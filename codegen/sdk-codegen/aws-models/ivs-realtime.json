@@ -3124,8 +3124,7 @@
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ImportPublicKey"
-                },
-                "smithy.api#readonly": {}
+                }
             }
         },
         "com.amazonaws.ivsrealtime#ImportPublicKeyRequest": {

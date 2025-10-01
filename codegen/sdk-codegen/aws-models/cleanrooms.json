@@ -705,6 +705,183 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#AccessBudget": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.cleanrooms#BudgetedResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the access budget resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudgetDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed budget information including time bounds, remaining budget, and refresh settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregateRemainingBudget": {
+                    "target": "com.amazonaws.cleanrooms#RemainingBudget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total remaining budget across all budget parameters, showing the lower value between the per-period budget and lifetime budget for this access budget. For individual parameter budgets, see <code>remainingBudget</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls and tracks usage limits for associated configured tables within a collaboration across queries and job. Supports both period-based budgets that can renew (daily, weekly, or monthly) and fixed lifetime budgets. Contains the resource ARN, remaining budget information, and up to two budget configurations (period-based and lifetime). By default, table usage is unlimited unless a budget is configured.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AccessBudgetDetails": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for the access budget period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for the access budget period.</p>"
+                    }
+                },
+                "remainingBudget": {
+                    "target": "com.amazonaws.cleanrooms#RemainingBudget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remaining budget amount available for use within this access budget.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "budget": {
+                    "target": "com.amazonaws.cleanrooms#Budget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total budget allocation amount for this access budget.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "budgetType": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudgetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time period for limiting table usage in queries and jobs. For calendar-based periods, the budget can renew if auto refresh is enabled. For lifetime budgets, the limit applies to the total usage throughout the collaboration. Valid values are:</p> <p> <code>CALENDAR_DAY</code> - Limit table usage per day.</p> <p> <code>CALENDAR_WEEK</code> - Limit table usage per week.</p> <p> <code>CALENDAR_MONTH</code> - Limit table usage per month.</p> <p> <code>LIFETIME</code> - Limit total table usage for the collaboration duration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoRefresh": {
+                    "target": "com.amazonaws.cleanrooms#AutoRefreshMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the budget automatically refreshes for each time period specified in <code>budgetType</code>. Valid values are:</p> <p> <code>ENABLED</code> - The budget refreshes automatically at the start of each period.</p> <p> <code>DISABLED</code> - The budget must be refreshed manually.</p> <p> <code>NULL</code> - The value is null when <code>budgetType</code> is set to <code>LIFETIME</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about an access budget including time bounds, budget allocation, and configuration settings.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AccessBudgetDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AccessBudgetDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AccessBudgetType": {
+            "type": "enum",
+            "members": {
+                "CALENDAR_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALENDAR_DAY"
+                    }
+                },
+                "CALENDAR_MONTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALENDAR_MONTH"
+                    }
+                },
+                "CALENDAR_WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALENDAR_WEEK"
+                    }
+                },
+                "LIFETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIFETIME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateParametersInput": {
+            "type": "structure",
+            "members": {
+                "budgetParameters": {
+                    "target": "com.amazonaws.cleanrooms#BudgetParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of budget parameters that define the access budget configuration for the privacy template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.cleanrooms#BudgetedResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource associated with this privacy budget template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input parameters for privacy budget templates that support access budgets functionality, enabling enhanced budget management capabilities.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateParametersOutput": {
+            "type": "structure",
+            "members": {
+                "budgetParameters": {
+                    "target": "com.amazonaws.cleanrooms#BudgetParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of budget parameters returned from the access budget configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.cleanrooms#BudgetedResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource associated with this privacy budget template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output parameters for privacy budget templates with access budgets support, containing the configured budget information.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateUpdateParameters": {
+            "type": "structure",
+            "members": {
+                "budgetParameters": {
+                    "target": "com.amazonaws.cleanrooms#BudgetParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated array of budget parameters for the access budget configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Update parameters for privacy budget templates with access budgets functionality, allowing modification of existing budget configurations.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -1984,6 +2161,23 @@
                 "smithy.api#uniqueItems": {}
             }
         },
+        "com.amazonaws.cleanrooms#AutoRefreshMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplate": {
             "type": "operation",
             "input": {
@@ -2373,6 +2567,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Information related to the utilization of resources that have been billed or charged for in a given context, such as a protected query.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#Budget": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000000
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#BudgetParameter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudgetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of budget parameter being configured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "budget": {
+                    "target": "com.amazonaws.cleanrooms#Budget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The budget allocation amount for this specific parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoRefresh": {
+                    "target": "com.amazonaws.cleanrooms#AutoRefreshMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this individual budget parameter automatically refreshes when the budget period resets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Individual budget parameter configuration that defines specific budget allocation settings for access budgets.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#BudgetParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#BudgetParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#BudgetedResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/configuredtableassociation/[\\d\\w-]+$"
             }
         },
         "com.amazonaws.cleanrooms#Change": {
@@ -6372,8 +6624,7 @@
                 "autoRefresh": {
                     "target": "com.amazonaws.cleanrooms#PrivacyBudgetTemplateAutoRefresh",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the privacy budget refreshes.</p> <important> <p>If you plan to regularly bring new data into the collaboration, you can use <code>CALENDAR_MONTH</code> to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queries across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes.</p> </important>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>How often the privacy budget refreshes.</p> <important> <p>If you plan to regularly bring new data into the collaboration, you can use <code>CALENDAR_MONTH</code> to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queries across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes.</p> </important>"
                     }
                 },
                 "privacyBudgetType": {
@@ -10652,6 +10903,13 @@
                         "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
+                },
+                "accessBudgetResourceArn": {
+                    "target": "com.amazonaws.cleanrooms#BudgetedResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Configured Table Association (ConfiguredTableAssociation) used to filter privacy budgets.</p>",
+                        "smithy.api#httpQuery": "accessBudgetResourceArn"
+                    }
                 }
             },
             "traits": {
@@ -11527,6 +11785,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "accessBudgetResourceArn": {
+                    "target": "com.amazonaws.cleanrooms#BudgetedResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the access budget resource to filter privacy budgets by.</p>",
+                        "smithy.api#httpQuery": "accessBudgetResourceArn"
                     }
                 }
             },
@@ -13153,6 +13418,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that specifies the epsilon parameter and the utility in terms of total aggregations, as well as the remaining aggregations available.</p>"
                     }
+                },
+                "accessBudget": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access budget information associated with this privacy budget.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13379,6 +13650,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that specifies the epsilon and noise parameters.</p>"
                     }
+                },
+                "accessBudget": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateParametersInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access budget configuration for the privacy budget template input, enabling integration with access budget functionality.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13392,6 +13669,12 @@
                     "target": "com.amazonaws.cleanrooms#DifferentialPrivacyTemplateParametersOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>The epsilon and noise parameters.</p>"
+                    }
+                },
+                "accessBudget": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateParametersOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access budget configuration returned from the privacy budget template, containing the configured access budget settings.</p>"
                     }
                 }
             },
@@ -13520,6 +13803,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that specifies the new values for the epsilon and noise parameters.</p>"
                     }
+                },
+                "accessBudget": {
+                    "target": "com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateUpdateParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The new access budget configuration that completely replaces the existing access budget settings in the privacy budget template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13533,6 +13822,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DIFFERENTIAL_PRIVACY"
+                    }
+                },
+                "ACCESS_BUDGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_BUDGET"
                     }
                 }
             }
@@ -14745,6 +15040,14 @@
                 "target": "com.amazonaws.cleanrooms#ReceiverConfiguration"
             }
         },
+        "com.amazonaws.cleanrooms#RemainingBudget": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#ResourceAlias": {
             "type": "string",
             "traits": {
@@ -15078,6 +15381,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "resourceArn": {
+                    "target": "com.amazonaws.cleanrooms#SchemaResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schema resource.</p>"
+                    }
+                },
                 "schemaTypeProperties": {
                     "target": "com.amazonaws.cleanrooms#SchemaTypeProperties",
                     "traits": {
@@ -15160,6 +15469,15 @@
                 "smithy.api#length": {
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership\\/[\\d\\w-]+\\/(configuredtableassociation|idmappingtable)\\/[\\d\\w-]+$"
             }
         },
         "com.amazonaws.cleanrooms#SchemaStatus": {
@@ -15389,6 +15707,12 @@
                     "target": "com.amazonaws.cleanrooms#AnalysisMethod",
                     "traits": {
                         "smithy.api#documentation": "<p>The analysis method for the associated schema.</p> <p> <code>DIRECT_QUERY</code> allows SQL queries to be run directly on this table.</p> <p> <code>DIRECT_JOB</code> allows PySpark jobs to be run directly on this table.</p> <p> <code>MULTIPLE</code> allows both SQL queries and PySpark jobs to be run directly on this table.</p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.cleanrooms#SchemaResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schema summary resource.</p>"
                     }
                 },
                 "selectedAnalysisMethods": {

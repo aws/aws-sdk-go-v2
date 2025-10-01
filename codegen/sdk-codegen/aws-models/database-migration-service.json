@@ -3161,7 +3161,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt \n         the connection parameters for the instance profile.</p>\n         <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then\n         DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt \n         the connection parameters for the instance profile.</p>\n         <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then\n         DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -11403,7 +11403,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt \n         the connection parameters for the instance profile.</p>\n         <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then\n         DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account \n         has a different default encryption key for each Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt \n         the connection parameters for the instance profile.</p>\n         <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then\n         DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -13214,7 +13214,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt \n         the connection parameters for the instance profile.</p>\n         <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then\n         DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt \n         the connection parameters for the instance profile.</p>\n         <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then\n         DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>"
                     }
                 },
                 "PubliclyAccessible": {

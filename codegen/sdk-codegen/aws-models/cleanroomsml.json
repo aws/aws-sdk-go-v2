@@ -721,6 +721,138 @@
                 }
             }
         },
+        "com.amazonaws.cleanroomsml#AccessBudget": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.cleanroomsml#BudgetedResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that this access budget applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.cleanroomsml#AccessBudgetDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of budget details for this resource. Contains active budget periods that apply to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregateRemainingBudget": {
+                    "target": "com.amazonaws.cleanroomsml#Budget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total remaining budget across all active budget periods for this resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An access budget that defines consumption limits for a specific resource within defined time periods.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#AccessBudgetDetails": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of this budget period.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of this budget period. If not specified, the budget period continues indefinitely.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "remainingBudget": {
+                    "target": "com.amazonaws.cleanroomsml#Budget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of budget remaining in this period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "budget": {
+                    "target": "com.amazonaws.cleanroomsml#Budget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total budget amount allocated for this period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "budgetType": {
+                    "target": "com.amazonaws.cleanroomsml#AccessBudgetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of budget period. Calendar-based types reset automatically at regular intervals, while LIFETIME budgets never reset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoRefresh": {
+                    "target": "com.amazonaws.cleanroomsml#AutoRefreshMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this budget automatically refreshes when the current period ends.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed information for a specific budget period, including time boundaries and budget amounts.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#AccessBudgetDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#AccessBudgetDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#AccessBudgetType": {
+            "type": "enum",
+            "members": {
+                "CALENDAR_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALENDAR_DAY"
+                    }
+                },
+                "CALENDAR_MONTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALENDAR_MONTH"
+                    }
+                },
+                "CALENDAR_WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALENDAR_WEEK"
+                    }
+                },
+                "LIFETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIFETIME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#AccessBudgets": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#AccessBudget"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -1379,6 +1511,40 @@
                     "min": 1,
                     "max": 20000000
                 }
+            }
+        },
+        "com.amazonaws.cleanroomsml#AutoRefreshMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#Budget": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#BudgetedResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/configuredtableassociation/[\\d\\w-]+$"
             }
         },
         "com.amazonaws.cleanroomsml#CancelTrainedModel": {
@@ -4610,6 +4776,12 @@
                         }
                     }
                 },
+                "privacyBudgets": {
+                    "target": "com.amazonaws.cleanroomsml#PrivacyBudgets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the privacy budgets that control access to this Clean Rooms ML input channel. Use these budgets to monitor and limit resource consumption over specified time periods.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.cleanroomsml#ResourceDescription",
                     "traits": {
@@ -5530,6 +5702,12 @@
                             "min": 0,
                             "max": 100000000000
                         }
+                    }
+                },
+                "privacyBudgets": {
+                    "target": "com.amazonaws.cleanroomsml#PrivacyBudgets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the privacy budgets that control access to this Clean Rooms ML input channel. Use these budgets to monitor and limit resource consumption over specified time periods.</p>"
                     }
                 },
                 "description": {
@@ -10003,6 +10181,20 @@
                         "smithy.api#enumValue": "POLICY_MUST_NOT_EXIST"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cleanroomsml#PrivacyBudgets": {
+            "type": "union",
+            "members": {
+                "accessBudgets": {
+                    "target": "com.amazonaws.cleanroomsml#AccessBudgets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of access budgets that apply to resources associated with this Clean Rooms ML input channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The privacy budget information that controls access to Clean Rooms ML input channels.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#PrivacyConfiguration": {
