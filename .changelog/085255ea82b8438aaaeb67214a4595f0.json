@@ -1,8 +1,0 @@
-{
-    "id": "085255ea-82b8-438a-aaeb-67214a4595f0",
-    "type": "feature",
-    "description": "Added the UpdateCluster API action to modify cluster configurations, and Slurm custom settings for queues.",
-    "modules": [
-        "service/pcs"
-    ]
-}

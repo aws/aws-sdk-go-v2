@@ -1,8 +1,0 @@
-{
-    "id": "3155db9a-24da-4877-94e9-5c520d1b7f31",
-    "type": "feature",
-    "description": "This release introduces data access budgets to control how many times a table can be used for queries and jobs in a collaboration.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

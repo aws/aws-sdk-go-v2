@@ -1,3 +1,7 @@
+# v1.35.0 (2025-10-01)
+
+* **Feature**: This release introduces data access budgets to control how many times a table can be used for queries and jobs in a collaboration.
+
 # v1.34.1 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "2fbaa13d-06fe-45f7-af1e-c8f9d21eb084",
-    "type": "feature",
-    "description": "This release introduces data access budgets to view how many times an input channel can be used for ML jobs in a collaboration.",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.57.7 (2025-10-01)
+
+* **Documentation**: This is a doc-only update, revising text for kms-key-arns.
+
 # v1.57.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

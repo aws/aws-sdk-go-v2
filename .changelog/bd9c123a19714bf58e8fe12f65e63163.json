@@ -1,8 +1,0 @@
-{
-    "id": "bd9c123a-1971-4bf5-8e8f-e12f65e63163",
-    "type": "documentation",
-    "description": "This is a documentation only Amazon ECS release that adds additional information for health checks.",
-    "modules": [
-        "service/ecs"
-    ]
-}

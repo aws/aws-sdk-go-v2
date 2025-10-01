@@ -1,3 +1,7 @@
+# v1.20.0 (2025-10-01)
+
+* **Feature**: This release introduces data access budgets to view how many times an input channel can be used for ML jobs in a collaboration.
+
 # v1.19.4 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

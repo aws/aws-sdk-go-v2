@@ -1,8 +1,0 @@
-{
-    "id": "eb1e54fe-6869-477d-a029-cf13651fb833",
-    "type": "documentation",
-    "description": "This is a doc-only update, revising text for kms-key-arns.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

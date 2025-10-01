@@ -1,3 +1,7 @@
+# v1.14.0 (2025-10-01)
+
+* **Feature**: Added the UpdateCluster API action to modify cluster configurations, and Slurm custom settings for queues.
+
 # v1.13.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

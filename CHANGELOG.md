@@ -1,3 +1,19 @@
+# Release (2025-10-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.33.0](service/chimesdkmeetings/CHANGELOG.md#v1330-2025-10-01)
+  * **Feature**: Add support to receive dual stack MediaPlacement URLs in Chime Meetings SDK
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.35.0](service/cleanrooms/CHANGELOG.md#v1350-2025-10-01)
+  * **Feature**: This release introduces data access budgets to control how many times a table can be used for queries and jobs in a collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.20.0](service/cleanroomsml/CHANGELOG.md#v1200-2025-10-01)
+  * **Feature**: This release introduces data access budgets to view how many times an input channel can be used for ML jobs in a collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.57.7](service/databasemigrationservice/CHANGELOG.md#v1577-2025-10-01)
+  * **Documentation**: This is a doc-only update, revising text for kms-key-arns.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.65.1](service/ecs/CHANGELOG.md#v1651-2025-10-01)
+  * **Documentation**: This is a documentation only Amazon ECS release that adds additional information for health checks.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.14.0](service/pcs/CHANGELOG.md#v1140-2025-10-01)
+  * **Feature**: Added the UpdateCluster API action to modify cluster configurations, and Slurm custom settings for queues.
+
 # Release (2025-09-30)
 
 ## Module Highlights
