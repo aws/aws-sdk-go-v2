@@ -368,7 +368,7 @@ func (m *AddInputChecksumTrailer) HandleFinalize(
 		if checksum == "" {
 			checksum, e = checksumReader.Base64Checksum()
 			if e != nil {
-				return out, metadata, fmt.Errorf("failed to get computed checksum, %w", err)
+				return out, metadata, fmt.Errorf("failed to get computed checksum, %w", e)
 			}
 		}
 		// Record the checksum and algorithm that was computed
