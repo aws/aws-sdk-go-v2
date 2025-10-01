@@ -362,22 +362,28 @@ func (m *AddInputChecksumTrailer) HandleFinalize(
 	}
 
 	out, metadata, err = next.HandleFinalize(ctx, in)
-	// store the calculated checksum if there's no one cached previously no matter if the
-	// request failed or not
-	if m.checksum == "" {
-		checksum, e := checksumReader.Base64Checksum()
-		if e != nil {
-			return out, metadata, fmt.Errorf("failed to cache computed checksum, %w", e)
-		}
-		m.checksum = checksum
-	}
 	if err == nil {
+		checksum := m.checksum
+		var e error
+		if checksum == "" {
+			checksum, e = checksumReader.Base64Checksum()
+			if e != nil {
+				return out, metadata, fmt.Errorf("failed to get computed checksum, %w", err)
+			}
+		}
 		// Record the checksum and algorithm that was computed
 		SetComputedInputChecksums(&metadata, map[string]string{
-			string(algorithm): m.checksum,
+			string(algorithm): checksum,
 		})
 	}
-
+	// store the calculated checksum if there's no one cached previously and the value is available in this attempt,
+	// no matter if the request failed or not
+	if m.checksum == "" {
+		checksum, e := checksumReader.Base64Checksum()
+		if e == nil {
+			m.checksum = checksum
+		}
+	}
 	return out, metadata, err
 }
 
