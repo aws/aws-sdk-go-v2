@@ -1,0 +1,8 @@
+{
+    "id": "50e921de-7a43-443c-8ecf-c644e998f62c",
+    "type": "bugfix",
+    "description": "Add missing ChecksumType field to UploadOutput.",
+    "modules": [
+        "feature/s3/manager"
+    ]
+}
