@@ -354,6 +354,29 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 			}`),
 			ExpectError: &types.FooError{},
 		},
+		// Some services serialize errors using __type, and if the response includes
+		// additional shapes that belong to a different namespace there'll be a nested
+		// __type property that must not be considered when determining which error to be
+		// surfaced.
+		//
+		// For an example service see Amazon DynamoDB.
+		"AwsJson11FooErrorWithNestedTypeProperty": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.protocoltests.restjson#FooError",
+			    "ErrorDetails": [
+			      {
+			          "__type": "com.amazon.internal#ErrorDetails",
+			          "reason": "Some reason"
+			      }
+			    ]
+			}`),
+			ExpectError: &types.FooError{},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
