@@ -1,8 +1,0 @@
-{
-    "id": "e1574f2e-e71d-4b9d-83cd-025abf1a1830",
-    "type": "feature",
-    "description": "Adds support to configure canaries with pre-configured blueprint code on supported runtime versions.  This behavior can be controlled via the new BlueprintTypes property exposed in the CreateCanary and UpdateCanary APIs.",
-    "modules": [
-        "service/synthetics"
-    ]
-}

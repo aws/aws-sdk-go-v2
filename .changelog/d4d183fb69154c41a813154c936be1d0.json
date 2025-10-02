@@ -1,8 +1,0 @@
-{
-    "id": "d4d183fb-6915-4c41-a813-154c936be1d0",
-    "type": "feature",
-    "description": "Add new warning type 'EXCLUDED_RESOURCES'",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

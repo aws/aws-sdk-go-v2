@@ -1,3 +1,7 @@
+# v1.41.0 (2025-10-02)
+
+* **Feature**: Adds support to configure canaries with pre-configured blueprint code on supported runtime versions.  This behavior can be controlled via the new BlueprintTypes property exposed in the CreateCanary and UpdateCanary APIs.
+
 # v1.40.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

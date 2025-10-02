@@ -1,3 +1,7 @@
+# v1.64.3 (2025-10-02)
+
+* **Documentation**: Updated descriptions for the Location parameter in CreateTrustedEntitySet and CreateThreatEntitySet.
+
 # v1.64.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

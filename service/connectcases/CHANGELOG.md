@@ -1,3 +1,7 @@
+# v1.32.0 (2025-10-02)
+
+* **Feature**: New Search All Related Items API enables searching related items across cases
+
 # v1.31.0 (2025-09-30)
 
 * **Feature**: This release adds support for two new related item types: ConnectCase for linking Amazon Connect cases and Custom for user-defined related items with configurable fields.

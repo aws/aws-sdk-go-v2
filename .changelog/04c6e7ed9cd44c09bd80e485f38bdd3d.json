@@ -1,8 +1,0 @@
-{
-    "id": "04c6e7ed-9cd4-4c09-bd80-e485f38bdd3d",
-    "type": "feature",
-    "description": "Add support for dual-stack account endpoint generation",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

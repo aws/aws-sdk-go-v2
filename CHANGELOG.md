@@ -1,3 +1,22 @@
+# Release (2025-10-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.19.11](feature/s3/manager/CHANGELOG.md#v11911-2025-10-02)
+  * **Bug Fix**: Add missing ChecksumType field to UploadOutput.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.67.0](service/cloudformation/CHANGELOG.md#v1670-2025-10-02)
+  * **Feature**: Add new warning type 'EXCLUDED_RESOURCES'
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.32.0](service/connectcases/CHANGELOG.md#v1320-2025-10-02)
+  * **Feature**: New Search All Related Items API enables searching related items across cases
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.51.0](service/dynamodb/CHANGELOG.md#v1510-2025-10-02)
+  * **Feature**: Add support for dual-stack account endpoint generation
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.64.3](service/guardduty/CHANGELOG.md#v1643-2025-10-02)
+  * **Documentation**: Updated descriptions for the Location parameter in CreateTrustedEntitySet and CreateThreatEntitySet.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.41.0](service/synthetics/CHANGELOG.md#v1410-2025-10-02)
+  * **Feature**: Adds support to configure canaries with pre-configured blueprint code on supported runtime versions.  This behavior can be controlled via the new BlueprintTypes property exposed in the CreateCanary and UpdateCanary APIs.
+
 # Release (2025-10-01)
 
 ## Module Highlights
