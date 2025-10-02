@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summaries of invoked Hooks. For more information, see [View CloudFormation Hooks invocations] in the
+// Returns summaries of invoked Hooks. For more information, see [View invocation summaries for CloudFormation Hooks] in the
 // CloudFormation Hooks User Guide.
 //
 // This operation supports the following parameter combinations:
@@ -26,7 +26,7 @@ import (
 //   - TargetId and TargetType : Returns summaries for a specific Hook invocation
 //     target.
 //
-// [View CloudFormation Hooks invocations]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html
+// [View invocation summaries for CloudFormation Hooks]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html
 func (c *Client) ListHookResults(ctx context.Context, params *ListHookResultsInput, optFns ...func(*Options)) (*ListHookResultsOutput, error) {
 	if params == nil {
 		params = &ListHookResultsInput{}

@@ -15,7 +15,7 @@ import (
 // CloudFormation Hook when you no longer use it.
 //
 // Deactivating an extension deletes the configuration details that are associated
-// with it. To temporary disable a CloudFormation Hook instead, you can use [SetTypeConfiguration].
+// with it. To temporarily disable a CloudFormation Hook instead, you can use [SetTypeConfiguration].
 //
 // Once deactivated, an extension can't be used in any CloudFormation operation.
 // This includes stack update operations where the stack template includes the
@@ -44,7 +44,7 @@ func (c *Client) DeactivateType(ctx context.Context, params *DeactivateTypeInput
 
 type DeactivateTypeInput struct {
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
+	// The Amazon Resource Name (ARN) for the extension in this account and Region.
 	//
 	// Conditional: You must specify either Arn , or TypeName and Type .
 	Arn *string
@@ -54,7 +54,7 @@ type DeactivateTypeInput struct {
 	// Conditional: You must specify either Arn , or TypeName and Type .
 	Type types.ThirdPartyType
 
-	// The type name of the extension, in this account and Region. If you specified a
+	// The type name of the extension in this account and Region. If you specified a
 	// type name alias when enabling the extension, use the type name alias.
 	//
 	// Conditional: You must specify either Arn , or TypeName and Type .

@@ -1725,6 +1725,7 @@ const (
 	WarningTypeUnsupportedProperties       WarningType = "UNSUPPORTED_PROPERTIES"
 	WarningTypeMutuallyExclusiveTypes      WarningType = "MUTUALLY_EXCLUSIVE_TYPES"
 	WarningTypeExcludedProperties          WarningType = "EXCLUDED_PROPERTIES"
+	WarningTypeExcludedResources           WarningType = "EXCLUDED_RESOURCES"
 )
 
 // Values returns all known values for WarningType. Note that this can be expanded
@@ -1737,5 +1738,6 @@ func (WarningType) Values() []WarningType {
 		"UNSUPPORTED_PROPERTIES",
 		"MUTUALLY_EXCLUSIVE_TYPES",
 		"EXCLUDED_PROPERTIES",
+		"EXCLUDED_RESOURCES",
 	}
 }

@@ -391,10 +391,10 @@ type CommentFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the content of a Case related item
+// Represents the content of a ConnectCase type related item.
 type ConnectCaseContent struct {
 
-	// The unique identifier of the related case
+	// A unique identifier of the case.
 	//
 	// This member is required.
 	CaseId *string
@@ -402,19 +402,19 @@ type ConnectCaseContent struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for related items of type Case
+// A filter for related items of type ConnectCase .
 type ConnectCaseFilter struct {
 
-	// The unique identifier of the case to filter by
+	// A unique identifier of the case.
 	CaseId *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the input content of a Case related item
+// Represents the content of a ConnectCase related item.
 type ConnectCaseInputContent struct {
 
-	// The unique identifier of the case to be related
+	// A unique identifier of the case.
 	//
 	// This member is required.
 	CaseId *string
@@ -467,10 +467,10 @@ type ContactFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the content of a Custom related item
+// Represents the content of a Custom type related item.
 type CustomContent struct {
 
-	// List of field values for the custom related item
+	// List of field values for the Custom related item.
 	//
 	// This member is required.
 	Fields []FieldValue
@@ -478,7 +478,8 @@ type CustomContent struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for fields in related items of type Custom
+// A filter for fields in Custom type related items. Only one value can be
+// provided.
 //
 // The following types satisfy this interface:
 //
@@ -490,7 +491,7 @@ type CustomFieldsFilter interface {
 	isCustomFieldsFilter()
 }
 
-// Matches items that satisfy all of the specified filter conditions
+// Provides "and all" filtering.
 type CustomFieldsFilterMemberAndAll struct {
 	Value []CustomFieldsFilter
 
@@ -508,7 +509,7 @@ type CustomFieldsFilterMemberField struct {
 
 func (*CustomFieldsFilterMemberField) isCustomFieldsFilter() {}
 
-// Excludes items matching the filter
+// Excludes items matching the filter.
 type CustomFieldsFilterMemberNot struct {
 	Value CustomFieldsFilter
 
@@ -517,7 +518,7 @@ type CustomFieldsFilterMemberNot struct {
 
 func (*CustomFieldsFilterMemberNot) isCustomFieldsFilter() {}
 
-// Matches items that satisfy any of the specified filter conditions
+// Provides "or all" filtering.
 type CustomFieldsFilterMemberOrAll struct {
 	Value []CustomFieldsFilter
 
@@ -526,19 +527,19 @@ type CustomFieldsFilterMemberOrAll struct {
 
 func (*CustomFieldsFilterMemberOrAll) isCustomFieldsFilter() {}
 
-// A filter for related items of type Custom
+// A filter for related items of type Custom .
 type CustomFilter struct {
 
-	// Filter conditions for custom fields
+	// Filter conditions for custom fields.
 	Fields CustomFieldsFilter
 
 	noSmithyDocumentSerde
 }
 
-// Represents the input content of a Custom related item
+// Represents the content of a Custom related item.
 type CustomInputContent struct {
 
-	// List of field values for the custom related item
+	// List of field values for the Custom related item.
 	//
 	// This member is required.
 	Fields []FieldValue
@@ -1159,7 +1160,7 @@ type RelatedItemContentMemberComment struct {
 
 func (*RelatedItemContentMemberComment) isRelatedItemContent() {}
 
-// Content for a related Connect case
+// Represents the Amazon Connect case to be created as a related item.
 type RelatedItemContentMemberConnectCase struct {
 	Value ConnectCaseContent
 
@@ -1177,7 +1178,7 @@ type RelatedItemContentMemberContact struct {
 
 func (*RelatedItemContentMemberContact) isRelatedItemContent() {}
 
-// Content for a custom related item
+// Represents the content of a Custom type related item.
 type RelatedItemContentMemberCustom struct {
 	Value CustomContent
 
@@ -1238,7 +1239,7 @@ type RelatedItemInputContentMemberComment struct {
 
 func (*RelatedItemInputContentMemberComment) isRelatedItemInputContent() {}
 
-// Input content for a related Connect case
+// Represents the Amazon Connect case to be created as a related item.
 type RelatedItemInputContentMemberConnectCase struct {
 	Value ConnectCaseInputContent
 
@@ -1256,7 +1257,7 @@ type RelatedItemInputContentMemberContact struct {
 
 func (*RelatedItemInputContentMemberContact) isRelatedItemInputContent() {}
 
-// Input content for a custom related item
+// Represents the content of a Custom type related item.
 type RelatedItemInputContentMemberCustom struct {
 	Value CustomInputContent
 
@@ -1306,7 +1307,7 @@ type RelatedItemTypeFilterMemberComment struct {
 
 func (*RelatedItemTypeFilterMemberComment) isRelatedItemTypeFilter() {}
 
-// Filter for related items of type Connect case
+// Represents the Amazon Connect case to be created as a related item.
 type RelatedItemTypeFilterMemberConnectCase struct {
 	Value ConnectCaseFilter
 
@@ -1324,7 +1325,7 @@ type RelatedItemTypeFilterMemberContact struct {
 
 func (*RelatedItemTypeFilterMemberContact) isRelatedItemTypeFilter() {}
 
-// Filter for related items of type Custom
+// Represents the content of a Custom type related item.
 type RelatedItemTypeFilterMemberCustom struct {
 	Value CustomFilter
 
@@ -1380,6 +1381,63 @@ type RequiredField struct {
 	//
 	// This member is required.
 	FieldId *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of items that represent RelatedItems. This data type is similar to [SearchRelatedItemsResponseItem]
+// except SearchAllRelatedItemsResponseItem has a caseId field.
+//
+// [SearchRelatedItemsResponseItem]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItemsResponseItem.html
+type SearchAllRelatedItemsResponseItem struct {
+
+	// Time at which a related item was associated with a case.
+	//
+	// This member is required.
+	AssociationTime *time.Time
+
+	// A unique identifier of the case.
+	//
+	// This member is required.
+	CaseId *string
+
+	// Represents the content of a particular type of related item.
+	//
+	// This member is required.
+	Content RelatedItemContent
+
+	// Unique identifier of a related item.
+	//
+	// This member is required.
+	RelatedItemId *string
+
+	// Type of a related item.
+	//
+	// This member is required.
+	Type RelatedItemType
+
+	// Represents the entity that performed the action.
+	PerformedBy UserUnion
+
+	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// organize, track, or control access for this resource.
+	Tags map[string]*string
+
+	noSmithyDocumentSerde
+}
+
+// The order in which all returned related items should be sorted.
+type SearchAllRelatedItemsSort struct {
+
+	// Whether related items should be sorted by association time or case ID.
+	//
+	// This member is required.
+	SortOrder Order
+
+	// Whether related items should be sorted in ascending or descending order.
+	//
+	// This member is required.
+	SortProperty SearchAllRelatedItemsSortProperty
 
 	noSmithyDocumentSerde
 }

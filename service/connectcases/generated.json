@@ -40,6 +40,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_ListTemplates.go",
         "api_op_PutCaseEventConfiguration.go",
+        "api_op_SearchAllRelatedItems.go",
         "api_op_SearchCases.go",
         "api_op_SearchRelatedItems.go",
         "api_op_TagResource.go",

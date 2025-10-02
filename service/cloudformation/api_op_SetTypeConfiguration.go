@@ -11,20 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the configuration data for a registered CloudFormation extension, in
-// the given account and Region.
+// Specifies the configuration data for a CloudFormation extension, such as a
+// resource or Hook, in the given account and Region.
+//
+// For more information, see [Edit configuration data for extensions in your account] in the CloudFormation User Guide.
 //
 // To view the current configuration data for an extension, refer to the
-// ConfigurationSchema element of [DescribeType]. For more information, see [Edit configuration data for extensions in your account] in the
-// CloudFormation User Guide.
+// ConfigurationSchema element of [DescribeType].
 //
 // It's strongly recommended that you use dynamic references to restrict sensitive
-// configuration definitions, such as third-party credentials. For more details on
-// dynamic references, see [Specify values stored in other services using dynamic references]in the CloudFormation User Guide.
+// configuration definitions, such as third-party credentials. For more
+// information, see [Specify values stored in other services using dynamic references]in the CloudFormation User Guide.
+//
+// For more information about setting the configuration data for resource types,
+// see [Defining the account-level configuration of an extension]in the CloudFormation Command Line Interface (CLI) User Guide. For more
+// information about setting the configuration data for Hooks, see the [CloudFormation Hooks User Guide].
 //
 // [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
 // [Edit configuration data for extensions in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
 // [Specify values stored in other services using dynamic references]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
+// [Defining the account-level configuration of an extension]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
+// [CloudFormation Hooks User Guide]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
 		params = &SetTypeConfigurationInput{}
@@ -42,14 +49,12 @@ func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfig
 
 type SetTypeConfigurationInput struct {
 
-	// The configuration data for the extension, in this account and Region.
+	// The configuration data for the extension in this account and Region.
 	//
-	// The configuration data must be formatted as JSON, and validate against the
-	// schema returned in the ConfigurationSchema response element of [DescribeType]. For more
-	// information, see [Defining the account-level configuration of an extension]in the CloudFormation Command Line Interface (CLI) User Guide.
+	// The configuration data must be formatted as JSON and validate against the
+	// extension's schema returned in the Schema response element of [DescribeType].
 	//
 	// [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-	// [Defining the account-level configuration of an extension]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
 	//
 	// This member is required.
 	Configuration *string
@@ -65,7 +70,7 @@ type SetTypeConfigurationInput struct {
 	// Conditional: You must specify ConfigurationArn , or Type and TypeName .
 	Type types.ThirdPartyType
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
+	// The Amazon Resource Name (ARN) for the extension in this account and Region.
 	//
 	// For public extensions, this will be the ARN assigned when you call the [ActivateType] API
 	// operation in this account and Region. For private extensions, this will be the
@@ -88,7 +93,7 @@ type SetTypeConfigurationInput struct {
 
 type SetTypeConfigurationOutput struct {
 
-	// The Amazon Resource Name (ARN) for the configuration data, in this account and
+	// The Amazon Resource Name (ARN) for the configuration data in this account and
 	// Region.
 	//
 	// Conditional: You must specify ConfigurationArn , or Type and TypeName .

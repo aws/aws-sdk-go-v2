@@ -630,6 +630,26 @@ func (m *validateOpPutCaseEventConfiguration) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchAllRelatedItems struct {
+}
+
+func (*validateOpSearchAllRelatedItems) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchAllRelatedItems) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchAllRelatedItemsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchAllRelatedItemsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchCases struct {
 }
 
@@ -932,6 +952,10 @@ func addOpListTemplatesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutCaseEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutCaseEventConfiguration{}, middleware.After)
+}
+
+func addOpSearchAllRelatedItemsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchAllRelatedItems{}, middleware.After)
 }
 
 func addOpSearchCasesValidationMiddleware(stack *middleware.Stack) error {
@@ -1769,6 +1793,41 @@ func validateRequiredFieldList(v []types.RequiredField) error {
 	}
 }
 
+func validateSearchAllRelatedItemsSort(v *types.SearchAllRelatedItemsSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAllRelatedItemsSort"}
+	if len(v.SortProperty) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortProperty"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchAllRelatedItemsSortList(v []types.SearchAllRelatedItemsSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAllRelatedItemsSortList"}
+	for i := range v {
+		if err := validateSearchAllRelatedItemsSort(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSection(v types.Section) error {
 	if v == nil {
 		return nil
@@ -2510,6 +2569,31 @@ func validateOpPutCaseEventConfigurationInput(v *PutCaseEventConfigurationInput)
 	} else if v.EventBridge != nil {
 		if err := validateEventBridgeConfiguration(v.EventBridge); err != nil {
 			invalidParams.AddNested("EventBridge", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchAllRelatedItemsInput(v *SearchAllRelatedItemsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAllRelatedItemsInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Filters != nil {
+		if err := validateRelatedItemFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sorts != nil {
+		if err := validateSearchAllRelatedItemsSortList(v.Sorts); err != nil {
+			invalidParams.AddNested("Sorts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

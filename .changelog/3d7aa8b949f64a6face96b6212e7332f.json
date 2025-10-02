@@ -1,0 +1,8 @@
+{
+    "id": "3d7aa8b9-49f6-4a6f-ace9-6b6212e7332f",
+    "type": "feature",
+    "description": "New Search All Related Items API enables searching related items across cases",
+    "modules": [
+        "service/connectcases"
+    ]
+}

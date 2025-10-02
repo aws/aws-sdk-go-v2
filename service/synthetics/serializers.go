@@ -2211,6 +2211,17 @@ func awsRestjson1_serializeDocumentBaseScreenshots(v []types.BaseScreenshot, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBlueprintTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBrowserConfig(v *types.BrowserConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2239,6 +2250,13 @@ func awsRestjson1_serializeDocumentBrowserConfigs(v []types.BrowserConfig, value
 func awsRestjson1_serializeDocumentCanaryCodeInput(v *types.CanaryCodeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BlueprintTypes != nil {
+		ok := object.Key("BlueprintTypes")
+		if err := awsRestjson1_serializeDocumentBlueprintTypes(v.BlueprintTypes, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Dependencies != nil {
 		ok := object.Key("Dependencies")

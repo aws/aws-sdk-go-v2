@@ -446,6 +446,18 @@ func TestCheckSnapshot_PutCaseEventConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchAllRelatedItems(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchAllRelatedItems(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchAllRelatedItems")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchCases(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchCases(context.Background(), nil, func(o *Options) {
@@ -930,6 +942,18 @@ func TestUpdateSnapshot_PutCaseEventConfiguration(t *testing.T) {
 	_, err := svc.PutCaseEventConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutCaseEventConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchAllRelatedItems(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchAllRelatedItems(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchAllRelatedItems")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

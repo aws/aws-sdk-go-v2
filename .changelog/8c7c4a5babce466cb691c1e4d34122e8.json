@@ -1,0 +1,8 @@
+{
+    "id": "8c7c4a5b-abce-466c-b691-c1e4d34122e8",
+    "type": "documentation",
+    "description": "Updated descriptions for the Location parameter in CreateTrustedEntitySet and CreateThreatEntitySet.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

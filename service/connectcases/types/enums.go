@@ -172,6 +172,26 @@ func (RuleType) Values() []RuleType {
 	}
 }
 
+type SearchAllRelatedItemsSortProperty string
+
+// Enum values for SearchAllRelatedItemsSortProperty
+const (
+	SearchAllRelatedItemsSortPropertyAssociationTime SearchAllRelatedItemsSortProperty = "AssociationTime"
+	SearchAllRelatedItemsSortPropertyCaseId          SearchAllRelatedItemsSortProperty = "CaseId"
+)
+
+// Values returns all known values for SearchAllRelatedItemsSortProperty. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchAllRelatedItemsSortProperty) Values() []SearchAllRelatedItemsSortProperty {
+	return []SearchAllRelatedItemsSortProperty{
+		"AssociationTime",
+		"CaseId",
+	}
+}
+
 type SlaStatus string
 
 // Enum values for SlaStatus

@@ -213,6 +213,25 @@ type Canary struct {
 // [Packaging your Python canary files]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package
 type CanaryCodeInput struct {
 
+	// BlueprintTypes is a list of templates that enable simplified canary creation.
+	// You can create canaries for common monitoring scenarios by providing only a JSON
+	// configuration file instead of writing custom scripts. The only supported value
+	// is multi-checks .
+	//
+	// Multi-checks monitors HTTP/DNS/SSL/TCP endpoints with built-in authentication
+	// schemes (Basic, API Key, OAuth, SigV4) and assertion capabilities. When you
+	// specify BlueprintTypes , the Handler field cannot be specified since the
+	// blueprint provides a pre-defined entry point.
+	//
+	// BlueprintTypes is supported only on canaries for syn-nodejs-3.0 runtime or
+	// later.
+	BlueprintTypes []string
+
+	// A list of dependencies that should be used for running this canary. Specify the
+	// dependencies as a key-value pair, where the key is the type of dependency and
+	// the value is the dependency reference.
+	Dependencies []Dependency
+
 	// The entry point to use for the source code when running the canary. For
 	// canaries that use the syn-python-selenium-1.0 runtime or a syn-nodejs.puppeteer
 	// runtime earlier than syn-nodejs.puppeteer-3.4 , the handler must be specified as
@@ -221,13 +240,9 @@ type CanaryCodeInput struct {
 	// can specify a folder where canary scripts reside as
 	// folder/fileName.functionName .
 	//
-	// This member is required.
+	// This field is required when you don't specify BlueprintTypes and is not allowed
+	// when you specify BlueprintTypes .
 	Handler *string
-
-	// A list of dependencies that should be used for running this canary. Specify the
-	// dependencies as a key-value pair, where the key is the type of dependency and
-	// the value is the dependency reference.
-	Dependencies []Dependency
 
 	// If your canary script is located in Amazon S3, specify the bucket name here. Do
 	// not include s3:// as the start of the bucket name.
@@ -257,12 +272,29 @@ type CanaryCodeInput struct {
 // its code is stored by CloudWatch Synthetics.
 type CanaryCodeOutput struct {
 
+	// BlueprintTypes is a list of templates that enable simplified canary creation.
+	// You can create canaries for common monitoring scenarios by providing only a JSON
+	// configuration file instead of writing custom scripts. The only supported value
+	// is multi-checks .
+	//
+	// Multi-checks monitors HTTP/DNS/SSL/TCP endpoints with built-in authentication
+	// schemes (Basic, API Key, OAuth, SigV4) and assertion capabilities. When you
+	// specify BlueprintTypes , the Handler field cannot be specified since the
+	// blueprint provides a pre-defined entry point.
+	//
+	// BlueprintTypes is supported only on canaries for syn-nodejs-3.0 runtime or
+	// later.
+	BlueprintTypes []string
+
 	// A list of dependencies that are used for running this canary. The dependencies
 	// are specified as a key-value pair, where the key is the type of dependency and
 	// the value is the dependency reference.
 	Dependencies []Dependency
 
 	// The entry point to use for the source code when running the canary.
+	//
+	// This field is required when you don't specify BlueprintTypes and is not allowed
+	// when you specify BlueprintTypes .
 	Handler *string
 
 	// The ARN of the Lambda layer where Synthetics stores the canary script code.

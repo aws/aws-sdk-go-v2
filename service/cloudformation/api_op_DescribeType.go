@@ -18,6 +18,10 @@ import (
 // If you specify a VersionId , DescribeType returns information about that
 // specific extension version. Otherwise, it returns information about the default
 // extension version.
+//
+// For more information, see [Edit configuration data for extensions in your account] in the CloudFormation User Guide.
+//
+// [Edit configuration data for extensions in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
 func (c *Client) DescribeType(ctx context.Context, params *DescribeTypeInput, optFns ...func(*Options)) (*DescribeTypeOutput, error) {
 	if params == nil {
 		params = &DescribeTypeInput{}
@@ -86,11 +90,9 @@ type DescribeTypeOutput struct {
 	// A JSON string that represent the current configuration data for the extension
 	// in this account and Region.
 	//
-	// To set the configuration data for an extension, use [SetTypeConfiguration]. For more information, see [Edit configuration data for extensions in your account]
-	// in the CloudFormation User Guide.
+	// To set the configuration data for an extension, use [SetTypeConfiguration].
 	//
 	// [SetTypeConfiguration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-	// [Edit configuration data for extensions in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
 	ConfigurationSchema *string
 
 	// The ID of the default version of the extension. The default version is used
@@ -236,10 +238,11 @@ type DescribeTypeOutput struct {
 
 	// The schema that defines the extension.
 	//
-	// For more information about extension schemas, see [Resource type schema] in the CloudFormation
-	// Command Line Interface (CLI) User Guide.
+	// For more information, see [Resource type schema] in the CloudFormation Command Line Interface (CLI)
+	// User Guide and the [CloudFormation Hooks User Guide].
 	//
 	// [Resource type schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+	// [CloudFormation Hooks User Guide]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html
 	Schema *string
 
 	// The URL of the source code for the extension.

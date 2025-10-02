@@ -37,7 +37,7 @@ type ListResourceScanResourcesInput struct {
 	// This member is required.
 	ResourceScanId *string
 
-	//  If the number of available results exceeds this maximum, the response includes
+	// If the number of available results exceeds this maximum, the response includes
 	// a NextToken value that you can use for the NextToken parameter to get the next
 	// set of results. By default the ListResourceScanResources API action will return
 	// at most 100 results in each response. The maximum value is 100.
@@ -218,7 +218,7 @@ func (c *Client) addOperationListResourceScanResourcesMiddlewares(stack *middlew
 // ListResourceScanResourcesPaginatorOptions is the paginator options for
 // ListResourceScanResources
 type ListResourceScanResourcesPaginatorOptions struct {
-	//  If the number of available results exceeds this maximum, the response includes
+	// If the number of available results exceeds this maximum, the response includes
 	// a NextToken value that you can use for the NextToken parameter to get the next
 	// set of results. By default the ListResourceScanResources API action will return
 	// at most 100 results in each response. The maximum value is 100.

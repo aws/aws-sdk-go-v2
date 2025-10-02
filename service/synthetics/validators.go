@@ -479,9 +479,6 @@ func validateCanaryCodeInput(v *types.CanaryCodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CanaryCodeInput"}
-	if v.Handler == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Handler"))
-	}
 	if v.Dependencies != nil {
 		if err := validateDependencies(v.Dependencies); err != nil {
 			invalidParams.AddNested("Dependencies", err.(smithy.InvalidParamsError))

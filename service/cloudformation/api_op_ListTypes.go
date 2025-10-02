@@ -98,7 +98,7 @@ type ListTypesInput struct {
 	//
 	//   - PUBLIC : Extensions that are publicly visible and available to be activated
 	//   within any Amazon Web Services account. This includes extensions from Amazon Web
-	//   Services, in addition to third-party publishers.
+	//   Services and third-party publishers.
 	//
 	// The default is PRIVATE .
 	Visibility types.Visibility

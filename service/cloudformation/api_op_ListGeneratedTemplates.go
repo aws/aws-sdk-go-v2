@@ -29,7 +29,7 @@ func (c *Client) ListGeneratedTemplates(ctx context.Context, params *ListGenerat
 
 type ListGeneratedTemplatesInput struct {
 
-	//  If the number of available results exceeds this maximum, the response includes
+	// If the number of available results exceeds this maximum, the response includes
 	// a NextToken value that you can use for the NextToken parameter to get the next
 	// set of results. By default the ListGeneratedTemplates API action will return at
 	// most 50 results in each response. The maximum value is 100.
@@ -191,7 +191,7 @@ func (c *Client) addOperationListGeneratedTemplatesMiddlewares(stack *middleware
 // ListGeneratedTemplatesPaginatorOptions is the paginator options for
 // ListGeneratedTemplates
 type ListGeneratedTemplatesPaginatorOptions struct {
-	//  If the number of available results exceeds this maximum, the response includes
+	// If the number of available results exceeds this maximum, the response includes
 	// a NextToken value that you can use for the NextToken parameter to get the next
 	// set of results. By default the ListGeneratedTemplates API action will return at
 	// most 50 results in each response. The maximum value is 100.
