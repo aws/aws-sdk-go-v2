@@ -1694,13 +1694,13 @@
                 "caseId": {
                     "target": "com.amazonaws.connectcases#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier of the related case",
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Represents the content of a Case related item"
+                "smithy.api#documentation": "<p>Represents the content of a <code>ConnectCase</code> type related item.</p>"
             }
         },
         "com.amazonaws.connectcases#ConnectCaseFilter": {
@@ -1709,12 +1709,12 @@
                 "caseId": {
                     "target": "com.amazonaws.connectcases#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier of the case to filter by"
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A filter for related items of type Case"
+                "smithy.api#documentation": "<p>A filter for related items of type <code>ConnectCase</code>.</p>"
             }
         },
         "com.amazonaws.connectcases#ConnectCaseInputContent": {
@@ -1723,13 +1723,13 @@
                 "caseId": {
                     "target": "com.amazonaws.connectcases#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier of the case to be related",
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Represents the input content of a Case related item"
+                "smithy.api#documentation": "<p>Represents the content of a <code>ConnectCase</code> related item.</p>"
             }
         },
         "com.amazonaws.connectcases#ConnectedToSystemTime": {
@@ -2481,13 +2481,13 @@
                 "fields": {
                     "target": "com.amazonaws.connectcases#FieldValueList",
                     "traits": {
-                        "smithy.api#documentation": "List of field values for the custom related item",
+                        "smithy.api#documentation": "<p>List of field values for the <code>Custom</code> related item.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Represents the content of a Custom related item"
+                "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> type related item.</p>"
             }
         },
         "com.amazonaws.connectcases#CustomEntity": {
@@ -2510,13 +2510,13 @@
                 "not": {
                     "target": "com.amazonaws.connectcases#CustomFieldsFilter",
                     "traits": {
-                        "smithy.api#documentation": "Excludes items matching the filter"
+                        "smithy.api#documentation": "<p>Excludes items matching the filter.</p>"
                     }
                 },
                 "andAll": {
                     "target": "com.amazonaws.connectcases#CustomFieldsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "Matches items that satisfy all of the specified filter conditions",
+                        "smithy.api#documentation": "<p>Provides \"and all\" filtering.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
@@ -2525,7 +2525,7 @@
                 "orAll": {
                     "target": "com.amazonaws.connectcases#CustomFieldsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "Matches items that satisfy any of the specified filter conditions",
+                        "smithy.api#documentation": "<p>Provides \"or all\" filtering.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
@@ -2533,7 +2533,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A filter for fields in related items of type Custom"
+                "smithy.api#documentation": "<p>A filter for fields in <code>Custom</code> type related items. Only one value can be provided.</p>"
             }
         },
         "com.amazonaws.connectcases#CustomFieldsFilterList": {
@@ -2548,12 +2548,12 @@
                 "fields": {
                     "target": "com.amazonaws.connectcases#CustomFieldsFilter",
                     "traits": {
-                        "smithy.api#documentation": "Filter conditions for custom fields"
+                        "smithy.api#documentation": "<p>Filter conditions for custom fields.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A filter for related items of type Custom"
+                "smithy.api#documentation": "<p>A filter for related items of type <code>Custom</code>.</p>"
             }
         },
         "com.amazonaws.connectcases#CustomInputContent": {
@@ -2562,7 +2562,7 @@
                 "fields": {
                     "target": "com.amazonaws.connectcases#FieldValueList",
                     "traits": {
-                        "smithy.api#documentation": "List of field values for the custom related item",
+                        "smithy.api#documentation": "<p>List of field values for the <code>Custom</code> related item.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 50
@@ -2572,7 +2572,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Represents the input content of a Custom related item"
+                "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> related item.</p>"
             }
         },
         "com.amazonaws.connectcases#DeleteCase": {
@@ -3070,6 +3070,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcases#PutCaseEventConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#SearchAllRelatedItems"
                 }
             ],
             "traits": {
@@ -5558,13 +5561,13 @@
                 "connectCase": {
                     "target": "com.amazonaws.connectcases#ConnectCaseContent",
                     "traits": {
-                        "smithy.api#documentation": "Content for a related Connect case"
+                        "smithy.api#documentation": "<p>Represents the Amazon Connect case to be created as a related item.</p>"
                     }
                 },
                 "custom": {
                     "target": "com.amazonaws.connectcases#CustomContent",
                     "traits": {
-                        "smithy.api#documentation": "Content for a custom related item"
+                        "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> type related item.</p>"
                     }
                 }
             },
@@ -5632,13 +5635,13 @@
                 "connectCase": {
                     "target": "com.amazonaws.connectcases#ConnectCaseInputContent",
                     "traits": {
-                        "smithy.api#documentation": "Input content for a related Connect case"
+                        "smithy.api#documentation": "<p>Represents the Amazon Connect case to be created as a related item.</p>"
                     }
                 },
                 "custom": {
                     "target": "com.amazonaws.connectcases#CustomInputContent",
                     "traits": {
-                        "smithy.api#documentation": "Input content for a custom related item"
+                        "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> type related item.</p>"
                     }
                 }
             },
@@ -5707,13 +5710,13 @@
                 "connectCase": {
                     "target": "com.amazonaws.connectcases#ConnectCaseFilter",
                     "traits": {
-                        "smithy.api#documentation": "Filter for related items of type Connect case"
+                        "smithy.api#documentation": "<p>Represents the Amazon Connect case to be created as a related item.</p>"
                     }
                 },
                 "custom": {
                     "target": "com.amazonaws.connectcases#CustomFilter",
                     "traits": {
-                        "smithy.api#documentation": "Filter for related items of type Custom"
+                        "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> type related item.</p>"
                     }
                 }
             },
@@ -5806,6 +5809,232 @@
                     {
                         "name": "REQUIRED",
                         "value": "Required"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#SearchAllRelatedItemsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#SearchAllRelatedItemsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html\">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about \"product defect\" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with \"Active\" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case IDs, not complete case objects. To retrieve full case details, you must make additional calls to the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html\">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html\">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/related-items-search",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "relatedItems"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 25
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.connectcases#RelatedItemFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of types of related items and their parameters to use for filtering. The filters work as an OR condition: caller gets back related items that match any of the specified filter types.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 10
+                        }
+                    }
+                },
+                "sorts": {
+                    "target": "com.amazonaws.connectcases#SearchAllRelatedItemsSortList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structured set of sort terms to specify the order in which related items should be returned. Supports sorting by association time or case ID. The sorts work in the order specified: first sort term takes precedence over subsequent terms.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 2
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                },
+                "relatedItems": {
+                    "target": "com.amazonaws.connectcases#SearchAllRelatedItemsResponseItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items related to a case.</p>",
+                        "smithy.api#length": {
+                            "max": 25
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsResponseItem": {
+            "type": "structure",
+            "members": {
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#RelatedItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of a related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationTime": {
+                    "target": "com.amazonaws.connectcases#AssociationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time at which a related item was associated with a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemContent",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion"
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of items that represent RelatedItems. This data type is similar to <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItemsResponseItem.html\">SearchRelatedItemsResponseItem</a> except Search<b>All</b>RelatedItemsResponseItem has a caseId field.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsResponseItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#SearchAllRelatedItemsResponseItem"
+            },
+            "traits": {
+                "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsSort": {
+            "type": "structure",
+            "members": {
+                "sortProperty": {
+                    "target": "com.amazonaws.connectcases#SearchAllRelatedItemsSortProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether related items should be sorted in ascending or descending order. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.connectcases#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether related items should be sorted by association time or case ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The order in which all returned related items should be sorted.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsSortList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#SearchAllRelatedItemsSort"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.connectcases#SearchAllRelatedItemsSortProperty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AssociationTime",
+                        "name": "ASSOCIATION_TIME"
+                    },
+                    {
+                        "value": "CaseId",
+                        "name": "CASE_ID"
                     }
                 ]
             }

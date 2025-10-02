@@ -240,7 +240,7 @@
                 "TypeNameAlias": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An alias to assign to the public extension, in this account and Region. If you specify an\n      alias for the extension, CloudFormation treats the alias as the extension type name within this\n      account and Region. You must use the alias to refer to the extension in your templates, API\n      calls, and CloudFormation console.</p>\n         <p>An extension alias must be unique within a given account and Region. You can activate the\n      same public resource multiple times in the same account and Region, using different type name\n      aliases.</p>"
+                        "smithy.api#documentation": "<p>An alias to assign to the public extension in this account and Region. If you specify an\n      alias for the extension, CloudFormation treats the alias as the extension type name within this\n      account and Region. You must use the alias to refer to the extension in your templates, API\n      calls, and CloudFormation console.</p>\n         <p>An extension alias must be unique within a given account and Region. You can activate the\n      same public resource multiple times in the same account and Region, using different type name\n      aliases.</p>"
                     }
                 },
                 "AutoUpdate": {
@@ -284,7 +284,7 @@
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#PrivateTypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the activated extension, in this account and\n      Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the activated extension in this account and\n      Region.</p>"
                     }
                 }
             },
@@ -2698,7 +2698,7 @@
                 "Resources": {
                     "target": "com.amazonaws.cloudformation#ResourceDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional list of resources to be included in the generated template.</p>\n         <p> If no resources are specified,the template will be created without any resources.\n      Resources can be added to the template using the <code>UpdateGeneratedTemplate</code> API\n      action.</p>"
+                        "smithy.api#documentation": "<p>An optional list of resources to be included in the generated template.</p>\n         <p>If no resources are specified,the template will be created without any resources.\n      Resources can be added to the template using the <code>UpdateGeneratedTemplate</code> API\n      action.</p>"
                     }
                 },
                 "GeneratedTemplateName": {
@@ -3294,7 +3294,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deactivates a public third-party extension, such as a resource or module, or a CloudFormation\n      Hook when you no longer use it.</p>\n         <p>Deactivating an extension deletes the configuration details that are associated with it.\n      To temporary disable a CloudFormation Hook instead, you can use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>.</p>\n         <p>Once deactivated, an extension can't be used in any CloudFormation operation. This includes\n      stack update operations where the stack template includes the extension, even if no updates\n      are being made to the extension. In addition, deactivated extensions aren't automatically\n      updated if a new version of the extension is released.</p>\n         <p>To see which extensions are currently activated, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html\">ListTypes</a>.</p>",
+                "smithy.api#documentation": "<p>Deactivates a public third-party extension, such as a resource or module, or a CloudFormation\n      Hook when you no longer use it.</p>\n         <p>Deactivating an extension deletes the configuration details that are associated with it.\n      To temporarily disable a CloudFormation Hook instead, you can use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>.</p>\n         <p>Once deactivated, an extension can't be used in any CloudFormation operation. This includes\n      stack update operations where the stack template includes the extension, even if no updates\n      are being made to the extension. In addition, deactivated extensions aren't automatically\n      updated if a new version of the extension is released.</p>\n         <p>To see which extensions are currently activated, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html\">ListTypes</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3304,7 +3304,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type name of the extension, in this account and Region. If you specified a type name\n      alias when enabling the extension, use the type name alias.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and\n        <code>Type</code>.</p>"
+                        "smithy.api#documentation": "<p>The type name of the extension in this account and Region. If you specified a type name\n      alias when enabling the extension, use the type name alias.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and\n        <code>Type</code>.</p>"
                     }
                 },
                 "Type": {
@@ -3316,7 +3316,7 @@
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#PrivateTypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and\n        <code>Type</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and\n        <code>Type</code>.</p>"
                     }
                 }
             },
@@ -5657,7 +5657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information about an extension from the CloudFormation registry in your\n      current account and Region.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information\n      about that specific extension version. Otherwise, it returns information about the default\n      extension version.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information about an extension from the CloudFormation registry in your\n      current account and Region.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information\n      about that specific extension version. Otherwise, it returns information about the default\n      extension version.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html\">Edit configuration\n        data for extensions in your account</a> in the\n      <i>CloudFormation User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5759,7 +5759,7 @@
                 "Schema": {
                     "target": "com.amazonaws.cloudformation#TypeSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schema that defines the extension.</p>\n         <p>For more information about extension schemas, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource type\n        schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The schema that defines the extension.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource type\n        schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i> and the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation\n        Hooks User Guide</a>.</p>"
                     }
                 },
                 "ProvisioningType": {
@@ -5825,7 +5825,7 @@
                 "ConfigurationSchema": {
                     "target": "com.amazonaws.cloudformation#ConfigurationSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that represent the current configuration data for the extension in this\n      account and Region.</p>\n         <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html\">Edit configuration\n        data for extensions in your account</a> in the\n      <i>CloudFormation User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A JSON string that represent the current configuration data for the extension in this\n      account and Region.</p>\n         <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>.</p>"
                     }
                 },
                 "PublisherId": {
@@ -7822,7 +7822,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cloudformation#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. By default the <code>ListGeneratedTemplates</code> API action\n      will return at most 50 results in each response. The maximum value is 100.</p>"
+                        "smithy.api#documentation": "<p>If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. By default the <code>ListGeneratedTemplates</code> API action\n      will return at most 50 results in each response. The maximum value is 100.</p>"
                     }
                 }
             },
@@ -7864,7 +7864,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns summaries of invoked Hooks. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html\">View CloudFormation Hooks\n        invocations</a> in the <i>CloudFormation Hooks User Guide</i>.</p>\n         <p>This operation supports the following parameter combinations:</p>\n         <ul>\n            <li>\n               <p>No parameters: Returns all Hook invocation summaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> only: Returns summaries for a specific Hook.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> and <code>Status</code>: Returns summaries for a specific\n          Hook filtered by status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TargetId</code> and <code>TargetType</code>: Returns summaries for a specific\n          Hook invocation target.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns summaries of invoked Hooks. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html\">View invocation\n        summaries for CloudFormation Hooks</a> in the <i>CloudFormation Hooks User Guide</i>.</p>\n         <p>This operation supports the following parameter combinations:</p>\n         <ul>\n            <li>\n               <p>No parameters: Returns all Hook invocation summaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> only: Returns summaries for a specific Hook.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> and <code>Status</code>: Returns summaries for a specific\n          Hook filtered by status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TargetId</code> and <code>TargetType</code>: Returns summaries for a specific\n          Hook invocation target.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudformation#ListHookResultsInput": {
@@ -8136,7 +8136,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cloudformation#BoxedMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. By default the <code>ListResourceScanRelatedResources</code> API\n      action will return up to 100 results in each response. The maximum value is 100.</p>"
+                        "smithy.api#documentation": "<p>If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. By default the <code>ListResourceScanRelatedResources</code> API\n      action will return up to 100 results in each response. The maximum value is 100.</p>"
                     }
                 }
             },
@@ -8290,7 +8290,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cloudformation#ResourceScannerMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. By default the <code>ListResourceScanResources</code> API action\n      will return at most 100 results in each response. The maximum value is 100.</p>"
+                        "smithy.api#documentation": "<p>If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. By default the <code>ListResourceScanResources</code> API action\n      will return at most 100 results in each response. The maximum value is 100.</p>"
                     }
                 }
             },
@@ -8348,7 +8348,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cloudformation#ResourceScannerMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. The default value is 10. The maximum value is 100.</p>"
+                        "smithy.api#documentation": "<p>If the number of available results exceeds this maximum, the response includes a\n        <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to\n      get the next set of results. The default value is 10. The maximum value is 100.</p>"
                     }
                 },
                 "ScanTypeFilter": {
@@ -9373,7 +9373,7 @@
                 "Visibility": {
                     "target": "com.amazonaws.cloudformation#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope at which the extensions are visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: Extensions that are visible and usable within this account and\n          Region. This includes:</p>\n               <ul>\n                  <li>\n                     <p>Private extensions you have registered in this account and Region.</p>\n                  </li>\n                  <li>\n                     <p>Public extensions that you have activated in this account and Region.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: Extensions that are publicly visible and available to be\n          activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to\n          third-party publishers.</p>\n            </li>\n         </ul>\n         <p>The default is <code>PRIVATE</code>.</p>"
+                        "smithy.api#documentation": "<p>The scope at which the extensions are visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: Extensions that are visible and usable within this account and\n          Region. This includes:</p>\n               <ul>\n                  <li>\n                     <p>Private extensions you have registered in this account and Region.</p>\n                  </li>\n                  <li>\n                     <p>Public extensions that you have activated in this account and Region.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: Extensions that are publicly visible and available to be\n          activated within any Amazon Web Services account. This includes extensions from Amazon Web Services and third-party\n          publishers.</p>\n            </li>\n         </ul>\n         <p>The default is <code>PRIVATE</code>.</p>"
                     }
                 },
                 "ProvisioningType": {
@@ -12036,7 +12036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given\n      account and Region.</p>\n         <p>To view the current configuration data for an extension, refer to the\n        <code>ConfigurationSchema</code> element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For\n      more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html\">Edit configuration\n        data for extensions in your account</a> in the\n      <i>CloudFormation User Guide</i>.</p>\n         <important>\n            <p>It's strongly recommended that you use dynamic references to restrict sensitive\n        configuration definitions, such as third-party credentials. For more details on dynamic\n        references, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html\">Specify values stored in\n          other services using dynamic references</a> in the\n          <i>CloudFormation User Guide</i>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Specifies the configuration data for a CloudFormation extension, such as a resource or Hook,\n      in the given account and Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html\">Edit configuration\n        data for extensions in your account</a> in the\n      <i>CloudFormation User Guide</i>.</p>\n         <p>To view the current configuration data for an extension, refer to the\n        <code>ConfigurationSchema</code> element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>\n         <important>\n            <p>It's strongly recommended that you use dynamic references to restrict sensitive\n        configuration definitions, such as third-party credentials. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html\">Specify values stored in other services using dynamic references</a> in the\n          <i>CloudFormation User Guide</i>.</p>\n         </important>\n         <p>For more information about setting the configuration data for resource types, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining the account-level configuration of an extension</a> in the\n        <i>CloudFormation Command Line Interface (CLI) User Guide</i>. For more information about setting the configuration\n      data for Hooks, see the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation\n        Hooks User Guide</a>.</p>"
             }
         },
         "com.amazonaws.cloudformation#SetTypeConfigurationInput": {
@@ -12045,14 +12045,14 @@
                 "TypeArn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p>\n         <p>For public extensions, this will be the ARN assigned when you call the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a> API operation in this account and Region. For private extensions, this\n      will be the ARN assigned when you call the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a> API\n      operation in this account and Region.</p>\n         <p>Do not include the extension versions suffix at the end of the ARN. You can set the\n      configuration for an extension, but not for a specific extension version.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>\n         <p>For public extensions, this will be the ARN assigned when you call the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a> API operation in this account and Region. For private extensions, this\n      will be the ARN assigned when you call the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a> API\n      operation in this account and Region.</p>\n         <p>Do not include the extension versions suffix at the end of the ARN. You can set the\n      configuration for an extension, but not for a specific extension version.</p>"
                     }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.cloudformation#TypeConfiguration",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The configuration data for the extension, in this account and Region.</p>\n         <p>The configuration data must be formatted as JSON, and validate against the schema returned\n      in the <code>ConfigurationSchema</code> response element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For\n      more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining the account-level configuration of an extension</a> in the\n        <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The configuration data for the extension in this account and Region.</p>\n         <p>The configuration data must be formatted as JSON and validate against the extension's\n      schema returned in the <code>Schema</code> response element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12085,7 +12085,7 @@
                 "ConfigurationArn": {
                     "target": "com.amazonaws.cloudformation#TypeConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and\n      Region.</p>\n         <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and\n        <code>TypeName</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the configuration data in this account and\n      Region.</p>\n         <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and\n        <code>TypeName</code>.</p>"
                     }
                 }
             },
@@ -15070,7 +15070,7 @@
                     "target": "com.amazonaws.cloudformation#TagKey",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            <i>Required</i>. A string used to identify this tag. You can specify a maximum of\n   128 characters for a tag key. Tags owned by Amazon Web Services have the reserved prefix:\n   <code>aws:</code>.</p>",
+                        "smithy.api#documentation": "<p>A string used to identify this tag. You can specify a maximum of\n   128 characters for a tag key. Tags owned by Amazon Web Services have the reserved prefix:\n   <code>aws:</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15078,7 +15078,7 @@
                     "target": "com.amazonaws.cloudformation#TagValue",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            <i>Required</i>. A string that contains the value for this tag. You can specify a\n   maximum of 256 characters for a tag value.</p>",
+                        "smithy.api#documentation": "<p>A string that contains the value for this tag. You can specify a\n   maximum of 256 characters for a tag value.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16777,6 +16777,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXCLUDED_PROPERTIES"
+                    }
+                },
+                "EXCLUDED_RESOURCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDED_RESOURCES"
                     }
                 }
             }
