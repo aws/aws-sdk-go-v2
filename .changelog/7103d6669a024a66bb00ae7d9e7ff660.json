@@ -1,0 +1,11 @@
+{
+    "id": "7103d666-9a02-4a66-bb00-ae7d9e7ff660",
+    "type": "dependency",
+    "collapse": true,
+    "description": "Update Smithy version to 1.62.0",
+    "modules": [
+        "internal/protocoltest/awsrestjson",
+        "internal/protocoltest/jsonrpc",
+        "internal/protocoltest/jsonrpc10"
+    ]
+}

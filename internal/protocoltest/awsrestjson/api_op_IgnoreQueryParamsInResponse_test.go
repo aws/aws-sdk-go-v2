@@ -7,6 +7,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,16 +33,10 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 				"Content-Type": []string{"application/json"},
 			},
 			BodyMediaType: "application/json",
-			Body:          []byte(`{}`),
-			ExpectResult:  &IgnoreQueryParamsInResponseOutput{},
-		},
-		// This test is similar to RestJsonIgnoreQueryParamsInResponse, but it ensures
-		// that clients gracefully handle responses from the server that do not serialize
-		// an empty JSON object.
-		"RestJsonIgnoreQueryParamsInResponseNoPayload": {
-			StatusCode:   200,
-			Body:         []byte(``),
-			ExpectResult: &IgnoreQueryParamsInResponseOutput{},
+			Body:          []byte(`{"baz":"bam"}`),
+			ExpectResult: &IgnoreQueryParamsInResponseOutput{
+				Baz: ptr.String("bam"),
+			},
 		},
 	}
 	for name, c := range cases {
