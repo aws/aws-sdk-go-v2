@@ -1,3 +1,7 @@
+# v1.23.0 (2025-10-03)
+
+* **Feature**: Updated Amazon Q in Connect APIs to support Email Contact Recommendations.
+
 # v1.22.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

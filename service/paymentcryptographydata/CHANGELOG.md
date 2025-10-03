@@ -1,3 +1,7 @@
+# v1.24.0 (2025-10-03)
+
+* **Feature**: Added a new API - translateKeyMaterial; allows keys wrapped by ECDH derived keys to be rewrapped under a static AES keyblock without first importing the key into the service.
+
 # v1.23.5 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

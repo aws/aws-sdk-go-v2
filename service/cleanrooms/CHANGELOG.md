@@ -1,3 +1,7 @@
+# v1.36.0 (2025-10-03)
+
+* **Feature**: Added support for reading data sources across regions, and results delivery to allowedlisted regions.
+
 # v1.35.0 (2025-10-01)
 
 * **Feature**: This release introduces data access budgets to control how many times a table can be used for queries and jobs in a collaboration.

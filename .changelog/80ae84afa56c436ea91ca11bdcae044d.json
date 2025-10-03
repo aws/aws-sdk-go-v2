@@ -1,8 +1,0 @@
-{
-    "id": "80ae84af-a56c-436e-a91c-a11bdcae044d",
-    "type": "feature",
-    "description": "Added support for reading data sources across regions, and results delivery to allowedlisted regions.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

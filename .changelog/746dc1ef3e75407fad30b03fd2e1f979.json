@@ -1,8 +1,0 @@
-{
-    "id": "746dc1ef-3e75-407f-ad30-b03fd2e1f979",
-    "type": "feature",
-    "description": "Updated Amazon Q in Connect APIs to support Email Contact Recommendations.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

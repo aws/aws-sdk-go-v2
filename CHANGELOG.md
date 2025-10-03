@@ -1,3 +1,15 @@
+# Release (2025-10-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.36.0](service/cleanrooms/CHANGELOG.md#v1360-2025-10-03)
+  * **Feature**: Added support for reading data sources across regions, and results delivery to allowedlisted regions.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.84.0](service/medialive/CHANGELOG.md#v1840-2025-10-03)
+  * **Feature**: AWS Elemental MediaLive enables Mediapackage V2 users to configure ID3, KLV, Nielsen ID3, and Segment Length related parameters through the Mediapackage output group.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.24.0](service/paymentcryptographydata/CHANGELOG.md#v1240-2025-10-03)
+  * **Feature**: Added a new API - translateKeyMaterial; allows keys wrapped by ECDH derived keys to be rewrapped under a static AES keyblock without first importing the key into the service.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.23.0](service/qconnect/CHANGELOG.md#v1230-2025-10-03)
+  * **Feature**: Updated Amazon Q in Connect APIs to support Email Contact Recommendations.
+
 # Release (2025-10-02)
 
 ## General Highlights
