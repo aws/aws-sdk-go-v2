@@ -968,6 +968,246 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 	}
 }
 
+func TestComputeInputPayloadChecksumRetry(t *testing.T) {
+	cases := map[string]struct {
+		initContext       func(context.Context) context.Context
+		buildInput        middleware.BuildInput
+		updatedStreamBody string
+
+		expectHeader           http.Header
+		expectPayload          []byte
+		expectDeferToFinalize  bool
+		expectChecksumMetadata map[string]string
+		expectErr              string
+	}{
+		"http request with stream unchanged": {
+			initContext: func(ctx context.Context) context.Context {
+				return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
+			},
+			buildInput: middleware.BuildInput{
+				Request: func() *smithyhttp.Request {
+					r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+					r.URL, _ = url.Parse("http://example.aws")
+					r.ContentLength = 11
+					r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+					return r
+				}(),
+			},
+			expectHeader: http.Header{
+				"X-Amz-Checksum-Crc32": []string{"DUoRhQ=="},
+			},
+			expectPayload: []byte("hello world"),
+			expectChecksumMetadata: map[string]string{
+				"CRC32": "DUoRhQ==",
+			},
+			expectErr: "mock error in first attempt",
+		},
+		"http request with stream updated": {
+			initContext: func(ctx context.Context) context.Context {
+				return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
+			},
+			buildInput: middleware.BuildInput{
+				Request: func() *smithyhttp.Request {
+					r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+					r.URL, _ = url.Parse("http://example.aws")
+					r.ContentLength = 11
+					r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+					return r
+				}(),
+			},
+			updatedStreamBody: "world hello",
+			expectHeader: http.Header{
+				"X-Amz-Checksum-Crc32": []string{"DUoRhQ=="},
+			},
+			expectPayload: []byte("world hello"),
+			expectChecksumMetadata: map[string]string{
+				"CRC32": "DUoRhQ==",
+			},
+			expectErr: "mock error in first attempt",
+		},
+		"https request with stream unchanged": {
+			initContext: func(ctx context.Context) context.Context {
+				return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
+			},
+			buildInput: middleware.BuildInput{
+				Request: func() *smithyhttp.Request {
+					r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+					r.URL, _ = url.Parse("https://example.aws")
+					r.ContentLength = 11
+					r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+					return r
+				}(),
+			},
+			expectHeader: http.Header{
+				"Content-Encoding": []string{"aws-chunked"},
+				"X-Amz-Trailer":    []string{"x-amz-checksum-crc32"},
+			},
+			expectPayload:         []byte("b\r\nhello world\r\n0\r\nx-amz-checksum-crc32:DUoRhQ==\r\n\r\n"),
+			expectDeferToFinalize: true,
+			expectChecksumMetadata: map[string]string{
+				"CRC32": "DUoRhQ==",
+			},
+			expectErr: "mock error in first attempt",
+		},
+		"https request with stream updated": {
+			initContext: func(ctx context.Context) context.Context {
+				return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
+			},
+			buildInput: middleware.BuildInput{
+				Request: func() *smithyhttp.Request {
+					r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+					r.URL, _ = url.Parse("https://example.aws")
+					r.ContentLength = 11
+					r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+					return r
+				}(),
+			},
+			updatedStreamBody: "world hello",
+			expectHeader: http.Header{
+				"Content-Encoding": []string{"aws-chunked"},
+				"X-Amz-Trailer":    []string{"x-amz-checksum-crc32"},
+			},
+			expectPayload:         []byte("b\r\nworld hello\r\n0\r\nx-amz-checksum-crc32:DUoRhQ==\r\n\r\n"),
+			expectDeferToFinalize: true,
+			expectChecksumMetadata: map[string]string{
+				"CRC32": "DUoRhQ==",
+			},
+			expectErr: "mock error in first attempt",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			m := &ComputeInputPayloadChecksum{
+				EnableTrailingChecksum:           true,
+				EnableComputePayloadHash:         true,
+				EnableDecodedContentLengthHeader: true,
+			}
+
+			trailerMiddleware := &AddInputChecksumTrailer{
+				EnableTrailingChecksum:   m.EnableTrailingChecksum,
+				EnableComputePayloadHash: m.EnableComputePayloadHash,
+			}
+
+			ctx := context.Background()
+			stack := middleware.NewStack("test", smithyhttp.NewStackRequest)
+			stack.Build.Add(middleware.BuildMiddlewareFunc(
+				"build-assert",
+				func(ctx context.Context, input middleware.BuildInput, next middleware.BuildHandler) (
+					out middleware.BuildOutput, metadata middleware.Metadata, err error,
+				) {
+					// ignore initial build input for the test case's build input.
+					out, metadata, err = next.HandleBuild(ctx, c.buildInput)
+					if err != nil {
+						t.Fatalf("expect no build error, got %v", err)
+					}
+
+					return out, metadata, err
+				},
+			), middleware.After)
+
+			var attempt int
+			stack.Finalize.Add(middleware.FinalizeMiddlewareFunc(
+				"mock retry middleware",
+				func(ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler) (
+					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+				) {
+					attemptInput := input
+					attemptInput.Request = smithyhttp.RequestCloner(attemptInput.Request)
+					out, metadata, err = next.HandleFinalize(ctx, attemptInput)
+					if err == nil {
+						t.Fatalf("expect first attempt fail, but succeeded")
+					}
+
+					attempt++
+					reAttemptInput := input
+					reAttemptInput.Request = smithyhttp.RequestCloner(reAttemptInput.Request)
+					if rewindable, ok := attemptInput.Request.(interface{ RewindStream() error }); ok {
+						if rewindErr := rewindable.RewindStream(); rewindErr != nil {
+							t.Fatalf("expect no rewindable error, got %v", rewindErr)
+						}
+					}
+
+					if c.updatedStreamBody != "" {
+						req, ok := reAttemptInput.Request.(*smithyhttp.Request)
+						if !ok {
+							t.Fatalf("unknown request type %T", req)
+						}
+
+						req, err = req.SetStream(bytes.NewReader([]byte(c.updatedStreamBody)))
+						if err != nil {
+							t.Fatalf("error when updating request stream before re-attempt: %v", err)
+						}
+						reAttemptInput.Request = req
+					}
+					out, metadata, err = next.HandleFinalize(ctx, reAttemptInput)
+					if err != nil {
+						t.Fatalf("expect second attempt succeed, got %v", err)
+					}
+					return
+				},
+			), middleware.After)
+
+			stack.Finalize.Add(m, middleware.After)
+			stack.Finalize.Add(trailerMiddleware, middleware.After)
+
+			stack.Finalize.Add(middleware.FinalizeMiddlewareFunc(
+				"assert-defer-to-finalize",
+				func(ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler) (
+					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+				) {
+					if e, a := c.expectDeferToFinalize, m.useTrailer; e != a {
+						t.Fatalf("expect %v defer to finalize, got %v", e, a)
+					}
+					return next.HandleFinalize(ctx, input)
+				},
+			), middleware.After)
+
+			validateRequestHandler := middleware.HandlerFunc(
+				func(ctx context.Context, input interface{}) (
+					output interface{}, metadata middleware.Metadata, err error,
+				) {
+					request := input.(*smithyhttp.Request)
+
+					if diff := cmpDiff(c.expectHeader, request.Header); diff != "" {
+						t.Errorf("expect header to match:\n%s", diff)
+					}
+
+					stream := request.GetStream()
+					actualPayload, err := ioutil.ReadAll(stream)
+					if err != nil {
+						t.Fatalf("expected no read error, got %v", err)
+					}
+
+					if attempt == 0 {
+						return output, metadata, fmt.Errorf("mock error in first attempt")
+					}
+
+					if diff := cmpDiff(string(c.expectPayload), string(actualPayload)); diff != "" {
+						t.Errorf("expect payload match:\n%s", diff)
+					}
+					return &smithyhttp.Response{}, metadata, nil
+				},
+			)
+
+			if c.initContext != nil {
+				ctx = c.initContext(ctx)
+			}
+			_, metadata, _ := stack.HandleMiddleware(ctx, struct{}{}, validateRequestHandler)
+			computedMetadata, ok := GetComputedInputChecksums(metadata)
+			if e, a := (c.expectChecksumMetadata != nil), ok; e != a {
+				t.Fatalf("expect checksum metadata %t, got %t, %v", e, a, computedMetadata)
+			}
+			if c.expectChecksumMetadata != nil {
+				if diff := cmpDiff(c.expectChecksumMetadata, computedMetadata); diff != "" {
+					t.Errorf("expect checksum metadata match\n%s", diff)
+				}
+			}
+		})
+
+	}
+}
+
 type mockReadSeeker struct {
 	io.Reader
 }
