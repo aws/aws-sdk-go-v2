@@ -24,9 +24,12 @@ type AIAgentType string
 
 // Enum values for AIAgentType
 const (
-	AIAgentTypeManualSearch         AIAgentType = "MANUAL_SEARCH"
-	AIAgentTypeAnswerRecommendation AIAgentType = "ANSWER_RECOMMENDATION"
-	AIAgentTypeSelfService          AIAgentType = "SELF_SERVICE"
+	AIAgentTypeManualSearch          AIAgentType = "MANUAL_SEARCH"
+	AIAgentTypeAnswerRecommendation  AIAgentType = "ANSWER_RECOMMENDATION"
+	AIAgentTypeSelfService           AIAgentType = "SELF_SERVICE"
+	AIAgentTypeEmailResponse         AIAgentType = "EMAIL_RESPONSE"
+	AIAgentTypeEmailOverview         AIAgentType = "EMAIL_OVERVIEW"
+	AIAgentTypeEmailGenerativeAnswer AIAgentType = "EMAIL_GENERATIVE_ANSWER"
 )
 
 // Values returns all known values for AIAgentType. Note that this can be expanded
@@ -38,6 +41,9 @@ func (AIAgentType) Values() []AIAgentType {
 		"MANUAL_SEARCH",
 		"ANSWER_RECOMMENDATION",
 		"SELF_SERVICE",
+		"EMAIL_RESPONSE",
+		"EMAIL_OVERVIEW",
+		"EMAIL_GENERATIVE_ANSWER",
 	}
 }
 
@@ -90,6 +96,10 @@ const (
 	AIPromptTypeQueryReformulation          AIPromptType = "QUERY_REFORMULATION"
 	AIPromptTypeSelfServicePreProcessing    AIPromptType = "SELF_SERVICE_PRE_PROCESSING"
 	AIPromptTypeSelfServiceAnswerGeneration AIPromptType = "SELF_SERVICE_ANSWER_GENERATION"
+	AIPromptTypeEmailResponse               AIPromptType = "EMAIL_RESPONSE"
+	AIPromptTypeEmailOverview               AIPromptType = "EMAIL_OVERVIEW"
+	AIPromptTypeEmailGenerativeAnswer       AIPromptType = "EMAIL_GENERATIVE_ANSWER"
+	AIPromptTypeEmailQueryReformulation     AIPromptType = "EMAIL_QUERY_REFORMULATION"
 )
 
 // Values returns all known values for AIPromptType. Note that this can be
@@ -103,6 +113,10 @@ func (AIPromptType) Values() []AIPromptType {
 		"QUERY_REFORMULATION",
 		"SELF_SERVICE_PRE_PROCESSING",
 		"SELF_SERVICE_ANSWER_GENERATION",
+		"EMAIL_RESPONSE",
+		"EMAIL_OVERVIEW",
+		"EMAIL_GENERATIVE_ANSWER",
+		"EMAIL_QUERY_REFORMULATION",
 	}
 }
 
@@ -924,6 +938,9 @@ const (
 	QueryResultTypeBlockedGenerativeAnswerChunk QueryResultType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
 	QueryResultTypeIntentAnswerChunk            QueryResultType = "INTENT_ANSWER_CHUNK"
 	QueryResultTypeBlockedIntentAnswerChunk     QueryResultType = "BLOCKED_INTENT_ANSWER_CHUNK"
+	QueryResultTypeEmailResponseChunk           QueryResultType = "EMAIL_RESPONSE_CHUNK"
+	QueryResultTypeEmailOverviewChunk           QueryResultType = "EMAIL_OVERVIEW_CHUNK"
+	QueryResultTypeEmailGenerativeAnswerChunk   QueryResultType = "EMAIL_GENERATIVE_ANSWER_CHUNK"
 )
 
 // Values returns all known values for QueryResultType. Note that this can be
@@ -939,6 +956,9 @@ func (QueryResultType) Values() []QueryResultType {
 		"BLOCKED_GENERATIVE_ANSWER_CHUNK",
 		"INTENT_ANSWER_CHUNK",
 		"BLOCKED_INTENT_ANSWER_CHUNK",
+		"EMAIL_RESPONSE_CHUNK",
+		"EMAIL_OVERVIEW_CHUNK",
+		"EMAIL_GENERATIVE_ANSWER_CHUNK",
 	}
 }
 
@@ -1063,6 +1083,9 @@ const (
 	RecommendationTypeBlockedGenerativeAnswerChunk RecommendationType = "BLOCKED_GENERATIVE_ANSWER_CHUNK"
 	RecommendationTypeIntentAnswerChunk            RecommendationType = "INTENT_ANSWER_CHUNK"
 	RecommendationTypeBlockedIntentAnswerChunk     RecommendationType = "BLOCKED_INTENT_ANSWER_CHUNK"
+	RecommendationTypeEmailResponseChunk           RecommendationType = "EMAIL_RESPONSE_CHUNK"
+	RecommendationTypeEmailOverviewChunk           RecommendationType = "EMAIL_OVERVIEW_CHUNK"
+	RecommendationTypeEmailGenerativeAnswerChunk   RecommendationType = "EMAIL_GENERATIVE_ANSWER_CHUNK"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -1079,6 +1102,9 @@ func (RecommendationType) Values() []RecommendationType {
 		"BLOCKED_GENERATIVE_ANSWER_CHUNK",
 		"INTENT_ANSWER_CHUNK",
 		"BLOCKED_INTENT_ANSWER_CHUNK",
+		"EMAIL_RESPONSE_CHUNK",
+		"EMAIL_OVERVIEW_CHUNK",
+		"EMAIL_GENERATIVE_ANSWER_CHUNK",
 	}
 }
 

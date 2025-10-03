@@ -1,0 +1,8 @@
+{
+    "id": "2e300ab9-ba27-4c1e-9c28-1b4d6d3cf044",
+    "type": "feature",
+    "description": "Added a new API - translateKeyMaterial; allows keys wrapped by ECDH derived keys to be rewrapped under a static AES keyblock without first importing the key into the service.",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}

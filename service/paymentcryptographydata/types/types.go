@@ -467,6 +467,31 @@ type DerivationMethodAttributesMemberVisa struct {
 
 func (*DerivationMethodAttributesMemberVisa) isDerivationMethodAttributes() {}
 
+// The shared information used when deriving a key using ECDH.
+//
+// The following types satisfy this interface:
+//
+//	DiffieHellmanDerivationDataMemberSharedInformation
+type DiffieHellmanDerivationData interface {
+	isDiffieHellmanDerivationData()
+}
+
+// A string containing information that binds the ECDH derived key to the two
+// parties involved or to the context of the key.
+//
+// It may include details like identities of the two parties deriving the key,
+// context of the operation, session IDs, and optionally a nonce. It must not
+// contain zero bytes. It is not recommended to reuse shared information for
+// multiple ECDH key derivations, as it could result in derived key material being
+// the same across different derivations.
+type DiffieHellmanDerivationDataMemberSharedInformation struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*DiffieHellmanDerivationDataMemberSharedInformation) isDiffieHellmanDerivationData() {}
+
 // Parameters that are required to generate or verify dCVC (Dynamic Card
 // Verification Code).
 type DiscoverDynamicCardVerificationCode struct {
@@ -970,6 +995,74 @@ type Ibm3624RandomPin struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information of a TR31KeyBlock wrapped using an ECDH derived key.
+type IncomingDiffieHellmanTr31KeyBlock struct {
+
+	// The keyArn of the certificate that signed the client's PublicKeyCertificate .
+	//
+	// This member is required.
+	CertificateAuthorityPublicKeyIdentifier *string
+
+	// The shared information used when deriving a key using ECDH.
+	//
+	// This member is required.
+	DerivationData DiffieHellmanDerivationData
+
+	// The key algorithm of the derived ECDH key.
+	//
+	// This member is required.
+	DeriveKeyAlgorithm SymmetricKeyAlgorithm
+
+	// The key derivation function to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationFunction KeyDerivationFunction
+
+	// The hash type to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationHashAlgorithm KeyDerivationHashAlgorithm
+
+	// The keyARN of the asymmetric ECC key pair.
+	//
+	// This member is required.
+	PrivateKeyIdentifier *string
+
+	// The client's public key certificate in PEM format (base64 encoded) to use for
+	// ECDH key derivation.
+	//
+	// This member is required.
+	PublicKeyCertificate *string
+
+	// The WrappedKeyBlock containing the transaction key wrapped using an ECDH
+	// dervied key.
+	//
+	// This member is required.
+	WrappedKeyBlock *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameter information of the incoming WrappedKeyBlock containing the
+// transaction key.
+//
+// The following types satisfy this interface:
+//
+//	IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock
+type IncomingKeyMaterial interface {
+	isIncomingKeyMaterial()
+}
+
+// Parameter information of the TR31WrappedKeyBlock containing the transaction key
+// wrapped using an ECDH dervied key.
+type IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
+	Value IncomingDiffieHellmanTr31KeyBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock) isIncomingKeyMaterial() {}
+
 // Parameters required for DUKPT MAC generation and verification.
 type MacAlgorithmDukpt struct {
 
@@ -1119,6 +1212,38 @@ type MasterCardAttributes struct {
 	//
 	// This member is required.
 	PrimaryAccountNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameter information of the outgoing TR31WrappedKeyBlock containing the
+// transaction key.
+//
+// The following types satisfy this interface:
+//
+//	OutgoingKeyMaterialMemberTr31KeyBlock
+type OutgoingKeyMaterial interface {
+	isOutgoingKeyMaterial()
+}
+
+// Parameter information of the TR31WrappedKeyBlock containing the transaction key
+// wrapped using a KEK.
+type OutgoingKeyMaterialMemberTr31KeyBlock struct {
+	Value OutgoingTr31KeyBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*OutgoingKeyMaterialMemberTr31KeyBlock) isOutgoingKeyMaterial() {}
+
+// Parameter information of the TR31WrappedKeyBlock containing the transaction key
+// wrapped using a KEK.
+type OutgoingTr31KeyBlock struct {
+
+	// The keyARN of the KEK used to wrap the transaction key.
+	//
+	// This member is required.
+	WrappingKeyIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -1752,6 +1877,34 @@ type WrappedKeyMaterialMemberTr31KeyBlock struct {
 
 func (*WrappedKeyMaterialMemberTr31KeyBlock) isWrappedKeyMaterial() {}
 
+// The parameter information of the outgoing wrapped key block.
+type WrappedWorkingKey struct {
+
+	// The key check value (KCV) of the key contained within the outgoing
+	// TR31WrappedKeyBlock.
+	//
+	// The KCV is used to check if all parties holding a given key have the same key
+	// or to detect that a key has changed. For more information on KCV, see [KCV]in the
+	// Amazon Web Services Payment Cryptography User Guide.
+	//
+	// [KCV]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.kcv
+	//
+	// This member is required.
+	KeyCheckValue *string
+
+	// The wrapped key block of the outgoing transaction key.
+	//
+	// This member is required.
+	WrappedKeyMaterial *string
+
+	// The key block format of the wrapped key.
+	//
+	// This member is required.
+	WrappedKeyMaterialFormat WrappedKeyMaterialFormat
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1767,8 +1920,11 @@ func (*UnknownUnionMember) isCardGenerationAttributes()       {}
 func (*UnknownUnionMember) isCardVerificationAttributes()     {}
 func (*UnknownUnionMember) isCryptogramAuthResponse()         {}
 func (*UnknownUnionMember) isDerivationMethodAttributes()     {}
+func (*UnknownUnionMember) isDiffieHellmanDerivationData()    {}
 func (*UnknownUnionMember) isEncryptionDecryptionAttributes() {}
+func (*UnknownUnionMember) isIncomingKeyMaterial()            {}
 func (*UnknownUnionMember) isMacAttributes()                  {}
+func (*UnknownUnionMember) isOutgoingKeyMaterial()            {}
 func (*UnknownUnionMember) isPinData()                        {}
 func (*UnknownUnionMember) isPinGenerationAttributes()        {}
 func (*UnknownUnionMember) isPinVerificationAttributes()      {}

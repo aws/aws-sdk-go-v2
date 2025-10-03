@@ -299,6 +299,7 @@ type PinBlockFormatForPinData string
 // Enum values for PinBlockFormatForPinData
 const (
 	PinBlockFormatForPinDataIsoFormat0 PinBlockFormatForPinData = "ISO_FORMAT_0"
+	PinBlockFormatForPinDataIsoFormat1 PinBlockFormatForPinData = "ISO_FORMAT_1"
 	PinBlockFormatForPinDataIsoFormat3 PinBlockFormatForPinData = "ISO_FORMAT_3"
 	PinBlockFormatForPinDataIsoFormat4 PinBlockFormatForPinData = "ISO_FORMAT_4"
 )
@@ -310,6 +311,7 @@ const (
 func (PinBlockFormatForPinData) Values() []PinBlockFormatForPinData {
 	return []PinBlockFormatForPinData{
 		"ISO_FORMAT_0",
+		"ISO_FORMAT_1",
 		"ISO_FORMAT_3",
 		"ISO_FORMAT_4",
 	}
@@ -431,5 +433,26 @@ func (VerificationFailedReason) Values() []VerificationFailedReason {
 		"INVALID_PIN",
 		"INVALID_VALIDATION_DATA",
 		"INVALID_AUTH_REQUEST_CRYPTOGRAM",
+	}
+}
+
+type WrappedKeyMaterialFormat string
+
+// Enum values for WrappedKeyMaterialFormat
+const (
+	WrappedKeyMaterialFormatKeyCryptogram WrappedKeyMaterialFormat = "KEY_CRYPTOGRAM"
+	WrappedKeyMaterialFormatTr31KeyBlock  WrappedKeyMaterialFormat = "TR31_KEY_BLOCK"
+	WrappedKeyMaterialFormatTr34KeyBlock  WrappedKeyMaterialFormat = "TR34_KEY_BLOCK"
+)
+
+// Values returns all known values for WrappedKeyMaterialFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WrappedKeyMaterialFormat) Values() []WrappedKeyMaterialFormat {
+	return []WrappedKeyMaterialFormat{
+		"KEY_CRYPTOGRAM",
+		"TR31_KEY_BLOCK",
+		"TR34_KEY_BLOCK",
 	}
 }

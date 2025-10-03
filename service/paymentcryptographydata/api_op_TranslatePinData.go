@@ -38,7 +38,7 @@ import (
 // PIN block, which is translated to a PEK encrypted PIN block for use within the
 // service. You can also use ECDH for reveal PIN, wherein the service translates
 // the PIN block from PEK to a ECDH derived encryption key. For more information on
-// establishing ECDH derived keys, see the [Generating keys]in the Amazon Web Services Payment
+// establishing ECDH derived keys, see the [Creating keys]in the Amazon Web Services Payment
 // Cryptography User Guide.
 //
 // The allowed combinations of PIN block format translations are guided by PCI. It
@@ -64,10 +64,10 @@ import (
 // # VerifyPinData
 //
 // [Using Dynamic Keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
+// [Creating keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
 // [Translate PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-// [Generating keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
 func (c *Client) TranslatePinData(ctx context.Context, params *TranslatePinDataInput, optFns ...func(*Options)) (*TranslatePinDataOutput, error) {
 	if params == nil {
 		params = &TranslatePinDataInput{}

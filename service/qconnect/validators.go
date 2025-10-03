@@ -2157,6 +2157,16 @@ func validateAIAgentConfiguration(v types.AIAgentConfiguration) error {
 			invalidParams.AddNested("[answerRecommendationAIAgentConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration:
+		if err := validateEmailGenerativeAnswerAIAgentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[emailGenerativeAnswerAIAgentConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AIAgentConfigurationMemberEmailResponseAIAgentConfiguration:
+		if err := validateEmailResponseAIAgentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[emailResponseAIAgentConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration:
 		if err := validateManualSearchAIAgentConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[manualSearchAIAgentConfiguration]", err.(smithy.InvalidParamsError))
@@ -2509,6 +2519,40 @@ func validateConversationContext(v *types.ConversationContext) error {
 	} else if v.SelfServiceConversationHistory != nil {
 		if err := validateSelfServiceConversationHistoryList(v.SelfServiceConversationHistory); err != nil {
 			invalidParams.AddNested("SelfServiceConversationHistory", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailGenerativeAnswerAIAgentConfiguration(v *types.EmailGenerativeAnswerAIAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailGenerativeAnswerAIAgentConfiguration"}
+	if v.AssociationConfigurations != nil {
+		if err := validateAssociationConfigurationList(v.AssociationConfigurations); err != nil {
+			invalidParams.AddNested("AssociationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailResponseAIAgentConfiguration(v *types.EmailResponseAIAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailResponseAIAgentConfiguration"}
+	if v.AssociationConfigurations != nil {
+		if err := validateAssociationConfigurationList(v.AssociationConfigurations); err != nil {
+			invalidParams.AddNested("AssociationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

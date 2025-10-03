@@ -150,6 +150,26 @@ func (m *validateOpReEncryptData) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTranslateKeyMaterial struct {
+}
+
+func (*validateOpTranslateKeyMaterial) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTranslateKeyMaterial) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TranslateKeyMaterialInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTranslateKeyMaterialInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTranslatePinData struct {
 }
 
@@ -276,6 +296,10 @@ func addOpGeneratePinDataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpReEncryptDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReEncryptData{}, middleware.After)
+}
+
+func addOpTranslateKeyMaterialValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTranslateKeyMaterial{}, middleware.After)
 }
 
 func addOpTranslatePinDataValidationMiddleware(stack *middleware.Stack) error {
@@ -1002,6 +1026,61 @@ func validateIbm3624RandomPin(v *types.Ibm3624RandomPin) error {
 	}
 }
 
+func validateIncomingDiffieHellmanTr31KeyBlock(v *types.IncomingDiffieHellmanTr31KeyBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncomingDiffieHellmanTr31KeyBlock"}
+	if v.PrivateKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateKeyIdentifier"))
+	}
+	if v.CertificateAuthorityPublicKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityPublicKeyIdentifier"))
+	}
+	if v.PublicKeyCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyCertificate"))
+	}
+	if len(v.DeriveKeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeriveKeyAlgorithm"))
+	}
+	if len(v.KeyDerivationFunction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationFunction"))
+	}
+	if len(v.KeyDerivationHashAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationHashAlgorithm"))
+	}
+	if v.DerivationData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DerivationData"))
+	}
+	if v.WrappedKeyBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyBlock"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIncomingKeyMaterial(v types.IncomingKeyMaterial) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncomingKeyMaterial"}
+	switch uv := v.(type) {
+	case *types.IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		if err := validateIncomingDiffieHellmanTr31KeyBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[DiffieHellmanTr31KeyBlock]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMacAlgorithmDukpt(v *types.MacAlgorithmDukpt) error {
 	if v == nil {
 		return nil
@@ -1097,6 +1176,40 @@ func validateMasterCardAttributes(v *types.MasterCardAttributes) error {
 	}
 	if v.ApplicationCryptogram == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationCryptogram"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutgoingKeyMaterial(v types.OutgoingKeyMaterial) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutgoingKeyMaterial"}
+	switch uv := v.(type) {
+	case *types.OutgoingKeyMaterialMemberTr31KeyBlock:
+		if err := validateOutgoingTr31KeyBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[Tr31KeyBlock]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutgoingTr31KeyBlock(v *types.OutgoingTr31KeyBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutgoingTr31KeyBlock"}
+	if v.WrappingKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappingKeyIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1683,9 +1796,6 @@ func validateOpGeneratePinDataInput(v *GeneratePinDataInput) error {
 			invalidParams.AddNested("GenerationAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.PrimaryAccountNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
-	}
 	if len(v.PinBlockFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PinBlockFormat"))
 	}
@@ -1737,6 +1847,32 @@ func validateOpReEncryptDataInput(v *ReEncryptDataInput) error {
 	if v.OutgoingWrappedKey != nil {
 		if err := validateWrappedKey(v.OutgoingWrappedKey); err != nil {
 			invalidParams.AddNested("OutgoingWrappedKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTranslateKeyMaterialInput(v *TranslateKeyMaterialInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TranslateKeyMaterialInput"}
+	if v.IncomingKeyMaterial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncomingKeyMaterial"))
+	} else if v.IncomingKeyMaterial != nil {
+		if err := validateIncomingKeyMaterial(v.IncomingKeyMaterial); err != nil {
+			invalidParams.AddNested("IncomingKeyMaterial", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutgoingKeyMaterial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutgoingKeyMaterial"))
+	} else if v.OutgoingKeyMaterial != nil {
+		if err := validateOutgoingKeyMaterial(v.OutgoingKeyMaterial); err != nil {
+			invalidParams.AddNested("OutgoingKeyMaterial", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1913,9 +2049,6 @@ func validateOpVerifyPinDataInput(v *VerifyPinDataInput) error {
 	}
 	if v.EncryptedPinBlock == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptedPinBlock"))
-	}
-	if v.PrimaryAccountNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
 	}
 	if len(v.PinBlockFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PinBlockFormat"))

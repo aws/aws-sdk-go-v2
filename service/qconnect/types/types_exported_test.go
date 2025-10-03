@@ -14,6 +14,15 @@ func ExampleAIAgentConfiguration_outputUsage() {
 	case *types.AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration:
 		_ = v.Value // Value is types.AnswerRecommendationAIAgentConfiguration
 
+	case *types.AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration:
+		_ = v.Value // Value is types.EmailGenerativeAnswerAIAgentConfiguration
+
+	case *types.AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration:
+		_ = v.Value // Value is types.EmailOverviewAIAgentConfiguration
+
+	case *types.AIAgentConfigurationMemberEmailResponseAIAgentConfiguration:
+		_ = v.Value // Value is types.EmailResponseAIAgentConfiguration
+
 	case *types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration:
 		_ = v.Value // Value is types.ManualSearchAIAgentConfiguration
 
@@ -30,7 +39,10 @@ func ExampleAIAgentConfiguration_outputUsage() {
 }
 
 var _ *types.SelfServiceAIAgentConfiguration
+var _ *types.EmailResponseAIAgentConfiguration
+var _ *types.EmailGenerativeAnswerAIAgentConfiguration
 var _ *types.ManualSearchAIAgentConfiguration
+var _ *types.EmailOverviewAIAgentConfiguration
 var _ *types.AnswerRecommendationAIAgentConfiguration
 
 func ExampleAIPromptTemplateConfiguration_outputUsage() {
@@ -166,6 +178,15 @@ func ExampleDataDetails_outputUsage() {
 	case *types.DataDetailsMemberContentData:
 		_ = v.Value // Value is types.ContentDataDetails
 
+	case *types.DataDetailsMemberEmailGenerativeAnswerChunkData:
+		_ = v.Value // Value is types.EmailGenerativeAnswerChunkDataDetails
+
+	case *types.DataDetailsMemberEmailOverviewChunkData:
+		_ = v.Value // Value is types.EmailOverviewChunkDataDetails
+
+	case *types.DataDetailsMemberEmailResponseChunkData:
+		_ = v.Value // Value is types.EmailResponseChunkDataDetails
+
 	case *types.DataDetailsMemberGenerativeChunkData:
 		_ = v.Value // Value is types.GenerativeChunkDataDetails
 
@@ -187,11 +208,14 @@ func ExampleDataDetails_outputUsage() {
 	}
 }
 
+var _ *types.EmailGenerativeAnswerChunkDataDetails
 var _ *types.ContentDataDetails
 var _ *types.GenerativeChunkDataDetails
 var _ *types.IntentDetectedDataDetails
 var _ *types.GenerativeDataDetails
+var _ *types.EmailOverviewChunkDataDetails
 var _ *types.SourceContentDataDetails
+var _ *types.EmailResponseChunkDataDetails
 
 func ExampleDataReference_outputUsage() {
 	var union types.DataReference

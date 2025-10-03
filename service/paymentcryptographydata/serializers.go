@@ -782,6 +782,101 @@ func awsRestjson1_serializeOpDocumentReEncryptDataInput(v *ReEncryptDataInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpTranslateKeyMaterial struct {
+}
+
+func (*awsRestjson1_serializeOpTranslateKeyMaterial) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpTranslateKeyMaterial) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TranslateKeyMaterialInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/keymaterial/translate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentTranslateKeyMaterialInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsTranslateKeyMaterialInput(v *TranslateKeyMaterialInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentTranslateKeyMaterialInput(v *TranslateKeyMaterialInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IncomingKeyMaterial != nil {
+		ok := object.Key("IncomingKeyMaterial")
+		if err := awsRestjson1_serializeDocumentIncomingKeyMaterial(v.IncomingKeyMaterial, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.KeyCheckValueAlgorithm) > 0 {
+		ok := object.Key("KeyCheckValueAlgorithm")
+		ok.String(string(v.KeyCheckValueAlgorithm))
+	}
+
+	if v.OutgoingKeyMaterial != nil {
+		ok := object.Key("OutgoingKeyMaterial")
+		if err := awsRestjson1_serializeDocumentOutgoingKeyMaterial(v.OutgoingKeyMaterial, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTranslatePinData struct {
 }
 
@@ -1710,6 +1805,22 @@ func awsRestjson1_serializeDocumentDerivationMethodAttributes(v types.Derivation
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDiffieHellmanDerivationData(v types.DiffieHellmanDerivationData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DiffieHellmanDerivationDataMemberSharedInformation:
+		av := object.Key("SharedInformation")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDiscoverDynamicCardVerificationCode(v *types.DiscoverDynamicCardVerificationCode, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2161,6 +2272,73 @@ func awsRestjson1_serializeDocumentIbm3624RandomPin(v *types.Ibm3624RandomPin, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIncomingDiffieHellmanTr31KeyBlock(v *types.IncomingDiffieHellmanTr31KeyBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		ok := object.Key("CertificateAuthorityPublicKeyIdentifier")
+		ok.String(*v.CertificateAuthorityPublicKeyIdentifier)
+	}
+
+	if v.DerivationData != nil {
+		ok := object.Key("DerivationData")
+		if err := awsRestjson1_serializeDocumentDiffieHellmanDerivationData(v.DerivationData, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DeriveKeyAlgorithm) > 0 {
+		ok := object.Key("DeriveKeyAlgorithm")
+		ok.String(string(v.DeriveKeyAlgorithm))
+	}
+
+	if len(v.KeyDerivationFunction) > 0 {
+		ok := object.Key("KeyDerivationFunction")
+		ok.String(string(v.KeyDerivationFunction))
+	}
+
+	if len(v.KeyDerivationHashAlgorithm) > 0 {
+		ok := object.Key("KeyDerivationHashAlgorithm")
+		ok.String(string(v.KeyDerivationHashAlgorithm))
+	}
+
+	if v.PrivateKeyIdentifier != nil {
+		ok := object.Key("PrivateKeyIdentifier")
+		ok.String(*v.PrivateKeyIdentifier)
+	}
+
+	if v.PublicKeyCertificate != nil {
+		ok := object.Key("PublicKeyCertificate")
+		ok.String(*v.PublicKeyCertificate)
+	}
+
+	if v.WrappedKeyBlock != nil {
+		ok := object.Key("WrappedKeyBlock")
+		ok.String(*v.WrappedKeyBlock)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIncomingKeyMaterial(v types.IncomingKeyMaterial, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock:
+		av := object.Key("DiffieHellmanTr31KeyBlock")
+		if err := awsRestjson1_serializeDocumentIncomingDiffieHellmanTr31KeyBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMacAlgorithmDukpt(v *types.MacAlgorithmDukpt, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2279,6 +2457,36 @@ func awsRestjson1_serializeDocumentMasterCardAttributes(v *types.MasterCardAttri
 	if v.PrimaryAccountNumber != nil {
 		ok := object.Key("PrimaryAccountNumber")
 		ok.String(*v.PrimaryAccountNumber)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutgoingKeyMaterial(v types.OutgoingKeyMaterial, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.OutgoingKeyMaterialMemberTr31KeyBlock:
+		av := object.Key("Tr31KeyBlock")
+		if err := awsRestjson1_serializeDocumentOutgoingTr31KeyBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutgoingTr31KeyBlock(v *types.OutgoingTr31KeyBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.WrappingKeyIdentifier != nil {
+		ok := object.Key("WrappingKeyIdentifier")
+		ok.String(*v.WrappingKeyIdentifier)
 	}
 
 	return nil

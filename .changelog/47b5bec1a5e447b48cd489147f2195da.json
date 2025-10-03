@@ -1,0 +1,8 @@
+{
+    "id": "47b5bec1-a5e4-47b4-8cd4-89147f2195da",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive enables Mediapackage V2 users to configure ID3, KLV, Nielsen ID3, and Segment Length related parameters through the Mediapackage output group.",
+    "modules": [
+        "service/medialive"
+    ]
+}

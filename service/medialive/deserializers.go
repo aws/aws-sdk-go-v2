@@ -40557,6 +40557,95 @@ func awsRestjson1_deserializeDocumentMediaPackageV2GroupSettings(v **types.Media
 				return err
 			}
 
+		case "id3Behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafId3Behavior to be of type string, got %T instead", value)
+				}
+				sv.Id3Behavior = types.CmafId3Behavior(jtv)
+			}
+
+		case "klvBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafKLVBehavior to be of type string, got %T instead", value)
+				}
+				sv.KlvBehavior = types.CmafKLVBehavior(jtv)
+			}
+
+		case "nielsenId3Behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafNielsenId3Behavior to be of type string, got %T instead", value)
+				}
+				sv.NielsenId3Behavior = types.CmafNielsenId3Behavior(jtv)
+			}
+
+		case "scte35Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Scte35Type to be of type string, got %T instead", value)
+				}
+				sv.Scte35Type = types.Scte35Type(jtv)
+			}
+
+		case "segmentLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentLength = ptr.Int32(int32(i64))
+			}
+
+		case "segmentLengthUnits":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafIngestSegmentLengthUnits to be of type string, got %T instead", value)
+				}
+				sv.SegmentLengthUnits = types.CmafIngestSegmentLengthUnits(jtv)
+			}
+
+		case "timedMetadataId3Frame":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafTimedMetadataId3Frame to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataId3Frame = types.CmafTimedMetadataId3Frame(jtv)
+			}
+
+		case "timedMetadataId3Period":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max10000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimedMetadataId3Period = ptr.Int32(int32(i64))
+			}
+
+		case "timedMetadataPassthrough":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafTimedMetadataPassthrough to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataPassthrough = types.CmafTimedMetadataPassthrough(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

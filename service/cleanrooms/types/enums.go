@@ -379,6 +379,87 @@ func (CollaborationQueryLogStatus) Values() []CollaborationQueryLogStatus {
 	}
 }
 
+type CommercialRegion string
+
+// Enum values for CommercialRegion
+const (
+	CommercialRegionUsWest1      CommercialRegion = "us-west-1"
+	CommercialRegionUsWest2      CommercialRegion = "us-west-2"
+	CommercialRegionUsEast1      CommercialRegion = "us-east-1"
+	CommercialRegionUsEast2      CommercialRegion = "us-east-2"
+	CommercialRegionAfSouth1     CommercialRegion = "af-south-1"
+	CommercialRegionApEast1      CommercialRegion = "ap-east-1"
+	CommercialRegionApSouth2     CommercialRegion = "ap-south-2"
+	CommercialRegionApSoutheast1 CommercialRegion = "ap-southeast-1"
+	CommercialRegionApSoutheast2 CommercialRegion = "ap-southeast-2"
+	CommercialRegionApSoutheast3 CommercialRegion = "ap-southeast-3"
+	CommercialRegionApSoutheast5 CommercialRegion = "ap-southeast-5"
+	CommercialRegionApSoutheast4 CommercialRegion = "ap-southeast-4"
+	CommercialRegionApSoutheast7 CommercialRegion = "ap-southeast-7"
+	CommercialRegionApSouth1     CommercialRegion = "ap-south-1"
+	CommercialRegionApNortheast3 CommercialRegion = "ap-northeast-3"
+	CommercialRegionApNortheast1 CommercialRegion = "ap-northeast-1"
+	CommercialRegionApNortheast2 CommercialRegion = "ap-northeast-2"
+	CommercialRegionCaCentral1   CommercialRegion = "ca-central-1"
+	CommercialRegionCaWest1      CommercialRegion = "ca-west-1"
+	CommercialRegionEuSouth1     CommercialRegion = "eu-south-1"
+	CommercialRegionEuWest3      CommercialRegion = "eu-west-3"
+	CommercialRegionEuSouth2     CommercialRegion = "eu-south-2"
+	CommercialRegionEuCentral2   CommercialRegion = "eu-central-2"
+	CommercialRegionEuCentral1   CommercialRegion = "eu-central-1"
+	CommercialRegionEuNorth1     CommercialRegion = "eu-north-1"
+	CommercialRegionEuWest1      CommercialRegion = "eu-west-1"
+	CommercialRegionEuWest2      CommercialRegion = "eu-west-2"
+	CommercialRegionMeSouth1     CommercialRegion = "me-south-1"
+	CommercialRegionMeCentral1   CommercialRegion = "me-central-1"
+	CommercialRegionIlCentral1   CommercialRegion = "il-central-1"
+	CommercialRegionSaEast1      CommercialRegion = "sa-east-1"
+	CommercialRegionMxCentral1   CommercialRegion = "mx-central-1"
+	CommercialRegionApEast2      CommercialRegion = "ap-east-2"
+)
+
+// Values returns all known values for CommercialRegion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommercialRegion) Values() []CommercialRegion {
+	return []CommercialRegion{
+		"us-west-1",
+		"us-west-2",
+		"us-east-1",
+		"us-east-2",
+		"af-south-1",
+		"ap-east-1",
+		"ap-south-2",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-southeast-3",
+		"ap-southeast-5",
+		"ap-southeast-4",
+		"ap-southeast-7",
+		"ap-south-1",
+		"ap-northeast-3",
+		"ap-northeast-1",
+		"ap-northeast-2",
+		"ca-central-1",
+		"ca-west-1",
+		"eu-south-1",
+		"eu-west-3",
+		"eu-south-2",
+		"eu-central-2",
+		"eu-central-1",
+		"eu-north-1",
+		"eu-west-1",
+		"eu-west-2",
+		"me-south-1",
+		"me-central-1",
+		"il-central-1",
+		"sa-east-1",
+		"mx-central-1",
+		"ap-east-2",
+	}
+}
+
 type ConfiguredTableAnalysisRuleType string
 
 // Enum values for ConfiguredTableAnalysisRuleType
@@ -1154,6 +1235,87 @@ func (SelectedAnalysisMethod) Values() []SelectedAnalysisMethod {
 	return []SelectedAnalysisMethod{
 		"DIRECT_QUERY",
 		"DIRECT_JOB",
+	}
+}
+
+type SupportedS3Region string
+
+// Enum values for SupportedS3Region
+const (
+	SupportedS3RegionUsWest1      SupportedS3Region = "us-west-1"
+	SupportedS3RegionUsWest2      SupportedS3Region = "us-west-2"
+	SupportedS3RegionUsEast1      SupportedS3Region = "us-east-1"
+	SupportedS3RegionUsEast2      SupportedS3Region = "us-east-2"
+	SupportedS3RegionAfSouth1     SupportedS3Region = "af-south-1"
+	SupportedS3RegionApEast1      SupportedS3Region = "ap-east-1"
+	SupportedS3RegionApEast2      SupportedS3Region = "ap-east-2"
+	SupportedS3RegionApSouth2     SupportedS3Region = "ap-south-2"
+	SupportedS3RegionApSoutheast1 SupportedS3Region = "ap-southeast-1"
+	SupportedS3RegionApSoutheast2 SupportedS3Region = "ap-southeast-2"
+	SupportedS3RegionApSoutheast3 SupportedS3Region = "ap-southeast-3"
+	SupportedS3RegionApSoutheast5 SupportedS3Region = "ap-southeast-5"
+	SupportedS3RegionApSoutheast4 SupportedS3Region = "ap-southeast-4"
+	SupportedS3RegionApSoutheast7 SupportedS3Region = "ap-southeast-7"
+	SupportedS3RegionApSouth1     SupportedS3Region = "ap-south-1"
+	SupportedS3RegionApNortheast3 SupportedS3Region = "ap-northeast-3"
+	SupportedS3RegionApNortheast1 SupportedS3Region = "ap-northeast-1"
+	SupportedS3RegionApNortheast2 SupportedS3Region = "ap-northeast-2"
+	SupportedS3RegionCaCentral1   SupportedS3Region = "ca-central-1"
+	SupportedS3RegionCaWest1      SupportedS3Region = "ca-west-1"
+	SupportedS3RegionEuSouth1     SupportedS3Region = "eu-south-1"
+	SupportedS3RegionEuWest3      SupportedS3Region = "eu-west-3"
+	SupportedS3RegionEuSouth2     SupportedS3Region = "eu-south-2"
+	SupportedS3RegionEuCentral2   SupportedS3Region = "eu-central-2"
+	SupportedS3RegionEuCentral1   SupportedS3Region = "eu-central-1"
+	SupportedS3RegionEuNorth1     SupportedS3Region = "eu-north-1"
+	SupportedS3RegionEuWest1      SupportedS3Region = "eu-west-1"
+	SupportedS3RegionEuWest2      SupportedS3Region = "eu-west-2"
+	SupportedS3RegionMeSouth1     SupportedS3Region = "me-south-1"
+	SupportedS3RegionMeCentral1   SupportedS3Region = "me-central-1"
+	SupportedS3RegionIlCentral1   SupportedS3Region = "il-central-1"
+	SupportedS3RegionSaEast1      SupportedS3Region = "sa-east-1"
+	SupportedS3RegionMxCentral1   SupportedS3Region = "mx-central-1"
+)
+
+// Values returns all known values for SupportedS3Region. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedS3Region) Values() []SupportedS3Region {
+	return []SupportedS3Region{
+		"us-west-1",
+		"us-west-2",
+		"us-east-1",
+		"us-east-2",
+		"af-south-1",
+		"ap-east-1",
+		"ap-east-2",
+		"ap-south-2",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-southeast-3",
+		"ap-southeast-5",
+		"ap-southeast-4",
+		"ap-southeast-7",
+		"ap-south-1",
+		"ap-northeast-3",
+		"ap-northeast-1",
+		"ap-northeast-2",
+		"ca-central-1",
+		"ca-west-1",
+		"eu-south-1",
+		"eu-west-3",
+		"eu-south-2",
+		"eu-central-2",
+		"eu-central-1",
+		"eu-north-1",
+		"eu-west-1",
+		"eu-west-2",
+		"me-south-1",
+		"me-central-1",
+		"il-central-1",
+		"sa-east-1",
+		"mx-central-1",
 	}
 }
 

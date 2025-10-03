@@ -2093,6 +2093,11 @@ func awsRestjson1_serializeOpDocumentCreateSessionInput(v *CreateSessionInput, v
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ContactArn != nil {
+		ok := object.Key("contactArn")
+		ok.String(*v.ContactArn)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -8955,6 +8960,24 @@ func awsRestjson1_serializeDocumentAIAgentConfiguration(v types.AIAgentConfigura
 			return err
 		}
 
+	case *types.AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration:
+		av := object.Key("emailGenerativeAnswerAIAgentConfiguration")
+		if err := awsRestjson1_serializeDocumentEmailGenerativeAnswerAIAgentConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration:
+		av := object.Key("emailOverviewAIAgentConfiguration")
+		if err := awsRestjson1_serializeDocumentEmailOverviewAIAgentConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AIAgentConfigurationMemberEmailResponseAIAgentConfiguration:
+		av := object.Key("emailResponseAIAgentConfiguration")
+		if err := awsRestjson1_serializeDocumentEmailResponseAIAgentConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration:
 		av := object.Key("manualSearchAIAgentConfiguration")
 		if err := awsRestjson1_serializeDocumentManualSearchAIAgentConfiguration(&uv.Value, av); err != nil {
@@ -9731,6 +9754,35 @@ func awsRestjson1_serializeDocumentCustomerProfileAttributes(v *types.CustomerPr
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEmailGenerativeAnswerAIAgentConfiguration(v *types.EmailGenerativeAnswerAIAgentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociationConfigurations != nil {
+		ok := object.Key("associationConfigurations")
+		if err := awsRestjson1_serializeDocumentAssociationConfigurationList(v.AssociationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailGenerativeAnswerAIPromptId != nil {
+		ok := object.Key("emailGenerativeAnswerAIPromptId")
+		ok.String(*v.EmailGenerativeAnswerAIPromptId)
+	}
+
+	if v.EmailQueryReformulationAIPromptId != nil {
+		ok := object.Key("emailQueryReformulationAIPromptId")
+		ok.String(*v.EmailQueryReformulationAIPromptId)
+	}
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEmailHeader(v *types.EmailHeader, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9803,6 +9855,52 @@ func awsRestjson1_serializeDocumentEmailMessageTemplateContentBody(v *types.Emai
 		if err := awsRestjson1_serializeDocumentMessageTemplateBodyContentProvider(v.PlainText, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEmailOverviewAIAgentConfiguration(v *types.EmailOverviewAIAgentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmailOverviewAIPromptId != nil {
+		ok := object.Key("emailOverviewAIPromptId")
+		ok.String(*v.EmailOverviewAIPromptId)
+	}
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEmailResponseAIAgentConfiguration(v *types.EmailResponseAIAgentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociationConfigurations != nil {
+		ok := object.Key("associationConfigurations")
+		if err := awsRestjson1_serializeDocumentAssociationConfigurationList(v.AssociationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailQueryReformulationAIPromptId != nil {
+		ok := object.Key("emailQueryReformulationAIPromptId")
+		ok.String(*v.EmailQueryReformulationAIPromptId)
+	}
+
+	if v.EmailResponseAIPromptId != nil {
+		ok := object.Key("emailResponseAIPromptId")
+		ok.String(*v.EmailResponseAIPromptId)
+	}
+
+	if v.Locale != nil {
+		ok := object.Key("locale")
+		ok.String(*v.Locale)
 	}
 
 	return nil

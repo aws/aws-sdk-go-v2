@@ -2879,6 +2879,9 @@ func awsRestjson1_deserializeOpErrorCreateSession(response *smithyhttp.Response,
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
+	case strings.EqualFold("DependencyFailedException", errorCode):
+		return awsRestjson1_deserializeErrorDependencyFailedException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -14187,6 +14190,42 @@ func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Respons
 	return output
 }
 
+func awsRestjson1_deserializeErrorDependencyFailedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DependencyFailedException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentDependencyFailedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorPreconditionFailedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.PreconditionFailedException{}
 	var buff [1024]byte
@@ -14592,6 +14631,36 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration{Value: mv}
+			break loop
+
+		case "emailGenerativeAnswerAIAgentConfiguration":
+			var mv types.EmailGenerativeAnswerAIAgentConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailGenerativeAnswerAIAgentConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration{Value: mv}
+			break loop
+
+		case "emailOverviewAIAgentConfiguration":
+			var mv types.EmailOverviewAIAgentConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailOverviewAIAgentConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration{Value: mv}
+			break loop
+
+		case "emailResponseAIAgentConfiguration":
+			var mv types.EmailResponseAIAgentConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailResponseAIAgentConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AIAgentConfigurationMemberEmailResponseAIAgentConfiguration{Value: mv}
 			break loop
 
 		case "manualSearchAIAgentConfiguration":
@@ -18925,6 +18994,36 @@ loop:
 			uv = &types.DataDetailsMemberContentData{Value: mv}
 			break loop
 
+		case "emailGenerativeAnswerChunkData":
+			var mv types.EmailGenerativeAnswerChunkDataDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailGenerativeAnswerChunkDataDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataDetailsMemberEmailGenerativeAnswerChunkData{Value: mv}
+			break loop
+
+		case "emailOverviewChunkData":
+			var mv types.EmailOverviewChunkDataDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailOverviewChunkDataDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataDetailsMemberEmailOverviewChunkData{Value: mv}
+			break loop
+
+		case "emailResponseChunkData":
+			var mv types.EmailResponseChunkDataDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailResponseChunkDataDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataDetailsMemberEmailResponseChunkData{Value: mv}
+			break loop
+
 		case "generativeChunkData":
 			var mv types.GenerativeChunkDataDetails
 			destAddr := &mv
@@ -19100,6 +19199,46 @@ func awsRestjson1_deserializeDocumentDataSummaryList(v *[]types.DataSummary, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDependencyFailedException(v **types.DependencyFailedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DependencyFailedException
+	if *v == nil {
+		sv = &types.DependencyFailedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDocument(v **types.Document, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19180,6 +19319,123 @@ func awsRestjson1_deserializeDocumentDocumentText(v **types.DocumentText, value 
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Text = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailGenerativeAnswerAIAgentConfiguration(v **types.EmailGenerativeAnswerAIAgentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailGenerativeAnswerAIAgentConfiguration
+	if *v == nil {
+		sv = &types.EmailGenerativeAnswerAIAgentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "associationConfigurations":
+			if err := awsRestjson1_deserializeDocumentAssociationConfigurationList(&sv.AssociationConfigurations, value); err != nil {
+				return err
+			}
+
+		case "emailGenerativeAnswerAIPromptId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UuidWithQualifier to be of type string, got %T instead", value)
+				}
+				sv.EmailGenerativeAnswerAIPromptId = ptr.String(jtv)
+			}
+
+		case "emailQueryReformulationAIPromptId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UuidWithQualifier to be of type string, got %T instead", value)
+				}
+				sv.EmailQueryReformulationAIPromptId = ptr.String(jtv)
+			}
+
+		case "locale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Locale = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailGenerativeAnswerChunkDataDetails(v **types.EmailGenerativeAnswerChunkDataDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailGenerativeAnswerChunkDataDetails
+	if *v == nil {
+		sv = &types.EmailGenerativeAnswerChunkDataDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Completion = ptr.String(jtv)
+			}
+
+		case "nextChunkToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextChunkToken = ptr.String(jtv)
+			}
+
+		case "references":
+			if err := awsRestjson1_deserializeDocumentDataSummaryList(&sv.References, value); err != nil {
+				return err
 			}
 
 		default:
@@ -19354,6 +19610,216 @@ func awsRestjson1_deserializeDocumentEmailMessageTemplateContentBody(v **types.E
 		case "plainText":
 			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.PlainText, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailOverviewAIAgentConfiguration(v **types.EmailOverviewAIAgentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailOverviewAIAgentConfiguration
+	if *v == nil {
+		sv = &types.EmailOverviewAIAgentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "emailOverviewAIPromptId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UuidWithQualifier to be of type string, got %T instead", value)
+				}
+				sv.EmailOverviewAIPromptId = ptr.String(jtv)
+			}
+
+		case "locale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Locale = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailOverviewChunkDataDetails(v **types.EmailOverviewChunkDataDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailOverviewChunkDataDetails
+	if *v == nil {
+		sv = &types.EmailOverviewChunkDataDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Completion = ptr.String(jtv)
+			}
+
+		case "nextChunkToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextChunkToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailResponseAIAgentConfiguration(v **types.EmailResponseAIAgentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailResponseAIAgentConfiguration
+	if *v == nil {
+		sv = &types.EmailResponseAIAgentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "associationConfigurations":
+			if err := awsRestjson1_deserializeDocumentAssociationConfigurationList(&sv.AssociationConfigurations, value); err != nil {
+				return err
+			}
+
+		case "emailQueryReformulationAIPromptId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UuidWithQualifier to be of type string, got %T instead", value)
+				}
+				sv.EmailQueryReformulationAIPromptId = ptr.String(jtv)
+			}
+
+		case "emailResponseAIPromptId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UuidWithQualifier to be of type string, got %T instead", value)
+				}
+				sv.EmailResponseAIPromptId = ptr.String(jtv)
+			}
+
+		case "locale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Locale = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailResponseChunkDataDetails(v **types.EmailResponseChunkDataDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailResponseChunkDataDetails
+	if *v == nil {
+		sv = &types.EmailResponseChunkDataDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Completion = ptr.String(jtv)
+			}
+
+		case "nextChunkToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextChunkToken = ptr.String(jtv)
 			}
 
 		default:

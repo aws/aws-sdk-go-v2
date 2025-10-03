@@ -24,6 +24,9 @@ type AgentAttributes struct {
 // The following types satisfy this interface:
 //
 //	AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration
+//	AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration
+//	AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration
+//	AIAgentConfigurationMemberEmailResponseAIAgentConfiguration
 //	AIAgentConfigurationMemberManualSearchAIAgentConfiguration
 //	AIAgentConfigurationMemberSelfServiceAIAgentConfiguration
 type AIAgentConfiguration interface {
@@ -38,6 +41,37 @@ type AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration struct {
 }
 
 func (*AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// Configuration for the EMAIL_GENERATIVE_ANSWER AI agent that provides
+// comprehensive knowledge-based answers for customer queries.
+type AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration struct {
+	Value EmailGenerativeAnswerAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberEmailGenerativeAnswerAIAgentConfiguration) isAIAgentConfiguration() {
+}
+
+// Configuration for the EMAIL_OVERVIEW AI agent that generates structured
+// overview of email conversations.
+type AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration struct {
+	Value EmailOverviewAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberEmailOverviewAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// Configuration for the EMAIL_RESPONSE AI agent that generates professional email
+// responses using knowledge base content.
+type AIAgentConfigurationMemberEmailResponseAIAgentConfiguration struct {
+	Value EmailResponseAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberEmailResponseAIAgentConfiguration) isAIAgentConfiguration() {}
 
 // The configuration for AI Agents of type MANUAL_SEARCH .
 type AIAgentConfigurationMemberManualSearchAIAgentConfiguration struct {
@@ -1644,6 +1678,9 @@ type CustomerProfileAttributes struct {
 // The following types satisfy this interface:
 //
 //	DataDetailsMemberContentData
+//	DataDetailsMemberEmailGenerativeAnswerChunkData
+//	DataDetailsMemberEmailOverviewChunkData
+//	DataDetailsMemberEmailResponseChunkData
 //	DataDetailsMemberGenerativeChunkData
 //	DataDetailsMemberGenerativeData
 //	DataDetailsMemberIntentDetectedData
@@ -1660,6 +1697,35 @@ type DataDetailsMemberContentData struct {
 }
 
 func (*DataDetailsMemberContentData) isDataDetails() {}
+
+// Streaming chunk data for email generative answers containing partial
+// knowledge-based response content.
+type DataDetailsMemberEmailGenerativeAnswerChunkData struct {
+	Value EmailGenerativeAnswerChunkDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberEmailGenerativeAnswerChunkData) isDataDetails() {}
+
+// Streaming chunk data for email overview containing partial overview content.
+type DataDetailsMemberEmailOverviewChunkData struct {
+	Value EmailOverviewChunkDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberEmailOverviewChunkData) isDataDetails() {}
+
+// Streaming chunk data for email response generation containing partial response
+// content.
+type DataDetailsMemberEmailResponseChunkData struct {
+	Value EmailResponseChunkDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberEmailResponseChunkData) isDataDetails() {}
 
 // Details about the generative chunk data.
 type DataDetailsMemberGenerativeChunkData struct {
@@ -1770,6 +1836,46 @@ type DocumentText struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for the EMAIL_GENERATIVE_ANSWER AI agent including
+// prompts, locale, and knowledge base associations.
+type EmailGenerativeAnswerAIAgentConfiguration struct {
+
+	// Configuration settings for knowledge base associations used by the email
+	// generative answer agent.
+	AssociationConfigurations []AssociationConfiguration
+
+	// The ID of the System AI prompt used for generating comprehensive
+	// knowledge-based answers from email queries.
+	EmailGenerativeAnswerAIPromptId *string
+
+	// The ID of the System AI prompt used for reformulating email queries to optimize
+	// knowledge base search results.
+	EmailQueryReformulationAIPromptId *string
+
+	// The locale setting for language-specific email processing and response
+	// generation (for example, en_US, es_ES).
+	Locale *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of streaming chunk data for email generative answers including
+// completion text and references.
+type EmailGenerativeAnswerChunkDataDetails struct {
+
+	// The partial or complete text content of the generative answer response.
+	Completion *string
+
+	// Token for retrieving the next chunk of streaming response data, if available.
+	NextChunkToken *string
+
+	// Source references and citations from knowledge base articles used to generate
+	// the answer.
+	References []DataSummary
+
+	noSmithyDocumentSerde
+}
+
 // The email header to include in email messages.
 type EmailHeader struct {
 
@@ -1811,6 +1917,72 @@ type EmailMessageTemplateContentBody struct {
 	// that don't render HTML content and clients that are connected to high-latency
 	// networks, such as mobile devices.
 	PlainText MessageTemplateBodyContentProvider
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for the EMAIL_OVERVIEW AI agent including prompt ID and
+// locale settings.
+type EmailOverviewAIAgentConfiguration struct {
+
+	// The ID of the System AI prompt used for generating structured email
+	// conversation summaries.
+	EmailOverviewAIPromptId *string
+
+	// The locale setting for language-specific email overview processing (for
+	// example, en_US, es_ES).
+	Locale *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of streaming chunk data for email overview including completion text
+// and pagination tokens.
+type EmailOverviewChunkDataDetails struct {
+
+	// The partial or complete overview text content in structured HTML format with
+	// customer issues, resolutions, and next steps.
+	Completion *string
+
+	// Token for retrieving the next chunk of streaming overview data, if available.
+	NextChunkToken *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for the EMAIL_RESPONSE AI agent including prompts,
+// locale, and knowledge base associations.
+type EmailResponseAIAgentConfiguration struct {
+
+	// Configuration settings for knowledge base associations used by the email
+	// response agent.
+	AssociationConfigurations []AssociationConfiguration
+
+	// The ID of the System AI prompt used for reformulating email queries to optimize
+	// knowledge base search for response generation.
+	EmailQueryReformulationAIPromptId *string
+
+	// The ID of the System AI prompt used for generating professional email responses
+	// based on knowledge base content.
+	EmailResponseAIPromptId *string
+
+	// The locale setting for language-specific email response generation (for
+	// example, en_US, es_ES).
+	Locale *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of streaming chunk data for email responses including completion text
+// and pagination tokens.
+type EmailResponseChunkDataDetails struct {
+
+	// The partial or complete professional email response text with appropriate
+	// greetings and closings.
+	Completion *string
+
+	// Token for retrieving the next chunk of streaming response data, if available.
+	NextChunkToken *string
 
 	noSmithyDocumentSerde
 }

@@ -515,6 +515,13 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedResultRegions != nil {
+		ok := object.Key("allowedResultRegions")
+		if err := awsRestjson1_serializeDocumentAllowedResultRegions(v.AllowedResultRegions, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.AnalyticsEngine) > 0 {
 		ok := object.Key("analyticsEngine")
 		ok.String(string(v.AnalyticsEngine))
@@ -8098,6 +8105,17 @@ func awsRestjson1_serializeDocumentAllowedResultReceivers(v []string, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedResultRegions(v []types.SupportedS3Region, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAnalysisParameter(v *types.AnalysisParameter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8399,6 +8417,11 @@ func awsRestjson1_serializeDocumentAthenaTableReference(v *types.AthenaTableRefe
 	if v.OutputLocation != nil {
 		ok := object.Key("outputLocation")
 		ok.String(*v.OutputLocation)
+	}
+
+	if len(v.Region) > 0 {
+		ok := object.Key("region")
+		ok.String(string(v.Region))
 	}
 
 	if v.TableName != nil {
@@ -8834,6 +8857,11 @@ func awsRestjson1_serializeDocumentGlueTableReference(v *types.GlueTableReferenc
 	if v.DatabaseName != nil {
 		ok := object.Key("databaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if len(v.Region) > 0 {
+		ok := object.Key("region")
+		ok.String(string(v.Region))
 	}
 
 	if v.TableName != nil {

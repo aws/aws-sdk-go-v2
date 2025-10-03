@@ -12,10 +12,6 @@ import (
 )
 
 // Creates an Amazon Q in Connect AI Prompt.
-//
-// For more information on supported models, see [Supported models for system and custom prompts].
-//
-// [Supported models for system and custom prompts]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
 func (c *Client) CreateAIPrompt(ctx context.Context, params *CreateAIPromptInput, optFns ...func(*Options)) (*CreateAIPromptOutput, error) {
 	if params == nil {
 		params = &CreateAIPromptInput{}
@@ -50,6 +46,11 @@ type CreateAIPromptInput struct {
 	AssistantId *string
 
 	// The identifier of the model used for this AI Prompt.
+	//
+	// For information about which models are supported in each Amazon Web Services
+	// Region, see [Supported models for system/custom prompts].
+	//
+	// [Supported models for system/custom prompts]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
 	//
 	// This member is required.
 	ModelId *string

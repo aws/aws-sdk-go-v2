@@ -62,6 +62,33 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An error occurred while calling a dependency. For example, calling
+// connect:DecribeContact as part of CreateSession with a contactArn.
+type DependencyFailedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DependencyFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DependencyFailedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DependencyFailedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DependencyFailedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The provided revisionId does not match, indicating the content has been
 // modified since it was last read.
 type PreconditionFailedException struct {

@@ -16343,6 +16343,51 @@ func awsRestjson1_serializeDocumentMediaPackageV2GroupSettings(v *types.MediaPac
 		}
 	}
 
+	if len(v.Id3Behavior) > 0 {
+		ok := object.Key("id3Behavior")
+		ok.String(string(v.Id3Behavior))
+	}
+
+	if len(v.KlvBehavior) > 0 {
+		ok := object.Key("klvBehavior")
+		ok.String(string(v.KlvBehavior))
+	}
+
+	if len(v.NielsenId3Behavior) > 0 {
+		ok := object.Key("nielsenId3Behavior")
+		ok.String(string(v.NielsenId3Behavior))
+	}
+
+	if len(v.Scte35Type) > 0 {
+		ok := object.Key("scte35Type")
+		ok.String(string(v.Scte35Type))
+	}
+
+	if v.SegmentLength != nil {
+		ok := object.Key("segmentLength")
+		ok.Integer(*v.SegmentLength)
+	}
+
+	if len(v.SegmentLengthUnits) > 0 {
+		ok := object.Key("segmentLengthUnits")
+		ok.String(string(v.SegmentLengthUnits))
+	}
+
+	if len(v.TimedMetadataId3Frame) > 0 {
+		ok := object.Key("timedMetadataId3Frame")
+		ok.String(string(v.TimedMetadataId3Frame))
+	}
+
+	if v.TimedMetadataId3Period != nil {
+		ok := object.Key("timedMetadataId3Period")
+		ok.Integer(*v.TimedMetadataId3Period)
+	}
+
+	if len(v.TimedMetadataPassthrough) > 0 {
+		ok := object.Key("timedMetadataPassthrough")
+		ok.String(string(v.TimedMetadataPassthrough))
+	}
+
 	return nil
 }
 

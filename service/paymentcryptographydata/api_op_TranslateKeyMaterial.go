@@ -11,21 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a Message Authentication Code (MAC) cryptogram within Amazon Web
-// Services Payment Cryptography.
+// Translates an encryption key between different wrapping keys without importing
+// the key into Amazon Web Services Payment Cryptography.
 //
-// You can use this operation to authenticate card-related data by using known
-// data values to generate MAC for data validation between the sending and
-// receiving parties. This operation uses message data, a secret encryption key and
-// MAC algorithm to generate a unique MAC value for transmission. The receiving
-// party of the MAC must use the same message data, secret encryption key and MAC
-// algorithm to reproduce another MAC value for comparision.
+// This operation can be used when key material is frequently rotated, such as
+// during every card transaction, and there is a need to avoid importing
+// short-lived keys into Amazon Web Services Payment Cryptography. It translates
+// short-lived transaction keys such as Pin Encryption Key (PEK) generated for each
+// transaction and wrapped with an ECDH (Elliptic Curve Diffie-Hellman) derived
+// wrapping key to another KEK (Key Encryption Key) wrapping key.
 //
-// You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by
-// setting generation attributes and algorithm to the associated values. The MAC
-// generation encryption key must have valid values for KeyUsage such as
-// TR31_M7_HMAC_KEY for HMAC generation, and the key must have KeyModesOfUse set
-// to Generate and Verify .
+// Before using this operation, you must first request the public key certificate
+// of the ECC key pair generated within Amazon Web Services Payment Cryptography to
+// establish an ECDH key agreement. In TranslateKeyData , the service uses its own
+// ECC key pair, public certificate of receiving ECC key pair, and the key
+// derivation parameters to generate a derived key. The service uses this derived
+// key to unwrap the incoming transaction key received as a TR31WrappedKeyBlock and
+// re-wrap using a user provided KEK to generate an outgoing Tr31WrappedKeyBlock.
+// For more information on establishing ECDH derived keys, see the [Creating keys]in the Amazon
+// Web Services Payment Cryptography User Guide.
 //
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
@@ -35,71 +39,58 @@ import (
 //
 // Related operations:
 //
-// # VerifyMac
+// [CreateKey]
 //
+// [GetPublicCertificate]
+//
+// [ImportKey]
+//
+// [Creating keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
+// [GetPublicCertificate]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-func (c *Client) GenerateMac(ctx context.Context, params *GenerateMacInput, optFns ...func(*Options)) (*GenerateMacOutput, error) {
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+func (c *Client) TranslateKeyMaterial(ctx context.Context, params *TranslateKeyMaterialInput, optFns ...func(*Options)) (*TranslateKeyMaterialOutput, error) {
 	if params == nil {
-		params = &GenerateMacInput{}
+		params = &TranslateKeyMaterialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateMac", params, optFns, c.addOperationGenerateMacMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TranslateKeyMaterial", params, optFns, c.addOperationTranslateKeyMaterialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GenerateMacOutput)
+	out := result.(*TranslateKeyMaterialOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GenerateMacInput struct {
+type TranslateKeyMaterialInput struct {
 
-	// The attributes and data values to use for MAC generation within Amazon Web
-	// Services Payment Cryptography.
+	// Parameter information of the TR31WrappedKeyBlock containing the transaction key.
 	//
 	// This member is required.
-	GenerationAttributes types.MacAttributes
+	IncomingKeyMaterial types.IncomingKeyMaterial
 
-	// The keyARN of the MAC generation encryption key.
+	// Parameter information of the wrapping key used to wrap the transaction key in
+	// the outgoing TR31WrappedKeyBlock.
 	//
 	// This member is required.
-	KeyIdentifier *string
+	OutgoingKeyMaterial types.OutgoingKeyMaterial
 
-	// The data for which a MAC is under generation. This value must be hexBinary.
-	//
-	// This member is required.
-	MessageData *string
-
-	// The length of a MAC under generation.
-	MacLength *int32
+	// The key check value (KCV) algorithm used for calculating the KCV.
+	KeyCheckValueAlgorithm types.KeyCheckValueAlgorithm
 
 	noSmithyDocumentSerde
 }
 
-type GenerateMacOutput struct {
+type TranslateKeyMaterialOutput struct {
 
-	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
-	// uses for MAC generation.
+	// The outgoing KEK wrapped TR31WrappedKeyBlock.
 	//
 	// This member is required.
-	KeyArn *string
-
-	// The key check value (KCV) of the encryption key. The KCV is used to check if
-	// all parties holding a given key have the same key or to detect that a key has
-	// changed.
-	//
-	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
-	// specification.
-	//
-	// This member is required.
-	KeyCheckValue *string
-
-	// The MAC cryptogram generated within Amazon Web Services Payment Cryptography.
-	//
-	// This member is required.
-	Mac *string
+	WrappedKey *types.WrappedWorkingKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -107,19 +98,19 @@ type GenerateMacOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTranslateKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateMac{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTranslateKeyMaterial{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateMac{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTranslateKeyMaterial{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMac"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "TranslateKeyMaterial"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -174,10 +165,10 @@ func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, opt
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGenerateMacValidationMiddleware(stack); err != nil {
+	if err = addOpTranslateKeyMaterialValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateMac(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTranslateKeyMaterial(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -240,10 +231,10 @@ func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGenerateMac(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTranslateKeyMaterial(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GenerateMac",
+		OperationName: "TranslateKeyMaterial",
 	}
 }

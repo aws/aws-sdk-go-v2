@@ -57,9 +57,10 @@ type UpdateAIPromptInput struct {
 
 	// The identifier of the model used for this AI Prompt.
 	//
-	// For more information on supported models, see [Supported models for system and custom prompts].
+	// For information about which models are supported in each Amazon Web Services
+	// Region, see [Supported models for system/custom prompts].
 	//
-	// [Supported models for system and custom prompts]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
+	// [Supported models for system/custom prompts]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
 	ModelId *string
 
 	// The configuration of the prompt template for this AI Prompt.

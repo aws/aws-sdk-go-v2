@@ -53,6 +53,11 @@ type CreateSessionInput struct {
 	// [Making retries safe with idempotent APIs]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
+	// The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to
+	// retrieve email content and establish session context for AI-powered email
+	// assistance.
+	ContactArn *string
+
 	// The description.
 	Description *string
 

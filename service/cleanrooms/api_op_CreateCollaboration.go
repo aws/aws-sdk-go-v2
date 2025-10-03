@@ -64,6 +64,12 @@ type CreateCollaborationInput struct {
 	// This member is required.
 	QueryLogStatus types.CollaborationQueryLogStatus
 
+	// The Amazon Web Services Regions where collaboration query results can be
+	// stored. When specified, results can only be written to these Regions. This
+	// parameter enables you to meet your compliance and data governance requirements,
+	// and implement regional data governance policies.
+	AllowedResultRegions []types.SupportedS3Region
+
 	//  The analytics engine.
 	//
 	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.

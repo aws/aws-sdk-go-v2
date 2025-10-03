@@ -14569,6 +14569,42 @@ func awsRestjson1_deserializeDocumentAllowedResultReceivers(v *[]string, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAllowedResultRegions(v *[]types.SupportedS3Region, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SupportedS3Region
+	if *v == nil {
+		cv = []types.SupportedS3Region{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SupportedS3Region
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SupportedS3Region to be of type string, got %T instead", value)
+			}
+			col = types.SupportedS3Region(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAnalysisParameter(v **types.AnalysisParameter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16056,6 +16092,15 @@ func awsRestjson1_deserializeDocumentAthenaTableReference(v **types.AthenaTableR
 				sv.OutputLocation = ptr.String(jtv)
 			}
 
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommercialRegion to be of type string, got %T instead", value)
+				}
+				sv.Region = types.CommercialRegion(jtv)
+			}
+
 		case "tableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16812,6 +16857,11 @@ func awsRestjson1_deserializeDocumentCollaboration(v **types.Collaboration, valu
 
 	for key, value := range shape {
 		switch key {
+		case "allowedResultRegions":
+			if err := awsRestjson1_deserializeDocumentAllowedResultRegions(&sv.AllowedResultRegions, value); err != nil {
+				return err
+			}
+
 		case "analyticsEngine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21699,6 +21749,15 @@ func awsRestjson1_deserializeDocumentGlueTableReference(v **types.GlueTableRefer
 					return fmt.Errorf("expected GlueDatabaseName to be of type string, got %T instead", value)
 				}
 				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommercialRegion to be of type string, got %T instead", value)
+				}
+				sv.Region = types.CommercialRegion(jtv)
 			}
 
 		case "tableName":

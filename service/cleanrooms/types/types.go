@@ -730,6 +730,11 @@ type AthenaTableReference struct {
 	//  The output location for the Athena table.
 	OutputLocation *string
 
+	// The Amazon Web Services Region where the Athena table is located. This
+	// parameter is required to uniquely identify and access tables across different
+	// Regions.
+	Region CommercialRegion
+
 	noSmithyDocumentSerde
 }
 
@@ -962,6 +967,12 @@ type Collaboration struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// The Amazon Web Services Regions where collaboration query results can be
+	// stored. Returns the list of Region identifiers that were specified when the
+	// collaboration was created. This list is used to enforce regional storage
+	// policies and compliance requirements.
+	AllowedResultRegions []SupportedS3Region
 
 	//  The analytics engine for the collaboration.
 	//
@@ -2817,6 +2828,10 @@ type GlueTableReference struct {
 	//
 	// This member is required.
 	TableName *string
+
+	// The Amazon Web Services Region where the Glue table is located. This parameter
+	// is required to uniquely identify and access tables across different Regions.
+	Region CommercialRegion
 
 	noSmithyDocumentSerde
 }
