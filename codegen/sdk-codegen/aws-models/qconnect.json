@@ -75,6 +75,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for AI Agents of type SELF_SERVICE.</p>"
                     }
+                },
+                "emailResponseAIAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#EmailResponseAIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the EMAIL_RESPONSE AI agent that generates professional email responses using knowledge base content.</p>"
+                    }
+                },
+                "emailOverviewAIAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#EmailOverviewAIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the EMAIL_OVERVIEW AI agent that generates structured overview of email conversations.</p>"
+                    }
+                },
+                "emailGenerativeAnswerAIAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#EmailGenerativeAnswerAIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the EMAIL_GENERATIVE_ANSWER AI agent that provides comprehensive knowledge-based answers for customer queries.</p>"
+                    }
                 }
             },
             "traits": {
@@ -323,6 +341,18 @@
                     {
                         "value": "SELF_SERVICE",
                         "name": "SELF_SERVICE"
+                    },
+                    {
+                        "value": "EMAIL_RESPONSE",
+                        "name": "EMAIL_RESPONSE"
+                    },
+                    {
+                        "value": "EMAIL_OVERVIEW",
+                        "name": "EMAIL_OVERVIEW"
+                    },
+                    {
+                        "value": "EMAIL_GENERATIVE_ANSWER",
+                        "name": "EMAIL_GENERATIVE_ANSWER"
                     }
                 ]
             }
@@ -1099,6 +1129,22 @@
                     {
                         "value": "SELF_SERVICE_ANSWER_GENERATION",
                         "name": "SELF_SERVICE_ANSWER_GENERATION"
+                    },
+                    {
+                        "value": "EMAIL_RESPONSE",
+                        "name": "EMAIL_RESPONSE"
+                    },
+                    {
+                        "value": "EMAIL_OVERVIEW",
+                        "name": "EMAIL_OVERVIEW"
+                    },
+                    {
+                        "value": "EMAIL_GENERATIVE_ANSWER",
+                        "name": "EMAIL_GENERATIVE_ANSWER"
+                    },
+                    {
+                        "value": "EMAIL_QUERY_REFORMULATION",
+                        "name": "EMAIL_QUERY_REFORMULATION"
                     }
                 ]
             }
@@ -3337,7 +3383,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Prompt.</p> <note> <p>For more information on supported models, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt\">Supported models for system and custom prompts</a>.</p> </note>",
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Prompt.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/aiprompts",
                     "method": "POST"
@@ -3401,7 +3447,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt\">Supported models for system/custom prompts</a>.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4490,6 +4536,9 @@
                     "target": "com.amazonaws.qconnect#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.qconnect#DependencyFailedException"
+                },
+                {
                     "target": "com.amazonaws.qconnect#ResourceNotFoundException"
                 },
                 {
@@ -4555,6 +4604,12 @@
                     "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>"
+                    }
+                },
+                "contactArn": {
+                    "target": "com.amazonaws.qconnect#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to retrieve email content and establish session context for AI-powered email assistance.</p>"
                     }
                 }
             }
@@ -4969,6 +5024,24 @@
                     "target": "com.amazonaws.qconnect#GenerativeChunkDataDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the generative chunk data.</p>"
+                    }
+                },
+                "emailResponseChunkData": {
+                    "target": "com.amazonaws.qconnect#EmailResponseChunkDataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Streaming chunk data for email response generation containing partial response content.</p>"
+                    }
+                },
+                "emailOverviewChunkData": {
+                    "target": "com.amazonaws.qconnect#EmailOverviewChunkDataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Streaming chunk data for email overview containing partial overview content.</p>"
+                    }
+                },
+                "emailGenerativeAnswerChunkData": {
+                    "target": "com.amazonaws.qconnect#EmailGenerativeAnswerChunkDataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Streaming chunk data for email generative answers containing partial knowledge-based response content.</p>"
                     }
                 }
             },
@@ -6106,6 +6179,19 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qconnect#DependencyFailedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error occurred while calling a dependency. For example, calling <code>connect:DecribeContact</code> as part of <code>CreateSession</code> with a contactArn.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
         "com.amazonaws.qconnect#Description": {
             "type": "string",
             "traits": {
@@ -6161,6 +6247,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The text of the document.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailGenerativeAnswerAIAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "emailGenerativeAnswerAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the System AI prompt used for generating comprehensive knowledge-based answers from email queries.</p>"
+                    }
+                },
+                "emailQueryReformulationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the System AI prompt used for reformulating email queries to optimize knowledge base search results.</p>"
+                    }
+                },
+                "locale": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale setting for language-specific email processing and response generation (for example, en_US, es_ES).</p>"
+                    }
+                },
+                "associationConfigurations": {
+                    "target": "com.amazonaws.qconnect#AssociationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for knowledge base associations used by the email generative answer agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for the EMAIL_GENERATIVE_ANSWER AI agent including prompts, locale, and knowledge base associations.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailGenerativeAnswerChunkDataDetails": {
+            "type": "structure",
+            "members": {
+                "completion": {
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partial or complete text content of the generative answer response.</p>"
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.qconnect#DataSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source references and citations from knowledge base articles used to generate the answer.</p>"
+                    }
+                },
+                "nextChunkToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for retrieving the next chunk of streaming response data, if available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of streaming chunk data for email generative answers including completion text and references.</p>"
             }
         },
         "com.amazonaws.qconnect#EmailHeader": {
@@ -6260,6 +6404,98 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The body to use in email messages.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailOverviewAIAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "emailOverviewAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the System AI prompt used for generating structured email conversation summaries.</p>"
+                    }
+                },
+                "locale": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale setting for language-specific email overview processing (for example, en_US, es_ES).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for the EMAIL_OVERVIEW AI agent including prompt ID and locale settings.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailOverviewChunkDataDetails": {
+            "type": "structure",
+            "members": {
+                "completion": {
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partial or complete overview text content in structured HTML format with customer issues, resolutions, and next steps.</p>"
+                    }
+                },
+                "nextChunkToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for retrieving the next chunk of streaming overview data, if available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of streaming chunk data for email overview including completion text and pagination tokens.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailResponseAIAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "emailResponseAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the System AI prompt used for generating professional email responses based on knowledge base content.</p>"
+                    }
+                },
+                "emailQueryReformulationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the System AI prompt used for reformulating email queries to optimize knowledge base search for response generation.</p>"
+                    }
+                },
+                "locale": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale setting for language-specific email response generation (for example, en_US, es_ES).</p>"
+                    }
+                },
+                "associationConfigurations": {
+                    "target": "com.amazonaws.qconnect#AssociationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for knowledge base associations used by the email response agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for the EMAIL_RESPONSE AI agent including prompts, locale, and knowledge base associations.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailResponseChunkDataDetails": {
+            "type": "structure",
+            "members": {
+                "completion": {
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partial or complete professional email response text with appropriate greetings and closings.</p>"
+                    }
+                },
+                "nextChunkToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for retrieving the next chunk of streaming response data, if available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of streaming chunk data for email responses including completion text and pagination tokens.</p>"
             }
         },
         "com.amazonaws.qconnect#ExtendedMessageTemplateData": {
@@ -12342,6 +12578,18 @@
                     {
                         "value": "BLOCKED_INTENT_ANSWER_CHUNK",
                         "name": "BLOCKED_INTENT_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "EMAIL_RESPONSE_CHUNK",
+                        "name": "EMAIL_RESPONSE_CHUNK"
+                    },
+                    {
+                        "value": "EMAIL_OVERVIEW_CHUNK",
+                        "name": "EMAIL_OVERVIEW_CHUNK"
+                    },
+                    {
+                        "value": "EMAIL_GENERATIVE_ANSWER_CHUNK",
+                        "name": "EMAIL_GENERATIVE_ANSWER_CHUNK"
                     }
                 ]
             }
@@ -13376,6 +13624,18 @@
                     {
                         "value": "BLOCKED_INTENT_ANSWER_CHUNK",
                         "name": "BLOCKED_INTENT_ANSWER_CHUNK"
+                    },
+                    {
+                        "value": "EMAIL_RESPONSE_CHUNK",
+                        "name": "EMAIL_RESPONSE_CHUNK"
+                    },
+                    {
+                        "value": "EMAIL_OVERVIEW_CHUNK",
+                        "name": "EMAIL_OVERVIEW_CHUNK"
+                    },
+                    {
+                        "value": "EMAIL_GENERATIVE_ANSWER_CHUNK",
+                        "name": "EMAIL_GENERATIVE_ANSWER_CHUNK"
                     }
                 ]
             }
@@ -15660,7 +15920,7 @@
                 "modelId": {
                     "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt.</p> <note> <p>For more information on supported models, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt\">Supported models for system and custom prompts</a>.</p> </note>"
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt\">Supported models for system/custom prompts</a>.</p> </note>"
                     }
                 }
             },
@@ -16694,27 +16954,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [

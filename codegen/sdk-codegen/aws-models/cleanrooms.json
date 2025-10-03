@@ -90,27 +90,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -1108,6 +1108,15 @@
                 "target": "com.amazonaws.cleanrooms#AccountId"
             }
         },
+        "com.amazonaws.cleanrooms#AllowedResultRegions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#SupportedS3Region"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.cleanrooms#AnalysisFormat": {
             "type": "enum",
             "members": {
@@ -2099,6 +2108,12 @@
         "com.amazonaws.cleanrooms#AthenaTableReference": {
             "type": "structure",
             "members": {
+                "region": {
+                    "target": "com.amazonaws.cleanrooms#CommercialRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the Athena table is located. This parameter is required to uniquely identify and access tables across different Regions.</p>"
+                    }
+                },
                 "workGroup": {
                     "target": "com.amazonaws.cleanrooms#AthenaWorkGroup",
                     "traits": {
@@ -2903,6 +2918,12 @@
                     "target": "com.amazonaws.cleanrooms#AutoApprovedChangeTypeList",
                     "traits": {
                         "smithy.api#documentation": "<p>The types of change requests that are automatically approved for this collaboration.</p>"
+                    }
+                },
+                "allowedResultRegions": {
+                    "target": "com.amazonaws.cleanrooms#AllowedResultRegions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions where collaboration query results can be stored. Returns the list of Region identifiers that were specified when the collaboration was created. This list is used to enforce regional storage policies and compliance requirements.</p>"
                     }
                 }
             },
@@ -4109,6 +4130,209 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.cleanrooms#CommercialRegion": {
+            "type": "enum",
+            "members": {
+                "US_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-west-1"
+                    }
+                },
+                "US_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-west-2"
+                    }
+                },
+                "US_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-east-1"
+                    }
+                },
+                "US_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-east-2"
+                    }
+                },
+                "AF_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "af-south-1"
+                    }
+                },
+                "AP_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-1"
+                    }
+                },
+                "AP_SOUTH_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-south-2"
+                    }
+                },
+                "AP_SOUTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-1"
+                    }
+                },
+                "AP_SOUTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-2"
+                    }
+                },
+                "AP_SOUTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-3"
+                    }
+                },
+                "AP_SOUTHEAST_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-5"
+                    }
+                },
+                "AP_SOUTHEAST_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-4"
+                    }
+                },
+                "AP_SOUTHEAST_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-7"
+                    }
+                },
+                "AP_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-south-1"
+                    }
+                },
+                "AP_NORTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-3"
+                    }
+                },
+                "AP_NORTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-1"
+                    }
+                },
+                "AP_NORTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-2"
+                    }
+                },
+                "CA_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-central-1"
+                    }
+                },
+                "CA_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-west-1"
+                    }
+                },
+                "EU_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-1"
+                    }
+                },
+                "EU_WEST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-3"
+                    }
+                },
+                "EU_SOUTH_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-2"
+                    }
+                },
+                "EU_CENTRAL_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-central-2"
+                    }
+                },
+                "EU_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-central-1"
+                    }
+                },
+                "EU_NORTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-north-1"
+                    }
+                },
+                "EU_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-1"
+                    }
+                },
+                "EU_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-2"
+                    }
+                },
+                "ME_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "me-south-1"
+                    }
+                },
+                "ME_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "me-central-1"
+                    }
+                },
+                "IL_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "il-central-1"
+                    }
+                },
+                "SA_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sa-east-1"
+                    }
+                },
+                "MX_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mx-central-1"
+                    }
+                },
+                "AP_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-2"
+                    }
+                }
             }
         },
         "com.amazonaws.cleanrooms#ComputeConfiguration": {
@@ -5748,6 +5972,12 @@
                     "target": "com.amazonaws.cleanrooms#AutoApprovedChangeTypeList",
                     "traits": {
                         "smithy.api#documentation": "<p>The types of change requests that are automatically approved for this collaboration.</p>"
+                    }
+                },
+                "allowedResultRegions": {
+                    "target": "com.amazonaws.cleanrooms#AllowedResultRegions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions where collaboration query results can be stored. When specified, results can only be written to these Regions. This parameter enables you to meet your compliance and data governance requirements, and implement regional data governance policies.</p>"
                     }
                 }
             }
@@ -9433,6 +9663,12 @@
         "com.amazonaws.cleanrooms#GlueTableReference": {
             "type": "structure",
             "members": {
+                "region": {
+                    "target": "com.amazonaws.cleanrooms#CommercialRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the Glue table is located. This parameter is required to uniquely identify and access tables across different Regions.</p>"
+                    }
+                },
                 "tableName": {
                     "target": "com.amazonaws.cleanrooms#GlueTableName",
                     "traits": {
@@ -16147,6 +16383,209 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protected query.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SupportedS3Region": {
+            "type": "enum",
+            "members": {
+                "US_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-west-1"
+                    }
+                },
+                "US_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-west-2"
+                    }
+                },
+                "US_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-east-1"
+                    }
+                },
+                "US_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-east-2"
+                    }
+                },
+                "AF_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "af-south-1"
+                    }
+                },
+                "AP_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-1"
+                    }
+                },
+                "AP_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-2"
+                    }
+                },
+                "AP_SOUTH_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-south-2"
+                    }
+                },
+                "AP_SOUTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-1"
+                    }
+                },
+                "AP_SOUTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-2"
+                    }
+                },
+                "AP_SOUTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-3"
+                    }
+                },
+                "AP_SOUTHEAST_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-5"
+                    }
+                },
+                "AP_SOUTHEAST_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-4"
+                    }
+                },
+                "AP_SOUTHEAST_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-7"
+                    }
+                },
+                "AP_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-south-1"
+                    }
+                },
+                "AP_NORTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-3"
+                    }
+                },
+                "AP_NORTHEAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-1"
+                    }
+                },
+                "AP_NORTHEAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-2"
+                    }
+                },
+                "CA_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-central-1"
+                    }
+                },
+                "CA_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-west-1"
+                    }
+                },
+                "EU_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-1"
+                    }
+                },
+                "EU_WEST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-3"
+                    }
+                },
+                "EU_SOUTH_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-2"
+                    }
+                },
+                "EU_CENTRAL_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-central-2"
+                    }
+                },
+                "EU_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-central-1"
+                    }
+                },
+                "EU_NORTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-north-1"
+                    }
+                },
+                "EU_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-1"
+                    }
+                },
+                "EU_WEST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-2"
+                    }
+                },
+                "ME_SOUTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "me-south-1"
+                    }
+                },
+                "ME_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "me-central-1"
+                    }
+                },
+                "IL_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "il-central-1"
+                    }
+                },
+                "SA_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sa-east-1"
+                    }
+                },
+                "MX_CENTRAL_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mx-central-1"
                     }
                 }
             }
