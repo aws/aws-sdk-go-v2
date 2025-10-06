@@ -36,6 +36,10 @@ type GetBackupPlanInput struct {
 	// This member is required.
 	BackupPlanId *string
 
+	// Number of future scheduled backup runs to preview. When set to 0 (default), no
+	// scheduled runs preview is included in the response. Valid range is 0-10.
+	MaxScheduledRunsPreview int32
+
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.
 	VersionId *string
@@ -82,6 +86,12 @@ type GetBackupPlanOutput struct {
 	// milliseconds. For example, the value 1516925490.087 represents Friday, January
 	// 26, 2018 12:11:30.087 AM.
 	LastExecutionDate *time.Time
+
+	// List of upcoming scheduled backup runs. Only included when
+	// MaxScheduledRunsPreview parameter is greater than 0. Contains up to 10 future
+	// backup executions with their scheduled times, execution types, and associated
+	// rule IDs.
+	ScheduledRunsPreview []types.ScheduledPlanExecutionMember
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.

@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateIndex(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateResourceExplorerSetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceExplorerSetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResourceExplorerSetup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateView(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_DeleteIndex(t *testing.T) {
 	_, err := svc.DeleteIndex(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourceExplorerSetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceExplorerSetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourceExplorerSetup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -194,6 +218,42 @@ func TestCheckSnapshot_GetManagedView(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourceExplorerSetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceExplorerSetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourceExplorerSetup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetServiceIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetServiceIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetServiceView(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceView(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetServiceView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetView(context.Background(), nil, func(o *Options) {
@@ -247,6 +307,42 @@ func TestCheckSnapshot_ListResources(t *testing.T) {
 	_, err := svc.ListResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListServiceIndexes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceIndexes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceIndexes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListServiceViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListStreamingAccessForServices(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStreamingAccessForServices(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListStreamingAccessForServices")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,6 +481,18 @@ func TestUpdateSnapshot_CreateIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateResourceExplorerSetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceExplorerSetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResourceExplorerSetup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateView(context.Background(), nil, func(o *Options) {
@@ -402,6 +510,18 @@ func TestUpdateSnapshot_DeleteIndex(t *testing.T) {
 	_, err := svc.DeleteIndex(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourceExplorerSetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceExplorerSetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourceExplorerSetup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -481,6 +601,42 @@ func TestUpdateSnapshot_GetManagedView(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourceExplorerSetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceExplorerSetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourceExplorerSetup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetServiceIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetServiceIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetServiceView(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetServiceView(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetServiceView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetView(context.Background(), nil, func(o *Options) {
@@ -534,6 +690,42 @@ func TestUpdateSnapshot_ListResources(t *testing.T) {
 	_, err := svc.ListResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceIndexes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceIndexes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceIndexes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListStreamingAccessForServices(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStreamingAccessForServices(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListStreamingAccessForServices")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

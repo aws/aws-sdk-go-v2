@@ -2311,14 +2311,14 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProtocolConfiguration != nil {
-		if err := validateProtocolConfiguration(v.ProtocolConfiguration); err != nil {
-			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AuthorizerConfiguration != nil {
 		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProtocolConfiguration != nil {
+		if err := validateProtocolConfiguration(v.ProtocolConfiguration); err != nil {
+			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2991,14 +2991,14 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProtocolConfiguration != nil {
-		if err := validateProtocolConfiguration(v.ProtocolConfiguration); err != nil {
-			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AuthorizerConfiguration != nil {
 		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProtocolConfiguration != nil {
+		if err := validateProtocolConfiguration(v.ProtocolConfiguration); err != nil {
+			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

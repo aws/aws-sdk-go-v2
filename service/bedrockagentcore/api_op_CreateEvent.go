@@ -69,6 +69,9 @@ type CreateEventInput struct {
 	// the request, but does not return an error.
 	ClientToken *string
 
+	// The key-value metadata to attach to the event.
+	Metadata map[string]types.MetadataValue
+
 	// The identifier of the session in which this event occurs. A session represents
 	// a sequence of related events.
 	SessionId *string

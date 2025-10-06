@@ -34,6 +34,9 @@ type UpdateFlowInput struct {
 	// This member is required.
 	FlowArn *string
 
+	//  Determines the processing capacity and feature set of the flow.
+	FlowSize types.FlowSize
+
 	//  The maintenance setting of the flow.
 	Maintenance *types.UpdateMaintenance
 

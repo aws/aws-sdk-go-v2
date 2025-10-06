@@ -314,6 +314,30 @@ func TestCheckSnapshot_DescribeMultiRegionClusters(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeMultiRegionParameterGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMultiRegionParameterGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMultiRegionParameterGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeMultiRegionParameters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMultiRegionParameters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMultiRegionParameters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeParameterGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeParameterGroups(context.Background(), nil, func(o *Options) {
@@ -822,6 +846,30 @@ func TestUpdateSnapshot_DescribeMultiRegionClusters(t *testing.T) {
 	_, err := svc.DescribeMultiRegionClusters(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeMultiRegionClusters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMultiRegionParameterGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMultiRegionParameterGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMultiRegionParameterGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMultiRegionParameters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMultiRegionParameters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMultiRegionParameters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

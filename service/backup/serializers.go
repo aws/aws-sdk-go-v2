@@ -3201,6 +3201,10 @@ func awsRestjson1_serializeOpHttpBindingsGetBackupPlanInput(v *GetBackupPlanInpu
 		}
 	}
 
+	if v.MaxScheduledRunsPreview != 0 {
+		encoder.SetQuery("MaxScheduledRunsPreview").Integer(v.MaxScheduledRunsPreview)
+	}
+
 	if v.VersionId != nil {
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}

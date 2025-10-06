@@ -62,6 +62,9 @@ type CreateAgentRuntimeInput struct {
 	// Environment variables to set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
+	// The life cycle configuration for the AgentCore Runtime.
+	LifecycleConfiguration *types.LifecycleConfiguration
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration

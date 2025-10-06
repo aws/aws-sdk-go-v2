@@ -59,6 +59,11 @@ type CreateMemoryInput struct {
 	// is extracted, processed, and consolidated.
 	MemoryStrategies []types.MemoryStrategyInput
 
+	// A map of tag keys and values to assign to an AgentCore Memory. Tags enable you
+	// to categorize your resources in different ways, for example, by purpose, owner,
+	// or environment.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

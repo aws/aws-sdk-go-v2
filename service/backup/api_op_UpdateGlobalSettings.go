@@ -30,9 +30,15 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 
 type UpdateGlobalSettingsInput struct {
 
+	// Inputs can include:
+	//
 	// A value for isCrossAccountBackupEnabled and a Region. Example:
 	// update-global-settings --global-settings isCrossAccountBackupEnabled=false
 	// --region us-west-2 .
+	//
+	// A value for Multi-party approval, styled as "Mpa": isMpaEnabled . Values can be
+	// true or false. Example: update-global-settings --global-settings
+	// isMpaEnabled=false --region us-west-2 .
 	GlobalSettings map[string]string
 
 	noSmithyDocumentSerde

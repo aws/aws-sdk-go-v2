@@ -1,0 +1,8 @@
+{
+    "id": "f0e06463-c42f-429f-a8a5-73c0ab08a8e3",
+    "type": "feature",
+    "description": "Adds labeling for DataQualityRuleResult for GetDataQualityResult and PublishDataQualityResult APIs",
+    "modules": [
+        "service/glue"
+    ]
+}

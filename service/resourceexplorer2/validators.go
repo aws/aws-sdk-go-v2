@@ -30,6 +30,26 @@ func (m *validateOpAssociateDefaultView) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateResourceExplorerSetup struct {
+}
+
+func (*validateOpCreateResourceExplorerSetup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResourceExplorerSetup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResourceExplorerSetupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResourceExplorerSetupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateView struct {
 }
 
@@ -105,6 +125,46 @@ func (m *validateOpGetManagedView) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetManagedViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceExplorerSetup struct {
+}
+
+func (*validateOpGetResourceExplorerSetup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceExplorerSetup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceExplorerSetupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceExplorerSetupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetServiceView struct {
+}
+
+func (*validateOpGetServiceView) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetServiceView) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetServiceViewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetServiceViewInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -294,6 +354,10 @@ func addOpAssociateDefaultViewValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAssociateDefaultView{}, middleware.After)
 }
 
+func addOpCreateResourceExplorerSetupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResourceExplorerSetup{}, middleware.After)
+}
+
 func addOpCreateViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateView{}, middleware.After)
 }
@@ -308,6 +372,14 @@ func addOpDeleteViewValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetManagedViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetManagedView{}, middleware.After)
+}
+
+func addOpGetResourceExplorerSetupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceExplorerSetup{}, middleware.After)
+}
+
+func addOpGetServiceViewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetServiceView{}, middleware.After)
 }
 
 func addOpGetViewValidationMiddleware(stack *middleware.Stack) error {
@@ -408,6 +480,24 @@ func validateOpAssociateDefaultViewInput(v *AssociateDefaultViewInput) error {
 	}
 }
 
+func validateOpCreateResourceExplorerSetupInput(v *CreateResourceExplorerSetupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceExplorerSetupInput"}
+	if v.RegionList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionList"))
+	}
+	if v.ViewName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateViewInput(v *CreateViewInput) error {
 	if v == nil {
 		return nil
@@ -470,6 +560,36 @@ func validateOpGetManagedViewInput(v *GetManagedViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetManagedViewInput"}
 	if v.ManagedViewArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagedViewArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceExplorerSetupInput(v *GetResourceExplorerSetupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceExplorerSetupInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetServiceViewInput(v *GetServiceViewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetServiceViewInput"}
+	if v.ServiceViewArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceViewArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

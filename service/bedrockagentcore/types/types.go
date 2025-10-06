@@ -340,6 +340,29 @@ type Event struct {
 	// The branch information for the event.
 	Branch *Branch
 
+	// Metadata associated with an event.
+	Metadata map[string]MetadataValue
+
+	noSmithyDocumentSerde
+}
+
+// Filter expression for retrieving events based on metadata associated with an
+// event.
+type EventMetadataFilterExpression struct {
+
+	// Left operand of the event metadata filter expression.
+	//
+	// This member is required.
+	Left LeftExpression
+
+	// Operator applied to the event metadata filter expression.
+	//
+	// This member is required.
+	Operator OperatorType
+
+	// Right operand of the event metadata filter expression.
+	Right RightExpression
+
 	noSmithyDocumentSerde
 }
 
@@ -348,6 +371,9 @@ type FilterInput struct {
 
 	// The branch filter criteria to apply when listing events.
 	Branch *BranchFilter
+
+	// Event metadata filter criteria to apply when retrieving events.
+	EventMetadata []EventMetadataFilterExpression
 
 	noSmithyDocumentSerde
 }
@@ -368,6 +394,24 @@ type InputContentBlock struct {
 
 	noSmithyDocumentSerde
 }
+
+// Left expression of the event metadata filter.
+//
+// The following types satisfy this interface:
+//
+//	LeftExpressionMemberMetadataKey
+type LeftExpression interface {
+	isLeftExpression()
+}
+
+// Key associated with the metadata in an event.
+type LeftExpressionMemberMetadataKey struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*LeftExpressionMemberMetadataKey) isLeftExpression() {}
 
 // The configuration for a stream that provides a visual representation of a
 // browser session in Amazon Bedrock. This stream enables agents to observe the
@@ -432,6 +476,72 @@ type MemoryRecord struct {
 	noSmithyDocumentSerde
 }
 
+// Input structure to create a new memory record.
+type MemoryRecordCreateInput struct {
+
+	// The content to be stored within the memory record.
+	//
+	// This member is required.
+	Content MemoryContent
+
+	// A list of namespace identifiers that categorize or group the memory record.
+	//
+	// This member is required.
+	Namespaces []string
+
+	// A client-provided identifier for tracking this specific record creation request.
+	//
+	// This member is required.
+	RequestIdentifier *string
+
+	// Time at which the memory record was created.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The ID of the memory strategy that defines how this memory record is grouped.
+	MemoryStrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Input structure to delete an existing memory record.
+type MemoryRecordDeleteInput struct {
+
+	// The unique ID of the memory record to be deleted.
+	//
+	// This member is required.
+	MemoryRecordId *string
+
+	noSmithyDocumentSerde
+}
+
+// Output information returned after processing a memory record operation.
+type MemoryRecordOutput struct {
+
+	// The unique ID associated to the memory record.
+	//
+	// This member is required.
+	MemoryRecordId *string
+
+	// The status of the memory record operation (e.g., SUCCEEDED, FAILED).
+	//
+	// This member is required.
+	Status MemoryRecordStatus
+
+	// The error code returned when the memory record operation fails.
+	ErrorCode *int32
+
+	// A human-readable error message describing why the memory record operation
+	// failed.
+	ErrorMessage *string
+
+	// The client-provided identifier that was used to track this record operation.
+	RequestIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a memory record.
 type MemoryRecordSummary struct {
 
@@ -466,6 +576,50 @@ type MemoryRecordSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Input structure to update an existing memory record.
+type MemoryRecordUpdateInput struct {
+
+	// The unique ID of the memory record to be updated.
+	//
+	// This member is required.
+	MemoryRecordId *string
+
+	// Time at which the memory record was updated
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The content to be stored within the memory record.
+	Content MemoryContent
+
+	// The updated ID of the memory strategy that defines how this memory record is
+	// grouped.
+	MemoryStrategyId *string
+
+	// The updated list of namespace identifiers for categorizing the memory record.
+	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+// Value associated with the eventMetadata key.
+//
+// The following types satisfy this interface:
+//
+//	MetadataValueMemberStringValue
+type MetadataValue interface {
+	isMetadataValue()
+}
+
+// Value associated with the eventMetadata key.
+type MetadataValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MetadataValueMemberStringValue) isMetadataValue() {}
 
 // Contains the payload content for an event.
 //
@@ -517,6 +671,24 @@ type ResourceContent struct {
 
 	noSmithyDocumentSerde
 }
+
+// Right expression of the eventMetadata filter.
+//
+// The following types satisfy this interface:
+//
+//	RightExpressionMemberMetadataValue
+type RightExpression interface {
+	isRightExpression()
+}
+
+// Value associated with the key in eventMetadata .
+type RightExpressionMemberMetadataValue struct {
+	Value MetadataValue
+
+	noSmithyDocumentSerde
+}
+
+func (*RightExpressionMemberMetadataValue) isRightExpression() {}
 
 // Contains search criteria for retrieving memory records.
 type SearchCriteria struct {
@@ -690,6 +862,9 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput() {}
 func (*UnknownUnionMember) isContent()                     {}
+func (*UnknownUnionMember) isLeftExpression()              {}
 func (*UnknownUnionMember) isMemoryContent()               {}
+func (*UnknownUnionMember) isMetadataValue()               {}
 func (*UnknownUnionMember) isPayloadType()                 {}
+func (*UnknownUnionMember) isRightExpression()             {}
 func (*UnknownUnionMember) isStreamUpdate()                {}

@@ -405,8 +405,6 @@ type ModifyDBInstanceInput struct {
 	//
 	//   - Must be in the distinguished name format.
 	//
-	//   - Can't be longer than 64 characters.
-	//
 	// Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain
 	DomainOu *string
 

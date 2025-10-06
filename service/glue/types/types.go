@@ -3560,6 +3560,9 @@ type DataQualityRuleResult struct {
 	// An evaluation message.
 	EvaluationMessage *string
 
+	// A map containing labels assigned to the data quality rule.
+	Labels map[string]string
+
 	// The name of the data quality rule.
 	Name *string
 

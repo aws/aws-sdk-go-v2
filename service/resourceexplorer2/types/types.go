@@ -27,6 +27,19 @@ type BatchGetViewError struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an error that occurred during a Resource Explorer
+// setup operation.
+type ErrorDetails struct {
+
+	// The error code that identifies the type of error that occurred.
+	Code *string
+
+	// A human-readable description of the error that occurred.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an additional property that describes a resource, that you
 // can optionally include in the view. This lets you view that property in search
 // results, and filter your search results based on the value of the property.
@@ -76,6 +89,33 @@ type Index struct {
 	//   include resources from all Regions in the account where Resource Explorer is
 	//   turned on.
 	Type IndexType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the status of a Resource Explorer index operation in
+// a specific Region.
+type IndexStatus struct {
+
+	// Details about any error that occurred during the index operation.
+	ErrorDetails *ErrorDetails
+
+	// An index is the data store used by Amazon Web Services Resource Explorer to
+	// hold information about your Amazon Web Services resources that the service
+	// discovers. Creating an index in an Amazon Web Services Region turns on Resource
+	// Explorer and lets it discover your resources.
+	//
+	// By default, an index is local, meaning that it contains information about
+	// resources in only the same Region as the index. However, you can promote the
+	// index of one Region in the account by calling UpdateIndexTypeto convert it into an aggregator
+	// index. The aggregator index receives a replicated copy of the index information
+	// from all other Regions where Resource Explorer is turned on. This allows search
+	// operations in that Region to return results from all Regions in the account.
+	Index *Index
+
+	// The current status of the index operation. Valid values are SUCCEEDED , FAILED ,
+	// IN_PROGRESS , or SKIPPED .
+	Status OperationStatus
 
 	noSmithyDocumentSerde
 }
@@ -180,6 +220,22 @@ type OrgConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the status of Resource Explorer configuration in a
+// specific Amazon Web Services Region.
+type RegionStatus struct {
+
+	// The status information for the Resource Explorer index in this Region.
+	Index *IndexStatus
+
+	// The Amazon Web Services Region for which this status information applies.
+	Region *string
+
+	// The status information for the Resource Explorer view in this Region.
+	View *ViewStatus
+
+	noSmithyDocumentSerde
+}
+
 // A resource in Amazon Web Services that Amazon Web Services Resource Explorer
 // has discovered, and for which it has stored information in the index of the
 // Amazon Web Services Region that contains the resource.
@@ -274,6 +330,52 @@ type SearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configuration and properties of a Resource Explorer service view.
+type ServiceView struct {
+
+	// The Amazon Resource Name (ARN) of the service view.
+	//
+	// This member is required.
+	ServiceViewArn *string
+
+	// A search filter defines which resources can be part of a search query result
+	// set.
+	Filters *SearchFilter
+
+	// A list of additional resource properties that are included in this view for
+	// search and filtering purposes.
+	IncludedProperties []IncludedProperty
+
+	// The scope type of the service view, which determines what resources are
+	// included.
+	ScopeType *string
+
+	// The Amazon Web Services service that has streaming access to this view's data.
+	StreamingAccessForService *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an Amazon Web Services service that has been granted
+// streaming access to your Resource Explorer data.
+type StreamingAccessDetails struct {
+
+	// The date and time when streaming access was granted to the Amazon Web Services
+	// service, in ISO 8601 format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The service principal of the Amazon Web Services service that has streaming
+	// access to your Resource Explorer data. A service principal is a unique
+	// identifier for an Amazon Web Services service.
+	//
+	// This member is required.
+	ServicePrincipal *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that describes a resource type supported by Amazon Web Services
 // Resource Explorer.
 type SupportedResourceType struct {
@@ -342,6 +444,29 @@ type View struct {
 	//
 	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ViewArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the status of a Resource Explorer view operation in
+// a specific Region.
+type ViewStatus struct {
+
+	// Details about any error that occurred during the view operation.
+	ErrorDetails *ErrorDetails
+
+	// The current status of the view operation. Valid values are SUCCEEDED , FAILED ,
+	// IN_PROGRESS , or SKIPPED .
+	Status OperationStatus
+
+	// A view is a structure that defines a set of filters that provide a view into
+	// the information in the Amazon Web Services Resource Explorer index. The filters
+	// specify which information from the index is visible to the users of the view.
+	// For example, you can specify filters that include only resources that are tagged
+	// with the key "ENV" and the value "DEVELOPMENT" in the results returned by this
+	// view. You could also create a second view that includes only resources that are
+	// tagged with "ENV" and "PRODUCTION".
+	View *View
 
 	noSmithyDocumentSerde
 }

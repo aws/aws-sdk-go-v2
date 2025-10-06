@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the OAuth 2.0 token of the provided resource
+// Returns the OAuth 2.0 token of the provided resource.
 func (c *Client) GetResourceOauth2Token(ctx context.Context, params *GetResourceOauth2TokenInput, optFns ...func(*Options)) (*GetResourceOauth2TokenOutput, error) {
 	if params == nil {
 		params = &GetResourceOauth2TokenInput{}
@@ -29,36 +29,39 @@ func (c *Client) GetResourceOauth2Token(ctx context.Context, params *GetResource
 
 type GetResourceOauth2TokenInput struct {
 
-	// The type of flow to be performed
+	// The type of flow to be performed.
 	//
 	// This member is required.
 	Oauth2Flow types.Oauth2FlowType
 
-	// Reference to the credential provider
+	// The name of the resource's credential provider.
 	//
 	// This member is required.
 	ResourceCredentialProviderName *string
 
-	// The OAuth scopes requested
+	// The OAuth scopes being requested.
 	//
 	// This member is required.
 	Scopes []string
 
-	// The identity token of the workload you want to retrive the Oauth2 Token of.
+	// The identity token of the workload from which you want to retrieve the OAuth2
+	// token.
 	//
 	// This member is required.
 	WorkloadIdentityToken *string
 
-	// Gives the ability to send extra/custom parameters to the resource credentials
-	// provider during the authorization process. Standard OAuth2 flow parameters will
-	// not be overriden.
+	// A map of custom parameters to include in the authorization request to the
+	// resource credential provider. These parameters are in addition to the standard
+	// OAuth 2.0 flow parameters, and will not override them.
 	CustomParameters map[string]string
 
-	// If true, always initiate a new 3LO flow
+	// Indicates whether to always initiate a new three-legged OAuth (3LO) flow,
+	// regardless of any existing session.
 	ForceAuthentication *bool
 
-	// Callback url to redirect after token retrieval completes. Should be one of the
-	// provideded urls during WorkloadIdentity creation
+	// The callback URL to redirect to after the OAuth 2.0 token retrieval is
+	// complete. This URL must be one of the provided URLs configured for the workload
+	// identity.
 	ResourceOauth2ReturnUrl *string
 
 	noSmithyDocumentSerde
@@ -66,11 +69,11 @@ type GetResourceOauth2TokenInput struct {
 
 type GetResourceOauth2TokenOutput struct {
 
-	// OAuth2 token ready for use
+	// The OAuth 2.0 access token to use.
 	AccessToken *string
 
-	// The URL for the authorization process, provided if the Access token requires
-	// user Authorization.
+	// The URL to initiate the authorization process, provided when the access token
+	// requires user authorization.
 	AuthorizationUrl *string
 
 	// Metadata pertaining to the operation's result.

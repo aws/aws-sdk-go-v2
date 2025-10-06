@@ -214,6 +214,9 @@ type AddMediaStreamRequest struct {
 	// used for.
 	Description *string
 
+	//  The key-value pairs that can be used to tag and organize the media stream.
+	MediaStreamTags map[string]string
+
 	//  The resolution of the video.
 	VideoFormat *string
 
@@ -222,14 +225,6 @@ type AddMediaStreamRequest struct {
 
 // A request to add an output to a flow.
 type AddOutputRequest struct {
-
-	//  The protocol to use for the output.
-	//
-	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
-	// reference is maintained for legacy purposes only.
-	//
-	// This member is required.
-	Protocol Protocol
 
 	//  The range of IP addresses that should be allowed to initiate output requests
 	// to this flow. These IP addresses should be in the form of a Classless
@@ -278,8 +273,17 @@ type AddOutputRequest struct {
 	// MediaConnect sets it to ENABLED.
 	OutputStatus OutputStatus
 
+	//  The key-value pairs that can be used to tag and organize the output.
+	OutputTags map[string]string
+
 	//  The port to use when content is distributed to this output.
 	Port *int32
+
+	//  The protocol to use for the output.
+	//
+	// Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This
+	// reference is maintained for legacy purposes only.
+	Protocol Protocol
 
 	//  The remote ID for the Zixi-pull output stream.
 	RemoteId *string
@@ -1052,6 +1056,9 @@ type GrantEntitlementRequest struct {
 	// soon as it is created. If you don’t specify the entitlementStatus field in your
 	// request, MediaConnect sets it to ENABLED.
 	EntitlementStatus EntitlementStatus
+
+	//  The key-value pairs that can be used to tag and organize the entitlement.
+	EntitlementTags map[string]string
 
 	//  The name of the entitlement. This value must be unique within the current flow.
 	Name *string
@@ -1897,6 +1904,9 @@ type SetSourceRequest struct {
 	//  Source port for SRT-caller protocol.
 	SourceListenerPort *int32
 
+	//  The key-value pairs that can be used to tag and organize the source.
+	SourceTags map[string]string
+
 	//  The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi and SRT caller-based streams.
 	StreamId *string
@@ -2457,6 +2467,10 @@ type VpcInterfaceRequest struct {
 
 	// The type of network interface.
 	NetworkInterfaceType NetworkInterfaceType
+
+	//  The key-value pairs that can be used to tag and organize the VPC network
+	// interface.
+	VpcInterfaceTags map[string]string
 
 	noSmithyDocumentSerde
 }

@@ -503,6 +503,27 @@ func (RestoreValidationStatus) Values() []RestoreValidationStatus {
 	}
 }
 
+type RuleExecutionType string
+
+// Enum values for RuleExecutionType
+const (
+	RuleExecutionTypeContinuous             RuleExecutionType = "CONTINUOUS"
+	RuleExecutionTypeSnapshots              RuleExecutionType = "SNAPSHOTS"
+	RuleExecutionTypeContinuousAndSnapshots RuleExecutionType = "CONTINUOUS_AND_SNAPSHOTS"
+)
+
+// Values returns all known values for RuleExecutionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleExecutionType) Values() []RuleExecutionType {
+	return []RuleExecutionType{
+		"CONTINUOUS",
+		"SNAPSHOTS",
+		"CONTINUOUS_AND_SNAPSHOTS",
+	}
+}
+
 type StorageClass string
 
 // Enum values for StorageClass

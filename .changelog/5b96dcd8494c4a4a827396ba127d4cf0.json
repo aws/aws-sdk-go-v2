@@ -1,0 +1,8 @@
+{
+    "id": "5b96dcd8-494c-4a4a-8273-96ba127d4cf0",
+    "type": "feature",
+    "description": "Add new AWS Resource Explorer APIs",
+    "modules": [
+        "service/resourceexplorer2"
+    ]
+}

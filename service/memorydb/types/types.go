@@ -394,6 +394,56 @@ type MultiRegionCluster struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an individual setting that controls some aspect of MemoryDB behavior
+// across multiple regions.
+type MultiRegionParameter struct {
+
+	// The valid range of values for the parameter.
+	AllowedValues *string
+
+	// The valid data type for the parameter.
+	DataType *string
+
+	// A description of the parameter.
+	Description *string
+
+	// The earliest engine version to which the parameter can apply.
+	MinimumEngineVersion *string
+
+	// The name of the parameter.
+	Name *string
+
+	// Indicates the source of the parameter value. Valid values: user | system |
+	// engine-default
+	Source *string
+
+	// The value of the parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the output of a CreateMultiRegionParameterGroup operation. A
+// multi-region parameter group represents a collection of parameters that can be
+// applied to clusters across multiple regions.
+type MultiRegionParameterGroup struct {
+
+	// The Amazon Resource Name (ARN) of the multi-region parameter group.
+	ARN *string
+
+	// A description of the multi-region parameter group.
+	Description *string
+
+	// The name of the parameter group family that this multi-region parameter group
+	// is compatible with.
+	Family *string
+
+	// The name of the multi-region parameter group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an individual node within a cluster. Each node runs its own instance
 // of the cluster's protocol-compliant caching software.
 type Node struct {

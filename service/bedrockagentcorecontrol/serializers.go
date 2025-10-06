@@ -124,6 +124,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentRuntimeInput(v *CreateAgentRunti
 		}
 	}
 
+	if v.LifecycleConfiguration != nil {
+		ok := object.Key("lifecycleConfiguration")
+		if err := awsRestjson1_serializeDocumentLifecycleConfiguration(v.LifecycleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkConfiguration != nil {
 		ok := object.Key("networkConfiguration")
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
@@ -952,6 +959,13 @@ func awsRestjson1_serializeOpDocumentCreateMemoryInput(v *CreateMemoryInput, val
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4073,6 +4087,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentRuntimeInput(v *UpdateAgentRunti
 		}
 	}
 
+	if v.LifecycleConfiguration != nil {
+		ok := object.Key("lifecycleConfiguration")
+		if err := awsRestjson1_serializeDocumentLifecycleConfiguration(v.LifecycleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkConfiguration != nil {
 		ok := object.Key("networkConfiguration")
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
@@ -5336,6 +5357,23 @@ func awsRestjson1_serializeDocumentKmsConfiguration(v *types.KmsConfiguration, v
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLifecycleConfiguration(v *types.LifecycleConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleRuntimeSessionTimeout != nil {
+		ok := object.Key("idleRuntimeSessionTimeout")
+		ok.Integer(*v.IdleRuntimeSessionTimeout)
+	}
+
+	if v.MaxLifetime != nil {
+		ok := object.Key("maxLifetime")
+		ok.Integer(*v.MaxLifetime)
 	}
 
 	return nil

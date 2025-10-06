@@ -7,6 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// An ACL with the specified name already exists.
 type ACLAlreadyExistsFault struct {
 	Message *string
 
@@ -32,6 +33,7 @@ func (e *ACLAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ACLAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified ACL does not exist.
 type ACLNotFoundFault struct {
 	Message *string
 
@@ -57,6 +59,8 @@ func (e *ACLNotFoundFault) ErrorCode() string {
 }
 func (e *ACLNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// ACLs allowed.
 type ACLQuotaExceededFault struct {
 	Message *string
 
@@ -82,6 +86,8 @@ func (e *ACLQuotaExceededFault) ErrorCode() string {
 }
 func (e *ACLQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The customer has exceeded the maximum number of API requests allowed per time
+// period.
 type APICallRateForCustomerExceededFault struct {
 	Message *string
 
@@ -109,6 +115,7 @@ func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A cluster with the specified name already exists.
 type ClusterAlreadyExistsFault struct {
 	Message *string
 
@@ -134,6 +141,7 @@ func (e *ClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified cluster does not exist.
 type ClusterNotFoundFault struct {
 	Message *string
 
@@ -159,6 +167,8 @@ func (e *ClusterNotFoundFault) ErrorCode() string {
 }
 func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// clusters allowed for this customer.
 type ClusterQuotaForCustomerExceededFault struct {
 	Message *string
 
@@ -186,6 +196,7 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A default user is required and must be specified.
 type DefaultUserRequired struct {
 	Message *string
 
@@ -211,6 +222,7 @@ func (e *DefaultUserRequired) ErrorCode() string {
 }
 func (e *DefaultUserRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A user with the specified name already exists.
 type DuplicateUserNameFault struct {
 	Message *string
 
@@ -236,6 +248,8 @@ func (e *DuplicateUserNameFault) ErrorCode() string {
 }
 func (e *DuplicateUserNameFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The cluster does not have sufficient capacity to perform the requested
+// operation.
 type InsufficientClusterCapacityFault struct {
 	Message *string
 
@@ -261,6 +275,7 @@ func (e *InsufficientClusterCapacityFault) ErrorCode() string {
 }
 func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The ACL is not in a valid state for the requested operation.
 type InvalidACLStateFault struct {
 	Message *string
 
@@ -286,6 +301,7 @@ func (e *InvalidACLStateFault) ErrorCode() string {
 }
 func (e *InvalidACLStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified Amazon Resource Name (ARN) is not valid.
 type InvalidARNFault struct {
 	Message *string
 
@@ -311,6 +327,7 @@ func (e *InvalidARNFault) ErrorCode() string {
 }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The cluster is not in a valid state for the requested operation.
 type InvalidClusterStateFault struct {
 	Message *string
 
@@ -336,6 +353,7 @@ func (e *InvalidClusterStateFault) ErrorCode() string {
 }
 func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The provided credentials are not valid.
 type InvalidCredentialsException struct {
 	Message *string
 
@@ -361,6 +379,7 @@ func (e *InvalidCredentialsException) ErrorCode() string {
 }
 func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified KMS key is not valid or accessible.
 type InvalidKMSKeyFault struct {
 	Message *string
 
@@ -415,6 +434,7 @@ func (e *InvalidMultiRegionClusterStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The node is not in a valid state for the requested operation.
 type InvalidNodeStateFault struct {
 	Message *string
 
@@ -440,6 +460,7 @@ func (e *InvalidNodeStateFault) ErrorCode() string {
 }
 func (e *InvalidNodeStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified parameter combination is not valid.
 type InvalidParameterCombinationException struct {
 	Message *string
 
@@ -467,6 +488,7 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The parameter group is not in a valid state for the requested operation.
 type InvalidParameterGroupStateFault struct {
 	Message *string
 
@@ -492,6 +514,7 @@ func (e *InvalidParameterGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified parameter value is not valid.
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -517,6 +540,7 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The snapshot is not in a valid state for the requested operation.
 type InvalidSnapshotStateFault struct {
 	Message *string
 
@@ -542,6 +566,7 @@ func (e *InvalidSnapshotStateFault) ErrorCode() string {
 }
 func (e *InvalidSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified subnet is not valid.
 type InvalidSubnet struct {
 	Message *string
 
@@ -567,6 +592,7 @@ func (e *InvalidSubnet) ErrorCode() string {
 }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The user is not in a valid state for the requested operation.
 type InvalidUserStateFault struct {
 	Message *string
 
@@ -592,6 +618,7 @@ func (e *InvalidUserStateFault) ErrorCode() string {
 }
 func (e *InvalidUserStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The VPC network is not in a valid state for the requested operation.
 type InvalidVPCNetworkStateFault struct {
 	Message *string
 
@@ -699,6 +726,8 @@ func (e *MultiRegionParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
+// The request cannot be processed because it would exceed the maximum number of
+// nodes allowed for this cluster.
 type NodeQuotaForClusterExceededFault struct {
 	Message *string
 
@@ -724,6 +753,8 @@ func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// nodes allowed for this customer.
 type NodeQuotaForCustomerExceededFault struct {
 	Message *string
 
@@ -749,6 +780,7 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
 }
 func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested operation would result in no changes.
 type NoOperationFault struct {
 	Message *string
 
@@ -774,6 +806,7 @@ func (e *NoOperationFault) ErrorCode() string {
 }
 func (e *NoOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A parameter group with the specified name already exists.
 type ParameterGroupAlreadyExistsFault struct {
 	Message *string
 
@@ -799,6 +832,7 @@ func (e *ParameterGroupAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified parameter group does not exist.
 type ParameterGroupNotFoundFault struct {
 	Message *string
 
@@ -824,6 +858,8 @@ func (e *ParameterGroupNotFoundFault) ErrorCode() string {
 }
 func (e *ParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// parameter groups allowed.
 type ParameterGroupQuotaExceededFault struct {
 	Message *string
 
@@ -955,6 +991,7 @@ func (e *ReservedNodesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The required service-linked role was not found.
 type ServiceLinkedRoleNotFoundFault struct {
 	Message *string
 
@@ -980,6 +1017,7 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string {
 }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified service update does not exist.
 type ServiceUpdateNotFoundFault struct {
 	Message *string
 
@@ -1005,6 +1043,7 @@ func (e *ServiceUpdateNotFoundFault) ErrorCode() string {
 }
 func (e *ServiceUpdateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified shard does not exist.
 type ShardNotFoundFault struct {
 	Message *string
 
@@ -1030,6 +1069,8 @@ func (e *ShardNotFoundFault) ErrorCode() string {
 }
 func (e *ShardNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// shards allowed per cluster.
 type ShardsPerClusterQuotaExceededFault struct {
 	Message *string
 
@@ -1057,6 +1098,7 @@ func (e *ShardsPerClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A snapshot with the specified name already exists.
 type SnapshotAlreadyExistsFault struct {
 	Message *string
 
@@ -1082,6 +1124,7 @@ func (e *SnapshotAlreadyExistsFault) ErrorCode() string {
 }
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified snapshot does not exist.
 type SnapshotNotFoundFault struct {
 	Message *string
 
@@ -1107,6 +1150,8 @@ func (e *SnapshotNotFoundFault) ErrorCode() string {
 }
 func (e *SnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// snapshots allowed.
 type SnapshotQuotaExceededFault struct {
 	Message *string
 
@@ -1132,6 +1177,7 @@ func (e *SnapshotQuotaExceededFault) ErrorCode() string {
 }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A subnet group with the specified name already exists.
 type SubnetGroupAlreadyExistsFault struct {
 	Message *string
 
@@ -1157,6 +1203,7 @@ func (e *SubnetGroupAlreadyExistsFault) ErrorCode() string {
 }
 func (e *SubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The subnet group is currently in use and cannot be deleted.
 type SubnetGroupInUseFault struct {
 	Message *string
 
@@ -1182,6 +1229,7 @@ func (e *SubnetGroupInUseFault) ErrorCode() string {
 }
 func (e *SubnetGroupInUseFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified subnet group does not exist.
 type SubnetGroupNotFoundFault struct {
 	Message *string
 
@@ -1207,6 +1255,8 @@ func (e *SubnetGroupNotFoundFault) ErrorCode() string {
 }
 func (e *SubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// subnet groups allowed.
 type SubnetGroupQuotaExceededFault struct {
 	Message *string
 
@@ -1232,6 +1282,7 @@ func (e *SubnetGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *SubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The subnet is currently in use and cannot be deleted.
 type SubnetInUse struct {
 	Message *string
 
@@ -1257,6 +1308,7 @@ func (e *SubnetInUse) ErrorCode() string {
 }
 func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified subnet is not allowed for this operation.
 type SubnetNotAllowedFault struct {
 	Message *string
 
@@ -1282,6 +1334,8 @@ func (e *SubnetNotAllowedFault) ErrorCode() string {
 }
 func (e *SubnetNotAllowedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// subnets allowed.
 type SubnetQuotaExceededFault struct {
 	Message *string
 
@@ -1307,6 +1361,7 @@ func (e *SubnetQuotaExceededFault) ErrorCode() string {
 }
 func (e *SubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified tag does not exist.
 type TagNotFoundFault struct {
 	Message *string
 
@@ -1332,6 +1387,8 @@ func (e *TagNotFoundFault) ErrorCode() string {
 }
 func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// tags allowed per resource.
 type TagQuotaPerResourceExceeded struct {
 	Message *string
 
@@ -1357,6 +1414,7 @@ func (e *TagQuotaPerResourceExceeded) ErrorCode() string {
 }
 func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Test failover is not available for this cluster configuration.
 type TestFailoverNotAvailableFault struct {
 	Message *string
 
@@ -1382,6 +1440,7 @@ func (e *TestFailoverNotAvailableFault) ErrorCode() string {
 }
 func (e *TestFailoverNotAvailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A user with the specified name already exists.
 type UserAlreadyExistsFault struct {
 	Message *string
 
@@ -1407,6 +1466,7 @@ func (e *UserAlreadyExistsFault) ErrorCode() string {
 }
 func (e *UserAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified user does not exist.
 type UserNotFoundFault struct {
 	Message *string
 
@@ -1432,6 +1492,8 @@ func (e *UserNotFoundFault) ErrorCode() string {
 }
 func (e *UserNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request cannot be processed because it would exceed the maximum number of
+// users allowed.
 type UserQuotaExceededFault struct {
 	Message *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "860db022-5654-4ae8-87d8-94046549ef8b",
+    "type": "feature",
+    "description": "Support for DescribeMultiRegionParameterGroups and DescribeMultiRegionParameters API.",
+    "modules": [
+        "service/memorydb"
+    ]
+}

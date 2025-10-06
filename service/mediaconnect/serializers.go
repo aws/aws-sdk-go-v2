@@ -803,6 +803,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 		ok.String(string(v.FlowSize))
 	}
 
+	if v.FlowTags != nil {
+		ok := object.Key("flowTags")
+		if err := awsRestjson1_serializeDocument__mapOfString(v.FlowTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Maintenance != nil {
 		ok := object.Key("maintenance")
 		if err := awsRestjson1_serializeDocumentAddMaintenance(v.Maintenance, ok); err != nil {
@@ -3971,6 +3978,11 @@ func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.FlowSize) > 0 {
+		ok := object.Key("flowSize")
+		ok.String(string(v.FlowSize))
+	}
+
 	if v.Maintenance != nil {
 		ok := object.Key("maintenance")
 		if err := awsRestjson1_serializeDocumentUpdateMaintenance(v.Maintenance, ok); err != nil {
@@ -5162,6 +5174,13 @@ func awsRestjson1_serializeDocumentAddMediaStreamRequest(v *types.AddMediaStream
 		ok.String(*v.MediaStreamName)
 	}
 
+	if v.MediaStreamTags != nil {
+		ok := object.Key("mediaStreamTags")
+		if err := awsRestjson1_serializeDocument__mapOfString(v.MediaStreamTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.MediaStreamType) > 0 {
 		ok := object.Key("mediaStreamType")
 		ok.String(string(v.MediaStreamType))
@@ -5238,6 +5257,13 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if len(v.OutputStatus) > 0 {
 		ok := object.Key("outputStatus")
 		ok.String(string(v.OutputStatus))
+	}
+
+	if v.OutputTags != nil {
+		ok := object.Key("outputTags")
+		if err := awsRestjson1_serializeDocument__mapOfString(v.OutputTags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Port != nil {
@@ -5546,6 +5572,13 @@ func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitle
 	if len(v.EntitlementStatus) > 0 {
 		ok := object.Key("entitlementStatus")
 		ok.String(string(v.EntitlementStatus))
+	}
+
+	if v.EntitlementTags != nil {
+		ok := object.Key("entitlementTags")
+		if err := awsRestjson1_serializeDocument__mapOfString(v.EntitlementTags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -5864,6 +5897,13 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.SourceListenerPort != nil {
 		ok := object.Key("sourceListenerPort")
 		ok.Integer(*v.SourceListenerPort)
+	}
+
+	if v.SourceTags != nil {
+		ok := object.Key("sourceTags")
+		if err := awsRestjson1_serializeDocument__mapOfString(v.SourceTags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StreamId != nil {
@@ -6211,6 +6251,13 @@ func awsRestjson1_serializeDocumentVpcInterfaceRequest(v *types.VpcInterfaceRequ
 	if v.SubnetId != nil {
 		ok := object.Key("subnetId")
 		ok.String(*v.SubnetId)
+	}
+
+	if v.VpcInterfaceTags != nil {
+		ok := object.Key("vpcInterfaceTags")
+		if err := awsRestjson1_serializeDocument__mapOfString(v.VpcInterfaceTags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

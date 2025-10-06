@@ -62,6 +62,42 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchCreateMemoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateMemoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchCreateMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDeleteMemoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteMemoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateMemoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvent(context.Background(), nil, func(o *Options) {
@@ -91,6 +127,18 @@ func TestCheckSnapshot_DeleteMemoryRecord(t *testing.T) {
 	_, err := svc.DeleteMemoryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteMemoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentCard(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentCard(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentCard")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +410,18 @@ func TestCheckSnapshot_StopCodeInterpreterSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopRuntimeSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopRuntimeSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopRuntimeSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateBrowserStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateBrowserStream(context.Background(), nil, func(o *Options) {
@@ -373,6 +433,42 @@ func TestCheckSnapshot_UpdateBrowserStream(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchCreateMemoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateMemoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchCreateMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteMemoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteMemoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateMemoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvent(context.Background(), nil, func(o *Options) {
@@ -402,6 +498,18 @@ func TestUpdateSnapshot_DeleteMemoryRecord(t *testing.T) {
 	_, err := svc.DeleteMemoryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteMemoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentCard(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentCard(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentCard")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -666,6 +774,18 @@ func TestUpdateSnapshot_StopCodeInterpreterSession(t *testing.T) {
 	_, err := svc.StopCodeInterpreterSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopCodeInterpreterSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopRuntimeSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopRuntimeSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopRuntimeSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtains an Workload access token for agentic workloads acting on behalf of user
-// with User Id.
+// Obtains a workload access token for agentic workloads acting on behalf of a
+// user, using the user's ID.
 func (c *Client) GetWorkloadAccessTokenForUserId(ctx context.Context, params *GetWorkloadAccessTokenForUserIdInput, optFns ...func(*Options)) (*GetWorkloadAccessTokenForUserIdOutput, error) {
 	if params == nil {
 		params = &GetWorkloadAccessTokenForUserIdInput{}
@@ -29,12 +29,12 @@ func (c *Client) GetWorkloadAccessTokenForUserId(ctx context.Context, params *Ge
 
 type GetWorkloadAccessTokenForUserIdInput struct {
 
-	// The user id of the user you are retrieving the access token for.
+	// The ID of the user for whom you are retrieving the access token.
 	//
 	// This member is required.
 	UserId *string
 
-	// The name of the worklaod you want to get the access token of.
+	// The name of the workload from which you want to retrieve the access token.
 	//
 	// This member is required.
 	WorkloadName *string
@@ -44,7 +44,7 @@ type GetWorkloadAccessTokenForUserIdInput struct {
 
 type GetWorkloadAccessTokenForUserIdOutput struct {
 
-	// The workload access token of the named workload.
+	// The access token for the specified workload.
 	//
 	// This member is required.
 	WorkloadAccessToken *string

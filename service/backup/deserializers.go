@@ -7016,6 +7016,11 @@ func awsRestjson1_deserializeOpDocumentGetBackupPlanOutput(v **GetBackupPlanOutp
 				}
 			}
 
+		case "ScheduledRunsPreview":
+			if err := awsRestjson1_deserializeDocumentScheduledRunsPreview(&sv.ScheduledRunsPreview, value); err != nil {
+				return err
+			}
+
 		case "VersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24427,6 +24432,105 @@ func awsRestjson1_deserializeDocumentRestoreTestingSelections(v *[]types.Restore
 		var col types.RestoreTestingSelectionForList
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentRestoreTestingSelectionForList(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScheduledPlanExecutionMember(v **types.ScheduledPlanExecutionMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScheduledPlanExecutionMember
+	if *v == nil {
+		sv = &types.ScheduledPlanExecutionMember{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExecutionTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ExecutionTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "RuleExecutionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleExecutionType to be of type string, got %T instead", value)
+				}
+				sv.RuleExecutionType = types.RuleExecutionType(jtv)
+			}
+
+		case "RuleId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.RuleId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScheduledRunsPreview(v *[]types.ScheduledPlanExecutionMember, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ScheduledPlanExecutionMember
+	if *v == nil {
+		cv = []types.ScheduledPlanExecutionMember{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ScheduledPlanExecutionMember
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScheduledPlanExecutionMember(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

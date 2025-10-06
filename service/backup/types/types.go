@@ -2523,4 +2523,24 @@ type RestoreTestingSelectionForUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a scheduled backup plan execution, including the
+// execution time, rule type, and associated rule identifier.
+type ScheduledPlanExecutionMember struct {
+
+	// The timestamp when the backup is scheduled to run, in Unix format and
+	// Coordinated Universal Time (UTC). The value is accurate to milliseconds.
+	ExecutionTime *time.Time
+
+	// The type of backup rule execution. Valid values are CONTINUOUS (point-in-time
+	// recovery), SNAPSHOTS (snapshot backups), or CONTINUOUS_AND_SNAPSHOTS (both
+	// types combined).
+	RuleExecutionType RuleExecutionType
+
+	// The unique identifier of the backup rule that will execute at the scheduled
+	// time.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

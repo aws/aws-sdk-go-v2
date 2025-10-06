@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtains an Workload access token for agentic workloads acting on behalf of user
-// with JWT token
+// Obtains a workload access token for agentic workloads acting on behalf of a
+// user, using a JWT token.
 func (c *Client) GetWorkloadAccessTokenForJWT(ctx context.Context, params *GetWorkloadAccessTokenForJWTInput, optFns ...func(*Options)) (*GetWorkloadAccessTokenForJWTOutput, error) {
 	if params == nil {
 		params = &GetWorkloadAccessTokenForJWTInput{}
@@ -29,12 +29,12 @@ func (c *Client) GetWorkloadAccessTokenForJWT(ctx context.Context, params *GetWo
 
 type GetWorkloadAccessTokenForJWTInput struct {
 
-	// OAuth2 token issued by the user's identity provider
+	// The OAuth 2.0 token issued by the user's identity provider.
 	//
 	// This member is required.
 	UserToken *string
 
-	// Unique identifier for the registered agent
+	// The unique identifier for the registered workload.
 	//
 	// This member is required.
 	WorkloadName *string
@@ -44,7 +44,7 @@ type GetWorkloadAccessTokenForJWTInput struct {
 
 type GetWorkloadAccessTokenForJWTOutput struct {
 
-	// Opaque token representing both agent and user identity
+	// An opaque token representing the identity of both the workload and the user.
 	//
 	// This member is required.
 	WorkloadAccessToken *string

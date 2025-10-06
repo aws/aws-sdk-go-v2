@@ -1512,9 +1512,6 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 			invalidParams.AddNested("MediaStreamOutputConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Protocol) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

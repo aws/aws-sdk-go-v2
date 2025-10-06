@@ -818,6 +818,24 @@ type KmsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
+// resources in AgentCore Runtime. This configuration helps optimize resource
+// utilization by automatically cleaning up idle sessions and preventing
+// long-running instances from consuming resources indefinitely.
+type LifecycleConfiguration struct {
+
+	// Timeout in seconds for idle runtime sessions. When a session remains idle for
+	// this duration, it will be automatically terminated. Default: 900 seconds (15
+	// minutes).
+	IdleRuntimeSessionTimeout *int32
+
+	// Maximum lifetime for the instance in seconds. Once reached, instances will be
+	// automatically terminated and replaced. Default: 28800 seconds (8 hours).
+	MaxLifetime *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a Model Context Protocol (MCP) gateway. This structure
 // defines how the gateway implements the MCP protocol.
 type MCPGatewayConfiguration struct {

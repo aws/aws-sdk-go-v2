@@ -10,6 +10,66 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchCreateMemoryRecords struct {
+}
+
+func (*validateOpBatchCreateMemoryRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateMemoryRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateMemoryRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateMemoryRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteMemoryRecords struct {
+}
+
+func (*validateOpBatchDeleteMemoryRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteMemoryRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteMemoryRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteMemoryRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateMemoryRecords struct {
+}
+
+func (*validateOpBatchUpdateMemoryRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateMemoryRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateMemoryRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateMemoryRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvent struct {
 }
 
@@ -65,6 +125,26 @@ func (m *validateOpDeleteMemoryRecord) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMemoryRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentCard struct {
+}
+
+func (*validateOpGetAgentCard) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentCard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentCardInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentCardInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +590,26 @@ func (m *validateOpStopCodeInterpreterSession) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopRuntimeSession struct {
+}
+
+func (*validateOpStopRuntimeSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopRuntimeSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopRuntimeSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopRuntimeSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBrowserStream struct {
 }
 
@@ -530,6 +630,18 @@ func (m *validateOpUpdateBrowserStream) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchCreateMemoryRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateMemoryRecords{}, middleware.After)
+}
+
+func addOpBatchDeleteMemoryRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteMemoryRecords{}, middleware.After)
+}
+
+func addOpBatchUpdateMemoryRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateMemoryRecords{}, middleware.After)
+}
+
 func addOpCreateEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvent{}, middleware.After)
 }
@@ -540,6 +652,10 @@ func addOpDeleteEventValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMemoryRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMemoryRecord{}, middleware.After)
+}
+
+func addOpGetAgentCardValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentCard{}, middleware.After)
 }
 
 func addOpGetBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -630,6 +746,10 @@ func addOpStopCodeInterpreterSessionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpStopCodeInterpreterSession{}, middleware.After)
 }
 
+func addOpStopRuntimeSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopRuntimeSession{}, middleware.After)
+}
+
 func addOpUpdateBrowserStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBrowserStream{}, middleware.After)
 }
@@ -682,6 +802,41 @@ func validateConversational(v *types.Conversational) error {
 	}
 }
 
+func validateEventMetadataFilterExpression(v *types.EventMetadataFilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventMetadataFilterExpression"}
+	if v.Left == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Left"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventMetadataFilterList(v []types.EventMetadataFilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventMetadataFilterList"}
+	for i := range v {
+		if err := validateEventMetadataFilterExpression(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterInput(v *types.FilterInput) error {
 	if v == nil {
 		return nil
@@ -690,6 +845,11 @@ func validateFilterInput(v *types.FilterInput) error {
 	if v.Branch != nil {
 		if err := validateBranchFilter(v.Branch); err != nil {
 			invalidParams.AddNested("Branch", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventMetadata != nil {
+		if err := validateEventMetadataFilterList(v.EventMetadata); err != nil {
+			invalidParams.AddNested("EventMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -723,6 +883,114 @@ func validateInputContentBlockList(v []types.InputContentBlock) error {
 		if err := validateInputContentBlock(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryRecordCreateInput(v *types.MemoryRecordCreateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordCreateInput"}
+	if v.RequestIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestIdentifier"))
+	}
+	if v.Namespaces == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespaces"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.Timestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryRecordDeleteInput(v *types.MemoryRecordDeleteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordDeleteInput"}
+	if v.MemoryRecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryRecordId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryRecordsCreateInputList(v []types.MemoryRecordCreateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordsCreateInputList"}
+	for i := range v {
+		if err := validateMemoryRecordCreateInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryRecordsDeleteInputList(v []types.MemoryRecordDeleteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordsDeleteInputList"}
+	for i := range v {
+		if err := validateMemoryRecordDeleteInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryRecordsUpdateInputList(v []types.MemoryRecordUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordsUpdateInputList"}
+	for i := range v {
+		if err := validateMemoryRecordUpdateInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryRecordUpdateInput(v *types.MemoryRecordUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordUpdateInput"}
+	if v.MemoryRecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryRecordId"))
+	}
+	if v.Timestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -817,6 +1085,72 @@ func validateViewPort(v *types.ViewPort) error {
 	}
 }
 
+func validateOpBatchCreateMemoryRecordsInput(v *BatchCreateMemoryRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateMemoryRecordsInput"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if v.Records == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Records"))
+	} else if v.Records != nil {
+		if err := validateMemoryRecordsCreateInputList(v.Records); err != nil {
+			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteMemoryRecordsInput(v *BatchDeleteMemoryRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteMemoryRecordsInput"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if v.Records == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Records"))
+	} else if v.Records != nil {
+		if err := validateMemoryRecordsDeleteInputList(v.Records); err != nil {
+			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateMemoryRecordsInput(v *BatchUpdateMemoryRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateMemoryRecordsInput"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if v.Records == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Records"))
+	} else if v.Records != nil {
+		if err := validateMemoryRecordsUpdateInputList(v.Records); err != nil {
+			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventInput(v *CreateEventInput) error {
 	if v == nil {
 		return nil
@@ -884,6 +1218,21 @@ func validateOpDeleteMemoryRecordInput(v *DeleteMemoryRecordInput) error {
 	}
 	if v.MemoryRecordId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemoryRecordId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentCardInput(v *GetAgentCardInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentCardInput"}
+	if v.AgentRuntimeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1299,6 +1648,24 @@ func validateOpStopCodeInterpreterSessionInput(v *StopCodeInterpreterSessionInpu
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopRuntimeSessionInput(v *StopRuntimeSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopRuntimeSessionInput"}
+	if v.RuntimeSessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeSessionId"))
+	}
+	if v.AgentRuntimeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

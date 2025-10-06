@@ -83,6 +83,25 @@ func (ContentBlockType) Values() []ContentBlockType {
 	}
 }
 
+type MemoryRecordStatus string
+
+// Enum values for MemoryRecordStatus
+const (
+	MemoryRecordStatusSucceeded MemoryRecordStatus = "SUCCEEDED"
+	MemoryRecordStatusFailed    MemoryRecordStatus = "FAILED"
+)
+
+// Values returns all known values for MemoryRecordStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemoryRecordStatus) Values() []MemoryRecordStatus {
+	return []MemoryRecordStatus{
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type Oauth2FlowType string
 
 // Enum values for Oauth2FlowType
@@ -99,6 +118,27 @@ func (Oauth2FlowType) Values() []Oauth2FlowType {
 	return []Oauth2FlowType{
 		"USER_FEDERATION",
 		"M2M",
+	}
+}
+
+type OperatorType string
+
+// Enum values for OperatorType
+const (
+	OperatorTypeEqualsTo  OperatorType = "EQUALS_TO"
+	OperatorTypeExists    OperatorType = "EXISTS"
+	OperatorTypeNotExists OperatorType = "NOT_EXISTS"
+)
+
+// Values returns all known values for OperatorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperatorType) Values() []OperatorType {
+	return []OperatorType{
+		"EQUALS_TO",
+		"EXISTS",
+		"NOT_EXISTS",
 	}
 }
 

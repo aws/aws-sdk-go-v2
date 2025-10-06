@@ -11,14 +11,11 @@ import (
 )
 
 // This API permanently deletes all QuickSight customizations for the specified
-// Amazon Web Services account and namespace in this Amazon Web Services Region.
-// When you delete account customizations:
+// Amazon Web Services account and namespace. When you delete account
+// customizations:
 //
 //   - All customizations are removed including themes, branding, and visual
 //     settings
-//
-//   - The deletion affects only the specified Amazon Web Services Region -
-//     customizations in other regions remain unchanged
 //
 //   - This action cannot be undone through the API
 //
@@ -27,8 +24,8 @@ import (
 // Before proceeding: Ensure you have backups of any custom themes or branding
 // elements you may want to recreate.
 //
-// Deletes all Amazon QuickSight customizations in this Amazon Web Services Region
-// for the specified Amazon Web Services account and QuickSight namespace.
+// Deletes all Amazon QuickSight customizations for the specified Amazon Web
+// Services account and QuickSight namespace.
 func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteAccountCustomizationInput, optFns ...func(*Options)) (*DeleteAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &DeleteAccountCustomizationInput{}
@@ -47,7 +44,7 @@ func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteA
 type DeleteAccountCustomizationInput struct {
 
 	// The ID for the Amazon Web Services account that you want to delete QuickSight
-	// customizations from in this Amazon Web Services Region.
+	// customizations from.
 	//
 	// This member is required.
 	AwsAccountId *string

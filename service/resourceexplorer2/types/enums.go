@@ -71,3 +71,26 @@ func (IndexType) Values() []IndexType {
 		"AGGREGATOR",
 	}
 }
+
+type OperationStatus string
+
+// Enum values for OperationStatus
+const (
+	OperationStatusSucceeded  OperationStatus = "SUCCEEDED"
+	OperationStatusFailed     OperationStatus = "FAILED"
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusSkipped    OperationStatus = "SKIPPED"
+)
+
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
+		"SKIPPED",
+	}
+}

@@ -1,0 +1,8 @@
+{
+    "id": "513630fd-6864-473a-8794-ece0a53eb3ef",
+    "type": "feature",
+    "description": "Add support for VM lifecycle configuration parameters and A2A protocol",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

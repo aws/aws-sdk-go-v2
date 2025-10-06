@@ -47,6 +47,9 @@ type CreateFlowInput struct {
 	// optional parameter to LARGE if you want to enable NDI outputs on the flow.
 	FlowSize types.FlowSize
 
+	//  The key-value pairs that can be used to tag and organize the flow.
+	FlowTags map[string]string
+
 	//  The maintenance settings you want to use for the flow.
 	Maintenance *types.AddMaintenance
 

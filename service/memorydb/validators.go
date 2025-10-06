@@ -330,6 +330,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMultiRegionParameters struct {
+}
+
+func (*validateOpDescribeMultiRegionParameters) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMultiRegionParameters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMultiRegionParametersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMultiRegionParametersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeParameters struct {
 }
 
@@ -714,6 +734,10 @@ func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
 
+func addOpDescribeMultiRegionParametersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMultiRegionParameters{}, middleware.After)
+}
+
 func addOpDescribeParametersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeParameters{}, middleware.After)
 }
@@ -1072,6 +1096,21 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserInput"}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeMultiRegionParametersInput(v *DescribeMultiRegionParametersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMultiRegionParametersInput"}
+	if v.MultiRegionParameterGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiRegionParameterGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -44,11 +44,47 @@ func ExampleContent_outputUsage() {
 
 var _ *string
 
+func ExampleLeftExpression_outputUsage() {
+	var union types.LeftExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LeftExpressionMemberMetadataKey:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleMemoryContent_outputUsage() {
 	var union types.MemoryContent
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.MemoryContentMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleMetadataValue_outputUsage() {
+	var union types.MetadataValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MetadataValueMemberStringValue:
 		_ = v.Value // Value is string
 
 	case *types.UnknownUnionMember:
@@ -83,6 +119,24 @@ func ExamplePayloadType_outputUsage() {
 
 var _ document.Interface
 var _ *types.Conversational
+
+func ExampleRightExpression_outputUsage() {
+	var union types.RightExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RightExpressionMemberMetadataValue:
+		_ = v.Value // Value is types.MetadataValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.MetadataValue
 
 func ExampleStreamUpdate_outputUsage() {
 	var union types.StreamUpdate

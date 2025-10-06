@@ -73,6 +73,11 @@ type GetAgentRuntimeOutput struct {
 	// This member is required.
 	LastUpdatedAt *time.Time
 
+	// The life cycle configuration for the AgentCore Runtime.
+	//
+	// This member is required.
+	LifecycleConfiguration *types.LifecycleConfiguration
+
 	// The network configuration for the AgentCore Runtime.
 	//
 	// This member is required.

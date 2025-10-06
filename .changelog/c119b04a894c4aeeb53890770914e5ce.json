@@ -1,0 +1,8 @@
+{
+    "id": "c119b04a-894c-4aee-b538-90770914e5ce",
+    "type": "feature",
+    "description": "Adds optional MaxScheduledRunsPreview input to GetBackupPlan API to provide a preview of up to 10 next scheduled backup plan runs in the GetBackupPlan response.",
+    "modules": [
+        "service/backup"
+    ]
+}

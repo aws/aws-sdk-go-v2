@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves an API Key associated with an API Key Credential Provider
+// Retrieves the API key associated with an API key credential provider.
 func (c *Client) GetResourceApiKey(ctx context.Context, params *GetResourceApiKeyInput, optFns ...func(*Options)) (*GetResourceApiKeyOutput, error) {
 	if params == nil {
 		params = &GetResourceApiKeyInput{}
@@ -28,12 +28,13 @@ func (c *Client) GetResourceApiKey(ctx context.Context, params *GetResourceApiKe
 
 type GetResourceApiKeyInput struct {
 
-	// The credential provider name of the resource you are retrieving the API Key of.
+	// The credential provider name for the resource from which you are retrieving the
+	// API key.
 	//
 	// This member is required.
 	ResourceCredentialProviderName *string
 
-	// The identity token of the workload you want to get the API Key of.
+	// The identity token of the workload from which you want to retrieve the API key.
 	//
 	// This member is required.
 	WorkloadIdentityToken *string
@@ -43,7 +44,7 @@ type GetResourceApiKeyInput struct {
 
 type GetResourceApiKeyOutput struct {
 
-	// The API Key associated with the resource requested.
+	// The API key associated with the resource requested.
 	//
 	// This member is required.
 	ApiKey *string

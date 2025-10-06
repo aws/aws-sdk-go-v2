@@ -29,6 +29,8 @@
         "api_op_DescribeEngineVersions.go",
         "api_op_DescribeEvents.go",
         "api_op_DescribeMultiRegionClusters.go",
+        "api_op_DescribeMultiRegionParameterGroups.go",
+        "api_op_DescribeMultiRegionParameters.go",
         "api_op_DescribeParameterGroups.go",
         "api_op_DescribeParameters.go",
         "api_op_DescribeReservedNodes.go",

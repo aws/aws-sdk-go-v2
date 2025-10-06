@@ -1,0 +1,8 @@
+{
+    "id": "eb88cb15-2433-4d8e-bee7-d300ade095a8",
+    "type": "documentation",
+    "description": "Documentation improvements for QuickSight API documentation to clarify that delete operation APIs are global.",
+    "modules": [
+        "service/quicksight"
+    ]
+}
