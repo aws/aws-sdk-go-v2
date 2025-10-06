@@ -24,7 +24,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The credentials that you used to call this operation don't have the minimum required\n            permissions.</p>",
+                "smithy.api#documentation": "<p>The credentials that you used to call this operation don't have the minimum required permissions.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -70,7 +70,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the specified view as the default for the Amazon Web Services Region in which you call this\n            operation. When a user performs a <a>Search</a> that doesn't explicitly\n            specify which view to use, then Amazon Web Services Resource Explorer automatically chooses this default view for\n            searches performed in this Amazon Web Services Region.</p>\n         <p>If an Amazon Web Services Region doesn't have a default view \n    configured, then users must explicitly specify a view with every <code>Search</code> \n    operation performed in that Region.</p>",
+                "smithy.api#documentation": "<p>Sets the specified view as the default for the Amazon Web Services Region in which you call this operation. When a user performs a <a>Search</a> that doesn't explicitly specify which view to use, then Amazon Web Services Resource Explorer automatically chooses this default view for searches performed in this Amazon Web Services Region.</p> <p>If an Amazon Web Services Region doesn't have a default view configured, then users must explicitly specify a view with every <code>Search</code> operation performed in that Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/AssociateDefaultView"
@@ -84,7 +84,7 @@
                 "ViewArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view to set as the default for the Amazon Web Services Region and\n            Amazon Web Services account in which you call this operation. The specified view must already exist in\n            the called Region.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view to set as the default for the Amazon Web Services Region and Amazon Web Services account in which you call this operation. The specified view must already exist in the called Region.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1011
@@ -100,7 +100,7 @@
                 "ViewArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view that the operation set as the default for queries made\n            in the Amazon Web Services Region and Amazon Web Services account in which you called this operation.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view that the operation set as the default for queries made in the Amazon Web Services Region and Amazon Web Services account in which you called this operation.</p>"
                     }
                 }
             }
@@ -158,7 +158,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of error messages for any views that Amazon Web Services Resource Explorer couldn't retrieve\n            details.</p>"
+                "smithy.api#documentation": "<p>A collection of error messages for any views that Amazon Web Services Resource Explorer couldn't retrieve details.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#BatchGetViewErrors": {
@@ -188,13 +188,13 @@
                 "Views": {
                     "target": "com.amazonaws.resourceexplorer2#ViewList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure with a list of objects with details for each of the specified\n            views.</p>"
+                        "smithy.api#documentation": "<p>A structure with a list of objects with details for each of the specified views.</p>"
                     }
                 },
                 "Errors": {
                     "target": "com.amazonaws.resourceexplorer2#BatchGetViewErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>If any of the specified ARNs result in an error, then this structure describes the\n            error.</p>"
+                        "smithy.api#documentation": "<p>If any of the specified ARNs result in an error, then this structure describes the error.</p>"
                     }
                 }
             }
@@ -259,7 +259,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If you attempted to create a view, then the request failed because either you specified parameters that didn’t match the\n            original request, or you attempted to create a view with a name that already exists in\n            this Amazon Web Services Region.</p>\n         <p>If you attempted to create an index, then the request failed because either you specified parameters that didn't match\n            the original request, or an index already exists in the current Amazon Web Services Region.</p>\n         <p>If you attempted to update an index type to <code>AGGREGATOR</code>, then the request failed because you already\n            have an <code>AGGREGATOR</code> index in a different Amazon Web Services Region.</p>",
+                "smithy.api#documentation": "<p>If you attempted to create a view, then the request failed because either you specified parameters that didn’t match the original request, or you attempted to create a view with a name that already exists in this Amazon Web Services Region.</p> <p>If you attempted to create an index, then the request failed because either you specified parameters that didn't match the original request, or an index already exists in the current Amazon Web Services Region.</p> <p>If you attempted to update an index type to <code>AGGREGATOR</code>, then the request failed because you already have an <code>AGGREGATOR</code> index in a different Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -290,7 +290,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating\n            an index. Resource Explorer begins discovering the resources in this Region and stores the details\n            about the resources in the index so that they can be queried by using the <a>Search</a> operation. You can create only one index in a Region.</p>\n         <note>\n            <p>This operation creates only a <i>local</i> index. To promote the\n                local index in one Amazon Web Services Region into the aggregator index for the Amazon Web Services account, use the\n                    <a>UpdateIndexType</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search by creating an aggregator index</a> in the\n                    <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         </note>\n         <p>For more details about what happens when you turn on Resource Explorer in an Amazon Web Services Region, see\n                <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html\">Turn\n                on Resource Explorer to index your resources in an Amazon Web Services Region</a> in the\n                <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <p>If this is the first Amazon Web Services Region in which you've created an index for Resource Explorer, then\n            this operation also <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">creates a\n                service-linked role</a> in your Amazon Web Services account that allows Resource Explorer to enumerate\n            your resources to populate the index.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Action</b>:\n                        <code>resource-explorer-2:CreateIndex</code>\n               </p>\n               <p>\n                  <b>Resource</b>: The ARN of the index (as it will\n                    exist after the operation completes) in the Amazon Web Services Region and account in which\n                    you're trying to create the index. Use the wildcard character (<code>*</code>)\n                    at the end of the string to match the eventual UUID. For example, the following\n                        <code>Resource</code> element restricts the role or user to creating an\n                    index in only the <code>us-east-2</code> Region of the specified account.</p>\n               <p>\n                  <code>\"Resource\":\n                            \"arn:aws:resource-explorer-2:us-west-2:<i>&lt;account-id&gt;</i>:index/*\"</code>\n               </p>\n               <p>Alternatively, you can use <code>\"Resource\": \"*\"</code> to allow the role or\n                    user to create an index in any Region.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Action</b>:\n                        <code>iam:CreateServiceLinkedRole</code>\n               </p>\n               <p>\n                  <b>Resource</b>: No specific resource (*). </p>\n               <p>This permission is required only the first time you create an index to turn on\n                    Resource Explorer in the account. Resource Explorer uses this to create the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">service-linked\n                        role needed to index the resources in your account</a>. Resource Explorer uses the\n                    same service-linked role for all additional indexes you create\n                    afterwards.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating an index. Resource Explorer begins discovering the resources in this Region and stores the details about the resources in the index so that they can be queried by using the <a>Search</a> operation. You can create only one index in a Region.</p> <note> <p>This operation creates only a <i>local</i> index. To promote the local index in one Amazon Web Services Region into the aggregator index for the Amazon Web Services account, use the <a>UpdateIndexType</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search by creating an aggregator index</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> </note> <p>For more details about what happens when you turn on Resource Explorer in an Amazon Web Services Region, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html\">Turn on Resource Explorer to index your resources in an Amazon Web Services Region</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <p>If this is the first Amazon Web Services Region in which you've created an index for Resource Explorer, then this operation also <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">creates a service-linked role</a> in your Amazon Web Services account that allows Resource Explorer to enumerate your resources to populate the index.</p> <ul> <li> <p> <b>Action</b>: <code>resource-explorer-2:CreateIndex</code> </p> <p> <b>Resource</b>: The ARN of the index (as it will exist after the operation completes) in the Amazon Web Services Region and account in which you're trying to create the index. Use the wildcard character (<code>*</code>) at the end of the string to match the eventual UUID. For example, the following <code>Resource</code> element restricts the role or user to creating an index in only the <code>us-east-2</code> Region of the specified account.</p> <p> <code>\"Resource\": \"arn:aws:resource-explorer-2:us-west-2:<i>&lt;account-id&gt;</i>:index/*\"</code> </p> <p>Alternatively, you can use <code>\"Resource\": \"*\"</code> to allow the role or user to create an index in any Region.</p> </li> <li> <p> <b>Action</b>: <code>iam:CreateServiceLinkedRole</code> </p> <p> <b>Resource</b>: No specific resource (*). </p> <p>This permission is required only the first time you create an index to turn on Resource Explorer in the account. Resource Explorer uses this to create the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">service-linked role needed to index the resources in your account</a>. Resource Explorer uses the same service-linked role for all additional indexes you create afterwards.</p> </li> </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateIndex"
@@ -305,7 +305,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the\n        accidental creation of duplicate versions. We recommend that you generate a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID-type\n        value</a> to ensure the uniqueness of your index.</p>",
+                        "smithy.api#documentation": "<p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the accidental creation of duplicate versions. We recommend that you generate a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID-type value</a> to ensure the uniqueness of your index.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -313,7 +313,7 @@
                     "target": "com.amazonaws.resourceexplorer2#TagMap",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "write",
-                        "smithy.api#documentation": "<p>The specified tags are attached only to the index created in this Amazon Web Services Region. The\n            tags aren't attached to any of the resources listed in the index.</p>"
+                        "smithy.api#documentation": "<p>The specified tags are attached only to the index created in this Amazon Web Services Region. The tags aren't attached to any of the resources listed in the index.</p>"
                     }
                 }
             }
@@ -324,13 +324,13 @@
                 "Arn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the new local index for the Region. You can reference this ARN in IAM\n            permission policies to authorize the following operations: <a>DeleteIndex</a>\n            | <a>GetIndex</a> | <a>UpdateIndexType</a> | <a>CreateView</a>\n         </p>"
+                        "smithy.api#documentation": "<p>The ARN of the new local index for the Region. You can reference this ARN in IAM permission policies to authorize the following operations: <a>DeleteIndex</a> | <a>GetIndex</a> | <a>UpdateIndexType</a> | <a>CreateView</a> </p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.resourceexplorer2#IndexState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the current state of the index. You can check for changes to the state for\n            asynchronous operations by calling the <a>GetIndex</a> operation.</p>\n         <note>\n            <p>The state can remain in the <code>CREATING</code> or <code>UPDATING</code> state\n                for several hours as Resource Explorer discovers the information about your resources and\n                populates the index.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the current state of the index. You can check for changes to the state for asynchronous operations by calling the <a>GetIndex</a> operation.</p> <note> <p>The state can remain in the <code>CREATING</code> or <code>UPDATING</code> state for several hours as Resource Explorer discovers the information about your resources and populates the index.</p> </note>"
                     }
                 },
                 "CreatedAt": {
@@ -340,6 +340,92 @@
                         "smithy.api#timestampFormat": "date-time"
                     }
                 }
+            }
+        },
+        "com.amazonaws.resourceexplorer2#CreateResourceExplorerSetup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#CreateResourceExplorerSetupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#CreateResourceExplorerSetupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Resource Explorer setup configuration across multiple Amazon Web Services Regions. This operation sets up indexes and views in the specified Regions. This operation can also be used to set an aggregator Region for cross-Region resource search.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateResourceExplorerSetup"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#CreateResourceExplorerSetupInput": {
+            "type": "structure",
+            "members": {
+                "RegionList": {
+                    "target": "com.amazonaws.resourceexplorer2#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions where Resource Explorer should be configured. Each Region in the list will have a user-owned index created.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "AggregatorRegions": {
+                    "target": "com.amazonaws.resourceexplorer2#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions that should be configured as aggregator Regions. Aggregator Regions receive replicated index information from all other Regions where there is a user-owned index.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "ViewName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the view to be created as part of the Resource Explorer setup. The view name must be unique within the Amazon Web Services account and Region.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9-]{1,64}$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#CreateResourceExplorerSetupOutput": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the setup task. Use this ID with <code>GetResourceExplorerSetup</code> to monitor the progress of the configuration operation.</p>",
+                        "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourceexplorer2#CreateView": {
@@ -374,7 +460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a view that users can query by using the <a>Search</a> operation.\n            Results from queries that you make using this view include only resources that match the\n            view's <code>Filters</code>. For more information about Amazon Web Services Resource Explorer views, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html\">Managing views</a>\n            in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <p>Only the principals with an IAM identity-based policy that grants <code>Allow</code>\n            to the <code>Search</code> action on a <code>Resource</code> with the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of\n            this view can <a>Search</a> using views you create with this\n            operation.</p>",
+                "smithy.api#documentation": "<p>Creates a view that users can query by using the <a>Search</a> operation. Results from queries that you make using this view include only resources that match the view's <code>Filters</code>. For more information about Amazon Web Services Resource Explorer views, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html\">Managing views</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <p>Only the principals with an IAM identity-based policy that grants <code>Allow</code> to the <code>Search</code> action on a <code>Resource</code> with the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of this view can <a>Search</a> using views you create with this operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateView"
@@ -388,7 +474,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the\n        accidental creation of duplicate versions. We recommend that you generate a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID-type\n        value</a> to ensure the uniqueness of your views.</p>",
+                        "smithy.api#documentation": "<p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the accidental creation of duplicate versions. We recommend that you generate a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID-type value</a> to ensure the uniqueness of your views.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#length": {
                             "min": 1,
@@ -399,20 +485,20 @@
                 "ViewName": {
                     "target": "com.amazonaws.resourceexplorer2#ViewName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new view. This name appears in the list of views in Resource Explorer.</p>\n         <p>The name must be no more than 64 characters long, and can include letters, digits, and\n            the dash (-) character. The name must be unique within its Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The name of the new view. This name appears in the list of views in Resource Explorer.</p> <p>The name must be no more than 64 characters long, and can include letters, digits, and the dash (-) character. The name must be unique within its Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IncludedProperties": {
                     "target": "com.amazonaws.resourceexplorer2#IncludedPropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies optional fields that you want included in search results from this\n        view. It is a list of objects that each describe a field to include.</p>\n         <p>The default is an empty list, with no optional fields included in the results.</p>"
+                        "smithy.api#documentation": "<p>Specifies optional fields that you want included in search results from this view. It is a list of objects that each describe a field to include.</p> <p>The default is an empty list, with no optional fields included in the results.</p>"
                     }
                 },
                 "Scope": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The root ARN of the account, an organizational unit (OU), or an organization ARN. If\n            left empty, the default is account.</p>",
+                        "smithy.api#documentation": "<p>The root ARN of the account, an organizational unit (OU), or an organization ARN. If left empty, the default is account.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -422,7 +508,7 @@
                 "Filters": {
                     "target": "com.amazonaws.resourceexplorer2#SearchFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of \n            queries made using this view. When you use this view in a <a>Search</a> \n            operation, the filter string is combined with the search's <code>QueryString</code> \n            parameter using a logical <code>AND</code> operator.</p>\n         <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for\n                Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <important>\n            <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter\n                    prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the \n                    string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 \n                    resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is\n                    <i>not</i> tagged with a key <code>Stage</code> that has the value\n                    <code>prod</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a <a>Search</a> operation, the filter string is combined with the search's <code>QueryString</code> parameter using a logical <code>AND</code> operator.</p> <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <important> <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is <i>not</i> tagged with a key <code>Stage</code> that has the value <code>prod</code>.</p> </important>"
                     }
                 },
                 "Tags": {
@@ -485,7 +571,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region.\n            When you delete an index, Resource Explorer stops discovering and indexing resources in that\n            Region. Resource Explorer also deletes all views in that Region. These actions occur as\n            asynchronous background tasks. You can check to see when the actions are complete by\n            using the <a>GetIndex</a> operation and checking the <code>Status</code>\n            response value.</p>\n         <note>\n            <p>If the index you delete is the aggregator index for the Amazon Web Services account, you must\n                wait 24 hours before you can promote another local index to be the\n                aggregator index for the account. Users can't perform account-wide searches using\n                Resource Explorer until another aggregator index is configured.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region. When you delete an index, Resource Explorer stops discovering and indexing resources in that Region. Resource Explorer also deletes all views in that Region. These actions occur as asynchronous background tasks. You can check to see when the actions are complete by using the <a>GetIndex</a> operation and checking the <code>Status</code> response value.</p> <note> <p>If the index you delete is the aggregator index for the Amazon Web Services account, you must wait 24 hours before you can promote another local index to be the aggregator index for the account. Users can't perform account-wide searches using Resource Explorer until another aggregator index is configured.</p> </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteIndex"
@@ -511,7 +597,7 @@
                 "Arn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the index that you successfully started the deletion\n            process.</p>\n         <note>\n            <p>This operation is asynchronous. To check its status, call the <a>GetIndex</a> operation.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the index that you successfully started the deletion process.</p> <note> <p>This operation is asynchronous. To check its status, call the <a>GetIndex</a> operation.</p> </note>"
                     }
                 },
                 "State": {
@@ -527,6 +613,76 @@
                         "smithy.api#timestampFormat": "date-time"
                     }
                 }
+            }
+        },
+        "com.amazonaws.resourceexplorer2#DeleteResourceExplorerSetup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#DeleteResourceExplorerSetupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#DeleteResourceExplorerSetupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Resource Explorer setup configuration. This operation removes indexes and views from the specified Regions or all Regions where Resource Explorer is configured.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteResourceExplorerSetup"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#DeleteResourceExplorerSetupInput": {
+            "type": "structure",
+            "members": {
+                "RegionList": {
+                    "target": "com.amazonaws.resourceexplorer2#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions from which to delete the Resource Explorer configuration. If not specified, the operation uses the <code>DeleteInAllRegions</code> parameter to determine scope.</p>"
+                    }
+                },
+                "DeleteInAllRegions": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to delete Resource Explorer configuration from all Regions where it is currently enabled. If this parameter is set to <code>true</code>, a value for <code>RegionList</code> must not be provided. Otherwise, the operation fails with a <code>ValidationException</code> error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#DeleteResourceExplorerSetupOutput": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the deletion task. Use this ID with <code>GetResourceExplorerSetup</code> to monitor the progress of the deletion operation.</p>",
+                        "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resourceexplorer2#DeleteView": {
@@ -558,7 +714,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified view.</p>\n         <p>If the specified view is the default view for its Amazon Web Services Region, then all <a>Search</a> operations in that Region must explicitly specify the view to use\n            until you configure a new default by calling the <a>AssociateDefaultView</a>\n            operation.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified view.</p> <p>If the specified view is the default view for its Amazon Web Services Region, then all <a>Search</a> operations in that Region must explicitly specify the view to use until you configure a new default by calling the <a>AssociateDefaultView</a> operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteView"
@@ -619,12 +775,32 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>After you call this operation, the affected Amazon Web Services Region no longer has a default view.\n            All <a>Search</a> operations in that Region must explicitly specify a view or\n            the operation fails. You can configure a new default by calling the <a>AssociateDefaultView</a> operation.</p>\n         <p>If an Amazon Web Services Region doesn't have a default view \n    configured, then users must explicitly specify a view with every <code>Search</code> \n    operation performed in that Region.</p>",
+                "smithy.api#documentation": "<p>After you call this operation, the affected Amazon Web Services Region no longer has a default view. All <a>Search</a> operations in that Region must explicitly specify a view or the operation fails. You can configure a new default by calling the <a>AssociateDefaultView</a> operation.</p> <p>If an Amazon Web Services Region doesn't have a default view configured, then users must explicitly specify a view with every <code>Search</code> operation performed in that Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DisassociateDefaultView"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ErrorDetails": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that identifies the type of error that occurred.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the error that occurred.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an error that occurred during a Resource Explorer setup operation.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#GetAccountLevelServiceConfiguration": {
@@ -650,7 +826,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the status of your account's Amazon Web Services service access, and validates the service\n            linked role required to access the multi-account search feature. Only the management\n            account can invoke this API call. </p>",
+                "smithy.api#documentation": "<p>Retrieves the status of your account's Amazon Web Services service access, and validates the service linked role required to access the multi-account search feature. Only the management account can invoke this API call. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetAccountLevelServiceConfiguration"
@@ -664,7 +840,7 @@
                 "OrgConfiguration": {
                     "target": "com.amazonaws.resourceexplorer2#OrgConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the organization, and whether configuration is <code>ENABLED</code> or\n                <code>DISABLED</code>.</p>"
+                        "smithy.api#documentation": "<p>Details about the organization, and whether configuration is <code>ENABLED</code> or <code>DISABLED</code>.</p>"
                     }
                 }
             },
@@ -698,7 +874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the Amazon Resource Name (ARN) of the view that is the default for the\n            Amazon Web Services Region in which you call this operation. You can then call <a>GetView</a> to retrieve the details of that view.</p>",
+                "smithy.api#documentation": "<p>Retrieves the Amazon Resource Name (ARN) of the view that is the default for the Amazon Web Services Region in which you call this operation. You can then call <a>GetView</a> to retrieve the details of that view.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetDefaultView"
@@ -712,7 +888,7 @@
                 "ViewArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view that is the current default for the Amazon Web Services Region in\n            which you called this operation.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view that is the current default for the Amazon Web Services Region in which you called this operation.</p>"
                     }
                 }
             }
@@ -743,7 +919,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about the Amazon Web Services Resource Explorer index in the Amazon Web Services Region in which you invoked\n            the operation.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about the Amazon Web Services Resource Explorer index in the Amazon Web Services Region in which you invoked the operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetIndex"
@@ -762,7 +938,7 @@
                 "Type": {
                     "target": "com.amazonaws.resourceexplorer2#IndexType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the index in this Region. For information about the aggregator index and\n            how it differs from a local index, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search\n                by creating an aggregator index</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of the index in this Region. For information about the aggregator index and how it differs from a local index, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search by creating an aggregator index</a>.</p>"
                     }
                 },
                 "State": {
@@ -774,13 +950,13 @@
                 "ReplicatingFrom": {
                     "target": "com.amazonaws.resourceexplorer2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This response value is present only if this index is\n            <code>Type=AGGREGATOR</code>.</p>\n         <p>A list of the Amazon Web Services Regions that replicate their content to the index in this\n            Region.</p>"
+                        "smithy.api#documentation": "<p>This response value is present only if this index is <code>Type=AGGREGATOR</code>.</p> <p>A list of the Amazon Web Services Regions that replicate their content to the index in this Region.</p>"
                     }
                 },
                 "ReplicatingTo": {
                     "target": "com.amazonaws.resourceexplorer2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This response value is present only if this index is <code>Type=LOCAL</code>.</p>\n         <p>The Amazon Web Services Region that contains the aggregator index, if one exists. If an aggregator index\n            does exist then the Region in which you called this operation replicates its index\n            information to the Region specified in this response value. </p>"
+                        "smithy.api#documentation": "<p>This response value is present only if this index is <code>Type=LOCAL</code>.</p> <p>The Amazon Web Services Region that contains the aggregator index, if one exists. If an aggregator index does exist then the Region in which you called this operation replicates its index information to the Region specified in this response value. </p>"
                     }
                 },
                 "CreatedAt": {
@@ -875,6 +1051,228 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.resourceexplorer2#GetResourceExplorerSetup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#GetResourceExplorerSetupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#GetResourceExplorerSetupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status and details of a Resource Explorer setup operation. This operation returns information about the progress of creating or deleting Resource Explorer configurations across Regions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetResourceExplorerSetup"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Regions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetResourceExplorerSetupInput": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the setup task to retrieve status information for. This ID is returned by <code>CreateResourceExplorerSetup</code> or <code>DeleteResourceExplorerSetup</code> operations.</p>",
+                        "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Region status results to return in a single response. Valid values are between <code>1</code> and <code>100</code>.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous <code>GetResourceExplorerSetup</code> response. Use this token to retrieve the next set of results.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetResourceExplorerSetupOutput": {
+            "type": "structure",
+            "members": {
+                "Regions": {
+                    "target": "com.amazonaws.resourceexplorer2#RegionStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Region status objects that describe the current state of Resource Explorer configuration in each Region.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent <code>GetResourceExplorerSetup</code> request to retrieve the next set of results.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetServiceIndex": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#GetServiceIndexOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about the Resource Explorer index in the current Amazon Web Services Region. This operation returns the ARN and type of the index if one exists.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetServiceIndex"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetServiceIndexOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Resource Explorer index in the current Region.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.resourceexplorer2#IndexType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the index. Valid values are <code>LOCAL</code> (contains resources from the current Region only) or <code>AGGREGATOR</code> (contains replicated resource information from all Regions).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetServiceView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#GetServiceViewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#GetServiceViewOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details about a specific Resource Explorer service view. This operation returns the configuration and properties of the specified view.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetServiceView"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetServiceViewInput": {
+            "type": "structure",
+            "members": {
+                "ServiceViewArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service view to retrieve details for.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1011
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetServiceViewOutput": {
+            "type": "structure",
+            "members": {
+                "View": {
+                    "target": "com.amazonaws.resourceexplorer2#ServiceView",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>ServiceView</code> object that contains the details and configuration of the requested service view.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourceexplorer2#GetView": {
             "type": "operation",
             "input": {
@@ -952,7 +1350,7 @@
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the property that is included in this view.</p>\n         <p>You can specify the following property names for this field:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tags</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the property that is included in this view.</p> <p>You can specify the following property names for this field:</p> <ul> <li> <p> <code>tags</code> </p> </li> </ul>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1011
@@ -962,7 +1360,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an additional property that describes a resource, that you can\n            optionally include in the view. This lets you view that property in search results, and\n            filter your search results based on the value of the property.</p>"
+                "smithy.api#documentation": "<p>Information about an additional property that describes a resource, that you can optionally include in the view. This lets you view that property in search results, and filter your search results based on the value of the property.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#IncludedPropertyList": {
@@ -989,12 +1387,12 @@
                 "Type": {
                     "target": "com.amazonaws.resourceexplorer2#IndexType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of index. It can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOCAL</code> – The index contains information about resources\n                    from only the same Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AGGREGATOR</code> – Resource Explorer replicates copies of the indexed\n                    information about resources in all other Amazon Web Services Regions to the aggregator index. This\n                    lets search results in the Region with the aggregator index to include resources\n                    from all Regions in the account where Resource Explorer is turned on.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of index. It can be one of the following values:</p> <ul> <li> <p> <code>LOCAL</code> – The index contains information about resources from only the same Amazon Web Services Region.</p> </li> <li> <p> <code>AGGREGATOR</code> – Resource Explorer replicates copies of the indexed information about resources in all other Amazon Web Services Regions to the aggregator index. This lets search results in the Region with the aggregator index to include resources from all Regions in the account where Resource Explorer is turned on.</p> </li> </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An index is the data store used by Amazon Web Services Resource Explorer to hold information about your Amazon Web Services\n            resources that the service discovers. Creating an index in an Amazon Web Services Region turns on\n            Resource Explorer and lets it discover your resources.</p>\n         <p>By default, an index is <i>local</i>, meaning that it contains\n            information about resources in only the same Region as the index. However, you can\n            promote the index of one Region in the account by calling <a>UpdateIndexType</a> to convert it into an aggregator index. The aggregator index\n            receives a replicated copy of the index information from all other Regions where Resource Explorer\n            is turned on. This allows search operations in that Region to return results from all\n            Regions in the account.</p>"
+                "smithy.api#documentation": "<p>An index is the data store used by Amazon Web Services Resource Explorer to hold information about your Amazon Web Services resources that the service discovers. Creating an index in an Amazon Web Services Region turns on Resource Explorer and lets it discover your resources.</p> <p>By default, an index is <i>local</i>, meaning that it contains information about resources in only the same Region as the index. However, you can promote the index of one Region in the account by calling <a>UpdateIndexType</a> to convert it into an aggregator index. The aggregator index receives a replicated copy of the index information from all other Regions where Resource Explorer is turned on. This allows search operations in that Region to return results from all Regions in the account.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#IndexList": {
@@ -1035,6 +1433,29 @@
                 ]
             }
         },
+        "com.amazonaws.resourceexplorer2#IndexStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.resourceexplorer2#OperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the index operation. Valid values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>IN_PROGRESS</code>, or <code>SKIPPED</code>.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.resourceexplorer2#Index"
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.resourceexplorer2#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about any error that occurred during the index operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the status of a Resource Explorer index operation in a specific Region.</p>"
+            }
+        },
         "com.amazonaws.resourceexplorer2#IndexType": {
             "type": "string",
             "traits": {
@@ -1060,7 +1481,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed because of internal service error. Try your request again\n            later.</p>",
+                "smithy.api#documentation": "<p>The request failed because of internal service error. Try your request again later.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1088,7 +1509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting\n            resource information for Amazon Web Services Resource Explorer.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListIndexes"
@@ -1125,7 +1546,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently\n            collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a\n            delegated administrator with service access enabled can invoke this API call.\n            </p>",
+                "smithy.api#documentation": "<p>Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListIndexesForMembers"
@@ -1145,7 +1566,7 @@
                 "AccountIdList": {
                     "target": "com.amazonaws.resourceexplorer2#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account IDs will limit the output to only indexes from these\n            accounts.</p>",
+                        "smithy.api#documentation": "<p>The account IDs will limit the output to only indexes from these accounts.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -1156,7 +1577,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 10
@@ -1166,7 +1587,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -1184,13 +1605,13 @@
                 "Indexes": {
                     "target": "com.amazonaws.resourceexplorer2#MemberIndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the details and status of each\n            index.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the details and status of each index.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>"
                     }
                 }
             },
@@ -1204,13 +1625,13 @@
                 "Type": {
                     "target": "com.amazonaws.resourceexplorer2#IndexType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, limits the output to only indexes of the specified Type, either\n                <code>LOCAL</code> or <code>AGGREGATOR</code>.</p>\n         <p>Use this option to discover the aggregator index for your account.</p>"
+                        "smithy.api#documentation": "<p>If specified, limits the output to only indexes of the specified Type, either <code>LOCAL</code> or <code>AGGREGATOR</code>.</p> <p>Use this option to discover the aggregator index for your account.</p>"
                     }
                 },
                 "Regions": {
                     "target": "com.amazonaws.resourceexplorer2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, limits the response to only information about the index in the specified\n            list of Amazon Web Services Regions.</p>",
+                        "smithy.api#documentation": "<p>If specified, limits the response to only information about the index in the specified list of Amazon Web Services Regions.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 20
@@ -1220,7 +1641,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -1230,7 +1651,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -1251,7 +1672,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>"
                     }
                 }
             }
@@ -1282,7 +1703,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon resource names (ARNs) of the \n            <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Amazon Web Services-managed views</a> available \n            in the Amazon Web Services Region in which you call this operation. </p>",
+                "smithy.api#documentation": "<p>Lists the Amazon resource names (ARNs) of the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Amazon Web Services-managed views</a> available in the Amazon Web Services Region in which you call this operation. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListManagedViews"
@@ -1301,7 +1722,7 @@
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 50
@@ -1311,7 +1732,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -1321,7 +1742,7 @@
                 "ServicePrincipal": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a service principal name. If specified, then the \n            operation only returns the managed views that are managed by the input service. </p>",
+                        "smithy.api#documentation": "<p>Specifies a service principal name. If specified, then the operation only returns the managed views that are managed by the input service. </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1024
@@ -1339,7 +1760,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>"
                     }
                 },
                 "ManagedViews": {
@@ -1382,7 +1803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of resources and their details that match the specified criteria. This query must \n            use a view. If you don’t explicitly specify a view, then Resource Explorer uses the default view for the Amazon Web Services Region \n            in which you call this operation. </p>",
+                "smithy.api#documentation": "<p>Returns a list of resources and their details that match the specified criteria. This query must use a view. If you don’t explicitly specify a view, then Resource Explorer uses the default view for the Amazon Web Services Region in which you call this operation. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListResources"
@@ -1402,13 +1823,13 @@
                 "Filters": {
                     "target": "com.amazonaws.resourceexplorer2#SearchFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of \n            queries made using this view. When you use this view in a <a>Search</a> \n            operation, the filter string is combined with the search's <code>QueryString</code> \n            parameter using a logical <code>AND</code> operator.</p>\n         <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for\n                Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <important>\n            <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter\n                    prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the \n                    string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 \n                    resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is\n                    <i>not</i> tagged with a key <code>Stage</code> that has the value\n                    <code>prod</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a <a>Search</a> operation, the filter string is combined with the search's <code>QueryString</code> parameter using a logical <code>AND</code> operator.</p> <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <important> <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is <i>not</i> tagged with a key <code>Stage</code> that has the value <code>prod</code>.</p> </important>"
                     }
                 },
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 1000
@@ -1418,7 +1839,7 @@
                 "ViewArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon resource name (ARN) of the view to use for the query. If you don't \n            specify a value for this parameter, then the operation automatically uses the default view \n            for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have \n            a default view or if you don't have permission to use the default view, then the operation \n            fails with a 401 Unauthorized exception.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon resource name (ARN) of the view to use for the query. If you don't specify a value for this parameter, then the operation automatically uses the default view for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have a default view or if you don't have permission to use the default view, then the operation fails with a 401 Unauthorized exception.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 1000
@@ -1428,7 +1849,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>\n         <note>\n            <p>The <code>ListResources</code> operation \n            does not generate a <code>NextToken</code> if you set <code>MaxResults</code> to 1000. </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p> <note> <p>The <code>ListResources</code> operation does not generate a <code>NextToken</code> if you set <code>MaxResults</code> to 1000. </p> </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -1452,7 +1873,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -1467,6 +1888,260 @@
                             "min": 1,
                             "max": 1011
                         }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListServiceIndexes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#ListServiceIndexesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#ListServiceIndexesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Resource Explorer indexes across the specified Amazon Web Services Regions. This operation returns information about indexes including their ARNs, types, and Regions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListServiceIndexes"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "outputToken": "NextToken",
+                    "items": "Indexes"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListServiceIndexesInput": {
+            "type": "structure",
+            "members": {
+                "Regions": {
+                    "target": "com.amazonaws.resourceexplorer2#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions to include in the search for indexes. If not specified, indexes from all Regions are returned.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 20
+                        }
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of index results to return in a single response. Valid values are between <code>1</code> and <code>100</code>.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous <code>ListServiceIndexes</code> response. Use this token to retrieve the next set of results.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListServiceIndexesOutput": {
+            "type": "structure",
+            "members": {
+                "Indexes": {
+                    "target": "com.amazonaws.resourceexplorer2#IndexList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Index</code> objects that describe the Resource Explorer indexes found in the specified Regions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent <code>ListServiceIndexes</code> request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListServiceViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#ListServiceViewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#ListServiceViewsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Resource Explorer service views available in the current Amazon Web Services account. This operation returns the ARNs of available service views.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListServiceViews"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "outputToken": "NextToken",
+                    "items": "ServiceViews"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListServiceViewsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of service view results to return in a single response. Valid values are between <code>1</code> and <code>50</code>.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous <code>ListServiceViews</code> response. Use this token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListServiceViewsOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent <code>ListServiceViews</code> request to retrieve the next set of results.</p>"
+                    }
+                },
+                "ServiceViews": {
+                    "target": "com.amazonaws.resourceexplorer2#ServiceViewArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (ARNs) for the service views available in the current Amazon Web Services account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListStreamingAccessForServices": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#ListStreamingAccessForServicesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#ListStreamingAccessForServicesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Amazon Web Services services that have been granted streaming access to your Resource Explorer data. Streaming access allows Amazon Web Services services to receive real-time updates about your resources as they are indexed by Resource Explorer.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListStreamingAccessForServices"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "StreamingAccessForServices"
+                }
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListStreamingAccessForServicesInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of streaming access entries to return in the response. If there are more results available, the response includes a NextToken value that you can use in a subsequent call to get the next set of results. The value must be between 1 and 50. If you don't specify a value, the default is 50.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListStreamingAccessForServicesOutput": {
+            "type": "structure",
+            "members": {
+                "StreamingAccessForServices": {
+                    "target": "com.amazonaws.resourceexplorer2#StreamingAccessDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services services that have streaming access to your Resource Explorer data, including details about when the access was granted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>"
                     }
                 }
             },
@@ -1517,13 +2192,13 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 1000
@@ -1544,7 +2219,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>"
                     }
                 }
             }
@@ -1605,7 +2280,7 @@
                 "Tags": {
                     "target": "com.amazonaws.resourceexplorer2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag key and value pairs that you want to attach to the specified view or\n            index.</p>"
+                        "smithy.api#documentation": "<p>The tag key and value pairs that you want to attach to the specified view or index.</p>"
                     }
                 }
             }
@@ -1633,7 +2308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource names (ARNs)</a> of the views available in the Amazon Web Services Region in which you\n            call this operation.</p>\n         <note>\n            <p>Always check the <code>NextToken</code> response parameter \nfor a <code>null</code> value when calling a paginated operation. These operations can \noccasionally return an empty set of results even when there are more results available. The \n<code>NextToken</code> response parameter value is <code>null</code>\n               <i>only</i> \nwhen there are no more results to display.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource names (ARNs)</a> of the views available in the Amazon Web Services Region in which you call this operation.</p> <note> <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value when calling a paginated operation. These operations can occasionally return an empty set of results even when there are more results available. The <code>NextToken</code> response parameter value is <code>null</code> <i>only</i> when there are no more results to display.</p> </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListViews"
@@ -1653,13 +2328,13 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 50
@@ -1674,13 +2349,13 @@
                 "Views": {
                     "target": "com.amazonaws.resourceexplorer2#ViewArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of views available in the Amazon Web Services Region in which you called this\n            operation.</p>"
+                        "smithy.api#documentation": "<p>The list of views available in the Amazon Web Services Region in which you called this operation.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>"
                     }
                 }
             }
@@ -1722,7 +2397,7 @@
                 "Scope": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of an Amazon Web Services account or organization that specifies whether this managed view \n    includes resources from only the specified Amazon Web Services account or all accounts in the specified organization. </p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of an Amazon Web Services account or organization that specifies whether this managed view includes resources from only the specified Amazon Web Services account or all accounts in the specified organization. </p>"
                     }
                 },
                 "IncludedProperties": {
@@ -1737,7 +2412,7 @@
                 "ResourcePolicy": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource policy that defines access to the managed view. To learn more about this policy, review \n            <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Managed views</a>.</p>"
+                        "smithy.api#documentation": "<p>The resource policy that defines access to the managed view. To learn more about this policy, review <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Managed views</a>.</p>"
                     }
                 },
                 "Version": {
@@ -1748,7 +2423,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon Web Services-managed view is how other Amazon Web Services services can access \n            resource information indexed by Resource Explorer for your Amazon Web Services account or organization \n            with your consent. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Managed views</a>. </p>"
+                "smithy.api#documentation": "<p>An Amazon Web Services-managed view is how other Amazon Web Services services can access resource information indexed by Resource Explorer for your Amazon Web Services account or organization with your consent. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Managed views</a>. </p>"
             }
         },
         "com.amazonaws.resourceexplorer2#ManagedViewArnList": {
@@ -1769,7 +2444,7 @@
                 "Region": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region in which the index\n            exists.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region in which the index exists.</p>"
                     }
                 },
                 "Arn": {
@@ -1781,18 +2456,41 @@
                 "Type": {
                     "target": "com.amazonaws.resourceexplorer2#IndexType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of index. It can be one of the following values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOCAL</code> – The index contains information about resources\n                    from only the same Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AGGREGATOR</code> – Resource Explorer replicates copies of the indexed\n                    information about resources in all other Amazon Web Services Regions to the aggregator index. This\n                    lets search results in the Region with the aggregator index to include resources\n                    from all Regions in the account where Resource Explorer is turned on.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of index. It can be one of the following values: </p> <ul> <li> <p> <code>LOCAL</code> – The index contains information about resources from only the same Amazon Web Services Region.</p> </li> <li> <p> <code>AGGREGATOR</code> – Resource Explorer replicates copies of the indexed information about resources in all other Amazon Web Services Regions to the aggregator index. This lets search results in the Region with the aggregator index to include resources from all Regions in the account where Resource Explorer is turned on.</p> </li> </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An index is the data store used by Amazon Web Services Resource Explorer to hold information about your Amazon Web Services\n            resources that the service discovers. </p>"
+                "smithy.api#documentation": "<p>An index is the data store used by Amazon Web Services Resource Explorer to hold information about your Amazon Web Services resources that the service discovers. </p>"
             }
         },
         "com.amazonaws.resourceexplorer2#MemberIndexList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.resourceexplorer2#MemberIndex"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#OperationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
+                    },
+                    {
+                        "name": "SKIPPED",
+                        "value": "SKIPPED"
+                    }
+                ]
             }
         },
         "com.amazonaws.resourceexplorer2#OrgConfiguration": {
@@ -1813,7 +2511,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This is a structure that contains the status of Amazon Web Services service access, and whether you have a valid service-linked role to enable \n            multi-account search for your organization.</p>"
+                "smithy.api#documentation": "<p>This is a structure that contains the status of Amazon Web Services service access, and whether you have a valid service-linked role to enable multi-account search for your organization.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#QueryString": {
@@ -1829,7 +2527,43 @@
         "com.amazonaws.resourceexplorer2#RegionList": {
             "type": "list",
             "member": {
-                "target": "smithy.api#String"
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#pattern": "^[a-z-]+-[a-z]+-[0-9]$"
+                }
+            }
+        },
+        "com.amazonaws.resourceexplorer2#RegionStatus": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for which this status information applies.</p>",
+                        "smithy.api#pattern": "^[a-z-]+-[a-z]+-[0-9]$"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.resourceexplorer2#IndexStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status information for the Resource Explorer index in this Region.</p>"
+                    }
+                },
+                "View": {
+                    "target": "com.amazonaws.resourceexplorer2#ViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status information for the Resource Explorer view in this Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the status of Resource Explorer configuration in a specific Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#RegionStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourceexplorer2#RegionStatus"
             }
         },
         "com.amazonaws.resourceexplorer2#Resource": {
@@ -1862,25 +2596,25 @@
                 "Service": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services service that owns the resource and is responsible for creating and updating\n            it.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that owns the resource and is responsible for creating and updating it.</p>"
                     }
                 },
                 "LastReportedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that Resource Explorer last queried this resource and updated the index with\n            the latest information about the resource.</p>",
+                        "smithy.api#documentation": "<p>The date and time that Resource Explorer last queried this resource and updated the index with the latest information about the resource.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "Properties": {
                     "target": "com.amazonaws.resourceexplorer2#ResourcePropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure with additional type-specific details about the resource. These properties\n            can be added by turning on integration between Resource Explorer and other Amazon Web Services services.</p>"
+                        "smithy.api#documentation": "<p>A structure with additional type-specific details about the resource. These properties can be added by turning on integration between Resource Explorer and other Amazon Web Services services.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A resource in Amazon Web Services that Amazon Web Services Resource Explorer has discovered, and for which it has stored\n            information in the index of the Amazon Web Services Region that contains the resource.</p>"
+                "smithy.api#documentation": "<p>A resource in Amazon Web Services that Amazon Web Services Resource Explorer has discovered, and for which it has stored information in the index of the Amazon Web Services Region that contains the resource.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#ResourceCount": {
@@ -1889,18 +2623,18 @@
                 "TotalResources": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of resources that match the search query. This value can't exceed\n            1,000. If there are more than 1,000 resources that match\n            the query, then only 1,000 are counted and the <code>Complete</code>\n            field is set to false. We recommend that you refine your query to return a smaller\n            number of results.</p>"
+                        "smithy.api#documentation": "<p>The number of resources that match the search query. This value can't exceed 1,000. If there are more than 1,000 resources that match the query, then only 1,000 are counted and the <code>Complete</code> field is set to false. We recommend that you refine your query to return a smaller number of results.</p>"
                     }
                 },
                 "Complete": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the <code>TotalResources</code> value represents an exhaustive count\n            of search results.</p>\n         <ul>\n            <li>\n               <p>If <code>True</code>, it indicates that the search was exhaustive. Every\n                    resource that matches the query was counted.</p>\n            </li>\n            <li>\n               <p>If <code>False</code>, then the search reached the limit of\n                    1,000 matching results, and stopped counting.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates whether the <code>TotalResources</code> value represents an exhaustive count of search results.</p> <ul> <li> <p>If <code>True</code>, it indicates that the search was exhaustive. Every resource that matches the query was counted.</p> </li> <li> <p>If <code>False</code>, then the search reached the limit of 1,000 matching results, and stopped counting.</p> </li> </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the number of results that match the query. At this time, Amazon Web Services Resource Explorer\n            doesn't count more than 1,000 matches for any query. This structure\n            provides information about whether the query exceeded this limit.</p>\n         <p>This field is included in every page when you paginate the results.</p>"
+                "smithy.api#documentation": "<p>Information about the number of results that match the query. At this time, Amazon Web Services Resource Explorer doesn't count more than 1,000 matches for any query. This structure provides information about whether the query exceeded this limit.</p> <p>This field is included in every page when you paginate the results.</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#ResourceExplorer": {
@@ -1909,6 +2643,12 @@
             "operations": [
                 {
                     "target": "com.amazonaws.resourceexplorer2#BatchGetView"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#CreateResourceExplorerSetup"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#DeleteResourceExplorerSetup"
                 },
                 {
                     "target": "com.amazonaws.resourceexplorer2#DisassociateDefaultView"
@@ -1926,6 +2666,15 @@
                     "target": "com.amazonaws.resourceexplorer2#GetManagedView"
                 },
                 {
+                    "target": "com.amazonaws.resourceexplorer2#GetResourceExplorerSetup"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#GetServiceIndex"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#GetServiceView"
+                },
+                {
                     "target": "com.amazonaws.resourceexplorer2#ListIndexesForMembers"
                 },
                 {
@@ -1933,6 +2682,15 @@
                 },
                 {
                     "target": "com.amazonaws.resourceexplorer2#ListResources"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ListServiceIndexes"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ListServiceViews"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ListStreamingAccessForServices"
                 },
                 {
                     "target": "com.amazonaws.resourceexplorer2#ListSupportedResourceTypes"
@@ -1982,7 +2740,7 @@
                         "x-amz-source-account"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Web Services Resource Explorer is a resource search and discovery service. By using Resource Explorer, you can\n            explore your resources using an internet search engine-like experience. Examples of\n            resources include Amazon Relational Database Service (Amazon RDS) instances, Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB\n            tables. You can search for your resources using resource metadata like names, tags, and\n            IDs. Resource Explorer can search across all of the Amazon Web Services Regions in your account in which you turn\n            the service on, to simplify your cross-Region workloads.</p>\n         <p>Resource Explorer scans the resources in each of the Amazon Web Services Regions in your Amazon Web Services account in which\n            you turn on Resource Explorer. Resource Explorer <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index\">creates\n                and maintains an index</a> in each Region, with the details of that Region's\n            resources.</p>\n         <p>You can <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">search across all of the\n                indexed Regions in your account</a> by designating one of your Amazon Web Services Regions to\n            contain the aggregator index for the account. When you <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html\">promote a local index\n                in a Region to become the aggregator index for the account</a>, Resource Explorer automatically\n            replicates the index information from all local indexes in the other Regions to the\n            aggregator index. Therefore, the Region with the aggregator index has a copy of all resource\n            information for all Regions in the account where you turned on Resource Explorer. As a result,\n            views in the aggregator index Region include resources from all of the indexed Regions in your\n            account.</p>\n         <p>For more information about Amazon Web Services Resource Explorer, including how to enable and configure the\n            service, see the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/\">Amazon Web Services Resource Explorer User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Resource Explorer is a resource search and discovery service. By using Resource Explorer, you can explore your resources using an internet search engine-like experience. Examples of resources include Amazon Relational Database Service (Amazon RDS) instances, Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB tables. You can search for your resources using resource metadata like names, tags, and IDs. Resource Explorer can search across all of the Amazon Web Services Regions in your account in which you turn the service on, to simplify your cross-Region workloads.</p> <p>Resource Explorer scans the resources in each of the Amazon Web Services Regions in your Amazon Web Services account in which you turn on Resource Explorer. Resource Explorer <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index\">creates and maintains an index</a> in each Region, with the details of that Region's resources.</p> <p>You can <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">search across all of the indexed Regions in your account</a> by designating one of your Amazon Web Services Regions to contain the aggregator index for the account. When you <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html\">promote a local index in a Region to become the aggregator index for the account</a>, Resource Explorer automatically replicates the index information from all local indexes in the other Regions to the aggregator index. Therefore, the Region with the aggregator index has a copy of all resource information for all Regions in the account where you turned on Resource Explorer. As a result, views in the aggregator index Region include resources from all of the indexed Regions in your account.</p> <p>For more information about Amazon Web Services Resource Explorer, including how to enable and configure the service, see the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/\">Amazon Web Services Resource Explorer User Guide</a>.</p>",
                 "smithy.api#title": "AWS Resource Explorer",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1991,27 +2749,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -2584,7 +3342,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You specified a resource that doesn't exist. Check the ID or ARN that you used to\n            identity the resource, and try again.</p>",
+                "smithy.api#documentation": "<p>You specified a resource that doesn't exist. Check the ID or ARN that you used to identity the resource, and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2601,14 +3359,14 @@
                 "LastReportedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the information about this resource property was last\n            updated.</p>",
+                        "smithy.api#documentation": "<p>The date and time that the information about this resource property was last updated.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "Data": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about this property. The content of this field is a JSON object that varies\n            based on the resource type.</p>"
+                        "smithy.api#documentation": "<p>Details about this property. The content of this field is a JSON object that varies based on the resource type.</p>"
                     }
                 }
             },
@@ -2657,7 +3415,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for resources and displays details about all resources that match the\n            specified criteria. You must specify a query string.</p>\n         <p>All search queries must use a view. If you don't explicitly specify a view, then\n            Amazon Web Services Resource Explorer uses the default view for the Amazon Web Services Region in which you call this operation.\n            The results are the logical intersection of the results that match both the\n                <code>QueryString</code> parameter supplied to this operation and the\n                <code>SearchFilter</code> parameter attached to the view.</p>\n         <p>For the complete syntax supported by the <code>QueryString</code> parameter, see\n                <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html\">Search\n                query syntax reference for Resource Explorer</a>.</p>\n         <p>If your search results are empty, or are missing results that you think should be\n            there, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html\">Troubleshooting Resource Explorer\n                search</a>.</p>",
+                "smithy.api#documentation": "<p>Searches for resources and displays details about all resources that match the specified criteria. You must specify a query string.</p> <p>All search queries must use a view. If you don't explicitly specify a view, then Amazon Web Services Resource Explorer uses the default view for the Amazon Web Services Region in which you call this operation. The results are the logical intersection of the results that match both the <code>QueryString</code> parameter supplied to this operation and the <code>SearchFilter</code> parameter attached to the view.</p> <p>For the complete syntax supported by the <code>QueryString</code> parameter, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html\">Search query syntax reference for Resource Explorer</a>.</p> <p>If your search results are empty, or are missing results that you think should be there, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html\">Troubleshooting Resource Explorer search</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/Search"
@@ -2677,7 +3435,7 @@
                 "FilterString": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string that contains the search keywords, prefixes, and operators to control the\n            results that can be returned by a <a>Search</a> operation. For more details,\n            see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html\">Search\n                query syntax</a>.</p>",
+                        "smithy.api#documentation": "<p>The string that contains the search keywords, prefixes, and operators to control the results that can be returned by a <a>Search</a> operation. For more details, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html\">Search query syntax</a>.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 2048
@@ -2687,7 +3445,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A search filter defines which resources can be part of a search query result\n            set.</p>",
+                "smithy.api#documentation": "<p>A search filter defines which resources can be part of a search query result set.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2697,14 +3455,14 @@
                 "QueryString": {
                     "target": "com.amazonaws.resourceexplorer2#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that includes keywords and filters that specify the resources that you want\n            to include in the results.</p>\n         <p>For the complete syntax supported by the <code>QueryString</code> parameter, see\n                <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query syntax reference for Resource Explorer</a>.</p>\n         <p>The search is completely case insensitive. You can specify an empty string to return\n            all results up to the limit of 1,000 total results.</p>\n         <note>\n            <p>The operation can return only the first 1,000 results. If the\n                resource you want is not included, then use a different value for\n                    <code>QueryString</code> to refine the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A string that includes keywords and filters that specify the resources that you want to include in the results.</p> <p>For the complete syntax supported by the <code>QueryString</code> parameter, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query syntax reference for Resource Explorer</a>.</p> <p>The search is completely case insensitive. You can specify an empty string to return all results up to the limit of 1,000 total results.</p> <note> <p>The operation can return only the first 1,000 results. If the resource you want is not included, then use a different value for <code>QueryString</code> to refine the results.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 1000
@@ -2714,7 +3472,7 @@
                 "ViewArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view to use for the query. If you don't specify a\n            value for this parameter, then the operation automatically uses the default view for the\n            Amazon Web Services Region in which you called this operation. If the Region either doesn't have a\n            default view or if you don't have permission to use the default view, then the operation\n            fails with a <code>401 Unauthorized</code> exception.</p>",
+                        "smithy.api#documentation": "<p>Specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the view to use for the query. If you don't specify a value for this parameter, then the operation automatically uses the default view for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have a default view or if you don't have permission to use the default view, then the operation fails with a <code>401 Unauthorized</code> exception.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 1000
@@ -2724,7 +3482,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -2745,7 +3503,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. The pagination tokens expire after 24 hours.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 2048
@@ -2800,6 +3558,77 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.resourceexplorer2#ServiceView": {
+            "type": "structure",
+            "members": {
+                "ServiceViewArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.resourceexplorer2#SearchFilter"
+                },
+                "IncludedProperties": {
+                    "target": "com.amazonaws.resourceexplorer2#IncludedPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional resource properties that are included in this view for search and filtering purposes.</p>"
+                    }
+                },
+                "StreamingAccessForService": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that has streaming access to this view's data.</p>"
+                    }
+                },
+                "ScopeType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope type of the service view, which determines what resources are included.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration and properties of a Resource Explorer service view.</p>"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ServiceViewArnList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#StreamingAccessDetails": {
+            "type": "structure",
+            "members": {
+                "ServicePrincipal": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service that has streaming access to your Resource Explorer data. A service principal is a unique identifier for an Amazon Web Services service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when streaming access was granted to the Amazon Web Services service, in ISO 8601 format.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an Amazon Web Services service that has been granted streaming access to your Resource Explorer data.</p>"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#StreamingAccessDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourceexplorer2#StreamingAccessDetails"
+            }
+        },
         "com.amazonaws.resourceexplorer2#StringList": {
             "type": "list",
             "member": {
@@ -2815,7 +3644,7 @@
                 "Service": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services service that is associated with the resource type. This is the primary\n            service that lets you create and interact with resources of this type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that is associated with the resource type. This is the primary service that lets you create and interact with resources of this type.</p>"
                     }
                 },
                 "ResourceType": {
@@ -2884,7 +3713,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view or index that you want to attach tags\n            to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view or index that you want to attach tags to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2892,7 +3721,7 @@
                 "Tags": {
                     "target": "com.amazonaws.resourceexplorer2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag key and value pairs that you want to attach to the specified view or\n            index.</p>"
+                        "smithy.api#documentation": "<p>A list of tag key and value pairs that you want to attach to the specified view or index.</p>"
                     }
                 }
             }
@@ -2909,7 +3738,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed because you exceeded a rate limit for this operation. For more\n            information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/quotas.html\">Quotas for\n            Resource Explorer</a>.</p>",
+                "smithy.api#documentation": "<p>The request failed because you exceeded a rate limit for this operation. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/quotas.html\">Quotas for Resource Explorer</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -2969,7 +3798,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view or index that you want to remove tags\n            from.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view or index that you want to remove tags from.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2977,7 +3806,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.resourceexplorer2#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the keys for the tags that you want to remove from the specified view or\n            index.</p>",
+                        "smithy.api#documentation": "<p>A list of the keys for the tags that you want to remove from the specified view or index.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -3020,7 +3849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the type of the index from one of the following types to the other. For more\n            information about indexes and the role they perform in Amazon Web Services Resource Explorer, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on\n                cross-Region search by creating an aggregator index</a> in the\n                <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>AGGREGATOR</code> index type</b>\n               </p>\n               <p>The index contains information about resources from all Amazon Web Services Regions in the\n                    Amazon Web Services account in which you've created a Resource Explorer index. Resource information from\n                    all other Regions is replicated to this Region's index.</p>\n               <p>When you change the index type to <code>AGGREGATOR</code>, Resource Explorer turns on\n                    replication of all discovered resource information from the other Amazon Web Services Regions\n                    in your account to this index. You can then, from this Region only, perform\n                    resource search queries that span all Amazon Web Services Regions in the Amazon Web Services account.\n                    Turning on replication from all other Regions is performed by asynchronous\n                    background tasks. You can check the status of the asynchronous tasks by using\n                    the <a>GetIndex</a> operation. When the asynchronous tasks complete,\n                    the <code>Status</code> response of that operation changes from\n                        <code>UPDATING</code> to <code>ACTIVE</code>. After that, you can start to\n                    see results from other Amazon Web Services Regions in query results. However, it can take\n                    several hours for replication from all other Regions to complete.</p>\n               <important>\n                  <p>You can have only one aggregator index per Amazon Web Services account. Before you can\n                        promote a different index to be the aggregator index for the account, you must\n                        first demote the existing aggregator index to type <code>LOCAL</code>.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LOCAL</code> index type</b>\n               </p>\n               <p>The index contains information about resources in only the Amazon Web Services Region in\n                    which the index exists. If an aggregator index in another Region exists, then\n                    information in this local index is replicated to the aggregator index.</p>\n               <p>When you change the index type to <code>LOCAL</code>, Resource Explorer turns off the\n                    replication of resource information from all other Amazon Web Services Regions in the\n                    Amazon Web Services account to this Region. The aggregator index remains in the\n                        <code>UPDATING</code> state until all replication with other Regions\n                    successfully stops. You can check the status of the asynchronous task by using\n                    the <a>GetIndex</a> operation. When Resource Explorer successfully stops all\n                    replication with other Regions, the <code>Status</code> response of that\n                    operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. Separately,\n                    the resource information from other Regions that was previously stored in the\n                    index is deleted within 30 days by another background task. Until that\n                    asynchronous task completes, some results from other Regions can continue to\n                    appear in search results.</p>\n               <important>\n                  <p>After you demote an aggregator index to a local index, you must wait\n                        24 hours before you can promote another index to be the new\n                        aggregator index for the account.</p>\n               </important>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Changes the type of the index from one of the following types to the other. For more information about indexes and the role they perform in Amazon Web Services Resource Explorer, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search by creating an aggregator index</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <ul> <li> <p> <b> <code>AGGREGATOR</code> index type</b> </p> <p>The index contains information about resources from all Amazon Web Services Regions in the Amazon Web Services account in which you've created a Resource Explorer index. Resource information from all other Regions is replicated to this Region's index.</p> <p>When you change the index type to <code>AGGREGATOR</code>, Resource Explorer turns on replication of all discovered resource information from the other Amazon Web Services Regions in your account to this index. You can then, from this Region only, perform resource search queries that span all Amazon Web Services Regions in the Amazon Web Services account. Turning on replication from all other Regions is performed by asynchronous background tasks. You can check the status of the asynchronous tasks by using the <a>GetIndex</a> operation. When the asynchronous tasks complete, the <code>Status</code> response of that operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. After that, you can start to see results from other Amazon Web Services Regions in query results. However, it can take several hours for replication from all other Regions to complete.</p> <important> <p>You can have only one aggregator index per Amazon Web Services account. Before you can promote a different index to be the aggregator index for the account, you must first demote the existing aggregator index to type <code>LOCAL</code>.</p> </important> </li> <li> <p> <b> <code>LOCAL</code> index type</b> </p> <p>The index contains information about resources in only the Amazon Web Services Region in which the index exists. If an aggregator index in another Region exists, then information in this local index is replicated to the aggregator index.</p> <p>When you change the index type to <code>LOCAL</code>, Resource Explorer turns off the replication of resource information from all other Amazon Web Services Regions in the Amazon Web Services account to this Region. The aggregator index remains in the <code>UPDATING</code> state until all replication with other Regions successfully stops. You can check the status of the asynchronous task by using the <a>GetIndex</a> operation. When Resource Explorer successfully stops all replication with other Regions, the <code>Status</code> response of that operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. Separately, the resource information from other Regions that was previously stored in the index is deleted within 30 days by another background task. Until that asynchronous task completes, some results from other Regions can continue to appear in search results.</p> <important> <p>After you demote an aggregator index to a local index, you must wait 24 hours before you can promote another index to be the new aggregator index for the account.</p> </important> </li> </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/UpdateIndexType"
@@ -3041,7 +3870,7 @@
                     "target": "com.amazonaws.resourceexplorer2#IndexType",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>The type of the index. To understand the difference between <code>LOCAL</code> and\n                <code>AGGREGATOR</code>, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region\n                search</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of the index. To understand the difference between <code>LOCAL</code> and <code>AGGREGATOR</code>, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3065,7 +3894,7 @@
                 "State": {
                     "target": "com.amazonaws.resourceexplorer2#IndexState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the state of the request to update the index. This operation is\n            asynchronous. Call the <a>GetIndex</a> operation to check for changes.</p>"
+                        "smithy.api#documentation": "<p>Indicates the state of the request to update the index. This operation is asynchronous. Call the <a>GetIndex</a> operation to check for changes.</p>"
                     }
                 },
                 "LastUpdatedAt": {
@@ -3106,7 +3935,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies some of the details of a view. You can change the filter string and the list\n            of included properties. You can't change the name of the view.</p>",
+                "smithy.api#documentation": "<p>Modifies some of the details of a view. You can change the filter string and the list of included properties. You can't change the name of the view.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/UpdateView"
@@ -3130,13 +3959,13 @@
                 "IncludedProperties": {
                     "target": "com.amazonaws.resourceexplorer2#IncludedPropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies optional fields that you want included in search results from this\n        view. It is a list of objects that each describe a field to include.</p>\n         <p>The default is an empty list, with no optional fields included in the results.</p>"
+                        "smithy.api#documentation": "<p>Specifies optional fields that you want included in search results from this view. It is a list of objects that each describe a field to include.</p> <p>The default is an empty list, with no optional fields included in the results.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.resourceexplorer2#SearchFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of \n            queries made using this view. When you use this view in a <a>Search</a> \n            operation, the filter string is combined with the search's <code>QueryString</code> \n            parameter using a logical <code>AND</code> operator.</p>\n         <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for\n                Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <important>\n            <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter\n                    prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the \n                    string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 \n                    resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is\n                    <i>not</i> tagged with a key <code>Stage</code> that has the value\n                    <code>prod</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a <a>Search</a> operation, the filter string is combined with the search's <code>QueryString</code> parameter using a logical <code>AND</code> operator.</p> <p>For information about the supported syntax, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html\">Search query reference for Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <important> <p>This query string in the context of this operation supports only <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters\">filter prefixes</a> with optional <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators\">operators</a>. It doesn't support free-form text. For example, the string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is <i>not</i> tagged with a key <code>Stage</code> that has the value <code>prod</code>.</p> </important>"
                     }
                 }
             }
@@ -3169,7 +3998,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You provided an invalid value for one of the operation's parameters. Check the syntax\n            for the operation, and try again.</p>",
+                "smithy.api#documentation": "<p>You provided an invalid value for one of the operation's parameters. Check the syntax for the operation, and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3227,7 +4056,7 @@
                 "Scope": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of an Amazon Web Services account, an organization, or an\n        organizational unit (OU) that specifies whether this view includes resources from only \n        the specified Amazon Web Services account, all accounts in the specified organization, or all accounts in \n        the specified OU.</p>\n         <p>If not specified, the value defaults to the Amazon Web Services account used to call this \n        operation.</p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of an Amazon Web Services account, an organization, or an organizational unit (OU) that specifies whether this view includes resources from only the specified Amazon Web Services account, all accounts in the specified organization, or all accounts in the specified OU.</p> <p>If not specified, the value defaults to the Amazon Web Services account used to call this operation.</p>"
                     }
                 },
                 "IncludedProperties": {
@@ -3239,12 +4068,12 @@
                 "Filters": {
                     "target": "com.amazonaws.resourceexplorer2#SearchFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <a>SearchFilter</a> objects that specify which resources can be\n            included in the results of queries made using this view.</p>"
+                        "smithy.api#documentation": "<p>An array of <a>SearchFilter</a> objects that specify which resources can be included in the results of queries made using this view.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A view is a structure that defines a set of filters that provide a view into the\n            information in the Amazon Web Services Resource Explorer index. The filters specify which information from the\n            index is visible to the users of the view. For example, you can specify filters that\n            include only resources that are tagged with the key \"ENV\" and the value \"DEVELOPMENT\" in\n            the results returned by this view. You could also create a second view that includes\n            only resources that are tagged with \"ENV\" and \"PRODUCTION\".</p>"
+                "smithy.api#documentation": "<p>A view is a structure that defines a set of filters that provide a view into the information in the Amazon Web Services Resource Explorer index. The filters specify which information from the index is visible to the users of the view. For example, you can specify filters that include only resources that are tagged with the key \"ENV\" and the value \"DEVELOPMENT\" in the results returned by this view. You could also create a second view that includes only resources that are tagged with \"ENV\" and \"PRODUCTION\".</p>"
             }
         },
         "com.amazonaws.resourceexplorer2#ViewArnList": {
@@ -3263,6 +4092,29 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ViewStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.resourceexplorer2#OperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the view operation. Valid values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>IN_PROGRESS</code>, or <code>SKIPPED</code>.</p>"
+                    }
+                },
+                "View": {
+                    "target": "com.amazonaws.resourceexplorer2#View"
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.resourceexplorer2#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about any error that occurred during the view operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the status of a Resource Explorer view operation in a specific Region.</p>"
             }
         }
     }

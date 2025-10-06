@@ -5362,7 +5362,7 @@
                 "GlobalSettings": {
                     "target": "com.amazonaws.backup#GlobalSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the flag <code>isCrossAccountBackupEnabled</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of the flags <code>isCrossAccountBackupEnabled</code> and\n          <code>isMpaEnabled</code> ('Mpa' refers to multi-party approval).</p>"
                     }
                 },
                 "LastUpdateTime": {
@@ -6581,6 +6581,14 @@
                         "smithy.api#documentation": "<p>Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes\n         long. Version IDs cannot be edited.</p>",
                         "smithy.api#httpQuery": "versionId"
                     }
+                },
+                "MaxScheduledRunsPreview": {
+                    "target": "com.amazonaws.backup#MaxScheduledRunsPreview",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Number of future scheduled backup runs to preview. When set to 0 (default), no scheduled runs preview is included in the response. Valid range is 0-10.</p>",
+                        "smithy.api#httpQuery": "MaxScheduledRunsPreview"
+                    }
                 }
             },
             "traits": {
@@ -6642,6 +6650,12 @@
                     "target": "com.amazonaws.backup#AdvancedBackupSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a list of <code>BackupOptions</code> for each resource type. The list is\n         populated only if the advanced option is set for the backup plan.</p>"
+                    }
+                },
+                "ScheduledRunsPreview": {
+                    "target": "com.amazonaws.backup#ScheduledRunsPreview",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of upcoming scheduled backup runs. Only included when <code>MaxScheduledRunsPreview</code> parameter is greater than 0. Contains up to 10 future backup executions with their scheduled times, execution types, and associated rule IDs.</p>"
                     }
                 }
             },
@@ -10624,6 +10638,16 @@
                 }
             }
         },
+        "com.amazonaws.backup#MaxScheduledRunsPreview": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.backup#MessageCategory": {
             "type": "string"
         },
@@ -12741,6 +12765,61 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.backup#RuleExecutionType": {
+            "type": "enum",
+            "members": {
+                "CONTINUOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUOUS"
+                    }
+                },
+                "SNAPSHOTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPSHOTS"
+                    }
+                },
+                "CONTINUOUS_AND_SNAPSHOTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUOUS_AND_SNAPSHOTS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#ScheduledPlanExecutionMember": {
+            "type": "structure",
+            "members": {
+                "ExecutionTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the backup is scheduled to run, in Unix format and Coordinated Universal Time (UTC). The value is accurate to milliseconds.</p>"
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the backup rule that will execute at the scheduled time.</p>"
+                    }
+                },
+                "RuleExecutionType": {
+                    "target": "com.amazonaws.backup#RuleExecutionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of backup rule execution. Valid values are <code>CONTINUOUS</code> (point-in-time recovery), <code>SNAPSHOTS</code> (snapshot backups), or <code>CONTINUOUS_AND_SNAPSHOTS</code> (both types combined).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a scheduled backup plan execution, including the execution time, rule type, and associated rule identifier.</p>"
+            }
+        },
+        "com.amazonaws.backup#ScheduledRunsPreview": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ScheduledPlanExecutionMember"
+            }
+        },
         "com.amazonaws.backup#SensitiveStringMap": {
             "type": "map",
             "key": {
@@ -12952,7 +13031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a job to create a one-time copy of the specified resource.</p>\n         <p>Does not support continuous backups.</p>",
+                "smithy.api#documentation": "<p>Starts a job to create a one-time copy of the specified resource.</p>\n         <p>Does not support continuous backups.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/recov-point-create-a-copy.html#backup-copy-retry\">Copy \n      job retry</a> for information on how Backup retries copy job \n      operations.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/copy-jobs",
@@ -13648,7 +13727,7 @@
                 "GlobalSettings": {
                     "target": "com.amazonaws.backup#GlobalSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:\n            <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false\n            --region us-west-2</code>.</p>"
+                        "smithy.api#documentation": "<p>Inputs can include:</p>\n         <p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:\n            <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false\n            --region us-west-2</code>.</p>\n         <p>A value for Multi-party approval, styled as \"Mpa\": <code>isMpaEnabled</code>. Values can\n         be true or false. Example:\n         <code>update-global-settings --global-settings isMpaEnabled=false\n            --region us-west-2</code>.</p>"
                     }
                 }
             },

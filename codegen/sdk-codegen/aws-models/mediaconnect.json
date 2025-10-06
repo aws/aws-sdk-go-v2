@@ -204,6 +204,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-outputs.html",
+                    "documentation": "Grants permission to add outputs to an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Adds outputs to an existing bridge.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -314,6 +318,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-sources.html",
+                    "documentation": "Grants permission to add sources to an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Adds sources to an existing bridge.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -415,6 +423,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-mediastreams.html",
+                    "documentation": "Grants permission to add media streams to any flow"
+                },
                 "smithy.api#documentation": "<p> Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -503,6 +515,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-outputs.html",
+                    "documentation": "Grants permission to add outputs to any flow"
+                },
                 "smithy.api#documentation": "<p> Adds outputs to an existing flow. You can create up to 50 outputs per flow.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -606,6 +622,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-sources.html",
+                    "documentation": "Grants permission to add sources to any flow"
+                },
                 "smithy.api#documentation": "<p> Adds sources to a flow.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -691,6 +711,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-vpcinterfaces.html",
+                    "documentation": "Grants permission to add VPC interfaces to any flow"
+                },
                 "smithy.api#documentation": "<p> Adds VPC interfaces to a flow.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -856,6 +880,13 @@
                         "smithy.api#documentation": "<p> The resolution of the video.</p>",
                         "smithy.api#jsonName": "videoFormat"
                     }
+                },
+                "MediaStreamTags": {
+                    "target": "com.amazonaws.mediaconnect#__mapOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key-value pairs that can be used to tag and organize the media stream. </p>",
+                        "smithy.api#jsonName": "mediaStreamTags"
+                    }
                 }
             },
             "traits": {
@@ -931,10 +962,8 @@
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p> The protocol to use for the output.</p> <note> <p>Elemental MediaConnect no longer supports the Fujitsu QoS protocol. This reference is maintained for legacy purposes only.</p> </note>",
-                        "smithy.api#jsonName": "protocol",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "protocol"
                     }
                 },
                 "RemoteId": {
@@ -991,6 +1020,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>",
                         "smithy.api#jsonName": "ndiProgramName"
+                    }
+                },
+                "OutputTags": {
+                    "target": "com.amazonaws.mediaconnect#__mapOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key-value pairs that can be used to tag and organize the output. </p>",
+                        "smithy.api#jsonName": "outputTags"
                     }
                 }
             },
@@ -1469,7 +1505,8 @@
                     "absolute": true
                 },
                 "aws.iam#iamResource": {
-                    "name": "bridge"
+                    "name": "Bridge",
+                    "relativeDocumentation": "gateway-components-bridges.html"
                 }
             }
         },
@@ -1704,6 +1741,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges.html",
+                    "documentation": "Grants permission to create bridges"
+                },
                 "smithy.api#documentation": "<p> Creates a new bridge. The request must include one source.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1837,6 +1878,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows.html",
+                    "documentation": "Grants permission to create flows"
+                },
                 "smithy.api#documentation": "<p> Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1958,6 +2003,13 @@
                         "smithy.api#documentation": "<p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>",
                         "smithy.api#jsonName": "ndiConfig"
                     }
+                },
+                "FlowTags": {
+                    "target": "com.amazonaws.mediaconnect#__mapOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key-value pairs that can be used to tag and organize the flow. </p>",
+                        "smithy.api#jsonName": "flowTags"
+                    }
                 }
             },
             "traits": {
@@ -2011,6 +2063,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateways.html",
+                    "documentation": "Grants permission to create gateways"
+                },
                 "smithy.api#documentation": "<p> Creates a new gateway. The request must include at least one network (up to four).</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2119,6 +2175,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridge-bridgearn.html",
+                    "documentation": "Grants permission to delete bridges"
+                },
                 "smithy.api#documentation": "<p> Deletes a bridge. Before you can delete a bridge, you must stop the bridge.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2189,6 +2249,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn.html",
+                    "documentation": "Grants permission to delete flows"
+                },
                 "smithy.api#documentation": "<p> Deletes a flow. Before you can delete a flow, you must stop the flow.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2269,6 +2333,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateways-gatewayarn.html",
+                    "documentation": "Grants permission to delete gateways"
+                },
                 "smithy.api#documentation": "<p> Deletes a gateway. Before you can delete a gateway, you must deregister its instances and delete its bridges.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2342,6 +2410,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateway-instances-gatewayinstancearn.html",
+                    "documentation": "Grants permission to deregister gateway instance"
+                },
                 "smithy.api#documentation": "<p> Deregisters an instance. Before you deregister an instance, all bridges running on the instance must be stopped. If you want to deregister an instance without stopping the bridges, you must use the --force option.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2429,6 +2501,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn.html",
+                    "documentation": "Grants permission to display the details of a bridge"
+                },
                 "smithy.api#documentation": "<p> Displays the details of a bridge.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2499,6 +2575,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn.html",
+                    "documentation": "Grants permission to display the details of a flow including the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements"
+                },
                 "smithy.api#documentation": "<p> Displays the details of a flow. The response includes the flow Amazon Resource Name (ARN), name, and Availability Zone, as well as details about the source, outputs, and entitlements.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2738,6 +2818,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-source-metadata.html",
+                    "documentation": "Grants permission to view information about the flow's source transport stream and programs"
+                },
                 "smithy.api#documentation": "<p> The <code>DescribeFlowSourceMetadata</code> API is used to view information about the flow's source transport stream and programs. This API displays status messages about the flow's source as well as details about the program's video, audio, and other data. </p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2829,6 +2913,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-source-thumbnail.html",
+                    "documentation": "Grants permission to view flow's source thumbnail"
+                },
                 "smithy.api#documentation": "<p> Describes the thumbnail for the flow source. </p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2901,6 +2989,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateways-gatewayarn.html",
+                    "documentation": "Grants permission to display the details of a gateway including the gateway ARN, name, and CIDR blocks, as well as details about the networks"
+                },
                 "smithy.api#documentation": "<p> Displays the details of a gateway. The response includes the gateway Amazon Resource Name (ARN), name, and CIDR blocks, as well as details about the networks.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2942,6 +3034,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateway-instances-gatewayinstancearn.html",
+                    "documentation": "Grants permission to display the details of a gateway instance"
+                },
                 "smithy.api#documentation": "<p> Displays the details of an instance. </p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3041,6 +3137,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-offerings-offeringarn.html",
+                    "documentation": "Grants permission to display the details of an offering"
+                },
                 "smithy.api#documentation": "<p> Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3107,6 +3207,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-reservations-reservationarn.html",
+                    "documentation": "Grants permission to display the details of a reservation"
+                },
                 "smithy.api#documentation": "<p> Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3842,7 +3946,8 @@
                     "absolute": true
                 },
                 "aws.iam#iamResource": {
-                    "name": "flow"
+                    "name": "Flow",
+                    "relativeDocumentation": "flows.html"
                 }
             }
         },
@@ -4249,7 +4354,8 @@
                     "absolute": true
                 },
                 "aws.iam#iamResource": {
-                    "name": "gatewayInstance"
+                    "name": "GatewayInstance",
+                    "relativeDocumentation": "gateway-components-instances.html"
                 }
             }
         },
@@ -4305,7 +4411,8 @@
                     "absolute": true
                 },
                 "aws.iam#iamResource": {
-                    "name": "gateway"
+                    "name": "Gateway",
+                    "relativeDocumentation": "gateway.html"
                 }
             }
         },
@@ -4396,6 +4503,13 @@
                         "smithy.api#jsonName": "subscribers",
                         "smithy.api#required": {}
                     }
+                },
+                "EntitlementTags": {
+                    "target": "com.amazonaws.mediaconnect#__mapOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key-value pairs that can be used to tag and organize the entitlement. </p>",
+                        "smithy.api#jsonName": "entitlementTags"
+                    }
                 }
             },
             "traits": {
@@ -4434,6 +4548,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-entitlements.html",
+                    "documentation": "Grants permission to grant entitlements on any flow"
+                },
                 "smithy.api#documentation": "<p> Grants entitlements to an existing flow.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -4754,6 +4872,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges.html",
+                    "documentation": "Grants permission to display a list of bridges that are associated with this account and an optionally specified Arn"
+                },
                 "smithy.api#documentation": "<p> Displays a list of bridges that are associated with this account and an optionally specified Amazon Resource Name (ARN). This request returns a paginated result.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4843,6 +4965,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-entitlements.html",
+                    "documentation": "Grants permission to display a list of all entitlements that have been granted to the account"
+                },
                 "smithy.api#documentation": "<p> Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4925,6 +5051,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows.html",
+                    "documentation": "Grants permission to display a list of flows that are associated with this account"
+                },
                 "smithy.api#documentation": "<p> Displays a list of flows that are associated with this account. This request returns a paginated result.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5010,6 +5140,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateway-instances.html",
+                    "documentation": "Grants permission to display a list of instances that are associated with this gateway"
+                },
                 "smithy.api#documentation": "<p> Displays a list of instances associated with the Amazon Web Services account. This request returns a paginated result. You can use the filterArn property to display only the instances associated with the selected Gateway Amazon Resource Name (ARN).</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5102,6 +5236,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateways.html",
+                    "documentation": "Grants permission to display a list of gateways that are associated with this account"
+                },
                 "smithy.api#documentation": "<p> Displays a list of gateways that are associated with this account. This request returns a paginated result.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5184,6 +5322,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-offerings.html",
+                    "documentation": "Grants permission to display a list of all offerings that are available to the account in the current AWS Region"
+                },
                 "smithy.api#documentation": "<p> Displays a list of all offerings that are available to this account in the current Amazon Web Services Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5266,6 +5408,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-reservations.html",
+                    "documentation": "Grants permission to display a list of all reservations that have been purchased by the account in the current AWS Region"
+                },
                 "smithy.api#documentation": "<p> Displays a list of all reservations that have been purchased by this account in the current Amazon Web Services Region. This list includes all reservations in all states (such as active and expired).</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5775,6 +5921,12 @@
                 "aws.auth#sigv4": {
                     "name": "mediaconnect"
                 },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "maxAge": 86400
@@ -7189,7 +7341,8 @@
                     "absolute": true
                 },
                 "aws.iam#iamResource": {
-                    "name": "offering"
+                    "name": "Offering",
+                    "relativeDocumentation": "offering.html"
                 }
             }
         },
@@ -7494,6 +7647,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-offerings-offeringarn.html",
+                    "documentation": "Grants permission to purchase an offering"
+                },
                 "smithy.api#documentation": "<p> Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -7606,6 +7763,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-outputs-outputname.html",
+                    "documentation": "Grants permission to remove an output of an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Removes an output from a bridge.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -7694,6 +7855,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-sources-sourcename.html",
+                    "documentation": "Grants permission to remove a source of an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Removes a source from a bridge.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -7779,6 +7944,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-mediastreams-mediastreamname.html",
+                    "documentation": "Grants permission to remove media streams on any flow"
+                },
                 "smithy.api#documentation": "<p> Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -7864,6 +8033,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-outputs-outputarn.html",
+                    "documentation": "Grants permission to remove outputs from any flow"
+                },
                 "smithy.api#documentation": "<p> Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -7950,6 +8123,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-source-sourcearn.html",
+                    "documentation": "Grants permission to remove sources from any flow"
+                },
                 "smithy.api#documentation": "<p> Removes a source from an existing flow. This request can be made only if there is more than one source on the flow. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -8036,6 +8213,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-vpcinterfaces.html",
+                    "documentation": "Grants permission to add VPC interfaces to any flow"
+                },
                 "smithy.api#documentation": "<p> Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -8257,7 +8438,8 @@
                     "absolute": true
                 },
                 "aws.iam#iamResource": {
-                    "name": "reservation"
+                    "name": "Reservation",
+                    "relativeDocumentation": "reservation.html"
                 }
             }
         },
@@ -8357,6 +8539,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-entitlements-entitlementarn.html",
+                    "documentation": "Grants permission to revoke entitlements on any flow"
+                },
                 "smithy.api#documentation": "<p> Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -8626,6 +8812,13 @@
                         "smithy.api#documentation": "<p> The source configuration for cloud flows receiving a stream from a bridge.</p>",
                         "smithy.api#jsonName": "gatewayBridgeSource"
                     }
+                },
+                "SourceTags": {
+                    "target": "com.amazonaws.mediaconnect#__mapOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key-value pairs that can be used to tag and organize the source. </p>",
+                        "smithy.api#jsonName": "sourceTags"
+                    }
                 }
             },
             "traits": {
@@ -8839,6 +9032,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-start-flowarn.html",
+                    "documentation": "Grants permission to start flows"
+                },
                 "smithy.api#documentation": "<p> Starts a flow.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -8979,6 +9176,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-stop-flowarn.html",
+                    "documentation": "Grants permission to stop flows"
+                },
                 "smithy.api#documentation": "<p> Stops a flow.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -9046,6 +9247,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "tags-resourcearn.html",
+                    "documentation": "Grants permission to associate tags with resources"
+                },
                 "smithy.api#documentation": "<p> Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -9493,6 +9698,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "tags-resourcearn.html",
+                    "documentation": "Grants permission to remove tags with resources"
+                },
                 "smithy.api#documentation": "<p> Deletes specified tags from a resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -9559,6 +9768,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn.html",
+                    "documentation": "Grants permission to update bridges"
+                },
                 "smithy.api#documentation": "<p> Updates the bridge.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -9709,6 +9922,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-outputs-outputname.html",
+                    "documentation": "Grants permission to update an output of an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Updates an existing bridge output.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -9860,6 +10077,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-sources-sourcename.html",
+                    "documentation": "Grants permission to update a source of an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Updates an existing bridge source.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -9962,6 +10183,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-bridges-bridgearn-state.html",
+                    "documentation": "Grants permission to update the state of an existing bridge"
+                },
                 "smithy.api#documentation": "<p> Updates the bridge state. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -10170,6 +10395,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn.html",
+                    "documentation": "Grants permission to update flows"
+                },
                 "smithy.api#documentation": "<p> Updates an existing flow.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -10208,6 +10437,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-entitlements-entitlementarn.html",
+                    "documentation": "Grants permission to update entitlements on any flow"
+                },
                 "smithy.api#documentation": "<p> Updates an entitlement. You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -10322,6 +10555,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-mediastreams-mediastreamname.html",
+                    "documentation": "Grants permission to update media streams on any flow"
+                },
                 "smithy.api#documentation": "<p> Updates an existing media stream.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -10442,6 +10679,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-outputs-outputarn.html",
+                    "documentation": "Grants permission to update outputs on any flow"
+                },
                 "smithy.api#documentation": "<p> Updates an existing flow output.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -10667,6 +10908,13 @@
                         "smithy.api#documentation": "<p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>",
                         "smithy.api#jsonName": "ndiConfig"
                     }
+                },
+                "FlowSize": {
+                    "target": "com.amazonaws.mediaconnect#FlowSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Determines the processing capacity and feature set of the flow. </p>",
+                        "smithy.api#jsonName": "flowSize"
+                    }
                 }
             },
             "traits": {
@@ -10717,6 +10965,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-flows-flowarn-source-sourcearn.html",
+                    "documentation": "Grants permission to update the source of any flow"
+                },
                 "smithy.api#documentation": "<p> Updates the source of a flow.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -10956,6 +11208,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "relativeDocumentation": "v1-gateway-instances-gatewayinstancearn.html",
+                    "documentation": "Grants permission to update the configuration of an existing Gateway Instance"
+                },
                 "smithy.api#documentation": "<p>Updates an existing gateway instance. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -11205,6 +11461,13 @@
                         "smithy.api#documentation": "<p> The subnet IDs that you want to use for your VPC interface. A range of IP addresses in your VPC. When you create your VPC, you specify a range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC. When you create a subnet for your VPC, you specify the CIDR block for the subnet, which is a subset of the VPC CIDR block. The subnets that you use across all VPC interfaces on the flow must be in the same Availability Zone as the flow. </p>",
                         "smithy.api#jsonName": "subnetId",
                         "smithy.api#required": {}
+                    }
+                },
+                "VpcInterfaceTags": {
+                    "target": "com.amazonaws.mediaconnect#__mapOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key-value pairs that can be used to tag and organize the VPC network interface. </p>",
+                        "smithy.api#jsonName": "vpcInterfaceTags"
                     }
                 }
             },

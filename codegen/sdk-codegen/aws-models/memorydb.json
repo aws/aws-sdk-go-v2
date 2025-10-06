@@ -91,7 +91,7 @@
                     "code": "ACLAlreadyExists",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>An ACL with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -135,7 +135,7 @@
                     "code": "ACLNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified ACL does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -172,7 +172,7 @@
                     "code": "ACLQuotaExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of ACLs allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -203,7 +203,7 @@
                     "code": "APICallRateForCustomerExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The customer has exceeded the maximum number of API requests allowed per time period.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -297,6 +297,12 @@
                 },
                 {
                     "target": "com.amazonaws.memorydb#DescribeMultiRegionClusters"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#DescribeMultiRegionParameterGroups"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#DescribeMultiRegionParameters"
                 },
                 {
                     "target": "com.amazonaws.memorydb#DescribeParameterGroups"
@@ -1575,7 +1581,7 @@
                     "code": "ClusterAlreadyExists",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A cluster with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1723,7 +1729,7 @@
                     "code": "ClusterNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified cluster does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1766,7 +1772,7 @@
                     "code": "ClusterQuotaForCustomerExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of clusters allowed for this customer.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2660,7 +2666,7 @@
                     "code": "DefaultUserRequired",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A default user is required and must be specified.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3495,6 +3501,157 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.memorydb#DescribeMultiRegionParameterGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#DescribeMultiRegionParameterGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#DescribeMultiRegionParameterGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#ServiceLinkedRoleNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of multi-region parameter groups.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionParameterGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionParameterGroupName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request for information on a specific multi-region parameter group.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.memorydb#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionParameterGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token to include in the response. If this token is provided, the response includes only results beyond the token, up to the value specified by MaxResults.</p>"
+                    }
+                },
+                "MultiRegionParameterGroups": {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of multi-region parameter groups. Each element in the list contains detailed information about one parameter group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionParameters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.memorydb#DescribeMultiRegionParametersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.memorydb#DescribeMultiRegionParametersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.memorydb#ServiceLinkedRoleNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the detailed parameter list for a particular multi-region parameter group.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionParametersRequest": {
+            "type": "structure",
+            "members": {
+                "MultiRegionParameterGroupName": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region parameter group to return details for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter types to return. Valid values: user | system | engine-default</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.memorydb#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.memorydb#DescribeMultiRegionParametersResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token to include in the response. If this token is provided, the response includes only results beyond the token, up to the value specified by MaxResults.</p>"
+                    }
+                },
+                "MultiRegionParameters": {
+                    "target": "com.amazonaws.memorydb#MultiRegionParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameters specific to a particular multi-region parameter group. Each element in the list contains detailed information about one parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.memorydb#DescribeParameterGroups": {
             "type": "operation",
             "input": {
@@ -4198,7 +4355,7 @@
                     "code": "DuplicateUserName",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A user with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4460,7 +4617,7 @@
                     "code": "InsufficientClusterCapacity",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The cluster does not have sufficient capacity to perform the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4486,7 +4643,7 @@
                     "code": "InvalidACLState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The ACL is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4503,7 +4660,7 @@
                     "code": "InvalidARN",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified Amazon Resource Name (ARN) is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4520,7 +4677,7 @@
                     "code": "InvalidClusterState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The cluster is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4537,7 +4694,7 @@
                     "code": "InvalidCredentialsException",
                     "httpResponseCode": 408
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The provided credentials are not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 408
             }
@@ -4554,7 +4711,7 @@
                     "code": "InvalidKMSKeyFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified KMS key is not valid or accessible.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4588,7 +4745,7 @@
                     "code": "InvalidNodeState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The node is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4605,7 +4762,7 @@
                     "code": "InvalidParameterCombination",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified parameter combination is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4622,7 +4779,7 @@
                     "code": "InvalidParameterGroupState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The parameter group is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4639,7 +4796,7 @@
                     "code": "InvalidParameterValue",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified parameter value is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4656,7 +4813,7 @@
                     "code": "InvalidSnapshotState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The snapshot is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4673,7 +4830,7 @@
                     "code": "InvalidSubnet",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified subnet is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4690,7 +4847,7 @@
                     "code": "InvalidUserState",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The user is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4707,7 +4864,7 @@
                     "code": "InvalidVPCNetworkStateFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The VPC network is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5053,6 +5210,97 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.memorydb#MultiRegionParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the parameter.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the parameter.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the source of the parameter value. Valid values: user | system | engine-default</p>"
+                    }
+                },
+                "DataType": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid data type for the parameter.</p>"
+                    }
+                },
+                "AllowedValues": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid range of values for the parameter.</p>"
+                    }
+                },
+                "MinimumEngineVersion": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The earliest engine version to which the parameter can apply.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an individual setting that controls some aspect of MemoryDB behavior across multiple regions.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionParameterGroup": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the multi-region parameter group.</p>"
+                    }
+                },
+                "Family": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter group family that this multi-region parameter group is compatible with.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the multi-region parameter group.</p>"
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the multi-region parameter group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the output of a CreateMultiRegionParameterGroup operation. A multi-region parameter group represents a collection of parameters that can be applied to clusters across multiple regions.</p>"
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionParameterGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.memorydb#MultiRegionParameterGroup",
+                "traits": {
+                    "smithy.api#xmlName": "MultiRegionParameterGroup"
+                }
+            }
+        },
         "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault": {
             "type": "structure",
             "members": {
@@ -5068,6 +5316,15 @@
                 "smithy.api#documentation": "<p>The specified multi-Region parameter group does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.memorydb#MultiRegionParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.memorydb#MultiRegionParameter",
+                "traits": {
+                    "smithy.api#xmlName": "MultiRegionParameter"
+                }
             }
         },
         "com.amazonaws.memorydb#NetworkType": {
@@ -5111,7 +5368,7 @@
                     "code": "NoOperationFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The requested operation would result in no changes.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5175,7 +5432,7 @@
                     "code": "NodeQuotaForClusterExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of nodes allowed for this cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5192,7 +5449,7 @@
                     "code": "NodeQuotaForCustomerExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of nodes allowed for this customer.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5291,7 +5548,7 @@
                     "code": "ParameterGroupAlreadyExists",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A parameter group with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5317,7 +5574,7 @@
                     "code": "ParameterGroupNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified parameter group does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -5334,7 +5591,7 @@
                     "code": "ParameterGroupQuotaExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of parameter groups allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5932,7 +6189,7 @@
                     "code": "ServiceLinkedRoleNotFoundFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The required service-linked role was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6020,7 +6277,7 @@
                     "code": "ServiceUpdateNotFoundFault",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified service update does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6223,7 +6480,7 @@
                     "code": "ShardNotFoundFault",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified shard does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6240,7 +6497,7 @@
                     "code": "ShardsPerClusterQuotaExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of shards allowed per cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6322,7 +6579,7 @@
                     "code": "SnapshotAlreadyExistsFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A snapshot with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6354,7 +6611,7 @@
                     "code": "SnapshotNotFoundFault",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified snapshot does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6371,7 +6628,7 @@
                     "code": "SnapshotQuotaExceededFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of snapshots allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6502,7 +6759,7 @@
                     "code": "SubnetGroupAlreadyExists",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A subnet group with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6519,7 +6776,7 @@
                     "code": "SubnetGroupInUse",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The subnet group is currently in use and cannot be deleted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6542,7 +6799,7 @@
                     "code": "SubnetGroupNotFoundFault",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified subnet group does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6559,7 +6816,7 @@
                     "code": "SubnetGroupQuotaExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of subnet groups allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6585,7 +6842,7 @@
                     "code": "SubnetInUse",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The subnet is currently in use and cannot be deleted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6611,7 +6868,7 @@
                     "code": "SubnetNotAllowedFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified subnet is not allowed for this operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6628,7 +6885,7 @@
                     "code": "SubnetQuotaExceededFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of subnets allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6683,7 +6940,7 @@
                     "code": "TagNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified tag does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6700,7 +6957,7 @@
                     "code": "TagQuotaPerResourceExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of tags allowed per resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6816,7 +7073,7 @@
                     "code": "TestFailoverNotAvailableFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Test failover is not available for this cluster configuration.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7577,7 +7834,7 @@
                     "code": "UserAlreadyExists",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A user with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7626,7 +7883,7 @@
                     "code": "UserNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The specified user does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -7643,7 +7900,7 @@
                     "code": "UserQuotaExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of users allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

@@ -14367,6 +14367,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map containing metrics associated with the evaluation of the rule based on row-level results. </p>"
                     }
+                },
+                "Labels": {
+                    "target": "com.amazonaws.glue#Labels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map containing labels assigned to the data quality rule. </p>"
+                    }
                 }
             },
             "traits": {
@@ -30078,6 +30084,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies configuration properties for a labeling set generation task run.</p>"
+            }
+        },
+        "com.amazonaws.glue#Labels": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#NameString"
             }
         },
         "com.amazonaws.glue#LakeFormationConfiguration": {
