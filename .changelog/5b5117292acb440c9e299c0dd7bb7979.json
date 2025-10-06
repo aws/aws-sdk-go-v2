@@ -1,8 +1,0 @@
-{
-    "id": "5b511729-2acb-440c-9e29-9c0dd7bb7979",
-    "type": "feature",
-    "description": "Enabling Tag-on-Create for AWS Elemental MediaConnect flow-based resource types",
-    "modules": [
-        "service/mediaconnect"
-    ]
-}

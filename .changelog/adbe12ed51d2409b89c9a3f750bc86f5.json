@@ -1,8 +1,0 @@
-{
-    "id": "adbe12ed-51d2-409b-89c9-a3f750bc86f5",
-    "type": "feature",
-    "description": "Add support for batch memory management, agent card retrieval and session termination",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

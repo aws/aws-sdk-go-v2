@@ -1,3 +1,7 @@
+# v1.5.0 (2025-10-06)
+
+* **Feature**: Add support for batch memory management, agent card retrieval and session termination
+
 # v1.4.5 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

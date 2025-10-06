@@ -1,3 +1,7 @@
+# v1.32.0 (2025-10-06)
+
+* **Feature**: Support for DescribeMultiRegionParameterGroups and DescribeMultiRegionParameters API.
+
 # v1.31.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

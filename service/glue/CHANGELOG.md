@@ -1,3 +1,7 @@
+# v1.130.0 (2025-10-06)
+
+* **Feature**: Adds labeling for DataQualityRuleResult for GetDataQualityResult and PublishDataQualityResult APIs
+
 # v1.129.1 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

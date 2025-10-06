@@ -1,3 +1,7 @@
+# v1.7.0 (2025-10-06)
+
+* **Feature**: Add support for VM lifecycle configuration parameters and A2A protocol
+
 # v1.6.0 (2025-09-30)
 
 * **Feature**: Tagging support for AgentCore Gateway

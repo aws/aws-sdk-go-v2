@@ -1,8 +1,0 @@
-{
-    "id": "dd842cc1-248e-402f-8eea-c0c0a82a221c",
-    "type": "documentation",
-    "description": "Documentation updates to the CreateDBClusterMessage$PubliclyAccessible and CreateDBInstanceMessage$PubliclyAccessible properties.",
-    "modules": [
-        "service/rds"
-    ]
-}

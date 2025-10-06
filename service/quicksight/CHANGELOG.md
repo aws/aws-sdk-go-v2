@@ -1,3 +1,7 @@
+# v1.94.4 (2025-10-06)
+
+* **Documentation**: Documentation improvements for QuickSight API documentation to clarify that delete operation APIs are global.
+
 # v1.94.3 (2025-09-30)
 
 * **Documentation**: added warnings to a few CLI pages

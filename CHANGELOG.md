@@ -1,3 +1,25 @@
+# Release (2025-10-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.48.0](service/backup/CHANGELOG.md#v1480-2025-10-06)
+  * **Feature**: Adds optional MaxScheduledRunsPreview input to GetBackupPlan API to provide a preview of up to 10 next scheduled backup plan runs in the GetBackupPlan response.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.5.0](service/bedrockagentcore/CHANGELOG.md#v150-2025-10-06)
+  * **Feature**: Add support for batch memory management, agent card retrieval and session termination
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.7.0](service/bedrockagentcorecontrol/CHANGELOG.md#v170-2025-10-06)
+  * **Feature**: Add support for VM lifecycle configuration parameters and A2A protocol
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.130.0](service/glue/CHANGELOG.md#v11300-2025-10-06)
+  * **Feature**: Adds labeling for DataQualityRuleResult for GetDataQualityResult and PublishDataQualityResult APIs
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.45.0](service/mediaconnect/CHANGELOG.md#v1450-2025-10-06)
+  * **Feature**: Enabling Tag-on-Create for AWS Elemental MediaConnect flow-based resource types
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.32.0](service/memorydb/CHANGELOG.md#v1320-2025-10-06)
+  * **Feature**: Support for DescribeMultiRegionParameterGroups and DescribeMultiRegionParameters API.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.94.4](service/quicksight/CHANGELOG.md#v1944-2025-10-06)
+  * **Documentation**: Documentation improvements for QuickSight API documentation to clarify that delete operation APIs are global.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.108.1](service/rds/CHANGELOG.md#v11081-2025-10-06)
+  * **Documentation**: Documentation updates to the CreateDBClusterMessage$PubliclyAccessible and CreateDBInstanceMessage$PubliclyAccessible properties.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.22.0](service/resourceexplorer2/CHANGELOG.md#v1220-2025-10-06)
+  * **Feature**: Add new AWS Resource Explorer APIs
+
 # Release (2025-10-03)
 
 ## Module Highlights

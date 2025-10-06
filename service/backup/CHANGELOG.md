@@ -1,3 +1,7 @@
+# v1.48.0 (2025-10-06)
+
+* **Feature**: Adds optional MaxScheduledRunsPreview input to GetBackupPlan API to provide a preview of up to 10 next scheduled backup plan runs in the GetBackupPlan response.
+
 # v1.47.7 (2025-09-30)
 
 * No change notes available for this release.
