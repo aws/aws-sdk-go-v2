@@ -16,6 +16,8 @@ import (
 
 // Get detailed data for a service instance. A service instance is an
 // instantiation of service template and it runs in a specific environment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetServiceInstance(ctx context.Context, params *GetServiceInstanceInput, optFns ...func(*Options)) (*GetServiceInstanceOutput, error) {
 	if params == nil {
 		params = &GetServiceInstanceInput{}

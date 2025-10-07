@@ -26,6 +26,8 @@ import (
 //
 // For more information, see [Environments] and [Provisioning methods] in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Environments]: https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html
 // [Provisioning methods]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {

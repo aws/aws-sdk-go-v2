@@ -19,6 +19,8 @@ import (
 // defined by the selected service template. For more information, see [Proton templates]in the
 // Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Proton templates]: https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html
 func (c *Client) CreateServiceTemplate(ctx context.Context, params *CreateServiceTemplateInput, optFns ...func(*Options)) (*CreateServiceTemplateOutput, error) {
 	if params == nil {

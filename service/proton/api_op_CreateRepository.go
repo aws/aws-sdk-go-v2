@@ -19,6 +19,8 @@ import (
 //
 // For more information, see [Self-managed provisioning], [Template bundles], and [Template sync configurations] in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Self-managed provisioning]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
 // [Template sync configurations]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html
 // [Template bundles]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles

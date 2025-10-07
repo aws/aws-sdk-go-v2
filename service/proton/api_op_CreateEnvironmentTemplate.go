@@ -26,6 +26,8 @@ import (
 //     include the provisioning parameter and set the value to CUSTOMER_MANAGED . For
 //     more information, see [Register and publish an environment template]in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Register and publish an environment template]: https://docs.aws.amazon.com/proton/latest/userguide/template-create.html
 // [Environment Templates]: https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html
 func (c *Client) CreateEnvironmentTemplate(ctx context.Context, params *CreateEnvironmentTemplateInput, optFns ...func(*Options)) (*CreateEnvironmentTemplateOutput, error) {

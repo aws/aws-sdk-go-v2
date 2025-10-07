@@ -12,6 +12,8 @@ import (
 )
 
 // List environments with detail data summaries.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsInput, optFns ...func(*Options)) (*ListEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentsInput{}

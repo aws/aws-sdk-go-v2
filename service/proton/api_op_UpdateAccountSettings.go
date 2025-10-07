@@ -13,6 +13,8 @@ import (
 
 // Update Proton settings that are used for multiple services in the Amazon Web
 // Services account.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}

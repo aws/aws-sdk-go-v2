@@ -25,6 +25,8 @@ import (
 //     resulting deployment state is SUCCEEDED and the cancellation attempt has no
 //     effect.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Update a service pipeline]: https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-pipeline-update.html
 func (c *Client) CancelServicePipelineDeployment(ctx context.Context, params *CancelServicePipelineDeploymentInput, optFns ...func(*Options)) (*CancelServicePipelineDeploymentOutput, error) {
 	if params == nil {

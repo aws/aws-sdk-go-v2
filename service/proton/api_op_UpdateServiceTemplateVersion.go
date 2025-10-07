@@ -12,6 +12,8 @@ import (
 )
 
 // Update a major or minor version of a service template.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) UpdateServiceTemplateVersion(ctx context.Context, params *UpdateServiceTemplateVersionInput, optFns ...func(*Options)) (*UpdateServiceTemplateVersionOutput, error) {
 	if params == nil {
 		params = &UpdateServiceTemplateVersionInput{}

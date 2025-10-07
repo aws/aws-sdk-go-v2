@@ -12,6 +12,8 @@ import (
 )
 
 // Get the status of a template sync.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetTemplateSyncStatus(ctx context.Context, params *GetTemplateSyncStatusInput, optFns ...func(*Options)) (*GetTemplateSyncStatusOutput, error) {
 	if params == nil {
 		params = &GetTemplateSyncStatusInput{}

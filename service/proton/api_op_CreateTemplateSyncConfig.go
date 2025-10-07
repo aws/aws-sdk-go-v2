@@ -20,6 +20,8 @@ import (
 // major or minor version of its template is created, if the version doesn’t
 // already exist. For more information, see [Template sync configurations]in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Template sync configurations]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html
 func (c *Client) CreateTemplateSyncConfig(ctx context.Context, params *CreateTemplateSyncConfigInput, optFns ...func(*Options)) (*CreateTemplateSyncConfigOutput, error) {
 	if params == nil {

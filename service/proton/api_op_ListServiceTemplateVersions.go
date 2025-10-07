@@ -12,6 +12,8 @@ import (
 )
 
 // List major or minor versions of a service template with detail data.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListServiceTemplateVersions(ctx context.Context, params *ListServiceTemplateVersionsInput, optFns ...func(*Options)) (*ListServiceTemplateVersionsOutput, error) {
 	if params == nil {
 		params = &ListServiceTemplateVersionsInput{}

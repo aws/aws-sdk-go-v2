@@ -12,6 +12,8 @@ import (
 )
 
 // List the provisioned resources for your environment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListEnvironmentProvisionedResources(ctx context.Context, params *ListEnvironmentProvisionedResourcesInput, optFns ...func(*Options)) (*ListEnvironmentProvisionedResourcesOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentProvisionedResourcesInput{}

@@ -15,6 +15,8 @@ import (
 // service template is a version that isn't backward compatible. A minor version of
 // a service template is a version that's backward compatible within its major
 // version.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) CreateServiceTemplateVersion(ctx context.Context, params *CreateServiceTemplateVersionInput, optFns ...func(*Options)) (*CreateServiceTemplateVersionOutput, error) {
 	if params == nil {
 		params = &CreateServiceTemplateVersionInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // List service templates with detail data.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListServiceTemplates(ctx context.Context, params *ListServiceTemplatesInput, optFns ...func(*Options)) (*ListServiceTemplatesOutput, error) {
 	if params == nil {
 		params = &ListServiceTemplatesInput{}

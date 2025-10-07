@@ -12,6 +12,8 @@ import (
 )
 
 // Get detail data for Proton account-wide settings.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetAccountSettings(ctx context.Context, params *GetAccountSettingsInput, optFns ...func(*Options)) (*GetAccountSettingsOutput, error) {
 	if params == nil {
 		params = &GetAccountSettingsInput{}

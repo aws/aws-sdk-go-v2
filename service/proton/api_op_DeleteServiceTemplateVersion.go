@@ -21,6 +21,8 @@ import (
 // version. Delete a Recommended minor version of the service template if no other
 // minor versions of the service template exist. A minor version of a service
 // template is a version that's backwards compatible.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteServiceTemplateVersion(ctx context.Context, params *DeleteServiceTemplateVersionInput, optFns ...func(*Options)) (*DeleteServiceTemplateVersionOutput, error) {
 	if params == nil {
 		params = &DeleteServiceTemplateVersionInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Delete the deployment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentInput, optFns ...func(*Options)) (*DeleteDeploymentOutput, error) {
 	if params == nil {
 		params = &DeleteDeploymentInput{}

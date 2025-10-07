@@ -12,6 +12,8 @@ import (
 )
 
 // List provisioned resources for a service instance with details.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListServiceInstanceProvisionedResources(ctx context.Context, params *ListServiceInstanceProvisionedResourcesInput, optFns ...func(*Options)) (*ListServiceInstanceProvisionedResourcesOutput, error) {
 	if params == nil {
 		params = &ListServiceInstanceProvisionedResourcesInput{}

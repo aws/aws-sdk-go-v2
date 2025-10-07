@@ -12,6 +12,8 @@ import (
 )
 
 // List linked repositories with detail data.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesInput, optFns ...func(*Options)) (*ListRepositoriesOutput, error) {
 	if params == nil {
 		params = &ListRepositoriesInput{}

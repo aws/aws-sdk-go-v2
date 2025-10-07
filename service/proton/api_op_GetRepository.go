@@ -12,6 +12,8 @@ import (
 )
 
 // Get detail data for a linked repository.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetRepository(ctx context.Context, params *GetRepositoryInput, optFns ...func(*Options)) (*GetRepositoryOutput, error) {
 	if params == nil {
 		params = &GetRepositoryInput{}

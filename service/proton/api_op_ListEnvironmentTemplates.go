@@ -12,6 +12,8 @@ import (
 )
 
 // List environment templates.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListEnvironmentTemplates(ctx context.Context, params *ListEnvironmentTemplatesInput, optFns ...func(*Options)) (*ListEnvironmentTemplatesOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentTemplatesInput{}

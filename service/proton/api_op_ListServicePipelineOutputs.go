@@ -12,6 +12,8 @@ import (
 )
 
 // Get a list of service pipeline Infrastructure as Code (IaC) outputs.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListServicePipelineOutputs(ctx context.Context, params *ListServicePipelineOutputsInput, optFns ...func(*Options)) (*ListServicePipelineOutputsOutput, error) {
 	if params == nil {
 		params = &ListServicePipelineOutputsInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Get detail data for a template sync configuration.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetTemplateSyncConfig(ctx context.Context, params *GetTemplateSyncConfigInput, optFns ...func(*Options)) (*GetTemplateSyncConfigOutput, error) {
 	if params == nil {
 		params = &GetTemplateSyncConfigInput{}

@@ -21,6 +21,8 @@ import (
 // version. Delete a Recommended minor version of the environment template if no
 // other minor versions of the environment template exist. A minor version of an
 // environment template is a version that's backward compatible.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteEnvironmentTemplateVersion(ctx context.Context, params *DeleteEnvironmentTemplateVersionInput, optFns ...func(*Options)) (*DeleteEnvironmentTemplateVersionOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentTemplateVersionInput{}

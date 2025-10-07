@@ -12,6 +12,8 @@ import (
 )
 
 // List the infrastructure as code outputs for your environment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListEnvironmentOutputs(ctx context.Context, params *ListEnvironmentOutputsInput, optFns ...func(*Options)) (*ListEnvironmentOutputsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentOutputsInput{}

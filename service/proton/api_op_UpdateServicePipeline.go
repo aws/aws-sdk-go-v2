@@ -40,6 +40,8 @@ import (
 // recommended (latest) major and minor version of the current template by default.
 // You can specify a different major version that's higher than the major version
 // in use and a minor version.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) UpdateServicePipeline(ctx context.Context, params *UpdateServicePipelineInput, optFns ...func(*Options)) (*UpdateServicePipelineOutput, error) {
 	if params == nil {
 		params = &UpdateServicePipelineInput{}

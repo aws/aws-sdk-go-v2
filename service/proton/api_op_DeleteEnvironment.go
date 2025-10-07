@@ -12,6 +12,8 @@ import (
 )
 
 // Delete an environment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentInput{}

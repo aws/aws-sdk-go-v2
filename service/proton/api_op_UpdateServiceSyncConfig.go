@@ -12,6 +12,8 @@ import (
 )
 
 // Update the Proton Ops config file.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) UpdateServiceSyncConfig(ctx context.Context, params *UpdateServiceSyncConfigInput, optFns ...func(*Options)) (*UpdateServiceSyncConfigOutput, error) {
 	if params == nil {
 		params = &UpdateServiceSyncConfigInput{}

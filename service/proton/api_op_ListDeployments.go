@@ -13,6 +13,8 @@ import (
 
 // List deployments. You can filter the result list by environment, service, or a
 // single service instance.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInput, optFns ...func(*Options)) (*ListDeploymentsOutput, error) {
 	if params == nil {
 		params = &ListDeploymentsInput{}

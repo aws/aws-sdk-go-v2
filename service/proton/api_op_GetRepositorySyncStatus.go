@@ -21,6 +21,8 @@ import (
 //
 // For more information about ABAC, see [ABAC] in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [ABAC]: https://docs.aws.amazon.com/proton/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags
 func (c *Client) GetRepositorySyncStatus(ctx context.Context, params *GetRepositorySyncStatusInput, optFns ...func(*Options)) (*GetRepositorySyncStatusOutput, error) {
 	if params == nil {

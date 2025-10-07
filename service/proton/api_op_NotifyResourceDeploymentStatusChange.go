@@ -16,6 +16,8 @@ import (
 //
 // For more information, see [Self-managed provisioning] in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Self-managed provisioning]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
 func (c *Client) NotifyResourceDeploymentStatusChange(ctx context.Context, params *NotifyResourceDeploymentStatusChangeInput, optFns ...func(*Options)) (*NotifyResourceDeploymentStatusChangeOutput, error) {
 	if params == nil {

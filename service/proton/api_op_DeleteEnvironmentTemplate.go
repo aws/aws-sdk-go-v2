@@ -13,6 +13,8 @@ import (
 
 // If no other major or minor versions of an environment template exist, delete
 // the environment template.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteEnvironmentTemplate(ctx context.Context, params *DeleteEnvironmentTemplateInput, optFns ...func(*Options)) (*DeleteEnvironmentTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentTemplateInput{}

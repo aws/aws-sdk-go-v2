@@ -12,6 +12,8 @@ import (
 )
 
 // List repository sync definitions with detail data.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListRepositorySyncDefinitions(ctx context.Context, params *ListRepositorySyncDefinitionsInput, optFns ...func(*Options)) (*ListRepositorySyncDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListRepositorySyncDefinitionsInput{}

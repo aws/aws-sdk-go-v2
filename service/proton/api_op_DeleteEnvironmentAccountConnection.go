@@ -21,6 +21,8 @@ import (
 //
 // For more information, see [Environment account connections] in the Proton User guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Environment account connections]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
 func (c *Client) DeleteEnvironmentAccountConnection(ctx context.Context, params *DeleteEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*DeleteEnvironmentAccountConnectionOutput, error) {
 	if params == nil {

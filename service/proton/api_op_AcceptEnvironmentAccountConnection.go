@@ -18,6 +18,8 @@ import (
 //
 // For more information, see [Environment account connections] in the Proton User guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Environment account connections]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
 func (c *Client) AcceptEnvironmentAccountConnection(ctx context.Context, params *AcceptEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*AcceptEnvironmentAccountConnectionOutput, error) {
 	if params == nil {

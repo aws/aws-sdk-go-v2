@@ -12,6 +12,8 @@ import (
 )
 
 // Get detailed data for an environment template.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetEnvironmentTemplate(ctx context.Context, params *GetEnvironmentTemplateInput, optFns ...func(*Options)) (*GetEnvironmentTemplateOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentTemplateInput{}

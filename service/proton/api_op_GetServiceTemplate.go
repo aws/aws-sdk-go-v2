@@ -12,6 +12,8 @@ import (
 )
 
 // Get detailed data for a service template.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetServiceTemplate(ctx context.Context, params *GetServiceTemplateInput, optFns ...func(*Options)) (*GetServiceTemplateOutput, error) {
 	if params == nil {
 		params = &GetServiceTemplateInput{}

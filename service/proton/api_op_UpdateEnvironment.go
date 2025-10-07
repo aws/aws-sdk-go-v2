@@ -67,6 +67,8 @@ import (
 // default. You can also specify a different major version that's higher than the
 // major version in use and a minor version.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Environments]: https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html
 // [Provisioning methods]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {

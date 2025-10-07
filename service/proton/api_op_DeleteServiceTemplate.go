@@ -13,6 +13,8 @@ import (
 
 // If no other major or minor versions of the service template exist, delete the
 // service template.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteServiceTemplate(ctx context.Context, params *DeleteServiceTemplateInput, optFns ...func(*Options)) (*DeleteServiceTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteServiceTemplateInput{}

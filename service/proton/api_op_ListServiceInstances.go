@@ -13,6 +13,8 @@ import (
 
 // List service instances with summary data. This action lists service instances
 // of all services in the Amazon Web Services account.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListServiceInstances(ctx context.Context, params *ListServiceInstancesInput, optFns ...func(*Options)) (*ListServiceInstancesOutput, error) {
 	if params == nil {
 		params = &ListServiceInstancesInput{}

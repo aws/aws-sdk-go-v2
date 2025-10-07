@@ -12,6 +12,8 @@ import (
 )
 
 // Get the status of the synced service instance.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetServiceInstanceSyncStatus(ctx context.Context, params *GetServiceInstanceSyncStatusInput, optFns ...func(*Options)) (*GetServiceInstanceSyncStatusOutput, error) {
 	if params == nil {
 		params = &GetServiceInstanceSyncStatusInput{}

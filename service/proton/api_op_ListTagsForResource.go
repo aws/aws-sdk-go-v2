@@ -13,6 +13,8 @@ import (
 
 // List tags for a resource. For more information, see [Proton resources and tagging] in the Proton User Guide.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

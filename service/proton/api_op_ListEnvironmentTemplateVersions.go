@@ -12,6 +12,8 @@ import (
 )
 
 // List major or minor versions of an environment template with detail data.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListEnvironmentTemplateVersions(ctx context.Context, params *ListEnvironmentTemplateVersionsInput, optFns ...func(*Options)) (*ListEnvironmentTemplateVersionsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentTemplateVersionsInput{}

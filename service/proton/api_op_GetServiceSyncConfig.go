@@ -12,6 +12,8 @@ import (
 )
 
 // Get detailed information for the service sync configuration.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetServiceSyncConfig(ctx context.Context, params *GetServiceSyncConfigInput, optFns ...func(*Options)) (*GetServiceSyncConfigOutput, error) {
 	if params == nil {
 		params = &GetServiceSyncConfigInput{}

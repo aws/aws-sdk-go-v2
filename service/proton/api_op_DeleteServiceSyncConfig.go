@@ -12,6 +12,8 @@ import (
 )
 
 // Delete the Proton Ops file.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteServiceSyncConfig(ctx context.Context, params *DeleteServiceSyncConfigInput, optFns ...func(*Options)) (*DeleteServiceSyncConfigOutput, error) {
 	if params == nil {
 		params = &DeleteServiceSyncConfigInput{}

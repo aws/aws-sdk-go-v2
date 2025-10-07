@@ -12,6 +12,8 @@ import (
 )
 
 // Update a major or minor version of an environment template.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) UpdateEnvironmentTemplateVersion(ctx context.Context, params *UpdateEnvironmentTemplateVersionInput, optFns ...func(*Options)) (*UpdateEnvironmentTemplateVersionOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentTemplateVersionInput{}

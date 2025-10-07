@@ -16,6 +16,8 @@ import (
 )
 
 // Get detailed data for a service.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetService(ctx context.Context, params *GetServiceInput, optFns ...func(*Options)) (*GetServiceOutput, error) {
 	if params == nil {
 		params = &GetServiceInput{}

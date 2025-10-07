@@ -12,6 +12,8 @@ import (
 )
 
 // Create a service instance.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) CreateServiceInstance(ctx context.Context, params *CreateServiceInstanceInput, optFns ...func(*Options)) (*CreateServiceInstanceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInstanceInput{}

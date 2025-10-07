@@ -12,6 +12,8 @@ import (
 )
 
 // Create the Proton Ops configuration file.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) CreateServiceSyncConfig(ctx context.Context, params *CreateServiceSyncConfigInput, optFns ...func(*Options)) (*CreateServiceSyncConfigOutput, error) {
 	if params == nil {
 		params = &CreateServiceSyncConfigInput{}

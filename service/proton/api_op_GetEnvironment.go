@@ -15,6 +15,8 @@ import (
 )
 
 // Get detailed data for an environment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}

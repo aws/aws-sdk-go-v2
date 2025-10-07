@@ -12,6 +12,8 @@ import (
 )
 
 // De-register and unlink your repository.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryInput, optFns ...func(*Options)) (*DeleteRepositoryOutput, error) {
 	if params == nil {
 		params = &DeleteRepositoryInput{}

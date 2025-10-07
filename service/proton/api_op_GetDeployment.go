@@ -12,6 +12,8 @@ import (
 )
 
 // Get detailed data for a deployment.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}

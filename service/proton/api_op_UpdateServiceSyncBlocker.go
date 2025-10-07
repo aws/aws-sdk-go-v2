@@ -12,6 +12,8 @@ import (
 )
 
 // Update the service sync blocker by resolving it.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) UpdateServiceSyncBlocker(ctx context.Context, params *UpdateServiceSyncBlockerInput, optFns ...func(*Options)) (*UpdateServiceSyncBlockerOutput, error) {
 	if params == nil {
 		params = &UpdateServiceSyncBlockerInput{}

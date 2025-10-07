@@ -12,6 +12,8 @@ import (
 )
 
 // Delete a template sync configuration.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) DeleteTemplateSyncConfig(ctx context.Context, params *DeleteTemplateSyncConfigInput, optFns ...func(*Options)) (*DeleteTemplateSyncConfigOutput, error) {
 	if params == nil {
 		params = &DeleteTemplateSyncConfigInput{}

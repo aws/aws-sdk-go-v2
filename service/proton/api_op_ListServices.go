@@ -12,6 +12,8 @@ import (
 )
 
 // List services with summaries of detail data.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}

@@ -25,6 +25,8 @@ import (
 //     resulting deployment state is SUCCEEDED and the cancellation attempt has no
 //     effect.
 //
+// Deprecated: AWS Proton is not accepting new customers.
+//
 // [Update an environment]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-update.html
 func (c *Client) CancelEnvironmentDeployment(ctx context.Context, params *CancelEnvironmentDeploymentInput, optFns ...func(*Options)) (*CancelEnvironmentDeploymentOutput, error) {
 	if params == nil {

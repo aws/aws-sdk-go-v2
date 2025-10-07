@@ -12,6 +12,8 @@ import (
 )
 
 // Get detailed data for the service sync blocker summary.
+//
+// Deprecated: AWS Proton is not accepting new customers.
 func (c *Client) GetServiceSyncBlockerSummary(ctx context.Context, params *GetServiceSyncBlockerSummaryInput, optFns ...func(*Options)) (*GetServiceSyncBlockerSummaryOutput, error) {
 	if params == nil {
 		params = &GetServiceSyncBlockerSummaryInput{}
