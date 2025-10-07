@@ -1,8 +1,0 @@
-{
-    "id": "b28d438a-c9d8-4c24-82b3-112c6b35cf32",
-    "type": "feature",
-    "description": "Deprecating APIs in AWS Proton namespace.",
-    "modules": [
-        "service/proton"
-    ]
-}

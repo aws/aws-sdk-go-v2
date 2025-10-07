@@ -3,11 +3,11 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.39.2
 	github.com/aws/aws-sdk-go-v2/config v1.31.12
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.19.11
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.254.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.77.6
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.4
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.66.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.8
 	github.com/aws/aws-sdk-go-v2/service/sts v1.38.6
@@ -24,7 +24,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.8.9 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.9 // indirect

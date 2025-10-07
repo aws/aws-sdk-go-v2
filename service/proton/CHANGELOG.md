@@ -1,3 +1,7 @@
+# v1.39.0 (2025-10-07)
+
+* **Feature**: Deprecating APIs in AWS Proton namespace.
+
 # v1.38.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,14 @@
+# Release (2025-10-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.9.0](service/internal/checksum/CHANGELOG.md#v190-2025-10-07)
+  * **Feature**: Cache first calculated checksum and reuse it in retry, this feature avoids checksum re-calculation and enables request payload consistency check among attempts.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.39.0](service/proton/CHANGELOG.md#v1390-2025-10-07)
+  * **Feature**: Deprecating APIs in AWS Proton namespace.
+
 # Release (2025-10-06)
 
 ## Module Highlights
