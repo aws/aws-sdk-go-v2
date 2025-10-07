@@ -30,6 +30,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, Proton\n      can use the associated IAM role to provision environment infrastructure resources in the associated environment account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton User guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -268,27 +272,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -954,6 +958,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Attempts to cancel a component deployment (for a component that is in the <code>IN_PROGRESS</code> deployment status).</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>"
             }
         },
@@ -1020,6 +1028,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Attempts to cancel an environment deployment on an <a>UpdateEnvironment</a> action, if the deployment is <code>IN_PROGRESS</code>. For more\n      information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-update.html\">Update an environment</a> in the <i>Proton\n        User guide</i>.</p>\n         <p>The following list includes potential cancellation scenarios.</p>\n         <ul>\n            <li>\n               <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n               <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>If the current <a>UpdateEnvironment</a> action succeeds before the cancellation attempt starts, the resulting deployment state is\n            <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
             }
         },
@@ -1086,6 +1098,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Attempts to cancel a service instance deployment on an <a>UpdateServiceInstance</a> action, if the deployment is <code>IN_PROGRESS</code>. For\n      more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-instance-update.html\">Update a service instance</a>\n      in the <i>Proton User guide</i>.</p>\n         <p>The following list includes potential cancellation scenarios.</p>\n         <ul>\n            <li>\n               <p>If the cancellation attempt succeeds, the resulting deployment state is\n            <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n               <p>If the cancellation attempt fails, the resulting deployment state is\n            <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>If the current <a>UpdateServiceInstance</a> action succeeds before the\n          cancellation attempt starts, the resulting deployment state is <code>SUCCEEDED</code> and\n          the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
             }
         },
@@ -1160,6 +1176,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Attempts to cancel a service pipeline deployment on an <a>UpdateServicePipeline</a> action, if the deployment is <code>IN_PROGRESS</code>. For\n      more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-pipeline-update.html\">Update a service pipeline</a>\n      in the <i>Proton User guide</i>.</p>\n         <p>The following list includes potential cancellation scenarios.</p>\n         <ul>\n            <li>\n               <p>If the cancellation attempt succeeds, the resulting deployment state is\n            <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n               <p>If the cancellation attempt fails, the resulting deployment state is\n            <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>If the current <a>UpdateServicePipeline</a> action succeeds before the\n          cancellation attempt starts, the resulting deployment state is <code>SUCCEEDED</code> and\n          the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
             }
         },
@@ -1698,6 +1718,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create an Proton component. A component is an infrastructure extension for a service instance.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -1815,6 +1839,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Deploy a new environment. An Proton environment is created from an environment template that defines infrastructure and resources that can be\n      shared across services.</p>\n         <p class=\"title\">\n            <b>You can provision environments using the following methods:</b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Web Services-managed provisioning: Proton makes direct calls to provision your resources.</p>\n            </li>\n            <li>\n               <p>Self-managed provisioning: Proton makes pull requests on your repository to provide compiled infrastructure as code (IaC) files that your IaC\n          engine uses to provision resources.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html\">Environments</a> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html\">Provisioning methods</a> in the <i>Proton User\n        Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -1848,6 +1876,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment\n      account from a management account.</p>\n         <p>An environment account connection is a secure bi-directional connection between a <i>management account</i> and an <i>environment\n        account</i> that maintains authorization and permissions. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>Proton User\n        guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2036,6 +2068,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create an environment template for Proton. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html\">Environment Templates</a> in the <i>Proton User Guide</i>.</p>\n         <p>You can create an environment template in one of the two following ways:</p>\n         <ul>\n            <li>\n               <p>Register and publish a <i>standard</i> environment template that instructs Proton to deploy and manage environment\n          infrastructure.</p>\n            </li>\n            <li>\n               <p>Register and publish a <i>customer managed</i> environment template that connects Proton to your existing provisioned\n          infrastructure that you manage. Proton <i>doesn't</i> manage your existing provisioned infrastructure. To create an environment\n          template for customer provisioned and managed infrastructure, include the <code>provisioning</code> parameter and set the value to\n            <code>CUSTOMER_MANAGED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/template-create.html\">Register\n            and publish an environment template</a> in the <i>Proton User Guide</i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
@@ -2126,6 +2162,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create a new major or minor version of an environment template. A major version of an environment template is a version that\n        <i>isn't</i> backwards compatible. A minor version of an environment template is a version that's backwards compatible within its major\n      version.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2215,6 +2255,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create and register a link to a repository. Proton uses the link to repeatedly access the repository, to either push to it (self-managed\n      provisioning) or pull from it (template sync). You can share a linked repository across multiple resources (like environments using self-managed\n      provisioning, or synced templates). When you create a repository link, Proton creates a <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/using-service-linked-roles.html\">service-linked role</a> for you.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self\">Self-managed provisioning</a>, <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles\">Template bundles</a>, and\n        <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html\">Template sync configurations</a> in the <i>Proton\n        User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2301,6 +2345,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create an Proton service. An Proton service is an instantiation of a service\n      template and often includes several service instances and pipeline. For more information, see\n        <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-services.html\">Services</a>\n      in the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2403,6 +2451,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create a service instance.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2511,6 +2563,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create the Proton Ops configuration file.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2595,6 +2651,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create a service template. The administrator creates a service template to define\n      standardized infrastructure and an optional CI/CD service pipeline. Developers, in turn,\n      select the service template from Proton. If the selected service template includes a\n      service pipeline definition, they provide a link to their source code repository. Proton\n      then deploys and manages the infrastructure defined by the selected service template. For more\n      information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html\">Proton templates</a> in the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2685,6 +2745,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Create a new major or minor version of a service template. A major version of a service\n      template is a version that <i>isn't</i> backward compatible. A minor version of\n      a service template is a version that's backward compatible within its major version.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2787,6 +2851,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Set up a template to create new template versions automatically by tracking a linked repository. A linked repository is a repository that has\n   been registered with Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>When a commit is pushed to your linked repository, Proton checks for changes to your repository template bundles. If it detects a template\n   bundle change, a new major or minor version of its template is created, if the version doesn’t already exist. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html\">Template sync configurations</a> in the <i>Proton\n    User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2877,6 +2945,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Delete an Proton component resource.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -2937,6 +3009,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Delete the deployment.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3004,6 +3080,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Delete an environment.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3037,6 +3117,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>In an environment account, delete an environment account connection.</p>\n         <p>After you delete an environment account connection that’s in use by an Proton environment, Proton <i>can’t</i> manage the\n      environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're\n      responsible for cleaning up provisioned resources that remain without an environment connection.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton User guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3130,6 +3214,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>If no other major or minor versions of an environment template exist, delete the environment template.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3193,6 +3281,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>If no other minor versions of an environment template exist, delete a major version of the environment template if it's not the\n        <code>Recommended</code> version. Delete the <code>Recommended</code> version of the environment template if no other major versions or minor versions\n      of the environment template exist. A major version of an environment template is a version that's not backward compatible.</p>\n         <p>Delete a minor version of an environment template if it <i>isn't</i> the <code>Recommended</code> version. Delete a\n        <code>Recommended</code> minor version of the environment template if no other minor versions of the environment template exist. A minor version of an\n      environment template is a version that's backward compatible.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3270,6 +3362,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>De-register and unlink your repository.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3340,6 +3436,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Delete a service, with its instances and pipeline.</p>\n         <note>\n            <p>You can't delete a service if it has any service instances that have components attached\n        to them.</p>\n            <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
@@ -3403,6 +3503,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Delete the Proton Ops file.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3459,6 +3563,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>If no other major or minor versions of the service template exist, delete the service\n      template.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3522,6 +3630,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>If no other minor versions of a service template exist, delete a major version of the\n      service template if it's not the <code>Recommended</code> version. Delete the\n        <code>Recommended</code> version of the service template if no other major versions or minor\n      versions of the service template exist. A major version of a service template is a version\n      that <i>isn't</i> backwards compatible.</p>\n         <p>Delete a minor version of a service template if it's not the <code>Recommended</code>\n      version. Delete a <code>Recommended</code> minor version of the service template if no other\n      minor versions of the service template exist. A minor version of a service template is a\n      version that's backwards compatible.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -3599,6 +3711,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Delete a template sync configuration.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -5126,6 +5242,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detail data for Proton account-wide settings.</p>",
                 "smithy.api#readonly": {}
             }
@@ -5171,6 +5291,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a component.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
@@ -5283,6 +5407,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a deployment.</p>",
                 "smithy.api#readonly": {}
             }
@@ -5371,6 +5499,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for an environment.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
@@ -5430,6 +5562,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>In an environment account, get the detailed data for an environment account connection.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton User guide</i>.</p>",
                 "smithy.api#readonly": {}
             }
@@ -5522,6 +5658,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for an environment template.</p>",
                 "smithy.api#readonly": {}
             }
@@ -5576,6 +5716,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a major or minor version of an environment template.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
@@ -5690,6 +5834,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detail data for a linked repository.</p>",
                 "smithy.api#readonly": {}
             }
@@ -5758,6 +5906,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get the sync status of a repository used for Proton template sync. For more information about template sync, see .</p>\n         <note>\n            <p>A repository sync status isn't tied to the Proton Repository resource (or any other Proton resource). Therefore, tags on an Proton Repository resource\n        have no effect on this action. Specifically, you can't use these tags to control access to this action using Attribute-based access control\n        (ABAC).</p>\n            <p>For more information about ABAC, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags\">ABAC</a> in the <i>Proton User\n          Guide</i>.</p>\n         </note>"
             }
         },
@@ -5828,6 +5980,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get counts of Proton resources.</p>\n         <p>For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A\n   resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current.</p>\n         <p>The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor\n   version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components,\n   environments, and service templates return less information - see the <code>components</code>, <code>environments</code>, and\n    <code>serviceTemplates</code> field descriptions.</p>\n         <p>For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html\">Proton dashboard</a> in the\n    <i>Proton User Guide</i>.</p>",
                 "smithy.api#readonly": {}
             }
@@ -5874,6 +6030,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a service.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
@@ -6079,6 +6239,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a service instance. A service instance is an instantiation of\n      service template and it runs in a specific environment.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
@@ -6176,6 +6340,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get the status of the synced service instance.</p>"
             }
         },
@@ -6258,6 +6426,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for the service sync blocker summary.</p>",
                 "smithy.api#readonly": {}
             }
@@ -6317,6 +6489,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed information for the service sync configuration.</p>",
                 "smithy.api#readonly": {}
             }
@@ -6370,6 +6546,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a service template.</p>",
                 "smithy.api#readonly": {}
             }
@@ -6431,6 +6611,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detailed data for a major or minor version of a service template.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
@@ -6545,6 +6729,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get detail data for a template sync configuration.</p>",
                 "smithy.api#readonly": {}
             }
@@ -6605,6 +6793,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get the status of a template sync.</p>"
             }
         },
@@ -6715,6 +6907,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get a list of component Infrastructure as Code (IaC) outputs.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -6792,6 +6988,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List provisioned resources for a component with details.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -6860,6 +7060,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List components with summary data. You can filter the result list by environment, service, or a single service instance.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -6949,6 +7153,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List deployments. You can filter the result list by environment, service, or a single service instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7047,6 +7255,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>View a list of environment account connections.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton User guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7137,6 +7349,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List the infrastructure as code outputs for your environment.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7214,6 +7430,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List the provisioned resources for your environment.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7285,6 +7505,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List major or minor versions of an environment template with detail data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7366,6 +7590,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List environment templates.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7437,6 +7665,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List environments with detail data summaries.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7514,6 +7746,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List linked repositories with detail data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7582,6 +7818,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List repository sync definitions with detail data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7667,6 +7907,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get a list service of instance Infrastructure as Code (IaC) outputs.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7751,6 +7995,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List provisioned resources for a service instance with details.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7829,6 +8077,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List service instances with summary data. This action lists service instances of all\n      services in the Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8035,6 +8287,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Get a list of service pipeline Infrastructure as Code (IaC) outputs.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8112,6 +8368,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List provisioned resources for a service and pipeline with details.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8183,6 +8443,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List major or minor versions of a service template with detail data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8264,6 +8528,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List service templates with detail data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8332,6 +8600,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List services with summaries of detail data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8403,6 +8675,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>List tags for a resource. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton\n    resources and tagging</a> in the <i>Proton User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -8505,6 +8781,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Notify Proton of status changes to a provisioned resource when you use self-managed provisioning.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self\">Self-managed provisioning</a> in the <i>Proton User Guide</i>.</p>"
             }
         },
@@ -8716,6 +8996,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>In a management account, reject an environment account connection from another environment account.</p>\n         <p>After you reject an environment account connection request, you <i>can't</i> accept or use the rejected environment account\n      connection.</p>\n         <p>You <i>can’t</i> reject an environment account connection that's connected to an environment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton User guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -10970,6 +11254,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Tag a resource. A tag is a key-value pair of metadata that you associate with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in\n   the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -11214,6 +11502,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Remove a customer tag from a resource. A tag is a key-value pair of metadata associated with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in\n   the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -11268,6 +11560,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update Proton settings that are used for multiple services in the Amazon Web Services account.</p>"
             }
         },
@@ -11344,6 +11640,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update a component.</p>\n         <p>There are a few modes for updating a component. The <code>deploymentType</code> field defines the mode.</p>\n         <note>\n            <p>You can't update a component while its deployment status, or the deployment status of a service instance attached to it, is\n        <code>IN_PROGRESS</code>.</p>\n         </note>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>"
             }
         },
@@ -11451,6 +11751,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update an environment.</p>\n         <p>If the environment is associated with an environment account connection, <i>don't</i> update or include the\n        <code>protonServiceRoleArn</code> and <code>provisioningRepository</code> parameter to update or connect to an environment account connection.</p>\n         <p>You can only update to a new environment account connection if that connection was created in the same environment account that the current\n      environment account connection was created in. The account connection must also be associated with the current environment.</p>\n         <p>If the environment <i>isn't</i> associated with an environment account connection, <i>don't</i> update or include the\n        <code>environmentAccountConnectionId</code> parameter. You <i>can't</i> update or connect the environment to an environment account\n      connection if it <i>isn't</i> already associated with an environment connection.</p>\n         <p>You can update either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. You can’t update\n      both.</p>\n         <p>If the environment was configured for Amazon Web Services-managed provisioning, omit the <code>provisioningRepository</code> parameter.</p>\n         <p>If the environment was configured for self-managed provisioning, specify the <code>provisioningRepository</code> parameter and omit the\n        <code>protonServiceRoleArn</code> and <code>environmentAccountConnectionId</code> parameters.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html\">Environments</a> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html\">Provisioning methods</a> in the <i>Proton User\n        Guide</i>.</p>\n         <p>There are four modes for updating an environment. The <code>deploymentType</code> field defines the mode.</p>\n         <dl>\n            <dt/>\n            <dd>\n               <p>\n                  <code>NONE</code>\n               </p>\n               <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n               <p>In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated.\n              <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n               <p>In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in\n            use, by default. You can also specify a different minor version of the current major version in use.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n               <p>In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template,\n            by default. You can also specify a different major version that's higher than the major version in use and a minor version.</p>\n            </dd>\n         </dl>"
             }
         },
@@ -11483,6 +11787,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>In an environment account, update an environment account connection to use a new IAM role.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton User guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
@@ -11657,6 +11965,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update an environment template.</p>"
             }
         },
@@ -11732,6 +12044,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update a major or minor version of an environment template.</p>"
             }
         },
@@ -11824,6 +12140,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Edit a service description or use a spec to add and delete service instances.</p>\n         <note>\n            <p>Existing service instances and the service pipeline <i>can't</i> be edited\n        using this API. They can only be deleted.</p>\n         </note>\n         <p>Use the <code>description</code> parameter to modify the description.</p>\n         <p>Edit the <code>spec</code> parameter to add or delete instances.</p>\n         <note>\n            <p>You can't delete a service instance (remove it from the spec) if it has an attached\n        component.</p>\n            <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>\n         </note>"
             }
         },
@@ -11887,6 +12207,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update a service instance.</p>\n         <p>There are a few modes for updating a service instance. The <code>deploymentType</code>\n      field defines the mode.</p>\n         <note>\n            <p>You can't update a service instance while its deployment status, or the deployment\n        status of a component attached to it, is <code>IN_PROGRESS</code>.</p>\n            <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>\n         </note>"
             }
         },
@@ -12001,6 +12325,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update the service pipeline.</p>\n         <p>There are four modes for updating a service pipeline. The <code>deploymentType</code>\n      field defines the mode.</p>\n         <dl>\n            <dt/>\n            <dd>\n               <p>\n                  <code>NONE</code>\n               </p>\n               <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested\n            metadata parameters are updated.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n               <p>In this mode, the service pipeline is deployed and updated with the new spec that\n            you provide. Only requested parameters are updated. <i>Don’t</i> include\n            major or minor version parameters when you use this <code>deployment-type</code>.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n               <p>In this mode, the service pipeline is deployed and updated with the published,\n            recommended (latest) minor version of the current major version in use, by default. You\n            can specify a different minor version of the current major version in use.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n               <p>In this mode, the service pipeline is deployed and updated with the published,\n            recommended (latest) major and minor version of the current template by default. You can\n            specify a different major version that's higher than the major version in use and a\n            minor version.</p>\n            </dd>\n         </dl>"
             }
         },
@@ -12093,6 +12421,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update the service sync blocker by resolving it.</p>"
             }
         },
@@ -12169,6 +12501,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update the Proton Ops config file.</p>"
             }
         },
@@ -12252,6 +12588,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update a service template.</p>"
             }
         },
@@ -12327,6 +12667,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update a major or minor version of a service template.</p>"
             }
         },
@@ -12428,6 +12772,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "10/07/2025",
+                    "message": "AWS Proton is not accepting new customers."
+                },
                 "smithy.api#documentation": "<p>Update template sync configuration parameters, except for the <code>templateName</code> and <code>templateType</code>. Repository details\n   (branch, name, and provider) should be of a linked repository. A linked repository is a repository that has been registered with Proton. For\n   more information, see <a>CreateRepository</a>.</p>"
             }
         },
