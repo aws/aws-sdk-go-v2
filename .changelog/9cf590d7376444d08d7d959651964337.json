@@ -1,0 +1,8 @@
+{
+    "id": "9cf590d7-3764-44d0-8d7d-959651964337",
+    "type": "feature",
+    "description": "Add durability checks to validate part count and range for upload/download. You can disable this with `DisableValidateParts` in upload/download options, though doing so is not recommended because it damages the durability posture of your application.",
+    "modules": [
+        "feature/s3/manager"
+    ]
+}
