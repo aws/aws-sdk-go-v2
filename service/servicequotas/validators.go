@@ -250,6 +250,26 @@ func (m *validateOpRequestServiceQuotaIncrease) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAutoManagement struct {
+}
+
+func (*validateOpStartAutoManagement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAutoManagement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAutoManagementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAutoManagementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -336,6 +356,10 @@ func addOpPutServiceQuotaIncreaseRequestIntoTemplateValidationMiddleware(stack *
 
 func addOpRequestServiceQuotaIncreaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRequestServiceQuotaIncrease{}, middleware.After)
+}
+
+func addOpStartAutoManagementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAutoManagement{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -589,6 +613,24 @@ func validateOpRequestServiceQuotaIncreaseInput(v *RequestServiceQuotaIncreaseIn
 	}
 	if v.DesiredValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DesiredValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAutoManagementInput(v *StartAutoManagementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAutoManagementInput"}
+	if len(v.OptInLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OptInLevel"))
+	}
+	if len(v.OptInType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -398,6 +398,18 @@ func TestCheckSnapshot_StartConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartOutpostDecommission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOutpostDecommission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartOutpostDecommission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -798,6 +810,18 @@ func TestUpdateSnapshot_StartConnection(t *testing.T) {
 	_, err := svc.StartConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartOutpostDecommission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOutpostDecommission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartOutpostDecommission")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

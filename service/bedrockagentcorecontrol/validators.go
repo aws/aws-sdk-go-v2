@@ -2412,9 +2412,7 @@ func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 	if len(v.AuthorizerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerType"))
 	}
-	if v.AuthorizerConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerConfiguration"))
-	} else if v.AuthorizerConfiguration != nil {
+	if v.AuthorizerConfiguration != nil {
 		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -3046,9 +3044,7 @@ func validateOpUpdateGatewayInput(v *UpdateGatewayInput) error {
 	if len(v.AuthorizerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerType"))
 	}
-	if v.AuthorizerConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerConfiguration"))
-	} else if v.AuthorizerConfiguration != nil {
+	if v.AuthorizerConfiguration != nil {
 		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
 		}

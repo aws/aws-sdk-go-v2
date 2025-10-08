@@ -470,6 +470,26 @@ func (m *validateOpStartConnection) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartOutpostDecommission struct {
+}
+
+func (*validateOpStartOutpostDecommission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOutpostDecommission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOutpostDecommissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOutpostDecommissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -682,6 +702,10 @@ func addOpStartConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartConnection{}, middleware.After)
 }
 
+func addOpStartOutpostDecommissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOutpostDecommission{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -811,9 +835,6 @@ func validateOpCreateOrderInput(v *CreateOrderInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOrderInput"}
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
-	}
-	if v.LineItems == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LineItems"))
 	}
 	if len(v.PaymentOption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PaymentOption"))
@@ -1149,6 +1170,21 @@ func validateOpStartConnectionInput(v *StartConnectionInput) error {
 	}
 	if v.ClientPublicKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientPublicKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartOutpostDecommissionInput(v *StartOutpostDecommissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOutpostDecommissionInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,47 +11,42 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an order for an Outpost.
-func (c *Client) CreateOrder(ctx context.Context, params *CreateOrderInput, optFns ...func(*Options)) (*CreateOrderOutput, error) {
+// Starts the decommission process to return the Outposts racks or servers.
+func (c *Client) StartOutpostDecommission(ctx context.Context, params *StartOutpostDecommissionInput, optFns ...func(*Options)) (*StartOutpostDecommissionOutput, error) {
 	if params == nil {
-		params = &CreateOrderInput{}
+		params = &StartOutpostDecommissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateOrder", params, optFns, c.addOperationCreateOrderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartOutpostDecommission", params, optFns, c.addOperationStartOutpostDecommissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateOrderOutput)
+	out := result.(*StartOutpostDecommissionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateOrderInput struct {
+type StartOutpostDecommissionInput struct {
 
-	//  The ID or the Amazon Resource Name (ARN) of the Outpost.
+	// The ID or ARN of the Outpost that you want to decommission.
 	//
 	// This member is required.
 	OutpostIdentifier *string
 
-	// The payment option.
-	//
-	// This member is required.
-	PaymentOption types.PaymentOption
-
-	// The line items that make up the order.
-	LineItems []types.LineItemRequest
-
-	// The payment terms.
-	PaymentTerm types.PaymentTerm
+	// Validates the request without starting the decommission process.
+	ValidateOnly bool
 
 	noSmithyDocumentSerde
 }
 
-type CreateOrderOutput struct {
+type StartOutpostDecommissionOutput struct {
 
-	// Information about this order.
-	Order *types.Order
+	// The resources still associated with the Outpost that you are decommissioning.
+	BlockingResourceTypes []types.BlockingResourceType
+
+	// The status of the decommission request.
+	Status types.DecommissionRequestStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,19 +54,19 @@ type CreateOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartOutpostDecommissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOrder{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutpostDecommission{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOrder{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutpostDecommission{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOrder"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "StartOutpostDecommission"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -126,10 +121,10 @@ func (c *Client) addOperationCreateOrderMiddlewares(stack *middleware.Stack, opt
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateOrderValidationMiddleware(stack); err != nil {
+	if err = addOpStartOutpostDecommissionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOrder(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartOutpostDecommission(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -192,10 +187,10 @@ func (c *Client) addOperationCreateOrderMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateOrder(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartOutpostDecommission(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateOrder",
+		OperationName: "StartOutpostDecommission",
 	}
 }

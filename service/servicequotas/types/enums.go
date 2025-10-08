@@ -46,6 +46,61 @@ func (ErrorCode) Values() []ErrorCode {
 	}
 }
 
+type OptInLevel string
+
+// Enum values for OptInLevel
+const (
+	OptInLevelAccount OptInLevel = "ACCOUNT"
+)
+
+// Values returns all known values for OptInLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OptInLevel) Values() []OptInLevel {
+	return []OptInLevel{
+		"ACCOUNT",
+	}
+}
+
+type OptInStatus string
+
+// Enum values for OptInStatus
+const (
+	OptInStatusEnabled  OptInStatus = "ENABLED"
+	OptInStatusDisabled OptInStatus = "DISABLED"
+)
+
+// Values returns all known values for OptInStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OptInStatus) Values() []OptInStatus {
+	return []OptInStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type OptInType string
+
+// Enum values for OptInType
+const (
+	OptInTypeNotifyOnly      OptInType = "NotifyOnly"
+	OptInTypeNotifyAndAdjust OptInType = "NotifyAndAdjust"
+)
+
+// Values returns all known values for OptInType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OptInType) Values() []OptInType {
+	return []OptInType{
+		"NotifyOnly",
+		"NotifyAndAdjust",
+	}
+}
+
 type PeriodUnit string
 
 // Enum values for PeriodUnit

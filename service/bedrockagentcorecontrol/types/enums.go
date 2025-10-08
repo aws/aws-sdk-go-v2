@@ -80,6 +80,7 @@ type AuthorizerType string
 // Enum values for AuthorizerType
 const (
 	AuthorizerTypeCustomJwt AuthorizerType = "CUSTOM_JWT"
+	AuthorizerTypeAwsIam    AuthorizerType = "AWS_IAM"
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
@@ -89,6 +90,7 @@ const (
 func (AuthorizerType) Values() []AuthorizerType {
 	return []AuthorizerType{
 		"CUSTOM_JWT",
+		"AWS_IAM",
 	}
 }
 

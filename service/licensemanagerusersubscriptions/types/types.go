@@ -40,6 +40,9 @@ type ActiveDirectorySettings struct {
 	// A list of domain IPv4 addresses that are used for the Active Directory.
 	DomainIpv4List []string
 
+	// A list of domain IPv6 addresses that are used for the Active Directory.
+	DomainIpv6List []string
+
 	// The domain name for the Active Directory.
 	DomainName *string
 
@@ -236,6 +239,9 @@ type LicenseServer struct {
 
 	// A list of domain IPv4 addresses that are used for the RDS license server.
 	Ipv4Address *string
+
+	// A list of domain IPv6 addresses that are used for the RDS license server.
+	Ipv6Address *string
 
 	// The current state of the provisioning process for the RDS license server.
 	ProvisioningStatus LicenseServerEndpointProvisioningStatus

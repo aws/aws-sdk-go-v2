@@ -35,11 +35,6 @@ func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, 
 
 type CreateGatewayInput struct {
 
-	// The authorizer configuration for the gateway.
-	//
-	// This member is required.
-	AuthorizerConfiguration types.AuthorizerConfiguration
-
 	// The type of authorizer to use for the gateway.
 	//
 	// This member is required.
@@ -60,6 +55,9 @@ type CreateGatewayInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The authorizer configuration for the gateway.
+	AuthorizerConfiguration types.AuthorizerConfiguration
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, the service

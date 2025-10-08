@@ -1,0 +1,8 @@
+{
+    "id": "bd47d4dd-0401-40e5-82e9-ed97d5b48787",
+    "type": "feature",
+    "description": "introduces Service Quotas Automatic Management. Users can opt-in to monitoring and managing service quotas, receive notifications when quota usage reaches thresholds, configure notification channels, subscribe to EventBridge events for automation, and view notifications in the AWS Health dashboard.",
+    "modules": [
+        "service/servicequotas"
+    ]
+}

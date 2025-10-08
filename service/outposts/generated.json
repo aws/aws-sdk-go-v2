@@ -36,6 +36,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_StartCapacityTask.go",
         "api_op_StartConnection.go",
+        "api_op_StartOutpostDecommission.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateOutpost.go",

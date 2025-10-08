@@ -1,0 +1,8 @@
+{
+    "id": "4625fbe9-e6ee-4f6d-83d1-0cace57bae4f",
+    "type": "feature",
+    "description": "Adding support for authorizer type AWS_IAM to AgentCore Control Gateway.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

@@ -30,11 +30,6 @@ func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, 
 
 type UpdateGatewayInput struct {
 
-	// The updated authorizer configuration for the gateway.
-	//
-	// This member is required.
-	AuthorizerConfiguration types.AuthorizerConfiguration
-
 	// The updated authorizer type for the gateway.
 	//
 	// This member is required.
@@ -60,6 +55,9 @@ type UpdateGatewayInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The updated authorizer configuration for the gateway.
+	AuthorizerConfiguration types.AuthorizerConfiguration
 
 	// The updated description for the gateway.
 	Description *string

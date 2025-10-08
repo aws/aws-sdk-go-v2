@@ -122,6 +122,18 @@ func TestCheckSnapshot_GetAssociationForServiceQuotaTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAutoManagementConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAutoManagementConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAutoManagementConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAWSDefaultServiceQuota(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAWSDefaultServiceQuota(context.Background(), nil, func(o *Options) {
@@ -278,6 +290,30 @@ func TestCheckSnapshot_RequestServiceQuotaIncrease(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartAutoManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAutoManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAutoManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopAutoManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAutoManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopAutoManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -295,6 +331,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAutoManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAutoManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAutoManagement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -354,6 +402,18 @@ func TestUpdateSnapshot_GetAssociationForServiceQuotaTemplate(t *testing.T) {
 	_, err := svc.GetAssociationForServiceQuotaTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAssociationForServiceQuotaTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAutoManagementConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAutoManagementConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAutoManagementConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -517,6 +577,30 @@ func TestUpdateSnapshot_RequestServiceQuotaIncrease(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartAutoManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAutoManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAutoManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopAutoManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAutoManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopAutoManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -534,6 +618,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAutoManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAutoManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAutoManagement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

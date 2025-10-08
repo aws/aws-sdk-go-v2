@@ -80,6 +80,24 @@ type QuotaContextInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Information on your Service Quotas for [Service Quotas Automatic Management]. Automatic Management monitors your
+// Service Quotas utilization and notifies you before you run out of your allocated
+// quotas.
+//
+// [Service Quotas Automatic Management]: https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html
+type QuotaInfo struct {
+
+	// The Service Quotas code for the Amazon Web Services service monitored with
+	// Automatic Management.
+	QuotaCode *string
+
+	// The Service Quotas name for the Amazon Web Services service monitored with
+	// Automatic Management.
+	QuotaName *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the quota period.
 type QuotaPeriod struct {
 
