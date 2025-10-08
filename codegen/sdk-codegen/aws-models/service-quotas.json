@@ -413,6 +413,50 @@
         "com.amazonaws.servicequotas#ExceptionMessage": {
             "type": "string"
         },
+        "com.amazonaws.servicequotas#ExcludedLimit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_ /]{1,128}$"
+            }
+        },
+        "com.amazonaws.servicequotas#ExcludedQuotaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.servicequotas#ExcludedLimit"
+            }
+        },
+        "com.amazonaws.servicequotas#ExcludedService": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_ /]{1,128}$"
+            }
+        },
+        "com.amazonaws.servicequotas#ExclusionList": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.servicequotas#ExcludedService"
+            },
+            "value": {
+                "target": "com.amazonaws.servicequotas#ExcludedQuotaList"
+            }
+        },
+        "com.amazonaws.servicequotas#ExclusionQuotaList": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.servicequotas#ExcludedService"
+            },
+            "value": {
+                "target": "com.amazonaws.servicequotas#QuotaInfoList"
+            }
+        },
         "com.amazonaws.servicequotas#GetAWSDefaultServiceQuota": {
             "type": "operation",
             "input": {
@@ -537,6 +581,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.servicequotas#GetAutoManagementConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#GetAutoManagementConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#GetAutoManagementConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about your <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html\">Service Quotas Automatic Management</a> configuration. Automatic Management monitors your Service Quotas utilization and notifies you before you\n            run out of your allocated quotas.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#GetAutoManagementConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#GetAutoManagementConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "OptInLevel": {
+                    "target": "com.amazonaws.servicequotas#OptInLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the opt-in level for Automatic Management. Only Amazon Web Services account level is supported.</p>"
+                    }
+                },
+                "OptInType": {
+                    "target": "com.amazonaws.servicequotas#OptInType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the opt-in type for Automatic Management. There are two modes: Notify only and Notify and Auto-Adjust. Currently, only\n                                NotifyOnly is available.</p>"
+                    }
+                },
+                "NotificationArn": {
+                    "target": "com.amazonaws.servicequotas#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table\">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications.</p>"
+                    }
+                },
+                "OptInStatus": {
+                    "target": "com.amazonaws.servicequotas#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status on whether Automatic Management is started or stopped.</p>"
+                    }
+                },
+                "ExclusionList": {
+                    "target": "com.amazonaws.servicequotas#ExclusionQuotaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Amazon Web Services services excluded from Automatic Management.\n            You won't be notified of Service Quotas utilization for Amazon Web Services services added to the\n                Automatic Management exclusion list.\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.servicequotas#GetRequestedServiceQuotaChange": {
             "type": "operation",
             "input": {
@@ -621,7 +739,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the applied quota value for the specified account-level or resource-level quota. For some quotas, only the\n            default values are available. If the applied quota value is not available for a quota,\n            the quota is not retrieved.</p>"
+                "smithy.api#documentation": "<p>Retrieves the applied quota value for the specified account-level or resource-level\n            quota. For some quotas, only the default values are available. If the applied quota\n            value is not available for a quota, the quota is not retrieved.</p>"
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaIncreaseRequestFromTemplate": {
@@ -926,7 +1044,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified Amazon Web Services service. Filter responses to return quota requests at \n        either the account level, resource level, or all levels. Responses include any open or closed requests within 90 days.</p>",
+                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified Amazon Web Services service. Filter\n            responses to return quota requests at either the account level, resource level, or all\n            levels. Responses include any open or closed requests within 90 days.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -964,7 +1082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified quota. Filter responses to return quota requests at either the\n            account level, resource level, or all levels.</p>",
+                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified quota. Filter responses to\n            return quota requests at either the account level, resource level, or all levels.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1222,7 +1340,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the applied quota values for the specified Amazon Web Services service. For some quotas, only\n            the default values are available. If the applied quota value is not available for a\n            quota, the quota is not retrieved. Filter responses to return applied quota values at either the account level,\n            resource level, or all levels.</p>",
+                "smithy.api#documentation": "<p>Lists the applied quota values for the specified Amazon Web Services service. For some quotas, only\n            the default values are available. If the applied quota value is not available for a\n            quota, the quota is not retrieved. Filter responses to return applied quota values at\n            either the account level, resource level, or all levels.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1521,6 +1639,51 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.servicequotas#OptInLevel": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.servicequotas#OptInStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.servicequotas#OptInType": {
+            "type": "enum",
+            "members": {
+                "NotifyOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotifyOnly"
+                    }
+                },
+                "NotifyAndAdjust": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotifyAndAdjust"
+                    }
+                }
+            }
+        },
         "com.amazonaws.servicequotas#OrganizationNotInAllFeaturesModeException": {
             "type": "structure",
             "members": {
@@ -1781,6 +1944,32 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.servicequotas#QuotaInfo": {
+            "type": "structure",
+            "members": {
+                "QuotaCode": {
+                    "target": "com.amazonaws.servicequotas#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Service Quotas code for the Amazon Web Services service monitored with Automatic Management.</p>"
+                    }
+                },
+                "QuotaName": {
+                    "target": "com.amazonaws.servicequotas#QuotaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Service Quotas name for the Amazon Web Services service monitored with Automatic Management.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on your Service Quotas for <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html\">Service Quotas Automatic Management</a>. Automatic Management monitors your Service Quotas utilization and notifies you before you\n            run out of your allocated quotas.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#QuotaInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.servicequotas#QuotaInfo"
+            }
+        },
         "com.amazonaws.servicequotas#QuotaMetricName": {
             "type": "string"
         },
@@ -1870,7 +2059,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits a quota increase request for the specified quota at the account or resource level.</p>"
+                "smithy.api#documentation": "<p>Submits a quota increase request for the specified quota at the account or resource\n            level.</p>"
             }
         },
         "com.amazonaws.servicequotas#RequestServiceQuotaIncreaseRequest": {
@@ -2373,6 +2562,9 @@
                     "target": "com.amazonaws.servicequotas#GetAssociationForServiceQuotaTemplate"
                 },
                 {
+                    "target": "com.amazonaws.servicequotas#GetAutoManagementConfiguration"
+                },
+                {
                     "target": "com.amazonaws.servicequotas#GetAWSDefaultServiceQuota"
                 },
                 {
@@ -2412,10 +2604,19 @@
                     "target": "com.amazonaws.servicequotas#RequestServiceQuotaIncrease"
                 },
                 {
+                    "target": "com.amazonaws.servicequotas#StartAutoManagement"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#StopAutoManagement"
+                },
+                {
                     "target": "com.amazonaws.servicequotas#TagResource"
                 },
                 {
                     "target": "com.amazonaws.servicequotas#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#UpdateAutoManagement"
                 }
             ],
             "traits": {
@@ -2439,27 +2640,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -3342,6 +3543,76 @@
                 }
             }
         },
+        "com.amazonaws.servicequotas#StartAutoManagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#StartAutoManagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#StartAutoManagementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html\">Service Quotas Automatic Management</a> for an Amazon Web Services account, including notification preferences\n            and excluded quotas configurations. Automatic Management monitors your Service Quotas utilization and notifies you before you\n            run out of your allocated quotas.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#StartAutoManagementRequest": {
+            "type": "structure",
+            "members": {
+                "OptInLevel": {
+                    "target": "com.amazonaws.servicequotas#OptInLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the opt-in level for Automatic Management. Only Amazon Web Services account level is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OptInType": {
+                    "target": "com.amazonaws.servicequotas#OptInType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the opt-in type for Automatic Management. There are two modes: Notify only and Notify and Auto-Adjust. Currently, only\n                                NotifyOnly is available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationArn": {
+                    "target": "com.amazonaws.servicequotas#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table\">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications.</p>"
+                    }
+                },
+                "ExclusionList": {
+                    "target": "com.amazonaws.servicequotas#ExclusionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Amazon Web Services services excluded from Automatic Management.\n            You won't be notified of Service Quotas utilization for Amazon Web Services services added to the\n                Automatic Management exclusion list.\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#StartAutoManagementResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.servicequotas#Statistic": {
             "type": "string",
             "traits": {
@@ -3350,6 +3621,49 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^(Sum|Maximum)$"
+            }
+        },
+        "com.amazonaws.servicequotas#StopAutoManagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#StopAutoManagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#StopAutoManagementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html\">Service Quotas Automatic Management</a> for an Amazon Web Services account and removes all associated\n            configurations. Automatic Management monitors your Service Quotas utilization and notifies you before you\n            run out of your allocated quotas.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#StopAutoManagementRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#StopAutoManagementResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#SupportCaseAllowed": {
@@ -3548,7 +3862,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.servicequotas#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can\n            get this information by using the Service Quotas console, or by listing the quotas using the\n            <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> Amazon Web Services API operation.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can\n            get this information by using the Service Quotas console, or by listing the quotas using the\n                <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> Amazon Web Services API operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3565,6 +3879,68 @@
             }
         },
         "com.amazonaws.servicequotas#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.servicequotas#UpdateAutoManagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicequotas#UpdateAutoManagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicequotas#UpdateAutoManagementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicequotas#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#NoSuchResourceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates your <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html\">Service Quotas Automatic Management</a> configuration, including notification preferences and\n            excluded quotas. Automatic Management monitors your Service Quotas utilization and notifies you before you\n            run out of your allocated quotas.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#UpdateAutoManagementRequest": {
+            "type": "structure",
+            "members": {
+                "OptInType": {
+                    "target": "com.amazonaws.servicequotas#OptInType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the opt-in type for your Automatic Management configuration.\n            There are two modes: Notify only and Notify and Auto-Adjust. Currently, only\n                                NotifyOnly is available.</p>"
+                    }
+                },
+                "NotificationArn": {
+                    "target": "com.amazonaws.servicequotas#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table\">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications you want\n            to update.</p>"
+                    }
+                },
+                "ExclusionList": {
+                    "target": "com.amazonaws.servicequotas#ExclusionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Amazon Web Services services you want to exclude from Automatic Management.\n            You won't be notified of Service Quotas utilization for Amazon Web Services services added to the\n                Automatic Management exclusion list.\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.servicequotas#UpdateAutoManagementResponse": {
             "type": "structure",
             "members": {},
             "traits": {

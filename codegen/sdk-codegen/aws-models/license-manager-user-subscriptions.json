@@ -64,6 +64,16 @@
                         }
                     }
                 },
+                "DomainIpv6List": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IpV6List",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of domain IPv6 addresses that are used for the Active Directory.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2
+                        }
+                    }
+                },
                 "DomainCredentialsProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#CredentialsProvider",
                     "traits": {
@@ -858,6 +868,18 @@
                 "target": "com.amazonaws.licensemanagerusersubscriptions#IpV4"
             }
         },
+        "com.amazonaws.licensemanagerusersubscriptions#IpV6": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|::[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}$"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#IpV6List": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#IpV6"
+            }
+        },
         "com.amazonaws.licensemanagerusersubscriptions#LicenseManagerUserSubscriptions": {
             "type": "service",
             "version": "2018-05-10",
@@ -1554,6 +1576,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of domain IPv4 addresses that are used for the RDS license server.</p>"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of domain IPv6 addresses that are used for the RDS license server.</p>"
                     }
                 }
             },

@@ -507,6 +507,59 @@
                 "target": "com.amazonaws.outposts#BlockingInstance"
             }
         },
+        "com.amazonaws.outposts#BlockingResourceType": {
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_INSTANCE"
+                    }
+                },
+                "OUTPOST_RAM_SHARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_RAM_SHARE"
+                    }
+                },
+                "LGW_ROUTING_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LGW_ROUTING_DOMAIN"
+                    }
+                },
+                "LGW_ROUTE_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LGW_ROUTE_TABLE"
+                    }
+                },
+                "LGW_VIRTUAL_INTERFACE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LGW_VIRTUAL_INTERFACE_GROUP"
+                    }
+                },
+                "OUTPOST_ORDER_CANCELLABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_ORDER_CANCELLABLE"
+                    }
+                },
+                "OUTPOST_ORDER_INTERVENTION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_ORDER_INTERVENTION_REQUIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#BlockingResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#BlockingResourceType"
+            }
+        },
         "com.amazonaws.outposts#CIDR": {
             "type": "string",
             "traits": {
@@ -1179,8 +1232,7 @@
                 "LineItems": {
                     "target": "com.amazonaws.outposts#LineItemRequestListDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The line items that make up the order.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The line items that make up the order.</p>"
                     }
                 },
                 "PaymentOption": {
@@ -1395,6 +1447,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.outposts#DecommissionRequestStatus": {
+            "type": "enum",
+            "members": {
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                },
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUESTED"
+                    }
+                }
             }
         },
         "com.amazonaws.outposts#DeleteOutpost": {
@@ -4209,6 +4284,9 @@
                     "target": "com.amazonaws.outposts#StartConnection"
                 },
                 {
+                    "target": "com.amazonaws.outposts#StartOutpostDecommission"
+                },
+                {
                     "target": "com.amazonaws.outposts#TagResource"
                 },
                 {
@@ -5925,6 +6003,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#StartOutpostDecommission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#StartOutpostDecommissionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#StartOutpostDecommissionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts the decommission process to return the Outposts racks or servers.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/outposts/{OutpostIdentifier}/decommission",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#StartOutpostDecommissionInput": {
+            "type": "structure",
+            "members": {
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Outpost that you want to decommission.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidateOnly": {
+                    "target": "com.amazonaws.outposts#ValidateOnly",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Validates the request without starting the decommission process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#StartOutpostDecommissionOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.outposts#DecommissionRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the decommission request.</p>"
+                    }
+                },
+                "BlockingResourceTypes": {
+                    "target": "com.amazonaws.outposts#BlockingResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources still associated with the Outpost that you are decommissioning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#StateOrRegion": {
             "type": "string",
             "traits": {
@@ -6776,6 +6931,12 @@
         },
         "com.amazonaws.outposts#VCPUCount": {
             "type": "integer"
+        },
+        "com.amazonaws.outposts#ValidateOnly": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.outposts#ValidationException": {
             "type": "structure",
