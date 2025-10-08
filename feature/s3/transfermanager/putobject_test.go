@@ -616,6 +616,7 @@ func TestProgressListener_MultiUpload(t *testing.T) {
 
 	var opts Options
 	opts.ProgressListeners.Register(listener)
+	opts.Concurrency = 1 // ensure deterministic progress listener order
 
 	mgr := New(c, opts)
 
