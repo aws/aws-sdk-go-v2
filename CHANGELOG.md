@@ -1,3 +1,15 @@
+# Release (2025-10-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.8.0](service/bedrockagentcorecontrol/CHANGELOG.md#v180-2025-10-08)
+  * **Feature**: Adding support for authorizer type AWS_IAM to AgentCore Control Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.21.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v1210-2025-10-08)
+  * **Feature**: Released support for IPv6 and dual-stack active directories
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.57.0](service/outposts/CHANGELOG.md#v1570-2025-10-08)
+  * **Feature**: This release adds the new StartOutpostDecommission API, which starts the decommission process to return Outposts racks or servers.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.33.0](service/servicequotas/CHANGELOG.md#v1330-2025-10-08)
+  * **Feature**: introduces Service Quotas Automatic Management. Users can opt-in to monitoring and managing service quotas, receive notifications when quota usage reaches thresholds, configure notification channels, subscribe to EventBridge events for automation, and view notifications in the AWS Health dashboard.
+
 # Release (2025-10-07)
 
 ## General Highlights

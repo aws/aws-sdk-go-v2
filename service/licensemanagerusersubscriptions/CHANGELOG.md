@@ -1,3 +1,7 @@
+# v1.21.0 (2025-10-08)
+
+* **Feature**: Released support for IPv6 and dual-stack active directories
+
 # v1.20.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

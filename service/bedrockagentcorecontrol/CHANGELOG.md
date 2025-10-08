@@ -1,3 +1,7 @@
+# v1.8.0 (2025-10-08)
+
+* **Feature**: Adding support for authorizer type AWS_IAM to AgentCore Control Gateway.
+
 # v1.7.0 (2025-10-06)
 
 * **Feature**: Add support for VM lifecycle configuration parameters and A2A protocol

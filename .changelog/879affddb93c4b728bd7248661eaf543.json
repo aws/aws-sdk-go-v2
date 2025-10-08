@@ -1,8 +1,0 @@
-{
-    "id": "879affdd-b93c-4b72-8bd7-248661eaf543",
-    "type": "feature",
-    "description": "This release adds the new StartOutpostDecommission API, which starts the decommission process to return Outposts racks or servers.",
-    "modules": [
-        "service/outposts"
-    ]
-}

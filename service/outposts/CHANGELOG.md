@@ -1,3 +1,7 @@
+# v1.57.0 (2025-10-08)
+
+* **Feature**: This release adds the new StartOutpostDecommission API, which starts the decommission process to return Outposts racks or servers.
+
 # v1.56.7 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions
