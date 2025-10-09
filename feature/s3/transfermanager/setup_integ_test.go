@@ -249,8 +249,8 @@ func UniqueID() string {
 func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts ...func(options *Options)) {
 	key := UniqueID()
 
-	_, err := s3TransferManagerClient.PutObject(context.Background(),
-		&PutObjectInput{
+	_, err := s3TransferManagerClient.UploadObject(context.Background(),
+		&UploadObjectInput{
 			Bucket: bucket,
 			Key:    key,
 			Body:   testData.Body,
