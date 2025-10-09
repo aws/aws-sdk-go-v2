@@ -55,7 +55,7 @@ type FileFilter interface {
 // individual PutObjectInput that the S3 Transfer Manager generates
 type PutRequestCallback interface {
 	// UpdateRequest preprocesses each PutObjectInput as customized
-	UpdateRequest(*PutObjectInput)
+	UpdateRequest(*UploadObjectInput)
 }
 
 // UploadDirectoryOutput represents a response from the UploadDirectory() call
@@ -340,7 +340,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 			u.setErr(fmt.Errorf("error when opening file %s: %v", data.path, err))
 			continue
 		}
-		input := &PutObjectInput{
+		input := &UploadObjectInput{
 			Bucket: u.in.Bucket,
 			Key:    data.key,
 			Body:   f,
@@ -348,7 +348,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		if u.in.Callback != nil {
 			u.in.Callback.UpdateRequest(input)
 		}
-		out, err := u.c.PutObject(ctx, input)
+		out, err := u.c.UploadObject(ctx, input)
 		if err != nil {
 			u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
 			continue

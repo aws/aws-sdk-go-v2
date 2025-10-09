@@ -35,7 +35,7 @@ func TestUploadOrderMulti(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
 
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               "Bucket",
 		Key:                  "Key - value",
 		Body:                 bytes.NewReader(buf20MB),
@@ -114,7 +114,7 @@ func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 		Concurrency:   1,
 	})
 
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(buf20MB),
@@ -143,7 +143,7 @@ func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
 		func(o *Options) {
 			o.PartSizeBytes = 5
 		})
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(buf20MB),
@@ -164,7 +164,7 @@ func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
 func TestUploadOrderSingle(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               "Bucket",
 		Key:                  "Key - value",
 		Body:                 bytes.NewReader(buf2MB),
@@ -212,7 +212,7 @@ func TestUploadSingleFailure(t *testing.T) {
 	}
 
 	mgr := New(c, Options{})
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(buf2MB),
@@ -234,7 +234,7 @@ func TestUploadSingleFailure(t *testing.T) {
 func TestUploadOrderZero(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(make([]byte, 0)),
@@ -270,7 +270,7 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 	mgr := New(c, Options{}, func(o *Options) {
 		o.Concurrency = 1
 	})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(buf20MB),
@@ -295,7 +295,7 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 	mgr := New(c, Options{}, func(o *Options) {
 		o.Concurrency = 1
 	})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(buf20MB),
@@ -319,7 +319,7 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 	}
 
 	mgr := New(c, Options{})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(make([]byte, 1024*1024*12)),
@@ -350,7 +350,7 @@ func (f *failreader) Read(b []byte) (int, error) {
 func TestUploadOrderReadFail1(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   &failreader{times: 1},
@@ -373,7 +373,7 @@ func TestUploadOrderReadFail2(t *testing.T) {
 	mgr := New(c, Options{}, func(o *Options) {
 		o.Concurrency = 1
 	})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   &failreader{times: 2},
@@ -417,7 +417,7 @@ func (s *sizedReader) Read(p []byte) (n int, err error) {
 func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   &sizedReader{size: 1024 * 1024 * 21},
@@ -448,7 +448,7 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 func TestUploadOrderMultiBufferedReaderPartial(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   &sizedReader{size: 1024 * 1024 * 21, err: io.EOF},
@@ -481,7 +481,7 @@ func TestUploadOrderMultiBufferedReaderPartial(t *testing.T) {
 func TestUploadOrderMultiBufferedReaderEOF(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   &sizedReader{size: 1024 * 1024 * 16, err: io.EOF},
@@ -512,7 +512,7 @@ func TestUploadOrderMultiBufferedReaderEOF(t *testing.T) {
 func TestUploadOrderSingleBufferedReader(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, Options{})
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   &sizedReader{size: 1024 * 1024 * 2},
@@ -535,7 +535,7 @@ func TestUploadZeroLenObject(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
 	mgr := New(c, Options{})
-	resp, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   strings.NewReader(""),
@@ -564,12 +564,12 @@ func TestProgressListener_SingleUpload_SeekableBody(t *testing.T) {
 	mgr := New(c, opts)
 
 	body := "foobarbaz"
-	in := &PutObjectInput{
+	in := &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   strings.NewReader(body),
 	}
-	out, err := mgr.PutObject(context.Background(), in)
+	out, err := mgr.UploadObject(context.Background(), in)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,12 +592,12 @@ func TestProgressListener_SingleUpload_UnseekableBody(t *testing.T) {
 	mgr := New(c, opts)
 
 	body := "foobarbaz"
-	in := &PutObjectInput{
+	in := &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewBuffer([]byte(body)),
 	}
-	out, err := mgr.PutObject(context.Background(), in)
+	out, err := mgr.UploadObject(context.Background(), in)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,12 +620,12 @@ func TestProgressListener_MultiUpload(t *testing.T) {
 
 	mgr := New(c, opts)
 
-	in := &PutObjectInput{
+	in := &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(buf40MB),
 	}
-	out, err := mgr.PutObject(context.Background(), in)
+	out, err := mgr.UploadObject(context.Background(), in)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -666,7 +666,7 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 		o.Concurrency = 1
 		o.PartSizeBytes = minPartSizeBytes
 	})
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body: &testIncompleteReader{
@@ -705,7 +705,7 @@ func TestSSE(t *testing.T) {
 		o.Concurrency = 5
 	})
 
-	_, err := mgr.PutObject(context.Background(), &PutObjectInput{
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               "Bucket",
 		Key:                  "Key",
 		SSECustomerAlgorithm: "AES256",
@@ -729,7 +729,7 @@ func TestUploadWithContextCanceled(t *testing.T) {
 	ctx.Error = fmt.Errorf("context canceled")
 	close(ctx.DoneCh)
 
-	_, err := u.PutObject(ctx, &PutObjectInput{
+	_, err := u.UploadObject(ctx, &UploadObjectInput{
 		Bucket: "Bucket",
 		Key:    "Key",
 		Body:   bytes.NewReader(make([]byte, 0)),
@@ -793,7 +793,7 @@ func TestUploadRetry(t *testing.T) {
 			})
 
 			uploader := New(client, Options{})
-			_, err := uploader.PutObject(context.Background(), &PutObjectInput{
+			_, err := uploader.UploadObject(context.Background(), &UploadObjectInput{
 				Bucket: "bucket",
 				Key:    "key",
 				Body:   c.Body,

@@ -74,9 +74,9 @@ func (m *multipartUploadError) UploadID() string {
 	return m.uploadID
 }
 
-// PutObjectInput represents a request to the PutObject() call. It contains common fields
+// UploadObjectInput represents a request to the PutObject() call. It contains common fields
 // of s3 PutObject and CreateMultipartUpload input
-type PutObjectInput struct {
+type UploadObjectInput struct {
 	// Bucket the object is uploaded into
 	Bucket string
 
@@ -380,7 +380,7 @@ func nztime(t time.Time) *time.Time {
 	return aws.Time(t)
 }
 
-func (i PutObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorithm types.ChecksumAlgorithm) *s3.PutObjectInput {
+func (i UploadObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorithm types.ChecksumAlgorithm) *s3.PutObjectInput {
 	input := &s3.PutObjectInput{
 		Bucket: aws.String(i.Bucket),
 		Key:    aws.String(i.Key),
@@ -432,7 +432,7 @@ func (i PutObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorithm t
 	return input
 }
 
-func (i PutObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types.ChecksumAlgorithm) *s3.CreateMultipartUploadInput {
+func (i UploadObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types.ChecksumAlgorithm) *s3.CreateMultipartUploadInput {
 	input := &s3.CreateMultipartUploadInput{
 		Bucket: aws.String(i.Bucket),
 		Key:    aws.String(i.Key),
@@ -483,7 +483,7 @@ func (i PutObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types.Ch
 	return input
 }
 
-func (i PutObjectInput) mapCompleteMultipartUploadInput(uploadID *string, completedParts completedParts) *s3.CompleteMultipartUploadInput {
+func (i UploadObjectInput) mapCompleteMultipartUploadInput(uploadID *string, completedParts completedParts) *s3.CompleteMultipartUploadInput {
 	input := &s3.CompleteMultipartUploadInput{
 		Bucket:   aws.String(i.Bucket),
 		Key:      aws.String(i.Key),
@@ -505,7 +505,7 @@ func (i PutObjectInput) mapCompleteMultipartUploadInput(uploadID *string, comple
 	return input
 }
 
-func (i PutObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploadID *string, checksumAlgorithm types.ChecksumAlgorithm) *s3.UploadPartInput {
+func (i UploadObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploadID *string, checksumAlgorithm types.ChecksumAlgorithm) *s3.UploadPartInput {
 	input := &s3.UploadPartInput{
 		Bucket:     aws.String(i.Bucket),
 		Key:        aws.String(i.Key),
@@ -528,7 +528,7 @@ func (i PutObjectInput) mapUploadPartInput(body io.Reader, partNum *int32, uploa
 	return input
 }
 
-func (i *PutObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.AbortMultipartUploadInput {
+func (i *UploadObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.AbortMultipartUploadInput {
 	input := &s3.AbortMultipartUploadInput{
 		Bucket:   aws.String(i.Bucket),
 		Key:      aws.String(i.Key),
@@ -537,9 +537,9 @@ func (i *PutObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.Abor
 	return input
 }
 
-// PutObjectOutput represents a response from the PutObject() call. It contains common fields
+// UploadObjectOutput represents a response from the PutObject() call. It contains common fields
 // of s3 PutObject and CompleteMultipartUpload output
-type PutObjectOutput struct {
+type UploadObjectOutput struct {
 	// The ID for a multipart upload to S3. In the case of an error the error
 	// can be cast to the MultiUploadFailure interface to extract the upload ID.
 	// Will be empty string if multipart upload was not used, and the object
@@ -607,7 +607,7 @@ type PutObjectOutput struct {
 	ResultMetadata smithymiddleware.Metadata
 }
 
-func (o *PutObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket, key string, contentLength int64) {
+func (o *UploadObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket, key string, contentLength int64) {
 	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
 	o.ChecksumCRC32 = aws.ToString(out.ChecksumCRC32)
 	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
@@ -625,7 +625,7 @@ func (o *PutObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket
 	o.ResultMetadata = out.ResultMetadata.Clone()
 }
 
-func (o *PutObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID string, contentLength int64, completedParts completedParts) {
+func (o *UploadObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID string, contentLength int64, completedParts completedParts) {
 	o.UploadID = uploadID
 	o.CompletedParts = completedParts
 	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
@@ -645,15 +645,15 @@ func (o *PutObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteM
 	o.ResultMetadata = out.ResultMetadata
 }
 
-// PutObject uploads an object to S3, intelligently buffering large
+// UploadObject uploads an object to S3, intelligently buffering large
 // files into smaller chunks and sending them in parallel across multiple
 // goroutines. You can configure the chunk size and concurrency through the
 // Options parameters.
 //
 // Additional functional options can be provided to configure the individual
-// upload. These options are copies of the original Options instance, the client of which PutObject is called from.
+// upload. These options are copies of the original Options instance, the client of which UploadObject is called from.
 // Modifying the options will not impact the original Client and Options instance.
-func (c *Client) PutObject(ctx context.Context, input *PutObjectInput, opts ...func(*Options)) (*PutObjectOutput, error) {
+func (c *Client) UploadObject(ctx context.Context, input *UploadObjectInput, opts ...func(*Options)) (*UploadObjectOutput, error) {
 	i := uploader{in: input, options: c.options.Copy()}
 	for _, opt := range opts {
 		opt(&i.options)
@@ -664,7 +664,7 @@ func (c *Client) PutObject(ctx context.Context, input *PutObjectInput, opts ...f
 
 type uploader struct {
 	options Options
-	in      *PutObjectInput
+	in      *UploadObjectInput
 
 	// PartPool allows for the re-usage of streaming payload part buffers between upload calls
 	partPool   bytesBufferPool
@@ -673,7 +673,7 @@ type uploader struct {
 	progressEmitter *singleObjectProgressEmitter
 }
 
-func (u *uploader) upload(ctx context.Context) (*PutObjectOutput, error) {
+func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 	if err := u.init(); err != nil {
 		return nil, fmt.Errorf("unable to initialize upload: %w", err)
 	}
@@ -744,7 +744,7 @@ func (u *uploader) initSize() error {
 	return nil
 }
 
-func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanUp func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
+func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanUp func(), clientOptions ...func(*s3.Options)) (*UploadObjectOutput, error) {
 	defer cleanUp()
 
 	params := u.in.mapSingleUploadInput(r, u.options.ChecksumAlgorithm)
@@ -757,7 +757,7 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 		return nil, err
 	}
 
-	var output PutObjectOutput
+	var output UploadObjectOutput
 	output.mapFromPutObjectOutput(out, u.in.Bucket, u.in.Key, objectSize)
 
 	u.progressEmitter.BytesTransferred(ctx, objectSize)
@@ -821,7 +821,7 @@ func (cp completedParts) Swap(i, j int) {
 
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
-func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuflen int, cleanup func(), clientOptions ...func(*s3.Options)) (*PutObjectOutput, error) {
+func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuflen int, cleanup func(), clientOptions ...func(*s3.Options)) (*UploadObjectOutput, error) {
 	params := u.uploader.in.mapCreateMultipartUploadInput(u.options.ChecksumAlgorithm)
 
 	// Create a multipart
@@ -886,7 +886,7 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 		}
 	}
 
-	var out PutObjectOutput
+	var out UploadObjectOutput
 	out.mapFromCompleteMultipartUploadOutput(completeOut, aws.ToString(params.Bucket), aws.ToString(u.uploadID), u.progressEmitter.bytesTransferred.Load(), u.parts)
 
 	u.progressEmitter.Complete(ctx, &out)

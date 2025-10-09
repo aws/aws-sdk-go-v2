@@ -3,7 +3,6 @@ package transfermanager
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -11,6 +10,8 @@ import (
 	"sort"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
@@ -32,7 +33,7 @@ type keynameCallback struct {
 	keyword string
 }
 
-func (kc *keynameCallback) UpdateRequest(in *PutObjectInput) {
+func (kc *keynameCallback) UpdateRequest(in *UploadObjectInput) {
 	if in.Key == kc.keyword {
 		in.Key = in.Key + "/gotyou"
 	}
