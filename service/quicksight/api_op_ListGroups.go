@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all user groups in Amazon QuickSight.
+// Lists all user groups in Amazon Quick Sight.
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
 		params = &ListGroupsInput{}
@@ -30,8 +30,8 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 type ListGroupsInput struct {
 
 	// The ID for the Amazon Web Services account that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
-	// QuickSight account.
+	// use the ID for the Amazon Web Services account that contains your Amazon Quick
+	// Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string

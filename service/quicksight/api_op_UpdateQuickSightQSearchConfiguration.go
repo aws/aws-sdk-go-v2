@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the state of a QuickSight Q Search configuration.
+// Updates the state of a Quick Sight Q Search configuration.
 func (c *Client) UpdateQuickSightQSearchConfiguration(ctx context.Context, params *UpdateQuickSightQSearchConfigurationInput, optFns ...func(*Options)) (*UpdateQuickSightQSearchConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateQuickSightQSearchConfigurationInput{}
@@ -29,13 +29,13 @@ func (c *Client) UpdateQuickSightQSearchConfiguration(ctx context.Context, param
 
 type UpdateQuickSightQSearchConfigurationInput struct {
 
-	// The ID of the Amazon Web Services account that contains the QuickSight Q Search
-	// configuration that you want to update.
+	// The ID of the Amazon Web Services account that contains the Quick Sight Q
+	// Search configuration that you want to update.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The status of the QuickSight Q Search configuration that the user wants to
+	// The status of the Quick Sight Q Search configuration that the user wants to
 	// update.
 	//
 	// This member is required.
@@ -46,7 +46,7 @@ type UpdateQuickSightQSearchConfigurationInput struct {
 
 type UpdateQuickSightQSearchConfigurationOutput struct {
 
-	// The status of the QuickSight Q Search configuration.
+	// The status of the Quick Sight Q Search configuration.
 	QSearchStatus types.QSearchStatus
 
 	// The Amazon Web Services request ID for this operation.

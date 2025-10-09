@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the versions of the templates in the current Amazon QuickSight
+// Lists all the versions of the templates in the current Amazon Quick Sight
 // account.
 func (c *Client) ListTemplateVersions(ctx context.Context, params *ListTemplateVersionsInput, optFns ...func(*Options)) (*ListTemplateVersionsOutput, error) {
 	if params == nil {

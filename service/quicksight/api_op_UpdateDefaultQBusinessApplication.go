@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Amazon Q Business application that is linked to a QuickSight account.
+// Updates a Amazon Q Business application that is linked to a Quick Sight account.
 func (c *Client) UpdateDefaultQBusinessApplication(ctx context.Context, params *UpdateDefaultQBusinessApplicationInput, optFns ...func(*Options)) (*UpdateDefaultQBusinessApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateDefaultQBusinessApplicationInput{}
@@ -33,13 +33,13 @@ type UpdateDefaultQBusinessApplicationInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The ID of the QuickSight account that is connected to the Amazon Q Business
+	// The ID of the Quick Sight account that is connected to the Amazon Q Business
 	// application that you want to update.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The QuickSight namespace that contains the linked Amazon Q Business
+	// The Quick Sight namespace that contains the linked Amazon Q Business
 	// application. If this field is left blank, the default namespace is used.
 	// Currently, the default namespace is the only valid value for this parameter.
 	Namespace *string

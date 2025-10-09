@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates services and authorized targets to configure what the
-// QuickSight IAM Identity Center application can access.
+// Adds or updates services and authorized targets to configure what the Quick
+// Sight IAM Identity Center application can access.
 //
-// This operation is only supported for QuickSight accounts using IAM Identity
+// This operation is only supported for Quick Sight accounts using IAM Identity
 // Center
 func (c *Client) UpdateIdentityPropagationConfig(ctx context.Context, params *UpdateIdentityPropagationConfigInput, optFns ...func(*Options)) (*UpdateIdentityPropagationConfigOutput, error) {
 	if params == nil {

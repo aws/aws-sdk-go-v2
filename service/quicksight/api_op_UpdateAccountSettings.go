@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Amazon QuickSight settings in your Amazon Web Services account.
+// Updates the Amazon Quick Sight settings in your Amazon Web Services account.
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -28,24 +28,25 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// The ID for the Amazon Web Services account that contains the QuickSight
+	// The ID for the Amazon Web Services account that contains the Quick Sight
 	// settings that you want to list.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The default namespace for this Amazon Web Services account. Currently, the
-	// default is default . IAM users that register for the first time with QuickSight
-	// provide an email address that becomes associated with the default namespace.
+	// default is default . IAM users that register for the first time with Amazon
+	// Quick Sight provide an email address that becomes associated with the default
+	// namespace.
 	//
 	// This member is required.
 	DefaultNamespace *string
 
-	// The email address that you want QuickSight to send notifications to regarding
-	// your Amazon Web Services account or QuickSight subscription.
+	// The email address that you want Quick Sight to send notifications to regarding
+	// your Amazon Web Services account or Quick Sight subscription.
 	NotificationEmail *string
 
-	// A boolean value that determines whether or not an QuickSight account can be
+	// A boolean value that determines whether or not an Quick Sight account can be
 	// deleted. A True value doesn't allow the account to be deleted and results in an
 	// error message if a user tries to make a DeleteAccountSubscription request. A
 	// False value will allow the account to be deleted.

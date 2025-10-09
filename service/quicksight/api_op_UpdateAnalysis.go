@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an analysis in Amazon QuickSight
+// Updates an analysis in Amazon Quick Sight
 func (c *Client) UpdateAnalysis(ctx context.Context, params *UpdateAnalysisInput, optFns ...func(*Options)) (*UpdateAnalysisOutput, error) {
 	if params == nil {
 		params = &UpdateAnalysisInput{}
@@ -42,7 +42,7 @@ type UpdateAnalysisInput struct {
 	AwsAccountId *string
 
 	// A descriptive name for the analysis that you're updating. This name displays
-	// for the analysis in the QuickSight console.
+	// for the analysis in the Amazon Quick Sight console.
 	//
 	// This member is required.
 	Name *string
@@ -63,8 +63,8 @@ type UpdateAnalysisInput struct {
 	SourceEntity *types.AnalysisSourceEntity
 
 	// The Amazon Resource Name (ARN) for the theme to apply to the analysis that
-	// you're creating. To see the theme in the QuickSight console, make sure that you
-	// have access to it.
+	// you're creating. To see the theme in the Amazon Quick Sight console, make sure
+	// that you have access to it.
 	ThemeArn *string
 
 	// The option to relax the validation needed to update an analysis with definition

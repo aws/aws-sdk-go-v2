@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a Amazon Q Business application that is linked to an QuickSight
+// Describes a Amazon Q Business application that is linked to an Quick Sight
 // account.
 func (c *Client) DescribeDefaultQBusinessApplication(ctx context.Context, params *DescribeDefaultQBusinessApplicationInput, optFns ...func(*Options)) (*DescribeDefaultQBusinessApplicationOutput, error) {
 	if params == nil {
@@ -29,13 +29,13 @@ func (c *Client) DescribeDefaultQBusinessApplication(ctx context.Context, params
 
 type DescribeDefaultQBusinessApplicationInput struct {
 
-	// The ID of the QuickSight account that is linked to the Amazon Q Business
+	// The ID of the Quick Sight account that is linked to the Amazon Q Business
 	// application that you want described.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The QuickSight namespace that contains the linked Amazon Q Business
+	// The Quick Sight namespace that contains the linked Amazon Q Business
 	// application. If this field is left blank, the default namespace is used.
 	// Currently, the default namespace is the only valid value for this parameter.
 	Namespace *string
@@ -45,7 +45,7 @@ type DescribeDefaultQBusinessApplicationInput struct {
 
 type DescribeDefaultQBusinessApplicationOutput struct {
 
-	// The ID of the Amazon Q Business application that is linked to the QuickSight
+	// The ID of the Amazon Q Business application that is linked to the Quick Sight
 	// account.
 	ApplicationId *string
 

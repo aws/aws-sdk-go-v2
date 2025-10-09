@@ -11,34 +11,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an QuickSight account, or subscribes to QuickSight Q.
+// Creates an Amazon Quick Sight account, or subscribes to Amazon Quick Sight Q.
 //
 // The Amazon Web Services Region for the account is derived from what is
 // configured in the CLI or SDK.
 //
 // Before you use this operation, make sure that you can connect to an existing
 // Amazon Web Services account. If you don't have an Amazon Web Services account,
-// see [Sign up for Amazon Web Services]in the Amazon QuickSight User Guide. The person who signs up for QuickSight
-// needs to have the correct Identity and Access Management (IAM) permissions. For
-// more information, see [IAM Policy Examples for QuickSight]in the QuickSight User Guide.
+// see [Sign up for Amazon Web Services]in the Amazon Quick Sight User Guide. The person who signs up for Amazon
+// Quick Sight needs to have the correct Identity and Access Management (IAM)
+// permissions. For more information, see [IAM Policy Examples for Amazon Quick Sight]in the Amazon Quick Sight User Guide.
 //
 // If your IAM policy includes both the Subscribe and CreateAccountSubscription
 // actions, make sure that both actions are set to Allow . If either action is set
 // to Deny , the Deny action prevails and your API call fails.
 //
 // You can't pass an existing IAM role to access other Amazon Web Services
-// services using this API operation. To pass your existing IAM role to QuickSight,
-// see [Passing IAM roles to QuickSight]in the QuickSight User Guide.
+// services using this API operation. To pass your existing IAM role to Amazon
+// Quick Sight, see [Passing IAM roles to Amazon Quick Sight]in the Amazon Quick Sight User Guide.
 //
-// You can't set default resource access on the new account from the QuickSight
-// API. Instead, add default resource access from the QuickSight console. For more
-// information about setting default resource access to Amazon Web Services
-// services, see [Setting default resource access to Amazon Web Services services]in the QuickSight User Guide.
+// You can't set default resource access on the new account from the Amazon Quick
+// Sight API. Instead, add default resource access from the Amazon Quick Sight
+// console. For more information about setting default resource access to Amazon
+// Web Services services, see [Setting default resource access to Amazon Web Services services]in the Amazon Quick Sight User Guide.
 //
 // [Setting default resource access to Amazon Web Services services]: https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html
-// [Passing IAM roles to QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role
+// [IAM Policy Examples for Amazon Quick Sight]: https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html
+// [Passing IAM roles to Amazon Quick Sight]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role
 // [Sign up for Amazon Web Services]: https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html
-// [IAM Policy Examples for QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html
 func (c *Client) CreateAccountSubscription(ctx context.Context, params *CreateAccountSubscriptionInput, optFns ...func(*Options)) (*CreateAccountSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateAccountSubscriptionInput{}
@@ -56,14 +56,14 @@ func (c *Client) CreateAccountSubscription(ctx context.Context, params *CreateAc
 
 type CreateAccountSubscriptionInput struct {
 
-	// The name of your QuickSight account. This name is unique over all of Amazon Web
-	// Services, and it appears only when users sign in. You can't change AccountName
-	// value after the QuickSight account is created.
+	// The name of your Amazon Quick Sight account. This name is unique over all of
+	// Amazon Web Services, and it appears only when users sign in. You can't change
+	// AccountName value after the Amazon Quick Sight account is created.
 	//
 	// This member is required.
 	AccountName *string
 
-	// The method that you want to use to authenticate your QuickSight account.
+	// The method that you want to use to authenticate your Quick Sight account.
 	//
 	// If you choose ACTIVE_DIRECTORY , provide an ActiveDirectoryName and an
 	// AdminGroup associated with your Active Directory.
@@ -75,79 +75,79 @@ type CreateAccountSubscriptionInput struct {
 	AuthenticationMethod types.AuthenticationMethodOption
 
 	// The Amazon Web Services account ID of the account that you're using to create
-	// your QuickSight account.
+	// your Quick Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The email address that you want QuickSight to send notifications to regarding
-	// your QuickSight account or QuickSight subscription.
+	// The email address that you want Quick Sight to send notifications to regarding
+	// your Quick Sight account or Quick Sight subscription.
 	//
 	// This member is required.
 	NotificationEmail *string
 
 	// The name of your Active Directory. This field is required if ACTIVE_DIRECTORY
-	// is the selected authentication method of the new QuickSight account.
+	// is the selected authentication method of the new Quick Sight account.
 	ActiveDirectoryName *string
 
 	// The admin group associated with your Active Directory or IAM Identity Center
 	// account. Either this field or the AdminProGroup field is required if
 	// ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method
-	// of the new QuickSight account.
+	// of the new Quick Sight account.
 	//
-	// For more information about using IAM Identity Center in QuickSight, see [Using IAM Identity Center with QuickSight Enterprise Edition] in the
-	// QuickSight User Guide. For more information about using Active Directory in
-	// QuickSight, see [Using Active Directory with QuickSight Enterprise Edition]in the QuickSight User Guide.
+	// For more information about using IAM Identity Center in Amazon Quick Sight, see [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]
+	// in the Amazon Quick Sight User Guide. For more information about using Active
+	// Directory in Amazon Quick Sight, see [Using Active Directory with Amazon Quick Sight Enterprise Edition]in the Amazon Quick Sight User Guide.
 	//
-	// [Using IAM Identity Center with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
-	// [Using Active Directory with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using Active Directory with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
 	AdminGroup []string
 
 	// The admin pro group associated with your Active Directory or IAM Identity
 	// Center account. Either this field or the AdminGroup field is required if
 	// ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method
-	// of the new QuickSight account.
+	// of the new Quick Sight account.
 	//
-	// For more information about using IAM Identity Center in QuickSight, see [Using IAM Identity Center with QuickSight Enterprise Edition] in the
-	// QuickSight User Guide. For more information about using Active Directory in
-	// QuickSight, see [Using Active Directory with QuickSight Enterprise Edition]in the QuickSight User Guide.
+	// For more information about using IAM Identity Center in Amazon Quick Sight, see [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]
+	// in the Amazon Quick Sight User Guide. For more information about using Active
+	// Directory in Amazon Quick Sight, see [Using Active Directory with Amazon Quick Sight Enterprise Edition]in the Amazon Quick Sight User Guide.
 	//
-	// [Using IAM Identity Center with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
-	// [Using Active Directory with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using Active Directory with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
 	AdminProGroup []string
 
 	// The author group associated with your Active Directory or IAM Identity Center
 	// account.
 	//
-	// For more information about using IAM Identity Center in QuickSight, see [Using IAM Identity Center with QuickSight Enterprise Edition] in the
-	// QuickSight User Guide. For more information about using Active Directory in
-	// QuickSight, see [Using Active Directory with QuickSight Enterprise Edition]in the QuickSight User Guide.
+	// For more information about using IAM Identity Center in Amazon Quick Sight, see [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]
+	// in the Amazon Quick Sight User Guide. For more information about using Active
+	// Directory in Amazon Quick Sight, see [Using Active Directory with Amazon Quick Sight Enterprise Edition]in the Amazon Quick Sight User Guide.
 	//
-	// [Using IAM Identity Center with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
-	// [Using Active Directory with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using Active Directory with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
 	AuthorGroup []string
 
 	// The author pro group associated with your Active Directory or IAM Identity
 	// Center account.
 	//
-	// For more information about using IAM Identity Center in QuickSight, see [Using IAM Identity Center with QuickSight Enterprise Edition] in the
-	// QuickSight User Guide. For more information about using Active Directory in
-	// QuickSight, see [Using Active Directory with QuickSight Enterprise Edition]in the QuickSight User Guide.
+	// For more information about using IAM Identity Center in Amazon Quick Sight, see [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]
+	// in the Amazon Quick Sight User Guide. For more information about using Active
+	// Directory in Amazon Quick Sight, see [Using Active Directory with Amazon Quick Sight Enterprise Edition]in the Amazon Quick Sight User Guide.
 	//
-	// [Using IAM Identity Center with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
-	// [Using Active Directory with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using Active Directory with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
 	AuthorProGroup []string
 
-	// A 10-digit phone number for the author of the QuickSight account to use for
-	// future communications. This field is required if ENTERPPRISE_AND_Q is the
-	// selected edition of the new QuickSight account.
+	// A 10-digit phone number for the author of the Amazon Quick Sight account to use
+	// for future communications. This field is required if ENTERPPRISE_AND_Q is the
+	// selected edition of the new Amazon Quick Sight account.
 	ContactNumber *string
 
-	// The ID of the Active Directory that is associated with your QuickSight account.
+	// The ID of the Active Directory that is associated with your Quick Sight account.
 	DirectoryId *string
 
-	// The edition of QuickSight that you want your account to have. Currently, you
-	// can choose from ENTERPRISE or ENTERPRISE_AND_Q .
+	// The edition of Amazon Quick Sight that you want your account to have.
+	// Currently, you can choose from ENTERPRISE or ENTERPRISE_AND_Q .
 	//
 	// If you choose ENTERPRISE_AND_Q , the following parameters are required:
 	//
@@ -160,49 +160,49 @@ type CreateAccountSubscriptionInput struct {
 	//   - ContactNumber
 	Edition types.Edition
 
-	// The email address of the author of the QuickSight account to use for future
-	// communications. This field is required if ENTERPPRISE_AND_Q is the selected
-	// edition of the new QuickSight account.
+	// The email address of the author of the Amazon Quick Sight account to use for
+	// future communications. This field is required if ENTERPPRISE_AND_Q is the
+	// selected edition of the new Amazon Quick Sight account.
 	EmailAddress *string
 
-	// The first name of the author of the QuickSight account to use for future
-	// communications. This field is required if ENTERPPRISE_AND_Q is the selected
-	// edition of the new QuickSight account.
+	// The first name of the author of the Amazon Quick Sight account to use for
+	// future communications. This field is required if ENTERPPRISE_AND_Q is the
+	// selected edition of the new Amazon Quick Sight account.
 	FirstName *string
 
 	// The Amazon Resource Name (ARN) for the IAM Identity Center instance.
 	IAMIdentityCenterInstanceArn *string
 
-	// The last name of the author of the QuickSight account to use for future
+	// The last name of the author of the Amazon Quick Sight account to use for future
 	// communications. This field is required if ENTERPPRISE_AND_Q is the selected
-	// edition of the new QuickSight account.
+	// edition of the new Amazon Quick Sight account.
 	LastName *string
 
 	// The reader group associated with your Active Directory or IAM Identity Center
 	// account.
 	//
-	// For more information about using IAM Identity Center in QuickSight, see [Using IAM Identity Center with QuickSight Enterprise Edition] in the
-	// QuickSight User Guide. For more information about using Active Directory in
-	// QuickSight, see [Using Active Directory with QuickSight Enterprise Edition]in the QuickSight User Guide.
+	// For more information about using IAM Identity Center in Amazon Quick Sight, see [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]
+	// in the Amazon Quick Sight User Guide. For more information about using Active
+	// Directory in Amazon Quick Sight, see [Using Active Directory with Amazon Quick Sight Enterprise Edition]in the Amazon Quick Sight User Guide.
 	//
-	// [Using IAM Identity Center with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
-	// [Using Active Directory with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using Active Directory with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
 	ReaderGroup []string
 
 	// The reader pro group associated with your Active Directory or IAM Identity
 	// Center account.
 	//
-	// For more information about using IAM Identity Center in QuickSight, see [Using IAM Identity Center with QuickSight Enterprise Edition] in the
-	// QuickSight User Guide. For more information about using Active Directory in
-	// QuickSight, see [Using Active Directory with QuickSight Enterprise Edition]in the QuickSight User Guide.
+	// For more information about using IAM Identity Center in Amazon Quick Sight, see [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]
+	// in the Amazon Quick Sight User Guide. For more information about using Active
+	// Directory in Amazon Quick Sight, see [Using Active Directory with Amazon Quick Sight Enterprise Edition]in the Amazon Quick Sight User Guide.
 	//
-	// [Using IAM Identity Center with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
-	// [Using Active Directory with QuickSight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using Active Directory with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+	// [Using IAM Identity Center with Amazon Quick Sight Enterprise Edition]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
 	ReaderProGroup []string
 
-	// The realm of the Active Directory that is associated with your QuickSight
+	// The realm of the Active Directory that is associated with your Quick Sight
 	// account. This field is required if ACTIVE_DIRECTORY is the selected
-	// authentication method of the new QuickSight account.
+	// authentication method of the new Quick Sight account.
 	Realm *string
 
 	noSmithyDocumentSerde
@@ -213,8 +213,8 @@ type CreateAccountSubscriptionOutput struct {
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// A SignupResponse object that returns information about a newly created
-	// QuickSight account.
+	// A SignupResponse object that returns information about a newly created Quick
+	// Sight account.
 	SignupResponse *types.SignupResponse
 
 	// The HTTP status of the request.

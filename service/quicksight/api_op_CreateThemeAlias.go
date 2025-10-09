@@ -31,7 +31,7 @@ type CreateThemeAliasInput struct {
 
 	// The name that you want to give to the theme alias that you are creating. The
 	// alias name can't begin with a $ . Alias names that start with $ are reserved by
-	// Amazon QuickSight.
+	// Amazon Quick Sight.
 	//
 	// This member is required.
 	AliasName *string

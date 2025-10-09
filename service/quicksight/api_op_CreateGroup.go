@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the CreateGroup operation to create a group in QuickSight. You can create
+// Use the CreateGroup operation to create a group in Quick Sight. You can create
 // up to 10,000 groups in a namespace. If you want to create more than 10,000
 // groups in a namespace, contact Amazon Web Services Support.
 //
@@ -37,8 +37,8 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 type CreateGroupInput struct {
 
 	// The ID for the Amazon Web Services account that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
-	// QuickSight account.
+	// use the ID for the Amazon Web Services account that contains your Amazon Quick
+	// Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string

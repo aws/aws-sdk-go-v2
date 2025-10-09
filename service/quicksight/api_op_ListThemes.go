@@ -45,9 +45,9 @@ type ListThemesInput struct {
 	//
 	//   - ALL (default) - Display all existing themes.
 	//
-	//   - CUSTOM - Display only the themes created by people using Amazon QuickSight.
+	//   - CUSTOM - Display only the themes created by people using Amazon Quick Sight.
 	//
-	//   - QUICKSIGHT - Display only the starting themes defined by QuickSight.
+	//   - QUICKSIGHT - Display only the starting themes defined by Quick Sight.
 	Type types.ThemeType
 
 	noSmithyDocumentSerde

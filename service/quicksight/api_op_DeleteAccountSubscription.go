@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deleting your QuickSight account subscription has permanent, irreversible
+// Deleting your Quick Sight account subscription has permanent, irreversible
 // consequences across all Amazon Web Services regions:
 //
 //   - Global deletion – Running this operation from any single region will delete
-//     your QuickSight account and all data in every Amazon Web Services region where
-//     you have QuickSight resources.
+//     your Quick Sight account and all data in every Amazon Web Services region where
+//     you have Quick Sight resources.
 //
 //   - Complete data loss – All dashboards, analyses, datasets, data sources, and
 //     custom visuals will be permanently deleted across all regions.
@@ -26,16 +26,16 @@ import (
 //   - Shared resources removed – All shared dashboards, folders, and resources
 //     will become inaccessible to other users and external recipients.
 //
-//   - User access terminated – All QuickSight users in your account will lose
+//   - User access terminated – All Quick Sight users in your account will lose
 //     access immediately, including authors, readers, and administrators.
 //
-//   - No recovery possible – Once deleted, your QuickSight account and all
+//   - No recovery possible – Once deleted, your Quick Sight account and all
 //     associated data cannot be restored.
 //
 // Consider exporting critical dashboards and data before proceeding with account
 // deletion.
 //
-// Use the DeleteAccountSubscription operation to delete an QuickSight account.
+// Use the DeleteAccountSubscription operation to delete an Quick Sight account.
 // This operation will result in an error message if you have configured your
 // account termination protection settings to True . To change this setting and
 // delete your account, call the UpdateAccountSettings API and set the value of

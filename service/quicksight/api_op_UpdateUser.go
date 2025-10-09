@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon QuickSight user.
+// Updates an Amazon Quick Sight user.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -30,8 +30,8 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 type UpdateUserInput struct {
 
 	// The ID for the Amazon Web Services account that the user is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
-	// QuickSight account.
+	// use the ID for the Amazon Web Services account that contains your Amazon Quick
+	// Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -46,7 +46,7 @@ type UpdateUserInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The Amazon QuickSight role of the user. The role can be one of the following
+	// The Amazon Quick Sight role of the user. The role can be one of the following
 	// default security cohorts:
 	//
 	//   - READER : A user who has read-only access to dashboards.
@@ -54,34 +54,34 @@ type UpdateUserInput struct {
 	//   - AUTHOR : A user who can create data sources, datasets, analyses, and
 	//   dashboards.
 	//
-	//   - ADMIN : A user who is an author, who can also manage Amazon QuickSight
+	//   - ADMIN : A user who is an author, who can also manage Amazon Quick Sight
 	//   settings.
 	//
 	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
-	//   Reader Pros have access to Amazon Q in QuickSight, can build stories with Amazon
-	//   Q, and can generate executive summaries from dashboards.
+	//   Reader Pros have access to Amazon Q in Quick Sight, can build stories with
+	//   Amazon Q, and can generate executive summaries from dashboards.
 	//
 	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
 	//   Author Pros can author dashboards with natural language with Amazon Q, build
 	//   stories with Amazon Q, create Topics for Q&A, and generate executive summaries
 	//   from dashboards.
 	//
-	//   - ADMIN_PRO : Admin Pros are Author Pros who can also manage Amazon QuickSight
-	//   administrative settings. Admin Pro users are billed at Author Pro pricing.
+	//   - ADMIN_PRO : Admin Pros are Author Pros who can also manage Amazon Quick
+	//   Sight administrative settings. Admin Pro users are billed at Author Pro pricing.
 	//
-	// The name of the QuickSight role is invisible to the user except for the console
-	// screens dealing with permissions.
+	// The name of the Quick Sight role is invisible to the user except for the
+	// console screens dealing with permissions.
 	//
 	// This member is required.
 	Role types.UserRole
 
-	// The Amazon QuickSight user name that you want to update.
+	// The Amazon Quick Sight user name that you want to update.
 	//
 	// This member is required.
 	UserName *string
 
 	// The URL of the custom OpenID Connect (OIDC) provider that provides identity to
-	// let a user federate into QuickSight with an associated Identity and Access
+	// let a user federate into Quick Sight with an associated Identity and Access
 	// Management(IAM) role. This parameter should only be used when
 	// ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC .
 	CustomFederationProviderUrl *string
@@ -100,18 +100,18 @@ type UpdateUserInput struct {
 	//
 	// A set of custom permissions includes any combination of these restrictions.
 	// Currently, you need to create the profile names for custom permission sets by
-	// using the QuickSight console. Then, you use the RegisterUser API operation to
-	// assign the named set of permissions to a QuickSight user.
+	// using the Quick Sight console. Then, you use the RegisterUser API operation to
+	// assign the named set of permissions to a Quick Sight user.
 	//
-	// QuickSight custom permissions are applied through IAM policies. Therefore, they
-	// override the permissions typically granted by assigning QuickSight users to one
-	// of the default security cohorts in QuickSight (admin, author, reader).
+	// Quick Sight custom permissions are applied through IAM policies. Therefore,
+	// they override the permissions typically granted by assigning Quick Sight users
+	// to one of the default security cohorts in Quick Sight (admin, author, reader).
 	//
-	// This feature is available only to QuickSight Enterprise edition subscriptions.
+	// This feature is available only to Quick Sight Enterprise edition subscriptions.
 	CustomPermissionsName *string
 
 	// The type of supported external login provider that provides identity to let a
-	// user federate into QuickSight with an associated Identity and Access
+	// user federate into Quick Sight with an associated Identity and Access
 	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
 	//
@@ -150,7 +150,7 @@ type UpdateUserOutput struct {
 	// The HTTP status of the request.
 	Status int32
 
-	// The Amazon QuickSight user.
+	// The Amazon Quick Sight user.
 	User *types.User
 
 	// Metadata pertaining to the operation's result.

@@ -128,6 +128,9 @@ func awsAwsjson11_deserializeOpErrorAssociateWebACL(response *smithyhttp.Respons
 	case strings.EqualFold("WAFInvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("WAFLimitsExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFLimitsExceededException(response, errorBody)
+
 	case strings.EqualFold("WAFNonexistentItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
 

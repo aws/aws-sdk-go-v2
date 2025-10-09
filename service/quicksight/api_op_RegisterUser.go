@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon QuickSight user whose identity is associated with the
+// Creates an Amazon Quick Sight user whose identity is associated with the
 // Identity and Access Management (IAM) identity or role specified in the request.
-// When you register a new user from the QuickSight API, QuickSight generates a
+// When you register a new user from the Quick Sight API, Quick Sight generates a
 // registration URL. The user accesses this registration URL to create their
-// account. QuickSight doesn't send a registration email to users who are
-// registered from the QuickSight API. If you want new users to receive a
-// registration email, then add those users in the QuickSight console. For more
-// information on registering a new user in the QuickSight console, see [Inviting users to access QuickSight].
+// account. Quick Sight doesn't send a registration email to users who are
+// registered from the Quick Sight API. If you want new users to receive a
+// registration email, then add those users in the Quick Sight console. For more
+// information on registering a new user in the Quick Sight console, see [Inviting users to access Quick Sight].
 //
-// [Inviting users to access QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users
+// [Inviting users to access Quick Sight]: https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users
 func (c *Client) RegisterUser(ctx context.Context, params *RegisterUserInput, optFns ...func(*Options)) (*RegisterUserOutput, error) {
 	if params == nil {
 		params = &RegisterUserInput{}
@@ -39,8 +39,8 @@ func (c *Client) RegisterUser(ctx context.Context, params *RegisterUserInput, op
 type RegisterUserInput struct {
 
 	// The ID for the Amazon Web Services account that the user is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
-	// QuickSight account.
+	// use the ID for the Amazon Web Services account that contains your Amazon Quick
+	// Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -50,7 +50,7 @@ type RegisterUserInput struct {
 	// This member is required.
 	Email *string
 
-	// The identity type that your QuickSight account uses to manage the identity of
+	// The identity type that your Quick Sight account uses to manage the identity of
 	// users.
 	//
 	// This member is required.
@@ -61,7 +61,7 @@ type RegisterUserInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The Amazon QuickSight role for the user. The user role can be one of the
+	// The Amazon Quick Sight role for the user. The user role can be one of the
 	// following:
 	//
 	//   - READER : A user who has read-only access to dashboards.
@@ -69,20 +69,20 @@ type RegisterUserInput struct {
 	//   - AUTHOR : A user who can create data sources, datasets, analyses, and
 	//   dashboards.
 	//
-	//   - ADMIN : A user who is an author, who can also manage Amazon QuickSight
+	//   - ADMIN : A user who is an author, who can also manage Amazon Quick Sight
 	//   settings.
 	//
 	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
-	//   Reader Pros have access to Amazon Q in QuickSight, can build stories with Amazon
-	//   Q, and can generate executive summaries from dashboards.
+	//   Reader Pros have access to Amazon Q in Quick Sight, can build stories with
+	//   Amazon Q, and can generate executive summaries from dashboards.
 	//
 	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
 	//   Author Pros can author dashboards with natural language with Amazon Q, build
 	//   stories with Amazon Q, create Topics for Q&A, and generate executive summaries
 	//   from dashboards.
 	//
-	//   - ADMIN_PRO : Admin Pros are Author Pros who can also manage Amazon QuickSight
-	//   administrative settings. Admin Pro users are billed at Author Pro pricing.
+	//   - ADMIN_PRO : Admin Pros are Author Pros who can also manage Amazon Quick
+	//   Sight administrative settings. Admin Pro users are billed at Author Pro pricing.
 	//
 	//   - RESTRICTED_READER : This role isn't currently available for use.
 	//
@@ -92,7 +92,7 @@ type RegisterUserInput struct {
 	UserRole types.UserRole
 
 	// The URL of the custom OpenID Connect (OIDC) provider that provides identity to
-	// let a user federate into QuickSight with an associated Identity and Access
+	// let a user federate into Quick Sight with an associated Identity and Access
 	// Management(IAM) role. This parameter should only be used when
 	// ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC .
 	CustomFederationProviderUrl *string
@@ -113,21 +113,21 @@ type RegisterUserInput struct {
 	//
 	// A set of custom permissions includes any combination of these restrictions.
 	// Currently, you need to create the profile names for custom permission sets by
-	// using the QuickSight console. Then, you use the RegisterUser API operation to
-	// assign the named set of permissions to a QuickSight user.
+	// using the Quick Sight console. Then, you use the RegisterUser API operation to
+	// assign the named set of permissions to a Quick Sight user.
 	//
-	// QuickSight custom permissions are applied through IAM policies. Therefore, they
-	// override the permissions typically granted by assigning QuickSight users to one
-	// of the default security cohorts in QuickSight (admin, author, reader, admin pro,
-	// author pro, reader pro).
+	// Quick Sight custom permissions are applied through IAM policies. Therefore,
+	// they override the permissions typically granted by assigning Quick Sight users
+	// to one of the default security cohorts in Quick Sight (admin, author, reader,
+	// admin pro, author pro, reader pro).
 	//
-	// This feature is available only to QuickSight Enterprise edition subscriptions.
+	// This feature is available only to Quick Sight Enterprise edition subscriptions.
 	//
 	// [UpdateUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html
 	CustomPermissionsName *string
 
 	// The type of supported external login provider that provides identity to let a
-	// user federate into Amazon QuickSight with an associated Identity and Access
+	// user federate into Amazon Quick Sight with an associated Identity and Access
 	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
 	//
@@ -144,16 +144,16 @@ type RegisterUserInput struct {
 	// The identity ID for a user in the external login provider.
 	ExternalLoginId *string
 
-	// The ARN of the IAM user or role that you are registering with Amazon
-	// QuickSight.
+	// The ARN of the IAM user or role that you are registering with Amazon Quick
+	// Sight.
 	IamArn *string
 
 	// You need to use this parameter only when you register one or more users using
 	// an assumed IAM role. You don't need to provide the session name for other
-	// scenarios, for example when you are registering an IAM user or an Amazon
-	// QuickSight user. You can register multiple users using the same IAM role if each
-	// user has a different session name. For more information on assuming IAM roles,
-	// see [assume-role]assume-role in the CLI Reference.
+	// scenarios, for example when you are registering an IAM user or an Amazon Quick
+	// Sight user. You can register multiple users using the same IAM role if each user
+	// has a different session name. For more information on assuming IAM roles, see [assume-role]
+	// assume-role in the CLI Reference.
 	//
 	// [assume-role]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
 	SessionName *string
@@ -161,7 +161,7 @@ type RegisterUserInput struct {
 	// The tags to associate with the user.
 	Tags []types.Tag
 
-	// The Amazon QuickSight user name that you want to create for the user you are
+	// The Amazon Quick Sight user name that you want to create for the user you are
 	// registering.
 	UserName *string
 

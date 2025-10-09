@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an Amazon QuickSight user to an Amazon QuickSight group.
+// Adds an Amazon Quick Sight user to an Amazon Quick Sight group.
 func (c *Client) CreateGroupMembership(ctx context.Context, params *CreateGroupMembershipInput, optFns ...func(*Options)) (*CreateGroupMembershipOutput, error) {
 	if params == nil {
 		params = &CreateGroupMembershipInput{}
@@ -30,8 +30,8 @@ func (c *Client) CreateGroupMembership(ctx context.Context, params *CreateGroupM
 type CreateGroupMembershipInput struct {
 
 	// The ID for the Amazon Web Services account that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
-	// QuickSight account.
+	// use the ID for the Amazon Web Services account that contains your Amazon Quick
+	// Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string

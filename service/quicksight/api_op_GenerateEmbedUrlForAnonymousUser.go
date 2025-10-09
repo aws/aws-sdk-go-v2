@@ -54,7 +54,7 @@ func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *G
 
 type GenerateEmbedUrlForAnonymousUserInput struct {
 
-	// The Amazon Resource Names (ARNs) for the QuickSight resources that the user is
+	// The Amazon Resource Names (ARNs) for the Quick Sight resources that the user is
 	// authorized to access during the lifetime of the session.
 	//
 	// If you choose Dashboard embedding experience, pass the list of dashboard ARNs
@@ -79,17 +79,17 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// This member is required.
 	ExperienceConfiguration *types.AnonymousUserEmbeddingExperienceConfiguration
 
-	// The QuickSight namespace that the anonymous user virtually belongs to. If you
-	// are not using an Amazon QuickSight custom namespace, set this to default .
+	// The Amazon Quick Sight namespace that the anonymous user virtually belongs to.
+	// If you are not using an Amazon QuickSight custom namespace, set this to default .
 	//
 	// This member is required.
 	Namespace *string
 
 	// The domains that you want to add to the allow list for access to the generated
 	// URL that is then embedded. This optional parameter overrides the static domains
-	// that are configured in the Manage QuickSight menu in the QuickSight console.
-	// Instead, it allows only the domains that you include in this parameter. You can
-	// list up to three domains or subdomains in each API call.
+	// that are configured in the Manage Quick Sight menu in the Amazon Quick Sight
+	// console. Instead, it allows only the domains that you include in this parameter.
+	// You can list up to three domains or subdomains in each API call.
 	//
 	// To include all subdomains under a specific domain to the allow list, use * . For
 	// example, https://*.sapp.amazon.com includes all subdomains under
@@ -106,7 +106,7 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// used to provide row-level security.
 	//
 	// These are not the tags used for the Amazon Web Services resource tagging
-	// feature. For more information, see [Using Row-Level Security (RLS) with Tags]in the Amazon QuickSight User Guide.
+	// feature. For more information, see [Using Row-Level Security (RLS) with Tags]in the Amazon Quick Sight User Guide.
 	//
 	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	SessionTags []types.SessionTag

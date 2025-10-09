@@ -59,10 +59,11 @@ type UpdateIAMPolicyAssignmentInput struct {
 	//   the data source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The QuickSight users, groups, or both that you want to assign the policy to.
+	// The Amazon Quick Sight users, groups, or both that you want to assign the
+	// policy to.
 	Identities map[string][]string
 
-	// The ARN for the IAM policy to apply to the QuickSight users and groups
+	// The ARN for the IAM policy to apply to the Amazon Quick Sight users and groups
 	// specified in this assignment.
 	PolicyArn *string
 
@@ -88,11 +89,12 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	//   the data source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The QuickSight users, groups, or both that the IAM policy is assigned to.
+	// The Amazon Quick Sight users, groups, or both that the IAM policy is assigned
+	// to.
 	Identities map[string][]string
 
-	// The ARN for the IAM policy applied to the QuickSight users and groups specified
-	// in this assignment.
+	// The ARN for the IAM policy applied to the Amazon Quick Sight users and groups
+	// specified in this assignment.
 	PolicyArn *string
 
 	// The Amazon Web Services request ID for this operation.

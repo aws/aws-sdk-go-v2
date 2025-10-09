@@ -110,6 +110,26 @@ func (m *validateOpCreateAccountSubscription) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateActionConnector struct {
+}
+
+func (*validateOpCreateActionConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateActionConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateActionConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateActionConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAnalysis struct {
 }
 
@@ -605,6 +625,26 @@ func (m *validateOpDeleteAccountSubscription) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccountSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteActionConnector struct {
+}
+
+func (*validateOpDeleteActionConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteActionConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteActionConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteActionConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1265,6 +1305,46 @@ func (m *validateOpDescribeAccountSubscription) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAccountSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeActionConnector struct {
+}
+
+func (*validateOpDescribeActionConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeActionConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeActionConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeActionConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeActionConnectorPermissions struct {
+}
+
+func (*validateOpDescribeActionConnectorPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeActionConnectorPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeActionConnectorPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeActionConnectorPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2310,6 +2390,46 @@ func (m *validateOpGetDashboardEmbedUrl) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFlowMetadata struct {
+}
+
+func (*validateOpGetFlowMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFlowMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFlowMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFlowMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFlowPermissions struct {
+}
+
+func (*validateOpGetFlowPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFlowPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFlowPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFlowPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSessionEmbedUrl struct {
 }
 
@@ -2325,6 +2445,26 @@ func (m *validateOpGetSessionEmbedUrl) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSessionEmbedUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListActionConnectors struct {
+}
+
+func (*validateOpListActionConnectors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListActionConnectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListActionConnectorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListActionConnectorsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2505,6 +2645,26 @@ func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDataSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFlows struct {
+}
+
+func (*validateOpListFlows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3090,6 +3250,26 @@ func (m *validateOpRestoreAnalysis) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchActionConnectors struct {
+}
+
+func (*validateOpSearchActionConnectors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchActionConnectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchActionConnectorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchActionConnectorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchAnalyses struct {
 }
 
@@ -3165,6 +3345,26 @@ func (m *validateOpSearchDataSources) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchDataSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchFlows struct {
+}
+
+func (*validateOpSearchFlows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchFlows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchFlowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchFlowsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3405,6 +3605,46 @@ func (m *validateOpUpdateAccountSettings) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateAccountSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateActionConnector struct {
+}
+
+func (*validateOpUpdateActionConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateActionConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateActionConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateActionConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateActionConnectorPermissions struct {
+}
+
+func (*validateOpUpdateActionConnectorPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateActionConnectorPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateActionConnectorPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateActionConnectorPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3745,6 +3985,26 @@ func (m *validateOpUpdateDefaultQBusinessApplication) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDefaultQBusinessApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFlowPermissions struct {
+}
+
+func (*validateOpUpdateFlowPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFlowPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFlowPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFlowPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4270,6 +4530,10 @@ func addOpCreateAccountSubscriptionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateAccountSubscription{}, middleware.After)
 }
 
+func addOpCreateActionConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateActionConnector{}, middleware.After)
+}
+
 func addOpCreateAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnalysis{}, middleware.After)
 }
@@ -4368,6 +4632,10 @@ func addOpDeleteAccountCustomPermissionValidationMiddleware(stack *middleware.St
 
 func addOpDeleteAccountSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccountSubscription{}, middleware.After)
+}
+
+func addOpDeleteActionConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteActionConnector{}, middleware.After)
 }
 
 func addOpDeleteAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -4500,6 +4768,14 @@ func addOpDescribeAccountSettingsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeAccountSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAccountSubscription{}, middleware.After)
+}
+
+func addOpDescribeActionConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeActionConnector{}, middleware.After)
+}
+
+func addOpDescribeActionConnectorPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeActionConnectorPermissions{}, middleware.After)
 }
 
 func addOpDescribeAnalysisDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -4710,8 +4986,20 @@ func addOpGetDashboardEmbedUrlValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetDashboardEmbedUrl{}, middleware.After)
 }
 
+func addOpGetFlowMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFlowMetadata{}, middleware.After)
+}
+
+func addOpGetFlowPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFlowPermissions{}, middleware.After)
+}
+
 func addOpGetSessionEmbedUrlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSessionEmbedUrl{}, middleware.After)
+}
+
+func addOpListActionConnectorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListActionConnectors{}, middleware.After)
 }
 
 func addOpListAnalysesValidationMiddleware(stack *middleware.Stack) error {
@@ -4748,6 +5036,10 @@ func addOpListDataSetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
+}
+
+func addOpListFlowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlows{}, middleware.After)
 }
 
 func addOpListFolderMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -4866,6 +5158,10 @@ func addOpRestoreAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreAnalysis{}, middleware.After)
 }
 
+func addOpSearchActionConnectorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchActionConnectors{}, middleware.After)
+}
+
 func addOpSearchAnalysesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchAnalyses{}, middleware.After)
 }
@@ -4880,6 +5176,10 @@ func addOpSearchDataSetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchDataSources{}, middleware.After)
+}
+
+func addOpSearchFlowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchFlows{}, middleware.After)
 }
 
 func addOpSearchFoldersValidationMiddleware(stack *middleware.Stack) error {
@@ -4928,6 +5228,14 @@ func addOpUpdateAccountCustomPermissionValidationMiddleware(stack *middleware.St
 
 func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccountSettings{}, middleware.After)
+}
+
+func addOpUpdateActionConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateActionConnector{}, middleware.After)
+}
+
+func addOpUpdateActionConnectorPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateActionConnectorPermissions{}, middleware.After)
 }
 
 func addOpUpdateAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -4996,6 +5304,10 @@ func addOpUpdateDataSourcePermissionsValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateDefaultQBusinessApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDefaultQBusinessApplication{}, middleware.After)
+}
+
+func addOpUpdateFlowPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFlowPermissions{}, middleware.After)
 }
 
 func addOpUpdateFolderValidationMiddleware(stack *middleware.Stack) error {
@@ -5096,6 +5408,44 @@ func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateVPCConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVPCConnection{}, middleware.After)
+}
+
+func validateActionConnectorSearchFilter(v *types.ActionConnectorSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionConnectorSearchFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionConnectorSearchFilterList(v []types.ActionConnectorSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionConnectorSearchFilterList"}
+	for i := range v {
+		if err := validateActionConnectorSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAggregationSortConfiguration(v *types.AggregationSortConfiguration) error {
@@ -5443,6 +5793,24 @@ func validateAnonymousUserQSearchBarEmbeddingConfiguration(v *types.AnonymousUse
 	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserQSearchBarEmbeddingConfiguration"}
 	if v.InitialTopicId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialTopicId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAPIKeyConnectionMetadata(v *types.APIKeyConnectionMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "APIKeyConnectionMetadata"}
+	if v.BaseEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEndpoint"))
+	}
+	if v.ApiKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6840,6 +7208,138 @@ func validateAuroraPostgreSqlParameters(v *types.AuroraPostgreSqlParameters) err
 	}
 }
 
+func validateAuthConfig(v *types.AuthConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthConfig"}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.AuthenticationMetadata == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMetadata"))
+	} else if v.AuthenticationMetadata != nil {
+		if err := validateAuthenticationMetadata(v.AuthenticationMetadata); err != nil {
+			invalidParams.AddNested("AuthenticationMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthenticationMetadata(v types.AuthenticationMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthenticationMetadata"}
+	switch uv := v.(type) {
+	case *types.AuthenticationMetadataMemberApiKeyConnectionMetadata:
+		if err := validateAPIKeyConnectionMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[ApiKeyConnectionMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AuthenticationMetadataMemberAuthorizationCodeGrantMetadata:
+		if err := validateAuthorizationCodeGrantMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[AuthorizationCodeGrantMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AuthenticationMetadataMemberBasicAuthConnectionMetadata:
+		if err := validateBasicAuthConnectionMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[BasicAuthConnectionMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AuthenticationMetadataMemberClientCredentialsGrantMetadata:
+		if err := validateClientCredentialsGrantMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[ClientCredentialsGrantMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AuthenticationMetadataMemberIamConnectionMetadata:
+		if err := validateIAMConnectionMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[IamConnectionMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AuthenticationMetadataMemberNoneConnectionMetadata:
+		if err := validateNoneConnectionMetadata(&uv.Value); err != nil {
+			invalidParams.AddNested("[NoneConnectionMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthorizationCodeGrantCredentialsDetails(v types.AuthorizationCodeGrantCredentialsDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizationCodeGrantCredentialsDetails"}
+	switch uv := v.(type) {
+	case *types.AuthorizationCodeGrantCredentialsDetailsMemberAuthorizationCodeGrantDetails:
+		if err := validateAuthorizationCodeGrantDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[AuthorizationCodeGrantDetails]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthorizationCodeGrantDetails(v *types.AuthorizationCodeGrantDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizationCodeGrantDetails"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.TokenEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenEndpoint"))
+	}
+	if v.AuthorizationEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationEndpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthorizationCodeGrantMetadata(v *types.AuthorizationCodeGrantMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizationCodeGrantMetadata"}
+	if v.BaseEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEndpoint"))
+	}
+	if v.RedirectUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RedirectUrl"))
+	}
+	if v.AuthorizationCodeGrantCredentialsDetails != nil {
+		if err := validateAuthorizationCodeGrantCredentialsDetails(v.AuthorizationCodeGrantCredentialsDetails); err != nil {
+			invalidParams.AddNested("AuthorizationCodeGrantCredentialsDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAwsIotAnalyticsParameters(v *types.AwsIotAnalyticsParameters) error {
 	if v == nil {
 		return nil
@@ -7066,6 +7566,27 @@ func validateBarChartVisual(v *types.BarChartVisual) error {
 		if err := validateColumnHierarchyList(v.ColumnHierarchies); err != nil {
 			invalidParams.AddNested("ColumnHierarchies", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBasicAuthConnectionMetadata(v *types.BasicAuthConnectionMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicAuthConnectionMetadata"}
+	if v.BaseEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEndpoint"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7840,6 +8361,66 @@ func validateChartAxisLabelOptions(v *types.ChartAxisLabelOptions) error {
 	}
 }
 
+func validateClientCredentialsDetails(v types.ClientCredentialsDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCredentialsDetails"}
+	switch uv := v.(type) {
+	case *types.ClientCredentialsDetailsMemberClientCredentialsGrantDetails:
+		if err := validateClientCredentialsGrantDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[ClientCredentialsGrantDetails]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientCredentialsGrantDetails(v *types.ClientCredentialsGrantDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCredentialsGrantDetails"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.TokenEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenEndpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientCredentialsGrantMetadata(v *types.ClientCredentialsGrantMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCredentialsGrantMetadata"}
+	if v.BaseEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEndpoint"))
+	}
+	if v.ClientCredentialsDetails != nil {
+		if err := validateClientCredentialsDetails(v.ClientCredentialsDetails); err != nil {
+			invalidParams.AddNested("ClientCredentialsDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateColorScale(v *types.ColorScale) error {
 	if v == nil {
 		return nil
@@ -8445,6 +9026,21 @@ func validateConditionalFormattingSolidColor(v *types.ConditionalFormattingSolid
 	invalidParams := smithy.InvalidParamsError{Context: "ConditionalFormattingSolidColor"}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfluenceParameters(v *types.ConfluenceParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceParameters"}
+	if v.ConfluenceUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfluenceUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9409,6 +10005,11 @@ func validateDataSourceCredentials(v *types.DataSourceCredentials) error {
 			invalidParams.AddNested("CredentialPair", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.WebProxyCredentials != nil {
+		if err := validateWebProxyCredentials(v.WebProxyCredentials); err != nil {
+			invalidParams.AddNested("WebProxyCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9450,6 +10051,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 	case *types.DataSourceParametersMemberBigQueryParameters:
 		if err := validateBigQueryParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[BigQueryParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceParametersMemberConfluenceParameters:
+		if err := validateConfluenceParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[ConfluenceParameters]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.DataSourceParametersMemberDatabricksParameters:
@@ -9497,6 +10103,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 			invalidParams.AddNested("[PrestoParameters]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.DataSourceParametersMemberQBusinessParameters:
+		if err := validateQBusinessParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[QBusinessParameters]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.DataSourceParametersMemberRdsParameters:
 		if err := validateRdsParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[RdsParameters]", err.(smithy.InvalidParamsError))
@@ -9505,6 +10116,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 	case *types.DataSourceParametersMemberRedshiftParameters:
 		if err := validateRedshiftParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[RedshiftParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceParametersMemberS3KnowledgeBaseParameters:
+		if err := validateS3KnowledgeBaseParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3KnowledgeBaseParameters]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.DataSourceParametersMemberS3Parameters:
@@ -9550,6 +10166,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 	case *types.DataSourceParametersMemberTwitterParameters:
 		if err := validateTwitterParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[TwitterParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceParametersMemberWebCrawlerParameters:
+		if err := validateWebCrawlerParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[WebCrawlerParameters]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -13122,6 +13743,21 @@ func validateHistogramVisual(v *types.HistogramVisual) error {
 	}
 }
 
+func validateIAMConnectionMetadata(v *types.IAMConnectionMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IAMConnectionMetadata"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIdentifier(v *types.Identifier) error {
 	if v == nil {
 		return nil
@@ -14632,6 +15268,21 @@ func validateNestedFilter(v *types.NestedFilter) error {
 	}
 }
 
+func validateNoneConnectionMetadata(v *types.NoneConnectionMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NoneConnectionMetadata"}
+	if v.BaseEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEndpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNullValueFormatConfiguration(v *types.NullValueFormatConfiguration) error {
 	if v == nil {
 		return nil
@@ -15334,6 +15985,24 @@ func validatePeriodToDateComputation(v *types.PeriodToDateComputation) error {
 		if err := validateMeasureField(v.Value); err != nil {
 			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePermission(v *types.Permission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Permission"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -16226,6 +16895,21 @@ func validateProjectOperation(v *types.ProjectOperation) error {
 	}
 }
 
+func validateQBusinessParameters(v *types.QBusinessParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QBusinessParameters"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRadarChartAggregatedFieldWells(v *types.RadarChartAggregatedFieldWells) error {
 	if v == nil {
 		return nil
@@ -17104,6 +17788,21 @@ func validateS3BucketConfiguration(v *types.S3BucketConfiguration) error {
 	}
 }
 
+func validateS3KnowledgeBaseParameters(v *types.S3KnowledgeBaseParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3KnowledgeBaseParameters"}
+	if v.BucketUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Parameters(v *types.S3Parameters) error {
 	if v == nil {
 		return nil
@@ -17421,6 +18120,44 @@ func validateSchedulesConfigurations(v *types.SchedulesConfigurations) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SchedulesConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFlowsFilter(v *types.SearchFlowsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFlowsFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFlowsFilterList(v []types.SearchFlowsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFlowsFilterList"}
+	for i := range v {
+		if err := validateSearchFlowsFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -20511,6 +21248,40 @@ func validateUntagColumnOperation(v *types.UntagColumnOperation) error {
 	}
 }
 
+func validateUpdateFlowPermissionsInputGrantPermissionsList(v []types.Permission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowPermissionsInputGrantPermissionsList"}
+	for i := range v {
+		if err := validatePermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateFlowPermissionsInputRevokePermissionsList(v []types.Permission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowPermissionsInputRevokePermissionsList"}
+	for i := range v {
+		if err := validatePermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateLinkPermissionList(v []types.ResourcePermission) error {
 	if v == nil {
 		return nil
@@ -21000,6 +21771,39 @@ func validateWaterfallVisual(v *types.WaterfallVisual) error {
 	}
 }
 
+func validateWebCrawlerParameters(v *types.WebCrawlerParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebCrawlerParameters"}
+	if len(v.WebCrawlerAuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("WebCrawlerAuthType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebProxyCredentials(v *types.WebProxyCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebProxyCredentials"}
+	if v.WebProxyUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebProxyUsername"))
+	}
+	if v.WebProxyPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebProxyPassword"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWhatIfPointScenario(v *types.WhatIfPointScenario) error {
 	if v == nil {
 		return nil
@@ -21298,6 +22102,47 @@ func validateOpCreateAccountSubscriptionInput(v *CreateAccountSubscriptionInput)
 	}
 	if v.NotificationEmail == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotificationEmail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateActionConnectorInput(v *CreateActionConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateActionConnectorInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ActionConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.AuthenticationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationConfig"))
+	} else if v.AuthenticationConfig != nil {
+		if err := validateAuthConfig(v.AuthenticationConfig); err != nil {
+			invalidParams.AddNested("AuthenticationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Permissions != nil {
+		if err := validateResourcePermissionList(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22072,6 +22917,24 @@ func validateOpDeleteAccountSubscriptionInput(v *DeleteAccountSubscriptionInput)
 	}
 }
 
+func validateOpDeleteActionConnectorInput(v *DeleteActionConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteActionConnectorInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ActionConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAnalysisInput(v *DeleteAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -22688,6 +23551,42 @@ func validateOpDescribeAccountSubscriptionInput(v *DescribeAccountSubscriptionIn
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountSubscriptionInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeActionConnectorInput(v *DescribeActionConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeActionConnectorInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ActionConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeActionConnectorPermissionsInput(v *DescribeActionConnectorPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeActionConnectorPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ActionConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -23682,11 +24581,62 @@ func validateOpGetDashboardEmbedUrlInput(v *GetDashboardEmbedUrlInput) error {
 	}
 }
 
+func validateOpGetFlowMetadataInput(v *GetFlowMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFlowMetadataInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFlowPermissionsInput(v *GetFlowPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFlowPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSessionEmbedUrlInput(v *GetSessionEmbedUrlInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSessionEmbedUrlInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListActionConnectorsInput(v *ListActionConnectorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListActionConnectorsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -23825,6 +24775,21 @@ func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDataSourcesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFlowsInput(v *ListFlowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -24366,6 +25331,28 @@ func validateOpRestoreAnalysisInput(v *RestoreAnalysisInput) error {
 	}
 }
 
+func validateOpSearchActionConnectorsInput(v *SearchActionConnectorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchActionConnectorsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateActionConnectorSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchAnalysesInput(v *SearchAnalysesInput) error {
 	if v == nil {
 		return nil
@@ -24440,6 +25427,28 @@ func validateOpSearchDataSourcesInput(v *SearchDataSourcesInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	} else if v.Filters != nil {
 		if err := validateDataSourceSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchFlowsInput(v *SearchFlowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFlowsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateSearchFlowsFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -24722,6 +25731,62 @@ func validateOpUpdateAccountSettingsInput(v *UpdateAccountSettingsInput) error {
 	}
 	if v.DefaultNamespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultNamespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateActionConnectorInput(v *UpdateActionConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateActionConnectorInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ActionConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AuthenticationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationConfig"))
+	} else if v.AuthenticationConfig != nil {
+		if err := validateAuthConfig(v.AuthenticationConfig); err != nil {
+			invalidParams.AddNested("AuthenticationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateActionConnectorPermissionsInput(v *UpdateActionConnectorPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateActionConnectorPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ActionConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
+	}
+	if v.GrantPermissions != nil {
+		if err := validateResourcePermissionList(v.GrantPermissions); err != nil {
+			invalidParams.AddNested("GrantPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokePermissions != nil {
+		if err := validateResourcePermissionList(v.RevokePermissions); err != nil {
+			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -25199,6 +26264,34 @@ func validateOpUpdateDefaultQBusinessApplicationInput(v *UpdateDefaultQBusinessA
 	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFlowPermissionsInput(v *UpdateFlowPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if v.GrantPermissions != nil {
+		if err := validateUpdateFlowPermissionsInputGrantPermissionsList(v.GrantPermissions); err != nil {
+			invalidParams.AddNested("GrantPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokePermissions != nil {
+		if err := validateUpdateFlowPermissionsInputRevokePermissionsList(v.RevokePermissions); err != nil {
+			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

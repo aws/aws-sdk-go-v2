@@ -14,11 +14,11 @@ import (
 // Creates a dashboard from either a template or directly with a
 // DashboardDefinition . To first create a template, see the [CreateTemplate] API operation.
 //
-// A dashboard is an entity in QuickSight that identifies QuickSight reports,
-// created from analyses. You can share QuickSight dashboards. With the right
-// permissions, you can create scheduled email reports from them. If you have the
-// correct permissions, you can create a dashboard from a template that exists in a
-// different Amazon Web Services account.
+// A dashboard is an entity in Amazon Quick Sight that identifies Amazon Quick
+// Sight reports, created from analyses. You can share Amazon Quick Sight
+// dashboards. With the right permissions, you can create scheduled email reports
+// from them. If you have the correct permissions, you can create a dashboard from
+// a template that exists in a different Amazon Web Services account.
 //
 // [CreateTemplate]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
@@ -57,9 +57,9 @@ type CreateDashboardInput struct {
 	// Options for publishing the dashboard when you create it:
 	//
 	//   - AvailabilityStatus for AdHocFilteringOption - This status can be either
-	//   ENABLED or DISABLED . When this is set to DISABLED , QuickSight disables the
-	//   left filter pane on the published dashboard, which can be used for ad hoc
-	//   (one-time) filtering. This option is ENABLED by default.
+	//   ENABLED or DISABLED . When this is set to DISABLED , Amazon Quick Sight
+	//   disables the left filter pane on the published dashboard, which can be used for
+	//   ad hoc (one-time) filtering. This option is ENABLED by default.
 	//
 	//   - AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED
 	//   or DISABLED . The visual option to export data to .CSV format isn't enabled
@@ -67,6 +67,11 @@ type CreateDashboardInput struct {
 	//
 	//   - VisibilityState for SheetControlsOption - This visibility state can be
 	//   either COLLAPSED or EXPANDED . This option is COLLAPSED by default.
+	//
+	//   - AvailabilityStatus for QuickSuiteActionsOption - This status can be either
+	//   ENABLED or DISABLED . Features related to Actions in Amazon Quick Suite on
+	//   dashboards are disabled when this is set to DISABLED . This option is DISABLED
+	//   by default.
 	//
 	//   - AvailabilityStatus for ExecutiveSummaryOption - This status can be either
 	//   ENABLED or DISABLED . The option to build an executive summary is disabled
@@ -86,7 +91,8 @@ type CreateDashboardInput struct {
 	// to be valid.
 	Definition *types.DashboardVersionDefinition
 
-	// When you create the dashboard, QuickSight adds the dashboard to these folders.
+	// When you create the dashboard, Amazon Quick Sight adds the dashboard to these
+	// folders.
 	FolderArns []string
 
 	// A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
@@ -113,8 +119,8 @@ type CreateDashboardInput struct {
 	// you need to create a dashboard from an analysis, first convert the analysis to a
 	// template by using the [CreateTemplate]API operation. For SourceTemplate , specify the Amazon
 	// Resource Name (ARN) of the source template. The SourceTemplate ARN can contain
-	// any Amazon Web Services account and any QuickSight-supported Amazon Web Services
-	// Region.
+	// any Amazon Web Services account and any Amazon Quick Sight-supported Amazon Web
+	// Services Region.
 	//
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each dataset

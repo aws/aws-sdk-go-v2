@@ -2,6 +2,122 @@
 
 package types
 
+type ActionConnectorErrorType string
+
+// Enum values for ActionConnectorErrorType
+const (
+	ActionConnectorErrorTypeInternalFailure ActionConnectorErrorType = "INTERNAL_FAILURE"
+)
+
+// Values returns all known values for ActionConnectorErrorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionConnectorErrorType) Values() []ActionConnectorErrorType {
+	return []ActionConnectorErrorType{
+		"INTERNAL_FAILURE",
+	}
+}
+
+type ActionConnectorSearchFilterNameEnum string
+
+// Enum values for ActionConnectorSearchFilterNameEnum
+const (
+	ActionConnectorSearchFilterNameEnumActionConnectorName           ActionConnectorSearchFilterNameEnum = "ACTION_CONNECTOR_NAME"
+	ActionConnectorSearchFilterNameEnumActionConnectorType           ActionConnectorSearchFilterNameEnum = "ACTION_CONNECTOR_TYPE"
+	ActionConnectorSearchFilterNameEnumQuicksightOwner               ActionConnectorSearchFilterNameEnum = "QUICKSIGHT_OWNER"
+	ActionConnectorSearchFilterNameEnumQuicksightViewerOrOwner       ActionConnectorSearchFilterNameEnum = "QUICKSIGHT_VIEWER_OR_OWNER"
+	ActionConnectorSearchFilterNameEnumDirectQuicksightSoleOwner     ActionConnectorSearchFilterNameEnum = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	ActionConnectorSearchFilterNameEnumDirectQuicksightOwner         ActionConnectorSearchFilterNameEnum = "DIRECT_QUICKSIGHT_OWNER"
+	ActionConnectorSearchFilterNameEnumDirectQuicksightViewerOrOwner ActionConnectorSearchFilterNameEnum = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+)
+
+// Values returns all known values for ActionConnectorSearchFilterNameEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionConnectorSearchFilterNameEnum) Values() []ActionConnectorSearchFilterNameEnum {
+	return []ActionConnectorSearchFilterNameEnum{
+		"ACTION_CONNECTOR_NAME",
+		"ACTION_CONNECTOR_TYPE",
+		"QUICKSIGHT_OWNER",
+		"QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+	}
+}
+
+type ActionConnectorType string
+
+// Enum values for ActionConnectorType
+const (
+	ActionConnectorTypeGenericHttp                        ActionConnectorType = "GENERIC_HTTP"
+	ActionConnectorTypeServicenowNowPlatform              ActionConnectorType = "SERVICENOW_NOW_PLATFORM"
+	ActionConnectorTypeSalesforceCrm                      ActionConnectorType = "SALESFORCE_CRM"
+	ActionConnectorTypeMicrosoftOutlook                   ActionConnectorType = "MICROSOFT_OUTLOOK"
+	ActionConnectorTypePagerdutyAdvance                   ActionConnectorType = "PAGERDUTY_ADVANCE"
+	ActionConnectorTypeJiraCloud                          ActionConnectorType = "JIRA_CLOUD"
+	ActionConnectorTypeAtlassianConfluence                ActionConnectorType = "ATLASSIAN_CONFLUENCE"
+	ActionConnectorTypeAmazonS3                           ActionConnectorType = "AMAZON_S3"
+	ActionConnectorTypeAmazonBedrockAgentRuntime          ActionConnectorType = "AMAZON_BEDROCK_AGENT_RUNTIME"
+	ActionConnectorTypeAmazonBedrockRuntime               ActionConnectorType = "AMAZON_BEDROCK_RUNTIME"
+	ActionConnectorTypeAmazonBedrockDataAutomationRuntime ActionConnectorType = "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME"
+	ActionConnectorTypeAmazonTextract                     ActionConnectorType = "AMAZON_TEXTRACT"
+	ActionConnectorTypeAmazonComprehend                   ActionConnectorType = "AMAZON_COMPREHEND"
+	ActionConnectorTypeAmazonComprehendMedical            ActionConnectorType = "AMAZON_COMPREHEND_MEDICAL"
+	ActionConnectorTypeMicrosoftOnedrive                  ActionConnectorType = "MICROSOFT_ONEDRIVE"
+	ActionConnectorTypeMicrosoftSharepoint                ActionConnectorType = "MICROSOFT_SHAREPOINT"
+	ActionConnectorTypeMicrosoftTeams                     ActionConnectorType = "MICROSOFT_TEAMS"
+	ActionConnectorTypeSapBusinesspartner                 ActionConnectorType = "SAP_BUSINESSPARTNER"
+	ActionConnectorTypeSapProductmasterdata               ActionConnectorType = "SAP_PRODUCTMASTERDATA"
+	ActionConnectorTypeSapPhysicalinventory               ActionConnectorType = "SAP_PHYSICALINVENTORY"
+	ActionConnectorTypeSapBillofmaterials                 ActionConnectorType = "SAP_BILLOFMATERIALS"
+	ActionConnectorTypeSapMaterialstock                   ActionConnectorType = "SAP_MATERIALSTOCK"
+	ActionConnectorTypeZendeskSuite                       ActionConnectorType = "ZENDESK_SUITE"
+	ActionConnectorTypeSmartsheet                         ActionConnectorType = "SMARTSHEET"
+	ActionConnectorTypeSlack                              ActionConnectorType = "SLACK"
+	ActionConnectorTypeAsana                              ActionConnectorType = "ASANA"
+	ActionConnectorTypeBambooHr                           ActionConnectorType = "BAMBOO_HR"
+)
+
+// Values returns all known values for ActionConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionConnectorType) Values() []ActionConnectorType {
+	return []ActionConnectorType{
+		"GENERIC_HTTP",
+		"SERVICENOW_NOW_PLATFORM",
+		"SALESFORCE_CRM",
+		"MICROSOFT_OUTLOOK",
+		"PAGERDUTY_ADVANCE",
+		"JIRA_CLOUD",
+		"ATLASSIAN_CONFLUENCE",
+		"AMAZON_S3",
+		"AMAZON_BEDROCK_AGENT_RUNTIME",
+		"AMAZON_BEDROCK_RUNTIME",
+		"AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME",
+		"AMAZON_TEXTRACT",
+		"AMAZON_COMPREHEND",
+		"AMAZON_COMPREHEND_MEDICAL",
+		"MICROSOFT_ONEDRIVE",
+		"MICROSOFT_SHAREPOINT",
+		"MICROSOFT_TEAMS",
+		"SAP_BUSINESSPARTNER",
+		"SAP_PRODUCTMASTERDATA",
+		"SAP_PHYSICALINVENTORY",
+		"SAP_BILLOFMATERIALS",
+		"SAP_MATERIALSTOCK",
+		"ZENDESK_SUITE",
+		"SMARTSHEET",
+		"SLACK",
+		"ASANA",
+		"BAMBOO_HR",
+	}
+}
+
 type AggType string
 
 // Enum values for AggType
@@ -577,6 +693,24 @@ func (AuthenticationType) Values() []AuthenticationType {
 	}
 }
 
+type AuthorizationCodeGrantCredentialsSource string
+
+// Enum values for AuthorizationCodeGrantCredentialsSource
+const (
+	AuthorizationCodeGrantCredentialsSourcePlainCredentials AuthorizationCodeGrantCredentialsSource = "PLAIN_CREDENTIALS"
+)
+
+// Values returns all known values for AuthorizationCodeGrantCredentialsSource.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationCodeGrantCredentialsSource) Values() []AuthorizationCodeGrantCredentialsSource {
+	return []AuthorizationCodeGrantCredentialsSource{
+		"PLAIN_CREDENTIALS",
+	}
+}
+
 type AuthorSpecifiedAggregation string
 
 // Enum values for AuthorSpecifiedAggregation
@@ -885,6 +1019,23 @@ func (CategoryFilterType) Values() []CategoryFilterType {
 	}
 }
 
+type ClientCredentialsSource string
+
+// Enum values for ClientCredentialsSource
+const (
+	ClientCredentialsSourcePlainCredentials ClientCredentialsSource = "PLAIN_CREDENTIALS"
+)
+
+// Values returns all known values for ClientCredentialsSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientCredentialsSource) Values() []ClientCredentialsSource {
+	return []ClientCredentialsSource{
+		"PLAIN_CREDENTIALS",
+	}
+}
+
 type ColorFillType string
 
 // Enum values for ColorFillType
@@ -1152,6 +1303,33 @@ func (ConditionalFormattingIconSetType) Values() []ConditionalFormattingIconSetT
 		"BARS",
 		"FOUR_COLOR_ARROW",
 		"FOUR_GRAY_ARROW",
+	}
+}
+
+type ConnectionAuthType string
+
+// Enum values for ConnectionAuthType
+const (
+	ConnectionAuthTypeBasic                   ConnectionAuthType = "BASIC"
+	ConnectionAuthTypeApiKey                  ConnectionAuthType = "API_KEY"
+	ConnectionAuthTypeOauth2ClientCredentials ConnectionAuthType = "OAUTH2_CLIENT_CREDENTIALS"
+	ConnectionAuthTypeNone                    ConnectionAuthType = "NONE"
+	ConnectionAuthTypeIam                     ConnectionAuthType = "IAM"
+	ConnectionAuthTypeOauth2AuthorizationCode ConnectionAuthType = "OAUTH2_AUTHORIZATION_CODE"
+)
+
+// Values returns all known values for ConnectionAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionAuthType) Values() []ConnectionAuthType {
+	return []ConnectionAuthType{
+		"BASIC",
+		"API_KEY",
+		"OAUTH2_CLIENT_CREDENTIALS",
+		"NONE",
+		"IAM",
+		"OAUTH2_AUTHORIZATION_CODE",
 	}
 }
 
@@ -1642,6 +1820,13 @@ const (
 	DataSourceTypeTrino               DataSourceType = "TRINO"
 	DataSourceTypeBigquery            DataSourceType = "BIGQUERY"
 	DataSourceTypeGooglesheets        DataSourceType = "GOOGLESHEETS"
+	DataSourceTypeGoogleDrive         DataSourceType = "GOOGLE_DRIVE"
+	DataSourceTypeConfluence          DataSourceType = "CONFLUENCE"
+	DataSourceTypeSharepoint          DataSourceType = "SHAREPOINT"
+	DataSourceTypeOneDrive            DataSourceType = "ONE_DRIVE"
+	DataSourceTypeWebCrawler          DataSourceType = "WEB_CRAWLER"
+	DataSourceTypeS3KnowledgeBase     DataSourceType = "S3_KNOWLEDGE_BASE"
+	DataSourceTypeQbusiness           DataSourceType = "QBUSINESS"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -1680,6 +1865,13 @@ func (DataSourceType) Values() []DataSourceType {
 		"TRINO",
 		"BIGQUERY",
 		"GOOGLESHEETS",
+		"GOOGLE_DRIVE",
+		"CONFLUENCE",
+		"SHAREPOINT",
+		"ONE_DRIVE",
+		"WEB_CRAWLER",
+		"S3_KNOWLEDGE_BASE",
+		"QBUSINESS",
 	}
 }
 
@@ -1922,6 +2114,31 @@ func (ExceptionResourceType) Values() []ExceptionResourceType {
 	}
 }
 
+type FieldName string
+
+// Enum values for FieldName
+const (
+	FieldNameFlowName                      FieldName = "assetName"
+	FieldNameFlowDescription               FieldName = "assetDescription"
+	FieldNameDirectQuicksightOwner         FieldName = "DIRECT_QUICKSIGHT_OWNER"
+	FieldNameDirectQuicksightViewerOrOwner FieldName = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	FieldNameDirectQuicksightSoleOwner     FieldName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+)
+
+// Values returns all known values for FieldName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FieldName) Values() []FieldName {
+	return []FieldName{
+		"assetName",
+		"assetDescription",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat
@@ -2026,6 +2243,27 @@ func (FilterVisualScope) Values() []FilterVisualScope {
 	return []FilterVisualScope{
 		"ALL_VISUALS",
 		"SELECTED_VISUALS",
+	}
+}
+
+type FlowPublishState string
+
+// Enum values for FlowPublishState
+const (
+	FlowPublishStatePublished       FlowPublishState = "PUBLISHED"
+	FlowPublishStateDraft           FlowPublishState = "DRAFT"
+	FlowPublishStatePendingApproval FlowPublishState = "PENDING_APPROVAL"
+)
+
+// Values returns all known values for FlowPublishState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowPublishState) Values() []FlowPublishState {
+	return []FlowPublishState{
+		"PUBLISHED",
+		"DRAFT",
+		"PENDING_APPROVAL",
 	}
 }
 
@@ -4303,6 +4541,25 @@ func (RowLevelPermissionPolicy) Values() []RowLevelPermissionPolicy {
 	}
 }
 
+type SearchFilterOperator string
+
+// Enum values for SearchFilterOperator
+const (
+	SearchFilterOperatorStringEquals SearchFilterOperator = "StringEquals"
+	SearchFilterOperatorStringLike   SearchFilterOperator = "StringLike"
+)
+
+// Values returns all known values for SearchFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchFilterOperator) Values() []SearchFilterOperator {
+	return []SearchFilterOperator{
+		"StringEquals",
+		"StringLike",
+	}
+}
+
 type SectionPageBreakStatus string
 
 // Enum values for SectionPageBreakStatus
@@ -5726,6 +5983,29 @@ func (VPCConnectionResourceStatus) Values() []VPCConnectionResourceStatus {
 		"DELETION_IN_PROGRESS",
 		"DELETION_FAILED",
 		"DELETED",
+	}
+}
+
+type WebCrawlerAuthType string
+
+// Enum values for WebCrawlerAuthType
+const (
+	WebCrawlerAuthTypeNoAuth    WebCrawlerAuthType = "NO_AUTH"
+	WebCrawlerAuthTypeBasicAuth WebCrawlerAuthType = "BASIC_AUTH"
+	WebCrawlerAuthTypeForm      WebCrawlerAuthType = "FORM"
+	WebCrawlerAuthTypeSaml      WebCrawlerAuthType = "SAML"
+)
+
+// Values returns all known values for WebCrawlerAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebCrawlerAuthType) Values() []WebCrawlerAuthType {
+	return []WebCrawlerAuthType{
+		"NO_AUTH",
+		"BASIC_AUTH",
+		"FORM",
+		"SAML",
 	}
 }
 

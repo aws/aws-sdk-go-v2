@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API permanently deletes all QuickSight customizations for the specified
+// This API permanently deletes all Quick Sight customizations for the specified
 // Amazon Web Services account and namespace. When you delete account
 // customizations:
 //
@@ -19,13 +19,13 @@ import (
 //
 //   - This action cannot be undone through the API
 //
-//   - Users will see default QuickSight styling after customizations are deleted
+//   - Users will see default Quick Sight styling after customizations are deleted
 //
 // Before proceeding: Ensure you have backups of any custom themes or branding
 // elements you may want to recreate.
 //
-// Deletes all Amazon QuickSight customizations for the specified Amazon Web
-// Services account and QuickSight namespace.
+// Deletes all Amazon Quick Sight customizations for the specified Amazon Web
+// Services account and Quick Sight namespace.
 func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteAccountCustomizationInput, optFns ...func(*Options)) (*DeleteAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &DeleteAccountCustomizationInput{}
@@ -43,13 +43,13 @@ func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteA
 
 type DeleteAccountCustomizationInput struct {
 
-	// The ID for the Amazon Web Services account that you want to delete QuickSight
+	// The ID for the Amazon Web Services account that you want to delete Quick Sight
 	// customizations from.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The QuickSight namespace that you're deleting the customizations from.
+	// The Quick Sight namespace that you're deleting the customizations from.
 	Namespace *string
 
 	noSmithyDocumentSerde

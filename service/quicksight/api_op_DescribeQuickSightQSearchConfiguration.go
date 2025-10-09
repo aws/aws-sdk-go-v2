@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the state of a QuickSight Q Search configuration.
+// Describes the state of a Quick Sight Q Search configuration.
 func (c *Client) DescribeQuickSightQSearchConfiguration(ctx context.Context, params *DescribeQuickSightQSearchConfigurationInput, optFns ...func(*Options)) (*DescribeQuickSightQSearchConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeQuickSightQSearchConfigurationInput{}
@@ -29,8 +29,8 @@ func (c *Client) DescribeQuickSightQSearchConfiguration(ctx context.Context, par
 
 type DescribeQuickSightQSearchConfigurationInput struct {
 
-	// The ID of the Amazon Web Services account that contains the QuickSight Q Search
-	// configuration that the user wants described.
+	// The ID of the Amazon Web Services account that contains the Quick Sight Q
+	// Search configuration that the user wants described.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -40,7 +40,7 @@ type DescribeQuickSightQSearchConfigurationInput struct {
 
 type DescribeQuickSightQSearchConfigurationOutput struct {
 
-	// The status of QuickSight Q Search configuration.
+	// The status of Quick Sight Q Search configuration.
 	QSearchStatus types.QSearchStatus
 
 	// The Amazon Web Services request ID for this operation.

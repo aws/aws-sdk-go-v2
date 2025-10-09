@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all brands in an QuickSight account.
+// Lists all brands in an Quick Sight account.
 func (c *Client) ListBrands(ctx context.Context, params *ListBrandsInput, optFns ...func(*Options)) (*ListBrandsOutput, error) {
 	if params == nil {
 		params = &ListBrandsInput{}

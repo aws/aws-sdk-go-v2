@@ -56,7 +56,7 @@ type CreateDataSetInput struct {
 	// This member is required.
 	PhysicalTableMap map[string]types.PhysicalTable
 
-	// Groupings of columns that work together in certain QuickSight features.
+	// Groupings of columns that work together in certain Amazon Quick Sight features.
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 
@@ -75,7 +75,8 @@ type CreateDataSetInput struct {
 	// The folder that contains fields and nested subfolders for your dataset.
 	FieldFolders map[string]types.FieldFolder
 
-	// When you create the dataset, QuickSight adds the dataset to these folders.
+	// When you create the dataset, Amazon Quick Sight adds the dataset to these
+	// folders.
 	FolderArns []string
 
 	// Configures the combination and transformation of the data from the physical

@@ -12,7 +12,7 @@ import (
 )
 
 // Use the DescribeAccountSubscription operation to receive a description of an
-// QuickSight account's subscription. A successful API call returns an AccountInfo
+// Quick Sight account's subscription. A successful API call returns an AccountInfo
 // object that includes an account's name, subscription status, authentication
 // type, edition, and notification email address.
 func (c *Client) DescribeAccountSubscription(ctx context.Context, params *DescribeAccountSubscriptionInput, optFns ...func(*Options)) (*DescribeAccountSubscriptionOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) DescribeAccountSubscription(ctx context.Context, params *Descri
 
 type DescribeAccountSubscriptionInput struct {
 
-	// The Amazon Web Services account ID associated with your QuickSight account.
+	// The Amazon Web Services account ID associated with your Quick Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -44,16 +44,16 @@ type DescribeAccountSubscriptionOutput struct {
 
 	// A structure that contains the following elements:
 	//
-	//   - Your QuickSight account name.
+	//   - Your Quick Sight account name.
 	//
-	//   - The edition of QuickSight that your account is using.
+	//   - The edition of Quick Sight that your account is using.
 	//
-	//   - The notification email address that is associated with the QuickSight
-	//   account.
+	//   - The notification email address that is associated with the Amazon Quick
+	//   Sight account.
 	//
-	//   - The authentication type of the QuickSight account.
+	//   - The authentication type of the Quick Sight account.
 	//
-	//   - The status of the QuickSight account's subscription.
+	//   - The status of the Quick Sight account's subscription.
 	AccountInfo *types.AccountInfo
 
 	// The Amazon Web Services request ID for this operation.

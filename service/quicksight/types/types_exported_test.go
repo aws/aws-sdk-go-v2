@@ -7,6 +7,80 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 )
 
+func ExampleAuthenticationMetadata_outputUsage() {
+	var union types.AuthenticationMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AuthenticationMetadataMemberApiKeyConnectionMetadata:
+		_ = v.Value // Value is types.APIKeyConnectionMetadata
+
+	case *types.AuthenticationMetadataMemberAuthorizationCodeGrantMetadata:
+		_ = v.Value // Value is types.AuthorizationCodeGrantMetadata
+
+	case *types.AuthenticationMetadataMemberBasicAuthConnectionMetadata:
+		_ = v.Value // Value is types.BasicAuthConnectionMetadata
+
+	case *types.AuthenticationMetadataMemberClientCredentialsGrantMetadata:
+		_ = v.Value // Value is types.ClientCredentialsGrantMetadata
+
+	case *types.AuthenticationMetadataMemberIamConnectionMetadata:
+		_ = v.Value // Value is types.IAMConnectionMetadata
+
+	case *types.AuthenticationMetadataMemberNoneConnectionMetadata:
+		_ = v.Value // Value is types.NoneConnectionMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BasicAuthConnectionMetadata
+var _ *types.ClientCredentialsGrantMetadata
+var _ *types.IAMConnectionMetadata
+var _ *types.APIKeyConnectionMetadata
+var _ *types.AuthorizationCodeGrantMetadata
+var _ *types.NoneConnectionMetadata
+
+func ExampleAuthorizationCodeGrantCredentialsDetails_outputUsage() {
+	var union types.AuthorizationCodeGrantCredentialsDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AuthorizationCodeGrantCredentialsDetailsMemberAuthorizationCodeGrantDetails:
+		_ = v.Value // Value is types.AuthorizationCodeGrantDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AuthorizationCodeGrantDetails
+
+func ExampleClientCredentialsDetails_outputUsage() {
+	var union types.ClientCredentialsDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ClientCredentialsDetailsMemberClientCredentialsGrantDetails:
+		_ = v.Value // Value is types.ClientCredentialsGrantDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ClientCredentialsGrantDetails
+
 func ExampleDataSourceParameters_outputUsage() {
 	var union types.DataSourceParameters
 	// type switches can be used to check the union value
@@ -31,6 +105,9 @@ func ExampleDataSourceParameters_outputUsage() {
 
 	case *types.DataSourceParametersMemberBigQueryParameters:
 		_ = v.Value // Value is types.BigQueryParameters
+
+	case *types.DataSourceParametersMemberConfluenceParameters:
+		_ = v.Value // Value is types.ConfluenceParameters
 
 	case *types.DataSourceParametersMemberCustomConnectionParameters:
 		_ = v.Value // Value is types.CustomConnectionParameters
@@ -62,11 +139,17 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberPrestoParameters:
 		_ = v.Value // Value is types.PrestoParameters
 
+	case *types.DataSourceParametersMemberQBusinessParameters:
+		_ = v.Value // Value is types.QBusinessParameters
+
 	case *types.DataSourceParametersMemberRdsParameters:
 		_ = v.Value // Value is types.RdsParameters
 
 	case *types.DataSourceParametersMemberRedshiftParameters:
 		_ = v.Value // Value is types.RedshiftParameters
+
+	case *types.DataSourceParametersMemberS3KnowledgeBaseParameters:
+		_ = v.Value // Value is types.S3KnowledgeBaseParameters
 
 	case *types.DataSourceParametersMemberS3Parameters:
 		_ = v.Value // Value is types.S3Parameters
@@ -95,6 +178,9 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberTwitterParameters:
 		_ = v.Value // Value is types.TwitterParameters
 
+	case *types.DataSourceParametersMemberWebCrawlerParameters:
+		_ = v.Value // Value is types.WebCrawlerParameters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -106,13 +192,16 @@ func ExampleDataSourceParameters_outputUsage() {
 
 var _ *types.RedshiftParameters
 var _ *types.DatabricksParameters
+var _ *types.S3KnowledgeBaseParameters
 var _ *types.JiraParameters
 var _ *types.ImpalaParameters
 var _ *types.MySqlParameters
 var _ *types.SnowflakeParameters
 var _ *types.BigQueryParameters
 var _ *types.CustomConnectionParameters
+var _ *types.QBusinessParameters
 var _ *types.ServiceNowParameters
+var _ *types.WebCrawlerParameters
 var _ *types.PrestoParameters
 var _ *types.AuroraParameters
 var _ *types.S3Parameters
@@ -130,6 +219,7 @@ var _ *types.SqlServerParameters
 var _ *types.PostgreSqlParameters
 var _ *types.StarburstParameters
 var _ *types.AuroraPostgreSqlParameters
+var _ *types.ConfluenceParameters
 var _ *types.AthenaParameters
 var _ *types.SparkParameters
 
@@ -179,6 +269,80 @@ func ExamplePhysicalTable_outputUsage() {
 var _ *types.S3Source
 var _ *types.CustomSql
 var _ *types.RelationalTable
+
+func ExampleReadAuthenticationMetadata_outputUsage() {
+	var union types.ReadAuthenticationMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReadAuthenticationMetadataMemberApiKeyConnectionMetadata:
+		_ = v.Value // Value is types.ReadAPIKeyConnectionMetadata
+
+	case *types.ReadAuthenticationMetadataMemberAuthorizationCodeGrantMetadata:
+		_ = v.Value // Value is types.ReadAuthorizationCodeGrantMetadata
+
+	case *types.ReadAuthenticationMetadataMemberBasicAuthConnectionMetadata:
+		_ = v.Value // Value is types.ReadBasicAuthConnectionMetadata
+
+	case *types.ReadAuthenticationMetadataMemberClientCredentialsGrantMetadata:
+		_ = v.Value // Value is types.ReadClientCredentialsGrantMetadata
+
+	case *types.ReadAuthenticationMetadataMemberIamConnectionMetadata:
+		_ = v.Value // Value is types.ReadIamConnectionMetadata
+
+	case *types.ReadAuthenticationMetadataMemberNoneConnectionMetadata:
+		_ = v.Value // Value is types.ReadNoneConnectionMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReadBasicAuthConnectionMetadata
+var _ *types.ReadIamConnectionMetadata
+var _ *types.ReadAuthorizationCodeGrantMetadata
+var _ *types.ReadNoneConnectionMetadata
+var _ *types.ReadAPIKeyConnectionMetadata
+var _ *types.ReadClientCredentialsGrantMetadata
+
+func ExampleReadAuthorizationCodeGrantCredentialsDetails_outputUsage() {
+	var union types.ReadAuthorizationCodeGrantCredentialsDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReadAuthorizationCodeGrantCredentialsDetailsMemberReadAuthorizationCodeGrantDetails:
+		_ = v.Value // Value is types.ReadAuthorizationCodeGrantDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReadAuthorizationCodeGrantDetails
+
+func ExampleReadClientCredentialsDetails_outputUsage() {
+	var union types.ReadClientCredentialsDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReadClientCredentialsDetailsMemberReadClientCredentialsGrantDetails:
+		_ = v.Value // Value is types.ReadClientCredentialsGrantDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReadClientCredentialsGrantDetails
 
 func ExampleTransformOperation_outputUsage() {
 	var union types.TransformOperation

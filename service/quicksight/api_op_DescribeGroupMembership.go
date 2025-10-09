@@ -32,8 +32,8 @@ func (c *Client) DescribeGroupMembership(ctx context.Context, params *DescribeGr
 type DescribeGroupMembershipInput struct {
 
 	// The ID for the Amazon Web Services account that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account that contains your Amazon
-	// QuickSight account.
+	// use the ID for the Amazon Web Services account that contains your Amazon Quick
+	// Sight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -58,7 +58,7 @@ type DescribeGroupMembershipInput struct {
 
 type DescribeGroupMembershipOutput struct {
 
-	// A member of an Amazon QuickSight group. Currently, group members must be users.
+	// A member of an Quick Sight group. Currently, group members must be users.
 	// Groups can't be members of another group. .
 	GroupMember *types.GroupMember
 

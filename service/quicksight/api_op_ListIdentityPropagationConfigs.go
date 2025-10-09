@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all services and authorized targets that the QuickSight IAM Identity
+// Lists all services and authorized targets that the Quick Sight IAM Identity
 // Center application can access.
 //
-// This operation is only supported for QuickSight accounts that use IAM Identity
+// This operation is only supported for Quick Sight accounts that use IAM Identity
 // Center.
 func (c *Client) ListIdentityPropagationConfigs(ctx context.Context, params *ListIdentityPropagationConfigsInput, optFns ...func(*Options)) (*ListIdentityPropagationConfigsOutput, error) {
 	if params == nil {
@@ -56,7 +56,7 @@ type ListIdentityPropagationConfigsOutput struct {
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// A list of services and their authorized targets that the QuickSight IAM
+	// A list of services and their authorized targets that the Quick Sight IAM
 	// Identity Center application can access.
 	Services []types.AuthorizedTargetsByService
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an QuickSight brand.
+// Creates an Quick Sight brand.
 func (c *Client) CreateBrand(ctx context.Context, params *CreateBrandInput, optFns ...func(*Options)) (*CreateBrandOutput, error) {
 	if params == nil {
 		params = &CreateBrandInput{}

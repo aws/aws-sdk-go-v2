@@ -16,10 +16,10 @@ import (
 // Only one job can run simultaneously in a given schedule. Repeated requests are
 // skipped with a 202 HTTP status code.
 //
-// For more information, see [Scheduling and sending QuickSight reports by email] and [Configuring email report settings for a QuickSight dashboard] in the Amazon QuickSight User Guide.
+// For more information, see [Scheduling and sending Amazon Quick Sight reports by email] and [Configuring email report settings for a Amazon Quick Sight dashboard] in the Amazon Quick Sight User Guide.
 //
-// [Configuring email report settings for a QuickSight dashboard]: https://docs.aws.amazon.com/quicksight/latest/user/email-reports-from-dashboard.html
-// [Scheduling and sending QuickSight reports by email]: https://docs.aws.amazon.com/quicksight/latest/user/sending-reports.html
+// [Configuring email report settings for a Amazon Quick Sight dashboard]: https://docs.aws.amazon.com/quicksight/latest/user/email-reports-from-dashboard.html
+// [Scheduling and sending Amazon Quick Sight reports by email]: https://docs.aws.amazon.com/quicksight/latest/user/sending-reports.html
 func (c *Client) StartDashboardSnapshotJobSchedule(ctx context.Context, params *StartDashboardSnapshotJobScheduleInput, optFns ...func(*Options)) (*StartDashboardSnapshotJobScheduleOutput, error) {
 	if params == nil {
 		params = &StartDashboardSnapshotJobScheduleInput{}
@@ -49,8 +49,8 @@ type StartDashboardSnapshotJobScheduleInput struct {
 	DashboardId *string
 
 	// The ID of the schedule that you want to start a snapshot job schedule for. The
-	// schedule ID can be found in the QuickSight console in the Schedules pane of the
-	// dashboard that the schedule is configured for.
+	// schedule ID can be found in the Amazon Quick Sight console in the Schedules pane
+	// of the dashboard that the schedule is configured for.
 	//
 	// This member is required.
 	ScheduleId *string

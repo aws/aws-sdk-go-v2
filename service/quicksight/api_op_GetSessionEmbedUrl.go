@@ -11,14 +11,14 @@ import (
 )
 
 // Generates a session URL and authorization code that you can use to embed the
-// Amazon QuickSight console in your web server code. Use GetSessionEmbedUrl where
-// you want to provide an authoring portal that allows users to create data
-// sources, datasets, analyses, and dashboards. The users who access an embedded
-// QuickSight console need belong to the author or admin security cohort. If you
-// want to restrict permissions to some of these features, add a custom permissions
-// profile to the user with the [UpdateUser]API operation. Use [RegisterUser] API operation to add a new
-// user with a custom permission profile attached. For more information, see the
-// following sections in the Amazon QuickSight User Guide:
+// Amazon Amazon Quick Sight console in your web server code. Use
+// GetSessionEmbedUrl where you want to provide an authoring portal that allows
+// users to create data sources, datasets, analyses, and dashboards. The users who
+// access an embedded Amazon Quick Sight console need belong to the author or admin
+// security cohort. If you want to restrict permissions to some of these features,
+// add a custom permissions profile to the user with the [UpdateUser]API operation. Use [RegisterUser] API
+// operation to add a new user with a custom permission profile attached. For more
+// information, see the following sections in the Amazon QuickSight User Guide:
 //
 // [Embedding Analytics]
 //
@@ -45,8 +45,8 @@ func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbed
 
 type GetSessionEmbedUrlInput struct {
 
-	// The ID for the Amazon Web Services account associated with your QuickSight
-	// subscription.
+	// The ID for the Amazon Web Services account associated with your Amazon Quick
+	// Sight subscription.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -63,10 +63,10 @@ type GetSessionEmbedUrlInput struct {
 	//   - /start/favorites
 	//
 	//   - /dashboards/DashboardId - where DashboardId is the actual ID key from the
-	//   QuickSight console URL of the dashboard
+	//   Amazon Quick Sight console URL of the dashboard
 	//
-	//   - /analyses/AnalysisId - where AnalysisId is the actual ID key from the
-	//   QuickSight console URL of the analysis
+	//   - /analyses/AnalysisId - where AnalysisId is the actual ID key from the Amazon
+	//   Quick Sight console URL of the analysis
 	EntryPoint *string
 
 	// How many minutes the session is valid. The session lifetime must be 15-600

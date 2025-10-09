@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns one or more tags (key-value pairs) to the specified QuickSight
+// Assigns one or more tags (key-value pairs) to the specified Amazon Quick Sight
 // resource.
 //
 // Tags can help you organize and categorize your resources. You can also use them
@@ -22,17 +22,18 @@ import (
 // If you specify a tag key that is already associated with the resource, the new
 // tag value that you specify replaces the previous value for that tag.
 //
-// You can associate as many as 50 tags with a resource. QuickSight supports
-// tagging on data set, data source, dashboard, template, topic, and user.
+// You can associate as many as 50 tags with a resource. Amazon Quick Sight
+// supports tagging on data set, data source, dashboard, template, topic, and user.
 //
-// Tagging for QuickSight works in a similar way to tagging for other Amazon Web
-// Services services, except for the following:
+// Tagging for Amazon Quick Sight works in a similar way to tagging for other
+// Amazon Web Services services, except for the following:
 //
-//   - Tags are used to track costs for users in QuickSight. You can't tag other
-//     resources that QuickSight costs are based on, such as storage capacoty (SPICE),
-//     session usage, alert consumption, or reporting units.
+//   - Tags are used to track costs for users in Amazon Quick Sight. You can't tag
+//     other resources that Amazon Quick Sight costs are based on, such as storage
+//     capacoty (SPICE), session usage, alert consumption, or reporting units.
 //
-//   - QuickSight doesn't currently support the tag editor for Resource Groups.
+//   - Amazon Quick Sight doesn't currently support the tag editor for Resource
+//     Groups.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

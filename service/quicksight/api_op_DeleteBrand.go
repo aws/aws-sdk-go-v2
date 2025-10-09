@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API permanently deletes the specified QuickSight brand. When you delete a
+// This API permanently deletes the specified Quick Sight brand. When you delete a
 // brand:
 //
 //   - The brand and all its associated branding elements are permanently removed
@@ -23,7 +23,7 @@ import (
 // Before proceeding: Verify that the brand is no longer needed and consider the
 // impact on any applications currently using this brand.
 //
-// Deletes an QuickSight brand.
+// Deletes an Quick Sight brand.
 func (c *Client) DeleteBrand(ctx context.Context, params *DeleteBrandInput, optFns ...func(*Options)) (*DeleteBrandOutput, error) {
 	if params == nil {
 		params = &DeleteBrandInput{}

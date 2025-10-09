@@ -1,0 +1,8 @@
+{
+    "id": "a516e915-f601-412a-99cb-10f98ed4611b",
+    "type": "feature",
+    "description": "This release adds the ability to throw WafLimitsExceededException when the maximum number of Application Load Balancer (ALB) associations per AWS WAF v2 WebACL is exceeded.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

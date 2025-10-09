@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon QuickSight analyses that exist in the specified Amazon Web
+// Lists Amazon Quick Sight analyses that exist in the specified Amazon Web
 // Services account.
 func (c *Client) ListAnalyses(ctx context.Context, params *ListAnalysesInput, optFns ...func(*Options)) (*ListAnalysesOutput, error) {
 	if params == nil {

@@ -54,9 +54,9 @@ type UpdateDashboardInput struct {
 	// Options for publishing the dashboard when you create it:
 	//
 	//   - AvailabilityStatus for AdHocFilteringOption - This status can be either
-	//   ENABLED or DISABLED . When this is set to DISABLED , QuickSight disables the
-	//   left filter pane on the published dashboard, which can be used for ad hoc
-	//   (one-time) filtering. This option is ENABLED by default.
+	//   ENABLED or DISABLED . When this is set to DISABLED , Amazon Quick Sight
+	//   disables the left filter pane on the published dashboard, which can be used for
+	//   ad hoc (one-time) filtering. This option is ENABLED by default.
 	//
 	//   - AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED
 	//   or DISABLED . The visual option to export data to .CSV format isn't enabled
@@ -64,6 +64,11 @@ type UpdateDashboardInput struct {
 	//
 	//   - VisibilityState for SheetControlsOption - This visibility state can be
 	//   either COLLAPSED or EXPANDED . This option is COLLAPSED by default.
+	//
+	//   - AvailabilityStatus for QuickSuiteActionsOption - This status can be either
+	//   ENABLED or DISABLED . Features related to Actions in Amazon Quick Suite on
+	//   dashboards are disabled when this is set to DISABLED . This option is DISABLED
+	//   by default.
 	//
 	//   - AvailabilityStatus for ExecutiveSummaryOption - This status can be either
 	//   ENABLED or DISABLED . The option to build an executive summary is disabled
@@ -91,8 +96,8 @@ type UpdateDashboardInput struct {
 	// you need to update a dashboard from an analysis, first convert the analysis to a
 	// template by using the [CreateTemplate]API operation. For SourceTemplate , specify the Amazon
 	// Resource Name (ARN) of the source template. The SourceTemplate ARN can contain
-	// any Amazon Web Services account and any QuickSight-supported Amazon Web Services
-	// Region.
+	// any Amazon Web Services account and any Amazon Quick Sight-supported Amazon Web
+	// Services Region.
 	//
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each dataset

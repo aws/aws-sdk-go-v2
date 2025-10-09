@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateAccountSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateActionConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAnalysis(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAnalysis(context.Background(), nil, func(o *Options) {
@@ -415,6 +427,18 @@ func TestCheckSnapshot_DeleteAccountSubscription(t *testing.T) {
 	_, err := svc.DeleteAccountSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAccountSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteActionConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -811,6 +835,30 @@ func TestCheckSnapshot_DescribeAccountSubscription(t *testing.T) {
 	_, err := svc.DescribeAccountSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAccountSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeActionConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeActionConnectorPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeActionConnectorPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeActionConnectorPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1442,11 +1490,47 @@ func TestCheckSnapshot_GetDashboardEmbedUrl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFlowMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFlowMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFlowPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFlowPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSessionEmbedUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSessionEmbedUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListActionConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListActionConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListActionConnectors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1555,6 +1639,18 @@ func TestCheckSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1910,6 +2006,18 @@ func TestCheckSnapshot_RestoreAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchActionConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchActionConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchActionConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchAnalyses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchAnalyses(context.Background(), nil, func(o *Options) {
@@ -1951,6 +2059,18 @@ func TestCheckSnapshot_SearchDataSources(t *testing.T) {
 	_, err := svc.SearchDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2095,6 +2215,30 @@ func TestCheckSnapshot_UpdateAccountSettings(t *testing.T) {
 	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateActionConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateActionConnectorPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateActionConnectorPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateActionConnectorPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2299,6 +2443,18 @@ func TestCheckSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	_, err := svc.UpdateDefaultQBusinessApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDefaultQBusinessApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateFlowPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFlowPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFlowPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2665,6 +2821,18 @@ func TestUpdateSnapshot_CreateAccountSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateActionConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAnalysis(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAnalysis(context.Background(), nil, func(o *Options) {
@@ -2958,6 +3126,18 @@ func TestUpdateSnapshot_DeleteAccountSubscription(t *testing.T) {
 	_, err := svc.DeleteAccountSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAccountSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteActionConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3354,6 +3534,30 @@ func TestUpdateSnapshot_DescribeAccountSubscription(t *testing.T) {
 	_, err := svc.DescribeAccountSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAccountSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeActionConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeActionConnectorPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeActionConnectorPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeActionConnectorPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3985,11 +4189,47 @@ func TestUpdateSnapshot_GetDashboardEmbedUrl(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFlowMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFlowMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFlowPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFlowPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSessionEmbedUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSessionEmbedUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListActionConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListActionConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListActionConnectors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4098,6 +4338,18 @@ func TestUpdateSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4453,6 +4705,18 @@ func TestUpdateSnapshot_RestoreAnalysis(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchActionConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchActionConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchActionConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SearchAnalyses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchAnalyses(context.Background(), nil, func(o *Options) {
@@ -4494,6 +4758,18 @@ func TestUpdateSnapshot_SearchDataSources(t *testing.T) {
 	_, err := svc.SearchDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4638,6 +4914,30 @@ func TestUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
 	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateActionConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateActionConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateActionConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateActionConnectorPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateActionConnectorPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateActionConnectorPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4842,6 +5142,18 @@ func TestUpdateSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	_, err := svc.UpdateDefaultQBusinessApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDefaultQBusinessApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFlowPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFlowPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFlowPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

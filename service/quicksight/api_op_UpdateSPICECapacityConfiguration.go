@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the SPICE capacity configuration for a QuickSight account.
+// Updates the SPICE capacity configuration for a Quick Sight account.
 func (c *Client) UpdateSPICECapacityConfiguration(ctx context.Context, params *UpdateSPICECapacityConfigurationInput, optFns ...func(*Options)) (*UpdateSPICECapacityConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateSPICECapacityConfigurationInput{}

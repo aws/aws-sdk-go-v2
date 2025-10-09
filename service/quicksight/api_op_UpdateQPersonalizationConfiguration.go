@@ -35,9 +35,9 @@ type UpdateQPersonalizationConfigurationInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// An option to allow QuickSight to customize data stories with user specific
-	// metadata, specifically location and job information, in your IAM Identity Center
-	// instance.
+	// An option to allow Amazon Quick Sight to customize data stories with user
+	// specific metadata, specifically location and job information, in your IAM
+	// Identity Center instance.
 	//
 	// This member is required.
 	PersonalizationMode types.PersonalizationMode

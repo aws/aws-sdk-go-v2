@@ -14,10 +14,10 @@ import (
 // Creates a theme.
 //
 // A theme is set of configuration options for color and layout. Themes apply to
-// analyses and dashboards. For more information, see [Using Themes in Amazon QuickSight]in the Amazon QuickSight
+// analyses and dashboards. For more information, see [Using Themes in Amazon Quick Sight]in the Amazon Quick Sight
 // User Guide.
 //
-// [Using Themes in Amazon QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
+// [Using Themes in Amazon Quick Sight]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
 func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optFns ...func(*Options)) (*CreateThemeOutput, error) {
 	if params == nil {
 		params = &CreateThemeInput{}
@@ -42,7 +42,7 @@ type CreateThemeInput struct {
 	AwsAccountId *string
 
 	// The ID of the theme that a custom theme will inherit from. All themes inherit
-	// from one of the starting themes defined by Amazon QuickSight. For a list of the
+	// from one of the starting themes defined by Amazon Quick Sight. For a list of the
 	// starting themes, use ListThemes or choose Themes from within an analysis.
 	//
 	// This member is required.

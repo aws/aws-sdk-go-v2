@@ -12,24 +12,25 @@ import (
 )
 
 // Describes the customizations associated with the provided Amazon Web Services
-// account and Amazon QuickSight namespace. The QuickSight console evaluates which
-// customizations to apply by running this API operation with the Resolved flag
-// included.
+// account and Amazon Quick Sight namespace. The Quick Sight console evaluates
+// which customizations to apply by running this API operation with the Resolved
+// flag included.
 //
 // To determine what customizations display when you run this command, it can help
 // to visualize the relationship of the entities involved.
 //
 //   - Amazon Web Services account - The Amazon Web Services account exists at the
 //     top of the hierarchy. It has the potential to use all of the Amazon Web Services
-//     Regions and Amazon Web Services Services. When you subscribe to QuickSight, you
+//     Regions and Amazon Web Services Services. When you subscribe to Quick Sight, you
 //     choose one Amazon Web Services Region to use as your home Region. That's where
-//     your free SPICE capacity is located. You can use QuickSight in any supported
+//     your free SPICE capacity is located. You can use Quick Sight in any supported
 //     Amazon Web Services Region.
 //
-//   - Amazon Web Services Region - You can sign in to QuickSight in any Amazon Web
-//     Services Region. If you have a user directory, it resides in us-east-1, which is
-//     US East (N. Virginia). Generally speaking, these users have access to QuickSight
-//     in any Amazon Web Services Region, unless they are constrained to a namespace.
+//   - Amazon Web Services Region - You can sign in to Quick Sight in any Amazon
+//     Web Services Region. If you have a user directory, it resides in us-east-1,
+//     which is US East (N. Virginia). Generally speaking, these users have access to
+//     Quick Sight in any Amazon Web Services Region, unless they are constrained to a
+//     namespace.
 //
 // To run the command in a different Amazon Web Services Region, you change your
 //
@@ -43,14 +44,14 @@ import (
 //	- Run aws configure to change your default Amazon Web Services Region. Use
 //	Enter to key the same settings for your keys. For more information, see [Configuring the CLI].
 //
-//	- Namespace - A QuickSight namespace is a partition that contains users and
+//	- Namespace - A Quick Sight namespace is a partition that contains users and
 //	assets (data sources, datasets, dashboards, and so on). To access assets that
 //	are in a specific namespace, users and groups must also be part of the same
 //	namespace. People who share a namespace are completely isolated from users and
 //	assets in other namespaces, even if they are in the same Amazon Web Services
 //	account and Amazon Web Services Region.
 //
-//	- Applied customizations - QuickSight customizations can apply to an Amazon
+//	- Applied customizations - Quick Sight customizations can apply to an Amazon
 //	Web Services account or to a namespace. Settings that you apply to a namespace
 //	override settings that you apply to an Amazon Web Services account.
 //
@@ -74,20 +75,20 @@ func (c *Client) DescribeAccountCustomization(ctx context.Context, params *Descr
 
 type DescribeAccountCustomizationInput struct {
 
-	// The ID for the Amazon Web Services account that you want to describe QuickSight
-	// customizations for.
+	// The ID for the Amazon Web Services account that you want to describe Quick
+	// Sight customizations for.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The QuickSight namespace that you want to describe QuickSight customizations
+	// The Quick Sight namespace that you want to describe Quick Sight customizations
 	// for.
 	Namespace *string
 
 	// The Resolved flag works with the other parameters to determine which view of
-	// QuickSight customizations is returned. You can add this flag to your command to
-	// use the same view that QuickSight uses to identify which customizations to apply
-	// to the console. Omit this flag, or set it to no-resolved , to reveal
+	// Quick Sight customizations is returned. You can add this flag to your command to
+	// use the same view that Quick Sight uses to identify which customizations to
+	// apply to the console. Omit this flag, or set it to no-resolved , to reveal
 	// customizations that are configured at different levels.
 	Resolved bool
 
@@ -96,7 +97,7 @@ type DescribeAccountCustomizationInput struct {
 
 type DescribeAccountCustomizationOutput struct {
 
-	// The QuickSight customizations that exist.
+	// The Quick Sight customizations that exist.
 	AccountCustomization *types.AccountCustomization
 
 	// The Amazon Resource Name (ARN) of the customization that's associated with this
@@ -106,7 +107,7 @@ type DescribeAccountCustomizationOutput struct {
 	// The ID for the Amazon Web Services account that you're describing.
 	AwsAccountId *string
 
-	// The QuickSight namespace that you're describing.
+	// The Quick Sight namespace that you're describing.
 	Namespace *string
 
 	// The Amazon Web Services request ID for this operation.

@@ -53,30 +53,32 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	Type types.DataSourceType
 
-	// The credentials QuickSight that uses to connect to your underlying source.
-	// Currently, only credentials based on user name and password are supported.
+	// The credentials Amazon Quick Sight that uses to connect to your underlying
+	// source. Currently, only credentials based on user name and password are
+	// supported.
 	Credentials *types.DataSourceCredentials
 
-	// The parameters that QuickSight uses to connect to your underlying source.
+	// The parameters that Amazon Quick Sight uses to connect to your underlying
+	// source.
 	DataSourceParameters types.DataSourceParameters
 
-	// When you create the data source, QuickSight adds the data source to these
-	// folders.
+	// When you create the data source, Amazon Quick Sight adds the data source to
+	// these folders.
 	FolderArns []string
 
 	// A list of resource permissions on the data source.
 	Permissions []types.ResourcePermission
 
-	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to
-	// your underlying source.
+	// Secure Socket Layer (SSL) properties that apply when Amazon Quick Sight
+	// connects to your underlying source.
 	SslProperties *types.SslProperties
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the data source.
 	Tags []types.Tag
 
-	// Use this parameter only when you want QuickSight to use a VPC connection when
-	// connecting to your underlying source.
+	// Use this parameter only when you want Amazon Quick Sight to use a VPC
+	// connection when connecting to your underlying source.
 	VpcConnectionProperties *types.VpcConnectionProperties
 
 	noSmithyDocumentSerde

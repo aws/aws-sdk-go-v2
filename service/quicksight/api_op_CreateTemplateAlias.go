@@ -31,7 +31,7 @@ type CreateTemplateAliasInput struct {
 
 	// The name that you want to give to the template alias that you're creating.
 	// Don't start the alias name with the $ character. Alias names that start with $
-	// are reserved by QuickSight.
+	// are reserved by Quick Sight.
 	//
 	// This member is required.
 	AliasName *string

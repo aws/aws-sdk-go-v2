@@ -13,12 +13,12 @@ import (
 
 // Starts an Asset Bundle import job.
 //
-// An Asset Bundle import job imports specified QuickSight assets into an
-// QuickSight account. You can also choose to import a naming prefix and specified
-// configuration overrides. The assets that are contained in the bundle file that
-// you provide are used to create or update a new or existing asset in your
-// QuickSight account. Each QuickSight account can run up to 5 import jobs
-// concurrently.
+// An Asset Bundle import job imports specified Amazon Quick Sight assets into an
+// Amazon Quick Sight account. You can also choose to import a naming prefix and
+// specified configuration overrides. The assets that are contained in the bundle
+// file that you provide are used to create or update a new or existing asset in
+// your Amazon Quick Sight account. Each Amazon Quick Sight account can run up to 5
+// import jobs concurrently.
 //
 // The API caller must have the necessary "create" , "describe" , and "update"
 // permissions in their IAM role to access each resource type that is contained in
@@ -63,8 +63,8 @@ type StartAssetBundleImportJobInput struct {
 	// changes caused by the failed job.
 	//
 	// If you choose DO_NOTHING , failed import jobs will not attempt to roll back any
-	// asset changes caused by the failed job, possibly keeping the QuickSight account
-	// in an inconsistent state.
+	// asset changes caused by the failed job, possibly keeping the Amazon Quick Sight
+	// account in an inconsistent state.
 	FailureAction types.AssetBundleImportFailureAction
 
 	// Optional overrides that are applied to the resource configuration before import.

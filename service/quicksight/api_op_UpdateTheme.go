@@ -35,8 +35,8 @@ type UpdateThemeInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The theme ID, defined by Amazon QuickSight, that a custom theme inherits from.
-	// All themes initially inherit from a default QuickSight theme.
+	// The theme ID, defined by Amazon Quick Sight, that a custom theme inherits from.
+	// All themes initially inherit from a default Quick Sight theme.
 	//
 	// This member is required.
 	BaseThemeId *string
