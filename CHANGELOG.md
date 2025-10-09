@@ -1,3 +1,11 @@
+# Release (2025-10-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.95.0](service/quicksight/CHANGELOG.md#v1950-2025-10-09)
+  * **Feature**: This release adds support for ActionConnector and Flow, which are new resources associated with Amazon Quick Suite. Additional updates include expanded Data Source options, further branding customization, and new capabilities that can be restricted by Admins.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.68.0](service/wafv2/CHANGELOG.md#v1680-2025-10-09)
+  * **Feature**: This release adds the ability to throw WafLimitsExceededException when the maximum number of Application Load Balancer (ALB) associations per AWS WAF v2 WebACL is exceeded.
+
 # Release (2025-10-08)
 
 ## Module Highlights

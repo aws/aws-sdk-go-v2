@@ -1,3 +1,7 @@
+# v1.95.0 (2025-10-09)
+
+* **Feature**: This release adds support for ActionConnector and Flow, which are new resources associated with Amazon Quick Suite. Additional updates include expanded Data Source options, further branding customization, and new capabilities that can be restricted by Admins.
+
 # v1.94.4 (2025-10-06)
 
 * **Documentation**: Documentation improvements for QuickSight API documentation to clarify that delete operation APIs are global.

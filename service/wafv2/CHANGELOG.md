@@ -1,3 +1,7 @@
+# v1.68.0 (2025-10-09)
+
+* **Feature**: This release adds the ability to throw WafLimitsExceededException when the maximum number of Application Load Balancer (ALB) associations per AWS WAF v2 WebACL is exceeded.
+
 # v1.67.7 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions
