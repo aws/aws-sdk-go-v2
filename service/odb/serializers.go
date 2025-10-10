@@ -2456,6 +2456,67 @@ func (m *awsAwsjson10_serializeOpUpdateOdbNetwork) HandleSerialize(ctx context.C
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson10_serializeOpUpdateOdbPeeringConnection struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateOdbPeeringConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateOdbPeeringConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateOdbPeeringConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Odb.UpdateOdbPeeringConnection")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateOdbPeeringConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson10_serializeDocumentCustomerContact(v *types.CustomerContact, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2625,6 +2686,17 @@ func awsAwsjson10_serializeDocumentMonths(v []types.Month, value smithyjson.Valu
 		if err := awsAwsjson10_serializeDocumentMonth(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPeeredCidrList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3088,6 +3160,13 @@ func awsAwsjson10_serializeOpDocumentCreateOdbPeeringConnectionInput(v *CreateOd
 	if v.OdbNetworkId != nil {
 		ok := object.Key("odbNetworkId")
 		ok.String(*v.OdbNetworkId)
+	}
+
+	if v.PeerNetworkCidrsToBeAdded != nil {
+		ok := object.Key("peerNetworkCidrsToBeAdded")
+		if err := awsAwsjson10_serializeDocumentPeeredCidrList(v.PeerNetworkCidrsToBeAdded, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PeerNetworkId != nil {
@@ -3700,6 +3779,37 @@ func awsAwsjson10_serializeOpDocumentUpdateOdbNetworkInput(v *UpdateOdbNetworkIn
 	if len(v.ZeroEtlAccess) > 0 {
 		ok := object.Key("zeroEtlAccess")
 		ok.String(string(v.ZeroEtlAccess))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateOdbPeeringConnectionInput(v *UpdateOdbPeeringConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayName != nil {
+		ok := object.Key("displayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.OdbPeeringConnectionId != nil {
+		ok := object.Key("odbPeeringConnectionId")
+		ok.String(*v.OdbPeeringConnectionId)
+	}
+
+	if v.PeerNetworkCidrsToBeAdded != nil {
+		ok := object.Key("peerNetworkCidrsToBeAdded")
+		if err := awsAwsjson10_serializeDocumentPeeredCidrList(v.PeerNetworkCidrsToBeAdded, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PeerNetworkCidrsToBeRemoved != nil {
+		ok := object.Key("peerNetworkCidrsToBeRemoved")
+		if err := awsAwsjson10_serializeDocumentPeeredCidrList(v.PeerNetworkCidrsToBeRemoved, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

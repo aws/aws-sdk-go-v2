@@ -52,6 +52,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_ListWorkloadIdentities.go",
         "api_op_SetTokenVaultCMK.go",
+        "api_op_SynchronizeGatewayTargets.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateAgentRuntime.go",

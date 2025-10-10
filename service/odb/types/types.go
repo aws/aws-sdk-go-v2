@@ -1826,6 +1826,11 @@ type OdbPeeringConnection struct {
 	// The Amazon Resource Name (ARN) of the peer network.
 	PeerNetworkArn *string
 
+	// The CIDR blocks associated with the peering connection. These CIDR blocks
+	// define the IP address ranges that can communicate through the peering
+	// connection.
+	PeerNetworkCidrs []string
+
 	// The percentage progress of the ODB peering connection creation or deletion.
 	PercentProgress *float32
 
@@ -1869,6 +1874,11 @@ type OdbPeeringConnectionSummary struct {
 
 	// The Amazon Resource Name (ARN) of the peer network.
 	PeerNetworkArn *string
+
+	// The CIDR blocks associated with the peering connection. These CIDR blocks
+	// define the IP address ranges that can communicate through the peering
+	// connection.
+	PeerNetworkCidrs []string
 
 	// The percentage progress of the ODB peering connection creation or deletion.
 	PercentProgress *float32

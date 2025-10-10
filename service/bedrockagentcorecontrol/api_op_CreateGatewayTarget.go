@@ -31,12 +31,6 @@ func (c *Client) CreateGatewayTarget(ctx context.Context, params *CreateGatewayT
 
 type CreateGatewayTargetInput struct {
 
-	// The credential provider configurations for the target. These configurations
-	// specify how the gateway authenticates with the target endpoint.
-	//
-	// This member is required.
-	CredentialProviderConfigurations []types.CredentialProviderConfiguration
-
 	// The identifier of the gateway to create a target for.
 	//
 	// This member is required.
@@ -54,11 +48,16 @@ type CreateGatewayTargetInput struct {
 	TargetConfiguration types.TargetConfiguration
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
-	// more than one time. If this token matches a previous request, the service
-	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	// more than one time. If you don't specify this field, a value is randomly
+	// generated for you. If this token matches a previous request, the service ignores
+	// the request, but doesn't return an error. For more information, see [Ensuring idempotency].
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
+
+	// The credential provider configurations for the target. These configurations
+	// specify how the gateway authenticates with the target endpoint.
+	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
 	// The description of the gateway target.
 	Description *string
@@ -110,6 +109,9 @@ type CreateGatewayTargetOutput struct {
 
 	// The description of the target.
 	Description *string
+
+	// The last synchronization of the target.
+	LastSynchronizedAt *time.Time
 
 	// The reasons for the current status of the target.
 	StatusReasons []string

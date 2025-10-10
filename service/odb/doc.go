@@ -7,7 +7,7 @@
 // inside Amazon Web Services data centers. You can migrate your Oracle Exadata
 // workloads, establish low-latency connectivity with applications running on
 // Amazon Web Services, and integrate with Amazon Web Services services. For
-// example, you can run application servers in a virtual private cloud (VPC) and
+// example, you can run application servers in a Virtual Private Cloud (VPC) and
 // access an Oracle Exadata system running in Oracle Database@Amazon Web Services.
 // You can get started with Oracle Database@Amazon Web Services by using the
 // familiar Amazon Web Services Management Console, APIs, or CLI.
@@ -19,16 +19,18 @@
 // as polling or callback functions to determine when a command has been applied.
 // The reference structure is as follows.
 //
-// In this preview release documentation, the links in the "See Also" sections do
-// not work.
-//
 // Oracle Database@Amazon Web Services API Reference
 //
-//   - For the alphabetical list of API actions, see .
+//   - For the alphabetical list of API actions, see [API Actions].
 //
-//   - For the alphabetical list of data types, see .
+//   - For the alphabetical list of data types, see [Data Types].
 //
-//   - For a list of common parameters, see CommonParameters.
+//   - For a list of common query parameters, see [Common Parameters].
 //
-//   - For descriptions of the error codes, see CommonErrors.
+//   - For descriptions of the error codes, see [Common Errors].
+//
+// [API Actions]: https://docs.aws.amazon.com/odb/latest/APIReference/API_Operations.html
+// [Common Errors]: https://docs.aws.amazon.com/odb/latest/APIReference/CommonErrors.html
+// [Data Types]: https://docs.aws.amazon.com/odb/latest/APIReference/API_Types.html
+// [Common Parameters]: https://docs.aws.amazon.com/odb/latest/APIReference/CommonParameters.html
 package odb

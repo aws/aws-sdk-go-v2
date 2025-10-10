@@ -710,6 +710,26 @@ func (m *validateOpSetTokenVaultCMK) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSynchronizeGatewayTargets struct {
+}
+
+func (*validateOpSynchronizeGatewayTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSynchronizeGatewayTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SynchronizeGatewayTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSynchronizeGatewayTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1050,6 +1070,10 @@ func addOpSetTokenVaultCMKValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetTokenVaultCMK{}, middleware.After)
 }
 
+func addOpSynchronizeGatewayTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSynchronizeGatewayTargets{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -1250,6 +1274,11 @@ func validateCustomConfigurationInput(v types.CustomConfigurationInput) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomConfigurationInput"}
 	switch uv := v.(type) {
+	case *types.CustomConfigurationInputMemberSelfManagedConfiguration:
+		if err := validateSelfManagedConfigurationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[selfManagedConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.CustomConfigurationInputMemberSemanticOverride:
 		if err := validateSemanticOverrideConfigurationInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[semanticOverride]", err.(smithy.InvalidParamsError))
@@ -1469,6 +1498,24 @@ func validateGoogleOauth2ProviderConfigInput(v *types.GoogleOauth2ProviderConfig
 	}
 }
 
+func validateInvocationConfigurationInput(v *types.InvocationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvocationConfigurationInput"}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if v.PayloadDeliveryBucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadDeliveryBucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKmsConfiguration(v *types.KmsConfiguration) error {
 	if v == nil {
 		return nil
@@ -1506,6 +1553,21 @@ func validateMcpLambdaTargetConfiguration(v *types.McpLambdaTargetConfiguration)
 	}
 }
 
+func validateMcpServerTargetConfiguration(v *types.McpServerTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "McpServerTargetConfiguration"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMcpTargetConfiguration(v types.McpTargetConfiguration) error {
 	if v == nil {
 		return nil
@@ -1515,6 +1577,11 @@ func validateMcpTargetConfiguration(v types.McpTargetConfiguration) error {
 	case *types.McpTargetConfigurationMemberLambda:
 		if err := validateMcpLambdaTargetConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[lambda]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.McpTargetConfigurationMemberMcpServer:
+		if err := validateMcpServerTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[mcpServer]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1942,6 +2009,25 @@ func validateSchemaProperties(v map[string]types.SchemaDefinition) error {
 		value := v[key]
 		if err := validateSchemaDefinition(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelfManagedConfigurationInput(v *types.SelfManagedConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelfManagedConfigurationInput"}
+	if v.InvocationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvocationConfiguration"))
+	} else if v.InvocationConfiguration != nil {
+		if err := validateInvocationConfigurationInput(v.InvocationConfiguration); err != nil {
+			invalidParams.AddNested("InvocationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2442,9 +2528,7 @@ func validateOpCreateGatewayTargetInput(v *CreateGatewayTargetInput) error {
 			invalidParams.AddNested("TargetConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CredentialProviderConfigurations == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderConfigurations"))
-	} else if v.CredentialProviderConfigurations != nil {
+	if v.CredentialProviderConfigurations != nil {
 		if err := validateCredentialProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
 			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
 		}
@@ -2910,6 +2994,24 @@ func validateOpSetTokenVaultCMKInput(v *SetTokenVaultCMKInput) error {
 	}
 }
 
+func validateOpSynchronizeGatewayTargetsInput(v *SynchronizeGatewayTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SynchronizeGatewayTargetsInput"}
+	if v.GatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if v.TargetIdList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetIdList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -3077,9 +3179,7 @@ func validateOpUpdateGatewayTargetInput(v *UpdateGatewayTargetInput) error {
 			invalidParams.AddNested("TargetConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CredentialProviderConfigurations == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderConfigurations"))
-	} else if v.CredentialProviderConfigurations != nil {
+	if v.CredentialProviderConfigurations != nil {
 		if err := validateCredentialProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
 			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
 		}

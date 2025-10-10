@@ -162,7 +162,8 @@ type CodeSigningPolicies struct {
 	// Code signing configuration policy for deployment validation failure. If you set
 	// the policy to Enforce , Lambda blocks the deployment request if signature
 	// validation checks fail. If you set the policy to Warn , Lambda allows the
-	// deployment and creates a CloudWatch log.
+	// deployment and issues a new Amazon CloudWatch metric ( SignatureValidationErrors
+	// ) and also stores the warning in the CloudTrail log.
 	//
 	// Default value: Warn
 	UntrustedArtifactOnDeployment CodeSigningPolicy

@@ -89,6 +89,9 @@ type GetGatewayTargetOutput struct {
 	// The description of the gateway target.
 	Description *string
 
+	// The last synchronization of the target.
+	LastSynchronizedAt *time.Time
+
 	// The reasons for the current status of the gateway target.
 	StatusReasons []string
 

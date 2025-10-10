@@ -382,12 +382,22 @@ type CredentialProviderConfiguration struct {
 //
 // The following types satisfy this interface:
 //
+//	CustomConfigurationInputMemberSelfManagedConfiguration
 //	CustomConfigurationInputMemberSemanticOverride
 //	CustomConfigurationInputMemberSummaryOverride
 //	CustomConfigurationInputMemberUserPreferenceOverride
 type CustomConfigurationInput interface {
 	isCustomConfigurationInput()
 }
+
+// The self managed configuration for a custom memory strategy.
+type CustomConfigurationInputMemberSelfManagedConfiguration struct {
+	Value SelfManagedConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomConfigurationInputMemberSelfManagedConfiguration) isCustomConfigurationInput() {}
 
 // The semantic override configuration for a custom memory strategy.
 type CustomConfigurationInputMemberSemanticOverride struct {
@@ -750,6 +760,62 @@ type GatewaySummary struct {
 	noSmithyDocumentSerde
 }
 
+// The gateway target.
+type GatewayTarget struct {
+
+	// The date and time at which the target was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The provider configurations.
+	//
+	// This member is required.
+	CredentialProviderConfigurations []CredentialProviderConfiguration
+
+	// The Amazon Resource Name (ARN) of the gateway target.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// The name of the gateway target.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the gateway target.
+	//
+	// This member is required.
+	Status TargetStatus
+
+	// The configuration for a gateway target. This structure defines how the gateway
+	// connects to and interacts with the target endpoint.
+	//
+	// This member is required.
+	TargetConfiguration TargetConfiguration
+
+	// The target ID.
+	//
+	// This member is required.
+	TargetId *string
+
+	// The date and time at which the target was updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description for the gateway target.
+	Description *string
+
+	// The last synchronization time.
+	LastSynchronizedAt *time.Time
+
+	// The status reasons for the target status.
+	StatusReasons []string
+
+	noSmithyDocumentSerde
+}
+
 // Input configuration for a GitHub OAuth2 provider.
 type GithubOauth2ProviderConfigInput struct {
 
@@ -800,6 +866,38 @@ type GoogleOauth2ProviderConfigOutput struct {
 	//
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
+
+	noSmithyDocumentSerde
+}
+
+// The configuration to invoke a self-managed memory processing pipeline with.
+type InvocationConfiguration struct {
+
+	// The S3 bucket name for event payload delivery.
+	//
+	// This member is required.
+	PayloadDeliveryBucketName *string
+
+	// The ARN of the SNS topic for job notifications.
+	//
+	// This member is required.
+	TopicArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration to invoke a self-managed memory processing pipeline with.
+type InvocationConfigurationInput struct {
+
+	// The S3 bucket name for event payload delivery.
+	//
+	// This member is required.
+	PayloadDeliveryBucketName *string
+
+	// The ARN of the SNS topic for job notifications.
+	//
+	// This member is required.
+	TopicArn *string
 
 	noSmithyDocumentSerde
 }
@@ -874,12 +972,24 @@ type McpLambdaTargetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The target configuration for the MCP server.
+type McpServerTargetConfiguration struct {
+
+	// The endpoint for the MCP server target configuration.
+	//
+	// This member is required.
+	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // The Model Context Protocol (MCP) configuration for a target. This structure
 // defines how the gateway uses MCP to communicate with the target.
 //
 // The following types satisfy this interface:
 //
 //	McpTargetConfigurationMemberLambda
+//	McpTargetConfigurationMemberMcpServer
 //	McpTargetConfigurationMemberOpenApiSchema
 //	McpTargetConfigurationMemberSmithyModel
 type McpTargetConfiguration interface {
@@ -896,6 +1006,15 @@ type McpTargetConfigurationMemberLambda struct {
 }
 
 func (*McpTargetConfigurationMemberLambda) isMcpTargetConfiguration() {}
+
+// The MCP server specified as the gateway target.
+type McpTargetConfigurationMemberMcpServer struct {
+	Value McpServerTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*McpTargetConfigurationMemberMcpServer) isMcpTargetConfiguration() {}
 
 // The OpenAPI schema for the Model Context Protocol target. This schema defines
 // the API structure of the target.
@@ -1087,6 +1206,24 @@ type MemorySummary struct {
 	noSmithyDocumentSerde
 }
 
+// The trigger configuration based on a message.
+type MessageBasedTrigger struct {
+
+	// The number of messages that trigger memory processing.
+	MessageCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// The trigger configuration based on a message.
+type MessageBasedTriggerInput struct {
+
+	// The number of messages that trigger memory processing.
+	MessageCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // Input configuration for a Microsoft OAuth2 provider.
 type MicrosoftOauth2ProviderConfigInput struct {
 
@@ -1152,6 +1289,18 @@ type ModifyExtractionConfigurationMemberCustomExtractionConfiguration struct {
 func (*ModifyExtractionConfigurationMemberCustomExtractionConfiguration) isModifyExtractionConfiguration() {
 }
 
+// The configuration for updating invocation settings.
+type ModifyInvocationConfigurationInput struct {
+
+	// The updated S3 bucket name for event payload delivery.
+	PayloadDeliveryBucketName *string
+
+	// The updated ARN of the SNS topic for job notifications.
+	TopicArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information for modifying memory strategies.
 type ModifyMemoryStrategies struct {
 
@@ -1187,6 +1336,21 @@ type ModifyMemoryStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for updating the self-managed memory strategy.
+type ModifySelfManagedConfiguration struct {
+
+	// The updated number of historical messages to include in processing context.
+	HistoricalContextWindowSize *int32
+
+	// The updated configuration to invoke self-managed memory processing pipeline.
+	InvocationConfiguration *ModifyInvocationConfigurationInput
+
+	// The updated list of conditions that trigger memory processing.
+	TriggerConditions []TriggerConditionInput
+
+	noSmithyDocumentSerde
+}
+
 // Contains information for modifying a strategy configuration.
 type ModifyStrategyConfiguration struct {
 
@@ -1195,6 +1359,9 @@ type ModifyStrategyConfiguration struct {
 
 	// The updated extraction configuration.
 	Extraction ModifyExtractionConfiguration
+
+	// The updated self-managed configuration.
+	SelfManagedConfiguration *ModifySelfManagedConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1606,6 +1773,44 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
+// A configuration for a self-managed memory strategy.
+type SelfManagedConfiguration struct {
+
+	// The number of historical messages to include in processing context.
+	//
+	// This member is required.
+	HistoricalContextWindowSize *int32
+
+	// The configuration to use when invoking memory processing.
+	//
+	// This member is required.
+	InvocationConfiguration *InvocationConfiguration
+
+	// A list of conditions that trigger memory processing.
+	//
+	// This member is required.
+	TriggerConditions []TriggerCondition
+
+	noSmithyDocumentSerde
+}
+
+// Input configuration for a self-managed memory strategy.
+type SelfManagedConfigurationInput struct {
+
+	// Configuration to invoke a self-managed memory processing pipeline with.
+	//
+	// This member is required.
+	InvocationConfiguration *InvocationConfigurationInput
+
+	// Number of historical messages to include in processing context.
+	HistoricalContextWindowSize *int32
+
+	// A list of conditions that trigger memory processing.
+	TriggerConditions []TriggerConditionInput
+
+	noSmithyDocumentSerde
+}
+
 // Contains semantic consolidation override configuration.
 type SemanticConsolidationOverride struct {
 
@@ -1735,6 +1940,9 @@ type StrategyConfiguration struct {
 	// The extraction configuration for the memory strategy.
 	Extraction ExtractionConfiguration
 
+	// Self-managed configuration settings.
+	SelfManagedConfiguration *SelfManagedConfiguration
+
 	// The type of override for the strategy configuration.
 	Type OverrideType
 
@@ -1854,6 +2062,42 @@ type TargetSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Trigger configuration based on time.
+type TimeBasedTrigger struct {
+
+	// Idle session timeout (seconds) that triggers memory processing.
+	IdleSessionTimeout *int32
+
+	noSmithyDocumentSerde
+}
+
+// Trigger configuration based on time.
+type TimeBasedTriggerInput struct {
+
+	// Idle session timeout (seconds) that triggers memory processing.
+	IdleSessionTimeout *int32
+
+	noSmithyDocumentSerde
+}
+
+// Trigger configuration based on tokens.
+type TokenBasedTrigger struct {
+
+	// Number of tokens that trigger memory processing.
+	TokenCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Trigger configuration based on tokens.
+type TokenBasedTriggerInput struct {
+
+	// Number of tokens that trigger memory processing.
+	TokenCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // A tool definition for a gateway target. This structure defines a tool that the
 // target exposes through the Model Context Protocol.
 type ToolDefinition struct {
@@ -1913,6 +2157,82 @@ type ToolSchemaMemberS3 struct {
 }
 
 func (*ToolSchemaMemberS3) isToolSchema() {}
+
+// Condition that triggers memory processing.
+//
+// The following types satisfy this interface:
+//
+//	TriggerConditionMemberMessageBasedTrigger
+//	TriggerConditionMemberTimeBasedTrigger
+//	TriggerConditionMemberTokenBasedTrigger
+type TriggerCondition interface {
+	isTriggerCondition()
+}
+
+// Message based trigger configuration.
+type TriggerConditionMemberMessageBasedTrigger struct {
+	Value MessageBasedTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionMemberMessageBasedTrigger) isTriggerCondition() {}
+
+// Time based trigger configuration.
+type TriggerConditionMemberTimeBasedTrigger struct {
+	Value TimeBasedTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionMemberTimeBasedTrigger) isTriggerCondition() {}
+
+// Token based trigger configuration.
+type TriggerConditionMemberTokenBasedTrigger struct {
+	Value TokenBasedTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionMemberTokenBasedTrigger) isTriggerCondition() {}
+
+// Condition that triggers memory processing.
+//
+// The following types satisfy this interface:
+//
+//	TriggerConditionInputMemberMessageBasedTrigger
+//	TriggerConditionInputMemberTimeBasedTrigger
+//	TriggerConditionInputMemberTokenBasedTrigger
+type TriggerConditionInput interface {
+	isTriggerConditionInput()
+}
+
+// Message based trigger configuration.
+type TriggerConditionInputMemberMessageBasedTrigger struct {
+	Value MessageBasedTriggerInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionInputMemberMessageBasedTrigger) isTriggerConditionInput() {}
+
+// Time based trigger configuration.
+type TriggerConditionInputMemberTimeBasedTrigger struct {
+	Value TimeBasedTriggerInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionInputMemberTimeBasedTrigger) isTriggerConditionInput() {}
+
+// Token based trigger configuration.
+type TriggerConditionInputMemberTokenBasedTrigger struct {
+	Value TokenBasedTriggerInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionInputMemberTokenBasedTrigger) isTriggerConditionInput() {}
 
 // Contains user preference consolidation override configuration.
 type UserPreferenceConsolidationOverride struct {
@@ -2102,3 +2422,5 @@ func (*UnknownUnionMember) isOauth2ProviderConfigOutput()            {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}
+func (*UnknownUnionMember) isTriggerCondition()                      {}
+func (*UnknownUnionMember) isTriggerConditionInput()                 {}

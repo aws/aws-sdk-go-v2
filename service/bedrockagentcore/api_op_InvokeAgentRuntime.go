@@ -29,7 +29,10 @@ import (
 // InvokeAgentRuntime . For an example, see [Authenticate and authorize with Inbound Auth and Outbound Auth].
 //
 // To use this operation, you must have the bedrock-agentcore:InvokeAgentRuntime
-// permission.
+// permission. If you are making a call to InvokeAgentRuntime on behalf of a user
+// ID with the X-Amzn-Bedrock-AgentCore-Runtime-User-Id header, You require
+// permissions to both actions ( bedrock-agentcore:InvokeAgentRuntime and
+// bedrock-agentcore:InvokeAgentRuntimeForUser ).
 //
 // [Invoke an AgentCore Runtime agent]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-invoke-agent.html
 // [Authenticate and authorize with Inbound Auth and Outbound Auth]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html

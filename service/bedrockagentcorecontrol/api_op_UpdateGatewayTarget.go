@@ -30,11 +30,6 @@ func (c *Client) UpdateGatewayTarget(ctx context.Context, params *UpdateGatewayT
 
 type UpdateGatewayTargetInput struct {
 
-	// The updated credential provider configurations for the gateway target.
-	//
-	// This member is required.
-	CredentialProviderConfigurations []types.CredentialProviderConfiguration
-
 	// The unique identifier of the gateway associated with the target.
 	//
 	// This member is required.
@@ -55,6 +50,9 @@ type UpdateGatewayTargetInput struct {
 	//
 	// This member is required.
 	TargetId *string
+
+	// The updated credential provider configurations for the gateway target.
+	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
 	// The updated description for the gateway target.
 	Description *string
@@ -107,6 +105,9 @@ type UpdateGatewayTargetOutput struct {
 
 	// The updated description of the gateway target.
 	Description *string
+
+	// The date and time at which the targets were last synchronized.
+	LastSynchronizedAt *time.Time
 
 	// The reasons for the current status of the updated gateway target.
 	StatusReasons []string

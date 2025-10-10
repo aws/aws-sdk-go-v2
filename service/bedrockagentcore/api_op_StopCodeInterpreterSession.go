@@ -59,6 +59,12 @@ type StopCodeInterpreterSessionInput struct {
 	// ignores the request, but does not return an error.
 	ClientToken *string
 
+	// The trace identifier for request tracking.
+	TraceId *string
+
+	// The parent trace information for distributed tracing.
+	TraceParent *string
+
 	noSmithyDocumentSerde
 }
 

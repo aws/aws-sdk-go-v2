@@ -412,6 +412,7 @@ const (
 	OverrideTypeSemanticOverride       OverrideType = "SEMANTIC_OVERRIDE"
 	OverrideTypeSummaryOverride        OverrideType = "SUMMARY_OVERRIDE"
 	OverrideTypeUserPreferenceOverride OverrideType = "USER_PREFERENCE_OVERRIDE"
+	OverrideTypeSelfManaged            OverrideType = "SELF_MANAGED"
 )
 
 // Values returns all known values for OverrideType. Note that this can be
@@ -423,6 +424,7 @@ func (OverrideType) Values() []OverrideType {
 		"SEMANTIC_OVERRIDE",
 		"SUMMARY_OVERRIDE",
 		"USER_PREFERENCE_OVERRIDE",
+		"SELF_MANAGED",
 	}
 }
 
@@ -514,12 +516,14 @@ type TargetStatus string
 
 // Enum values for TargetStatus
 const (
-	TargetStatusCreating           TargetStatus = "CREATING"
-	TargetStatusUpdating           TargetStatus = "UPDATING"
-	TargetStatusUpdateUnsuccessful TargetStatus = "UPDATE_UNSUCCESSFUL"
-	TargetStatusDeleting           TargetStatus = "DELETING"
-	TargetStatusReady              TargetStatus = "READY"
-	TargetStatusFailed             TargetStatus = "FAILED"
+	TargetStatusCreating                TargetStatus = "CREATING"
+	TargetStatusUpdating                TargetStatus = "UPDATING"
+	TargetStatusUpdateUnsuccessful      TargetStatus = "UPDATE_UNSUCCESSFUL"
+	TargetStatusDeleting                TargetStatus = "DELETING"
+	TargetStatusReady                   TargetStatus = "READY"
+	TargetStatusFailed                  TargetStatus = "FAILED"
+	TargetStatusSynchronizing           TargetStatus = "SYNCHRONIZING"
+	TargetStatusSynchronizeUnsuccessful TargetStatus = "SYNCHRONIZE_UNSUCCESSFUL"
 )
 
 // Values returns all known values for TargetStatus. Note that this can be
@@ -534,6 +538,8 @@ func (TargetStatus) Values() []TargetStatus {
 		"DELETING",
 		"READY",
 		"FAILED",
+		"SYNCHRONIZING",
+		"SYNCHRONIZE_UNSUCCESSFUL",
 	}
 }
 

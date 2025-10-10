@@ -15,22 +15,12 @@ import (
 // one parameter, submit a list of the following: ParameterName , ParameterValue ,
 // and ApplyMethod . A maximum of 20 parameters can be modified in a single request.
 //
-// After you create a DB cluster parameter group, you should wait at least 5
-// minutes before creating your first DB cluster that uses that DB cluster
-// parameter group as the default parameter group. This allows Amazon RDS to fully
-// complete the create operation before the parameter group is used as the default
-// for a new DB cluster. This is especially important for parameters that are
-// critical when creating the default database for a DB cluster, such as the
-// character set for the default database defined by the character_set_database
-// parameter. You can use the Parameter Groups option of the [Amazon RDS console]or the
-// DescribeDBClusterParameters operation to verify that your DB cluster parameter
-// group has been created or modified.
-//
-// If the modified DB cluster parameter group is used by an Aurora Serverless v1
-// cluster, Aurora applies the update immediately. The cluster restart might
-// interrupt your workload. In that case, your application must reopen any
-// connections and retry any transactions that were active when the parameter
-// changes took effect.
+// There are two types of parameters - dynamic parameters and static parameters.
+// Changes to dynamic parameters are applied to the DB cluster immediately without
+// a reboot. Changes to static parameters are applied only after the DB cluster is
+// rebooted, which can be done using RebootDBCluster operation. You can use the
+// Parameter Groups option of the [Amazon RDS console]or the DescribeDBClusterParameters operation to
+// verify that your DB cluster parameter group has been created or modified.
 //
 // For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
 // User Guide.

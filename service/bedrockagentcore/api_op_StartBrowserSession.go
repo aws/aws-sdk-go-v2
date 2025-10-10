@@ -70,6 +70,12 @@ type StartBrowserSessionInput struct {
 	// value is 60 seconds, and the maximum allowed value is 28800 seconds (8 hours).
 	SessionTimeoutSeconds *int32
 
+	// The trace identifier for request tracking.
+	TraceId *string
+
+	// The parent trace information for distributed tracing.
+	TraceParent *string
+
 	// The dimensions of the browser viewport for this session. This determines the
 	// visible area of the web content and affects how web pages are rendered. If not
 	// specified, Amazon Bedrock uses a default viewport size.

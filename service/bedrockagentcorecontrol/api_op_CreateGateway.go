@@ -15,9 +15,8 @@ import (
 // Creates a gateway for Amazon Bedrock Agent. A gateway serves as an integration
 // point between your agent and external services.
 //
-// To create a gateway, you must specify a name, protocol type, and IAM role. The
-// role grants the gateway permission to access Amazon Web Services services and
-// resources.
+// If you specify CUSTOM_JWT as the authorizerType , you must provide an
+// authorizerConfiguration .
 func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, optFns ...func(*Options)) (*CreateGatewayOutput, error) {
 	if params == nil {
 		params = &CreateGatewayInput{}
@@ -36,6 +35,10 @@ func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, 
 type CreateGatewayInput struct {
 
 	// The type of authorizer to use for the gateway.
+	//
+	//   - CUSTOM_JWT - Authorize with a bearer token.
+	//
+	//   - AWS_IAM - Authorize with your Amazon Web Services IAM credentials.
 	//
 	// This member is required.
 	AuthorizerType types.AuthorizerType
@@ -56,12 +59,14 @@ type CreateGatewayInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The authorizer configuration for the gateway.
+	// The authorizer configuration for the gateway. Required if authorizerType is
+	// CUSTOM_JWT .
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
-	// more than one time. If this token matches a previous request, the service
-	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	// more than one time. If you don't specify this field, a value is randomly
+	// generated for you. If this token matches a previous request, the service ignores
+	// the request, but doesn't return an error. For more information, see [Ensuring idempotency].
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string

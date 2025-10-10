@@ -244,6 +244,11 @@ func awsRestjson1_serializeOpDocumentAddPermissionInput(v *AddPermissionInput, v
 		ok.String(string(v.FunctionUrlAuthType))
 	}
 
+	if v.InvokedViaFunctionUrl != nil {
+		ok := object.Key("InvokedViaFunctionUrl")
+		ok.Boolean(*v.InvokedViaFunctionUrl)
+	}
+
 	if v.Principal != nil {
 		ok := object.Key("Principal")
 		ok.String(*v.Principal)

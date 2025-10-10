@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a peering connection between an ODB network and either another ODB
-// network or a customer-owned VPC.
+// Creates a peering connection between an ODB network and a VPC.
 //
 // A peering connection enables private connectivity between the networks for
 // application-tier communication.
@@ -53,6 +52,11 @@ type CreateOdbPeeringConnectionInput struct {
 
 	// The display name for the ODB peering connection.
 	DisplayName *string
+
+	// A list of CIDR blocks to add to the peering connection. These CIDR blocks
+	// define the IP address ranges that can communicate through the peering
+	// connection.
+	PeerNetworkCidrsToBeAdded []string
 
 	// The tags to assign to the ODB peering connection.
 	Tags map[string]string

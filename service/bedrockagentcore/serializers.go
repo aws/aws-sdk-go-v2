@@ -1702,6 +1702,16 @@ func awsRestjson1_serializeOpHttpBindingsInvokeCodeInterpreterInput(v *InvokeCod
 		encoder.SetHeader(locationName).String(*v.SessionId)
 	}
 
+	if v.TraceId != nil {
+		locationName := "X-Amzn-Trace-Id"
+		encoder.SetHeader(locationName).String(*v.TraceId)
+	}
+
+	if v.TraceParent != nil {
+		locationName := "Traceparent"
+		encoder.SetHeader(locationName).String(*v.TraceParent)
+	}
+
 	return nil
 }
 
@@ -2567,6 +2577,16 @@ func awsRestjson1_serializeOpHttpBindingsStartBrowserSessionInput(v *StartBrowse
 		}
 	}
 
+	if v.TraceId != nil {
+		locationName := "X-Amzn-Trace-Id"
+		encoder.SetHeader(locationName).String(*v.TraceId)
+	}
+
+	if v.TraceParent != nil {
+		locationName := "Traceparent"
+		encoder.SetHeader(locationName).String(*v.TraceParent)
+	}
+
 	return nil
 }
 
@@ -2678,6 +2698,16 @@ func awsRestjson1_serializeOpHttpBindingsStartCodeInterpreterSessionInput(v *Sta
 		}
 	}
 
+	if v.TraceId != nil {
+		locationName := "X-Amzn-Trace-Id"
+		encoder.SetHeader(locationName).String(*v.TraceId)
+	}
+
+	if v.TraceParent != nil {
+		locationName := "Traceparent"
+		encoder.SetHeader(locationName).String(*v.TraceParent)
+	}
+
 	return nil
 }
 
@@ -2786,6 +2816,16 @@ func awsRestjson1_serializeOpHttpBindingsStopBrowserSessionInput(v *StopBrowserS
 		encoder.SetQuery("sessionId").String(*v.SessionId)
 	}
 
+	if v.TraceId != nil {
+		locationName := "X-Amzn-Trace-Id"
+		encoder.SetHeader(locationName).String(*v.TraceId)
+	}
+
+	if v.TraceParent != nil {
+		locationName := "Traceparent"
+		encoder.SetHeader(locationName).String(*v.TraceParent)
+	}
+
 	return nil
 }
 
@@ -2882,6 +2922,16 @@ func awsRestjson1_serializeOpHttpBindingsStopCodeInterpreterSessionInput(v *Stop
 
 	if v.SessionId != nil {
 		encoder.SetQuery("sessionId").String(*v.SessionId)
+	}
+
+	if v.TraceId != nil {
+		locationName := "X-Amzn-Trace-Id"
+		encoder.SetHeader(locationName).String(*v.TraceId)
+	}
+
+	if v.TraceParent != nil {
+		locationName := "Traceparent"
+		encoder.SetHeader(locationName).String(*v.TraceParent)
 	}
 
 	return nil

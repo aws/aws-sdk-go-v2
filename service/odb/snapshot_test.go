@@ -541,6 +541,18 @@ func TestCheckSnapshot_UpdateOdbNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateOdbPeeringConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOdbPeeringConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateOdbPeeringConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AcceptMarketplaceRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptMarketplaceRegistration(context.Background(), nil, func(o *Options) {
@@ -1014,6 +1026,18 @@ func TestUpdateSnapshot_UpdateOdbNetwork(t *testing.T) {
 	_, err := svc.UpdateOdbNetwork(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateOdbNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateOdbPeeringConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOdbPeeringConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateOdbPeeringConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

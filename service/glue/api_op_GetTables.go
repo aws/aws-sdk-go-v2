@@ -46,6 +46,11 @@ type GetTablesInput struct {
 	//   - NAME , TABLE_TYPE - Names of all tables and the table types.
 	AttributesToGet []types.TableAttributes
 
+	// A structure containing the Lake Formation [audit context].
+	//
+	// [audit context]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+	AuditContext *types.AuditContext
+
 	// The ID of the Data Catalog where the tables reside. If none is provided, the
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string

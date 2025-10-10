@@ -1,0 +1,8 @@
+{
+    "id": "ac7fd0bb-6d4e-4539-96f6-60429d1075ad",
+    "type": "feature",
+    "description": "Addition of AuditContext in GetTable/GetTables Request",
+    "modules": [
+        "service/glue"
+    ]
+}

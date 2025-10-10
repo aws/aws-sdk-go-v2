@@ -71,6 +71,12 @@ type StartCodeInterpreterSessionInput struct {
 	// hours).
 	SessionTimeoutSeconds *int32
 
+	// The trace identifier for request tracking.
+	TraceId *string
+
+	// The parent trace information for distributed tracing.
+	TraceParent *string
+
 	noSmithyDocumentSerde
 }
 

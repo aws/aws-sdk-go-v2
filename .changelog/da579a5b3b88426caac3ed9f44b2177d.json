@@ -1,0 +1,8 @@
+{
+    "id": "da579a5b-3b88-426c-aac3-ed9f44b2177d",
+    "type": "feature",
+    "description": "Bedrock AgentCore release for Runtime, and Memory.",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

@@ -109,6 +109,9 @@ func ExampleCustomConfigurationInput_outputUsage() {
 	var union types.CustomConfigurationInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CustomConfigurationInputMemberSelfManagedConfiguration:
+		_ = v.Value // Value is types.SelfManagedConfigurationInput
+
 	case *types.CustomConfigurationInputMemberSemanticOverride:
 		_ = v.Value // Value is types.SemanticOverrideConfigurationInput
 
@@ -129,6 +132,7 @@ func ExampleCustomConfigurationInput_outputUsage() {
 
 var _ *types.UserPreferenceOverrideConfigurationInput
 var _ *types.SummaryOverrideConfigurationInput
+var _ *types.SelfManagedConfigurationInput
 var _ *types.SemanticOverrideConfigurationInput
 
 func ExampleCustomConsolidationConfiguration_outputUsage() {
@@ -270,6 +274,9 @@ func ExampleMcpTargetConfiguration_outputUsage() {
 	case *types.McpTargetConfigurationMemberLambda:
 		_ = v.Value // Value is types.McpLambdaTargetConfiguration
 
+	case *types.McpTargetConfigurationMemberMcpServer:
+		_ = v.Value // Value is types.McpServerTargetConfiguration
+
 	case *types.McpTargetConfigurationMemberOpenApiSchema:
 		_ = v.Value // Value is types.ApiSchemaConfiguration
 
@@ -287,6 +294,7 @@ func ExampleMcpTargetConfiguration_outputUsage() {
 
 var _ *types.McpLambdaTargetConfiguration
 var _ types.ApiSchemaConfiguration
+var _ *types.McpServerTargetConfiguration
 
 func ExampleMemoryStrategyInput_outputUsage() {
 	var union types.MemoryStrategyInput
@@ -509,3 +517,55 @@ func ExampleToolSchema_outputUsage() {
 
 var _ *types.S3Configuration
 var _ []types.ToolDefinition
+
+func ExampleTriggerCondition_outputUsage() {
+	var union types.TriggerCondition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TriggerConditionMemberMessageBasedTrigger:
+		_ = v.Value // Value is types.MessageBasedTrigger
+
+	case *types.TriggerConditionMemberTimeBasedTrigger:
+		_ = v.Value // Value is types.TimeBasedTrigger
+
+	case *types.TriggerConditionMemberTokenBasedTrigger:
+		_ = v.Value // Value is types.TokenBasedTrigger
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TokenBasedTrigger
+var _ *types.TimeBasedTrigger
+var _ *types.MessageBasedTrigger
+
+func ExampleTriggerConditionInput_outputUsage() {
+	var union types.TriggerConditionInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TriggerConditionInputMemberMessageBasedTrigger:
+		_ = v.Value // Value is types.MessageBasedTriggerInput
+
+	case *types.TriggerConditionInputMemberTimeBasedTrigger:
+		_ = v.Value // Value is types.TimeBasedTriggerInput
+
+	case *types.TriggerConditionInputMemberTokenBasedTrigger:
+		_ = v.Value // Value is types.TokenBasedTriggerInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TimeBasedTriggerInput
+var _ *types.MessageBasedTriggerInput
+var _ *types.TokenBasedTriggerInput

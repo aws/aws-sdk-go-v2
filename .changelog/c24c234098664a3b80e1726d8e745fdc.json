@@ -1,0 +1,8 @@
+{
+    "id": "c24c2340-9866-4a3b-80e1-726d8e745fdc",
+    "type": "feature",
+    "description": "Add InvokedViaFunctionUrl context key to limit invocations to only FURL invokes.",
+    "modules": [
+        "service/lambda"
+    ]
+}

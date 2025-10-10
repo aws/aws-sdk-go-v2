@@ -73,6 +73,12 @@ type InvokeCodeInterpreterInput struct {
 	// expired or been stopped, the request will fail.
 	SessionId *string
 
+	// The trace identifier for request tracking.
+	TraceId *string
+
+	// The parent trace information for distributed tracing.
+	TraceParent *string
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "6ee3935c-36a3-4b9e-8062-579e015d4627",
+    "type": "feature",
+    "description": "This release adds APIs that allow you to specify CIDR ranges in your ODB peering connection.",
+    "modules": [
+        "service/odb"
+    ]
+}

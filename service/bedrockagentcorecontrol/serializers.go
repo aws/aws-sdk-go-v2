@@ -3797,6 +3797,102 @@ func awsRestjson1_serializeOpDocumentSetTokenVaultCMKInput(v *SetTokenVaultCMKIn
 	return nil
 }
 
+type awsRestjson1_serializeOpSynchronizeGatewayTargets struct {
+}
+
+func (*awsRestjson1_serializeOpSynchronizeGatewayTargets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSynchronizeGatewayTargets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SynchronizeGatewayTargetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/gateways/{gatewayIdentifier}/synchronizeTargets")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSynchronizeGatewayTargetsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSynchronizeGatewayTargetsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSynchronizeGatewayTargetsInput(v *SynchronizeGatewayTargetsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayIdentifier == nil || len(*v.GatewayIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayIdentifier must not be empty")}
+	}
+	if v.GatewayIdentifier != nil {
+		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSynchronizeGatewayTargetsInput(v *SynchronizeGatewayTargetsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetIdList != nil {
+		ok := object.Key("targetIdList")
+		if err := awsRestjson1_serializeDocumentTargetIdList(v.TargetIdList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -5070,6 +5166,12 @@ func awsRestjson1_serializeDocumentCustomConfigurationInput(v types.CustomConfig
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.CustomConfigurationInputMemberSelfManagedConfiguration:
+		av := object.Key("selfManagedConfiguration")
+		if err := awsRestjson1_serializeDocumentSelfManagedConfigurationInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.CustomConfigurationInputMemberSemanticOverride:
 		av := object.Key("semanticOverride")
 		if err := awsRestjson1_serializeDocumentSemanticOverrideConfigurationInput(&uv.Value, av); err != nil {
@@ -5345,6 +5447,23 @@ func awsRestjson1_serializeDocumentGoogleOauth2ProviderConfigInput(v *types.Goog
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInvocationConfigurationInput(v *types.InvocationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PayloadDeliveryBucketName != nil {
+		ok := object.Key("payloadDeliveryBucketName")
+		ok.String(*v.PayloadDeliveryBucketName)
+	}
+
+	if v.TopicArn != nil {
+		ok := object.Key("topicArn")
+		ok.String(*v.TopicArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKmsConfiguration(v *types.KmsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5422,6 +5541,18 @@ func awsRestjson1_serializeDocumentMcpLambdaTargetConfiguration(v *types.McpLamb
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMcpServerTargetConfiguration(v *types.McpServerTargetConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMcpSupportedVersions(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5441,6 +5572,12 @@ func awsRestjson1_serializeDocumentMcpTargetConfiguration(v types.McpTargetConfi
 	case *types.McpTargetConfigurationMemberLambda:
 		av := object.Key("lambda")
 		if err := awsRestjson1_serializeDocumentMcpLambdaTargetConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.McpTargetConfigurationMemberMcpServer:
+		av := object.Key("mcpServer")
+		if err := awsRestjson1_serializeDocumentMcpServerTargetConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -5515,6 +5652,18 @@ func awsRestjson1_serializeDocumentMemoryStrategyInputList(v []types.MemoryStrat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMessageBasedTriggerInput(v *types.MessageBasedTriggerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MessageCount != nil {
+		ok := object.Key("messageCount")
+		ok.Integer(*v.MessageCount)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMicrosoftOauth2ProviderConfigInput(v *types.MicrosoftOauth2ProviderConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5565,6 +5714,23 @@ func awsRestjson1_serializeDocumentModifyExtractionConfiguration(v types.ModifyE
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentModifyInvocationConfigurationInput(v *types.ModifyInvocationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PayloadDeliveryBucketName != nil {
+		ok := object.Key("payloadDeliveryBucketName")
+		ok.String(*v.PayloadDeliveryBucketName)
+	}
+
+	if v.TopicArn != nil {
+		ok := object.Key("topicArn")
+		ok.String(*v.TopicArn)
+	}
+
 	return nil
 }
 
@@ -5640,6 +5806,32 @@ func awsRestjson1_serializeDocumentModifyMemoryStrategyInput(v *types.ModifyMemo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentModifySelfManagedConfiguration(v *types.ModifySelfManagedConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HistoricalContextWindowSize != nil {
+		ok := object.Key("historicalContextWindowSize")
+		ok.Integer(*v.HistoricalContextWindowSize)
+	}
+
+	if v.InvocationConfiguration != nil {
+		ok := object.Key("invocationConfiguration")
+		if err := awsRestjson1_serializeDocumentModifyInvocationConfigurationInput(v.InvocationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TriggerConditions != nil {
+		ok := object.Key("triggerConditions")
+		if err := awsRestjson1_serializeDocumentTriggerConditionInputList(v.TriggerConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentModifyStrategyConfiguration(v *types.ModifyStrategyConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5654,6 +5846,13 @@ func awsRestjson1_serializeDocumentModifyStrategyConfiguration(v *types.ModifySt
 	if v.Extraction != nil {
 		ok := object.Key("extraction")
 		if err := awsRestjson1_serializeDocumentModifyExtractionConfiguration(v.Extraction, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelfManagedConfiguration != nil {
+		ok := object.Key("selfManagedConfiguration")
+		if err := awsRestjson1_serializeDocumentModifySelfManagedConfiguration(v.SelfManagedConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -6045,6 +6244,32 @@ func awsRestjson1_serializeDocumentSecurityGroups(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSelfManagedConfigurationInput(v *types.SelfManagedConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HistoricalContextWindowSize != nil {
+		ok := object.Key("historicalContextWindowSize")
+		ok.Integer(*v.HistoricalContextWindowSize)
+	}
+
+	if v.InvocationConfiguration != nil {
+		ok := object.Key("invocationConfiguration")
+		if err := awsRestjson1_serializeDocumentInvocationConfigurationInput(v.InvocationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TriggerConditions != nil {
+		ok := object.Key("triggerConditions")
+		if err := awsRestjson1_serializeDocumentTriggerConditionInputList(v.TriggerConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSemanticMemoryStrategyInput(v *types.SemanticMemoryStrategyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6236,6 +6461,41 @@ func awsRestjson1_serializeDocumentTargetConfiguration(v types.TargetConfigurati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTargetIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimeBasedTriggerInput(v *types.TimeBasedTriggerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleSessionTimeout != nil {
+		ok := object.Key("idleSessionTimeout")
+		ok.Integer(*v.IdleSessionTimeout)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTokenBasedTriggerInput(v *types.TokenBasedTriggerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TokenCount != nil {
+		ok := object.Key("tokenCount")
+		ok.Integer(*v.TokenCount)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentToolDefinition(v *types.ToolDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6300,6 +6560,52 @@ func awsRestjson1_serializeDocumentToolSchema(v types.ToolSchema, value smithyjs
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerConditionInput(v types.TriggerConditionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.TriggerConditionInputMemberMessageBasedTrigger:
+		av := object.Key("messageBasedTrigger")
+		if err := awsRestjson1_serializeDocumentMessageBasedTriggerInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.TriggerConditionInputMemberTimeBasedTrigger:
+		av := object.Key("timeBasedTrigger")
+		if err := awsRestjson1_serializeDocumentTimeBasedTriggerInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.TriggerConditionInputMemberTokenBasedTrigger:
+		av := object.Key("tokenBasedTrigger")
+		if err := awsRestjson1_serializeDocumentTokenBasedTriggerInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerConditionInputList(v []types.TriggerConditionInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentTriggerConditionInput(v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

@@ -4754,6 +4754,10 @@ type Paths struct {
 
 // A public key that you can use with [signed URLs and signed cookies], or with [field-level encryption].
 //
+// CloudFront supports signed URLs and signed cookies with RSA 2048 or ECDSA 256
+// key signatures. Field-level encryption is only compatible with RSA 2048 key
+// signatures.
+//
 // [signed URLs and signed cookies]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
 // [field-level encryption]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
 type PublicKey struct {
@@ -4780,6 +4784,10 @@ type PublicKey struct {
 }
 
 // Configuration information about a public key that you can use with [signed URLs and signed cookies], or with [field-level encryption].
+//
+// CloudFront supports signed URLs and signed cookies with RSA 2048 or ECDSA 256
+// key signatures. Field-level encryption is only compatible with RSA 2048 key
+// signatures.
 //
 // [signed URLs and signed cookies]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
 // [field-level encryption]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html

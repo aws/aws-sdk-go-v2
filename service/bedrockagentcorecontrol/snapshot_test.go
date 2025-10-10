@@ -590,6 +590,18 @@ func TestCheckSnapshot_SetTokenVaultCMK(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SynchronizeGatewayTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SynchronizeGatewayTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SynchronizeGatewayTargets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1242,18 @@ func TestUpdateSnapshot_SetTokenVaultCMK(t *testing.T) {
 	_, err := svc.SetTokenVaultCMK(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SetTokenVaultCMK")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SynchronizeGatewayTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SynchronizeGatewayTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SynchronizeGatewayTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

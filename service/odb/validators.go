@@ -629,6 +629,26 @@ func (m *validateOpUpdateOdbNetwork) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOdbPeeringConnection struct {
+}
+
+func (*validateOpUpdateOdbPeeringConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOdbPeeringConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOdbPeeringConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOdbPeeringConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptMarketplaceRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptMarketplaceRegistration{}, middleware.After)
 }
@@ -751,6 +771,10 @@ func addOpUpdateCloudExadataInfrastructureValidationMiddleware(stack *middleware
 
 func addOpUpdateOdbNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOdbNetwork{}, middleware.After)
+}
+
+func addOpUpdateOdbPeeringConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOdbPeeringConnection{}, middleware.After)
 }
 
 func validateOpAcceptMarketplaceRegistrationInput(v *AcceptMarketplaceRegistrationInput) error {
@@ -1288,6 +1312,21 @@ func validateOpUpdateOdbNetworkInput(v *UpdateOdbNetworkInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOdbNetworkInput"}
 	if v.OdbNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OdbNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOdbPeeringConnectionInput(v *UpdateOdbPeeringConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOdbPeeringConnectionInput"}
+	if v.OdbPeeringConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OdbPeeringConnectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
