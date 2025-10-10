@@ -2196,16 +2196,10 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource",
-                        "ids": {
-                            "cloudExadataInfrastructureId": "cloudExadataInfrastructureId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
                     },
                     {
-                        "resource": "com.amazonaws.odb#OdbNetworkResource",
-                        "ids": {
-                            "odbNetworkId": "odbNetworkId"
-                        }
+                        "resource": "com.amazonaws.odb#OdbNetworkResource"
                     }
                 ]
             }
@@ -2478,7 +2472,7 @@
                         "smithy.api#documentation": "<p>The number of CPU cores to enable on the VM cluster.</p>",
                         "smithy.api#range": {
                             "min": 0,
-                            "max": 368
+                            "max": 10000
                         },
                         "smithy.api#required": {}
                     }
@@ -2638,16 +2632,10 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource",
-                        "ids": {
-                            "cloudExadataInfrastructureId": "cloudExadataInfrastructureId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
                     },
                     {
-                        "resource": "com.amazonaws.odb#OdbNetworkResource",
-                        "ids": {
-                            "odbNetworkId": "odbNetworkId"
-                        }
+                        "resource": "com.amazonaws.odb#OdbNetworkResource"
                     }
                 ]
             }
@@ -2900,7 +2888,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Creates a peering connection between an ODB network and either another ODB network or a customer-owned VPC.</p> <p>A peering connection enables private connectivity between the networks for application-tier communication.</p>",
+                "smithy.api#documentation": "<p>Creates a peering connection between an ODB network and a VPC.</p> <p>A peering connection enables private connectivity between the networks for application-tier communication.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2927,6 +2915,12 @@
                         "smithy.api#documentation": "<p>The display name for the ODB peering connection.</p>"
                     }
                 },
+                "peerNetworkCidrsToBeAdded": {
+                    "target": "com.amazonaws.odb#PeeredCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of CIDR blocks to add to the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.odb#GeneralInputString",
                     "traits": {
@@ -2949,10 +2943,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#OdbNetworkResource",
-                        "ids": {
-                            "odbNetworkId": "odbNetworkId"
-                        }
+                        "resource": "com.amazonaws.odb#OdbNetworkResource"
                     }
                 ]
             }
@@ -4717,16 +4708,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudVmClusterResource",
-                        "ids": {
-                            "cloudVmClusterId": "cloudVmClusterId"
-                        }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#DbNodeResource",
-                        "ids": {
-                            "dbNodeId": "dbNodeId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudVmClusterResource"
                     }
                 ]
             }
@@ -4796,10 +4778,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource",
-                        "ids": {
-                            "cloudExadataInfrastructureId": "cloudExadataInfrastructureId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
                     }
                 ]
             }
@@ -5689,10 +5668,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource",
-                        "ids": {
-                            "cloudExadataInfrastructureId": "cloudExadataInfrastructureId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
                     }
                 ]
             }
@@ -6791,7 +6767,7 @@
                 },
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Oracle Database@Amazon Web Services is an offering that enables you to access Oracle Exadata infrastructure managed by Oracle Cloud Infrastructure (OCI) inside Amazon Web Services data centers. You can migrate your Oracle Exadata workloads, establish low-latency connectivity with applications running on Amazon Web Services, and integrate with Amazon Web Services services. For example, you can run application servers in a virtual private cloud (VPC) and access an Oracle Exadata system running in Oracle Database@Amazon Web Services. You can get started with Oracle Database@Amazon Web Services by using the familiar Amazon Web Services Management Console, APIs, or CLI.</p> <p>This interface reference for Oracle Database@Amazon Web Services contains documentation for a programming or command line interface that you can use to manage Oracle Database@Amazon Web Services. Oracle Database@Amazon Web Services is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. The reference structure is as follows.</p> <note> <p>In this preview release documentation, the links in the \"See Also\" sections do not work.</p> </note> <p> <b>Oracle Database@Amazon Web Services API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see .</p> </li> <li> <p>For the alphabetical list of data types, see .</p> </li> <li> <p>For a list of common parameters, see <a>CommonParameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a>CommonErrors</a>.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Oracle Database@Amazon Web Services is an offering that enables you to access Oracle Exadata infrastructure managed by Oracle Cloud Infrastructure (OCI) inside Amazon Web Services data centers. You can migrate your Oracle Exadata workloads, establish low-latency connectivity with applications running on Amazon Web Services, and integrate with Amazon Web Services services. For example, you can run application servers in a Virtual Private Cloud (VPC) and access an Oracle Exadata system running in Oracle Database@Amazon Web Services. You can get started with Oracle Database@Amazon Web Services by using the familiar Amazon Web Services Management Console, APIs, or CLI.</p> <p>This interface reference for Oracle Database@Amazon Web Services contains documentation for a programming or command line interface that you can use to manage Oracle Database@Amazon Web Services. Oracle Database@Amazon Web Services is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. The reference structure is as follows.</p> <p> <b>Oracle Database@Amazon Web Services API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href=\"https://docs.aws.amazon.com/odb/latest/APIReference/API_Operations.html\">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href=\"https://docs.aws.amazon.com/odb/latest/APIReference/API_Types.html\">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href=\"https://docs.aws.amazon.com/odb/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href=\"https://docs.aws.amazon.com/odb/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p> </li> </ul>",
                 "smithy.api#title": "odb",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -6800,27 +6776,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -7840,6 +7816,12 @@
                         "smithy.api#documentation": "<p>The type of the ODB peering connection.</p> <p>Valid Values: <code>ODB-VPC | ODB-ODB</code> </p>"
                     }
                 },
+                "peerNetworkCidrs": {
+                    "target": "com.amazonaws.odb#PeeredCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR blocks associated with the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -7876,6 +7858,9 @@
             },
             "read": {
                 "target": "com.amazonaws.odb#GetOdbPeeringConnection"
+            },
+            "update": {
+                "target": "com.amazonaws.odb#UpdateOdbPeeringConnection"
             },
             "delete": {
                 "target": "com.amazonaws.odb#DeleteOdbPeeringConnection"
@@ -7944,6 +7929,12 @@
                         "smithy.api#documentation": "<p>The type of the ODB peering connection.</p> <p>Valid Values: <code>ODB-VPC | ODB-ODB</code> </p>"
                     }
                 },
+                "peerNetworkCidrs": {
+                    "target": "com.amazonaws.odb#PeeredCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR blocks associated with the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -7977,6 +7968,22 @@
                         "smithy.api#enumValue": "NONROLLING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.odb#PeeredCidr": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 18
+                },
+                "smithy.api#pattern": "^(?:(?:\\d|[01]?\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d|\\d)\\/(?:[1-2][0-9]|3[0-2]|[1-9])$"
+            }
+        },
+        "com.amazonaws.odb#PeeredCidrList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#PeeredCidr"
             }
         },
         "com.amazonaws.odb#PolicyDocument": {
@@ -8031,8 +8038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reboots the specified DB node in a VM cluster.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#documentation": "<p>Reboots the specified DB node in a VM cluster.</p>"
             }
         },
         "com.amazonaws.odb#RebootDbNodeInput": {
@@ -8059,16 +8065,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudVmClusterResource",
-                        "ids": {
-                            "cloudVmClusterId": "cloudVmClusterId"
-                        }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#DbNodeResource",
-                        "ids": {
-                            "dbNodeId": "dbNodeId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudVmClusterResource"
                     }
                 ]
             }
@@ -8402,8 +8399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the specified DB node in a VM cluster.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#documentation": "<p>Starts the specified DB node in a VM cluster.</p>"
             }
         },
         "com.amazonaws.odb#StartDbNodeInput": {
@@ -8430,16 +8426,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudVmClusterResource",
-                        "ids": {
-                            "cloudVmClusterId": "cloudVmClusterId"
-                        }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#DbNodeResource",
-                        "ids": {
-                            "dbNodeId": "dbNodeId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudVmClusterResource"
                     }
                 ]
             }
@@ -8497,8 +8484,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops the specified DB node in a VM cluster.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#documentation": "<p>Stops the specified DB node in a VM cluster.</p>"
             }
         },
         "com.amazonaws.odb#StopDbNodeInput": {
@@ -8525,16 +8511,7 @@
                 "smithy.api#input": {},
                 "smithy.api#references": [
                     {
-                        "resource": "com.amazonaws.odb#CloudVmClusterResource",
-                        "ids": {
-                            "cloudVmClusterId": "cloudVmClusterId"
-                        }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#DbNodeResource",
-                        "ids": {
-                            "dbNodeId": "dbNodeId"
-                        }
+                        "resource": "com.amazonaws.odb#CloudVmClusterResource"
                     }
                 ]
             }
@@ -9040,6 +9017,105 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the ODB network.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateOdbPeeringConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateOdbPeeringConnectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateOdbPeeringConnectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the settings of an Oracle Database@Amazon Web Services peering connection. You can update the display name and add or remove CIDR blocks from the peering connection.</p>"
+            }
+        },
+        "com.amazonaws.odb#UpdateOdbPeeringConnectionInput": {
+            "type": "structure",
+            "members": {
+                "odbPeeringConnectionId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Oracle Database@Amazon Web Services peering connection to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new display name for the peering connection.</p>"
+                    }
+                },
+                "peerNetworkCidrsToBeAdded": {
+                    "target": "com.amazonaws.odb#PeeredCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of CIDR blocks to add to the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection. The CIDR blocks must not overlap with existing CIDR blocks in the Oracle Database@Amazon Web Services network.</p>"
+                    }
+                },
+                "peerNetworkCidrsToBeRemoved": {
+                    "target": "com.amazonaws.odb#PeeredCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of CIDR blocks to remove from the peering connection. The CIDR blocks must currently exist in the peering connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateOdbPeeringConnectionOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the peering connection.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the peering connection update operation.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the peering connection update operation.</p>"
+                    }
+                },
+                "odbPeeringConnectionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Oracle Database@Amazon Web Services peering connection that was updated.</p>",
                         "smithy.api#required": {}
                     }
                 }

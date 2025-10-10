@@ -2418,7 +2418,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a gateway for Amazon Bedrock Agent. A gateway serves as an integration point between your agent and external services.</p> <p>To create a gateway, you must specify a name, protocol type, and IAM role. The role grants the gateway permission to access Amazon Web Services services and resources.</p>",
+                "smithy.api#documentation": "<p>Creates a gateway for Amazon Bedrock Agent. A gateway serves as an integration point between your agent and external services.</p> <p>If you specify <code>CUSTOM_JWT</code> as the <code>authorizerType</code>, you must provide an <code>authorizerConfiguration</code>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -2446,7 +2446,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2473,14 +2473,14 @@
                 "authorizerType": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authorizer to use for the gateway.</p>",
+                        "smithy.api#documentation": "<p>The type of authorizer to use for the gateway.</p> <ul> <li> <p> <code>CUSTOM_JWT</code> - Authorize with a bearer token.</p> </li> <li> <p> <code>AWS_IAM</code> - Authorize with your Amazon Web Services IAM credentials.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "authorizerConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorizer configuration for the gateway.</p>"
+                        "smithy.api#documentation": "<p>The authorizer configuration for the gateway. Required if <code>authorizerType</code> is <code>CUSTOM_JWT</code>.</p>"
                     }
                 },
                 "kmsKeyArn": {
@@ -2692,7 +2692,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2706,8 +2706,7 @@
                 "credentialProviderConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CredentialProviderConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credential provider configurations for the target. These configurations specify how the gateway authenticates with the target endpoint.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The credential provider configurations for the target. These configurations specify how the gateway authenticates with the target endpoint.</p>"
                     }
                 }
             },
@@ -2785,6 +2784,12 @@
                         "smithy.api#documentation": "<p>The credential provider configurations for the target.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "lastSynchronizedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last synchronization of the target.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2825,6 +2830,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new Amazon Bedrock AgentCore Memory resource.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "POST",
                     "uri": "/memories/create"
                 },
@@ -3262,6 +3268,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#UserPreferenceOverrideConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The user preference override configuration for a custom memory strategy.</p>"
+                    }
+                },
+                "selfManagedConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SelfManagedConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The self managed configuration for a custom memory strategy.</p>"
                     }
                 }
             },
@@ -4090,6 +4102,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Amazon Bedrock AgentCore Memory resource.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "DELETE",
                     "uri": "/memories/{memoryId}/delete"
                 },
@@ -4634,6 +4647,93 @@
                 "smithy.api#documentation": "<p>Contains summary information about a gateway.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayTarget": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the target was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the target was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReasons": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StatusReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status reasons for the target status.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the gateway target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the gateway target.</p>"
+                    }
+                },
+                "targetConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentialProviderConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CredentialProviderConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastSynchronizedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last synchronization time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The gateway target.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GatewayTarget"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#GatewayTargetResource": {
             "type": "resource",
             "operations": [
@@ -4648,6 +4748,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ListGatewayTargets"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargets"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayTarget"
@@ -5625,6 +5728,12 @@
                         "smithy.api#documentation": "<p>The credential provider configurations for the gateway target.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "lastSynchronizedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last synchronization of the target.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6124,6 +6233,51 @@
                 "smithy.api#documentation": "<p>This exception is thrown if there was an unexpected error during processing of request</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InvocationConfiguration": {
+            "type": "structure",
+            "members": {
+                "topicArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the SNS topic for job notifications.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payloadDeliveryBucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket name for event payload delivery.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration to invoke a self-managed memory processing pipeline with.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InvocationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "topicArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the SNS topic for job notifications.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payloadDeliveryBucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket name for event payload delivery.</p>",
+                        "smithy.api#pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration to invoke a self-managed memory processing pipeline with.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#IssuerUrlType": {
@@ -7306,6 +7460,22 @@
                 "smithy.api#documentation": "<p>The Lambda configuration for a Model Context Protocol target. This structure defines how the gateway uses a Lambda function to communicate with the target.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#McpServerTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint for the MCP server target configuration.</p>",
+                        "smithy.api#pattern": "^https://.*",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target configuration for the MCP server.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#McpSupportedVersions": {
             "type": "list",
             "member": {
@@ -7331,6 +7501,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#McpLambdaTargetConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Lambda configuration for the Model Context Protocol target. This configuration defines how the gateway uses a Lambda function to communicate with the target.</p>"
+                    }
+                },
+                "mcpServer": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#McpServerTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MCP server specified as the gateway target.</p>"
                     }
                 }
             },
@@ -7728,6 +7904,39 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#MemorySummary"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#MessageBasedTrigger": {
+            "type": "structure",
+            "members": {
+                "messageCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of messages that trigger memory processing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trigger configuration based on a message.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MessageBasedTriggerInput": {
+            "type": "structure",
+            "members": {
+                "messageCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 6,
+                        "smithy.api#documentation": "<p>The number of messages that trigger memory processing.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trigger configuration based on a message.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#MicrosoftOauth2ProviderConfigInput": {
             "type": "structure",
             "members": {
@@ -7791,6 +8000,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information for modifying an extraction configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ModifyInvocationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "topicArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated ARN of the SNS topic for job notifications.</p>"
+                    }
+                },
+                "payloadDeliveryBucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated S3 bucket name for event payload delivery.</p>",
+                        "smithy.api#pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for updating invocation settings.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ModifyMemoryStrategies": {
@@ -7858,6 +8088,36 @@
                 "smithy.api#documentation": "<p>Input for modifying a memory strategy.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ModifySelfManagedConfiguration": {
+            "type": "structure",
+            "members": {
+                "triggerConditions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TriggerConditionInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated list of conditions that trigger memory processing.</p>"
+                    }
+                },
+                "invocationConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModifyInvocationConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration to invoke self-managed memory processing pipeline.</p>"
+                    }
+                },
+                "historicalContextWindowSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated number of historical messages to include in processing context.</p>",
+                        "smithy.api#range": {
+                            "min": 3,
+                            "max": 20
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for updating the self-managed memory strategy.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ModifyStrategyConfiguration": {
             "type": "structure",
             "members": {
@@ -7871,6 +8131,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ModifyConsolidationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated consolidation configuration.</p>"
+                    }
+                },
+                "selfManagedConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModifySelfManagedConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated self-managed configuration.</p>"
                     }
                 }
             },
@@ -8312,6 +8578,12 @@
                     "traits": {
                         "smithy.api#enumValue": "USER_PREFERENCE_OVERRIDE"
                     }
+                },
+                "SELF_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF_MANAGED"
+                    }
                 }
             }
         },
@@ -8716,6 +8988,67 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#SelfManagedConfiguration": {
+            "type": "structure",
+            "members": {
+                "triggerConditions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TriggerConditionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that trigger memory processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InvocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to use when invoking memory processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "historicalContextWindowSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of historical messages to include in processing context.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration for a self-managed memory strategy.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SelfManagedConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "triggerConditions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TriggerConditionInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that trigger memory processing.</p>"
+                    }
+                },
+                "invocationConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InvocationConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration to invoke a self-managed memory processing pipeline with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "historicalContextWindowSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 4,
+                        "smithy.api#documentation": "<p>Number of historical messages to include in processing context.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input configuration for a self-managed memory strategy.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#SemanticConsolidationOverride": {
             "type": "structure",
             "members": {
@@ -9067,6 +9400,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The consolidation configuration for the memory strategy.</p>"
                     }
+                },
+                "selfManagedConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SelfManagedConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Self-managed configuration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9174,6 +9513,84 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Input for summary override consolidation configuration in a memory strategy.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The gateway targets.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PUT",
+                    "uri": "/gateways/{gatewayIdentifier}/synchronizeTargets"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway Identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetIdList": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TargetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target ID list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsResponse": {
+            "type": "structure",
+            "members": {
+                "targets": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway targets for synchronization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#TagKey": {
@@ -9330,6 +9747,18 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z]{10}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#TargetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#TargetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#TargetMaxResults": {
             "type": "integer",
             "traits": {
@@ -9393,6 +9822,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SYNCHRONIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNCHRONIZING"
+                    }
+                },
+                "SYNCHRONIZE_UNSUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNCHRONIZE_UNSUCCESSFUL"
                     }
                 }
             }
@@ -9479,6 +9920,72 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#TimeBasedTrigger": {
+            "type": "structure",
+            "members": {
+                "idleSessionTimeout": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Idle session timeout (seconds) that triggers memory processing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Trigger configuration based on time.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TimeBasedTriggerInput": {
+            "type": "structure",
+            "members": {
+                "idleSessionTimeout": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>Idle session timeout (seconds) that triggers memory processing.</p>",
+                        "smithy.api#range": {
+                            "min": 10,
+                            "max": 3000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Trigger configuration based on time.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TokenBasedTrigger": {
+            "type": "structure",
+            "members": {
+                "tokenCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of tokens that trigger memory processing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Trigger configuration based on tokens.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TokenBasedTriggerInput": {
+            "type": "structure",
+            "members": {
+                "tokenCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 5000,
+                        "smithy.api#documentation": "<p>Number of tokens that trigger memory processing.</p>",
+                        "smithy.api#range": {
+                            "min": 100,
+                            "max": 500000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Trigger configuration based on tokens.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#TokenEndpointType": {
             "type": "string"
         },
@@ -9551,6 +10058,80 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A tool schema for a gateway target. This structure defines the schema for a tool that the target exposes through the Model Context Protocol.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TriggerCondition": {
+            "type": "union",
+            "members": {
+                "messageBasedTrigger": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MessageBasedTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message based trigger configuration.</p>"
+                    }
+                },
+                "tokenBasedTrigger": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TokenBasedTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token based trigger configuration.</p>"
+                    }
+                },
+                "timeBasedTrigger": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TimeBasedTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time based trigger configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Condition that triggers memory processing.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TriggerConditionInput": {
+            "type": "union",
+            "members": {
+                "messageBasedTrigger": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MessageBasedTriggerInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message based trigger configuration.</p>"
+                    }
+                },
+                "tokenBasedTrigger": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TokenBasedTriggerInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token based trigger configuration.</p>"
+                    }
+                },
+                "timeBasedTrigger": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TimeBasedTriggerInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time based trigger configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Condition that triggers memory processing.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TriggerConditionInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#TriggerConditionInput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#TriggerConditionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#TriggerCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException": {
@@ -10370,8 +10951,7 @@
                 "credentialProviderConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CredentialProviderConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated credential provider configurations for the gateway target.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The updated credential provider configurations for the gateway target.</p>"
                     }
                 }
             },
@@ -10448,6 +11028,12 @@
                         "smithy.api#documentation": "<p>The updated credential provider configurations for the gateway target.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "lastSynchronizedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the targets were last synchronized.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10488,6 +11074,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Update an Amazon Bedrock AgentCore Memory resource memory.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "PUT",
                     "uri": "/memories/{memoryId}/update"
                 },

@@ -826,27 +826,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -24820,6 +24820,12 @@
                         "smithy.api#documentation": "<p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
                     }
                 },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the Lake Formation <a href=\"https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html\">audit context</a>.</p>"
+                    }
+                },
                 "IncludeStatusDetails": {
                     "target": "com.amazonaws.glue#BooleanNullable",
                     "traits": {
@@ -25106,6 +25112,12 @@
                     "target": "com.amazonaws.glue#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
+                    }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the Lake Formation <a href=\"https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html\">audit context</a>.</p>"
                     }
                 },
                 "IncludeStatusDetails": {
@@ -46672,7 +46684,10 @@
                     }
                 },
                 "UpdateOpenTableFormatInput": {
-                    "target": "com.amazonaws.glue#UpdateOpenTableFormatInput"
+                    "target": "com.amazonaws.glue#UpdateOpenTableFormatInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input parameters for updating open table format tables in GlueData Catalog, serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>"
+                    }
                 }
             },
             "traits": {

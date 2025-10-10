@@ -844,6 +844,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates multiple memory records in a single batch operation for the specified memory with custom content.</p>",
                 "smithy.api#http": {
+                    "code": 201,
                     "method": "POST",
                     "uri": "/memories/{memoryId}/memoryRecords/batchCreate"
                 },
@@ -1630,6 +1631,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an event in an AgentCore Memory resource. Events represent interactions or activities that occur within a session and are associated with specific actors.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:CreateEvent</code> permission.</p> <p>This operation is subject to request rate limiting.</p>",
                 "smithy.api#http": {
+                    "code": 201,
                     "method": "POST",
                     "uri": "/memories/{memoryId}/events"
                 },
@@ -3074,7 +3076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore Runtime and receives responses in real-time. </p> <p>To invoke an agent you must specify the AgentCore Runtime ARN and provide a payload containing your request. You can optionally specify a qualifier to target a specific version or endpoint of the agent.</p> <p>This operation supports streaming responses, allowing you to receive partial responses as they become available. We recommend using pagination to ensure that the operation returns quickly and successfully when processing large responses.</p> <p>For example code, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-invoke-agent.html\">Invoke an AgentCore Runtime agent</a>. </p> <p>If you're integrating your agent with OAuth, you can't use the Amazon Web Services SDK to call <code>InvokeAgentRuntime</code>. Instead, make a HTTPS request to <code>InvokeAgentRuntime</code>. For an example, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html\">Authenticate and authorize with Inbound Auth and Outbound Auth</a>.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:InvokeAgentRuntime</code> permission.</p>",
+                "smithy.api#documentation": "<p>Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore Runtime and receives responses in real-time. </p> <p>To invoke an agent you must specify the AgentCore Runtime ARN and provide a payload containing your request. You can optionally specify a qualifier to target a specific version or endpoint of the agent.</p> <p>This operation supports streaming responses, allowing you to receive partial responses as they become available. We recommend using pagination to ensure that the operation returns quickly and successfully when processing large responses.</p> <p>For example code, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-invoke-agent.html\">Invoke an AgentCore Runtime agent</a>. </p> <p>If you're integrating your agent with OAuth, you can't use the Amazon Web Services SDK to call <code>InvokeAgentRuntime</code>. Instead, make a HTTPS request to <code>InvokeAgentRuntime</code>. For an example, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html\">Authenticate and authorize with Inbound Auth and Outbound Auth</a>.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:InvokeAgentRuntime</code> permission. If you are making a call to <code>InvokeAgentRuntime</code> on behalf of a user ID with the <code>X-Amzn-Bedrock-AgentCore-Runtime-User-Id</code> header, You require permissions to both actions (<code>bedrock-agentcore:InvokeAgentRuntime</code> and <code>bedrock-agentcore:InvokeAgentRuntimeForUser</code>). </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/runtimes/{agentRuntimeArn}/invocations",
@@ -3336,6 +3338,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the code interpreter session to use. This must be an active session created with <code>StartCodeInterpreterSession</code>. If the session has expired or been stopped, the request will fail.</p>",
                         "smithy.api#httpHeader": "x-amzn-code-interpreter-session-id"
+                    }
+                },
+                "traceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace identifier for request tracking.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Trace-Id",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "traceParent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent trace information for distributed tracing.</p>",
+                        "smithy.api#httpHeader": "traceparent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
                     }
                 },
                 "name": {
@@ -5061,6 +5085,28 @@
         "com.amazonaws.bedrockagentcore#StartBrowserSessionRequest": {
             "type": "structure",
             "members": {
+                "traceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace identifier for request tracking.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Trace-Id",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "traceParent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent trace information for distributed tracing.</p>",
+                        "smithy.api#httpHeader": "traceparent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
                 "browserIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -5179,6 +5225,28 @@
         "com.amazonaws.bedrockagentcore#StartCodeInterpreterSessionRequest": {
             "type": "structure",
             "members": {
+                "traceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace identifier for request tracking.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Trace-Id",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "traceParent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent trace information for distributed tracing.</p>",
+                        "smithy.api#httpHeader": "traceparent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
                 "codeInterpreterIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -5285,6 +5353,28 @@
         "com.amazonaws.bedrockagentcore#StopBrowserSessionRequest": {
             "type": "structure",
             "members": {
+                "traceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace identifier for request tracking.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Trace-Id",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "traceParent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent trace information for distributed tracing.</p>",
+                        "smithy.api#httpHeader": "traceparent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
                 "browserIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -5386,6 +5476,28 @@
         "com.amazonaws.bedrockagentcore#StopCodeInterpreterSessionRequest": {
             "type": "structure",
             "members": {
+                "traceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace identifier for request tracking.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Trace-Id",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "traceParent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent trace information for distributed tracing.</p>",
+                        "smithy.api#httpHeader": "traceparent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
                 "codeInterpreterIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
