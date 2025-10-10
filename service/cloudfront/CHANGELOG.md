@@ -1,3 +1,7 @@
+# v1.55.0 (2025-10-10)
+
+* **Feature**: Added new viewer security policy, TLSv1.2_2025, for CloudFront.
+
 # v1.54.4 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

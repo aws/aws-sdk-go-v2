@@ -1,3 +1,7 @@
+# v1.5.0 (2025-10-10)
+
+* **Feature**: This release adds APIs that allow you to specify CIDR ranges in your ODB peering connection.
+
 # v1.4.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

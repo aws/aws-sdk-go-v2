@@ -1,3 +1,7 @@
+# v1.108.2 (2025-10-10)
+
+* **Documentation**: Updated the text in the Important section of the ModifyDBClusterParameterGroup page.
+
 # v1.108.1 (2025-10-06)
 
 * **Documentation**: Documentation updates to the CreateDBClusterMessage$PubliclyAccessible and CreateDBInstanceMessage$PubliclyAccessible properties.

@@ -1,3 +1,7 @@
+# v1.131.0 (2025-10-10)
+
+* **Feature**: Addition of AuditContext in GetTable/GetTables Request
+
 # v1.130.0 (2025-10-06)
 
 * **Feature**: Adds labeling for DataQualityRuleResult for GetDataQualityResult and PublishDataQualityResult APIs

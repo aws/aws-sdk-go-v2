@@ -1,8 +1,0 @@
-{
-    "id": "ae2f7b84-2945-4746-9ad7-1a661eb65e82",
-    "type": "documentation",
-    "description": "Updated the text in the Important section of the ModifyDBClusterParameterGroup page.",
-    "modules": [
-        "service/rds"
-    ]
-}

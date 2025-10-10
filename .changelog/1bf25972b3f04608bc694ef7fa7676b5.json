@@ -1,8 +1,0 @@
-{
-    "id": "1bf25972-b3f0-4608-bc69-4ef7fa7676b5",
-    "type": "feature",
-    "description": "Bedrock AgentCore release for Gateway, and Memory including Self-Managed Strategies support for Memory.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

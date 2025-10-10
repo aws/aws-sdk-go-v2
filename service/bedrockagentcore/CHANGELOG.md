@@ -1,3 +1,7 @@
+# v1.6.0 (2025-10-10)
+
+* **Feature**: Bedrock AgentCore release for Runtime, and Memory.
+
 # v1.5.0 (2025-10-06)
 
 * **Feature**: Add support for batch memory management, agent card retrieval and session termination

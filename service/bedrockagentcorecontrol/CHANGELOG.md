@@ -1,3 +1,7 @@
+# v1.9.0 (2025-10-10)
+
+* **Feature**: Bedrock AgentCore release for Gateway, and Memory including Self-Managed Strategies support for Memory.
+
 # v1.8.0 (2025-10-08)
 
 * **Feature**: Adding support for authorizer type AWS_IAM to AgentCore Control Gateway.

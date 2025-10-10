@@ -1,3 +1,21 @@
+# Release (2025-10-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.6.0](service/bedrockagentcore/CHANGELOG.md#v160-2025-10-10)
+  * **Feature**: Bedrock AgentCore release for Runtime, and Memory.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.9.0](service/bedrockagentcorecontrol/CHANGELOG.md#v190-2025-10-10)
+  * **Feature**: Bedrock AgentCore release for Gateway, and Memory including Self-Managed Strategies support for Memory.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.55.0](service/cloudfront/CHANGELOG.md#v1550-2025-10-10)
+  * **Feature**: Added new viewer security policy, TLSv1.2_2025, for CloudFront.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.131.0](service/glue/CHANGELOG.md#v11310-2025-10-10)
+  * **Feature**: Addition of AuditContext in GetTable/GetTables Request
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.78.0](service/lambda/CHANGELOG.md#v1780-2025-10-10)
+  * **Feature**: Add InvokedViaFunctionUrl context key to limit invocations to only FURL invokes.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.5.0](service/odb/CHANGELOG.md#v150-2025-10-10)
+  * **Feature**: This release adds APIs that allow you to specify CIDR ranges in your ODB peering connection.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.108.2](service/rds/CHANGELOG.md#v11082-2025-10-10)
+  * **Documentation**: Updated the text in the Important section of the ModifyDBClusterParameterGroup page.
+
 # Release (2025-10-09)
 
 ## Module Highlights
