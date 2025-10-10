@@ -469,7 +469,14 @@ func isRangeMismatch(expectStart, expectEnd, actualStart, actualEnd int) bool {
 		return false // we don't know, one of the ranges was missing or unparseable
 	}
 
-	return expectStart != actualStart && expectEnd != actualEnd
+	// for the final chunk (or the first chunk if it's smaller) we still
+	// request a full chunk but we get back the actual final part of the
+	// object, which will be smaller
+	if expectStart == actualStart && actualEnd < expectEnd {
+		return false
+	}
+
+	return expectStart != actualStart || expectEnd != actualEnd
 }
 
 // getTotalBytes is a thread-safe getter for retrieving the total byte status.
