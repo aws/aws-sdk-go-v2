@@ -1,8 +1,0 @@
-{
-    "id": "1b632c97-d3f7-449e-9da7-6c1242b7ed24",
-    "type": "feature",
-    "description": "Updated InvokeAgentRuntime API to accept account id optionally and added CompleteResourceTokenAuth API.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

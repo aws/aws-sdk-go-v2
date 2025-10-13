@@ -1,3 +1,7 @@
+# v1.10.0 (2025-10-13)
+
+* **Feature**: Updated http status code in control plane apis of agentcore runtime, tools and identity. Additional included provider types for AgentCore Identity
+
 # v1.9.0 (2025-10-10)
 
 * **Feature**: Bedrock AgentCore release for Gateway, and Memory including Self-Managed Strategies support for Memory.

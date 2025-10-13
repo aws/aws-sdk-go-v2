@@ -1,3 +1,15 @@
+# Release (2025-10-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.7.0](service/bedrockagentcore/CHANGELOG.md#v170-2025-10-13)
+  * **Feature**: Updated InvokeAgentRuntime API to accept account id optionally and added CompleteResourceTokenAuth API.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.10.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1100-2025-10-13)
+  * **Feature**: Updated http status code in control plane apis of agentcore runtime, tools and identity. Additional included provider types for AgentCore Identity
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.255.0](service/ec2/CHANGELOG.md#v12550-2025-10-13)
+  * **Feature**: Release Amazon EC2 c8i, c8i-flex, m8a, and r8gb
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.8.0](service/observabilityadmin/CHANGELOG.md#v180-2025-10-13)
+  * **Feature**: CloudWatch Observability Admin adds the ability to enable Resource tags for telemetry in a customer account. The release introduces new APIs to enable, disable and describe the status of Resource tags for telemetry feature. This new capability simplifies monitoring AWS resources using tags.
+
 # Release (2025-10-10)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.8.0 (2025-10-13)
+
+* **Feature**: CloudWatch Observability Admin adds the ability to enable Resource tags for telemetry in a customer account. The release introduces new APIs to enable, disable and describe the status of Resource tags for telemetry feature. This new capability simplifies monitoring AWS resources using tags.
+
 # v1.7.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "afe08796-09c9-47a7-9cf2-249e68262e0f",
-    "type": "feature",
-    "description": "Release Amazon EC2 c8i, c8i-flex, m8a, and r8gb",
-    "modules": [
-        "service/ec2"
-    ]
-}
