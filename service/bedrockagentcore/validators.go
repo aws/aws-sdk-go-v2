@@ -70,6 +70,26 @@ func (m *validateOpBatchUpdateMemoryRecords) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCompleteResourceTokenAuth struct {
+}
+
+func (*validateOpCompleteResourceTokenAuth) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCompleteResourceTokenAuth) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CompleteResourceTokenAuthInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCompleteResourceTokenAuthInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvent struct {
 }
 
@@ -642,6 +662,10 @@ func addOpBatchUpdateMemoryRecordsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpBatchUpdateMemoryRecords{}, middleware.After)
 }
 
+func addOpCompleteResourceTokenAuthValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCompleteResourceTokenAuth{}, middleware.After)
+}
+
 func addOpCreateEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvent{}, middleware.After)
 }
@@ -1143,6 +1167,24 @@ func validateOpBatchUpdateMemoryRecordsInput(v *BatchUpdateMemoryRecordsInput) e
 		if err := validateMemoryRecordsUpdateInputList(v.Records); err != nil {
 			invalidParams.AddNested("Records", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCompleteResourceTokenAuthInput(v *CompleteResourceTokenAuthInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteResourceTokenAuthInput"}
+	if v.UserIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserIdentifier"))
+	}
+	if v.SessionUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionUri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

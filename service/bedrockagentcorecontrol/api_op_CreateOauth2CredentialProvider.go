@@ -47,6 +47,11 @@ type CreateOauth2CredentialProviderInput struct {
 	// This member is required.
 	Oauth2ProviderConfigInput types.Oauth2ProviderConfigInput
 
+	// A map of tag keys and values to assign to the OAuth2 credential provider. Tags
+	// enable you to categorize your resources in different ways, for example, by
+	// purpose, owner, or environment.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -66,6 +71,14 @@ type CreateOauth2CredentialProviderOutput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Callback URL to register on the OAuth2 credential provider as an allowed
+	// callback URL. This URL is where the OAuth2 authorization server redirects users
+	// after they complete the authorization flow.
+	CallbackUrl *string
+
+	// Contains the output configuration for an OAuth2 provider.
+	Oauth2ProviderConfigOutput types.Oauth2ProviderConfigOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

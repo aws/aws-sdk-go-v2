@@ -366,6 +366,13 @@ func awsRestjson1_serializeOpDocumentCreateApiKeyCredentialProviderInput(v *Crea
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1061,6 +1068,13 @@ func awsRestjson1_serializeOpDocumentCreateOauth2CredentialProviderInput(v *Crea
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1147,6 +1161,13 @@ func awsRestjson1_serializeOpDocumentCreateWorkloadIdentityInput(v *CreateWorklo
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5037,6 +5058,23 @@ func awsRestjson1_serializeDocumentApiSchemaConfiguration(v types.ApiSchemaConfi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAtlassianOauth2ProviderConfigInput(v *types.AtlassianOauth2ProviderConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("clientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAuthorizerConfiguration(v types.AuthorizerConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5447,6 +5485,38 @@ func awsRestjson1_serializeDocumentGoogleOauth2ProviderConfigInput(v *types.Goog
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorizationEndpoint != nil {
+		ok := object.Key("authorizationEndpoint")
+		ok.String(*v.AuthorizationEndpoint)
+	}
+
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("clientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if v.Issuer != nil {
+		ok := object.Key("issuer")
+		ok.String(*v.Issuer)
+	}
+
+	if v.TokenEndpoint != nil {
+		ok := object.Key("tokenEndpoint")
+		ok.String(*v.TokenEndpoint)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInvocationConfigurationInput(v *types.InvocationConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5493,6 +5563,23 @@ func awsRestjson1_serializeDocumentLifecycleConfiguration(v *types.LifecycleConf
 	if v.MaxLifetime != nil {
 		ok := object.Key("maxLifetime")
 		ok.Integer(*v.MaxLifetime)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLinkedinOauth2ProviderConfigInput(v *types.LinkedinOauth2ProviderConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("clientSecret")
+		ok.String(*v.ClientSecret)
 	}
 
 	return nil
@@ -5676,6 +5763,11 @@ func awsRestjson1_serializeDocumentMicrosoftOauth2ProviderConfigInput(v *types.M
 	if v.ClientSecret != nil {
 		ok := object.Key("clientSecret")
 		ok.String(*v.ClientSecret)
+	}
+
+	if v.TenantId != nil {
+		ok := object.Key("tenantId")
+		ok.String(*v.TenantId)
 	}
 
 	return nil
@@ -5916,6 +6008,13 @@ func awsRestjson1_serializeDocumentOauth2AuthorizationServerMetadata(v *types.Oa
 		ok.String(*v.TokenEndpoint)
 	}
 
+	if v.TokenEndpointAuthMethods != nil {
+		ok := object.Key("tokenEndpointAuthMethods")
+		if err := awsRestjson1_serializeDocumentTokenEndpointAuthMethodsType(v.TokenEndpointAuthMethods, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5946,6 +6045,12 @@ func awsRestjson1_serializeDocumentOauth2ProviderConfigInput(v types.Oauth2Provi
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.Oauth2ProviderConfigInputMemberAtlassianOauth2ProviderConfig:
+		av := object.Key("atlassianOauth2ProviderConfig")
+		if err := awsRestjson1_serializeDocumentAtlassianOauth2ProviderConfigInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.Oauth2ProviderConfigInputMemberCustomOauth2ProviderConfig:
 		av := object.Key("customOauth2ProviderConfig")
 		if err := awsRestjson1_serializeDocumentCustomOauth2ProviderConfigInput(&uv.Value, av); err != nil {
@@ -5961,6 +6066,18 @@ func awsRestjson1_serializeDocumentOauth2ProviderConfigInput(v types.Oauth2Provi
 	case *types.Oauth2ProviderConfigInputMemberGoogleOauth2ProviderConfig:
 		av := object.Key("googleOauth2ProviderConfig")
 		if err := awsRestjson1_serializeDocumentGoogleOauth2ProviderConfigInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.Oauth2ProviderConfigInputMemberIncludedOauth2ProviderConfig:
+		av := object.Key("includedOauth2ProviderConfig")
+		if err := awsRestjson1_serializeDocumentIncludedOauth2ProviderConfigInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.Oauth2ProviderConfigInputMemberLinkedinOauth2ProviderConfig:
+		av := object.Key("linkedinOauth2ProviderConfig")
+		if err := awsRestjson1_serializeDocumentLinkedinOauth2ProviderConfigInput(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -6493,6 +6610,17 @@ func awsRestjson1_serializeDocumentTokenBasedTriggerInput(v *types.TokenBasedTri
 		ok.Integer(*v.TokenCount)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTokenEndpointAuthMethodsType(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

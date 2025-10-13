@@ -205,6 +205,25 @@ func (Role) Values() []Role {
 	}
 }
 
+type SessionStatus string
+
+// Enum values for SessionStatus
+const (
+	SessionStatusInProgress SessionStatus = "IN_PROGRESS"
+	SessionStatusFailed     SessionStatus = "FAILED"
+)
+
+// Values returns all known values for SessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatus) Values() []SessionStatus {
+	return []SessionStatus{
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
 type TaskStatus string
 
 // Enum values for TaskStatus

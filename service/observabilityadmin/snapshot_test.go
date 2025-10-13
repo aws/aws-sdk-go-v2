@@ -146,6 +146,18 @@ func TestCheckSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTelemetryEnrichmentStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTelemetryEnrichmentStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTelemetryEnrichmentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTelemetryEvaluationStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTelemetryEvaluationStatus(context.Background(), nil, func(o *Options) {
@@ -266,6 +278,18 @@ func TestCheckSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTelemetryEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartTelemetryEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartTelemetryEvaluation(context.Background(), nil, func(o *Options) {
@@ -283,6 +307,18 @@ func TestCheckSnapshot_StartTelemetryEvaluationForOrganization(t *testing.T) {
 	_, err := svc.StartTelemetryEvaluationForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartTelemetryEvaluationForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopTelemetryEnrichment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -457,6 +493,18 @@ func TestUpdateSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTelemetryEnrichmentStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTelemetryEnrichmentStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTelemetryEnrichmentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTelemetryEvaluationStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTelemetryEvaluationStatus(context.Background(), nil, func(o *Options) {
@@ -577,6 +625,18 @@ func TestUpdateSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTelemetryEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartTelemetryEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartTelemetryEvaluation(context.Background(), nil, func(o *Options) {
@@ -594,6 +654,18 @@ func TestUpdateSnapshot_StartTelemetryEvaluationForOrganization(t *testing.T) {
 	_, err := svc.StartTelemetryEvaluationForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartTelemetryEvaluationForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopTelemetryEnrichment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

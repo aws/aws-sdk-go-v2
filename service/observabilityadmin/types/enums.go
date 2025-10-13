@@ -169,6 +169,27 @@ func (Status) Values() []Status {
 	}
 }
 
+type TelemetryEnrichmentStatus string
+
+// Enum values for TelemetryEnrichmentStatus
+const (
+	TelemetryEnrichmentStatusRunning  TelemetryEnrichmentStatus = "Running"
+	TelemetryEnrichmentStatusStopped  TelemetryEnrichmentStatus = "Stopped"
+	TelemetryEnrichmentStatusImpaired TelemetryEnrichmentStatus = "Impaired"
+)
+
+// Values returns all known values for TelemetryEnrichmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TelemetryEnrichmentStatus) Values() []TelemetryEnrichmentStatus {
+	return []TelemetryEnrichmentStatus{
+		"Running",
+		"Stopped",
+		"Impaired",
+	}
+}
+
 type TelemetryState string
 
 // Enum values for TelemetryState

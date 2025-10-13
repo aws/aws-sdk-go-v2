@@ -71,6 +71,10 @@ type InvokeAgentRuntimeInput struct {
 	// application/json for JSON data.
 	Accept *string
 
+	// The identifier of the Amazon Web Services account for the agent runtime
+	// resource.
+	AccountId *string
+
 	// Additional context information for distributed tracing.
 	Baggage *string
 

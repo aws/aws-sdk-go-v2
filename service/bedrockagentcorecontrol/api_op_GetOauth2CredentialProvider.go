@@ -75,6 +75,11 @@ type GetOauth2CredentialProviderOutput struct {
 	// This member is required.
 	Oauth2ProviderConfigOutput types.Oauth2ProviderConfigOutput
 
+	// Callback URL to register on the OAuth2 credential provider as an allowed
+	// callback URL. This URL is where the OAuth2 authorization server redirects users
+	// after they complete the authorization flow.
+	CallbackUrl *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

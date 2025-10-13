@@ -176,6 +176,41 @@ type ApiSchemaConfigurationMemberS3 struct {
 
 func (*ApiSchemaConfigurationMemberS3) isApiSchemaConfiguration() {}
 
+// Configuration settings for connecting to Atlassian services using OAuth2
+// authentication. This includes the client credentials required to authenticate
+// with Atlassian's OAuth2 authorization server.
+type AtlassianOauth2ProviderConfigInput struct {
+
+	// The client ID for the Atlassian OAuth2 provider. This identifier is assigned by
+	// Atlassian when you register your application.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The client secret for the Atlassian OAuth2 provider. This secret is assigned by
+	// Atlassian and used along with the client ID to authenticate your application.
+	//
+	// This member is required.
+	ClientSecret *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details returned for an Atlassian OAuth2 provider, including
+// the client ID and OAuth2 discovery information.
+type AtlassianOauth2ProviderConfigOutput struct {
+
+	// Contains the discovery information for an OAuth2 provider.
+	//
+	// This member is required.
+	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the Atlassian OAuth2 provider.
+	ClientId *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents inbound authorization configuration options used to authenticate
 // incoming requests.
 //
@@ -638,6 +673,9 @@ type CustomOauth2ProviderConfigOutput struct {
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
 
+	// The client ID for the custom OAuth2 provider.
+	ClientId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -840,6 +878,9 @@ type GithubOauth2ProviderConfigOutput struct {
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
 
+	// The client ID for the GitHub OAuth2 provider.
+	ClientId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -866,6 +907,58 @@ type GoogleOauth2ProviderConfigOutput struct {
 	//
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the Google OAuth2 provider.
+	ClientId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for connecting to a supported OAuth2 provider. This
+// includes client credentials and OAuth2 discovery information for providers that
+// have built-in support.
+type IncludedOauth2ProviderConfigInput struct {
+
+	// The client ID for the supported OAuth2 provider. This identifier is assigned by
+	// the OAuth2 provider when you register your application.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The client secret for the supported OAuth2 provider. This secret is assigned by
+	// the OAuth2 provider and used along with the client ID to authenticate your
+	// application.
+	//
+	// This member is required.
+	ClientSecret *string
+
+	// OAuth2 authorization endpoint for your isolated OAuth2 application tenant. This
+	// is where users are redirected to authenticate and authorize access to their
+	// resources.
+	AuthorizationEndpoint *string
+
+	// Token issuer of your isolated OAuth2 application tenant. This URL identifies
+	// the authorization server that issues tokens for this provider.
+	Issuer *string
+
+	// OAuth2 token endpoint for your isolated OAuth2 application tenant. This is
+	// where authorization codes are exchanged for access tokens.
+	TokenEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details returned for a supported OAuth2 provider, including
+// client credentials and OAuth2 discovery information.
+type IncludedOauth2ProviderConfigOutput struct {
+
+	// Contains the discovery information for an OAuth2 provider.
+	//
+	// This member is required.
+	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the supported OAuth2 provider.
+	ClientId *string
 
 	noSmithyDocumentSerde
 }
@@ -930,6 +1023,41 @@ type LifecycleConfiguration struct {
 	// Maximum lifetime for the instance in seconds. Once reached, instances will be
 	// automatically terminated and replaced. Default: 28800 seconds (8 hours).
 	MaxLifetime *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for connecting to LinkedIn services using OAuth2
+// authentication. This includes the client credentials required to authenticate
+// with LinkedIn's OAuth2 authorization server.
+type LinkedinOauth2ProviderConfigInput struct {
+
+	// The client ID for the LinkedIn OAuth2 provider. This identifier is assigned by
+	// LinkedIn when you register your application.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The client secret for the LinkedIn OAuth2 provider. This secret is assigned by
+	// LinkedIn and used along with the client ID to authenticate your application.
+	//
+	// This member is required.
+	ClientSecret *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details returned for a LinkedIn OAuth2 provider, including
+// the client ID and OAuth2 discovery information.
+type LinkedinOauth2ProviderConfigOutput struct {
+
+	// Contains the discovery information for an OAuth2 provider.
+	//
+	// This member is required.
+	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the LinkedIn OAuth2 provider.
+	ClientId *string
 
 	noSmithyDocumentSerde
 }
@@ -1237,6 +1365,11 @@ type MicrosoftOauth2ProviderConfigInput struct {
 	// This member is required.
 	ClientSecret *string
 
+	// The Microsoft Entra ID (formerly Azure AD) tenant ID for your organization.
+	// This identifies the specific tenant within Microsoft's identity platform where
+	// your application is registered.
+	TenantId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1247,6 +1380,9 @@ type MicrosoftOauth2ProviderConfigOutput struct {
 	//
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the Microsoft OAuth2 provider.
+	ClientId *string
 
 	noSmithyDocumentSerde
 }
@@ -1401,6 +1537,10 @@ type Oauth2AuthorizationServerMetadata struct {
 	// The supported response types for the OAuth2 authorization server.
 	ResponseTypes []string
 
+	// The authentication methods supported by the token endpoint. This specifies how
+	// clients can authenticate when requesting tokens from the authorization server.
+	TokenEndpointAuthMethods []string
+
 	noSmithyDocumentSerde
 }
 
@@ -1467,15 +1607,27 @@ func (*Oauth2DiscoveryMemberDiscoveryUrl) isOauth2Discovery() {}
 //
 // The following types satisfy this interface:
 //
+//	Oauth2ProviderConfigInputMemberAtlassianOauth2ProviderConfig
 //	Oauth2ProviderConfigInputMemberCustomOauth2ProviderConfig
 //	Oauth2ProviderConfigInputMemberGithubOauth2ProviderConfig
 //	Oauth2ProviderConfigInputMemberGoogleOauth2ProviderConfig
+//	Oauth2ProviderConfigInputMemberIncludedOauth2ProviderConfig
+//	Oauth2ProviderConfigInputMemberLinkedinOauth2ProviderConfig
 //	Oauth2ProviderConfigInputMemberMicrosoftOauth2ProviderConfig
 //	Oauth2ProviderConfigInputMemberSalesforceOauth2ProviderConfig
 //	Oauth2ProviderConfigInputMemberSlackOauth2ProviderConfig
 type Oauth2ProviderConfigInput interface {
 	isOauth2ProviderConfigInput()
 }
+
+// Configuration settings for Atlassian OAuth2 provider integration.
+type Oauth2ProviderConfigInputMemberAtlassianOauth2ProviderConfig struct {
+	Value AtlassianOauth2ProviderConfigInput
+
+	noSmithyDocumentSerde
+}
+
+func (*Oauth2ProviderConfigInputMemberAtlassianOauth2ProviderConfig) isOauth2ProviderConfigInput() {}
 
 // The configuration for a custom OAuth2 provider.
 type Oauth2ProviderConfigInputMemberCustomOauth2ProviderConfig struct {
@@ -1503,6 +1655,25 @@ type Oauth2ProviderConfigInputMemberGoogleOauth2ProviderConfig struct {
 }
 
 func (*Oauth2ProviderConfigInputMemberGoogleOauth2ProviderConfig) isOauth2ProviderConfigInput() {}
+
+// The configuration for a non-custom OAuth2 provider. This includes settings for
+// supported OAuth2 providers that have built-in integration support.
+type Oauth2ProviderConfigInputMemberIncludedOauth2ProviderConfig struct {
+	Value IncludedOauth2ProviderConfigInput
+
+	noSmithyDocumentSerde
+}
+
+func (*Oauth2ProviderConfigInputMemberIncludedOauth2ProviderConfig) isOauth2ProviderConfigInput() {}
+
+// Configuration settings for LinkedIn OAuth2 provider integration.
+type Oauth2ProviderConfigInputMemberLinkedinOauth2ProviderConfig struct {
+	Value LinkedinOauth2ProviderConfigInput
+
+	noSmithyDocumentSerde
+}
+
+func (*Oauth2ProviderConfigInputMemberLinkedinOauth2ProviderConfig) isOauth2ProviderConfigInput() {}
 
 // The configuration for a Microsoft OAuth2 provider.
 type Oauth2ProviderConfigInputMemberMicrosoftOauth2ProviderConfig struct {
@@ -1535,14 +1706,27 @@ func (*Oauth2ProviderConfigInputMemberSlackOauth2ProviderConfig) isOauth2Provide
 //
 // The following types satisfy this interface:
 //
+//	Oauth2ProviderConfigOutputMemberAtlassianOauth2ProviderConfig
 //	Oauth2ProviderConfigOutputMemberCustomOauth2ProviderConfig
 //	Oauth2ProviderConfigOutputMemberGithubOauth2ProviderConfig
 //	Oauth2ProviderConfigOutputMemberGoogleOauth2ProviderConfig
+//	Oauth2ProviderConfigOutputMemberIncludedOauth2ProviderConfig
+//	Oauth2ProviderConfigOutputMemberLinkedinOauth2ProviderConfig
 //	Oauth2ProviderConfigOutputMemberMicrosoftOauth2ProviderConfig
 //	Oauth2ProviderConfigOutputMemberSalesforceOauth2ProviderConfig
 //	Oauth2ProviderConfigOutputMemberSlackOauth2ProviderConfig
 type Oauth2ProviderConfigOutput interface {
 	isOauth2ProviderConfigOutput()
+}
+
+// The configuration details for the Atlassian OAuth2 provider.
+type Oauth2ProviderConfigOutputMemberAtlassianOauth2ProviderConfig struct {
+	Value AtlassianOauth2ProviderConfigOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*Oauth2ProviderConfigOutputMemberAtlassianOauth2ProviderConfig) isOauth2ProviderConfigOutput() {
 }
 
 // The output configuration for a custom OAuth2 provider.
@@ -1571,6 +1755,26 @@ type Oauth2ProviderConfigOutputMemberGoogleOauth2ProviderConfig struct {
 }
 
 func (*Oauth2ProviderConfigOutputMemberGoogleOauth2ProviderConfig) isOauth2ProviderConfigOutput() {}
+
+// The configuration for a non-custom OAuth2 provider. This includes the
+// configuration details for supported OAuth2 providers that have built-in
+// integration support.
+type Oauth2ProviderConfigOutputMemberIncludedOauth2ProviderConfig struct {
+	Value IncludedOauth2ProviderConfigOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*Oauth2ProviderConfigOutputMemberIncludedOauth2ProviderConfig) isOauth2ProviderConfigOutput() {}
+
+// The configuration details for the LinkedIn OAuth2 provider.
+type Oauth2ProviderConfigOutputMemberLinkedinOauth2ProviderConfig struct {
+	Value LinkedinOauth2ProviderConfigOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*Oauth2ProviderConfigOutputMemberLinkedinOauth2ProviderConfig) isOauth2ProviderConfigOutput() {}
 
 // The output configuration for a Microsoft OAuth2 provider.
 type Oauth2ProviderConfigOutputMemberMicrosoftOauth2ProviderConfig struct {
@@ -1729,6 +1933,9 @@ type SalesforceOauth2ProviderConfigOutput struct {
 	//
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the Salesforce OAuth2 provider.
+	ClientId *string
 
 	noSmithyDocumentSerde
 }
@@ -1927,6 +2134,9 @@ type SlackOauth2ProviderConfigOutput struct {
 	//
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
+
+	// The client ID for the Slack OAuth2 provider.
+	ClientId *string
 
 	noSmithyDocumentSerde
 }

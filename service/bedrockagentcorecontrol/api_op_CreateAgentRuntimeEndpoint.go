@@ -84,6 +84,12 @@ type CreateAgentRuntimeEndpointOutput struct {
 	// This member is required.
 	TargetVersion *string
 
+	// The unique identifier of the AgentCore Runtime.
+	AgentRuntimeId *string
+
+	// The name of the AgentCore Runtime endpoint.
+	EndpointName *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

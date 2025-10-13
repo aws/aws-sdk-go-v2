@@ -44,6 +44,9 @@ type DeleteAgentRuntimeOutput struct {
 	// This member is required.
 	Status types.AgentRuntimeStatus
 
+	// The unique identifier of the AgentCore Runtime.
+	AgentRuntimeId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

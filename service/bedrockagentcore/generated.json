@@ -12,6 +12,7 @@
         "api_op_BatchCreateMemoryRecords.go",
         "api_op_BatchDeleteMemoryRecords.go",
         "api_op_BatchUpdateMemoryRecords.go",
+        "api_op_CompleteResourceTokenAuth.go",
         "api_op_CreateEvent.go",
         "api_op_DeleteEvent.go",
         "api_op_DeleteMemoryRecord.go",

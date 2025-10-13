@@ -811,6 +811,36 @@ type ToolResultStructuredContent struct {
 	noSmithyDocumentSerde
 }
 
+// The OAuth2.0 token or user ID that was used to generate the workload access
+// token used for initiating the user authorization flow to retrieve OAuth2.0
+// tokens.
+//
+// The following types satisfy this interface:
+//
+//	UserIdentifierMemberUserId
+//	UserIdentifierMemberUserToken
+type UserIdentifier interface {
+	isUserIdentifier()
+}
+
+// The ID of the user for whom you have retrieved a workload access token for
+type UserIdentifierMemberUserId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIdentifierMemberUserId) isUserIdentifier() {}
+
+// The OAuth2.0 token issued by the user’s identity provider
+type UserIdentifierMemberUserToken struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIdentifierMemberUserToken) isUserIdentifier() {}
+
 // Stores information about a field passed inside a request that resulted in an
 // exception.
 type ValidationExceptionField struct {
@@ -868,3 +898,4 @@ func (*UnknownUnionMember) isMetadataValue()               {}
 func (*UnknownUnionMember) isPayloadType()                 {}
 func (*UnknownUnionMember) isRightExpression()             {}
 func (*UnknownUnionMember) isStreamUpdate()                {}
+func (*UnknownUnionMember) isUserIdentifier()              {}

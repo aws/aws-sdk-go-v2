@@ -155,3 +155,25 @@ func ExampleStreamUpdate_outputUsage() {
 }
 
 var _ *types.AutomationStreamUpdate
+
+func ExampleUserIdentifier_outputUsage() {
+	var union types.UserIdentifier
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UserIdentifierMemberUserId:
+		_ = v.Value // Value is string
+
+	case *types.UserIdentifierMemberUserToken:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string

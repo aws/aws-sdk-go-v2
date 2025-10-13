@@ -410,6 +410,15 @@ func awsRestjson1_deserializeOpDocumentCreateAgentRuntimeEndpointOutput(v **Crea
 				sv.AgentRuntimeEndpointArn = ptr.String(jtv)
 			}
 
+		case "agentRuntimeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentRuntimeId to be of type string, got %T instead", value)
+				}
+				sv.AgentRuntimeId = ptr.String(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -421,6 +430,15 @@ func awsRestjson1_deserializeOpDocumentCreateAgentRuntimeEndpointOutput(v **Crea
 					return err
 				}
 				sv.CreatedAt = ptr.Time(t)
+			}
+
+		case "endpointName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointName to be of type string, got %T instead", value)
+				}
+				sv.EndpointName = ptr.String(jtv)
 			}
 
 		case "status":
@@ -1963,6 +1981,15 @@ func awsRestjson1_deserializeOpDocumentCreateOauth2CredentialProviderOutput(v **
 
 	for key, value := range shape {
 		switch key {
+		case "callbackUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CallbackUrl = ptr.String(jtv)
+			}
+
 		case "clientSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.ClientSecretArn, value); err != nil {
 				return err
@@ -1984,6 +2011,11 @@ func awsRestjson1_deserializeOpDocumentCreateOauth2CredentialProviderOutput(v **
 					return fmt.Errorf("expected CredentialProviderName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "oauth2ProviderConfigOutput":
+			if err := awsRestjson1_deserializeDocumentOauth2ProviderConfigOutput(&sv.Oauth2ProviderConfigOutput, value); err != nil {
+				return err
 			}
 
 		default:
@@ -2330,6 +2362,15 @@ func awsRestjson1_deserializeOpDocumentDeleteAgentRuntimeOutput(v **DeleteAgentR
 
 	for key, value := range shape {
 		switch key {
+		case "agentRuntimeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentRuntimeId to be of type string, got %T instead", value)
+				}
+				sv.AgentRuntimeId = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2498,6 +2539,24 @@ func awsRestjson1_deserializeOpDocumentDeleteAgentRuntimeEndpointOutput(v **Dele
 
 	for key, value := range shape {
 		switch key {
+		case "agentRuntimeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentRuntimeId to be of type string, got %T instead", value)
+				}
+				sv.AgentRuntimeId = ptr.String(jtv)
+			}
+
+		case "endpointName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointName to be of type string, got %T instead", value)
+				}
+				sv.EndpointName = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5940,6 +5999,15 @@ func awsRestjson1_deserializeOpDocumentGetOauth2CredentialProviderOutput(v **Get
 
 	for key, value := range shape {
 		switch key {
+		case "callbackUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CallbackUrl = ptr.String(jtv)
+			}
+
 		case "clientSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.ClientSecretArn, value); err != nil {
 				return err
@@ -10659,6 +10727,15 @@ func awsRestjson1_deserializeOpDocumentUpdateOauth2CredentialProviderOutput(v **
 
 	for key, value := range shape {
 		switch key {
+		case "callbackUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CallbackUrl = ptr.String(jtv)
+			}
+
 		case "clientSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.ClientSecretArn, value); err != nil {
 				return err
@@ -12072,6 +12149,51 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAtlassianOauth2ProviderConfigOutput(v **types.AtlassianOauth2ProviderConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AtlassianOauth2ProviderConfigOutput
+	if *v == nil {
+		sv = &types.AtlassianOauth2ProviderConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
+		case "oauthDiscovery":
+			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAuthorizerConfiguration(v *types.AuthorizerConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12943,6 +13065,15 @@ func awsRestjson1_deserializeDocumentCustomOauth2ProviderConfigOutput(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
@@ -13549,6 +13680,15 @@ func awsRestjson1_deserializeDocumentGithubOauth2ProviderConfigOutput(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
@@ -13585,6 +13725,60 @@ func awsRestjson1_deserializeDocumentGoogleOauth2ProviderConfigOutput(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
+		case "oauthDiscovery":
+			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIncludedOauth2ProviderConfigOutput(v **types.IncludedOauth2ProviderConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IncludedOauth2ProviderConfigOutput
+	if *v == nil {
+		sv = &types.IncludedOauth2ProviderConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
@@ -13783,6 +13977,51 @@ func awsRestjson1_deserializeDocumentLifecycleConfiguration(v **types.LifecycleC
 					return err
 				}
 				sv.MaxLifetime = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLinkedinOauth2ProviderConfigOutput(v **types.LinkedinOauth2ProviderConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LinkedinOauth2ProviderConfigOutput
+	if *v == nil {
+		sv = &types.LinkedinOauth2ProviderConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
+		case "oauthDiscovery":
+			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
+				return err
 			}
 
 		default:
@@ -14530,6 +14769,15 @@ func awsRestjson1_deserializeDocumentMicrosoftOauth2ProviderConfigOutput(v **typ
 
 	for key, value := range shape {
 		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
@@ -14677,6 +14925,11 @@ func awsRestjson1_deserializeDocumentOauth2AuthorizationServerMetadata(v **types
 					return fmt.Errorf("expected TokenEndpointType to be of type string, got %T instead", value)
 				}
 				sv.TokenEndpoint = ptr.String(jtv)
+			}
+
+		case "tokenEndpointAuthMethods":
+			if err := awsRestjson1_deserializeDocumentTokenEndpointAuthMethodsType(&sv.TokenEndpointAuthMethods, value); err != nil {
+				return err
 			}
 
 		default:
@@ -14884,6 +15137,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "atlassianOauth2ProviderConfig":
+			var mv types.AtlassianOauth2ProviderConfigOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAtlassianOauth2ProviderConfigOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.Oauth2ProviderConfigOutputMemberAtlassianOauth2ProviderConfig{Value: mv}
+			break loop
+
 		case "customOauth2ProviderConfig":
 			var mv types.CustomOauth2ProviderConfigOutput
 			destAddr := &mv
@@ -14912,6 +15175,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.Oauth2ProviderConfigOutputMemberGoogleOauth2ProviderConfig{Value: mv}
+			break loop
+
+		case "includedOauth2ProviderConfig":
+			var mv types.IncludedOauth2ProviderConfigOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentIncludedOauth2ProviderConfigOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.Oauth2ProviderConfigOutputMemberIncludedOauth2ProviderConfig{Value: mv}
+			break loop
+
+		case "linkedinOauth2ProviderConfig":
+			var mv types.LinkedinOauth2ProviderConfigOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLinkedinOauth2ProviderConfigOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.Oauth2ProviderConfigOutputMemberLinkedinOauth2ProviderConfig{Value: mv}
 			break loop
 
 		case "microsoftOauth2ProviderConfig":
@@ -15543,6 +15826,15 @@ func awsRestjson1_deserializeDocumentSalesforceOauth2ProviderConfigOutput(v **ty
 
 	for key, value := range shape {
 		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
@@ -15986,6 +16278,15 @@ func awsRestjson1_deserializeDocumentSlackOauth2ProviderConfigOutput(v **types.S
 
 	for key, value := range shape {
 		switch key {
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientIdType to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
@@ -16542,6 +16843,42 @@ func awsRestjson1_deserializeDocumentTokenBasedTrigger(v **types.TokenBasedTrigg
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTokenEndpointAuthMethodsType(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TokenAuthMethod to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

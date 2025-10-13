@@ -1,0 +1,8 @@
+{
+    "id": "177acb0e-367e-4e1c-92ba-580cde537877",
+    "type": "feature",
+    "description": "Updated http status code in control plane apis of agentcore runtime, tools and identity. Additional included provider types for AgentCore Identity",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

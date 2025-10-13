@@ -219,6 +219,25 @@ const (
 	CredentialProviderVendorTypeSalesforceOauth2 CredentialProviderVendorType = "SalesforceOauth2"
 	CredentialProviderVendorTypeMicrosoftOauth2  CredentialProviderVendorType = "MicrosoftOauth2"
 	CredentialProviderVendorTypeCustomOauth2     CredentialProviderVendorType = "CustomOauth2"
+	CredentialProviderVendorTypeAtlassianOauth2  CredentialProviderVendorType = "AtlassianOauth2"
+	CredentialProviderVendorTypeLinkedinOauth2   CredentialProviderVendorType = "LinkedinOauth2"
+	CredentialProviderVendorTypeXOauth2          CredentialProviderVendorType = "XOauth2"
+	CredentialProviderVendorTypeOktaOauth2       CredentialProviderVendorType = "OktaOauth2"
+	CredentialProviderVendorTypeOneLoginOauth2   CredentialProviderVendorType = "OneLoginOauth2"
+	CredentialProviderVendorTypePingOneOauth2    CredentialProviderVendorType = "PingOneOauth2"
+	CredentialProviderVendorTypeFacebookOauth2   CredentialProviderVendorType = "FacebookOauth2"
+	CredentialProviderVendorTypeYandexOauth2     CredentialProviderVendorType = "YandexOauth2"
+	CredentialProviderVendorTypeRedditOauth2     CredentialProviderVendorType = "RedditOauth2"
+	CredentialProviderVendorTypeZoomOauth2       CredentialProviderVendorType = "ZoomOauth2"
+	CredentialProviderVendorTypeTwitchOauth2     CredentialProviderVendorType = "TwitchOauth2"
+	CredentialProviderVendorTypeSpotifyOauth2    CredentialProviderVendorType = "SpotifyOauth2"
+	CredentialProviderVendorTypeDropboxOauth2    CredentialProviderVendorType = "DropboxOauth2"
+	CredentialProviderVendorTypeNotionOauth2     CredentialProviderVendorType = "NotionOauth2"
+	CredentialProviderVendorTypeHubspotOauth2    CredentialProviderVendorType = "HubspotOauth2"
+	CredentialProviderVendorTypeCyberArkOauth2   CredentialProviderVendorType = "CyberArkOauth2"
+	CredentialProviderVendorTypeFusionAuthOauth2 CredentialProviderVendorType = "FusionAuthOauth2"
+	CredentialProviderVendorTypeAuth0Oauth2      CredentialProviderVendorType = "Auth0Oauth2"
+	CredentialProviderVendorTypeCognitoOauth2    CredentialProviderVendorType = "CognitoOauth2"
 )
 
 // Values returns all known values for CredentialProviderVendorType. Note that
@@ -234,6 +253,25 @@ func (CredentialProviderVendorType) Values() []CredentialProviderVendorType {
 		"SalesforceOauth2",
 		"MicrosoftOauth2",
 		"CustomOauth2",
+		"AtlassianOauth2",
+		"LinkedinOauth2",
+		"XOauth2",
+		"OktaOauth2",
+		"OneLoginOauth2",
+		"PingOneOauth2",
+		"FacebookOauth2",
+		"YandexOauth2",
+		"RedditOauth2",
+		"ZoomOauth2",
+		"TwitchOauth2",
+		"SpotifyOauth2",
+		"DropboxOauth2",
+		"NotionOauth2",
+		"HubspotOauth2",
+		"CyberArkOauth2",
+		"FusionAuthOauth2",
+		"Auth0Oauth2",
+		"CognitoOauth2",
 	}
 }
 

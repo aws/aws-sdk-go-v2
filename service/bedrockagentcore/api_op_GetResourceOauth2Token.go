@@ -55,6 +55,12 @@ type GetResourceOauth2TokenInput struct {
 	// OAuth 2.0 flow parameters, and will not override them.
 	CustomParameters map[string]string
 
+	// An opaque string that will be sent back to the callback URL provided in
+	// resourceOauth2ReturnUrl. This state should be used to protect the callback URL
+	// of your application against CSRF attacks by ensuring the response corresponds to
+	// the original request.
+	CustomState *string
+
 	// Indicates whether to always initiate a new three-legged OAuth (3LO) flow,
 	// regardless of any existing session.
 	ForceAuthentication *bool
@@ -63,6 +69,11 @@ type GetResourceOauth2TokenInput struct {
 	// complete. This URL must be one of the provided URLs configured for the workload
 	// identity.
 	ResourceOauth2ReturnUrl *string
+
+	// Unique identifier for the user's authentication session for retrieving OAuth2
+	// tokens. This ID tracks the authorization flow state across multiple requests and
+	// responses during the OAuth2 authentication process.
+	SessionUri *string
 
 	noSmithyDocumentSerde
 }
@@ -75,6 +86,16 @@ type GetResourceOauth2TokenOutput struct {
 	// The URL to initiate the authorization process, provided when the access token
 	// requires user authorization.
 	AuthorizationUrl *string
+
+	// Status indicating whether the user's authorization session is in progress or
+	// has failed. This helps determine the next steps in the OAuth2 authentication
+	// flow.
+	SessionStatus types.SessionStatus
+
+	// Unique identifier for the user's authorization session for retrieving OAuth2
+	// tokens. This matches the sessionId from the request and can be used to track the
+	// session state.
+	SessionUri *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

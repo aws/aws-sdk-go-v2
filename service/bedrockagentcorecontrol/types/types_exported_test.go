@@ -388,6 +388,9 @@ func ExampleOauth2ProviderConfigInput_outputUsage() {
 	var union types.Oauth2ProviderConfigInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.Oauth2ProviderConfigInputMemberAtlassianOauth2ProviderConfig:
+		_ = v.Value // Value is types.AtlassianOauth2ProviderConfigInput
+
 	case *types.Oauth2ProviderConfigInputMemberCustomOauth2ProviderConfig:
 		_ = v.Value // Value is types.CustomOauth2ProviderConfigInput
 
@@ -396,6 +399,12 @@ func ExampleOauth2ProviderConfigInput_outputUsage() {
 
 	case *types.Oauth2ProviderConfigInputMemberGoogleOauth2ProviderConfig:
 		_ = v.Value // Value is types.GoogleOauth2ProviderConfigInput
+
+	case *types.Oauth2ProviderConfigInputMemberIncludedOauth2ProviderConfig:
+		_ = v.Value // Value is types.IncludedOauth2ProviderConfigInput
+
+	case *types.Oauth2ProviderConfigInputMemberLinkedinOauth2ProviderConfig:
+		_ = v.Value // Value is types.LinkedinOauth2ProviderConfigInput
 
 	case *types.Oauth2ProviderConfigInputMemberMicrosoftOauth2ProviderConfig:
 		_ = v.Value // Value is types.MicrosoftOauth2ProviderConfigInput
@@ -420,12 +429,18 @@ var _ *types.MicrosoftOauth2ProviderConfigInput
 var _ *types.GithubOauth2ProviderConfigInput
 var _ *types.SalesforceOauth2ProviderConfigInput
 var _ *types.CustomOauth2ProviderConfigInput
+var _ *types.AtlassianOauth2ProviderConfigInput
+var _ *types.IncludedOauth2ProviderConfigInput
+var _ *types.LinkedinOauth2ProviderConfigInput
 var _ *types.SlackOauth2ProviderConfigInput
 
 func ExampleOauth2ProviderConfigOutput_outputUsage() {
 	var union types.Oauth2ProviderConfigOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.Oauth2ProviderConfigOutputMemberAtlassianOauth2ProviderConfig:
+		_ = v.Value // Value is types.AtlassianOauth2ProviderConfigOutput
+
 	case *types.Oauth2ProviderConfigOutputMemberCustomOauth2ProviderConfig:
 		_ = v.Value // Value is types.CustomOauth2ProviderConfigOutput
 
@@ -434,6 +449,12 @@ func ExampleOauth2ProviderConfigOutput_outputUsage() {
 
 	case *types.Oauth2ProviderConfigOutputMemberGoogleOauth2ProviderConfig:
 		_ = v.Value // Value is types.GoogleOauth2ProviderConfigOutput
+
+	case *types.Oauth2ProviderConfigOutputMemberIncludedOauth2ProviderConfig:
+		_ = v.Value // Value is types.IncludedOauth2ProviderConfigOutput
+
+	case *types.Oauth2ProviderConfigOutputMemberLinkedinOauth2ProviderConfig:
+		_ = v.Value // Value is types.LinkedinOauth2ProviderConfigOutput
 
 	case *types.Oauth2ProviderConfigOutputMemberMicrosoftOauth2ProviderConfig:
 		_ = v.Value // Value is types.MicrosoftOauth2ProviderConfigOutput
@@ -453,12 +474,15 @@ func ExampleOauth2ProviderConfigOutput_outputUsage() {
 	}
 }
 
+var _ *types.AtlassianOauth2ProviderConfigOutput
 var _ *types.CustomOauth2ProviderConfigOutput
 var _ *types.GithubOauth2ProviderConfigOutput
 var _ *types.MicrosoftOauth2ProviderConfigOutput
 var _ *types.SlackOauth2ProviderConfigOutput
+var _ *types.IncludedOauth2ProviderConfigOutput
 var _ *types.SalesforceOauth2ProviderConfigOutput
 var _ *types.GoogleOauth2ProviderConfigOutput
+var _ *types.LinkedinOauth2ProviderConfigOutput
 
 func ExampleRequestHeaderConfiguration_outputUsage() {
 	var union types.RequestHeaderConfiguration

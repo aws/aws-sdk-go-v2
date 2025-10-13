@@ -98,6 +98,18 @@ func TestCheckSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CompleteResourceTokenAuth(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteResourceTokenAuth(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CompleteResourceTokenAuth")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvent(context.Background(), nil, func(o *Options) {
@@ -462,6 +474,18 @@ func TestUpdateSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 	_, err := svc.BatchUpdateMemoryRecords(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchUpdateMemoryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CompleteResourceTokenAuth(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteResourceTokenAuth(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CompleteResourceTokenAuth")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

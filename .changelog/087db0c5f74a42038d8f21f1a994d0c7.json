@@ -1,0 +1,8 @@
+{
+    "id": "087db0c5-f74a-4203-8d8f-21f1a994d0c7",
+    "type": "feature",
+    "description": "CloudWatch Observability Admin adds the ability to enable Resource tags for telemetry in a customer account. The release introduces new APIs to enable, disable and describe the status of Resource tags for telemetry feature. This new capability simplifies monitoring AWS resources using tags.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

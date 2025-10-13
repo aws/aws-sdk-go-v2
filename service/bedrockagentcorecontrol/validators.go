@@ -1133,6 +1133,24 @@ func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
 	}
 }
 
+func validateAtlassianOauth2ProviderConfigInput(v *types.AtlassianOauth2ProviderConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AtlassianOauth2ProviderConfigInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAuthorizerConfiguration(v types.AuthorizerConfiguration) error {
 	if v == nil {
 		return nil
@@ -1498,6 +1516,24 @@ func validateGoogleOauth2ProviderConfigInput(v *types.GoogleOauth2ProviderConfig
 	}
 }
 
+func validateIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncludedOauth2ProviderConfigInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvocationConfigurationInput(v *types.InvocationConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1523,6 +1559,24 @@ func validateKmsConfiguration(v *types.KmsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KmsConfiguration"}
 	if len(v.KeyType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedinOauth2ProviderConfigInput(v *types.LinkedinOauth2ProviderConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedinOauth2ProviderConfigInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1851,6 +1905,11 @@ func validateOauth2ProviderConfigInput(v types.Oauth2ProviderConfigInput) error 
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Oauth2ProviderConfigInput"}
 	switch uv := v.(type) {
+	case *types.Oauth2ProviderConfigInputMemberAtlassianOauth2ProviderConfig:
+		if err := validateAtlassianOauth2ProviderConfigInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[atlassianOauth2ProviderConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.Oauth2ProviderConfigInputMemberCustomOauth2ProviderConfig:
 		if err := validateCustomOauth2ProviderConfigInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[customOauth2ProviderConfig]", err.(smithy.InvalidParamsError))
@@ -1864,6 +1923,16 @@ func validateOauth2ProviderConfigInput(v types.Oauth2ProviderConfigInput) error 
 	case *types.Oauth2ProviderConfigInputMemberGoogleOauth2ProviderConfig:
 		if err := validateGoogleOauth2ProviderConfigInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[googleOauth2ProviderConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.Oauth2ProviderConfigInputMemberIncludedOauth2ProviderConfig:
+		if err := validateIncludedOauth2ProviderConfigInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[includedOauth2ProviderConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.Oauth2ProviderConfigInputMemberLinkedinOauth2ProviderConfig:
+		if err := validateLinkedinOauth2ProviderConfigInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[linkedinOauth2ProviderConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.Oauth2ProviderConfigInputMemberMicrosoftOauth2ProviderConfig:

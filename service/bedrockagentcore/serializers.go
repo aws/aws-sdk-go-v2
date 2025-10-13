@@ -311,6 +311,94 @@ func awsRestjson1_serializeOpDocumentBatchUpdateMemoryRecordsInput(v *BatchUpdat
 	return nil
 }
 
+type awsRestjson1_serializeOpCompleteResourceTokenAuth struct {
+}
+
+func (*awsRestjson1_serializeOpCompleteResourceTokenAuth) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCompleteResourceTokenAuth) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CompleteResourceTokenAuthInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/identities/CompleteResourceTokenAuth")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCompleteResourceTokenAuthInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCompleteResourceTokenAuthInput(v *CompleteResourceTokenAuthInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCompleteResourceTokenAuthInput(v *CompleteResourceTokenAuthInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SessionUri != nil {
+		ok := object.Key("sessionUri")
+		ok.String(*v.SessionUri)
+	}
+
+	if v.UserIdentifier != nil {
+		ok := object.Key("userIdentifier")
+		if err := awsRestjson1_serializeDocumentUserIdentifier(v.UserIdentifier, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateEvent struct {
 }
 
@@ -1193,6 +1281,11 @@ func awsRestjson1_serializeOpDocumentGetResourceOauth2TokenInput(v *GetResourceO
 		}
 	}
 
+	if v.CustomState != nil {
+		ok := object.Key("customState")
+		ok.String(*v.CustomState)
+	}
+
 	if v.ForceAuthentication != nil {
 		ok := object.Key("forceAuthentication")
 		ok.Boolean(*v.ForceAuthentication)
@@ -1218,6 +1311,11 @@ func awsRestjson1_serializeOpDocumentGetResourceOauth2TokenInput(v *GetResourceO
 		if err := awsRestjson1_serializeDocumentScopesListType(v.Scopes, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SessionUri != nil {
+		ok := object.Key("sessionUri")
+		ok.String(*v.SessionUri)
 	}
 
 	if v.WorkloadIdentityToken != nil {
@@ -1555,6 +1653,10 @@ func awsRestjson1_serializeOpHttpBindingsInvokeAgentRuntimeInput(v *InvokeAgentR
 	if v.Accept != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
+	}
+
+	if v.AccountId != nil {
+		encoder.SetQuery("accountId").String(*v.AccountId)
 	}
 
 	if v.AgentRuntimeArn == nil || len(*v.AgentRuntimeArn) == 0 {
@@ -3730,6 +3832,26 @@ func awsRestjson1_serializeDocumentToolArguments(v *types.ToolArguments, value s
 		ok.String(*v.TaskId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUserIdentifier(v types.UserIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.UserIdentifierMemberUserId:
+		av := object.Key("userId")
+		av.String(uv.Value)
+
+	case *types.UserIdentifierMemberUserToken:
+		av := object.Key("userToken")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
