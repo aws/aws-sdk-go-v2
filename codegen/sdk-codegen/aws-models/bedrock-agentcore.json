@@ -77,6 +77,9 @@
             "version": "2024-02-28",
             "operations": [
                 {
+                    "target": "com.amazonaws.bedrockagentcore#CompleteResourceTokenAuth"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#GetResourceApiKey"
                 },
                 {
@@ -756,6 +759,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65536
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AuthorizationUrlType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
                 },
                 "smithy.api#sensitive": {}
             }
@@ -1444,6 +1456,72 @@
             "traits": {
                 "smithy.api#documentation": "<p>Contains output from a code interpreter stream.</p>",
                 "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CompleteResourceTokenAuth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#CompleteResourceTokenAuthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#CompleteResourceTokenAuthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Confirms the user authentication session for obtaining OAuth2.0 tokens for a resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/identities/CompleteResourceTokenAuth",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CompleteResourceTokenAuthRequest": {
+            "type": "structure",
+            "members": {
+                "userIdentifier": {
+                    "target": "com.amazonaws.bedrockagentcore#UserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2.0 token or user ID that was used to generate the workload access token used for initiating the user authorization flow to retrieve OAuth2.0 tokens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionUri": {
+                    "target": "com.amazonaws.bedrockagentcore#RequestUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the user's authentication session for retrieving OAuth2 tokens. This ID tracks the authorization flow state across multiple requests and responses during the OAuth2 authentication process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CompleteResourceTokenAuthResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcore#ConflictException": {
@@ -2721,6 +2799,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "sessionUri": {
+                    "target": "com.amazonaws.bedrockagentcore#RequestUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the user's authentication session for retrieving OAuth2 tokens. This ID tracks the authorization flow state across multiple requests and responses during the OAuth2 authentication process.</p>"
+                    }
+                },
                 "resourceOauth2ReturnUrl": {
                     "target": "com.amazonaws.bedrockagentcore#ResourceOauth2ReturnUrlType",
                     "traits": {
@@ -2738,6 +2822,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of custom parameters to include in the authorization request to the resource credential provider. These parameters are in addition to the standard OAuth 2.0 flow parameters, and will not override them.</p>"
                     }
+                },
+                "customState": {
+                    "target": "com.amazonaws.bedrockagentcore#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An opaque string that will be sent back to the callback URL provided in resourceOauth2ReturnUrl. This state should be used to protect the callback URL of your application against CSRF attacks by ensuring the response corresponds to the original request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2748,7 +2838,7 @@
             "type": "structure",
             "members": {
                 "authorizationUrl": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.bedrockagentcore#AuthorizationUrlType",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to initiate the authorization process, provided when the access token requires user authorization.</p>"
                     }
@@ -2757,6 +2847,18 @@
                     "target": "com.amazonaws.bedrockagentcore#AccessTokenType",
                     "traits": {
                         "smithy.api#documentation": "<p>The OAuth 2.0 access token to use.</p>"
+                    }
+                },
+                "sessionUri": {
+                    "target": "com.amazonaws.bedrockagentcore#RequestUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the user's authorization session for retrieving OAuth2 tokens. This matches the sessionId from the request and can be used to track the session state.</p>"
+                    }
+                },
+                "sessionStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status indicating whether the user's authorization session is in progress or has failed. This helps determine the next steps in the OAuth2 authentication flow.</p>"
                     }
                 }
             },
@@ -3187,6 +3289,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The qualifier to use for the agent runtime. This can be a version number or an endpoint name that points to a specific version. If not specified, Amazon Bedrock uses the default version of the agent runtime.</p>",
                         "smithy.api#httpQuery": "qualifier"
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account for the agent runtime resource.</p>",
+                        "smithy.api#httpQuery": "accountId",
+                        "smithy.api#pattern": "^[0-9]{12}$"
                     }
                 },
                 "payload": {
@@ -4650,6 +4760,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
         },
+        "com.amazonaws.bedrockagentcore#RequestUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^urn:ietf:params:oauth:request_uri:[a-zA-Z0-9-._~]+$"
+            }
+        },
         "com.amazonaws.bedrockagentcore#ResourceContent": {
             "type": "structure",
             "members": {
@@ -4997,6 +5117,23 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
             }
         },
+        "com.amazonaws.bedrockagentcore#SessionStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#SessionSummary": {
             "type": "structure",
             "members": {
@@ -5307,6 +5444,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#State": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentcore#StopBrowserSession": {
@@ -6054,6 +6201,26 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#UserIdentifier": {
+            "type": "union",
+            "members": {
+                "userToken": {
+                    "target": "com.amazonaws.bedrockagentcore#UserTokenType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2.0 token issued by the user’s identity provider</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.bedrockagentcore#UserIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user for whom you have retrieved a workload access token for</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The OAuth2.0 token or user ID that was used to generate the workload access token used for initiating the user authorization flow to retrieve OAuth2.0 tokens.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#UserTokenType": {
