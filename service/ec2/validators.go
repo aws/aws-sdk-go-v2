@@ -1090,6 +1090,26 @@ func (m *validateOpCopySnapshot) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCopyVolumes struct {
+}
+
+func (*validateOpCopyVolumes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCopyVolumes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CopyVolumesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCopyVolumesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCapacityReservationBySplitting struct {
 }
 
@@ -9926,6 +9946,10 @@ func addOpCopySnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopySnapshot{}, middleware.After)
 }
 
+func addOpCopyVolumesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCopyVolumes{}, middleware.After)
+}
+
 func addOpCreateCapacityReservationBySplittingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCapacityReservationBySplitting{}, middleware.After)
 }
@@ -13469,6 +13493,21 @@ func validateOpCopySnapshotInput(v *CopySnapshotInput) error {
 	}
 	if v.SourceSnapshotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceSnapshotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCopyVolumesInput(v *CopyVolumesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopyVolumesInput"}
+	if v.SourceVolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceVolumeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

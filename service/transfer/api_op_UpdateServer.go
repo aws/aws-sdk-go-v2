@@ -197,6 +197,10 @@ type UpdateServerInput struct {
 
 	// The protocol settings that are configured for your server.
 	//
+	// Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of
+	// Transfer Family servers, as this increases costs and can cause performance
+	// issues, including reduced connection limits for FTPS. For more details, see [Avoid placing NLBs and NATs in front of Transfer Family].
+	//
 	//   - To indicate passive mode (for FTP and FTPS protocols), use the PassiveIp
 	//   parameter. Enter a single dotted-quad IPv4 address, such as the external IP
 	//   address of a firewall, router, or load balancer.
@@ -216,6 +220,8 @@ type UpdateServerInput struct {
 	//
 	//   - As2Transports indicates the transport method for the AS2 messages.
 	//   Currently, only HTTP is supported.
+	//
+	// [Avoid placing NLBs and NATs in front of Transfer Family]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
 	ProtocolDetails *types.ProtocolDetails
 
 	// Specifies the file transfer protocol or protocols over which your file transfer

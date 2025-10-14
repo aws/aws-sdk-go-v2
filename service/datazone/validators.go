@@ -4200,6 +4200,36 @@ func validateAggregationListItem(v *types.AggregationListItem) error {
 	}
 }
 
+func validateAmazonQPropertiesInput(v *types.AmazonQPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonQPropertiesInput"}
+	if v.IsEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAmazonQPropertiesPatch(v *types.AmazonQPropertiesPatch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonQPropertiesPatch"}
+	if v.IsEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetFilterConfiguration(v types.AssetFilterConfiguration) error {
 	if v == nil {
 		return nil
@@ -4290,6 +4320,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectionPropertiesInput"}
 	switch uv := v.(type) {
+	case *types.ConnectionPropertiesInputMemberAmazonQProperties:
+		if err := validateAmazonQPropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[amazonQProperties]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConnectionPropertiesInputMemberHyperPodProperties:
 		if err := validateHyperPodPropertiesInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[hyperPodProperties]", err.(smithy.InvalidParamsError))
@@ -4319,6 +4354,11 @@ func validateConnectionPropertiesPatch(v types.ConnectionPropertiesPatch) error 
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectionPropertiesPatch"}
 	switch uv := v.(type) {
+	case *types.ConnectionPropertiesPatchMemberAmazonQProperties:
+		if err := validateAmazonQPropertiesPatch(&uv.Value); err != nil {
+			invalidParams.AddNested("[amazonQProperties]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConnectionPropertiesPatchMemberRedshiftProperties:
 		if err := validateRedshiftPropertiesPatch(&uv.Value); err != nil {
 			invalidParams.AddNested("[redshiftProperties]", err.(smithy.InvalidParamsError))
@@ -6305,9 +6345,6 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
-	if v.EnvironmentIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -8144,9 +8181,6 @@ func validateOpListConnectionsInput(v *ListConnectionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListConnectionsInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
-	}
-	if v.ProjectIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

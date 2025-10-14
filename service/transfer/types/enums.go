@@ -118,6 +118,46 @@ func (CompressionEnum) Values() []CompressionEnum {
 	}
 }
 
+type ConnectorEgressType string
+
+// Enum values for ConnectorEgressType
+const (
+	ConnectorEgressTypeServiceManaged ConnectorEgressType = "SERVICE_MANAGED"
+	ConnectorEgressTypeVpcLattice     ConnectorEgressType = "VPC_LATTICE"
+)
+
+// Values returns all known values for ConnectorEgressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorEgressType) Values() []ConnectorEgressType {
+	return []ConnectorEgressType{
+		"SERVICE_MANAGED",
+		"VPC_LATTICE",
+	}
+}
+
+type ConnectorStatus string
+
+// Enum values for ConnectorStatus
+const (
+	ConnectorStatusActive  ConnectorStatus = "ACTIVE"
+	ConnectorStatusErrored ConnectorStatus = "ERRORED"
+	ConnectorStatusPending ConnectorStatus = "PENDING"
+)
+
+// Values returns all known values for ConnectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorStatus) Values() []ConnectorStatus {
+	return []ConnectorStatus{
+		"ACTIVE",
+		"ERRORED",
+		"PENDING",
+	}
+}
+
 type CustomStepStatus string
 
 // Enum values for CustomStepStatus

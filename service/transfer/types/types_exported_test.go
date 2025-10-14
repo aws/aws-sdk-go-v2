@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
 
+func ExampleConnectorEgressConfig_outputUsage() {
+	var union types.ConnectorEgressConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConnectorEgressConfigMemberVpcLattice:
+		_ = v.Value // Value is types.ConnectorVpcLatticeEgressConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConnectorVpcLatticeEgressConfig
+
+func ExampleDescribedConnectorEgressConfig_outputUsage() {
+	var union types.DescribedConnectorEgressConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DescribedConnectorEgressConfigMemberVpcLattice:
+		_ = v.Value // Value is types.DescribedConnectorVpcLatticeEgressConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DescribedConnectorVpcLatticeEgressConfig
+
 func ExampleDescribedWebAppIdentityProviderDetails_outputUsage() {
 	var union types.DescribedWebAppIdentityProviderDetails
 	// type switches can be used to check the union value
@@ -24,6 +60,24 @@ func ExampleDescribedWebAppIdentityProviderDetails_outputUsage() {
 }
 
 var _ *types.DescribedIdentityCenterConfig
+
+func ExampleUpdateConnectorEgressConfig_outputUsage() {
+	var union types.UpdateConnectorEgressConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateConnectorEgressConfigMemberVpcLattice:
+		_ = v.Value // Value is types.UpdateConnectorVpcLatticeEgressConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateConnectorVpcLatticeEgressConfig
 
 func ExampleUpdateWebAppIdentityProviderDetails_outputUsage() {
 	var union types.UpdateWebAppIdentityProviderDetails

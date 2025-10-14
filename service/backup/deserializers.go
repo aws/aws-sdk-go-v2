@@ -3732,6 +3732,15 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupJobOutput(v **DescribeBacku
 				}
 			}
 
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "ExpectedCompletionDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3771,6 +3780,15 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupJobOutput(v **DescribeBacku
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "IsEncrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean2 to be of type *bool, got %T instead", value)
+				}
+				sv.IsEncrypted = jtv
 			}
 
 		case "IsParent":
@@ -3829,6 +3847,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupJobOutput(v **DescribeBacku
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.RecoveryPointArn = ptr.String(jtv)
+			}
+
+		case "RecoveryPointLifecycle":
+			if err := awsRestjson1_deserializeDocumentLifecycle(&sv.RecoveryPointLifecycle, value); err != nil {
+				return err
 			}
 
 		case "ResourceArn":
@@ -3890,6 +3913,24 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupJobOutput(v **DescribeBacku
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "VaultLockState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.VaultLockState = ptr.String(jtv)
+			}
+
+		case "VaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.VaultType = ptr.String(jtv)
 			}
 
 		default:
@@ -6115,6 +6156,15 @@ func awsRestjson1_deserializeOpDocumentDescribeRestoreJobOutput(v **DescribeRest
 				sv.BackupSizeInBytes = ptr.Int64(i64)
 			}
 
+		case "BackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultArn = ptr.String(jtv)
+			}
+
 		case "CompletionDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6251,6 +6301,15 @@ func awsRestjson1_deserializeOpDocumentDescribeRestoreJobOutput(v **DescribeRest
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.RestoreJobId = ptr.String(jtv)
+			}
+
+		case "SourceResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.SourceResourceArn = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -17657,6 +17716,15 @@ func awsRestjson1_deserializeDocumentBackupJob(v **types.BackupJob, value interf
 				}
 			}
 
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "ExpectedCompletionDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17696,6 +17764,15 @@ func awsRestjson1_deserializeDocumentBackupJob(v **types.BackupJob, value interf
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "IsEncrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean2 to be of type *bool, got %T instead", value)
+				}
+				sv.IsEncrypted = jtv
 			}
 
 		case "IsParent":
@@ -17741,6 +17818,11 @@ func awsRestjson1_deserializeDocumentBackupJob(v **types.BackupJob, value interf
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.RecoveryPointArn = ptr.String(jtv)
+			}
+
+		case "RecoveryPointLifecycle":
+			if err := awsRestjson1_deserializeDocumentLifecycle(&sv.RecoveryPointLifecycle, value); err != nil {
+				return err
 			}
 
 		case "ResourceArn":
@@ -17802,6 +17884,24 @@ func awsRestjson1_deserializeDocumentBackupJob(v **types.BackupJob, value interf
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "VaultLockState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.VaultLockState = ptr.String(jtv)
+			}
+
+		case "VaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.VaultType = ptr.String(jtv)
 			}
 
 		default:
@@ -19682,6 +19782,15 @@ func awsRestjson1_deserializeDocumentCopyJob(v **types.CopyJob, value interface{
 				sv.DestinationBackupVaultArn = ptr.String(jtv)
 			}
 
+		case "DestinationEncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.DestinationEncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "DestinationRecoveryPointArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19689,6 +19798,29 @@ func awsRestjson1_deserializeDocumentCopyJob(v **types.CopyJob, value interface{
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.DestinationRecoveryPointArn = ptr.String(jtv)
+			}
+
+		case "DestinationRecoveryPointLifecycle":
+			if err := awsRestjson1_deserializeDocumentLifecycle(&sv.DestinationRecoveryPointLifecycle, value); err != nil {
+				return err
+			}
+
+		case "DestinationVaultLockState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.DestinationVaultLockState = ptr.String(jtv)
+			}
+
+		case "DestinationVaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.DestinationVaultType = ptr.String(jtv)
 			}
 
 		case "IamRoleArn":
@@ -22282,6 +22414,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointCreator(v **types.RecoveryPoin
 				sv.BackupPlanId = ptr.String(jtv)
 			}
 
+		case "BackupPlanName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanName = ptr.String(jtv)
+			}
+
 		case "BackupPlanVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22291,6 +22432,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointCreator(v **types.RecoveryPoin
 				sv.BackupPlanVersion = ptr.String(jtv)
 			}
 
+		case "BackupRuleCron":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.BackupRuleCron = ptr.String(jtv)
+			}
+
 		case "BackupRuleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22298,6 +22448,24 @@ func awsRestjson1_deserializeDocumentRecoveryPointCreator(v **types.RecoveryPoin
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.BackupRuleId = ptr.String(jtv)
+			}
+
+		case "BackupRuleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.BackupRuleName = ptr.String(jtv)
+			}
+
+		case "BackupRuleTimezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.BackupRuleTimezone = ptr.String(jtv)
 			}
 
 		default:
@@ -23455,6 +23623,15 @@ func awsRestjson1_deserializeDocumentRestoreJobsListMember(v **types.RestoreJobs
 				sv.BackupSizeInBytes = ptr.Int64(i64)
 			}
 
+		case "BackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultArn = ptr.String(jtv)
+			}
+
 		case "CompletionDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -23591,6 +23768,15 @@ func awsRestjson1_deserializeDocumentRestoreJobsListMember(v **types.RestoreJobs
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.RestoreJobId = ptr.String(jtv)
+			}
+
+		case "SourceResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.SourceResourceArn = ptr.String(jtv)
 			}
 
 		case "Status":

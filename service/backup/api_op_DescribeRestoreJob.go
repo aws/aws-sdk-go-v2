@@ -46,6 +46,10 @@ type DescribeRestoreJobOutput struct {
 	// The size, in bytes, of the restored resource.
 	BackupSizeInBytes *int64
 
+	// The Amazon Resource Name (ARN) of the backup vault containing the recovery
+	// point being restored. This helps identify vault access policies and permissions.
+	BackupVaultArn *string
+
 	// The date and time that a job to restore a recovery point is completed, in Unix
 	// format and Coordinated Universal Time (UTC). The value of CompletionDate is
 	// accurate to milliseconds. For example, the value 1516925490.087 represents
@@ -98,6 +102,10 @@ type DescribeRestoreJobOutput struct {
 
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string
+
+	// The Amazon Resource Name (ARN) of the original resource that was backed up.
+	// This provides context about what resource is being restored.
+	SourceResourceArn *string
 
 	// Status code specifying the state of the job that is initiated by Backup to
 	// restore a recovery point.

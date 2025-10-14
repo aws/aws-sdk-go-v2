@@ -1183,6 +1183,10 @@ type Contact struct {
 	// generated and user-defined tags.
 	Tags map[string]string
 
+	// If this contact was created using a task template, this contains information
+	// about the task template.
+	TaskTemplateInfo *TaskTemplateInfoV2
+
 	// Total pause count for a contact.
 	TotalPauseCount *int32
 
@@ -6126,6 +6130,9 @@ type RoutingProfileManualAssignmentQueueConfigSummary struct {
 
 	// The channels this queue supports. Valid Values: CHAT | TASK | EMAIL
 	//
+	// VOICE is not supported. The information shown below is incorrect. We're working
+	// to correct it.
+	//
 	// This member is required.
 	Channel Channel
 
@@ -6603,6 +6610,10 @@ type SearchableSegmentAttributesCriteria struct {
 }
 
 // Time range that you additionally want to filter on.
+//
+// This is different from the [SearchContactsTimeRange] data type.
+//
+// [SearchContactsTimeRange]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchContactsTimeRange.html
 type SearchContactsAdditionalTimeRange struct {
 
 	// List of criteria of the time range to additionally filter on.
@@ -6651,8 +6662,8 @@ type SearchContactsTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// The timestamp condition indicating which timestamp should be used and how it
-// should be filtered.
+// The timestamp condition indicating which contact timestamp should be used and
+// how it should be filtered. It is not an actual timestamp value.
 type SearchContactsTimestampCondition struct {
 
 	// Condition of the timestamp on the contact.
@@ -7232,6 +7243,18 @@ type TaskTemplateField struct {
 type TaskTemplateFieldIdentifier struct {
 
 	// The name of the task template field.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the task template used to create this contact.
+type TaskTemplateInfoV2 struct {
+
+	// The Amazon Resource Name (ARN) of the task template used to create this contact.
+	Arn *string
+
+	// The name of the task template used to create this contact.
 	Name *string
 
 	noSmithyDocumentSerde

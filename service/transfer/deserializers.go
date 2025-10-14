@@ -9887,6 +9887,29 @@ func awsAwsjson11_deserializeDocumentDescribedConnector(v **types.DescribedConne
 				sv.ConnectorId = ptr.String(jtv)
 			}
 
+		case "EgressConfig":
+			if err := awsAwsjson11_deserializeDocumentDescribedConnectorEgressConfig(&sv.EgressConfig, value); err != nil {
+				return err
+			}
+
+		case "EgressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorEgressType to be of type string, got %T instead", value)
+				}
+				sv.EgressType = types.ConnectorEgressType(jtv)
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
 		case "LoggingRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9915,6 +9938,15 @@ func awsAwsjson11_deserializeDocumentDescribedConnector(v **types.DescribedConne
 				return err
 			}
 
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConnectorStatus(jtv)
+			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -9927,6 +9959,99 @@ func awsAwsjson11_deserializeDocumentDescribedConnector(v **types.DescribedConne
 					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDescribedConnectorEgressConfig(v *types.DescribedConnectorEgressConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DescribedConnectorEgressConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "VpcLattice":
+			var mv types.DescribedConnectorVpcLatticeEgressConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentDescribedConnectorVpcLatticeEgressConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DescribedConnectorEgressConfigMemberVpcLattice{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDescribedConnectorVpcLatticeEgressConfig(v **types.DescribedConnectorVpcLatticeEgressConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DescribedConnectorVpcLatticeEgressConfig
+	if *v == nil {
+		sv = &types.DescribedConnectorVpcLatticeEgressConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PortNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SftpPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PortNumber = ptr.Int32(int32(i64))
+			}
+
+		case "ResourceConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcLatticeResourceConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceConfigurationArn = ptr.String(jtv)
 			}
 
 		default:

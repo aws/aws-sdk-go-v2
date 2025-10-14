@@ -412,6 +412,8 @@ const (
 	ImageBuilderStateFailed               ImageBuilderState = "FAILED"
 	ImageBuilderStateUpdating             ImageBuilderState = "UPDATING"
 	ImageBuilderStatePendingQualification ImageBuilderState = "PENDING_QUALIFICATION"
+	ImageBuilderStatePendingSyncingApps   ImageBuilderState = "PENDING_SYNCING_APPS"
+	ImageBuilderStateSyncingApps          ImageBuilderState = "SYNCING_APPS"
 )
 
 // Values returns all known values for ImageBuilderState. Note that this can be
@@ -431,6 +433,8 @@ func (ImageBuilderState) Values() []ImageBuilderState {
 		"FAILED",
 		"UPDATING",
 		"PENDING_QUALIFICATION",
+		"PENDING_SYNCING_APPS",
+		"SYNCING_APPS",
 	}
 }
 
@@ -684,6 +688,35 @@ func (SessionState) Values() []SessionState {
 		"ACTIVE",
 		"PENDING",
 		"EXPIRED",
+	}
+}
+
+type SoftwareDeploymentStatus string
+
+// Enum values for SoftwareDeploymentStatus
+const (
+	SoftwareDeploymentStatusStagedForInstallation   SoftwareDeploymentStatus = "STAGED_FOR_INSTALLATION"
+	SoftwareDeploymentStatusPendingInstallation     SoftwareDeploymentStatus = "PENDING_INSTALLATION"
+	SoftwareDeploymentStatusInstalled               SoftwareDeploymentStatus = "INSTALLED"
+	SoftwareDeploymentStatusStagedForUninstallation SoftwareDeploymentStatus = "STAGED_FOR_UNINSTALLATION"
+	SoftwareDeploymentStatusPendingUninstallation   SoftwareDeploymentStatus = "PENDING_UNINSTALLATION"
+	SoftwareDeploymentStatusFailedToInstall         SoftwareDeploymentStatus = "FAILED_TO_INSTALL"
+	SoftwareDeploymentStatusFailedToUninstall       SoftwareDeploymentStatus = "FAILED_TO_UNINSTALL"
+)
+
+// Values returns all known values for SoftwareDeploymentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SoftwareDeploymentStatus) Values() []SoftwareDeploymentStatus {
+	return []SoftwareDeploymentStatus{
+		"STAGED_FOR_INSTALLATION",
+		"PENDING_INSTALLATION",
+		"INSTALLED",
+		"STAGED_FOR_UNINSTALLATION",
+		"PENDING_UNINSTALLATION",
+		"FAILED_TO_INSTALL",
+		"FAILED_TO_UNINSTALL",
 	}
 }
 

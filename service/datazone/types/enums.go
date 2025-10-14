@@ -121,6 +121,25 @@ func (ConfigurableActionTypeAuthorization) Values() []ConfigurableActionTypeAuth
 	}
 }
 
+type ConnectionScope string
+
+// Enum values for ConnectionScope
+const (
+	ConnectionScopeDomain  ConnectionScope = "DOMAIN"
+	ConnectionScopeProject ConnectionScope = "PROJECT"
+)
+
+// Values returns all known values for ConnectionScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionScope) Values() []ConnectionScope {
+	return []ConnectionScope{
+		"DOMAIN",
+		"PROJECT",
+	}
+}
+
 type ConnectionStatus string
 
 // Enum values for ConnectionStatus
@@ -176,6 +195,7 @@ const (
 	ConnectionTypeTeradata      ConnectionType = "TERADATA"
 	ConnectionTypeVertica       ConnectionType = "VERTICA"
 	ConnectionTypeWorkflowsMwaa ConnectionType = "WORKFLOWS_MWAA"
+	ConnectionTypeAmazonQ       ConnectionType = "AMAZON_Q"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -204,6 +224,7 @@ func (ConnectionType) Values() []ConnectionType {
 		"TERADATA",
 		"VERTICA",
 		"WORKFLOWS_MWAA",
+		"AMAZON_Q",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "39c612c8-537c-4090-9dc8-5638084c18fa",
+    "type": "feature",
+    "description": "SDK release for TaskTemplateInfo in Contact for DescribeContact response.",
+    "modules": [
+        "service/connect"
+    ]
+}

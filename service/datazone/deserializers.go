@@ -3094,6 +3094,15 @@ func awsRestjson1_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				return err
 			}
 
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionScope to be of type string, got %T instead", value)
+				}
+				sv.Scope = types.ConnectionScope(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13620,6 +13629,15 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 		case "props":
 			if err := awsRestjson1_deserializeDocumentConnectionPropertiesOutput(&sv.Props, value); err != nil {
 				return err
+			}
+
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionScope to be of type string, got %T instead", value)
+				}
+				sv.Scope = types.ConnectionScope(jtv)
 			}
 
 		case "type":
@@ -31317,6 +31335,15 @@ func awsRestjson1_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				return err
 			}
 
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionScope to be of type string, got %T instead", value)
+				}
+				sv.Scope = types.ConnectionScope(jtv)
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -36807,6 +36834,64 @@ func awsRestjson1_deserializeDocumentAllUsersGrantFilter(v **types.AllUsersGrant
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAmazonQPropertiesOutput(v **types.AmazonQPropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonQPropertiesOutput
+	if *v == nil {
+		sv = &types.AmazonQPropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AuthMode = ptr.String(jtv)
+			}
+
+		case "isEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsEnabled = ptr.Bool(jtv)
+			}
+
+		case "profileArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProfileArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentApplicableAssetTypes(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38962,6 +39047,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "amazonQProperties":
+			var mv types.AmazonQPropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAmazonQPropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberAmazonQProperties{Value: mv}
+			break loop
+
 		case "athenaProperties":
 			var mv types.AthenaPropertiesOutput
 			destAddr := &mv
@@ -39170,6 +39265,15 @@ func awsRestjson1_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 		case "props":
 			if err := awsRestjson1_deserializeDocumentConnectionPropertiesOutput(&sv.Props, value); err != nil {
 				return err
+			}
+
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionScope to be of type string, got %T instead", value)
+				}
+				sv.Scope = types.ConnectionScope(jtv)
 			}
 
 		case "type":
@@ -49000,6 +49104,15 @@ func awsRestjson1_deserializeDocumentPhysicalEndpoint(v **types.PhysicalEndpoint
 		case "awsLocation":
 			if err := awsRestjson1_deserializeDocumentAwsLocation(&sv.AwsLocation, value); err != nil {
 				return err
+			}
+
+		case "enableTrustedIdentityPropagation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableTrustedIdentityPropagation = ptr.Bool(jtv)
 			}
 
 		case "glueConnection":

@@ -71,6 +71,7 @@
         "api_op_CopyImage.go",
         "api_op_CopySnapshot.go",
         "api_op_CopySnapshot_test.go",
+        "api_op_CopyVolumes.go",
         "api_op_CreateCapacityReservation.go",
         "api_op_CreateCapacityReservationBySplitting.go",
         "api_op_CreateCapacityReservationFleet.go",

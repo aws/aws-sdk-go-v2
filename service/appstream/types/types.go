@@ -26,6 +26,47 @@ type AccessEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// The collection of license usage records.
+type AdminAppLicenseUsageRecord struct {
+
+	// The billing period for the license usage record.
+	//
+	// This member is required.
+	BillingPeriod *string
+
+	// The type of license (for example, Microsoft Office).
+	//
+	// This member is required.
+	LicenseType *string
+
+	// The account ID of the owner of the license.
+	//
+	// This member is required.
+	OwnerAWSAccountId *string
+
+	// The date and time when the license was first used.
+	//
+	// This member is required.
+	SubscriptionFirstUsedDate *time.Time
+
+	// The date and time when the license was last used.
+	//
+	// This member is required.
+	SubscriptionLastUsedDate *time.Time
+
+	// The ARN of the user who used the license-included application.
+	//
+	// This member is required.
+	UserArn *string
+
+	// The ID of the user who used the license-included application.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an app block.
 //
 // App blocks are an Amazon AppStream 2.0 resource that stores the details about
@@ -840,6 +881,9 @@ type Image struct {
 	// not.
 	LatestAppstreamAgentVersion LatestAppstreamAgentVersion
 
+	// Indicates whether the image includes license-included applications.
+	ManagedSoftwareIncluded *bool
+
 	// The operating system platform of the image.
 	Platform PlatformType
 
@@ -1291,6 +1335,71 @@ type SharedImagePermissions struct {
 	//
 	// This member is required.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// The association between a license-included application and a resource.
+type SoftwareAssociations struct {
+
+	// The error details for failed deployments of the license-included application.
+	DeploymentError []ErrorDetails
+
+	// The name of the license-included application.
+	//
+	// Possible values include the following:
+	//
+	//   - Microsoft_Office_2021_LTSC_Professional_Plus_32Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Professional_Plus_64Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Professional_Plus_32Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Professional_Plus_64Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Professional_32Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Professional_64Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Professional_32Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Professional_64Bit
+	//
+	//   - Microsoft_Project_2021_Professional_32Bit
+	//
+	//   - Microsoft_Project_2021_Professional_64Bit
+	//
+	//   - Microsoft_Project_2024_Professional_32Bit
+	//
+	//   - Microsoft_Project_2024_Professional_64Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Project_2021_Standard_32Bit
+	//
+	//   - Microsoft_Project_2021_Standard_64Bit
+	//
+	//   - Microsoft_Project_2024_Standard_32Bit
+	//
+	//   - Microsoft_Project_2024_Standard_64Bit
+	SoftwareName *string
+
+	// The deployment status of the license-included application.
+	Status SoftwareDeploymentStatus
 
 	noSmithyDocumentSerde
 }

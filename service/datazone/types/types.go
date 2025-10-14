@@ -216,6 +216,57 @@ type AllUsersGrantFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Q properties of the connection.
+type AmazonQPropertiesInput struct {
+
+	// Specifies whether Amazon Q is enabled for the connection.
+	//
+	// This member is required.
+	IsEnabled *bool
+
+	// The authentication mode of the connection's Amazon Q properties.
+	AuthMode *string
+
+	// The profile ARN of the connection's Amazon Q properties.
+	ProfileArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Q properties of the connection.
+type AmazonQPropertiesOutput struct {
+
+	// Specifies whether Amazon Q is enabled for the connection.
+	//
+	// This member is required.
+	IsEnabled *bool
+
+	// The authentication mode of the connection's Amazon Q properties.
+	AuthMode *string
+
+	// The profile ARN of the connection's Amazon Q properties.
+	ProfileArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Q properties of the connection.
+type AmazonQPropertiesPatch struct {
+
+	// Specifies whether Amazon Q is enabled for the connection.
+	//
+	// This member is required.
+	IsEnabled *bool
+
+	// The authentication mode of the connection's Amazon Q properties.
+	AuthMode *string
+
+	// The profile ARN of the connection's Amazon Q properties.
+	ProfileArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details of the asset filter.
 //
 // The following types satisfy this interface:
@@ -875,6 +926,7 @@ type ConnectionCredentials struct {
 //
 // The following types satisfy this interface:
 //
+//	ConnectionPropertiesInputMemberAmazonQProperties
 //	ConnectionPropertiesInputMemberAthenaProperties
 //	ConnectionPropertiesInputMemberGlueProperties
 //	ConnectionPropertiesInputMemberHyperPodProperties
@@ -886,6 +938,15 @@ type ConnectionCredentials struct {
 type ConnectionPropertiesInput interface {
 	isConnectionPropertiesInput()
 }
+
+// The Amazon Q properties of the connection.
+type ConnectionPropertiesInputMemberAmazonQProperties struct {
+	Value AmazonQPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberAmazonQProperties) isConnectionPropertiesInput() {}
 
 // The Amazon Athena properties of a connection.
 type ConnectionPropertiesInputMemberAthenaProperties struct {
@@ -963,6 +1024,7 @@ func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertie
 //
 // The following types satisfy this interface:
 //
+//	ConnectionPropertiesOutputMemberAmazonQProperties
 //	ConnectionPropertiesOutputMemberAthenaProperties
 //	ConnectionPropertiesOutputMemberGlueProperties
 //	ConnectionPropertiesOutputMemberHyperPodProperties
@@ -974,6 +1036,15 @@ func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertie
 type ConnectionPropertiesOutput interface {
 	isConnectionPropertiesOutput()
 }
+
+// The Amazon Q properties of the connection.
+type ConnectionPropertiesOutputMemberAmazonQProperties struct {
+	Value AmazonQPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberAmazonQProperties) isConnectionPropertiesOutput() {}
 
 // The Amazon Athena properties of a connection.
 type ConnectionPropertiesOutputMemberAthenaProperties struct {
@@ -1051,6 +1122,7 @@ func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionProperti
 //
 // The following types satisfy this interface:
 //
+//	ConnectionPropertiesPatchMemberAmazonQProperties
 //	ConnectionPropertiesPatchMemberAthenaProperties
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
@@ -1060,6 +1132,15 @@ func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionProperti
 type ConnectionPropertiesPatch interface {
 	isConnectionPropertiesPatch()
 }
+
+// The Amazon Q properties of the connection.
+type ConnectionPropertiesPatchMemberAmazonQProperties struct {
+	Value AmazonQPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberAmazonQProperties) isConnectionPropertiesPatch() {}
 
 // The Amazon Athena properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberAthenaProperties struct {
@@ -1156,6 +1237,9 @@ type ConnectionSummary struct {
 
 	// The connection props.
 	Props ConnectionPropertiesOutput
+
+	// The scope of the connection.
+	Scope ConnectionScope
 
 	noSmithyDocumentSerde
 }
@@ -4134,6 +4218,9 @@ type PhysicalEndpoint struct {
 
 	// The location of a connection.
 	AwsLocation *AwsLocation
+
+	// Specified whether trusted identity propagation for the connection is enabled.
+	EnableTrustedIdentityPropagation *bool
 
 	// The Amazon Web Services Glue connection.
 	GlueConnection *GlueConnection

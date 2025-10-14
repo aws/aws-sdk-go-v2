@@ -36,11 +36,6 @@ type ListConnectionsInput struct {
 	// This member is required.
 	DomainIdentifier *string
 
-	// The ID of the project where you want to list connections.
-	//
-	// This member is required.
-	ProjectIdentifier *string
-
 	// The ID of the environment where you want to list connections.
 	EnvironmentIdentifier *string
 
@@ -59,6 +54,12 @@ type ListConnectionsInput struct {
 	// named NextToken. You can specify this NextToken value in a subsequent call to
 	// ListConnections to list the next set of connections.
 	NextToken *string
+
+	// The ID of the project where you want to list connections.
+	ProjectIdentifier *string
+
+	// The scope of the connection.
+	Scope types.ConnectionScope
 
 	// Specifies how you want to sort the listed connections.
 	SortBy types.SortFieldConnection

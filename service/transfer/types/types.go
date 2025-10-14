@@ -97,6 +97,28 @@ type As2ConnectorConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration structure that defines how traffic is routed from the connector
+// to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress
+// type for private connectivity through customer VPCs.
+//
+// The following types satisfy this interface:
+//
+//	ConnectorEgressConfigMemberVpcLattice
+type ConnectorEgressConfig interface {
+	isConnectorEgressConfig()
+}
+
+// VPC_LATTICE configuration for routing connector traffic through customer VPCs.
+// Enables private connectivity to SFTP servers without requiring public internet
+// access or complex network configurations.
+type ConnectorEgressConfigMemberVpcLattice struct {
+	Value ConnectorVpcLatticeEgressConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectorEgressConfigMemberVpcLattice) isConnectorEgressConfig() {}
+
 // A structure that contains the details for files transferred using an SFTP
 // connector, during a single transfer.
 type ConnectorFileTransferResult struct {
@@ -117,6 +139,26 @@ type ConnectorFileTransferResult struct {
 
 	// For transfers that fail, this parameter describes the reason for the failure.
 	FailureMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// VPC_LATTICE egress configuration that specifies the Resource Configuration ARN
+// and port for connecting to SFTP servers through customer VPCs. Requires a valid
+// Resource Configuration with appropriate network access.
+type ConnectorVpcLatticeEgressConfig struct {
+
+	// ARN of the VPC_LATTICE Resource Configuration that defines the target SFTP
+	// server location. Must point to a valid Resource Configuration in the customer's
+	// VPC with appropriate network connectivity to the SFTP server.
+	//
+	// This member is required.
+	ResourceConfigurationArn *string
+
+	// Port number for connecting to the SFTP server through VPC_LATTICE. Defaults to
+	// 22 if not specified. Must match the port on which the target SFTP server is
+	// listening.
+	PortNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -571,6 +613,20 @@ type DescribedConnector struct {
 	// This member is required.
 	Arn *string
 
+	// Type of egress configuration for the connector. SERVICE_MANAGED uses Transfer
+	// Family managed NAT gateways, while VPC_LATTICE routes traffic through customer
+	// VPCs using VPC Lattice.
+	//
+	// This member is required.
+	EgressType ConnectorEgressType
+
+	// Current status of the connector. PENDING indicates creation/update in progress,
+	// ACTIVE means ready for operations, and ERRORED indicates a failure requiring
+	// attention.
+	//
+	// This member is required.
+	Status ConnectorStatus
+
 	// Connectors are used to send files using either the AS2 or SFTP protocol. For
 	// the access role, provide the Amazon Resource Name (ARN) of the Identity and
 	// Access Management role to use.
@@ -608,6 +664,19 @@ type DescribedConnector struct {
 	// The unique identifier for the connector.
 	ConnectorId *string
 
+	// Current egress configuration of the connector, showing how traffic is routed to
+	// the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress
+	// type.
+	//
+	// When using the VPC_LATTICE egress type, Transfer Family uses a managed Service
+	// Network to simplify the resource sharing process.
+	EgressConfig DescribedConnectorEgressConfig
+
+	// Error message providing details when the connector is in ERRORED status.
+	// Contains information to help troubleshoot connector creation or operation
+	// failures.
+	ErrorMessage *string
+
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
 	// set, you can view connector activity in your CloudWatch logs.
@@ -627,7 +696,52 @@ type DescribedConnector struct {
 	Tags []Tag
 
 	// The URL of the partner's AS2 or SFTP endpoint.
+	//
+	// When creating AS2 connectors or service-managed SFTP connectors (connectors
+	// without egress configuration), you must provide a URL to specify the remote
+	// server endpoint. For VPC Lattice type connectors, the URL must be null.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Response structure containing the current egress configuration details for the
+// connector. Shows how traffic is currently routed from the connector to the SFTP
+// server.
+//
+// The following types satisfy this interface:
+//
+//	DescribedConnectorEgressConfigMemberVpcLattice
+type DescribedConnectorEgressConfig interface {
+	isDescribedConnectorEgressConfig()
+}
+
+// VPC_LATTICE configuration details in the response, showing the current Resource
+// Configuration ARN and port settings for VPC-based connectivity.
+type DescribedConnectorEgressConfigMemberVpcLattice struct {
+	Value DescribedConnectorVpcLatticeEgressConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DescribedConnectorEgressConfigMemberVpcLattice) isDescribedConnectorEgressConfig() {}
+
+// VPC_LATTICE egress configuration details in the response, containing the
+// Resource Configuration ARN and port number currently configured for the
+// connector.
+type DescribedConnectorVpcLatticeEgressConfig struct {
+
+	// ARN of the VPC_LATTICE Resource Configuration currently used by the connector.
+	// This Resource Configuration defines the network path to the SFTP server through
+	// the customer's VPC.
+	//
+	// This member is required.
+	ResourceConfigurationArn *string
+
+	// Port number currently configured for SFTP connections through VPC_LATTICE.
+	// Shows the port on which the connector attempts to connect to the target SFTP
+	// server.
+	PortNumber *int32
 
 	noSmithyDocumentSerde
 }
@@ -924,6 +1038,10 @@ type DescribedServer struct {
 
 	// The protocol settings that are configured for your server.
 	//
+	// Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of
+	// Transfer Family servers, as this increases costs and can cause performance
+	// issues, including reduced connection limits for FTPS. For more details, see [Avoid placing NLBs and NATs in front of Transfer Family].
+	//
 	//   - To indicate passive mode (for FTP and FTPS protocols), use the PassiveIp
 	//   parameter. Enter a single dotted-quad IPv4 address, such as the external IP
 	//   address of a firewall, router, or load balancer.
@@ -943,6 +1061,8 @@ type DescribedServer struct {
 	//
 	//   - As2Transports indicates the transport method for the AS2 messages.
 	//   Currently, only HTTP is supported.
+	//
+	// [Avoid placing NLBs and NATs in front of Transfer Family]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
 	ProtocolDetails *ProtocolDetails
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
@@ -1694,6 +1814,10 @@ type ListedConnector struct {
 	ConnectorId *string
 
 	// The URL of the partner's AS2 or SFTP endpoint.
+	//
+	// When creating AS2 connectors or service-managed SFTP connectors (connectors
+	// without egress configuration), you must provide a URL to specify the remote
+	// server endpoint. For VPC Lattice type connectors, the URL must be null.
 	Url *string
 
 	noSmithyDocumentSerde
@@ -2003,6 +2127,16 @@ type ProtocolDetails struct {
 	// Family server for the change to take effect. For details on using passive mode
 	// (PASV) in a NAT environment, see [Configuring your FTPS server behind a firewall or NAT with Transfer Family].
 	//
+	// Additionally, avoid placing Network Load Balancers (NLBs) or NAT gateways in
+	// front of Transfer Family servers. This configuration increases costs and can
+	// cause performance issues. When NLBs or NATs are in the communication path,
+	// Transfer Family cannot accurately recognize client IP addresses, which impacts
+	// connection sharding and limits FTPS servers to only 300 simultaneous connections
+	// instead of 10,000. If you must use an NLB, use port 21 for health checks and
+	// enable TLS session resumption by setting TlsSessionResumptionMode = ENFORCED .
+	// For optimal performance, migrate to VPC endpoints with Elastic IP addresses
+	// instead of using NLBs. For more details, see [Avoid placing NLBs and NATs in front of Transfer Family].
+	//
 	// Special values
 	//
 	// The AUTO and 0.0.0.0 are special values for the PassiveIp parameter. The value
@@ -2020,6 +2154,7 @@ type ProtocolDetails struct {
 	// response.
 	//
 	// [Configuring your FTPS server behind a firewall or NAT with Transfer Family]: http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/
+	// [Avoid placing NLBs and NATs in front of Transfer Family]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
 	PassiveIp *string
 
 	// Use the SetStatOption to ignore the error that is generated when the client
@@ -2190,6 +2325,11 @@ type SftpConnectorConfig struct {
 	// TestConnection to retrieve the server host key during the initial connection
 	// attempt, and subsequently update the connector with the observed host key.
 	//
+	// When creating connectors with egress config (VPC_LATTICE type connectors),
+	// since host name is not something we can verify, the only accepted trusted host
+	// key format is key-type key-body without the host name. For example: ssh-rsa
+	// AAAAB3Nza...<long-string-for-public-key>
+	//
 	// The three standard SSH public key format elements are <key type> , <body base64>
 	// , and an optional <comment> , with spaces between each element. Specify only the
 	// <key type> and <body base64> : do not enter the <comment> portion of the key.
@@ -2209,10 +2349,14 @@ type SftpConnectorConfig struct {
 	//
 	// This prints the public host key to standard output.
 	//
-	//     ftp.host.com ssh-rsa AAAAB3Nza...<long-string-for-public-key
+	//     ftp.host.com ssh-rsa AAAAB3Nza...<long-string-for-public-key>
 	//
 	// Copy and paste this string into the TrustedHostKeys field for the
 	// create-connector command or into the Trusted host keys field in the console.
+	//
+	// For VPC Lattice type connectors (VPC_LATTICE), remove the hostname from the key
+	// and use only the key-type key-body format. In this example, it should be:
+	// ssh-rsa AAAAB3Nza...<long-string-for-public-key>
 	TrustedHostKeys []string
 
 	// The identifier for the secret (in Amazon Web Services Secrets Manager) that
@@ -2309,6 +2453,45 @@ type TagStepDetails struct {
 
 	// Array that contains from 1 to 10 key/value pairs.
 	Tags []S3Tag
+
+	noSmithyDocumentSerde
+}
+
+// Structure for updating the egress configuration of an existing connector.
+// Allows modification of how traffic is routed from the connector to the SFTP
+// server, including VPC_LATTICE settings.
+//
+// The following types satisfy this interface:
+//
+//	UpdateConnectorEgressConfigMemberVpcLattice
+type UpdateConnectorEgressConfig interface {
+	isUpdateConnectorEgressConfig()
+}
+
+// VPC_LATTICE configuration updates for the connector. Use this to modify the
+// Resource Configuration ARN or port number for VPC-based connectivity.
+type UpdateConnectorEgressConfigMemberVpcLattice struct {
+	Value UpdateConnectorVpcLatticeEgressConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateConnectorEgressConfigMemberVpcLattice) isUpdateConnectorEgressConfig() {}
+
+// VPC_LATTICE egress configuration updates for modifying how the connector routes
+// traffic through customer VPCs. Changes to these settings may require connector
+// restart to take effect.
+type UpdateConnectorVpcLatticeEgressConfig struct {
+
+	// Updated port number for SFTP connections through VPC_LATTICE. Change this if
+	// the target SFTP server port has been modified or if connecting to a different
+	// server endpoint.
+	PortNumber *int32
+
+	// Updated ARN of the VPC_LATTICE Resource Configuration. Use this to change the
+	// target SFTP server location or modify the network path through the customer's
+	// VPC infrastructure.
+	ResourceConfigurationArn *string
 
 	noSmithyDocumentSerde
 }
@@ -2530,7 +2713,10 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isConnectorEgressConfig()                  {}
+func (*UnknownUnionMember) isDescribedConnectorEgressConfig()         {}
 func (*UnknownUnionMember) isDescribedWebAppIdentityProviderDetails() {}
+func (*UnknownUnionMember) isUpdateConnectorEgressConfig()            {}
 func (*UnknownUnionMember) isUpdateWebAppIdentityProviderDetails()    {}
 func (*UnknownUnionMember) isWebAppIdentityProviderDetails()          {}
 func (*UnknownUnionMember) isWebAppUnits()                            {}

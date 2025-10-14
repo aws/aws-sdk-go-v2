@@ -1590,6 +1590,11 @@ func awsRestjson1_serializeOpDocumentCreateConnectionInput(v *CreateConnectionIn
 		ok.String(*v.Description)
 	}
 
+	if v.EnableTrustedIdentityPropagation != nil {
+		ok := object.Key("enableTrustedIdentityPropagation")
+		ok.Boolean(*v.EnableTrustedIdentityPropagation)
+	}
+
 	if v.EnvironmentIdentifier != nil {
 		ok := object.Key("environmentIdentifier")
 		ok.String(*v.EnvironmentIdentifier)
@@ -1605,6 +1610,11 @@ func awsRestjson1_serializeOpDocumentCreateConnectionInput(v *CreateConnectionIn
 		if err := awsRestjson1_serializeDocumentConnectionPropertiesInput(v.Props, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Scope) > 0 {
+		ok := object.Key("scope")
+		ok.String(string(v.Scope))
 	}
 
 	return nil
@@ -9990,6 +10000,10 @@ func awsRestjson1_serializeOpHttpBindingsListConnectionsInput(v *ListConnections
 		encoder.SetQuery("projectIdentifier").String(*v.ProjectIdentifier)
 	}
 
+	if len(v.Scope) > 0 {
+		encoder.SetQuery("scope").String(string(v.Scope))
+	}
+
 	if len(v.SortBy) > 0 {
 		encoder.SetQuery("sortBy").String(string(v.SortBy))
 	}
@@ -17318,6 +17332,50 @@ func awsRestjson1_serializeDocumentAllUsersGrantFilter(v *types.AllUsersGrantFil
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAmazonQPropertiesInput(v *types.AmazonQPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthMode != nil {
+		ok := object.Key("authMode")
+		ok.String(*v.AuthMode)
+	}
+
+	if v.IsEnabled != nil {
+		ok := object.Key("isEnabled")
+		ok.Boolean(*v.IsEnabled)
+	}
+
+	if v.ProfileArn != nil {
+		ok := object.Key("profileArn")
+		ok.String(*v.ProfileArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAmazonQPropertiesPatch(v *types.AmazonQPropertiesPatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthMode != nil {
+		ok := object.Key("authMode")
+		ok.String(*v.AuthMode)
+	}
+
+	if v.IsEnabled != nil {
+		ok := object.Key("isEnabled")
+		ok.Boolean(*v.IsEnabled)
+	}
+
+	if v.ProfileArn != nil {
+		ok := object.Key("profileArn")
+		ok.String(*v.ProfileArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApplicableAssetTypes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -17679,6 +17737,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ConnectionPropertiesInputMemberAmazonQProperties:
+		av := object.Key("amazonQProperties")
+		if err := awsRestjson1_serializeDocumentAmazonQPropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesInputMemberAthenaProperties:
 		av := object.Key("athenaProperties")
 		if err := awsRestjson1_serializeDocumentAthenaPropertiesInput(&uv.Value, av); err != nil {
@@ -17739,6 +17803,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesPatch(v types.ConnectionP
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ConnectionPropertiesPatchMemberAmazonQProperties:
+		av := object.Key("amazonQProperties")
+		if err := awsRestjson1_serializeDocumentAmazonQPropertiesPatch(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesPatchMemberAthenaProperties:
 		av := object.Key("athenaProperties")
 		if err := awsRestjson1_serializeDocumentAthenaPropertiesPatch(&uv.Value, av); err != nil {

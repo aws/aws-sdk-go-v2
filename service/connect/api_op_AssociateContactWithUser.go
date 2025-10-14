@@ -16,23 +16,14 @@ import (
 //
 // Following are common uses cases for this API:
 //
-//   - Custom contact routing. You can build custom contact routing mechanisms
-//     beyond the default system routing in Amazon Connect. You can create tailored
-//     contact distribution logic that offers queued contacts directly to specific
-//     agents.
+//   - Programmatically assign queued contacts to available users.
 //
-//   - Manual contact assignment. You can programmatically assign queued contacts
-//     to available users. This provides flexibility to contact centers that require
-//     manual oversight or specialized routing workflows outside of standard queue
-//     management.
-//
-// For information about how manual contact assignment works in the agent
-//
-//	workspace, see the [Access the Worklist app in the Amazon Connect agent workspace]in the Amazon Connect Administrator Guide.
+//   - Leverage the IAM context key connect:PreferredUserArn to restrict contact
+//     association to specific preferred user.
 //
 // Important things to know
 //
-//   - Use this API chat/SMS, email, and task contacts. It does not support voice
+//   - Use this API with chat, email, and task contacts. It does not support voice
 //     contacts.
 //
 //   - Use it to associate contacts with users regardless of their current state,
@@ -47,11 +38,14 @@ import (
 //     that your IAM policies are properly configured to support your intended use
 //     cases.
 //
+//   - The service quota Queues per routing profile per instance applies to
+//     manually assigned queues, too. For more information about this quota, see [Amazon Connect quotas]in
+//     the Amazon Connect Administrator Guide.
+//
 // Endpoints: See [Amazon Connect endpoints and quotas].
 //
 // [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
-//
-// [Access the Worklist app in the Amazon Connect agent workspace]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+// [Amazon Connect quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
 func (c *Client) AssociateContactWithUser(ctx context.Context, params *AssociateContactWithUserInput, optFns ...func(*Options)) (*AssociateContactWithUserOutput, error) {
 	if params == nil {
 		params = &AssociateContactWithUserInput{}

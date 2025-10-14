@@ -95,6 +95,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	var union types.ConnectionPropertiesInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ConnectionPropertiesInputMemberAmazonQProperties:
+		_ = v.Value // Value is types.AmazonQPropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesInput
 
@@ -129,6 +132,7 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 }
 
 var _ *types.SparkEmrPropertiesInput
+var _ *types.AmazonQPropertiesInput
 var _ *types.GluePropertiesInput
 var _ *types.S3PropertiesInput
 var _ *types.AthenaPropertiesInput
@@ -141,6 +145,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	var union types.ConnectionPropertiesOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ConnectionPropertiesOutputMemberAmazonQProperties:
+		_ = v.Value // Value is types.AmazonQPropertiesOutput
+
 	case *types.ConnectionPropertiesOutputMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesOutput
 
@@ -179,6 +186,7 @@ var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
 var _ *types.IamPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
+var _ *types.AmazonQPropertiesOutput
 var _ *types.HyperPodPropertiesOutput
 var _ *types.GluePropertiesOutput
 var _ *types.SparkEmrPropertiesOutput
@@ -187,6 +195,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	var union types.ConnectionPropertiesPatch
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ConnectionPropertiesPatchMemberAmazonQProperties:
+		_ = v.Value // Value is types.AmazonQPropertiesPatch
+
 	case *types.ConnectionPropertiesPatchMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesPatch
 
@@ -214,6 +225,7 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	}
 }
 
+var _ *types.AmazonQPropertiesPatch
 var _ *types.SparkEmrPropertiesPatch
 var _ *types.IamPropertiesPatch
 var _ *types.RedshiftPropertiesPatch

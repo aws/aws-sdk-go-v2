@@ -70,6 +70,11 @@ type UpdateConnectorInput struct {
 	// A structure that contains the parameters for an AS2 connector object.
 	As2Config *types.As2ConnectorConfig
 
+	// Updates the egress configuration for the connector, allowing you to modify how
+	// traffic is routed from the connector to the SFTP server. Changes to VPC
+	// configuration may require connector restart.
+	EgressConfig types.UpdateConnectorEgressConfig
+
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
 	// set, you can view connector activity in your CloudWatch logs.
@@ -82,6 +87,10 @@ type UpdateConnectorInput struct {
 	SftpConfig *types.SftpConnectorConfig
 
 	// The URL of the partner's AS2 or SFTP endpoint.
+	//
+	// When creating AS2 connectors or service-managed SFTP connectors (connectors
+	// without egress configuration), you must provide a URL to specify the remote
+	// server endpoint. For VPC Lattice type connectors, the URL must be null.
 	Url *string
 
 	noSmithyDocumentSerde

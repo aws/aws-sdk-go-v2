@@ -3137,6 +3137,7 @@ type InitializationType string
 const (
 	InitializationTypeDefault         InitializationType = "default"
 	InitializationTypeProvisionedRate InitializationType = "provisioned-rate"
+	InitializationTypeVolumeCopy      InitializationType = "volume-copy"
 )
 
 // Values returns all known values for InitializationType. Note that this can be
@@ -3147,6 +3148,7 @@ func (InitializationType) Values() []InitializationType {
 	return []InitializationType{
 		"default",
 		"provisioned-rate",
+		"volume-copy",
 	}
 }
 

@@ -10,8 +10,8 @@ import (
 // The backup options for each resource type.
 type AdvancedBackupSetting struct {
 
-	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows VSS backup jobs.
+	// Specifies the backup option for a selected resource. This option is available
+	// for Windows VSS backup jobs and S3 backups.
 	//
 	// Valid values:
 	//
@@ -20,6 +20,10 @@ type AdvancedBackupSetting struct {
 	//
 	// Set to "WindowsVSS":"disabled" to create a regular backup. The WindowsVSS
 	// option is not enabled by default.
+	//
+	// For S3 backups, set to "S3BackupACLs":"disabled" to exclude ACLs from the
+	// backup, or "S3BackupObjectTags":"disabled" to exclude object tags from the
+	// backup. By default, both ACLs and object tags are included in S3 backups.
 	//
 	// If you specify an invalid option, you get an InvalidParameterValueException
 	// exception.
@@ -125,6 +129,11 @@ type BackupJob struct {
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the backup. This
+	// can be a customer-managed key or an Amazon Web Services managed key, depending
+	// on the vault configuration.
+	EncryptionKeyArn *string
+
 	// The date and time a job to back up resources is expected to be completed, in
 	// Unix format and Coordinated Universal Time (UTC). The value of
 	// ExpectedCompletionDate is accurate to milliseconds. For example, the value
@@ -139,6 +148,11 @@ type BackupJob struct {
 
 	// The date on which the backup job was initiated.
 	InitiationDate *time.Time
+
+	// A boolean value indicating whether the backup is encrypted. All backups in
+	// Backup are encrypted, but this field indicates the encryption status for
+	// transparency.
+	IsEncrypted bool
 
 	// This is a boolean value indicating this is a parent (composite) backup job.
 	IsParent bool
@@ -169,6 +183,25 @@ type BackupJob struct {
 	// .
 	RecoveryPointArn *string
 
+	// Specifies the time period, in days, before a recovery point transitions to cold
+	// storage or is deleted.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, on the console, the retention setting must be 90
+	// days greater than the transition to cold after days setting. The transition to
+	// cold after days setting can't be changed after a backup has been transitioned to
+	// cold.
+	//
+	// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+	// Backup ignores this expression for other resource types.
+	//
+	// To remove the existing lifecycle and retention periods and keep your recovery
+	// points indefinitely, specify -1 for MoveToColdStorageAfterDays and
+	// DeleteAfterDays .
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+	RecoveryPointLifecycle *Lifecycle
+
 	// An ARN that uniquely identifies a resource. The format of the ARN depends on
 	// the resource type.
 	ResourceArn *string
@@ -196,6 +229,16 @@ type BackupJob struct {
 
 	// A detailed message explaining the status of the job to back up a resource.
 	StatusMessage *string
+
+	// The lock state of the backup vault. For logically air-gapped vaults, this
+	// indicates whether the vault is locked in compliance mode. Valid values include
+	// LOCKED and UNLOCKED .
+	VaultLockState *string
+
+	// The type of backup vault where the recovery point is stored. Valid values are
+	// BACKUP_VAULT for standard backup vaults and LOGICALLY_AIR_GAPPED_BACKUP_VAULT
+	// for logically air-gapped vaults.
+	VaultType *string
 
 	noSmithyDocumentSerde
 }
@@ -958,10 +1001,44 @@ type CopyJob struct {
 	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	DestinationBackupVaultArn *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the copied backup
+	// in the destination vault. This can be a customer-managed key or an Amazon Web
+	// Services managed key.
+	DestinationEncryptionKeyArn *string
+
 	// An ARN that uniquely identifies a destination recovery point; for example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
 	// .
 	DestinationRecoveryPointArn *string
+
+	// Specifies the time period, in days, before a recovery point transitions to cold
+	// storage or is deleted.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, on the console, the retention setting must be 90
+	// days greater than the transition to cold after days setting. The transition to
+	// cold after days setting can't be changed after a backup has been transitioned to
+	// cold.
+	//
+	// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+	// Backup ignores this expression for other resource types.
+	//
+	// To remove the existing lifecycle and retention periods and keep your recovery
+	// points indefinitely, specify -1 for MoveToColdStorageAfterDays and
+	// DeleteAfterDays .
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+	DestinationRecoveryPointLifecycle *Lifecycle
+
+	// The lock state of the destination backup vault. For logically air-gapped
+	// vaults, this indicates whether the vault is locked in compliance mode. Valid
+	// values include LOCKED and UNLOCKED .
+	DestinationVaultLockState *string
+
+	// The type of destination backup vault where the copied recovery point is stored.
+	// Valid values are BACKUP_VAULT for standard backup vaults and
+	// LOGICALLY_AIR_GAPPED_BACKUP_VAULT for logically air-gapped vaults.
+	DestinationVaultType *string
 
 	// Specifies the IAM role ARN used to copy the target recovery point; for example,
 	// arn:aws:iam::123456789012:role/S3Access .
@@ -1633,13 +1710,30 @@ type RecoveryPointCreator struct {
 	// Uniquely identifies a backup plan.
 	BackupPlanId *string
 
+	// The name of the backup plan that created this recovery point. This provides
+	// human-readable context about which backup plan was responsible for the backup
+	// job.
+	BackupPlanName *string
+
 	// Version IDs are unique, randomly generated, Unicode, UTF-8 encoded strings that
 	// are at most 1,024 bytes long. They cannot be edited.
 	BackupPlanVersion *string
 
+	// The cron expression that defines the schedule for the backup rule. This shows
+	// the frequency and timing of when backups are automatically triggered.
+	BackupRuleCron *string
+
 	// Uniquely identifies a rule used to schedule the backup of a selection of
 	// resources.
 	BackupRuleId *string
+
+	// The name of the backup rule within the backup plan that created this recovery
+	// point. This helps identify which specific rule triggered the backup job.
+	BackupRuleName *string
+
+	// The timezone used for the backup rule schedule. This provides context for when
+	// backups are scheduled to run in the specified timezone.
+	BackupRuleTimezone *string
 
 	noSmithyDocumentSerde
 }
@@ -1904,6 +1998,10 @@ type RestoreJobsListMember struct {
 	// The size, in bytes, of the restored resource.
 	BackupSizeInBytes *int64
 
+	// The Amazon Resource Name (ARN) of the backup vault containing the recovery
+	// point being restored. This helps identify vault access policies and permissions.
+	BackupVaultArn *string
+
 	// The date and time a job to restore a recovery point is completed, in Unix
 	// format and Coordinated Universal Time (UTC). The value of CompletionDate is
 	// accurate to milliseconds. For example, the value 1516925490.087 represents
@@ -1958,6 +2056,10 @@ type RestoreJobsListMember struct {
 
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string
+
+	// The Amazon Resource Name (ARN) of the original resource that was backed up.
+	// This provides context about what resource is being restored.
+	SourceResourceArn *string
 
 	// A status code specifying the state of the job initiated by Backup to restore a
 	// recovery point.

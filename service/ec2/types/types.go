@@ -7694,6 +7694,8 @@ type InitializationStatusDetails struct {
 	//
 	//   - provisioned-rate - Volume initialized using an Amazon EBS Provisioned Rate
 	//   for Volume Initialization.
+	//
+	//   - volume-copy - Volume copy initialized at the rate for volume copies.
 	InitializationType InitializationType
 
 	// The current volume initialization progress as a percentage (0-100). Returns 100
@@ -22680,6 +22682,10 @@ type Volume struct {
 
 	// The snapshot from which the volume was created, if applicable.
 	SnapshotId *string
+
+	// The ID of the source volume from which the volume copy was created. Only for
+	// volume copies.
+	SourceVolumeId *string
 
 	// This parameter is not returned by CreateVolume.
 	//

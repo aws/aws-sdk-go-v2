@@ -1,0 +1,8 @@
+{
+    "id": "2de4c344-b286-41c5-8006-7176da6b4ac2",
+    "type": "feature",
+    "description": "Support creating scoped and trustedIdentityPropagation enabled connections.",
+    "modules": [
+        "service/datazone"
+    ]
+}

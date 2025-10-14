@@ -110,6 +110,18 @@ func TestCheckSnapshot_AssociateFleet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateSoftwareToImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSoftwareToImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSoftwareToImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchAssociateUserStack(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchAssociateUserStack(context.Background(), nil, func(o *Options) {
@@ -542,6 +554,18 @@ func TestCheckSnapshot_DescribeApplications(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAppLicenseUsage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAppLicenseUsage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAppLicenseUsage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDirectoryConfigs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDirectoryConfigs(context.Background(), nil, func(o *Options) {
@@ -619,6 +643,18 @@ func TestCheckSnapshot_DescribeSessions(t *testing.T) {
 	_, err := svc.DescribeSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSoftwareAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSoftwareAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSoftwareAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -746,6 +782,18 @@ func TestCheckSnapshot_DisassociateFleet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateSoftwareFromImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSoftwareFromImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSoftwareFromImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableUser(context.Background(), nil, func(o *Options) {
@@ -847,6 +895,18 @@ func TestCheckSnapshot_StartImageBuilder(t *testing.T) {
 	_, err := svc.StartImageBuilder(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartSoftwareDeploymentToImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSoftwareDeploymentToImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSoftwareDeploymentToImageBuilder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1050,6 +1110,18 @@ func TestUpdateSnapshot_AssociateFleet(t *testing.T) {
 	_, err := svc.AssociateFleet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSoftwareToImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSoftwareToImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSoftwareToImageBuilder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1489,6 +1561,18 @@ func TestUpdateSnapshot_DescribeApplications(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAppLicenseUsage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAppLicenseUsage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAppLicenseUsage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDirectoryConfigs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDirectoryConfigs(context.Background(), nil, func(o *Options) {
@@ -1566,6 +1650,18 @@ func TestUpdateSnapshot_DescribeSessions(t *testing.T) {
 	_, err := svc.DescribeSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSoftwareAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSoftwareAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSoftwareAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1693,6 +1789,18 @@ func TestUpdateSnapshot_DisassociateFleet(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateSoftwareFromImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSoftwareFromImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSoftwareFromImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableUser(context.Background(), nil, func(o *Options) {
@@ -1794,6 +1902,18 @@ func TestUpdateSnapshot_StartImageBuilder(t *testing.T) {
 	_, err := svc.StartImageBuilder(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartSoftwareDeploymentToImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSoftwareDeploymentToImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSoftwareDeploymentToImageBuilder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

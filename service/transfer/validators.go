@@ -1546,6 +1546,40 @@ func addOpUpdateWebAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWebApp{}, middleware.After)
 }
 
+func validateConnectorEgressConfig(v types.ConnectorEgressConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorEgressConfig"}
+	switch uv := v.(type) {
+	case *types.ConnectorEgressConfigMemberVpcLattice:
+		if err := validateConnectorVpcLatticeEgressConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[VpcLattice]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorVpcLatticeEgressConfig(v *types.ConnectorVpcLatticeEgressConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorVpcLatticeEgressConfig"}
+	if v.ResourceConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomDirectoriesType(v *types.CustomDirectoriesType) error {
 	if v == nil {
 		return nil
@@ -1914,15 +1948,17 @@ func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
-	if v.Url == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Url"))
-	}
 	if v.AccessRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessRole"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EgressConfig != nil {
+		if err := validateConnectorEgressConfig(v.EgressConfig); err != nil {
+			invalidParams.AddNested("EgressConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

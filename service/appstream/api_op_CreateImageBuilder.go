@@ -191,6 +191,114 @@ type CreateImageBuilderInput struct {
 	// The name of the image used to create the image builder.
 	ImageName *string
 
+	// The list of license included applications to install on the image builder
+	// during creation.
+	//
+	// Possible values include the following:
+	//
+	//   - Microsoft_Office_2021_LTSC_Professional_Plus_32Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Professional_Plus_64Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Professional_Plus_32Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Professional_Plus_64Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Professional_32Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Professional_64Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Professional_32Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Professional_64Bit
+	//
+	//   - Microsoft_Project_2021_Professional_32Bit
+	//
+	//   - Microsoft_Project_2021_Professional_64Bit
+	//
+	//   - Microsoft_Project_2024_Professional_32Bit
+	//
+	//   - Microsoft_Project_2024_Professional_64Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Project_2021_Standard_32Bit
+	//
+	//   - Microsoft_Project_2021_Standard_64Bit
+	//
+	//   - Microsoft_Project_2024_Standard_32Bit
+	//
+	//   - Microsoft_Project_2024_Standard_64Bit
+	SoftwaresToInstall []string
+
+	// The list of license included applications to uninstall from the image builder
+	// during creation.
+	//
+	// Possible values include the following:
+	//
+	//   - Microsoft_Office_2021_LTSC_Professional_Plus_32Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Professional_Plus_64Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Professional_Plus_32Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Professional_Plus_64Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Professional_32Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Professional_64Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Professional_32Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Professional_64Bit
+	//
+	//   - Microsoft_Project_2021_Professional_32Bit
+	//
+	//   - Microsoft_Project_2021_Professional_64Bit
+	//
+	//   - Microsoft_Project_2024_Professional_32Bit
+	//
+	//   - Microsoft_Project_2024_Professional_64Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Office_2021_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Office_2024_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Visio_2021_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Standard_32Bit
+	//
+	//   - Microsoft_Visio_2024_LTSC_Standard_64Bit
+	//
+	//   - Microsoft_Project_2021_Standard_32Bit
+	//
+	//   - Microsoft_Project_2021_Standard_64Bit
+	//
+	//   - Microsoft_Project_2024_Standard_32Bit
+	//
+	//   - Microsoft_Project_2024_Standard_64Bit
+	SoftwaresToUninstall []string
+
 	// The tags to associate with the image builder. A tag is a key-value pair, and
 	// the value is optional. For example, Environment=Test. If you do not specify a
 	// value, Environment=.

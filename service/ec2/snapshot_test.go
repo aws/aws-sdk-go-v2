@@ -782,6 +782,18 @@ func TestCheckSnapshot_CopySnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CopyVolumes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CopyVolumes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CopyVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservation(context.Background(), nil, func(o *Options) {
@@ -9102,6 +9114,18 @@ func TestUpdateSnapshot_CopySnapshot(t *testing.T) {
 	_, err := svc.CopySnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CopySnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CopyVolumes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CopyVolumes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CopyVolumes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

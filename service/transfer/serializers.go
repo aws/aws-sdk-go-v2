@@ -4437,6 +4437,41 @@ func awsAwsjson11_serializeDocumentCertificateIds(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentConnectorEgressConfig(v types.ConnectorEgressConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ConnectorEgressConfigMemberVpcLattice:
+		av := object.Key("VpcLattice")
+		if err := awsAwsjson11_serializeDocumentConnectorVpcLatticeEgressConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectorVpcLatticeEgressConfig(v *types.ConnectorVpcLatticeEgressConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PortNumber != nil {
+		ok := object.Key("PortNumber")
+		ok.Integer(*v.PortNumber)
+	}
+
+	if v.ResourceConfigurationArn != nil {
+		ok := object.Key("ResourceConfigurationArn")
+		ok.String(*v.ResourceConfigurationArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCopyStepDetails(v *types.CopyStepDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5040,6 +5075,41 @@ func awsAwsjson11_serializeDocumentTagStepDetails(v *types.TagStepDetails, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUpdateConnectorEgressConfig(v types.UpdateConnectorEgressConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.UpdateConnectorEgressConfigMemberVpcLattice:
+		av := object.Key("VpcLattice")
+		if err := awsAwsjson11_serializeDocumentUpdateConnectorVpcLatticeEgressConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateConnectorVpcLatticeEgressConfig(v *types.UpdateConnectorVpcLatticeEgressConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PortNumber != nil {
+		ok := object.Key("PortNumber")
+		ok.Integer(*v.PortNumber)
+	}
+
+	if v.ResourceConfigurationArn != nil {
+		ok := object.Key("ResourceConfigurationArn")
+		ok.String(*v.ResourceConfigurationArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUpdateWebAppIdentityCenterConfig(v *types.UpdateWebAppIdentityCenterConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5331,6 +5401,13 @@ func awsAwsjson11_serializeOpDocumentCreateConnectorInput(v *CreateConnectorInpu
 	if v.As2Config != nil {
 		ok := object.Key("As2Config")
 		if err := awsAwsjson11_serializeDocumentAs2ConnectorConfig(v.As2Config, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EgressConfig != nil {
+		ok := object.Key("EgressConfig")
+		if err := awsAwsjson11_serializeDocumentConnectorEgressConfig(v.EgressConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -6779,6 +6856,13 @@ func awsAwsjson11_serializeOpDocumentUpdateConnectorInput(v *UpdateConnectorInpu
 	if v.ConnectorId != nil {
 		ok := object.Key("ConnectorId")
 		ok.String(*v.ConnectorId)
+	}
+
+	if v.EgressConfig != nil {
+		ok := object.Key("EgressConfig")
+		if err := awsAwsjson11_serializeDocumentUpdateConnectorEgressConfig(v.EgressConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LoggingRole != nil {

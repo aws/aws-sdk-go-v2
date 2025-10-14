@@ -97,6 +97,9 @@ type UpdateConnectionOutput struct {
 	// The connection props.
 	Props types.ConnectionPropertiesOutput
 
+	// The scope of the connection.
+	Scope types.ConnectionScope
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

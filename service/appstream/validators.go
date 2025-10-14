@@ -90,6 +90,26 @@ func (m *validateOpAssociateFleet) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateSoftwareToImageBuilder struct {
+}
+
+func (*validateOpAssociateSoftwareToImageBuilder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSoftwareToImageBuilder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSoftwareToImageBuilderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSoftwareToImageBuilderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchAssociateUserStack struct {
 }
 
@@ -670,6 +690,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAppLicenseUsage struct {
+}
+
+func (*validateOpDescribeAppLicenseUsage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppLicenseUsage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppLicenseUsageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppLicenseUsageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeEntitlements struct {
 }
 
@@ -725,6 +765,26 @@ func (m *validateOpDescribeSessions) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSoftwareAssociations struct {
+}
+
+func (*validateOpDescribeSoftwareAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSoftwareAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSoftwareAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSoftwareAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -865,6 +925,26 @@ func (m *validateOpDisassociateFleet) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateFleetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateSoftwareFromImageBuilder struct {
+}
+
+func (*validateOpDisassociateSoftwareFromImageBuilder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSoftwareFromImageBuilder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSoftwareFromImageBuilderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSoftwareFromImageBuilderInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1045,6 +1125,26 @@ func (m *validateOpStartImageBuilder) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartImageBuilderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSoftwareDeploymentToImageBuilder struct {
+}
+
+func (*validateOpStartSoftwareDeploymentToImageBuilder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSoftwareDeploymentToImageBuilder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSoftwareDeploymentToImageBuilderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSoftwareDeploymentToImageBuilderInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1326,6 +1426,10 @@ func addOpAssociateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFleet{}, middleware.After)
 }
 
+func addOpAssociateSoftwareToImageBuilderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSoftwareToImageBuilder{}, middleware.After)
+}
+
 func addOpBatchAssociateUserStackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchAssociateUserStack{}, middleware.After)
 }
@@ -1442,6 +1546,10 @@ func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
 
+func addOpDescribeAppLicenseUsageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppLicenseUsage{}, middleware.After)
+}
+
 func addOpDescribeEntitlementsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEntitlements{}, middleware.After)
 }
@@ -1452,6 +1560,10 @@ func addOpDescribeImagePermissionsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeSessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSessions{}, middleware.After)
+}
+
+func addOpDescribeSoftwareAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSoftwareAssociations{}, middleware.After)
 }
 
 func addOpDescribeThemeForStackValidationMiddleware(stack *middleware.Stack) error {
@@ -1480,6 +1592,10 @@ func addOpDisassociateApplicationFromEntitlementValidationMiddleware(stack *midd
 
 func addOpDisassociateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFleet{}, middleware.After)
+}
+
+func addOpDisassociateSoftwareFromImageBuilderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSoftwareFromImageBuilder{}, middleware.After)
 }
 
 func addOpEnableUserValidationMiddleware(stack *middleware.Stack) error {
@@ -1516,6 +1632,10 @@ func addOpStartFleetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartImageBuilderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImageBuilder{}, middleware.After)
+}
+
+func addOpStartSoftwareDeploymentToImageBuilderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSoftwareDeploymentToImageBuilder{}, middleware.After)
 }
 
 func addOpStopAppBlockBuilderValidationMiddleware(stack *middleware.Stack) error {
@@ -1882,6 +2002,24 @@ func validateOpAssociateFleetInput(v *AssociateFleetInput) error {
 	}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateSoftwareToImageBuilderInput(v *AssociateSoftwareToImageBuilderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSoftwareToImageBuilderInput"}
+	if v.ImageBuilderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuilderName"))
+	}
+	if v.SoftwareNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SoftwareNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2487,6 +2625,21 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 }
 
+func validateOpDescribeAppLicenseUsageInput(v *DescribeAppLicenseUsageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppLicenseUsageInput"}
+	if v.BillingPeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingPeriod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeEntitlementsInput(v *DescribeEntitlementsInput) error {
 	if v == nil {
 		return nil
@@ -2527,6 +2680,21 @@ func validateOpDescribeSessionsInput(v *DescribeSessionsInput) error {
 	}
 	if v.FleetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSoftwareAssociationsInput(v *DescribeSoftwareAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSoftwareAssociationsInput"}
+	if v.AssociatedResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2650,6 +2818,24 @@ func validateOpDisassociateFleetInput(v *DisassociateFleetInput) error {
 	}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateSoftwareFromImageBuilderInput(v *DisassociateSoftwareFromImageBuilderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSoftwareFromImageBuilderInput"}
+	if v.ImageBuilderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuilderName"))
+	}
+	if v.SoftwareNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SoftwareNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2791,6 +2977,21 @@ func validateOpStartImageBuilderInput(v *StartImageBuilderInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartImageBuilderInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSoftwareDeploymentToImageBuilderInput(v *StartSoftwareDeploymentToImageBuilderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSoftwareDeploymentToImageBuilderInput"}
+	if v.ImageBuilderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuilderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

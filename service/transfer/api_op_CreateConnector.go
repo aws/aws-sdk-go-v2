@@ -72,13 +72,14 @@ type CreateConnectorInput struct {
 	// This member is required.
 	AccessRole *string
 
-	// The URL of the partner's AS2 or SFTP endpoint.
-	//
-	// This member is required.
-	Url *string
-
 	// A structure that contains the parameters for an AS2 connector object.
 	As2Config *types.As2ConnectorConfig
+
+	// Specifies the egress configuration for the connector, which determines how
+	// traffic is routed from the connector to the SFTP server. When set to VPC,
+	// enables routing through customer VPCs using VPC_LATTICE for private
+	// connectivity.
+	EgressConfig types.ConnectorEgressConfig
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
@@ -94,6 +95,13 @@ type CreateConnectorInput struct {
 	// Key-value pairs that can be used to group and search for connectors. Tags are
 	// metadata attached to connectors for any purpose.
 	Tags []types.Tag
+
+	// The URL of the partner's AS2 or SFTP endpoint.
+	//
+	// When creating AS2 connectors or service-managed SFTP connectors (connectors
+	// without egress configuration), you must provide a URL to specify the remote
+	// server endpoint. For VPC Lattice type connectors, the URL must be null.
+	Url *string
 
 	noSmithyDocumentSerde
 }
