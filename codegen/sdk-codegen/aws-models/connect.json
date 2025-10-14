@@ -1828,27 +1828,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -3129,7 +3129,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a queued contact with an agent.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Custom contact routing. You can build custom contact routing mechanisms beyond the default\n     system routing in Amazon Connect. You can create tailored contact distribution logic that\n     offers queued contacts directly to specific agents.</p>\n            </li>\n            <li>\n               <p>Manual contact assignment. You can programmatically assign queued contacts to available users. This \n     provides flexibility to contact centers that require manual oversight or specialized routing\n     workflows outside of standard queue management.</p>\n               <p>For information about how manual contact assignment works in the agent workspace, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html\">Access the Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>Use this API chat/SMS, email, and task contacts. It does not support voice\n     contacts.</p>\n            </li>\n            <li>\n               <p>Use it to associate contacts with users regardless of their current state, including\n     custom states. Ensure your application logic accounts for user availability before making\n     associations.</p>\n            </li>\n            <li>\n               <p>It honors the IAM context key <code>connect:PreferredUserArn</code> to prevent\n     unauthorized contact associations.</p>\n            </li>\n            <li>\n               <p>It respects the IAM context key <code>connect:PreferredUserArn</code> to enforce\n     authorization controls and prevent unauthorized contact associations. Verify that your IAM\n     policies are properly configured to support your intended use cases.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#documentation": "<p>Associates a queued contact with an agent.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Programmatically assign queued contacts to available users.</p>\n            </li>\n            <li>\n               <p>Leverage the IAM context key <code>connect:PreferredUserArn</code> to restrict contact\n     association to specific preferred user.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>Use this API with chat, email, and task contacts. It does not support voice\n     contacts.</p>\n            </li>\n            <li>\n               <p>Use it to associate contacts with users regardless of their current state, including\n     custom states. Ensure your application logic accounts for user availability before making\n     associations.</p>\n            </li>\n            <li>\n               <p>It honors the IAM context key <code>connect:PreferredUserArn</code> to prevent\n     unauthorized contact associations.</p>\n            </li>\n            <li>\n               <p>It respects the IAM context key <code>connect:PreferredUserArn</code> to enforce\n     authorization controls and prevent unauthorized contact associations. Verify that your IAM\n     policies are properly configured to support your intended use cases.</p>\n            </li>\n            <li>\n               <p>The service quota <i>Queues per routing profile per instance</i> applies to\n     manually assigned queues, too. For more information about this quota, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas\">Amazon Connect quotas</a> in the <i>Amazon Connect Administrator\n     Guide</i>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contacts/{InstanceId}/{ContactId}/associate-user",
@@ -6143,6 +6143,12 @@
                     "target": "com.amazonaws.connect#ContactEvaluations",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the contact evaluations where the key is the FormId, which is a unique\n   identifier for the form.</p>"
+                    }
+                },
+                "TaskTemplateInfo": {
+                    "target": "com.amazonaws.connect#TaskTemplateInfoV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this contact was created using a task template, this contains information about the task template.</p>"
                     }
                 },
                 "ContactDetails": {
@@ -13370,7 +13376,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified contact. </p>\n         <important>\n            <ul>\n               <li>\n                  <p>\n                     <code>SystemEndpoint</code> is not populated for contacts with initiation method of\n      MONITOR, QUEUE_TRANSFER, or CALLBACK</p>\n               </li>\n               <li>\n                  <p>Contact information remains available in Amazon Connect for 24 months from the\n       <code>InitiationTimestamp</code>, and then it is deleted. Only contact information that is\n      available in Amazon Connect is returned by this API.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified contact. </p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Retrieve contact information such as the caller's phone number and the specific number the\n     caller dialed to integrate into custom monitoring or custom agent experience solutions.</p>\n            </li>\n            <li>\n               <p>Detect when a customer chat session disconnects due to a network issue on the agent's end.\n     Use the DisconnectReason field in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> to detect this event and then re-queue the chat for followup.</p>\n            </li>\n            <li>\n               <p>Identify after contact work (ACW) duration and call recordings information when a\n     COMPLETED event is received by using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-events.html\">contact event stream</a>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SystemEndpoint</code> is not populated for contacts with initiation method of\n     MONITOR, QUEUE_TRANSFER, or CALLBACK</p>\n            </li>\n            <li>\n               <p>Contact information remains available in Amazon Connect for 24 months from the\n      <code>InitiationTimestamp</code>, and then it is deleted. Only contact information that is\n     available in Amazon Connect is returned by this API.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contacts/{InstanceId}/{ContactId}",
@@ -25865,7 +25871,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. Both Instance ID and Instance ARN are supported input formats. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -26069,7 +26075,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the manual assignment queues associated with a routing profile.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>This API returns list of queues where contacts can be manually assigned or picked. The\n     user can additionally filter on queues, if they have access to those queues (otherwise a\n     invalid request exception will be thrown).</p>\n               <p>For information about how manual contact assignment works in the agent workspace, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html\">Access the Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>This API only returns the manual assignment queues associated with a routing profile. Use\n     the ListRoutingProfileQueues API to list the auto assignment queues for the routing\n     profile.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#documentation": "<p>Lists the manual assignment queues associated with a routing profile.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>This API returns list of queues where contacts can be manually assigned or picked by an\n     agent who has access to the Worklist app. The user can additionally filter on queues, if they\n     have access to those queues (otherwise a invalid request exception will be thrown).</p>\n               <p>For information about how manual contact assignment works in the agent workspace, see the\n      <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html\">Access the\n      Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>This API only returns the manual assignment queues associated with a routing profile. Use\n     the ListRoutingProfileQueues API to list the auto assignment queues for the routing\n     profile.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/routing-profiles/{InstanceId}/{RoutingProfileId}/manual-assignment-queues",
@@ -34579,7 +34585,7 @@
                 "Channel": {
                     "target": "com.amazonaws.connect#Channel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channels this queue supports. Valid Values: CHAT | TASK | EMAIL </p>",
+                        "smithy.api#documentation": "<p>The channels this queue supports. Valid Values: CHAT | TASK | EMAIL </p>\n         <important>\n            <p>VOICE is not supported. The information shown below is incorrect. We're working to correct\n    it. </p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -35670,7 +35676,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Time range that you additionally want to filter on.</p>"
+                "smithy.api#documentation": "<p>Time range that you <b>additionally</b> want to filter on.</p>\n         <note>\n            <p>This is different from the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchContactsTimeRange.html\">SearchContactsTimeRange</a> data type.</p>\n         </note>"
             }
         },
         "com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteria": {
@@ -35892,7 +35898,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The timestamp condition indicating which timestamp should be used and how it should be\n   filtered.</p>"
+                "smithy.api#documentation": "<p>The timestamp condition indicating which contact timestamp should be used and how it should\n   be filtered. It is not an actual timestamp value. </p>"
             }
         },
         "com.amazonaws.connect#SearchCriteria": {
@@ -41284,6 +41290,26 @@
                     "min": 1,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateInfoV2": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task template used to create this contact.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template used to create this contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the task template used to create this contact.</p>"
             }
         },
         "com.amazonaws.connect#TaskTemplateList": {

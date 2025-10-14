@@ -933,6 +933,108 @@
                 "smithy.api#documentation": "<p>The all users grant filter.</p>"
             }
         },
+        "com.amazonaws.datazone#AmazonQPropertiesInput": {
+            "type": "structure",
+            "members": {
+                "isEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Q is enabled for the connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN of the connection's Amazon Q properties.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"
+                    }
+                },
+                "authMode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication mode of the connection's Amazon Q properties.</p>",
+                        "smithy.api#length": {
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AmazonQPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "isEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Q is enabled for the connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN of the connection's Amazon Q properties.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"
+                    }
+                },
+                "authMode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication mode of the connection's Amazon Q properties.</p>",
+                        "smithy.api#length": {
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AmazonQPropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "isEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Q is enabled for the connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN of the connection's Amazon Q properties.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"
+                    }
+                },
+                "authMode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication mode of the connection's Amazon Q properties.</p>",
+                        "smithy.api#length": {
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+            }
+        },
         "com.amazonaws.datazone#ApplicableAssetTypes": {
             "type": "list",
             "member": {
@@ -2885,6 +2987,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
                     }
+                },
+                "amazonQProperties": {
+                    "target": "com.amazonaws.datazone#AmazonQPropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2941,6 +3049,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
                     }
+                },
+                "amazonQProperties": {
+                    "target": "com.amazonaws.datazone#AmazonQPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2985,10 +3099,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 properties of a connection properties patch.</p>"
                     }
+                },
+                "amazonQProperties": {
+                    "target": "com.amazonaws.datazone#AmazonQPropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The connection properties patch.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ConnectionScope": {
+            "type": "enum",
+            "members": {
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN"
+                    }
+                },
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT"
+                    }
+                }
             }
         },
         "com.amazonaws.datazone#ConnectionStatus": {
@@ -3111,6 +3248,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The connection type.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#ConnectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the connection.</p>"
                     }
                 }
             },
@@ -3239,6 +3382,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WORKFLOWS_MWAA"
+                    }
+                },
+                "AMAZON_Q": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_Q"
                     }
                 }
             }
@@ -4344,8 +4493,7 @@
                 "environmentIdentifier": {
                     "target": "com.amazonaws.datazone#EnvironmentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment where the connection is created.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the environment where the connection is created.</p>"
                     }
                 },
                 "name": {
@@ -4359,6 +4507,18 @@
                     "target": "com.amazonaws.datazone#ConnectionPropertiesInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection props.</p>"
+                    }
+                },
+                "enableTrustedIdentityPropagation": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the trusted identity propagation is enabled.</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#ConnectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the connection.</p>"
                     }
                 }
             },
@@ -4433,6 +4593,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The connection type.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#ConnectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the connection.</p>"
                     }
                 }
             },
@@ -10107,20 +10273,20 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -15770,6 +15936,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the connection.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#ConnectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the connection.</p>"
                     }
                 }
             },
@@ -22794,8 +22966,7 @@
                     "target": "com.amazonaws.datazone#ProjectId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the project where you want to list connections.</p>",
-                        "smithy.api#httpQuery": "projectIdentifier",
-                        "smithy.api#required": {}
+                        "smithy.api#httpQuery": "projectIdentifier"
                     }
                 },
                 "type": {
@@ -22803,6 +22974,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of connection.</p>",
                         "smithy.api#httpQuery": "type"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#ConnectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the connection.</p>",
+                        "smithy.api#httpQuery": "scope"
                     }
                 }
             },
@@ -27565,6 +27743,12 @@
                     "target": "com.amazonaws.datazone#GlueConnection",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Glue connection.</p>"
+                    }
+                },
+                "enableTrustedIdentityPropagation": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified whether trusted identity propagation for the connection is enabled.</p>"
                     }
                 },
                 "host": {
@@ -34943,6 +35127,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The connection type.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#ConnectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the connection.</p>"
                     }
                 }
             },
