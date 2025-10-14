@@ -1,3 +1,7 @@
+# v1.256.0 (2025-10-14)
+
+* **Feature**: This release adds support for creating instant, point-in-time copies of EBS volumes within the same Availability Zone
+
 # v1.255.0 (2025-10-13)
 
 * **Feature**: Release Amazon EC2 c8i, c8i-flex, m8a, and r8gb

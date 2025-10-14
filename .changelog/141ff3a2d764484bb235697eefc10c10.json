@@ -1,8 +1,0 @@
-{
-    "id": "141ff3a2-d764-484b-b235-697eefc10c10",
-    "type": "feature",
-    "description": "The AWS Backup job attribute extension enhancement helps customers better understand the plan that initiated each job, and the properties of the resource each job creates.",
-    "modules": [
-        "service/backup"
-    ]
-}

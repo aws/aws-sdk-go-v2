@@ -1,3 +1,7 @@
+# v1.50.0 (2025-10-14)
+
+* **Feature**: This release introduces support for Microsoft license included applications streaming.
+
 # v1.49.7 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

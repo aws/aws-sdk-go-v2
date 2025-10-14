@@ -1,3 +1,7 @@
+# v1.142.0 (2025-10-14)
+
+* **Feature**: SDK release for TaskTemplateInfo in Contact for DescribeContact response.
+
 # v1.141.0 (2025-09-26)
 
 * **Feature**: Adds supports for manual contact picking (WorkList) operations on Routing Profiles, Agent Management and SearchContacts APIs.

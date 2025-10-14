@@ -1,3 +1,7 @@
+# v1.43.0 (2025-10-14)
+
+* **Feature**: Support creating scoped and trustedIdentityPropagation enabled connections.
+
 # v1.42.0 (2025-09-30)
 
 * **Feature**: This release adds support for creation of EMR on EKS Connections in Amazon DataZone.

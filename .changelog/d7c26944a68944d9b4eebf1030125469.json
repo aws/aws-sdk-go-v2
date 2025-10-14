@@ -1,8 +1,0 @@
-{
-    "id": "d7c26944-a689-44d9-b4ee-bf1030125469",
-    "type": "feature",
-    "description": "Move UntagResource API body member to query parameter",
-    "modules": [
-        "service/transcribe"
-    ]
-}

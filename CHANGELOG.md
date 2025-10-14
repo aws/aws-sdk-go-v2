@@ -1,3 +1,21 @@
+# Release (2025-10-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.50.0](service/appstream/CHANGELOG.md#v1500-2025-10-14)
+  * **Feature**: This release introduces support for Microsoft license included applications streaming.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.49.0](service/backup/CHANGELOG.md#v1490-2025-10-14)
+  * **Feature**: The AWS Backup job attribute extension enhancement helps customers better understand the plan that initiated each job, and the properties of the resource each job creates.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.142.0](service/connect/CHANGELOG.md#v11420-2025-10-14)
+  * **Feature**: SDK release for TaskTemplateInfo in Contact for DescribeContact response.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.43.0](service/datazone/CHANGELOG.md#v1430-2025-10-14)
+  * **Feature**: Support creating scoped and trustedIdentityPropagation enabled connections.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.256.0](service/ec2/CHANGELOG.md#v12560-2025-10-14)
+  * **Feature**: This release adds support for creating instant, point-in-time copies of EBS volumes within the same Availability Zone
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.53.0](service/transcribe/CHANGELOG.md#v1530-2025-10-14)
+  * **Feature**: Move UntagResource API body member to query parameter
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.67.0](service/transfer/CHANGELOG.md#v1670-2025-10-14)
+  * **Feature**: SFTP connectors now support routing connections via customers' VPC. This enables connections to remote servers that are only accessible in a customer's VPC environment, and to servers that are accessible over the internet but need connections coming from an IP address in a customer VPC's CIDR range.
+
 # Release (2025-10-13)
 
 ## Module Highlights

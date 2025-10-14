@@ -1,8 +1,0 @@
-{
-    "id": "270f6f4b-6cb5-4fd9-9181-3dacf153f2b9",
-    "type": "feature",
-    "description": "This release introduces support for Microsoft license included applications streaming.",
-    "modules": [
-        "service/appstream"
-    ]
-}

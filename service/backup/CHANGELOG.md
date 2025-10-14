@@ -1,3 +1,7 @@
+# v1.49.0 (2025-10-14)
+
+* **Feature**: The AWS Backup job attribute extension enhancement helps customers better understand the plan that initiated each job, and the properties of the resource each job creates.
+
 # v1.48.0 (2025-10-06)
 
 * **Feature**: Adds optional MaxScheduledRunsPreview input to GetBackupPlan API to provide a preview of up to 10 next scheduled backup plan runs in the GetBackupPlan response.

@@ -1,8 +1,0 @@
-{
-    "id": "bd5a12b2-2e7d-4e64-adbe-ab028cec7526",
-    "type": "feature",
-    "description": "This release adds support for creating instant, point-in-time copies of EBS volumes within the same Availability Zone",
-    "modules": [
-        "service/ec2"
-    ]
-}
