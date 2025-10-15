@@ -1,3 +1,7 @@
+# v1.48.0 (2025-10-15)
+
+* **Feature**: Amazon Bedrock Automated Reasoning Policy now offers enhanced AWS KMS integration. The CreateAutomatedReasoningPolicy API includes a new kmsKeyId field, allowing customers to specify their preferred KMS key for encryption, improving control and compliance with AWS encryption mandates.
+
 # v1.47.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

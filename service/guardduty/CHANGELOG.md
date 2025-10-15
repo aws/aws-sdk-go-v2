@@ -1,3 +1,7 @@
+# v1.65.0 (2025-10-15)
+
+* **Feature**: Added default pagination value for ListMalwareProtectionPlans API and updated UpdateFindingsFeedback API
+
 # v1.64.3 (2025-10-02)
 
 * **Documentation**: Updated descriptions for the Location parameter in CreateTrustedEntitySet and CreateThreatEntitySet.

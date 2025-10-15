@@ -1,8 +1,0 @@
-{
-    "id": "f71b04dc-a0ec-46cc-b444-ec03bc0e9138",
-    "type": "feature",
-    "description": "Add support for NetworkType field in CreateDbCluster, ModifyDbCluster, RestoreDbClusterFromSnapshot and RestoreDbClusterToPointInTime for DocumentDB.",
-    "modules": [
-        "service/docdb"
-    ]
-}

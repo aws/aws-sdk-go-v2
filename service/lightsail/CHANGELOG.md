@@ -1,3 +1,7 @@
+# v1.50.0 (2025-10-15)
+
+* **Feature**: Add support for manage Lightsail Bucket CORS configuration
+
 # v1.49.1 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

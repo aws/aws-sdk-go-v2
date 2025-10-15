@@ -1,8 +1,0 @@
-{
-    "id": "fa55ed1d-20f1-484d-859f-2957a43d6cb0",
-    "type": "feature",
-    "description": "This release adds support for creating and managing InfluxDB 3 Core and Enterprise DbClusters.",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}

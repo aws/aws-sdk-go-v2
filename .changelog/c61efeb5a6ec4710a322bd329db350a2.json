@@ -1,8 +1,0 @@
-{
-    "id": "c61efeb5-a6ec-4710-a322-bd329db350a2",
-    "type": "feature",
-    "description": "Introducing EC2 Capacity Manager for monitoring and analyzing capacity usage across On-Demand Instances, Spot Instances, and Capacity Reservations.",
-    "modules": [
-        "service/ec2"
-    ]
-}

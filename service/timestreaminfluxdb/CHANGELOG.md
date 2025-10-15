@@ -1,3 +1,7 @@
+# v1.17.0 (2025-10-15)
+
+* **Feature**: This release adds support for creating and managing InfluxDB 3 Core and Enterprise DbClusters.
+
 # v1.16.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

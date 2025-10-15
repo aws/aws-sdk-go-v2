@@ -1,3 +1,21 @@
+# Release (2025-10-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.48.0](service/bedrock/CHANGELOG.md#v1480-2025-10-15)
+  * **Feature**: Amazon Bedrock Automated Reasoning Policy now offers enhanced AWS KMS integration. The CreateAutomatedReasoningPolicy API includes a new kmsKeyId field, allowing customers to specify their preferred KMS key for encryption, improving control and compliance with AWS encryption mandates.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.47.0](service/docdb/CHANGELOG.md#v1470-2025-10-15)
+  * **Feature**: Add support for NetworkType field in CreateDbCluster, ModifyDbCluster, RestoreDbClusterFromSnapshot and RestoreDbClusterToPointInTime for DocumentDB.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.257.0](service/ec2/CHANGELOG.md#v12570-2025-10-15)
+  * **Feature**: Introducing EC2 Capacity Manager for monitoring and analyzing capacity usage across On-Demand Instances, Spot Instances, and Capacity Reservations.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.51.0](service/elasticloadbalancingv2/CHANGELOG.md#v1510-2025-10-15)
+  * **Feature**: This release expands Listener Rule Conditions to support RegexValues and adds support for a new Transforms field in Listener Rules.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.65.0](service/guardduty/CHANGELOG.md#v1650-2025-10-15)
+  * **Feature**: Added default pagination value for ListMalwareProtectionPlans API and updated UpdateFindingsFeedback API
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.50.0](service/lightsail/CHANGELOG.md#v1500-2025-10-15)
+  * **Feature**: Add support for manage Lightsail Bucket CORS configuration
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.17.0](service/timestreaminfluxdb/CHANGELOG.md#v1170-2025-10-15)
+  * **Feature**: This release adds support for creating and managing InfluxDB 3 Core and Enterprise DbClusters.
+
 # Release (2025-10-14)
 
 ## Module Highlights

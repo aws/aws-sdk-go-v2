@@ -1,8 +1,0 @@
-{
-    "id": "799ad7cf-d4d9-495e-9929-a215c0af8174",
-    "type": "feature",
-    "description": "Add support for manage Lightsail Bucket CORS configuration",
-    "modules": [
-        "service/lightsail"
-    ]
-}

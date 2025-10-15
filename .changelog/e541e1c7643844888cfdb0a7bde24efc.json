@@ -1,8 +1,0 @@
-{
-    "id": "e541e1c7-6438-4488-8cfd-b0a7bde24efc",
-    "type": "feature",
-    "description": "Added default pagination value for ListMalwareProtectionPlans API and updated UpdateFindingsFeedback API",
-    "modules": [
-        "service/guardduty"
-    ]
-}

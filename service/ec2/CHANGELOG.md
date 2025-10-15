@@ -1,3 +1,7 @@
+# v1.257.0 (2025-10-15)
+
+* **Feature**: Introducing EC2 Capacity Manager for monitoring and analyzing capacity usage across On-Demand Instances, Spot Instances, and Capacity Reservations.
+
 # v1.256.0 (2025-10-14)
 
 * **Feature**: This release adds support for creating instant, point-in-time copies of EBS volumes within the same Availability Zone

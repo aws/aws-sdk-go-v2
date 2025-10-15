@@ -1,3 +1,7 @@
+# v1.47.0 (2025-10-15)
+
+* **Feature**: Add support for NetworkType field in CreateDbCluster, ModifyDbCluster, RestoreDbClusterFromSnapshot and RestoreDbClusterToPointInTime for DocumentDB.
+
 # v1.46.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions
