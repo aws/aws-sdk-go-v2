@@ -4369,6 +4369,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.Port != nil {
 		objectKey := object.Key("Port")
 		objectKey.Integer(*v.Port)
@@ -5423,6 +5428,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.NewDBClusterIdentifier != nil {
 		objectKey := object.Key("NewDBClusterIdentifier")
 		objectKey.String(*v.NewDBClusterIdentifier)
@@ -5814,6 +5824,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.Port != nil {
 		objectKey := object.Key("Port")
 		objectKey.Integer(*v.Port)
@@ -5882,6 +5897,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
 	}
 
 	if v.Port != nil {

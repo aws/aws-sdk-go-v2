@@ -48,6 +48,25 @@ func (ClusterStatus) Values() []ClusterStatus {
 	}
 }
 
+type DataFusionRuntimeType string
+
+// Enum values for DataFusionRuntimeType
+const (
+	DataFusionRuntimeTypeMultiThread    DataFusionRuntimeType = "multi-thread"
+	DataFusionRuntimeTypeMultiThreadAlt DataFusionRuntimeType = "multi-thread-alt"
+)
+
+// Values returns all known values for DataFusionRuntimeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataFusionRuntimeType) Values() []DataFusionRuntimeType {
+	return []DataFusionRuntimeType{
+		"multi-thread",
+		"multi-thread-alt",
+	}
+}
+
 type DbInstanceType string
 
 // Enum values for DbInstanceType
@@ -129,6 +148,7 @@ const (
 	DurationTypeMinutes      DurationType = "minutes"
 	DurationTypeSeconds      DurationType = "seconds"
 	DurationTypeMilliseconds DurationType = "milliseconds"
+	DurationTypeDays         DurationType = "days"
 )
 
 // Values returns all known values for DurationType. Note that this can be
@@ -141,6 +161,28 @@ func (DurationType) Values() []DurationType {
 		"minutes",
 		"seconds",
 		"milliseconds",
+		"days",
+	}
+}
+
+type EngineType string
+
+// Enum values for EngineType
+const (
+	EngineTypeInfluxdbV2           EngineType = "INFLUXDB_V2"
+	EngineTypeInfluxdbV3Core       EngineType = "INFLUXDB_V3_CORE"
+	EngineTypeInfluxdbV3Enterprise EngineType = "INFLUXDB_V3_ENTERPRISE"
+)
+
+// Values returns all known values for EngineType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngineType) Values() []EngineType {
+	return []EngineType{
+		"INFLUXDB_V2",
+		"INFLUXDB_V3_CORE",
+		"INFLUXDB_V3_ENTERPRISE",
 	}
 }
 
@@ -170,6 +212,10 @@ const (
 	InstanceModePrimary InstanceMode = "PRIMARY"
 	InstanceModeStandby InstanceMode = "STANDBY"
 	InstanceModeReplica InstanceMode = "REPLICA"
+	InstanceModeIngest  InstanceMode = "INGEST"
+	InstanceModeQuery   InstanceMode = "QUERY"
+	InstanceModeCompact InstanceMode = "COMPACT"
+	InstanceModeProcess InstanceMode = "PROCESS"
 )
 
 // Values returns all known values for InstanceMode. Note that this can be
@@ -181,6 +227,27 @@ func (InstanceMode) Values() []InstanceMode {
 		"PRIMARY",
 		"STANDBY",
 		"REPLICA",
+		"INGEST",
+		"QUERY",
+		"COMPACT",
+		"PROCESS",
+	}
+}
+
+type LogFormats string
+
+// Enum values for LogFormats
+const (
+	LogFormatsFull LogFormats = "full"
+)
+
+// Values returns all known values for LogFormats. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogFormats) Values() []LogFormats {
+	return []LogFormats{
+		"full",
 	}
 }
 
@@ -263,8 +330,9 @@ type TracingType string
 
 // Enum values for TracingType
 const (
-	TracingTypeLog    TracingType = "log"
-	TracingTypeJaeger TracingType = "jaeger"
+	TracingTypeLog      TracingType = "log"
+	TracingTypeJaeger   TracingType = "jaeger"
+	TracingTypeDisabled TracingType = "disabled"
 )
 
 // Values returns all known values for TracingType. Note that this can be expanded
@@ -275,6 +343,7 @@ func (TracingType) Values() []TracingType {
 	return []TracingType{
 		"log",
 		"jaeger",
+		"disabled",
 	}
 }
 

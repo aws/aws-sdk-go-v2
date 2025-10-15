@@ -265,6 +265,11 @@ func awsRestjson1_serializeOpDocumentCreateAutomatedReasoningPolicyInput(v *Crea
 		ok.String(*v.Description)
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2241,6 +2246,10 @@ func (m *awsRestjson1_serializeOpDeleteAutomatedReasoningPolicy) HandleSerialize
 func awsRestjson1_serializeOpHttpBindingsDeleteAutomatedReasoningPolicyInput(v *DeleteAutomatedReasoningPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Force {
+		encoder.SetQuery("force").Boolean(v.Force)
 	}
 
 	if v.PolicyArn == nil || len(*v.PolicyArn) == 0 {

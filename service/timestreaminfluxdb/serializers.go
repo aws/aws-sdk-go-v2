@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 )
 
@@ -1262,6 +1263,567 @@ func awsAwsjson10_serializeDocumentInfluxDBv2Parameters(v *types.InfluxDBv2Param
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentInfluxDBv3CoreParameters(v *types.InfluxDBv3CoreParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataFusionConfig != nil {
+		ok := object.Key("dataFusionConfig")
+		ok.String(*v.DataFusionConfig)
+	}
+
+	if v.DataFusionMaxParquetFanout != nil {
+		ok := object.Key("dataFusionMaxParquetFanout")
+		ok.Integer(*v.DataFusionMaxParquetFanout)
+	}
+
+	if v.DataFusionNumThreads != nil {
+		ok := object.Key("dataFusionNumThreads")
+		ok.Integer(*v.DataFusionNumThreads)
+	}
+
+	if v.DataFusionRuntimeDisableLifoSlot != nil {
+		ok := object.Key("dataFusionRuntimeDisableLifoSlot")
+		ok.Boolean(*v.DataFusionRuntimeDisableLifoSlot)
+	}
+
+	if v.DataFusionRuntimeEventInterval != nil {
+		ok := object.Key("dataFusionRuntimeEventInterval")
+		ok.Integer(*v.DataFusionRuntimeEventInterval)
+	}
+
+	if v.DataFusionRuntimeGlobalQueueInterval != nil {
+		ok := object.Key("dataFusionRuntimeGlobalQueueInterval")
+		ok.Integer(*v.DataFusionRuntimeGlobalQueueInterval)
+	}
+
+	if v.DataFusionRuntimeMaxBlockingThreads != nil {
+		ok := object.Key("dataFusionRuntimeMaxBlockingThreads")
+		ok.Integer(*v.DataFusionRuntimeMaxBlockingThreads)
+	}
+
+	if v.DataFusionRuntimeMaxIoEventsPerTick != nil {
+		ok := object.Key("dataFusionRuntimeMaxIoEventsPerTick")
+		ok.Integer(*v.DataFusionRuntimeMaxIoEventsPerTick)
+	}
+
+	if v.DataFusionRuntimeThreadKeepAlive != nil {
+		ok := object.Key("dataFusionRuntimeThreadKeepAlive")
+		if err := awsAwsjson10_serializeDocumentDuration(v.DataFusionRuntimeThreadKeepAlive, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataFusionRuntimeThreadPriority != nil {
+		ok := object.Key("dataFusionRuntimeThreadPriority")
+		ok.Integer(*v.DataFusionRuntimeThreadPriority)
+	}
+
+	if len(v.DataFusionRuntimeType) > 0 {
+		ok := object.Key("dataFusionRuntimeType")
+		ok.String(string(v.DataFusionRuntimeType))
+	}
+
+	if v.DataFusionUseCachedParquetLoader != nil {
+		ok := object.Key("dataFusionUseCachedParquetLoader")
+		ok.Boolean(*v.DataFusionUseCachedParquetLoader)
+	}
+
+	if v.DeleteGracePeriod != nil {
+		ok := object.Key("deleteGracePeriod")
+		if err := awsAwsjson10_serializeDocumentDuration(v.DeleteGracePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DisableParquetMemCache != nil {
+		ok := object.Key("disableParquetMemCache")
+		ok.Boolean(*v.DisableParquetMemCache)
+	}
+
+	if v.DistinctCacheEvictionInterval != nil {
+		ok := object.Key("distinctCacheEvictionInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.DistinctCacheEvictionInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecMemPoolBytes != nil {
+		ok := object.Key("execMemPoolBytes")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.ExecMemPoolBytes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ForceSnapshotMemThreshold != nil {
+		ok := object.Key("forceSnapshotMemThreshold")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.ForceSnapshotMemThreshold, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Gen1Duration != nil {
+		ok := object.Key("gen1Duration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.Gen1Duration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Gen1LookbackDuration != nil {
+		ok := object.Key("gen1LookbackDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.Gen1LookbackDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HardDeleteDefaultDuration != nil {
+		ok := object.Key("hardDeleteDefaultDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.HardDeleteDefaultDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LastCacheEvictionInterval != nil {
+		ok := object.Key("lastCacheEvictionInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.LastCacheEvictionInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LogFilter != nil {
+		ok := object.Key("logFilter")
+		ok.String(*v.LogFilter)
+	}
+
+	if len(v.LogFormat) > 0 {
+		ok := object.Key("logFormat")
+		ok.String(string(v.LogFormat))
+	}
+
+	if v.MaxHttpRequestSize != nil {
+		ok := object.Key("maxHttpRequestSize")
+		ok.Long(*v.MaxHttpRequestSize)
+	}
+
+	if v.ParquetMemCachePruneInterval != nil {
+		ok := object.Key("parquetMemCachePruneInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.ParquetMemCachePruneInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParquetMemCachePrunePercentage != nil {
+		ok := object.Key("parquetMemCachePrunePercentage")
+		switch {
+		case math.IsNaN(float64(*v.ParquetMemCachePrunePercentage)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.ParquetMemCachePrunePercentage), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.ParquetMemCachePrunePercentage), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.ParquetMemCachePrunePercentage)
+
+		}
+	}
+
+	if v.ParquetMemCacheQueryPathDuration != nil {
+		ok := object.Key("parquetMemCacheQueryPathDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.ParquetMemCacheQueryPathDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParquetMemCacheSize != nil {
+		ok := object.Key("parquetMemCacheSize")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.ParquetMemCacheSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreemptiveCacheAge != nil {
+		ok := object.Key("preemptiveCacheAge")
+		if err := awsAwsjson10_serializeDocumentDuration(v.PreemptiveCacheAge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryFileLimit != nil {
+		ok := object.Key("queryFileLimit")
+		ok.Integer(*v.QueryFileLimit)
+	}
+
+	if v.QueryLogSize != nil {
+		ok := object.Key("queryLogSize")
+		ok.Integer(*v.QueryLogSize)
+	}
+
+	if v.RetentionCheckInterval != nil {
+		ok := object.Key("retentionCheckInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.RetentionCheckInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshottedWalFilesToKeep != nil {
+		ok := object.Key("snapshottedWalFilesToKeep")
+		ok.Integer(*v.SnapshottedWalFilesToKeep)
+	}
+
+	if v.TableIndexCacheConcurrencyLimit != nil {
+		ok := object.Key("tableIndexCacheConcurrencyLimit")
+		ok.Integer(*v.TableIndexCacheConcurrencyLimit)
+	}
+
+	if v.TableIndexCacheMaxEntries != nil {
+		ok := object.Key("tableIndexCacheMaxEntries")
+		ok.Integer(*v.TableIndexCacheMaxEntries)
+	}
+
+	if v.WalMaxWriteBufferSize != nil {
+		ok := object.Key("walMaxWriteBufferSize")
+		ok.Integer(*v.WalMaxWriteBufferSize)
+	}
+
+	if v.WalReplayConcurrencyLimit != nil {
+		ok := object.Key("walReplayConcurrencyLimit")
+		ok.Integer(*v.WalReplayConcurrencyLimit)
+	}
+
+	if v.WalReplayFailOnError != nil {
+		ok := object.Key("walReplayFailOnError")
+		ok.Boolean(*v.WalReplayFailOnError)
+	}
+
+	if v.WalSnapshotSize != nil {
+		ok := object.Key("walSnapshotSize")
+		ok.Integer(*v.WalSnapshotSize)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentInfluxDBv3EnterpriseParameters(v *types.InfluxDBv3EnterpriseParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogSyncInterval != nil {
+		ok := object.Key("catalogSyncInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.CatalogSyncInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompactionCheckInterval != nil {
+		ok := object.Key("compactionCheckInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.CompactionCheckInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompactionCleanupWait != nil {
+		ok := object.Key("compactionCleanupWait")
+		if err := awsAwsjson10_serializeDocumentDuration(v.CompactionCleanupWait, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompactionGen2Duration != nil {
+		ok := object.Key("compactionGen2Duration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.CompactionGen2Duration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompactionMaxNumFilesPerPlan != nil {
+		ok := object.Key("compactionMaxNumFilesPerPlan")
+		ok.Integer(*v.CompactionMaxNumFilesPerPlan)
+	}
+
+	if v.CompactionMultipliers != nil {
+		ok := object.Key("compactionMultipliers")
+		ok.String(*v.CompactionMultipliers)
+	}
+
+	if v.CompactionRowLimit != nil {
+		ok := object.Key("compactionRowLimit")
+		ok.Integer(*v.CompactionRowLimit)
+	}
+
+	if v.DataFusionConfig != nil {
+		ok := object.Key("dataFusionConfig")
+		ok.String(*v.DataFusionConfig)
+	}
+
+	if v.DataFusionMaxParquetFanout != nil {
+		ok := object.Key("dataFusionMaxParquetFanout")
+		ok.Integer(*v.DataFusionMaxParquetFanout)
+	}
+
+	if v.DataFusionNumThreads != nil {
+		ok := object.Key("dataFusionNumThreads")
+		ok.Integer(*v.DataFusionNumThreads)
+	}
+
+	if v.DataFusionRuntimeDisableLifoSlot != nil {
+		ok := object.Key("dataFusionRuntimeDisableLifoSlot")
+		ok.Boolean(*v.DataFusionRuntimeDisableLifoSlot)
+	}
+
+	if v.DataFusionRuntimeEventInterval != nil {
+		ok := object.Key("dataFusionRuntimeEventInterval")
+		ok.Integer(*v.DataFusionRuntimeEventInterval)
+	}
+
+	if v.DataFusionRuntimeGlobalQueueInterval != nil {
+		ok := object.Key("dataFusionRuntimeGlobalQueueInterval")
+		ok.Integer(*v.DataFusionRuntimeGlobalQueueInterval)
+	}
+
+	if v.DataFusionRuntimeMaxBlockingThreads != nil {
+		ok := object.Key("dataFusionRuntimeMaxBlockingThreads")
+		ok.Integer(*v.DataFusionRuntimeMaxBlockingThreads)
+	}
+
+	if v.DataFusionRuntimeMaxIoEventsPerTick != nil {
+		ok := object.Key("dataFusionRuntimeMaxIoEventsPerTick")
+		ok.Integer(*v.DataFusionRuntimeMaxIoEventsPerTick)
+	}
+
+	if v.DataFusionRuntimeThreadKeepAlive != nil {
+		ok := object.Key("dataFusionRuntimeThreadKeepAlive")
+		if err := awsAwsjson10_serializeDocumentDuration(v.DataFusionRuntimeThreadKeepAlive, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataFusionRuntimeThreadPriority != nil {
+		ok := object.Key("dataFusionRuntimeThreadPriority")
+		ok.Integer(*v.DataFusionRuntimeThreadPriority)
+	}
+
+	if len(v.DataFusionRuntimeType) > 0 {
+		ok := object.Key("dataFusionRuntimeType")
+		ok.String(string(v.DataFusionRuntimeType))
+	}
+
+	if v.DataFusionUseCachedParquetLoader != nil {
+		ok := object.Key("dataFusionUseCachedParquetLoader")
+		ok.Boolean(*v.DataFusionUseCachedParquetLoader)
+	}
+
+	if v.DedicatedCompactor != nil {
+		ok := object.Key("dedicatedCompactor")
+		ok.Boolean(*v.DedicatedCompactor)
+	}
+
+	if v.DeleteGracePeriod != nil {
+		ok := object.Key("deleteGracePeriod")
+		if err := awsAwsjson10_serializeDocumentDuration(v.DeleteGracePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DisableParquetMemCache != nil {
+		ok := object.Key("disableParquetMemCache")
+		ok.Boolean(*v.DisableParquetMemCache)
+	}
+
+	if v.DistinctCacheEvictionInterval != nil {
+		ok := object.Key("distinctCacheEvictionInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.DistinctCacheEvictionInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DistinctValueCacheDisableFromHistory != nil {
+		ok := object.Key("distinctValueCacheDisableFromHistory")
+		ok.Boolean(*v.DistinctValueCacheDisableFromHistory)
+	}
+
+	if v.ExecMemPoolBytes != nil {
+		ok := object.Key("execMemPoolBytes")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.ExecMemPoolBytes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ForceSnapshotMemThreshold != nil {
+		ok := object.Key("forceSnapshotMemThreshold")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.ForceSnapshotMemThreshold, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Gen1Duration != nil {
+		ok := object.Key("gen1Duration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.Gen1Duration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Gen1LookbackDuration != nil {
+		ok := object.Key("gen1LookbackDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.Gen1LookbackDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HardDeleteDefaultDuration != nil {
+		ok := object.Key("hardDeleteDefaultDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.HardDeleteDefaultDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IngestQueryInstances != nil {
+		ok := object.Key("ingestQueryInstances")
+		ok.Integer(*v.IngestQueryInstances)
+	}
+
+	if v.LastCacheEvictionInterval != nil {
+		ok := object.Key("lastCacheEvictionInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.LastCacheEvictionInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LastValueCacheDisableFromHistory != nil {
+		ok := object.Key("lastValueCacheDisableFromHistory")
+		ok.Boolean(*v.LastValueCacheDisableFromHistory)
+	}
+
+	if v.LogFilter != nil {
+		ok := object.Key("logFilter")
+		ok.String(*v.LogFilter)
+	}
+
+	if len(v.LogFormat) > 0 {
+		ok := object.Key("logFormat")
+		ok.String(string(v.LogFormat))
+	}
+
+	if v.MaxHttpRequestSize != nil {
+		ok := object.Key("maxHttpRequestSize")
+		ok.Long(*v.MaxHttpRequestSize)
+	}
+
+	if v.ParquetMemCachePruneInterval != nil {
+		ok := object.Key("parquetMemCachePruneInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.ParquetMemCachePruneInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParquetMemCachePrunePercentage != nil {
+		ok := object.Key("parquetMemCachePrunePercentage")
+		switch {
+		case math.IsNaN(float64(*v.ParquetMemCachePrunePercentage)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.ParquetMemCachePrunePercentage), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.ParquetMemCachePrunePercentage), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.ParquetMemCachePrunePercentage)
+
+		}
+	}
+
+	if v.ParquetMemCacheQueryPathDuration != nil {
+		ok := object.Key("parquetMemCacheQueryPathDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.ParquetMemCacheQueryPathDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParquetMemCacheSize != nil {
+		ok := object.Key("parquetMemCacheSize")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.ParquetMemCacheSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreemptiveCacheAge != nil {
+		ok := object.Key("preemptiveCacheAge")
+		if err := awsAwsjson10_serializeDocumentDuration(v.PreemptiveCacheAge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryFileLimit != nil {
+		ok := object.Key("queryFileLimit")
+		ok.Integer(*v.QueryFileLimit)
+	}
+
+	if v.QueryLogSize != nil {
+		ok := object.Key("queryLogSize")
+		ok.Integer(*v.QueryLogSize)
+	}
+
+	if v.QueryOnlyInstances != nil {
+		ok := object.Key("queryOnlyInstances")
+		ok.Integer(*v.QueryOnlyInstances)
+	}
+
+	if v.ReplicationInterval != nil {
+		ok := object.Key("replicationInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.ReplicationInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetentionCheckInterval != nil {
+		ok := object.Key("retentionCheckInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.RetentionCheckInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshottedWalFilesToKeep != nil {
+		ok := object.Key("snapshottedWalFilesToKeep")
+		ok.Integer(*v.SnapshottedWalFilesToKeep)
+	}
+
+	if v.TableIndexCacheConcurrencyLimit != nil {
+		ok := object.Key("tableIndexCacheConcurrencyLimit")
+		ok.Integer(*v.TableIndexCacheConcurrencyLimit)
+	}
+
+	if v.TableIndexCacheMaxEntries != nil {
+		ok := object.Key("tableIndexCacheMaxEntries")
+		ok.Integer(*v.TableIndexCacheMaxEntries)
+	}
+
+	if v.WalMaxWriteBufferSize != nil {
+		ok := object.Key("walMaxWriteBufferSize")
+		ok.Integer(*v.WalMaxWriteBufferSize)
+	}
+
+	if v.WalReplayConcurrencyLimit != nil {
+		ok := object.Key("walReplayConcurrencyLimit")
+		ok.Integer(*v.WalReplayConcurrencyLimit)
+	}
+
+	if v.WalReplayFailOnError != nil {
+		ok := object.Key("walReplayFailOnError")
+		ok.Boolean(*v.WalReplayFailOnError)
+	}
+
+	if v.WalSnapshotSize != nil {
+		ok := object.Key("walSnapshotSize")
+		ok.Integer(*v.WalSnapshotSize)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentLogDeliveryConfiguration(v *types.LogDeliveryConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1286,6 +1848,38 @@ func awsAwsjson10_serializeDocumentParameters(v types.Parameters, value smithyjs
 		if err := awsAwsjson10_serializeDocumentInfluxDBv2Parameters(&uv.Value, av); err != nil {
 			return err
 		}
+
+	case *types.ParametersMemberInfluxDBv3Core:
+		av := object.Key("InfluxDBv3Core")
+		if err := awsAwsjson10_serializeDocumentInfluxDBv3CoreParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ParametersMemberInfluxDBv3Enterprise:
+		av := object.Key("InfluxDBv3Enterprise")
+		if err := awsAwsjson10_serializeDocumentInfluxDBv3EnterpriseParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v types.PercentOrAbsoluteLong, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PercentOrAbsoluteLongMemberAbsolute:
+		av := object.Key("absolute")
+		av.Long(uv.Value)
+
+	case *types.PercentOrAbsoluteLongMemberPercent:
+		av := object.Key("percent")
+		av.String(uv.Value)
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)

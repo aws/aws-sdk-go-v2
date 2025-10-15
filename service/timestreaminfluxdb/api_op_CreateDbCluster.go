@@ -29,20 +29,10 @@ func (c *Client) CreateDbCluster(ctx context.Context, params *CreateDbClusterInp
 
 type CreateDbClusterInput struct {
 
-	// The amount of storage to allocate for your DB storage type in GiB (gibibytes).
-	//
-	// This member is required.
-	AllocatedStorage *int32
-
 	// The Timestream for InfluxDB DB instance type to run InfluxDB on.
 	//
 	// This member is required.
 	DbInstanceType types.DbInstanceType
-
-	// Specifies the type of cluster to create.
-	//
-	// This member is required.
-	DeploymentType types.ClusterDeploymentType
 
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -51,14 +41,6 @@ type CreateDbClusterInput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The password of the initial admin user created in InfluxDB. This password will
-	// allow you to access the InfluxDB UI to perform various administrative tasks and
-	// also use the InfluxDB CLI to create an operator token. These attributes will be
-	// stored in a secret created in Secrets Manager in your account.
-	//
-	// This member is required.
-	Password *string
 
 	// A list of VPC security group IDs to associate with the Timestream for InfluxDB
 	// cluster.
@@ -72,6 +54,9 @@ type CreateDbClusterInput struct {
 	//
 	// This member is required.
 	VpcSubnetIds []string
+
+	// The amount of storage to allocate for your DB storage type in GiB (gibibytes).
+	AllocatedStorage *int32
 
 	// The name of the initial InfluxDB bucket. All InfluxDB data is stored in a
 	// bucket. A bucket combines the concept of a database and a retention period (the
@@ -96,6 +81,9 @@ type CreateDbClusterInput struct {
 	//   - Influx I/O Included 16000 IOPS
 	DbStorageType types.DbStorageType
 
+	// Specifies the type of cluster to create.
+	DeploymentType types.ClusterDeploymentType
+
 	// Specifies the behavior of failure recovery when the primary node of the cluster
 	// fails.
 	FailoverMode types.FailoverMode
@@ -112,11 +100,17 @@ type CreateDbClusterInput struct {
 	// InfluxDB organization is a workspace for a group of users.
 	Organization *string
 
+	// The password of the initial admin user created in InfluxDB. This password will
+	// allow you to access the InfluxDB UI to perform various administrative tasks and
+	// also use the InfluxDB CLI to create an operator token. These attributes will be
+	// stored in a secret created in Secrets Manager in your account.
+	Password *string
+
 	// The port number on which InfluxDB accepts connections.
 	//
 	// Valid Values: 1024-65535
 	//
-	// Default: 8086
+	// Default: 8086 for InfluxDB v2, 8181 for InfluxDB v3
 	//
 	// Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680
 	Port *int32

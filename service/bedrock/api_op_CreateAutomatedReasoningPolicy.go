@@ -52,6 +52,12 @@ type CreateAutomatedReasoningPolicyInput struct {
 	// about the policy's purpose and the types of validations it performs.
 	Description *string
 
+	// The identifier of the KMS key to use for encrypting the automated reasoning
+	// policy and its associated artifacts. If you don't specify a KMS key, Amazon
+	// Bedrock uses an KMS managed key for encryption. For enhanced security and
+	// control, you can specify a customer managed KMS key.
+	KmsKeyId *string
+
 	// The policy definition that contains the formal logic rules, variables, and
 	// custom variable types used to validate foundation model responses in your
 	// application.

@@ -163,6 +163,19 @@ type CreateDBClusterInput struct {
 	//   - Cannot be a reserved word for the chosen database engine.
 	MasterUsername *string
 
+	// The network type of the cluster.
+	//
+	// The network type is determined by the DBSubnetGroup specified for the cluster.
+	// A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols ( DUAL ).
+	//
+	// For more information, see [DocumentDB clusters in a VPC] in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid Values: IPV4 | DUAL
+	//
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	NetworkType *string
+
 	// The port number on which the instances in the cluster accept connections.
 	Port *int32
 
@@ -218,9 +231,9 @@ type CreateDBClusterInput struct {
 	//
 	// Default value is standard
 	//
-	// When you create a DocumentDB DB cluster with the storage type set to iopt1 , the
-	// storage type is returned in the response. The storage type isn't returned when
-	// you set it to standard .
+	// When you create an Amazon DocumentDB cluster with the storage type set to iopt1
+	// , the storage type is returned in the response. The storage type isn't returned
+	// when you set it to standard .
 	StorageType *string
 
 	// The tags to be assigned to the cluster.

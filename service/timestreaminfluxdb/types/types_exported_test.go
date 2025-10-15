@@ -14,6 +14,12 @@ func ExampleParameters_outputUsage() {
 	case *types.ParametersMemberInfluxDBv2:
 		_ = v.Value // Value is types.InfluxDBv2Parameters
 
+	case *types.ParametersMemberInfluxDBv3Core:
+		_ = v.Value // Value is types.InfluxDBv3CoreParameters
+
+	case *types.ParametersMemberInfluxDBv3Enterprise:
+		_ = v.Value // Value is types.InfluxDBv3EnterpriseParameters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -23,4 +29,28 @@ func ExampleParameters_outputUsage() {
 	}
 }
 
+var _ *types.InfluxDBv3EnterpriseParameters
+var _ *types.InfluxDBv3CoreParameters
 var _ *types.InfluxDBv2Parameters
+
+func ExamplePercentOrAbsoluteLong_outputUsage() {
+	var union types.PercentOrAbsoluteLong
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PercentOrAbsoluteLongMemberAbsolute:
+		_ = v.Value // Value is int64
+
+	case *types.PercentOrAbsoluteLongMemberPercent:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *int64

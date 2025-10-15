@@ -126,6 +126,9 @@ type UpdateDbInstanceOutput struct {
 	// Specifies the DbInstance's role in the cluster.
 	InstanceMode types.InstanceMode
 
+	// Specifies the DbInstance's roles in the cluster.
+	InstanceModes []types.InstanceMode
+
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 

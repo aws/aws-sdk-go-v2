@@ -98,6 +98,19 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// restore request is rejected.
 	KmsKeyId *string
 
+	// The network type of the cluster.
+	//
+	// The network type is determined by the DBSubnetGroup specified for the cluster.
+	// A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols ( DUAL ).
+	//
+	// For more information, see [DocumentDB clusters in a VPC] in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid Values: IPV4 | DUAL
+	//
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	NetworkType *string
+
 	// The port number on which the new cluster accepts connections.
 	//
 	// Constraints: Must be a value from 1150 to 65535 .

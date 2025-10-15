@@ -190,6 +190,10 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
+	// The next time you can modify the Amazon DocumentDB cluster to use the iopt1
+	// storage type.
+	IOOptimizedNextAllowedModificationTime *time.Time
+
 	// If StorageEncrypted is true , the KMS key identifier for the encrypted cluster.
 	KmsKeyId *string
 
@@ -206,6 +210,19 @@ type DBCluster struct {
 
 	// Specifies whether the cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
+
+	// The network type of the cluster.
+	//
+	// The network type is determined by the DBSubnetGroup specified for the cluster.
+	// A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols ( DUAL ).
+	//
+	// For more information, see [DocumentDB clusters in a VPC] in the Amazon DocumentDB Developer Guide.
+	//
+	// Valid Values: IPV4 | DUAL
+	//
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	NetworkType *string
 
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string
@@ -651,6 +668,14 @@ type DBSubnetGroup struct {
 	// Detailed information about one or more subnets within a subnet group.
 	Subnets []Subnet
 
+	// The network type of the DB subnet group.
+	//
+	// Valid Values: IPV4 | DUAL
+	//
+	// A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL).
+	SupportedNetworkTypes []string
+
 	// Provides the virtual private cloud (VPC) ID of the subnet group.
 	VpcId *string
 
@@ -912,7 +937,29 @@ type Parameter struct {
 	// Specifies the name of the parameter.
 	ParameterName *string
 
-	// Specifies the value of the parameter.
+	// Specifies the value of the parameter. Must be one or more of the cluster
+	// parameter's AllowedValues in CSV format:
+	//
+	// Valid values are:
+	//
+	//   - enabled : The cluster accepts secure connections using TLS version 1.0
+	//   through 1.3.
+	//
+	//   - disabled : The cluster does not accept secure connections using TLS.
+	//
+	//   - fips-140-3 : The cluster only accepts secure connections per the
+	//   requirements of the Federal Information Processing Standards (FIPS) publication
+	//   140-3. Only supported starting with Amazon DocumentDB 5.0 (engine version
+	//   3.0.3727) clusters in these regions: ca-central-1, us-west-2, us-east-1,
+	//   us-east-2, us-gov-east-1, us-gov-west-1.
+	//
+	//   - tls1.2+ : The cluster accepts secure connections using TLS version 1.2 and
+	//   above. Only supported starting with Amazon DocumentDB 4.0 (engine version
+	//   2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).
+	//
+	//   - tls1.3+ : The cluster accepts secure connections using TLS version 1.3 and
+	//   above. Only supported starting with Amazon DocumentDB 4.0 (engine version
+	//   2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).
 	ParameterValue *string
 
 	// Indicates the source of the parameter value.

@@ -1191,6 +1191,33 @@ func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
 }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The network type is not supported by either DBSubnetGroup or the DB engine
+// version.
+type NetworkTypeNotSupported struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NetworkTypeNotSupported) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NetworkTypeNotSupported) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NetworkTypeNotSupported) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NetworkTypeNotSupported"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NetworkTypeNotSupported) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource ID was not found.
 type ResourceNotFoundFault struct {
 	Message *string

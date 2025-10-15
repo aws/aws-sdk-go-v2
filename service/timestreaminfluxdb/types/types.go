@@ -40,6 +40,9 @@ type DbClusterSummary struct {
 	// and read operations.
 	Endpoint *string
 
+	// The engine type of your DB cluster.
+	EngineType EngineType
+
 	// Specifies whether the network type of the Timestream for InfluxDB Cluster is
 	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.
@@ -94,6 +97,9 @@ type DbInstanceForClusterSummary struct {
 
 	// Specifies the DB instance's role in the cluster.
 	InstanceMode InstanceMode
+
+	// Specifies the DB instance's roles in the cluster.
+	InstanceModes []InstanceMode
 
 	// Specifies whether the network type of the Timestream for InfluxDB instance is
 	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
@@ -418,6 +424,487 @@ type InfluxDBv2Parameters struct {
 	noSmithyDocumentSerde
 }
 
+// All the customer-modifiable InfluxDB v3 Core parameters in Timestream for
+// InfluxDB.
+type InfluxDBv3CoreParameters struct {
+
+	// Provides custom configuration to DataFusion as a comma-separated list of
+	// key:value pairs.
+	DataFusionConfig *string
+
+	// When multiple parquet files are required in a sorted way (deduplication for
+	// example), specifies the maximum fanout.
+	//
+	// Default: 1000
+	DataFusionMaxParquetFanout *int32
+
+	// Sets the maximum number of DataFusion runtime threads to use.
+	DataFusionNumThreads *int32
+
+	// Disables the LIFO slot of the DataFusion runtime.
+	DataFusionRuntimeDisableLifoSlot *bool
+
+	// Sets the number of scheduler ticks after which the scheduler of the DataFusion
+	// tokio runtime polls for external events–for example: timers, I/O.
+	DataFusionRuntimeEventInterval *int32
+
+	// Sets the number of scheduler ticks after which the scheduler of the DataFusion
+	// runtime polls the global task queue.
+	DataFusionRuntimeGlobalQueueInterval *int32
+
+	// Specifies the limit for additional threads spawned by the DataFusion runtime.
+	DataFusionRuntimeMaxBlockingThreads *int32
+
+	// Configures the maximum number of events processed per tick by the tokio
+	// DataFusion runtime.
+	DataFusionRuntimeMaxIoEventsPerTick *int32
+
+	// Sets a custom timeout for a thread in the blocking pool of the tokio DataFusion
+	// runtime.
+	DataFusionRuntimeThreadKeepAlive *Duration
+
+	// Sets the thread priority for tokio DataFusion runtime workers.
+	//
+	// Default: 10
+	DataFusionRuntimeThreadPriority *int32
+
+	// Specifies the DataFusion tokio runtime type.
+	//
+	// Default: multi-thread
+	DataFusionRuntimeType DataFusionRuntimeType
+
+	// Uses a cached parquet loader when reading parquet files from the object store.
+	DataFusionUseCachedParquetLoader *bool
+
+	// Specifies the grace period before permanently deleting data.
+	//
+	// Default: 24h
+	DeleteGracePeriod *Duration
+
+	// Disables the in-memory Parquet cache. By default, the cache is enabled.
+	DisableParquetMemCache *bool
+
+	// Specifies the interval to evict expired entries from the distinct value cache,
+	// expressed as a human-readable duration–for example: 20s, 1m, 1h.
+	//
+	// Default: 10s
+	DistinctCacheEvictionInterval *Duration
+
+	// Specifies the size of memory pool used during query execution. Can be given as
+	// absolute value in bytes or as a percentage of the total available memory–for
+	// example: 8000000000 or 10%.
+	//
+	// Default: 20%
+	ExecMemPoolBytes PercentOrAbsoluteLong
+
+	// Specifies the threshold for the internal memory buffer. Supports either a
+	// percentage (portion of available memory) or absolute value in MB–for example:
+	// 70% or 100
+	//
+	// Default: 70%
+	ForceSnapshotMemThreshold PercentOrAbsoluteLong
+
+	// Specifies the duration that Parquet files are arranged into. Data timestamps
+	// land each row into a file of this duration. Supported durations are 1m, 5m, and
+	// 10m. These files are known as “generation 1” files that the compactor in
+	// InfluxDB 3 Enterprise can merge into larger generations.
+	//
+	// Default: 10m
+	Gen1Duration *Duration
+
+	// Specifies how far back to look when creating generation 1 Parquet files.
+	//
+	// Default: 24h
+	Gen1LookbackDuration *Duration
+
+	// Sets the default duration for hard deletion of data.
+	//
+	// Default: 90d
+	HardDeleteDefaultDuration *Duration
+
+	// Specifies the interval to evict expired entries from the Last-N-Value cache,
+	// expressed as a human-readable duration–for example: 20s, 1m, 1h.
+	//
+	// Default: 10s
+	LastCacheEvictionInterval *Duration
+
+	// Sets the filter directive for logs.
+	LogFilter *string
+
+	// Defines the message format for logs.
+	//
+	// Default: full
+	LogFormat LogFormats
+
+	// Specifies the maximum size of HTTP requests.
+	//
+	// Default: 10485760
+	MaxHttpRequestSize *int64
+
+	// Sets the interval to check if the in-memory Parquet cache needs to be pruned.
+	//
+	// Default: 1s
+	ParquetMemCachePruneInterval *Duration
+
+	// Specifies the percentage of entries to prune during a prune operation on the
+	// in-memory Parquet cache.
+	//
+	// Default: 0.1
+	ParquetMemCachePrunePercentage *float32
+
+	// Specifies the time window for caching recent Parquet files in memory.
+	//
+	// Default: 5h
+	ParquetMemCacheQueryPathDuration *Duration
+
+	// Specifies the size of the in-memory Parquet cache in megabytes or percentage of
+	// total available memory.
+	//
+	// Default: 20%
+	ParquetMemCacheSize PercentOrAbsoluteLong
+
+	// Specifies the interval to prefetch into the Parquet cache during compaction.
+	//
+	// Default: 3d
+	PreemptiveCacheAge *Duration
+
+	// Limits the number of Parquet files a query can access. If a query attempts to
+	// read more than this limit, InfluxDB 3 returns an error.
+	//
+	// Default: 432
+	QueryFileLimit *int32
+
+	// Defines the size of the query log. Up to this many queries remain in the log
+	// before older queries are evicted to make room for new ones.
+	//
+	// Default: 1000
+	QueryLogSize *int32
+
+	// The interval at which retention policies are checked and enforced. Enter as a
+	// human-readable time–for example: 30m or 1h.
+	//
+	// Default: 30m
+	RetentionCheckInterval *Duration
+
+	// Specifies the number of snapshotted WAL files to retain in the object store.
+	// Flushing the WAL files does not clear the WAL files immediately; they are
+	// deleted when the number of snapshotted WAL files exceeds this number.
+	//
+	// Default: 300
+	SnapshottedWalFilesToKeep *int32
+
+	// Limits the concurrency level for table index cache operations.
+	//
+	// Default: 8
+	TableIndexCacheConcurrencyLimit *int32
+
+	// Specifies the maximum number of entries in the table index cache.
+	//
+	// Default: 1000
+	TableIndexCacheMaxEntries *int32
+
+	// Specifies the maximum number of write requests that can be buffered before a
+	// flush must be executed and succeed.
+	//
+	// Default: 100000
+	WalMaxWriteBufferSize *int32
+
+	// Concurrency limit during WAL replay. Setting this number too high can lead to
+	// OOM. The default is dynamically determined.
+	//
+	// Default: max(num_cpus, 10)
+	WalReplayConcurrencyLimit *int32
+
+	// Determines whether WAL replay should fail when encountering errors.
+	//
+	// Default: false
+	WalReplayFailOnError *bool
+
+	// Defines the number of WAL files to attempt to remove in a snapshot. This,
+	// multiplied by the interval, determines how often snapshots are taken.
+	//
+	// Default: 600
+	WalSnapshotSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for
+// InfluxDB.
+type InfluxDBv3EnterpriseParameters struct {
+
+	// Specifies if the compactor instance should be a standalone instance or not.
+	//
+	// This member is required.
+	DedicatedCompactor *bool
+
+	// Specifies number of instances in the DbCluster which can both ingest and query.
+	//
+	// This member is required.
+	IngestQueryInstances *int32
+
+	// Specifies number of instances in the DbCluster which can only query.
+	//
+	// This member is required.
+	QueryOnlyInstances *int32
+
+	// Defines how often the catalog synchronizes across cluster nodes.
+	//
+	// Default: 10s
+	CatalogSyncInterval *Duration
+
+	// Specifies how often the compactor checks for new compaction work to perform.
+	//
+	// Default: 10s
+	CompactionCheckInterval *Duration
+
+	// Specifies the amount of time that the compactor waits after finishing a
+	// compaction run to delete files marked as needing deletion during that compaction
+	// run.
+	//
+	// Default: 10m
+	CompactionCleanupWait *Duration
+
+	// Specifies the duration of the first level of compaction (gen2). Later levels of
+	// compaction are multiples of this duration. This value should be equal to or
+	// greater than the gen1 duration.
+	//
+	// Default: 20m
+	CompactionGen2Duration *Duration
+
+	// Sets the maximum number of files included in any compaction plan.
+	//
+	// Default: 500
+	CompactionMaxNumFilesPerPlan *int32
+
+	// Specifies a comma-separated list of multiples defining the duration of each
+	// level of compaction. The number of elements in the list determines the number of
+	// compaction levels. The first element specifies the duration of the first level
+	// (gen3); subsequent levels are multiples of the previous level.
+	//
+	// Default: 3,4,6,5
+	CompactionMultipliers *string
+
+	// Specifies the soft limit for the number of rows per file that the compactor
+	// writes. The compactor may write more rows than this limit.
+	//
+	// Default: 1000000
+	CompactionRowLimit *int32
+
+	// Provides custom configuration to DataFusion as a comma-separated list of
+	// key:value pairs.
+	DataFusionConfig *string
+
+	// When multiple parquet files are required in a sorted way (deduplication for
+	// example), specifies the maximum fanout.
+	//
+	// Default: 1000
+	DataFusionMaxParquetFanout *int32
+
+	// Sets the maximum number of DataFusion runtime threads to use.
+	DataFusionNumThreads *int32
+
+	// Disables the LIFO slot of the DataFusion runtime.
+	DataFusionRuntimeDisableLifoSlot *bool
+
+	// Sets the number of scheduler ticks after which the scheduler of the DataFusion
+	// tokio runtime polls for external events–for example: timers, I/O.
+	DataFusionRuntimeEventInterval *int32
+
+	// Sets the number of scheduler ticks after which the scheduler of the DataFusion
+	// runtime polls the global task queue.
+	DataFusionRuntimeGlobalQueueInterval *int32
+
+	// Specifies the limit for additional threads spawned by the DataFusion runtime.
+	DataFusionRuntimeMaxBlockingThreads *int32
+
+	// Configures the maximum number of events processed per tick by the tokio
+	// DataFusion runtime.
+	DataFusionRuntimeMaxIoEventsPerTick *int32
+
+	// Sets a custom timeout for a thread in the blocking pool of the tokio DataFusion
+	// runtime.
+	DataFusionRuntimeThreadKeepAlive *Duration
+
+	// Sets the thread priority for tokio DataFusion runtime workers.
+	//
+	// Default: 10
+	DataFusionRuntimeThreadPriority *int32
+
+	// Specifies the DataFusion tokio runtime type.
+	//
+	// Default: multi-thread
+	DataFusionRuntimeType DataFusionRuntimeType
+
+	// Uses a cached parquet loader when reading parquet files from the object store.
+	DataFusionUseCachedParquetLoader *bool
+
+	// Specifies the grace period before permanently deleting data.
+	//
+	// Default: 24h
+	DeleteGracePeriod *Duration
+
+	// Disables the in-memory Parquet cache. By default, the cache is enabled.
+	DisableParquetMemCache *bool
+
+	// Specifies the interval to evict expired entries from the distinct value cache,
+	// expressed as a human-readable duration–for example: 20s, 1m, 1h.
+	//
+	// Default: 10s
+	DistinctCacheEvictionInterval *Duration
+
+	// Disables populating the distinct value cache from historical data. If disabled,
+	// the cache is still populated with data from the write-ahead log (WAL).
+	DistinctValueCacheDisableFromHistory *bool
+
+	// Specifies the size of memory pool used during query execution. Can be given as
+	// absolute value in bytes or as a percentage of the total available memory–for
+	// example: 8000000000 or 10%.
+	//
+	// Default: 20%
+	ExecMemPoolBytes PercentOrAbsoluteLong
+
+	// Specifies the threshold for the internal memory buffer. Supports either a
+	// percentage (portion of available memory) or absolute value in MB–for example:
+	// 70% or 100
+	//
+	// Default: 70%
+	ForceSnapshotMemThreshold PercentOrAbsoluteLong
+
+	// Specifies the duration that Parquet files are arranged into. Data timestamps
+	// land each row into a file of this duration. Supported durations are 1m, 5m, and
+	// 10m. These files are known as “generation 1” files, which the compactor can
+	// merge into larger generations.
+	//
+	// Default: 10m
+	Gen1Duration *Duration
+
+	// Specifies how far back to look when creating generation 1 Parquet files.
+	//
+	// Default: 24h
+	Gen1LookbackDuration *Duration
+
+	// Sets the default duration for hard deletion of data.
+	//
+	// Default: 90d
+	HardDeleteDefaultDuration *Duration
+
+	// Specifies the interval to evict expired entries from the Last-N-Value cache,
+	// expressed as a human-readable duration–for example: 20s, 1m, 1h.
+	//
+	// Default: 10s
+	LastCacheEvictionInterval *Duration
+
+	// Disables populating the last-N-value cache from historical data. If disabled,
+	// the cache is still populated with data from the write-ahead log (WAL).
+	LastValueCacheDisableFromHistory *bool
+
+	// Sets the filter directive for logs.
+	LogFilter *string
+
+	// Defines the message format for logs.
+	//
+	// Default: full
+	LogFormat LogFormats
+
+	// Specifies the maximum size of HTTP requests.
+	//
+	// Default: 10485760
+	MaxHttpRequestSize *int64
+
+	// Sets the interval to check if the in-memory Parquet cache needs to be pruned.
+	//
+	// Default: 1s
+	ParquetMemCachePruneInterval *Duration
+
+	// Specifies the percentage of entries to prune during a prune operation on the
+	// in-memory Parquet cache.
+	//
+	// Default: 0.1
+	ParquetMemCachePrunePercentage *float32
+
+	// Specifies the time window for caching recent Parquet files in memory.
+	//
+	// Default: 5h
+	ParquetMemCacheQueryPathDuration *Duration
+
+	// Specifies the size of the in-memory Parquet cache in megabytes or percentage of
+	// total available memory.
+	//
+	// Default: 20%
+	ParquetMemCacheSize PercentOrAbsoluteLong
+
+	// Specifies the interval to prefetch into the Parquet cache during compaction.
+	//
+	// Default: 3d
+	PreemptiveCacheAge *Duration
+
+	// Limits the number of Parquet files a query can access. If a query attempts to
+	// read more than this limit, InfluxDB 3 returns an error.
+	//
+	// Default: 432
+	QueryFileLimit *int32
+
+	// Defines the size of the query log. Up to this many queries remain in the log
+	// before older queries are evicted to make room for new ones.
+	//
+	// Default: 1000
+	QueryLogSize *int32
+
+	// Specifies the interval at which data replication occurs between cluster nodes.
+	//
+	// Default: 250ms
+	ReplicationInterval *Duration
+
+	// The interval at which retention policies are checked and enforced. Enter as a
+	// human-readable time–for example: 30m or 1h.
+	//
+	// Default: 30m
+	RetentionCheckInterval *Duration
+
+	// Specifies the number of snapshotted WAL files to retain in the object store.
+	// Flushing the WAL files does not clear the WAL files immediately; they are
+	// deleted when the number of snapshotted WAL files exceeds this number.
+	//
+	// Default: 300
+	SnapshottedWalFilesToKeep *int32
+
+	// Limits the concurrency level for table index cache operations.
+	//
+	// Default: 8
+	TableIndexCacheConcurrencyLimit *int32
+
+	// Specifies the maximum number of entries in the table index cache.
+	//
+	// Default: 1000
+	TableIndexCacheMaxEntries *int32
+
+	// Specifies the maximum number of write requests that can be buffered before a
+	// flush must be executed and succeed.
+	//
+	// Default: 100000
+	WalMaxWriteBufferSize *int32
+
+	// Concurrency limit during WAL replay. Setting this number too high can lead to
+	// OOM. The default is dynamically determined.
+	//
+	// Default: max(num_cpus, 10)
+	WalReplayConcurrencyLimit *int32
+
+	// Determines whether WAL replay should fail when encountering errors.
+	//
+	// Default: false
+	WalReplayFailOnError *bool
+
+	// Defines the number of WAL files to attempt to remove in a snapshot. This,
+	// multiplied by the interval, determines how often snapshots are taken.
+	//
+	// Default: 600
+	WalSnapshotSize *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 type LogDeliveryConfiguration struct {
 
@@ -434,6 +921,8 @@ type LogDeliveryConfiguration struct {
 // The following types satisfy this interface:
 //
 //	ParametersMemberInfluxDBv2
+//	ParametersMemberInfluxDBv3Core
+//	ParametersMemberInfluxDBv3Enterprise
 type Parameters interface {
 	isParameters()
 }
@@ -446,6 +935,54 @@ type ParametersMemberInfluxDBv2 struct {
 }
 
 func (*ParametersMemberInfluxDBv2) isParameters() {}
+
+// All the customer-modifiable InfluxDB v3 Core parameters in Timestream for
+// InfluxDB.
+type ParametersMemberInfluxDBv3Core struct {
+	Value InfluxDBv3CoreParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*ParametersMemberInfluxDBv3Core) isParameters() {}
+
+// All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for
+// InfluxDB.
+type ParametersMemberInfluxDBv3Enterprise struct {
+	Value InfluxDBv3EnterpriseParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*ParametersMemberInfluxDBv3Enterprise) isParameters() {}
+
+// Percent or Absolute Long for InfluxDB parameters
+//
+// The following types satisfy this interface:
+//
+//	PercentOrAbsoluteLongMemberAbsolute
+//	PercentOrAbsoluteLongMemberPercent
+type PercentOrAbsoluteLong interface {
+	isPercentOrAbsoluteLong()
+}
+
+// Absolute long for InfluxDB parameters.
+type PercentOrAbsoluteLongMemberAbsolute struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*PercentOrAbsoluteLongMemberAbsolute) isPercentOrAbsoluteLong() {}
+
+// Percent for InfluxDB parameters.
+type PercentOrAbsoluteLongMemberPercent struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*PercentOrAbsoluteLongMemberPercent) isPercentOrAbsoluteLong() {}
 
 // Configuration for S3 bucket log delivery.
 type S3Configuration struct {
@@ -474,4 +1011,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isParameters() {}
+func (*UnknownUnionMember) isParameters()            {}
+func (*UnknownUnionMember) isPercentOrAbsoluteLong() {}

@@ -73,6 +73,9 @@ type GetDbClusterOutput struct {
 	// and read operations.
 	Endpoint *string
 
+	// The engine type of your DB cluster.
+	EngineType types.EngineType
+
 	// The configured failover mode for the DB cluster.
 	FailoverMode types.FailoverMode
 

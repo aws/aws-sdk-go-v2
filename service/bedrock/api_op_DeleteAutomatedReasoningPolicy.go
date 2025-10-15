@@ -35,6 +35,13 @@ type DeleteAutomatedReasoningPolicyInput struct {
 	// This member is required.
 	PolicyArn *string
 
+	// Specifies whether to force delete the automated reasoning policy even if it has
+	// active resources. When false , Amazon Bedrock validates if all artifacts have
+	// been deleted (e.g. policy version, test case, test result) for a policy before
+	// deletion. When true , Amazon Bedrock will delete the policy and all its
+	// artifacts without validation. Default is false .
+	Force bool
+
 	noSmithyDocumentSerde
 }
 

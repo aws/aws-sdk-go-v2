@@ -794,6 +794,18 @@ func TestCheckSnapshot_CopyVolumes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityManagerDataExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityManagerDataExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservation(context.Background(), nil, func(o *Options) {
@@ -1903,6 +1915,18 @@ func TestCheckSnapshot_CreateVpnGateway(t *testing.T) {
 	_, err := svc.CreateVpnGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateVpnGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCapacityManagerDataExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3151,6 +3175,18 @@ func TestCheckSnapshot_DescribeCapacityBlockStatus(t *testing.T) {
 	_, err := svc.DescribeCapacityBlockStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapacityBlockStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityManagerDataExports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityManagerDataExports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityManagerDataExports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5162,6 +5198,18 @@ func TestCheckSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testing
 	}
 }
 
+func TestCheckSnapshot_DisableCapacityManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableCapacityManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableCapacityManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableEbsEncryptionByDefault(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableEbsEncryptionByDefault(context.Background(), nil, func(o *Options) {
@@ -5594,6 +5642,18 @@ func TestCheckSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing.
 	}
 }
 
+func TestCheckSnapshot_EnableCapacityManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableCapacityManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableCapacityManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableEbsEncryptionByDefault(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableEbsEncryptionByDefault(context.Background(), nil, func(o *Options) {
@@ -5911,6 +5971,42 @@ func TestCheckSnapshot_GetAwsNetworkPerformanceData(t *testing.T) {
 	_, err := svc.GetAwsNetworkPerformanceData(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAwsNetworkPerformanceData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCapacityManagerAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityManagerAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCapacityManagerMetricData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMetricData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityManagerMetricData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCapacityManagerMetricDimensions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMetricDimensions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityManagerMetricDimensions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8366,6 +8462,18 @@ func TestCheckSnapshot_UnmonitorInstances(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCapacityManagerOrganizationsAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityManagerOrganizationsAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCapacityManagerOrganizationsAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSecurityGroupRuleDescriptionsEgress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSecurityGroupRuleDescriptionsEgress(context.Background(), nil, func(o *Options) {
@@ -9126,6 +9234,18 @@ func TestUpdateSnapshot_CopyVolumes(t *testing.T) {
 	_, err := svc.CopyVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CopyVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCapacityManagerDataExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityManagerDataExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10242,6 +10362,18 @@ func TestUpdateSnapshot_CreateVpnGateway(t *testing.T) {
 	_, err := svc.CreateVpnGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateVpnGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCapacityManagerDataExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11490,6 +11622,18 @@ func TestUpdateSnapshot_DescribeCapacityBlockStatus(t *testing.T) {
 	_, err := svc.DescribeCapacityBlockStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityBlockStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityManagerDataExports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityManagerDataExports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityManagerDataExports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13501,6 +13645,18 @@ func TestUpdateSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testin
 	}
 }
 
+func TestUpdateSnapshot_DisableCapacityManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableCapacityManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableCapacityManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableEbsEncryptionByDefault(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableEbsEncryptionByDefault(context.Background(), nil, func(o *Options) {
@@ -13933,6 +14089,18 @@ func TestUpdateSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing
 	}
 }
 
+func TestUpdateSnapshot_EnableCapacityManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableCapacityManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableCapacityManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableEbsEncryptionByDefault(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableEbsEncryptionByDefault(context.Background(), nil, func(o *Options) {
@@ -14250,6 +14418,42 @@ func TestUpdateSnapshot_GetAwsNetworkPerformanceData(t *testing.T) {
 	_, err := svc.GetAwsNetworkPerformanceData(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAwsNetworkPerformanceData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCapacityManagerAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityManagerAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCapacityManagerMetricData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMetricData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityManagerMetricData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCapacityManagerMetricDimensions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMetricDimensions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityManagerMetricDimensions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16698,6 +16902,18 @@ func TestUpdateSnapshot_UnmonitorInstances(t *testing.T) {
 	_, err := svc.UnmonitorInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UnmonitorInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCapacityManagerOrganizationsAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityManagerOrganizationsAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCapacityManagerOrganizationsAccess")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -78,6 +78,12 @@ type GetAutomatedReasoningPolicyOutput struct {
 	// The description of the policy.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the automated
+	// reasoning policy and its associated artifacts. If a KMS key is not provided
+	// during the initial CreateAutomatedReasoningPolicyRequest, the kmsKeyArn won't be
+	// included in the GetAutomatedReasoningPolicyResponse.
+	KmsKeyArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
