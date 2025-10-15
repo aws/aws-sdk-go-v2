@@ -1,0 +1,8 @@
+{
+    "id": "31eb6a20-b3a9-4826-b78f-12a5148d5d30",
+    "type": "bugfix",
+    "description": "Fix the event stream deserialization error of enum type marked with event header trait",
+    "modules": [
+        "."
+    ]
+}
