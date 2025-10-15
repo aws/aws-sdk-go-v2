@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -102,7 +103,39 @@ func (b DefaultNewCommandBuilder) NewCommand(ctx context.Context) (*exec.Cmd, er
 		}
 	}
 
-	cmdArgs = append(cmdArgs, b.Args...)
+	splitQuotedWords := func (s string) []string {
+		var args []string
+		var insideQuote bool
+		current := bytes.NewBufferString("")
+		for i := 0; i < len(s); i++ {
+			c := s[i]
+			if c == '"' {
+				insideQuote = !insideQuote
+			} else if c == ' ' && !insideQuote {
+				if current.Len() > 0 {
+					args = append(args, current.String())
+					current = bytes.NewBufferString("")
+				}
+			} else {
+				current.WriteByte(c)
+			}
+		}
+		if current.Len() > 0 {
+			args = append(args, current.String())
+		}
+		return args
+	}
+
+	if runtime.GOOS == "windows" && len(b.Args) == 1 && strings.Contains(b.Args[0], `"`) {
+		quotedArgs := splitQuotedWords(b.Args[0])
+		for i := 0; i < len(quotedArgs); i++ {
+			fmt.Printf("argument %s\n", quotedArgs[i])
+		}
+		cmdArgs = append(cmdArgs, quotedArgs...)
+	} else {
+		cmdArgs = append(cmdArgs, b.Args...)
+	}
+
 	cmd := exec.CommandContext(ctx, cmdArgs[0], cmdArgs[1:]...)
 	cmd.Env = os.Environ()
 
