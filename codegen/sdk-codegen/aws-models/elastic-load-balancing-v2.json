@@ -1231,7 +1231,7 @@
                 "MutualAuthentication": {
                     "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mutual authentication configuration information.</p>"
+                        "smithy.api#documentation": "<p>[HTTPS listeners] The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -1538,7 +1538,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a rule for the specified listener. The listener must be associated with an\n      Application Load Balancer.</p>\n         <p>Each rule consists of a priority, one or more actions, and one or more conditions. Rules\n      are evaluated in priority order, from the lowest value to the highest value. When the\n      conditions for a rule are met, its actions are performed. If the conditions for no rules are\n      met, the actions for the default rule are performed. For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules\">Listener rules</a> in the <i>Application Load Balancers Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a rule for the specified listener. The listener must be associated with an\n      Application Load Balancer.</p>\n         <p>Each rule consists of a priority, one or more actions, one or more conditions, and\n      up to two optional transforms. Rules are evaluated in priority order, from the lowest value \n      to the highest value. When the conditions for a rule are met, its actions are performed. \n      If the conditions for no rules are met, the actions for the default rule are performed. \n      For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules\">Listener rules</a> in the <i>Application Load Balancers Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a rule",
@@ -1627,6 +1627,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the rule.</p>"
+                    }
+                },
+                "Transforms": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RuleTransformList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform \n      and one URL rewrite transform.</p>"
                     }
                 }
             },
@@ -4257,27 +4263,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -5557,12 +5563,32 @@
                 "Values": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The host names. The maximum size of each name is 128 characters. The comparison is\n      case insensitive. The following wildcard characters are supported: * (matches 0 or more\n      characters) and ? (matches exactly 1 character). You must include at least one \".\" \n      character. You can include only alphabetical characters after the final \".\" character.</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of the strings matches\n      the host name.</p>"
+                        "smithy.api#documentation": "<p>The host names. The maximum length of each string is 128 characters. The comparison is\n      case insensitive. The following wildcard characters are supported: * (matches 0 or more\n      characters) and ? (matches exactly 1 character). You must include at least one \".\" \n      character. You can include only alphabetical characters after the final \".\" character.</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of the strings matches\n      the host name.</p>"
+                    }
+                },
+                "RegexValues": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expressions to compare against the host header. The maximum length of each string is 128 characters.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a host header condition.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#HostHeaderRewriteConfig": {
+            "type": "structure",
+            "members": {
+                "Rewrites": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RewriteConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host header rewrite transform. Each transform consists of a regular expression to match and a replacement string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a host header rewrite transform. This transform matches a pattern in the host header in an HTTP request and replaces it with the specified string.</p>"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#HttpCode": {
@@ -5574,13 +5600,19 @@
                 "HttpHeaderName": {
                     "target": "com.amazonaws.elasticloadbalancingv2#HttpHeaderConditionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the HTTP header field. The maximum size is 40 characters. The header name is\n      case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not\n      supported.</p>\n         <p>You can't use an HTTP header condition to specify the host header. Instead, use a <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#host-conditions\">host condition</a>.</p>"
+                        "smithy.api#documentation": "<p>The name of the HTTP header field. The maximum length is 40 characters. The header name is\n      case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not\n      supported.</p>\n         <p>You can't use an HTTP header condition to specify the host header. Instead, use a <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#host-conditions\">host condition</a>.</p>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strings to compare against the value of the HTTP header. The maximum size of\n      each string is 128 characters. The comparison strings are case insensitive. The following\n      wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1\n      character).</p>\n         <p>If the same header appears multiple times in the request, we search them in order until a\n      match is found.</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of the strings matches\n      the value of the HTTP header. To require that all of the strings are a match, create one\n      condition per string.</p>"
+                        "smithy.api#documentation": "<p>The strings to compare against the value of the HTTP header. The maximum length of\n      each string is 128 characters. The comparison strings are case insensitive. The following\n      wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1\n      character).</p>\n         <p>If the same header appears multiple times in the request, we search them in order until a\n      match is found.</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of the strings matches\n      the value of the HTTP header. To require that all of the strings are a match, create one\n      condition per string.</p>"
+                    }
+                },
+                "RegexValues": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expression to compare against the HTTP header. The maximum length of each string is 128 characters.</p>"
                     }
                 }
             },
@@ -5597,7 +5629,7 @@
                 "Values": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the request method. The maximum size is 40 characters. The allowed characters\n      are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not\n      supported; therefore, the method name must be an exact match.</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of the strings matches\n      the HTTP request method. We recommend that you route GET and HEAD requests in the same way,\n      because the response to a HEAD request may be cached.</p>"
+                        "smithy.api#documentation": "<p>The name of the request method. The maximum length is 40 characters. The allowed characters\n      are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not\n      supported; therefore, the method name must be an exact match.</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of the strings matches\n      the HTTP request method. We recommend that you route GET and HEAD requests in the same way,\n      because the response to a HEAD request may be cached.</p>"
                     }
                 }
             },
@@ -5843,7 +5875,7 @@
                 "Name": {
                     "target": "com.amazonaws.elasticloadbalancingv2#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the limit. The possible values are:</p>\n         <ul>\n            <li>\n               <p>application-load-balancers</p>\n            </li>\n            <li>\n               <p>condition-values-per-alb-rule</p>\n            </li>\n            <li>\n               <p>condition-wildcards-per-alb-rule</p>\n            </li>\n            <li>\n               <p>gateway-load-balancers</p>\n            </li>\n            <li>\n               <p>gateway-load-balancers-per-vpc</p>\n            </li>\n            <li>\n               <p>geneve-target-groups</p>\n            </li>\n            <li>\n               <p>listeners-per-application-load-balancer</p>\n            </li>\n            <li>\n               <p>listeners-per-network-load-balancer</p>\n            </li>\n            <li>\n               <p>network-load-balancers</p>\n            </li>\n            <li>\n               <p>rules-per-application-load-balancer</p>\n            </li>\n            <li>\n               <p>target-groups</p>\n            </li>\n            <li>\n               <p>target-groups-per-action-on-application-load-balancer</p>\n            </li>\n            <li>\n               <p>target-groups-per-action-on-network-load-balancer</p>\n            </li>\n            <li>\n               <p>target-groups-per-application-load-balancer</p>\n            </li>\n            <li>\n               <p>targets-per-application-load-balancer</p>\n            </li>\n            <li>\n               <p>targets-per-availability-zone-per-gateway-load-balancer</p>\n            </li>\n            <li>\n               <p>targets-per-availability-zone-per-network-load-balancer</p>\n            </li>\n            <li>\n               <p>targets-per-network-load-balancer</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the limit.</p>"
                     }
                 },
                 "Max": {
@@ -6165,7 +6197,7 @@
                 "Key": {
                     "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deletion_protection.enabled</code> - Indicates whether deletion protection is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load\n          balancing is enabled. The possible values are <code>true</code> and <code>false</code>.\n          The default for Network Load Balancers and Gateway Load Balancers is <code>false</code>. \n          The default for Application Load Balancers is <code>true</code>, and can't be changed.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by both Application Load Balancers and Network Load\n      Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs.\n          This attribute is required if access logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          access logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv6.deny_all_igw_traffic</code> - Blocks internet gateway (IGW) access to the\n          load balancer. It is set to <code>false</code> for internet-facing load balancers and\n            <code>true</code> for internal load balancers, preventing unintended access to your\n          internal load balancer through an internet gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>zonal_shift.config.enabled</code> - Indicates whether zonal shift is \n          enabled. The possible values are <code>true</code> and <code>false</code>. The \n          default is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Application Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The\n          valid range is 1-4000 seconds. The default is 60 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>client_keep_alive.seconds</code> - The client keep alive value, in seconds. The \n          valid range is 60-604800 seconds. The default is 3600 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.enabled</code> - Indicates whether connection logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.bucket</code> - The name of the S3 bucket for the connection logs.\n          This attribute is required if connection logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          connection logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.desync_mitigation_mode</code> - Determines how the load balancer\n          handles requests that might pose a security risk to your application. The possible values\n          are <code>monitor</code>, <code>defensive</code>, and <code>strictest</code>. The default\n          is <code>defensive</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.drop_invalid_header_fields.enabled</code> - Indicates whether HTTP\n          headers with invalid header fields are removed by the load balancer (<code>true</code>) or\n          routed to targets (<code>false</code>). The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.preserve_host_header.enabled</code> - Indicates whether the\n          Application Load Balancer should preserve the <code>Host</code> header in the HTTP request\n          and send it to the target without any change. The possible values are <code>true</code>\n          and <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.x_amzn_tls_version_and_cipher_suite.enabled</code> - Indicates\n          whether the two headers (<code>x-amzn-tls-version</code> and\n            <code>x-amzn-tls-cipher-suite</code>), which contain information about the negotiated\n          TLS version and cipher suite, are added to the client request before sending it to the\n          target. The <code>x-amzn-tls-version</code> header has information about the TLS protocol\n          version negotiated with the client, and the <code>x-amzn-tls-cipher-suite</code> header\n          has information about the cipher suite negotiated with the client. Both headers are in\n          OpenSSL format. The possible values for the attribute are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_client_port.enabled</code> - Indicates whether the\n            <code>X-Forwarded-For</code> header should preserve the source port that the client used\n          to connect to the load balancer. The possible values are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_header_processing.mode</code> - Enables you to modify,\n          preserve, or remove the <code>X-Forwarded-For</code> header in the HTTP request before the\n          Application Load Balancer sends the request to the target. The possible values are\n            <code>append</code>, <code>preserve</code>, and <code>remove</code>. The default is\n            <code>append</code>.</p>\n               <ul>\n                  <li>\n                     <p>If the value is <code>append</code>, the Application Load Balancer adds the client\n              IP address (of the last hop) to the <code>X-Forwarded-For</code> header in the HTTP\n              request before it sends it to targets.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>preserve</code> the Application Load Balancer preserves the\n                <code>X-Forwarded-For</code> header in the HTTP request, and sends it to targets\n              without any change.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>remove</code>, the Application Load Balancer removes the\n                <code>X-Forwarded-For</code> header in the HTTP request before it sends it to\n              targets.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The possible\n          values are <code>true</code> and <code>false</code>. The default is <code>true</code>.\n          Elastic Load Balancing requires that message header names contain only alphanumeric\n          characters and hyphens.</p>\n            </li>\n            <li>\n               <p>\n                  <code>waf.fail_open.enabled</code> - Indicates whether to allow a WAF-enabled load\n          balancer to route requests to targets if it is unable to forward the request to Amazon Web Services WAF. The possible values are <code>true</code> and <code>false</code>. The\n          default is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>dns_record.client_routing_policy</code> - Indicates how traffic is \n          distributed among the load balancer Availability Zones. The possible values are \n          <code>availability_zone_affinity</code> with 100 percent zonal affinity, \n          <code>partial_availability_zone_affinity</code> with 85 percent zonal affinity, \n          and <code>any_availability_zone</code> with 0 percent zonal affinity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>secondary_ips.auto_assigned.per_subnet</code> - The number of secondary\n            IP addresses to configure for your load balancer nodes. Use to address port \n            allocation errors if you can't add targets. The valid range is 0 to 7. The \n            default is 0. After you set this value, you can't decrease it.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attributes are supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deletion_protection.enabled</code> - Indicates whether deletion protection is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load\n          balancing is enabled. The possible values are <code>true</code> and <code>false</code>.\n          The default for Network Load Balancers and Gateway Load Balancers is <code>false</code>. \n          The default for Application Load Balancers is <code>true</code>, and can't be changed.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by both Application Load Balancers and Network Load\n      Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>access_logs.s3.enabled</code> - Indicates whether access logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.bucket</code> - The name of the S3 bucket for the access logs.\n          This attribute is required if access logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          access logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv6.deny_all_igw_traffic</code> - Blocks internet gateway (IGW) access to the\n          load balancer. It is set to <code>false</code> for internet-facing load balancers and\n            <code>true</code> for internal load balancers, preventing unintended access to your\n          internal load balancer through an internet gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>zonal_shift.config.enabled</code> - Indicates whether zonal shift is \n          enabled. The possible values are <code>true</code> and <code>false</code>. The \n          default is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Application Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>idle_timeout.timeout_seconds</code> - The idle timeout value, in seconds. The\n          valid range is 1-4000 seconds. The default is 60 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>client_keep_alive.seconds</code> - The client keep alive value, in seconds. The \n          valid range is 60-604800 seconds. The default is 3600 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.enabled</code> - Indicates whether connection logs are enabled. The\n          value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.bucket</code> - The name of the S3 bucket for the connection logs.\n          This attribute is required if connection logs are enabled. The bucket must exist in the same\n          region as the load balancer and have a bucket policy that grants Elastic Load Balancing\n          permissions to write to the bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connection_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the\n          connection logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.desync_mitigation_mode</code> - Determines how the load balancer\n          handles requests that might pose a security risk to your application. The possible values\n          are <code>monitor</code>, <code>defensive</code>, and <code>strictest</code>. The default\n          is <code>defensive</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.drop_invalid_header_fields.enabled</code> - Indicates whether HTTP\n          headers with invalid header fields are removed by the load balancer (<code>true</code>) or\n          routed to targets (<code>false</code>). The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.preserve_host_header.enabled</code> - Indicates whether the\n          Application Load Balancer should preserve the <code>Host</code> header in the HTTP request\n          and send it to the target without any change. The possible values are <code>true</code>\n          and <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.x_amzn_tls_version_and_cipher_suite.enabled</code> - Indicates\n          whether the two headers (<code>x-amzn-tls-version</code> and\n            <code>x-amzn-tls-cipher-suite</code>), which contain information about the negotiated\n          TLS version and cipher suite, are added to the client request before sending it to the\n          target. The <code>x-amzn-tls-version</code> header has information about the TLS protocol\n          version negotiated with the client, and the <code>x-amzn-tls-cipher-suite</code> header\n          has information about the cipher suite negotiated with the client. Both headers are in\n          OpenSSL format. The possible values for the attribute are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_client_port.enabled</code> - Indicates whether the\n            <code>X-Forwarded-For</code> header should preserve the source port that the client used\n          to connect to the load balancer. The possible values are <code>true</code> and\n            <code>false</code>. The default is <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http.xff_header_processing.mode</code> - Enables you to modify,\n          preserve, or remove the <code>X-Forwarded-For</code> header in the HTTP request before the\n          Application Load Balancer sends the request to the target. The possible values are\n            <code>append</code>, <code>preserve</code>, and <code>remove</code>. The default is\n            <code>append</code>.</p>\n               <ul>\n                  <li>\n                     <p>If the value is <code>append</code>, the Application Load Balancer adds the client\n              IP address (of the last hop) to the <code>X-Forwarded-For</code> header in the HTTP\n              request before it sends it to targets.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>preserve</code> the Application Load Balancer preserves the\n                <code>X-Forwarded-For</code> header in the HTTP request, and sends it to targets\n              without any change.</p>\n                  </li>\n                  <li>\n                     <p>If the value is <code>remove</code>, the Application Load Balancer removes the\n                <code>X-Forwarded-For</code> header in the HTTP request before it sends it to\n              targets.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>routing.http2.enabled</code> - Indicates whether clients can connect to the load\n          balancer using HTTP/2. If <code>true</code>, clients can connect using HTTP/2 or HTTP/1.1.\n          However, all client requests are subject to the stricter HTTP/2 header validation rules.\n          For example, message header names must contain only alphanumeric characters and hyphens.\n          If <code>false</code>, clients must connect using HTTP/1.1. The default is\n            <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>waf.fail_open.enabled</code> - Indicates whether to allow a WAF-enabled load\n          balancer to route requests to targets if it is unable to forward the request to Amazon Web Services WAF. The possible values are <code>true</code> and <code>false</code>. The\n          default is <code>false</code>.</p>\n            </li>\n         </ul>\n         <p>The following attributes are supported by only Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>dns_record.client_routing_policy</code> - Indicates how traffic is \n          distributed among the load balancer Availability Zones. The possible values are \n          <code>availability_zone_affinity</code> with 100 percent zonal affinity, \n          <code>partial_availability_zone_affinity</code> with 85 percent zonal affinity, \n          and <code>any_availability_zone</code> with 0 percent zonal affinity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>secondary_ips.auto_assigned.per_subnet</code> - The number of secondary\n            IP addresses to configure for your load balancer nodes. Use to address port \n            allocation errors if you can't add targets. The valid range is 0 to 7. The \n            default is 0. After you set this value, you can't decrease it.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -6795,7 +6827,7 @@
                 "MutualAuthentication": {
                     "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mutual authentication configuration information.</p>"
+                        "smithy.api#documentation": "<p>[HTTPS listeners] The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -7105,6 +7137,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The actions.</p>"
                     }
+                },
+                "Transforms": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RuleTransformList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform \n      and one URL rewrite transform. If you specify <code>Transforms</code>, you can't specify <code>ResetTransforms</code>.</p>"
+                    }
+                },
+                "ResetTransforms": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ResetTransforms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to remove all transforms from the rule. If you specify <code>ResetTransforms</code>, \n      you can't specify <code>Transforms</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7304,7 +7348,7 @@
                 "HealthCheckEnabled": {
                     "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether health checks are enabled.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether health checks are enabled. If the target type is <code>lambda</code>,\n      health checks are disabled by default but can be enabled. If the target type is\n      <code>instance</code>, <code>ip</code>, or <code>alb</code>, health checks are always\n      enabled and can't be disabled.</p>"
                     }
                 },
                 "HealthCheckIntervalSeconds": {
@@ -7522,7 +7566,13 @@
                 "Values": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path patterns to compare against the request URL. The maximum size of each\n      string is 128 characters. The comparison is case sensitive. The following wildcard characters\n      are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of them matches the\n      request URL. The path pattern is compared only to the path of the URL, not to its query\n      string. To compare against the query string, use a <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions\">query string condition</a>.</p>"
+                        "smithy.api#documentation": "<p>The path patterns to compare against the request URL. The maximum length of each\n      string is 128 characters. The comparison is case sensitive. The following wildcard characters\n      are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).</p>\n         <p>If you specify multiple strings, the condition is satisfied if one of them matches the\n      request URL. The path pattern is compared only to the path of the URL, not to its query\n      string. To compare against the query string, use a <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions\">query string condition</a>.</p>"
+                    }
+                },
+                "RegexValues": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expressions to compare against the request URL. The maximum length of each string is 128 characters.</p>"
                     }
                 }
             },
@@ -7640,7 +7690,7 @@
                 "Values": {
                     "target": "com.amazonaws.elasticloadbalancingv2#QueryStringKeyValuePairList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key/value pairs or values to find in the query string. The maximum size of\n      each string is 128 characters. The comparison is case insensitive. The following wildcard\n      characters are supported: * (matches 0 or more characters) and ? (matches exactly 1\n      character). To search for a literal '*' or '?' character in a query string, you must escape\n      these characters in <code>Values</code> using a '\\' character.</p>\n         <p>If you specify multiple key/value pairs or values, the condition is satisfied if one of\n      them is found in the query string.</p>"
+                        "smithy.api#documentation": "<p>The key/value pairs or values to find in the query string. The maximum length of\n      each string is 128 characters. The comparison is case insensitive. The following wildcard\n      characters are supported: * (matches 0 or more characters) and ? (matches exactly 1\n      character). To search for a literal '*' or '?' character in a query string, you must escape\n      these characters in <code>Values</code> using a '\\' character.</p>\n         <p>If you specify multiple key/value pairs or values, the condition is satisfied if one of\n      them is found in the query string.</p>"
                     }
                 }
             },
@@ -8064,6 +8114,9 @@
         "com.amazonaws.elasticloadbalancingv2#ResetCapacityReservation": {
             "type": "boolean"
         },
+        "com.amazonaws.elasticloadbalancingv2#ResetTransforms": {
+            "type": "boolean"
+        },
         "com.amazonaws.elasticloadbalancingv2#ResourceArn": {
             "type": "string"
         },
@@ -8199,6 +8252,36 @@
                 }
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#RewriteConfig": {
+            "type": "structure",
+            "members": {
+                "Regex": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#StringValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The regular expression to match in the input string. The maximum length of the string is 1,024 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Replace": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#StringValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. \n      You can specify capture groups in the regular expression (for example, $1 and $2).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a rewrite transform. This transform matches a pattern and replaces it with the specified string.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RewriteConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#RewriteConfig"
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#Rule": {
             "type": "structure",
             "members": {
@@ -8230,6 +8313,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#IsDefault",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether this is the default rule.</p>"
+                    }
+                },
+                "Transforms": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RuleTransformList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transforms for the rule.</p>"
                     }
                 }
             },
@@ -8296,6 +8385,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information for a source IP condition. Specify only when <code>Field</code> is\n        <code>source-ip</code>.</p>"
                     }
+                },
+                "RegexValues": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expressions to match against the condition field. The maximum length of each string is 128 characters.\n      Specify only when <code>Field</code> is <code>http-header</code>, <code>host-header</code>, or <code>path-pattern</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8358,6 +8453,40 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the priorities for the rules for a listener.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RuleTransform": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TransformTypeEnum",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of transform. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>host-header-rewrite</code> - Rewrite the host header.</p>\n            </li>\n            <li>\n               <p>\n                  <code>url-rewrite</code> - Rewrite the request URL.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostHeaderRewriteConfig": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#HostHeaderRewriteConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a host header rewrite transform. This transform modifies the host header in an HTTP request.\n        Specify only when <code>Type</code> is <code>host-header-rewrite</code>.</p>"
+                    }
+                },
+                "UrlRewriteConfig": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#UrlRewriteConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a URL rewrite transform. This transform modifies the request URL.\n      Specify only when <code>Type</code> is <code>url-rewrite</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a transform to apply to requests that match a rule. Transforms are applied to requests before they are sent to targets.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#RuleTransformList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#RuleTransform"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#Rules": {
@@ -8674,7 +8803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the Availability Zones for the specified public subnets for the specified\n      Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets replace the\n      previously enabled subnets.</p>\n         <p>When you specify subnets for a Network Load Balancer, or Gateway Load Balancer you must include all subnets that\n      were enabled previously, with their existing configurations, plus any additional\n      subnets.</p>",
+                "smithy.api#documentation": "<p>Enables the Availability Zones for the specified public subnets for the specified\n      Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets \n      replace the previously enabled subnets.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To enable Availability Zones for a load balancer",
@@ -8716,7 +8845,7 @@
                 "Subnets": {
                     "target": "com.amazonaws.elasticloadbalancingv2#Subnets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You\n      must specify either subnets or subnet mappings.</p>\n         <p>[Application Load Balancers] You must specify subnets from at least two Availability\n      Zones.</p>\n         <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>\n         <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local\n      Zones.</p>\n         <p>[Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more \n      Availability Zones.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You\n      must specify either subnets or subnet mappings.</p>\n         <p>[Application Load Balancers] You must specify subnets from at least two Availability\n      Zones.</p>\n         <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>\n         <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local\n      Zones.</p>\n         <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>\n         <p>[Gateway Load Balancers] You can specify subnets from one or more Availability Zones.\n      You must include all subnets that were enabled previously, with their existing configurations, \n      plus any additional subnets.</p>"
                     }
                 },
                 "SubnetMappings": {
@@ -9821,6 +9950,23 @@
         "com.amazonaws.elasticloadbalancingv2#TotalRevokedEntries": {
             "type": "long"
         },
+        "com.amazonaws.elasticloadbalancingv2#TransformTypeEnum": {
+            "type": "enum",
+            "members": {
+                "HOST_HEADER_REWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host-header-rewrite"
+                    }
+                },
+                "URL_REWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "url-rewrite"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#TrustStore": {
             "type": "structure",
             "members": {
@@ -10068,6 +10214,20 @@
                 "smithy.api#documentation": "<p>The specified protocol is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#UrlRewriteConfig": {
+            "type": "structure",
+            "members": {
+                "Rewrites": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#RewriteConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL rewrite transform to apply to the request. The transform consists of a regular expression to match and a replacement string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a URL rewrite transform. This transform matches a pattern in the request URL and replaces it with the specified string.</p>"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#VpcId": {

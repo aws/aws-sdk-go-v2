@@ -1730,7 +1730,7 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is\n            not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid system snapshot in the\n                    <i>available</i> state.</p>\n            </li>\n            <li>\n               <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>\n            </li>\n            <li>\n               <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid cluster snapshot ARN.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is\n            not case sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid cluster snapshot in the\n                    <i>available</i> state.</p>\n            </li>\n            <li>\n               <p>If the source cluster snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>\n            </li>\n            <li>\n               <p>If the source cluster snapshot is in a different Amazon Web Services Region or owned by another Amazon Web Services account, specify the snapshot ARN.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1839,6 +1839,9 @@
                 },
                 {
                     "target": "com.amazonaws.docdb#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#NetworkTypeNotSupported"
                 },
                 {
                     "target": "com.amazonaws.docdb#StorageQuotaExceededFault"
@@ -1978,7 +1981,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>\n         <note>\n            <p>When you create a DocumentDB DB cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n                    in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>\n         <note>\n            <p>When you create an Amazon DocumentDB cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n                    in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
                     }
                 },
                 "ServerlessV2ScalingConfiguration": {
@@ -1997,6 +2000,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.\n            This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the DB cluster.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. \n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. \n            If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. \n            Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
                     }
                 }
             },
@@ -2525,7 +2534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>\n         <p></p>\n         <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>\n         <note>\n            <p>This action only applies to Amazon DocumentDB clusters.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions. \n            The global cluster contains one primary cluster with read-write capability, and up-to 10 read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>\n         <p></p>\n         <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. \n            Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>\n         <note>\n            <p>This action only applies to Amazon DocumentDB clusters.</p>\n         </note>"
             }
         },
         "com.amazonaws.docdb#CreateGlobalClusterMessage": {
@@ -2787,6 +2796,12 @@
                         "smithy.api#documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is\n            enabled, the cluster cannot be deleted unless it is modified and\n                <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>\n            protects clusters from being accidentally deleted.</p>"
                     }
                 },
+                "IOOptimizedNextAllowedModificationTime": {
+                    "target": "com.amazonaws.docdb#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next time you can modify the Amazon DocumentDB cluster to use the iopt1 storage type.</p>"
+                    }
+                },
                 "StorageType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
@@ -2803,6 +2818,12 @@
                     "target": "com.amazonaws.docdb#ClusterMasterUserSecret",
                     "traits": {
                         "smithy.api#documentation": "<p>The secret managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the master user password.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
                     }
                 }
             },
@@ -3849,6 +3870,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the DB subnet group.</p>"
+                    }
+                },
+                "SupportedNetworkTypes": {
+                    "target": "com.amazonaws.docdb#NetworkTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB subnet group.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>\n         <p>A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL).</p>"
                     }
                 }
             },
@@ -6532,6 +6559,9 @@
                     "target": "com.amazonaws.docdb#InvalidVPCNetworkStateFault"
                 },
                 {
+                    "target": "com.amazonaws.docdb#NetworkTypeNotSupported"
+                },
+                {
                     "target": "com.amazonaws.docdb#StorageQuotaExceededFault"
                 }
             ],
@@ -6619,7 +6649,7 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n         <p>Constraints: You must allow major version upgrades when specifying a value for the\n             <code>EngineVersion</code> parameter that is a different major version than the DB\n             cluster's current version.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the cluster's current version.</p>\n            </li>\n            <li>\n               <p>Since some parameters are version specific, changing them requires executing a new <code>ModifyDBCluster</code> API call after the in-place MVU completes.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Performing an MVU directly impacts the following parameters:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>MasterUserPassword</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>NewDBClusterIdentifier</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>VpcSecurityGroupIds</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Port</code>\n                  </p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "DeletionProtection": {
@@ -6656,6 +6686,12 @@
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the master user password.</p>\n         <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster. \n            The secret value contains the updated password.</p>\n         <p>Constraint: You must apply the change immediately when rotating the master user password.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
                     }
                 }
             },
@@ -7153,6 +7189,29 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.docdb#NetworkTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdb#String"
+            }
+        },
+        "com.amazonaws.docdb#NetworkTypeNotSupported": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.docdb#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NetworkTypeNotSupported",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The network type is not supported by either <code>DBSubnetGroup</code> or the DB engine version.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.docdb#OrderableDBInstanceOption": {
             "type": "structure",
             "members": {
@@ -7245,7 +7304,7 @@
                 "ParameterValue": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the value of the parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies the value of the parameter.\n            Must be one or more of the cluster parameter's <code>AllowedValues</code> in CSV format:</p>\n         <p>Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code>: The cluster accepts secure connections using TLS version 1.0 through 1.3. </p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code>: The cluster does not accept secure connections using TLS. </p>\n            </li>\n            <li>\n               <p>\n                  <code>fips-140-3</code>: The cluster only accepts secure connections per the requirements of the Federal Information Processing Standards (FIPS) publication 140-3.\n                    Only supported starting with Amazon DocumentDB 5.0 (engine version 3.0.3727) clusters in these regions: ca-central-1, us-west-2, us-east-1, us-east-2, us-gov-east-1, us-gov-west-1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tls1.2+</code>: The cluster accepts secure connections using TLS version 1.2 and above.\n                    Only supported starting with Amazon DocumentDB 4.0 (engine version 2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tls1.3+</code>: The cluster accepts secure connections using TLS version 1.3 and above.\n                    Only supported starting with Amazon DocumentDB 4.0 (engine version 2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Description": {
@@ -7872,6 +7931,9 @@
                     "target": "com.amazonaws.docdb#KMSKeyNotAccessibleFault"
                 },
                 {
+                    "target": "com.amazonaws.docdb#NetworkTypeNotSupported"
+                },
+                {
                     "target": "com.amazonaws.docdb#StorageQuotaExceededFault"
                 }
             ],
@@ -7977,6 +8039,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -8045,6 +8113,9 @@
                 },
                 {
                     "target": "com.amazonaws.docdb#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#NetworkTypeNotSupported"
                 },
                 {
                     "target": "com.amazonaws.docdb#StorageQuotaExceededFault"
@@ -8143,6 +8214,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
                     }
                 }
             },

@@ -1445,6 +1445,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the access log configuration for the bucket.</p>"
                     }
+                },
+                "cors": {
+                    "target": "com.amazonaws.lightsail#BucketCorsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of cross-origin resource sharing (CORS) rules that identify origins and the HTTP methods that can be executed on your bucket. This field is only included in the response when CORS configuration is requested or when updating CORS configuration. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html\">Configuring cross-origin resource sharing (CORS)</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1536,6 +1542,117 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lightsail#BucketBundle"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsAllowedHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#string"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsAllowedMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(DELETE|GET|HEAD|POST|PUT)$"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsAllowedMethods": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#BucketCorsAllowedMethod"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsAllowedOrigins": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#string"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsConfig": {
+            "type": "structure",
+            "members": {
+                "rules": {
+                    "target": "com.amazonaws.lightsail#BucketCorsRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of origins and methods (cross-origin access that you want to allow). You can add up to 20 rules to the configuration. The total size is limited to 64 KB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the cross-origin resource sharing (CORS) configuration for a Lightsail bucket. CORS defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.\n        For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html\">Configuring cross-origin resource sharing (CORS)</a>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsExposeHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#string"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsRule": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.lightsail#BucketCorsRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the CORS rule. The ID value can be up to 255 characters long. The IDs help you find a rule in the configuration.</p>"
+                    }
+                },
+                "allowedMethods": {
+                    "target": "com.amazonaws.lightsail#BucketCorsAllowedMethods",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP methods that are allowed when accessing the bucket from the specified origin. Each CORS rule must identify at least one origin and one method.</p>\n         <p>You can use the following HTTP methods:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GET</code> - Retrieves data from the server, such as downloading files or viewing content.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUT</code> - Uploads or replaces data on the server, such as uploading new files.</p>\n            </li>\n            <li>\n               <p>\n                  <code>POST</code> - Sends data to the server for processing, such as submitting forms or creating new resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code> - Removes data from the server, such as deleting files or resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEAD</code> - Retrieves only the headers from the server without the actual content, useful for checking if a resource exists.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowedOrigins": {
+                    "target": "com.amazonaws.lightsail#BucketCorsAllowedOrigins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more origins you want customers to be able to access the bucket from. Each CORS rule must identify at least one origin and one method.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowedHeaders": {
+                    "target": "com.amazonaws.lightsail#BucketCorsAllowedHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Headers that are specified in the <code>Access-Control-Request-Headers</code> header. These headers are allowed in a preflight <code>OPTIONS</code> request. In response to any preflight <code>OPTIONS</code> request, Amazon S3 returns any requested headers that are allowed.</p>"
+                    }
+                },
+                "exposeHeaders": {
+                    "target": "com.amazonaws.lightsail#BucketCorsExposeHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p>"
+                    }
+                },
+                "maxAgeSeconds": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in seconds that your browser is to cache the preflight response for the specified resource. A CORS rule can have only one <code>maxAgeSeconds</code> element.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a cross-origin resource sharing (CORS) rule for a Lightsail bucket. CORS rules specify which origins are allowed to access the bucket, which HTTP methods are allowed, and other access control information. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html\">Configuring cross-origin resource sharing (CORS)</a>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsRuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.lightsail#BucketCorsRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#BucketCorsRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.lightsail#BucketList": {
@@ -5155,7 +5272,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance\n      your application, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-lightsail-instances-for-load-balancing\">Configure your Lightsail instances for load balancing</a>. You can create up to 5\n      load balancers per AWS Region in your account.</p>\n         <p>When you create a load balancer, you can specify a unique name and port settings. To\n      change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code>\n      operation.</p>\n         <p>The <code>create load balancer</code> operation supports tag-based access control via\n      request tags. For more information, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance\n      your application, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-lightsail-instances-for-load-balancing\">Configure your Lightsail instances for load balancing</a>. You can create up to 10\n      load balancers per AWS Region in your account.</p>\n         <p>When you create a load balancer, you can specify a unique name and port settings. To\n      change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code>\n      operation.</p>\n         <p>The <code>create load balancer</code> operation supports tag-based access control via\n      request tags. For more information, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateLoadBalancer",
@@ -9419,6 +9536,12 @@
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether to include Lightsail instances that were given\n      access to the bucket using the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html\">SetResourceAccessForBucket</a>\n      action.</p>"
+                    }
+                },
+                "includeCors": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include Lightsail bucket CORS configuration in the response. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html\">Configuring cross-origin resource sharing (CORS)</a>.</p>\n         <note>\n            <p>This parameter is only supported when getting a single bucket with <code>bucketName</code> specified. The default value for this parameter is <code>False</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -16121,27 +16244,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -23128,6 +23251,12 @@
                     "target": "com.amazonaws.lightsail#BucketAccessLogConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the access log configuration for the bucket.</p>"
+                    }
+                },
+                "cors": {
+                    "target": "com.amazonaws.lightsail#BucketCorsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the cross-origin resource sharing (CORS) configuration for your bucket. If a CORS configuration exists, it is replaced with the specified configuration. For AWS CLI operations, this parameter can also be passed as a file. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html\">Configuring cross-origin resource sharing (CORS)</a>.</p>\n         <note>\n            <p>CORS information is only returned in a response when you update the CORS policy.</p>\n         </note>"
                     }
                 }
             },
