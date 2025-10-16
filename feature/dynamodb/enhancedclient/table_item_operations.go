@@ -3,6 +3,7 @@ package enhancedclient
 import (
 	"context"
 	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
@@ -54,7 +55,7 @@ func (t *Table[T]) GetItemWithProjection(ctx context.Context, m Map, proj expres
 	}
 
 	if res == nil || res.Item == nil {
-		return nil, fmt.Errorf("empty response or item in GetItem() call")
+		return nil, fmt.Errorf("empty response or item in GetItemWithProjection() call")
 	}
 
 	item, err := t.options.Schema.Decode(res.Item)
