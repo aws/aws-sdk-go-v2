@@ -4,7 +4,7 @@
 
 `aws-sdk-go-v2` is the v2 AWS SDK for the Go programming language.
 
-The v2 SDK requires a minimum version of `Go 1.22`.
+The v2 SDK requires a minimum version of `Go 1.23`.
 
 Check out the [release notes](https://github.com/aws/aws-sdk-go-v2/blob/main/CHANGELOG.md) for information about the latest bug
 fixes, updates, and features added to the SDK.
