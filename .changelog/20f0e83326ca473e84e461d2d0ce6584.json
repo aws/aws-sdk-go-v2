@@ -1,0 +1,8 @@
+{
+    "id": "20f0e833-26ca-473e-84e4-61d2d0ce6584",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/machinelearning"
+    ]
+}

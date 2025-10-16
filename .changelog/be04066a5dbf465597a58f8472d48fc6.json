@@ -1,0 +1,8 @@
+{
+    "id": "be04066a-5dbf-4655-97a5-8f8472d48fc6",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/georoutes"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "50aeeeac-0ae0-4003-9692-e0ad20d58472",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/databrew"
+    ]
+}

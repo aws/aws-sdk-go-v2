@@ -1,0 +1,8 @@
+{
+    "id": "297d8bfb-e6dc-4b15-93f0-ad3f356aabc0",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/identitystore"
+    ]
+}

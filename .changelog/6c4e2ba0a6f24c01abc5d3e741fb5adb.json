@@ -1,0 +1,8 @@
+{
+    "id": "6c4e2ba0-a6f2-4c01-abc5-d3e741fb5adb",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/kafka"
+    ]
+}

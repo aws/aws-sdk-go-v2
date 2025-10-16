@@ -1,0 +1,8 @@
+{
+    "id": "8f22708b-2326-46e5-971c-4d5722b0646b",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ssmcontacts"
+    ]
+}

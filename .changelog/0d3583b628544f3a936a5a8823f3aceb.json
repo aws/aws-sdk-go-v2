@@ -1,0 +1,8 @@
+{
+    "id": "0d3583b6-2854-4f3a-936a-5a8823f3aceb",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/marketplaceentitlementservice"
+    ]
+}

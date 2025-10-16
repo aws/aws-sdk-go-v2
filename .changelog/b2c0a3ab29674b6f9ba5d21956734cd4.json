@@ -1,0 +1,8 @@
+{
+    "id": "b2c0a3ab-2967-4b6f-9ba5-d21956734cd4",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/amplify"
+    ]
+}

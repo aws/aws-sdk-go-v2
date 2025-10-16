@@ -1,0 +1,8 @@
+{
+    "id": "6e330b14-7ca5-4f30-bffd-3d2dd0a23e28",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/lexmodelbuildingservice"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "e4f34c2c-db9f-414b-a2e3-2d2f180d477a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/acmpca"
+    ]
+}

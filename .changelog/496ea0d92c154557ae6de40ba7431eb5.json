@@ -1,0 +1,8 @@
+{
+    "id": "496ea0d9-2c15-4557-ae6d-e40ba7431eb5",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/networkflowmonitor"
+    ]
+}

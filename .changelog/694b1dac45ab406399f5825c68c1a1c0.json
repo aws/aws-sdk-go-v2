@@ -1,0 +1,8 @@
+{
+    "id": "694b1dac-45ab-4063-99f5-825c68c1a1c0",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/osis"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "efc15b15-e5d4-4828-b8b9-961bb6245a99",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ivs"
+    ]
+}

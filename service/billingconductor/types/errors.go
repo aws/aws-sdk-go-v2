@@ -179,7 +179,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input doesn't match with the constraints specified by Amazon Web Services.
+// The input doesn't match with the constraints specified by Amazon Web Services
+// services.
 type ValidationException struct {
 	Message *string
 

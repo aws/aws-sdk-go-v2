@@ -1,0 +1,8 @@
+{
+    "id": "96f84bd8-991c-43e5-8ac1-80107e364694",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/grafana"
+    ]
+}

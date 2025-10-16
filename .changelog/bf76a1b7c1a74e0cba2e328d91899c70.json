@@ -1,0 +1,8 @@
+{
+    "id": "bf76a1b7-c1a7-4e0c-ba2e-328d91899c70",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/gamelift"
+    ]
+}

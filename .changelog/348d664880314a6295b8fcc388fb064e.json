@@ -1,0 +1,8 @@
+{
+    "id": "348d6648-8031-4a62-95b8-fcc388fb064e",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/route53recoverycontrolconfig"
+    ]
+}

@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves the margin summary report, which includes the Amazon Web Services
-// cost and charged amount (pro forma cost) by Amazon Web Service for a specific
-// billing group.
+// cost and charged amount (pro forma cost) by Amazon Web Services service for a
+// specific billing group.
 func (c *Client) GetBillingGroupCostReport(ctx context.Context, params *GetBillingGroupCostReportInput, optFns ...func(*Options)) (*GetBillingGroupCostReportOutput, error) {
 	if params == nil {
 		params = &GetBillingGroupCostReportInput{}
@@ -42,7 +42,7 @@ type GetBillingGroupCostReportInput struct {
 
 	// A list of strings that specify the attributes that are used to break down costs
 	// in the margin summary reports for the billing group. For example, you can view
-	// your costs by the Amazon Web Service name or the billing period.
+	// your costs by the Amazon Web Services service name or the billing period.
 	GroupBy []types.GroupByAttributeName
 
 	// The maximum number of margin summary reports to retrieve.

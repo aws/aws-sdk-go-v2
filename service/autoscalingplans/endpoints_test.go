@@ -1161,8 +1161,45 @@ func TestEndpointCase30(t *testing.T) {
 	}
 }
 
-// For region us-gov-west-1 with FIPS disabled and DualStack disabled
+// For region us-gov-east-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase31(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-gov-east-1"),
+		UseFIPS:      ptr.Bool(true),
+		UseDualStack: ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://autoscaling-plans.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// For region us-gov-west-1 with FIPS disabled and DualStack disabled
+func TestEndpointCase32(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-west-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1198,8 +1235,45 @@ func TestEndpointCase31(t *testing.T) {
 	}
 }
 
+// For region us-gov-west-1 with FIPS enabled and DualStack disabled
+func TestEndpointCase33(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-gov-west-1"),
+		UseFIPS:      ptr.Bool(true),
+		UseDualStack: ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://autoscaling-plans.us-gov-west-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
 // For region us-gov-east-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase32(t *testing.T) {
+func TestEndpointCase34(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1235,45 +1309,8 @@ func TestEndpointCase32(t *testing.T) {
 	}
 }
 
-// For region us-gov-east-1 with FIPS enabled and DualStack disabled
-func TestEndpointCase33(t *testing.T) {
-	var params = EndpointParameters{
-		Region:       ptr.String("us-gov-east-1"),
-		UseFIPS:      ptr.Bool(true),
-		UseDualStack: ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://autoscaling-plans-fips.us-gov-east-1.amazonaws.com")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:        *uri,
-		Headers:    http.Header{},
-		Properties: smithy.Properties{},
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
 // For region us-gov-east-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase34(t *testing.T) {
+func TestEndpointCase35(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1310,7 +1347,7 @@ func TestEndpointCase34(t *testing.T) {
 }
 
 // For region us-iso-east-1 with FIPS enabled and DualStack disabled
-func TestEndpointCase35(t *testing.T) {
+func TestEndpointCase36(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-iso-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1347,7 +1384,7 @@ func TestEndpointCase35(t *testing.T) {
 }
 
 // For region us-iso-east-1 with FIPS disabled and DualStack disabled
-func TestEndpointCase36(t *testing.T) {
+func TestEndpointCase37(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-iso-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1384,7 +1421,7 @@ func TestEndpointCase36(t *testing.T) {
 }
 
 // For region us-isob-east-1 with FIPS enabled and DualStack disabled
-func TestEndpointCase37(t *testing.T) {
+func TestEndpointCase38(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-isob-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1421,7 +1458,7 @@ func TestEndpointCase37(t *testing.T) {
 }
 
 // For region us-isob-east-1 with FIPS disabled and DualStack disabled
-func TestEndpointCase38(t *testing.T) {
+func TestEndpointCase39(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-isob-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1458,7 +1495,7 @@ func TestEndpointCase38(t *testing.T) {
 }
 
 // For custom endpoint with region set and fips disabled and dualstack disabled
-func TestEndpointCase39(t *testing.T) {
+func TestEndpointCase40(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1496,7 +1533,7 @@ func TestEndpointCase39(t *testing.T) {
 }
 
 // For custom endpoint with region not set and fips disabled and dualstack disabled
-func TestEndpointCase40(t *testing.T) {
+func TestEndpointCase41(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
@@ -1533,7 +1570,7 @@ func TestEndpointCase40(t *testing.T) {
 }
 
 // For custom endpoint with fips enabled and dualstack disabled
-func TestEndpointCase41(t *testing.T) {
+func TestEndpointCase42(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1554,7 +1591,7 @@ func TestEndpointCase41(t *testing.T) {
 }
 
 // For custom endpoint with fips disabled and dualstack enabled
-func TestEndpointCase42(t *testing.T) {
+func TestEndpointCase43(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1575,7 +1612,7 @@ func TestEndpointCase42(t *testing.T) {
 }
 
 // Missing region
-func TestEndpointCase43(t *testing.T) {
+func TestEndpointCase44(t *testing.T) {
 	var params = EndpointParameters{}
 
 	resolver := NewDefaultEndpointResolverV2()

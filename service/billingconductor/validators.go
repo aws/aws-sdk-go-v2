@@ -829,6 +829,21 @@ func validateLineItemFiltersList(v []types.LineItemFilter) error {
 	}
 }
 
+func validatePresentationObject(v *types.PresentationObject) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PresentationObject"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateCustomLineItemChargeDetails(v *types.UpdateCustomLineItemChargeDetails) error {
 	if v == nil {
 		return nil
@@ -1055,6 +1070,11 @@ func validateOpCreateCustomLineItemInput(v *CreateCustomLineItemInput) error {
 	} else if v.ChargeDetails != nil {
 		if err := validateCustomLineItemChargeDetails(v.ChargeDetails); err != nil {
 			invalidParams.AddNested("ChargeDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PresentationDetails != nil {
+		if err := validatePresentationObject(v.PresentationDetails); err != nil {
+			invalidParams.AddNested("PresentationDetails", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,8 @@
+{
+    "id": "f9e9e780-2d50-4d83-9fee-d659e0503a2a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/freetier"
+    ]
+}

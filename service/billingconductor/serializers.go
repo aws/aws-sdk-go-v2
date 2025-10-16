@@ -609,6 +609,11 @@ func awsRestjson1_serializeOpDocumentCreateCustomLineItemInput(v *CreateCustomLi
 		}
 	}
 
+	if len(v.ComputationRule) > 0 {
+		ok := object.Key("ComputationRule")
+		ok.String(string(v.ComputationRule))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -617,6 +622,13 @@ func awsRestjson1_serializeOpDocumentCreateCustomLineItemInput(v *CreateCustomLi
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.PresentationDetails != nil {
+		ok := object.Key("PresentationDetails")
+		if err := awsRestjson1_serializeDocumentPresentationObject(v.PresentationDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -3663,6 +3675,18 @@ func awsRestjson1_serializeDocumentListResourcesAssociatedToCustomLineItemFilter
 	if len(v.Relationship) > 0 {
 		ok := object.Key("Relationship")
 		ok.String(string(v.Relationship))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPresentationObject(v *types.PresentationObject, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Service != nil {
+		ok := object.Key("Service")
+		ok.String(*v.Service)
 	}
 
 	return nil

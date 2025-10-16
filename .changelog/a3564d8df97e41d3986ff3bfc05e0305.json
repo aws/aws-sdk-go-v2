@@ -1,0 +1,8 @@
+{
+    "id": "a3564d8d-f97e-41d3-986f-f3bfc05e0305",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/qldb"
+    ]
+}

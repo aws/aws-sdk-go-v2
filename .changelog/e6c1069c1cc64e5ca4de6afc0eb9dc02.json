@@ -1,0 +1,8 @@
+{
+    "id": "e6c1069c-1cc6-4e5c-a4de-6afc0eb9dc02",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/lookoutequipment"
+    ]
+}

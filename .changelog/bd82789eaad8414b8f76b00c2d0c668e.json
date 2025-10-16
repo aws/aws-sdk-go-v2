@@ -1,0 +1,8 @@
+{
+    "id": "bd82789e-aad8-414b-8f76-b00c2d0c668e",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/personalizeruntime"
+    ]
+}

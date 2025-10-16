@@ -7003,6 +7003,15 @@ func awsRestjson1_deserializeDocumentCustomLineItemListElement(v **types.CustomL
 				return err
 			}
 
+		case "ComputationRule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputationRuleEnum to be of type string, got %T instead", value)
+				}
+				sv.ComputationRule = types.ComputationRuleEnum(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7054,6 +7063,11 @@ func awsRestjson1_deserializeDocumentCustomLineItemListElement(v **types.CustomL
 					return fmt.Errorf("expected CustomLineItemName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "PresentationDetails":
+			if err := awsRestjson1_deserializeDocumentPresentationObject(&sv.PresentationDetails, value); err != nil {
+				return err
 			}
 
 		case "ProductCode":
@@ -7175,6 +7189,15 @@ func awsRestjson1_deserializeDocumentCustomLineItemVersionListElement(v **types.
 				return err
 			}
 
+		case "ComputationRule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputationRuleEnum to be of type string, got %T instead", value)
+				}
+				sv.ComputationRule = types.ComputationRuleEnum(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7235,6 +7258,11 @@ func awsRestjson1_deserializeDocumentCustomLineItemVersionListElement(v **types.
 					return fmt.Errorf("expected CustomLineItemName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "PresentationDetails":
+			if err := awsRestjson1_deserializeDocumentPresentationObject(&sv.PresentationDetails, value); err != nil {
+				return err
 			}
 
 		case "ProductCode":
@@ -7887,6 +7915,46 @@ func awsRestjson1_deserializeDocumentListResourcesAssociatedToCustomLineItemResp
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPresentationObject(v **types.PresentationObject, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PresentationObject
+	if *v == nil {
+		sv = &types.PresentationObject{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Service":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Service to be of type string, got %T instead", value)
+				}
+				sv.Service = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

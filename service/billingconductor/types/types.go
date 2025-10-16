@@ -312,6 +312,9 @@ type CustomLineItemListElement struct {
 	// line item.
 	ChargeDetails *ListCustomLineItemChargeDetails
 
+	// The display settings of the custom line item
+	ComputationRule ComputationRuleEnum
+
 	// The time created.
 	CreationTime int64
 
@@ -328,6 +331,9 @@ type CustomLineItemListElement struct {
 
 	// The custom line item's name.
 	Name *string
+
+	// The presentation configuration of the custom line item
+	PresentationDetails *PresentationObject
 
 	// The product code that's associated with the custom line item.
 	ProductCode *string
@@ -372,6 +378,9 @@ type CustomLineItemVersionListElement struct {
 	//  A representation of the charge details of a custom line item.
 	ChargeDetails *ListCustomLineItemChargeDetails
 
+	// The display settings of the custom line item
+	ComputationRule ComputationRuleEnum
+
 	// The time when the custom line item version was created.
 	CreationTime int64
 
@@ -389,6 +398,9 @@ type CustomLineItemVersionListElement struct {
 
 	// The name of the custom line item.
 	Name *string
+
+	// The presentation configuration of the custom line item
+	PresentationDetails *PresentationObject
 
 	// The product code that’s associated with the custom line item.
 	ProductCode *string
@@ -663,6 +675,17 @@ type ListResourcesAssociatedToCustomLineItemResponseElement struct {
 	//  The type of relationship between the custom line item and the associated
 	// resource.
 	Relationship CustomLineItemRelationship
+
+	noSmithyDocumentSerde
+}
+
+// The presentation configuration of the custom line item
+type PresentationObject struct {
+
+	// This defines the service of where the custom line item is presented
+	//
+	// This member is required.
+	Service *string
 
 	noSmithyDocumentSerde
 }

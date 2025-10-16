@@ -1,0 +1,8 @@
+{
+    "id": "eb116006-c95e-4b44-bc14-86940acfe482",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/keyspaces"
+    ]
+}

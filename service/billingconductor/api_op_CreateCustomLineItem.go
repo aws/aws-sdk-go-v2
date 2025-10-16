@@ -61,9 +61,18 @@ type CreateCustomLineItemInput struct {
 	//  A time range for which the custom line item is effective.
 	BillingPeriodRange *types.CustomLineItemBillingPeriodRange
 
-	//  The token that is needed to support idempotency. Idempotency isn't currently
-	// supported, but will be implemented in a future update.
+	// A unique, case-sensitive identifier that you specify to ensure idempotency of
+	// the request. Idempotency ensures that an API request completes no more than one
+	// time. With an idempotent request, if the original request completes
+	// successfully, any subsequent retries complete successfully without performing
+	// any further actions.
 	ClientToken *string
+
+	// The display settings of the custom line item
+	ComputationRule types.ComputationRuleEnum
+
+	// The presentation configuration of the custom line item
+	PresentationDetails *types.PresentationObject
 
 	//  A map that contains tag keys and tag values that are attached to a custom line
 	// item.

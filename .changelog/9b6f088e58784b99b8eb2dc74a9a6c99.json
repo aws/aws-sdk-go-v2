@@ -1,0 +1,8 @@
+{
+    "id": "9b6f088e-5878-4b99-b8eb-2dc74a9a6c99",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/timestreamquery"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "c1894d4a-efac-4053-b9a4-aa10a8e8199e",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/apprunner"
+    ]
+}

@@ -47,6 +47,23 @@ func (BillingGroupStatus) Values() []BillingGroupStatus {
 	}
 }
 
+type ComputationRuleEnum string
+
+// Enum values for ComputationRuleEnum
+const (
+	ComputationRuleEnumConsolidated ComputationRuleEnum = "CONSOLIDATED"
+)
+
+// Values returns all known values for ComputationRuleEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputationRuleEnum) Values() []ComputationRuleEnum {
+	return []ComputationRuleEnum{
+		"CONSOLIDATED",
+	}
+}
+
 type ConflictExceptionReason string
 
 // Enum values for ConflictExceptionReason
@@ -247,66 +264,70 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonUnknownOperation                      ValidationExceptionReason = "UNKNOWN_OPERATION"
-	ValidationExceptionReasonCannotParse                           ValidationExceptionReason = "CANNOT_PARSE"
-	ValidationExceptionReasonFieldValidationFailed                 ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
-	ValidationExceptionReasonOther                                 ValidationExceptionReason = "OTHER"
-	ValidationExceptionReasonPrimaryNotAssociated                  ValidationExceptionReason = "PRIMARY_NOT_ASSOCIATED"
-	ValidationExceptionReasonPrimaryCannotDisassociate             ValidationExceptionReason = "PRIMARY_CANNOT_DISASSOCIATE"
-	ValidationExceptionReasonAccountsNotAssociated                 ValidationExceptionReason = "ACCOUNTS_NOT_ASSOCIATED"
-	ValidationExceptionReasonAccountsAlreadyAssociated             ValidationExceptionReason = "ACCOUNTS_ALREADY_ASSOCIATED"
-	ValidationExceptionReasonIllegalPrimaryAccount                 ValidationExceptionReason = "ILLEGAL_PRIMARY_ACCOUNT"
-	ValidationExceptionReasonIllegalAccounts                       ValidationExceptionReason = "ILLEGAL_ACCOUNTS"
-	ValidationExceptionReasonMismatchedBillinggroupArn             ValidationExceptionReason = "MISMATCHED_BILLINGGROUP_ARN"
-	ValidationExceptionReasonMissingBillinggroup                   ValidationExceptionReason = "MISSING_BILLINGGROUP"
-	ValidationExceptionReasonMismatchedCustomlineitemArn           ValidationExceptionReason = "MISMATCHED_CUSTOMLINEITEM_ARN"
-	ValidationExceptionReasonIllegalBillingPeriod                  ValidationExceptionReason = "ILLEGAL_BILLING_PERIOD"
-	ValidationExceptionReasonIllegalBillingPeriodRange             ValidationExceptionReason = "ILLEGAL_BILLING_PERIOD_RANGE"
-	ValidationExceptionReasonTooManyAccountsInRequest              ValidationExceptionReason = "TOO_MANY_ACCOUNTS_IN_REQUEST"
-	ValidationExceptionReasonDuplicateAccount                      ValidationExceptionReason = "DUPLICATE_ACCOUNT"
-	ValidationExceptionReasonInvalidBillingGroupStatus             ValidationExceptionReason = "INVALID_BILLING_GROUP_STATUS"
-	ValidationExceptionReasonMismatchedPricingplanArn              ValidationExceptionReason = "MISMATCHED_PRICINGPLAN_ARN"
-	ValidationExceptionReasonMissingPricingplan                    ValidationExceptionReason = "MISSING_PRICINGPLAN"
-	ValidationExceptionReasonMismatchedPricingruleArn              ValidationExceptionReason = "MISMATCHED_PRICINGRULE_ARN"
-	ValidationExceptionReasonDuplicatePricingruleArns              ValidationExceptionReason = "DUPLICATE_PRICINGRULE_ARNS"
-	ValidationExceptionReasonIllegalExpression                     ValidationExceptionReason = "ILLEGAL_EXPRESSION"
-	ValidationExceptionReasonIllegalScope                          ValidationExceptionReason = "ILLEGAL_SCOPE"
-	ValidationExceptionReasonIllegalService                        ValidationExceptionReason = "ILLEGAL_SERVICE"
-	ValidationExceptionReasonPricingrulesNotExist                  ValidationExceptionReason = "PRICINGRULES_NOT_EXIST"
-	ValidationExceptionReasonPricingrulesAlreadyAssociated         ValidationExceptionReason = "PRICINGRULES_ALREADY_ASSOCIATED"
-	ValidationExceptionReasonPricingrulesNotAssociated             ValidationExceptionReason = "PRICINGRULES_NOT_ASSOCIATED"
-	ValidationExceptionReasonInvalidTimeRange                      ValidationExceptionReason = "INVALID_TIME_RANGE"
-	ValidationExceptionReasonInvalidBillingviewArn                 ValidationExceptionReason = "INVALID_BILLINGVIEW_ARN"
-	ValidationExceptionReasonMismatchedBillingviewArn              ValidationExceptionReason = "MISMATCHED_BILLINGVIEW_ARN"
-	ValidationExceptionReasonIllegalCustomlineitem                 ValidationExceptionReason = "ILLEGAL_CUSTOMLINEITEM"
-	ValidationExceptionReasonMissingCustomlineitem                 ValidationExceptionReason = "MISSING_CUSTOMLINEITEM"
-	ValidationExceptionReasonIllegalCustomlineitemUpdate           ValidationExceptionReason = "ILLEGAL_CUSTOMLINEITEM_UPDATE"
-	ValidationExceptionReasonTooManyCustomlineitemsInRequest       ValidationExceptionReason = "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST"
-	ValidationExceptionReasonIllegalChargeDetails                  ValidationExceptionReason = "ILLEGAL_CHARGE_DETAILS"
-	ValidationExceptionReasonIllegalUpdateChargeDetails            ValidationExceptionReason = "ILLEGAL_UPDATE_CHARGE_DETAILS"
-	ValidationExceptionReasonInvalidArn                            ValidationExceptionReason = "INVALID_ARN"
-	ValidationExceptionReasonIllegalResourceArns                   ValidationExceptionReason = "ILLEGAL_RESOURCE_ARNS"
-	ValidationExceptionReasonIllegalCustomlineitemModification     ValidationExceptionReason = "ILLEGAL_CUSTOMLINEITEM_MODIFICATION"
-	ValidationExceptionReasonMissingLinkedAccountIds               ValidationExceptionReason = "MISSING_LINKED_ACCOUNT_IDS"
-	ValidationExceptionReasonMultipleLinkedAccountIds              ValidationExceptionReason = "MULTIPLE_LINKED_ACCOUNT_IDS"
-	ValidationExceptionReasonMissingPricingPlanArn                 ValidationExceptionReason = "MISSING_PRICING_PLAN_ARN"
-	ValidationExceptionReasonMultiplePricingPlanArn                ValidationExceptionReason = "MULTIPLE_PRICING_PLAN_ARN"
-	ValidationExceptionReasonIllegalChildAssociateResource         ValidationExceptionReason = "ILLEGAL_CHILD_ASSOCIATE_RESOURCE"
-	ValidationExceptionReasonCustomLineItemAssociationExists       ValidationExceptionReason = "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"
-	ValidationExceptionReasonInvalidBillingGroup                   ValidationExceptionReason = "INVALID_BILLING_GROUP"
-	ValidationExceptionReasonInvalidBillingPeriodForOperation      ValidationExceptionReason = "INVALID_BILLING_PERIOD_FOR_OPERATION"
-	ValidationExceptionReasonIllegalBillingEntity                  ValidationExceptionReason = "ILLEGAL_BILLING_ENTITY"
-	ValidationExceptionReasonIllegalModifierPercentage             ValidationExceptionReason = "ILLEGAL_MODIFIER_PERCENTAGE"
-	ValidationExceptionReasonIllegalType                           ValidationExceptionReason = "ILLEGAL_TYPE"
-	ValidationExceptionReasonIllegalEndedBillinggroup              ValidationExceptionReason = "ILLEGAL_ENDED_BILLINGGROUP"
-	ValidationExceptionReasonIllegalTieringInput                   ValidationExceptionReason = "ILLEGAL_TIERING_INPUT"
-	ValidationExceptionReasonIllegalOperation                      ValidationExceptionReason = "ILLEGAL_OPERATION"
-	ValidationExceptionReasonIllegalUsageType                      ValidationExceptionReason = "ILLEGAL_USAGE_TYPE"
-	ValidationExceptionReasonInvalidSkuCombo                       ValidationExceptionReason = "INVALID_SKU_COMBO"
-	ValidationExceptionReasonInvalidFilter                         ValidationExceptionReason = "INVALID_FILTER"
-	ValidationExceptionReasonTooManyAutoAssociateBillingGroups     ValidationExceptionReason = "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS"
-	ValidationExceptionReasonCannotDeleteAutoAssociateBillingGroup ValidationExceptionReason = "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP"
-	ValidationExceptionReasonIllegalAccountId                      ValidationExceptionReason = "ILLEGAL_ACCOUNT_ID"
+	ValidationExceptionReasonUnknownOperation                               ValidationExceptionReason = "UNKNOWN_OPERATION"
+	ValidationExceptionReasonCannotParse                                    ValidationExceptionReason = "CANNOT_PARSE"
+	ValidationExceptionReasonFieldValidationFailed                          ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
+	ValidationExceptionReasonOther                                          ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonPrimaryNotAssociated                           ValidationExceptionReason = "PRIMARY_NOT_ASSOCIATED"
+	ValidationExceptionReasonPrimaryCannotDisassociate                      ValidationExceptionReason = "PRIMARY_CANNOT_DISASSOCIATE"
+	ValidationExceptionReasonAccountsNotAssociated                          ValidationExceptionReason = "ACCOUNTS_NOT_ASSOCIATED"
+	ValidationExceptionReasonAccountsAlreadyAssociated                      ValidationExceptionReason = "ACCOUNTS_ALREADY_ASSOCIATED"
+	ValidationExceptionReasonIllegalPrimaryAccount                          ValidationExceptionReason = "ILLEGAL_PRIMARY_ACCOUNT"
+	ValidationExceptionReasonIllegalAccounts                                ValidationExceptionReason = "ILLEGAL_ACCOUNTS"
+	ValidationExceptionReasonMismatchedBillinggroupArn                      ValidationExceptionReason = "MISMATCHED_BILLINGGROUP_ARN"
+	ValidationExceptionReasonMissingBillinggroup                            ValidationExceptionReason = "MISSING_BILLINGGROUP"
+	ValidationExceptionReasonMismatchedCustomlineitemArn                    ValidationExceptionReason = "MISMATCHED_CUSTOMLINEITEM_ARN"
+	ValidationExceptionReasonIllegalBillingPeriod                           ValidationExceptionReason = "ILLEGAL_BILLING_PERIOD"
+	ValidationExceptionReasonIllegalBillingPeriodRange                      ValidationExceptionReason = "ILLEGAL_BILLING_PERIOD_RANGE"
+	ValidationExceptionReasonTooManyAccountsInRequest                       ValidationExceptionReason = "TOO_MANY_ACCOUNTS_IN_REQUEST"
+	ValidationExceptionReasonDuplicateAccount                               ValidationExceptionReason = "DUPLICATE_ACCOUNT"
+	ValidationExceptionReasonInvalidBillingGroupStatus                      ValidationExceptionReason = "INVALID_BILLING_GROUP_STATUS"
+	ValidationExceptionReasonMismatchedPricingplanArn                       ValidationExceptionReason = "MISMATCHED_PRICINGPLAN_ARN"
+	ValidationExceptionReasonMissingPricingplan                             ValidationExceptionReason = "MISSING_PRICINGPLAN"
+	ValidationExceptionReasonMismatchedPricingruleArn                       ValidationExceptionReason = "MISMATCHED_PRICINGRULE_ARN"
+	ValidationExceptionReasonDuplicatePricingruleArns                       ValidationExceptionReason = "DUPLICATE_PRICINGRULE_ARNS"
+	ValidationExceptionReasonMissingCostcategory                            ValidationExceptionReason = "MISSING_COSTCATEGORY"
+	ValidationExceptionReasonIllegalExpression                              ValidationExceptionReason = "ILLEGAL_EXPRESSION"
+	ValidationExceptionReasonIllegalScope                                   ValidationExceptionReason = "ILLEGAL_SCOPE"
+	ValidationExceptionReasonIllegalService                                 ValidationExceptionReason = "ILLEGAL_SERVICE"
+	ValidationExceptionReasonPricingrulesNotExist                           ValidationExceptionReason = "PRICINGRULES_NOT_EXIST"
+	ValidationExceptionReasonPricingrulesAlreadyAssociated                  ValidationExceptionReason = "PRICINGRULES_ALREADY_ASSOCIATED"
+	ValidationExceptionReasonPricingrulesNotAssociated                      ValidationExceptionReason = "PRICINGRULES_NOT_ASSOCIATED"
+	ValidationExceptionReasonInvalidTimeRange                               ValidationExceptionReason = "INVALID_TIME_RANGE"
+	ValidationExceptionReasonInvalidBillingviewArn                          ValidationExceptionReason = "INVALID_BILLINGVIEW_ARN"
+	ValidationExceptionReasonMismatchedBillingviewArn                       ValidationExceptionReason = "MISMATCHED_BILLINGVIEW_ARN"
+	ValidationExceptionReasonIllegalCustomlineitem                          ValidationExceptionReason = "ILLEGAL_CUSTOMLINEITEM"
+	ValidationExceptionReasonMissingCustomlineitem                          ValidationExceptionReason = "MISSING_CUSTOMLINEITEM"
+	ValidationExceptionReasonIllegalCustomlineitemUpdate                    ValidationExceptionReason = "ILLEGAL_CUSTOMLINEITEM_UPDATE"
+	ValidationExceptionReasonTooManyCustomlineitemsInRequest                ValidationExceptionReason = "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST"
+	ValidationExceptionReasonIllegalChargeDetails                           ValidationExceptionReason = "ILLEGAL_CHARGE_DETAILS"
+	ValidationExceptionReasonIllegalUpdateChargeDetails                     ValidationExceptionReason = "ILLEGAL_UPDATE_CHARGE_DETAILS"
+	ValidationExceptionReasonInvalidArn                                     ValidationExceptionReason = "INVALID_ARN"
+	ValidationExceptionReasonIllegalResourceArns                            ValidationExceptionReason = "ILLEGAL_RESOURCE_ARNS"
+	ValidationExceptionReasonIllegalCustomlineitemModification              ValidationExceptionReason = "ILLEGAL_CUSTOMLINEITEM_MODIFICATION"
+	ValidationExceptionReasonMissingLinkedAccountIds                        ValidationExceptionReason = "MISSING_LINKED_ACCOUNT_IDS"
+	ValidationExceptionReasonMultipleLinkedAccountIds                       ValidationExceptionReason = "MULTIPLE_LINKED_ACCOUNT_IDS"
+	ValidationExceptionReasonMissingPricingPlanArn                          ValidationExceptionReason = "MISSING_PRICING_PLAN_ARN"
+	ValidationExceptionReasonMultiplePricingPlanArn                         ValidationExceptionReason = "MULTIPLE_PRICING_PLAN_ARN"
+	ValidationExceptionReasonIllegalChildAssociateResource                  ValidationExceptionReason = "ILLEGAL_CHILD_ASSOCIATE_RESOURCE"
+	ValidationExceptionReasonCustomLineItemAssociationExists                ValidationExceptionReason = "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"
+	ValidationExceptionReasonInvalidBillingGroup                            ValidationExceptionReason = "INVALID_BILLING_GROUP"
+	ValidationExceptionReasonInvalidBillingPeriodForOperation               ValidationExceptionReason = "INVALID_BILLING_PERIOD_FOR_OPERATION"
+	ValidationExceptionReasonIllegalBillingEntity                           ValidationExceptionReason = "ILLEGAL_BILLING_ENTITY"
+	ValidationExceptionReasonIllegalModifierPercentage                      ValidationExceptionReason = "ILLEGAL_MODIFIER_PERCENTAGE"
+	ValidationExceptionReasonIllegalType                                    ValidationExceptionReason = "ILLEGAL_TYPE"
+	ValidationExceptionReasonIllegalEndedBillinggroup                       ValidationExceptionReason = "ILLEGAL_ENDED_BILLINGGROUP"
+	ValidationExceptionReasonIllegalTieringInput                            ValidationExceptionReason = "ILLEGAL_TIERING_INPUT"
+	ValidationExceptionReasonIllegalOperation                               ValidationExceptionReason = "ILLEGAL_OPERATION"
+	ValidationExceptionReasonIllegalUsageType                               ValidationExceptionReason = "ILLEGAL_USAGE_TYPE"
+	ValidationExceptionReasonInvalidSkuCombo                                ValidationExceptionReason = "INVALID_SKU_COMBO"
+	ValidationExceptionReasonInvalidFilter                                  ValidationExceptionReason = "INVALID_FILTER"
+	ValidationExceptionReasonTooManyAutoAssociateBillingGroups              ValidationExceptionReason = "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS"
+	ValidationExceptionReasonCannotDeleteAutoAssociateBillingGroup          ValidationExceptionReason = "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP"
+	ValidationExceptionReasonIllegalAccountId                               ValidationExceptionReason = "ILLEGAL_ACCOUNT_ID"
+	ValidationExceptionReasonBillingGroupAlreadyExistInCurrentBillingPeriod ValidationExceptionReason = "BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD"
+	ValidationExceptionReasonIllegalComputationRule                         ValidationExceptionReason = "ILLEGAL_COMPUTATION_RULE"
+	ValidationExceptionReasonIllegalLineItemFilter                          ValidationExceptionReason = "ILLEGAL_LINE_ITEM_FILTER"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -337,6 +358,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"MISSING_PRICINGPLAN",
 		"MISMATCHED_PRICINGRULE_ARN",
 		"DUPLICATE_PRICINGRULE_ARNS",
+		"MISSING_COSTCATEGORY",
 		"ILLEGAL_EXPRESSION",
 		"ILLEGAL_SCOPE",
 		"ILLEGAL_SERVICE",
@@ -375,5 +397,8 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS",
 		"CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP",
 		"ILLEGAL_ACCOUNT_ID",
+		"BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD",
+		"ILLEGAL_COMPUTATION_RULE",
+		"ILLEGAL_LINE_ITEM_FILTER",
 	}
 }

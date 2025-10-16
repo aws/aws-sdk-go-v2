@@ -1,0 +1,8 @@
+{
+    "id": "1efe8016-8255-4643-8dcc-a1ccd6ba3f26",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

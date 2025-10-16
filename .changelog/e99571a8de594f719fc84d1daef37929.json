@@ -1,0 +1,8 @@
+{
+    "id": "e99571a8-de59-4f71-9fc8-4d1daef37929",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/batch"
+    ]
+}

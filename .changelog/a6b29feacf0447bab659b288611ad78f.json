@@ -1,0 +1,8 @@
+{
+    "id": "a6b29fea-cf04-47ba-b659-b288611ad78f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/kms"
+    ]
+}
