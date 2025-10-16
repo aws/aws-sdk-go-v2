@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.8
 	github.com/aws/aws-sdk-go-v2/service/sts v1.38.6
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.32.4
-	github.com/aws/smithy-go v1.23.0
+	github.com/aws/smithy-go v1.23.1
 )
 
 require (
@@ -32,7 +32,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.1 // indirect
 )
 
-go 1.22
+go 1.23
 
 replace github.com/aws/aws-sdk-go-v2/service/codestar => ../../../service/codestar/
 
