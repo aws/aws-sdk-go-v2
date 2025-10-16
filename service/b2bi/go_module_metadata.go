@@ -3,4 +3,4 @@
 package b2bi
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.0.0-preview.85"
+const goModuleVersion = "1.0.0-preview.86"

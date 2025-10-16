@@ -1,8 +1,0 @@
-{
-    "id": "8b1a5bb4-9330-4f5f-a900-6882813395c6",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/apptest"
-    ]
-}

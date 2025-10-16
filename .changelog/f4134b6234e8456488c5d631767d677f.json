@@ -1,8 +1,0 @@
-{
-    "id": "f4134b62-34e8-4564-88c5-d631767d677f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/migrationhubconfig"
-    ]
-}

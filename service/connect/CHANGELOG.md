@@ -1,3 +1,8 @@
+# v1.142.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.142.0 (2025-10-14)
 
 * **Feature**: SDK release for TaskTemplateInfo in Contact for DescribeContact response.

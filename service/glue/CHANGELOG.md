@@ -1,3 +1,8 @@
+# v1.131.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.131.0 (2025-10-10)
 
 * **Feature**: Addition of AuditContext in GetTable/GetTables Request

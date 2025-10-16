@@ -1,3 +1,8 @@
+# v1.55.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2025-10-10)
 
 * **Feature**: Added new viewer security policy, TLSv1.2_2025, for CloudFront.

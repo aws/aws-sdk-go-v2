@@ -1,3 +1,8 @@
+# v1.59.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2025-09-26)
 
 * **Feature**: Support tagging and tag propagation to IAM Identity Center for Redshift Idc Applications

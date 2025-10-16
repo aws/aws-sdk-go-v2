@@ -1,3 +1,9 @@
+# v1.33.0 (2025-10-16)
+
+* **Feature**: Update endpoint ruleset parameters casing
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2025-10-06)
 
 * **Feature**: Support for DescribeMultiRegionParameterGroups and DescribeMultiRegionParameters API.

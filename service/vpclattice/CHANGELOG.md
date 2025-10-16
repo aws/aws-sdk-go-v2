@@ -1,3 +1,8 @@
+# v1.19.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-09-29)
 
 * **Feature**: Adds support for specifying the number of IPv4 addresses in each ENI for the resource gateway for VPC Lattice.

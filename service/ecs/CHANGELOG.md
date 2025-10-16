@@ -1,3 +1,8 @@
+# v1.65.2 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.1 (2025-10-01)
 
 * **Documentation**: This is a documentation only Amazon ECS release that adds additional information for health checks.

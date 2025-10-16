@@ -1,3 +1,8 @@
+# v1.33.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2025-10-01)
 
 * **Feature**: Add support to receive dual stack MediaPlacement URLs in Chime Meetings SDK

@@ -1,8 +1,0 @@
-{
-    "id": "c57e3aaf-ed3d-4354-ab0a-0a4d2570e615",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/globalaccelerator"
-    ]
-}

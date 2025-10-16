@@ -1,8 +1,0 @@
-{
-    "id": "82bda11d-6c52-4494-9245-e4279c646abb",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/polly"
-    ]
-}

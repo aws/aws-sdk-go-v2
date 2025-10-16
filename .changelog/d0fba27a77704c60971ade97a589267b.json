@@ -1,8 +1,0 @@
-{
-    "id": "d0fba27a-7770-4c60-971a-de97a589267b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/dataexchange"
-    ]
-}

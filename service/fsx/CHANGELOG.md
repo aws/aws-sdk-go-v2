@@ -1,3 +1,8 @@
+# v1.62.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.0 (2025-09-30)
 
 * **Feature**: Add Dual-Stack support for Amazon FSx for NetApp ONTAP and Windows File Server

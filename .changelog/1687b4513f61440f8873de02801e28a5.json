@@ -1,8 +1,0 @@
-{
-    "id": "1687b451-3f61-440f-8873-de02801e28a5",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/lexruntimev2"
-    ]
-}

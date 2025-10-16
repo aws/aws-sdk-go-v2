@@ -1,3 +1,8 @@
+# v1.48.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2025-09-29)
 
 * **Feature**: This release introduces several new features and improvements to enhance pipeline management, logging, and resource configuration.

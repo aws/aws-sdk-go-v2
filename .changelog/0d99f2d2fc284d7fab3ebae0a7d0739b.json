@@ -1,8 +1,0 @@
-{
-    "id": "0d99f2d2-fc28-4d7f-ab3e-bae0a7d0739b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/memorydb"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.32.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2025-10-02)
 
 * **Feature**: New Search All Related Items API enables searching related items across cases

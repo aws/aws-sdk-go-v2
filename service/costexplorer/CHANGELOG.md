@@ -1,3 +1,8 @@
+# v1.57.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2025-09-26)
 
 * **Feature**: Support for payer account dimension and billing view health status.

@@ -3,4 +3,4 @@
 package accessanalyzer
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.44.6"
+const goModuleVersion = "1.44.7"

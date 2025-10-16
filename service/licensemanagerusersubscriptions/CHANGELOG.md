@@ -1,3 +1,8 @@
+# v1.21.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2025-10-08)
 
 * **Feature**: Released support for IPv6 and dual-stack active directories

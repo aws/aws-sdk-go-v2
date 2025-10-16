@@ -3,4 +3,4 @@
 package acmpca
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.44.5"
+const goModuleVersion = "1.45.0"

@@ -1,3 +1,8 @@
+# v1.55.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2025-09-30)
 
 * **Feature**: Added support for FIPS VPC endpoints in FIPS-enabled AWS Regions.

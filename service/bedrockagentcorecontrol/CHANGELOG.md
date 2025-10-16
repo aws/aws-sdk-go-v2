@@ -1,3 +1,8 @@
+# v1.10.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2025-10-13)
 
 * **Feature**: Updated http status code in control plane apis of agentcore runtime, tools and identity. Additional included provider types for AgentCore Identity

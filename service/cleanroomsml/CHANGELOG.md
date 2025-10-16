@@ -1,3 +1,8 @@
+# v1.20.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2025-10-01)
 
 * **Feature**: This release introduces data access budgets to view how many times an input channel can be used for ML jobs in a collaboration.

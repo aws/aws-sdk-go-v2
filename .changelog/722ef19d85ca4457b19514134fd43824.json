@@ -1,8 +1,0 @@
-{
-    "id": "722ef19d-85ca-4457-b195-14134fd43824",
-    "type": "feature",
-    "description": "New feature: service flat CLI and first AWS managed pricing plan (BasicPricingPlan)",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

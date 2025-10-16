@@ -1,8 +1,0 @@
-{
-    "id": "860eba92-2045-4bbc-b459-af31ef527688",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/medicalimaging"
-    ]
-}

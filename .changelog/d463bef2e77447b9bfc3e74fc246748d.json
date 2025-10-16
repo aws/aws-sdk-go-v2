@@ -1,8 +1,0 @@
-{
-    "id": "d463bef2-e774-47b9-bfc3-e74fc246748d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/bcmdataexports"
-    ]
-}

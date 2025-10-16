@@ -1,3 +1,111 @@
+# Release (2025-10-16)
+
+## General Highlights
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.45.0](service/acmpca/CHANGELOG.md#v1450-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.38.0](service/amplify/CHANGELOG.md#v1380-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.29.0](service/apigatewaymanagementapi/CHANGELOG.md#v1290-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.39.0](service/apprunner/CHANGELOG.md#v1390-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/apptest`: [v1.10.0](service/apptest/CHANGELOG.md#v1100-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.30.0](service/autoscalingplans/CHANGELOG.md#v1300-2025-10-16)
+  * **Feature**: Updated FIPS endpoints for US GovCloud regions
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.58.0](service/batch/CHANGELOG.md#v1580-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.12.0](service/bcmdataexports/CHANGELOG.md#v1120-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.26.0](service/billingconductor/CHANGELOG.md#v1260-2025-10-16)
+  * **Feature**: New feature: service flat CLI and first AWS managed pricing plan (BasicPricingPlan)
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.54.0](service/customerprofiles/CHANGELOG.md#v1540-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.39.0](service/databrew/CHANGELOG.md#v1390-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.40.0](service/dataexchange/CHANGELOG.md#v1400-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.35.0](service/dlm/CHANGELOG.md#v1350-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.13.0](service/freetier/CHANGELOG.md#v1130-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.47.0](service/gamelift/CHANGELOG.md#v1470-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.7.0](service/georoutes/CHANGELOG.md#v170-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.35.0](service/globalaccelerator/CHANGELOG.md#v1350-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.32.0](service/grafana/CHANGELOG.md#v1320-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.33.0](service/identitystore/CHANGELOG.md#v1330-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.48.0](service/ivs/CHANGELOG.md#v1480-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.31.0](service/ivsrealtime/CHANGELOG.md#v1310-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.44.0](service/kafka/CHANGELOG.md#v1440-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.24.0](service/keyspaces/CHANGELOG.md#v1240-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.46.0](service/kms/CHANGELOG.md#v1460-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.34.0](service/lexmodelbuildingservice/CHANGELOG.md#v1340-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.35.0](service/lexruntimev2/CHANGELOG.md#v1350-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.36.0](service/lookoutequipment/CHANGELOG.md#v1360-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.26.0](service/m2/CHANGELOG.md#v1260-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.34.0](service/machinelearning/CHANGELOG.md#v1340-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.34.0](service/marketplaceentitlementservice/CHANGELOG.md#v1340-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.32.0](service/mediapackagev2/CHANGELOG.md#v1320-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.22.0](service/medicalimaging/CHANGELOG.md#v1220-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.33.0](service/memorydb/CHANGELOG.md#v1330-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.31.0](service/migrationhubconfig/CHANGELOG.md#v1310-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.10.0](service/networkflowmonitor/CHANGELOG.md#v1100-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.21.0](service/osis/CHANGELOG.md#v1210-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.46.0](service/personalize/CHANGELOG.md#v1460-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.33.0](service/personalizeruntime/CHANGELOG.md#v1330-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.29.0](service/pinpointsmsvoice/CHANGELOG.md#v1290-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.54.0](service/polly/CHANGELOG.md#v1540-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.40.0](service/pricing/CHANGELOG.md#v1400-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.31.0](service/qldb/CHANGELOG.md#v1310-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/qldbsession`: [v1.31.0](service/qldbsession/CHANGELOG.md#v1310-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.32.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1320-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.66.0](service/ssm/CHANGELOG.md#v1660-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.31.0](service/ssmcontacts/CHANGELOG.md#v1310-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.5.0](service/ssmguiconnect/CHANGELOG.md#v150-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.36.0](service/timestreamquery/CHANGELOG.md#v1360-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.30.0](service/voiceid/CHANGELOG.md#v1300-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.33.0](service/workspacesweb/CHANGELOG.md#v1330-2025-10-16)
+  * **Feature**: Update endpoint ruleset parameters casing
+
 # Release (2025-10-15)
 
 ## Module Highlights

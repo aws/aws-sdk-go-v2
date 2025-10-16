@@ -1,3 +1,9 @@
+# v1.54.0 (2025-10-16)
+
+* **Feature**: Update endpoint ruleset parameters casing
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2025-09-30)
 
 * **Feature**: This release introduces ListProfileHistoryRecords and GetProfileHistoryRecord APIs for comprehensive profile history tracking with complete audit trails of creation, updates, merges, deletions, and data ingestion events.

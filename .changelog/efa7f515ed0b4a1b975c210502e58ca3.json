@@ -1,8 +1,0 @@
-{
-    "id": "efa7f515-ed0b-4a1b-975c-210502e58ca3",
-    "type": "feature",
-    "description": "Updated FIPS endpoints for US GovCloud regions",
-    "modules": [
-        "service/autoscalingplans"
-    ]
-}

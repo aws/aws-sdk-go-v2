@@ -1,8 +1,0 @@
-{
-    "id": "a72e4a6a-f27e-4408-b254-719ef5cfc93b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

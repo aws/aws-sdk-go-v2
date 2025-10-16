@@ -1,3 +1,8 @@
+# v1.45.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2025-10-06)
 
 * **Feature**: Enabling Tag-on-Create for AWS Elemental MediaConnect flow-based resource types

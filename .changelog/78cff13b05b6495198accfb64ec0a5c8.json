@@ -1,8 +1,0 @@
-{
-    "id": "78cff13b-05b6-4951-98ac-cfb64ec0a5c8",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ssmguiconnect"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "7c228078-525b-40f1-a926-2203e29d0c4e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/pinpointsmsvoice"
-    ]
-}

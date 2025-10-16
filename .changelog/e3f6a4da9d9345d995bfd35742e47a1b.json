@@ -1,8 +1,0 @@
-{
-    "id": "e3f6a4da-9d93-45d9-95bf-d35742e47a1b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/dlm"
-    ]
-}

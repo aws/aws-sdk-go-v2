@@ -1,8 +1,0 @@
-{
-    "id": "861a160b-9174-4812-a8e7-3e5ea78833d4",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/voiceid"
-    ]
-}

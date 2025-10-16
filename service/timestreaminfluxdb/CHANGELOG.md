@@ -1,3 +1,8 @@
+# v1.17.1 (2025-10-16)
+
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2025-10-15)
 
 * **Feature**: This release adds support for creating and managing InfluxDB 3 Core and Enterprise DbClusters.

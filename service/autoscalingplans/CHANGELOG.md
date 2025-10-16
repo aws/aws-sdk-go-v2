@@ -1,3 +1,9 @@
+# v1.30.0 (2025-10-16)
+
+* **Feature**: Updated FIPS endpoints for US GovCloud regions
+* **Dependency Update**: Bump minimum Go version to 1.23.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.5 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions
