@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/service/dynamodb
 
-go 1.22
+go 1.23
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.39.2
@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.9
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.1
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.9
-	github.com/aws/smithy-go v1.23.0
+	github.com/aws/smithy-go v1.23.1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
