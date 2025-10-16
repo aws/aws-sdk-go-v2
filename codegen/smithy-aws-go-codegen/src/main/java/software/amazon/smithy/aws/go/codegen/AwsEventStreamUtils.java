@@ -28,6 +28,7 @@ import software.amazon.smithy.model.knowledge.EventStreamInfo;
 import software.amazon.smithy.model.shapes.BlobShape;
 import software.amazon.smithy.model.shapes.BooleanShape;
 import software.amazon.smithy.model.shapes.ByteShape;
+import software.amazon.smithy.model.shapes.EnumShape;
 import software.amazon.smithy.model.shapes.IntegerShape;
 import software.amazon.smithy.model.shapes.LongShape;
 import software.amazon.smithy.model.shapes.MemberShape;
@@ -1549,7 +1550,7 @@ public final class AwsEventStreamUtils {
                             var dest = String.format("v.%s",
                                     symbolProvider.toMemberName(headerBinding));
                             new HeaderShapeDeserVisitor(writer, model, headerBinding, dest,
-                                    headerBinding.getMemberName(), "msg.Headers").writeDeserializer();
+                                    headerBinding.getMemberName(), symbolProvider.toSymbol(headerBinding), "msg.Headers").writeDeserializer();
                         }
                         if (payloadBinding.isPresent()) {
                             var memberShape = payloadBinding.get();
@@ -1920,6 +1921,7 @@ public final class AwsEventStreamUtils {
         private final MemberShape memberShape;
         private final String dest;
         private final String headerName;
+        private final Symbol headerSymbol;
         private final String dataSource;
         private final GoPointableIndex pointableIndex;
 
@@ -1929,6 +1931,7 @@ public final class AwsEventStreamUtils {
                 MemberShape memberShape,
                 String dest,
                 String headerName,
+                Symbol headerSymbol,
                 String dataSource
         ) {
             this.writer = writer;
@@ -1936,6 +1939,7 @@ public final class AwsEventStreamUtils {
             this.memberShape = memberShape;
             this.dest = dest;
             this.headerName = headerName;
+            this.headerSymbol = headerSymbol;
             this.dataSource = dataSource;
             this.pointableIndex = GoPointableIndex.of(this.model);
         }
@@ -1993,6 +1997,12 @@ public final class AwsEventStreamUtils {
             var stringSymbol = SymbolUtils.createValueSymbolBuilder("string")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
             writeTypeDeserializer(getEventStreamSymbol("StringValue"), stringSymbol);
+            return null;
+        }
+
+        @Override
+        public Void enumShape(EnumShape shape) {
+            writeTypeDeserializer(getEventStreamSymbol("StringValue"),  headerSymbol);
             return null;
         }
 
