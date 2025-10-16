@@ -55,6 +55,8 @@ func TestTagParse(t *testing.T) {
 		{`dynamodbav:"prop" dynamodbindex:",global,local,partition,sort"`, false, true, Tag{Name: "prop", Indexes: []Index{{Name: "", Global: true, Local: true, Partition: true, Sort: true}}}},
 		{`dynamodbav:"prop" dynamodbindex:","`, false, true, Tag{Name: "prop", Indexes: []Index{{}}}},
 		{`dynamodbav:"prop" dynamodbindex:""`, false, true, Tag{Name: "prop"}},
+		{`dynamodbav:"prop,converter|float64"`, false, true, Tag{Name: "prop", Converter: true, Options: map[string][]string{"converter": {"float64"}}}},
+		{`dynamodbav:"prop,converter|time|format=2006-01-02"`, false, true, Tag{Name: "prop", Converter: true, Options: map[string][]string{"converter": {"time", "format=2006-01-02"}}}},
 		// unsupported tags are ignored
 		{`dynamodbav:"prop" dynamodbindex:"idx,unsupportedtag"`, false, true, Tag{Name: "prop", Indexes: []Index{{Name: "idx"}}}},
 		{`dynamodbav:",unsupportedtag"`, false, true, Tag{}},

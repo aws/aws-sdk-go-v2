@@ -2,11 +2,13 @@ package enhancedclient
 
 import (
 	"encoding"
+	"errors"
 	"fmt"
 	"reflect"
 	"strconv"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/enhancedclient/converters"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
@@ -243,6 +245,18 @@ type DecoderOptions struct {
 	// call UnmarshalText on the target. If the attributevalue is a binary, its
 	// value will be used to call UnmarshalBinary.
 	UseEncodingUnmarshalers bool
+
+	// IgnoreNilValueErrors controls whether decoding should ignore errors
+	// caused by nil values during schema conversion.
+	// If true, fields with nil values that cause conversion errors will be skipped.
+	// If false or nil, such cases will trigger an error.
+	IgnoreNilValueErrors *bool
+
+	// ConverterRegistry provides a registry of type converters used during
+	// encoding and decoding operations. It will be set on both the Decoder
+	// and Encoder to control how values are transformed between Go types
+	// and schema representations.
+	ConverterRegistry *converters.Registry
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -305,6 +319,33 @@ func (d *Decoder[T]) decode(av types.AttributeValue, v reflect.Value, fieldTag T
 			return u.UnmarshalDynamoDBAttributeValue(av)
 		}
 		return d.decodeNull(v)
+	}
+
+	if d.options.ConverterRegistry != nil && fieldTag.Converter {
+		el := valueElem(v)
+		cvtName := el.Type().String()
+
+		opts, ok := fieldTag.Option("converter")
+		if ok {
+			cvtName = opts[0]
+		}
+
+		if cvt := d.options.ConverterRegistry.Converter(cvtName); cvt != nil {
+			vr, err := cvt.FromAttributeValue(av, opts)
+
+			if errors.Is(converters.ErrNilValue, err) && !unwrap(d.options.IgnoreNilValueErrors) {
+				err = nil
+			}
+
+			if err != nil {
+				return err
+			}
+
+			rv := reflect.ValueOf(vr)
+			el.Set(rv)
+
+			return nil
+		}
 	}
 
 	v0 := v

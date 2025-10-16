@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/feature/dynamodb/enhancedclient
 
-go 1.24.0
+go 1.22.0
 
 replace github.com/aws/aws-sdk-go-v2/config => ../../../config
 
@@ -14,6 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression v0.0.0-00010101000000-000000000000
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.4
 	github.com/aws/smithy-go v1.22.4
+	github.com/davecgh/go-spew v1.1.1
 )
 
 require (

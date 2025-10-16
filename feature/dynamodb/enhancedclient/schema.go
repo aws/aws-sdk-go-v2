@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/aws/smithy-go/middleware"
+
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
@@ -16,7 +18,8 @@ type Schema[T any] struct {
 	typ          reflect.Type
 
 	//generators map[string]enhancedclient2.Generator[T]
-	extensions map[ExecutionPhase][]Extension
+	extensions   map[ExecutionPhase][]Extension
+	interceptors middleware.Stack
 
 	// common
 	attributeDefinitions      []types.AttributeDefinition
@@ -101,12 +104,18 @@ func NewSchema[T any](fns ...func(options *SchemaOptions)) (*Schema[T], error) {
 		fn(&opts)
 	}
 
-	out := &Schema[T]{
+	s := &Schema[T]{
 		options:      opts,
 		cachedFields: cf,
 		typ:          reflect.TypeFor[T](),
-		enc:          NewEncoder[T](),
-		dec:          NewDecoder[T](),
+		enc: NewEncoder[T](func(options *EncoderOptions) {
+			options.ConverterRegistry = opts.ConverterRegistry
+			options.IgnoreNilValueErrors = opts.IgnoreNilValueErrors
+		}),
+		dec: NewDecoder[T](func(options *DecoderOptions) {
+			options.ConverterRegistry = opts.ConverterRegistry
+			options.IgnoreNilValueErrors = opts.IgnoreNilValueErrors
+		}),
 	}
 
 	resolversFns := []func(o *Schema[T]) error{
@@ -119,10 +128,10 @@ func NewSchema[T any](fns ...func(options *SchemaOptions)) (*Schema[T], error) {
 	}
 
 	for _, fn := range resolversFns {
-		if err := fn(out); err != nil {
+		if err := fn(s); err != nil {
 			return nil, err
 		}
 	}
 
-	return out, nil
+	return s, nil
 }

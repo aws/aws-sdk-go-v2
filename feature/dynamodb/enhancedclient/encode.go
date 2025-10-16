@@ -2,11 +2,13 @@ package enhancedclient
 
 import (
 	"encoding"
+	"errors"
 	"fmt"
 	"reflect"
 	"strconv"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/enhancedclient/converters"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
@@ -382,6 +384,18 @@ type EncoderOptions struct {
 
 	// When enabled, the encoder will omit empty time attribute values
 	OmitEmptyTime bool
+
+	// IgnoreNilValueErrors controls whether decoding should ignore errors
+	// caused by nil values during schema conversion.
+	// If true, fields with nil values that cause conversion errors will be skipped.
+	// If false or nil, such cases will trigger an error.
+	IgnoreNilValueErrors *bool
+
+	// ConverterRegistry provides a registry of type converters used during
+	// encoding and decoding operations. It will be set on both the Decoder
+	// and Encoder to control how values are transformed between Go types
+	// and schema representations.
+	ConverterRegistry *converters.Registry
 }
 
 // An Encoder provides marshaling Go value types to AttributeValues.
@@ -420,6 +434,26 @@ func (e *Encoder[T]) encode(v reflect.Value, fieldTag Tag) (types.AttributeValue
 	// Ignore fields explicitly marked to be skipped.
 	if fieldTag.Ignore {
 		return nil, nil
+	}
+
+	if e.options.ConverterRegistry != nil && fieldTag.Converter {
+		el := valueElem(v)
+		cvtName := el.Type().String()
+
+		opts, ok := fieldTag.Option("converter")
+		if ok {
+			cvtName = opts[0]
+		}
+
+		if cvt := e.options.ConverterRegistry.Converter(cvtName); cvt != nil {
+			av, err := cvt.ToAttributeValue(el.Interface(), opts)
+
+			if errors.Is(converters.ErrNilValue, err) && !unwrap(e.options.IgnoreNilValueErrors) {
+				err = nil
+			}
+
+			return av, err
+		}
 	}
 
 	// Zero values are serialized as null, or skipped if omitEmpty.
