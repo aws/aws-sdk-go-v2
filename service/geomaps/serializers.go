@@ -400,6 +400,10 @@ func awsRestjson1_serializeOpHttpBindingsGetStyleDescriptorInput(v *GetStyleDesc
 		encoder.SetQuery("color-scheme").String(string(v.ColorScheme))
 	}
 
+	if len(v.ContourDensity) > 0 {
+		encoder.SetQuery("contour-density").String(string(v.ContourDensity))
+	}
+
 	if v.Key != nil {
 		encoder.SetQuery("key").String(*v.Key)
 	}
@@ -414,6 +418,20 @@ func awsRestjson1_serializeOpHttpBindingsGetStyleDescriptorInput(v *GetStyleDesc
 	if len(v.Style) > 0 {
 		if err := encoder.SetURI("Style").String(string(v.Style)); err != nil {
 			return err
+		}
+	}
+
+	if len(v.Terrain) > 0 {
+		encoder.SetQuery("terrain").String(string(v.Terrain))
+	}
+
+	if len(v.Traffic) > 0 {
+		encoder.SetQuery("traffic").String(string(v.Traffic))
+	}
+
+	if v.TravelModes != nil {
+		for i := range v.TravelModes {
+			encoder.AddQuery("travel-modes").String(string(v.TravelModes[i]))
 		}
 	}
 

@@ -1,0 +1,8 @@
+{
+    "id": "6ca0b58e-224d-4d19-963e-1fffa5a2a00d",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/finspacedata"
+    ]
+}

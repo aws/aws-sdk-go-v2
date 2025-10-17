@@ -1,0 +1,8 @@
+{
+    "id": "28e00404-6c3c-4219-b22d-6fbec25a7dcc",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/iotdeviceadvisor"
+    ]
+}

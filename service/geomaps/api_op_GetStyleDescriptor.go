@@ -12,6 +12,10 @@ import (
 )
 
 // GetStyleDescriptor returns information about the style.
+//
+// For more information, see [Style dynamic maps] in the Amazon Location Service Developer Guide.
+//
+// [Style dynamic maps]: https://docs.aws.amazon.com/location/latest/developerguide/styling-dynamic-maps.html
 func (c *Client) GetStyleDescriptor(ctx context.Context, params *GetStyleDescriptorInput, optFns ...func(*Options)) (*GetStyleDescriptorOutput, error) {
 	if params == nil {
 		params = &GetStyleDescriptorInput{}
@@ -43,6 +47,13 @@ type GetStyleDescriptorInput struct {
 	//
 	// Valid values for ColorScheme are case sensitive.
 	ColorScheme types.ColorScheme
+
+	// Displays the shape and steepness of terrain features using elevation lines. The
+	// density value controls how densely the available contour line information is
+	// rendered on the map.
+	//
+	// This parameter is valid only for the Standard map style.
+	ContourDensity types.ContourDensity
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
 	// SigV4 signature must be provided when making a request.
@@ -81,6 +92,29 @@ type GetStyleDescriptorInput struct {
 	//
 	//   - VNM : Vietnam's view on the Paracel Islands and Spratly Islands
 	PoliticalView *string
+
+	// Adjusts how physical terrain details are rendered on the map.
+	//
+	// The following terrain styles are currently supported:
+	//
+	//   - Hillshade : Displays the physical terrain details through shading and
+	//   highlighting of elevation change and geographic features.
+	//
+	// This parameter is valid only for the Standard map style.
+	Terrain types.Terrain
+
+	// Displays real-time traffic information overlay on map, such as incident events
+	// and flow events.
+	//
+	// This parameter is valid only for the Standard map style.
+	Traffic types.Traffic
+
+	// Renders additional map information relevant to selected travel modes.
+	// Information for multiple travel modes can be displayed simultaneously, although
+	// this increases the overall information density rendered on the map.
+	//
+	// This parameter is valid only for the Standard map style.
+	TravelModes []types.TravelMode
 
 	noSmithyDocumentSerde
 }

@@ -67,9 +67,13 @@ type CreateApplicationInput struct {
 	// This member is required.
 	Description *string
 
-	// The path and file name of the executable file that launches the content for
-	// streaming. Enter a path value that is relative to the location set in
-	// ApplicationSourceUri .
+	// The relative path and file name of the executable file that Amazon GameLift
+	// Streams will stream. Specify a path relative to the location set in
+	// ApplicationSourceUri . The file must be contained within the application's root
+	// folder. For Windows applications, the file must be a valid Windows executable or
+	// batch file with a filename ending in .exe, .cmd, or .bat. For Linux
+	// applications, the file must be a valid Linux binary executable or a script that
+	// contains an initial interpreter line starting with a shebang (' #! ').
 	//
 	// This member is required.
 	ExecutablePath *string
@@ -173,8 +177,8 @@ type CreateApplicationOutput struct {
 	// A human-readable label for the application. You can edit this value.
 	Description *string
 
-	// The path and file name of the executable file that launches the content for
-	// streaming.
+	// The relative path and file name of the executable file that launches the
+	// content for streaming.
 	ExecutablePath *string
 
 	// A unique ID value that is assigned to the resource when it's created. Format

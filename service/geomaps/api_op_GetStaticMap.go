@@ -14,6 +14,19 @@ import (
 // GetStaticMap provides high-quality static map images with customizable options.
 // You can modify the map's appearance and overlay additional information. It's an
 // ideal solution for applications requiring tailored static map snapshots.
+//
+// For more information, see the following topics in the Amazon Location Service
+// Developer Guide:
+//
+// [Static maps]
+//
+// [Customize static maps]
+//
+// [Overlay on the static map]
+//
+// [Overlay on the static map]: https://docs.aws.amazon.com/location/latest/developerguide/overlaying-static-map.html
+// [Customize static maps]: https://docs.aws.amazon.com/location/latest/developerguide/customizing-static-maps.html
+// [Static maps]: https://docs.aws.amazon.com/location/latest/developerguide/static-maps.html
 func (c *Client) GetStaticMap(ctx context.Context, params *GetStaticMapInput, optFns ...func(*Options)) (*GetStaticMapOutput, error) {
 	if params == nil {
 		params = &GetStaticMapInput{}
@@ -49,24 +62,25 @@ type GetStaticMapInput struct {
 	// This member is required.
 	Width *int32
 
-	// Takes in two or more pair of coordinates, [Lon, Lat], with each coordinate
-	// separated by a comma. The API will generate an image to encompass all of the
-	// provided coordinates.
+	// Takes in two or more pair of coordinates in World Geodetic System (WGS 84)
+	// format: [longitude, latitude], with each coordinate separated by a comma. The
+	// API will generate an image to encompass all of the provided coordinates.
 	//
 	// Cannot be used with Zoom and or Radius
 	//
 	// Example: 97.170451,78.039098,99.045536,27.176178
 	BoundedPositions *string
 
-	// Takes in two pairs of coordinates, [Lon, Lat], denoting south-westerly and
-	// north-easterly edges of the image. The underlying area becomes the view of the
-	// image.
+	// Takes in two pairs of coordinates in World Geodetic System (WGS 84) format:
+	// [longitude, latitude], denoting south-westerly and north-easterly edges of the
+	// image. The underlying area becomes the view of the image.
 	//
 	// Example: -123.17075,49.26959,-123.08125,49.31429
 	BoundingBox *string
 
-	// Takes in a pair of coordinates, [Lon, Lat], which becomes the center point of
-	// the image. This parameter requires that either zoom or radius is set.
+	// Takes in a pair of coordinates in World Geodetic System (WGS 84) format:
+	// [longitude, latitude], which becomes the center point of the image. This
+	// parameter requires that either zoom or radius is set.
 	//
 	// Cannot be used with Zoom and or Radius
 	//

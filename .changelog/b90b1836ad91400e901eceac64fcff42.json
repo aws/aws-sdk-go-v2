@@ -1,0 +1,8 @@
+{
+    "id": "b90b1836-ad91-400e-901e-ceac64fcff42",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/appconfigdata"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "8a07edff-84a2-45b2-9861-4a56ffb8c449",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/dsql"
+    ]
+}

@@ -584,8 +584,8 @@ type EntityTypeFiltersMemberDataProductFilters struct {
 func (*EntityTypeFiltersMemberDataProductFilters) isEntityTypeFilters() {}
 
 // The filters that you can use with the ListEntities operation to filter machine
-// learning products. You can filter by EntityId, LastModifiedDate, ProductTitle,
-// and Visibility.
+// learning products. You can filter by EntityId , astModifiedDate , ProductTitle ,
+// and Visibility .
 type EntityTypeFiltersMemberMachineLearningProductFilters struct {
 	Value MachineLearningProductFilters
 
@@ -760,8 +760,8 @@ type MachineLearningProductEntityIdFilter struct {
 }
 
 // The filters that you can use with the ListEntities operation to filter machine
-// learning products. You can filter by EntityId, LastModifiedDate, ProductTitle,
-// and Visibility.
+// learning products. You can filter by EntityId , astModifiedDate , ProductTitle ,
+// and Visibility .
 type MachineLearningProductFilters struct {
 
 	// Filter machine learning products by their entity IDs.

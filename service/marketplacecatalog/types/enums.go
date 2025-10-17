@@ -77,10 +77,11 @@ type ContainerProductSortBy string
 
 // Enum values for ContainerProductSortBy
 const (
-	ContainerProductSortByEntityId         ContainerProductSortBy = "EntityId"
-	ContainerProductSortByLastModifiedDate ContainerProductSortBy = "LastModifiedDate"
-	ContainerProductSortByProductTitle     ContainerProductSortBy = "ProductTitle"
-	ContainerProductSortByVisibility       ContainerProductSortBy = "Visibility"
+	ContainerProductSortByEntityId              ContainerProductSortBy = "EntityId"
+	ContainerProductSortByLastModifiedDate      ContainerProductSortBy = "LastModifiedDate"
+	ContainerProductSortByProductTitle          ContainerProductSortBy = "ProductTitle"
+	ContainerProductSortByVisibility            ContainerProductSortBy = "Visibility"
+	ContainerProductSortByCompatibleAWSServices ContainerProductSortBy = "CompatibleAWSServices"
 )
 
 // Values returns all known values for ContainerProductSortBy. Note that this can
@@ -93,6 +94,7 @@ func (ContainerProductSortBy) Values() []ContainerProductSortBy {
 		"LastModifiedDate",
 		"ProductTitle",
 		"Visibility",
+		"CompatibleAWSServices",
 	}
 }
 
@@ -417,10 +419,11 @@ type SaaSProductSortBy string
 
 // Enum values for SaaSProductSortBy
 const (
-	SaaSProductSortByEntityId         SaaSProductSortBy = "EntityId"
-	SaaSProductSortByProductTitle     SaaSProductSortBy = "ProductTitle"
-	SaaSProductSortByVisibility       SaaSProductSortBy = "Visibility"
-	SaaSProductSortByLastModifiedDate SaaSProductSortBy = "LastModifiedDate"
+	SaaSProductSortByEntityId            SaaSProductSortBy = "EntityId"
+	SaaSProductSortByProductTitle        SaaSProductSortBy = "ProductTitle"
+	SaaSProductSortByVisibility          SaaSProductSortBy = "Visibility"
+	SaaSProductSortByLastModifiedDate    SaaSProductSortBy = "LastModifiedDate"
+	SaaSProductSortByDeliveryOptionTypes SaaSProductSortBy = "DeliveryOptionTypes"
 )
 
 // Values returns all known values for SaaSProductSortBy. Note that this can be
@@ -433,6 +436,7 @@ func (SaaSProductSortBy) Values() []SaaSProductSortBy {
 		"ProductTitle",
 		"Visibility",
 		"LastModifiedDate",
+		"DeliveryOptionTypes",
 	}
 }
 

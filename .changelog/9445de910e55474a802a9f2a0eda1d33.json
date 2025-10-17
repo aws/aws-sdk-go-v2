@@ -1,0 +1,8 @@
+{
+    "id": "9445de91-0e55-474a-802a-9f2a0eda1d33",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/applicationinsights"
+    ]
+}

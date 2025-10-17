@@ -1,0 +1,8 @@
+{
+    "id": "db70466d-33bf-4f73-b2ce-a7f11fc52723",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sagemakergeospatial"
+    ]
+}

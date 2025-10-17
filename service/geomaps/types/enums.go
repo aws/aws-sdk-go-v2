@@ -21,6 +21,23 @@ func (ColorScheme) Values() []ColorScheme {
 	}
 }
 
+type ContourDensity string
+
+// Enum values for ContourDensity
+const (
+	ContourDensityMedium ContourDensity = "Medium"
+)
+
+// Values returns all known values for ContourDensity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContourDensity) Values() []ContourDensity {
+	return []ContourDensity{
+		"Medium",
+	}
+}
+
 type LabelSize string
 
 // Enum values for LabelSize
@@ -121,6 +138,59 @@ func (StaticMapStyle) Values() []StaticMapStyle {
 	return []StaticMapStyle{
 		"Satellite",
 		"Standard",
+	}
+}
+
+type Terrain string
+
+// Enum values for Terrain
+const (
+	TerrainHillshade Terrain = "Hillshade"
+)
+
+// Values returns all known values for Terrain. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Terrain) Values() []Terrain {
+	return []Terrain{
+		"Hillshade",
+	}
+}
+
+type Traffic string
+
+// Enum values for Traffic
+const (
+	TrafficAll Traffic = "All"
+)
+
+// Values returns all known values for Traffic. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Traffic) Values() []Traffic {
+	return []Traffic{
+		"All",
+	}
+}
+
+type TravelMode string
+
+// Enum values for TravelMode
+const (
+	TravelModeTransit TravelMode = "Transit"
+	TravelModeTruck   TravelMode = "Truck"
+)
+
+// Values returns all known values for TravelMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TravelMode) Values() []TravelMode {
+	return []TravelMode{
+		"Transit",
+		"Truck",
 	}
 }
 

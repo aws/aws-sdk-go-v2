@@ -13,6 +13,10 @@ import (
 // GetTile returns a tile. Map tiles are used by clients to render a map. they're
 // addressed using a grid arrangement with an X coordinate, Y coordinate, and Z
 // (zoom) level.
+//
+// For more information, see [Tiles] in the Amazon Location Service Developer Guide.
+//
+// [Tiles]: https://docs.aws.amazon.com/location/latest/developerguide/tiles.html
 func (c *Client) GetTile(ctx context.Context, params *GetTileInput, optFns ...func(*Options)) (*GetTileOutput, error) {
 	if params == nil {
 		params = &GetTileInput{}

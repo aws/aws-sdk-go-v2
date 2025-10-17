@@ -1,0 +1,8 @@
+{
+    "id": "8339ed3f-5924-4b35-ad35-09787b37b1f2",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/cloudfrontkeyvaluestore"
+    ]
+}

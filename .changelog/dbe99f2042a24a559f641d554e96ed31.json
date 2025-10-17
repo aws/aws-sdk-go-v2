@@ -1,0 +1,8 @@
+{
+    "id": "dbe99f20-42a2-4a55-9f64-1d554e96ed31",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

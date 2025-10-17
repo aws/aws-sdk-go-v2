@@ -1,0 +1,8 @@
+{
+    "id": "725ca934-2cbc-44e6-8a64-864245007e44",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/qapps"
+    ]
+}

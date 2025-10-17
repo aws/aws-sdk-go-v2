@@ -117,7 +117,8 @@ type GetStreamGroupOutput struct {
 	//   which are in error.
 	//
 	//   - ERROR : An error occurred when the stream group deployed. See StatusReason
-	//   for more information.
+	//   (returned by CreateStreamGroup , GetStreamGroup , and UpdateStreamGroup ) for
+	//   more information.
 	//
 	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
 	//   group.

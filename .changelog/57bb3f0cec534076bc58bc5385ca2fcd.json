@@ -1,0 +1,8 @@
+{
+    "id": "57bb3f0c-ec53-4076-bc58-bc5385ca2fcd",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/elasticsearchservice"
+    ]
+}

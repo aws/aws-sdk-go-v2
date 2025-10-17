@@ -1,0 +1,8 @@
+{
+    "id": "201fa3fb-5ddc-4a3c-9424-901d66cf7a09",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

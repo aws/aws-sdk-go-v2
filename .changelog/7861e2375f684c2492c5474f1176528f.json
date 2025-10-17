@@ -1,0 +1,8 @@
+{
+    "id": "7861e237-5f68-4c24-92c5-474f1176528f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/tnb"
+    ]
+}

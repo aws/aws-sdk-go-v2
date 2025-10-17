@@ -1,0 +1,8 @@
+{
+    "id": "f35a8fef-8010-449d-9eac-674822bd72e1",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/bcmrecommendedactions"
+    ]
+}

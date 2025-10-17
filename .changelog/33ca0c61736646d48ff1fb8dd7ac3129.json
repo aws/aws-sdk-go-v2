@@ -1,0 +1,8 @@
+{
+    "id": "33ca0c61-7366-46d4-8ff1-fb8dd7ac3129",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

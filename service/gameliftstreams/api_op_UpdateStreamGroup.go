@@ -25,13 +25,17 @@ import (
 //   - Always-on: The streaming capacity that is allocated and ready to handle
 //     stream requests without delay. You pay for this capacity whether it's in use or
 //     not. Best for quickest time from streaming request to streaming session. Default
-//     is 1 when creating a stream group or adding a location.
+//     is 1 (2 for high stream classes) when creating a stream group or adding a
+//     location.
 //
 //   - On-demand: The streaming capacity that Amazon GameLift Streams can allocate
 //     in response to stream requests, and then de-allocate when the session has
 //     terminated. This offers a cost control measure at the expense of a greater
 //     startup time (typically under 5 minutes). Default is 0 when creating a stream
 //     group or adding a location.
+//
+// Values for capacity must be whole number multiples of the tenancy value of the
+// stream group's stream class.
 //
 // To update a stream group, specify the stream group's Amazon Resource Name (ARN)
 // and provide the new values. If the request is successful, Amazon GameLift
@@ -162,7 +166,8 @@ type UpdateStreamGroupOutput struct {
 	//   which are in error.
 	//
 	//   - ERROR : An error occurred when the stream group deployed. See StatusReason
-	//   for more information.
+	//   (returned by CreateStreamGroup , GetStreamGroup , and UpdateStreamGroup ) for
+	//   more information.
 	//
 	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
 	//   group.

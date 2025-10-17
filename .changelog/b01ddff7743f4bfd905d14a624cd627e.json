@@ -1,0 +1,8 @@
+{
+    "id": "b01ddff7-743f-4bfd-905d-14a624cd627e",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/migrationhubrefactorspaces"
+    ]
+}

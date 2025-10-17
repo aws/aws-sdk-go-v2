@@ -169,7 +169,8 @@ type GetStreamSessionOutput struct {
 	//   maximum length of a session specified by SessionLengthSeconds in
 	//   StartStreamSession is exceeded.
 	//
-	//   - ERROR : The stream session failed to activate.
+	//   - ERROR : The stream session failed to activate. See StatusReason (returned by
+	//   GetStreamSession and StartStreamSession ) for more information.
 	//
 	//   - PENDING_CLIENT_RECONNECTION : A client has recently disconnected and the
 	//   stream session is waiting for the client to reconnect. A client has
@@ -187,6 +188,21 @@ type GetStreamSessionOutput struct {
 	Status types.StreamSessionStatus
 
 	// A short description of the reason the stream session is in ERROR status.
+	//
+	//   - internalError : An internal service error occurred. Start a new stream
+	//   session to continue streaming.
+	//
+	//   - invalidSignalRequest : The WebRTC signal request that was sent is not valid.
+	//   When starting or reconnecting to a stream session, use generateSignalRequest
+	//   in the Amazon GameLift Streams Web SDK to generate a new signal request.
+	//
+	//   - placementTimeout : Amazon GameLift Streams could not find available stream
+	//   capacity to start a stream session. Increase the stream capacity in the stream
+	//   group or wait until capacity becomes available.
+	//
+	//   - applicationLogS3DestinationError : Could not write the application log to
+	//   the Amazon S3 bucket that is configured for the streaming application. Make sure
+	//   the bucket still exists.
 	StatusReason types.StreamSessionStatusReason
 
 	// The unique identifier for the Amazon GameLift Streams stream group that is

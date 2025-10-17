@@ -1,0 +1,8 @@
+{
+    "id": "4dec5b30-03bf-416b-a4f0-eca9917abd70",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/bedrockdataautomationruntime"
+    ]
+}

@@ -89,8 +89,8 @@ type GetApplicationOutput struct {
 	// A human-readable label for the application. You can edit this value.
 	Description *string
 
-	// The path and file name of the executable file that launches the content for
-	// streaming.
+	// The relative path and file name of the executable file that launches the
+	// content for streaming.
 	ExecutablePath *string
 
 	// A unique ID value that is assigned to the resource when it's created. Format

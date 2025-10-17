@@ -1,0 +1,8 @@
+{
+    "id": "8cb4e0a1-4e1d-4f60-9f7d-ecd72608388e",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/datasync"
+    ]
+}

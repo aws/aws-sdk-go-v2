@@ -1,0 +1,8 @@
+{
+    "id": "37da6437-a521-4837-bd69-0c1e59583011",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/licensemanager"
+    ]
+}

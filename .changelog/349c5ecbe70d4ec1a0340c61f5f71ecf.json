@@ -1,0 +1,8 @@
+{
+    "id": "349c5ecb-e70d-4ec1-a034-0c61f5f71ecf",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/kendraranking"
+    ]
+}

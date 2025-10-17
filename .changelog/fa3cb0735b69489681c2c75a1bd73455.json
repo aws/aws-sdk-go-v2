@@ -1,0 +1,8 @@
+{
+    "id": "fa3cb073-5b69-4896-81c2-c75a1bd73455",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/iottwinmaker"
+    ]
+}
