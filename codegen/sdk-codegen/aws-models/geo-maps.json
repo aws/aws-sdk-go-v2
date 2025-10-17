@@ -55,6 +55,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.geomaps#ContourDensity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "MEDIUM",
+                        "value": "Medium"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.geomaps#CountryCode": {
             "type": "string",
             "traits": {
@@ -96,7 +107,7 @@
                 "target": "com.amazonaws.geomaps#GetGlyphsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p> <code>GetGlyphs</code> returns the map's glyphs.</p>",
+                "smithy.api#documentation": "<p> <code>GetGlyphs</code> returns the map's glyphs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/styling-labels-with-glyphs.html\">Style labels with glyphs</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/glyphs/{FontStack}/{FontUnicodeRange}",
                     "method": "GET"
@@ -137,7 +148,7 @@
                 "FontUnicodeRange": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Unicode range of characters to download glyphs for. This must be aligned to multiples of 256. </p> <p>Example: <code>0-255.pdf</code> </p>",
+                        "smithy.api#documentation": "<p>A Unicode range of characters to download glyphs for. This must be aligned to multiples of 256. </p> <p>Example: <code>0-255.pbf</code> </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^[0-9]+-[0-9]+\\.pbf$",
                         "smithy.api#required": {}
@@ -193,7 +204,7 @@
                 "target": "com.amazonaws.geomaps#GetSpritesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p> <code>GetSprites</code> returns the map's sprites.</p>",
+                "smithy.api#documentation": "<p> <code>GetSprites</code> returns the map's sprites.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/styling-iconography-with-sprites.html\">Style iconography with sprites</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}",
                     "method": "GET"
@@ -320,7 +331,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>GetStaticMap</code> provides high-quality static map images with customizable options. You can modify the map's appearance and overlay additional information. It's an ideal solution for applications requiring tailored static map snapshots.</p>",
+                "smithy.api#documentation": "<p> <code>GetStaticMap</code> provides high-quality static map images with customizable options. You can modify the map's appearance and overlay additional information. It's an ideal solution for applications requiring tailored static map snapshots.</p> <p>For more information, see the following topics in the <i>Amazon Location Service Developer Guide</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/static-maps.html\">Static maps</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/customizing-static-maps.html\">Customize static maps</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/overlaying-static-map.html\">Overlay on the static map</a> </p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/static/{FileName}",
                     "method": "GET"
@@ -354,21 +365,21 @@
                 "BoundingBox": {
                     "target": "com.amazonaws.geomaps#PositionListString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Takes in two pairs of coordinates, [Lon, Lat], denoting south-westerly and north-easterly edges of the image. The underlying area becomes the view of the image. </p> <p>Example: -123.17075,49.26959,-123.08125,49.31429</p>",
+                        "smithy.api#documentation": "<p>Takes in two pairs of coordinates in World Geodetic System (WGS 84) format: [longitude, latitude], denoting south-westerly and north-easterly edges of the image. The underlying area becomes the view of the image. </p> <p>Example: -123.17075,49.26959,-123.08125,49.31429</p>",
                         "smithy.api#httpQuery": "bounding-box"
                     }
                 },
                 "BoundedPositions": {
                     "target": "com.amazonaws.geomaps#PositionListString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Takes in two or more pair of coordinates, [Lon, Lat], with each coordinate separated by a comma. The API will generate an image to encompass all of the provided coordinates. </p> <note> <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code> </p> </note> <p>Example: 97.170451,78.039098,99.045536,27.176178</p>",
+                        "smithy.api#documentation": "<p>Takes in two or more pair of coordinates in World Geodetic System (WGS 84) format: [longitude, latitude], with each coordinate separated by a comma. The API will generate an image to encompass all of the provided coordinates. </p> <note> <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code> </p> </note> <p>Example: 97.170451,78.039098,99.045536,27.176178</p>",
                         "smithy.api#httpQuery": "bounded-positions"
                     }
                 },
                 "Center": {
                     "target": "com.amazonaws.geomaps#PositionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Takes in a pair of coordinates, [Lon, Lat], which becomes the center point of the image. This parameter requires that either zoom or radius is set.</p> <note> <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code> </p> </note> <p>Example: 49.295,-123.108</p>",
+                        "smithy.api#documentation": "<p>Takes in a pair of coordinates in World Geodetic System (WGS 84) format: [longitude, latitude], which becomes the center point of the image. This parameter requires that either zoom or radius is set.</p> <note> <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code> </p> </note> <p>Example: 49.295,-123.108</p>",
                         "smithy.api#httpQuery": "center"
                     }
                 },
@@ -567,7 +578,7 @@
                 "target": "com.amazonaws.geomaps#GetStyleDescriptorResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p> <code>GetStyleDescriptor</code> returns information about the style.</p>",
+                "smithy.api#documentation": "<p> <code>GetStyleDescriptor</code> returns information about the style.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/styling-dynamic-maps.html\">Style dynamic maps</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/styles/{Style}/descriptor",
                     "method": "GET"
@@ -613,6 +624,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.</p> <p>The following political views are currently supported:</p> <ul> <li> <p> <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands</p> </li> <li> <p> <code>EGY</code>: Egypt's view on Bir Tawil</p> </li> <li> <p> <code>IND</code>: India's view on Gilgit-Baltistan</p> </li> <li> <p> <code>KEN</code>: Kenya's view on the Ilemi Triangle</p> </li> <li> <p> <code>MAR</code>: Morocco's view on Western Sahara</p> </li> <li> <p> <code>RUS</code>: Russia's view on Crimea</p> </li> <li> <p> <code>SDN</code>: Sudan's view on the Halaib Triangle</p> </li> <li> <p> <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p> </li> <li> <p> <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa Headwaters</p> </li> <li> <p> <code>SYR</code>: Syria's view on the Golan Heights</p> </li> <li> <p> <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p> </li> <li> <p> <code>TZA</code>: Tanzania's view on Lake Malawi</p> </li> <li> <p> <code>URY</code>: Uruguay's view on Rincon de Artigas</p> </li> <li> <p> <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p> </li> </ul>",
                         "smithy.api#httpQuery": "political-view"
+                    }
+                },
+                "Terrain": {
+                    "target": "com.amazonaws.geomaps#Terrain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adjusts how physical terrain details are rendered on the map.</p> <p>The following terrain styles are currently supported:</p> <ul> <li> <p> <code>Hillshade</code>: Displays the physical terrain details through shading and highlighting of elevation change and geographic features.</p> </li> </ul> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
+                        "smithy.api#httpQuery": "terrain"
+                    }
+                },
+                "ContourDensity": {
+                    "target": "com.amazonaws.geomaps#ContourDensity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the shape and steepness of terrain features using elevation lines. The density value controls how densely the available contour line information is rendered on the map.</p> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
+                        "smithy.api#httpQuery": "contour-density"
+                    }
+                },
+                "Traffic": {
+                    "target": "com.amazonaws.geomaps#Traffic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays real-time traffic information overlay on map, such as incident events and flow events.</p> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
+                        "smithy.api#httpQuery": "traffic"
+                    }
+                },
+                "TravelModes": {
+                    "target": "com.amazonaws.geomaps#TravelModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Renders additional map information relevant to selected travel modes. Information for multiple travel modes can be displayed simultaneously, although this increases the overall information density rendered on the map.</p> <p>This parameter is valid only for the <code>Standard</code> map style.</p>",
+                        "smithy.api#httpQuery": "travel-modes"
                     }
                 },
                 "Key": {
@@ -690,7 +729,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>GetTile</code> returns a tile. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.</p>",
+                "smithy.api#documentation": "<p> <code>GetTile</code> returns a tile. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/tiles.html\">Tiles</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/tiles/{Tileset}/{Z}/{X}/{Y}",
                     "method": "GET"
@@ -979,26 +1018,26 @@
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         },
                         "Region": {
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -2105,6 +2144,17 @@
                 ]
             }
         },
+        "com.amazonaws.geomaps#Terrain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "HILLSHADE",
+                        "value": "Hillshade"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.geomaps#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -2131,6 +2181,41 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[-.\\w]+$"
+            }
+        },
+        "com.amazonaws.geomaps#Traffic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ALL",
+                        "value": "All"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#TravelMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "TRANSIT",
+                        "value": "Transit"
+                    },
+                    {
+                        "name": "TRUCK",
+                        "value": "Truck"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#TravelModeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geomaps#TravelMode"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.geomaps#ValidationException": {
