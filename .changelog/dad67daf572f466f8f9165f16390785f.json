@@ -1,8 +1,0 @@
-{
-    "id": "dad67daf-572f-466f-8f91-65f16390785f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/arczonalshift"
-    ]
-}

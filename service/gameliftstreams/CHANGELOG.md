@@ -1,3 +1,7 @@
+# v1.6.8 (2025-10-17)
+
+* **Documentation**: Updates documentation to clarify valid application binaries for an Amazon GameLift Streams application and provide descriptions of stream session error status reasons
+
 # v1.6.7 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

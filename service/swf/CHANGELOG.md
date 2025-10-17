@@ -1,3 +1,7 @@
+# v1.33.0 (2025-10-17)
+
+* **Feature**: Releasing minor endpoint updates.
+
 # v1.32.6 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

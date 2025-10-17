@@ -1,8 +1,0 @@
-{
-    "id": "8850bc2f-6318-4855-a3ab-a212cca359b4",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "7553923b-5dcb-4a03-a8df-33a4ef12dac9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/signer"
-    ]
-}

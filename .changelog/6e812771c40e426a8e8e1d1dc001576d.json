@@ -1,8 +1,0 @@
-{
-    "id": "6e812771-c40e-426a-8e8e-1d1dc001576d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/route53recoveryreadiness"
-    ]
-}

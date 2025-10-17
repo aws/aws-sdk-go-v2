@@ -1,8 +1,0 @@
-{
-    "id": "6512a85a-5c48-4ec2-9f15-a36b7063454b",
-    "type": "documentation",
-    "description": "Updates documentation to clarify valid application binaries for an Amazon GameLift Streams application and provide descriptions of stream session error status reasons",
-    "modules": [
-        "service/gameliftstreams"
-    ]
-}

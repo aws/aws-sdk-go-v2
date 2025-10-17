@@ -1,8 +1,0 @@
-{
-    "id": "a9f0008d-f4e3-42f8-a2b1-2cedc99ab35a",
-    "type": "feature",
-    "description": "Releasing minor endpoint updates.",
-    "modules": [
-        "service/swf"
-    ]
-}

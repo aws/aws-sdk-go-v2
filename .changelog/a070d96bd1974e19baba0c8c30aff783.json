@@ -1,8 +1,0 @@
-{
-    "id": "a070d96b-d197-4e19-baba-0c8c30aff783",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

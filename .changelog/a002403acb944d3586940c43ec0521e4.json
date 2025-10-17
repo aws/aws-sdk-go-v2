@@ -1,8 +1,0 @@
-{
-    "id": "a002403a-cb94-4d35-8694-0c43ec0521e4",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/controlcatalog"
-    ]
-}

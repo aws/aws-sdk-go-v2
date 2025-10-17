@@ -1,8 +1,0 @@
-{
-    "id": "8ec1dc8c-4337-4b79-83b3-7c385fc82ef5",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/timestreamwrite"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "40c8e98d-737a-4b22-9b84-f5e35780dd74",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/wellarchitected"
-    ]
-}

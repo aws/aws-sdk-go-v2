@@ -1,8 +1,0 @@
-{
-    "id": "7200bc6e-5f64-40c0-a27b-9fa4fd33362f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/licensemanagerusersubscriptions"
-    ]
-}

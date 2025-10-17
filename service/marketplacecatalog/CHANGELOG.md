@@ -1,3 +1,7 @@
+# v1.37.0 (2025-10-17)
+
+* **Feature**: The ListEntities API now supports two new CAPI filters: DeliveryOptionTypes for SaaS products and CompatibleAWSServices for Container products.
+
 # v1.36.7 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

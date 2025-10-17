@@ -1,8 +1,0 @@
-{
-    "id": "23c7d3a5-a86b-4b39-9e5e-2637edcbac87",
-    "type": "feature",
-    "description": "Added support for optional style parameters in maps, including Terrain, ContourDensity, Traffic, and TravelModes.",
-    "modules": [
-        "service/geomaps"
-    ]
-}

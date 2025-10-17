@@ -1,8 +1,0 @@
-{
-    "id": "601ecffd-6b75-4f6e-833d-50f7932b68e3",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/codestarnotifications"
-    ]
-}

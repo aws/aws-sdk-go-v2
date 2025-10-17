@@ -1,8 +1,0 @@
-{
-    "id": "79733c28-4d1d-4942-bbaa-924c06fc4420",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/iotthingsgraph"
-    ]
-}

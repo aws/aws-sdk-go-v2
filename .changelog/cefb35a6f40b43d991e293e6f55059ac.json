@@ -1,8 +1,0 @@
-{
-    "id": "cefb35a6-f40b-43d9-91e2-93e6f55059ac",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/directoryservice"
-    ]
-}

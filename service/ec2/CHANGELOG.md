@@ -1,3 +1,7 @@
+# v1.257.2 (2025-10-17)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
 # v1.257.1 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

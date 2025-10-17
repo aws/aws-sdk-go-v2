@@ -1,3 +1,19 @@
+# Release (2025-10-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.257.2](service/ec2/CHANGELOG.md#v12572-2025-10-17)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.6.8](service/gameliftstreams/CHANGELOG.md#v168-2025-10-17)
+  * **Documentation**: Updates documentation to clarify valid application binaries for an Amazon GameLift Streams application and provide descriptions of stream session error status reasons
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.7.0](service/geomaps/CHANGELOG.md#v170-2025-10-17)
+  * **Feature**: Added support for optional style parameters in maps, including Terrain, ContourDensity, Traffic, and TravelModes.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.37.0](service/marketplacecatalog/CHANGELOG.md#v1370-2025-10-17)
+  * **Feature**: The ListEntities API now supports two new CAPI filters: DeliveryOptionTypes for SaaS products and CompatibleAWSServices for Container products.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.40.0](service/networkmanager/CHANGELOG.md#v1400-2025-10-17)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.33.0](service/swf/CHANGELOG.md#v1330-2025-10-17)
+  * **Feature**: Releasing minor endpoint updates.
+
 # Release (2025-10-16)
 
 ## General Highlights

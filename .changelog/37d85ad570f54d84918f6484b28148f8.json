@@ -1,8 +1,0 @@
-{
-    "id": "37d85ad5-70f5-4d84-918f-6484b28148f8",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/iotdataplane"
-    ]
-}

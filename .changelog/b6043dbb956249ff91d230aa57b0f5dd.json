@@ -1,8 +1,0 @@
-{
-    "id": "b6043dbb-9562-49ff-91d2-30aa57b0f5dd",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

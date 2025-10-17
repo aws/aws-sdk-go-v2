@@ -1,8 +1,0 @@
-{
-    "id": "a03e7146-073a-4c3b-ad53-52a06d92bc0b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

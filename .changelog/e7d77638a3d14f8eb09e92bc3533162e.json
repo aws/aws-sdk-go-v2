@@ -1,8 +1,0 @@
-{
-    "id": "e7d77638-a3d1-4f8e-b09e-92bc3533162e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

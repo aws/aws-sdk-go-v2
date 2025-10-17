@@ -1,8 +1,0 @@
-{
-    "id": "4d9c41f1-dd19-4333-a90a-79a76af589e8",
-    "type": "feature",
-    "description": "The ListEntities API now supports two new CAPI filters: DeliveryOptionTypes for SaaS products and CompatibleAWSServices for Container products.",
-    "modules": [
-        "service/marketplacecatalog"
-    ]
-}

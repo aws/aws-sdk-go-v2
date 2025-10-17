@@ -1,3 +1,7 @@
+# v1.7.0 (2025-10-17)
+
+* **Feature**: Added support for optional style parameters in maps, including Terrain, ContourDensity, Traffic, and TravelModes.
+
 # v1.6.6 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

@@ -1,8 +1,0 @@
-{
-    "id": "1951717e-6277-4d71-8272-df12ecdaca8d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}
