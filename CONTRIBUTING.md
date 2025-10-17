@@ -132,31 +132,6 @@ go test -tags codegen ./private/...
 
 See the `Makefile` for additional testing tags that can be used in testing.
 
-To test on multiple platform the SDK includes several DockerFiles under the
-`awstesting/sandbox` folder, and associated make recipes to to execute
-unit testing within environments configured for specific Go versions.
-
-```
-make sandbox-test-go18
-```
-
-To run all sandbox environments use the following make recipe
-
-```
-# Optionally update the Go tip that will be used during the batch testing
-make update-aws-golang-tip
-
-# Run all SDK tests for supported Go versions in sandboxes
-make sandbox-test
-```
-
-In addition the sandbox environment include make recipes for interactive modes
-so you can run command within the Docker container and context of the SDK.
-
-```
-make sandbox-go18
-```
-
 [issues]: https://github.com/aws/aws-sdk-go-v2/issues
 [pr]: https://github.com/aws/aws-sdk-go-v2/pulls
 [license]: http://aws.amazon.com/apache2.0/
