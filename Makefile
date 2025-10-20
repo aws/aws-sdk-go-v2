@@ -291,6 +291,18 @@ build-modules-%:
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
+build-tagged-modules:
+	@# Compiles modules tagged with BUILD_TAGS.
+	@# This just ensures the modules compile correctly and doesn't actually produce any executable. 
+	@# This also runs "vet" analyzers on the module
+	@set -o pipefail; \
+	cd ./internal/repotools/cmd/findtaggedmodules \
+		&& go run . $(BUILD_TAGS) | \
+		while read module; do \
+			echo "Testing module: $$module"; \
+			(cd "$(PWD)/$$module" && go test ${BUILD_TAGS} ${RUN_NONE} -vet=all ./...) || echo "Tests failed for module: $$module"; \
+		done
+
 go-build-modules-%:
 	@# build command that uses the pattern to define the root path that the
 	@# module testing will start from. Strips off the "build-modules-" and
@@ -314,6 +326,16 @@ test-race-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
+
+test-race-vet-modules-%:
+	@# Test command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "test-race-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. test-race-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-race-vet-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test -timeout=2m ${UNIT_TEST_TAGS} -race -vet=all -cpu=4 ./..."
 
 test-modules-%:
 	@# Test command that uses the pattern to define the root path that the
@@ -373,7 +395,7 @@ api-diff-modules-%:
 .PHONY: ci-test ci-test-no-generate ci-test-generate-validate
 
 ci-test: generate unit-race ci-test-generate-validate
-ci-test-no-generate: unit-race
+ci-test-no-generate: lint build-tagged-modules test-race-vet-modules-.
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
