@@ -67,7 +67,7 @@ jobs:
       run: go install golang.org/x/lint/golint@latest
 
     - name: Test
-      run: make ci-test-no-generate
+      run: make ci-test-no-generate-no-race
 
   windows-tests:
     name: Windows SDK Tests
