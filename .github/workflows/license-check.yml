@@ -2,6 +2,10 @@ name: License Scan
 
 on: [pull_request]
 
+
+permissions:
+  contents: read
+
 jobs:
   licensescan:
     name: License Scan
