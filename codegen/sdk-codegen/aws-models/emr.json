@@ -5044,6 +5044,12 @@
                         "smithy.api#enumValue": "RESIZING"
                     }
                 },
+                "RECONFIGURING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECONFIGURING"
+                    }
+                },
                 "SUSPENDED": {
                     "target": "smithy.api#Unit",
                     "traits": {
