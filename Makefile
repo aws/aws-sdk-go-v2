@@ -396,6 +396,7 @@ api-diff-modules-%:
 
 ci-test: generate unit-race ci-test-generate-validate
 ci-test-no-generate: lint build-tagged-modules test-race-vet-modules-.
+ci-test-no-generate-no-race: lint build-tagged-modules test-modules-.
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"

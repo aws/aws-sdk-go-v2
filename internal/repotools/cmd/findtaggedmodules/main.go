@@ -4,7 +4,9 @@ findtaggedmodules finds modules that contain given go build tags.
 Given a directory and a list of tags, the command looks at all .go files
 inside the directory to find any that contain the tags. Once found, it
 finds which module they belong to and returns all directories where any
-of the tags are found
+of the tags are found.
+
+It always returns paths Unix-style with a forward slash ("/") as separator
 
 Usage:
 
@@ -80,6 +82,8 @@ func main() {
 		}
 		if found {
 			relPath, err := filepath.Rel(repoRoot, modPath)
+			// Use Unix style path
+			relPath = filepath.ToSlash(relPath)
 			if err != nil {
 				fmt.Println(modPath)
 			} else {
