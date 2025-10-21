@@ -1,3 +1,7 @@
+# v1.83.0 (2025-10-21)
+
+* **Feature**: This release adds the ability to set resolution for the black video generator and also adds the StartJobsQuery and GetJobsQueryResults APIs which allow asynchronous search of job history using new filters.
+
 # v1.82.7 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

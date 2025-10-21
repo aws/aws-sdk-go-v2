@@ -1,8 +1,0 @@
-{
-    "id": "b48694c8-861a-49c1-81d7-0d7cab03afbd",
-    "type": "feature",
-    "description": "Added RECONFIGURING to the InstanceFleetState convenience enum.",
-    "modules": [
-        "service/emr"
-    ]
-}

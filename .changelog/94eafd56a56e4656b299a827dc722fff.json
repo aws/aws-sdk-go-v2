@@ -1,8 +1,0 @@
-{
-    "id": "94eafd56-a56e-4656-b299-a827dc722fff",
-    "type": "feature",
-    "description": "Added ClientToken parameter to MeterUsage API for specifying idempotent requests.",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

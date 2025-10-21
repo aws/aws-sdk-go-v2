@@ -1,8 +1,0 @@
-{
-    "id": "268b2de4-133b-49e6-9e09-a7d2eba2bc25",
-    "type": "feature",
-    "description": "This release adds the ability to set resolution for the black video generator and also adds the StartJobsQuery and GetJobsQueryResults APIs which allow asynchronous search of job history using new filters.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

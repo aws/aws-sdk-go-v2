@@ -1,3 +1,7 @@
+# v1.34.0 (2025-10-21)
+
+* **Feature**: Added ClientToken parameter to MeterUsage API for specifying idempotent requests.
+
 # v1.33.8 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

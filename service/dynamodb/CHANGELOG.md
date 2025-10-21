@@ -1,3 +1,7 @@
+# v1.52.0 (2025-10-21)
+
+* **Feature**: Add AccountID based endpoint metric to endpoint rules.
+
 # v1.51.1 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

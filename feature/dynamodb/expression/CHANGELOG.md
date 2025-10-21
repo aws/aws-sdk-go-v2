@@ -1,3 +1,7 @@
+# v1.8.16 (2025-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.15 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

@@ -1,3 +1,18 @@
+# Release (2025-10-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.52.0](service/dynamodb/CHANGELOG.md#v1520-2025-10-21)
+  * **Feature**: Add AccountID based endpoint metric to endpoint rules.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.55.0](service/emr/CHANGELOG.md#v1550-2025-10-21)
+  * **Feature**: Added RECONFIGURING to the InstanceFleetState convenience enum.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.34.0](service/marketplacemetering/CHANGELOG.md#v1340-2025-10-21)
+  * **Feature**: Added ClientToken parameter to MeterUsage API for specifying idempotent requests.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.83.0](service/mediaconvert/CHANGELOG.md#v1830-2025-10-21)
+  * **Feature**: This release adds the ability to set resolution for the black video generator and also adds the StartJobsQuery and GetJobsQueryResults APIs which allow asynchronous search of job history using new filters.
+
 # Release (2025-10-17)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.55.0 (2025-10-21)
+
+* **Feature**: Added RECONFIGURING to the InstanceFleetState convenience enum.
+
 # v1.54.6 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.
