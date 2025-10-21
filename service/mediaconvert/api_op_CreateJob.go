@@ -68,10 +68,11 @@ type CreateJobInput struct {
 	HopDestinations []types.HopDestination
 
 	// Use Job engine versions to run jobs for your production workflow on one
-	// version, while you test and validate the latest version. To specify a Job engine
-	// version: Enter a date in a YYYY-MM-DD format. For a list of valid Job engine
-	// versions, submit a ListVersions request. To not specify a Job engine version:
-	// Leave blank.
+	// version, while you test and validate the latest version. Job engine versions
+	// represent periodically grouped MediaConvert releases with new features, updates,
+	// improvements, and fixes. Job engine versions are in a YYYY-MM-DD format. Note
+	// that the Job engine version feature is not publicly available at this time. To
+	// request access, contact AWS support.
 	JobEngineVersion *string
 
 	// Optional. When you create a job, you can either specify a job template or

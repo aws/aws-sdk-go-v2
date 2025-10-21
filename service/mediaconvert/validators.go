@@ -250,6 +250,26 @@ func (m *validateOpGetJob) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetJobsQueryResults struct {
+}
+
+func (*validateOpGetJobsQueryResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJobsQueryResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJobsQueryResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJobsQueryResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetJobTemplate struct {
 }
 
@@ -496,6 +516,10 @@ func addOpDisassociateCertificateValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJob{}, middleware.After)
+}
+
+func addOpGetJobsQueryResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJobsQueryResults{}, middleware.After)
 }
 
 func addOpGetJobTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -771,6 +795,21 @@ func validateOpGetJobInput(v *GetJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetJobsQueryResultsInput(v *GetJobsQueryResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJobsQueryResultsInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}

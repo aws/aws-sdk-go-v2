@@ -259,6 +259,9 @@ func awsAwsjson11_deserializeOpErrorMeterUsage(response *smithyhttp.Response, me
 	case strings.EqualFold("DuplicateRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateRequestException(response, errorBody)
 
+	case strings.EqualFold("IdempotencyConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorIdempotencyConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -673,6 +676,41 @@ func awsAwsjson11_deserializeErrorExpiredTokenException(response *smithyhttp.Res
 
 	output := &types.ExpiredTokenException{}
 	err := awsAwsjson11_deserializeDocumentExpiredTokenException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorIdempotencyConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.IdempotencyConflictException{}
+	err := awsAwsjson11_deserializeDocumentIdempotencyConflictException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1279,6 +1317,46 @@ func awsAwsjson11_deserializeDocumentExpiredTokenException(v **types.ExpiredToke
 	var sv *types.ExpiredTokenException
 	if *v == nil {
 		sv = &types.ExpiredTokenException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIdempotencyConflictException(v **types.IdempotencyConflictException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdempotencyConflictException
+	if *v == nil {
+		sv = &types.IdempotencyConflictException{}
 	} else {
 		sv = *v
 	}

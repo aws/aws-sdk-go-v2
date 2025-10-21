@@ -1,12 +1,10 @@
-MeterUsage
+StartJobsQuery
 	Initialize stack step
 		spanInitializeStart
 		InterceptExecution
 		RegisterServiceMetadata
-		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
-		OperationInputValidation
 		spanInitializeEnd
 	Serialize stack step
 		spanBuildRequestStart

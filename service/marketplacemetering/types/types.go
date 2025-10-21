@@ -58,7 +58,7 @@ type UsageRecord struct {
 
 	// Timestamp, in UTC, for which the usage is being reported.
 	//
-	// Your application can meter usage for up to one hour in the past. Make sure the
+	// Your application can meter usage for up to six hours in the past. Make sure the
 	// timestamp value is not before the start of the software usage.
 	//
 	// This member is required.

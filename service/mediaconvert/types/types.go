@@ -407,10 +407,15 @@ type AudioDescription struct {
 	// Streaming.
 	CustomLanguageCode *string
 
-	// Indicates the language of the audio output track. The ISO 639 language
-	// specified in the 'Language Code' drop down will be used when 'Follow Input
-	// Language Code' is not selected or when 'Follow Input Language Code' is selected
-	// but there is no ISO 639 language code specified by the input.
+	// Specify the language for your output audio track. To follow the input language:
+	// Leave blank. When you do, also set Language code control to Follow input. If no
+	// input language is detected MediaConvert will not write an output language code.
+	// To follow the input langauge, but fall back to a specified language code if
+	// there is no input language to follow: Enter an ISO 639-2 three-letter language
+	// code in all capital letters. When you do, also set Language code control to
+	// Follow input. To specify the language code: Enter an ISO 639 three-letter
+	// language code in all capital letters. When you do, also set Language code
+	// control to Use configured.
 	LanguageCode LanguageCode
 
 	// Specify which source for language code takes precedence for this audio track.
@@ -491,7 +496,8 @@ type AudioProperties struct {
 	// The number of audio channels in the audio track.
 	Channels *int32
 
-	// The frame rate of the video or audio track.
+	// The frame rate of the video or audio track, expressed as a fraction with
+	// numerator and denominator values.
 	FrameRate *FrameRate
 
 	// The language code of the audio track, in three character ISO 639-3 format.
@@ -548,9 +554,8 @@ type AudioSelector struct {
 	// alternative audio with DEFAULT=YES is chosen instead.
 	HlsRenditionGroupSettings *HlsRenditionGroupSettings
 
-	// Specify the language to select from your audio input. In the MediaConvert
-	// console choose from a list of languages. In your JSON job settings choose from
-	// an ISO 639-2 three-letter code listed at
+	// Specify the language, using an ISO 639-2 three-letter code in all capital
+	// letters. You can find a list of codes at:
 	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	LanguageCode LanguageCode
 
@@ -581,14 +586,14 @@ type AudioSelector struct {
 	// MPEG Transport Stream inputs. Use this when you know the exact PID values of
 	// your audio streams. Track: Default. Select audio by track number. This is the
 	// most common option and works with most input container formats. Language code:
-	// Select audio by language using ISO 639-2 or ISO 639-3 three-letter language
-	// codes. Use this when your source has embedded language metadata and you want to
-	// select tracks based on their language. HLS rendition group: Select audio from an
-	// HLS rendition group. Use this when your input is an HLS package with multiple
-	// audio renditions and you want to select specific rendition groups. All PCM:
-	// Select all uncompressed PCM audio tracks from your input automatically. This is
-	// useful when you want to include all PCM audio tracks without specifying
-	// individual track numbers.
+	// Select audio by language using an ISO 639-2 or ISO 639-3 three-letter code in
+	// all capital letters. Use this when your source has embedded language metadata
+	// and you want to select tracks based on their language. HLS rendition group:
+	// Select audio from an HLS rendition group. Use this when your input is an HLS
+	// package with multiple audio renditions and you want to select specific rendition
+	// groups. All PCM: Select all uncompressed PCM audio tracks from your input
+	// automatically. This is useful when you want to include all PCM audio tracks
+	// without specifying individual track numbers.
 	SelectorType AudioSelectorType
 
 	// Identify a track from the input audio to include in this selector by entering
@@ -860,7 +865,7 @@ type Av1Settings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
@@ -998,7 +1003,7 @@ type AvcIntraSettings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Use this setting for interlaced outputs, when your output frame rate is half of
@@ -1989,6 +1994,70 @@ type CmfcSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Codec-specific parameters parsed from the video essence headers. This
+// information provides detailed technical specifications about how the video was
+// encoded, including profile settings, resolution details, and color space
+// information that can help you understand the source video characteristics and
+// make informed encoding decisions.
+type CodecMetadata struct {
+
+	// The number of bits used per color component in the video essence such as 8, 10,
+	// or 12 bits. Standard range (SDR) video typically uses 8-bit, while 10-bit is
+	// common for high dynamic range (HDR).
+	BitDepth *int32
+
+	// The chroma subsampling format used in the video encoding, such as "4:2:0" or
+	// "4:4:4". This describes how color information is sampled relative to brightness
+	// information. Different subsampling ratios affect video quality and file size,
+	// with "4:4:4" providing the highest color fidelity and "4:2:0" being most common
+	// for standard video.
+	ChromaSubsampling *string
+
+	// The frame rate of the video or audio track, expressed as a fraction with
+	// numerator and denominator values.
+	CodedFrameRate *FrameRate
+
+	// The color space primaries of the video track, defining the red, green, and blue
+	// color coordinates used for the video. This information helps ensure accurate
+	// color reproduction during playback and transcoding.
+	ColorPrimaries ColorPrimaries
+
+	// The height in pixels as coded by the codec. This represents the actual encoded
+	// video height as specified in the video stream headers.
+	Height *int32
+
+	// The codec level or tier that specifies the maximum processing requirements and
+	// capabilities. Levels define constraints such as maximum bit rate, frame rate,
+	// and resolution.
+	Level *string
+
+	// The color space matrix coefficients of the video track, defining how RGB color
+	// values are converted to and from YUV color space. This affects color accuracy
+	// during encoding and decoding processes.
+	MatrixCoefficients MatrixCoefficients
+
+	// The codec profile used to encode the video. Profiles define specific feature
+	// sets and capabilities within a codec standard. For example, H.264 profiles
+	// include Baseline, Main, and High, each supporting different encoding features
+	// and complexity levels.
+	Profile *string
+
+	// The scanning method specified in the video essence, indicating whether the
+	// video uses progressive or interlaced scanning.
+	ScanType *string
+
+	// The color space transfer characteristics of the video track, defining the
+	// relationship between linear light values and the encoded signal values. This
+	// affects brightness and contrast reproduction.
+	TransferCharacteristics TransferCharacteristics
+
+	// The width in pixels as coded by the codec. This represents the actual encoded
+	// video width as specified in the video stream headers.
+	Width *int32
+
+	noSmithyDocumentSerde
+}
+
 // Custom 3D lut settings
 type ColorConversion3DLUTSetting struct {
 
@@ -2856,9 +2925,8 @@ type DynamicAudioSelector struct {
 	// Specify the S3, HTTP, or HTTPS URL for your external audio file input.
 	ExternalAudioFileInput *string
 
-	// Specify the language to select from your audio input. In the MediaConvert
-	// console choose from a list of languages. In your JSON job settings choose from
-	// an ISO 639-2 three-letter code listed at
+	// Specify the language, using an ISO 639-2 three-letter code in all capital
+	// letters. You can find a list of codes at:
 	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	LanguageCode LanguageCode
 
@@ -3453,7 +3521,8 @@ type FrameCaptureSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The frame rate of the video or audio track.
+// The frame rate of the video or audio track, expressed as a fraction with
+// numerator and denominator values.
 type FrameRate struct {
 
 	// The denominator, or bottom number, in the fractional frame rate. For example,
@@ -3798,7 +3867,7 @@ type H264Settings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// The Quality tuning level you choose represents a trade-off between the encoding
@@ -4233,7 +4302,7 @@ type H265Settings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
@@ -4467,12 +4536,14 @@ type HlsCaptionLanguageMapping struct {
 	// Caption channel.
 	CaptionChannel *int32
 
-	// Specify the language for this captions channel, using the ISO 639-2 or ISO
-	// 639-3 three-letter language code
+	// Specify the language, using an ISO 639-2 three-letter code in all capital
+	// letters. You can find a list of codes at:
+	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	CustomLanguageCode *string
 
-	// Specify the language, using the ISO 639-2 three-letter code listed at
-	// https://www.loc.gov/standards/iso639-2/php/code_list.php.
+	// Specify the language, using an ISO 639-2 three-letter code in all capital
+	// letters. You can find a list of codes at:
+	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	LanguageCode LanguageCode
 
 	// Caption language description.
@@ -4769,7 +4840,9 @@ type HlsRenditionGroupSettings struct {
 	// Optional. Specify alternative group ID
 	RenditionGroupId *string
 
-	// Optional. Specify ISO 639-2 or ISO 639-3 code in the language property
+	// Optionally specify the language, using an ISO 639-2 or ISO 639-3 three-letter
+	// code in all capital letters. You can find a list of codes at:
+	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	RenditionLanguageCode LanguageCode
 
 	// Optional. Specify media name
@@ -4908,7 +4981,7 @@ type ImscDestinationSettings struct {
 	// do, MediaConvert adds accessibility attributes to your output HLS or DASH
 	// manifest. For HLS manifests, MediaConvert adds the following accessibility
 	// attributes under EXT-X-MEDIA for this track:
-	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
+	// CHARACTERISTICS="public.accessibility.transcribes-spoken-dialog,public.accessibility.describes-music-and-sound"
 	// and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the following in the
 	// adaptation set for this track: . If the captions track is not intended to
 	// provide such accessibility: Keep the default value, Disabled. When you do, for
@@ -5428,9 +5501,23 @@ type InputVideoGenerator struct {
 	// Frame rate numerator and Frame rate denominator blank.
 	FramerateNumerator *int32
 
+	// Specify the height, in pixels, for your video generator input. This is useful
+	// for positioning when you include one or more video overlays for this input. To
+	// use the default resolution 540x360: Leave both width and height blank. To
+	// specify a height: Enter an even integer from 32 to 8192. When you do, you must
+	// also specify a value for width.
+	Height *int32
+
 	// Specify the audio sample rate, in Hz, for the silent audio in your video
 	// generator input. Enter an integer from 32000 to 48000.
 	SampleRate *int32
+
+	// Specify the width, in pixels, for your video generator input. This is useful
+	// for positioning when you include one or more video overlays for this input. To
+	// use the default resolution 540x360: Leave both width and height blank. To
+	// specify a width: Enter an even integer from 32 to 8192. When you do, you must
+	// also specify a value for height.
+	Width *int32
 
 	noSmithyDocumentSerde
 }
@@ -5664,8 +5751,11 @@ type JobEngineVersion struct {
 	ExpirationDate *time.Time
 
 	// Use Job engine versions to run jobs for your production workflow on one
-	// version, while you test and validate the latest version. Job engine versions are
-	// in a YYYY-MM-DD format.
+	// version, while you test and validate the latest version. Job engine versions
+	// represent periodically grouped MediaConvert releases with new features, updates,
+	// improvements, and fixes. Job engine versions are in a YYYY-MM-DD format. Note
+	// that the Job engine version feature is not publicly available at this time. To
+	// request access, contact AWS support.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -5775,6 +5865,31 @@ type JobSettings struct {
 	// output that you want to include this metadata, you must set ID3 metadata to
 	// Passthrough.
 	TimedMetadataInsertion *TimedMetadataInsertion
+
+	noSmithyDocumentSerde
+}
+
+// Provide one or more JobsQueryFilter objects, each containing a Key with an
+// associated Values array. Note that MediaConvert queries jobs using OR logic.
+type JobsQueryFilter struct {
+
+	// Specify job details to filter for while performing a jobs query. You specify
+	// these filters as part of a key-value pair within the JobsQueryFilter array. The
+	// following list describes which keys are available and their possible values: *
+	// queue - Your Queue's name or ARN. * status - Your job's status. (SUBMITTED |
+	// PROGRESSING | COMPLETE | CANCELED | ERROR) * fileInput - Your input file URL, or
+	// partial input file name. * jobEngineVersionRequested - The Job engine version
+	// that you requested for your job. Valid versions are in a YYYY-MM-DD format. *
+	// jobEngineVersionUsed - The Job engine version that your job used. This may
+	// differ from the version that you requested. Valid versions are in a YYYY-MM-DD
+	// format. * audioCodec - Your output's audio codec. (AAC | MP2 | MP3 | WAV | AIFF
+	// | AC3| EAC3 | EAC3_ATMOS | VORBIS | OPUS | PASSTHROUGH | FLAC) * videoCodec -
+	// Your output's video codec. (AV1 | AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 |
+	// MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC)
+	Key JobsQueryFilterKey
+
+	// A list of values associated with a JobsQueryFilterKey.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -6945,7 +7060,7 @@ type Mpeg2Settings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Optional. Use Quality tuning level to choose how you want to trade off encoding
@@ -7563,7 +7678,7 @@ type OutputGroupSettings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth
@@ -7804,7 +7919,7 @@ type ProresSettings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Use this setting for interlaced outputs, when your output frame rate is half of
@@ -9135,25 +9250,41 @@ type VideoPreprocessor struct {
 // Details about the media file's video track.
 type VideoProperties struct {
 
-	// The bit depth of the video track.
+	// The number of bits used per color component such as 8, 10, or 12 bits. Standard
+	// range (SDR) video typically uses 8-bit, while 10-bit is common for high dynamic
+	// range (HDR).
 	BitDepth *int32
 
 	// The bit rate of the video track, in bits per second.
 	BitRate *int64
 
-	// The color space color primaries of the video track.
+	// Codec-specific parameters parsed from the video essence headers. This
+	// information provides detailed technical specifications about how the video was
+	// encoded, including profile settings, resolution details, and color space
+	// information that can help you understand the source video characteristics and
+	// make informed encoding decisions.
+	CodecMetadata *CodecMetadata
+
+	// The color space primaries of the video track, defining the red, green, and blue
+	// color coordinates used for the video. This information helps ensure accurate
+	// color reproduction during playback and transcoding.
 	ColorPrimaries ColorPrimaries
 
-	// The frame rate of the video or audio track.
+	// The frame rate of the video or audio track, expressed as a fraction with
+	// numerator and denominator values.
 	FrameRate *FrameRate
 
 	// The height of the video track, in pixels.
 	Height *int32
 
-	// The color space matrix coefficients of the video track.
+	// The color space matrix coefficients of the video track, defining how RGB color
+	// values are converted to and from YUV color space. This affects color accuracy
+	// during encoding and decoding processes.
 	MatrixCoefficients MatrixCoefficients
 
-	// The color space transfer characteristics of the video track.
+	// The color space transfer characteristics of the video track, defining the
+	// relationship between linear light values and the encoded signal values. This
+	// affects brightness and contrast reproduction.
 	TransferCharacteristics TransferCharacteristics
 
 	// The width of the video track, in pixels.
@@ -9546,7 +9677,7 @@ type WebvttDestinationSettings struct {
 	// you do, MediaConvert adds accessibility attributes to your output HLS or DASH
 	// manifest. For HLS manifests, MediaConvert adds the following accessibility
 	// attributes under EXT-X-MEDIA for this track:
-	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
+	// CHARACTERISTICS="public.accessibility.transcribes-spoken-dialog,public.accessibility.describes-music-and-sound"
 	// and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the following in the
 	// adaptation set for this track: . If the captions track is not intended to
 	// provide such accessibility: Keep the default value, Disabled. When you do, for
@@ -9585,7 +9716,9 @@ type WebvttHlsSourceSettings struct {
 	// Optional. Specify alternative group ID
 	RenditionGroupId *string
 
-	// Optional. Specify ISO 639-2 or ISO 639-3 code in the language property
+	// Optionally specify the language, using an ISO 639-2 or ISO 639-3 three-letter
+	// code in all capital letters. You can find a list of codes at:
+	// https://www.loc.gov/standards/iso639-2/php/code_list.php
 	RenditionLanguageCode LanguageCode
 
 	// Optional. Specify media name
@@ -9833,7 +9966,7 @@ type XavcSettings struct {
 	// Multi-Scale Similarity Index Measure * PSNR_HVS: Peak Signal-to-Noise Ratio,
 	// Human Visual System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
 	// Quality-Defined Variable Bitrate. This option is only available when your output
-	// uses the QVBR rate control mode.
+	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
 	// Specify the XAVC profile for this output. For more information, see the Sony

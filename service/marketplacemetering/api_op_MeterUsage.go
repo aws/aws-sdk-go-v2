@@ -23,9 +23,14 @@ import (
 // customers with usage data split into buckets by tags that you define (or allow
 // the customer to define).
 //
-// Usage records are expected to be submitted as quickly as possible after the
-// event that is being recorded, and are not accepted more than 6 hours after the
-// event.
+// Submit usage records to report events from the previous hour. If you submit
+// records that are greater than six hours after events occur, the records won’t be
+// accepted. The timestamp in your request determines when an event is recorded.
+// You can only report usage once per hour for each dimension. For AMI-based
+// products, this is per dimension and per EC2 instance. For container products,
+// this is per dimension and per ECS task or EKS pod. You can’t modify values after
+// they’re recorded. If you report usage before the current hour ends, you will be
+// unable to report additional usage until the next hour begins.
 //
 // For Amazon Web Services Regions that support MeterUsage , see [MeterUsage Region support for Amazon EC2] and [MeterUsage Region support for Amazon ECS and Amazon EKS].
 //
@@ -67,6 +72,21 @@ type MeterUsageInput struct {
 	//
 	// This member is required.
 	UsageDimension *string
+
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotencyConflictException error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
+	ClientToken *string
 
 	// Checks whether you have the permissions required for the action, but does not
 	// make the request. If you have the permissions, the request returns
@@ -165,6 +185,9 @@ func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, opti
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opMeterUsageMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMeterUsageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -229,6 +252,39 @@ func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpMeterUsage struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpMeterUsage) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpMeterUsage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*MeterUsageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *MeterUsageInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opMeterUsageMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpMeterUsage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opMeterUsage(region string) *awsmiddleware.RegisterServiceMetadata {

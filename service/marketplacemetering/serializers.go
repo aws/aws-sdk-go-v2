@@ -397,6 +397,11 @@ func awsAwsjson11_serializeOpDocumentMeterUsageInput(v *MeterUsageInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.DryRun != nil {
 		ok := object.Key("DryRun")
 		ok.Boolean(*v.DryRun)

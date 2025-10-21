@@ -1,0 +1,8 @@
+{
+    "id": "65a19627-2c16-4e04-a084-45ea0b5a83bf",
+    "type": "feature",
+    "description": "Add AccountID based endpoint metric to endpoint rules.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

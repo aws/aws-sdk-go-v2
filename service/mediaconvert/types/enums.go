@@ -2207,12 +2207,15 @@ const (
 	CodecHevc     Codec = "HEVC"
 	CodecJpeg2000 Codec = "JPEG2000"
 	CodecMjpeg    Codec = "MJPEG"
+	CodecMpeg1    Codec = "MPEG1"
 	CodecMp4v     Codec = "MP4V"
 	CodecMpeg2    Codec = "MPEG2"
 	CodecProres   Codec = "PRORES"
 	CodecTheora   Codec = "THEORA"
+	CodecVfw      Codec = "VFW"
 	CodecVp8      Codec = "VP8"
 	CodecVp9      Codec = "VP9"
+	CodecQtrle    Codec = "QTRLE"
 	CodecC608     Codec = "C608"
 	CodecC708     Codec = "C708"
 	CodecWebvtt   Codec = "WEBVTT"
@@ -2238,12 +2241,15 @@ func (Codec) Values() []Codec {
 		"HEVC",
 		"JPEG2000",
 		"MJPEG",
+		"MPEG1",
 		"MP4V",
 		"MPEG2",
 		"PRORES",
 		"THEORA",
+		"VFW",
 		"VP8",
 		"VP9",
+		"QTRLE",
 		"C608",
 		"C708",
 		"WEBVTT",
@@ -3880,12 +3886,13 @@ type FrameMetricType string
 
 // Enum values for FrameMetricType
 const (
-	FrameMetricTypePsnr    FrameMetricType = "PSNR"
-	FrameMetricTypeSsim    FrameMetricType = "SSIM"
-	FrameMetricTypeMsSsim  FrameMetricType = "MS_SSIM"
-	FrameMetricTypePsnrHvs FrameMetricType = "PSNR_HVS"
-	FrameMetricTypeVmaf    FrameMetricType = "VMAF"
-	FrameMetricTypeQvbr    FrameMetricType = "QVBR"
+	FrameMetricTypePsnr       FrameMetricType = "PSNR"
+	FrameMetricTypeSsim       FrameMetricType = "SSIM"
+	FrameMetricTypeMsSsim     FrameMetricType = "MS_SSIM"
+	FrameMetricTypePsnrHvs    FrameMetricType = "PSNR_HVS"
+	FrameMetricTypeVmaf       FrameMetricType = "VMAF"
+	FrameMetricTypeQvbr       FrameMetricType = "QVBR"
+	FrameMetricTypeShotChange FrameMetricType = "SHOT_CHANGE"
 )
 
 // Values returns all known values for FrameMetricType. Note that this can be
@@ -3900,6 +3907,7 @@ func (FrameMetricType) Values() []FrameMetricType {
 		"PSNR_HVS",
 		"VMAF",
 		"QVBR",
+		"SHOT_CHANGE",
 	}
 }
 
@@ -5908,6 +5916,58 @@ func (JobPhase) Values() []JobPhase {
 		"PROBING",
 		"TRANSCODING",
 		"UPLOADING",
+	}
+}
+
+type JobsQueryFilterKey string
+
+// Enum values for JobsQueryFilterKey
+const (
+	JobsQueryFilterKeyQueue                     JobsQueryFilterKey = "queue"
+	JobsQueryFilterKeyStatus                    JobsQueryFilterKey = "status"
+	JobsQueryFilterKeyFileInput                 JobsQueryFilterKey = "fileInput"
+	JobsQueryFilterKeyJobEngineVersionRequested JobsQueryFilterKey = "jobEngineVersionRequested"
+	JobsQueryFilterKeyJobEngineVersionUsed      JobsQueryFilterKey = "jobEngineVersionUsed"
+	JobsQueryFilterKeyAudioCodec                JobsQueryFilterKey = "audioCodec"
+	JobsQueryFilterKeyVideoCodec                JobsQueryFilterKey = "videoCodec"
+)
+
+// Values returns all known values for JobsQueryFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobsQueryFilterKey) Values() []JobsQueryFilterKey {
+	return []JobsQueryFilterKey{
+		"queue",
+		"status",
+		"fileInput",
+		"jobEngineVersionRequested",
+		"jobEngineVersionUsed",
+		"audioCodec",
+		"videoCodec",
+	}
+}
+
+type JobsQueryStatus string
+
+// Enum values for JobsQueryStatus
+const (
+	JobsQueryStatusSubmitted   JobsQueryStatus = "SUBMITTED"
+	JobsQueryStatusProgressing JobsQueryStatus = "PROGRESSING"
+	JobsQueryStatusComplete    JobsQueryStatus = "COMPLETE"
+	JobsQueryStatusError       JobsQueryStatus = "ERROR"
+)
+
+// Values returns all known values for JobsQueryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobsQueryStatus) Values() []JobsQueryStatus {
+	return []JobsQueryStatus{
+		"SUBMITTED",
+		"PROGRESSING",
+		"COMPLETE",
+		"ERROR",
 	}
 }
 

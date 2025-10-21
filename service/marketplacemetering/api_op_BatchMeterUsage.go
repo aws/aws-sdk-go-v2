@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	The CustomerIdentifier parameter is scheduled for deprecation. Use
+//	The CustomerIdentifier parameter is scheduled for deprecation on March 31,
 //
-// CustomerAWSAccountID instead.
+// 2026. Use CustomerAWSAccountID instead.
 //
 // These parameters are mutually exclusive. You can't specify both
 // CustomerIdentifier and CustomerAWSAccountID in the same request.

@@ -118,6 +118,32 @@ func (e *ExpiredTokenException) ErrorCode() string {
 }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The ClientToken is being used for multiple requests.
+type IdempotencyConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IdempotencyConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IdempotencyConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IdempotencyConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IdempotencyConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IdempotencyConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal error has occurred. Retry your request. If the problem persists,
 // post a message with details on the Amazon Web Services forums.
 type InternalServiceErrorException struct {

@@ -320,6 +320,7 @@ const (
 	InstanceFleetStateBootstrapping InstanceFleetState = "BOOTSTRAPPING"
 	InstanceFleetStateRunning       InstanceFleetState = "RUNNING"
 	InstanceFleetStateResizing      InstanceFleetState = "RESIZING"
+	InstanceFleetStateReconfiguring InstanceFleetState = "RECONFIGURING"
 	InstanceFleetStateSuspended     InstanceFleetState = "SUSPENDED"
 	InstanceFleetStateTerminating   InstanceFleetState = "TERMINATING"
 	InstanceFleetStateTerminated    InstanceFleetState = "TERMINATED"
@@ -335,6 +336,7 @@ func (InstanceFleetState) Values() []InstanceFleetState {
 		"BOOTSTRAPPING",
 		"RUNNING",
 		"RESIZING",
+		"RECONFIGURING",
 		"SUSPENDED",
 		"TERMINATING",
 		"TERMINATED",

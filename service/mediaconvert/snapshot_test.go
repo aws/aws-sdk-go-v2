@@ -230,6 +230,18 @@ func TestCheckSnapshot_GetJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetJobsQueryResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobsQueryResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetJobsQueryResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetJobTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetJobTemplate(context.Background(), nil, func(o *Options) {
@@ -379,6 +391,18 @@ func TestCheckSnapshot_SearchJobs(t *testing.T) {
 	_, err := svc.SearchJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartJobsQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJobsQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartJobsQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +637,18 @@ func TestUpdateSnapshot_GetJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetJobsQueryResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobsQueryResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetJobsQueryResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetJobTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetJobTemplate(context.Background(), nil, func(o *Options) {
@@ -762,6 +798,18 @@ func TestUpdateSnapshot_SearchJobs(t *testing.T) {
 	_, err := svc.SearchJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartJobsQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJobsQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartJobsQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
