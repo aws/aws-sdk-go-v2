@@ -297,10 +297,11 @@ build-tagged-modules:
 	@# This just ensures the modules compile correctly and doesn't actually produce any executable. 
 	@# This also runs "vet" analyzers on the module
 	cd ./internal/repotools/cmd/findtaggedmodules \
-		&& go run . $(BUILD_TAGS) > "$(TEMP_FILE)" \
+		&& go run . $(BUILD_TAGS) > "$(TEMP_FILE)";
+	cd ./internal/repotools/cmd/eachmodule \
 		&& while read module; do \
 			echo "Testing module: $$module"; \
-			(cd "$(PWD)/$$module" && go test ${BUILD_TAGS} ${RUN_NONE} -vet=all ./...) || { echo "Tests failed for module: $$module"; exit 1; }; \
+			(go run . -p "$$module" ${EACHMODULE_FLAGS} "go test ${BUILD_TAGS} ${RUN_NONE} -vet=all ./...") || { echo "Tests failed for module: $$module"; exit 1; }; \
 		done < "$(TEMP_FILE)";
 
 go-build-modules-%:
