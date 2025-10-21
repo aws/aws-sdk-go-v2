@@ -291,17 +291,17 @@ build-modules-%:
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
+TEMP_FILE := $(shell mktemp)
 build-tagged-modules:
 	@# Compiles modules tagged with BUILD_TAGS.
 	@# This just ensures the modules compile correctly and doesn't actually produce any executable. 
 	@# This also runs "vet" analyzers on the module
 	cd ./internal/repotools/cmd/findtaggedmodules \
-		&& go run . $(BUILD_TAGS) > "$(TMPDIR)/tagged_modules.txt" \
+		&& go run . $(BUILD_TAGS) > "$(TEMP_FILE)" \
 		&& while read module; do \
 			echo "Testing module: $$module"; \
-			(cd "$(PWD)/$$module" && go test ${BUILD_TAGS} ${RUN_NONE} -vet=all ./...) || { echo "Tests failed for module: $$module"; rm -f "$(TMPDIR)/tagged_modules.txt"; exit 1; }; \
-		done < "$(TMPDIR)/tagged_modules.txt"; \
-		rm -f "$(TMPDIR)/tagged_modules.txt"
+			(cd "$(PWD)/$$module" && go test ${BUILD_TAGS} ${RUN_NONE} -vet=all ./...) || { echo "Tests failed for module: $$module"; exit 1; }; \
+		done < "$(TEMP_FILE)";
 
 go-build-modules-%:
 	@# build command that uses the pattern to define the root path that the
