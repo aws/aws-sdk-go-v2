@@ -9,6 +9,10 @@ on:
       - main
       - 'feat-**'
 
+
+permissions:
+  contents: read
+
 env:
   EACHMODULE_CONCURRENCY: 2
   SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go

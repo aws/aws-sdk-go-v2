@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+
+permissions:
+  contents: read
+
 env:
   # get owner of the repository. used by forks.
   SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go

@@ -5,8 +5,7 @@
       "service": "aws.kitchensinktest#AwsJson1KitchenSink",
       "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktest",
       "moduleVersion": "0.0.1",
-      "generateGoMod": true,
-      "goDirective": "1.23"
+      "generateGoMod": true
     }
   }
 }
