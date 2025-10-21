@@ -93,4 +93,5 @@ jobs:
       run: ./ci-find-smithy-go.sh
 
     - name: Test
+      shell: bash
       run: make ci-test-no-generate
