@@ -221,6 +221,9 @@ func ExampleTelephonyOutboundMode_outputUsage() {
 	case *types.TelephonyOutboundModeMemberPredictive:
 		_ = v.Value // Value is types.PredictiveConfig
 
+	case *types.TelephonyOutboundModeMemberPreview:
+		_ = v.Value // Value is types.PreviewConfig
+
 	case *types.TelephonyOutboundModeMemberProgressive:
 		_ = v.Value // Value is types.ProgressiveConfig
 
@@ -234,5 +237,6 @@ func ExampleTelephonyOutboundMode_outputUsage() {
 }
 
 var _ *types.PredictiveConfig
+var _ *types.PreviewConfig
 var _ *types.AgentlessConfig
 var _ *types.ProgressiveConfig

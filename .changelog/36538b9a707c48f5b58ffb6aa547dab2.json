@@ -1,0 +1,8 @@
+{
+    "id": "36538b9a-707c-48f5-b58f-fb6aa547dab2",
+    "type": "feature",
+    "description": "This release adds AvailabilityZoneId support for CreateNetworkInterface and DescribeNetworkInterfaces APIs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

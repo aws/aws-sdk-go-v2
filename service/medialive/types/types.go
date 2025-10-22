@@ -1272,6 +1272,33 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
+// An alert on a channel
+type ChannelAlert struct {
+
+	// The type of the alert
+	AlertType *string
+
+	// The time when the alert was cleared
+	ClearedTimestamp *time.Time
+
+	// The unique ID for this alert instance
+	Id *string
+
+	// The user facing alert message which can have more context
+	Message *string
+
+	// The ID of the pipeline this alert is associated with
+	PipelineId *string
+
+	// The time when the alert was set
+	SetTimestamp *time.Time
+
+	// The state of the alert
+	State ChannelAlertState
+
+	noSmithyDocumentSerde
+}
+
 // Placeholder documentation for ChannelEgressEndpoint
 type ChannelEgressEndpoint struct {
 
@@ -1498,6 +1525,36 @@ type CloudWatchAlarmTemplateSummary struct {
 
 	// Represents the tags associated with a resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An alert on a cluster
+type ClusterAlert struct {
+
+	// The type of the alert
+	AlertType *string
+
+	// The ID of the channel this alert is associated with
+	ChannelId *string
+
+	// The time when the alert was cleared
+	ClearedTimestamp *time.Time
+
+	// The further subtype of this alert
+	Id *string
+
+	// The user facing alert message which can have more context
+	Message *string
+
+	// The ID of the node this alert is associated with
+	NodeId *string
+
+	// The time when the alert was set
+	SetTimestamp *time.Time
+
+	// The state of the alert
+	State ClusterAlertState
 
 	noSmithyDocumentSerde
 }
@@ -5680,6 +5737,33 @@ type Multiplex struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An alert on a multiplex
+type MultiplexAlert struct {
+
+	// The type of the alert
+	AlertType *string
+
+	// The time when the alert was cleared
+	ClearedTimestamp *time.Time
+
+	// The unique ID for this alert instance
+	Id *string
+
+	// The user facing alert message which can have more context
+	Message *string
+
+	// The ID of the pipeline this alert is associated with
+	PipelineId *string
+
+	// The time when the alert was set
+	SetTimestamp *time.Time
+
+	// The state of the alert
+	State MultiplexAlertState
 
 	noSmithyDocumentSerde
 }

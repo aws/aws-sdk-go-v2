@@ -1,0 +1,8 @@
+{
+    "id": "396ca469-2001-4301-9615-da62f56220f6",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/directconnect"
+    ]
+}

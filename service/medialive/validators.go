@@ -1130,6 +1130,26 @@ func (m *validateOpGetSignalMap) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAlerts struct {
+}
+
+func (*validateOpListAlerts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAlerts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAlertsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAlertsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListChannelPlacementGroups struct {
 }
 
@@ -1150,6 +1170,26 @@ func (m *validateOpListChannelPlacementGroups) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListClusterAlerts struct {
+}
+
+func (*validateOpListClusterAlerts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClusterAlerts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClusterAlertsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClusterAlertsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInputDeviceTransfers struct {
 }
 
@@ -1165,6 +1205,26 @@ func (m *validateOpListInputDeviceTransfers) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInputDeviceTransfersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMultiplexAlerts struct {
+}
+
+func (*validateOpListMultiplexAlerts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMultiplexAlerts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMultiplexAlertsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMultiplexAlertsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2114,12 +2174,24 @@ func addOpGetSignalMapValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSignalMap{}, middleware.After)
 }
 
+func addOpListAlertsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAlerts{}, middleware.After)
+}
+
 func addOpListChannelPlacementGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListChannelPlacementGroups{}, middleware.After)
 }
 
+func addOpListClusterAlertsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClusterAlerts{}, middleware.After)
+}
+
 func addOpListInputDeviceTransfersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInputDeviceTransfers{}, middleware.After)
+}
+
+func addOpListMultiplexAlertsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMultiplexAlerts{}, middleware.After)
 }
 
 func addOpListMultiplexProgramsValidationMiddleware(stack *middleware.Stack) error {
@@ -5939,11 +6011,41 @@ func validateOpGetSignalMapInput(v *GetSignalMapInput) error {
 	}
 }
 
+func validateOpListAlertsInput(v *ListAlertsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAlertsInput"}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListChannelPlacementGroupsInput(v *ListChannelPlacementGroupsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListChannelPlacementGroupsInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClusterAlertsInput(v *ListClusterAlertsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClusterAlertsInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
@@ -5961,6 +6063,21 @@ func validateOpListInputDeviceTransfersInput(v *ListInputDeviceTransfersInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "ListInputDeviceTransfersInput"}
 	if v.TransferType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransferType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMultiplexAlertsInput(v *ListMultiplexAlertsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMultiplexAlertsInput"}
+	if v.MultiplexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MultiplexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

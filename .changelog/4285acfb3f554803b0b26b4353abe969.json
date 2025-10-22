@@ -1,0 +1,8 @@
+{
+    "id": "4285acfb-3f55-4803-b0b2-6b4353abe969",
+    "type": "feature",
+    "description": "Update for general availability of AWS RTB Fabric service.",
+    "modules": [
+        "service/rtbfabric"
+    ]
+}

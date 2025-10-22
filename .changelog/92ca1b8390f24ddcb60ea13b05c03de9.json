@@ -1,0 +1,8 @@
+{
+    "id": "92ca1b83-90f2-4ddc-b60e-a13b05c03de9",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/pcs"
+    ]
+}

@@ -5106,6 +5106,42 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAgentActions(v *[]types.AgentAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AgentAction
+	if *v == nil {
+		cv = []types.AgentAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AgentAction
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AgentAction to be of type string, got %T instead", value)
+			}
+			col = types.AgentAction(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAgentlessConfig(v **types.AgentlessConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7000,6 +7036,81 @@ func awsRestjson1_deserializeDocumentPredictiveConfig(v **types.PredictiveConfig
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPreviewConfig(v **types.PreviewConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PreviewConfig
+	if *v == nil {
+		sv = &types.PreviewConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "agentActions":
+			if err := awsRestjson1_deserializeDocumentAgentActions(&sv.AgentActions, value); err != nil {
+				return err
+			}
+
+		case "bandwidthAllocation":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.BandwidthAllocation = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.BandwidthAllocation = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BandwidthAllocation to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "timeoutConfig":
+			if err := awsRestjson1_deserializeDocumentTimeoutConfig(&sv.TimeoutConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProgressiveConfig(v **types.ProgressiveConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8078,6 +8189,16 @@ loop:
 			uv = &types.TelephonyOutboundModeMemberPredictive{Value: mv}
 			break loop
 
+		case "preview":
+			var mv types.PreviewConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPreviewConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TelephonyOutboundModeMemberPreview{Value: mv}
+			break loop
+
 		case "progressive":
 			var mv types.ProgressiveConfig
 			destAddr := &mv
@@ -8136,6 +8257,50 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected XAmazonErrorType to be of type string, got %T instead", value)
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimeoutConfig(v **types.TimeoutConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeoutConfig
+	if *v == nil {
+		sv = &types.TimeoutConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "durationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeoutDuration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

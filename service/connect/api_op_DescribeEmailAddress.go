@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +46,11 @@ type DescribeEmailAddressInput struct {
 }
 
 type DescribeEmailAddressOutput struct {
+
+	// A list of alias configurations associated with this email address. Contains
+	// details about email addresses that forward to this primary email address. The
+	// list can contain at most one alias configuration per email address.
+	AliasConfigurations []types.AliasConfiguration
 
 	// The email address creation timestamp in ISO 8601 Datetime.
 	CreateTimestamp *string

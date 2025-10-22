@@ -1,0 +1,8 @@
+{
+    "id": "8e48cbd7-ea9a-450e-9048-afdfff0f0e81",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ivschat"
+    ]
+}

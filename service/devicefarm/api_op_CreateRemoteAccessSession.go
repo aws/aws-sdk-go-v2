@@ -41,6 +41,9 @@ type CreateRemoteAccessSessionInput struct {
 	// This member is required.
 	ProjectArn *string
 
+	// The Amazon Resource Name (ARN) of the app to create the remote access session.
+	AppArn *string
+
 	// Unique identifier for the client. If you want access to multiple devices on the
 	// same client, you should pass the same clientId value in each call to
 	// CreateRemoteAccessSession . This identifier is required only if

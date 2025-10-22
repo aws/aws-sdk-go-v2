@@ -842,6 +842,18 @@ func TestCheckSnapshot_GetSignalMap(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAlerts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAlerts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAlerts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListChannelPlacementGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannelPlacementGroups(context.Background(), nil, func(o *Options) {
@@ -883,6 +895,18 @@ func TestCheckSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
 	_, err := svc.ListCloudWatchAlarmTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCloudWatchAlarmTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListClusterAlerts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterAlerts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListClusterAlerts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -967,6 +991,18 @@ func TestCheckSnapshot_ListInputSecurityGroups(t *testing.T) {
 	_, err := svc.ListInputSecurityGroups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListInputSecurityGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMultiplexAlerts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMultiplexAlerts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMultiplexAlerts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2281,6 +2317,18 @@ func TestUpdateSnapshot_GetSignalMap(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAlerts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAlerts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAlerts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListChannelPlacementGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannelPlacementGroups(context.Background(), nil, func(o *Options) {
@@ -2322,6 +2370,18 @@ func TestUpdateSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
 	_, err := svc.ListCloudWatchAlarmTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCloudWatchAlarmTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListClusterAlerts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterAlerts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListClusterAlerts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2406,6 +2466,18 @@ func TestUpdateSnapshot_ListInputSecurityGroups(t *testing.T) {
 	_, err := svc.ListInputSecurityGroups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListInputSecurityGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMultiplexAlerts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMultiplexAlerts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMultiplexAlerts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

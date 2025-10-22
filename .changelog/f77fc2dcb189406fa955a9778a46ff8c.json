@@ -1,0 +1,8 @@
+{
+    "id": "f77fc2dc-b189-406f-a955-a9778a46ff8c",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/appfabric"
+    ]
+}

@@ -134,6 +134,18 @@ func TestCheckSnapshot_AssociateDefaultVocabulary(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateEmailAddressAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateEmailAddressAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateEmailAddressAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateFlow(context.Background(), nil, func(o *Options) {
@@ -1375,6 +1387,18 @@ func TestCheckSnapshot_DisassociateBot(t *testing.T) {
 	_, err := svc.DisassociateBot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateBot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateEmailAddressAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateEmailAddressAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateEmailAddressAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3553,6 +3577,18 @@ func TestUpdateSnapshot_AssociateDefaultVocabulary(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateEmailAddressAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateEmailAddressAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateEmailAddressAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateFlow(context.Background(), nil, func(o *Options) {
@@ -4794,6 +4830,18 @@ func TestUpdateSnapshot_DisassociateBot(t *testing.T) {
 	_, err := svc.DisassociateBot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateBot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateEmailAddressAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateEmailAddressAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateEmailAddressAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

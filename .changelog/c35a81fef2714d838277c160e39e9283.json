@@ -1,0 +1,8 @@
+{
+    "id": "c35a81fe-f271-4d83-8277-c160e39e9283",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sagemakera2iruntime"
+    ]
+}

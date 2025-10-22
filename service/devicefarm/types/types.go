@@ -162,6 +162,10 @@ type CPU struct {
 // Configuration settings for a remote access session, including billing method.
 type CreateRemoteAccessSessionConfiguration struct {
 
+	// A list of upload ARNs for app packages to be installed onto your device.
+	// (Maximum 3)
+	AuxiliaryApps []string
+
 	// The billing method for the remote access session.
 	BillingMethod BillingMethod
 
@@ -1076,6 +1080,9 @@ type RecurringCharge struct {
 
 // Represents information about the remote access session.
 type RemoteAccessSession struct {
+
+	// The ARN for the app to be installed onto your device.
+	AppUpload *string
 
 	// The Amazon Resource Name (ARN) of the remote access session.
 	Arn *string

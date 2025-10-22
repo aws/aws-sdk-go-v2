@@ -76,6 +76,15 @@ type AgentContactReference struct {
 	noSmithyDocumentSerde
 }
 
+// Information about agent-first outbound strategy configuration.
+type AgentFirst struct {
+
+	// Information about preview configuration of agent first outbound strategy
+	Preview *Preview
+
+	noSmithyDocumentSerde
+}
+
 // Information about an agent hierarchy group.
 type AgentHierarchyGroup struct {
 
@@ -112,6 +121,9 @@ type AgentHierarchyGroups struct {
 
 // Information about the agent who accepted the contact.
 type AgentInfo struct {
+
+	// The timestamp when the contact was accepted by the agent.
+	AcceptedByAgentTimestamp *time.Time
 
 	// The difference in time, in whole seconds, between AfterContactWorkStartTimestamp
 	// and AfterContactWorkEndTimestamp .
@@ -151,6 +163,9 @@ type AgentInfo struct {
 
 	// The identifier of the agent who accepted the contact.
 	Id *string
+
+	// The timestamp when the agent finished previewing the contact.
+	PreviewEndTimestamp *time.Time
 
 	// List of StateTransition for a supervisor.
 	StateTransitions []StateTransition
@@ -299,6 +314,17 @@ type AgentStatusSummary struct {
 
 	// The type of the agent status.
 	Type AgentStatusType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information of an email alias.
+type AliasConfiguration struct {
+
+	// The email address ID.
+	//
+	// This member is required.
+	EmailAddressId *string
 
 	noSmithyDocumentSerde
 }
@@ -617,7 +643,7 @@ type AudioQualityMetricsInfo struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// request access to this API, contact Amazon Web ServicesSupport.
 //
 // Information about an authentication profile. An authentication profile is a
 // resource that stores the authentication settings for users in your contact
@@ -688,7 +714,7 @@ type AuthenticationProfile struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// request access to this API, contact Amazon Web ServicesSupport.
 //
 // A summary of a given authentication profile.
 type AuthenticationProfileSummary struct {
@@ -1089,7 +1115,11 @@ type Contact struct {
 	// Information about the call disconnect experience.
 	DisconnectDetails *DisconnectDetails
 
-	// The disconnect reason for the contact.
+	// The disconnect reason for the contact. For a list and description of all the
+	// possible disconnect reasons by channel, see DisconnectReason under [ContactTraceRecord]in the
+	// Amazon Connect Administrator Guide.
+	//
+	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 	DisconnectReason *string
 
 	// The date and time that the customer endpoint disconnected from the current
@@ -1127,6 +1157,9 @@ type Contact struct {
 
 	// The name of the contact.
 	Name *string
+
+	// Information about the outbound strategy.
+	OutboundStrategy *OutboundStrategy
 
 	// If this contact is not the first contact, this is the ID of the previous
 	// contact.
@@ -1241,6 +1274,9 @@ type ContactDataRequest struct {
 
 	// Endpoint of the customer for which contact will be initiated.
 	CustomerEndpoint *Endpoint
+
+	// Information about the outbound strategy.
+	OutboundStrategy *OutboundStrategy
 
 	// The identifier of the queue associated with the Amazon Connect instance in
 	// which contacts that are created will be queued.
@@ -2094,6 +2130,11 @@ type EmailAddressInfo struct {
 
 // Contains information about an email address for a contact center.
 type EmailAddressMetadata struct {
+
+	// A list of alias configurations for this email address, showing which email
+	// addresses forward to this primary address. Each configuration contains the email
+	// address ID of an alias that forwards emails to this address.
+	AliasConfigurations []AliasConfiguration
 
 	// The description of the email address.
 	Description *string
@@ -4604,6 +4645,29 @@ type OutboundRawMessage struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the outbound strategy.
+type OutboundStrategy struct {
+
+	// Type of the outbound strategy.
+	//
+	// This member is required.
+	Type OutboundStrategyType
+
+	// Config of the outbound strategy.
+	Config *OutboundStrategyConfig
+
+	noSmithyDocumentSerde
+}
+
+// The config of the outbound strategy.
+type OutboundStrategyConfig struct {
+
+	// The config of agent first outbound strategy.
+	AgentFirst *AgentFirst
+
+	noSmithyDocumentSerde
+}
+
 // The start time or end time for an hours of operation override.
 type OverrideTimeSlice struct {
 
@@ -4875,6 +4939,18 @@ type PhoneNumberSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Countdown timer configuration after the agent accepted the contact.
+type PostAcceptTimeoutConfig struct {
+
+	// Duration in seconds for the countdown timer after the agent accepted the
+	// contact.
+	//
+	// This member is required.
+	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Information about a predefined attribute.
 type PredefinedAttribute struct {
 
@@ -4966,6 +5042,23 @@ type PredefinedAttributeValuesMemberStringList struct {
 }
 
 func (*PredefinedAttributeValuesMemberStringList) isPredefinedAttributeValues() {}
+
+// Information about agent-first preview mode outbound strategy configuration.
+type Preview struct {
+
+	// The actions the agent can perform after accepting the preview outbound contact.
+	//
+	// This member is required.
+	AllowedUserActions []AllowedUserAction
+
+	// Countdown timer configuration after the agent accepted the preview outbound
+	// contact.
+	//
+	// This member is required.
+	PostAcceptTimeoutConfig *PostAcceptTimeoutConfig
+
+	noSmithyDocumentSerde
+}
 
 // Information about a problem detail.
 type ProblemDetail struct {
@@ -7920,7 +8013,7 @@ type UserSearchCriteria struct {
 	// A leaf node condition which can be used to specify a string condition.
 	//
 	// The currently supported values for FieldName are Username , FirstName , LastName
-	// , RoutingProfileId , SecurityProfileId , ResourceId .
+	// , RoutingProfileId , SecurityProfileId , resourceId .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde

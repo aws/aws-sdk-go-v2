@@ -1,0 +1,8 @@
+{
+    "id": "ac021026-926e-437d-968e-0528cb741eee",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

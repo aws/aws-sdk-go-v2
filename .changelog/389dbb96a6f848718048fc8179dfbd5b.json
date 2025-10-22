@@ -1,0 +1,8 @@
+{
+    "id": "389dbb96-a6f8-4871-8048-fc8179dfbd5b",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/bcmdashboards"
+    ]
+}

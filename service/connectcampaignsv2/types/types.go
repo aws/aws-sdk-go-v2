@@ -659,6 +659,25 @@ type PredictiveConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Preview config
+type PreviewConfig struct {
+
+	// The bandwidth allocation of a queue resource.
+	//
+	// This member is required.
+	BandwidthAllocation *float64
+
+	// Timeout Config for preview contacts.
+	//
+	// This member is required.
+	TimeoutConfig *TimeoutConfig
+
+	// Actions that can be performed by agent during preview phase.
+	AgentActions []AgentAction
+
+	noSmithyDocumentSerde
+}
+
 // Information about a profile outbound request
 type ProfileOutboundRequest struct {
 
@@ -998,6 +1017,7 @@ type TelephonyOutboundConfig struct {
 //
 //	TelephonyOutboundModeMemberAgentless
 //	TelephonyOutboundModeMemberPredictive
+//	TelephonyOutboundModeMemberPreview
 //	TelephonyOutboundModeMemberProgressive
 type TelephonyOutboundMode interface {
 	isTelephonyOutboundMode()
@@ -1021,6 +1041,15 @@ type TelephonyOutboundModeMemberPredictive struct {
 
 func (*TelephonyOutboundModeMemberPredictive) isTelephonyOutboundMode() {}
 
+// Preview config
+type TelephonyOutboundModeMemberPreview struct {
+	Value PreviewConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*TelephonyOutboundModeMemberPreview) isTelephonyOutboundMode() {}
+
 // Progressive config
 type TelephonyOutboundModeMemberProgressive struct {
 	Value ProgressiveConfig
@@ -1029,6 +1058,17 @@ type TelephonyOutboundModeMemberProgressive struct {
 }
 
 func (*TelephonyOutboundModeMemberProgressive) isTelephonyOutboundMode() {}
+
+// Timeout Config for preview contacts.
+type TimeoutConfig struct {
+
+	// Timeout duration for a preview contact in seconds.
+	//
+	// This member is required.
+	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
+}
 
 // Time range in 24 hour format
 type TimeRange struct {

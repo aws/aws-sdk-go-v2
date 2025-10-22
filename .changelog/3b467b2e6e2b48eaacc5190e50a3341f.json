@@ -1,0 +1,8 @@
+{
+    "id": "3b467b2e-6e2b-48ea-acc5-190e50a3341f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/forecastquery"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "8e13737c-4b57-4092-94cd-0158b78c9ef5",
+    "type": "feature",
+    "description": "This release added support for email address alias configuration and outbound campaign preview mode.",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "72e46bb1-ca74-49ff-ba83-8196c6949992",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/workspaces"
+    ]
+}

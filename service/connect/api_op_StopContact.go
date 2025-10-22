@@ -57,7 +57,11 @@ type StopContactInput struct {
 	InstanceId *string
 
 	// The reason a contact can be disconnected. Only Amazon Connect outbound
-	// campaigns can provide this field.
+	// campaigns can provide this field. For a list and description of all the possible
+	// disconnect reasons by channel (including outbound campaign voice contacts) see
+	// DisconnectReason under [ContactTraceRecord]in the Amazon Connect Administrator Guide.
+	//
+	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 	DisconnectReason *types.DisconnectReason
 
 	noSmithyDocumentSerde

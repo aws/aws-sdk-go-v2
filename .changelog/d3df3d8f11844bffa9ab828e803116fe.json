@@ -1,0 +1,8 @@
+{
+    "id": "d3df3d8f-1184-4bff-a9ab-828e803116fe",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

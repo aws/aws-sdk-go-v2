@@ -130,6 +130,26 @@ func (m *validateOpAssociateDefaultVocabulary) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateEmailAddressAlias struct {
+}
+
+func (*validateOpAssociateEmailAddressAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateEmailAddressAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateEmailAddressAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateEmailAddressAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateFlow struct {
 }
 
@@ -2205,6 +2225,26 @@ func (m *validateOpDisassociateBot) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateEmailAddressAlias struct {
+}
+
+func (*validateOpDisassociateEmailAddressAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateEmailAddressAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateEmailAddressAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateEmailAddressAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5674,6 +5714,10 @@ func addOpAssociateDefaultVocabularyValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpAssociateDefaultVocabulary{}, middleware.After)
 }
 
+func addOpAssociateEmailAddressAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateEmailAddressAlias{}, middleware.After)
+}
+
 func addOpAssociateFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFlow{}, middleware.After)
 }
@@ -6088,6 +6132,10 @@ func addOpDisassociateApprovedOriginValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateBot{}, middleware.After)
+}
+
+func addOpDisassociateEmailAddressAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateEmailAddressAlias{}, middleware.After)
 }
 
 func addOpDisassociateFlowValidationMiddleware(stack *middleware.Stack) error {
@@ -6797,6 +6845,38 @@ func validateAgentConfig(v *types.AgentConfig) error {
 	}
 }
 
+func validateAgentFirst(v *types.AgentFirst) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentFirst"}
+	if v.Preview != nil {
+		if err := validatePreview(v.Preview); err != nil {
+			invalidParams.AddNested("Preview", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAliasConfiguration(v *types.AliasConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AliasConfiguration"}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssignSlaActionDefinition(v *types.AssignSlaActionDefinition) error {
 	if v == nil {
 		return nil
@@ -6929,6 +7009,40 @@ func validateContactConfiguration(v *types.ContactConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ContactConfiguration"}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContactDataRequest(v *types.ContactDataRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactDataRequest"}
+	if v.OutboundStrategy != nil {
+		if err := validateOutboundStrategy(v.OutboundStrategy); err != nil {
+			invalidParams.AddNested("OutboundStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContactDataRequestList(v []types.ContactDataRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactDataRequestList"}
+	for i := range v {
+		if err := validateContactDataRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7990,6 +8104,43 @@ func validateOutboundRawMessage(v *types.OutboundRawMessage) error {
 	}
 }
 
+func validateOutboundStrategy(v *types.OutboundStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutboundStrategy"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Config != nil {
+		if err := validateOutboundStrategyConfig(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutboundStrategyConfig(v *types.OutboundStrategyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutboundStrategyConfig"}
+	if v.AgentFirst != nil {
+		if err := validateAgentFirst(v.AgentFirst); err != nil {
+			invalidParams.AddNested("AgentFirst", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOverrideTimeSlice(v *types.OverrideTimeSlice) error {
 	if v == nil {
 		return nil
@@ -8068,6 +8219,43 @@ func validatePhoneNumberQuickConnectConfig(v *types.PhoneNumberQuickConnectConfi
 	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumberQuickConnectConfig"}
 	if v.PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePostAcceptTimeoutConfig(v *types.PostAcceptTimeoutConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostAcceptTimeoutConfig"}
+	if v.DurationInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreview(v *types.Preview) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Preview"}
+	if v.PostAcceptTimeoutConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostAcceptTimeoutConfig"))
+	} else if v.PostAcceptTimeoutConfig != nil {
+		if err := validatePostAcceptTimeoutConfig(v.PostAcceptTimeoutConfig); err != nil {
+			invalidParams.AddNested("PostAcceptTimeoutConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowedUserActions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedUserActions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9140,6 +9328,31 @@ func validateOpAssociateDefaultVocabularyInput(v *AssociateDefaultVocabularyInpu
 	}
 }
 
+func validateOpAssociateEmailAddressAliasInput(v *AssociateEmailAddressAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEmailAddressAliasInput"}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AliasConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasConfiguration"))
+	} else if v.AliasConfiguration != nil {
+		if err := validateAliasConfiguration(v.AliasConfiguration); err != nil {
+			invalidParams.AddNested("AliasConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateFlowInput(v *AssociateFlowInput) error {
 	if v == nil {
 		return nil
@@ -9448,6 +9661,10 @@ func validateOpBatchPutContactInput(v *BatchPutContactInput) error {
 	}
 	if v.ContactDataRequestList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactDataRequestList"))
+	} else if v.ContactDataRequestList != nil {
+		if err := validateContactDataRequestList(v.ContactDataRequestList); err != nil {
+			invalidParams.AddNested("ContactDataRequestList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11234,6 +11451,31 @@ func validateOpDisassociateBotInput(v *DisassociateBotInput) error {
 	if v.LexBot != nil {
 		if err := validateLexBot(v.LexBot); err != nil {
 			invalidParams.AddNested("LexBot", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateEmailAddressAliasInput(v *DisassociateEmailAddressAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateEmailAddressAliasInput"}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AliasConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasConfiguration"))
+	} else if v.AliasConfiguration != nil {
+		if err := validateAliasConfiguration(v.AliasConfiguration); err != nil {
+			invalidParams.AddNested("AliasConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -13300,6 +13542,11 @@ func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput)
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.OutboundStrategy != nil {
+		if err := validateOutboundStrategy(v.OutboundStrategy); err != nil {
+			invalidParams.AddNested("OutboundStrategy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

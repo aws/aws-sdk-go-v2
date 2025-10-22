@@ -1321,6 +1321,28 @@ func validatePredictiveConfig(v *types.PredictiveConfig) error {
 	}
 }
 
+func validatePreviewConfig(v *types.PreviewConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreviewConfig"}
+	if v.BandwidthAllocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BandwidthAllocation"))
+	}
+	if v.TimeoutConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeoutConfig"))
+	} else if v.TimeoutConfig != nil {
+		if err := validateTimeoutConfig(v.TimeoutConfig); err != nil {
+			invalidParams.AddNested("TimeoutConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProfileOutboundRequest(v *types.ProfileOutboundRequest) error {
 	if v == nil {
 		return nil
@@ -1611,11 +1633,31 @@ func validateTelephonyOutboundMode(v types.TelephonyOutboundMode) error {
 			invalidParams.AddNested("[predictive]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.TelephonyOutboundModeMemberPreview:
+		if err := validatePreviewConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[preview]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.TelephonyOutboundModeMemberProgressive:
 		if err := validateProgressiveConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[progressive]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeoutConfig(v *types.TimeoutConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeoutConfig"}
+	if v.DurationInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

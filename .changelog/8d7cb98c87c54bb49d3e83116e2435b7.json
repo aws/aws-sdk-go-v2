@@ -1,0 +1,8 @@
+{
+    "id": "8d7cb98c-87c5-4bb4-9d3e-83116e2435b7",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mwaa"
+    ]
+}

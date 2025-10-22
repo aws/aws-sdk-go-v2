@@ -10,14 +10,14 @@ It always returns paths Unix-style with a forward slash ("/") as separator
 
 Usage:
 
-    findtagmodules -tags [tag1,tag2] [-p path]
+	findtagmodules -tags [tag1,tag2] [-p path]
 
 The flags are:
 
-    -tags
-        List of tags to look for, passed as "tag1,tag2"
-    -p
-        Root path to search from. Default to the repo root
+	-tags
+	    List of tags to look for, passed as "tag1,tag2"
+	-p
+	    Root path to search from. Default to the repo root
 */
 package main
 
@@ -45,7 +45,7 @@ func init() {
 
 func main() {
 	flag.Parse()
-	
+
 	if tags == "" {
 		log.Fatal("must specify -tags")
 	}
@@ -72,7 +72,7 @@ func main() {
 		log.Fatalf("failed to walk directory: %v", err)
 	}
 
-	for _, modPath := range boots.Modules() { 
+	for _, modPath := range boots.Modules() {
 		if modPath == rootPath {
 			continue
 		}
@@ -110,7 +110,7 @@ func hasAnyTag(modPath string, targetTags []string) (bool, error) {
 		buf := make([]byte, 200)
 		n, _ := file.Read(buf)
 		lines := strings.Split(string(buf[:n]), "\n")
-		
+
 		for i := 0; i < 2 && i < len(lines); i++ {
 			line := strings.TrimSpace(lines[i])
 			if strings.HasPrefix(line, "//go:build") || strings.HasPrefix(line, "// +build") {
@@ -123,6 +123,6 @@ func hasAnyTag(modPath string, targetTags []string) (bool, error) {
 			}
 		}
 		return nil
-	}) 
+	})
 	return found, err
 }

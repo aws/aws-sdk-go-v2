@@ -1,0 +1,8 @@
+{
+    "id": "71bff43f-93f8-494c-ac02-7009ee5116e3",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/directoryservicedata"
+    ]
+}

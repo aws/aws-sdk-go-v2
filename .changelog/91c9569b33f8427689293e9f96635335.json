@@ -1,0 +1,8 @@
+{
+    "id": "91c9569b-33f8-4276-8929-3e9f96635335",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/cloudhsmv2"
+    ]
+}

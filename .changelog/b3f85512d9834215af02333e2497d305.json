@@ -1,0 +1,8 @@
+{
+    "id": "b3f85512-d983-4215-af02-333e2497d305",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/iotanalytics"
+    ]
+}

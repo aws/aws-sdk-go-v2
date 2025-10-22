@@ -1,0 +1,8 @@
+{
+    "id": "611fd983-75e0-4d48-a5a2-59cab0e6bc7d",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sns"
+    ]
+}

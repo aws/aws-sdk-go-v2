@@ -1,0 +1,8 @@
+{
+    "id": "f17a8b2e-89f3-4948-9963-98682c97aab1",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ssmincidents"
+    ]
+}

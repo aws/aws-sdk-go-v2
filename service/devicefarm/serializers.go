@@ -4736,9 +4736,27 @@ func awsAwsjson11_serializeDocumentAndroidPaths(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAuxiliaryAppArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCreateRemoteAccessSessionConfiguration(v *types.CreateRemoteAccessSessionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuxiliaryApps != nil {
+		ok := object.Key("auxiliaryApps")
+		if err := awsAwsjson11_serializeDocumentAuxiliaryAppArnList(v.AuxiliaryApps, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.BillingMethod) > 0 {
 		ok := object.Key("billingMethod")
@@ -5468,6 +5486,11 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 func awsAwsjson11_serializeOpDocumentCreateRemoteAccessSessionInput(v *CreateRemoteAccessSessionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppArn != nil {
+		ok := object.Key("appArn")
+		ok.String(*v.AppArn)
+	}
 
 	if v.ClientId != nil {
 		ok := object.Key("clientId")

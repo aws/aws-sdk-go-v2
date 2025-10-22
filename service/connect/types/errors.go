@@ -114,7 +114,7 @@ func (e *ContactFlowNotPublishedException) ErrorCode() string {
 }
 func (e *ContactFlowNotPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The contact with the specified ID is not active or does not exist.
+// The contact with the specified ID does not exist.
 type ContactNotFoundException struct {
 	Message *string
 

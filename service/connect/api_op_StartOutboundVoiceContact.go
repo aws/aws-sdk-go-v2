@@ -107,6 +107,9 @@ type StartOutboundVoiceContactInput struct {
 	// Panel (CCP).
 	Name *string
 
+	// Information about the outbound strategy.
+	OutboundStrategy *types.OutboundStrategy
+
 	// The queue for the call. If you specify a queue, the phone displayed for caller
 	// ID is the phone number specified in the queue. If you do not specify a queue,
 	// the queue defined in the flow is used. If you do not specify a queue, you must

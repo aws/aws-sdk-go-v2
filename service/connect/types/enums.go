@@ -94,6 +94,25 @@ func (AgentStatusType) Values() []AgentStatusType {
 	}
 }
 
+type AllowedUserAction string
+
+// Enum values for AllowedUserAction
+const (
+	AllowedUserActionCall    AllowedUserAction = "CALL"
+	AllowedUserActionDiscard AllowedUserAction = "DISCARD"
+)
+
+// Values returns all known values for AllowedUserAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllowedUserAction) Values() []AllowedUserAction {
+	return []AllowedUserAction{
+		"CALL",
+		"DISCARD",
+	}
+}
+
 type AnsweringMachineDetectionStatus string
 
 // Enum values for AnsweringMachineDetectionStatus
@@ -841,6 +860,7 @@ const (
 	FailureReasonCodeInvalidCustomerEndpoint         FailureReasonCode = "INVALID_CUSTOMER_ENDPOINT"
 	FailureReasonCodeInvalidSystemEndpoint           FailureReasonCode = "INVALID_SYSTEM_ENDPOINT"
 	FailureReasonCodeInvalidQueue                    FailureReasonCode = "INVALID_QUEUE"
+	FailureReasonCodeInvalidOutboundStrategy         FailureReasonCode = "INVALID_OUTBOUND_STRATEGY"
 	FailureReasonCodeMissingCampaign                 FailureReasonCode = "MISSING_CAMPAIGN"
 	FailureReasonCodeMissingCustomerEndpoint         FailureReasonCode = "MISSING_CUSTOMER_ENDPOINT"
 	FailureReasonCodeMissingQueueIdAndSystemEndpoint FailureReasonCode = "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT"
@@ -859,6 +879,7 @@ func (FailureReasonCode) Values() []FailureReasonCode {
 		"INVALID_CUSTOMER_ENDPOINT",
 		"INVALID_SYSTEM_ENDPOINT",
 		"INVALID_QUEUE",
+		"INVALID_OUTBOUND_STRATEGY",
 		"MISSING_CAMPAIGN",
 		"MISSING_CUSTOMER_ENDPOINT",
 		"MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT",
@@ -1537,6 +1558,23 @@ func (OutboundMessageSourceType) Values() []OutboundMessageSourceType {
 	return []OutboundMessageSourceType{
 		"TEMPLATE",
 		"RAW",
+	}
+}
+
+type OutboundStrategyType string
+
+// Enum values for OutboundStrategyType
+const (
+	OutboundStrategyTypeAgentFirst OutboundStrategyType = "AGENT_FIRST"
+)
+
+// Values returns all known values for OutboundStrategyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutboundStrategyType) Values() []OutboundStrategyType {
+	return []OutboundStrategyType{
+		"AGENT_FIRST",
 	}
 }
 

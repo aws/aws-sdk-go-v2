@@ -1,0 +1,8 @@
+{
+    "id": "9ef75276-b28a-4ba5-8353-8df53da72a18",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/codegurureviewer"
+    ]
+}

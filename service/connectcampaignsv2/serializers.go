@@ -2974,6 +2974,17 @@ func awsRestjson1_serializeOpDocumentUpdateCampaignSourceInput(v *UpdateCampaign
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentActions(v []types.AgentAction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentlessConfig(v *types.AgentlessConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3588,6 +3599,45 @@ func awsRestjson1_serializeDocumentPredictiveConfig(v *types.PredictiveConfig, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPreviewConfig(v *types.PreviewConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentActions != nil {
+		ok := object.Key("agentActions")
+		if err := awsRestjson1_serializeDocumentAgentActions(v.AgentActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BandwidthAllocation != nil {
+		ok := object.Key("bandwidthAllocation")
+		switch {
+		case math.IsNaN(*v.BandwidthAllocation):
+			ok.String("NaN")
+
+		case math.IsInf(*v.BandwidthAllocation, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.BandwidthAllocation, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.BandwidthAllocation)
+
+		}
+	}
+
+	if v.TimeoutConfig != nil {
+		ok := object.Key("timeoutConfig")
+		if err := awsRestjson1_serializeDocumentTimeoutConfig(v.TimeoutConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProfileOutboundRequest(v *types.ProfileOutboundRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3999,6 +4049,12 @@ func awsRestjson1_serializeDocumentTelephonyOutboundMode(v types.TelephonyOutbou
 			return err
 		}
 
+	case *types.TelephonyOutboundModeMemberPreview:
+		av := object.Key("preview")
+		if err := awsRestjson1_serializeDocumentPreviewConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.TelephonyOutboundModeMemberProgressive:
 		av := object.Key("progressive")
 		if err := awsRestjson1_serializeDocumentProgressiveConfig(&uv.Value, av); err != nil {
@@ -4009,6 +4065,18 @@ func awsRestjson1_serializeDocumentTelephonyOutboundMode(v types.TelephonyOutbou
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimeoutConfig(v *types.TimeoutConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("durationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
 	return nil
 }
 

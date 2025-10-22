@@ -948,6 +948,25 @@ func (CdiInputResolution) Values() []CdiInputResolution {
 	}
 }
 
+type ChannelAlertState string
+
+// Enum values for ChannelAlertState
+const (
+	ChannelAlertStateSet     ChannelAlertState = "SET"
+	ChannelAlertStateCleared ChannelAlertState = "CLEARED"
+)
+
+// Values returns all known values for ChannelAlertState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelAlertState) Values() []ChannelAlertState {
+	return []ChannelAlertState{
+		"SET",
+		"CLEARED",
+	}
+}
+
 type ChannelClass string
 
 // Enum values for ChannelClass
@@ -1157,6 +1176,25 @@ func (CloudWatchAlarmTemplateTreatMissingData) Values() []CloudWatchAlarmTemplat
 		"breaching",
 		"ignore",
 		"missing",
+	}
+}
+
+type ClusterAlertState string
+
+// Enum values for ClusterAlertState
+const (
+	ClusterAlertStateSet     ClusterAlertState = "SET"
+	ClusterAlertStateCleared ClusterAlertState = "CLEARED"
+)
+
+// Values returns all known values for ClusterAlertState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterAlertState) Values() []ClusterAlertState {
+	return []ClusterAlertState{
+		"SET",
+		"CLEARED",
 	}
 }
 
@@ -5406,6 +5444,25 @@ func (MsSmoothH265PackagingType) Values() []MsSmoothH265PackagingType {
 	return []MsSmoothH265PackagingType{
 		"HEV1",
 		"HVC1",
+	}
+}
+
+type MultiplexAlertState string
+
+// Enum values for MultiplexAlertState
+const (
+	MultiplexAlertStateSet     MultiplexAlertState = "SET"
+	MultiplexAlertStateCleared MultiplexAlertState = "CLEARED"
+)
+
+// Values returns all known values for MultiplexAlertState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultiplexAlertState) Values() []MultiplexAlertState {
+	return []MultiplexAlertState{
+		"SET",
+		"CLEARED",
 	}
 }
 

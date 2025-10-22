@@ -1,0 +1,8 @@
+{
+    "id": "7ef6bb68-c12b-41b2-b1ec-c0575d96ed4d",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}
