@@ -1,3 +1,7 @@
+# v1.8.0 (2025-10-22)
+
+* **Feature**: Updated Amazon Connect Outbound Campaigns V2 SDK to support Preview Outbound Mode
+
 # v1.7.7 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

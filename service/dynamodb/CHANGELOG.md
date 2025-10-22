@@ -1,3 +1,7 @@
+# v1.52.1 (2025-10-22)
+
+* No change notes available for this release.
+
 # v1.52.0 (2025-10-21)
 
 * **Feature**: Add AccountID based endpoint metric to endpoint rules.

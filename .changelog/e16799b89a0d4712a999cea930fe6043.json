@@ -1,8 +1,0 @@
-{
-    "id": "e16799b8-9a0d-4712-a999-cea930fe6043",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

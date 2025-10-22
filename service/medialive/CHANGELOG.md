@@ -1,3 +1,7 @@
+# v1.85.0 (2025-10-22)
+
+* **Feature**: Add 3 API operations for fetching alerts: ListAlerts (Channels), ListClusterAlerts (MediaLive Anywhere), and ListMultiplexAlerts
+
 # v1.84.1 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

@@ -1,3 +1,7 @@
+# v1.143.0 (2025-10-22)
+
+* **Feature**: This release added support for email address alias configuration and outbound campaign preview mode.
+
 # v1.142.1 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

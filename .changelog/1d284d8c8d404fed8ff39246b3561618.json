@@ -1,8 +1,0 @@
-{
-    "id": "1d284d8c-8d40-4fed-8ff3-9246b3561618",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/comprehendmedical"
-    ]
-}

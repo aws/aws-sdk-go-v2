@@ -1,8 +1,0 @@
-{
-    "id": "d1ade53d-b5fb-4822-98a3-0b43d7f7f3a9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/workmail"
-    ]
-}

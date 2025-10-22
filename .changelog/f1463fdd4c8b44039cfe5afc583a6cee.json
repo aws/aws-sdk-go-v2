@@ -1,8 +1,0 @@
-{
-    "id": "f1463fdd-4c8b-4403-9cfe-5afc583a6cee",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/chatbot"
-    ]
-}

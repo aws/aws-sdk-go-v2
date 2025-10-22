@@ -1,8 +1,0 @@
-{
-    "id": "aa5c110f-b58b-477a-8d61-888ea64ee96d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/b2bi"
-    ]
-}

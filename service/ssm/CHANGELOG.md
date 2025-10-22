@@ -1,3 +1,7 @@
+# v1.66.1 (2025-10-22)
+
+* No change notes available for this release.
+
 # v1.66.0 (2025-10-16)
 
 * **Feature**: Update endpoint ruleset parameters casing

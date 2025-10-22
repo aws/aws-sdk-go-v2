@@ -1,8 +1,0 @@
-{
-    "id": "c1804354-e454-4df7-a0bb-5a1e5e4a9bc7",
-    "type": "feature",
-    "description": "Updated Amazon Connect Outbound Campaigns V2 SDK to support Preview Outbound Mode",
-    "modules": [
-        "service/connectcampaignsv2"
-    ]
-}

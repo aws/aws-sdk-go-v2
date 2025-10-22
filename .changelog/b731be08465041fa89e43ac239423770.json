@@ -1,8 +1,0 @@
-{
-    "id": "b731be08-4650-41fa-89e4-3ac239423770",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "125e70a8-e0d5-4331-9cb7-5952468c648f",
-    "type": "feature",
-    "description": "This release adds support for optionally including an app as part of a CreateRemoteAccessSession request",
-    "modules": [
-        "service/devicefarm"
-    ]
-}

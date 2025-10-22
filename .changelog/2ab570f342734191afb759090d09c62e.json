@@ -1,8 +1,0 @@
-{
-    "id": "2ab570f3-4273-4191-afb7-59090d09c62e",
-    "type": "feature",
-    "description": "Updated OIDC and SAML apis to reject multiple simultaneous requests to change a unique object.",
-    "modules": [
-        "service/iam"
-    ]
-}

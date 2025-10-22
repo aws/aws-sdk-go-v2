@@ -1,8 +1,0 @@
-{
-    "id": "f4f07574-6582-4c95-ba09-b98027fc1f11",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ec2instanceconnect"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "ee1a1201-0f44-4f9b-9936-4c268ca4774f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/kinesisanalyticsv2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "bf62f31c-aaf0-4865-9423-b5ea3a63805f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/notificationscontacts"
-    ]
-}

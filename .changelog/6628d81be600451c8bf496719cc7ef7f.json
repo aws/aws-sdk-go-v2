@@ -1,8 +1,0 @@
-{
-    "id": "6628d81b-e600-451c-8bf4-96719cc7ef7f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

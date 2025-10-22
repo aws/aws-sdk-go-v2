@@ -1,8 +1,0 @@
-{
-    "id": "ec6a7303-eb8d-484e-953a-c8ee3a4b6b3c",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/iotsecuretunneling"
-    ]
-}

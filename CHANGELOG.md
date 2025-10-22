@@ -1,3 +1,39 @@
+# Release (2025-10-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.60.0](service/autoscaling/CHANGELOG.md#v1600-2025-10-22)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.68.0](service/cloudformation/CHANGELOG.md#v1680-2025-10-22)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.143.0](service/connect/CHANGELOG.md#v11430-2025-10-22)
+  * **Feature**: This release added support for email address alias configuration and outbound campaign preview mode.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.8.0](service/connectcampaignsv2/CHANGELOG.md#v180-2025-10-22)
+  * **Feature**: Updated Amazon Connect Outbound Campaigns V2 SDK to support Preview Outbound Mode
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.58.0](service/costexplorer/CHANGELOG.md#v1580-2025-10-22)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.36.0](service/devicefarm/CHANGELOG.md#v1360-2025-10-22)
+  * **Feature**: This release adds support for optionally including an app as part of a CreateRemoteAccessSession request
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.38.0](service/directconnect/CHANGELOG.md#v1380-2025-10-22)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.258.0](service/ec2/CHANGELOG.md#v12580-2025-10-22)
+  * **Feature**: This release adds AvailabilityZoneId support for CreateNetworkInterface and DescribeNetworkInterfaces APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.48.0](service/iam/CHANGELOG.md#v1480-2025-10-22)
+  * **Feature**: Updated OIDC and SAML apis to reject multiple simultaneous requests to change a unique object.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.85.0](service/medialive/CHANGELOG.md#v1850-2025-10-22)
+  * **Feature**: Add 3 API operations for fetching alerts: ListAlerts (Channels), ListClusterAlerts (MediaLive Anywhere), and ListMultiplexAlerts
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.23.0](service/oam/CHANGELOG.md#v1230-2025-10-22)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.59.0](service/route53/CHANGELOG.md#v1590-2025-10-22)
+  * **Feature**: Amazon Route 53 now supports the ISOB West Region for private DNS for Amazon VPCs and cloudwatch healthchecks.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.0.0](service/rtbfabric/CHANGELOG.md#v100-2025-10-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Update for general availability of AWS RTB Fabric service.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.39.0](service/sns/CHANGELOG.md#v1390-2025-10-22)
+  * **Feature**: Update endpoint ruleset parameters casing
+
 # Release (2025-10-21)
 
 ## General Highlights

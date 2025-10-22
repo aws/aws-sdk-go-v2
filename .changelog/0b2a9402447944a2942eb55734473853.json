@@ -1,8 +1,0 @@
-{
-    "id": "0b2a9402-4479-44a2-942e-b55734473853",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cognitoidentity"
-    ]
-}

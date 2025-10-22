@@ -1,3 +1,7 @@
+# v1.33.1 (2025-10-22)
+
+* No change notes available for this release.
+
 # v1.33.0 (2025-10-17)
 
 * **Feature**: Releasing minor endpoint updates.

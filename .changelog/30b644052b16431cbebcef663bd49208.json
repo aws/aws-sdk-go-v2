@@ -1,8 +1,0 @@
-{
-    "id": "30b64405-2b16-431c-bebc-ef663bd49208",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/connectparticipant"
-    ]
-}

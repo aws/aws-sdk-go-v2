@@ -1,8 +1,0 @@
-{
-    "id": "dd86d15a-c24e-48ec-95f1-e61a6d4d0382",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

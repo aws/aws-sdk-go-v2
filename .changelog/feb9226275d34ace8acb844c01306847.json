@@ -1,8 +1,0 @@
-{
-    "id": "feb92262-75d3-4ace-8acb-844c01306847",
-    "type": "feature",
-    "description": "Add 3 API operations for fetching alerts: ListAlerts (Channels), ListClusterAlerts (MediaLive Anywhere), and ListMultiplexAlerts",
-    "modules": [
-        "service/medialive"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.48.0 (2025-10-22)
+
+* **Feature**: Updated OIDC and SAML apis to reject multiple simultaneous requests to change a unique object.
+
 # v1.47.8 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

@@ -1,8 +1,0 @@
-{
-    "id": "5a121808-76d1-4f0b-bb9d-3bfdb214259f",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the ISOB West Region for private DNS for Amazon VPCs and cloudwatch healthchecks.",
-    "modules": [
-        "service/route53"
-    ]
-}
