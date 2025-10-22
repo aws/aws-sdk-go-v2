@@ -377,6 +377,18 @@
                 "target": "com.amazonaws.devicefarm#Artifact"
             }
         },
+        "com.amazonaws.devicefarm#AuxiliaryAppArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devicefarm#AmazonResourceName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.devicefarm#BillingMethod": {
             "type": "enum",
             "members": {
@@ -923,6 +935,12 @@
         "com.amazonaws.devicefarm#CreateRemoteAccessSessionConfiguration": {
             "type": "structure",
             "members": {
+                "auxiliaryApps": {
+                    "target": "com.amazonaws.devicefarm#AuxiliaryAppArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of upload ARNs for app packages to be installed onto your device. (Maximum 3)</p>"
+                    }
+                },
                 "billingMethod": {
                     "target": "com.amazonaws.devicefarm#BillingMethod",
                     "traits": {
@@ -961,6 +979,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the device for which you want to create a remote access session.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "appArn": {
+                    "target": "com.amazonaws.devicefarm#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the app to create the remote access session.</p>"
                     }
                 },
                 "instanceArn": {
@@ -2371,27 +2395,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -8006,6 +8030,12 @@
                     "target": "com.amazonaws.devicefarm#DeviceProxy",
                     "traits": {
                         "smithy.api#documentation": "<p>The device proxy configured for the remote access session.</p>"
+                    }
+                },
+                "appUpload": {
+                    "target": "com.amazonaws.devicefarm#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the app to be installed onto your device.</p>"
                     }
                 }
             },

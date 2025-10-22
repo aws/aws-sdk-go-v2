@@ -3659,6 +3659,83 @@
                 "smithy.api#documentation": "Placeholder documentation for Channel"
             }
         },
+        "com.amazonaws.medialive#ChannelAlert": {
+            "type": "structure",
+            "members": {
+                "AlertType": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The type of the alert",
+                        "smithy.api#jsonName": "alertType"
+                    }
+                },
+                "ClearedTimestamp": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the alert was cleared",
+                        "smithy.api#jsonName": "clearedTimestamp"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID for this alert instance",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The user facing alert message which can have more context",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "PipelineId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the pipeline this alert is associated with",
+                        "smithy.api#jsonName": "pipelineId"
+                    }
+                },
+                "SetTimestamp": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the alert was set",
+                        "smithy.api#jsonName": "setTimestamp"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.medialive#ChannelAlertState",
+                    "traits": {
+                        "smithy.api#documentation": "The state of the alert",
+                        "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An alert on a channel"
+            }
+        },
+        "com.amazonaws.medialive#ChannelAlertState": {
+            "type": "enum",
+            "members": {
+                "SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SET"
+                    }
+                },
+                "CLEARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLEARED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The possible states of a channel alert. SET - The alert is actively happening. CLEARED - The alert is no longer happening."
+            }
+        },
         "com.amazonaws.medialive#ChannelClass": {
             "type": "enum",
             "members": {
@@ -4461,6 +4538,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "Specifies how missing data points are treated when evaluating the alarm's condition."
+            }
+        },
+        "com.amazonaws.medialive#ClusterAlert": {
+            "type": "structure",
+            "members": {
+                "AlertType": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The type of the alert",
+                        "smithy.api#jsonName": "alertType"
+                    }
+                },
+                "ChannelId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the channel this alert is associated with",
+                        "smithy.api#jsonName": "channelId"
+                    }
+                },
+                "ClearedTimestamp": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the alert was cleared",
+                        "smithy.api#jsonName": "clearedTimestamp"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The further subtype of this alert",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The user facing alert message which can have more context",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the node this alert is associated with",
+                        "smithy.api#jsonName": "nodeId"
+                    }
+                },
+                "SetTimestamp": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the alert was set",
+                        "smithy.api#jsonName": "setTimestamp"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.medialive#ClusterAlertState",
+                    "traits": {
+                        "smithy.api#documentation": "The state of the alert",
+                        "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An alert on a cluster"
+            }
+        },
+        "com.amazonaws.medialive#ClusterAlertState": {
+            "type": "enum",
+            "members": {
+                "SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SET"
+                    }
+                },
+                "CLEARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLEARED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The possible states of a cluster alert. SET - The alert is actively happening. CLEARED - The alert is no longer happening."
             }
         },
         "com.amazonaws.medialive#ClusterNetworkSettings": {
@@ -21871,6 +22032,113 @@
                 "smithy.api#documentation": "If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode."
             }
         },
+        "com.amazonaws.medialive#ListAlerts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#ListAlertsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#ListAlertsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List the alerts for a channel with optional filtering based on alert state.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prod/channels/{ChannelId}/alerts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Alerts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.medialive#ListAlertsRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the channel",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.medialive#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of items to return",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The next pagination token",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "StateFilter": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.",
+                        "smithy.api#httpQuery": "stateFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListAlertsRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#ListAlertsResponse": {
+            "type": "structure",
+            "members": {
+                "Alerts": {
+                    "target": "com.amazonaws.medialive#__listOfChannelAlert",
+                    "traits": {
+                        "smithy.api#documentation": "The alerts found for this channel",
+                        "smithy.api#jsonName": "alerts"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The token to use to retrieve the next page of results",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListAlertsResponse",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.medialive#ListChannelPlacementGroups": {
             "type": "operation",
             "input": {
@@ -22253,6 +22521,113 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for ListCloudWatchAlarmTemplatesResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#ListClusterAlerts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#ListClusterAlertsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#ListClusterAlertsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List the alerts for a cluster with optional filtering based on alert state.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prod/clusters/{ClusterId}/alerts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Alerts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.medialive#ListClusterAlertsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the cluster",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.medialive#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of items to return",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The next pagination token",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "StateFilter": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.",
+                        "smithy.api#httpQuery": "stateFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListClusterAlertsRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#ListClusterAlertsResponse": {
+            "type": "structure",
+            "members": {
+                "Alerts": {
+                    "target": "com.amazonaws.medialive#__listOfClusterAlert",
+                    "traits": {
+                        "smithy.api#documentation": "The alerts found for this cluster",
+                        "smithy.api#jsonName": "alerts"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The token to use to retrieve the next page of results",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListClusterAlertsResponse",
                 "smithy.api#output": {}
             }
         },
@@ -22887,6 +23262,113 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for ListInputsResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#ListMultiplexAlerts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#ListMultiplexAlertsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#ListMultiplexAlertsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List the alerts for a multiplex with optional filtering based on alert state.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prod/multiplexes/{MultiplexId}/alerts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Alerts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.medialive#ListMultiplexAlertsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.medialive#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of items to return",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "MultiplexId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the multiplex",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The next pagination token",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "StateFilter": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.",
+                        "smithy.api#httpQuery": "stateFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListMultiplexAlertsRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#ListMultiplexAlertsResponse": {
+            "type": "structure",
+            "members": {
+                "Alerts": {
+                    "target": "com.amazonaws.medialive#__listOfMultiplexAlert",
+                    "traits": {
+                        "smithy.api#documentation": "The alerts found for this multiplex",
+                        "smithy.api#jsonName": "alerts"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The token to use to retrieve the next page of results",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ListMultiplexAlertsResponse",
                 "smithy.api#output": {}
             }
         },
@@ -25283,6 +25765,9 @@
                     "target": "com.amazonaws.medialive#GetSignalMap"
                 },
                 {
+                    "target": "com.amazonaws.medialive#ListAlerts"
+                },
+                {
                     "target": "com.amazonaws.medialive#ListChannelPlacementGroups"
                 },
                 {
@@ -25293,6 +25778,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#ListCloudWatchAlarmTemplates"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ListClusterAlerts"
                 },
                 {
                     "target": "com.amazonaws.medialive#ListClusters"
@@ -25314,6 +25802,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#ListInputSecurityGroups"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ListMultiplexAlerts"
                 },
                 {
                     "target": "com.amazonaws.medialive#ListMultiplexes"
@@ -25472,27 +25963,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -27383,6 +27874,83 @@
             },
             "traits": {
                 "smithy.api#documentation": "The multiplex object."
+            }
+        },
+        "com.amazonaws.medialive#MultiplexAlert": {
+            "type": "structure",
+            "members": {
+                "AlertType": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The type of the alert",
+                        "smithy.api#jsonName": "alertType"
+                    }
+                },
+                "ClearedTimestamp": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the alert was cleared",
+                        "smithy.api#jsonName": "clearedTimestamp"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID for this alert instance",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The user facing alert message which can have more context",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "PipelineId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the pipeline this alert is associated with",
+                        "smithy.api#jsonName": "pipelineId"
+                    }
+                },
+                "SetTimestamp": {
+                    "target": "com.amazonaws.medialive#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The time when the alert was set",
+                        "smithy.api#jsonName": "setTimestamp"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.medialive#MultiplexAlertState",
+                    "traits": {
+                        "smithy.api#documentation": "The state of the alert",
+                        "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An alert on a multiplex"
+            }
+        },
+        "com.amazonaws.medialive#MultiplexAlertState": {
+            "type": "enum",
+            "members": {
+                "SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SET"
+                    }
+                },
+                "CLEARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLEARED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The possible states of a multiplex alert. SET - The alert is actively happening. CLEARED - The alert is no longer happening."
             }
         },
         "com.amazonaws.medialive#MultiplexContainerSettings": {
@@ -38941,6 +39509,15 @@
                 "smithy.api#documentation": "Placeholder documentation for __listOfCaptionSelector"
             }
         },
+        "com.amazonaws.medialive#__listOfChannelAlert": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#ChannelAlert"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfChannelAlert"
+            }
+        },
         "com.amazonaws.medialive#__listOfChannelEgressEndpoint": {
             "type": "list",
             "member": {
@@ -38993,6 +39570,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfCloudWatchAlarmTemplateSummary"
+            }
+        },
+        "com.amazonaws.medialive#__listOfClusterAlert": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#ClusterAlert"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfClusterAlert"
             }
         },
         "com.amazonaws.medialive#__listOfCmafIngestCaptionLanguageMapping": {
@@ -39389,6 +39975,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfMulticastSourceUpdateRequest"
+            }
+        },
+        "com.amazonaws.medialive#__listOfMultiplexAlert": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#MultiplexAlert"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfMultiplexAlert"
             }
         },
         "com.amazonaws.medialive#__listOfMultiplexOutputDestination": {

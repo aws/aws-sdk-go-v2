@@ -351,6 +351,20 @@
                 "target": "com.amazonaws.connect#AgentContactReference"
             }
         },
+        "com.amazonaws.connect#AgentFirst": {
+            "type": "structure",
+            "members": {
+                "Preview": {
+                    "target": "com.amazonaws.connect#Preview",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about preview configuration of agent first outbound strategy</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about agent-first outbound strategy configuration.</p>"
+            }
+        },
         "com.amazonaws.connect#AgentFirstName": {
             "type": "string",
             "traits": {
@@ -435,6 +449,18 @@
                     "target": "com.amazonaws.connect#AgentResourceId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the agent who accepted the contact.</p>"
+                    }
+                },
+                "AcceptedByAgentTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the contact was accepted by the agent.</p>"
+                    }
+                },
+                "PreviewEndTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the agent finished previewing the contact.</p>"
                     }
                 },
                 "ConnectedToAgentTimestamp": {
@@ -900,6 +926,33 @@
                 }
             }
         },
+        "com.amazonaws.connect#AliasConfiguration": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information of an email alias.</p>"
+            }
+        },
+        "com.amazonaws.connect#AliasConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AliasConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.connect#AllowedAccessControlTags": {
             "type": "map",
             "key": {
@@ -947,6 +1000,29 @@
                 }
             }
         },
+        "com.amazonaws.connect#AllowedUserAction": {
+            "type": "enum",
+            "members": {
+                "CALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALL"
+                    }
+                },
+                "DISCARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCARD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#AllowedUserActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AllowedUserAction"
+            }
+        },
         "com.amazonaws.connect#AmazonConnectService": {
             "type": "service",
             "version": "2017-08-08",
@@ -968,6 +1044,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#AssociateDefaultVocabulary"
+                },
+                {
+                    "target": "com.amazonaws.connect#AssociateEmailAddressAlias"
                 },
                 {
                     "target": "com.amazonaws.connect#AssociateFlow"
@@ -1280,6 +1359,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DisassociateBot"
+                },
+                {
+                    "target": "com.amazonaws.connect#DisassociateEmailAddressAlias"
                 },
                 {
                     "target": "com.amazonaws.connect#DisassociateFlow"
@@ -3246,6 +3328,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#AssociateEmailAddressAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#AssociateEmailAddressAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#AssociateEmailAddressAliasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an email address alias with an existing email address in an Amazon Connect\n   instance. This creates a forwarding relationship where emails sent to the alias email address are\n   automatically forwarded to the primary email address. </p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Unified customer support</b>: Create multiple entry points (for example, support@example.com,\n     help@example.com, customercare@example.com) that all forward to a single agent queue for\n     streamlined management.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Department consolidation</b>: Forward emails from legacy department addresses (for example,\n     sales@example.com, info@example.com) to a centralized customer service email during\n     organizational restructuring.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Brand management</b>: Enable you to use familiar brand-specific email addresses that forward\n     to the appropriate Amazon Connect instance email address.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>Each email address can have a maximum of one alias. You cannot create multiple aliases for\n     the same email address. </p>\n            </li>\n            <li>\n               <p>If the alias email address already receives direct emails, it continues to receive direct\n     emails plus forwarded emails.</p>\n            </li>\n            <li>\n               <p>You cannot chain email aliases together (that is, create an alias of an alias).</p>\n            </li>\n         </ul>\n         <p>\n            <code>AssociateEmailAddressAlias</code> does not return the following information:</p>\n         <ul>\n            <li>\n               <p>A confirmation of the alias relationship details (you must call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html\">DescribeEmailAddress</a> to verify).</p>\n            </li>\n            <li>\n               <p>The timestamp of when the association occurred.</p>\n            </li>\n            <li>\n               <p>The status of the forwarding configuration.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See \n   <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociateEmailAddressAlias.html\">DisassociateEmailAddressAlias</a>: Removes the alias association between two email\n     addresses in an Amazon Connect instance.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html\">DescribeEmailAddress</a>:\n     View current alias configurations for an email address.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchEmailAddresses.html\">SearchEmailAddresses</a>:\n     Find email addresses and their alias relationships across an instance.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateEmailAddress.html\">CreateEmailAddress</a>: Create new email addresses that can participate in alias\n     relationships.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteEmailAddress.html\">DeleteEmailAddress</a>: Remove email addresses (automatically removes any alias\n     relationships).</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateEmailAddressMetadata.html\">UpdateEmailAddressMetadata</a>: Modify email address properties (does not affect alias\n     relationships).</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/email-addresses/{InstanceId}/{EmailAddressId}/associate-alias",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#AssociateEmailAddressAliasRequest": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasConfiguration": {
+                    "target": "com.amazonaws.connect#AliasConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration object that specifies which email address will serve as the alias. The\n   specified email address must already exist in the Amazon Connect instance and cannot already\n   be configured as an alias or have an alias of its own.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#AssociateEmailAddressAliasResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#AssociateFlow": {
             "type": "operation",
             "input": {
@@ -4541,7 +4711,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP\n    address restrictions or session timeouts</a>. </p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP\n    address restrictions or session timeouts</a>. </p>"
             }
         },
         "com.amazonaws.connect#AuthenticationProfileDescription": {
@@ -4613,7 +4783,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>A summary of a given authentication profile.</p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>A summary of a given authentication profile.</p>"
             }
         },
         "com.amazonaws.connect#AuthenticationProfileSummaryList": {
@@ -6136,7 +6306,7 @@
                 "DisconnectReason": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The disconnect reason for the contact.</p>"
+                        "smithy.api#documentation": "<p>The disconnect reason for the contact. For a list and description of all the possible\n   disconnect reasons by channel, see DisconnectReason under <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator Guide</i>. </p>"
                     }
                 },
                 "ContactEvaluations": {
@@ -6155,6 +6325,12 @@
                     "target": "com.amazonaws.connect#ContactDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of string key/value pairs that contain user-defined attributes which are lightly typed\n   within the contact. This object is used only for task contacts.</p>"
+                    }
+                },
+                "OutboundStrategy": {
+                    "target": "com.amazonaws.connect#OutboundStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the outbound strategy.</p>"
                     }
                 },
                 "Attributes": {
@@ -6247,6 +6423,12 @@
                     "target": "com.amazonaws.connect#Campaign",
                     "traits": {
                         "smithy.api#documentation": "<p>Structure to store information associated with a campaign.</p>"
+                    }
+                },
+                "OutboundStrategy": {
+                    "target": "com.amazonaws.connect#OutboundStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the outbound strategy.</p>"
                     }
                 }
             },
@@ -7166,7 +7348,7 @@
                     "code": "ContactNotFoundException",
                     "httpResponseCode": 410
                 },
-                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist.</p>",
+                "smithy.api#documentation": "<p>The contact with the specified ID does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
             }
@@ -13304,7 +13486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Describes the target authentication profile.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Describes the target authentication profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
@@ -13376,7 +13558,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified contact. </p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Retrieve contact information such as the caller's phone number and the specific number the\n     caller dialed to integrate into custom monitoring or custom agent experience solutions.</p>\n            </li>\n            <li>\n               <p>Detect when a customer chat session disconnects due to a network issue on the agent's end.\n     Use the DisconnectReason field in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> to detect this event and then re-queue the chat for followup.</p>\n            </li>\n            <li>\n               <p>Identify after contact work (ACW) duration and call recordings information when a\n     COMPLETED event is received by using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-events.html\">contact event stream</a>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SystemEndpoint</code> is not populated for contacts with initiation method of\n     MONITOR, QUEUE_TRANSFER, or CALLBACK</p>\n            </li>\n            <li>\n               <p>Contact information remains available in Amazon Connect for 24 months from the\n      <code>InitiationTimestamp</code>, and then it is deleted. Only contact information that is\n     available in Amazon Connect is returned by this API.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified contact. </p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Retrieve contact information such as the caller's phone number and the specific number the\n     caller dialed to integrate into custom monitoring or custom agent experience solutions.</p>\n            </li>\n            <li>\n               <p>Detect when a customer chat session disconnects due to a network issue on the agent's end.\n     Use the DisconnectReason field in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> to detect this event and then re-queue the chat for\n     followup.</p>\n            </li>\n            <li>\n               <p>Identify after contact work (ACW) duration and call recordings information when a\n     COMPLETED event is received by using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-events.html\">contact event stream</a>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SystemEndpoint</code> is not populated for contacts with initiation method of\n     MONITOR, QUEUE_TRANSFER, or CALLBACK</p>\n            </li>\n            <li>\n               <p>Contact information remains available in Amazon Connect for 24 months from the\n      <code>InitiationTimestamp</code>, and then it is deleted. Only contact information that is\n     available in Amazon Connect is returned by this API.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contacts/{InstanceId}/{ContactId}",
@@ -13753,6 +13935,12 @@
                     "target": "com.amazonaws.connect#ISO8601Datetime",
                     "traits": {
                         "smithy.api#documentation": "<p>The email address last modification timestamp in ISO 8601 Datetime.</p>"
+                    }
+                },
+                "AliasConfigurations": {
+                    "target": "com.amazonaws.connect#AliasConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of alias configurations associated with this email address. Contains details about\n   email addresses that forward to this primary email address. The list can contain at most one\n   alias configuration per email address.</p>"
                     }
                 },
                 "Tags": {
@@ -15597,6 +15785,91 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DisassociateEmailAddressAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DisassociateEmailAddressAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DisassociateEmailAddressAliasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the alias association between two email addresses in an Amazon Connect instance.\n   After disassociation, emails sent to the former alias email address are no longer forwarded to\n   the primary email address. Both email addresses continue to exist independently and can receive\n   emails directly.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Department separation</b>: Remove alias relationships when splitting a consolidated support\n     queue back into separate department-specific queues.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Email address retirement</b>: Cleanly remove forwarding relationships before decommissioning\n     old email addresses.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Organizational restructuring</b>: Reconfigure email routing when business processes change and\n     aliases are no longer needed.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>Concurrent operations: This API uses distributed locking, so concurrent operations on the\n     same email addresses may be temporarily blocked.</p>\n            </li>\n            <li>\n               <p>Emails sent to the former alias address are still delivered directly to that address if it\n     exists.</p>\n            </li>\n            <li>\n               <p>You do not need to delete the email addresses after disassociation. Both addresses remain\n     active independently.</p>\n            </li>\n            <li>\n               <p>After a successful disassociation, you can immediately create a new alias relationship\n     with the same addresses.</p>\n            </li>\n            <li>\n               <p>200 status means alias was successfully disassociated.</p>\n            </li>\n         </ul>\n         <p>\n            <code>DisassociateEmailAddressAlias</code> does not return the following information:</p>\n         <ul>\n            <li>\n               <p>Details in the response about the email that was disassociated. The response returns an empty body.</p>\n            </li>\n            <li>\n               <p>The timestamp of when the disassociation occurred.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See \n   <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociateEmailAddressAlias.html\">AssociateEmailAddressAlias</a>: Associates an email address alias with an existing email\n     address in an Amazon Connect instance.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html\">DescribeEmailAddress</a>:\n     View current alias configurations for an email address.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchEmailAddresses.html\">SearchEmailAddresses</a>:\n     Find email addresses and their alias relationships across an instance.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateEmailAddress.html\">CreateEmailAddress</a>: Create new email addresses that can participate in alias\n     relationships.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteEmailAddress.html\">DeleteEmailAddress</a>: Remove email addresses (automatically removes any alias\n     relationships).</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateEmailAddressMetadata.html\">UpdateEmailAddressMetadata</a>: Modify email address properties (does not affect alias\n     relationships).</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/email-addresses/{InstanceId}/{EmailAddressId}/disassociate-alias",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DisassociateEmailAddressAliasRequest": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasConfiguration": {
+                    "target": "com.amazonaws.connect#AliasConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration object that specifies which alias relationship to remove. The alias\n   association must currently exist between the primary email address and the specified alias email\n   address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DisassociateEmailAddressAliasResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DisassociateFlow": {
             "type": "operation",
             "input": {
@@ -16616,6 +16889,12 @@
                     "target": "com.amazonaws.connect#EmailAddressDisplayName",
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of email address.</p>"
+                    }
+                },
+                "AliasConfigurations": {
+                    "target": "com.amazonaws.connect#AliasConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of alias configurations for this email address, showing which email addresses forward\n   to this primary address. Each configuration contains the email address ID of an alias that\n   forwards emails to this address.</p>"
                     }
                 }
             },
@@ -18550,6 +18829,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INVALID_QUEUE"
+                    }
+                },
+                "INVALID_OUTBOUND_STRATEGY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_OUTBOUND_STRATEGY"
                     }
                 },
                 "MISSING_CAMPAIGN": {
@@ -21581,7 +21866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web Services Support ticket. </p>",
+                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web ServicesSupport ticket. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/import",
@@ -23340,7 +23625,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/authentication-profiles-summary/{InstanceId}",
@@ -28930,6 +29215,52 @@
                 }
             }
         },
+        "com.amazonaws.connect#OutboundStrategy": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#OutboundStrategyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the outbound strategy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.connect#OutboundStrategyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Config of the outbound strategy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the outbound strategy.</p>"
+            }
+        },
+        "com.amazonaws.connect#OutboundStrategyConfig": {
+            "type": "structure",
+            "members": {
+                "AgentFirst": {
+                    "target": "com.amazonaws.connect#AgentFirst",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The config of agent first outbound strategy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The config of the outbound strategy.</p>"
+            }
+        },
+        "com.amazonaws.connect#OutboundStrategyType": {
+            "type": "enum",
+            "members": {
+                "AGENT_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_FIRST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#OutboundSubject": {
             "type": "string",
             "traits": {
@@ -31200,6 +31531,29 @@
                 }
             }
         },
+        "com.amazonaws.connect#PostAcceptPreviewTimeoutDurationInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.connect#PostAcceptTimeoutConfig": {
+            "type": "structure",
+            "members": {
+                "DurationInSeconds": {
+                    "target": "com.amazonaws.connect#PostAcceptPreviewTimeoutDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Duration in seconds for the countdown timer after the agent accepted the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Countdown timer configuration after the agent accepted the contact.</p>"
+            }
+        },
         "com.amazonaws.connect#PotentialAudioQualityIssue": {
             "type": "string",
             "traits": {
@@ -31444,6 +31798,28 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.connect#Preview": {
+            "type": "structure",
+            "members": {
+                "PostAcceptTimeoutConfig": {
+                    "target": "com.amazonaws.connect#PostAcceptTimeoutConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Countdown timer configuration after the agent accepted the preview outbound contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowedUserActions": {
+                    "target": "com.amazonaws.connect#AllowedUserActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actions the agent can perform after accepting the preview outbound contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about agent-first preview mode outbound strategy configuration.</p>"
             }
         },
         "com.amazonaws.connect#Priority": {
@@ -33728,7 +34104,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web Services Support.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web ServicesSupport.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -38726,7 +39102,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see the following topics in the <i>Amazon Connect\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web ServicesSupport. </p>\n         <p>For more information about chat, see the following topics in the <i>Amazon Connect\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -39629,6 +40005,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Denotes the class of traffic. Calls with different traffic types are handled differently by\n    Amazon Connect. The default value is <code>GENERAL</code>. Use <code>CAMPAIGN</code> if\n    <code>EnableAnswerMachineDetection</code> is set to <code>true</code>. For all other cases, use\n    <code>GENERAL</code>. </p>"
                     }
+                },
+                "OutboundStrategy": {
+                    "target": "com.amazonaws.connect#OutboundStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the outbound strategy.</p>"
+                    }
                 }
             },
             "traits": {
@@ -40227,7 +40609,7 @@
                 "DisconnectReason": {
                     "target": "com.amazonaws.connect#DisconnectReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason a contact can be disconnected. Only Amazon Connect outbound campaigns can\n   provide this field.</p>"
+                        "smithy.api#documentation": "<p>The reason a contact can be disconnected. Only Amazon Connect outbound campaigns can\n   provide this field. For a list and description of all the possible\n   disconnect reasons by channel (including outbound campaign voice contacts) see DisconnectReason under <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator Guide</i>. </p>"
                     }
                 }
             },
@@ -42293,7 +42675,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Updates the selected authentication profile.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Updates the selected authentication profile.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
@@ -43698,7 +44080,7 @@
                 "AttributeType": {
                     "target": "com.amazonaws.connect#InstanceAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web Services Support for allowlisting.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web ServicesSupport for allowlisting.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -47001,7 +47383,7 @@
                 "StringCondition": {
                     "target": "com.amazonaws.connect#StringCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <p>The currently supported values for <code>FieldName</code> are <code>Username</code>,\n    <code>FirstName</code>, <code>LastName</code>, <code>RoutingProfileId</code>,\n    <code>SecurityProfileId</code>, <code>ResourceId</code>.</p>"
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <p>The currently supported values for <code>FieldName</code> are <code>Username</code>,\n    <code>FirstName</code>, <code>LastName</code>, <code>RoutingProfileId</code>,\n    <code>SecurityProfileId</code>, <code>resourceId</code>.</p>"
                     }
                 },
                 "ListCondition": {

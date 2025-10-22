@@ -23,6 +23,28 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.connectcampaignsv2#AgentAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Actions that can performed on a contact by an agent",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISCARD",
+                        "name": "DISCARD"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#AgentActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaignsv2#AgentAction"
+            },
+            "traits": {
+                "smithy.api#documentation": "Actions that can be performed by agent during preview phase.",
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.connectcampaignsv2#AgentlessConfig": {
             "type": "structure",
             "members": {},
@@ -184,27 +206,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -975,10 +997,10 @@
             "traits": {
                 "smithy.api#documentation": "Identifier representing a Campaign",
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-:/]*$"
+                "smithy.api#pattern": "^[-:/a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.connectcampaignsv2#CampaignIdList": {
@@ -2015,10 +2037,10 @@
             "traits": {
                 "smithy.api#documentation": "Identifier representing a Dial request",
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]*$"
+                "smithy.api#pattern": "^[-_.a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.connectcampaignsv2#EmailAddress": {
@@ -2688,10 +2710,10 @@
             "traits": {
                 "smithy.api#documentation": "Amazon Connect Instance Id",
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]*$"
+                "smithy.api#pattern": "^[-_.a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.connectcampaignsv2#InstanceIdFilter": {
@@ -3376,6 +3398,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "Predictive config"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PreviewConfig": {
+            "type": "structure",
+            "members": {
+                "bandwidthAllocation": {
+                    "target": "com.amazonaws.connectcampaignsv2#BandwidthAllocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeoutConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#TimeoutConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentActions": {
+                    "target": "com.amazonaws.connectcampaignsv2#AgentActions"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Preview config"
             }
         },
         "com.amazonaws.connectcampaignsv2#ProfileId": {
@@ -4533,6 +4578,9 @@
                 },
                 "agentless": {
                     "target": "com.amazonaws.connectcampaignsv2#AgentlessConfig"
+                },
+                "preview": {
+                    "target": "com.amazonaws.connectcampaignsv2#PreviewConfig"
                 }
             },
             "traits": {
@@ -4624,6 +4672,30 @@
                     "max": 50
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\-/]*$"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#TimeoutConfig": {
+            "type": "structure",
+            "members": {
+                "durationInSeconds": {
+                    "target": "com.amazonaws.connectcampaignsv2#TimeoutDuration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Timeout Config for preview contacts."
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#TimeoutDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Timeout duration for a preview contact in seconds.",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
+                }
             }
         },
         "com.amazonaws.connectcampaignsv2#UntagResource": {
