@@ -130,7 +130,7 @@
                     ]
                 },
                 "smithy.api#documentation": "<note> <p>Amazon Bedrock AgentCore is in preview release and is subject to change.</p> </note> <p>Welcome to the Amazon Bedrock AgentCore Data Plane API reference. Data Plane actions process and handle data or workloads within Amazon Web Services services. </p>",
-                "smithy.api#title": "Amazon Bedrock AgentCore Data Plane Fronting Layer",
+                "smithy.api#title": "Amazon Bedrock AgentCore",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

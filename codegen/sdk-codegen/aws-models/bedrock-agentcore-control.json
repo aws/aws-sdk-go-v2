@@ -471,7 +471,7 @@
                     "maxAge": 86400
                 },
                 "smithy.api#documentation": "<note> <p> is in preview release and is subject to change.</p> </note> <p>Welcome to the Amazon Bedrock AgentCore Control plane API reference. Control plane actions configure, create, modify, and monitor Amazon Web Services resources.</p>",
-                "smithy.api#title": "Amazon Bedrock Agent Core Control Plane Fronting Layer",
+                "smithy.api#title": "Amazon Bedrock AgentCore Control",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

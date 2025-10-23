@@ -28,6 +28,9 @@
                 "smithy.api#pattern": "^arn:.+$"
             }
         },
+        "com.amazonaws.dsql#BypassPolicyLockoutSafetyCheck": {
+            "type": "boolean"
+        },
         "com.amazonaws.dsql#ClientToken": {
             "type": "string",
             "traits": {
@@ -80,7 +83,16 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.dsql#DeleteClusterPolicy"
+                },
+                {
+                    "target": "com.amazonaws.dsql#GetClusterPolicy"
+                },
+                {
                     "target": "com.amazonaws.dsql#GetVpcEndpointServiceName"
+                },
+                {
+                    "target": "com.amazonaws.dsql#PutClusterPolicy"
                 }
             ],
             "traits": {
@@ -274,7 +286,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create new clusters."
                 },
-                "smithy.api#documentation": "<p>The CreateCluster API allows you to create both single-region clusters and multi-Region\n         clusters. With the addition of the <i>multiRegionProperties</i> parameter,\n         you can create a cluster with witness Region support and establish peer relationships with\n         clusters in other Regions during creation.</p>\n         <note>\n            <p>Creating multi-Region clusters requires additional IAM permissions beyond those\n               needed for single-Region clusters, as detailed in the <b>Required permissions</b> section\n            below.</p>\n         </note>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <dl>\n            <dt>dsql:CreateCluster</dt>\n            <dd>\n               <p>Required to create a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:TagResource</dt>\n            <dd>\n               <p>Permission to add tags to a resource.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Permission to configure multi-region properties for a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>When specifying <code>multiRegionProperties.clusters</code>, permission to\n                  add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>When specifying <code>multiRegionProperties.witnessRegion</code>, permission\n                  to set a witness Region. This permission is checked both in the cluster Region and\n                  in the witness Region.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n               <p>Condition Keys: <code>dsql:WitnessRegion</code> (matching the specified witness region)</p>\n            </dd>\n         </dl>\n         <important>\n            <ul>\n               <li>\n                  <p>The witness Region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>The CreateCluster API allows you to create both single-Region clusters and multi-Region\n         clusters. With the addition of the <i>multiRegionProperties</i> parameter,\n         you can create a cluster with witness Region support and establish peer relationships with\n         clusters in other Regions during creation.</p>\n         <note>\n            <p>Creating multi-Region clusters requires additional IAM permissions beyond those\n               needed for single-Region clusters, as detailed in the <b>Required permissions</b> section\n            below.</p>\n         </note>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <dl>\n            <dt>dsql:CreateCluster</dt>\n            <dd>\n               <p>Required to create a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:TagResource</dt>\n            <dd>\n               <p>Permission to add tags to a resource.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Permission to configure multi-Region properties for a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n            </dd>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>When specifying <code>multiRegionProperties.clusters</code>, permission to\n                  add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>When specifying <code>multiRegionProperties.witnessRegion</code>, permission\n                  to set a witness Region. This permission is checked both in the cluster Region and\n                  in the witness Region.</p>\n               <p>Resources: <code>arn:aws:dsql:region:account-id:cluster/*</code>\n               </p>\n               <p>Condition Keys: <code>dsql:WitnessRegion</code> (matching the specified witness region)</p>\n            </dd>\n         </dl>\n         <important>\n            <ul>\n               <li>\n                  <p>The witness Region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "Create Cluster",
@@ -328,6 +340,21 @@
                     "target": "com.amazonaws.dsql#MultiRegionProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration settings when creating a multi-Region cluster, including the witness region and linked cluster properties.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.dsql#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional resource-based policy document in JSON format that defines access permissions for the cluster.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "bypassPolicyLockoutSafetyCheck": {
+                    "target": "com.amazonaws.dsql#BypassPolicyLockoutSafetyCheck",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>An optional field that controls whether to bypass the lockout prevention check. When set to true, this parameter allows you to apply a policy that might lock you out of the cluster. Use with caution.</p>",
                         "smithy.api#notProperty": {}
                     }
                 }
@@ -785,6 +812,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.dsql#DeleteClusterPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dsql#DeleteClusterPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dsql#DeleteClusterPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dsql#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource-based policy attached to a cluster. This removes all access permissions defined by the policy, reverting to default access controls.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/cluster/{identifier}/policy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.dsql#DeleteClusterPolicyInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.dsql#ClusterId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedPolicyVersion": {
+                    "target": "com.amazonaws.dsql#PolicyVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected version of the policy to delete. This parameter ensures that you're deleting the correct version of the policy and helps prevent accidental deletions.</p>",
+                        "smithy.api#httpQuery": "expected-policy-version",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.dsql#ClientToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "client-token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dsql#DeleteClusterPolicyOutput": {
+            "type": "structure",
+            "members": {
+                "policyVersion": {
+                    "target": "com.amazonaws.dsql#PolicyVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the policy that was deleted.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.dsql#DeletionProtectionEnabled": {
             "type": "boolean",
             "traits": {
@@ -1021,6 +1123,72 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output of a cluster.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.dsql#GetClusterPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dsql#GetClusterPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dsql#GetClusterPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dsql#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the resource-based policy document attached to a cluster. This policy defines the access permissions and conditions for the cluster.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/cluster/{identifier}/policy"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.dsql#GetClusterPolicyInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.dsql#ClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the cluster to retrieve the policy from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dsql#GetClusterPolicyOutput": {
+            "type": "structure",
+            "members": {
+                "policy": {
+                    "target": "com.amazonaws.dsql#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document attached to the cluster, returned as a JSON string.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyVersion": {
+                    "target": "com.amazonaws.dsql#PolicyVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the policy document. This version number is incremented each time the policy is updated.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -1334,13 +1502,13 @@
                 "witnessRegion": {
                     "target": "com.amazonaws.dsql#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The  that serves as the witness region for a multi-Region cluster. The witness region helps maintain cluster consistency and quorum.</p>"
+                        "smithy.api#documentation": "<p>The  Region that serves as the witness region for a multi-Region cluster. The witness Region helps maintain cluster consistency and quorum.</p>"
                     }
                 },
                 "clusters": {
                     "target": "com.amazonaws.dsql#ClusterArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of linked clusters that form the multi-Region cluster configuration. Each linked cluster represents a database instance in a different  Region.</p>"
+                        "smithy.api#documentation": "<p>The set of peered clusters that form the multi-Region cluster configuration. Each peered cluster represents a database instance in a different  Region.</p>"
                     }
                 }
             },
@@ -1352,6 +1520,108 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>Token used to retrieve next page.</p>"
+            }
+        },
+        "com.amazonaws.dsql#PolicyDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A resource-based policy document in JSON format. Length constraints: Minimum length of 1. Maximum length of 20480 characters (approximately 20KB).</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20480
+                }
+            }
+        },
+        "com.amazonaws.dsql#PolicyVersion": {
+            "type": "string"
+        },
+        "com.amazonaws.dsql#PutClusterPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dsql#PutClusterPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dsql#PutClusterPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dsql#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dsql#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a resource-based policy to a cluster. This policy defines access permissions and conditions for the cluster, allowing you to control which principals can perform actions on the cluster.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster/{identifier}/policy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.dsql#PutClusterPolicyInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.dsql#ClusterId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.dsql#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document to attach to the cluster. This should be a valid JSON policy document that defines permissions and conditions.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "bypassPolicyLockoutSafetyCheck": {
+                    "target": "com.amazonaws.dsql#BypassPolicyLockoutSafetyCheck",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A flag that allows you to bypass the policy lockout safety check. When set to true, this parameter allows you to apply a policy that might lock you out of the cluster. Use with caution.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "expectedPolicyVersion": {
+                    "target": "com.amazonaws.dsql#PolicyVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected version of the current policy. This parameter ensures that you're updating the correct version of the policy and helps prevent concurrent modification conflicts.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.dsql#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dsql#PutClusterPolicyOutput": {
+            "type": "structure",
+            "members": {
+                "policyVersion": {
+                    "target": "com.amazonaws.dsql#PolicyVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the policy after it has been updated or created.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dsql#Region": {
@@ -1685,7 +1955,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to modify the deletion protection status of a given cluster."
                 },
-                "smithy.api#documentation": "<p>The <i>UpdateCluster</i> API allows you to modify both single-Region and multi-Region cluster configurations. With the <i>multiRegionProperties</i> parameter, you can add or modify witness Region support and manage peer relationships with clusters in other Regions.</p>\n         <note>\n            <p>Note that updating multi-region clusters requires additional IAM permissions beyond those needed for standard cluster updates, as detailed in the Permissions section.</p>\n         </note>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <dl>\n            <dt>dsql:UpdateCluster</dt>\n            <dd>\n               <p>Permission to update a DSQL cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Permission to configure multi-Region properties for a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:GetCluster</dt>\n            <dd>\n               <p>Permission to retrieve cluster information.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>Permission to add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>dsql:RemovePeerCluster</dt>\n            <dd>\n               <p>Permission to remove peer clusters. The <i>dsql:RemovePeerCluster</i> permission\n                  uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               <p>Resources:\n                     <code>arn:aws:dsql:*:<i>account-id</i>:cluster/*</code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>Permission to set a witness Region.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n               <p>Condition Keys: dsql:WitnessRegion (matching the specified witness\n                  Region)</p>\n               <p>\n                  <b>This permission is checked both in the cluster Region and in the witness\n                        Region.</b>\n               </p>\n            </dd>\n         </dl>\n         <important>\n            <ul>\n               <li>\n                  <p>The witness region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n               <li>\n                  <p>When updating clusters with peer relationships, permissions are checked for both adding and removing peers.</p>\n               </li>\n               <li>\n                  <p>The <code>dsql:RemovePeerCluster</code> permission uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>The <i>UpdateCluster</i> API allows you to modify both single-Region and multi-Region cluster configurations. With the <i>multiRegionProperties</i> parameter, you can add or modify witness Region support and manage peer relationships with clusters in other Regions.</p>\n         <note>\n            <p>Note that updating multi-Region clusters requires additional IAM permissions\n            beyond those needed for standard cluster updates, as detailed in the Permissions\n            section.</p>\n         </note>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <dl>\n            <dt>dsql:UpdateCluster</dt>\n            <dd>\n               <p>Permission to update a DSQL cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:PutMultiRegionProperties</dt>\n            <dd>\n               <p>Permission to configure multi-Region properties for a cluster.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:GetCluster</dt>\n            <dd>\n               <p>Permission to retrieve cluster information.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n            </dd>\n            <dt>dsql:AddPeerCluster</dt>\n            <dd>\n               <p>Permission to add peer clusters.</p>\n               <p>Resources:</p>\n               <ul>\n                  <li>\n                     <p>Local cluster: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Each peer cluster: exact ARN of each specified peer cluster</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>dsql:RemovePeerCluster</dt>\n            <dd>\n               <p>Permission to remove peer clusters. The <i>dsql:RemovePeerCluster</i> permission\n                  uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               <p>Resources:\n                     <code>arn:aws:dsql:*:<i>account-id</i>:cluster/*</code>\n               </p>\n            </dd>\n         </dl>\n         <dl>\n            <dt>dsql:PutWitnessRegion</dt>\n            <dd>\n               <p>Permission to set a witness Region.</p>\n               <p>Resources: <code>arn:aws:dsql:<i>region</i>:<i>account-id</i>:cluster/<i>cluster-id</i>\n                  </code>\n               </p>\n               <p>Condition Keys: dsql:WitnessRegion (matching the specified witness\n                  Region)</p>\n               <p>\n                  <b>This permission is checked both in the cluster Region and in the witness\n                        Region.</b>\n               </p>\n            </dd>\n         </dl>\n         <important>\n            <ul>\n               <li>\n                  <p>The witness region specified in\n                     <code>multiRegionProperties.witnessRegion</code> cannot be the same as the\n                  cluster's Region.</p>\n               </li>\n               <li>\n                  <p>When updating clusters with peer relationships, permissions are checked for both adding and removing peers.</p>\n               </li>\n               <li>\n                  <p>The <code>dsql:RemovePeerCluster</code> permission uses a wildcard ARN pattern to simplify permission management during updates.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "Update Cluster",
