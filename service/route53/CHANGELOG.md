@@ -1,3 +1,7 @@
+# v1.59.1 (2025-10-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2025-10-22)
 
 * **Feature**: Amazon Route 53 now supports the ISOB West Region for private DNS for Amazon VPCs and cloudwatch healthchecks.

@@ -1,8 +1,0 @@
-{
-    "id": "f5e8a5bc-7228-461a-893c-940dbc782719",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/storagegateway"
-    ]
-}

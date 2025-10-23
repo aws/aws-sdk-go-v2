@@ -1,8 +1,0 @@
-{
-    "id": "54be9d7b-b620-4b4f-9b4b-c6d8c729d357",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/docdbelastic"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0707d1df-0818-408f-acd7-4354b5a78a30",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/costandusagereportservice"
-    ]
-}

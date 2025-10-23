@@ -1,3 +1,7 @@
+# v1.37.1 (2025-10-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2025-10-17)
 
 * **Feature**: The ListEntities API now supports two new CAPI filters: DeliveryOptionTypes for SaaS products and CompatibleAWSServices for Container products.

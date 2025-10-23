@@ -1,3 +1,8 @@
+# v1.8.0 (2025-10-23)
+
+* **Feature**: Fixing the service documentation name
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.1 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

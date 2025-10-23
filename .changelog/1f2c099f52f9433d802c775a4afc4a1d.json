@@ -1,8 +1,0 @@
-{
-    "id": "1f2c099f-52f9-433d-802c-775a4afc4a1d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/healthlake"
-    ]
-}

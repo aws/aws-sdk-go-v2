@@ -1,8 +1,0 @@
-{
-    "id": "9c9440b0-424b-47fd-97a1-84b43d8bc2f2",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/macie2"
-    ]
-}

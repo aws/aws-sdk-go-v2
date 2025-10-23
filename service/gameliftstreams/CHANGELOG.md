@@ -1,3 +1,7 @@
+# v1.6.9 (2025-10-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.8 (2025-10-17)
 
 * **Documentation**: Updates documentation to clarify valid application binaries for an Amazon GameLift Streams application and provide descriptions of stream session error status reasons

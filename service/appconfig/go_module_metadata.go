@@ -3,4 +3,4 @@
 package appconfig
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.42.8"
+const goModuleVersion = "1.42.9"

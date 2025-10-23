@@ -1,3 +1,110 @@
+# Release (2025-10-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.29.0](service/account/CHANGELOG.md#v1290-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.41.0](service/applicationautoscaling/CHANGELOG.md#v1410-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.35.0](service/applicationdiscoveryservice/CHANGELOG.md#v1350-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.8.0](service/bedrockagentcore/CHANGELOG.md#v180-2025-10-23)
+  * **Feature**: Fixing the service documentation name
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.11.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1110-2025-10-23)
+  * **Feature**: Fixing the service documentation name
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.28.0](service/chimesdkvoice/CHANGELOG.md#v1280-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.17.0](service/cloudtraildata/CHANGELOG.md#v1170-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.68.0](service/codebuild/CHANGELOG.md#v1680-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.35.0](service/codestarconnections/CHANGELOG.md#v1350-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.59.0](service/configservice/CHANGELOG.md#v1590-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.33.0](service/connectcontactlens/CHANGELOG.md#v1330-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.34.0](service/costandusagereportservice/CHANGELOG.md#v1340-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.58.0](service/databasemigrationservice/CHANGELOG.md#v1580-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.20.0](service/docdbelastic/CHANGELOG.md#v1200-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.36.0](service/drs/CHANGELOG.md#v1360-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.10.0](service/dsql/CHANGELOG.md#v1100-2025-10-23)
+  * **Feature**: Add support for resource-based policies for Aurora DSQL clusters. This will enable you to implement Block Public Access (BPA) which will help restrict access to your Aurora DSQL public or VPC endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.33.0](service/ebs/CHANGELOG.md#v1330-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.51.0](service/ecr/CHANGELOG.md#v1510-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.38.0](service/ecrpublic/CHANGELOG.md#v1380-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.36.0](service/healthlake/CHANGELOG.md#v1360-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.26.0](service/internetmonitor/CHANGELOG.md#v1260-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.33.0](service/iotevents/CHANGELOG.md#v1330-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.30.0](service/iotjobsdataplane/CHANGELOG.md#v1300-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.33.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1330-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.20.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v1200-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.79.0](service/lambda/CHANGELOG.md#v1790-2025-10-23)
+  * **Feature**: Add NodeJs 24 (nodejs24.x) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.50.0](service/macie2/CHANGELOG.md#v1500-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.22.0](service/managedblockchainquery/CHANGELOG.md#v1220-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.30.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1300-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.54.0](service/mediatailor/CHANGELOG.md#v1540-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.38.0](service/mgn/CHANGELOG.md#v1380-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.31.0](service/migrationhub/CHANGELOG.md#v1310-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.5.0](service/mpa/CHANGELOG.md#v150-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.16.0](service/neptunedata/CHANGELOG.md#v1160-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.13.0](service/networkmonitor/CHANGELOG.md#v1130-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.5.2](service/odb/CHANGELOG.md#v152-2025-10-23)
+  * **Documentation**: Doc-only update that removes duplicate values from descriptions of ODB peering APIs.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.37.0](service/omics/CHANGELOG.md#v1370-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.27.0](service/opensearchserverless/CHANGELOG.md#v1270-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.10.0](service/pcaconnectorscep/CHANGELOG.md#v1100-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.31.0](service/personalizeevents/CHANGELOG.md#v1310-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.29.0](service/pinpointemail/CHANGELOG.md#v1290-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.35.0](service/resiliencehub/CHANGELOG.md#v1350-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.29.0](service/rum/CHANGELOG.md#v1290-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.216.0](service/sagemaker/CHANGELOG.md#v12160-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.31.0](service/sagemakeredge/CHANGELOG.md#v1310-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.29.0](service/savingsplans/CHANGELOG.md#v1290-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.25.0](service/securitylake/CHANGELOG.md#v1250-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.54.0](service/sesv2/CHANGELOG.md#v1540-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.43.0](service/storagegateway/CHANGELOG.md#v1430-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.42.0](service/synthetics/CHANGELOG.md#v1420-2025-10-23)
+  * **Feature**: Update endpoint ruleset parameters casing
+
 # Release (2025-10-22)
 
 ## General Highlights

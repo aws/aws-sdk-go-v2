@@ -1,8 +1,0 @@
-{
-    "id": "ae6f6b36-8f5b-4ce3-a1bb-3a3adc33591d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/chimesdkvoice"
-    ]
-}

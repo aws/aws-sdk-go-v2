@@ -1,8 +1,0 @@
-{
-    "id": "9fdecefc-021c-4c75-a323-3e3c8ddc36ed",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/securitylake"
-    ]
-}

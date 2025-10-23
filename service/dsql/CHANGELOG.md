@@ -1,3 +1,8 @@
+# v1.10.0 (2025-10-23)
+
+* **Feature**: Add support for resource-based policies for Aurora DSQL clusters. This will enable you to implement Block Public Access (BPA) which will help restrict access to your Aurora DSQL public or VPC endpoints.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.9 (2025-10-16)
 
 * **Dependency Update**: Bump minimum Go version to 1.23.

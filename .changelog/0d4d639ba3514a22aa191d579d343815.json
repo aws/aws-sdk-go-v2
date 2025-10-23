@@ -1,8 +1,0 @@
-{
-    "id": "0d4d639b-a351-4a22-aa19-1d579d343815",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/rum"
-    ]
-}

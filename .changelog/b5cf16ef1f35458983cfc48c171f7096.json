@@ -1,8 +1,0 @@
-{
-    "id": "b5cf16ef-1f35-4589-83cf-c48c171f7096",
-    "type": "feature",
-    "description": "Fixing the service documentation name",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "3ee0b75a-f764-4b60-bdea-86c853c7ef02",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

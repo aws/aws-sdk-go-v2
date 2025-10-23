@@ -1,3 +1,7 @@
+# v1.7.1 (2025-10-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2025-10-17)
 
 * **Feature**: Added support for optional style parameters in maps, including Terrain, ContourDensity, Traffic, and TravelModes.

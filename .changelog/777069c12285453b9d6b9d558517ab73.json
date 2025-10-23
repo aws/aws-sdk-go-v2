@@ -1,8 +1,0 @@
-{
-    "id": "777069c1-2285-453b-9d6b-9d558517ab73",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/networkmonitor"
-    ]
-}

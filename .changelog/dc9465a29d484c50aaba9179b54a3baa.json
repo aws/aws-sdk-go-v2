@@ -1,8 +1,0 @@
-{
-    "id": "dc9465a2-9d48-4c50-aaba-9179b54a3baa",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/pinpointemail"
-    ]
-}

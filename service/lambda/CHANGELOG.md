@@ -1,3 +1,8 @@
+# v1.79.0 (2025-10-23)
+
+* **Feature**: Add NodeJs 24 (nodejs24.x) support to AWS Lambda.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.2 (2025-10-22)
 
 * No change notes available for this release.

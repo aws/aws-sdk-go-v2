@@ -1,3 +1,7 @@
+# v1.36.1 (2025-10-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-10-22)
 
 * **Feature**: This release adds support for optionally including an app as part of a CreateRemoteAccessSession request

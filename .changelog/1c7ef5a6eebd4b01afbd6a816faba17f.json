@@ -1,8 +1,0 @@
-{
-    "id": "1c7ef5a6-eebd-4b01-afbd-6a816faba17f",
-    "type": "feature",
-    "description": "Add support for resource-based policies for Aurora DSQL clusters. This will enable you to implement Block Public Access (BPA) which will help restrict access to your Aurora DSQL public or VPC endpoints.",
-    "modules": [
-        "service/dsql"
-    ]
-}

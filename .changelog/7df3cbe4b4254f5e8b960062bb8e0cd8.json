@@ -1,8 +1,0 @@
-{
-    "id": "7df3cbe4-b425-4f5e-8b96-0062bb8e0cd8",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "4417614e-5e00-46ea-b3e4-3721d655cd9e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/applicationdiscoveryservice"
-    ]
-}

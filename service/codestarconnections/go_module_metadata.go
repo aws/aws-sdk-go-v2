@@ -3,4 +3,4 @@
 package codestarconnections
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.34.7"
+const goModuleVersion = "1.35.0"

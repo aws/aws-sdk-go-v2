@@ -1,3 +1,7 @@
+# v1.85.1 (2025-10-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.85.0 (2025-10-22)
 
 * **Feature**: Add 3 API operations for fetching alerts: ListAlerts (Channels), ListClusterAlerts (MediaLive Anywhere), and ListMultiplexAlerts

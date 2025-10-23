@@ -1,8 +1,0 @@
-{
-    "id": "54345446-1b6c-4740-b682-8d58b6fa7590",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/codebuild"
-    ]
-}
