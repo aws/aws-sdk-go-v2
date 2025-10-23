@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// The CreateCluster API allows you to create both single-region clusters and
+// The CreateCluster API allows you to create both single-Region clusters and
 // multi-Region clusters. With the addition of the multiRegionProperties parameter,
 // you can create a cluster with witness Region support and establish peer
 // relationships with clusters in other Regions during creation.
@@ -31,7 +31,7 @@ import (
 //
 // Resources: arn:aws:dsql:region:account-id:cluster/*
 //
-// dsql:PutMultiRegionProperties Permission to configure multi-region properties
+// dsql:PutMultiRegionProperties Permission to configure multi-Region properties
 // for a cluster.
 //
 // Resources: arn:aws:dsql:region:account-id:cluster/*
@@ -72,6 +72,11 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
+	// An optional field that controls whether to bypass the lockout prevention check.
+	// When set to true, this parameter allows you to apply a policy that might lock
+	// you out of the cluster. Use with caution.
+	BypassPolicyLockoutSafetyCheck bool
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
 	// With an idempotent request, if the original request completes successfully, the
@@ -94,6 +99,10 @@ type CreateClusterInput struct {
 	// The configuration settings when creating a multi-Region cluster, including the
 	// witness region and linked cluster properties.
 	MultiRegionProperties *types.MultiRegionProperties
+
+	// An optional resource-based policy document in JSON format that defines access
+	// permissions for the cluster.
+	Policy *string
 
 	// A map of key and value pairs to use to tag your cluster.
 	Tags map[string]string

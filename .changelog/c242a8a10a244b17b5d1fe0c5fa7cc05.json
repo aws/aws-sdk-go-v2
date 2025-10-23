@@ -1,0 +1,8 @@
+{
+    "id": "c242a8a1-0a24-4b17-b5d1-fe0c5fa7cc05",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/drs"
+    ]
+}

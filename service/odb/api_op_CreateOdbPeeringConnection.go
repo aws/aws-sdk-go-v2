@@ -75,8 +75,6 @@ type CreateOdbPeeringConnectionOutput struct {
 	DisplayName *string
 
 	// The status of the ODB peering connection.
-	//
-	// Valid Values: provisioning | active | terminating | terminated | failed
 	Status types.ResourceStatus
 
 	// The reason for the current status of the ODB peering connection.

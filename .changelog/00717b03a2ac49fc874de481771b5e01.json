@@ -1,0 +1,8 @@
+{
+    "id": "00717b03-a2ac-49fc-874d-e481771b5e01",
+    "type": "documentation",
+    "description": "Doc-only update that removes duplicate values from descriptions of ODB peering APIs.",
+    "modules": [
+        "service/odb"
+    ]
+}

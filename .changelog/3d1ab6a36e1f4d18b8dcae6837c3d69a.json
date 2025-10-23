@@ -1,0 +1,8 @@
+{
+    "id": "3d1ab6a3-6e1f-4d18-b8dc-ae6837c3d69a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/applicationautoscaling"
+    ]
+}

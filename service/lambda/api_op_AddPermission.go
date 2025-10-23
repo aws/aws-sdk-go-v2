@@ -91,16 +91,16 @@ type AddPermissionInput struct {
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
 	// want to restrict access to authenticated users only. Set to NONE if you want to
 	// bypass IAM authentication to create a public endpoint. For more information, see
-	// [Security and auth model for Lambda function URLs].
+	// [Control access to Lambda function URLs].
 	//
-	// [Security and auth model for Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+	// [Control access to Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
 	FunctionUrlAuthType types.FunctionUrlAuthType
 
 	// Restricts the lambda:InvokeFunction action to calls coming from a function URL.
 	// When set to true , this prevents the principal from invoking the function by any
-	// means other than the function URL. For more information, see [Security and auth model for Lambda function URLs].
+	// means other than the function URL. For more information, see [Control access to Lambda function URLs].
 	//
-	// [Security and auth model for Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+	// [Control access to Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
 	InvokedViaFunctionUrl *bool
 
 	// The identifier for your organization in Organizations. Use this to grant

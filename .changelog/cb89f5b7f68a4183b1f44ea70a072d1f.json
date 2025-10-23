@@ -1,0 +1,8 @@
+{
+    "id": "cb89f5b7-f68a-4183-b1f4-4ea70a072d1f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/cloudtraildata"
+    ]
+}

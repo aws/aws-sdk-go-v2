@@ -1,0 +1,8 @@
+{
+    "id": "a3cb200e-0aa9-4576-ac0f-de7b0c393896",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/connectcontactlens"
+    ]
+}

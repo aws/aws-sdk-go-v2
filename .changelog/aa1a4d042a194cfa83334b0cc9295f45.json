@@ -1,0 +1,8 @@
+{
+    "id": "aa1a4d04-2a19-4cfa-8333-4b0cc9295f45",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mgn"
+    ]
+}

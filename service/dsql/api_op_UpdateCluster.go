@@ -17,7 +17,7 @@ import (
 // modify witness Region support and manage peer relationships with clusters in
 // other Regions.
 //
-// Note that updating multi-region clusters requires additional IAM permissions
+// Note that updating multi-Region clusters requires additional IAM permissions
 // beyond those needed for standard cluster updates, as detailed in the Permissions
 // section.
 //

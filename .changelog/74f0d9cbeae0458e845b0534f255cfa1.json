@@ -1,0 +1,8 @@
+{
+    "id": "74f0d9cb-eae0-458e-845b-0534f255cfa1",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/neptunedata"
+    ]
+}

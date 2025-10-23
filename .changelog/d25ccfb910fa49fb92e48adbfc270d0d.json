@@ -1,0 +1,8 @@
+{
+    "id": "d25ccfb9-10fa-49fb-92e4-8adbfc270d0d",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/kinesisvideowebrtcstorage"
+    ]
+}

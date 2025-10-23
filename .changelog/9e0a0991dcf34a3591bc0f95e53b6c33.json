@@ -1,0 +1,8 @@
+{
+    "id": "9e0a0991-dcf3-4a35-91bc-0f95e53b6c33",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "ef96ec2b-12ad-497c-8a5d-891812acc8e8",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/personalizeevents"
+    ]
+}

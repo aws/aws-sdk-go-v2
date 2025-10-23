@@ -163,7 +163,7 @@ func operationTracer(p tracing.TracerProvider) tracing.Tracer {
 }
 
 // Client provides the API client to make operations call for Amazon Bedrock
-// AgentCore Data Plane Fronting Layer.
+// AgentCore.
 type Client struct {
 	options Options
 

@@ -1,0 +1,8 @@
+{
+    "id": "ad8f9a8f-b166-4e3a-a979-9354bd8a9d95",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

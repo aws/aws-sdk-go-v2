@@ -1,0 +1,8 @@
+{
+    "id": "e73571e7-22af-40f1-a2e2-9de3335f1571",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ecrpublic"
+    ]
+}

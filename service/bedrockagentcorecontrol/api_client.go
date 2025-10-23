@@ -162,8 +162,8 @@ func operationTracer(p tracing.TracerProvider) tracing.Tracer {
 	return p.Tracer("github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol")
 }
 
-// Client provides the API client to make operations call for Amazon Bedrock Agent
-// Core Control Plane Fronting Layer.
+// Client provides the API client to make operations call for Amazon Bedrock
+// AgentCore Control.
 type Client struct {
 	options Options
 

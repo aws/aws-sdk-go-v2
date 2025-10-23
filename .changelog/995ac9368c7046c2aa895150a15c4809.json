@@ -1,0 +1,8 @@
+{
+    "id": "995ac936-8c70-46c2-aa89-5150a15c4809",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/managedblockchainquery"
+    ]
+}

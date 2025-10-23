@@ -1,0 +1,8 @@
+{
+    "id": "84f58661-a329-461b-8ad6-1736829e06db",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

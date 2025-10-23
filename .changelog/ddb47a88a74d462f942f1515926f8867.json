@@ -1,0 +1,8 @@
+{
+    "id": "ddb47a88-a74d-462f-942f-1515926f8867",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/omics"
+    ]
+}

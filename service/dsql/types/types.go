@@ -46,12 +46,12 @@ type EncryptionDetails struct {
 // witness region and linked cluster settings.
 type MultiRegionProperties struct {
 
-	// The set of linked clusters that form the multi-Region cluster configuration.
-	// Each linked cluster represents a database instance in a different Region.
+	// The set of peered clusters that form the multi-Region cluster configuration.
+	// Each peered cluster represents a database instance in a different Region.
 	Clusters []string
 
-	// The that serves as the witness region for a multi-Region cluster. The witness
-	// region helps maintain cluster consistency and quorum.
+	// The Region that serves as the witness region for a multi-Region cluster. The
+	// witness Region helps maintain cluster consistency and quorum.
 	WitnessRegion *string
 
 	noSmithyDocumentSerde

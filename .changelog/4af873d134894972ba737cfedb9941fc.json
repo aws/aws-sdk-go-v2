@@ -1,0 +1,8 @@
+{
+    "id": "4af873d1-3489-4972-ba73-7cfedb9941fc",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mpa"
+    ]
+}

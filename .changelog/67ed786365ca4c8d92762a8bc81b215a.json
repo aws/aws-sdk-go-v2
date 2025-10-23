@@ -1,0 +1,8 @@
+{
+    "id": "67ed7863-65ca-4c8d-9276-2a8bc81b215a",
+    "type": "feature",
+    "description": "Add NodeJs 24 (nodejs24.x) support to AWS Lambda.",
+    "modules": [
+        "service/lambda"
+    ]
+}

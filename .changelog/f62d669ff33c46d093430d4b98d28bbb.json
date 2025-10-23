@@ -1,0 +1,8 @@
+{
+    "id": "f62d669f-f33c-46d0-9343-0d4b98d28bbb",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/codestarconnections"
+    ]
+}

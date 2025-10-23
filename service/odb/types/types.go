@@ -137,8 +137,7 @@ type CloudAutonomousVmCluster struct {
 	// Autonomous VM cluster.
 	IsMtlsEnabledVmCluster *bool
 
-	// The Oracle license model that applies to the Autonomous VM cluster. Valid
-	// values are LICENSE_INCLUDED or BRING_YOUR_OWN_LICENSE .
+	// The Oracle license model that applies to the Autonomous VM cluster.
 	LicenseModel LicenseModel
 
 	// The scheduling details for the maintenance window. Patching and system updates
@@ -1585,8 +1584,6 @@ type ManagedS3BackupAccess struct {
 	Ipv4Addresses []string
 
 	// The status of the managed Amazon S3 backup access.
-	//
-	// Valid Values: enabled | disabled
 	Status ManagedResourceStatus
 
 	noSmithyDocumentSerde
@@ -1835,8 +1832,6 @@ type OdbPeeringConnection struct {
 	PercentProgress *float32
 
 	// The status of the ODB peering connection.
-	//
-	// Valid Values: provisioning | active | terminating | terminated | failed
 	Status ResourceStatus
 
 	// The reason for the current status of the ODB peering connection.
@@ -1884,8 +1879,6 @@ type OdbPeeringConnectionSummary struct {
 	PercentProgress *float32
 
 	// The status of the ODB peering connection.
-	//
-	// Valid Values: provisioning | active | terminating | terminated | failed
 	Status ResourceStatus
 
 	// The reason for the current status of the ODB peering connection.
@@ -1907,8 +1900,6 @@ type S3Access struct {
 	S3PolicyDocument *string
 
 	// The status of the Amazon S3 access.
-	//
-	// Valid Values: enabled | disabled
 	Status ManagedResourceStatus
 
 	noSmithyDocumentSerde
@@ -1921,8 +1912,6 @@ type ServiceNetworkEndpoint struct {
 	VpcEndpointId *string
 
 	// The type of the VPC endpoint.
-	//
-	// Valid Values: Interface | Gateway
 	VpcEndpointType VpcEndpointType
 
 	noSmithyDocumentSerde
@@ -1969,8 +1958,6 @@ type ZeroEtlAccess struct {
 	Cidr *string
 
 	// The status of the Zero-ETL access.
-	//
-	// Valid Values: enabled | disabled
 	Status ManagedResourceStatus
 
 	noSmithyDocumentSerde
