@@ -94,6 +94,30 @@ func newDownloadNonRangeClient(data []byte) (*downloadCaptureClient, *int) {
 	return capture, &capture.GetObjectInvocations
 }
 
+func newDownloadBadRangeClient(data []byte) (*downloadCaptureClient, *int, *[]string) {
+	capture := &downloadCaptureClient{}
+
+	capture.GetObjectFn = func(_ context.Context, params *s3.GetObjectInput, _ ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
+		start, fin := parseRange(aws.ToString(params.Range))
+		fin++
+
+		if fin >= int64(len(data)) {
+			fin = int64(len(data))
+		}
+
+		bodyBytes := data[start:fin]
+
+		return &s3.GetObjectOutput{
+			Body: ioutil.NopCloser(bytes.NewReader(bodyBytes)),
+			// offset start by 1 to make it wrong
+			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start+1, fin-1, len(data))),
+			ContentLength: aws.Int64(int64(len(bodyBytes))),
+		}, nil
+	}
+
+	return capture, &capture.GetObjectInvocations, &capture.RetrievedRanges
+}
+
 func newDownloadVersionClient(data []byte) (*downloadCaptureClient, *int, *[]string, *[]string) {
 	capture := &downloadCaptureClient{}
 
