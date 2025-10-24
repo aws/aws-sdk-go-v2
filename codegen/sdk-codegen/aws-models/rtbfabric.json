@@ -4070,6 +4070,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the parameters of an open RTB attribute module.</p>"
                     }
+                },
+                "rateLimiter": {
+                    "target": "com.amazonaws.rtbfabric#RateLimiterModuleParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the parameters of a rate limit.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4950,6 +4956,20 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.rtbfabric#RateLimiterModuleParameters": {
+            "type": "structure",
+            "members": {
+                "tps": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transactions per second rate limit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the parameters of a rate limit.</p>"
             }
         },
         "com.amazonaws.rtbfabric#RejectLink": {

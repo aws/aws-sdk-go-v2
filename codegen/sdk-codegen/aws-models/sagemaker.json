@@ -15499,7 +15499,7 @@
                 "PlatformIdentifier": {
                     "target": "com.amazonaws.sagemaker#PlatformIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform identifier of the notebook instance runtime environment.</p>"
+                        "smithy.api#documentation": "<p>The platform identifier of the notebook instance runtime environment. The default value is <code>notebook-al2-v2</code>.</p>"
                     }
                 },
                 "InstanceMetadataServiceConfiguration": {
@@ -31893,6 +31893,9 @@
                 "smithy.api#documentation": "<p>The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications.</p>"
             }
         },
+        "com.amazonaws.sagemaker#EnableCaching": {
+            "type": "boolean"
+        },
         "com.amazonaws.sagemaker#EnableCapture": {
             "type": "boolean"
         },
@@ -37979,6 +37982,38 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InferenceComponentDataCacheConfig": {
+            "type": "structure",
+            "members": {
+                "EnableCaching": {
+                    "target": "com.amazonaws.sagemaker#EnableCaching",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Sets whether the endpoint that hosts the inference component caches the model artifacts and container image.</p> <p>With caching enabled, the endpoint caches this data in each instance that it provisions for the inference component. That way, the inference component deploys faster during the auto scaling process. If caching isn't enabled, the inference component takes longer to deploy because of the time it spends downloading the data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that affect how the inference component caches data.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceComponentDataCacheConfigSummary": {
+            "type": "structure",
+            "members": {
+                "EnableCaching": {
+                    "target": "com.amazonaws.sagemaker#EnableCaching",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Indicates whether the inference component caches model artifacts as part of the auto scaling process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that affect how the inference component caches data.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#InferenceComponentDeploymentConfig": {
             "type": "structure",
             "members": {
@@ -38145,6 +38180,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of an existing inference component that is to contain the inference component that you're creating with your request.</p> <p>Specify this parameter only if your request is meant to create an adapter inference component. An adapter inference component contains the path to an adapter model. The purpose of the adapter model is to tailor the inference output of a base foundation model, which is hosted by the base inference component. The adapter inference component uses the compute resources that you assigned to the base inference component.</p> <p>When you create an adapter inference component, use the <code>Container</code> parameter to specify the location of the adapter artifacts. In the parameter value, use the <code>ArtifactUrl</code> parameter of the <code>InferenceComponentContainerSpecification</code> data type.</p> <p>Before you can create an adapter inference component, you must have an existing inference component that contains the foundation model that you want to adapt.</p>"
                     }
+                },
+                "DataCacheConfig": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentDataCacheConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that affect how the inference component caches data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -38182,6 +38223,12 @@
                     "target": "com.amazonaws.sagemaker#InferenceComponentName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the base inference component that contains this inference component.</p>"
+                    }
+                },
+                "DataCacheConfig": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentDataCacheConfigSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that affect how the inference component caches data.</p>"
                     }
                 }
             },
@@ -59409,7 +59456,7 @@
                 "S3DataDistributionType": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3DataDistributionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to distribute the data from Amazon S3 to all processing instances with <code>FullyReplicated</code>, or whether the data from Amazon S3 is shared by Amazon S3 key, downloading one shard of data to each processing instance.</p>"
+                        "smithy.api#documentation": "<p>Whether to distribute the data from Amazon S3 to all processing instances with <code>FullyReplicated</code>, or whether the data from Amazon S3 is sharded by Amazon S3 key, downloading one shard of data to each processing instance.</p>"
                     }
                 },
                 "S3CompressionType": {

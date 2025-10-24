@@ -2993,6 +2993,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
                     }
+                },
+                "mlflowProperties": {
+                    "target": "com.amazonaws.datazone#MlflowPropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3055,6 +3061,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
                     }
+                },
+                "mlflowProperties": {
+                    "target": "com.amazonaws.datazone#MlflowPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3104,6 +3116,12 @@
                     "target": "com.amazonaws.datazone#AmazonQPropertiesPatch",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Q properties of the connection.</p>"
+                    }
+                },
+                "mlflowProperties": {
+                    "target": "com.amazonaws.datazone#MlflowPropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
                     }
                 }
             },
@@ -3388,6 +3406,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AMAZON_Q"
+                    }
+                },
+                "MLFLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MLFLOW"
                     }
                 }
             }
@@ -27017,6 +27041,66 @@
             },
             "value": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.datazone#MlflowPropertiesInput": {
+            "type": "structure",
+            "members": {
+                "trackingServerName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tracking server as part of the MLflow properties of a connection.</p>"
+                    }
+                },
+                "trackingServerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tracking server ARN as part of the MLflow properties of a connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#MlflowPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "trackingServerName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tracking server as part of the MLflow properties of a connection.</p>"
+                    }
+                },
+                "trackingServerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tracking server ARN as part of the MLflow properties of a connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#MlflowPropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "trackingServerName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tracking server as part of the MLflow properties of a connection.</p>"
+                    }
+                },
+                "trackingServerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tracking server ARN as part of the MLflow properties of a connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MLflow properties of a connection.</p>"
             }
         },
         "com.amazonaws.datazone#Model": {

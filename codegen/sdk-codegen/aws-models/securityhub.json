@@ -22190,7 +22190,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by customers to update information about their investigation into a finding. \n         Requested by delegated administrator accounts or member accounts. \n         Delegated administrator accounts can update findings for their account and their member accounts. \n         Member accounts can update findings for their account. <code>BatchUpdateFindings</code> and <code>BatchUpdateFindingV2</code> both use <code>securityhub:BatchUpdateFindings</code> in the <code>Action</code> element of an IAM policy statement. \n         You must have permission to perform the <code>securityhub:BatchUpdateFindings</code> action. \n         Updates from <code>BatchUpdateFindingsV2</code> don't affect the value of f<code>inding_info.modified_time</code>, <code>finding_info.modified_time_dt</code>, <code>time</code>, <code>time_dt for a finding</code>. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Used by customers to update information about their investigation into a finding. \n         Requested by delegated administrator accounts or member accounts. \n         Delegated administrator accounts can update findings for their account and their member accounts. \n         Member accounts can update findings for their account. <code>BatchUpdateFindings</code> and <code>BatchUpdateFindingV2</code> both use <code>securityhub:BatchUpdateFindings</code> in the <code>Action</code> element of an IAM policy statement. \n         You must have permission to perform the <code>securityhub:BatchUpdateFindings</code> action. \n         Updates from <code>BatchUpdateFindingsV2</code> don't affect the value of f<code>inding_info.modified_time</code>, <code>finding_info.modified_time_dt</code>, <code>time</code>, <code>time_dt for a finding</code>. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/findingsv2/batchupdatev2",
@@ -22842,6 +22842,18 @@
                     "target": "com.amazonaws.securityhub#OcsfMapFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>Enables filtering based on map field values.</p>"
+                    }
+                },
+                "IpFilters": {
+                    "target": "com.amazonaws.securityhub#OcsfIpFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IP address filters that allowing you to filter findings based on IP address properties.</p>"
+                    }
+                },
+                "NestedCompositeFilters": {
+                    "target": "com.amazonaws.securityhub#CompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides an additional level of filtering, creating a three-layer nested structure. \n         The first layer is a <code>CompositeFilters</code> array with a <code>CompositeOperator</code> (<code>AND</code>/<code>OR</code>). \n         The second layer is a <code>CompositeFilter</code> object that contains direct filters and <code>NestedCompositeFilters</code>. \n         The third layer is <code>NestedCompositeFilters</code>, which contains additional filter conditions.\n      </p>"
                     }
                 },
                 "Operator": {
@@ -23538,7 +23550,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables aggregation across Amazon Web Services Regions. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Enables aggregation across Amazon Web Services Regions. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/aggregatorv2/create",
@@ -23818,7 +23830,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a V2 automation rule. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Creates a V2 automation rule. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/automationrulesv2/create",
@@ -25011,7 +25023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Aggregator V2. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Deletes the Aggregator V2. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/aggregatorv2/delete/{AggregatorV2Arn+}",
@@ -25071,7 +25083,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a V2 automation rule. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Deletes a V2 automation rule. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/automationrulesv2/{Identifier}",
@@ -25970,7 +25982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the product integration. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Gets information about the product integration. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/productsV2",
@@ -26051,7 +26063,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns details about the service resource in your account. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Returns details about the service resource in your account. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/hubv2",
@@ -26512,7 +26524,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disable the service for the current Amazon Web Services Region or specified Amazon Web Services Region. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Disable the service for the current Amazon Web Services Region or specified Amazon Web Services Region. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/hubv2",
@@ -27035,7 +27047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the service in account for the current Amazon Web Services Region or specified Amazon Web Services Region. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Enables the service in account for the current Amazon Web Services Region or specified Amazon Web Services Region. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/hubv2",
@@ -27621,7 +27633,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the configuration of the specified Aggregator V2. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Returns the configuration of the specified Aggregator V2. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/aggregatorv2/get/{AggregatorV2Arn+}",
@@ -27706,7 +27718,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an automation rule for the V2 service. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Returns an automation rule for the V2 service. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/automationrulesv2/{Identifier}",
@@ -28524,7 +28536,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns aggregated statistical data about findings.\n         <code>GetFindingStatisticsV2</code> use <code>securityhub:GetAdhocInsightResults</code> in the <code>Action</code> element of an IAM policy statement. \n         You must have permission to perform the <code>s</code> action. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Returns aggregated statistical data about findings.\n         <code>GetFindingStatisticsV2</code> use <code>securityhub:GetAdhocInsightResults</code> in the <code>Action</code> element of an IAM policy statement. \n         You must have permission to perform the <code>s</code> action. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingsv2/statistics",
@@ -28798,7 +28810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Return a list of findings that match the specified criteria.\n      <code>GetFindings</code> and <code>GetFindingsV2</code> both use <code>securityhub:GetFindings</code> in the <code>Action</code> element of an IAM policy statement. \n         You must have permission to perform the <code>securityhub:GetFindings</code> action. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Return a list of findings that match the specified criteria.\n      <code>GetFindings</code> and <code>GetFindingsV2</code> both use <code>securityhub:GetFindings</code> in the <code>Action</code> element of an IAM policy statement. \n         You must have permission to perform the <code>securityhub:GetFindings</code> action. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingsv2",
@@ -29295,7 +29307,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves statistical information about Amazon Web Services resources and their associated security findings. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Retrieves statistical information about Amazon Web Services resources and their associated security findings. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resourcesv2/statistics",
@@ -29376,7 +29388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of resources. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Returns a list of resources. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resourcesv2",
@@ -29644,6 +29656,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "class_name"
+                    }
+                },
+                "VULNERABILITIES_AFFECTED_PACKAGES_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vulnerabilities.affected_packages.name"
+                    }
+                },
+                "FINDING_INFO_ANALYTIC_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_info.analytic.name"
+                    }
+                },
+                "COMPLIANCE_STANDARDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "compliance.standards"
+                    }
+                },
+                "CLOUD_ACCOUNT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cloud.account.name"
                     }
                 }
             }
@@ -30491,7 +30527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of V2 aggregators. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of V2 aggregators. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/aggregatorv2/list",
@@ -30684,7 +30720,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of automation rules and metadata for the calling account. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Returns a list of automation rules and metadata for the calling account. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/automationrulesv2/list",
@@ -32708,6 +32744,24 @@
                     "traits": {
                         "smithy.api#enumValue": "finding_info.modified_time_dt"
                     }
+                },
+                "RESOURCES_IMAGE_CREATED_TIME_DT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.created_time_dt"
+                    }
+                },
+                "RESOURCES_IMAGE_LAST_USED_TIME_DT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.last_used_time_dt"
+                    }
+                },
+                "RESOURCES_MODIFIED_TIME_DT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.modified_time_dt"
+                    }
                 }
             }
         },
@@ -32807,6 +32861,46 @@
                 "target": "com.amazonaws.securityhub#OcsfFinding"
             }
         },
+        "com.amazonaws.securityhub#OcsfIpField": {
+            "type": "enum",
+            "members": {
+                "EVIDENCES_DST_ENDPOINT_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.dst_endpoint.ip"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.ip"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#OcsfIpFilter": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.securityhub#OcsfIpField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IP address field to filter on.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.securityhub#IpFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure for filtering findings based on IP address attributes.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#OcsfIpFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#OcsfIpFilter"
+            }
+        },
         "com.amazonaws.securityhub#OcsfMapField": {
             "type": "enum",
             "members": {
@@ -32814,6 +32908,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "resources.tags"
+                    }
+                },
+                "COMPLIANCE_CONTROL_PARAMETERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "compliance.control_parameters"
+                    }
+                },
+                "DATABUCKET_TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "databucket.tags"
+                    }
+                },
+                "FINDING_INFO_TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_info.tags"
                     }
                 }
             }
@@ -32878,6 +32990,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "finding_info.related_events_count"
+                    }
+                },
+                "EVIDENCES_API_RESPONSE_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.api.response.code"
+                    }
+                },
+                "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.dst_endpoint.autonomous_system.number"
+                    }
+                },
+                "EVIDENCES_DST_ENDPOINT_PORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.dst_endpoint.port"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.autonomous_system.number"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_PORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.port"
+                    }
+                },
+                "RESOURCES_IMAGE_IN_USE_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.in_use_count"
                     }
                 }
             }
@@ -33098,6 +33246,228 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "class_name"
+                    }
+                },
+                "DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "databucket.encryption_details.algorithm"
+                    }
+                },
+                "DATABUCKET_ENCRYPTION_DETAILS_KEY_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "databucket.encryption_details.key_uid"
+                    }
+                },
+                "DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "databucket.file.data_classifications.classifier_details.type"
+                    }
+                },
+                "EVIDENCES_ACTOR_USER_ACCOUNT_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.actor.user.account.uid"
+                    }
+                },
+                "EVIDENCES_API_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.api.operation"
+                    }
+                },
+                "EVIDENCES_API_RESPONSE_ERROR_MESSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.api.response.error_message"
+                    }
+                },
+                "EVIDENCES_API_SERVICE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.api.service.name"
+                    }
+                },
+                "EVIDENCES_CONNECTION_INFO_DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.connection_info.direction"
+                    }
+                },
+                "EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.connection_info.protocol_name"
+                    }
+                },
+                "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.dst_endpoint.autonomous_system.name"
+                    }
+                },
+                "EVIDENCES_DST_ENDPOINT_LOCATION_CITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.dst_endpoint.location.city"
+                    }
+                },
+                "EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.dst_endpoint.location.country"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.autonomous_system.name"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_HOSTNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.hostname"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_LOCATION_CITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.location.city"
+                    }
+                },
+                "EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "evidences.src_endpoint.location.country"
+                    }
+                },
+                "FINDING_INFO_ANALYTIC_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_info.analytic.name"
+                    }
+                },
+                "MALWARE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "malware.name"
+                    }
+                },
+                "MALWARE_SCAN_INFO_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "malware_scan_info.uid"
+                    }
+                },
+                "MALWARE_SEVERITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "malware.severity"
+                    }
+                },
+                "RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.cloud_function.layers.uid_alt"
+                    }
+                },
+                "RESOURCES_CLOUD_FUNCTION_RUNTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.cloud_function.runtime"
+                    }
+                },
+                "RESOURCES_CLOUD_FUNCTION_USER_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.cloud_function.user.uid"
+                    }
+                },
+                "RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.device.encryption_details.key_uid"
+                    }
+                },
+                "RESOURCES_DEVICE_IMAGE_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.device.image.uid"
+                    }
+                },
+                "RESOURCES_IMAGE_ARCHITECTURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.architecture"
+                    }
+                },
+                "RESOURCES_IMAGE_REGISTRY_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.registry_uid"
+                    }
+                },
+                "RESOURCES_IMAGE_REPOSITORY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.repository_name"
+                    }
+                },
+                "RESOURCES_IMAGE_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.image.uid"
+                    }
+                },
+                "RESOURCES_SUBNET_INFO_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.subnet_info.uid"
+                    }
+                },
+                "RESOURCES_VPC_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.vpc_uid"
+                    }
+                },
+                "VULNERABILITIES_AFFECTED_CODE_FILE_PATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vulnerabilities.affected_code.file.path"
+                    }
+                },
+                "VULNERABILITIES_AFFECTED_PACKAGES_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vulnerabilities.affected_packages.name"
+                    }
+                },
+                "VULNERABILITIES_CVE_EPSS_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vulnerabilities.cve.epss.score"
+                    }
+                },
+                "VULNERABILITIES_CVE_UID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vulnerabilities.cve.uid"
+                    }
+                },
+                "VULNERABILITIES_RELATED_VULNERABILITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vulnerabilities.related_vulnerabilities"
+                    }
+                },
+                "CLOUD_ACCOUNT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cloud.account.name"
                     }
                 }
             }
@@ -34808,37 +35178,37 @@
                 "ACCOUNT_ID": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "account_id"
+                        "smithy.api#enumValue": "AccountId"
                     }
                 },
                 "REGION": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "region"
+                        "smithy.api#enumValue": "Region"
                     }
                 },
                 "RESOURCE_CATEGORY": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_category"
+                        "smithy.api#enumValue": "ResourceCategory"
                     }
                 },
                 "RESOURCE_TYPE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_type"
+                        "smithy.api#enumValue": "ResourceType"
                     }
                 },
                 "RESOURCE_NAME": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_name"
+                        "smithy.api#enumValue": "ResourceName"
                     }
                 },
                 "FINDING_TYPE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.finding_type"
+                        "smithy.api#enumValue": "FindingsSummary.FindingType"
                     }
                 }
             }
@@ -34912,10 +35282,10 @@
         "com.amazonaws.securityhub#ResourceResult": {
             "type": "structure",
             "members": {
-                "ResourceArn": {
+                "ResourceGuid": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN that uniquely identifies a resource.</p>"
+                        "smithy.api#documentation": "<p>The global identifier used to identify a resource.</p>"
                     }
                 },
                 "ResourceId": {
@@ -35118,6 +35488,12 @@
                         "smithy.api#documentation": "<p>Enables filtering based on map-based field values.</p>"
                     }
                 },
+                "NestedCompositeFilters": {
+                    "target": "com.amazonaws.securityhub#ResourcesCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides an additional level of filtering, creating a three-layer nested structure.\n         The first layer is a <code>CompositeFilters</code> array with a <code>CompositeOperator</code> (<code>AND</code>/<code>OR</code>). \n         The second layer is a <code>CompositeFilter</code> object that contains direct filters and <code>NestedCompositeFilters</code>. \n         The third layer is <code>NestedCompositeFilters</code>, which contains additional filter conditions.\n      </p>"
+                    }
+                },
                 "Operator": {
                     "target": "com.amazonaws.securityhub#AllowedOperators",
                     "traits": {
@@ -35141,13 +35517,13 @@
                 "RESOURCE_DETAIL_CAPTURE_TIME_DT": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_detail_capture_time_dt"
+                        "smithy.api#enumValue": "ResourceDetailCaptureTime"
                     }
                 },
                 "RESOURCE_CREATION_TIME_DT": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_creation_time_dt"
+                        "smithy.api#enumValue": "ResourceCreationTime"
                     }
                 }
             }
@@ -35201,7 +35577,7 @@
                 "TAG": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "tags"
+                        "smithy.api#enumValue": "ResourceTags"
                     }
                 }
             }
@@ -35235,55 +35611,55 @@
                 "TOTAL_FINDINGS": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.total_findings"
+                        "smithy.api#enumValue": "FindingsSummary.TotalFindings"
                     }
                 },
                 "SEVERITY_OTHER": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.other"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Other"
                     }
                 },
                 "SEVERITY_FATAL": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.fatal"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Fatal"
                     }
                 },
                 "SEVERITY_CRITICAL": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.critical"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Critical"
                     }
                 },
                 "SEVERITY_HIGH": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.high"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.High"
                     }
                 },
                 "SEVERITY_MEDIUM": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.medium"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Medium"
                     }
                 },
                 "SEVERITY_LOW": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.low"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Low"
                     }
                 },
                 "SEVERITY_INFORMATIONAL": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.informational"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Informational"
                     }
                 },
                 "SEVERITY_UNKNOWN": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.severities.unknown"
+                        "smithy.api#enumValue": "FindingsSummary.Severities.Unknown"
                     }
                 }
             }
@@ -35314,58 +35690,58 @@
         "com.amazonaws.securityhub#ResourcesStringField": {
             "type": "enum",
             "members": {
-                "RESOURCE_ARN": {
+                "RESOURCE_GUID": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_arn"
+                        "smithy.api#enumValue": "ResourceGuid"
                     }
                 },
                 "RESOURCE_ID": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_id"
+                        "smithy.api#enumValue": "ResourceId"
                     }
                 },
                 "ACCOUNT_ID": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "account_id"
+                        "smithy.api#enumValue": "AccountId"
                     }
                 },
                 "REGION": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "region"
+                        "smithy.api#enumValue": "Region"
                     }
                 },
                 "RESOURCE_CATEGORY": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_category"
+                        "smithy.api#enumValue": "ResourceCategory"
                     }
                 },
                 "RESOURCE_TYPE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_type"
+                        "smithy.api#enumValue": "ResourceType"
                     }
                 },
                 "RESOURCE_NAME": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "resource_name"
+                        "smithy.api#enumValue": "ResourceName"
                     }
                 },
                 "FINDING_TYPE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.finding_type"
+                        "smithy.api#enumValue": "FindingsSummary.FindingType"
                     }
                 },
                 "PRODUCT_NAME": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "findings_summary.product_name"
+                        "smithy.api#enumValue": "FindingsSummary.ProductName"
                     }
                 }
             }
@@ -36673,27 +37049,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -39685,7 +40061,7 @@
                     "target": "com.amazonaws.securityhub#UnprocessedErrorCode",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n         The error code for the unprocessed security control.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The error code for the unprocessed security control. The <code>NOT_FOUND</code> value has been deprecated and \n         replaced by the <code>RESOURCE_NOT_FOUND</code> value.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39721,7 +40097,7 @@
                     "target": "com.amazonaws.securityhub#UnprocessedErrorCode",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The error code for the unprocessed standard and control association.\n      </p>",
+                        "smithy.api#documentation": "<p>The error code for the unprocessed standard and control association. The <code>NOT_FOUND</code> value has been deprecated and \n         replaced by the <code>RESOURCE_NOT_FOUND</code> value.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39751,7 +40127,7 @@
                     "target": "com.amazonaws.securityhub#UnprocessedErrorCode",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The error code for the unprocessed update of the control's enablement status in the\n         specified standard.</p>",
+                        "smithy.api#documentation": "<p>The error code for the unprocessed update of the control's enablement status in the\n         specified standard.  The <code>NOT_FOUND</code> value has been deprecated and \n         replaced by the <code>RESOURCE_NOT_FOUND</code> value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39956,7 +40332,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Udpates the configuration for the Aggregator V2. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Udpates the configuration for the Aggregator V2. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/aggregatorv2/update/{AggregatorV2Arn+}",
@@ -40055,7 +40431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a V2 automation rule. This API is in private preview and subject to change.</p>",
+                "smithy.api#documentation": "<p>Updates a V2 automation rule. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/automationrulesv2/{Identifier}",

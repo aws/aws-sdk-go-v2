@@ -150,6 +150,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A Unicode range of characters to download glyphs for. This must be aligned to multiples of 256. </p> <p>Example: <code>0-255.pbf</code> </p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "max": 50
+                        },
                         "smithy.api#pattern": "^[0-9]+-[0-9]+\\.pbf$",
                         "smithy.api#required": {}
                     }
@@ -366,14 +369,20 @@
                     "target": "com.amazonaws.geomaps#PositionListString",
                     "traits": {
                         "smithy.api#documentation": "<p>Takes in two pairs of coordinates in World Geodetic System (WGS 84) format: [longitude, latitude], denoting south-westerly and north-easterly edges of the image. The underlying area becomes the view of the image. </p> <p>Example: -123.17075,49.26959,-123.08125,49.31429</p>",
-                        "smithy.api#httpQuery": "bounding-box"
+                        "smithy.api#httpQuery": "bounding-box",
+                        "smithy.api#length": {
+                            "max": 100
+                        }
                     }
                 },
                 "BoundedPositions": {
                     "target": "com.amazonaws.geomaps#PositionListString",
                     "traits": {
                         "smithy.api#documentation": "<p>Takes in two or more pair of coordinates in World Geodetic System (WGS 84) format: [longitude, latitude], with each coordinate separated by a comma. The API will generate an image to encompass all of the provided coordinates. </p> <note> <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code> </p> </note> <p>Example: 97.170451,78.039098,99.045536,27.176178</p>",
-                        "smithy.api#httpQuery": "bounded-positions"
+                        "smithy.api#httpQuery": "bounded-positions",
+                        "smithy.api#length": {
+                            "max": 2000
+                        }
                     }
                 },
                 "Center": {
@@ -448,7 +457,11 @@
                     "target": "com.amazonaws.geomaps#SensitiveInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>Applies additional space (in pixels) around overlay feature to prevent them from being cut or obscured.</p> <note> <p>Value for max and min is determined by:</p> <p>Min: <code>1</code> </p> <p>Max: <code>min(height, width)/4</code> </p> </note> <p>Example: <code>100</code> </p>",
-                        "smithy.api#httpQuery": "padding"
+                        "smithy.api#httpQuery": "padding",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 350
+                        }
                     }
                 },
                 "PoliticalView": {
@@ -758,6 +771,13 @@
         "com.amazonaws.geomaps#GetTileRequest": {
             "type": "structure",
             "members": {
+                "AdditionalFeatures": {
+                    "target": "com.amazonaws.geomaps#TileAdditionalFeatureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of optional additional parameters such as map styles that can be requested for each result.</p>",
+                        "smithy.api#httpQuery": "additional-features"
+                    }
+                },
                 "Tileset": {
                     "target": "com.amazonaws.geomaps#Tileset",
                     "traits": {
@@ -771,6 +791,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The zoom value for the map tile.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "max": 2
+                        },
                         "smithy.api#pattern": "\\d+",
                         "smithy.api#required": {}
                     }
@@ -780,6 +803,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The X axis value for the map tile. Must be between 0 and 19.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "max": 7
+                        },
                         "smithy.api#pattern": "\\d+",
                         "smithy.api#required": {}
                     }
@@ -789,6 +815,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Y axis value for the map tile.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "max": 7
+                        },
                         "smithy.api#pattern": "\\d+",
                         "smithy.api#required": {}
                     }
@@ -2034,7 +2063,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 7
+                    "min": 7,
+                    "max": 7000
                 },
                 "smithy.api#pattern": "^(-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?)(,(-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?))*$",
                 "smithy.api#sensitive": {}
@@ -2173,6 +2203,45 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.geomaps#TileAdditionalFeature": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CONTOUR_LINES",
+                        "value": "ContourLines",
+                        "documentation": "Map elevation contour lines."
+                    },
+                    {
+                        "name": "HILLSHADE",
+                        "value": "Hillshade",
+                        "documentation": "Map hillshading details for shading elevation changes."
+                    },
+                    {
+                        "name": "LOGISTICS",
+                        "value": "Logistics",
+                        "documentation": "Map logistics details, including advanced pois and road networks."
+                    },
+                    {
+                        "name": "TRANSIT",
+                        "value": "Transit",
+                        "documentation": "Map transit details."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#TileAdditionalFeatureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geomaps#TileAdditionalFeature"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.geomaps#Tileset": {
             "type": "string",
             "traits": {
@@ -2215,6 +2284,9 @@
                 "target": "com.amazonaws.geomaps#TravelMode"
             },
             "traits": {
+                "smithy.api#length": {
+                    "max": 2
+                },
                 "smithy.api#uniqueItems": {}
             }
         },
