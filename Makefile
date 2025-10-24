@@ -325,6 +325,13 @@ api-diff-modules-%:
 			-skip="internal/repotools" \
 			"$$(go env GOPATH)/bin/gorelease"
 
+##############
+# CI Testing #
+##############
+.PHONY: ci-test-no-generate ci-test-no-generate-no-race
+
+ci-test-no-generate: lint build-tagged-modules test-race-vet-modules-.
+ci-test-no-generate-no-race: lint build-tagged-modules test-modules-.
 
 #######################
 # Integration Testing #
