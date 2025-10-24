@@ -1,8 +1,0 @@
-{
-    "id": "9deaecd6-0553-46e6-829c-4a91c0083c23",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/kinesisvideosignaling"
-    ]
-}

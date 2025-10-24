@@ -1,8 +1,0 @@
-{
-    "id": "a79559cc-fea2-498e-8555-34d0d1ac8aad",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/mediapackage"
-    ]
-}

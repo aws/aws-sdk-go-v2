@@ -1,8 +1,0 @@
-{
-    "id": "50e97fb2-031c-4893-ad55-51a02032a66e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/paymentcryptography"
-    ]
-}

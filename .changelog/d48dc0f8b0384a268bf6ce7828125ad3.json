@@ -1,8 +1,0 @@
-{
-    "id": "d48dc0f8-b038-4a26-8bf6-ce7828125ad3",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/billing"
-    ]
-}

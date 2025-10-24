@@ -1,8 +1,0 @@
-{
-    "id": "b6245459-5d2f-4cd5-9cf3-604f283a0b30",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/dynamodbstreams"
-    ]
-}

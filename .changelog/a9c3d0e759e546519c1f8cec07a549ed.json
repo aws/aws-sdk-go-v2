@@ -1,8 +1,0 @@
-{
-    "id": "a9c3d0e7-59e5-4651-9c1f-8cec07a549ed",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/s3tables"
-    ]
-}

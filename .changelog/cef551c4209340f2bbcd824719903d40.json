@@ -1,8 +1,0 @@
-{
-    "id": "cef551c4-2093-40f2-bbcd-824719903d40",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

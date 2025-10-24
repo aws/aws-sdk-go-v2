@@ -1,8 +1,0 @@
-{
-    "id": "8eb9f48b-6ba8-4f4b-b62a-67ac8e92540a",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

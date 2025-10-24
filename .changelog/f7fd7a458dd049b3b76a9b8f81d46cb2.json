@@ -1,8 +1,0 @@
-{
-    "id": "f7fd7a45-8dd0-49b3-b76a-9b8f81d46cb2",
-    "type": "feature",
-    "description": "Add status reasons for TERMINATED stream sessions",
-    "modules": [
-        "service/gameliftstreams"
-    ]
-}

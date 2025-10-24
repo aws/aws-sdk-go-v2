@@ -1,8 +1,0 @@
-{
-    "id": "776bd6bf-3306-41c5-88b6-ade036a49211",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/elasticloadbalancing"
-    ]
-}

@@ -1,3 +1,28 @@
+# Release (2025-10-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.40.0](service/budgets/CHANGELOG.md#v1400-2025-10-24)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.44.0](service/datazone/CHANGELOG.md#v1440-2025-10-24)
+  * **Feature**: This release adds support for MLflow connections Creation in DataZone
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.32.0](service/dynamodbstreams/CHANGELOG.md#v1320-2025-10-24)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.7.0](service/gameliftstreams/CHANGELOG.md#v170-2025-10-24)
+  * **Feature**: Add status reasons for TERMINATED stream sessions
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.8.0](service/geomaps/CHANGELOG.md#v180-2025-10-24)
+  * **Feature**: Added support for optional AdditionalFeatures parameter in the V2 GetTile API.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.50.0](service/location/CHANGELOG.md#v1500-2025-10-24)
+  * **Feature**: Added support for mobile app restrictions in Amazon Location API keys.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.1.0](service/rtbfabric/CHANGELOG.md#v110-2025-10-24)
+  * **Feature**: Add support for custom rate limits.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.217.0](service/sagemaker/CHANGELOG.md#v12170-2025-10-24)
+  * **Feature**: Added inference components model data caching feature
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.65.0](service/securityhub/CHANGELOG.md#v1650-2025-10-24)
+  * **Feature**: Release 3 layer filter support in GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2,GetResourcesStatisticsV2, AutomationRule V2 APIs. Update filter casing in GetResourcesV2, GetResourcesStatisticsV2 APIs. Add new filters in GetFindingsV2, GetFindingStatisticsV2, AutomationRule V2 APIs.
+
 # Release (2025-10-23)
 
 ## General Highlights

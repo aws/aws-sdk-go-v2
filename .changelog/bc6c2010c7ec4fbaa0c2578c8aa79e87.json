@@ -1,8 +1,0 @@
-{
-    "id": "bc6c2010-c7ec-4fba-a0c2-578c8aa79e87",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/supplychain"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "f00bc4d6-5583-4e41-a0e8-0426ff8ff7e6",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

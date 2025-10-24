@@ -1,8 +1,0 @@
-{
-    "id": "aebffafa-ccdc-4c61-aa3e-a2b6d96b20cf",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/mediastore"
-    ]
-}

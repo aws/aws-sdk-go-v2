@@ -1,3 +1,7 @@
+# v1.7.0 (2025-10-24)
+
+* **Feature**: Add status reasons for TERMINATED stream sessions
+
 # v1.6.9 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

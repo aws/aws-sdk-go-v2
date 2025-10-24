@@ -1,8 +1,0 @@
-{
-    "id": "cca3143d-3687-4800-aff6-4b3eeeab823a",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/lookoutvision"
-    ]
-}

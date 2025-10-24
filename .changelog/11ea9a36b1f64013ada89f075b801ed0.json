@@ -1,8 +1,0 @@
-{
-    "id": "11ea9a36-b1f6-4013-ada8-9f075b801ed0",
-    "type": "feature",
-    "description": "This release adds support for MLflow connections Creation in DataZone",
-    "modules": [
-        "service/datazone"
-    ]
-}

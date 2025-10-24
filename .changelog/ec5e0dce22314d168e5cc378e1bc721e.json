@@ -1,8 +1,0 @@
-{
-    "id": "ec5e0dce-2231-4d16-8e5c-c378e1bc721e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/route53domains"
-    ]
-}

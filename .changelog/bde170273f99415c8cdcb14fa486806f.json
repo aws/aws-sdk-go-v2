@@ -1,8 +1,0 @@
-{
-    "id": "bde17027-3f99-415c-8cdc-b14fa486806f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/eks"
-    ]
-}

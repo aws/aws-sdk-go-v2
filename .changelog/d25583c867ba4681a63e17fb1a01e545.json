@@ -1,8 +1,0 @@
-{
-    "id": "d25583c8-67ba-4681-a63e-17fb1a01e545",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

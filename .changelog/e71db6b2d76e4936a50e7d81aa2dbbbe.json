@@ -1,8 +1,0 @@
-{
-    "id": "e71db6b2-d76e-4936-a50e-7d81aa2dbbbe",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/translate"
-    ]
-}

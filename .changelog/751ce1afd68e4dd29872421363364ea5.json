@@ -1,8 +1,0 @@
-{
-    "id": "751ce1af-d68e-4dd2-9872-421363364ea5",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/pcaconnectorad"
-    ]
-}

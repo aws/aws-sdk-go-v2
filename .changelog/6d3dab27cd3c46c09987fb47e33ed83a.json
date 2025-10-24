@@ -1,8 +1,0 @@
-{
-    "id": "6d3dab27-cd3c-46c0-9987-fb47e33ed83a",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/sagemakermetrics"
-    ]
-}

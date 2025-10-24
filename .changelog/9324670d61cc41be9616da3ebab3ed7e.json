@@ -1,8 +1,0 @@
-{
-    "id": "9324670d-61cc-41be-9616-da3ebab3ed7e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

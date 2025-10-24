@@ -1,8 +1,0 @@
-{
-    "id": "7039bac4-4c47-4141-ad1a-06c52165ab5d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/acm"
-    ]
-}

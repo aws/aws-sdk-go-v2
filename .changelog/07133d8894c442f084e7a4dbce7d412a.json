@@ -1,8 +1,0 @@
-{
-    "id": "07133d88-94c4-42f0-84e7-a4dbce7d412a",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/budgets"
-    ]
-}

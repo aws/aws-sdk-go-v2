@@ -1,8 +1,0 @@
-{
-    "id": "0a34393e-8773-4806-8ec5-87dd8222c324",
-    "type": "feature",
-    "description": "Add support for custom rate limits.",
-    "modules": [
-        "service/rtbfabric"
-    ]
-}

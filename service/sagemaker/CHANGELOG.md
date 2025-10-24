@@ -1,3 +1,7 @@
+# v1.217.0 (2025-10-24)
+
+* **Feature**: Added inference components model data caching feature
+
 # v1.216.0 (2025-10-23)
 
 * **Feature**: Update endpoint ruleset parameters casing

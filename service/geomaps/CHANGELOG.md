@@ -1,3 +1,7 @@
+# v1.8.0 (2025-10-24)
+
+* **Feature**: Added support for optional AdditionalFeatures parameter in the V2 GetTile API.
+
 # v1.7.1 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions
