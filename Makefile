@@ -331,7 +331,7 @@ api-diff-modules-%:
 .PHONY: ci-test-no-generate ci-test-no-generate-no-race
 
 ci-test-no-generate: lint build-tagged-modules test-race-vet-modules-.
-ci-test-no-generate-no-race: lint build-tagged-modules test-modules-.
+ci-test-no-generate-no-race: lint build-tagged-modules unit-modules-.
 
 #######################
 # Integration Testing #
