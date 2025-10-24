@@ -17767,6 +17767,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 			return err
 		}
 
+	case *types.ConnectionPropertiesInputMemberMlflowProperties:
+		av := object.Key("mlflowProperties")
+		if err := awsRestjson1_serializeDocumentMlflowPropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesInputMemberRedshiftProperties:
 		av := object.Key("redshiftProperties")
 		if err := awsRestjson1_serializeDocumentRedshiftPropertiesInput(&uv.Value, av); err != nil {
@@ -17824,6 +17830,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesPatch(v types.ConnectionP
 	case *types.ConnectionPropertiesPatchMemberIamProperties:
 		av := object.Key("iamProperties")
 		if err := awsRestjson1_serializeDocumentIamPropertiesPatch(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConnectionPropertiesPatchMemberMlflowProperties:
+		av := object.Key("mlflowProperties")
+		if err := awsRestjson1_serializeDocumentMlflowPropertiesPatch(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -19267,6 +19279,40 @@ func awsRestjson1_serializeDocumentMetadataGenerationRunTarget(v *types.Metadata
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMlflowPropertiesInput(v *types.MlflowPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrackingServerArn != nil {
+		ok := object.Key("trackingServerArn")
+		ok.String(*v.TrackingServerArn)
+	}
+
+	if v.TrackingServerName != nil {
+		ok := object.Key("trackingServerName")
+		ok.String(*v.TrackingServerName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMlflowPropertiesPatch(v *types.MlflowPropertiesPatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrackingServerArn != nil {
+		ok := object.Key("trackingServerArn")
+		ok.String(*v.TrackingServerArn)
+	}
+
+	if v.TrackingServerName != nil {
+		ok := object.Key("trackingServerName")
+		ok.String(*v.TrackingServerName)
 	}
 
 	return nil

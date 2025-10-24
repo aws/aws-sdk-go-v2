@@ -158,6 +158,33 @@ func (Terrain) Values() []Terrain {
 	}
 }
 
+type TileAdditionalFeature string
+
+// Enum values for TileAdditionalFeature
+const (
+	// Map elevation contour lines.
+	TileAdditionalFeatureContourLines TileAdditionalFeature = "ContourLines"
+	// Map hillshading details for shading elevation changes.
+	TileAdditionalFeatureHillshade TileAdditionalFeature = "Hillshade"
+	// Map logistics details, including advanced pois and road networks.
+	TileAdditionalFeatureLogistics TileAdditionalFeature = "Logistics"
+	// Map transit details.
+	TileAdditionalFeatureTransit TileAdditionalFeature = "Transit"
+)
+
+// Values returns all known values for TileAdditionalFeature. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TileAdditionalFeature) Values() []TileAdditionalFeature {
+	return []TileAdditionalFeature{
+		"ContourLines",
+		"Hillshade",
+		"Logistics",
+		"Transit",
+	}
+}
+
 type Traffic string
 
 // Enum values for Traffic

@@ -61115,8 +61115,18 @@ func awsRestjson1_deserializeDocumentCompositeFilter(v **types.CompositeFilter, 
 				return err
 			}
 
+		case "IpFilters":
+			if err := awsRestjson1_deserializeDocumentOcsfIpFilterList(&sv.IpFilters, value); err != nil {
+				return err
+			}
+
 		case "MapFilters":
 			if err := awsRestjson1_deserializeDocumentOcsfMapFilterList(&sv.MapFilters, value); err != nil {
+				return err
+			}
+
+		case "NestedCompositeFilters":
+			if err := awsRestjson1_deserializeDocumentCompositeFilterList(&sv.NestedCompositeFilters, value); err != nil {
 				return err
 			}
 
@@ -67523,6 +67533,85 @@ func awsRestjson1_deserializeDocumentOcsfFindingsList(v *[]document.Interface, v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOcsfIpFilter(v **types.OcsfIpFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OcsfIpFilter
+	if *v == nil {
+		sv = &types.OcsfIpFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OcsfIpField to be of type string, got %T instead", value)
+				}
+				sv.FieldName = types.OcsfIpField(jtv)
+			}
+
+		case "Filter":
+			if err := awsRestjson1_deserializeDocumentIpFilter(&sv.Filter, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOcsfIpFilterList(v *[]types.OcsfIpFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OcsfIpFilter
+	if *v == nil {
+		cv = []types.OcsfIpFilter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OcsfIpFilter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOcsfIpFilter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOcsfMapFilter(v **types.OcsfMapFilter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -70606,15 +70695,6 @@ func awsRestjson1_deserializeDocumentResourceResult(v **types.ResourceResult, va
 				sv.Region = ptr.String(jtv)
 			}
 
-		case "ResourceArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.ResourceArn = ptr.String(jtv)
-			}
-
 		case "ResourceCategory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -70645,6 +70725,15 @@ func awsRestjson1_deserializeDocumentResourceResult(v **types.ResourceResult, va
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.ResourceDetailCaptureTimeDt = ptr.String(jtv)
+			}
+
+		case "ResourceGuid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceGuid = ptr.String(jtv)
 			}
 
 		case "ResourceId":

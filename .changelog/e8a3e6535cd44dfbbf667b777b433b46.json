@@ -1,0 +1,8 @@
+{
+    "id": "e8a3e653-5cd4-4dfb-bf66-7b777b433b46",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

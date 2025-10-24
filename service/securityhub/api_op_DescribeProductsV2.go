@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the product integration. This API is in private preview
+// Gets information about the product integration. This API is in public preview
 // and subject to change.
 func (c *Client) DescribeProductsV2(ctx context.Context, params *DescribeProductsV2Input, optFns ...func(*Options)) (*DescribeProductsV2Output, error) {
 	if params == nil {

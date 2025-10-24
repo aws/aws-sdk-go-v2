@@ -1,0 +1,8 @@
+{
+    "id": "969902a2-0a48-489a-b33e-9a353398ad18",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/datapipeline"
+    ]
+}

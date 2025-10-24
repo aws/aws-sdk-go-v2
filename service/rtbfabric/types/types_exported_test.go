@@ -61,6 +61,9 @@ func ExampleModuleParameters_outputUsage() {
 	case *types.ModuleParametersMemberOpenRtbAttribute:
 		_ = v.Value // Value is types.OpenRtbAttributeModuleParameters
 
+	case *types.ModuleParametersMemberRateLimiter:
+		_ = v.Value // Value is types.RateLimiterModuleParameters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -72,3 +75,4 @@ func ExampleModuleParameters_outputUsage() {
 
 var _ *types.OpenRtbAttributeModuleParameters
 var _ *types.NoBidModuleParameters
+var _ *types.RateLimiterModuleParameters

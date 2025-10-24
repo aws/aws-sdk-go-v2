@@ -1,0 +1,8 @@
+{
+    "id": "79738b43-afab-43df-9643-641238f5d284",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/iotmanagedintegrations"
+    ]
+}

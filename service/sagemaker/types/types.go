@@ -10241,6 +10241,36 @@ type InferenceComponentContainerSpecificationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Settings that affect how the inference component caches data.
+type InferenceComponentDataCacheConfig struct {
+
+	// Sets whether the endpoint that hosts the inference component caches the model
+	// artifacts and container image.
+	//
+	// With caching enabled, the endpoint caches this data in each instance that it
+	// provisions for the inference component. That way, the inference component
+	// deploys faster during the auto scaling process. If caching isn't enabled, the
+	// inference component takes longer to deploy because of the time it spends
+	// downloading the data.
+	//
+	// This member is required.
+	EnableCaching *bool
+
+	noSmithyDocumentSerde
+}
+
+// Settings that affect how the inference component caches data.
+type InferenceComponentDataCacheConfigSummary struct {
+
+	// Indicates whether the inference component caches model artifacts as part of the
+	// auto scaling process.
+	//
+	// This member is required.
+	EnableCaching *bool
+
+	noSmithyDocumentSerde
+}
+
 // The deployment configuration for an endpoint that hosts inference components.
 // The configuration includes the desired deployment strategy and rollback
 // settings.
@@ -10348,6 +10378,9 @@ type InferenceComponentSpecification struct {
 	// deploy with an inference component.
 	Container *InferenceComponentContainerSpecification
 
+	// Settings that affect how the inference component caches data.
+	DataCacheConfig *InferenceComponentDataCacheConfig
+
 	// The name of an existing SageMaker AI model object in your account that you want
 	// to deploy with the inference component.
 	ModelName *string
@@ -10371,6 +10404,9 @@ type InferenceComponentSpecificationSummary struct {
 	// Details about the container that provides the runtime environment for the model
 	// that is deployed with the inference component.
 	Container *InferenceComponentContainerSpecificationSummary
+
+	// Settings that affect how the inference component caches data.
+	DataCacheConfig *InferenceComponentDataCacheConfigSummary
 
 	// The name of the SageMaker AI model object that is deployed with the inference
 	// component.
@@ -15858,8 +15894,8 @@ type ProcessingS3Input struct {
 	S3CompressionType ProcessingS3CompressionType
 
 	// Whether to distribute the data from Amazon S3 to all processing instances with
-	// FullyReplicated , or whether the data from Amazon S3 is shared by Amazon S3 key,
-	// downloading one shard of data to each processing instance.
+	// FullyReplicated , or whether the data from Amazon S3 is sharded by Amazon S3
+	// key, downloading one shard of data to each processing instance.
 	S3DataDistributionType ProcessingS3DataDistributionType
 
 	// Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies

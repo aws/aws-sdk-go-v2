@@ -15,9 +15,9 @@ import (
 // Creates an API key resource in your Amazon Web Services account, which lets you
 // grant actions for Amazon Location resources to the API key bearer.
 //
-// For more information, see [Using API keys].
+// For more information, see [Use API keys to authenticate] in the Amazon Location Service Developer Guide.
 //
-// [Using API keys]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
+// [Use API keys to authenticate]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeyInput{}

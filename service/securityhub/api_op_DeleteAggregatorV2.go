@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Aggregator V2. This API is in private preview and subject to change.
+// Deletes the Aggregator V2. This API is in public preview and subject to change.
 func (c *Client) DeleteAggregatorV2(ctx context.Context, params *DeleteAggregatorV2Input, optFns ...func(*Options)) (*DeleteAggregatorV2Output, error) {
 	if params == nil {
 		params = &DeleteAggregatorV2Input{}

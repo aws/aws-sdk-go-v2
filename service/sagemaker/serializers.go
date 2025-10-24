@@ -28328,6 +28328,18 @@ func awsAwsjson11_serializeDocumentInferenceComponentContainerSpecification(v *t
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInferenceComponentDataCacheConfig(v *types.InferenceComponentDataCacheConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableCaching != nil {
+		ok := object.Key("EnableCaching")
+		ok.Boolean(*v.EnableCaching)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceComponentDeploymentConfig(v *types.InferenceComponentDeploymentConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28411,6 +28423,13 @@ func awsAwsjson11_serializeDocumentInferenceComponentSpecification(v *types.Infe
 	if v.Container != nil {
 		ok := object.Key("Container")
 		if err := awsAwsjson11_serializeDocumentInferenceComponentContainerSpecification(v.Container, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataCacheConfig != nil {
+		ok := object.Key("DataCacheConfig")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentDataCacheConfig(v.DataCacheConfig, ok); err != nil {
 			return err
 		}
 	}

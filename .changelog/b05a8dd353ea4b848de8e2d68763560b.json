@@ -1,0 +1,8 @@
+{
+    "id": "b05a8dd3-53ea-4b84-8de8-e2d68763560b",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/panorama"
+    ]
+}

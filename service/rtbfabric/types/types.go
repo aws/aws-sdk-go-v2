@@ -285,6 +285,7 @@ type ModuleConfiguration struct {
 //
 //	ModuleParametersMemberNoBid
 //	ModuleParametersMemberOpenRtbAttribute
+//	ModuleParametersMemberRateLimiter
 type ModuleParameters interface {
 	isModuleParameters()
 }
@@ -306,6 +307,15 @@ type ModuleParametersMemberOpenRtbAttribute struct {
 }
 
 func (*ModuleParametersMemberOpenRtbAttribute) isModuleParameters() {}
+
+// Describes the parameters of a rate limit.
+type ModuleParametersMemberRateLimiter struct {
+	Value RateLimiterModuleParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*ModuleParametersMemberRateLimiter) isModuleParameters() {}
 
 // Describes a no bid action.
 type NoBidAction struct {
@@ -353,6 +363,15 @@ type OpenRtbAttributeModuleParameters struct {
 	//
 	// This member is required.
 	HoldbackPercentage *float32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the parameters of a rate limit.
+type RateLimiterModuleParameters struct {
+
+	// The transactions per second rate limit.
+	Tps *float32
 
 	noSmithyDocumentSerde
 }

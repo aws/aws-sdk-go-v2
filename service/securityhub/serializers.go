@@ -29030,9 +29030,23 @@ func awsRestjson1_serializeDocumentCompositeFilter(v *types.CompositeFilter, val
 		}
 	}
 
+	if v.IpFilters != nil {
+		ok := object.Key("IpFilters")
+		if err := awsRestjson1_serializeDocumentOcsfIpFilterList(v.IpFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MapFilters != nil {
 		ok := object.Key("MapFilters")
 		if err := awsRestjson1_serializeDocumentOcsfMapFilterList(v.MapFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NestedCompositeFilters != nil {
+		ok := object.Key("NestedCompositeFilters")
+		if err := awsRestjson1_serializeDocumentCompositeFilterList(v.NestedCompositeFilters, ok); err != nil {
 			return err
 		}
 	}
@@ -30762,6 +30776,38 @@ func awsRestjson1_serializeDocumentOcsfFindingIdentifierList(v []types.OcsfFindi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOcsfIpFilter(v *types.OcsfIpFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FieldName) > 0 {
+		ok := object.Key("FieldName")
+		ok.String(string(v.FieldName))
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsRestjson1_serializeDocumentIpFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOcsfIpFilterList(v []types.OcsfIpFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentOcsfIpFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOcsfMapFilter(v *types.OcsfMapFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32272,6 +32318,13 @@ func awsRestjson1_serializeDocumentResourcesCompositeFilter(v *types.ResourcesCo
 	if v.MapFilters != nil {
 		ok := object.Key("MapFilters")
 		if err := awsRestjson1_serializeDocumentResourcesMapFilterList(v.MapFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NestedCompositeFilters != nil {
+		ok := object.Key("NestedCompositeFilters")
+		if err := awsRestjson1_serializeDocumentResourcesCompositeFilterList(v.NestedCompositeFilters, ok); err != nil {
 			return err
 		}
 	}

@@ -931,6 +931,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberGlueProperties
 //	ConnectionPropertiesInputMemberHyperPodProperties
 //	ConnectionPropertiesInputMemberIamProperties
+//	ConnectionPropertiesInputMemberMlflowProperties
 //	ConnectionPropertiesInputMemberRedshiftProperties
 //	ConnectionPropertiesInputMemberS3Properties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
@@ -984,6 +985,15 @@ type ConnectionPropertiesInputMemberIamProperties struct {
 
 func (*ConnectionPropertiesInputMemberIamProperties) isConnectionPropertiesInput() {}
 
+// The MLflow properties of a connection.
+type ConnectionPropertiesInputMemberMlflowProperties struct {
+	Value MlflowPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberMlflowProperties) isConnectionPropertiesInput() {}
+
 // The Amazon Redshift properties of a connection.
 type ConnectionPropertiesInputMemberRedshiftProperties struct {
 	Value RedshiftPropertiesInput
@@ -1029,6 +1039,7 @@ func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertie
 //	ConnectionPropertiesOutputMemberGlueProperties
 //	ConnectionPropertiesOutputMemberHyperPodProperties
 //	ConnectionPropertiesOutputMemberIamProperties
+//	ConnectionPropertiesOutputMemberMlflowProperties
 //	ConnectionPropertiesOutputMemberRedshiftProperties
 //	ConnectionPropertiesOutputMemberS3Properties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
@@ -1082,6 +1093,15 @@ type ConnectionPropertiesOutputMemberIamProperties struct {
 
 func (*ConnectionPropertiesOutputMemberIamProperties) isConnectionPropertiesOutput() {}
 
+// The MLflow properties of a connection.
+type ConnectionPropertiesOutputMemberMlflowProperties struct {
+	Value MlflowPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberMlflowProperties) isConnectionPropertiesOutput() {}
+
 // The Amazon Redshift properties of a connection.
 type ConnectionPropertiesOutputMemberRedshiftProperties struct {
 	Value RedshiftPropertiesOutput
@@ -1126,6 +1146,7 @@ func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionProperti
 //	ConnectionPropertiesPatchMemberAthenaProperties
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
+//	ConnectionPropertiesPatchMemberMlflowProperties
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
 //	ConnectionPropertiesPatchMemberSparkEmrProperties
@@ -1168,6 +1189,15 @@ type ConnectionPropertiesPatchMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberIamProperties) isConnectionPropertiesPatch() {}
+
+// The MLflow properties of a connection.
+type ConnectionPropertiesPatchMemberMlflowProperties struct {
+	Value MlflowPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberMlflowProperties) isConnectionPropertiesPatch() {}
 
 // The Amazon Redshift properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberRedshiftProperties struct {
@@ -3865,6 +3895,45 @@ type MetadataGenerationRunTarget struct {
 
 	// The revision of the asset for which metadata was generated.
 	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The MLflow properties of a connection.
+type MlflowPropertiesInput struct {
+
+	// The tracking server ARN as part of the MLflow properties of a connection.
+	TrackingServerArn *string
+
+	// The name of the tracking server as part of the MLflow properties of a
+	// connection.
+	TrackingServerName *string
+
+	noSmithyDocumentSerde
+}
+
+// The MLflow properties of a connection.
+type MlflowPropertiesOutput struct {
+
+	// The tracking server ARN as part of the MLflow properties of a connection.
+	TrackingServerArn *string
+
+	// The name of the tracking server as part of the MLflow properties of a
+	// connection.
+	TrackingServerName *string
+
+	noSmithyDocumentSerde
+}
+
+// The MLflow properties of a connection.
+type MlflowPropertiesPatch struct {
+
+	// The tracking server ARN as part of the MLflow properties of a connection.
+	TrackingServerArn *string
+
+	// The name of the tracking server as part of the MLflow properties of a
+	// connection.
+	TrackingServerName *string
 
 	noSmithyDocumentSerde
 }

@@ -2828,6 +2828,12 @@ func awsRestjson1_serializeDocumentModuleParameters(v types.ModuleParameters, va
 			return err
 		}
 
+	case *types.ModuleParametersMemberRateLimiter:
+		av := object.Key("rateLimiter")
+		if err := awsRestjson1_serializeDocumentRateLimiterModuleParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -2919,6 +2925,31 @@ func awsRestjson1_serializeDocumentOpenRtbAttributeModuleParameters(v *types.Ope
 
 		default:
 			ok.Float(*v.HoldbackPercentage)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRateLimiterModuleParameters(v *types.RateLimiterModuleParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tps != nil {
+		ok := object.Key("tps")
+		switch {
+		case math.IsNaN(float64(*v.Tps)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Tps), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Tps), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Tps)
 
 		}
 	}

@@ -7,6 +7,24 @@ import (
 	"time"
 )
 
+// Unique identifying information for an Android app. Consists of a package name
+// and a 20 byte SHA-1 certificate fingerprint.
+type AndroidApp struct {
+
+	// 20 byte SHA-1 certificate fingerprint associated with the Android app signing
+	// certificate.
+	//
+	// This member is required.
+	CertificateFingerprint *string
+
+	// Unique package name for an Android app.
+	//
+	// This member is required.
+	Package *string
+
+	noSmithyDocumentSerde
+}
+
 // Options for filtering API keys.
 type ApiKeyFilter struct {
 
@@ -119,6 +137,16 @@ type ApiKeyRestrictions struct {
 	// This member is required.
 	AllowResources []string
 
+	// An optional list of allowed Android applications for which requests must
+	// originate from. Requests using this API key from other sources will not be
+	// allowed.
+	AllowAndroidApps []AndroidApp
+
+	// An optional list of allowed Apple applications for which requests must
+	// originate from. Requests using this API key from other sources will not be
+	// allowed.
+	AllowAppleApps []AppleApp
+
 	// An optional list of allowed HTTP referers for which requests must originate
 	// from. Requests using this API key from other domains will not be allowed.
 	//
@@ -140,6 +168,19 @@ type ApiKeyRestrictions struct {
 	//
 	//   - No spaces allowed. For example, https://example.com .
 	AllowReferers []string
+
+	noSmithyDocumentSerde
+}
+
+// Unique identifying information for an Apple app (iOS, macOS, tvOS and watchOS).
+// Consists of an Apple Bundle ID.
+type AppleApp struct {
+
+	// The unique identifier of the app across all Apple platforms (iOS, macOS, tvOS,
+	// watchOS, etc.)
+	//
+	// This member is required.
+	BundleId *string
 
 	noSmithyDocumentSerde
 }

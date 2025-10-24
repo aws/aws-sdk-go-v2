@@ -11,7 +11,7 @@ import (
 )
 
 // Returns details about the service resource in your account. This API is in
-// private preview and subject to change.
+// public preview and subject to change.
 func (c *Client) DescribeSecurityHubV2(ctx context.Context, params *DescribeSecurityHubV2Input, optFns ...func(*Options)) (*DescribeSecurityHubV2Output, error) {
 	if params == nil {
 		params = &DescribeSecurityHubV2Input{}

@@ -14,7 +14,7 @@ import (
 // Returns aggregated statistical data about findings. GetFindingStatisticsV2 use
 // securityhub:GetAdhocInsightResults in the Action element of an IAM policy
 // statement. You must have permission to perform the s action. This API is in
-// private preview and subject to change.
+// public preview and subject to change.
 func (c *Client) GetFindingStatisticsV2(ctx context.Context, params *GetFindingStatisticsV2Input, optFns ...func(*Options)) (*GetFindingStatisticsV2Output, error) {
 	if params == nil {
 		params = &GetFindingStatisticsV2Input{}

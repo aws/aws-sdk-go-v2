@@ -1,0 +1,8 @@
+{
+    "id": "fe81f863-50fe-48b3-b075-069af2d1210b",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/fis"
+    ]
+}

@@ -259,6 +259,12 @@ const (
 	StreamSessionStatusReasonInvalidSignalRequest     StreamSessionStatusReason = "invalidSignalRequest"
 	StreamSessionStatusReasonPlacementTimeout         StreamSessionStatusReason = "placementTimeout"
 	StreamSessionStatusReasonAppLogS3DestinationError StreamSessionStatusReason = "applicationLogS3DestinationError"
+	StreamSessionStatusReasonApplicationExit          StreamSessionStatusReason = "applicationExit"
+	StreamSessionStatusReasonConnectionTimeout        StreamSessionStatusReason = "connectionTimeout"
+	StreamSessionStatusReasonReconnectionTimeout      StreamSessionStatusReason = "reconnectionTimeout"
+	StreamSessionStatusReasonMaxSessionLengthTimeout  StreamSessionStatusReason = "maxSessionLengthTimeout"
+	StreamSessionStatusReasonIdleTimeout              StreamSessionStatusReason = "idleTimeout"
+	StreamSessionStatusReasonApiTerminated            StreamSessionStatusReason = "apiTerminated"
 )
 
 // Values returns all known values for StreamSessionStatusReason. Note that this
@@ -271,5 +277,11 @@ func (StreamSessionStatusReason) Values() []StreamSessionStatusReason {
 		"invalidSignalRequest",
 		"placementTimeout",
 		"applicationLogS3DestinationError",
+		"applicationExit",
+		"connectionTimeout",
+		"reconnectionTimeout",
+		"maxSessionLengthTimeout",
+		"idleTimeout",
+		"apiTerminated",
 	}
 }

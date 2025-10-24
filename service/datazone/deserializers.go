@@ -39097,6 +39097,16 @@ loop:
 			uv = &types.ConnectionPropertiesOutputMemberIamProperties{Value: mv}
 			break loop
 
+		case "mlflowProperties":
+			var mv types.MlflowPropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMlflowPropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberMlflowProperties{Value: mv}
+			break loop
+
 		case "redshiftProperties":
 			var mv types.RedshiftPropertiesOutput
 			destAddr := &mv
@@ -48129,6 +48139,55 @@ func awsRestjson1_deserializeDocumentMetadataMap(v *map[string]string, value int
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMlflowPropertiesOutput(v **types.MlflowPropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MlflowPropertiesOutput
+	if *v == nil {
+		sv = &types.MlflowPropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "trackingServerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TrackingServerArn = ptr.String(jtv)
+			}
+
+		case "trackingServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TrackingServerName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

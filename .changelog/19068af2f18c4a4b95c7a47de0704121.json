@@ -1,0 +1,8 @@
+{
+    "id": "19068af2-f18c-4a4b-95c7-a47de0704121",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/chimesdkmessaging"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "eb97cace-c172-4a8c-ac6c-77f0a14ef859",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/servicediscovery"
+    ]
+}

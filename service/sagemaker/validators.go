@@ -10662,6 +10662,21 @@ func validateInferenceComponentComputeResourceRequirements(v *types.InferenceCom
 	}
 }
 
+func validateInferenceComponentDataCacheConfig(v *types.InferenceComponentDataCacheConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentDataCacheConfig"}
+	if v.EnableCaching == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableCaching"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceComponentDeploymentConfig(v *types.InferenceComponentDeploymentConfig) error {
 	if v == nil {
 		return nil
@@ -10731,6 +10746,11 @@ func validateInferenceComponentSpecification(v *types.InferenceComponentSpecific
 	if v.ComputeResourceRequirements != nil {
 		if err := validateInferenceComponentComputeResourceRequirements(v.ComputeResourceRequirements); err != nil {
 			invalidParams.AddNested("ComputeResourceRequirements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataCacheConfig != nil {
+		if err := validateInferenceComponentDataCacheConfig(v.DataCacheConfig); err != nil {
+			invalidParams.AddNested("DataCacheConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

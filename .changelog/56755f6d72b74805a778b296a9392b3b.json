@@ -1,0 +1,8 @@
+{
+    "id": "56755f6d-72b7-4805-a778-b296a9392b3b",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/snowdevicemanagement"
+    ]
+}

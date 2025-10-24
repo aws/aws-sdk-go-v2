@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of resources. This API is in private preview and subject to
+// Returns a list of resources. This API is in public preview and subject to
 // change.
 func (c *Client) GetResourcesV2(ctx context.Context, params *GetResourcesV2Input, optFns ...func(*Options)) (*GetResourcesV2Output, error) {
 	if params == nil {

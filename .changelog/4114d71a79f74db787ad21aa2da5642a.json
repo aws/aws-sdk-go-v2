@@ -1,0 +1,8 @@
+{
+    "id": "4114d71a-79f7-4db7-87ad-21aa2da5642a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/docdb"
+    ]
+}

@@ -11,6 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This operation is no longer current and may be deprecated in the future. We
+// recommend you upgrade to SuggestSuggest or AutocompleteAutocomplete unless you require Grab data.
+//
+//   - SearchPlaceIndexForSuggestions is part of a previous Amazon Location Service
+//     Places API (version 1) which has been superseded by a more intuitive, powerful,
+//     and complete API (version 2).
+//
+//   - The version 2 Suggest operation gives better results for typeahead place
+//     search suggestions with fuzzy matching, while the version 2 Autocomplete
+//     operation gives better results for address completion based on partial input.
+//
+//   - If you are using an Amazon Web Services SDK or the Amazon Web Services CLI,
+//     note that the Places API version 2 is found under geo-places or geo_places ,
+//     not under location .
+//
+//   - Since Grab is not yet fully supported in Places API version 2, we recommend
+//     you continue using API version 1 when using Grab.
+//
 // Generates suggestions for addresses and points of interest based on partial or
 // misspelled free-form text. This operation is also known as autocomplete,
 // autosuggest, or fuzzy matching.

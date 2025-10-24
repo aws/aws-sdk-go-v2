@@ -1,0 +1,8 @@
+{
+    "id": "a0d43da6-2457-45e0-a107-6b01498905ff",
+    "type": "feature",
+    "description": "Added support for optional AdditionalFeatures parameter in the V2 GetTile API.",
+    "modules": [
+        "service/geomaps"
+    ]
+}

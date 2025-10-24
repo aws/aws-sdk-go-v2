@@ -12,6 +12,10 @@ import (
 )
 
 // Lists API key resources in your Amazon Web Services account.
+//
+// For more information, see [Use API keys to authenticate] in the Amazon Location Service Developer Guide.
+//
+// [Use API keys to authenticate]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}

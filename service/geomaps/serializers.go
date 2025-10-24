@@ -497,6 +497,12 @@ func awsRestjson1_serializeOpHttpBindingsGetTileInput(v *GetTileInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AdditionalFeatures != nil {
+		for i := range v.AdditionalFeatures {
+			encoder.AddQuery("additional-features").String(string(v.AdditionalFeatures[i]))
+		}
+	}
+
 	if v.Key != nil {
 		encoder.SetQuery("key").String(*v.Key)
 	}

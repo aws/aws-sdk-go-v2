@@ -419,23 +419,27 @@ type GroupByField string
 
 // Enum values for GroupByField
 const (
-	GroupByFieldActivityName               GroupByField = "activity_name"
-	GroupByFieldCloudAccountUid            GroupByField = "cloud.account.uid"
-	GroupByFieldCloudProvider              GroupByField = "cloud.provider"
-	GroupByFieldCloudRegion                GroupByField = "cloud.region"
-	GroupByFieldComplianceAssessmentsName  GroupByField = "compliance.assessments.name"
-	GroupByFieldComplianceStatus           GroupByField = "compliance.status"
-	GroupByFieldComplianceControl          GroupByField = "compliance.control"
-	GroupByFieldFindingInfoTitle           GroupByField = "finding_info.title"
-	GroupByFieldFindingInfoTypes           GroupByField = "finding_info.types"
-	GroupByFieldMetadataProductName        GroupByField = "metadata.product.name"
-	GroupByFieldMetadataProductUid         GroupByField = "metadata.product.uid"
-	GroupByFieldResourcesType              GroupByField = "resources.type"
-	GroupByFieldResourcesUid               GroupByField = "resources.uid"
-	GroupByFieldSeverity                   GroupByField = "severity"
-	GroupByFieldStatus                     GroupByField = "status"
-	GroupByFieldVulnerabilitiesFixCoverage GroupByField = "vulnerabilities.fix_coverage"
-	GroupByFieldClassName                  GroupByField = "class_name"
+	GroupByFieldActivityName                        GroupByField = "activity_name"
+	GroupByFieldCloudAccountUid                     GroupByField = "cloud.account.uid"
+	GroupByFieldCloudProvider                       GroupByField = "cloud.provider"
+	GroupByFieldCloudRegion                         GroupByField = "cloud.region"
+	GroupByFieldComplianceAssessmentsName           GroupByField = "compliance.assessments.name"
+	GroupByFieldComplianceStatus                    GroupByField = "compliance.status"
+	GroupByFieldComplianceControl                   GroupByField = "compliance.control"
+	GroupByFieldFindingInfoTitle                    GroupByField = "finding_info.title"
+	GroupByFieldFindingInfoTypes                    GroupByField = "finding_info.types"
+	GroupByFieldMetadataProductName                 GroupByField = "metadata.product.name"
+	GroupByFieldMetadataProductUid                  GroupByField = "metadata.product.uid"
+	GroupByFieldResourcesType                       GroupByField = "resources.type"
+	GroupByFieldResourcesUid                        GroupByField = "resources.uid"
+	GroupByFieldSeverity                            GroupByField = "severity"
+	GroupByFieldStatus                              GroupByField = "status"
+	GroupByFieldVulnerabilitiesFixCoverage          GroupByField = "vulnerabilities.fix_coverage"
+	GroupByFieldClassName                           GroupByField = "class_name"
+	GroupByFieldVulnerabilitiesAffectedPackagesName GroupByField = "vulnerabilities.affected_packages.name"
+	GroupByFieldFindingInfoAnalyticName             GroupByField = "finding_info.analytic.name"
+	GroupByFieldComplianceStandards                 GroupByField = "compliance.standards"
+	GroupByFieldCloudAccountName                    GroupByField = "cloud.account.name"
 )
 
 // Values returns all known values for GroupByField. Note that this can be
@@ -461,6 +465,10 @@ func (GroupByField) Values() []GroupByField {
 		"status",
 		"vulnerabilities.fix_coverage",
 		"class_name",
+		"vulnerabilities.affected_packages.name",
+		"finding_info.analytic.name",
+		"compliance.standards",
+		"cloud.account.name",
 	}
 }
 
@@ -639,10 +647,13 @@ type OcsfDateField string
 
 // Enum values for OcsfDateField
 const (
-	OcsfDateFieldFindingInfoCreatedTimeDt   OcsfDateField = "finding_info.created_time_dt"
-	OcsfDateFieldFindingInfoFirstSeenTimeDt OcsfDateField = "finding_info.first_seen_time_dt"
-	OcsfDateFieldFindingInfoLastSeenTimeDt  OcsfDateField = "finding_info.last_seen_time_dt"
-	OcsfDateFieldFindingInfoModifiedTimeDt  OcsfDateField = "finding_info.modified_time_dt"
+	OcsfDateFieldFindingInfoCreatedTimeDt     OcsfDateField = "finding_info.created_time_dt"
+	OcsfDateFieldFindingInfoFirstSeenTimeDt   OcsfDateField = "finding_info.first_seen_time_dt"
+	OcsfDateFieldFindingInfoLastSeenTimeDt    OcsfDateField = "finding_info.last_seen_time_dt"
+	OcsfDateFieldFindingInfoModifiedTimeDt    OcsfDateField = "finding_info.modified_time_dt"
+	OcsfDateFieldResourcesImageCreatedTimeDt  OcsfDateField = "resources.image.created_time_dt"
+	OcsfDateFieldResourcesImageLastUsedTimeDt OcsfDateField = "resources.image.last_used_time_dt"
+	OcsfDateFieldResourcesModifiedTimeDt      OcsfDateField = "resources.modified_time_dt"
 )
 
 // Values returns all known values for OcsfDateField. Note that this can be
@@ -655,6 +666,28 @@ func (OcsfDateField) Values() []OcsfDateField {
 		"finding_info.first_seen_time_dt",
 		"finding_info.last_seen_time_dt",
 		"finding_info.modified_time_dt",
+		"resources.image.created_time_dt",
+		"resources.image.last_used_time_dt",
+		"resources.modified_time_dt",
+	}
+}
+
+type OcsfIpField string
+
+// Enum values for OcsfIpField
+const (
+	OcsfIpFieldEvidencesDstEndpointIp OcsfIpField = "evidences.dst_endpoint.ip"
+	OcsfIpFieldEvidencesSrcEndpointIp OcsfIpField = "evidences.src_endpoint.ip"
+)
+
+// Values returns all known values for OcsfIpField. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OcsfIpField) Values() []OcsfIpField {
+	return []OcsfIpField{
+		"evidences.dst_endpoint.ip",
+		"evidences.src_endpoint.ip",
 	}
 }
 
@@ -662,7 +695,10 @@ type OcsfMapField string
 
 // Enum values for OcsfMapField
 const (
-	OcsfMapFieldResourcesTags OcsfMapField = "resources.tags"
+	OcsfMapFieldResourcesTags               OcsfMapField = "resources.tags"
+	OcsfMapFieldComplianceControlParameters OcsfMapField = "compliance.control_parameters"
+	OcsfMapFieldDatabucketTags              OcsfMapField = "databucket.tags"
+	OcsfMapFieldFindingInfoTags             OcsfMapField = "finding_info.tags"
 )
 
 // Values returns all known values for OcsfMapField. Note that this can be
@@ -672,6 +708,9 @@ const (
 func (OcsfMapField) Values() []OcsfMapField {
 	return []OcsfMapField{
 		"resources.tags",
+		"compliance.control_parameters",
+		"databucket.tags",
+		"finding_info.tags",
 	}
 }
 
@@ -679,12 +718,18 @@ type OcsfNumberField string
 
 // Enum values for OcsfNumberField
 const (
-	OcsfNumberFieldActivityId                    OcsfNumberField = "activity_id"
-	OcsfNumberFieldComplianceStatusId            OcsfNumberField = "compliance.status_id"
-	OcsfNumberFieldConfidenceScore               OcsfNumberField = "confidence_score"
-	OcsfNumberFieldSeverityId                    OcsfNumberField = "severity_id"
-	OcsfNumberFieldStatusId                      OcsfNumberField = "status_id"
-	OcsfNumberFieldFindingInfoRelatedEventsCount OcsfNumberField = "finding_info.related_events_count"
+	OcsfNumberFieldActivityId                                 OcsfNumberField = "activity_id"
+	OcsfNumberFieldComplianceStatusId                         OcsfNumberField = "compliance.status_id"
+	OcsfNumberFieldConfidenceScore                            OcsfNumberField = "confidence_score"
+	OcsfNumberFieldSeverityId                                 OcsfNumberField = "severity_id"
+	OcsfNumberFieldStatusId                                   OcsfNumberField = "status_id"
+	OcsfNumberFieldFindingInfoRelatedEventsCount              OcsfNumberField = "finding_info.related_events_count"
+	OcsfNumberFieldEvidencesApiResponseCode                   OcsfNumberField = "evidences.api.response.code"
+	OcsfNumberFieldEvidencesDstEndpointAutonomousSystemNumber OcsfNumberField = "evidences.dst_endpoint.autonomous_system.number"
+	OcsfNumberFieldEvidencesDstEndpointPort                   OcsfNumberField = "evidences.dst_endpoint.port"
+	OcsfNumberFieldEvidencesSrcEndpointAutonomousSystemNumber OcsfNumberField = "evidences.src_endpoint.autonomous_system.number"
+	OcsfNumberFieldEvidencesSrcEndpointPort                   OcsfNumberField = "evidences.src_endpoint.port"
+	OcsfNumberFieldResourcesImageInUseCount                   OcsfNumberField = "resources.image.in_use_count"
 )
 
 // Values returns all known values for OcsfNumberField. Note that this can be
@@ -699,6 +744,12 @@ func (OcsfNumberField) Values() []OcsfNumberField {
 		"severity_id",
 		"status_id",
 		"finding_info.related_events_count",
+		"evidences.api.response.code",
+		"evidences.dst_endpoint.autonomous_system.number",
+		"evidences.dst_endpoint.port",
+		"evidences.src_endpoint.autonomous_system.number",
+		"evidences.src_endpoint.port",
+		"resources.image.in_use_count",
 	}
 }
 
@@ -706,38 +757,75 @@ type OcsfStringField string
 
 // Enum values for OcsfStringField
 const (
-	OcsfStringFieldMetadataUid                        OcsfStringField = "metadata.uid"
-	OcsfStringFieldActivityName                       OcsfStringField = "activity_name"
-	OcsfStringFieldCloudAccountUid                    OcsfStringField = "cloud.account.uid"
-	OcsfStringFieldCloudProvider                      OcsfStringField = "cloud.provider"
-	OcsfStringFieldCloudRegion                        OcsfStringField = "cloud.region"
-	OcsfStringFieldComplianceAssessmentsCategory      OcsfStringField = "compliance.assessments.category"
-	OcsfStringFieldComplianceAssessmentsName          OcsfStringField = "compliance.assessments.name"
-	OcsfStringFieldComplianceControl                  OcsfStringField = "compliance.control"
-	OcsfStringFieldComplianceStatus                   OcsfStringField = "compliance.status"
-	OcsfStringFieldComplianceStandards                OcsfStringField = "compliance.standards"
-	OcsfStringFieldFindingInfoDesc                    OcsfStringField = "finding_info.desc"
-	OcsfStringFieldFindingInfoSrcUrl                  OcsfStringField = "finding_info.src_url"
-	OcsfStringFieldFindingInfoTitle                   OcsfStringField = "finding_info.title"
-	OcsfStringFieldFindingInfoTypes                   OcsfStringField = "finding_info.types"
-	OcsfStringFieldFindingInfoUid                     OcsfStringField = "finding_info.uid"
-	OcsfStringFieldFindingInfoRelatedEventsUid        OcsfStringField = "finding_info.related_events.uid"
-	OcsfStringFieldFindingInfoRelatedEventsProductUid OcsfStringField = "finding_info.related_events.product.uid"
-	OcsfStringFieldFindingInfoRelatedEventsTitle      OcsfStringField = "finding_info.related_events.title"
-	OcsfStringFieldMetadataProductName                OcsfStringField = "metadata.product.name"
-	OcsfStringFieldMetadataProductUid                 OcsfStringField = "metadata.product.uid"
-	OcsfStringFieldMetadataProductVendorName          OcsfStringField = "metadata.product.vendor_name"
-	OcsfStringFieldRemediationDesc                    OcsfStringField = "remediation.desc"
-	OcsfStringFieldRemediationReferences              OcsfStringField = "remediation.references"
-	OcsfStringFieldResourcesCloudPartition            OcsfStringField = "resources.cloud_partition"
-	OcsfStringFieldResourcesRegion                    OcsfStringField = "resources.region"
-	OcsfStringFieldResourcesType                      OcsfStringField = "resources.type"
-	OcsfStringFieldResourcesUid                       OcsfStringField = "resources.uid"
-	OcsfStringFieldSeverity                           OcsfStringField = "severity"
-	OcsfStringFieldStatus                             OcsfStringField = "status"
-	OcsfStringFieldComment                            OcsfStringField = "comment"
-	OcsfStringFieldVulnerabilitiesFixCoverage         OcsfStringField = "vulnerabilities.fix_coverage"
-	OcsfStringFieldClassName                          OcsfStringField = "class_name"
+	OcsfStringFieldMetadataUid                                            OcsfStringField = "metadata.uid"
+	OcsfStringFieldActivityName                                           OcsfStringField = "activity_name"
+	OcsfStringFieldCloudAccountUid                                        OcsfStringField = "cloud.account.uid"
+	OcsfStringFieldCloudProvider                                          OcsfStringField = "cloud.provider"
+	OcsfStringFieldCloudRegion                                            OcsfStringField = "cloud.region"
+	OcsfStringFieldComplianceAssessmentsCategory                          OcsfStringField = "compliance.assessments.category"
+	OcsfStringFieldComplianceAssessmentsName                              OcsfStringField = "compliance.assessments.name"
+	OcsfStringFieldComplianceControl                                      OcsfStringField = "compliance.control"
+	OcsfStringFieldComplianceStatus                                       OcsfStringField = "compliance.status"
+	OcsfStringFieldComplianceStandards                                    OcsfStringField = "compliance.standards"
+	OcsfStringFieldFindingInfoDesc                                        OcsfStringField = "finding_info.desc"
+	OcsfStringFieldFindingInfoSrcUrl                                      OcsfStringField = "finding_info.src_url"
+	OcsfStringFieldFindingInfoTitle                                       OcsfStringField = "finding_info.title"
+	OcsfStringFieldFindingInfoTypes                                       OcsfStringField = "finding_info.types"
+	OcsfStringFieldFindingInfoUid                                         OcsfStringField = "finding_info.uid"
+	OcsfStringFieldFindingInfoRelatedEventsUid                            OcsfStringField = "finding_info.related_events.uid"
+	OcsfStringFieldFindingInfoRelatedEventsProductUid                     OcsfStringField = "finding_info.related_events.product.uid"
+	OcsfStringFieldFindingInfoRelatedEventsTitle                          OcsfStringField = "finding_info.related_events.title"
+	OcsfStringFieldMetadataProductName                                    OcsfStringField = "metadata.product.name"
+	OcsfStringFieldMetadataProductUid                                     OcsfStringField = "metadata.product.uid"
+	OcsfStringFieldMetadataProductVendorName                              OcsfStringField = "metadata.product.vendor_name"
+	OcsfStringFieldRemediationDesc                                        OcsfStringField = "remediation.desc"
+	OcsfStringFieldRemediationReferences                                  OcsfStringField = "remediation.references"
+	OcsfStringFieldResourcesCloudPartition                                OcsfStringField = "resources.cloud_partition"
+	OcsfStringFieldResourcesRegion                                        OcsfStringField = "resources.region"
+	OcsfStringFieldResourcesType                                          OcsfStringField = "resources.type"
+	OcsfStringFieldResourcesUid                                           OcsfStringField = "resources.uid"
+	OcsfStringFieldSeverity                                               OcsfStringField = "severity"
+	OcsfStringFieldStatus                                                 OcsfStringField = "status"
+	OcsfStringFieldComment                                                OcsfStringField = "comment"
+	OcsfStringFieldVulnerabilitiesFixCoverage                             OcsfStringField = "vulnerabilities.fix_coverage"
+	OcsfStringFieldClassName                                              OcsfStringField = "class_name"
+	OcsfStringFieldDatabucketEncryptionDetailsAlgorithm                   OcsfStringField = "databucket.encryption_details.algorithm"
+	OcsfStringFieldDatabucketEncryptionDetailsKeyUid                      OcsfStringField = "databucket.encryption_details.key_uid"
+	OcsfStringFieldDatabucketFileDataClassificationsClassifierDetailsType OcsfStringField = "databucket.file.data_classifications.classifier_details.type"
+	OcsfStringFieldEvidencesActorUserAccountUid                           OcsfStringField = "evidences.actor.user.account.uid"
+	OcsfStringFieldEvidencesApiOperation                                  OcsfStringField = "evidences.api.operation"
+	OcsfStringFieldEvidencesApiResponseErrorMessage                       OcsfStringField = "evidences.api.response.error_message"
+	OcsfStringFieldEvidencesApiServiceName                                OcsfStringField = "evidences.api.service.name"
+	OcsfStringFieldEvidencesConnectionInfoDirection                       OcsfStringField = "evidences.connection_info.direction"
+	OcsfStringFieldEvidencesConnectionInfoProtocolName                    OcsfStringField = "evidences.connection_info.protocol_name"
+	OcsfStringFieldEvidencesDstEndpointAutonomousSystemName               OcsfStringField = "evidences.dst_endpoint.autonomous_system.name"
+	OcsfStringFieldEvidencesDstEndpointLocationCity                       OcsfStringField = "evidences.dst_endpoint.location.city"
+	OcsfStringFieldEvidencesDstEndpointLocationCountry                    OcsfStringField = "evidences.dst_endpoint.location.country"
+	OcsfStringFieldEvidencesSrcEndpointAutonomousSystemName               OcsfStringField = "evidences.src_endpoint.autonomous_system.name"
+	OcsfStringFieldEvidencesSrcEndpointHostname                           OcsfStringField = "evidences.src_endpoint.hostname"
+	OcsfStringFieldEvidencesSrcEndpointLocationCity                       OcsfStringField = "evidences.src_endpoint.location.city"
+	OcsfStringFieldEvidencesSrcEndpointLocationCountry                    OcsfStringField = "evidences.src_endpoint.location.country"
+	OcsfStringFieldFindingInfoAnalyticName                                OcsfStringField = "finding_info.analytic.name"
+	OcsfStringFieldMalwareName                                            OcsfStringField = "malware.name"
+	OcsfStringFieldMalwareScanInfoUid                                     OcsfStringField = "malware_scan_info.uid"
+	OcsfStringFieldMalwareSeverity                                        OcsfStringField = "malware.severity"
+	OcsfStringFieldResourcesCloudFunctionLayersUidAlt                     OcsfStringField = "resources.cloud_function.layers.uid_alt"
+	OcsfStringFieldResourcesCloudFunctionRuntime                          OcsfStringField = "resources.cloud_function.runtime"
+	OcsfStringFieldResourcesCloudFunctionUserUid                          OcsfStringField = "resources.cloud_function.user.uid"
+	OcsfStringFieldResourcesDeviceEncryptionDetailsKeyUid                 OcsfStringField = "resources.device.encryption_details.key_uid"
+	OcsfStringFieldResourcesDeviceImageUid                                OcsfStringField = "resources.device.image.uid"
+	OcsfStringFieldResourcesImageArchitecture                             OcsfStringField = "resources.image.architecture"
+	OcsfStringFieldResourcesImageRegistryUid                              OcsfStringField = "resources.image.registry_uid"
+	OcsfStringFieldResourcesImageRepositoryName                           OcsfStringField = "resources.image.repository_name"
+	OcsfStringFieldResourcesImageUid                                      OcsfStringField = "resources.image.uid"
+	OcsfStringFieldResourcesSubnetInfoUid                                 OcsfStringField = "resources.subnet_info.uid"
+	OcsfStringFieldResourcesVpcUid                                        OcsfStringField = "resources.vpc_uid"
+	OcsfStringFieldVulnerabilitiesAffectedCodeFilePath                    OcsfStringField = "vulnerabilities.affected_code.file.path"
+	OcsfStringFieldVulnerabilitiesAffectedPackagesName                    OcsfStringField = "vulnerabilities.affected_packages.name"
+	OcsfStringFieldVulnerabilitiesCveEpssScore                            OcsfStringField = "vulnerabilities.cve.epss.score"
+	OcsfStringFieldVulnerabilitiesCveUid                                  OcsfStringField = "vulnerabilities.cve.uid"
+	OcsfStringFieldVulnerabilitiesRelatedVulnerabilities                  OcsfStringField = "vulnerabilities.related_vulnerabilities"
+	OcsfStringFieldCloudAccountName                                       OcsfStringField = "cloud.account.name"
 )
 
 // Values returns all known values for OcsfStringField. Note that this can be
@@ -778,6 +866,43 @@ func (OcsfStringField) Values() []OcsfStringField {
 		"comment",
 		"vulnerabilities.fix_coverage",
 		"class_name",
+		"databucket.encryption_details.algorithm",
+		"databucket.encryption_details.key_uid",
+		"databucket.file.data_classifications.classifier_details.type",
+		"evidences.actor.user.account.uid",
+		"evidences.api.operation",
+		"evidences.api.response.error_message",
+		"evidences.api.service.name",
+		"evidences.connection_info.direction",
+		"evidences.connection_info.protocol_name",
+		"evidences.dst_endpoint.autonomous_system.name",
+		"evidences.dst_endpoint.location.city",
+		"evidences.dst_endpoint.location.country",
+		"evidences.src_endpoint.autonomous_system.name",
+		"evidences.src_endpoint.hostname",
+		"evidences.src_endpoint.location.city",
+		"evidences.src_endpoint.location.country",
+		"finding_info.analytic.name",
+		"malware.name",
+		"malware_scan_info.uid",
+		"malware.severity",
+		"resources.cloud_function.layers.uid_alt",
+		"resources.cloud_function.runtime",
+		"resources.cloud_function.user.uid",
+		"resources.device.encryption_details.key_uid",
+		"resources.device.image.uid",
+		"resources.image.architecture",
+		"resources.image.registry_uid",
+		"resources.image.repository_name",
+		"resources.image.uid",
+		"resources.subnet_info.uid",
+		"resources.vpc_uid",
+		"vulnerabilities.affected_code.file.path",
+		"vulnerabilities.affected_packages.name",
+		"vulnerabilities.cve.epss.score",
+		"vulnerabilities.cve.uid",
+		"vulnerabilities.related_vulnerabilities",
+		"cloud.account.name",
 	}
 }
 
@@ -936,12 +1061,12 @@ type ResourceGroupByField string
 
 // Enum values for ResourceGroupByField
 const (
-	ResourceGroupByFieldAccountId        ResourceGroupByField = "account_id"
-	ResourceGroupByFieldRegion           ResourceGroupByField = "region"
-	ResourceGroupByFieldResourceCategory ResourceGroupByField = "resource_category"
-	ResourceGroupByFieldResourceType     ResourceGroupByField = "resource_type"
-	ResourceGroupByFieldResourceName     ResourceGroupByField = "resource_name"
-	ResourceGroupByFieldFindingType      ResourceGroupByField = "findings_summary.finding_type"
+	ResourceGroupByFieldAccountId        ResourceGroupByField = "AccountId"
+	ResourceGroupByFieldRegion           ResourceGroupByField = "Region"
+	ResourceGroupByFieldResourceCategory ResourceGroupByField = "ResourceCategory"
+	ResourceGroupByFieldResourceType     ResourceGroupByField = "ResourceType"
+	ResourceGroupByFieldResourceName     ResourceGroupByField = "ResourceName"
+	ResourceGroupByFieldFindingType      ResourceGroupByField = "FindingsSummary.FindingType"
 )
 
 // Values returns all known values for ResourceGroupByField. Note that this can be
@@ -950,12 +1075,12 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceGroupByField) Values() []ResourceGroupByField {
 	return []ResourceGroupByField{
-		"account_id",
-		"region",
-		"resource_category",
-		"resource_type",
-		"resource_name",
-		"findings_summary.finding_type",
+		"AccountId",
+		"Region",
+		"ResourceCategory",
+		"ResourceType",
+		"ResourceName",
+		"FindingsSummary.FindingType",
 	}
 }
 
@@ -963,8 +1088,8 @@ type ResourcesDateField string
 
 // Enum values for ResourcesDateField
 const (
-	ResourcesDateFieldResourceDetailCaptureTimeDt ResourcesDateField = "resource_detail_capture_time_dt"
-	ResourcesDateFieldResourceCreationTimeDt      ResourcesDateField = "resource_creation_time_dt"
+	ResourcesDateFieldResourceDetailCaptureTimeDt ResourcesDateField = "ResourceDetailCaptureTime"
+	ResourcesDateFieldResourceCreationTimeDt      ResourcesDateField = "ResourceCreationTime"
 )
 
 // Values returns all known values for ResourcesDateField. Note that this can be
@@ -973,8 +1098,8 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourcesDateField) Values() []ResourcesDateField {
 	return []ResourcesDateField{
-		"resource_detail_capture_time_dt",
-		"resource_creation_time_dt",
+		"ResourceDetailCaptureTime",
+		"ResourceCreationTime",
 	}
 }
 
@@ -982,7 +1107,7 @@ type ResourcesMapField string
 
 // Enum values for ResourcesMapField
 const (
-	ResourcesMapFieldTag ResourcesMapField = "tags"
+	ResourcesMapFieldTag ResourcesMapField = "ResourceTags"
 )
 
 // Values returns all known values for ResourcesMapField. Note that this can be
@@ -991,7 +1116,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourcesMapField) Values() []ResourcesMapField {
 	return []ResourcesMapField{
-		"tags",
+		"ResourceTags",
 	}
 }
 
@@ -999,15 +1124,15 @@ type ResourcesNumberField string
 
 // Enum values for ResourcesNumberField
 const (
-	ResourcesNumberFieldTotalFindings         ResourcesNumberField = "findings_summary.total_findings"
-	ResourcesNumberFieldSeverityOther         ResourcesNumberField = "findings_summary.severities.other"
-	ResourcesNumberFieldSeverityFatal         ResourcesNumberField = "findings_summary.severities.fatal"
-	ResourcesNumberFieldSeverityCritical      ResourcesNumberField = "findings_summary.severities.critical"
-	ResourcesNumberFieldSeverityHigh          ResourcesNumberField = "findings_summary.severities.high"
-	ResourcesNumberFieldSeverityMedium        ResourcesNumberField = "findings_summary.severities.medium"
-	ResourcesNumberFieldSeverityLow           ResourcesNumberField = "findings_summary.severities.low"
-	ResourcesNumberFieldSeverityInformational ResourcesNumberField = "findings_summary.severities.informational"
-	ResourcesNumberFieldSeverityUnknown       ResourcesNumberField = "findings_summary.severities.unknown"
+	ResourcesNumberFieldTotalFindings         ResourcesNumberField = "FindingsSummary.TotalFindings"
+	ResourcesNumberFieldSeverityOther         ResourcesNumberField = "FindingsSummary.Severities.Other"
+	ResourcesNumberFieldSeverityFatal         ResourcesNumberField = "FindingsSummary.Severities.Fatal"
+	ResourcesNumberFieldSeverityCritical      ResourcesNumberField = "FindingsSummary.Severities.Critical"
+	ResourcesNumberFieldSeverityHigh          ResourcesNumberField = "FindingsSummary.Severities.High"
+	ResourcesNumberFieldSeverityMedium        ResourcesNumberField = "FindingsSummary.Severities.Medium"
+	ResourcesNumberFieldSeverityLow           ResourcesNumberField = "FindingsSummary.Severities.Low"
+	ResourcesNumberFieldSeverityInformational ResourcesNumberField = "FindingsSummary.Severities.Informational"
+	ResourcesNumberFieldSeverityUnknown       ResourcesNumberField = "FindingsSummary.Severities.Unknown"
 )
 
 // Values returns all known values for ResourcesNumberField. Note that this can be
@@ -1016,15 +1141,15 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourcesNumberField) Values() []ResourcesNumberField {
 	return []ResourcesNumberField{
-		"findings_summary.total_findings",
-		"findings_summary.severities.other",
-		"findings_summary.severities.fatal",
-		"findings_summary.severities.critical",
-		"findings_summary.severities.high",
-		"findings_summary.severities.medium",
-		"findings_summary.severities.low",
-		"findings_summary.severities.informational",
-		"findings_summary.severities.unknown",
+		"FindingsSummary.TotalFindings",
+		"FindingsSummary.Severities.Other",
+		"FindingsSummary.Severities.Fatal",
+		"FindingsSummary.Severities.Critical",
+		"FindingsSummary.Severities.High",
+		"FindingsSummary.Severities.Medium",
+		"FindingsSummary.Severities.Low",
+		"FindingsSummary.Severities.Informational",
+		"FindingsSummary.Severities.Unknown",
 	}
 }
 
@@ -1032,15 +1157,15 @@ type ResourcesStringField string
 
 // Enum values for ResourcesStringField
 const (
-	ResourcesStringFieldResourceArn      ResourcesStringField = "resource_arn"
-	ResourcesStringFieldResourceId       ResourcesStringField = "resource_id"
-	ResourcesStringFieldAccountId        ResourcesStringField = "account_id"
-	ResourcesStringFieldRegion           ResourcesStringField = "region"
-	ResourcesStringFieldResourceCategory ResourcesStringField = "resource_category"
-	ResourcesStringFieldResourceType     ResourcesStringField = "resource_type"
-	ResourcesStringFieldResourceName     ResourcesStringField = "resource_name"
-	ResourcesStringFieldFindingType      ResourcesStringField = "findings_summary.finding_type"
-	ResourcesStringFieldProductName      ResourcesStringField = "findings_summary.product_name"
+	ResourcesStringFieldResourceGuid     ResourcesStringField = "ResourceGuid"
+	ResourcesStringFieldResourceId       ResourcesStringField = "ResourceId"
+	ResourcesStringFieldAccountId        ResourcesStringField = "AccountId"
+	ResourcesStringFieldRegion           ResourcesStringField = "Region"
+	ResourcesStringFieldResourceCategory ResourcesStringField = "ResourceCategory"
+	ResourcesStringFieldResourceType     ResourcesStringField = "ResourceType"
+	ResourcesStringFieldResourceName     ResourcesStringField = "ResourceName"
+	ResourcesStringFieldFindingType      ResourcesStringField = "FindingsSummary.FindingType"
+	ResourcesStringFieldProductName      ResourcesStringField = "FindingsSummary.ProductName"
 )
 
 // Values returns all known values for ResourcesStringField. Note that this can be
@@ -1049,15 +1174,15 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourcesStringField) Values() []ResourcesStringField {
 	return []ResourcesStringField{
-		"resource_arn",
-		"resource_id",
-		"account_id",
-		"region",
-		"resource_category",
-		"resource_type",
-		"resource_name",
-		"findings_summary.finding_type",
-		"findings_summary.product_name",
+		"ResourceGuid",
+		"ResourceId",
+		"AccountId",
+		"Region",
+		"ResourceCategory",
+		"ResourceType",
+		"ResourceName",
+		"FindingsSummary.FindingType",
+		"FindingsSummary.ProductName",
 	}
 }
 

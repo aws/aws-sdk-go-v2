@@ -1,0 +1,8 @@
+{
+    "id": "d9ef8218-b978-4dc7-b99a-976ec36170ba",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/migrationhubstrategy"
+    ]
+}

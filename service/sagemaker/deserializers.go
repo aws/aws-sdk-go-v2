@@ -63012,6 +63012,46 @@ func awsAwsjson11_deserializeDocumentInferenceComponentContainerSpecificationSum
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInferenceComponentDataCacheConfigSummary(v **types.InferenceComponentDataCacheConfigSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentDataCacheConfigSummary
+	if *v == nil {
+		sv = &types.InferenceComponentDataCacheConfigSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableCaching":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableCaching to be of type *bool, got %T instead", value)
+				}
+				sv.EnableCaching = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceComponentDeploymentConfig(v **types.InferenceComponentDeploymentConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -63215,6 +63255,11 @@ func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(v **
 
 		case "Container":
 			if err := awsAwsjson11_deserializeDocumentInferenceComponentContainerSpecificationSummary(&sv.Container, value); err != nil {
+				return err
+			}
+
+		case "DataCacheConfig":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentDataCacheConfigSummary(&sv.DataCacheConfig, value); err != nil {
 				return err
 			}
 

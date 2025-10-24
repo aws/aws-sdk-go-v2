@@ -1,0 +1,8 @@
+{
+    "id": "771e541f-f84c-4a35-a750-314286c8b309",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

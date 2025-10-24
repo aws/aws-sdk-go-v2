@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +56,10 @@ type GetTileInput struct {
 	//
 	// This member is required.
 	Z *string
+
+	// A list of optional additional parameters such as map styles that can be
+	// requested for each result.
+	AdditionalFeatures []types.TileAdditionalFeature
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
 	// SigV4 signature must be provided when making a request.

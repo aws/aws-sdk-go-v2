@@ -1,0 +1,8 @@
+{
+    "id": "190846aa-5243-4aa1-a98e-52b398163361",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ssooidc"
+    ]
+}

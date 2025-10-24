@@ -11,8 +11,7 @@ import (
 )
 
 // Disable the service for the current Amazon Web Services Region or specified
-// Amazon Web Services Region. This API is in private preview and subject to
-// change.
+// Amazon Web Services Region. This API is in public preview and subject to change.
 func (c *Client) DisableSecurityHubV2(ctx context.Context, params *DisableSecurityHubV2Input, optFns ...func(*Options)) (*DisableSecurityHubV2Output, error) {
 	if params == nil {
 		params = &DisableSecurityHubV2Input{}

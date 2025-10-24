@@ -1,0 +1,8 @@
+{
+    "id": "bb76cda9-6d00-4f17-94e5-29ae0ef0528f",
+    "type": "feature",
+    "description": "Release 3 layer filter support in GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2,GetResourcesStatisticsV2, AutomationRule V2 APIs. Update filter casing in GetResourcesV2, GetResourcesStatisticsV2 APIs. Add new filters in GetFindingsV2, GetFindingStatisticsV2, AutomationRule V2 APIs.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

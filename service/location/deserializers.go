@@ -10614,6 +10614,89 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAndroidApp(v **types.AndroidApp, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AndroidApp
+	if *v == nil {
+		sv = &types.AndroidApp{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CertificateFingerprint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Sha1CertificateFingerprint to be of type string, got %T instead", value)
+				}
+				sv.CertificateFingerprint = ptr.String(jtv)
+			}
+
+		case "Package":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AndroidPackageName to be of type string, got %T instead", value)
+				}
+				sv.Package = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAndroidAppList(v *[]types.AndroidApp, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AndroidApp
+	if *v == nil {
+		cv = []types.AndroidApp{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AndroidApp
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAndroidApp(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentApiKeyActionList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10677,6 +10760,16 @@ func awsRestjson1_deserializeDocumentApiKeyRestrictions(v **types.ApiKeyRestrict
 				return err
 			}
 
+		case "AllowAndroidApps":
+			if err := awsRestjson1_deserializeDocumentAndroidAppList(&sv.AllowAndroidApps, value); err != nil {
+				return err
+			}
+
+		case "AllowAppleApps":
+			if err := awsRestjson1_deserializeDocumentAppleAppList(&sv.AllowAppleApps, value); err != nil {
+				return err
+			}
+
 		case "AllowReferers":
 			if err := awsRestjson1_deserializeDocumentRefererPatternList(&sv.AllowReferers, value); err != nil {
 				return err
@@ -10693,6 +10786,80 @@ func awsRestjson1_deserializeDocumentApiKeyRestrictions(v **types.ApiKeyRestrict
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAppleApp(v **types.AppleApp, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AppleApp
+	if *v == nil {
+		sv = &types.AppleApp{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BundleId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppleBundleId to be of type string, got %T instead", value)
+				}
+				sv.BundleId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAppleAppList(v *[]types.AppleApp, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AppleApp
+	if *v == nil {
+		cv = []types.AppleApp{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AppleApp
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAppleApp(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11577,7 +11744,7 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 					sv.Distance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -11620,7 +11787,7 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 					sv.DurationSeconds = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -12435,7 +12602,7 @@ func awsRestjson1_deserializeDocumentLeg(v **types.Leg, value interface{}) error
 					sv.Distance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -12469,7 +12636,7 @@ func awsRestjson1_deserializeDocumentLeg(v **types.Leg, value interface{}) error
 					sv.DurationSeconds = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -13764,7 +13931,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.AddressNumber = ptr.String(jtv)
 			}
@@ -13778,7 +13945,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Country = ptr.String(jtv)
 			}
@@ -13792,7 +13959,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Interpolated = ptr.Bool(jtv)
 			}
@@ -13801,7 +13968,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Label = ptr.String(jtv)
 			}
@@ -13810,7 +13977,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Municipality = ptr.String(jtv)
 			}
@@ -13819,7 +13986,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Neighborhood = ptr.String(jtv)
 			}
@@ -13828,7 +13995,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
@@ -13837,7 +14004,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Region = ptr.String(jtv)
 			}
@@ -13846,7 +14013,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Street = ptr.String(jtv)
 			}
@@ -13855,7 +14022,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.SubMunicipality = ptr.String(jtv)
 			}
@@ -13864,7 +14031,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.SubRegion = ptr.String(jtv)
 			}
@@ -13883,7 +14050,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.UnitNumber = ptr.String(jtv)
 			}
@@ -13892,7 +14059,7 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.UnitType = ptr.String(jtv)
 			}
@@ -14403,7 +14570,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 					sv.Distance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -14437,7 +14604,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 					sv.DurationSeconds = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -14590,7 +14757,7 @@ func awsRestjson1_deserializeDocumentSearchForPositionResult(v **types.SearchFor
 					sv.Distance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -14697,7 +14864,7 @@ func awsRestjson1_deserializeDocumentSearchForSuggestionsResult(v **types.Search
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Text = ptr.String(jtv)
 			}
@@ -14796,7 +14963,7 @@ func awsRestjson1_deserializeDocumentSearchForTextResult(v **types.SearchForText
 					sv.Distance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -14844,7 +15011,7 @@ func awsRestjson1_deserializeDocumentSearchForTextResult(v **types.SearchForText
 					sv.Relevance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -15237,7 +15404,7 @@ func awsRestjson1_deserializeDocumentStep(v **types.Step, value interface{}) err
 					sv.Distance = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -15271,7 +15438,7 @@ func awsRestjson1_deserializeDocumentStep(v **types.Step, value interface{}) err
 					sv.DurationSeconds = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -15444,7 +15611,7 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -15453,7 +15620,7 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

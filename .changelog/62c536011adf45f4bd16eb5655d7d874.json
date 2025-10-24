@@ -1,0 +1,8 @@
+{
+    "id": "62c53601-1adf-45f4-bd16-eb5655d7d874",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/robomaker"
+    ]
+}

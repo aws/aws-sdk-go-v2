@@ -356,7 +356,14 @@ type StartStreamSessionOutput struct {
 	//   - TERMINATED : The stream session has ended.
 	Status types.StreamSessionStatus
 
-	// A short description of the reason the stream session is in ERROR status.
+	// A short description of the reason the stream session is in ERROR status or
+	// TERMINATED status.
+	//
+	// ERROR status reasons:
+	//
+	//   - applicationLogS3DestinationError : Could not write the application log to
+	//   the Amazon S3 bucket that is configured for the streaming application. Make sure
+	//   the bucket still exists.
 	//
 	//   - internalError : An internal service error occurred. Start a new stream
 	//   session to continue streaming.
@@ -369,9 +376,29 @@ type StartStreamSessionOutput struct {
 	//   capacity to start a stream session. Increase the stream capacity in the stream
 	//   group or wait until capacity becomes available.
 	//
-	//   - applicationLogS3DestinationError : Could not write the application log to
-	//   the Amazon S3 bucket that is configured for the streaming application. Make sure
-	//   the bucket still exists.
+	// TERMINATED status reasons:
+	//
+	//   - apiTerminated : The stream session was terminated by an API call to [TerminateStreamSession].
+	//
+	//   - applicationExit : The streaming application exited or crashed. The stream
+	//   session was terminated because the application is no longer running.
+	//
+	//   - connectionTimeout : The stream session was terminated because the client
+	//   failed to connect within the connection timeout period specified by
+	//   ConnectionTimeoutSeconds .
+	//
+	//   - idleTimeout : The stream session was terminated because it exceeded the idle
+	//   timeout period of 60 minutes with no user input activity.
+	//
+	//   - maxSessionLengthTimeout : The stream session was terminated because it
+	//   exceeded the maximum session length timeout period specified by
+	//   SessionLengthSeconds .
+	//
+	//   - reconnectionTimeout : The stream session was terminated because the client
+	//   failed to reconnect within the reconnection timeout period specified by
+	//   ConnectionTimeoutSeconds after losing connection.
+	//
+	// [TerminateStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TerminateStreamSession.html
 	StatusReason types.StreamSessionStatusReason
 
 	// The unique identifier for the Amazon GameLift Streams stream group that is

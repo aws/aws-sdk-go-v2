@@ -1306,6 +1306,41 @@ func addOpVerifyDevicePositionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpVerifyDevicePosition{}, middleware.After)
 }
 
+func validateAndroidApp(v *types.AndroidApp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AndroidApp"}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.CertificateFingerprint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateFingerprint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAndroidAppList(v []types.AndroidApp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AndroidAppList"}
+	for i := range v {
+		if err := validateAndroidApp(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateApiKeyRestrictions(v *types.ApiKeyRestrictions) error {
 	if v == nil {
 		return nil
@@ -1316,6 +1351,48 @@ func validateApiKeyRestrictions(v *types.ApiKeyRestrictions) error {
 	}
 	if v.AllowResources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowResources"))
+	}
+	if v.AllowAndroidApps != nil {
+		if err := validateAndroidAppList(v.AllowAndroidApps); err != nil {
+			invalidParams.AddNested("AllowAndroidApps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowAppleApps != nil {
+		if err := validateAppleAppList(v.AllowAppleApps); err != nil {
+			invalidParams.AddNested("AllowAppleApps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppleApp(v *types.AppleApp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppleApp"}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppleAppList(v []types.AppleApp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppleAppList"}
+	for i := range v {
+		if err := validateAppleApp(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

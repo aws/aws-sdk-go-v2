@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns an automation rule for the V2 service. This API is in private preview
+// Returns an automation rule for the V2 service. This API is in public preview
 // and subject to change.
 func (c *Client) GetAutomationRuleV2(ctx context.Context, params *GetAutomationRuleV2Input, optFns ...func(*Options)) (*GetAutomationRuleV2Output, error) {
 	if params == nil {

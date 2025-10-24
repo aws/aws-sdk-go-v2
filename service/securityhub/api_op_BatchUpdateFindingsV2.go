@@ -21,7 +21,7 @@ import (
 // securityhub:BatchUpdateFindings action. Updates from BatchUpdateFindingsV2
 // don't affect the value of f inding_info.modified_time ,
 // finding_info.modified_time_dt , time , time_dt for a finding . This API is in
-// private preview and subject to change.
+// public preview and subject to change.
 func (c *Client) BatchUpdateFindingsV2(ctx context.Context, params *BatchUpdateFindingsV2Input, optFns ...func(*Options)) (*BatchUpdateFindingsV2Output, error) {
 	if params == nil {
 		params = &BatchUpdateFindingsV2Input{}

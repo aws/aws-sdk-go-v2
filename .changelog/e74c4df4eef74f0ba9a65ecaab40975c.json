@@ -1,0 +1,8 @@
+{
+    "id": "e74c4df4-eef7-4f0b-a9a6-5ecaab40975c",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/amplifyuibuilder"
+    ]
+}

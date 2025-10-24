@@ -110,6 +110,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberIamProperties:
 		_ = v.Value // Value is types.IamPropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberMlflowProperties:
+		_ = v.Value // Value is types.MlflowPropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberRedshiftProperties:
 		_ = v.Value // Value is types.RedshiftPropertiesInput
 
@@ -140,6 +143,7 @@ var _ *types.IamPropertiesInput
 var _ *types.SparkGluePropertiesInput
 var _ *types.HyperPodPropertiesInput
 var _ *types.RedshiftPropertiesInput
+var _ *types.MlflowPropertiesInput
 
 func ExampleConnectionPropertiesOutput_outputUsage() {
 	var union types.ConnectionPropertiesOutput
@@ -159,6 +163,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 
 	case *types.ConnectionPropertiesOutputMemberIamProperties:
 		_ = v.Value // Value is types.IamPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberMlflowProperties:
+		_ = v.Value // Value is types.MlflowPropertiesOutput
 
 	case *types.ConnectionPropertiesOutputMemberRedshiftProperties:
 		_ = v.Value // Value is types.RedshiftPropertiesOutput
@@ -181,6 +188,7 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	}
 }
 
+var _ *types.MlflowPropertiesOutput
 var _ *types.S3PropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
@@ -207,6 +215,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	case *types.ConnectionPropertiesPatchMemberIamProperties:
 		_ = v.Value // Value is types.IamPropertiesPatch
 
+	case *types.ConnectionPropertiesPatchMemberMlflowProperties:
+		_ = v.Value // Value is types.MlflowPropertiesPatch
+
 	case *types.ConnectionPropertiesPatchMemberRedshiftProperties:
 		_ = v.Value // Value is types.RedshiftPropertiesPatch
 
@@ -227,6 +238,7 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 
 var _ *types.AmazonQPropertiesPatch
 var _ *types.SparkEmrPropertiesPatch
+var _ *types.MlflowPropertiesPatch
 var _ *types.IamPropertiesPatch
 var _ *types.RedshiftPropertiesPatch
 var _ *types.AthenaPropertiesPatch

@@ -1,0 +1,8 @@
+{
+    "id": "aa05cecc-abae-408e-8782-d780d01c4fc0",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mediastoredata"
+    ]
+}

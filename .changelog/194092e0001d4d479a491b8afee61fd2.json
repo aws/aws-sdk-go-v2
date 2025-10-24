@@ -1,0 +1,8 @@
+{
+    "id": "194092e0-001d-4d47-9a49-1b8afee61fd2",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/mq"
+    ]
+}

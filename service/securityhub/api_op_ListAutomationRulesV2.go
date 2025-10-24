@@ -12,7 +12,7 @@ import (
 )
 
 // Returns a list of automation rules and metadata for the calling account. This
-// API is in private preview and subject to change.
+// API is in public preview and subject to change.
 func (c *Client) ListAutomationRulesV2(ctx context.Context, params *ListAutomationRulesV2Input, optFns ...func(*Options)) (*ListAutomationRulesV2Output, error) {
 	if params == nil {
 		params = &ListAutomationRulesV2Input{}

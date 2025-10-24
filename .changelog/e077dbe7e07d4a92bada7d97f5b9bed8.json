@@ -1,0 +1,8 @@
+{
+    "id": "e077dbe7-e07d-4a92-bada-7d97f5b9bed8",
+    "type": "feature",
+    "description": "Added support for mobile app restrictions in Amazon Location API keys.",
+    "modules": [
+        "service/location"
+    ]
+}

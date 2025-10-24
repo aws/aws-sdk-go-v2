@@ -14435,8 +14435,19 @@ type CompositeFilter struct {
 	// Enables filtering based on date and timestamp fields.
 	DateFilters []OcsfDateFilter
 
+	// A list of IP address filters that allowing you to filter findings based on IP
+	// address properties.
+	IpFilters []OcsfIpFilter
+
 	// Enables filtering based on map field values.
 	MapFilters []OcsfMapFilter
+
+	//  Provides an additional level of filtering, creating a three-layer nested
+	// structure. The first layer is a CompositeFilters array with a CompositeOperator
+	// ( AND / OR ). The second layer is a CompositeFilter object that contains direct
+	// filters and NestedCompositeFilters . The third layer is NestedCompositeFilters ,
+	// which contains additional filter conditions.
+	NestedCompositeFilters []CompositeFilter
 
 	// Enables filtering based on numerical field values.
 	NumberFilters []OcsfNumberFilter
@@ -16161,6 +16172,18 @@ type OcsfFindingIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// The structure for filtering findings based on IP address attributes.
+type OcsfIpFilter struct {
+
+	// The name of the IP address field to filter on.
+	FieldName OcsfIpField
+
+	// The IP filter for querying findings.
+	Filter *IpFilter
+
+	noSmithyDocumentSerde
+}
+
 // Enables filtering of security findings based on map field values in OCSF.
 type OcsfMapFilter struct {
 
@@ -17321,14 +17344,14 @@ type ResourceResult struct {
 	// An aggregated view of security findings associated with a resource.
 	FindingsSummary []ResourceFindingsSummary
 
-	// Specifies the ARN that uniquely identifies a resource.
-	ResourceArn *string
-
 	// The grouping where the resource belongs.
 	ResourceCategory ResourceCategory
 
 	// The time when the resource was created.
 	ResourceCreationTimeDt *string
+
+	// The global identifier used to identify a resource.
+	ResourceGuid *string
 
 	// The name of the resource.
 	ResourceName *string
@@ -17351,6 +17374,13 @@ type ResourcesCompositeFilter struct {
 
 	// Enables filtering based on map-based field values.
 	MapFilters []ResourcesMapFilter
+
+	//  Provides an additional level of filtering, creating a three-layer nested
+	// structure. The first layer is a CompositeFilters array with a CompositeOperator
+	// ( AND / OR ). The second layer is a CompositeFilter object that contains direct
+	// filters and NestedCompositeFilters . The third layer is NestedCompositeFilters ,
+	// which contains additional filter conditions.
+	NestedCompositeFilters []ResourcesCompositeFilter
 
 	// Enables filtering based on numerical field values.
 	NumberFilters []ResourcesNumberFilter
@@ -19034,7 +19064,8 @@ type UnprocessedConfigurationPolicyAssociation struct {
 // returned.
 type UnprocessedSecurityControl struct {
 
-	//  The error code for the unprocessed security control.
+	//  The error code for the unprocessed security control. The NOT_FOUND value has
+	// been deprecated and replaced by the RESOURCE_NOT_FOUND value.
 	//
 	// This member is required.
 	ErrorCode UnprocessedErrorCode
@@ -19059,7 +19090,9 @@ type UnprocessedSecurityControl struct {
 // [BatchUpdateStandardsControlAssociations]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
 type UnprocessedStandardsControlAssociation struct {
 
-	// The error code for the unprocessed standard and control association.
+	// The error code for the unprocessed standard and control association. The
+	// NOT_FOUND value has been deprecated and replaced by the RESOURCE_NOT_FOUND
+	// value.
 	//
 	// This member is required.
 	ErrorCode UnprocessedErrorCode
@@ -19089,7 +19122,8 @@ type UnprocessedStandardsControlAssociation struct {
 type UnprocessedStandardsControlAssociationUpdate struct {
 
 	// The error code for the unprocessed update of the control's enablement status in
-	// the specified standard.
+	// the specified standard. The NOT_FOUND value has been deprecated and replaced by
+	// the RESOURCE_NOT_FOUND value.
 	//
 	// This member is required.
 	ErrorCode UnprocessedErrorCode
