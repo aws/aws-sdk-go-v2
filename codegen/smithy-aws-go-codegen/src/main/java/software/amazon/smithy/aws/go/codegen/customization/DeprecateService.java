@@ -24,7 +24,16 @@ public class DeprecateService implements GoIntegration {
 	    "com.amazonaws.privatenetworks#E5GNetworkControllerLambda",
 	    "com.amazonaws.opsworks#OpsWorks_20130218",
 	    "com.amazonaws.opsworkscm#OpsWorksCM_V2016_11_01",
-        "com.amazonaws.sms#AWSServerMigrationService_V2016_10_24"
+        "com.amazonaws.sms#AWSServerMigrationService_V2016_10_24",
+
+        // 10/28/25
+        "com.amazonaws.qldb#AmazonQLDB",
+        "com.amazonaws.qldbsession#QLDBSession",
+        "com.amazonaws.robomaker#robomaker",
+        "com.amazonaws.lookoutmetrics#LookoutMetrics",
+        "com.amazonaws.lookoutvision#LookoutVisionService",
+        "com.amazonaws.iotfleethub#AWSIoTFleetHub",
+        "com.amazonaws.apptest#AwsApptestControlPlaneService"
     );
 
     @Override
