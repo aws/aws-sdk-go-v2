@@ -1,8 +1,0 @@
-{
-    "id": "f4ea859b-b066-49ea-ad29-de39736be553",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/shield"
-    ]
-}

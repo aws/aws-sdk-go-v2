@@ -1,8 +1,0 @@
-{
-    "id": "01a8299e-3878-441a-b1e1-1a6681b45ab0",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9dc931c3-83b1-453b-b726-31cf572fa3da",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/athena"
-    ]
-}

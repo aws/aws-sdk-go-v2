@@ -1,8 +1,0 @@
-{
-    "id": "10061d69-4b3d-46ed-a8a6-f46c938f8147",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/workmailmessageflow"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "259a36ce-5704-48a3-97d2-47f96ff39da9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/launchwizard"
-    ]
-}

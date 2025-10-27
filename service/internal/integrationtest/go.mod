@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.39.4
 	github.com/aws/aws-sdk-go-v2/config v1.31.15
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.19.15
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.52.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.258.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.79.0

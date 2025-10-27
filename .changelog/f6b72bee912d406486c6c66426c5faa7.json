@@ -1,8 +1,0 @@
-{
-    "id": "f6b72bee-912d-4064-86c6-c66426c5faa7",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/rbin"
-    ]
-}

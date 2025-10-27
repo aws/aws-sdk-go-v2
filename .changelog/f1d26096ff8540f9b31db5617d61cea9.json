@@ -1,8 +1,0 @@
-{
-    "id": "f1d26096-ff85-40f9-b31d-b5617d61cea9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ssoadmin"
-    ]
-}

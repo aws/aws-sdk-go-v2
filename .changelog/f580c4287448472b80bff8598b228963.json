@@ -1,8 +1,0 @@
-{
-    "id": "f580c428-7448-472b-80bf-f8598b228963",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/mturk"
-    ]
-}

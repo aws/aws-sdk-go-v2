@@ -1,8 +1,0 @@
-{
-    "id": "2bd999ad-7d71-4432-aeac-555ce772dc47",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/scheduler"
-    ]
-}

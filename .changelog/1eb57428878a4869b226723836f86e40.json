@@ -1,8 +1,0 @@
-{
-    "id": "1eb57428-878a-4869-b226-723836f86e40",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ssmsap"
-    ]
-}

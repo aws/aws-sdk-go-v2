@@ -1,8 +1,0 @@
-{
-    "id": "5ebd20d1-1d1f-4bbf-850b-3c3287095387",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/s3vectors"
-    ]
-}

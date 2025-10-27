@@ -1,8 +1,0 @@
-{
-    "id": "13961060-8ec1-4b3d-9673-175882d9548d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/bedrockdataautomation"
-    ]
-}

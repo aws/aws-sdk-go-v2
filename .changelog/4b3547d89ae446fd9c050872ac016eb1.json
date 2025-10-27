@@ -1,8 +1,0 @@
-{
-    "id": "4b3547d8-9ae4-46fd-9c05-0872ac016eb1",
-    "type": "feature",
-    "description": "Fixed missing SummaryMap keys in GetAccountSummary response that were being filtered out during deserialization in AWS Java SDK v2",
-    "modules": [
-        "service/iam"
-    ]
-}

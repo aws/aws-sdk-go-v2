@@ -1,8 +1,0 @@
-{
-    "id": "edb233bb-531d-4072-9589-b316aa6f26ce",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/route53profiles"
-    ]
-}

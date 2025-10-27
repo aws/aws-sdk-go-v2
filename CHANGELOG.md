@@ -1,3 +1,15 @@
+# Release (2025-10-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.20.0](feature/s3/manager/CHANGELOG.md#v1200-2025-10-27)
+  * **Feature**: Add durability checks to validate part count and range for upload/download. You can disable this with `DisableValidateParts` in upload/download options, though doing so is not recommended because it damages the durability posture of your application.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.59.0](service/costexplorer/CHANGELOG.md#v1590-2025-10-27)
+  * **Feature**: Updated endpoint for eusc-de-east-1 region.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.49.0](service/iam/CHANGELOG.md#v1490-2025-10-27)
+  * **Feature**: Fixed missing SummaryMap keys in GetAccountSummary response that were being filtered out during deserialization in AWS Java SDK v2
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.41.0](service/kinesis/CHANGELOG.md#v1410-2025-10-27)
+  * **Feature**: Adds support for record sizes up to 10MiB and introduces new UpdateMaxRecordSize API to modify stream record size limits. Adds record size parameters to existing CreateStream and DescribeStreamSummary APIs for request and response payloads respectively.
+
 # Release (2025-10-24)
 
 ## General Highlights

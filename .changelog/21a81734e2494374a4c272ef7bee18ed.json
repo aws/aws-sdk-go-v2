@@ -1,8 +1,0 @@
-{
-    "id": "21a81734-e249-4374-a4c2-72ef7bee18ed",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ses"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "217572d0-72fb-4ebc-8132-803e62e1c0ad",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

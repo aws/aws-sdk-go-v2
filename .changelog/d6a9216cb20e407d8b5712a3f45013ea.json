@@ -1,8 +1,0 @@
-{
-    "id": "d6a9216c-b20e-407d-8b57-12a3f45013ea",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/dax"
-    ]
-}
