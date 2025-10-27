@@ -13,6 +13,8 @@ import (
 )
 
 // Gets a test configuration.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetTestConfiguration(ctx context.Context, params *GetTestConfigurationInput, optFns ...func(*Options)) (*GetTestConfigurationOutput, error) {
 	if params == nil {
 		params = &GetTestConfigurationInput{}
@@ -33,9 +35,13 @@ type GetTestConfigurationInput struct {
 	// The request test configuration ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The test configuration version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationVersion *int32
 
 	noSmithyDocumentSerde
@@ -56,53 +62,75 @@ type GetTestConfigurationOutput struct {
 	// The latest version of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestVersion *types.TestConfigurationLatestVersion
 
 	// The test configuration name
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The properties of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties map[string]string
 
 	// The resources of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resources []types.Resource
 
 	// The status of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.TestConfigurationLifecycle
 
 	// The test configuration Amazon Resource Name (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationArn *string
 
 	// The response test configuration ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The test configuration version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationVersion *int32
 
 	// The description of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The service settings of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceSettings *types.ServiceSettings
 
 	// The status reason of the test configuration.
 	StatusReason *string
 
 	// The tags of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

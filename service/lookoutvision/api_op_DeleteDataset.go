@@ -27,6 +27,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:DeleteDataset
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -49,11 +51,15 @@ type DeleteDatasetInput struct {
 	// single dataset project, specify train .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// The name of the project that contains the dataset that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to DeleteDataset
@@ -69,6 +75,8 @@ type DeleteDatasetInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// DeleteDataset . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

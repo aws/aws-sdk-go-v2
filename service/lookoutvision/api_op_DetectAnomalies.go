@@ -29,6 +29,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:DetectAnomalies
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DetectAnomalies(ctx context.Context, params *DetectAnomaliesInput, optFns ...func(*Options)) (*DetectAnomaliesOutput, error) {
 	if params == nil {
 		params = &DetectAnomaliesInput{}
@@ -49,22 +51,30 @@ type DetectAnomaliesInput struct {
 	// The unencrypted image bytes that you want to analyze.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Body io.Reader
 
 	// The type of the image passed in Body . Valid values are image/png (PNG format
 	// images) and image/jpeg (JPG format images).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType *string
 
 	// The version of the model that you want to use.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The name of the project that contains the model version that you want to use.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -73,6 +83,8 @@ type DetectAnomaliesInput struct {
 type DetectAnomaliesOutput struct {
 
 	// The results of the DetectAnomalies operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectAnomalyResult *types.DetectAnomalyResult
 
 	// Metadata pertaining to the operation's result.

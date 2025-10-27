@@ -19,6 +19,8 @@ import (
 //
 // Lists world generator jobs.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) ListWorldGenerationJobs(ctx context.Context, params *ListWorldGenerationJobsInput, optFns ...func(*Options)) (*ListWorldGenerationJobsOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ func (c *Client) ListWorldGenerationJobs(ctx context.Context, params *ListWorldG
 type ListWorldGenerationJobsInput struct {
 
 	// Optional filters to limit results. You can use status and templateId .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	// When this parameter is used, ListWorldGeneratorJobs only returns maxResults
@@ -47,6 +51,8 @@ type ListWorldGenerationJobsInput struct {
 	// can be between 1 and 100. If this parameter is not used, then
 	// ListWorldGeneratorJobs returns up to 100 results and a nextToken value if
 	// applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -55,6 +61,8 @@ type ListWorldGenerationJobsInput struct {
 	// that token to the request object's nextToken parameter. If there are no
 	// remaining results, the previous response object's NextToken parameter is set to
 	// null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -65,6 +73,8 @@ type ListWorldGenerationJobsOutput struct {
 	// Summary information for world generator jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldGenerationJobSummaries []types.WorldGenerationJobSummary
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -73,6 +83,8 @@ type ListWorldGenerationJobsOutput struct {
 	// that token to the request object's nextToken parameter. If there are no
 	// remaining results, the previous response object's NextToken parameter is set to
 	// null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -16,6 +16,8 @@ import (
 //
 // This action returns a maximum of MaxResults items and is paginated so that you
 // can retrieve all the items by calling ListLedgers multiple times.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListLedgers(ctx context.Context, params *ListLedgersInput, optFns ...func(*Options)) (*ListLedgersOutput, error) {
 	if params == nil {
 		params = &ListLedgersInput{}
@@ -35,11 +37,15 @@ type ListLedgersInput struct {
 
 	// The maximum number of results to return in a single ListLedgers request. (The
 	// actual number of results returned might be fewer.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A pagination token, indicating that you want to retrieve the next page of
 	// results. If you received a value for NextToken in the response from a previous
 	// ListLedgers call, then you should use that value as input here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,6 +55,8 @@ type ListLedgersOutput struct {
 
 	// The ledgers that are associated with the current Amazon Web Services account
 	// and Region.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ledgers []types.LedgerSummary
 
 	// A pagination token, indicating whether there are more results available:
@@ -59,6 +67,8 @@ type ListLedgersOutput struct {
 	//   - If NextToken is not empty, then there are more results available. To
 	//   retrieve the next page of results, use the value of NextToken in a subsequent
 	//   ListLedgers call.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,8 @@ import (
 )
 
 // Runs a backtest for anomaly detection for the specified resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) BackTestAnomalyDetector(ctx context.Context, params *BackTestAnomalyDetectorInput, optFns ...func(*Options)) (*BackTestAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &BackTestAnomalyDetectorInput{}
@@ -31,6 +33,8 @@ type BackTestAnomalyDetectorInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	noSmithyDocumentSerde

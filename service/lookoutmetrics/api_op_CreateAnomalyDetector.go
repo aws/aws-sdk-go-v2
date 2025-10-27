@@ -12,6 +12,8 @@ import (
 )
 
 // Creates an anomaly detector.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateAnomalyDetector(ctx context.Context, params *CreateAnomalyDetectorInput, optFns ...func(*Options)) (*CreateAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &CreateAnomalyDetectorInput{}
@@ -32,22 +34,32 @@ type CreateAnomalyDetectorInput struct {
 	// Contains information about the configuration of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorConfig *types.AnomalyDetectorConfig
 
 	// The name of the detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorName *string
 
 	// A description of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorDescription *string
 
 	// The ARN of the KMS key to use to encrypt your data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyArn *string
 
 	// A list of [tags] to apply to the anomaly detector.
 	//
 	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -56,6 +68,8 @@ type CreateAnomalyDetectorInput struct {
 type CreateAnomalyDetectorOutput struct {
 
 	// The ARN of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// Metadata pertaining to the operation's result.

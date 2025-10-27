@@ -12,6 +12,8 @@ import (
 
 // Removes one or more tags from a specified Amazon QLDB resource. You can specify
 // up to 50 tag keys to remove.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -34,11 +36,15 @@ type UntagResourceInput struct {
 	//     arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// The list of tag keys to remove.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

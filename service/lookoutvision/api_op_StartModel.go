@@ -25,6 +25,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:StartModel
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartModel(ctx context.Context, params *StartModelInput, optFns ...func(*Options)) (*StartModelOutput, error) {
 	if params == nil {
 		params = &StartModelInput{}
@@ -48,16 +50,22 @@ type StartModelInput struct {
 	// you use.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MinInferenceUnits *int32
 
 	// The version of the model that you want to start.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The name of the project that contains the model that you want to start.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to StartModel completes
@@ -73,10 +81,14 @@ type StartModelInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// StartModel . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The maximum number of inference units to use for auto-scaling the model. If you
 	// don't specify a value, Amazon Lookout for Vision doesn't auto-scale the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxInferenceUnits *int32
 
 	noSmithyDocumentSerde
@@ -85,6 +97,8 @@ type StartModelInput struct {
 type StartModelOutput struct {
 
 	// The current running status of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.ModelHostingStatus
 
 	// Metadata pertaining to the operation's result.

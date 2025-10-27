@@ -12,6 +12,8 @@ import (
 )
 
 // Add feedback for an anomalous metric.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutFeedback(ctx context.Context, params *PutFeedbackInput, optFns ...func(*Options)) (*PutFeedbackOutput, error) {
 	if params == nil {
 		params = &PutFeedbackInput{}
@@ -32,11 +34,15 @@ type PutFeedbackInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// Feedback for an anomalous metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupTimeSeriesFeedback *types.AnomalyGroupTimeSeriesFeedback
 
 	noSmithyDocumentSerde

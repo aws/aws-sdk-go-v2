@@ -13,6 +13,8 @@ import (
 
 // Gets a list of Fleet Hub for IoT Device Management web applications for the
 // current account.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -31,6 +33,8 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 type ListApplicationsInput struct {
 
 	// A token used to get the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,9 +44,13 @@ type ListApplicationsOutput struct {
 
 	// An array of objects that provide summaries of information about the web
 	// applications in the list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationSummaries []types.ApplicationSummary
 
 	// A token used to get the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

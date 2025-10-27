@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a test configuration.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteTestConfiguration(ctx context.Context, params *DeleteTestConfigurationInput, optFns ...func(*Options)) (*DeleteTestConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteTestConfigurationInput{}
@@ -31,6 +33,8 @@ type DeleteTestConfigurationInput struct {
 	// The test ID of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	noSmithyDocumentSerde

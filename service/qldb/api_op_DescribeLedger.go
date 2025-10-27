@@ -14,6 +14,8 @@ import (
 
 // Returns information about a ledger, including its state, permissions mode,
 // encryption at rest settings, and when it was created.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeLedger(ctx context.Context, params *DescribeLedgerInput, optFns ...func(*Options)) (*DescribeLedgerOutput, error) {
 	if params == nil {
 		params = &DescribeLedgerInput{}
@@ -34,6 +36,8 @@ type DescribeLedgerInput struct {
 	// The name of the ledger that you want to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -42,11 +46,15 @@ type DescribeLedgerInput struct {
 type DescribeLedgerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time, in epoch time format, when the ledger was created. (Epoch
 	// time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970
 	// UTC.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationDateTime *time.Time
 
 	// Specifies whether the ledger is protected from being deleted by any user. If
@@ -55,21 +63,31 @@ type DescribeLedgerOutput struct {
 	// If deletion protection is enabled, you must first disable it before you can
 	// delete the ledger. You can disable it by calling the UpdateLedger operation to
 	// set this parameter to false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeletionProtection *bool
 
 	// Information about the encryption of data at rest in the ledger. This includes
 	// the current status, the KMS key, and when the key became inaccessible (in the
 	// case of an error). If this parameter is undefined, the ledger uses an Amazon Web
 	// Services owned KMS key for encryption.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EncryptionDescription *types.LedgerEncryptionDescription
 
 	// The name of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The permissions mode of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionsMode types.PermissionsMode
 
 	// The current status of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State types.LedgerState
 
 	// Metadata pertaining to the operation's result.

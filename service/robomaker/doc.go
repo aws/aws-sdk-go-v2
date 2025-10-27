@@ -4,4 +4,6 @@
 // AWS RoboMaker.
 //
 // This section provides documentation for the AWS RoboMaker API operations.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package robomaker

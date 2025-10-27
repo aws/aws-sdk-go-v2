@@ -18,6 +18,8 @@ import (
 //
 // Gets the world template body.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) GetWorldTemplateBody(ctx context.Context, params *GetWorldTemplateBodyInput, optFns ...func(*Options)) (*GetWorldTemplateBodyOutput, error) {
 	if params == nil {
@@ -37,9 +39,13 @@ func (c *Client) GetWorldTemplateBody(ctx context.Context, params *GetWorldTempl
 type GetWorldTemplateBodyInput struct {
 
 	// The Amazon Resource Name (arn) of the world generator job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GenerationJob *string
 
 	// The Amazon Resource Name (arn) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	noSmithyDocumentSerde
@@ -48,6 +54,8 @@ type GetWorldTemplateBodyInput struct {
 type GetWorldTemplateBodyOutput struct {
 
 	// The world template body.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateBody *string
 
 	// Metadata pertaining to the operation's result.

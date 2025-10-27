@@ -21,9 +21,7 @@ import (
 //
 // Deletes a fleet.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -47,6 +45,8 @@ type DeleteFleetInput struct {
 	// The Amazon Resource Name (ARN) of the fleet.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	noSmithyDocumentSerde

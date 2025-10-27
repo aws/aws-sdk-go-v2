@@ -18,6 +18,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:ListModels
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns ...func(*Options)) (*ListModelsOutput, error) {
 	if params == nil {
 		params = &ListModelsInput{}
@@ -38,16 +40,22 @@ type ListModelsInput struct {
 	// The name of the project that contains the model versions that you want to list.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Lookout for Vision returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of models.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,10 +64,14 @@ type ListModelsInput struct {
 type ListModelsOutput struct {
 
 	// A list of model versions in the specified project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Models []types.ModelMetadata
 
 	// If the response is truncated, Amazon Lookout for Vision returns this token that
 	// you can use in the subsequent request to retrieve the next set of models.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

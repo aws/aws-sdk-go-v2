@@ -12,6 +12,8 @@ import (
 )
 
 // Starts a test run.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartTestRun(ctx context.Context, params *StartTestRunInput, optFns ...func(*Options)) (*StartTestRunOutput, error) {
 	if params == nil {
 		params = &StartTestRunInput{}
@@ -32,15 +34,23 @@ type StartTestRunInput struct {
 	// The test suite ID of the test run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The client token of the test run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The tags of the test run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The configuration ID of the test run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	noSmithyDocumentSerde
@@ -51,11 +61,15 @@ type StartTestRunOutput struct {
 	// The test run ID of the test run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The test run status of the test run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunStatus types.TestRunStatus
 
 	// Metadata pertaining to the operation's result.

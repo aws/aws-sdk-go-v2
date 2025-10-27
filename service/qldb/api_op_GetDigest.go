@@ -13,6 +13,8 @@ import (
 
 // Returns the digest of a ledger at the latest committed block in the journal.
 // The response includes a 256-bit hash value and a block address.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDigest(ctx context.Context, params *GetDigestInput, optFns ...func(*Options)) (*GetDigestOutput, error) {
 	if params == nil {
 		params = &GetDigestInput{}
@@ -33,6 +35,8 @@ type GetDigestInput struct {
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -43,12 +47,16 @@ type GetDigestOutput struct {
 	// The 256-bit hash value representing the digest returned by a GetDigest request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Digest []byte
 
 	// The latest block location covered by the digest that you requested. An address
 	// is an Amazon Ion structure that has two fields: strandId and sequenceNo .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DigestTipAddress *types.ValueHolder
 
 	// Metadata pertaining to the operation's result.

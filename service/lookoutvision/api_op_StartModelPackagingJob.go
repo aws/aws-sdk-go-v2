@@ -42,6 +42,8 @@ import (
 // For more information, see Using your Amazon Lookout for Vision model on an edge
 // device in the Amazon Lookout for Vision Developer Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [CreateDeployment]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html
 func (c *Client) StartModelPackagingJob(ctx context.Context, params *StartModelPackagingJobInput, optFns ...func(*Options)) (*StartModelPackagingJobOutput, error) {
 	if params == nil {
@@ -63,17 +65,23 @@ type StartModelPackagingJobInput struct {
 	// The configuration for the model packaging job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Configuration *types.ModelPackagingConfiguration
 
 	//  The version of the model within the project that you want to package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	//  The name of the project which contains the version of the model that you want
 	// to package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to
@@ -90,13 +98,19 @@ type StartModelPackagingJobInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// StartModelPackagingJob . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A description for the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A name for the model packaging job. If you don't supply a value, the service
 	// creates a job name for you.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobName *string
 
 	noSmithyDocumentSerde
@@ -106,6 +120,8 @@ type StartModelPackagingJobOutput struct {
 
 	// The job name for the model packaging job. If you don't supply a job name in the
 	// JobName input parameter, the service creates a job name for you.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobName *string
 
 	// Metadata pertaining to the operation's result.

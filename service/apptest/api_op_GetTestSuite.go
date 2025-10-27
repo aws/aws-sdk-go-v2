@@ -13,6 +13,8 @@ import (
 )
 
 // Gets a test suite.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetTestSuite(ctx context.Context, params *GetTestSuiteInput, optFns ...func(*Options)) (*GetTestSuiteOutput, error) {
 	if params == nil {
 		params = &GetTestSuiteInput{}
@@ -33,9 +35,13 @@ type GetTestSuiteInput struct {
 	// The ID of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The version of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	noSmithyDocumentSerde
@@ -46,11 +52,15 @@ type GetTestSuiteOutput struct {
 	// The after steps of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AfterSteps []types.Step
 
 	// The before steps of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BeforeSteps []types.Step
 
 	// The creation time of the test suite.
@@ -66,43 +76,61 @@ type GetTestSuiteOutput struct {
 	// The latest version of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestVersion *types.TestSuiteLatestVersion
 
 	// The name of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The test cases of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCases types.TestCases
 
 	// The test suite Amazon Resource Name (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteArn *string
 
 	// The response ID of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The version of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	// The description of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The status of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.TestSuiteLifecycle
 
 	// The status reason of the test suite.
 	StatusReason *string
 
 	// The tags of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // Updates a dataset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateMetricSet(ctx context.Context, params *UpdateMetricSetInput, optFns ...func(*Options)) (*UpdateMetricSetOutput, error) {
 	if params == nil {
 		params = &UpdateMetricSetInput{}
@@ -32,6 +34,8 @@ type UpdateMetricSetInput struct {
 	// The ARN of the dataset to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetArn *string
 
 	// Describes a list of filters for choosing specific dimensions and specific
@@ -39,29 +43,45 @@ type UpdateMetricSetInput struct {
 	// want to include. When multiple dimensions or values are specified, the
 	// dimensions are joined with an AND operation and the values are joined with an OR
 	// operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionFilterList []types.MetricSetDimensionFilter
 
 	// The dimension list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionList []string
 
 	// The metric list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricList []types.Metric
 
 	// The dataset's description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetDescription *string
 
 	// The dataset's interval.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetFrequency types.Frequency
 
 	// Contains information about source data used to generate metrics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSource *types.MetricSource
 
 	// After an interval ends, the amount of seconds that the detector waits before
 	// importing data. Offset is only supported for S3, Redshift, Athena and
 	// datasources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Offset *int32
 
 	// The timestamp column.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimestampColumn *types.TimestampColumn
 
 	noSmithyDocumentSerde
@@ -70,6 +90,8 @@ type UpdateMetricSetInput struct {
 type UpdateMetricSetOutput struct {
 
 	// The ARN of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetArn *string
 
 	// Metadata pertaining to the operation's result.

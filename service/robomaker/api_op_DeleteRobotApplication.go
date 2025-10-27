@@ -18,6 +18,8 @@ import (
 //
 // Deletes a robot application.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DeleteRobotApplication(ctx context.Context, params *DeleteRobotApplicationInput, optFns ...func(*Options)) (*DeleteRobotApplicationOutput, error) {
 	if params == nil {
@@ -39,9 +41,13 @@ type DeleteRobotApplicationInput struct {
 	// The Amazon Resource Name (ARN) of the the robot application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Application *string
 
 	// The version of the robot application to delete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationVersion *string
 
 	noSmithyDocumentSerde

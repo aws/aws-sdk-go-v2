@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a dataset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateMetricSet(ctx context.Context, params *CreateMetricSetInput, optFns ...func(*Options)) (*CreateMetricSetOutput, error) {
 	if params == nil {
 		params = &CreateMetricSetInput{}
@@ -32,50 +34,74 @@ type CreateMetricSetInput struct {
 	// The ARN of the anomaly detector that will use the dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// A list of metrics that the dataset will contain.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricList []types.Metric
 
 	// The name of the dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetName *string
 
 	// Contains information about how the source data should be interpreted.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSource *types.MetricSource
 
 	// A list of filters that specify which data is kept for anomaly detection.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionFilterList []types.MetricSetDimensionFilter
 
 	// A list of the fields you want to treat as dimensions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionList []string
 
 	// A description of the dataset you are creating.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetDescription *string
 
 	// The frequency with which the source data will be analyzed for anomalies.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetFrequency types.Frequency
 
 	// After an interval ends, the amount of seconds that the detector waits before
 	// importing data. Offset is only supported for S3, Redshift, Athena and
 	// datasources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Offset *int32
 
 	// A list of [tags] to apply to the dataset.
 	//
 	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Contains information about the column used for tracking time in your source
 	// data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimestampColumn *types.TimestampColumn
 
 	// The time zone in which your source data was recorded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timezone *string
 
 	noSmithyDocumentSerde
@@ -84,6 +110,8 @@ type CreateMetricSetInput struct {
 type CreateMetricSetOutput struct {
 
 	// The ARN of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetArn *string
 
 	// Metadata pertaining to the operation's result.

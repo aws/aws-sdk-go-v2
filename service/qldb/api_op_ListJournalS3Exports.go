@@ -20,6 +20,8 @@ import (
 // This action does not return any expired export jobs. For more information, see [Export job expiration]
 // in the Amazon QLDB Developer Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Export job expiration]: https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration
 func (c *Client) ListJournalS3Exports(ctx context.Context, params *ListJournalS3ExportsInput, optFns ...func(*Options)) (*ListJournalS3ExportsOutput, error) {
 	if params == nil {
@@ -40,11 +42,15 @@ type ListJournalS3ExportsInput struct {
 
 	// The maximum number of results to return in a single ListJournalS3Exports
 	// request. (The actual number of results returned might be fewer.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A pagination token, indicating that you want to retrieve the next page of
 	// results. If you received a value for NextToken in the response from a previous
 	// ListJournalS3Exports call, then you should use that value as input here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,6 +60,8 @@ type ListJournalS3ExportsOutput struct {
 
 	// The journal export jobs for all ledgers that are associated with the current
 	// Amazon Web Services account and Region.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JournalS3Exports []types.JournalS3ExportDescription
 
 	//   - If NextToken is empty, then the last page of results has been processed and
@@ -62,6 +70,8 @@ type ListJournalS3ExportsOutput struct {
 	//   - If NextToken is not empty, then there are more results available. To
 	//   retrieve the next page of results, use the value of NextToken in a subsequent
 	//   ListJournalS3Exports call.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

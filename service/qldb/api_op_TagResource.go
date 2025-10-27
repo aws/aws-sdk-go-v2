@@ -14,6 +14,8 @@ import (
 //
 // A resource can have up to 50 tags. If you try to create more than 50 tags for a
 // resource, your request fails and returns an error.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,6 +38,8 @@ type TagResourceInput struct {
 	//     arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// The key-value pairs to add as tags to the specified QLDB resource. Tag keys are
@@ -44,6 +48,8 @@ type TagResourceInput struct {
 	// null.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]*string
 
 	noSmithyDocumentSerde

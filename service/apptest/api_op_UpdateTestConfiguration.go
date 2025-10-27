@@ -12,6 +12,8 @@ import (
 )
 
 // Updates a test configuration.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateTestConfiguration(ctx context.Context, params *UpdateTestConfigurationInput, optFns ...func(*Options)) (*UpdateTestConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateTestConfigurationInput{}
@@ -32,18 +34,28 @@ type UpdateTestConfigurationInput struct {
 	// The test configuration ID of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The description of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The properties of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties map[string]string
 
 	// The resources of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resources []types.Resource
 
 	// The service settings of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceSettings *types.ServiceSettings
 
 	noSmithyDocumentSerde
@@ -54,11 +66,15 @@ type UpdateTestConfigurationOutput struct {
 	// The configuration ID of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The configuration version of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationVersion *int32
 
 	// Metadata pertaining to the operation's result.

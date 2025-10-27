@@ -11,6 +11,8 @@ import (
 )
 
 // Returns all tags for a specified Amazon QLDB resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -33,6 +35,8 @@ type ListTagsForResourceInput struct {
 	//     arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -41,6 +45,8 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// The tags that are currently associated with the specified Amazon QLDB resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.

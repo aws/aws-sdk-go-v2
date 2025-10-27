@@ -19,6 +19,8 @@ import (
 //
 // Lists worlds.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) ListWorlds(ctx context.Context, params *ListWorldsInput, optFns ...func(*Options)) (*ListWorldsOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ func (c *Client) ListWorlds(ctx context.Context, params *ListWorldsInput, optFns
 type ListWorldsInput struct {
 
 	// Optional filters to limit results. You can use status .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	// When this parameter is used, ListWorlds only returns maxResults results in a
@@ -46,6 +50,8 @@ type ListWorldsInput struct {
 	// returned nextToken value. This value can be between 1 and 100. If this
 	// parameter is not used, then ListWorlds returns up to 100 results and a nextToken
 	// value if applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -53,6 +59,8 @@ type ListWorldsInput struct {
 	// the next set of results, call ListWorlds again and assign that token to the
 	// request object's nextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -65,9 +73,13 @@ type ListWorldsOutput struct {
 	// the next set of results, call ListWorlds again and assign that token to the
 	// request object's nextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Summary information for worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldSummaries []types.WorldSummary
 
 	// Metadata pertaining to the operation's result.

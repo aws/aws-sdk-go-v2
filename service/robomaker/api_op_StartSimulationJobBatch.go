@@ -21,6 +21,8 @@ import (
 // Starts a new simulation job batch. The batch is defined using one or more
 // SimulationJobRequest objects.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) StartSimulationJobBatch(ctx context.Context, params *StartSimulationJobBatchInput, optFns ...func(*Options)) (*StartSimulationJobBatchOutput, error) {
 	if params == nil {
@@ -42,17 +44,25 @@ type StartSimulationJobBatchInput struct {
 	// A list of simulation job requests to create in the batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateSimulationJobRequests []types.SimulationJobRequest
 
 	// The batch policy.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchPolicy *types.BatchPolicy
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -61,34 +71,52 @@ type StartSimulationJobBatchInput struct {
 type StartSimulationJobBatchOutput struct {
 
 	// The Amazon Resource Name (arn) of the batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The batch policy.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchPolicy *types.BatchPolicy
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// A list of created simulation job request summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedRequests []types.SimulationJobSummary
 
 	// A list of failed simulation job requests. The request failed to be created into
 	// a simulation job. Failed requests do not have a simulation job ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailedRequests []types.FailedCreateSimulationJobRequest
 
 	// The failure code if the simulation job batch failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.SimulationJobBatchErrorCode
 
 	// The reason the simulation job batch failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// A list of pending simulation job requests. These requests have not yet been
 	// created into simulation jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PendingRequests []types.SimulationJobRequest
 
 	// The status of the simulation job batch.
@@ -121,10 +149,14 @@ type StartSimulationJobBatchOutput struct {
 	// .
 	//
 	// TimedOut The simulation batch job timed out.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.SimulationJobBatchStatus
 
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

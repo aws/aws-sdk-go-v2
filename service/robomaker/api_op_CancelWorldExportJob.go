@@ -18,6 +18,8 @@ import (
 //
 // Cancels the specified export job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CancelWorldExportJob(ctx context.Context, params *CancelWorldExportJobInput, optFns ...func(*Options)) (*CancelWorldExportJobOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type CancelWorldExportJobInput struct {
 	// The Amazon Resource Name (arn) of the world export job to cancel.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde

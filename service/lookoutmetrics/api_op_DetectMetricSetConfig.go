@@ -12,6 +12,8 @@ import (
 )
 
 // Detects an Amazon S3 dataset's file format, interval, and offset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DetectMetricSetConfig(ctx context.Context, params *DetectMetricSetConfigInput, optFns ...func(*Options)) (*DetectMetricSetConfigOutput, error) {
 	if params == nil {
 		params = &DetectMetricSetConfigInput{}
@@ -32,11 +34,15 @@ type DetectMetricSetConfigInput struct {
 	// An anomaly detector ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// A data source.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoDetectionMetricSource *types.AutoDetectionMetricSource
 
 	noSmithyDocumentSerde
@@ -45,6 +51,8 @@ type DetectMetricSetConfigInput struct {
 type DetectMetricSetConfigOutput struct {
 
 	// The inferred dataset configuration for the datasource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DetectedMetricSetConfig *types.DetectedMetricSetConfig
 
 	// Metadata pertaining to the operation's result.

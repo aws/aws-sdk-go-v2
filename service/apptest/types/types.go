@@ -13,12 +13,18 @@ type Batch struct {
 	// The job name of the batch.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchJobName *string
 
 	// The batch job parameters of the batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchJobParameters map[string]string
 
 	// The export data set names of the batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportDataSetNames []string
 
 	noSmithyDocumentSerde
@@ -30,20 +36,30 @@ type BatchStepInput struct {
 	// The batch job name of the batch step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchJobName *string
 
 	// The resource of the batch step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resource MainframeResourceSummary
 
 	// The batch job parameters of the batch step input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchJobParameters map[string]string
 
 	// The export data set names of the batch step input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportDataSetNames []string
 
 	// The properties of the batch step input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties *MainframeActionProperties
 
 	noSmithyDocumentSerde
@@ -53,12 +69,18 @@ type BatchStepInput struct {
 type BatchStepOutput struct {
 
 	// The data set details of the batch step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSetDetails []DataSet
 
 	// The data set export location of the batch step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSetExportLocation *string
 
 	// The Database Migration Service (DMS) output location of the batch step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DmsOutputLocation *string
 
 	noSmithyDocumentSerde
@@ -70,9 +92,13 @@ type BatchSummary struct {
 	// The step input of the batch summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *BatchStepInput
 
 	// The step output of the batch summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *BatchStepOutput
 
 	noSmithyDocumentSerde
@@ -84,9 +110,13 @@ type CloudFormation struct {
 	// The template location of the CloudFormation template.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateLocation *string
 
 	// The CloudFormation properties in the CloudFormation template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -98,9 +128,13 @@ type CloudFormationAction struct {
 	// The resource of the CloudFormation action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resource *string
 
 	// The action type of the CloudFormation action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType CloudFormationActionType
 
 	noSmithyDocumentSerde
@@ -117,6 +151,8 @@ type CloudFormationStepSummary interface {
 }
 
 // Creates the CloudFormation summary of the step.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type CloudFormationStepSummaryMemberCreateCloudformation struct {
 	Value CreateCloudFormationSummary
 
@@ -126,6 +162,8 @@ type CloudFormationStepSummaryMemberCreateCloudformation struct {
 func (*CloudFormationStepSummaryMemberCreateCloudformation) isCloudFormationStepSummary() {}
 
 // Deletes the CloudFormation summary of the CloudFormation step summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type CloudFormationStepSummaryMemberDeleteCloudformation struct {
 	Value DeleteCloudFormationSummary
 
@@ -140,9 +178,13 @@ type CompareAction struct {
 	// The input of the compare action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Input Input
 
 	// The output of the compare action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Output Output
 
 	noSmithyDocumentSerde
@@ -154,6 +196,8 @@ type CompareActionSummary struct {
 	// The type of the compare action summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type File
 
 	noSmithyDocumentSerde
@@ -170,6 +214,8 @@ type CompareDatabaseCDCStepInput struct {
 	// The source metadata of the compare database CDC step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceMetadata *SourceDatabaseMetadata
 
 	// The target location of the compare database CDC step input.
@@ -180,6 +226,8 @@ type CompareDatabaseCDCStepInput struct {
 	// The target metadata location of the compare database CDC step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetMetadata *TargetDatabaseMetadata
 
 	// The output location of the compare database CDC step input.
@@ -199,6 +247,8 @@ type CompareDatabaseCDCStepOutput struct {
 	// The comparison status of the compare database CDC step output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComparisonStatus ComparisonStatusEnum
 
 	noSmithyDocumentSerde
@@ -210,9 +260,13 @@ type CompareDatabaseCDCSummary struct {
 	// The step input of the compare database CDC summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *CompareDatabaseCDCStepInput
 
 	// The step output of the compare database CDC summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *CompareDatabaseCDCStepOutput
 
 	noSmithyDocumentSerde
@@ -224,21 +278,29 @@ type CompareDataSetsStepInput struct {
 	// The source data sets of the compare data sets step input location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceDataSets []DataSet
 
 	// The source location of the compare data sets step input location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceLocation *string
 
 	// The target data sets of the compare data sets step input location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetDataSets []DataSet
 
 	// The target location of the compare data sets step input location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetLocation *string
 
 	noSmithyDocumentSerde
@@ -250,11 +312,15 @@ type CompareDataSetsStepOutput struct {
 	// The comparison output location of the compare data sets step output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComparisonOutputLocation *string
 
 	// The comparison status of the compare data sets step output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComparisonStatus ComparisonStatusEnum
 
 	noSmithyDocumentSerde
@@ -266,9 +332,13 @@ type CompareDataSetsSummary struct {
 	// The step input of the compare data sets summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *CompareDataSetsStepInput
 
 	// The step output of the compare data sets summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *CompareDataSetsStepOutput
 
 	noSmithyDocumentSerde
@@ -285,6 +355,8 @@ type CompareFileType interface {
 }
 
 // The database CDC of the compare file type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type CompareFileTypeMemberDatabaseCDC struct {
 	Value CompareDatabaseCDCSummary
 
@@ -294,6 +366,8 @@ type CompareFileTypeMemberDatabaseCDC struct {
 func (*CompareFileTypeMemberDatabaseCDC) isCompareFileType() {}
 
 // The data sets in the compare file type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type CompareFileTypeMemberDatasets struct {
 	Value CompareDataSetsSummary
 
@@ -308,9 +382,13 @@ type CreateCloudFormationStepInput struct {
 	// The template location of the CloudFormation step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateLocation *string
 
 	// The CloudFormation properties of the CloudFormation step input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -325,6 +403,8 @@ type CreateCloudFormationStepOutput struct {
 	StackId *string
 
 	// The exports of the CloudFormation step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Exports map[string]string
 
 	noSmithyDocumentSerde
@@ -336,9 +416,13 @@ type CreateCloudFormationSummary struct {
 	// The step input of the CloudFormation summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *CreateCloudFormationStepInput
 
 	// The step output of the CloudFormation summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *CreateCloudFormationStepOutput
 
 	noSmithyDocumentSerde
@@ -350,11 +434,15 @@ type DatabaseCDC struct {
 	// The source metadata of the database CDC.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceMetadata *SourceDatabaseMetadata
 
 	// The target metadata of the database CDC.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetMetadata *TargetDatabaseMetadata
 
 	noSmithyDocumentSerde
@@ -366,11 +454,15 @@ type DataSet struct {
 	// The CCSID of the data set.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ccsid *string
 
 	// The format of the data set.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Format Format
 
 	// The length of the data set.
@@ -381,11 +473,15 @@ type DataSet struct {
 	// The name of the data set.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The type of the data set.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type DataSetType
 
 	noSmithyDocumentSerde
@@ -413,9 +509,13 @@ type DeleteCloudFormationSummary struct {
 	// The step input of the deleted CloudFormation summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *DeleteCloudFormationStepInput
 
 	// The step output of the deleted CloudFormation summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *DeleteCloudFormationStepOutput
 
 	noSmithyDocumentSerde
@@ -431,6 +531,8 @@ type File interface {
 }
 
 // The file type of the file.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type FileMemberFileType struct {
 	Value CompareFileType
 
@@ -450,6 +552,8 @@ type FileMetadata interface {
 }
 
 // The database CDC of the file metadata.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type FileMetadataMemberDatabaseCDC struct {
 	Value DatabaseCDC
 
@@ -459,6 +563,8 @@ type FileMetadataMemberDatabaseCDC struct {
 func (*FileMetadataMemberDatabaseCDC) isFileMetadata() {}
 
 // The data sets of the file metadata.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type FileMetadataMemberDataSets struct {
 	Value []DataSet
 
@@ -477,6 +583,8 @@ type Input interface {
 }
 
 // The file in the input.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type InputMemberFile struct {
 	Value InputFile
 
@@ -491,16 +599,22 @@ type InputFile struct {
 	// The file metadata of the input file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileMetadata FileMetadata
 
 	// The source location of the input file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceLocation *string
 
 	// The target location of the input file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetLocation *string
 
 	noSmithyDocumentSerde
@@ -514,6 +628,8 @@ type M2ManagedActionProperties struct {
 
 	// The import data set location of the AWS Mainframe Modernization managed action
 	// properties.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImportDataSetLocation *string
 
 	noSmithyDocumentSerde
@@ -525,18 +641,26 @@ type M2ManagedApplication struct {
 	// The application ID of the AWS Mainframe Modernization managed application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// The runtime of the AWS Mainframe Modernization managed application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Runtime M2ManagedRuntime
 
 	// The listener port of the AWS Mainframe Modernization managed application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ListenerPort *string
 
 	// The VPC endpoint service name of the AWS Mainframe Modernization managed
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcEndpointServiceName *string
 
 	noSmithyDocumentSerde
@@ -548,14 +672,20 @@ type M2ManagedApplicationAction struct {
 	// The action type of the AWS Mainframe Modernization managed application action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType M2ManagedActionType
 
 	// The resource of the AWS Mainframe Modernization managed application action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resource *string
 
 	// The properties of the AWS Mainframe Modernization managed application action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties *M2ManagedActionProperties
 
 	noSmithyDocumentSerde
@@ -568,6 +698,8 @@ type M2ManagedApplicationStepInput struct {
 	// input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType M2ManagedActionType
 
 	// The application ID of the AWS Mainframe Modernization managed application step
@@ -587,6 +719,8 @@ type M2ManagedApplicationStepInput struct {
 
 	// The properties of the AWS Mainframe Modernization managed application step
 	// input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties *M2ManagedActionProperties
 
 	// The VPC endpoint service name of the AWS Mainframe Modernization managed
@@ -601,6 +735,8 @@ type M2ManagedApplicationStepOutput struct {
 
 	// The import data set summary of the AWS Mainframe Modernization managed
 	// application step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImportDataSetSummary map[string]string
 
 	noSmithyDocumentSerde
@@ -613,10 +749,14 @@ type M2ManagedApplicationStepSummary struct {
 	// summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *M2ManagedApplicationStepInput
 
 	// The step output of the AWS Mainframe Modernization managed application step
 	// summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *M2ManagedApplicationStepOutput
 
 	noSmithyDocumentSerde
@@ -629,11 +769,15 @@ type M2ManagedApplicationSummary struct {
 	// summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// The runtime of the AWS Mainframe Modernization managed application summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Runtime M2ManagedRuntime
 
 	// The listener port of the AWS Mainframe Modernization managed application
@@ -649,21 +793,29 @@ type M2NonManagedApplication struct {
 	// The listener port of the AWS Mainframe Modernization non-managed application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ListenerPort *string
 
 	// The runtime of the AWS Mainframe Modernization non-managed application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Runtime M2NonManagedRuntime
 
 	// The VPC endpoint service name of the AWS Mainframe Modernization non-managed
 	// application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcEndpointServiceName *string
 
 	// The web application name of the AWS Mainframe Modernization non-managed
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WebAppName *string
 
 	noSmithyDocumentSerde
@@ -676,11 +828,15 @@ type M2NonManagedApplicationAction struct {
 	// action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType M2NonManagedActionType
 
 	// The resource of the AWS Mainframe Modernization non-managed application action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resource *string
 
 	noSmithyDocumentSerde
@@ -693,6 +849,8 @@ type M2NonManagedApplicationStepInput struct {
 	// input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType M2NonManagedActionType
 
 	// The listener port of the AWS Mainframe Modernization non-managed application
@@ -705,6 +863,8 @@ type M2NonManagedApplicationStepInput struct {
 	// input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Runtime M2NonManagedRuntime
 
 	// The VPC endpoint service name of the AWS Mainframe Modernization non-managed
@@ -732,10 +892,14 @@ type M2NonManagedApplicationStepSummary struct {
 	// summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *M2NonManagedApplicationStepInput
 
 	// The step output of the AWS Mainframe Modernization non-managed application step
 	// summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *M2NonManagedApplicationStepOutput
 
 	noSmithyDocumentSerde
@@ -753,6 +917,8 @@ type M2NonManagedApplicationSummary struct {
 	// The runtime of the AWS Mainframe Modernization non-managed application summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Runtime M2NonManagedRuntime
 
 	// The VPC endpoint service name of the AWS Mainframe Modernization non-managed
@@ -774,14 +940,20 @@ type MainframeAction struct {
 	// The action type of the mainframe action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActionType MainframeActionType
 
 	// The resource of the mainframe action.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resource *string
 
 	// The properties of the mainframe action.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties *MainframeActionProperties
 
 	noSmithyDocumentSerde
@@ -791,6 +963,8 @@ type MainframeAction struct {
 type MainframeActionProperties struct {
 
 	// The DMS task ARN of the mainframe action properties.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DmsTaskArn *string
 
 	noSmithyDocumentSerde
@@ -807,6 +981,8 @@ type MainframeActionSummary interface {
 }
 
 // The batch of the mainframe action summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type MainframeActionSummaryMemberBatch struct {
 	Value BatchSummary
 
@@ -816,6 +992,8 @@ type MainframeActionSummaryMemberBatch struct {
 func (*MainframeActionSummaryMemberBatch) isMainframeActionSummary() {}
 
 // The tn3270 port of the mainframe action summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type MainframeActionSummaryMemberTn3270 struct {
 	Value TN3270Summary
 
@@ -835,6 +1013,8 @@ type MainframeActionType interface {
 }
 
 // The batch of the mainframe action type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type MainframeActionTypeMemberBatch struct {
 	Value Batch
 
@@ -844,6 +1024,8 @@ type MainframeActionTypeMemberBatch struct {
 func (*MainframeActionTypeMemberBatch) isMainframeActionType() {}
 
 // The tn3270 port of the mainframe action type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type MainframeActionTypeMemberTn3270 struct {
 	Value TN3270
 
@@ -864,6 +1046,8 @@ type MainframeResourceSummary interface {
 
 // The AWS Mainframe Modernization managed application in the mainframe resource
 // summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type MainframeResourceSummaryMemberM2ManagedApplication struct {
 	Value M2ManagedApplicationSummary
 
@@ -874,6 +1058,8 @@ func (*MainframeResourceSummaryMemberM2ManagedApplication) isMainframeResourceSu
 
 // The AWS Mainframe Modernization non-managed application in the mainframe
 // resource summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type MainframeResourceSummaryMemberM2NonManagedApplication struct {
 	Value M2NonManagedApplicationSummary
 
@@ -892,6 +1078,8 @@ type Output interface {
 }
 
 // The file of the output.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type OutputMemberFile struct {
 	Value OutputFile
 
@@ -904,6 +1092,8 @@ func (*OutputMemberFile) isOutput() {}
 type OutputFile struct {
 
 	// The file location of the output file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileLocation *string
 
 	noSmithyDocumentSerde
@@ -915,11 +1105,15 @@ type Resource struct {
 	// The name of the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The type of the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type ResourceType
 
 	noSmithyDocumentSerde
@@ -937,6 +1131,8 @@ type ResourceAction interface {
 }
 
 // The CloudFormation action of the resource action.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceActionMemberCloudFormationAction struct {
 	Value CloudFormationAction
 
@@ -947,6 +1143,8 @@ func (*ResourceActionMemberCloudFormationAction) isResourceAction() {}
 
 // The AWS Mainframe Modernization managed application action of the resource
 // action.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceActionMemberM2ManagedApplicationAction struct {
 	Value M2ManagedApplicationAction
 
@@ -957,6 +1155,8 @@ func (*ResourceActionMemberM2ManagedApplicationAction) isResourceAction() {}
 
 // The AWS Mainframe Modernization non-managed application action of the resource
 // action.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceActionMemberM2NonManagedApplicationAction struct {
 	Value M2NonManagedApplicationAction
 
@@ -977,6 +1177,8 @@ type ResourceActionSummary interface {
 }
 
 // The CloudFormation template of the resource action summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceActionSummaryMemberCloudFormation struct {
 	Value CloudFormationStepSummary
 
@@ -987,6 +1189,8 @@ func (*ResourceActionSummaryMemberCloudFormation) isResourceActionSummary() {}
 
 // The AWS Mainframe Modernization managed application of the resource action
 // summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceActionSummaryMemberM2ManagedApplication struct {
 	Value M2ManagedApplicationStepSummary
 
@@ -997,6 +1201,8 @@ func (*ResourceActionSummaryMemberM2ManagedApplication) isResourceActionSummary(
 
 // The AWS Mainframe Modernization non-managed application of the resource action
 // summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceActionSummaryMemberM2NonManagedApplication struct {
 	Value M2NonManagedApplicationStepSummary
 
@@ -1017,6 +1223,8 @@ type ResourceType interface {
 }
 
 // The CloudFormation template of the resource type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceTypeMemberCloudFormation struct {
 	Value CloudFormation
 
@@ -1026,6 +1234,8 @@ type ResourceTypeMemberCloudFormation struct {
 func (*ResourceTypeMemberCloudFormation) isResourceType() {}
 
 // The AWS Mainframe Modernization managed application of the resource type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceTypeMemberM2ManagedApplication struct {
 	Value M2ManagedApplication
 
@@ -1035,6 +1245,8 @@ type ResourceTypeMemberM2ManagedApplication struct {
 func (*ResourceTypeMemberM2ManagedApplication) isResourceType() {}
 
 // The AWS Mainframe Modernization non-managed application of the resource type.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type ResourceTypeMemberM2NonManagedApplication struct {
 	Value M2NonManagedApplication
 
@@ -1049,11 +1261,15 @@ type Script struct {
 	// The script location of the scripts.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptLocation *string
 
 	// The type of the scripts.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type ScriptType
 
 	noSmithyDocumentSerde
@@ -1065,11 +1281,15 @@ type ScriptSummary struct {
 	// The script location of the script summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptLocation *string
 
 	// The type of the script summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type ScriptType
 
 	noSmithyDocumentSerde
@@ -1090,11 +1310,15 @@ type SourceDatabaseMetadata struct {
 	// The capture tool of the source database metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CaptureTool CaptureTool
 
 	// The type of the source database metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type SourceDatabase
 
 	noSmithyDocumentSerde
@@ -1106,14 +1330,20 @@ type Step struct {
 	// The action of the step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Action StepAction
 
 	// The name of the step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The description of the step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -1131,6 +1361,8 @@ type StepAction interface {
 }
 
 // The compare action of the step action.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type StepActionMemberCompareAction struct {
 	Value CompareAction
 
@@ -1140,6 +1372,8 @@ type StepActionMemberCompareAction struct {
 func (*StepActionMemberCompareAction) isStepAction() {}
 
 // The mainframe action of the step action.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type StepActionMemberMainframeAction struct {
 	Value MainframeAction
 
@@ -1149,6 +1383,8 @@ type StepActionMemberMainframeAction struct {
 func (*StepActionMemberMainframeAction) isStepAction() {}
 
 // The resource action of the step action.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type StepActionMemberResourceAction struct {
 	Value ResourceAction
 
@@ -1169,6 +1405,8 @@ type StepRunSummary interface {
 }
 
 // The compare action of the step run summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type StepRunSummaryMemberCompareAction struct {
 	Value CompareActionSummary
 
@@ -1178,6 +1416,8 @@ type StepRunSummaryMemberCompareAction struct {
 func (*StepRunSummaryMemberCompareAction) isStepRunSummary() {}
 
 // The mainframe action of the step run summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type StepRunSummaryMemberMainframeAction struct {
 	Value MainframeActionSummary
 
@@ -1187,6 +1427,8 @@ type StepRunSummaryMemberMainframeAction struct {
 func (*StepRunSummaryMemberMainframeAction) isStepRunSummary() {}
 
 // The resource action of the step run summary.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type StepRunSummaryMemberResourceAction struct {
 	Value ResourceActionSummary
 
@@ -1201,11 +1443,15 @@ type TargetDatabaseMetadata struct {
 	// The capture tool of the target database metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CaptureTool CaptureTool
 
 	// The type of the target database metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type TargetDatabase
 
 	noSmithyDocumentSerde
@@ -1217,11 +1463,15 @@ type TestCaseLatestVersion struct {
 	// The status of the test case latest version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestCaseLifecycle
 
 	// The version of the test case latest version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *int32
 
 	// The status reason of the test case latest version.
@@ -1241,21 +1491,29 @@ type TestCaseRunSummary struct {
 	// The status of the test case run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestCaseRunStatus
 
 	// The test case id of the test case run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test case version of the test case run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	// The test run id of the test case run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The run end time of the test case run summary.
@@ -1277,6 +1535,8 @@ type TestCases interface {
 }
 
 // The sequential of the test case.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 type TestCasesMemberSequential struct {
 	Value []string
 
@@ -1301,26 +1561,36 @@ type TestCaseSummary struct {
 	// The latest version of the test case summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestVersion *int32
 
 	// The name of the test case summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the test case summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestCaseLifecycle
 
 	// The test case Amazon Resource Name (ARN) of the test case summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseArn *string
 
 	// The test case ID of the test case summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The status reason of the test case summary.
@@ -1335,11 +1605,15 @@ type TestConfigurationLatestVersion struct {
 	// The status of the test configuration latest version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestConfigurationLifecycle
 
 	// The version of the test configuration latest version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *int32
 
 	// The status reason of the test configuration latest version.
@@ -1364,26 +1638,36 @@ type TestConfigurationSummary struct {
 	// The latest version of the test configuration summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestVersion *int32
 
 	// The name of the test configuration summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the test configuration summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestConfigurationLifecycle
 
 	// The test configuration ARN of the test configuration summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationArn *string
 
 	// The test configuration ID of the test configuration summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The status reason of the test configuration summary.
@@ -1403,16 +1687,22 @@ type TestRunStepSummary struct {
 	// The status of the test run step summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status StepRunStatus
 
 	// The step name of the test run step summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepName *string
 
 	// The test run ID of the test run step summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The after step of the test run step summary.
@@ -1428,15 +1718,23 @@ type TestRunStepSummary struct {
 	StatusReason *string
 
 	// The test case ID of the test run step summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test case version of the test run step summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	// The test suite ID of the test run step summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The test suite version of the test run step summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	noSmithyDocumentSerde
@@ -1453,26 +1751,36 @@ type TestRunSummary struct {
 	// The status of the test run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestRunStatus
 
 	// The test run ARN of the test run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunArn *string
 
 	// The test run ID of the test run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The test suite ID of the test run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The test suite version of the test run summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	// The run end time of the test run summary.
@@ -1482,9 +1790,13 @@ type TestRunSummary struct {
 	StatusReason *string
 
 	// The test configuration ID of the test run summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The test configuration version of the test run summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationVersion *int32
 
 	noSmithyDocumentSerde
@@ -1496,11 +1808,15 @@ type TestSuiteLatestVersion struct {
 	// The status of the test suite latest version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestSuiteLifecycle
 
 	// The version of the test suite latest version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *int32
 
 	// The status reason of the test suite latest version.
@@ -1525,26 +1841,36 @@ type TestSuiteSummary struct {
 	// The latest version of the test suite summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestVersion *int32
 
 	// The name of the test suite summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the test suite summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status TestSuiteLifecycle
 
 	// The test suite Amazon Resource Name (ARN) of the test suite summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteArn *string
 
 	// The test suite ID of the test suite summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The status reason of the test suite summary.
@@ -1559,9 +1885,13 @@ type TN3270 struct {
 	// The script of the TN3270 protocol.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Script *Script
 
 	// The data set names of the TN3270 protocol.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportDataSetNames []string
 
 	noSmithyDocumentSerde
@@ -1573,17 +1903,25 @@ type TN3270StepInput struct {
 	// The resource of the TN3270 step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resource MainframeResourceSummary
 
 	// The script of the TN3270 step input.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Script *ScriptSummary
 
 	// The export data set names of the TN3270 step input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportDataSetNames []string
 
 	// The properties of the TN3270 step input.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties *MainframeActionProperties
 
 	noSmithyDocumentSerde
@@ -1595,15 +1933,23 @@ type TN3270StepOutput struct {
 	// The script output location of the TN3270 step output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptOutputLocation *string
 
 	// The data set details of the TN3270 step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSetDetails []DataSet
 
 	// The data set export location of the TN3270 step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSetExportLocation *string
 
 	// The output location of the TN3270 step output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DmsOutputLocation *string
 
 	noSmithyDocumentSerde
@@ -1615,9 +1961,13 @@ type TN3270Summary struct {
 	// The step input of the TN3270 summary.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepInput *TN3270StepInput
 
 	// The step output of the TN3270 summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepOutput *TN3270StepOutput
 
 	noSmithyDocumentSerde

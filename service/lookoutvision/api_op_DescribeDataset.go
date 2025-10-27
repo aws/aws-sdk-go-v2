@@ -15,6 +15,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:DescribeDataset
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}
@@ -37,11 +39,15 @@ type DescribeDatasetInput struct {
 	// dataset project, specify train
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// The name of the project that contains the dataset that you want to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -50,6 +56,8 @@ type DescribeDatasetInput struct {
 type DescribeDatasetOutput struct {
 
 	// The description of the requested dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetDescription *types.DatasetDescription
 
 	// Metadata pertaining to the operation's result.

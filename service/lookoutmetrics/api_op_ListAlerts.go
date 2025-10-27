@@ -16,6 +16,8 @@ import (
 // Amazon Lookout for Metrics API actions are eventually consistent. If you do a
 // read operation on a resource immediately after creating or modifying it, use
 // retries to allow time for the write operation to complete.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListAlerts(ctx context.Context, params *ListAlertsInput, optFns ...func(*Options)) (*ListAlertsOutput, error) {
 	if params == nil {
 		params = &ListAlertsInput{}
@@ -34,14 +36,20 @@ func (c *Client) ListAlerts(ctx context.Context, params *ListAlertsInput, optFns
 type ListAlertsInput struct {
 
 	// The ARN of the alert's detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The maximum number of results that will be displayed by the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the result of the previous request is truncated, the response includes a
 	// NextToken . To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,10 +58,14 @@ type ListAlertsInput struct {
 type ListAlertsOutput struct {
 
 	// Contains information about an alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertSummaryList []types.AlertSummary
 
 	// If the response is truncated, the service returns this token. To retrieve the
 	// next set of results, use this token in the next request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

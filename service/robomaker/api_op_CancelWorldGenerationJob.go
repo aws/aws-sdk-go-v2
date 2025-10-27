@@ -18,6 +18,8 @@ import (
 //
 // Cancels the specified world generator job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CancelWorldGenerationJob(ctx context.Context, params *CancelWorldGenerationJobInput, optFns ...func(*Options)) (*CancelWorldGenerationJobOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type CancelWorldGenerationJobInput struct {
 	// The Amazon Resource Name (arn) of the world generator job to cancel.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde

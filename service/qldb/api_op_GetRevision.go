@@ -14,6 +14,8 @@ import (
 // Returns a revision data object for a specified document ID and block address.
 // Also returns a proof of the specified revision for verification if
 // DigestTipAddress is provided.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetRevision(ctx context.Context, params *GetRevisionInput, optFns ...func(*Options)) (*GetRevisionOutput, error) {
 	if params == nil {
 		params = &GetRevisionInput{}
@@ -37,16 +39,22 @@ type GetRevisionInput struct {
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14} .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BlockAddress *types.ValueHolder
 
 	// The UUID (represented in Base62-encoded text) of the document to be verified.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DocumentId *string
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The latest block location covered by the digest for which to request a proof.
@@ -54,6 +62,8 @@ type GetRevisionInput struct {
 	// sequenceNo .
 	//
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49} .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DigestTipAddress *types.ValueHolder
 
 	noSmithyDocumentSerde
@@ -64,12 +74,16 @@ type GetRevisionOutput struct {
 	// The document revision data object in Amazon Ion format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Revision *types.ValueHolder
 
 	// The proof object in Amazon Ion format returned by a GetRevision request. A
 	// proof contains the list of hash values that are required to recalculate the
 	// specified digest using a Merkle tree, starting with the specified document
 	// revision.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Proof *types.ValueHolder
 
 	// Metadata pertaining to the operation's result.

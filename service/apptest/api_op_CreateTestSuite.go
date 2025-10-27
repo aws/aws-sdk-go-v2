@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a test suite.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateTestSuite(ctx context.Context, params *CreateTestSuiteInput, optFns ...func(*Options)) (*CreateTestSuiteOutput, error) {
 	if params == nil {
 		params = &CreateTestSuiteInput{}
@@ -32,26 +34,40 @@ type CreateTestSuiteInput struct {
 	// The name of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The test cases in the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCases types.TestCases
 
 	// The after steps of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AfterSteps []types.Step
 
 	// The before steps of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BeforeSteps []types.Step
 
 	// The client token of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The tags of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -62,11 +78,15 @@ type CreateTestSuiteOutput struct {
 	// The suite ID of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The suite version of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	// Metadata pertaining to the operation's result.

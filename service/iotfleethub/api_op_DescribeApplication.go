@@ -12,6 +12,8 @@ import (
 )
 
 // Gets information about a Fleet Hub for IoT Device Management web application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}
@@ -32,6 +34,8 @@ type DescribeApplicationInput struct {
 	// The unique Id of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	noSmithyDocumentSerde
@@ -42,58 +46,82 @@ type DescribeApplicationOutput struct {
 	// The ARN of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationArn *string
 
 	// The date (in Unix epoch time) when the application was created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationCreationDate int64
 
 	// The unique Id of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// The date (in Unix epoch time) when the application was last updated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationLastUpdateDate int64
 
 	// The name of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationName *string
 
 	// The current state of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationState types.ApplicationState
 
 	// The URL of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationUrl *string
 
 	// The ARN of the role that the web application assumes when it interacts with
 	// Amazon Web Services IoT Core.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// An optional description of the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationDescription *string
 
 	// A message that explains any failures included in the applicationState response
 	// field. This message explains failures in the CreateApplication and
 	// DeleteApplication actions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The Id of the single sign-on client that you use to authenticate and authorize
 	// users on the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SsoClientId *string
 
 	// A set of key/value pairs that you can use to manage the web application
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

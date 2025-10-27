@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a Fleet Hub for IoT Device Management web application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}
@@ -31,11 +33,15 @@ type DeleteApplicationInput struct {
 	// The unique Id of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

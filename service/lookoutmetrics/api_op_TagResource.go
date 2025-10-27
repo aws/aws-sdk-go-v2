@@ -12,6 +12,8 @@ import (
 
 // Adds [tags] to a detector, dataset, or alert.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -33,12 +35,16 @@ type TagResourceInput struct {
 	// The resource's Amazon Resource Name (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// Tags to apply to the resource. Tag keys and values can contain letters,
 	// numbers, spaces, and the following symbols: _.:/=+@-
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

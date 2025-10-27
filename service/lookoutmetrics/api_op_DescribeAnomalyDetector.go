@@ -17,6 +17,8 @@ import (
 // Amazon Lookout for Metrics API actions are eventually consistent. If you do a
 // read operation on a resource immediately after creating or modifying it, use
 // retries to allow time for the write operation to complete.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAnomalyDetector(ctx context.Context, params *DescribeAnomalyDetectorInput, optFns ...func(*Options)) (*DescribeAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &DescribeAnomalyDetectorInput{}
@@ -37,6 +39,8 @@ type DescribeAnomalyDetectorInput struct {
 	// The ARN of the detector to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	noSmithyDocumentSerde
@@ -45,33 +49,53 @@ type DescribeAnomalyDetectorInput struct {
 type DescribeAnomalyDetectorOutput struct {
 
 	// The ARN of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// Contains information about the detector's configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorConfig *types.AnomalyDetectorConfigSummary
 
 	// A description of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorDescription *string
 
 	// The name of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorName *string
 
 	// The time at which the detector was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The reason that the detector failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The process that caused the detector to fail.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureType types.AnomalyDetectorFailureType
 
 	// The ARN of the KMS key to use to encrypt your data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyArn *string
 
 	// The time at which the detector was last modified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModificationTime *time.Time
 
 	// The status of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.AnomalyDetectorStatus
 
 	// Metadata pertaining to the operation's result.

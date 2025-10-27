@@ -12,6 +12,8 @@ import (
 
 // Removes [tags] from a detector, dataset, or alert.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
@@ -33,11 +35,15 @@ type UntagResourceInput struct {
 	// The resource's Amazon Resource Name (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// Keys to remove from the resource's tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

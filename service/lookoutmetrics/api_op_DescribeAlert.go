@@ -16,6 +16,8 @@ import (
 // Amazon Lookout for Metrics API actions are eventually consistent. If you do a
 // read operation on a resource immediately after creating or modifying it, use
 // retries to allow time for the write operation to complete.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAlert(ctx context.Context, params *DescribeAlertInput, optFns ...func(*Options)) (*DescribeAlertOutput, error) {
 	if params == nil {
 		params = &DescribeAlertInput{}
@@ -36,6 +38,8 @@ type DescribeAlertInput struct {
 	// The ARN of the alert to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	noSmithyDocumentSerde
@@ -44,6 +48,8 @@ type DescribeAlertInput struct {
 type DescribeAlertOutput struct {
 
 	// Contains information about an alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alert *types.Alert
 
 	// Metadata pertaining to the operation's result.

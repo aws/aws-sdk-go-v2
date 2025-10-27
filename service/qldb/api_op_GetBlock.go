@@ -26,6 +26,8 @@ import (
 // If no block exists with the specified address, then throws
 // InvalidParameterException .
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Journal contents]: https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html
 func (c *Client) GetBlock(ctx context.Context, params *GetBlockInput, optFns ...func(*Options)) (*GetBlockOutput, error) {
 	if params == nil {
@@ -50,11 +52,15 @@ type GetBlockInput struct {
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14} .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BlockAddress *types.ValueHolder
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The latest block location covered by the digest for which to request a proof.
@@ -62,6 +68,8 @@ type GetBlockInput struct {
 	// sequenceNo .
 	//
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49} .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DigestTipAddress *types.ValueHolder
 
 	noSmithyDocumentSerde
@@ -72,11 +80,15 @@ type GetBlockOutput struct {
 	// The block data object in Amazon Ion format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Block *types.ValueHolder
 
 	// The proof object in Amazon Ion format returned by a GetBlock request. A proof
 	// contains the list of hash values required to recalculate the specified digest
 	// using a Merkle tree, starting with the specified block.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Proof *types.ValueHolder
 
 	// Metadata pertaining to the operation's result.

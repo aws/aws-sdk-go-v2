@@ -12,6 +12,8 @@ import (
 )
 
 // Lists test configurations.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTestConfigurations(ctx context.Context, params *ListTestConfigurationsInput, optFns ...func(*Options)) (*ListTestConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListTestConfigurationsInput{}
@@ -30,12 +32,18 @@ func (c *Client) ListTestConfigurations(ctx context.Context, params *ListTestCon
 type ListTestConfigurationsInput struct {
 
 	// The maximum results of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The next token for the test configurations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The configuration IDs of the test configurations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationIds []string
 
 	noSmithyDocumentSerde
@@ -46,9 +54,13 @@ type ListTestConfigurationsOutput struct {
 	// The test configurations.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurations []types.TestConfigurationSummary
 
 	// The next token in the test configurations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -19,6 +19,8 @@ import (
 //
 // Describes a world.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DescribeWorld(ctx context.Context, params *DescribeWorldInput, optFns ...func(*Options)) (*DescribeWorldOutput, error) {
 	if params == nil {
@@ -40,6 +42,8 @@ type DescribeWorldInput struct {
 	// The Amazon Resource Name (arn) of the world you want to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	World *string
 
 	noSmithyDocumentSerde
@@ -48,22 +52,34 @@ type DescribeWorldInput struct {
 type DescribeWorldOutput struct {
 
 	// The Amazon Resource Name (arn) of the world.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the world was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (arn) of the world generation job that generated the
 	// world.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GenerationJob *string
 
 	// A map that contains tag keys and tag values that are attached to the world.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	// Returns the JSON formatted string that describes the contents of your world.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldDescriptionBody *string
 
 	// Metadata pertaining to the operation's result.

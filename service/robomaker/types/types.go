@@ -15,6 +15,8 @@ type BatchPolicy struct {
 	//
 	// Active states include: Pending , Preparing , Running , Restarting ,
 	// RunningFailed and Terminating . All other states are terminal states.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxConcurrency *int32
 
 	// The amount of time, in seconds, to wait for the batch to complete.
@@ -24,6 +26,8 @@ type BatchPolicy struct {
 	// failed list and the batch status will be Failed . If the pending requests were
 	// failing for any other reason, the failed pending requests will be moved to the
 	// failed list and the batch status will be TimedOut .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
@@ -33,16 +37,22 @@ type BatchPolicy struct {
 type Compute struct {
 
 	// Compute type information for the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputeType ComputeType
 
 	// Compute GPU unit limit for the simulation job. It is the same as the number of
 	// GPUs allocated to the SimulationJob.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GpuUnitLimit *int32
 
 	// The simulation unit limit. Your simulation is allocated CPU and memory
 	// proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu
 	// and 2GB of memory. You are only billed for the SU utilization you consume up to
 	// the maximum value provided. The default is 15.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationUnitLimit *int32
 
 	noSmithyDocumentSerde
@@ -52,16 +62,22 @@ type Compute struct {
 type ComputeResponse struct {
 
 	// Compute type response information for the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputeType ComputeType
 
 	// Compute GPU unit limit for the simulation job. It is the same as the number of
 	// GPUs allocated to the SimulationJob.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GpuUnitLimit *int32
 
 	// The simulation unit limit. Your simulation is allocated CPU and memory
 	// proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu
 	// and 2GB of memory. You are only billed for the SU utilization you consume up to
 	// the maximum value provided. The default is 15.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationUnitLimit *int32
 
 	noSmithyDocumentSerde
@@ -82,15 +98,23 @@ type DataSource struct {
 	//
 	// If you've specified the type of the data source as a File , you provide the
 	// Amazon S3 path to the file that you're using as your data source.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Destination *string
 
 	// The name of the data source.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The S3 bucket where the data files are located.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The list of S3 keys identifying the data source files.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Keys []S3KeyOutput
 
 	// The data type for the data source that you're using for your container image or
@@ -98,6 +122,8 @@ type DataSource struct {
 	// Archive, an Amazon S3 prefix, or a file.
 	//
 	// If you don't specify a field, the default value is File .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -109,16 +135,22 @@ type DataSourceConfig struct {
 	// The name of the data source.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The S3 bucket where the data files are located.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The list of S3 keys identifying the data source files.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Keys []string
 
 	// The location where your files are mounted in the container image.
@@ -133,6 +165,8 @@ type DataSourceConfig struct {
 	//
 	// If you've specified the type of the data source as a File , you provide the
 	// Amazon S3 path to the file that you're using as your data source.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Destination *string
 
 	// The data type for the data source that you're using for your container image or
@@ -140,6 +174,8 @@ type DataSourceConfig struct {
 	// Archive, an Amazon S3 prefix, or a file.
 	//
 	// If you don't specify a field, the default value is File .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -151,16 +187,22 @@ type DeploymentApplicationConfig struct {
 	// The Amazon Resource Name (ARN) of the robot application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Application *string
 
 	// The version of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationVersion *string
 
 	// The launch configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchConfig *DeploymentLaunchConfig
 
 	noSmithyDocumentSerde
@@ -170,16 +212,24 @@ type DeploymentApplicationConfig struct {
 type DeploymentConfig struct {
 
 	// The percentage of robots receiving the deployment at the same time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConcurrentDeploymentPercentage *int32
 
 	// The download condition file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DownloadConditionFile *S3Object
 
 	// The percentage of deployments that need to fail before stopping deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureThresholdPercentage *int32
 
 	// The amount of time, in seconds, to wait for deployment to a single robot to
 	// complete. Choose a time between 1 minute and 7 days. The default is 5 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotDeploymentTimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
@@ -189,27 +239,43 @@ type DeploymentConfig struct {
 type DeploymentJob struct {
 
 	// The Amazon Resource Name (ARN) of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the deployment job was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The deployment application configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentApplicationConfigs []DeploymentApplicationConfig
 
 	// The deployment configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfig *DeploymentConfig
 
 	// The deployment job failure code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode DeploymentJobErrorCode
 
 	// A short description of the reason why the deployment job failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// The status of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DeploymentStatus
 
 	noSmithyDocumentSerde
@@ -221,23 +287,33 @@ type DeploymentLaunchConfig struct {
 	// The launch file name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchFile *string
 
 	// The package name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// An array of key/value pairs specifying environment variables for the robot
 	// application
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentVariables map[string]string
 
 	// The deployment post-launch file. This file will be executed after the launch
 	// file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PostLaunchFile *string
 
 	// The deployment pre-launch file. This file will be executed prior to the launch
 	// file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreLaunchFile *string
 
 	noSmithyDocumentSerde
@@ -248,6 +324,8 @@ type DeploymentLaunchConfig struct {
 type Environment struct {
 
 	// The Docker image URI for either your robot or simulation applications.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Uri *string
 
 	noSmithyDocumentSerde
@@ -257,15 +335,23 @@ type Environment struct {
 type FailedCreateSimulationJobRequest struct {
 
 	// The time, in milliseconds since the epoch, when the simulation job batch failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailedAt *time.Time
 
 	// The failure code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode SimulationJobErrorCode
 
 	// The failure reason of the simulation job request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The simulation job request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Request *SimulationJobRequest
 
 	noSmithyDocumentSerde
@@ -275,9 +361,13 @@ type FailedCreateSimulationJobRequest struct {
 type FailureSummary struct {
 
 	// The worlds that failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Failures []WorldFailure
 
 	// The total number of failures.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TotalFailureCount int32
 
 	noSmithyDocumentSerde
@@ -287,9 +377,13 @@ type FailureSummary struct {
 type Filter struct {
 
 	// The name of the filter.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A list of values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -299,12 +393,18 @@ type Filter struct {
 type FinishedWorldsSummary struct {
 
 	// Information about worlds that failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureSummary *FailureSummary
 
 	// The total number of finished worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FinishedCount int32
 
 	// A list of worlds that succeeded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SucceededWorlds []string
 
 	noSmithyDocumentSerde
@@ -314,21 +414,33 @@ type FinishedWorldsSummary struct {
 type Fleet struct {
 
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the last deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentJob *string
 
 	// The status of the last fleet deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentStatus DeploymentStatus
 
 	// The time of the last deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentTime *time.Time
 
 	// The name of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -343,24 +455,36 @@ type LaunchConfig struct {
 	// If you've specified SimulationRuntime as the value for your
 	// SimulationSoftwareSuite , you can use this field to specify a list of commands
 	// for your container image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Command []string
 
 	// The environment variables for the application launch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentVariables map[string]string
 
 	// The launch file name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchFile *string
 
 	// The package name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PackageName *string
 
 	// The port forwarding configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PortForwardingConfig *PortForwardingConfig
 
 	// Boolean indicating whether a streaming session will be configured for the
 	// application. If True , AWS RoboMaker will configure a connection so you can
 	// interact with your application as it is running in the simulation. You must
 	// configure and launch the component. It must have a graphical user interface.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamUI bool
 
 	noSmithyDocumentSerde
@@ -385,12 +509,18 @@ type LoggingConfig struct {
 type NetworkInterface struct {
 
 	// The ID of the network interface.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkInterfaceId *string
 
 	// The IPv4 address of the network interface within the subnet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrivateIpAddress *string
 
 	// The IPv4 public address of the network interface.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PublicIpAddress *string
 
 	noSmithyDocumentSerde
@@ -400,9 +530,13 @@ type NetworkInterface struct {
 type OutputLocation struct {
 
 	// The S3 bucket for output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The S3 folder in the s3Bucket where output files will be placed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Prefix *string
 
 	noSmithyDocumentSerde
@@ -412,6 +546,8 @@ type OutputLocation struct {
 type PortForwardingConfig struct {
 
 	// The port mappings for the configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PortMappings []PortMapping
 
 	noSmithyDocumentSerde
@@ -423,15 +559,21 @@ type PortMapping struct {
 	// The port number on the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationPort *int32
 
 	// The port number on the simulation job instance to use as a remote connection
 	// point.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobPort *int32
 
 	// A Boolean indicating whether to enable this port mapping on public IP.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableOnPublicIp bool
 
 	noSmithyDocumentSerde
@@ -453,18 +595,26 @@ type ProgressDetail struct {
 	// ExecutingPostLaunch Executing post-launch script(s) if provided.
 	//
 	// Finished Deployment is complete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CurrentProgress RobotDeploymentStep
 
 	// Estimated amount of time in seconds remaining in the step. This currently only
 	// applies to the Downloading/Extracting step of the deployment. It is empty for
 	// other steps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EstimatedTimeRemainingSeconds *int32
 
 	// Precentage of the step that is done. This currently only applies to the
 	// Downloading/Extracting step of the deployment. It is empty for other steps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PercentDone *float32
 
 	// The Amazon Resource Name (ARN) of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetResource *string
 
 	noSmithyDocumentSerde
@@ -474,9 +624,13 @@ type ProgressDetail struct {
 type RenderingEngine struct {
 
 	// The name of the rendering engine.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name RenderingEngineType
 
 	// The version of the rendering engine.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -486,30 +640,48 @@ type RenderingEngine struct {
 type Robot struct {
 
 	// The architecture of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture Architecture
 
 	// The Amazon Resource Name (ARN) of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the robot was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FleetArn *string
 
 	// The Greengrass group associated with the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GreenGrassGroupId *string
 
 	// The Amazon Resource Name (ARN) of the last deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentJob *string
 
 	// The time of the last deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentTime *time.Time
 
 	// The name of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status RobotStatus
 
 	noSmithyDocumentSerde
@@ -521,20 +693,30 @@ type RobotApplicationConfig struct {
 	// The application information for the robot application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Application *string
 
 	// The launch configuration for the robot application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchConfig *LaunchConfig
 
 	// The version of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationVersion *string
 
 	// Information about tools configured for the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tools []Tool
 
 	// The upload configurations for the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UploadConfigurations []UploadConfiguration
 
 	// A Boolean indicating whether to use default robot application tools. The
@@ -567,19 +749,29 @@ type RobotApplicationConfig struct {
 type RobotApplicationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Information about a robot software suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotSoftwareSuite *RobotSoftwareSuite
 
 	// The version of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -589,24 +781,38 @@ type RobotApplicationSummary struct {
 type RobotDeployment struct {
 
 	// The robot deployment Amazon Resource Name (ARN).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the deployment finished.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentFinishTime *time.Time
 
 	// The time, in milliseconds since the epoch, when the deployment was started.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentStartTime *time.Time
 
 	// The robot deployment failure code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode DeploymentJobErrorCode
 
 	// A short description of the reason why the robot deployment failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// Information about how the deployment is progressing.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProgressDetail *ProgressDetail
 
 	// The status of the robot deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status RobotStatus
 
 	noSmithyDocumentSerde
@@ -616,10 +822,14 @@ type RobotDeployment struct {
 type RobotSoftwareSuite struct {
 
 	// The name of the robot software suite. General is the only supported value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name RobotSoftwareSuiteType
 
 	// The version of the robot software suite. Not applicable for General software
 	// suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version RobotSoftwareSuiteVersionType
 
 	noSmithyDocumentSerde
@@ -629,9 +839,13 @@ type RobotSoftwareSuite struct {
 type S3KeyOutput struct {
 
 	// The etag for the object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Etag *string
 
 	// The S3 key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Key *string
 
 	noSmithyDocumentSerde
@@ -643,14 +857,20 @@ type S3Object struct {
 	// The bucket containing the object.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The key of the object.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The etag of the object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Etag *string
 
 	noSmithyDocumentSerde
@@ -662,20 +882,30 @@ type SimulationApplicationConfig struct {
 	// The application information for the simulation application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Application *string
 
 	// The launch configuration for the simulation application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchConfig *LaunchConfig
 
 	// The version of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationVersion *string
 
 	// Information about tools configured for the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tools []Tool
 
 	// Information about upload configurations for the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UploadConfigurations []UploadConfiguration
 
 	// A Boolean indicating whether to use default simulation application tools. The
@@ -704,6 +934,8 @@ type SimulationApplicationConfig struct {
 	// A list of world configurations.
 	//
 	// This API is no longer supported and will throw an error if used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldConfigs []WorldConfig
 
 	noSmithyDocumentSerde
@@ -713,22 +945,34 @@ type SimulationApplicationConfig struct {
 type SimulationApplicationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Information about a robot software suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotSoftwareSuite *RobotSoftwareSuite
 
 	// Information about a simulation software suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationSoftwareSuite *SimulationSoftwareSuite
 
 	// The version of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -738,15 +982,23 @@ type SimulationApplicationSummary struct {
 type SimulationJob struct {
 
 	// The Amazon Resource Name (ARN) of the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// A unique identifier for this SimulationJob request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// Compute information for the simulation job
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Compute *ComputeResponse
 
 	// The data sources for the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSources []DataSource
 
 	// The failure behavior the simulation job.
@@ -755,60 +1007,94 @@ type SimulationJob struct {
 	// error code.
 	//
 	// Fail Stop the simulation job and terminate the instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureBehavior FailureBehavior
 
 	// The failure code of the simulation job if it failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode SimulationJobErrorCode
 
 	// The reason why the simulation job failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The IAM role that allows the simulation instance to call the AWS APIs that are
 	// specified in its associated policies on your behalf. This is how credentials are
 	// passed in to your simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// started.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastStartedAt *time.Time
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The logging configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LoggingConfig *LoggingConfig
 
 	// The maximum simulation job duration in seconds. The value must be 8 days
 	// (691,200 seconds) or less.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxJobDurationInSeconds int64
 
 	// The name of the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Information about a network interface.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkInterface *NetworkInterface
 
 	// Location for output files generated by the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputLocation *OutputLocation
 
 	// A list of robot applications.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotApplications []RobotApplicationConfig
 
 	// A list of simulation applications.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationApplications []SimulationApplicationConfig
 
 	// The simulation job execution duration in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationTimeMillis int64
 
 	// Status of the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status SimulationJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// VPC configuration information.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcConfig *VPCConfigResponse
 
 	noSmithyDocumentSerde
@@ -818,23 +1104,35 @@ type SimulationJob struct {
 type SimulationJobBatchSummary struct {
 
 	// The Amazon Resource Name (ARN) of the batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The number of created simulation job requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedRequestCount int32
 
 	// The number of failed simulation job requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailedRequestCount int32
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The number of pending simulation job requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PendingRequestCount int32
 
 	// The status of the simulation job batch.
@@ -867,6 +1165,8 @@ type SimulationJobBatchSummary struct {
 	// .
 	//
 	// TimedOut The simulation batch job timed out.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status SimulationJobBatchStatus
 
 	noSmithyDocumentSerde
@@ -879,9 +1179,13 @@ type SimulationJobRequest struct {
 	// (691,200 seconds) or less.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxJobDurationInSeconds int64
 
 	// Compute information for the simulation job
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Compute *Compute
 
 	// Specify data sources to mount read-only files from S3 into your simulation.
@@ -889,6 +1193,8 @@ type SimulationJobRequest struct {
 	//
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSources []DataSourceConfig
 
 	// The failure behavior the simulation job.
@@ -897,36 +1203,54 @@ type SimulationJobRequest struct {
 	// error code.
 	//
 	// Fail Stop the simulation job and terminate the instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureBehavior FailureBehavior
 
 	// The IAM role name that allows the simulation instance to call the AWS APIs that
 	// are specified in its associated policies on your behalf. This is how credentials
 	// are passed in to your simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// The logging configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LoggingConfig *LoggingConfig
 
 	// The output location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputLocation *OutputLocation
 
 	// The robot applications to use in the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotApplications []RobotApplicationConfig
 
 	// The simulation applications to use in the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationApplications []SimulationApplicationConfig
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// A Boolean indicating whether to use default applications in the simulation job.
 	// Default applications include Gazebo, rqt, rviz and terminal access.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseDefaultApplications *bool
 
 	// If your simulation job accesses resources in a VPC, you provide this parameter
 	// identifying the list of security group IDs and subnet IDs. These must belong to
 	// the same VPC. You must provide at least one security group and two subnet IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcConfig *VPCConfig
 
 	noSmithyDocumentSerde
@@ -936,28 +1260,44 @@ type SimulationJobRequest struct {
 type SimulationJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The compute type for the simulation job summary.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputeType ComputeType
 
 	// The names of the data sources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSourceNames []string
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A list of simulation job robot application names.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotApplicationNames []string
 
 	// A list of simulation job simulation application names.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationApplicationNames []string
 
 	// The status of the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status SimulationJobStatus
 
 	noSmithyDocumentSerde
@@ -968,10 +1308,14 @@ type SimulationSoftwareSuite struct {
 
 	// The name of the simulation software suite. SimulationRuntime is the only
 	// supported value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name SimulationSoftwareSuiteType
 
 	// The version of the simulation software suite. Not applicable for
 	// SimulationRuntime .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -981,15 +1325,23 @@ type SimulationSoftwareSuite struct {
 type Source struct {
 
 	// The taget processor architecture for the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture Architecture
 
 	// A hash of the object specified by s3Bucket and s3Key .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Etag *string
 
 	// The s3 bucket name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The s3 object key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Key *string
 
 	noSmithyDocumentSerde
@@ -999,12 +1351,18 @@ type Source struct {
 type SourceConfig struct {
 
 	// The target processor architecture for the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture Architecture
 
 	// The Amazon S3 bucket name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The s3 object key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Key *string
 
 	noSmithyDocumentSerde
@@ -1016,11 +1374,15 @@ type TemplateLocation struct {
 	// The Amazon S3 bucket name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The list of S3 keys identifying the data source files.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Key *string
 
 	noSmithyDocumentSerde
@@ -1030,18 +1392,28 @@ type TemplateLocation struct {
 type TemplateSummary struct {
 
 	// The Amazon Resource Name (ARN) of the template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the template was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The time, in milliseconds since the epoch, when the template was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The version of the template that you're using.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1053,26 +1425,36 @@ type Tool struct {
 	// Command-line arguments for the tool. It must include the tool executable name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Command *string
 
 	// The name of the tool.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Exit behavior determines what happens when your tool quits running. RESTART
 	// will cause your tool to be restarted. FAIL will cause your job to exit. The
 	// default is RESTART .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExitBehavior ExitBehavior
 
 	// Boolean indicating whether logs will be recorded in CloudWatch for the tool.
 	// The default is False .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamOutputToCloudWatch *bool
 
 	// Boolean indicating whether a streaming session will be configured for the tool.
 	// If True , AWS RoboMaker will configure a connection so you can interact with the
 	// tool as it is running in the simulation. It must have a graphical user
 	// interface. The default is False .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamUI *bool
 
 	noSmithyDocumentSerde
@@ -1090,6 +1472,8 @@ type UploadConfiguration struct {
 	// s3://amzn-s3-demo-bucket///robot-test .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	//  Specifies the path of the file(s) to upload. Standard Unix glob matching rules
@@ -1100,6 +1484,8 @@ type UploadConfiguration struct {
 	// [Glob Library]: https://github.com/gobwas/glob
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Path *string
 
 	// Specifies when to upload the files:
@@ -1117,6 +1503,8 @@ type UploadConfiguration struct {
 	// stopped.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UploadBehavior UploadBehavior
 
 	noSmithyDocumentSerde
@@ -1130,12 +1518,18 @@ type VPCConfig struct {
 	// A list of one or more subnet IDs in your VPC.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subnets []string
 
 	// A boolean indicating whether to assign a public IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssignPublicIp bool
 
 	// A list of one or more security groups IDs in your VPC.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroups []string
 
 	noSmithyDocumentSerde
@@ -1145,15 +1539,23 @@ type VPCConfig struct {
 type VPCConfigResponse struct {
 
 	// A boolean indicating if a public IP was assigned.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssignPublicIp bool
 
 	// A list of security group IDs associated with the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroups []string
 
 	// A list of subnet IDs associated with the simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subnets []string
 
 	// The VPC ID associated with your simulation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -1163,6 +1565,8 @@ type VPCConfigResponse struct {
 type WorldConfig struct {
 
 	// The world generated by Simulation WorldForge.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	World *string
 
 	noSmithyDocumentSerde
@@ -1179,9 +1583,13 @@ type WorldConfig struct {
 type WorldCount struct {
 
 	// The number of unique floorplans.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FloorplanCount *int32
 
 	// The number of unique interiors per floorplan.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InteriorCountPerFloorplan *int32
 
 	noSmithyDocumentSerde
@@ -1191,13 +1599,19 @@ type WorldCount struct {
 type WorldExportJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the world export job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the world export job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The output location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputLocation *OutputLocation
 
 	// The status of the world export job.
@@ -1213,9 +1627,13 @@ type WorldExportJobSummary struct {
 	// Canceled The world export job was cancelled.
 	//
 	// Canceling The world export job is being cancelled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status WorldExportJobStatus
 
 	// A list of worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Worlds []string
 
 	noSmithyDocumentSerde
@@ -1236,13 +1654,19 @@ type WorldFailure struct {
 	// RequestThrottled The request was throttled.
 	//
 	// InvalidInput An input parameter in the request is not valid.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode WorldGenerationJobErrorCode
 
 	// The number of failed worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCount int32
 
 	// The sample reason why the world failed. World errors are aggregated. A sample
 	// is used as the sampleFailureReason .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SampleFailureReason *string
 
 	noSmithyDocumentSerde
@@ -1252,13 +1676,19 @@ type WorldFailure struct {
 type WorldGenerationJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the world generator job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the world generator job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The number of worlds that failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailedWorldCount int32
 
 	// The status of the world generator job:
@@ -1276,15 +1706,23 @@ type WorldGenerationJobSummary struct {
 	// Canceled The world generator job was cancelled.
 	//
 	// Canceling The world generator job is being cancelled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status WorldGenerationJobStatus
 
 	// The number of worlds that were generated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SucceededWorldCount int32
 
 	// The Amazon Resource Name (arn) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	// Information about the world count.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldCount *WorldCount
 
 	noSmithyDocumentSerde
@@ -1294,15 +1732,23 @@ type WorldGenerationJobSummary struct {
 type WorldSummary struct {
 
 	// The Amazon Resource Name (ARN) of the world.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the world was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (arn) of the world generation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GenerationJob *string
 
 	// The Amazon Resource Name (arn) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	noSmithyDocumentSerde

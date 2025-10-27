@@ -21,6 +21,8 @@ import (
 // To remove a tag, specify the tag key. To change the tag value of an existing
 // tag key, use [TagResource]TagResource .
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [TagResource]: https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
@@ -44,12 +46,16 @@ type UntagResourceInput struct {
 	// tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A map that contains tag keys and tag values that will be unattached from the
 	// resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

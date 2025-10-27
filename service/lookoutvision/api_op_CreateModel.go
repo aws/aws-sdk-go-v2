@@ -29,6 +29,8 @@ import (
 // This operation requires permissions to perform the lookoutvision:CreateModel
 // operation. If you want to tag your model, you also require permission to the
 // lookoutvision:TagResource operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -49,11 +51,15 @@ type CreateModelInput struct {
 	// The location where Amazon Lookout for Vision saves the training results.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputConfig *types.OutputConfig
 
 	// The name of the project in which you want to create a model version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to CreateModel
@@ -69,18 +75,26 @@ type CreateModelInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// CreateModel . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A description for the version of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The identifier for your AWS KMS key. The key is used to encrypt training and
 	// test images copied into the service for model training. Your source images are
 	// unaffected. If this parameter is not specified, the copied images are encrypted
 	// by a key that AWS owns and manages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// A set of tags (key-value pairs) that you want to attach to the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -89,6 +103,8 @@ type CreateModelInput struct {
 type CreateModelOutput struct {
 
 	// The response from a call to CreateModel .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelMetadata *types.ModelMetadata
 
 	// Metadata pertaining to the operation's result.

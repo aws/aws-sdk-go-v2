@@ -6,5 +6,7 @@
 // This is the Amazon Lookout for Metrics API Reference. For an introduction to
 // the service with tutorials for getting started, visit [Amazon Lookout for Metrics Developer Guide].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Amazon Lookout for Metrics Developer Guide]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev
 package lookoutmetrics

@@ -12,6 +12,8 @@ import (
 )
 
 // Updates a test suite.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateTestSuite(ctx context.Context, params *UpdateTestSuiteInput, optFns ...func(*Options)) (*UpdateTestSuiteOutput, error) {
 	if params == nil {
 		params = &UpdateTestSuiteInput{}
@@ -32,18 +34,28 @@ type UpdateTestSuiteInput struct {
 	// The test suite ID of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The after steps of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AfterSteps []types.Step
 
 	// The before steps for the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BeforeSteps []types.Step
 
 	// The description of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The test cases in the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCases types.TestCases
 
 	noSmithyDocumentSerde
@@ -54,9 +66,13 @@ type UpdateTestSuiteOutput struct {
 	// The test suite ID of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The test suite version of the test suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	// Metadata pertaining to the operation's result.

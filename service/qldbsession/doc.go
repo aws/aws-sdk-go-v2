@@ -17,6 +17,8 @@
 //     QLDB shell. The shell is a command line interface that uses the QLDB driver to
 //     interact with a ledger. For information, see [Accessing Amazon QLDB using the QLDB shell].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Getting started with the driver]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html
 // [Accessing Amazon QLDB using the QLDB shell]: https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html
 package qldbsession

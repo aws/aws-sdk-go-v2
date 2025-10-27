@@ -21,6 +21,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:DeleteProject
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}
@@ -41,6 +43,8 @@ type DeleteProjectInput struct {
 	// The name of the project to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to DeleteProject
@@ -56,6 +60,8 @@ type DeleteProjectInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// DeleteProject . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -64,6 +70,8 @@ type DeleteProjectInput struct {
 type DeleteProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) of the project that was deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectArn *string
 
 	// Metadata pertaining to the operation's result.

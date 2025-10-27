@@ -16,6 +16,8 @@ import (
 // You can't restart a stream after you cancel it. Canceled QLDB stream resources
 // are subject to a 7-day retention period, so they are automatically deleted after
 // this limit expires.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CancelJournalKinesisStream(ctx context.Context, params *CancelJournalKinesisStreamInput, optFns ...func(*Options)) (*CancelJournalKinesisStreamOutput, error) {
 	if params == nil {
 		params = &CancelJournalKinesisStreamInput{}
@@ -36,12 +38,16 @@ type CancelJournalKinesisStreamInput struct {
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	// The UUID (represented in Base62-encoded text) of the QLDB journal stream to be
 	// canceled.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	noSmithyDocumentSerde
@@ -50,6 +56,8 @@ type CancelJournalKinesisStreamInput struct {
 type CancelJournalKinesisStreamOutput struct {
 
 	// The UUID (Base62-encoded text) of the canceled QLDB journal stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	// Metadata pertaining to the operation's result.

@@ -25,6 +25,8 @@ import (
 //     QLDB shell. The shell is a command line interface that uses the QLDB driver to
 //     interact with a ledger. For information, see [Accessing Amazon QLDB using the QLDB shell].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Getting started with the driver]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html
 // [Accessing Amazon QLDB using the QLDB shell]: https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html
 func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optFns ...func(*Options)) (*SendCommandOutput, error) {
@@ -45,18 +47,28 @@ func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optF
 type SendCommandInput struct {
 
 	// Command to abort the current transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AbortTransaction *types.AbortTransactionRequest
 
 	// Command to commit the specified transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitTransaction *types.CommitTransactionRequest
 
 	// Command to end the current session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndSession *types.EndSessionRequest
 
 	// Command to execute a statement in the specified transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecuteStatement *types.ExecuteStatementRequest
 
 	// Command to fetch a page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FetchPage *types.FetchPageRequest
 
 	// Specifies the session token for the current command. A session token is
@@ -64,13 +76,19 @@ type SendCommandInput struct {
 	//
 	// To obtain a session token, run the StartSession command. This SessionToken is
 	// required for every subsequent command that is issued during the current session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionToken *string
 
 	// Command to start a new session. A session token is obtained as part of the
 	// response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartSession *types.StartSessionRequest
 
 	// Command to start a new transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTransaction *types.StartTransactionRequest
 
 	noSmithyDocumentSerde
@@ -79,26 +97,40 @@ type SendCommandInput struct {
 type SendCommandOutput struct {
 
 	// Contains the details of the aborted transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AbortTransaction *types.AbortTransactionResult
 
 	// Contains the details of the committed transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitTransaction *types.CommitTransactionResult
 
 	// Contains the details of the ended session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndSession *types.EndSessionResult
 
 	// Contains the details of the executed statement.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecuteStatement *types.ExecuteStatementResult
 
 	// Contains the details of the fetched page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FetchPage *types.FetchPageResult
 
 	// Contains the details of the started session that includes a session token. This
 	// SessionToken is required for every subsequent command that is issued during the
 	// current session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartSession *types.StartSessionResult
 
 	// Contains the details of the started transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTransaction *types.StartTransactionResult
 
 	// Metadata pertaining to the operation's result.

@@ -5,4 +5,6 @@
 //
 // AWS Mainframe Modernization Application Testing provides tools and resources
 // for automated functional equivalence testing for your migration projects.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package apptest

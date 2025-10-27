@@ -11,6 +11,8 @@ import (
 )
 
 // Activates an anomaly detector.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ActivateAnomalyDetector(ctx context.Context, params *ActivateAnomalyDetectorInput, optFns ...func(*Options)) (*ActivateAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &ActivateAnomalyDetectorInput{}
@@ -31,6 +33,8 @@ type ActivateAnomalyDetectorInput struct {
 	// The ARN of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	noSmithyDocumentSerde

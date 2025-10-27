@@ -12,9 +12,13 @@ import (
 type Action struct {
 
 	// A configuration for an AWS Lambda channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LambdaConfiguration *LambdaConfiguration
 
 	// A configuration for an Amazon SNS channel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SNSConfiguration *SNSConfiguration
 
 	noSmithyDocumentSerde
@@ -24,37 +28,59 @@ type Action struct {
 type Alert struct {
 
 	// Action that will be triggered when there is an alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Action *Action
 
 	// The ARN of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	// A description of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertDescription *string
 
 	// The configuration of the alert filters, containing MetricList and
 	// DimensionFilter.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertFilters *AlertFilters
 
 	// The name of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertName *string
 
 	// The minimum severity for an anomaly to trigger the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertSensitivityThreshold int32
 
 	// The status of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertStatus AlertStatus
 
 	// The type of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertType AlertType
 
 	// The ARN of the detector to which the alert is attached.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The time at which the alert was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time at which the alert was last modified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModificationTime *time.Time
 
 	noSmithyDocumentSerde
@@ -64,9 +90,13 @@ type Alert struct {
 type AlertFilters struct {
 
 	// The list of DimensionFilter objects that are used for dimension-based filtering.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionFilterList []DimensionFilter
 
 	// The list of measures that you want to get alerts for.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricList []string
 
 	noSmithyDocumentSerde
@@ -76,32 +106,50 @@ type AlertFilters struct {
 type AlertSummary struct {
 
 	// The ARN of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	// The name of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertName *string
 
 	// The minimum severity for an anomaly to trigger the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertSensitivityThreshold int32
 
 	// The status of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertStatus AlertStatus
 
 	// The type of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertType AlertType
 
 	// The ARN of the detector to which the alert is attached.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The time at which the alert was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time at which the alert was last modified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModificationTime *time.Time
 
 	// The alert's [tags].
 	//
 	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -111,6 +159,8 @@ type AlertSummary struct {
 type AnomalyDetectorConfig struct {
 
 	// The frequency at which the detector analyzes its source data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorFrequency Frequency
 
 	noSmithyDocumentSerde
@@ -120,6 +170,8 @@ type AnomalyDetectorConfig struct {
 type AnomalyDetectorConfigSummary struct {
 
 	// The interval at which the detector analyzes its source data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorFrequency Frequency
 
 	noSmithyDocumentSerde
@@ -131,9 +183,13 @@ type AnomalyDetectorDataQualityMetric struct {
 
 	// An array of DataQualityMetricList objects. Each object in the array contains
 	// information about a data quality metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetDataQualityMetricList []MetricSetDataQualityMetric
 
 	// The start time for the data quality metrics collection.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -143,26 +199,40 @@ type AnomalyDetectorDataQualityMetric struct {
 type AnomalyDetectorSummary struct {
 
 	// The ARN of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// A description of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorDescription *string
 
 	// The name of the detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorName *string
 
 	// The time at which the detector was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time at which the detector was last modified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModificationTime *time.Time
 
 	// The status of detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status AnomalyDetectorStatus
 
 	// The detector's [tags].
 	//
 	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -172,21 +242,33 @@ type AnomalyDetectorSummary struct {
 type AnomalyGroup struct {
 
 	// The ID of the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// The severity score of the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupScore *float64
 
 	// The end time for the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndTime *string
 
 	// A list of measures affected by the anomaly.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricLevelImpactList []MetricLevelImpact
 
 	// The name of the primary affected measure for the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrimaryMetricName *string
 
 	// The start time for the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTime *string
 
 	noSmithyDocumentSerde
@@ -196,12 +278,18 @@ type AnomalyGroup struct {
 type AnomalyGroupStatistics struct {
 
 	// The start of the time range that was searched.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationStartDate *string
 
 	// Statistics for individual metrics within the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ItemizedMetricStatsList []ItemizedMetricStats
 
 	// The number of groups found.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TotalCount int32
 
 	noSmithyDocumentSerde
@@ -211,18 +299,28 @@ type AnomalyGroupStatistics struct {
 type AnomalyGroupSummary struct {
 
 	// The ID of the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// The severity score of the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupScore *float64
 
 	// The end time for the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EndTime *string
 
 	// The name of the primary affected measure for the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrimaryMetricName *string
 
 	// The start time for the group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartTime *string
 
 	noSmithyDocumentSerde
@@ -234,9 +332,13 @@ type AnomalyGroupTimeSeries struct {
 	// The ID of the anomaly group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// The ID of the metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSeriesId *string
 
 	noSmithyDocumentSerde
@@ -248,16 +350,22 @@ type AnomalyGroupTimeSeriesFeedback struct {
 	// The ID of the anomaly group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// Feedback on whether the metric is a legitimate anomaly.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IsAnomaly *bool
 
 	// The ID of the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSeriesId *string
 
 	noSmithyDocumentSerde
@@ -267,9 +375,13 @@ type AnomalyGroupTimeSeriesFeedback struct {
 type AppFlowConfig struct {
 
 	//  name of the flow.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FlowName *string
 
 	// An IAM role that gives Amazon Lookout for Metrics permission to access the flow.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -279,24 +391,38 @@ type AppFlowConfig struct {
 type AthenaSourceConfig struct {
 
 	// Settings for backtest mode.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackTestConfiguration *BackTestConfiguration
 
 	// The database's data catalog.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataCatalog *string
 
 	// The database's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// An IAM role that gives Amazon Lookout for Metrics permission to access the data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The database's results path.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3ResultsPath *string
 
 	// The database's table name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TableName *string
 
 	// The database's work group name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorkGroupName *string
 
 	noSmithyDocumentSerde
@@ -306,21 +432,33 @@ type AthenaSourceConfig struct {
 type AttributeValue struct {
 
 	// A binary value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	B *string
 
 	// A list of binary values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BS []string
 
 	// A number.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	N *string
 
 	// A list of numbers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NS []string
 
 	// A string.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S *string
 
 	// A list of strings.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SS []string
 
 	noSmithyDocumentSerde
@@ -330,6 +468,8 @@ type AttributeValue struct {
 type AutoDetectionMetricSource struct {
 
 	// The source's source config.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3SourceConfig *AutoDetectionS3SourceConfig
 
 	noSmithyDocumentSerde
@@ -339,9 +479,13 @@ type AutoDetectionMetricSource struct {
 type AutoDetectionS3SourceConfig struct {
 
 	// The config's historical data path list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HistoricalDataPathList []string
 
 	// The config's templated path list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplatedPathList []string
 
 	noSmithyDocumentSerde
@@ -353,6 +497,8 @@ type BackTestConfiguration struct {
 	// Run a backtest instead of monitoring new data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RunBackTestMode *bool
 
 	noSmithyDocumentSerde
@@ -362,10 +508,14 @@ type BackTestConfiguration struct {
 type CloudWatchConfig struct {
 
 	// Settings for backtest mode.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackTestConfiguration *BackTestConfiguration
 
 	// An IAM role that gives Amazon Lookout for Metrics permission to access data in
 	// Amazon CloudWatch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -375,6 +525,8 @@ type CloudWatchConfig struct {
 type ContributionMatrix struct {
 
 	// A list of contributing dimensions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionContributionList []DimensionContribution
 
 	noSmithyDocumentSerde
@@ -384,21 +536,33 @@ type ContributionMatrix struct {
 type CsvFormatDescriptor struct {
 
 	// The character set in which the source CSV file is written.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Charset *string
 
 	// Whether or not the source CSV file contains a header.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContainsHeader *bool
 
 	// The character used to delimit the source CSV file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Delimiter *string
 
 	// The level of compression of the source CSV file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileCompression CSVFileCompression
 
 	// A list of the source CSV file's headers, if any.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HeaderList []string
 
 	// The character used as a quote character.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	QuoteSymbol *string
 
 	noSmithyDocumentSerde
@@ -410,15 +574,23 @@ type CsvFormatDescriptor struct {
 type DataQualityMetric struct {
 
 	// A description of the data quality metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricDescription *string
 
 	// The name of the data quality metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricType DataQualityMetricType
 
 	// The value of the data quality metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricValue *float64
 
 	// The column that is being monitored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RelatedColumnName *string
 
 	noSmithyDocumentSerde
@@ -428,21 +600,33 @@ type DataQualityMetric struct {
 type DetectedCsvFormatDescriptor struct {
 
 	// The format's charset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Charset *DetectedField
 
 	// Whether the format includes a header.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContainsHeader *DetectedField
 
 	// The format's delimiter.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Delimiter *DetectedField
 
 	// The format's file compression.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileCompression *DetectedField
 
 	// The format's header list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HeaderList *DetectedField
 
 	// The format's quote symbol.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	QuoteSymbol *DetectedField
 
 	noSmithyDocumentSerde
@@ -452,12 +636,18 @@ type DetectedCsvFormatDescriptor struct {
 type DetectedField struct {
 
 	// The field's confidence.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Confidence Confidence
 
 	// The field's message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	// The field's value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *AttributeValue
 
 	noSmithyDocumentSerde
@@ -467,9 +657,13 @@ type DetectedField struct {
 type DetectedFileFormatDescriptor struct {
 
 	// Details about a CSV format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CsvFormatDescriptor *DetectedCsvFormatDescriptor
 
 	// Details about a JSON format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JsonFormatDescriptor *DetectedJsonFormatDescriptor
 
 	noSmithyDocumentSerde
@@ -479,9 +673,13 @@ type DetectedFileFormatDescriptor struct {
 type DetectedJsonFormatDescriptor struct {
 
 	// The format's character set.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Charset *DetectedField
 
 	// The format's file compression.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileCompression *DetectedField
 
 	noSmithyDocumentSerde
@@ -491,12 +689,18 @@ type DetectedJsonFormatDescriptor struct {
 type DetectedMetricSetConfig struct {
 
 	// The dataset's interval.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetFrequency *DetectedField
 
 	// The dataset's data source.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSource *DetectedMetricSource
 
 	// The dataset's offset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Offset *DetectedField
 
 	noSmithyDocumentSerde
@@ -506,6 +710,8 @@ type DetectedMetricSetConfig struct {
 type DetectedMetricSource struct {
 
 	// The data source's source configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3SourceConfig *DetectedS3SourceConfig
 
 	noSmithyDocumentSerde
@@ -515,6 +721,8 @@ type DetectedMetricSource struct {
 type DetectedS3SourceConfig struct {
 
 	// The source's file format descriptor.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatDescriptor *DetectedFileFormatDescriptor
 
 	noSmithyDocumentSerde
@@ -524,9 +732,13 @@ type DetectedS3SourceConfig struct {
 type DimensionContribution struct {
 
 	// The name of the dimension.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionName *string
 
 	// A list of dimension values that contributed to the anomaly.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionValueContributionList []DimensionValueContribution
 
 	noSmithyDocumentSerde
@@ -536,10 +748,14 @@ type DimensionContribution struct {
 type DimensionFilter struct {
 
 	// The name of the dimension to filter on.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionName *string
 
 	// The list of values for the dimension specified in DimensionName that you want
 	// to filter on.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionValueList []string
 
 	noSmithyDocumentSerde
@@ -551,11 +767,15 @@ type DimensionNameValue struct {
 	// The name of the dimension.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionName *string
 
 	// The value of the dimension.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionValue *string
 
 	noSmithyDocumentSerde
@@ -565,9 +785,13 @@ type DimensionNameValue struct {
 type DimensionValueContribution struct {
 
 	// The severity score of the value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContributionScore *float64
 
 	// The value of the dimension.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionValue *string
 
 	noSmithyDocumentSerde
@@ -577,12 +801,18 @@ type DimensionValueContribution struct {
 type ExecutionStatus struct {
 
 	// The reason that the run failed, if applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The run's status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status AnomalyDetectionTaskStatus
 
 	// The run's timestamp.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamp *string
 
 	noSmithyDocumentSerde
@@ -592,9 +822,13 @@ type ExecutionStatus struct {
 type FileFormatDescriptor struct {
 
 	// Contains information about how a source CSV data file should be analyzed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CsvFormatDescriptor *CsvFormatDescriptor
 
 	// Contains information about how a source JSON data file should be analyzed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JsonFormatDescriptor *JsonFormatDescriptor
 
 	noSmithyDocumentSerde
@@ -606,9 +840,13 @@ type FileFormatDescriptor struct {
 type Filter struct {
 
 	// The value that you want to include in the filter.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionValue *string
 
 	// The condition to apply.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FilterOperation FilterOperation
 
 	noSmithyDocumentSerde
@@ -619,18 +857,26 @@ type Filter struct {
 type InterMetricImpactDetails struct {
 
 	// The ID of the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// For potential causes ( CAUSE_OF_INPUT_ANOMALY_GROUP ), the percentage
 	// contribution the measure has in causing the anomalies.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContributionPercentage *float64
 
 	// The name of the measure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// Whether a measure is a potential cause of the anomaly group (
 	// CAUSE_OF_INPUT_ANOMALY_GROUP ), or whether the measure is impacted by the
 	// anomaly group ( EFFECT_OF_INPUT_ANOMALY_GROUP ).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RelationshipType RelationshipType
 
 	noSmithyDocumentSerde
@@ -640,9 +886,13 @@ type InterMetricImpactDetails struct {
 type ItemizedMetricStats struct {
 
 	// The name of the measure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The number of times that the measure appears.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OccurrenceCount int32
 
 	noSmithyDocumentSerde
@@ -652,9 +902,13 @@ type ItemizedMetricStats struct {
 type JsonFormatDescriptor struct {
 
 	// The character set in which the source JSON file is written.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Charset *string
 
 	// The level of compression of the source CSV file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileCompression JsonFileCompression
 
 	noSmithyDocumentSerde
@@ -666,11 +920,15 @@ type LambdaConfiguration struct {
 	// The ARN of the Lambda function.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LambdaArn *string
 
 	// The ARN of an IAM role that has permission to invoke the Lambda function.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -683,14 +941,20 @@ type Metric struct {
 	// The function with which the metric is calculated.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AggregationFunction AggregationFunction
 
 	// The name of the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The namespace for the metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -700,12 +964,18 @@ type Metric struct {
 type MetricLevelImpact struct {
 
 	// Details about the dimensions that contributed to the anomaly.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContributionMatrix *ContributionMatrix
 
 	// The name of the measure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The number of anomalous metrics for the measure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumTimeSeries int32
 
 	noSmithyDocumentSerde
@@ -716,9 +986,13 @@ type MetricLevelImpact struct {
 type MetricSetDataQualityMetric struct {
 
 	// The array of data quality metrics contained in the data quality metric set.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataQualityMetricList []DataQualityMetric
 
 	// The Amazon Resource Name (ARN) of the data quality metric array.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetArn *string
 
 	noSmithyDocumentSerde
@@ -731,9 +1005,13 @@ type MetricSetDataQualityMetric struct {
 type MetricSetDimensionFilter struct {
 
 	// The list of filters that you are applying.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FilterList []Filter
 
 	// The dimension that you want to filter on.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -743,26 +1021,40 @@ type MetricSetDimensionFilter struct {
 type MetricSetSummary struct {
 
 	// The ARN of the detector to which the dataset belongs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The time at which the dataset was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The time at which the dataset was last modified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModificationTime *time.Time
 
 	// The ARN of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetArn *string
 
 	// The description of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetDescription *string
 
 	// The name of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetName *string
 
 	// The dataset's [tags].
 	//
 	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -772,22 +1064,34 @@ type MetricSetSummary struct {
 type MetricSource struct {
 
 	// Details about an AppFlow datasource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppFlowConfig *AppFlowConfig
 
 	// Details about an Amazon Athena datasource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AthenaSourceConfig *AthenaSourceConfig
 
 	// Details about an Amazon CloudWatch monitoring datasource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchConfig *CloudWatchConfig
 
 	// Details about an Amazon Relational Database Service (RDS) datasource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RDSSourceConfig *RDSSourceConfig
 
 	// Details about an Amazon Redshift database datasource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RedshiftSourceConfig *RedshiftSourceConfig
 
 	// Contains information about the configuration of the S3 bucket that contains
 	// source files.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3SourceConfig *S3SourceConfig
 
 	noSmithyDocumentSerde
@@ -798,28 +1102,44 @@ type MetricSource struct {
 type RDSSourceConfig struct {
 
 	// A string identifying the database instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DBInstanceIdentifier *string
 
 	// The host name of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseHost *string
 
 	// The name of the RDS database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// The port number where the database can be accessed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabasePort *int32
 
 	// The Amazon Resource Name (ARN) of the role.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecretManagerArn *string
 
 	// The name of the table in the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TableName *string
 
 	// An object containing information about the Amazon Virtual Private Cloud (VPC)
 	// configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -829,27 +1149,43 @@ type RDSSourceConfig struct {
 type RedshiftSourceConfig struct {
 
 	// A string identifying the Redshift cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterIdentifier *string
 
 	// The name of the database host.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseHost *string
 
 	// The Redshift database name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// The port number where the database can be accessed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabasePort *int32
 
 	// The Amazon Resource Name (ARN) of the role providing access to the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecretManagerArn *string
 
 	// The table name of the Redshift database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TableName *string
 
 	// Contains information about the Amazon Virtual Private Cloud (VPC) configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -860,16 +1196,24 @@ type RedshiftSourceConfig struct {
 type S3SourceConfig struct {
 
 	// Contains information about a source file's formatting.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatDescriptor *FileFormatDescriptor
 
 	// A list of paths to the historical data files.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HistoricalDataPathList []string
 
 	// The ARN of an IAM role that has read and write access permissions to the source
 	// S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// A list of templated paths to the source files.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplatedPathList []string
 
 	noSmithyDocumentSerde
@@ -881,17 +1225,25 @@ type SampleDataS3SourceConfig struct {
 	// Contains information about a source file's formatting.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFormatDescriptor *FileFormatDescriptor
 
 	// The Amazon Resource Name (ARN) of the role.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// An array of strings containing the historical set of data paths.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HistoricalDataPathList []string
 
 	// An array of strings containing the list of templated paths.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplatedPathList []string
 
 	noSmithyDocumentSerde
@@ -904,11 +1256,15 @@ type SNSConfiguration struct {
 	// The ARN of the IAM role that has access to the target SNS topic.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The ARN of the target SNS topic.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnsTopicArn *string
 
 	// The format of the SNS topic.
@@ -921,6 +1277,8 @@ type SNSConfiguration struct {
 	//
 	//   - SHORT_TEXT – Send human-readable alerts with a link to the anomaly detail
 	//   page. We recommend this for SMS.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnsFormat SnsFormat
 
 	noSmithyDocumentSerde
@@ -933,16 +1291,22 @@ type TimeSeries struct {
 	// The dimensions of the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DimensionList []DimensionNameValue
 
 	// The values for the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricValueList []float64
 
 	// The ID of the metric.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSeriesId *string
 
 	noSmithyDocumentSerde
@@ -952,9 +1316,13 @@ type TimeSeries struct {
 type TimeSeriesFeedback struct {
 
 	// Feedback on whether the metric is a legitimate anomaly.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IsAnomaly *bool
 
 	// The ID of the metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSeriesId *string
 
 	noSmithyDocumentSerde
@@ -964,9 +1332,13 @@ type TimeSeriesFeedback struct {
 type TimestampColumn struct {
 
 	// The format of the timestamp column.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ColumnFormat *string
 
 	// The name of the timestamp column.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ColumnName *string
 
 	noSmithyDocumentSerde
@@ -978,11 +1350,15 @@ type ValidationExceptionField struct {
 	// The message with more information about the validation exception.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	// The name of the field.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -994,12 +1370,16 @@ type VpcConfiguration struct {
 	// An array of strings containing the list of security groups.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroupIdList []string
 
 	// An array of strings containing the Amazon VPC subnet IDs (e.g.,
 	// subnet-0bb1c79de3EXAMPLE .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetIdList []string
 
 	noSmithyDocumentSerde

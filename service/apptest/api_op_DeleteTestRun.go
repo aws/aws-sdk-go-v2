@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a test run.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteTestRun(ctx context.Context, params *DeleteTestRunInput, optFns ...func(*Options)) (*DeleteTestRunOutput, error) {
 	if params == nil {
 		params = &DeleteTestRunInput{}
@@ -31,6 +33,8 @@ type DeleteTestRunInput struct {
 	// The run ID of the test run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	noSmithyDocumentSerde

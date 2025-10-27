@@ -16,6 +16,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:CreateProject
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -36,6 +38,8 @@ type CreateProjectInput struct {
 	// The name for the project.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to CreateProject
@@ -51,6 +55,8 @@ type CreateProjectInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// CreateProject . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -59,6 +65,8 @@ type CreateProjectInput struct {
 type CreateProjectOutput struct {
 
 	// Information about the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectMetadata *types.ProjectMetadata
 
 	// Metadata pertaining to the operation's result.

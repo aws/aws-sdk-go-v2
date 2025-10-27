@@ -20,6 +20,8 @@ import (
 //
 // Describes a world export job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DescribeWorldExportJob(ctx context.Context, params *DescribeWorldExportJobInput, optFns ...func(*Options)) (*DescribeWorldExportJobOutput, error) {
 	if params == nil {
@@ -41,6 +43,8 @@ type DescribeWorldExportJobInput struct {
 	// The Amazon Resource Name (arn) of the world export job to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde
@@ -49,14 +53,20 @@ type DescribeWorldExportJobInput struct {
 type DescribeWorldExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world export job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world export job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The failure code of the world export job if it failed:
@@ -71,16 +81,24 @@ type DescribeWorldExportJobOutput struct {
 	// RequestThrottled The request was throttled.
 	//
 	// InvalidInput An input parameter in the request is not valid.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.WorldExportJobErrorCode
 
 	// The reason why the world export job failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The IAM role that the world export process uses to access the Amazon S3 bucket
 	// and put the export.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// The output location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputLocation *types.OutputLocation
 
 	// The status of the world export job.
@@ -97,13 +115,19 @@ type DescribeWorldExportJobOutput struct {
 	// Canceled The world export job was cancelled.
 	//
 	// Canceling The world export job is being cancelled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.WorldExportJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// A list of Amazon Resource Names (arns) that correspond to worlds to be exported.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Worlds []string
 
 	// Metadata pertaining to the operation's result.

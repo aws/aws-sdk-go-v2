@@ -13,6 +13,8 @@ import (
 )
 
 // Updates properties on a ledger.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateLedger(ctx context.Context, params *UpdateLedgerInput, optFns ...func(*Options)) (*UpdateLedgerOutput, error) {
 	if params == nil {
 		params = &UpdateLedgerInput{}
@@ -33,6 +35,8 @@ type UpdateLedgerInput struct {
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Specifies whether the ledger is protected from being deleted by any user. If
@@ -41,6 +45,8 @@ type UpdateLedgerInput struct {
 	// If deletion protection is enabled, you must first disable it before you can
 	// delete the ledger. You can disable it by calling the UpdateLedger operation to
 	// set this parameter to false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeletionProtection *bool
 
 	// The key in Key Management Service (KMS) to use for encryption of data at rest
@@ -80,6 +86,8 @@ type UpdateLedgerInput struct {
 	// [Using symmetric and asymmetric keys]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
 	// [Encryption at rest]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKey *string
 
 	noSmithyDocumentSerde
@@ -88,11 +96,15 @@ type UpdateLedgerInput struct {
 type UpdateLedgerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time, in epoch time format, when the ledger was created. (Epoch
 	// time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970
 	// UTC.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationDateTime *time.Time
 
 	// Specifies whether the ledger is protected from being deleted by any user. If
@@ -101,17 +113,25 @@ type UpdateLedgerOutput struct {
 	// If deletion protection is enabled, you must first disable it before you can
 	// delete the ledger. You can disable it by calling the UpdateLedger operation to
 	// set this parameter to false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeletionProtection *bool
 
 	// Information about the encryption of data at rest in the ledger. This includes
 	// the current status, the KMS key, and when the key became inaccessible (in the
 	// case of an error).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EncryptionDescription *types.LedgerEncryptionDescription
 
 	// The name of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current status of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State types.LedgerState
 
 	// Metadata pertaining to the operation's result.

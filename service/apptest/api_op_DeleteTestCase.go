@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a test case.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteTestCase(ctx context.Context, params *DeleteTestCaseInput, optFns ...func(*Options)) (*DeleteTestCaseOutput, error) {
 	if params == nil {
 		params = &DeleteTestCaseInput{}
@@ -31,6 +33,8 @@ type DeleteTestCaseInput struct {
 	// The test case ID of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	noSmithyDocumentSerde

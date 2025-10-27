@@ -17,6 +17,8 @@ import (
 //
 // This operation requires permissions to perform the
 // lookoutvision:ListDatasetEntries operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDatasetEntries(ctx context.Context, params *ListDatasetEntriesInput, optFns ...func(*Options)) (*ListDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &ListDatasetEntriesInput{}
@@ -39,43 +41,61 @@ type ListDatasetEntriesInput struct {
 	// dataset project, specify train .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// The name of the project that contains the dataset that you want to list.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// Only includes entries after the specified date in the response. For example,
 	// 2020-06-23T00:00:00 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AfterCreationDate *time.Time
 
 	// Specify normal to include only normal images. Specify anomaly to only include
 	// anomalous entries. If you don't specify a value, Amazon Lookout for Vision
 	// returns normal and anomalous images.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyClass *string
 
 	// Only includes entries before the specified date in the response. For example,
 	// 2020-06-23T00:00:00 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BeforeCreationDate *time.Time
 
 	// Specify true to include labeled entries, otherwise specify false . If you don't
 	// specify a value, Lookout for Vision returns all entries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Labeled *bool
 
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Lookout for Vision returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of dataset entries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Perform a "contains" search on the values of the source-ref key within the
 	// dataset. For example a value of "IMG_17" returns all JSON Lines where the
 	// source-ref key value matches *IMG_17*.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceRefContains *string
 
 	noSmithyDocumentSerde
@@ -84,11 +104,15 @@ type ListDatasetEntriesInput struct {
 type ListDatasetEntriesOutput struct {
 
 	// A list of the entries (JSON Lines) within the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetEntries []string
 
 	// If the response is truncated, Amazon Lookout for Vision returns this token that
 	// you can use in the subsequent request to retrieve the next set ofdataset
 	// entries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

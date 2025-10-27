@@ -12,6 +12,8 @@ import (
 )
 
 // Get feedback for an anomaly group.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetFeedback(ctx context.Context, params *GetFeedbackInput, optFns ...func(*Options)) (*GetFeedbackOutput, error) {
 	if params == nil {
 		params = &GetFeedbackInput{}
@@ -32,18 +34,26 @@ type GetFeedbackInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The anomalous metric and group ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupTimeSeriesFeedback *types.AnomalyGroupTimeSeries
 
 	// The maximum number of results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,9 +62,13 @@ type GetFeedbackInput struct {
 type GetFeedbackOutput struct {
 
 	// Feedback for an anomalous metric.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupTimeSeriesFeedback []types.TimeSeriesFeedback
 
 	// The pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

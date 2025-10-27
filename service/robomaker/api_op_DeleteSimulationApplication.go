@@ -18,6 +18,8 @@ import (
 //
 // Deletes a simulation application.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DeleteSimulationApplication(ctx context.Context, params *DeleteSimulationApplicationInput, optFns ...func(*Options)) (*DeleteSimulationApplicationOutput, error) {
 	if params == nil {
@@ -39,9 +41,13 @@ type DeleteSimulationApplicationInput struct {
 	// The application information for the simulation application to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Application *string
 
 	// The version of the simulation application to delete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationVersion *string
 
 	noSmithyDocumentSerde

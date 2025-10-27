@@ -15,6 +15,8 @@ import (
 // Creates a journal stream for a given Amazon QLDB ledger. The stream captures
 // every document revision that is committed to the ledger's journal and delivers
 // the data to a specified Amazon Kinesis Data Streams resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StreamJournalToKinesis(ctx context.Context, params *StreamJournalToKinesisInput, optFns ...func(*Options)) (*StreamJournalToKinesisOutput, error) {
 	if params == nil {
 		params = &StreamJournalToKinesisInput{}
@@ -44,17 +46,23 @@ type StreamJournalToKinesisInput struct {
 	// .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InclusiveStartTime *time.Time
 
 	// The configuration settings of the Kinesis Data Streams destination for your
 	// stream request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KinesisConfiguration *types.KinesisConfiguration
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
@@ -65,6 +73,8 @@ type StreamJournalToKinesisInput struct {
 	// is required for all journal stream requests.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The name that you want to assign to the QLDB journal stream. User-defined names
@@ -77,6 +87,8 @@ type StreamJournalToKinesisInput struct {
 	// [Quotas in Amazon QLDB]: https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamName *string
 
 	// The exclusive date and time that specifies when the stream ends. If you don't
@@ -84,10 +96,14 @@ type StreamJournalToKinesisInput struct {
 	//
 	// The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
 	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExclusiveEndTime *time.Time
 
 	// The key-value pairs to add as tags to the stream that you want to create. Tag
 	// keys are case sensitive. Tag values are case sensitive and can be null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]*string
 
 	noSmithyDocumentSerde
@@ -97,6 +113,8 @@ type StreamJournalToKinesisOutput struct {
 
 	// The UUID (represented in Base62-encoded text) that QLDB assigns to each QLDB
 	// journal stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	// Metadata pertaining to the operation's result.

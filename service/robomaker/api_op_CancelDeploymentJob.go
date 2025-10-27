@@ -15,9 +15,7 @@ import (
 //
 // Cancels the specified deployment job.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 func (c *Client) CancelDeploymentJob(ctx context.Context, params *CancelDeploymentJobInput, optFns ...func(*Options)) (*CancelDeploymentJobOutput, error) {
@@ -40,6 +38,8 @@ type CancelDeploymentJobInput struct {
 	// The deployment job ARN to cancel.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde

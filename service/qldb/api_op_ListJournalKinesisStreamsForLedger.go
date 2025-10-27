@@ -20,6 +20,8 @@ import (
 // can retrieve all the items by calling ListJournalKinesisStreamsForLedger
 // multiple times.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Expiration for terminal streams]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
 func (c *Client) ListJournalKinesisStreamsForLedger(ctx context.Context, params *ListJournalKinesisStreamsForLedgerInput, optFns ...func(*Options)) (*ListJournalKinesisStreamsForLedgerOutput, error) {
 	if params == nil {
@@ -41,16 +43,22 @@ type ListJournalKinesisStreamsForLedgerInput struct {
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	// The maximum number of results to return in a single
 	// ListJournalKinesisStreamsForLedger request. (The actual number of results
 	// returned might be fewer.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A pagination token, indicating that you want to retrieve the next page of
 	// results. If you received a value for NextToken in the response from a previous
 	// ListJournalKinesisStreamsForLedger call, you should use that value as input here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -64,9 +72,13 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 	//   - If NextToken is not empty, more results are available. To retrieve the next
 	//   page of results, use the value of NextToken in a subsequent
 	//   ListJournalKinesisStreamsForLedger call.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The QLDB journal streams that are currently associated with the given ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Streams []types.JournalKinesisStreamDescription
 
 	// Metadata pertaining to the operation's result.
