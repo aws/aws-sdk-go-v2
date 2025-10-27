@@ -17869,6 +17869,48 @@
                     "traits": {
                         "smithy.api#enumValue": "GlobalEndpointTokenVersion"
                     }
+                },
+                "AssumeRolePolicySizeQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssumeRolePolicySizeQuota"
+                    }
+                },
+                "InstanceProfiles": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceProfiles"
+                    }
+                },
+                "InstanceProfilesQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceProfilesQuota"
+                    }
+                },
+                "Providers": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Providers"
+                    }
+                },
+                "RolePolicySizeQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RolePolicySizeQuota"
+                    }
+                },
+                "Roles": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Roles"
+                    }
+                },
+                "RolesQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RolesQuota"
+                    }
                 }
             }
         },

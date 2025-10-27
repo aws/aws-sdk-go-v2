@@ -330,6 +330,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A set of up to 50 key-value pairs to use to create the tags. A tag consists of a required key and an optional value.</p>"
                     }
+                },
+                "MaxRecordSizeInKiB": {
+                    "target": "com.amazonaws.kinesis#MaxRecordSizeInKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum record size of a single record in kibibyte (KiB) that you can write to, and read from a stream.</p>"
+                    }
                 }
             },
             "traits": {
@@ -342,7 +348,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1048576
+                    "max": 10485760
                 }
             }
         },
@@ -1774,6 +1780,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesis#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#UpdateMaxRecordSize"
                 },
                 {
                     "target": "com.amazonaws.kinesis#UpdateShardCount"
@@ -6264,6 +6273,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kinesis#MaxRecordSizeInKiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1024,
+                    "max": 10240
+                }
+            }
+        },
         "com.amazonaws.kinesis#MergeShards": {
             "type": "operation",
             "input": {
@@ -6518,7 +6536,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Writes a single data record into an Amazon Kinesis data stream. Call\n                <code>PutRecord</code> to send data into the stream for real-time ingestion and\n            subsequent processing, one record at a time. Each shard can support writes up to 1,000\n            records per second, up to a maximum data write total of 1 MiB per second.</p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the\n                    <code>StreamName</code> parameter, or both. It is recommended that you use the\n                    <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>You must specify the name of the stream that captures, stores, and transports the\n            data; a partition key; and the data blob itself.</p>\n         <p>The data blob can be any type of data; for example, a segment from a log file,\n            geographic/location data, website clickstream data, and so on.</p>\n         <p>The partition key is used by Kinesis Data Streams to distribute data across shards.\n            Kinesis Data Streams segregates the data records that belong to a stream into multiple\n            shards, using the partition key associated with each data record to determine the shard\n            to which a given data record belongs.</p>\n         <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for\n            each key. An MD5 hash function is used to map partition keys to 128-bit integer values\n            and to map associated data records to shards using the hash key ranges of the shards.\n            You can override hashing the partition key to determine the shard by explicitly\n            specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>.</p>\n         <p>\n            <code>PutRecord</code> returns the shard ID of where the data record was placed and the\n            sequence number that was assigned to the data record.</p>\n         <p>Sequence numbers increase over time and are specific to a shard within a stream, not\n            across all shards within a stream. To guarantee strictly increasing ordering, write\n            serially to a shard and use the <code>SequenceNumberForOrdering</code> parameter. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>.</p>\n         <important>\n            <p>After you write a record to a stream, you cannot modify that record or its order\n                within the stream.</p>\n         </important>\n         <p>If a <code>PutRecord</code> request cannot be processed because of insufficient\n            provisioned throughput on the shard involved in the request, <code>PutRecord</code>\n            throws <code>ProvisionedThroughputExceededException</code>. </p>\n         <p>By default, data records are accessible for 24 hours from the time that they are added\n            to a stream. You can use <a>IncreaseStreamRetentionPeriod</a> or <a>DecreaseStreamRetentionPeriod</a> to modify this retention period.</p>",
+                "smithy.api#documentation": "<p>Writes a single data record into an Amazon Kinesis data stream. Call\n                <code>PutRecord</code> to send data into the stream for real-time ingestion and\n            subsequent processing, one record at a time. Each shard can support writes up to 1,000\n            records per second, up to a maximum data write total of 10 MiB per second.</p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the\n                    <code>StreamName</code> parameter, or both. It is recommended that you use the\n                    <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>You must specify the name of the stream that captures, stores, and transports the\n            data; a partition key; and the data blob itself.</p>\n         <p>The data blob can be any type of data; for example, a segment from a log file,\n            geographic/location data, website clickstream data, and so on.</p>\n         <p>The partition key is used by Kinesis Data Streams to distribute data across shards.\n            Kinesis Data Streams segregates the data records that belong to a stream into multiple\n            shards, using the partition key associated with each data record to determine the shard\n            to which a given data record belongs.</p>\n         <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for\n            each key. An MD5 hash function is used to map partition keys to 128-bit integer values\n            and to map associated data records to shards using the hash key ranges of the shards.\n            You can override hashing the partition key to determine the shard by explicitly\n            specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>.</p>\n         <p>\n            <code>PutRecord</code> returns the shard ID of where the data record was placed and the\n            sequence number that was assigned to the data record.</p>\n         <p>Sequence numbers increase over time and are specific to a shard within a stream, not\n            across all shards within a stream. To guarantee strictly increasing ordering, write\n            serially to a shard and use the <code>SequenceNumberForOrdering</code> parameter. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>.</p>\n         <important>\n            <p>After you write a record to a stream, you cannot modify that record or its order\n                within the stream.</p>\n         </important>\n         <p>If a <code>PutRecord</code> request cannot be processed because of insufficient\n            provisioned throughput on the shard involved in the request, <code>PutRecord</code>\n            throws <code>ProvisionedThroughputExceededException</code>. </p>\n         <p>By default, data records are accessible for 24 hours from the time that they are added\n            to a stream. You can use <a>IncreaseStreamRetentionPeriod</a> or <a>DecreaseStreamRetentionPeriod</a> to modify this retention period.</p>",
                 "smithy.rules#staticContextParams": {
                     "OperationType": {
                         "value": "data"
@@ -6649,7 +6667,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Writes multiple data records into a Kinesis data stream in a single call (also\n            referred to as a <code>PutRecords</code> request). Use this operation to send data into\n            the stream for data ingestion and processing. </p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the\n                    <code>StreamName</code> parameter, or both. It is recommended that you use the\n                    <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Each <code>PutRecords</code> request can support up to 500 records. Each record in the\n            request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request,\n            including partition keys. Each shard can support writes up to 1,000 records per second,\n            up to a maximum data write total of 1 MiB per second.</p>\n         <p>You must specify the name of the stream that captures, stores, and transports the\n            data; and an array of request <code>Records</code>, with each record in the array\n            requiring a partition key and data blob. The record size limit applies to the total size\n            of the partition key and data blob.</p>\n         <p>The data blob can be any type of data; for example, a segment from a log file,\n            geographic/location data, website clickstream data, and so on.</p>\n         <p>The partition key is used by Kinesis Data Streams as input to a hash function that\n            maps the partition key and associated data to a specific shard. An MD5 hash function is\n            used to map partition keys to 128-bit integer values and to map associated data records\n            to shards. As a result of this hashing mechanism, all data records with the same\n            partition key map to the same shard within the stream. For more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>.</p>\n         <p>Each record in the <code>Records</code> array may include an optional parameter,\n                <code>ExplicitHashKey</code>, which overrides the partition key to shard mapping.\n            This parameter allows a data producer to determine explicitly the shard where the record\n            is stored. For more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis\n                Data Streams Developer Guide</i>.</p>\n         <p>The <code>PutRecords</code> response includes an array of response\n                <code>Records</code>. Each record in the response array directly correlates with a\n            record in the request array using natural ordering, from the top to the bottom of the\n            request and response. The response <code>Records</code> array always includes the same\n            number of records as the request array.</p>\n         <p>The response <code>Records</code> array includes both successfully and unsuccessfully\n            processed records. Kinesis Data Streams attempts to process all records in each\n                <code>PutRecords</code> request. A single record failure does not stop the\n            processing of subsequent records. As a result, PutRecords doesn't guarantee the ordering\n            of records. If you need to read records in the same order they are written to the\n            stream, use <a>PutRecord</a> instead of <code>PutRecords</code>, and write to\n            the same shard.</p>\n         <p>A successfully processed record includes <code>ShardId</code> and\n                <code>SequenceNumber</code> values. The <code>ShardId</code> parameter identifies\n            the shard in the stream where the record is stored. The <code>SequenceNumber</code>\n            parameter is an identifier assigned to the put record, unique to all records in the\n            stream.</p>\n         <p>An unsuccessfully processed record includes <code>ErrorCode</code> and\n                <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error\n            and can be one of the following values:\n                <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>.\n                <code>ErrorMessage</code> provides more detailed information about the\n                <code>ProvisionedThroughputExceededException</code> exception including the account\n            ID, stream name, and shard ID of the record that was throttled. For more information\n            about partially successful responses, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis\n                Data Streams Developer Guide</i>.</p>\n         <important>\n            <p>After you write a record to a stream, you cannot modify that record or its order\n                within the stream.</p>\n         </important>\n         <p>By default, data records are accessible for 24 hours from the time that they are added\n            to a stream. You can use <a>IncreaseStreamRetentionPeriod</a> or <a>DecreaseStreamRetentionPeriod</a> to modify this retention period.</p>",
+                "smithy.api#documentation": "<p>Writes multiple data records into a Kinesis data stream in a single call (also\n            referred to as a <code>PutRecords</code> request). Use this operation to send data into\n            the stream for data ingestion and processing. </p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the\n                    <code>StreamName</code> parameter, or both. It is recommended that you use the\n                    <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Each <code>PutRecords</code> request can support up to 500 records. Each record in the\n            request can be as large as 10 MiB, up to a limit of 10 MiB for the entire request,\n            including partition keys. Each shard can support writes up to 1,000 records per second,\n            up to a maximum data write total of 1 MB per second.</p>\n         <p>You must specify the name of the stream that captures, stores, and transports the\n            data; and an array of request <code>Records</code>, with each record in the array\n            requiring a partition key and data blob. The record size limit applies to the total size\n            of the partition key and data blob.</p>\n         <p>The data blob can be any type of data; for example, a segment from a log file,\n            geographic/location data, website clickstream data, and so on.</p>\n         <p>The partition key is used by Kinesis Data Streams as input to a hash function that\n            maps the partition key and associated data to a specific shard. An MD5 hash function is\n            used to map partition keys to 128-bit integer values and to map associated data records\n            to shards. As a result of this hashing mechanism, all data records with the same\n            partition key map to the same shard within the stream. For more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>.</p>\n         <p>Each record in the <code>Records</code> array may include an optional parameter,\n                <code>ExplicitHashKey</code>, which overrides the partition key to shard mapping.\n            This parameter allows a data producer to determine explicitly the shard where the record\n            is stored. For more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis\n                Data Streams Developer Guide</i>.</p>\n         <p>The <code>PutRecords</code> response includes an array of response\n                <code>Records</code>. Each record in the response array directly correlates with a\n            record in the request array using natural ordering, from the top to the bottom of the\n            request and response. The response <code>Records</code> array always includes the same\n            number of records as the request array.</p>\n         <p>The response <code>Records</code> array includes both successfully and unsuccessfully\n            processed records. Kinesis Data Streams attempts to process all records in each\n                <code>PutRecords</code> request. A single record failure does not stop the\n            processing of subsequent records. As a result, PutRecords doesn't guarantee the ordering\n            of records. If you need to read records in the same order they are written to the\n            stream, use <a>PutRecord</a> instead of <code>PutRecords</code>, and write to\n            the same shard.</p>\n         <p>A successfully processed record includes <code>ShardId</code> and\n                <code>SequenceNumber</code> values. The <code>ShardId</code> parameter identifies\n            the shard in the stream where the record is stored. The <code>SequenceNumber</code>\n            parameter is an identifier assigned to the put record, unique to all records in the\n            stream.</p>\n         <p>An unsuccessfully processed record includes <code>ErrorCode</code> and\n                <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error\n            and can be one of the following values:\n                <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>.\n                <code>ErrorMessage</code> provides more detailed information about the\n                <code>ProvisionedThroughputExceededException</code> exception including the account\n            ID, stream name, and shard ID of the record that was throttled. For more information\n            about partially successful responses, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis\n                Data Streams Developer Guide</i>.</p>\n         <important>\n            <p>After you write a record to a stream, you cannot modify that record or its order\n                within the stream.</p>\n         </important>\n         <p>By default, data records are accessible for 24 hours from the time that they are added\n            to a stream. You can use <a>IncreaseStreamRetentionPeriod</a> or <a>DecreaseStreamRetentionPeriod</a> to modify this retention period.</p>",
                 "smithy.rules#staticContextParams": {
                     "OperationType": {
                         "value": "data"
@@ -7742,6 +7760,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of enhanced fan-out consumers registered with the stream.</p>"
                     }
+                },
+                "MaxRecordSizeInKiB": {
+                    "target": "com.amazonaws.kinesis#MaxRecordSizeInKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum record size of a single record in kibibyte (KiB) that you can write to, and read from a stream.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8222,6 +8246,67 @@
                         "smithy.rules#contextParam": {
                             "name": "ResourceARN"
                         }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#UpdateMaxRecordSize": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#UpdateMaxRecordSizeInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This allows you to update the <code>MaxRecordSize</code> of a single record that you can write to, and read from a stream. You can ingest and digest single records up to 10240 KiB.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#UpdateMaxRecordSizeInput": {
+            "type": "structure",
+            "members": {
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesis#StreamARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream for the <code>MaxRecordSize</code> update.</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "StreamARN"
+                        }
+                    }
+                },
+                "MaxRecordSizeInKiB": {
+                    "target": "com.amazonaws.kinesis#MaxRecordSizeInKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum record size of a single record in KiB that you can write to, and read from a stream. Specify a value between 1024 and 10240 KiB (1 to 10 MiB). If you specify a value that is out of this range, <code>UpdateMaxRecordSize</code> sends back an <code>ValidationException</code> message.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
