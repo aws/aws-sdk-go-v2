@@ -20,6 +20,8 @@ import (
 //
 // Creates a robot application.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateRobotApplication(ctx context.Context, params *CreateRobotApplicationInput, optFns ...func(*Options)) (*CreateRobotApplicationOutput, error) {
 	if params == nil {
@@ -41,22 +43,32 @@ type CreateRobotApplicationInput struct {
 	// The name of the robot application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The robot software suite used by the robot application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The object that contains that URI of the Docker image that you use for your
 	// robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment *types.Environment
 
 	// The sources of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sources []types.SourceConfig
 
 	// A map that contains tag keys and tag values that are attached to the robot
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -65,32 +77,50 @@ type CreateRobotApplicationInput struct {
 type CreateRobotApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// An object that contains the Docker image URI used to a create your robot
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The revision id of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RevisionId *string
 
 	// The robot software suite used by the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The sources of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sources []types.Source
 
 	// The list of all tags added to the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The version of the robot application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	// Metadata pertaining to the operation's result.

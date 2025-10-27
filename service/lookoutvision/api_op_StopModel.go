@@ -18,6 +18,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:StopModel
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopModel(ctx context.Context, params *StopModelInput, optFns ...func(*Options)) (*StopModelOutput, error) {
 	if params == nil {
 		params = &StopModelInput{}
@@ -38,11 +40,15 @@ type StopModelInput struct {
 	// The version of the model that you want to stop.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The name of the project that contains the model that you want to stop.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to StopModel completes
@@ -58,6 +64,8 @@ type StopModelInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// StopModel . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -66,6 +74,8 @@ type StopModelInput struct {
 type StopModelOutput struct {
 
 	// The status of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.ModelHostingStatus
 
 	// Metadata pertaining to the operation's result.

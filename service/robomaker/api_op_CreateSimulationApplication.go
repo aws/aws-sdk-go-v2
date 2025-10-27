@@ -20,6 +20,8 @@ import (
 //
 // Creates a simulation application.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateSimulationApplication(ctx context.Context, params *CreateSimulationApplicationInput, optFns ...func(*Options)) (*CreateSimulationApplicationOutput, error) {
 	if params == nil {
@@ -41,30 +43,44 @@ type CreateSimulationApplicationInput struct {
 	// The name of the simulation application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The robot software suite used by the simulation application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The simulation software suite used by the simulation application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
 	// The object that contains the Docker image URI used to create your simulation
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment *types.Environment
 
 	// The rendering engine for the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RenderingEngine *types.RenderingEngine
 
 	// The sources of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sources []types.SourceConfig
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -73,38 +89,60 @@ type CreateSimulationApplicationInput struct {
 type CreateSimulationApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The object that contains the Docker image URI that you used to create your
 	// simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The rendering engine for the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RenderingEngine *types.RenderingEngine
 
 	// The revision id of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RevisionId *string
 
 	// Information about the robot software suite.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The simulation software suite used by the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
 	// The sources of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sources []types.Source
 
 	// The list of all tags added to the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The version of the simulation application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	// Metadata pertaining to the operation's result.

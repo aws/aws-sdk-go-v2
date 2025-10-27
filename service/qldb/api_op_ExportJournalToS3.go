@@ -25,6 +25,8 @@ import (
 //
 // You can initiate up to two concurrent journal export requests for each ledger.
 // Beyond this limit, journal export requests throw LimitExceededException .
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS3Input, optFns ...func(*Options)) (*ExportJournalToS3Output, error) {
 	if params == nil {
 		params = &ExportJournalToS3Input{}
@@ -51,6 +53,8 @@ type ExportJournalToS3Input struct {
 	// time.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExclusiveEndTime *time.Time
 
 	// The inclusive start date and time for the range of journal contents to export.
@@ -64,11 +68,15 @@ type ExportJournalToS3Input struct {
 	// CreationDateTime , Amazon QLDB defaults it to the ledger's CreationDateTime .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InclusiveStartTime *time.Time
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
@@ -84,12 +92,16 @@ type ExportJournalToS3Input struct {
 	// is required for all journal export requests.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The configuration settings of the Amazon S3 bucket destination for your export
 	// request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3ExportConfiguration *types.S3ExportConfiguration
 
 	// The output format of your exported journal data. A journal export job can write
@@ -105,6 +117,8 @@ type ExportJournalToS3Input struct {
 	//
 	// [Amazon Ion]: https://docs.aws.amazon.com/qldb/latest/developerguide/ion.html
 	// [JSON Lines]: https://jsonlines.org/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputFormat types.OutputFormat
 
 	noSmithyDocumentSerde
@@ -119,6 +133,8 @@ type ExportJournalToS3Output struct {
 	// ExportId to call DescribeJournalS3Export .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportId *string
 
 	// Metadata pertaining to the operation's result.

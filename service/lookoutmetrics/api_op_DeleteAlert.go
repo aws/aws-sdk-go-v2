@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes an alert.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteAlert(ctx context.Context, params *DeleteAlertInput, optFns ...func(*Options)) (*DeleteAlertOutput, error) {
 	if params == nil {
 		params = &DeleteAlertInput{}
@@ -31,6 +33,8 @@ type DeleteAlertInput struct {
 	// The ARN of the alert to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	noSmithyDocumentSerde

@@ -19,6 +19,8 @@ import (
 // Cancels a simulation job batch. When you cancel a simulation job batch, you are
 // also cancelling all of the active simulation jobs created as part of the batch.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CancelSimulationJobBatch(ctx context.Context, params *CancelSimulationJobBatchInput, optFns ...func(*Options)) (*CancelSimulationJobBatchOutput, error) {
 	if params == nil {
@@ -40,6 +42,8 @@ type CancelSimulationJobBatchInput struct {
 	// The id of the batch to cancel.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Batch *string
 
 	noSmithyDocumentSerde

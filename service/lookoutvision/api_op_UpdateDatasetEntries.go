@@ -31,6 +31,8 @@ import (
 //
 // This operation requires permissions to perform the
 // lookoutvision:UpdateDatasetEntries operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDatasetEntries(ctx context.Context, params *UpdateDatasetEntriesInput, optFns ...func(*Options)) (*UpdateDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetEntriesInput{}
@@ -51,6 +53,8 @@ type UpdateDatasetEntriesInput struct {
 	// The entries to add to the dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Changes []byte
 
 	// The type of the dataset that you want to update. Specify train to update the
@@ -58,11 +62,15 @@ type UpdateDatasetEntriesInput struct {
 	// dataset project, specify train .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// The name of the project that contains the dataset that you want to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to UpdateDatasetEntries
@@ -79,6 +87,8 @@ type UpdateDatasetEntriesInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// UpdateDatasetEntries . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -87,6 +97,8 @@ type UpdateDatasetEntriesInput struct {
 type UpdateDatasetEntriesOutput struct {
 
 	// The status of the dataset update.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DatasetStatus
 
 	// Metadata pertaining to the operation's result.

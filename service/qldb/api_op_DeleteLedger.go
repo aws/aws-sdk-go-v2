@@ -15,6 +15,8 @@ import (
 // If deletion protection is enabled, you must first disable it before you can
 // delete the ledger. You can disable it by calling the UpdateLedger operation to
 // set this parameter to false .
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteLedger(ctx context.Context, params *DeleteLedgerInput, optFns ...func(*Options)) (*DeleteLedgerOutput, error) {
 	if params == nil {
 		params = &DeleteLedgerInput{}
@@ -35,6 +37,8 @@ type DeleteLedgerInput struct {
 	// The name of the ledger that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde

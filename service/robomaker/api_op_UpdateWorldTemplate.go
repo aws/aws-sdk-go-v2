@@ -20,6 +20,8 @@ import (
 //
 // Updates a world template.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) UpdateWorldTemplate(ctx context.Context, params *UpdateWorldTemplateInput, optFns ...func(*Options)) (*UpdateWorldTemplateOutput, error) {
 	if params == nil {
@@ -41,15 +43,23 @@ type UpdateWorldTemplateInput struct {
 	// The Amazon Resource Name (arn) of the world template to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	// The name of the template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The world template body.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateBody *string
 
 	// The location of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateLocation *types.TemplateLocation
 
 	noSmithyDocumentSerde
@@ -58,16 +68,24 @@ type UpdateWorldTemplateInput struct {
 type UpdateWorldTemplateOutput struct {
 
 	// The Amazon Resource Name (arn) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the world template was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The time, in milliseconds since the epoch, when the world template was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

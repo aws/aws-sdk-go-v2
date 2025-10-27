@@ -18,6 +18,8 @@ import (
 //
 // Deletes a world template.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DeleteWorldTemplate(ctx context.Context, params *DeleteWorldTemplateInput, optFns ...func(*Options)) (*DeleteWorldTemplateOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type DeleteWorldTemplateInput struct {
 	// The Amazon Resource Name (arn) of the world template you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	noSmithyDocumentSerde

@@ -13,6 +13,8 @@ import (
 
 // Returns a list of measures that are potential causes or effects of an anomaly
 // group.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListAnomalyGroupRelatedMetrics(ctx context.Context, params *ListAnomalyGroupRelatedMetricsInput, optFns ...func(*Options)) (*ListAnomalyGroupRelatedMetricsOutput, error) {
 	if params == nil {
 		params = &ListAnomalyGroupRelatedMetricsInput{}
@@ -33,22 +35,32 @@ type ListAnomalyGroupRelatedMetricsInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The ID of the anomaly group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// The maximum number of results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Filter for potential causes ( CAUSE_OF_INPUT_ANOMALY_GROUP ) or downstream
 	// effects ( EFFECT_OF_INPUT_ANOMALY_GROUP ) of the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RelationshipTypeFilter types.RelationshipType
 
 	noSmithyDocumentSerde
@@ -58,9 +70,13 @@ type ListAnomalyGroupRelatedMetricsOutput struct {
 
 	// Aggregated details about the measures contributing to the anomaly group, and
 	// the measures potentially impacted by the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InterMetricImpactList []types.InterMetricImpactDetails
 
 	// The pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

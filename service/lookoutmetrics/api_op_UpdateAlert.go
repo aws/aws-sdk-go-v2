@@ -12,6 +12,8 @@ import (
 )
 
 // Make changes to an existing alert.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateAlert(ctx context.Context, params *UpdateAlertInput, optFns ...func(*Options)) (*UpdateAlertOutput, error) {
 	if params == nil {
 		params = &UpdateAlertInput{}
@@ -32,19 +34,29 @@ type UpdateAlertInput struct {
 	// The ARN of the alert to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	// Action that will be triggered when there is an alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Action *types.Action
 
 	// A description of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertDescription *string
 
 	// The configuration of the alert filters, containing MetricList and
 	// DimensionFilterList.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertFilters *types.AlertFilters
 
 	// An integer from 0 to 100 specifying the alert sensitivity threshold.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertSensitivityThreshold int32
 
 	noSmithyDocumentSerde
@@ -53,6 +65,8 @@ type UpdateAlertInput struct {
 type UpdateAlertOutput struct {
 
 	// The ARN of the updated alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	// Metadata pertaining to the operation's result.

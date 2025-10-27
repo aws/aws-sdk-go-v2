@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a test configuration.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateTestConfiguration(ctx context.Context, params *CreateTestConfigurationInput, optFns ...func(*Options)) (*CreateTestConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateTestConfigurationInput{}
@@ -32,26 +34,40 @@ type CreateTestConfigurationInput struct {
 	// The name of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The defined resources of the test configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Resources []types.Resource
 
 	// The client token of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The properties of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Properties map[string]string
 
 	// The service settings of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceSettings *types.ServiceSettings
 
 	// The tags of the test configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -62,11 +78,15 @@ type CreateTestConfigurationOutput struct {
 	// The test configuration ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationId *string
 
 	// The test configuration version.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestConfigurationVersion *int32
 
 	// Metadata pertaining to the operation's result.

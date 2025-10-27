@@ -12,6 +12,8 @@ import (
 )
 
 // Lists test runs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTestRuns(ctx context.Context, params *ListTestRunsInput, optFns ...func(*Options)) (*ListTestRunsOutput, error) {
 	if params == nil {
 		params = &ListTestRunsInput{}
@@ -30,16 +32,24 @@ func (c *Client) ListTestRuns(ctx context.Context, params *ListTestRunsInput, op
 type ListTestRunsInput struct {
 
 	// The maximum number of test runs to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token from the previous request to retrieve the next page of test run
 	// results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The test run IDs of the test runs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunIds []string
 
 	// The test suite ID of the test runs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	noSmithyDocumentSerde
@@ -50,9 +60,13 @@ type ListTestRunsOutput struct {
 	// The test runs of the response query.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRuns []types.TestRunSummary
 
 	// The token from the previous request to retrieve the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

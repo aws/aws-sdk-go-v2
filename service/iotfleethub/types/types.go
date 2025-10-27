@@ -13,28 +13,42 @@ type ApplicationSummary struct {
 	// The unique Id of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// The name of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationName *string
 
 	// The URL of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationUrl *string
 
 	// The date (in Unix epoch time) when the web application was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationCreationDate int64
 
 	// An optional description of the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationDescription *string
 
 	// The date (in Unix epoch time) when the web application was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationLastUpdateDate int64
 
 	// The current state of the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationState ApplicationState
 
 	noSmithyDocumentSerde

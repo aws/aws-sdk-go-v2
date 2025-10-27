@@ -18,6 +18,8 @@ import (
 //
 // Restarts a running simulation job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) RestartSimulationJob(ctx context.Context, params *RestartSimulationJobInput, optFns ...func(*Options)) (*RestartSimulationJobOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type RestartSimulationJobInput struct {
 	// The Amazon Resource Name (ARN) of the simulation job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde

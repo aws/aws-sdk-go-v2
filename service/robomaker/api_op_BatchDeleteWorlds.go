@@ -18,6 +18,8 @@ import (
 //
 // Deletes one or more worlds in a batch operation.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) BatchDeleteWorlds(ctx context.Context, params *BatchDeleteWorldsInput, optFns ...func(*Options)) (*BatchDeleteWorldsOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type BatchDeleteWorldsInput struct {
 	// A list of Amazon Resource Names (arns) that correspond to worlds to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Worlds []string
 
 	noSmithyDocumentSerde
@@ -48,6 +52,8 @@ type BatchDeleteWorldsOutput struct {
 
 	// A list of unprocessed worlds associated with the call. These worlds were not
 	// deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UnprocessedWorlds []string
 
 	// Metadata pertaining to the operation's result.

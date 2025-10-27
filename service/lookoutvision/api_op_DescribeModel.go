@@ -15,6 +15,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:DescribeModel
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeModel(ctx context.Context, params *DescribeModelInput, optFns ...func(*Options)) (*DescribeModelOutput, error) {
 	if params == nil {
 		params = &DescribeModelInput{}
@@ -35,11 +37,15 @@ type DescribeModelInput struct {
 	// The version of the model that you want to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The project that contains the version of a model that you want to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -48,6 +54,8 @@ type DescribeModelInput struct {
 type DescribeModelOutput struct {
 
 	// Contains the description of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelDescription *types.ModelDescription
 
 	// Metadata pertaining to the operation's result.

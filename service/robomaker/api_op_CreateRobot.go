@@ -23,9 +23,7 @@ import (
 //
 // Creates a robot.
 //
-// Deprecated: AWS RoboMaker is unable to process this request as the support for
-// the AWS RoboMaker application deployment feature has ended. For additional
-// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -49,19 +47,27 @@ type CreateRobotInput struct {
 	// The target architecture of the robot.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture types.Architecture
 
 	// The Greengrass group id.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GreengrassGroupId *string
 
 	// The name for the robot.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A map that contains tag keys and tag values that are attached to the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -70,22 +76,34 @@ type CreateRobotInput struct {
 type CreateRobotOutput struct {
 
 	// The target architecture of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture types.Architecture
 
 	// The Amazon Resource Name (ARN) of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the robot was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the Greengrass group associated with the
 	// robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GreengrassGroupId *string
 
 	// The name of the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The list of all tags added to the robot.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

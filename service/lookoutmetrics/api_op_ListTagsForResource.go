@@ -12,6 +12,8 @@ import (
 
 // Gets a list of [tags] for a detector, dataset, or alert.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
@@ -33,6 +35,8 @@ type ListTagsForResourceInput struct {
 	// The resource's Amazon Resource Name (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -41,6 +45,8 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// The resource's tags.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

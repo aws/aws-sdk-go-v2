@@ -12,6 +12,8 @@ import (
 )
 
 // Lists test cases.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTestCases(ctx context.Context, params *ListTestCasesInput, optFns ...func(*Options)) (*ListTestCasesOutput, error) {
 	if params == nil {
 		params = &ListTestCasesInput{}
@@ -30,12 +32,18 @@ func (c *Client) ListTestCases(ctx context.Context, params *ListTestCasesInput, 
 type ListTestCasesInput struct {
 
 	// The maximum results of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The next token of the test cases.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The IDs of the test cases.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseIds []string
 
 	noSmithyDocumentSerde
@@ -46,9 +54,13 @@ type ListTestCasesOutput struct {
 	// The test cases in an application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCases []types.TestCaseSummary
 
 	// The next token in test cases.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

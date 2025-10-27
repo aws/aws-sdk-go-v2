@@ -18,6 +18,8 @@ import (
 //
 // Cancels the specified simulation job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CancelSimulationJob(ctx context.Context, params *CancelSimulationJobInput, optFns ...func(*Options)) (*CancelSimulationJobOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type CancelSimulationJobInput struct {
 	// The simulation job ARN to cancel.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde

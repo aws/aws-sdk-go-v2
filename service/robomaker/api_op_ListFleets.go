@@ -23,9 +23,7 @@ import (
 // Returns a list of fleets. You can optionally provide filters to retrieve
 // specific fleets.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -50,6 +48,8 @@ type ListFleetsInput struct {
 	//
 	// The filter name name is supported. When filtering, you must use the complete
 	// value of the filtered item. You can use up to three filters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	// When this parameter is used, ListFleets only returns maxResults results in a
@@ -58,6 +58,8 @@ type ListFleetsInput struct {
 	// returned nextToken value. This value can be between 1 and 200. If this
 	// parameter is not used, then ListFleets returns up to 200 results and a nextToken
 	// value if applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -68,6 +70,8 @@ type ListFleetsInput struct {
 	//
 	// This token should be treated as an opaque identifier that is only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -76,6 +80,8 @@ type ListFleetsInput struct {
 type ListFleetsOutput struct {
 
 	// A list of fleet details meeting the request criteria.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FleetDetails []types.Fleet
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -83,6 +89,8 @@ type ListFleetsOutput struct {
 	// the next set of results, call ListFleets again and assign that token to the
 	// request object's nextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

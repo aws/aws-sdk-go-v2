@@ -19,6 +19,8 @@ import (
 //
 // Describes a world template.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DescribeWorldTemplate(ctx context.Context, params *DescribeWorldTemplateInput, optFns ...func(*Options)) (*DescribeWorldTemplateOutput, error) {
 	if params == nil {
@@ -40,6 +42,8 @@ type DescribeWorldTemplateInput struct {
 	// The Amazon Resource Name (arn) of the world template you want to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	noSmithyDocumentSerde
@@ -48,27 +52,41 @@ type DescribeWorldTemplateInput struct {
 type DescribeWorldTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world template was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The time, in milliseconds since the epoch, when the world template was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// The name of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The version of the world template that you're using.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	// Metadata pertaining to the operation's result.

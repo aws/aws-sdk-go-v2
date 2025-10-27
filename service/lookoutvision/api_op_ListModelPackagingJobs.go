@@ -20,6 +20,8 @@ import (
 //
 // For more information, see Using your Amazon Lookout for Vision model on an edge
 // device in the Amazon Lookout for Vision Developer Guide.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListModelPackagingJobs(ctx context.Context, params *ListModelPackagingJobsInput, optFns ...func(*Options)) (*ListModelPackagingJobsOutput, error) {
 	if params == nil {
 		params = &ListModelPackagingJobsInput{}
@@ -40,16 +42,22 @@ type ListModelPackagingJobsInput struct {
 	//  The name of the project for which you want to list the model packaging jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more results to
 	// retrieve), Amazon Lookout for Vision returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,11 +67,15 @@ type ListModelPackagingJobsOutput struct {
 
 	//  A list of the model packaging jobs created for the specified Amazon Lookout
 	// for Vision project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingJobs []types.ModelPackagingJobMetadata
 
 	// If the previous response was incomplete (because there is more results to
 	// retrieve), Amazon Lookout for Vision returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

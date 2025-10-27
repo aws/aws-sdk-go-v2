@@ -12,6 +12,8 @@ import (
 )
 
 // Returns details about the requested data quality metrics.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDataQualityMetrics(ctx context.Context, params *GetDataQualityMetricsInput, optFns ...func(*Options)) (*GetDataQualityMetricsOutput, error) {
 	if params == nil {
 		params = &GetDataQualityMetricsInput{}
@@ -33,9 +35,13 @@ type GetDataQualityMetricsInput struct {
 	// investigate.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The Amazon Resource Name (ARN) of a specific data quality metric set.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricSetArn *string
 
 	noSmithyDocumentSerde
@@ -45,6 +51,8 @@ type GetDataQualityMetricsOutput struct {
 
 	// A list of the data quality metrics for the AnomalyDetectorArn that you
 	// requested.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorDataQualityMetricList []types.AnomalyDetectorDataQualityMetric
 
 	// Metadata pertaining to the operation's result.

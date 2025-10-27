@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a test suite.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteTestSuite(ctx context.Context, params *DeleteTestSuiteInput, optFns ...func(*Options)) (*DeleteTestSuiteOutput, error) {
 	if params == nil {
 		params = &DeleteTestSuiteInput{}
@@ -31,6 +33,8 @@ type DeleteTestSuiteInput struct {
 	// The test ID of the test suite.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	noSmithyDocumentSerde

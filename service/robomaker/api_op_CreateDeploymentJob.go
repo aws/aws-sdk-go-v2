@@ -29,9 +29,7 @@ import (
 // After 90 days, deployment jobs expire and will be deleted. They will no longer
 // be accessible.
 //
-// Deprecated: AWS RoboMaker is unable to process this request as the support for
-// the AWS RoboMaker application deployment feature has ended. For additional
-// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Creating a Robot Application Version]: https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022
@@ -57,23 +55,33 @@ type CreateDeploymentJobInput struct {
 	// the request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The deployment application configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// The Amazon Resource Name (ARN) of the fleet to deploy.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// The requested deployment configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfig *types.DeploymentConfig
 
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -82,15 +90,23 @@ type CreateDeploymentJobInput struct {
 type CreateDeploymentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The deployment application configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// The deployment configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfig *types.DeploymentConfig
 
 	// The failure code of the simulation job if it failed:
@@ -132,18 +148,28 @@ type CreateDeploymentJobOutput struct {
 	// powered on or connected to the internet.
 	//
 	// [AWSGreengrassResourceAccessRolePolicy managed policy]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.DeploymentJobErrorCode
 
 	// The failure reason of the deployment job if it failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The target fleet for the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// The status of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DeploymentStatus
 
 	// The list of all tags added to the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

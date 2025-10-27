@@ -23,9 +23,7 @@ import (
 //
 // Describes a deployment job.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -49,6 +47,8 @@ type DescribeDeploymentJobInput struct {
 	// The Amazon Resource Name (ARN) of the deployment job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde
@@ -57,33 +57,53 @@ type DescribeDeploymentJobInput struct {
 type DescribeDeploymentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the deployment job was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The deployment application configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// The deployment configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfig *types.DeploymentConfig
 
 	// The deployment job failure code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.DeploymentJobErrorCode
 
 	// A short description of the reason why the deployment job failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// A list of robot deployment summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RobotDeploymentSummary []types.RobotDeployment
 
 	// The status of the deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DeploymentStatus
 
 	// The list of all tags added to the specified deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

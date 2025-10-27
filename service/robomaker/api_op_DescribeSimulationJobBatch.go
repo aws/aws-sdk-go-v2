@@ -20,6 +20,8 @@ import (
 //
 // Describes a simulation job batch.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DescribeSimulationJobBatch(ctx context.Context, params *DescribeSimulationJobBatchInput, optFns ...func(*Options)) (*DescribeSimulationJobBatchOutput, error) {
 	if params == nil {
@@ -41,6 +43,8 @@ type DescribeSimulationJobBatchInput struct {
 	// The id of the batch to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Batch *string
 
 	noSmithyDocumentSerde
@@ -49,38 +53,58 @@ type DescribeSimulationJobBatchInput struct {
 type DescribeSimulationJobBatchOutput struct {
 
 	// The Amazon Resource Name (ARN) of the batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The batch policy.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchPolicy *types.BatchPolicy
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// A list of created simulation job summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedRequests []types.SimulationJobSummary
 
 	// A list of failed create simulation job requests. The request failed to be
 	// created into a simulation job. Failed requests do not have a simulation job ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailedRequests []types.FailedCreateSimulationJobRequest
 
 	// The failure code of the simulation job batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.SimulationJobBatchErrorCode
 
 	// The reason the simulation job batch failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedAt *time.Time
 
 	// A list of pending simulation job requests. These requests have not yet been
 	// created into simulation jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PendingRequests []types.SimulationJobRequest
 
 	// The status of the batch.
@@ -113,10 +137,14 @@ type DescribeSimulationJobBatchOutput struct {
 	// .
 	//
 	// TimedOut The simulation batch job timed out.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.SimulationJobBatchStatus
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job batch.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

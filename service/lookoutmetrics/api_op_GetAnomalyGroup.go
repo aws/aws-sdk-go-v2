@@ -12,6 +12,8 @@ import (
 )
 
 // Returns details about a group of anomalous metrics.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetAnomalyGroup(ctx context.Context, params *GetAnomalyGroupInput, optFns ...func(*Options)) (*GetAnomalyGroupOutput, error) {
 	if params == nil {
 		params = &GetAnomalyGroupInput{}
@@ -32,11 +34,15 @@ type GetAnomalyGroupInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The ID of the anomaly group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	noSmithyDocumentSerde
@@ -45,6 +51,8 @@ type GetAnomalyGroupInput struct {
 type GetAnomalyGroupOutput struct {
 
 	// Details about the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroup *types.AnomalyGroup
 
 	// Metadata pertaining to the operation's result.

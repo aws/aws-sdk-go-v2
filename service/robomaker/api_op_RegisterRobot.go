@@ -21,9 +21,7 @@ import (
 // This API is no longer supported and will throw an error if used. For more
 // information, see the January 31, 2022 update in the [Support policy]page.
 //
-// Deprecated: AWS RoboMaker is unable to process this request as the support for
-// the AWS RoboMaker application deployment feature has ended. For additional
-// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -47,11 +45,15 @@ type RegisterRobotInput struct {
 	// The Amazon Resource Name (ARN) of the fleet.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// The Amazon Resource Name (ARN) of the robot.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Robot *string
 
 	noSmithyDocumentSerde
@@ -60,9 +62,13 @@ type RegisterRobotInput struct {
 type RegisterRobotOutput struct {
 
 	// The Amazon Resource Name (ARN) of the fleet that the robot will join.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// Information about the robot registration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Robot *string
 
 	// Metadata pertaining to the operation's result.

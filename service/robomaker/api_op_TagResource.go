@@ -24,6 +24,8 @@ import (
 // For information about the rules that apply to tag keys and tag values, see [User-Defined Tag Restrictions] in
 // the AWS Billing and Cost Management User Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [User-Defined Tag Restrictions]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -46,11 +48,15 @@ type TagResourceInput struct {
 	// The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are tagging.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A map that contains tag keys and tag values that are attached to the resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

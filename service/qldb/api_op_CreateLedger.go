@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a new ledger in your Amazon Web Services account in the current Region.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateLedger(ctx context.Context, params *CreateLedgerInput, optFns ...func(*Options)) (*CreateLedgerOutput, error) {
 	if params == nil {
 		params = &CreateLedgerInput{}
@@ -39,6 +41,8 @@ type CreateLedgerInput struct {
 	// [Quotas in Amazon QLDB]: https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The permissions mode to assign to the ledger that you want to create. This
@@ -67,6 +71,8 @@ type CreateLedgerInput struct {
 	// [Getting started with the standard permissions mode]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionsMode types.PermissionsMode
 
 	// Specifies whether the ledger is protected from being deleted by any user. If
@@ -75,6 +81,8 @@ type CreateLedgerInput struct {
 	// If deletion protection is enabled, you must first disable it before you can
 	// delete the ledger. You can disable it by calling the UpdateLedger operation to
 	// set this parameter to false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeletionProtection *bool
 
 	// The key in Key Management Service (KMS) to use for encryption of data at rest
@@ -114,10 +122,14 @@ type CreateLedgerInput struct {
 	// [Using symmetric and asymmetric keys]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
 	// [Encryption at rest]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKey *string
 
 	// The key-value pairs to add as tags to the ledger that you want to create. Tag
 	// keys are case sensitive. Tag values are case sensitive and can be null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]*string
 
 	noSmithyDocumentSerde
@@ -126,11 +138,15 @@ type CreateLedgerInput struct {
 type CreateLedgerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time, in epoch time format, when the ledger was created. (Epoch
 	// time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970
 	// UTC.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationDateTime *time.Time
 
 	// Specifies whether the ledger is protected from being deleted by any user. If
@@ -139,20 +155,30 @@ type CreateLedgerOutput struct {
 	// If deletion protection is enabled, you must first disable it before you can
 	// delete the ledger. You can disable it by calling the UpdateLedger operation to
 	// set this parameter to false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeletionProtection *bool
 
 	// The ARN of the customer managed KMS key that the ledger uses for encryption at
 	// rest. If this parameter is undefined, the ledger uses an Amazon Web Services
 	// owned KMS key for encryption.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyArn *string
 
 	// The name of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The permissions mode of the ledger that you created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionsMode types.PermissionsMode
 
 	// The current status of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State types.LedgerState
 
 	// Metadata pertaining to the operation's result.

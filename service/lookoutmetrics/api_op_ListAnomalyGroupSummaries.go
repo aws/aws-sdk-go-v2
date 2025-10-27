@@ -12,6 +12,8 @@ import (
 )
 
 // Returns a list of anomaly groups.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListAnomalyGroupSummaries(ctx context.Context, params *ListAnomalyGroupSummariesInput, optFns ...func(*Options)) (*ListAnomalyGroupSummariesOutput, error) {
 	if params == nil {
 		params = &ListAnomalyGroupSummariesInput{}
@@ -32,18 +34,26 @@ type ListAnomalyGroupSummariesInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The minimum severity score for inclusion in the output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SensitivityThreshold int32
 
 	// The maximum number of results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,12 +62,18 @@ type ListAnomalyGroupSummariesInput struct {
 type ListAnomalyGroupSummariesOutput struct {
 
 	// Aggregated details about the anomaly groups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupStatistics *types.AnomalyGroupStatistics
 
 	// A list of anomaly group summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupSummaryList []types.AnomalyGroupSummary
 
 	// The pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

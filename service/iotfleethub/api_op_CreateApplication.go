@@ -17,6 +17,8 @@ import (
 // you create must also be in the same Amazon Web Services Region of the
 // organization instance of IAM Identity Center. For more information see [Enabling IAM Identity Center]and [Organization instances of IAM Identity Center].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Enabling IAM Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html
 // [Organization instances of IAM Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/organization-instances-identity-center.html
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
@@ -39,6 +41,8 @@ type CreateApplicationInput struct {
 	// The name of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationName *string
 
 	// The ARN of the role that the web application assumes when it interacts with
@@ -47,18 +51,26 @@ type CreateApplicationInput struct {
 	// The name of the role must be in the form AWSIotFleetHub_random_string .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// An optional description of the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationDescription *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A set of key/value pairs that you can use to manage the web application
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -69,11 +81,15 @@ type CreateApplicationOutput struct {
 	// The ARN of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationArn *string
 
 	// The unique Id of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// Metadata pertaining to the operation's result.

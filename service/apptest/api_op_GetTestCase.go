@@ -13,6 +13,8 @@ import (
 )
 
 // Gets a test case.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetTestCase(ctx context.Context, params *GetTestCaseInput, optFns ...func(*Options)) (*GetTestCaseOutput, error) {
 	if params == nil {
 		params = &GetTestCaseInput{}
@@ -33,9 +35,13 @@ type GetTestCaseInput struct {
 	// The request test ID of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test case version of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	noSmithyDocumentSerde
@@ -56,45 +62,63 @@ type GetTestCaseOutput struct {
 	// The latest version of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestVersion *types.TestCaseLatestVersion
 
 	// The name of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.TestCaseLifecycle
 
 	// The steps of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Steps []types.Step
 
 	// The Amazon Resource Name (ARN) of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseArn *string
 
 	// The response test ID of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The case version of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	// The description of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The status reason of the test case.
 	StatusReason *string
 
 	// The tags of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // Returns a selection of sample records from an Amazon S3 datasource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSampleData(ctx context.Context, params *GetSampleDataInput, optFns ...func(*Options)) (*GetSampleDataOutput, error) {
 	if params == nil {
 		params = &GetSampleDataInput{}
@@ -30,6 +32,8 @@ func (c *Client) GetSampleData(ctx context.Context, params *GetSampleDataInput, 
 type GetSampleDataInput struct {
 
 	// A datasource bucket in Amazon S3.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3SourceConfig *types.SampleDataS3SourceConfig
 
 	noSmithyDocumentSerde
@@ -38,9 +42,13 @@ type GetSampleDataInput struct {
 type GetSampleDataOutput struct {
 
 	// A list of header labels for the records.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HeaderValues []string
 
 	// A list of records.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SampleRows [][]string
 
 	// Metadata pertaining to the operation's result.

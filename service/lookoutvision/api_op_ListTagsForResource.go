@@ -16,6 +16,8 @@ import (
 //
 // This operation requires permissions to perform the
 // lookoutvision:ListTagsForResource operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -36,6 +38,8 @@ type ListTagsForResourceInput struct {
 	// The Amazon Resource Name (ARN) of the model for which you want to list tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -44,6 +48,8 @@ type ListTagsForResourceInput struct {
 type ListTagsForResourceOutput struct {
 
 	// A map of tag keys and values attached to the specified model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

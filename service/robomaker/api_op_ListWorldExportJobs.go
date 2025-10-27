@@ -19,6 +19,8 @@ import (
 //
 // Lists world export jobs.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) ListWorldExportJobs(ctx context.Context, params *ListWorldExportJobsInput, optFns ...func(*Options)) (*ListWorldExportJobsOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ func (c *Client) ListWorldExportJobs(ctx context.Context, params *ListWorldExpor
 type ListWorldExportJobsInput struct {
 
 	// Optional filters to limit results. You can use generationJobId and templateId .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	// When this parameter is used, ListWorldExportJobs only returns maxResults
@@ -46,6 +50,8 @@ type ListWorldExportJobsInput struct {
 	// ListWorldExportJobs request with the returned nextToken value. This value can
 	// be between 1 and 100. If this parameter is not used, then ListWorldExportJobs
 	// returns up to 100 results and a nextToken value if applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -53,6 +59,8 @@ type ListWorldExportJobsInput struct {
 	// the next set of results, call ListWorldExportJobs again and assign that token
 	// to the request object's nextToken parameter. If there are no remaining results,
 	// the previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -63,6 +71,8 @@ type ListWorldExportJobsOutput struct {
 	// Summary information for world export jobs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldExportJobSummaries []types.WorldExportJobSummary
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -70,6 +80,8 @@ type ListWorldExportJobsOutput struct {
 	// the next set of results, call ListWorldExportJobsRequest again and assign that
 	// token to the request object's nextToken parameter. If there are no remaining
 	// results, the previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

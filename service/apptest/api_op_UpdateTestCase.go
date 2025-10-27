@@ -12,6 +12,8 @@ import (
 )
 
 // Updates a test case.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateTestCase(ctx context.Context, params *UpdateTestCaseInput, optFns ...func(*Options)) (*UpdateTestCaseOutput, error) {
 	if params == nil {
 		params = &UpdateTestCaseInput{}
@@ -32,12 +34,18 @@ type UpdateTestCaseInput struct {
 	// The test case ID of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The description of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The steps of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Steps []types.Step
 
 	noSmithyDocumentSerde
@@ -48,11 +56,15 @@ type UpdateTestCaseOutput struct {
 	// The test case ID of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test case version of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	// Metadata pertaining to the operation's result.

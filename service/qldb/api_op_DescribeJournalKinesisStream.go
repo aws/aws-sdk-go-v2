@@ -18,6 +18,8 @@ import (
 // This action does not return any expired journal streams. For more information,
 // see [Expiration for terminal streams]in the Amazon QLDB Developer Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Expiration for terminal streams]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
 func (c *Client) DescribeJournalKinesisStream(ctx context.Context, params *DescribeJournalKinesisStreamInput, optFns ...func(*Options)) (*DescribeJournalKinesisStreamOutput, error) {
 	if params == nil {
@@ -39,12 +41,16 @@ type DescribeJournalKinesisStreamInput struct {
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	// The UUID (represented in Base62-encoded text) of the QLDB journal stream to
 	// describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	noSmithyDocumentSerde
@@ -54,6 +60,8 @@ type DescribeJournalKinesisStreamOutput struct {
 
 	// Information about the QLDB journal stream returned by a DescribeJournalS3Export
 	// request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Stream *types.JournalKinesisStreamDescription
 
 	// Metadata pertaining to the operation's result.

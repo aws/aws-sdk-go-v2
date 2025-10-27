@@ -23,9 +23,7 @@ import (
 //
 // Describes a fleet.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -49,6 +47,8 @@ type DescribeFleetInput struct {
 	// The Amazon Resource Name (ARN) of the fleet.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	noSmithyDocumentSerde
@@ -57,27 +57,43 @@ type DescribeFleetInput struct {
 type DescribeFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the last deployment job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentJob *string
 
 	// The status of the last deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentStatus types.DeploymentStatus
 
 	// The time of the last deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDeploymentTime *time.Time
 
 	// The name of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A list of robots.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Robots []types.Robot
 
 	// The list of all tags added to the specified fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // Returns information about the status of the specified anomaly detection jobs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAnomalyDetectionExecutions(ctx context.Context, params *DescribeAnomalyDetectionExecutionsInput, optFns ...func(*Options)) (*DescribeAnomalyDetectionExecutionsOutput, error) {
 	if params == nil {
 		params = &DescribeAnomalyDetectionExecutionsInput{}
@@ -32,16 +34,24 @@ type DescribeAnomalyDetectionExecutionsInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The number of items to return in the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The timestamp of the anomaly detection job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Timestamp *string
 
 	noSmithyDocumentSerde
@@ -50,9 +60,13 @@ type DescribeAnomalyDetectionExecutionsInput struct {
 type DescribeAnomalyDetectionExecutionsOutput struct {
 
 	// A list of detection jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionList []types.ExecutionStatus
 
 	// The pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

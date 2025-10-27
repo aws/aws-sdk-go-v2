@@ -12,6 +12,8 @@ import (
 )
 
 // Creates an alert for an anomaly detector.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateAlert(ctx context.Context, params *CreateAlertInput, optFns ...func(*Options)) (*CreateAlertOutput, error) {
 	if params == nil {
 		params = &CreateAlertInput{}
@@ -32,31 +34,45 @@ type CreateAlertInput struct {
 	// Action that will be triggered when there is an alert.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Action *types.Action
 
 	// The name of the alert.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertName *string
 
 	// The ARN of the detector to which the alert is attached.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// A description of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertDescription *string
 
 	// The configuration of the alert filters, containing MetricList and
 	// DimensionFilterList.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertFilters *types.AlertFilters
 
 	// An integer from 0 to 100 specifying the alert sensitivity threshold.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertSensitivityThreshold int32
 
 	// A list of [tags] to apply to the alert.
 	//
 	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -65,6 +81,8 @@ type CreateAlertInput struct {
 type CreateAlertOutput struct {
 
 	// The ARN of the alert.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AlertArn *string
 
 	// Metadata pertaining to the operation's result.

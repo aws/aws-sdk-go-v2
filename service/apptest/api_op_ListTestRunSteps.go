@@ -12,6 +12,8 @@ import (
 )
 
 // Lists test run steps.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTestRunSteps(ctx context.Context, params *ListTestRunStepsInput, optFns ...func(*Options)) (*ListTestRunStepsOutput, error) {
 	if params == nil {
 		params = &ListTestRunStepsInput{}
@@ -32,18 +34,28 @@ type ListTestRunStepsInput struct {
 	// The test run ID of the test run steps.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The maximum number of test run steps to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token from a previous step to retrieve the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The test case ID of the test run steps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test suite ID of the test run steps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	noSmithyDocumentSerde
@@ -54,9 +66,13 @@ type ListTestRunStepsOutput struct {
 	// The test run steps of the response query.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunSteps []types.TestRunStepSummary
 
 	// The token from a previous request to retrieve the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

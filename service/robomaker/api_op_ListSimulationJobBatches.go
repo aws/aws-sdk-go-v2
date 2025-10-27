@@ -20,6 +20,8 @@ import (
 // Returns a list simulation job batches. You can optionally provide filters to
 // retrieve specific simulation batch jobs.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) ListSimulationJobBatches(ctx context.Context, params *ListSimulationJobBatchesInput, optFns ...func(*Options)) (*ListSimulationJobBatchesOutput, error) {
 	if params == nil {
@@ -39,12 +41,16 @@ func (c *Client) ListSimulationJobBatches(ctx context.Context, params *ListSimul
 type ListSimulationJobBatchesInput struct {
 
 	// Optional filters to limit results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	// When this parameter is used, ListSimulationJobBatches only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another
 	// ListSimulationJobBatches request with the returned nextToken value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -52,6 +58,8 @@ type ListSimulationJobBatchesInput struct {
 	// the next set of results, call ListSimulationJobBatches again and assign that
 	// token to the request object's nextToken parameter. If there are no remaining
 	// results, the previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -64,9 +72,13 @@ type ListSimulationJobBatchesOutput struct {
 	// the next set of results, call ListSimulationJobBatches again and assign that
 	// token to the request object's nextToken parameter. If there are no remaining
 	// results, the previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of simulation job batch summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SimulationJobBatchSummaries []types.SimulationJobBatchSummary
 
 	// Metadata pertaining to the operation's result.

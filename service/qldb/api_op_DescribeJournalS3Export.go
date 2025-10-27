@@ -24,6 +24,8 @@ import (
 // If the ledger with the given Name doesn't exist, then throws
 // ResourceNotFoundException .
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Export job expiration]: https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration
 func (c *Client) DescribeJournalS3Export(ctx context.Context, params *DescribeJournalS3ExportInput, optFns ...func(*Options)) (*DescribeJournalS3ExportOutput, error) {
 	if params == nil {
@@ -46,11 +48,15 @@ type DescribeJournalS3ExportInput struct {
 	// describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportId *string
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -62,6 +68,8 @@ type DescribeJournalS3ExportOutput struct {
 	// request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportDescription *types.JournalS3ExportDescription
 
 	// Metadata pertaining to the operation's result.

@@ -20,6 +20,8 @@ import (
 //
 // Describes a world generation job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DescribeWorldGenerationJob(ctx context.Context, params *DescribeWorldGenerationJobInput, optFns ...func(*Options)) (*DescribeWorldGenerationJobOutput, error) {
 	if params == nil {
@@ -41,6 +43,8 @@ type DescribeWorldGenerationJobInput struct {
 	// The Amazon Resource Name (arn) of the world generation job to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Job *string
 
 	noSmithyDocumentSerde
@@ -49,14 +53,20 @@ type DescribeWorldGenerationJobInput struct {
 type DescribeWorldGenerationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world generation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world generation job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The failure code of the world generation job if it failed:
@@ -71,12 +81,18 @@ type DescribeWorldGenerationJobOutput struct {
 	// RequestThrottled The request was throttled.
 	//
 	// InvalidInput An input parameter in the request is not valid.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.WorldGenerationJobErrorCode
 
 	// The reason why the world generation job failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// Summary information about finished worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FinishedWorldsSummary *types.FinishedWorldsSummary
 
 	// The status of the world generation job:
@@ -94,20 +110,30 @@ type DescribeWorldGenerationJobOutput struct {
 	// Canceled The world generation job was cancelled.
 	//
 	// Canceling The world generation job is being cancelled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.WorldGenerationJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// generation job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The Amazon Resource Name (arn) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	// Information about the world count.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldCount *types.WorldCount
 
 	// A map that contains tag keys and tag values that are attached to the generated
 	// worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldTags map[string]string
 
 	// Metadata pertaining to the operation's result.

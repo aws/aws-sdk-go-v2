@@ -20,6 +20,8 @@ import (
 //
 // Creates a world export job.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateWorldExportJob(ctx context.Context, params *CreateWorldExportJobInput, optFns ...func(*Options)) (*CreateWorldExportJobOutput, error) {
 	if params == nil {
@@ -42,24 +44,34 @@ type CreateWorldExportJobInput struct {
 	// and put the export.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// The output location.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputLocation *types.OutputLocation
 
 	// A list of Amazon Resource Names (arns) that correspond to worlds to export.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Worlds []string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -68,14 +80,20 @@ type CreateWorldExportJobInput struct {
 type CreateWorldExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world export job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world export job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The failure code of the world export job if it failed:
@@ -97,13 +115,19 @@ type CreateWorldExportJobOutput struct {
 	// For more information about troubleshooting WorldForge, see [Troubleshooting Simulation WorldForge].
 	//
 	// [Troubleshooting Simulation WorldForge]: https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.WorldExportJobErrorCode
 
 	// The IAM role that the world export process uses to access the Amazon S3 bucket
 	// and put the export.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// The output location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputLocation *types.OutputLocation
 
 	// The status of the world export job.
@@ -119,10 +143,14 @@ type CreateWorldExportJobOutput struct {
 	// Canceled The world export job was cancelled.
 	//
 	// Canceling The world export job is being cancelled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.WorldExportJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

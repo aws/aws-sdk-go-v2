@@ -15,9 +15,13 @@ type Anomaly struct {
 	// the training dataset, apart from the anomaly type background . The service
 	// automatically inserts the background anomaly type into the response from
 	// DetectAnomalies .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Information about the pixel mask that covers an anomaly type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PixelAnomaly *PixelAnomaly
 
 	noSmithyDocumentSerde
@@ -27,25 +31,39 @@ type Anomaly struct {
 type DatasetDescription struct {
 
 	// The Unix timestamp for the time and date that the dataset was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// The type of the dataset. The value train represents a training dataset or
 	// single dataset project. The value test represents a test dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// Statistics about the images in a dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImageStats *DatasetImageStats
 
 	// The Unix timestamp for the date and time that the dataset was last updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTimestamp *time.Time
 
 	// The name of the project that contains the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The status of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DatasetStatus
 
 	// The status message for the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -56,6 +74,8 @@ type DatasetDescription struct {
 type DatasetGroundTruthManifest struct {
 
 	// The S3 bucket location for the manifest file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Object *InputS3Object
 
 	noSmithyDocumentSerde
@@ -65,15 +85,23 @@ type DatasetGroundTruthManifest struct {
 type DatasetImageStats struct {
 
 	// the total number of images labeled as an anomaly.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Anomaly *int32
 
 	// The total number of labeled images.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Labeled *int32
 
 	// The total number of images labeled as normal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Normal *int32
 
 	// The total number of images in the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Total *int32
 
 	noSmithyDocumentSerde
@@ -84,15 +112,23 @@ type DatasetImageStats struct {
 type DatasetMetadata struct {
 
 	// The Unix timestamp for the date and time that the dataset was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// The type of the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// The status for the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DatasetStatus
 
 	// The status message for the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -103,6 +139,8 @@ type DatasetMetadata struct {
 type DatasetSource struct {
 
 	// Location information for the manifest file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	GroundTruthManifest *DatasetGroundTruthManifest
 
 	noSmithyDocumentSerde
@@ -127,6 +165,8 @@ type DetectAnomalyResult struct {
 	// If the list has one entry ('background'), no anomalies were found on the image.
 	//
 	// An image classification model doesn't return an Anomalies list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Anomalies []Anomaly
 
 	// If the model is an image segmentation model, AnomalyMask contains pixel masks
@@ -136,18 +176,26 @@ type DetectAnomalyResult struct {
 	// type, see the color field of the PixelAnomaly object.
 	//
 	// An image classification model doesn't return an Anomalies list.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyMask []byte
 
 	// The confidence that Lookout for Vision has in the accuracy of the
 	// classification in IsAnomalous .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Confidence *float32
 
 	// True if Amazon Lookout for Vision classifies the image as containing an
 	// anomaly, otherwise false.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IsAnomalous *bool
 
 	// The source of the image that was analyzed. direct means that the images was
 	// supplied from the local computer. No other values are supported.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Source *ImageSource
 
 	noSmithyDocumentSerde
@@ -163,11 +211,15 @@ type GreengrassConfiguration struct {
 	//  A name for the AWS IoT Greengrass component.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComponentName *string
 
 	//  An S3 location in which Lookout for Vision stores the component artifacts.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3OutputLocation *S3Location
 
 	// Additional compiler options for the Greengrass component. Currently, only
@@ -176,25 +228,37 @@ type GreengrassConfiguration struct {
 	//
 	// For more information, see Compiler options in the Amazon Lookout for Vision
 	// Developer Guide.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CompilerOptions *string
 
 	//  A description for the AWS IoT Greengrass component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComponentDescription *string
 
 	// A Version for the AWS IoT Greengrass component. If you don't provide a value, a
 	// default value of Model Version.0.0 is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComponentVersion *string
 
 	//  A set of tags (key-value pairs) that you want to attach to the AWS IoT
 	// Greengrass component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []Tag
 
 	// The target device for the model. Currently the only supported value is
 	// jetson_xavier . If you specify TargetDevice , you can't specify TargetPlatform .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetDevice TargetDevice
 
 	// The target platform for the model. If you specify TargetPlatform , you can't
 	// specify TargetDevice .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TargetPlatform *TargetPlatform
 
 	noSmithyDocumentSerde
@@ -205,12 +269,18 @@ type GreengrassConfiguration struct {
 type GreengrassOutputDetails struct {
 
 	//  The name of the component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComponentName *string
 
 	//  The version of the component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComponentVersion *string
 
 	//  The Amazon Resource Name (ARN) of the component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComponentVersionArn *string
 
 	noSmithyDocumentSerde
@@ -220,6 +290,8 @@ type GreengrassOutputDetails struct {
 type ImageSource struct {
 
 	// The type of the image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -231,14 +303,20 @@ type InputS3Object struct {
 	// The Amazon S3 bucket that contains the manifest.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The name and location of the manifest file withiin the bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The version ID of the bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -248,49 +326,77 @@ type InputS3Object struct {
 type ModelDescription struct {
 
 	// The unix timestamp for the date and time that the model was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// The description for the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The unix timestamp for the date and time that the evaluation ended.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationEndTimestamp *time.Time
 
 	// The S3 location where Amazon Lookout for Vision saves the manifest file that
 	// was used to test the trained model and generate the performance scores.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationManifest *OutputS3Object
 
 	// The S3 location where Amazon Lookout for Vision saves the performance metrics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EvaluationResult *OutputS3Object
 
 	// The identifer for the AWS Key Management Service (AWS KMS) key that was used to
 	// encrypt the model during training.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The maximum number of inference units Amazon Lookout for Vision uses to
 	// auto-scale the model. For more information, see StartModel.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxInferenceUnits *int32
 
 	// The minimum number of inference units used by the model. For more information,
 	// see StartModel
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MinInferenceUnits *int32
 
 	// The Amazon Resource Name (ARN) of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelArn *string
 
 	// The version of the model
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The S3 location where Amazon Lookout for Vision saves model training files.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputConfig *OutputConfig
 
 	// Performance metrics for the model. Created during training.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Performance *ModelPerformance
 
 	// The status of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ModelStatus
 
 	// The status message for the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -300,25 +406,39 @@ type ModelDescription struct {
 type ModelMetadata struct {
 
 	// The unix timestamp for the date and time that the model was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// The description for the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelArn *string
 
 	// The version of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// Performance metrics for the model. Not available until training has
 	// successfully completed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Performance *ModelPerformance
 
 	// The status of the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ModelStatus
 
 	// The status message for the model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -333,6 +453,8 @@ type ModelPackagingConfiguration struct {
 	// packaging job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Greengrass *GreengrassConfiguration
 
 	noSmithyDocumentSerde
@@ -343,40 +465,62 @@ type ModelPackagingDescription struct {
 
 	//  The Unix timestamp for the time and date that the model packaging job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	//  The name of the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobName *string
 
 	//  The Unix timestamp for the time and date that the model packaging job was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTimestamp *time.Time
 
 	//  The configuration information used in the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingConfiguration *ModelPackagingConfiguration
 
 	// The description for the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingJobDescription *string
 
 	// The AWS service used to package the job. Currently Lookout for Vision can
 	// package jobs with AWS IoT Greengrass.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingMethod *string
 
 	// Information about the output of the model packaging job. For more information,
 	// see DescribeModelPackagingJob.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingOutputDetails *ModelPackagingOutputDetails
 
 	// The version of the model used in the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The name of the project that's associated with a model that's in the model
 	// package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	//  The status of the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ModelPackagingJobStatus
 
 	//  The status message for the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -387,32 +531,50 @@ type ModelPackagingJobMetadata struct {
 
 	// The Unix timestamp for the time and date that the model packaging job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	//  The name of the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobName *string
 
 	// The Unix timestamp for the time and date that the model packaging job was last
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastUpdatedTimestamp *time.Time
 
 	//  The description for the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingJobDescription *string
 
 	//  The AWS service used to package the job. Currently Lookout for Vision can
 	// package jobs with AWS IoT Greengrass.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingMethod *string
 
 	//  The version of the model that is in the model package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	//  The project that contains the model that is in the model package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// The status of the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ModelPackagingJobStatus
 
 	// The status message for the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -422,6 +584,8 @@ type ModelPackagingJobMetadata struct {
 type ModelPackagingOutputDetails struct {
 
 	//  Information about the AWS IoT Greengrass component in a model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Greengrass *GreengrassOutputDetails
 
 	noSmithyDocumentSerde
@@ -431,12 +595,18 @@ type ModelPackagingOutputDetails struct {
 type ModelPerformance struct {
 
 	// The overall F1 score metric for the trained model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	F1Score *float32
 
 	// The overall precision metric value for the trained model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Precision *float32
 
 	// The overall recall metric value for the trained model.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Recall *float32
 
 	noSmithyDocumentSerde
@@ -448,6 +618,8 @@ type OutputConfig struct {
 	// The S3 location for the output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *S3Location
 
 	noSmithyDocumentSerde
@@ -459,11 +631,15 @@ type OutputS3Object struct {
 	// The bucket that contains the training output.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The location of the training output in the bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	noSmithyDocumentSerde
@@ -476,9 +652,13 @@ type PixelAnomaly struct {
 	// A hex color value for the mask that covers an anomaly type. Each anomaly type
 	// has a different mask color. The color maps to the color of the anomaly type used
 	// in the training dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Color *string
 
 	// The percentage area of the image that the anomaly type covers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TotalPercentageArea *float32
 
 	noSmithyDocumentSerde
@@ -488,15 +668,23 @@ type PixelAnomaly struct {
 type ProjectDescription struct {
 
 	// The unix timestamp for the date and time that the project was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// A list of datasets in the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Datasets []DatasetMetadata
 
 	// The Amazon Resource Name (ARN) of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectArn *string
 
 	// The name of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -506,12 +694,18 @@ type ProjectDescription struct {
 type ProjectMetadata struct {
 
 	// The unix timestamp for the date and time that the project was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectArn *string
 
 	// The name of the project.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -527,9 +721,13 @@ type S3Location struct {
 	// and AWS account in which you use AWS IoT Greengrass.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The path of the folder, within the S3 bucket, that contains the output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -542,11 +740,15 @@ type Tag struct {
 	// The key of the tag that is attached to the specified model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The value of the tag that is attached to the specified model.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -560,12 +762,16 @@ type TargetPlatform struct {
 	// CPU).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arch TargetPlatformArch
 
 	// The target operating system for the model. Linux is the only operating system
 	// that is currently supported.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Os TargetPlatformOs
 
 	// The target accelerator for the model. Currently, Amazon Lookout for Vision only
@@ -578,6 +784,8 @@ type TargetPlatform struct {
 	//   - mcpu : CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}
 	//
 	//   - mattr : CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Accelerator TargetPlatformAccelerator
 
 	noSmithyDocumentSerde

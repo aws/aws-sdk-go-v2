@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a test case.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateTestCase(ctx context.Context, params *CreateTestCaseInput, optFns ...func(*Options)) (*CreateTestCaseOutput, error) {
 	if params == nil {
 		params = &CreateTestCaseInput{}
@@ -32,20 +34,30 @@ type CreateTestCaseInput struct {
 	// The name of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The steps in the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Steps []types.Step
 
 	// The client token of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The specified tags of the test case.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -56,11 +68,15 @@ type CreateTestCaseOutput struct {
 	// The test case ID of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test case version of the test case.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	// Metadata pertaining to the operation's result.

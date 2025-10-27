@@ -13,6 +13,8 @@ import (
 )
 
 // Gets a test run step.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetTestRunStep(ctx context.Context, params *GetTestRunStepInput, optFns ...func(*Options)) (*GetTestRunStepOutput, error) {
 	if params == nil {
 		params = &GetTestRunStepInput{}
@@ -33,17 +35,25 @@ type GetTestRunStepInput struct {
 	// The step name of the test run step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepName *string
 
 	// The test run ID of the test run step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The test case ID of a test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test suite ID of a test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	noSmithyDocumentSerde
@@ -59,16 +69,22 @@ type GetTestRunStepOutput struct {
 	// The status of the test run step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.StepRunStatus
 
 	// The step name of the test run step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepName *string
 
 	// The test run ID of the test run step.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The after steps of the test run step.
@@ -84,18 +100,28 @@ type GetTestRunStepOutput struct {
 	StatusReason *string
 
 	// The step run summary of the test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StepRunSummary types.StepRunSummary
 
 	// The test case ID of the test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseId *string
 
 	// The test case version of the test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestCaseVersion *int32
 
 	// The test suite ID of the test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteId *string
 
 	// The test suite version of the test run step.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteVersion *int32
 
 	// Metadata pertaining to the operation's result.

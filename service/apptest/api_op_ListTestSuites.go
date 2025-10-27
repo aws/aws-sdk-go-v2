@@ -12,6 +12,8 @@ import (
 )
 
 // Lists test suites.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTestSuites(ctx context.Context, params *ListTestSuitesInput, optFns ...func(*Options)) (*ListTestSuitesOutput, error) {
 	if params == nil {
 		params = &ListTestSuitesInput{}
@@ -30,12 +32,18 @@ func (c *Client) ListTestSuites(ctx context.Context, params *ListTestSuitesInput
 type ListTestSuitesInput struct {
 
 	// The maximum number of test suites to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token from a previous request to retrieve the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The suite ID of the test suites.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuiteIds []string
 
 	noSmithyDocumentSerde
@@ -46,10 +54,14 @@ type ListTestSuitesOutput struct {
 	// The test suites returned with the response query.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestSuites []types.TestSuiteSummary
 
 	// The token from a previous request to retrieve the next page of test suites
 	// results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

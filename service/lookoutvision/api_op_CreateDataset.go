@@ -24,6 +24,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:CreateDataset
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -45,11 +47,15 @@ type CreateDatasetInput struct {
 	// a test dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetType *string
 
 	// The name of the project in which you want to create a dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to CreateDataset
@@ -65,6 +71,8 @@ type CreateDatasetInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// CreateDataset . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The location of the manifest file that Amazon Lookout for Vision uses to create
@@ -77,6 +85,8 @@ type CreateDatasetInput struct {
 	// validated and used to create the dataset. The call to CreateDataset is
 	// asynchronous and might take a while to complete. To find out the current status,
 	// Check the value of Status returned in a call to DescribeDataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetSource *types.DatasetSource
 
 	noSmithyDocumentSerde
@@ -85,6 +95,8 @@ type CreateDatasetInput struct {
 type CreateDatasetOutput struct {
 
 	// Information about the dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetMetadata *types.DatasetMetadata
 
 	// Metadata pertaining to the operation's result.

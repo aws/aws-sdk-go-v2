@@ -13,6 +13,8 @@ import (
 
 // Updates a detector. After activation, you can only change a detector's
 // ingestion delay and description.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateAnomalyDetector(ctx context.Context, params *UpdateAnomalyDetectorInput, optFns ...func(*Options)) (*UpdateAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &UpdateAnomalyDetectorInput{}
@@ -33,16 +35,24 @@ type UpdateAnomalyDetectorInput struct {
 	// The ARN of the detector to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// Contains information about the configuration to which the detector will be
 	// updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorConfig *types.AnomalyDetectorConfig
 
 	// The updated detector description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorDescription *string
 
 	// The Amazon Resource Name (ARN) of an AWS KMS encryption key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -51,6 +61,8 @@ type UpdateAnomalyDetectorInput struct {
 type UpdateAnomalyDetectorOutput struct {
 
 	// The ARN of the updated detector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// Metadata pertaining to the operation's result.

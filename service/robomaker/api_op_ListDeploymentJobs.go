@@ -23,9 +23,7 @@ import (
 // Returns a list of deployment jobs for a fleet. You can optionally provide
 // filters to retrieve specific deployment jobs.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -52,6 +50,8 @@ type ListDeploymentJobsInput struct {
 	// use the complete value of the filtered item. You can use up to three filters,
 	// but they must be for the same named item. For example, if you are looking for
 	// items with the status InProgress or the status Pending .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Filters []types.Filter
 
 	// When this parameter is used, ListDeploymentJobs only returns maxResults results
@@ -60,6 +60,8 @@ type ListDeploymentJobsInput struct {
 	// request with the returned nextToken value. This value can be between 1 and 200.
 	// If this parameter is not used, then ListDeploymentJobs returns up to 200
 	// results and a nextToken value if applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -67,6 +69,8 @@ type ListDeploymentJobsInput struct {
 	// the next set of results, call ListDeploymentJobs again and assign that token to
 	// the request object's nextToken parameter. If there are no remaining results,
 	// the previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -75,6 +79,8 @@ type ListDeploymentJobsInput struct {
 type ListDeploymentJobsOutput struct {
 
 	// A list of deployment jobs that meet the criteria of the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentJobs []types.DeploymentJob
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -82,6 +88,8 @@ type ListDeploymentJobsOutput struct {
 	// the next set of results, call ListDeploymentJobs again and assign that token to
 	// the request object's nextToken parameter. If there are no remaining results,
 	// the previous response object's NextToken parameter is set to null.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

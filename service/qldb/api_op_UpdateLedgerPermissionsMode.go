@@ -17,6 +17,8 @@ import (
 // required IAM policies and table tags to avoid disruption to your users. To learn
 // more, see [Migrating to the standard permissions mode]in the Amazon QLDB Developer Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Migrating to the standard permissions mode]: https://docs.aws.amazon.com/qldb/latest/developerguide/ledger-management.basics.html#ledger-mgmt.basics.update-permissions.migrating
 func (c *Client) UpdateLedgerPermissionsMode(ctx context.Context, params *UpdateLedgerPermissionsModeInput, optFns ...func(*Options)) (*UpdateLedgerPermissionsModeOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ type UpdateLedgerPermissionsModeInput struct {
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The permissions mode to assign to the ledger. This parameter can have one of
@@ -66,6 +70,8 @@ type UpdateLedgerPermissionsModeInput struct {
 	// [Getting started with the standard permissions mode]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionsMode types.PermissionsMode
 
 	noSmithyDocumentSerde
@@ -74,12 +80,18 @@ type UpdateLedgerPermissionsModeInput struct {
 type UpdateLedgerPermissionsModeOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The name of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current permissions mode of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionsMode types.PermissionsMode
 
 	// Metadata pertaining to the operation's result.

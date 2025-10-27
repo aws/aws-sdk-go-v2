@@ -1,0 +1,14 @@
+{
+    "id": "979f8df0-5d61-428c-8427-780fc6241891",
+    "type": "feature",
+    "description": "Marked service APIs as deprecated. This service has reached end-of-life.",
+    "modules": [
+        "service/apptest",
+        "service/iotfleethub",
+        "service/lookoutmetrics",
+        "service/lookoutvision",
+        "service/qldb",
+        "service/qldbsession",
+        "service/robomaker"
+    ]
+}

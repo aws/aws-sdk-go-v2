@@ -11,6 +11,8 @@ import (
 )
 
 // Updates information about a Fleet Hub for IoT Device Management web application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -31,17 +33,25 @@ type UpdateApplicationInput struct {
 	// The unique Id of the web application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationId *string
 
 	// An optional description of the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationDescription *string
 
 	// The name of the web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationName *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

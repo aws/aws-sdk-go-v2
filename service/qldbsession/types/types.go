@@ -15,6 +15,8 @@ type AbortTransactionRequest struct {
 type AbortTransactionResult struct {
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	noSmithyDocumentSerde
@@ -34,11 +36,15 @@ type CommitTransactionRequest struct {
 	// duplicates.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitDigest []byte
 
 	// Specifies the transaction ID of the transaction to commit.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -48,15 +54,23 @@ type CommitTransactionRequest struct {
 type CommitTransactionResult struct {
 
 	// The commit digest of the committed transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommitDigest []byte
 
 	// Contains metrics about the number of I/O requests that were consumed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConsumedIOs *IOUsage
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	// The transaction ID of the committed transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -71,6 +85,8 @@ type EndSessionRequest struct {
 type EndSessionResult struct {
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	noSmithyDocumentSerde
@@ -82,14 +98,20 @@ type ExecuteStatementRequest struct {
 	// Specifies the statement of the request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Statement *string
 
 	// Specifies the transaction ID of the request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransactionId *string
 
 	// Specifies the parameters for the parameterized statement in the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Parameters []ValueHolder
 
 	noSmithyDocumentSerde
@@ -99,12 +121,18 @@ type ExecuteStatementRequest struct {
 type ExecuteStatementResult struct {
 
 	// Contains metrics about the number of I/O requests that were consumed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConsumedIOs *IOUsage
 
 	// Contains the details of the first fetched page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstPage *Page
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	noSmithyDocumentSerde
@@ -116,11 +144,15 @@ type FetchPageRequest struct {
 	// Specifies the next page token of the page to be fetched.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextPageToken *string
 
 	// Specifies the transaction ID of the page to be fetched.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -130,12 +162,18 @@ type FetchPageRequest struct {
 type FetchPageResult struct {
 
 	// Contains metrics about the number of I/O requests that were consumed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConsumedIOs *IOUsage
 
 	// Contains details of the fetched page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Page *Page
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	noSmithyDocumentSerde
@@ -145,9 +183,13 @@ type FetchPageResult struct {
 type IOUsage struct {
 
 	// The number of read I/O requests that the command made.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReadIOs int64
 
 	// The number of write I/O requests that the command made.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WriteIOs int64
 
 	noSmithyDocumentSerde
@@ -157,9 +199,13 @@ type IOUsage struct {
 type Page struct {
 
 	// The token of the next page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextPageToken *string
 
 	// A structure that contains values in multiple encoding formats.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Values []ValueHolder
 
 	noSmithyDocumentSerde
@@ -171,6 +217,8 @@ type StartSessionRequest struct {
 	// The name of the ledger to start a new session against.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	noSmithyDocumentSerde
@@ -181,9 +229,13 @@ type StartSessionResult struct {
 
 	// Session token of the started session. This SessionToken is required for every
 	// subsequent command that is issued during the current session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionToken *string
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	noSmithyDocumentSerde
@@ -198,9 +250,13 @@ type StartTransactionRequest struct {
 type StartTransactionResult struct {
 
 	// Contains server-side performance information for the command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimingInformation *TimingInformation
 
 	// The transaction ID of the started transaction.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -213,6 +269,8 @@ type TimingInformation struct {
 
 	// The amount of time that QLDB spent on processing the command, measured in
 	// milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProcessingTimeMilliseconds int64
 
 	noSmithyDocumentSerde
@@ -222,9 +280,13 @@ type TimingInformation struct {
 type ValueHolder struct {
 
 	// An Amazon Ion binary value contained in a ValueHolder structure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IonBinary []byte
 
 	// An Amazon Ion plaintext value contained in a ValueHolder structure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IonText *string
 
 	noSmithyDocumentSerde

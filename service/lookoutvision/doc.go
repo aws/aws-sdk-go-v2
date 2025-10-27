@@ -12,4 +12,6 @@
 // irregularities in production lines, and even minuscule defects in silicon wafers
 // — or any other physical item where quality is important such as a missing
 // capacitor on printed circuit boards.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package lookoutvision

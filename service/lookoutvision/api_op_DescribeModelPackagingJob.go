@@ -18,6 +18,8 @@ import (
 //
 // For more information, see Using your Amazon Lookout for Vision model on an edge
 // device in the Amazon Lookout for Vision Developer Guide.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeModelPackagingJob(ctx context.Context, params *DescribeModelPackagingJobInput, optFns ...func(*Options)) (*DescribeModelPackagingJobOutput, error) {
 	if params == nil {
 		params = &DescribeModelPackagingJobInput{}
@@ -38,12 +40,16 @@ type DescribeModelPackagingJobInput struct {
 	// The job name for the model packaging job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	JobName *string
 
 	// The name of the project that contains the model packaging job that you want to
 	// describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	noSmithyDocumentSerde
@@ -52,6 +58,8 @@ type DescribeModelPackagingJobInput struct {
 type DescribeModelPackagingJobOutput struct {
 
 	// The description of the model packaging job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelPackagingDescription *types.ModelPackagingDescription
 
 	// Metadata pertaining to the operation's result.

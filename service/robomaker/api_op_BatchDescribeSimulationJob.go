@@ -19,6 +19,8 @@ import (
 //
 // Describes one or more simulation jobs.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) BatchDescribeSimulationJob(ctx context.Context, params *BatchDescribeSimulationJobInput, optFns ...func(*Options)) (*BatchDescribeSimulationJobOutput, error) {
 	if params == nil {
@@ -40,6 +42,8 @@ type BatchDescribeSimulationJobInput struct {
 	// A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Jobs []string
 
 	noSmithyDocumentSerde
@@ -48,9 +52,13 @@ type BatchDescribeSimulationJobInput struct {
 type BatchDescribeSimulationJobOutput struct {
 
 	// A list of simulation jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Jobs []types.SimulationJob
 
 	// A list of unprocessed simulation job Amazon Resource Names (ARNs).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UnprocessedJobs []string
 
 	// Metadata pertaining to the operation's result.

@@ -24,9 +24,7 @@ import (
 // Syncrhonizes robots in a fleet to the latest deployment. This is helpful if
 // robots were added after a deployment.
 //
-// Deprecated: Support for the AWS RoboMaker application deployment feature has
-// ended. For additional information, see
-// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
@@ -51,11 +49,15 @@ type SyncDeploymentJobInput struct {
 	// the request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The target fleet for the synchronization.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	noSmithyDocumentSerde
@@ -64,15 +66,23 @@ type SyncDeploymentJobInput struct {
 type SyncDeploymentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the synchronization request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// Information about the deployment application configurations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// Information about the deployment configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfig *types.DeploymentConfig
 
 	// The failure code if the job fails:
@@ -110,15 +120,23 @@ type SyncDeploymentJobOutput struct {
 	//
 	// SimulationApplicationVersionMismatchedEtag Etag for SimulationApplication does
 	// not match value during version creation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.DeploymentJobErrorCode
 
 	// The failure reason if the job fails.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureReason *string
 
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Fleet *string
 
 	// The status of the synchronization job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DeploymentStatus
 
 	// Metadata pertaining to the operation's result.

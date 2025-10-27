@@ -20,6 +20,8 @@ import (
 //
 // Creates worlds using the specified template.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateWorldGenerationJob(ctx context.Context, params *CreateWorldGenerationJobInput, optFns ...func(*Options)) (*CreateWorldGenerationJobOutput, error) {
 	if params == nil {
@@ -42,23 +44,33 @@ type CreateWorldGenerationJobInput struct {
 	// want to create.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	// Information about the world count.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldCount *types.WorldCount
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// generator job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// A map that contains tag keys and tag values that are attached to the generated
 	// worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldTags map[string]string
 
 	noSmithyDocumentSerde
@@ -67,14 +79,20 @@ type CreateWorldGenerationJobInput struct {
 type CreateWorldGenerationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world generator job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world generator job was
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The failure code of the world generator job if it failed:
@@ -89,6 +107,8 @@ type CreateWorldGenerationJobOutput struct {
 	// RequestThrottled The request was throttled.
 	//
 	// InvalidInput An input parameter in the request is not valid.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FailureCode types.WorldGenerationJobErrorCode
 
 	// The status of the world generator job.
@@ -106,20 +126,30 @@ type CreateWorldGenerationJobOutput struct {
 	// Canceled The world generator job was cancelled.
 	//
 	// Canceling The world generator job is being cancelled.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.WorldGenerationJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// generator job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The Amazon Resource Name (arn) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Template *string
 
 	// Information about the world count.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldCount *types.WorldCount
 
 	// A map that contains tag keys and tag values that are attached to the generated
 	// worlds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WorldTags map[string]string
 
 	// Metadata pertaining to the operation's result.

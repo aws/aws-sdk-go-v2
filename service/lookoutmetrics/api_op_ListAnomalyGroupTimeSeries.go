@@ -12,6 +12,8 @@ import (
 )
 
 // Gets a list of anomalous metrics for a measure in an anomaly group.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListAnomalyGroupTimeSeries(ctx context.Context, params *ListAnomalyGroupTimeSeriesInput, optFns ...func(*Options)) (*ListAnomalyGroupTimeSeriesOutput, error) {
 	if params == nil {
 		params = &ListAnomalyGroupTimeSeriesInput{}
@@ -32,23 +34,33 @@ type ListAnomalyGroupTimeSeriesInput struct {
 	// The Amazon Resource Name (ARN) of the anomaly detector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	// The ID of the anomaly group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// The name of the measure field.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The maximum number of results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,18 +69,28 @@ type ListAnomalyGroupTimeSeriesInput struct {
 type ListAnomalyGroupTimeSeriesOutput struct {
 
 	// The ID of the anomaly group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyGroupId *string
 
 	// The name of the measure field.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricName *string
 
 	// The pagination token that's included if more results are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of anomalous metrics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeSeriesList []types.TimeSeries
 
 	// Timestamps for the anomalous metrics.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimestampList []string
 
 	// Metadata pertaining to the operation's result.

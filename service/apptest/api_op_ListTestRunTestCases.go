@@ -12,6 +12,8 @@ import (
 )
 
 // Lists test run test cases.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTestRunTestCases(ctx context.Context, params *ListTestRunTestCasesInput, optFns ...func(*Options)) (*ListTestRunTestCasesOutput, error) {
 	if params == nil {
 		params = &ListTestRunTestCasesInput{}
@@ -32,12 +34,18 @@ type ListTestRunTestCasesInput struct {
 	// The test run ID of the test cases.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunId *string
 
 	// The maximum number of test run test cases to return in one page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token from a previous request to retrieve the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,9 +56,13 @@ type ListTestRunTestCasesOutput struct {
 	// The test run of the test cases.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TestRunTestCases []types.TestCaseRunSummary
 
 	// The token from a previous request to retrieve the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

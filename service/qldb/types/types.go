@@ -16,52 +16,74 @@ type JournalKinesisStreamDescription struct {
 	// QLDB journal stream.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KinesisConfiguration *KinesisConfiguration
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal stream to write data records to a Kinesis Data Streams resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The current state of the QLDB journal stream.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status StreamStatus
 
 	// The UUID (represented in Base62-encoded text) of the QLDB journal stream.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	// The user-defined name of the QLDB journal stream.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamName *string
 
 	// The Amazon Resource Name (ARN) of the QLDB journal stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The date and time, in epoch time format, when the QLDB journal stream was
 	// created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM
 	// January 1, 1970 UTC.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The error message that describes the reason that a stream has a status of
 	// IMPAIRED or FAILED . This is not applicable to streams that have other status
 	// values.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCause ErrorCause
 
 	// The exclusive date and time that specifies when the stream ends. If this
 	// parameter is undefined, the stream runs indefinitely until you cancel it.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExclusiveEndTime *time.Time
 
 	// The inclusive start date and time from which to start streaming journal data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InclusiveStartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -76,6 +98,8 @@ type JournalS3ExportDescription struct {
 	// specified in the original export request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExclusiveEndTime *time.Time
 
 	// The date and time, in epoch time format, when the export job was created.
@@ -83,22 +107,30 @@ type JournalS3ExportDescription struct {
 	// 1970 UTC.)
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportCreationTime *time.Time
 
 	// The UUID (represented in Base62-encoded text) of the journal export job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportId *string
 
 	// The inclusive start date and time for the range of journal contents that was
 	// specified in the original export request.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InclusiveStartTime *time.Time
 
 	// The name of the ledger.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LedgerName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
@@ -110,20 +142,28 @@ type JournalS3ExportDescription struct {
 	//   for server-side encryption of your exported data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleArn *string
 
 	// The Amazon Simple Storage Service (Amazon S3) bucket location in which a
 	// journal export job writes the journal contents.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3ExportConfiguration *S3ExportConfiguration
 
 	// The current state of the journal export job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ExportStatus
 
 	// The output format of the exported journal data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputFormat OutputFormat
 
 	noSmithyDocumentSerde
@@ -136,6 +176,8 @@ type KinesisConfiguration struct {
 	// The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamArn *string
 
 	// Enables QLDB to publish multiple data records in a single Kinesis Data Streams
@@ -149,6 +191,8 @@ type KinesisConfiguration struct {
 	//
 	// [Consumer De-aggregation]: https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html
 	// [KPL Key Concepts]: https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AggregationEnabled *bool
 
 	noSmithyDocumentSerde
@@ -186,6 +230,8 @@ type LedgerEncryptionDescription struct {
 	//   unrecoverable permanently.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EncryptionStatus EncryptionStatus
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key that the ledger
@@ -195,6 +241,8 @@ type LedgerEncryptionDescription struct {
 	// Amazon Web Services owned KMS key.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyArn *string
 
 	// The date and time, in epoch time format, when the KMS key first became
@@ -202,6 +250,8 @@ type LedgerEncryptionDescription struct {
 	// seconds that have elapsed since 12:00:00 AM January 1, 1970 UTC.)
 	//
 	// This parameter is undefined if the KMS key is accessible.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InaccessibleKmsKeyDateTime *time.Time
 
 	noSmithyDocumentSerde
@@ -213,12 +263,18 @@ type LedgerSummary struct {
 	// The date and time, in epoch time format, when the ledger was created. (Epoch
 	// time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970
 	// UTC.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationDateTime *time.Time
 
 	// The name of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current status of the ledger.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State LedgerState
 
 	noSmithyDocumentSerde
@@ -236,6 +292,8 @@ type S3EncryptionConfiguration struct {
 	// [Protecting Data Using Server-Side Encryption]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ObjectEncryptionType S3ObjectEncryptionType
 
 	// The Amazon Resource Name (ARN) of a symmetric encryption key in Key Management
@@ -244,6 +302,8 @@ type S3EncryptionConfiguration struct {
 	// You must provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType .
 	//
 	// KmsKeyArn is not required if you specify SSE_S3 as the ObjectEncryptionType .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -262,12 +322,16 @@ type S3ExportConfiguration struct {
 	// [Bucket Restrictions and Limitations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The encryption settings that are used by a journal export job to write data in
 	// an Amazon S3 bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EncryptionConfiguration *S3EncryptionConfiguration
 
 	// The prefix for the Amazon S3 bucket in which a journal export job writes the
@@ -287,6 +351,8 @@ type S3ExportConfiguration struct {
 	// [Object Key and Metadata]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -296,6 +362,8 @@ type S3ExportConfiguration struct {
 type ValueHolder struct {
 
 	// An Amazon Ion plaintext value contained in a ValueHolder structure.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IonText *string
 
 	noSmithyDocumentSerde

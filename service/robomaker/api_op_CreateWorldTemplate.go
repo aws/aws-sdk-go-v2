@@ -20,6 +20,8 @@ import (
 //
 // Creates a world template.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateWorldTemplate(ctx context.Context, params *CreateWorldTemplateInput, optFns ...func(*Options)) (*CreateWorldTemplateOutput, error) {
 	if params == nil {
@@ -40,19 +42,29 @@ type CreateWorldTemplateInput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The name of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The world template body.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateBody *string
 
 	// The location of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateLocation *types.TemplateLocation
 
 	noSmithyDocumentSerde
@@ -61,20 +73,30 @@ type CreateWorldTemplateInput struct {
 type CreateWorldTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientRequestToken *string
 
 	// The time, in milliseconds since the epoch, when the world template was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The name of the world template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

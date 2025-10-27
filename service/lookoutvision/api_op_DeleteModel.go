@@ -19,6 +19,8 @@ import (
 //
 // This operation requires permissions to perform the lookoutvision:DeleteModel
 // operation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optFns ...func(*Options)) (*DeleteModelOutput, error) {
 	if params == nil {
 		params = &DeleteModelInput{}
@@ -39,11 +41,15 @@ type DeleteModelInput struct {
 	// The version of the model that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelVersion *string
 
 	// The name of the project that contains the model that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to DeleteModel
@@ -59,6 +65,8 @@ type DeleteModelInput struct {
 	// An error occurs if the other input parameters are not the same as in the first
 	// request. Using a different value for ClientToken is considered a new call to
 	// DeleteModel . An idempotency token is active for 8 hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -67,6 +75,8 @@ type DeleteModelInput struct {
 type DeleteModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model that was deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModelArn *string
 
 	// Metadata pertaining to the operation's result.

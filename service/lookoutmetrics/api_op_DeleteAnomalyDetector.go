@@ -12,6 +12,8 @@ import (
 
 // Deletes a detector. Deleting an anomaly detector will delete all of its
 // corresponding resources including any configured datasets and alerts.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomalyDetectorInput, optFns ...func(*Options)) (*DeleteAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &DeleteAnomalyDetectorInput{}
@@ -32,6 +34,8 @@ type DeleteAnomalyDetectorInput struct {
 	// The ARN of the detector to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AnomalyDetectorArn *string
 
 	noSmithyDocumentSerde
