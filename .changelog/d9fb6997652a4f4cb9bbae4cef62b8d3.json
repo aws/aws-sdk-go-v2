@@ -1,0 +1,8 @@
+{
+    "id": "d9fb6997-652a-4f4c-b9bb-ae4cef62b8d3",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/backupgateway"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "7350a1dc-c4bd-490f-9c57-b7e9437b6353",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/controltower"
+    ]
+}

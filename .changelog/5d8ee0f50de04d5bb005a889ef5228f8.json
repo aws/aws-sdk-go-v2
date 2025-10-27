@@ -1,0 +1,8 @@
+{
+    "id": "5d8ee0f5-0de0-4d5b-b005-a889ef5228f8",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

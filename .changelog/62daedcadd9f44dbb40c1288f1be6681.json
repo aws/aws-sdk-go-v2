@@ -1,0 +1,8 @@
+{
+    "id": "62daedca-dd9f-44db-b40c-1288f1be6681",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

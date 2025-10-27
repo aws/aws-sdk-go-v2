@@ -1,0 +1,8 @@
+{
+    "id": "eaadb331-dd96-41a2-8efd-e8b0c9d09ce8",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/simspaceweaver"
+    ]
+}

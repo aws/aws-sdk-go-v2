@@ -91,6 +91,10 @@ type CreateStreamInput struct {
 	// This member is required.
 	StreamName *string
 
+	// The maximum record size of a single record in kibibyte (KiB) that you can write
+	// to, and read from a stream.
+	MaxRecordSizeInKiB *int32
+
 	// The number of shards that the stream will use. The throughput of the stream is
 	// a function of the number of shards; more shards are required for greater
 	// provisioned throughput.

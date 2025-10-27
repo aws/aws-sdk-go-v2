@@ -1,0 +1,8 @@
+{
+    "id": "73a9b1e8-b101-4761-9d51-6b7b9fa2eaf2",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/braket"
+    ]
+}

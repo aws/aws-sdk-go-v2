@@ -1,0 +1,8 @@
+{
+    "id": "2f134ee8-f984-441c-bba2-c4fa150a83ba",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/greengrass"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "62881121-9c6d-4568-8346-30141c499345",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

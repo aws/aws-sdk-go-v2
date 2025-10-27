@@ -1,0 +1,8 @@
+{
+    "id": "4fb67d10-511a-45d8-8b2d-05c0d19a5a1a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/aiops"
+    ]
+}

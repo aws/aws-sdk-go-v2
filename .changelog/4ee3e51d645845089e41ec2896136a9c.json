@@ -1,0 +1,8 @@
+{
+    "id": "4ee3e51d-6458-4508-9e41-ec2896136a9c",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/elasticbeanstalk"
+    ]
+}

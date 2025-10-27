@@ -1,0 +1,8 @@
+{
+    "id": "83b53c8b-5470-4d42-9fa0-948e8eca10b4",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/rekognition"
+    ]
+}

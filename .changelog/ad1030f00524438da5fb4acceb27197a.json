@@ -1,0 +1,8 @@
+{
+    "id": "ad1030f0-0524-438d-a5fb-4acceb27197a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/pinpoint"
+    ]
+}

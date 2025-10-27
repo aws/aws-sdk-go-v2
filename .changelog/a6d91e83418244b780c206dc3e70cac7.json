@@ -1,0 +1,8 @@
+{
+    "id": "a6d91e83-4182-44b7-80c2-06dc3e70cac7",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

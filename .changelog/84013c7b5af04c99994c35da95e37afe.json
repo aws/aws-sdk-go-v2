@@ -1,0 +1,8 @@
+{
+    "id": "84013c7b-5af0-4c99-994c-35da95e37afe",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sfn"
+    ]
+}

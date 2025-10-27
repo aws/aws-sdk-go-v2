@@ -1,0 +1,8 @@
+{
+    "id": "14181d58-fb06-42c0-b2ea-33537626ebfa",
+    "type": "feature",
+    "description": "Adds support for record sizes up to 10MiB and introduces new UpdateMaxRecordSize API to modify stream record size limits. Adds record size parameters to existing CreateStream and DescribeStreamSummary APIs for request and response payloads respectively.",
+    "modules": [
+        "service/kinesis"
+    ]
+}

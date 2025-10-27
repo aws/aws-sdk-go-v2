@@ -1,0 +1,8 @@
+{
+    "id": "579174c1-df4c-4b73-845a-d7a08eadab98",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/repostspace"
+    ]
+}

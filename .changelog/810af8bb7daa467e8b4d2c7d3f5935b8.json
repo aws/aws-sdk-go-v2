@@ -1,0 +1,8 @@
+{
+    "id": "810af8bb-7daa-467e-8b4d-2c7d3f5935b8",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/wafregional"
+    ]
+}

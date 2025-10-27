@@ -1,0 +1,8 @@
+{
+    "id": "1b05b17a-9b66-4747-ae6b-d786b409be7a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "33440548-c5d8-41ba-bc6e-5c193641d7a9",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/route53resolver"
+    ]
+}

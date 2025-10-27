@@ -1,0 +1,8 @@
+{
+    "id": "1e0eb00c-aa7d-4498-bbdf-9b4683138f54",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/socialmessaging"
+    ]
+}

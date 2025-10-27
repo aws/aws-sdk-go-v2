@@ -15,7 +15,7 @@ import (
 // Writes a single data record into an Amazon Kinesis data stream. Call PutRecord
 // to send data into the stream for real-time ingestion and subsequent processing,
 // one record at a time. Each shard can support writes up to 1,000 records per
-// second, up to a maximum data write total of 1 MiB per second.
+// second, up to a maximum data write total of 10 MiB per second.
 //
 // When invoking this API, you must use either the StreamARN or the StreamName
 // parameter, or both. It is recommended that you use the StreamARN input

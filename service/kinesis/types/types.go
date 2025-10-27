@@ -544,6 +544,10 @@ type StreamDescriptionSummary struct {
 	//   - Master key owned by Kinesis Data Streams: alias/aws/kinesis
 	KeyId *string
 
+	// The maximum record size of a single record in kibibyte (KiB) that you can write
+	// to, and read from a stream.
+	MaxRecordSizeInKiB *int32
+
 	//  Specifies the capacity mode to which you want to set your data stream.
 	// Currently, in Kinesis Data Streams, you can choose between an on-demand
 	// ycapacity mode and a provisioned capacity mode for your data streams.

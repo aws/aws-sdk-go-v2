@@ -21,9 +21,9 @@ import (
 // parameter when you invoke this API.
 //
 // Each PutRecords request can support up to 500 records. Each record in the
-// request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request,
-// including partition keys. Each shard can support writes up to 1,000 records per
-// second, up to a maximum data write total of 1 MiB per second.
+// request can be as large as 10 MiB, up to a limit of 10 MiB for the entire
+// request, including partition keys. Each shard can support writes up to 1,000
+// records per second, up to a maximum data write total of 1 MB per second.
 //
 // You must specify the name of the stream that captures, stores, and transports
 // the data; and an array of request Records , with each record in the array

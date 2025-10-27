@@ -1,0 +1,8 @@
+{
+    "id": "5652ba2b-a19d-41ed-be91-69130fb7916c",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/connectcampaigns"
+    ]
+}

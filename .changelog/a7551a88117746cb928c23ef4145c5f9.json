@@ -1,0 +1,8 @@
+{
+    "id": "a7551a88-1177-46cb-928c-23ef4145c5f9",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}
