@@ -5792,6 +5792,12 @@
                 "target": "com.amazonaws.workspaces#IpAddress"
             }
         },
+        "com.amazonaws.workspaces#DnsIpv6Addresses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#Ipv6Address"
+            }
+        },
         "com.amazonaws.workspaces#DomainName": {
             "type": "string",
             "traits": {
@@ -6911,6 +6917,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#IpRuleItem"
+            }
+        },
+        "com.amazonaws.workspaces#Ipv6Address": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|[0-9a-fA-F]{1,4}(?::[0-9a-fA-F]{1,4}){0,6}::[0-9a-fA-F]{1,4}$"
             }
         },
         "com.amazonaws.workspaces#Limit": {
@@ -10698,6 +10710,12 @@
                         "smithy.api#documentation": "<p>The IP address of the WorkSpace.</p>"
                     }
                 },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.workspaces#Ipv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address of the WorkSpace.</p>"
+                    }
+                },
                 "State": {
                     "target": "com.amazonaws.workspaces#WorkspaceState",
                     "traits": {
@@ -11103,6 +11121,12 @@
                     "target": "com.amazonaws.workspaces#DnsIpAddresses",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP addresses of the DNS servers for the directory.</p>"
+                    }
+                },
+                "DnsIpv6Addresses": {
+                    "target": "com.amazonaws.workspaces#DnsIpv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 addresses of the DNS servers for the directory.</p>"
                     }
                 },
                 "CustomerUserName": {
@@ -11990,6 +12014,12 @@
                     "target": "com.amazonaws.workspaces#WorkspaceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>\n         <note>\n            <p>\n               <code>WorkspaceName</code> is required if <code>UserName</code> is\n            <code>[UNDEFINED]</code> for user-decoupled WorkSpaces.\n            <code>WorkspaceName</code> is not applicable if <code>UserName</code> is specified\n            for user-assigned WorkSpaces.</p>\n         </note>"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.workspaces#Ipv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address for the WorkSpace.</p>"
                     }
                 }
             },

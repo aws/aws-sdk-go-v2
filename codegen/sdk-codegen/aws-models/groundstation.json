@@ -72,7 +72,7 @@
                 "reservedCpuCores": {
                     "target": "com.amazonaws.groundstation#AgentCpuCoresList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>This field should not be used. Use agentCpuCores instead.</p>\n         </note>\n         <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>"
+                        "smithy.api#documentation": "<note> <p>This field should not be used. Use agentCpuCores instead.</p> </note> <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>"
                     }
                 },
                 "agentCpuCores": {
@@ -186,7 +186,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about how AWS Ground Station should configure an\n         antenna for downlink during a contact.</p>"
+                "smithy.api#documentation": "<p>Information about how AWS Ground Station should configure an antenna for downlink during a contact.</p>"
             }
         },
         "com.amazonaws.groundstation#AntennaDownlinkDemodDecodeConfig": {
@@ -314,6 +314,155 @@
                 "smithy.api#documentation": "<p>Information about AwsGroundStationAgentEndpoint.</p>"
             }
         },
+        "com.amazonaws.groundstation#AzElEphemeris": {
+            "type": "structure",
+            "members": {
+                "groundStation": {
+                    "target": "com.amazonaws.groundstation#GroundStationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ground station name for which you're providing azimuth elevation data.</p> <p>This ephemeris is specific to this ground station and can't be used at other locations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.groundstation#AzElSegmentsData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Azimuth elevation segment data.</p> <p>You can provide data inline in the request or through an Amazon S3 object reference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Azimuth elevation ephemeris data.</p> <p> Use this ephemeris type to provide pointing angles directly, rather than satellite orbital elements. Use this when you need precise antenna pointing but have imprecise or unknown satellite trajectory information. </p> <p> The azimuth elevation data specifies the antenna pointing direction at specific times relative to a ground station location. AWS Ground Station uses 4th order Lagrange interpolation to compute pointing angles between the provided data points. </p> <p> AWS Ground Station automatically filters interpolated pointing angles, including only those that are above the site mask elevation of the specified ground station. </p> <p> For more detail about providing azimuth elevation ephemerides to AWS Ground Station, see the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/providing-azimuth-elevation-ephemeris-data.html\">azimuth elevation ephemeris section</a> of the AWS Ground Station User Guide. </p>"
+            }
+        },
+        "com.amazonaws.groundstation#AzElEphemerisFilter": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the azimuth elevation ephemeris.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter for selecting contacts that use a specific <a>AzElEphemeris</a>.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#Ephemeris",
+                        "ids": {
+                            "ephemerisId": "id"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.groundstation#AzElProgramTrackSettings": {
+            "type": "structure",
+            "members": {
+                "ephemerisId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the azimuth elevation ephemeris.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Program track settings for <a>AzElEphemeris</a>.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#Ephemeris"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.groundstation#AzElSegment": {
+            "type": "structure",
+            "members": {
+                "referenceEpoch": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference time for this segment in ISO 8601 format in Coordinated Universal Time (UTC).</p> <p>All time values within the segment's <a>AzElSegment$azElList</a> are specified as offsets in atomic seconds from this reference epoch.</p> <p>Example: <code>2024-01-15T12:00:00.000Z</code> </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "validTimeRange": {
+                    "target": "com.amazonaws.groundstation#ISO8601TimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid time range for this segment.</p> <p> Specifies the start and end timestamps in ISO 8601 format in Coordinated Universal Time (UTC). The segment's pointing data must cover this entire time range. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "azElList": {
+                    "target": "com.amazonaws.groundstation#TimeAzElList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of time-tagged azimuth elevation data points.</p> <p> Must contain at least five points to support 4th order Lagrange interpolation. Points must be in chronological order with no duplicates. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A time segment containing azimuth elevation pointing data.</p> <p> Each segment defines a continuous time period with pointing angle data points. AWS Ground Station uses 4th order Lagrange interpolation between the provided points, so each segment must contain at least five data points. </p>"
+            }
+        },
+        "com.amazonaws.groundstation#AzElSegmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.groundstation#AzElSegment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.groundstation#AzElSegments": {
+            "type": "structure",
+            "members": {
+                "angleUnit": {
+                    "target": "com.amazonaws.groundstation#AngleUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for azimuth and elevation angles. All angles in all segments must use the same unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "azElSegmentList": {
+                    "target": "com.amazonaws.groundstation#AzElSegmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of azimuth elevation segments.</p> <p>Must contain between 1 and 100 segments. Segments must be in chronological order with no overlaps.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Azimuth elevation segment collection.</p> <p>Contains five or more time-ordered segments that define antenna pointing angles over the ephemeris validity period.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#AzElSegmentsData": {
+            "type": "union",
+            "members": {
+                "s3Object": {
+                    "target": "com.amazonaws.groundstation#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 object containing azimuth elevation segment data.</p> <p>The Amazon S3 object must contain JSON-formatted azimuth elevation data matching the <a>AzElSegments</a> structure.</p>"
+                    }
+                },
+                "azElData": {
+                    "target": "com.amazonaws.groundstation#AzElSegments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Azimuth elevation segment data provided directly in the request.</p> <p>Use this option for smaller datasets or when Amazon S3 access is not available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for azimuth elevation segment data.</p> <p>Specify either <a>AzElSegmentsData$s3Object</a> to reference data in Amazon S3, or <a>AzElSegmentsData$azElData</a> to provide data inline.</p>"
+            }
+        },
         "com.amazonaws.groundstation#BandwidthUnits": {
             "type": "enum",
             "members": {
@@ -386,7 +535,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#CapabilityArn": {
@@ -809,7 +959,7 @@
                 "uplinkEchoConfig": {
                     "target": "com.amazonaws.groundstation#UplinkEchoConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p>\n         <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
+                        "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
                     }
                 },
                 "s3RecordingConfig": {
@@ -820,7 +970,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing the parameters of a <code>Config</code>.</p>\n         <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>"
+                "smithy.api#documentation": "<p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>"
             }
         },
         "com.amazonaws.groundstation#ConnectionDetails": {
@@ -953,13 +1103,19 @@
                 "visibilityStartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will rise above the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n         <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i>\n         </p>"
+                        "smithy.api#documentation": "<p> Projected time in UTC your satellite will rise above the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts. <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i> </p>"
                     }
                 },
                 "visibilityEndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will set below the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n         <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i>\n         </p>"
+                        "smithy.api#documentation": "<p> Projected time in UTC your satellite will set below the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts. <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i> </p>"
+                    }
+                },
+                "ephemeris": {
+                    "target": "com.amazonaws.groundstation#EphemerisResponseData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ephemeris that determines antenna pointing for the contact.</p>"
                     }
                 }
             },
@@ -1098,7 +1254,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>Config</code> with the specified <code>configData</code> parameters.</p>\n         <p>Only one type of <code>configData</code> can be specified.</p>",
+                "smithy.api#documentation": "<p>Creates a <code>Config</code> with the specified <code>configData</code> parameters.</p> <p>Only one type of <code>configData</code> can be specified.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/config"
@@ -1130,7 +1286,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#CreateDataflowEndpointGroup": {
@@ -1153,7 +1310,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code>DataflowEndpoint</code> objects.</p>\n         <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> \n         to specify which endpoints to use during a contact.</p>\n         <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> \n         must match a <code>DataflowEndpoint</code> in the same group.</p>",
+                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code>DataflowEndpoint</code> objects.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/dataflowEndpointGroup"
@@ -1166,7 +1323,7 @@
                 "endpointDetails": {
                     "target": "com.amazonaws.groundstation#EndpointDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoint details of each endpoint in the dataflow endpoint group.\n\n         All dataflow endpoints within a single dataflow endpoint group must be of the same type.\n         You cannot mix <a href=\"https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html\">\n            AWS Ground Station Agent endpoints</a> with\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html\">Dataflow endpoints</a> in the same group.\n         If your use case requires both types of endpoints, you must create separate dataflow endpoint\n         groups for each type.\n      </p>",
+                        "smithy.api#documentation": "<p>Endpoint details of each endpoint in the dataflow endpoint group. All dataflow endpoints within a single dataflow endpoint group must be of the same type. You cannot mix <a href=\"https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html\"> AWS Ground Station Agent endpoints</a> with <a href=\"https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html\">Dataflow endpoints</a> in the same group. If your use case requires both types of endpoints, you must create separate dataflow endpoint groups for each type. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1190,7 +1347,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#CreateEphemeris": {
@@ -1213,7 +1371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Ephemeris with the specified <code>EphemerisData</code>.</p>",
+                "smithy.api#documentation": "<p>Create an ephemeris with your specified <a>EphemerisData</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ephemeris"
@@ -1226,20 +1384,19 @@
                 "satelliteId": {
                     "target": "com.amazonaws.groundstation#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Ground Station satellite ID for this ephemeris.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The satellite ID that associates this ephemeris with a satellite in AWS Ground Station.</p>"
                     }
                 },
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to set the ephemeris status to <code>ENABLED</code> after validation.</p>\n         <p>Setting this to false will set the ephemeris status to <code>DISABLED</code> after validation.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to enable the ephemeris after validation. Set to <code>false</code> to keep it disabled.</p>"
                     }
                 },
                 "priority": {
                     "target": "com.amazonaws.groundstation#CustomerEphemerisPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>\n         <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>\n         <p>Priority must be 1 or greater</p>"
+                        "smithy.api#documentation": "<p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>"
                     }
                 },
                 "expirationTime": {
@@ -1251,14 +1408,14 @@
                 "name": {
                     "target": "com.amazonaws.groundstation#SafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>",
+                        "smithy.api#documentation": "<p>A name that you can use to identify the ephemeris.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "kmsKeyArn": {
                     "target": "com.amazonaws.groundstation#KeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of a KMS key used to encrypt the ephemeris in Ground Station.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the KMS key to use for encrypting the ephemeris.</p>"
                     }
                 },
                 "ephemeris": {
@@ -1273,6 +1430,9 @@
                         "smithy.api#documentation": "<p>Tags assigned to an ephemeris.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#CreateMissionProfile": {
@@ -1295,7 +1455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a mission profile.</p>\n         <p>\n            <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings\n         has two elements: a <i>from</i> ARN and a <i>to</i> ARN.</p>",
+                "smithy.api#documentation": "<p>Creates a mission profile.</p> <p> <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings has two elements: a <i>from</i> ARN and a <i>to</i> ARN.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/missionprofile"
@@ -1334,7 +1494,7 @@
                 "dataflowEdges": {
                     "target": "com.amazonaws.groundstation#DataflowEdgeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>\n            <code>Config</code> and a <i>to</i>\n            <code>Config</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1365,7 +1525,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#Criticality": {
@@ -1660,7 +1821,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#DeleteDataflowEndpointGroup": {
@@ -1704,7 +1866,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#DeleteEphemeris": {
@@ -1723,11 +1886,14 @@
                     "target": "com.amazonaws.groundstation#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.groundstation#ResourceInUseException"
+                },
+                {
                     "target": "com.amazonaws.groundstation#ResourceNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an ephemeris</p>",
+                "smithy.api#documentation": "<p>Delete an ephemeris.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ephemeris/{ephemerisId}"
@@ -1746,6 +1912,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#DeleteMissionProfile": {
@@ -1789,7 +1958,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#DemodulationConfig": {
@@ -1896,7 +2066,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#DescribeContactResponse": {
@@ -1989,18 +2160,31 @@
                 "visibilityStartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will rise above the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n      </p>"
+                        "smithy.api#documentation": "<p> Projected time in UTC your satellite will rise above the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts. </p>"
                     }
                 },
                 "visibilityEndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will set below the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n      </p>"
+                        "smithy.api#documentation": "<p> Projected time in UTC your satellite will set below the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts. </p>"
+                    }
+                },
+                "trackingOverrides": {
+                    "target": "com.amazonaws.groundstation#TrackingOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tracking configuration overrides specified when the contact was reserved.</p>"
+                    }
+                },
+                "ephemeris": {
+                    "target": "com.amazonaws.groundstation#EphemerisResponseData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ephemeris that determines antenna pointing directions for the contact.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {},
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.groundstation#Contact"
@@ -2028,7 +2212,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an existing ephemeris.</p>",
+                "smithy.api#documentation": "<p>Retrieve information about an existing ephemeris.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ephemeris/{ephemerisId}"
@@ -2047,6 +2231,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#DescribeEphemerisResponse": {
@@ -2073,7 +2260,7 @@
                 "priority": {
                     "target": "com.amazonaws.groundstation#EphemerisPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>\n         <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>\n         <p>Priority must be 1 or greater</p>"
+                        "smithy.api#documentation": "<p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>"
                     }
                 },
                 "creationTime": {
@@ -2091,7 +2278,7 @@
                 "name": {
                     "target": "com.amazonaws.groundstation#SafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>A name that you can use to identify the ephemeris.</p>"
                     }
                 },
                 "tags": {
@@ -2109,11 +2296,18 @@
                 "invalidReason": {
                     "target": "com.amazonaws.groundstation#EphemerisInvalidReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reason that an ephemeris failed validation. Only provided for ephemerides with <code>INVALID</code> status.</p>"
+                        "smithy.api#documentation": "<p>Reason that an ephemeris failed validation. Appears only when the status is <code>INVALID</code>.</p>"
+                    }
+                },
+                "errorReasons": {
+                    "target": "com.amazonaws.groundstation#EphemerisErrorReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed error information for ephemerides with <code>INVALID</code> status.</p> <p>Provides specific error codes and messages to help diagnose validation failures.</p>"
                     }
                 }
             },
             "traits": {
+                "smithy.api#output": {},
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.groundstation#Ephemeris"
@@ -2379,6 +2573,9 @@
                 },
                 "oem": {
                     "target": "com.amazonaws.groundstation#OEMEphemeris"
+                },
+                "azEl": {
+                    "target": "com.amazonaws.groundstation#AzElEphemeris"
                 }
             },
             "traits": {
@@ -2391,7 +2588,7 @@
                 "sourceS3Object": {
                     "target": "com.amazonaws.groundstation#S3Object",
                     "traits": {
-                        "smithy.api#documentation": "<p>Source S3 object used for the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>Source Amazon S3 object used for the ephemeris.</p>"
                     }
                 },
                 "ephemerisData": {
@@ -2403,6 +2600,287 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Description of ephemeris.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#EphemerisErrorCode": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "MISMATCHED_SATCAT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISMATCHED_SATCAT_ID"
+                    }
+                },
+                "OEM_VERSION_UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OEM_VERSION_UNSUPPORTED"
+                    }
+                },
+                "ORIGINATOR_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORIGINATOR_MISSING"
+                    }
+                },
+                "CREATION_DATE_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_DATE_MISSING"
+                    }
+                },
+                "OBJECT_NAME_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBJECT_NAME_MISSING"
+                    }
+                },
+                "OBJECT_ID_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBJECT_ID_MISSING"
+                    }
+                },
+                "REF_FRAME_UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REF_FRAME_UNSUPPORTED"
+                    }
+                },
+                "REF_FRAME_EPOCH_UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REF_FRAME_EPOCH_UNSUPPORTED"
+                    }
+                },
+                "TIME_SYSTEM_UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_SYSTEM_UNSUPPORTED"
+                    }
+                },
+                "CENTER_BODY_UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CENTER_BODY_UNSUPPORTED"
+                    }
+                },
+                "INTERPOLATION_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERPOLATION_MISSING"
+                    }
+                },
+                "INTERPOLATION_DEGREE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERPOLATION_DEGREE_INVALID"
+                    }
+                },
+                "AZ_EL_SEGMENT_LIST_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_LIST_MISSING"
+                    }
+                },
+                "INSUFFICIENT_TIME_AZ_EL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_TIME_AZ_EL"
+                    }
+                },
+                "START_TIME_IN_FUTURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_TIME_IN_FUTURE"
+                    }
+                },
+                "END_TIME_IN_PAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "END_TIME_IN_PAST"
+                    }
+                },
+                "EXPIRATION_TIME_TOO_EARLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRATION_TIME_TOO_EARLY"
+                    }
+                },
+                "START_TIME_METADATA_TOO_EARLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_TIME_METADATA_TOO_EARLY"
+                    }
+                },
+                "STOP_TIME_METADATA_TOO_LATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_TIME_METADATA_TOO_LATE"
+                    }
+                },
+                "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME"
+                    }
+                },
+                "AZ_EL_SEGMENT_TIMES_OVERLAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_TIMES_OVERLAP"
+                    }
+                },
+                "AZ_EL_SEGMENTS_OUT_OF_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENTS_OUT_OF_ORDER"
+                    }
+                },
+                "TIME_AZ_EL_ITEMS_OUT_OF_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_AZ_EL_ITEMS_OUT_OF_ORDER"
+                    }
+                },
+                "MEAN_MOTION_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEAN_MOTION_INVALID"
+                    }
+                },
+                "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID"
+                    }
+                },
+                "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID"
+                    }
+                },
+                "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID"
+                    }
+                },
+                "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID"
+                    }
+                },
+                "TIME_AZ_EL_ANGLE_UNITS_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_AZ_EL_ANGLE_UNITS_INVALID"
+                    }
+                },
+                "INSUFFICIENT_KMS_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_KMS_PERMISSIONS"
+                    }
+                },
+                "FILE_FORMAT_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_FORMAT_INVALID"
+                    }
+                },
+                "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID"
+                    }
+                },
+                "AZ_EL_SEGMENT_START_TIME_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_START_TIME_INVALID"
+                    }
+                },
+                "AZ_EL_SEGMENT_END_TIME_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_END_TIME_INVALID"
+                    }
+                },
+                "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID"
+                    }
+                },
+                "AZ_EL_SEGMENT_END_TIME_TOO_LATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_SEGMENT_END_TIME_TOO_LATE"
+                    }
+                },
+                "AZ_EL_TOTAL_DURATION_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL_TOTAL_DURATION_EXCEEDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.groundstation#EphemerisErrorReason": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.groundstation#EphemerisErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code identifying the type of validation failure.</p> <p>See the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/troubleshooting-invalid-ephemerides.html\">Troubleshooting Invalid Ephemerides guide</a> for error code details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.groundstation#ErrorString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable message describing the validation failure.</p> <p>Provides specific details about what failed and may include suggestions for remediation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed error information for ephemeris validation failures.</p> <p>Provides an error code and descriptive message to help diagnose and resolve validation issues.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#EphemerisErrorReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.groundstation#EphemerisErrorReason"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.groundstation#EphemerisFilter": {
+            "type": "union",
+            "members": {
+                "azEl": {
+                    "target": "com.amazonaws.groundstation#AzElEphemerisFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for <a>AzElEphemeris</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter for selecting contacts that use a specific ephemeris\".</p>"
             }
         },
         "com.amazonaws.groundstation#EphemerisIdResponse": {
@@ -2465,6 +2943,12 @@
                         "smithy.api#documentation": "<p>The AWS Ground Station ephemeris ID.</p>"
                     }
                 },
+                "ephemerisType": {
+                    "target": "com.amazonaws.groundstation#EphemerisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of ephemeris.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.groundstation#EphemerisStatus",
                     "traits": {
@@ -2474,7 +2958,7 @@
                 "priority": {
                     "target": "com.amazonaws.groundstation#EphemerisPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>\n         <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>\n         <p>Priority must be 1 or greater</p>"
+                        "smithy.api#documentation": "<p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>"
                     }
                 },
                 "enabled": {
@@ -2492,13 +2976,13 @@
                 "name": {
                     "target": "com.amazonaws.groundstation#SafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>A name that you can use to identify the ephemeris.</p>"
                     }
                 },
                 "sourceS3Object": {
                     "target": "com.amazonaws.groundstation#S3Object",
                     "traits": {
-                        "smithy.api#documentation": "<p>Source S3 object used for the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>Source Amazon S3 object used for the ephemeris.</p>"
                     }
                 }
             },
@@ -2519,19 +3003,19 @@
                 "ephemerisId": {
                     "target": "com.amazonaws.groundstation#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>UUID of a customer-provided ephemeris.</p>\n         <p>This field is not populated for default ephemerides from Space Track.</p>"
+                        "smithy.api#documentation": "<p>UUID of a customer-provided ephemeris.</p> <p>This field is not populated for default ephemerides from Space Track.</p>"
                     }
                 },
                 "epoch": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The epoch of a default, ephemeris from Space Track in UTC.</p>\n         <p>This field is not populated for customer-provided ephemerides.</p>"
+                        "smithy.api#documentation": "<p>The epoch of a default, ephemeris from Space Track in UTC.</p> <p>This field is not populated for customer-provided ephemerides.</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.groundstation#SafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>\n         <p>A name is only returned for customer-provider ephemerides that have a name associated.</p>"
+                        "smithy.api#documentation": "<p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p> <p>A name is only returned for customer-provider ephemerides that have a name associated.</p>"
                     }
                 }
             },
@@ -2546,6 +3030,32 @@
                     "min": 0,
                     "max": 99999
                 }
+            }
+        },
+        "com.amazonaws.groundstation#EphemerisResponseData": {
+            "type": "structure",
+            "members": {
+                "ephemerisId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the ephemeris. Appears only for custom ephemerides.</p>"
+                    }
+                },
+                "ephemerisType": {
+                    "target": "com.amazonaws.groundstation#EphemerisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of ephemeris.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Ephemeris data for a contact.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#Ephemeris"
+                    }
+                ]
             }
         },
         "com.amazonaws.groundstation#EphemerisSource": {
@@ -2618,6 +3128,35 @@
                 }
             }
         },
+        "com.amazonaws.groundstation#EphemerisType": {
+            "type": "enum",
+            "members": {
+                "TLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLE"
+                    }
+                },
+                "OEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OEM"
+                    }
+                },
+                "AZ_EL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ_EL"
+                    }
+                },
+                "SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_MANAGED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.groundstation#EphemerisTypeDescription": {
             "type": "union",
             "members": {
@@ -2626,10 +3165,22 @@
                 },
                 "oem": {
                     "target": "com.amazonaws.groundstation#EphemerisDescription"
+                },
+                "azEl": {
+                    "target": "com.amazonaws.groundstation#EphemerisDescription"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.groundstation#ErrorString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.groundstation#Frequency": {
@@ -2660,7 +3211,7 @@
                 "value": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p>\n         <ul>\n            <li>\n               <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p>\n            </li>\n            <li>\n               <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p>\n            </li>\n            <li>\n               <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2719,7 +3270,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>\n         </note>\n         <p>Gets the latest configuration information for a registered agent.</p>",
+                "smithy.api#documentation": "<note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Gets the latest configuration information for a registered agent.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/agent/{agentId}/configuration"
@@ -2738,6 +3289,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#GetAgentConfigurationResponse": {
@@ -2755,6 +3309,9 @@
                         "smithy.api#documentation": "<p>Tasking document for agent.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#GetConfig": {
@@ -2777,7 +3334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns <code>Config</code> information.</p>\n         <p>Only one <code>Config</code> response can be returned.</p>",
+                "smithy.api#documentation": "<p>Returns <code>Config</code> information.</p> <p>Only one <code>Config</code> response can be returned.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/config/{configType}/{configId}"
@@ -2806,7 +3363,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#GetConfigResponse": {
@@ -2822,7 +3380,7 @@
                 "configArn": {
                     "target": "com.amazonaws.groundstation#ConfigArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of a <code>Config</code>\n         </p>",
+                        "smithy.api#documentation": "<p>ARN of a <code>Config</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2854,7 +3412,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#GetDataflowEndpointGroup": {
@@ -2898,7 +3457,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#GetDataflowEndpointGroupResponse": {
@@ -2942,7 +3502,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#GetMinuteUsage": {
@@ -2992,7 +3553,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#GetMinuteUsageResponse": {
@@ -3030,7 +3592,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#GetMissionProfile": {
@@ -3074,7 +3637,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#GetMissionProfileResponse": {
@@ -3125,7 +3689,7 @@
                 "dataflowEdges": {
                     "target": "com.amazonaws.groundstation#DataflowEdgeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>\n            <code>Config</code> and a <i>to</i>\n            <code>Config</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.</p>"
                     }
                 },
                 "trackingConfigArn": {
@@ -3155,6 +3719,7 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {},
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.groundstation#MissionProfile"
@@ -3203,7 +3768,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#GetSatelliteResponse": {
@@ -3304,7 +3870,7 @@
                     "name": "groundstation"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the AWS Ground Station API Reference. AWS Ground Station is a fully managed service that\n      enables you to control satellite communications, downlink and process satellite data, and\n      scale your satellite operations efficiently and cost-effectively without having\n      to build or manage your own ground station infrastructure.</p>",
+                "smithy.api#documentation": "<p>Welcome to the AWS Ground Station API Reference. AWS Ground Station is a fully managed service that enables you to control satellite communications, downlink and process satellite data, and scale your satellite operations efficiently and cost-effectively without having to build or manage your own ground station infrastructure.</p>",
                 "smithy.api#title": "AWS Ground Station",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3313,27 +3879,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -4118,6 +4684,30 @@
                 }
             }
         },
+        "com.amazonaws.groundstation#ISO8601TimeRange": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start time in ISO 8601 format in Coordinated Universal Time (UTC).</p> <p>Example: <code>2026-11-15T10:28:48.000Z</code> </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>End time in ISO 8601 format in Coordinated Universal Time (UTC).</p> <p>Example: <code>2024-01-15T12:00:00.000Z</code> </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Time range specified using ISO 8601 format timestamps.</p>"
+            }
+        },
         "com.amazonaws.groundstation#InstanceId": {
             "type": "string",
             "traits": {
@@ -4321,7 +4911,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListConfigsResponse": {
@@ -4341,7 +4932,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListContacts": {
@@ -4364,7 +4956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of contacts.</p>\n         <p>If <code>statusList</code> contains AVAILABLE, the request must include\n      <code>groundStation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>.\n      </p>",
+                "smithy.api#documentation": "<p>Returns a list of contacts.</p> <p>If <code>statusList</code> contains AVAILABLE, the request must include <code>groundStation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contacts"
@@ -4431,10 +5023,17 @@
                     "traits": {
                         "smithy.api#documentation": "<p>ARN of a mission profile.</p>"
                     }
+                },
+                "ephemeris": {
+                    "target": "com.amazonaws.groundstation#EphemerisFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for selecting contacts that use a specific ephemeris\".</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListContactsResponse": {
@@ -4454,7 +5053,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListDataflowEndpointGroups": {
@@ -4510,7 +5110,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListDataflowEndpointGroupsResponse": {
@@ -4530,7 +5131,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListEphemerides": {
@@ -4553,7 +5155,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List existing ephemerides.</p>",
+                "smithy.api#documentation": "<p>List your existing ephemerides.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ephemerides"
@@ -4564,7 +5166,10 @@
                     "outputToken": "nextToken",
                     "items": "ephemerides"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
             }
         },
         "com.amazonaws.groundstation#ListEphemeridesRequest": {
@@ -4573,21 +5178,26 @@
                 "satelliteId": {
                     "target": "com.amazonaws.groundstation#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Ground Station satellite ID to list ephemeris for.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The AWS Ground Station satellite ID to list ephemeris for.</p>"
+                    }
+                },
+                "ephemerisType": {
+                    "target": "com.amazonaws.groundstation#EphemerisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter ephemerides by type. If not specified, all ephemeris types will be returned.</p>"
                     }
                 },
                 "startTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time to list in UTC. The operation will return an ephemeris if its expiration time is within the time range defined by the <code>startTime</code> and <code>endTime</code>.</p>",
+                        "smithy.api#documentation": "<p>The start time for the list operation in UTC. Returns ephemerides with expiration times within your specified time range.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time to list in UTC. The operation will return an ephemeris if its expiration time is within the time range defined by the <code>startTime</code> and <code>endTime</code>.</p>",
+                        "smithy.api#documentation": "<p>The end time for the list operation in UTC. Returns ephemerides with expiration times within your specified time range.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4611,6 +5221,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListEphemeridesResponse": {
@@ -4628,6 +5241,9 @@
                         "smithy.api#documentation": "<p>List of ephemerides.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListGroundStations": {
@@ -4710,7 +5326,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListMissionProfiles": {
@@ -4766,7 +5383,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListMissionProfilesResponse": {
@@ -4786,7 +5404,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListSatellites": {
@@ -4842,7 +5461,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListSatellitesResponse": {
@@ -4862,7 +5482,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ListTagsForResource": {
@@ -4906,7 +5527,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#ListTagsForResourceResponse": {
@@ -4920,7 +5542,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#MissionProfile": {
@@ -5033,18 +5656,18 @@
                 "s3Object": {
                     "target": "com.amazonaws.groundstation#S3Object",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the S3 object to be used as the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 object that contains the ephemeris data.</p>"
                     }
                 },
                 "oemData": {
                     "target": "com.amazonaws.groundstation#UnboundedString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data for an OEM ephemeris, supplied directly in the request rather than through an S3 object.</p>"
+                        "smithy.api#documentation": "<p>OEM data that you provide directly instead of using an Amazon S3 object.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Ephemeris data in Orbit Ephemeris Message (OEM) format.\n        </p>\n         <p>\n            AWS Ground Station processes OEM Customer Provided Ephemerides according to the <a href=\"https://public.ccsds.org/Pubs/502x0b3e1.pdf\">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/providing-custom-ephemeris-data.html#oem-ephemeris-format\">OEM ephemeris format</a> in the AWS Ground Station user guide.\n        </p>"
+                "smithy.api#documentation": "<p>Ephemeris data in Orbit Ephemeris Message (OEM) format.</p> <p> AWS Ground Station processes OEM ephemerides according to the <a href=\"https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf\">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format\">OEM ephemeris format</a> in the AWS Ground Station user guide. </p>"
             }
         },
         "com.amazonaws.groundstation#PaginationMaxResults": {
@@ -5096,6 +5719,20 @@
                     "min": 1,
                     "max": 21600
                 }
+            }
+        },
+        "com.amazonaws.groundstation#ProgramTrackSettings": {
+            "type": "union",
+            "members": {
+                "azEl": {
+                    "target": "com.amazonaws.groundstation#AzElProgramTrackSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Program track settings for <a>AzElEphemeris</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Program track settings for an antenna during a contact.</p>"
             }
         },
         "com.amazonaws.groundstation#RangedConnectionDetails": {
@@ -5165,7 +5802,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>\n         </note>\n         <p> Registers a new agent with AWS Ground Station. </p>",
+                "smithy.api#documentation": "<note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p> Registers a new agent with AWS Ground Station. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/agent"
@@ -5195,6 +5832,9 @@
                         "smithy.api#documentation": "<p>Tags assigned to an <code>Agent</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#RegisterAgentResponse": {
@@ -5206,6 +5846,9 @@
                         "smithy.api#documentation": "<p>UUID of registered agent.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#ReserveContact": {
@@ -5222,6 +5865,9 @@
                 },
                 {
                     "target": "com.amazonaws.groundstation#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#ResourceLimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.groundstation#ResourceNotFoundException"
@@ -5248,8 +5894,7 @@
                 "satelliteArn": {
                     "target": "com.amazonaws.groundstation#satelliteArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of a satellite</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>ARN of a satellite</p>"
                     }
                 },
                 "startTime": {
@@ -5278,10 +5923,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags assigned to a contact.</p>"
                     }
+                },
+                "trackingOverrides": {
+                    "target": "com.amazonaws.groundstation#TrackingOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tracking configuration overrides for the contact.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.groundstation#ResourceInUseException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource is in use by non-terminal state contacts and cannot be modified or deleted.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.groundstation#ResourceLimitExceededException": {
@@ -5357,12 +6022,12 @@
                 "version": {
                     "target": "com.amazonaws.groundstation#S3VersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>For versioned S3 objects, the version to use for the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>For versioned Amazon S3 objects, the version to use for the ephemeris.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object stored in S3 containing ephemeris data.</p>"
+                "smithy.api#documentation": "<p>Object stored in Amazon S3 containing ephemeris data.</p>"
             }
         },
         "com.amazonaws.groundstation#S3ObjectKey": {
@@ -5591,7 +6256,7 @@
                 "configDetails": {
                     "target": "com.amazonaws.groundstation#ConfigDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional details for a <code>Config</code>, if type is <code>dataflow-endpoint</code> or <code>antenna-downlink-demod-decode</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Additional details for a <code>Config</code>, if type is <code>dataflow-endpoint</code> or <code>antenna-downlink-demod-decode</code> </p>"
                     }
                 },
                 "dataflowSourceRegion": {
@@ -5618,7 +6283,7 @@
                 "bandwidth": {
                     "target": "com.amazonaws.groundstation#FrequencyBandwidth",
                     "traits": {
-                        "smithy.api#documentation": "<p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p>\n         <ul>\n            <li>\n               <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p>\n            </li>\n            <li>\n               <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p>\n            </li>\n            <li>\n               <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5674,7 +6339,7 @@
                 "validTimeRange": {
                     "target": "com.amazonaws.groundstation#TimeRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid time range for the TLE. Gaps or overlap are not permitted.</p>",
+                        "smithy.api#documentation": "<p>The valid time range for the TLE. Time ranges must be continuous without gaps or overlaps.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5701,18 +6366,18 @@
                 "s3Object": {
                     "target": "com.amazonaws.groundstation#S3Object",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the S3 object to be used as the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 object that contains the ephemeris data.</p>"
                     }
                 },
                 "tleData": {
                     "target": "com.amazonaws.groundstation#TLEDataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data for a TLE ephemeris, supplied directly in the request rather than through an S3 object.</p>"
+                        "smithy.api#documentation": "<p>TLE data that you provide directly instead of using an Amazon S3 object.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Two-line element set (TLE) ephemeris.</p>"
+                "smithy.api#documentation": "<p>Two-line element set (TLE) ephemeris.</p> <p> For more detail about providing Two-line element sets to AWS Ground Station, see the <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/providing-tle-ephemeris-data.html\">TLE section</a> of the AWS Ground Station user guide. </p>"
             }
         },
         "com.amazonaws.groundstation#TagKeys": {
@@ -5774,14 +6439,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#TagResourceResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#TagsMap": {
@@ -5793,20 +6460,60 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.groundstation#TimeAzEl": {
+            "type": "structure",
+            "members": {
+                "dt": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time offset in atomic seconds from the segment's reference epoch.</p> <p>All <code>dt</code> values within a segment must be in ascending order with no duplicates.</p> <p> <code>dt</code> values may be:</p> <ul> <li> <p>negative</p> </li> <li> <p>expressed as fractions of a second</p> </li> <li> <p>expressed in scientific notation</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "az": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Azimuth angle at the specified time.</p> <p>Valid ranges by unit:</p> <ul> <li> <p> <code>DEGREE_ANGLE</code>: -180 to 360 degrees, measured clockwise from true north</p> </li> <li> <p> <code>RADIAN</code>: -π to 2π radians, measured clockwise from true north</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "el": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Elevation angle at the specified time.</p> <p>Valid ranges by unit:</p> <ul> <li> <p> <code>DEGREE_ANGLE</code>: -90 to 90 degrees, where 0 is the horizon, 90 is zenith, and negative values are below the horizon </p> </li> <li> <p> <code>RADIAN</code>: -π/2 to π/2 radians, where 0 is the horizon, π/2 is zenith, and negative values are below the horizon </p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Time-tagged azimuth elevation pointing data.</p> <p>Specifies the antenna pointing direction at a specific time offset from the segment's reference epoch.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#TimeAzElList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.groundstation#TimeAzEl"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5
+                }
+            }
+        },
         "com.amazonaws.groundstation#TimeRange": {
             "type": "structure",
             "members": {
                 "startTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time in UTC at which the time range starts.</p>",
+                        "smithy.api#documentation": "<p>Unix epoch timestamp in UTC at which the time range starts.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time in UTC at which the time range ends.</p>",
+                        "smithy.api#documentation": "<p>Unix epoch timestamp in UTC at which the time range ends.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5847,7 +6554,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object that determines whether tracking should be used during a contact\n         executed with this <code>Config</code> in the mission profile.</p>"
+                "smithy.api#documentation": "<p>Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#TrackingOverrides": {
+            "type": "structure",
+            "members": {
+                "programTrackSettings": {
+                    "target": "com.amazonaws.groundstation#ProgramTrackSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Program track settings to override for antenna tracking during the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overrides the default tracking configuration on an antenna during a contact.</p>"
             }
         },
         "com.amazonaws.groundstation#UnboundedString": {
@@ -5908,14 +6630,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#UntagResourceResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#UpdateAgentStatus": {
@@ -5938,7 +6662,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>\n         </note>\n         <p>Update the status of the agent.</p>",
+                "smithy.api#documentation": "<note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Update the status of the agent.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/agent/{agentId}"
@@ -5978,6 +6702,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#UpdateAgentStatusResponse": {
@@ -5990,6 +6717,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.groundstation#UpdateConfig": {
@@ -6012,7 +6742,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the <code>Config</code> used when scheduling contacts.</p>\n         <p>Updating a <code>Config</code> will not update the execution parameters\n         for existing future contacts scheduled with this <code>Config</code>.</p>",
+                "smithy.api#documentation": "<p>Updates the <code>Config</code> used when scheduling contacts.</p> <p>Updating a <code>Config</code> will not update the execution parameters for existing future contacts scheduled with this <code>Config</code>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/config/{configType}/{configId}"
@@ -6055,7 +6785,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#UpdateEphemeris": {
@@ -6078,7 +6809,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing ephemeris</p>",
+                "smithy.api#documentation": "<p>Update an existing ephemeris.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/ephemeris/{ephemerisId}"
@@ -6100,22 +6831,25 @@
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the ephemeris is enabled or not. Changing this value will not require the ephemeris to be re-validated.</p>",
+                        "smithy.api#documentation": "<p>Enable or disable the ephemeris. Changing this value doesn't require re-validation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.groundstation#SafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>"
+                        "smithy.api#documentation": "<p>A name that you can use to identify the ephemeris.</p>"
                     }
                 },
                 "priority": {
                     "target": "com.amazonaws.groundstation#EphemerisPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>\n         <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>\n         <p>Priority must be 1 or greater</p>"
+                        "smithy.api#documentation": "<p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#UpdateMissionProfile": {
@@ -6138,7 +6872,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a mission profile.</p>\n         <p>Updating a mission profile will not update the execution parameters\n         for existing future contacts.</p>",
+                "smithy.api#documentation": "<p>Updates a mission profile.</p> <p>Updating a mission profile will not update the execution parameters for existing future contacts.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/missionprofile/{missionProfileId}"
@@ -6184,7 +6918,7 @@
                 "dataflowEdges": {
                     "target": "com.amazonaws.groundstation#DataflowEdgeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>\n            <code>Config</code> and a <i>to</i>\n            <code>Config</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.</p>"
                     }
                 },
                 "trackingConfigArn": {
@@ -6207,7 +6941,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.groundstation#UplinkEchoConfig": {
@@ -6229,7 +6964,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p>\n         <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the \n         specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> \n         is used in a contact.</p>"
+                "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
             }
         },
         "com.amazonaws.groundstation#UplinkSpectrumConfig": {

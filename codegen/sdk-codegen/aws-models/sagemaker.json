@@ -20119,6 +20119,42 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DeleteProcessingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteProcessingJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a processing job. After Amazon SageMaker deletes a processing job, all of the metadata for the processing job is lost. You can delete only processing jobs that are in a terminal state (<code>Stopped</code>, <code>Failed</code>, or <code>Completed</code>). You cannot delete a job that is in the <code>InProgress</code> or <code>Stopping</code> state. After deleting the job, you can reuse its name to create another processing job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteProcessingJobRequest": {
+            "type": "structure",
+            "members": {
+                "ProcessingJobName": {
+                    "target": "com.amazonaws.sagemaker#ProcessingJobName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the processing job to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.sagemaker#DeleteProject": {
             "type": "operation",
             "input": {
@@ -20273,6 +20309,42 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteTrainingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteTrainingJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a training job. After SageMaker deletes a training job, all of the metadata for the training job is lost. You can delete only training jobs that are in a terminal state (<code>Stopped</code>, <code>Failed</code>, or <code>Completed</code>) and don't retain an <code>Available</code> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-warm-pools.html\">managed warm pool</a>. You cannot delete a job that is in the <code>InProgress</code> or <code>Stopping</code> state. After deleting the job, you can reuse its name to create another training job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteTrainingJobRequest": {
+            "type": "structure",
+            "members": {
+                "TrainingJobName": {
+                    "target": "com.amazonaws.sagemaker#TrainingJobName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the training job to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sagemaker#DeleteTrial": {
@@ -65801,6 +65873,9 @@
                     "target": "com.amazonaws.sagemaker#DeletePipeline"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DeleteProcessingJob"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DeleteProject"
                 },
                 {
@@ -65811,6 +65886,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteTags"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DeleteTrainingJob"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteTrial"
@@ -74185,6 +74263,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Stopped"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
                     }
                 }
             }
