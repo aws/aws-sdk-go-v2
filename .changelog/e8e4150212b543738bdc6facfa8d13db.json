@@ -1,8 +1,0 @@
-{
-    "id": "e8e41502-12b5-4373-8bdc-6facfa8d13db",
-    "type": "feature",
-    "description": "This released the DescribeCapacityReservationTopology API.",
-    "modules": [
-        "service/ec2"
-    ]
-}

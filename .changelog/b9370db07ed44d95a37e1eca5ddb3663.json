@@ -1,8 +1,0 @@
-{
-    "id": "b9370db0-7ed4-4d95-a37e-1eca5ddb3663",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

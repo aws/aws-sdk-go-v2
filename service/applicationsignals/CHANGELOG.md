@@ -1,3 +1,7 @@
+# v1.17.0 (2025-10-28)
+
+* **Feature**: Added support for CloudWatch Synthetics Canary resources in ListAuditFindings API. This enhancement allows customers to retrieve audit findings specifically for CloudWatch Synthetics canaries and enables service-canary correlation analysis.
+
 # v1.16.2 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

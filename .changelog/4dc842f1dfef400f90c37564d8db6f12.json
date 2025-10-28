@@ -1,8 +1,0 @@
-{
-    "id": "4dc842f1-dfef-400f-90c3-7564d8db6f12",
-    "type": "feature",
-    "description": "Amazon SageMaker now supports deleting training and processing jobs in a terminal status.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

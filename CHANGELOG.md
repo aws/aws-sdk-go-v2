@@ -1,3 +1,48 @@
+# Release (2025-10-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.17.0](service/applicationsignals/CHANGELOG.md#v1170-2025-10-28)
+  * **Feature**: Added support for CloudWatch Synthetics Canary resources in ListAuditFindings API. This enhancement allows customers to retrieve audit findings specifically for CloudWatch Synthetics canaries and enables service-canary correlation analysis.
+* `github.com/aws/aws-sdk-go-v2/service/apptest`: [v1.11.0](service/apptest/CHANGELOG.md#v1110-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.38.0](service/detective/CHANGELOG.md#v1380-2025-10-28)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.259.0](service/ec2/CHANGELOG.md#v12590-2025-10-28)
+  * **Feature**: This released the DescribeCapacityReservationTopology API.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.66.0](service/ecs/CHANGELOG.md#v1660-2025-10-28)
+  * **Feature**: Amazon ECS supports native linear and canary service deployments, allowing you to shift traffic in increments for more control.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.41.0](service/efs/CHANGELOG.md#v1410-2025-10-28)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.8.0](service/gameliftstreams/CHANGELOG.md#v180-2025-10-28)
+  * **Feature**: Add stream group expiration date and expired status
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.38.0](service/groundstation/CHANGELOG.md#v1380-2025-10-28)
+  * **Feature**: Enable use of AzEl ephemerides
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.30.0](service/iotfleethub/CHANGELOG.md#v1300-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.80.0](service/lambda/CHANGELOG.md#v1800-2025-10-28)
+  * **Feature**: Added SerializedRequestEntityTooLargeException to Lambda Invoke API
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.37.0](service/lookoutmetrics/CHANGELOG.md#v1370-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.33.0](service/lookoutvision/CHANGELOG.md#v1330-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.46.0](service/organizations/CHANGELOG.md#v1460-2025-10-28)
+  * **Feature**: Added Account State field to the ListDelegatedAdministrators API response.
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.32.0](service/qldb/CHANGELOG.md#v1320-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/qldbsession`: [v1.32.0](service/qldbsession/CHANGELOG.md#v1320-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.36.0](service/robomaker/CHANGELOG.md#v1360-2025-10-28)
+  * **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.89.0](service/s3/CHANGELOG.md#v1890-2025-10-28)
+  * **Feature**: Amazon Simple Storage Service / Features: Add conditional writes in CopyObject on destination key to prevent unintended object modifications.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.218.0](service/sagemaker/CHANGELOG.md#v12180-2025-10-28)
+  * **Feature**: Amazon SageMaker now supports deleting training and processing jobs in a terminal status.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.64.0](service/workspaces/CHANGELOG.md#v1640-2025-10-28)
+  * **Feature**: Added IPv6 address support for WorkSpaces using Dual-Stack subnets
+
 # Release (2025-10-27)
 
 ## Module Highlights

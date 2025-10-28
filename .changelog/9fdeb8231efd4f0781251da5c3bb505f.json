@@ -1,8 +1,0 @@
-{
-    "id": "9fdeb823-1efd-4f07-8125-1da5c3bb505f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/opensearch"
-    ]
-}

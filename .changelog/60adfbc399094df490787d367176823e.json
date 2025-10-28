@@ -1,8 +1,0 @@
-{
-    "id": "60adfbc3-9909-4df4-9078-7d367176823e",
-    "type": "feature",
-    "description": "Add stream group expiration date and expired status",
-    "modules": [
-        "service/gameliftstreams"
-    ]
-}

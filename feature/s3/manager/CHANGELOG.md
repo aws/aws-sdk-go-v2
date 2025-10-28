@@ -1,3 +1,7 @@
+# v1.20.1 (2025-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2025-10-27)
 
 * **Feature**: Add durability checks to validate part count and range for upload/download. You can disable this with `DisableValidateParts` in upload/download options, though doing so is not recommended because it damages the durability posture of your application.

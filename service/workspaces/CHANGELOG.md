@@ -1,3 +1,7 @@
+# v1.64.0 (2025-10-28)
+
+* **Feature**: Added IPv6 address support for WorkSpaces using Dual-Stack subnets
+
 # v1.63.8 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

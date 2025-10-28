@@ -1,3 +1,7 @@
+# v1.66.0 (2025-10-28)
+
+* **Feature**: Amazon ECS supports native linear and canary service deployments, allowing you to shift traffic in increments for more control.
+
 # v1.65.4 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

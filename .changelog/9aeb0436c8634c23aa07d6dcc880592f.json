@@ -1,8 +1,0 @@
-{
-    "id": "9aeb0436-c863-4c23-aa07-d6dcc880592f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/trustedadvisor"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "43c9a521-07b0-42ed-8868-9f4a287c3e6b",
-    "type": "feature",
-    "description": "Amazon ECS supports native linear and canary service deployments, allowing you to shift traffic in increments for more control.",
-    "modules": [
-        "service/ecs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.259.0 (2025-10-28)
+
+* **Feature**: This released the DescribeCapacityReservationTopology API.
+
 # v1.258.1 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

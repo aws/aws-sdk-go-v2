@@ -1,8 +1,0 @@
-{
-    "id": "9d7848b8-e163-4f2e-9b71-ac8158ac1dbc",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cloudwatchevents"
-    ]
-}

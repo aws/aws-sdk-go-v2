@@ -1,3 +1,7 @@
+# v1.218.0 (2025-10-28)
+
+* **Feature**: Amazon SageMaker now supports deleting training and processing jobs in a terminal status.
+
 # v1.217.0 (2025-10-24)
 
 * **Feature**: Added inference components model data caching feature

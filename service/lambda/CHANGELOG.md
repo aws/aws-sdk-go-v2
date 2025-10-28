@@ -1,3 +1,7 @@
+# v1.80.0 (2025-10-28)
+
+* **Feature**: Added SerializedRequestEntityTooLargeException to Lambda Invoke API
+
 # v1.79.0 (2025-10-23)
 
 * **Feature**: Add NodeJs 24 (nodejs24.x) support to AWS Lambda.

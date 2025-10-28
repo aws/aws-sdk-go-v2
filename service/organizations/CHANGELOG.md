@@ -1,3 +1,7 @@
+# v1.46.0 (2025-10-28)
+
+* **Feature**: Added Account State field to the ListDelegatedAdministrators API response.
+
 # v1.45.5 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

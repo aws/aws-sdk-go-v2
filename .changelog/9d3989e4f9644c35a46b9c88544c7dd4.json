@@ -1,8 +1,0 @@
-{
-    "id": "9d3989e4-f964-4c35-a46b-9c88544c7dd4",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}

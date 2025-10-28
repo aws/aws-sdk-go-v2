@@ -1,8 +1,0 @@
-{
-    "id": "483bf900-3b35-44ec-8287-187d5ec0ce25",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

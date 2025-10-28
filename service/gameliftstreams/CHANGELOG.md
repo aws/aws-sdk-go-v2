@@ -1,3 +1,7 @@
+# v1.8.0 (2025-10-28)
+
+* **Feature**: Add stream group expiration date and expired status
+
 # v1.7.0 (2025-10-24)
 
 * **Feature**: Add status reasons for TERMINATED stream sessions

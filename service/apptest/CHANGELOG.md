@@ -1,3 +1,7 @@
+# v1.11.0 (2025-10-28)
+
+* **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+
 # v1.10.1 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

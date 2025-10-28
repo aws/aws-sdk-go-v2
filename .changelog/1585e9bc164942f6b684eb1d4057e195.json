@@ -1,8 +1,0 @@
-{
-    "id": "1585e9bc-1649-42f6-b684-eb1d4057e195",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cloud9"
-    ]
-}

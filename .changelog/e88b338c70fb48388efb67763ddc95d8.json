@@ -1,8 +1,0 @@
-{
-    "id": "e88b338c-70fb-4838-8efb-67763ddc95d8",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/backupsearch"
-    ]
-}

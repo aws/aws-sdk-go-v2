@@ -1,8 +1,0 @@
-{
-    "id": "11bf10d3-d31f-4bc4-ae41-92829a1a00b9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/kendra"
-    ]
-}

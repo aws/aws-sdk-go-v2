@@ -1,8 +1,0 @@
-{
-    "id": "0751936a-900b-4df8-b296-4229b9372a6f",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/glacier"
-    ]
-}

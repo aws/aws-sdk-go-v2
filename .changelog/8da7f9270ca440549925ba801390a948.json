@@ -1,8 +1,0 @@
-{
-    "id": "8da7f927-0ca4-4054-9925-ba801390a948",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/codegurusecurity"
-    ]
-}

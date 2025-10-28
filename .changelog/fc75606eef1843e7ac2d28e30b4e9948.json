@@ -1,8 +1,0 @@
-{
-    "id": "fc75606e-ef18-43e7-ac2d-28e30b4e9948",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/inspectorscan"
-    ]
-}

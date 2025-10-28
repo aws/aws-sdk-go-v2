@@ -1,8 +1,0 @@
-{
-    "id": "baed1009-2bda-49cc-95d4-dc12d9d573b9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/s3control"
-    ]
-}

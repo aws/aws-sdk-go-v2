@@ -1,8 +1,0 @@
-{
-    "id": "4390e0ed-0792-4e82-b015-d69d4db9b765",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

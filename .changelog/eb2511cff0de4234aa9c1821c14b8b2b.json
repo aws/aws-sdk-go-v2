@@ -1,8 +1,0 @@
-{
-    "id": "eb2511cf-f0de-4234-aa9c-1821c14b8b2b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/mediapackagevod"
-    ]
-}
