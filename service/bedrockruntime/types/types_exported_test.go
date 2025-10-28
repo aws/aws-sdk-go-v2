@@ -480,6 +480,42 @@ func ExampleImageSource_outputUsage() {
 var _ *types.S3Location
 var _ []byte
 
+func ExampleInvokeModelWithBidirectionalStreamInput_outputUsage() {
+	var union types.InvokeModelWithBidirectionalStreamInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvokeModelWithBidirectionalStreamInputMemberChunk:
+		_ = v.Value // Value is types.BidirectionalInputPayloadPart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BidirectionalInputPayloadPart
+
+func ExampleInvokeModelWithBidirectionalStreamOutput_outputUsage() {
+	var union types.InvokeModelWithBidirectionalStreamOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvokeModelWithBidirectionalStreamOutputMemberChunk:
+		_ = v.Value // Value is types.BidirectionalOutputPayloadPart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BidirectionalOutputPayloadPart
+
 func ExamplePromptVariableValues_outputUsage() {
 	var union types.PromptVariableValues
 	// type switches can be used to check the union value

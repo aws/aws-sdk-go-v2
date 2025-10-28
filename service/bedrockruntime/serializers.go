@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
 	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockruntime/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
@@ -751,6 +753,79 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 	return nil
 }
 
+type awsRestjson1_serializeOpInvokeModelWithBidirectionalStream struct {
+}
+
+func (*awsRestjson1_serializeOpInvokeModelWithBidirectionalStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInvokeModelWithBidirectionalStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InvokeModelWithBidirectionalStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/model/{modelId}/invoke-with-bidirectional-stream")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsInvokeModelWithBidirectionalStreamInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/vnd.amazon.eventstream")
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsInvokeModelWithBidirectionalStreamInput(v *InvokeModelWithBidirectionalStreamInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ModelId == nil || len(*v.ModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member modelId must not be empty")}
+	}
+	if v.ModelId != nil {
+		if err := encoder.SetURI("modelId").String(*v.ModelId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpInvokeModelWithResponseStream struct {
 }
 
@@ -1061,6 +1136,48 @@ func awsRestjson1_serializeOpDocumentStartAsyncInvokeInput(v *StartAsyncInvokeIn
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeEventStreamInvokeModelWithBidirectionalStreamInput(v types.InvokeModelWithBidirectionalStreamInput, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	switch vv := v.(type) {
+	case *types.InvokeModelWithBidirectionalStreamInputMemberChunk:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("chunk"))
+		return awsRestjson1_serializeEventMessageBidirectionalInputPayloadPart(&vv.Value, msg)
+
+	default:
+		return fmt.Errorf("unexpected event message type: %v", v)
+
+	}
+}
+func awsRestjson1_serializeEventMessageBidirectionalInputPayloadPart(v *types.BidirectionalInputPayloadPart, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentBidirectionalInputPayloadPart(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBidirectionalInputPayloadPart(v *types.BidirectionalInputPayloadPart, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bytes != nil {
+		ok := object.Key("bytes")
+		ok.Base64EncodeBytes(v.Bytes)
 	}
 
 	return nil

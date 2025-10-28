@@ -15,6 +15,7 @@
         "api_op_CountTokens.go",
         "api_op_GetAsyncInvoke.go",
         "api_op_InvokeModel.go",
+        "api_op_InvokeModelWithBidirectionalStream.go",
         "api_op_InvokeModelWithResponseStream.go",
         "api_op_ListAsyncInvokes.go",
         "api_op_StartAsyncInvoke.go",

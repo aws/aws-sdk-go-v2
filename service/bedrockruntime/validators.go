@@ -130,6 +130,26 @@ func (m *validateOpInvokeModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeModelWithBidirectionalStream struct {
+}
+
+func (*validateOpInvokeModelWithBidirectionalStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeModelWithBidirectionalStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeModelWithBidirectionalStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeModelWithBidirectionalStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeModelWithResponseStream struct {
 }
 
@@ -192,6 +212,10 @@ func addOpGetAsyncInvokeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpInvokeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeModel{}, middleware.After)
+}
+
+func addOpInvokeModelWithBidirectionalStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeModelWithBidirectionalStream{}, middleware.After)
 }
 
 func addOpInvokeModelWithResponseStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -1279,6 +1303,21 @@ func validateOpInvokeModelInput(v *InvokeModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeModelWithBidirectionalStreamInput(v *InvokeModelWithBidirectionalStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelWithBidirectionalStreamInput"}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
