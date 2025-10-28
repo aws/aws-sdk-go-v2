@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// List existing ephemerides.
+// List your existing ephemerides.
 func (c *Client) ListEphemerides(ctx context.Context, params *ListEphemeridesInput, optFns ...func(*Options)) (*ListEphemeridesOutput, error) {
 	if params == nil {
 		params = &ListEphemeridesInput{}
@@ -30,28 +30,30 @@ func (c *Client) ListEphemerides(ctx context.Context, params *ListEphemeridesInp
 
 type ListEphemeridesInput struct {
 
-	// The end time to list in UTC. The operation will return an ephemeris if its
-	// expiration time is within the time range defined by the startTime and endTime .
+	// The end time for the list operation in UTC. Returns ephemerides with expiration
+	// times within your specified time range.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The AWS Ground Station satellite ID to list ephemeris for.
-	//
-	// This member is required.
-	SatelliteId *string
-
-	// The start time to list in UTC. The operation will return an ephemeris if its
-	// expiration time is within the time range defined by the startTime and endTime .
+	// The start time for the list operation in UTC. Returns ephemerides with
+	// expiration times within your specified time range.
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	// Filter ephemerides by type. If not specified, all ephemeris types will be
+	// returned.
+	EphemerisType types.EphemerisType
 
 	// Maximum number of ephemerides to return.
 	MaxResults *int32
 
 	// Pagination token.
 	NextToken *string
+
+	// The AWS Ground Station satellite ID to list ephemeris for.
+	SatelliteId *string
 
 	// The list of ephemeris status to return.
 	StatusList []types.EphemerisStatus

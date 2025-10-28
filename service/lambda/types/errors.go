@@ -918,6 +918,39 @@ func (e *ResourceNotReadyException) ErrorCode() string {
 }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The processed request payload exceeded the Invoke request body size limit for
+// asynchronous invocations. While the event payload may be under 1 MB, the size
+// after internal serialization exceeds the maximum allowed size for asynchronous
+// invocations.
+type SerializedRequestEntityTooLargeException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SerializedRequestEntityTooLargeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SerializedRequestEntityTooLargeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SerializedRequestEntityTooLargeException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SerializedRequestEntityTooLargeException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SerializedRequestEntityTooLargeException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The Lambda service encountered an internal error.
 type ServiceException struct {
 	Message *string

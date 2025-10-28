@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing ephemeris
+// Update an existing ephemeris.
 func (c *Client) UpdateEphemeris(ctx context.Context, params *UpdateEphemerisInput, optFns ...func(*Options)) (*UpdateEphemerisOutput, error) {
 	if params == nil {
 		params = &UpdateEphemerisInput{}
@@ -28,8 +28,8 @@ func (c *Client) UpdateEphemeris(ctx context.Context, params *UpdateEphemerisInp
 
 type UpdateEphemerisInput struct {
 
-	// Whether the ephemeris is enabled or not. Changing this value will not require
-	// the ephemeris to be re-validated.
+	// Enable or disable the ephemeris. Changing this value doesn't require
+	// re-validation.
 	//
 	// This member is required.
 	Enabled *bool
@@ -39,17 +39,13 @@ type UpdateEphemerisInput struct {
 	// This member is required.
 	EphemerisId *string
 
-	// A name string associated with the ephemeris. Used as a human-readable
-	// identifier for the ephemeris.
+	// A name that you can use to identify the ephemeris.
 	Name *string
 
-	// Customer-provided priority score to establish the order in which overlapping
-	// ephemerides should be used.
+	// A priority score that determines which ephemeris to use when multiple
+	// ephemerides overlap.
 	//
-	// The default for customer-provided ephemeris priority is 1, and higher numbers
-	// take precedence.
-	//
-	// Priority must be 1 or greater
+	// Higher numbers take precedence. The default is 1. Must be 1 or greater.
 	Priority *int32
 
 	noSmithyDocumentSerde

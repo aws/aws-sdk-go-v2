@@ -1,0 +1,8 @@
+{
+    "id": "c60afb9c-4440-4d30-a52c-86f8ba72ce9c",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/elastictranscoder"
+    ]
+}

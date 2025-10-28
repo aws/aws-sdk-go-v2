@@ -1,0 +1,8 @@
+{
+    "id": "194841a7-fe98-493c-abc7-3e1ee83c3dd6",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/servicecatalogappregistry"
+    ]
+}

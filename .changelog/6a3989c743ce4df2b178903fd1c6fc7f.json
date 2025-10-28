@@ -1,0 +1,8 @@
+{
+    "id": "6a3989c7-43ce-4df2-b178-903fd1c6fc7f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/ram"
+    ]
+}

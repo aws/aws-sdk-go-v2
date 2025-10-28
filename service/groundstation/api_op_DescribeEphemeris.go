@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes an existing ephemeris.
+// Retrieve information about an existing ephemeris.
 func (c *Client) DescribeEphemeris(ctx context.Context, params *DescribeEphemerisInput, optFns ...func(*Options)) (*DescribeEphemerisOutput, error) {
 	if params == nil {
 		params = &DescribeEphemerisInput{}
@@ -49,21 +49,22 @@ type DescribeEphemerisOutput struct {
 	// The AWS Ground Station ephemeris ID.
 	EphemerisId *string
 
-	// Reason that an ephemeris failed validation. Only provided for ephemerides with
-	// INVALID status.
+	// Detailed error information for ephemerides with INVALID status.
+	//
+	// Provides specific error codes and messages to help diagnose validation failures.
+	ErrorReasons []types.EphemerisErrorReason
+
+	// Reason that an ephemeris failed validation. Appears only when the status is
+	// INVALID .
 	InvalidReason types.EphemerisInvalidReason
 
-	// A name string associated with the ephemeris. Used as a human-readable
-	// identifier for the ephemeris.
+	// A name that you can use to identify the ephemeris.
 	Name *string
 
-	// Customer-provided priority score to establish the order in which overlapping
-	// ephemerides should be used.
+	// A priority score that determines which ephemeris to use when multiple
+	// ephemerides overlap.
 	//
-	// The default for customer-provided ephemeris priority is 1, and higher numbers
-	// take precedence.
-	//
-	// Priority must be 1 or greater
+	// Higher numbers take precedence. The default is 1. Must be 1 or greater.
 	Priority *int32
 
 	// The AWS Ground Station satellite ID associated with ephemeris.

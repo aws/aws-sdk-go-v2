@@ -265,6 +265,97 @@ func (EndpointStatus) Values() []EndpointStatus {
 	}
 }
 
+type EphemerisErrorCode string
+
+// Enum values for EphemerisErrorCode
+const (
+	EphemerisErrorCodeInternalError                     EphemerisErrorCode = "INTERNAL_ERROR"
+	EphemerisErrorCodeMismatchedSatcatId                EphemerisErrorCode = "MISMATCHED_SATCAT_ID"
+	EphemerisErrorCodeOemVersionUnsupported             EphemerisErrorCode = "OEM_VERSION_UNSUPPORTED"
+	EphemerisErrorCodeOriginatorMissing                 EphemerisErrorCode = "ORIGINATOR_MISSING"
+	EphemerisErrorCodeCreationDateMissing               EphemerisErrorCode = "CREATION_DATE_MISSING"
+	EphemerisErrorCodeObjectNameMissing                 EphemerisErrorCode = "OBJECT_NAME_MISSING"
+	EphemerisErrorCodeObjectIdMissing                   EphemerisErrorCode = "OBJECT_ID_MISSING"
+	EphemerisErrorCodeRefFrameUnsupported               EphemerisErrorCode = "REF_FRAME_UNSUPPORTED"
+	EphemerisErrorCodeRefFrameEpochUnsupported          EphemerisErrorCode = "REF_FRAME_EPOCH_UNSUPPORTED"
+	EphemerisErrorCodeTimeSystemUnsupported             EphemerisErrorCode = "TIME_SYSTEM_UNSUPPORTED"
+	EphemerisErrorCodeCenterBodyUnsupported             EphemerisErrorCode = "CENTER_BODY_UNSUPPORTED"
+	EphemerisErrorCodeInterpolationMissing              EphemerisErrorCode = "INTERPOLATION_MISSING"
+	EphemerisErrorCodeInterpolationDegreeInvalid        EphemerisErrorCode = "INTERPOLATION_DEGREE_INVALID"
+	EphemerisErrorCodeAzElSegmentListMissing            EphemerisErrorCode = "AZ_EL_SEGMENT_LIST_MISSING"
+	EphemerisErrorCodeInsufficientTimeAzEl              EphemerisErrorCode = "INSUFFICIENT_TIME_AZ_EL"
+	EphemerisErrorCodeStartTimeInFuture                 EphemerisErrorCode = "START_TIME_IN_FUTURE"
+	EphemerisErrorCodeEndTimeInPast                     EphemerisErrorCode = "END_TIME_IN_PAST"
+	EphemerisErrorCodeExpirationTimeTooEarly            EphemerisErrorCode = "EXPIRATION_TIME_TOO_EARLY"
+	EphemerisErrorCodeStartTimeMetadataTooEarly         EphemerisErrorCode = "START_TIME_METADATA_TOO_EARLY"
+	EphemerisErrorCodeStopTimeMetadataTooLate           EphemerisErrorCode = "STOP_TIME_METADATA_TOO_LATE"
+	EphemerisErrorCodeAzElSegmentEndTimeBeforeStartTime EphemerisErrorCode = "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME"
+	EphemerisErrorCodeAzElSegmentTimesOverlap           EphemerisErrorCode = "AZ_EL_SEGMENT_TIMES_OVERLAP"
+	EphemerisErrorCodeAzElSegmentsOutOfOrder            EphemerisErrorCode = "AZ_EL_SEGMENTS_OUT_OF_ORDER"
+	EphemerisErrorCodeTimeAzElItemsOutOfOrder           EphemerisErrorCode = "TIME_AZ_EL_ITEMS_OUT_OF_ORDER"
+	EphemerisErrorCodeMeanMotionInvalid                 EphemerisErrorCode = "MEAN_MOTION_INVALID"
+	EphemerisErrorCodeTimeAzElAzRadianRangeInvalid      EphemerisErrorCode = "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID"
+	EphemerisErrorCodeTimeAzElElRadianRangeInvalid      EphemerisErrorCode = "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID"
+	EphemerisErrorCodeTimeAzElAzDegreeRangeInvalid      EphemerisErrorCode = "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID"
+	EphemerisErrorCodeTimeAzElElDegreeRangeInvalid      EphemerisErrorCode = "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID"
+	EphemerisErrorCodeTimeAzElAngleUnitsInvalid         EphemerisErrorCode = "TIME_AZ_EL_ANGLE_UNITS_INVALID"
+	EphemerisErrorCodeInsufficientKmsPermissions        EphemerisErrorCode = "INSUFFICIENT_KMS_PERMISSIONS"
+	EphemerisErrorCodeFileFormatInvalid                 EphemerisErrorCode = "FILE_FORMAT_INVALID"
+	EphemerisErrorCodeAzElSegmentReferenceEpochInvalid  EphemerisErrorCode = "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID"
+	EphemerisErrorCodeAzElSegmentStartTimeInvalid       EphemerisErrorCode = "AZ_EL_SEGMENT_START_TIME_INVALID"
+	EphemerisErrorCodeAzElSegmentEndTimeInvalid         EphemerisErrorCode = "AZ_EL_SEGMENT_END_TIME_INVALID"
+	EphemerisErrorCodeAzElSegmentValidTimeRangeInvalid  EphemerisErrorCode = "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID"
+	EphemerisErrorCodeAzElSegmentEndTimeTooLate         EphemerisErrorCode = "AZ_EL_SEGMENT_END_TIME_TOO_LATE"
+	EphemerisErrorCodeAzElTotalDurationExceeded         EphemerisErrorCode = "AZ_EL_TOTAL_DURATION_EXCEEDED"
+)
+
+// Values returns all known values for EphemerisErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EphemerisErrorCode) Values() []EphemerisErrorCode {
+	return []EphemerisErrorCode{
+		"INTERNAL_ERROR",
+		"MISMATCHED_SATCAT_ID",
+		"OEM_VERSION_UNSUPPORTED",
+		"ORIGINATOR_MISSING",
+		"CREATION_DATE_MISSING",
+		"OBJECT_NAME_MISSING",
+		"OBJECT_ID_MISSING",
+		"REF_FRAME_UNSUPPORTED",
+		"REF_FRAME_EPOCH_UNSUPPORTED",
+		"TIME_SYSTEM_UNSUPPORTED",
+		"CENTER_BODY_UNSUPPORTED",
+		"INTERPOLATION_MISSING",
+		"INTERPOLATION_DEGREE_INVALID",
+		"AZ_EL_SEGMENT_LIST_MISSING",
+		"INSUFFICIENT_TIME_AZ_EL",
+		"START_TIME_IN_FUTURE",
+		"END_TIME_IN_PAST",
+		"EXPIRATION_TIME_TOO_EARLY",
+		"START_TIME_METADATA_TOO_EARLY",
+		"STOP_TIME_METADATA_TOO_LATE",
+		"AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME",
+		"AZ_EL_SEGMENT_TIMES_OVERLAP",
+		"AZ_EL_SEGMENTS_OUT_OF_ORDER",
+		"TIME_AZ_EL_ITEMS_OUT_OF_ORDER",
+		"MEAN_MOTION_INVALID",
+		"TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID",
+		"TIME_AZ_EL_EL_RADIAN_RANGE_INVALID",
+		"TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID",
+		"TIME_AZ_EL_EL_DEGREE_RANGE_INVALID",
+		"TIME_AZ_EL_ANGLE_UNITS_INVALID",
+		"INSUFFICIENT_KMS_PERMISSIONS",
+		"FILE_FORMAT_INVALID",
+		"AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID",
+		"AZ_EL_SEGMENT_START_TIME_INVALID",
+		"AZ_EL_SEGMENT_END_TIME_INVALID",
+		"AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID",
+		"AZ_EL_SEGMENT_END_TIME_TOO_LATE",
+		"AZ_EL_TOTAL_DURATION_EXCEEDED",
+	}
+}
+
 type EphemerisInvalidReason string
 
 // Enum values for EphemerisInvalidReason
@@ -338,6 +429,29 @@ func (EphemerisStatus) Values() []EphemerisStatus {
 		"ENABLED",
 		"DISABLED",
 		"EXPIRED",
+	}
+}
+
+type EphemerisType string
+
+// Enum values for EphemerisType
+const (
+	EphemerisTypeTle            EphemerisType = "TLE"
+	EphemerisTypeOem            EphemerisType = "OEM"
+	EphemerisTypeAzEl           EphemerisType = "AZ_EL"
+	EphemerisTypeServiceManaged EphemerisType = "SERVICE_MANAGED"
+)
+
+// Values returns all known values for EphemerisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EphemerisType) Values() []EphemerisType {
+	return []EphemerisType{
+		"TLE",
+		"OEM",
+		"AZ_EL",
+		"SERVICE_MANAGED",
 	}
 }
 

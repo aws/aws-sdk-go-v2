@@ -1,0 +1,8 @@
+{
+    "id": "6ffa966b-36e3-494b-ac8a-af4f39a49a68",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/cloudsearchdomain"
+    ]
+}

@@ -229,7 +229,8 @@ type RegisterTaskDefinitionInput struct {
 	// If task is specified, all containers within the specified task share the same
 	// process namespace.
 	//
-	// If no value is specified, the default is a private namespace for each container.
+	// If no value is specified, the The default is a private namespace for each
+	// container.
 	//
 	// If the host PID mode is used, there's a heightened risk of undesired process
 	// namespace exposure.

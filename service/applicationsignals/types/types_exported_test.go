@@ -11,6 +11,9 @@ func ExampleAuditTargetEntity_outputUsage() {
 	var union types.AuditTargetEntity
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AuditTargetEntityMemberCanary:
+		_ = v.Value // Value is types.CanaryEntity
+
 	case *types.AuditTargetEntityMemberService:
 		_ = v.Value // Value is types.ServiceEntity
 
@@ -32,6 +35,7 @@ func ExampleAuditTargetEntity_outputUsage() {
 var _ *types.ServiceEntity
 var _ *types.ServiceOperationEntity
 var _ *types.ServiceLevelObjectiveEntity
+var _ *types.CanaryEntity
 
 func ExampleInterval_outputUsage() {
 	var union types.Interval

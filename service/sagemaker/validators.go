@@ -2390,6 +2390,26 @@ func (m *validateOpDeletePipeline) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteProcessingJob struct {
+}
+
+func (*validateOpDeleteProcessingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProcessingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProcessingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProcessingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteProject struct {
 }
 
@@ -2465,6 +2485,26 @@ func (m *validateOpDeleteTags) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrainingJob struct {
+}
+
+func (*validateOpDeleteTrainingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrainingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrainingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrainingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6526,6 +6566,10 @@ func addOpDeletePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePipeline{}, middleware.After)
 }
 
+func addOpDeleteProcessingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProcessingJob{}, middleware.After)
+}
+
 func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProject{}, middleware.After)
 }
@@ -6540,6 +6584,10 @@ func addOpDeleteStudioLifecycleConfigValidationMiddleware(stack *middleware.Stac
 
 func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTags{}, middleware.After)
+}
+
+func addOpDeleteTrainingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrainingJob{}, middleware.After)
 }
 
 func addOpDeleteTrialComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -17677,6 +17725,21 @@ func validateOpDeletePipelineInput(v *DeletePipelineInput) error {
 	}
 }
 
+func validateOpDeleteProcessingJobInput(v *DeleteProcessingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProcessingJobInput"}
+	if v.ProcessingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProcessingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteProjectInput(v *DeleteProjectInput) error {
 	if v == nil {
 		return nil
@@ -17735,6 +17798,21 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTrainingJobInput(v *DeleteTrainingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrainingJobInput"}
+	if v.TrainingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

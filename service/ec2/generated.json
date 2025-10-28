@@ -274,6 +274,7 @@
         "api_op_DescribeCapacityManagerDataExports.go",
         "api_op_DescribeCapacityReservationBillingRequests.go",
         "api_op_DescribeCapacityReservationFleets.go",
+        "api_op_DescribeCapacityReservationTopology.go",
         "api_op_DescribeCapacityReservations.go",
         "api_op_DescribeCarrierGateways.go",
         "api_op_DescribeClassicLinkInstances.go",

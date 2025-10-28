@@ -12,9 +12,8 @@
 //
 // # Support and feedback for Organizations
 //
-// We welcome your feedback. Send your comments to feedback-awsorganizations@amazon.com or post your feedback and
-// questions in the [Organizations support forum]. For more information about the Amazon Web Services support
-// forums, see [Forums Help].
+// We welcome your feedback. You can post your feedback and questions in the [Organizations support forum]. For
+// more information about the Amazon Web Services Support forums, see [Forums Help].
 //
 // # Endpoint to call When using the CLI or the Amazon Web Services SDK
 //
@@ -70,8 +69,8 @@
 // CloudTrail, see [Logging Organizations API calls with CloudTrail]in the Organizations User Guide. To learn more about
 // CloudTrail, including how to turn it on and find your log files, see the [CloudTrail User Guide].
 //
-// [Forums Help]: http://forums.aws.amazon.com/help.jspa
-// [Organizations support forum]: http://forums.aws.amazon.com/forum.jspa?forumID=219
+// [Forums Help]: https://forums.aws.amazon.com/help.jspa
+// [Organizations support forum]: https://forums.aws.amazon.com/forum.jspa?forumID=219
 // [CloudTrail User Guide]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html
 // [Organizations User Guide]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
 // [Logging Organizations API calls with CloudTrail]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_incident-response.html#orgs_cloudtrail-integration

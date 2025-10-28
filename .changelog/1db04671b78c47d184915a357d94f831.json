@@ -1,0 +1,8 @@
+{
+    "id": "1db04671-b78c-47d1-8491-5a357d94f831",
+    "type": "feature",
+    "description": "Added SerializedRequestEntityTooLargeException to Lambda Invoke API",
+    "modules": [
+        "service/lambda"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "50d35cc8-fe6d-4da8-b771-b9fd4f70eba3",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/supportapp"
+    ]
+}

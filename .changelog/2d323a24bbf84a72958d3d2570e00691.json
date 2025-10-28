@@ -1,0 +1,8 @@
+{
+    "id": "2d323a24-bbf8-4a72-958d-3d2570e00691",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/xray"
+    ]
+}

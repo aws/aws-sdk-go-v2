@@ -14,9 +14,10 @@ import (
 
 //	Updates the configuration settings for an Amazon GameLift Streams stream group
 //
-// resource. You can change the description, the set of locations, and the
-// requested capacity of a stream group per location. If you want to change the
-// stream class, create a new stream group.
+// resource. To update a stream group, it must be in ACTIVE status. You can change
+// the description, the set of locations, and the requested capacity of a stream
+// group per location. If you want to change the stream class, create a new stream
+// group.
 //
 // Stream capacity represents the number of concurrent streams that can be active
 // at a time. You set stream capacity per location, per stream group. There are two
@@ -39,7 +40,8 @@ import (
 //
 // To update a stream group, specify the stream group's Amazon Resource Name (ARN)
 // and provide the new values. If the request is successful, Amazon GameLift
-// Streams returns the complete updated metadata for the stream group.
+// Streams returns the complete updated metadata for the stream group. Expired
+// stream groups cannot be updated.
 func (c *Client) UpdateStreamGroup(ctx context.Context, params *UpdateStreamGroupInput, optFns ...func(*Options)) (*UpdateStreamGroupOutput, error) {
 	if params == nil {
 		params = &UpdateStreamGroupInput{}
@@ -127,6 +129,12 @@ type UpdateStreamGroupOutput struct {
 	// A descriptive label for the stream group.
 	Description *string
 
+	// The time at which this stream group expires. Timestamps are expressed using in
+	// ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC). After this time, you
+	// will no longer be able to update this stream group or use it to start stream
+	// sessions. Only Get and Delete operations will work on an expired stream group.
+	ExpiresAt *time.Time
+
 	// A unique ID value that is assigned to the resource when it's created. Format
 	// example: sg-1AB2C3De4 .
 	Id *string
@@ -165,12 +173,16 @@ type UpdateStreamGroupOutput struct {
 	//   error state. Verify the details of individual locations and remove any locations
 	//   which are in error.
 	//
+	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
+	//   group.
+	//
 	//   - ERROR : An error occurred when the stream group deployed. See StatusReason
 	//   (returned by CreateStreamGroup , GetStreamGroup , and UpdateStreamGroup ) for
 	//   more information.
 	//
-	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
-	//   group.
+	//   - EXPIRED : The stream group is expired and can no longer host streams. This
+	//   typically occurs when a stream group is 365 days old, as indicated by the value
+	//   of ExpiresAt . Create a new stream group to resume streaming capabilities.
 	//
 	//   - UPDATING_LOCATIONS : One or more locations in the stream group are in the
 	//   process of updating (either activating or deleting).

@@ -1,0 +1,8 @@
+{
+    "id": "fbfba89e-7c8b-4208-a352-17bd1645ee44",
+    "type": "feature",
+    "description": "Added support for CloudWatch Synthetics Canary resources in ListAuditFindings API. This enhancement allows customers to retrieve audit findings specifically for CloudWatch Synthetics canaries and enables service-canary correlation analysis.",
+    "modules": [
+        "service/applicationsignals"
+    ]
+}

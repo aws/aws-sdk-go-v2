@@ -8823,6 +8823,7 @@ const (
 	TrainingJobStatusFailed     TrainingJobStatus = "Failed"
 	TrainingJobStatusStopping   TrainingJobStatus = "Stopping"
 	TrainingJobStatusStopped    TrainingJobStatus = "Stopped"
+	TrainingJobStatusDeleting   TrainingJobStatus = "Deleting"
 )
 
 // Values returns all known values for TrainingJobStatus. Note that this can be
@@ -8836,6 +8837,7 @@ func (TrainingJobStatus) Values() []TrainingJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+		"Deleting",
 	}
 }
 

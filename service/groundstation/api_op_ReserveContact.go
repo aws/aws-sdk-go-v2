@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,18 +45,19 @@ type ReserveContactInput struct {
 	// This member is required.
 	MissionProfileArn *string
 
-	// ARN of a satellite
-	//
-	// This member is required.
-	SatelliteArn *string
-
 	// Start time of a contact in UTC.
 	//
 	// This member is required.
 	StartTime *time.Time
 
+	// ARN of a satellite
+	SatelliteArn *string
+
 	// Tags assigned to a contact.
 	Tags map[string]string
+
+	// Tracking configuration overrides for the contact.
+	TrackingOverrides *types.TrackingOverrides
 
 	noSmithyDocumentSerde
 }

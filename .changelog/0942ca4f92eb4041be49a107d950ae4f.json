@@ -1,0 +1,8 @@
+{
+    "id": "0942ca4f-92eb-4041-be49-a107d950ae4f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sqs"
+    ]
+}

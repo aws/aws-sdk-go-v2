@@ -1,0 +1,8 @@
+{
+    "id": "50ec3f1e-7c87-43de-8b40-098cdd0a1d4a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/apigatewayv2"
+    ]
+}

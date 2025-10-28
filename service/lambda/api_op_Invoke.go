@@ -17,6 +17,9 @@ import (
 // function asynchronously, set InvocationType to Event . Lambda passes the
 // ClientContext object to your function for synchronous invocations only.
 //
+// For synchronous invocations, the maximum payload size is 6 MB. For asynchronous
+// invocations, the maximum payload size is 1 MB.
+//
 // For [synchronous invocation], details about the function response, including errors, are included in
 // the response body and headers. For either invocation type, you can find more
 // information in the [execution log]and [trace].
@@ -114,7 +117,9 @@ type InvokeInput struct {
 	// synchronously invoked functions only.
 	LogType types.LogType
 
-	// The JSON that you want to provide to your Lambda function as input.
+	// The JSON that you want to provide to your Lambda function as input. The maximum
+	// payload size is 6 MB for synchronous invocations and 1 MB for asynchronous
+	// invocations.
 	//
 	// You can enter the JSON directly. For example, --payload '{ "key": "value" }' .
 	// You can also specify a file path. For example, --payload file://payload.json .

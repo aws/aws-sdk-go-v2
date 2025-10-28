@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates an Ephemeris with the specified EphemerisData .
+// Create an ephemeris with your specified EphemerisData.
 func (c *Client) CreateEphemeris(ctx context.Context, params *CreateEphemerisInput, optFns ...func(*Options)) (*CreateEphemerisOutput, error) {
 	if params == nil {
 		params = &CreateEphemerisInput{}
@@ -30,21 +30,13 @@ func (c *Client) CreateEphemeris(ctx context.Context, params *CreateEphemerisInp
 
 type CreateEphemerisInput struct {
 
-	// A name string associated with the ephemeris. Used as a human-readable
-	// identifier for the ephemeris.
+	// A name that you can use to identify the ephemeris.
 	//
 	// This member is required.
 	Name *string
 
-	// AWS Ground Station satellite ID for this ephemeris.
-	//
-	// This member is required.
-	SatelliteId *string
-
-	// Whether to set the ephemeris status to ENABLED after validation.
-	//
-	// Setting this to false will set the ephemeris status to DISABLED after
-	// validation.
+	// Set to true to enable the ephemeris after validation. Set to false to keep it
+	// disabled.
 	Enabled *bool
 
 	// Ephemeris data.
@@ -54,17 +46,18 @@ type CreateEphemerisInput struct {
 	// EXPIRED .
 	ExpirationTime *time.Time
 
-	// The ARN of a KMS key used to encrypt the ephemeris in Ground Station.
+	// The ARN of the KMS key to use for encrypting the ephemeris.
 	KmsKeyArn *string
 
-	// Customer-provided priority score to establish the order in which overlapping
-	// ephemerides should be used.
+	// A priority score that determines which ephemeris to use when multiple
+	// ephemerides overlap.
 	//
-	// The default for customer-provided ephemeris priority is 1, and higher numbers
-	// take precedence.
-	//
-	// Priority must be 1 or greater
+	// Higher numbers take precedence. The default is 1. Must be 1 or greater.
 	Priority *int32
+
+	// The satellite ID that associates this ephemeris with a satellite in AWS Ground
+	// Station.
+	SatelliteId *string
 
 	// Tags assigned to an ephemeris.
 	Tags map[string]string

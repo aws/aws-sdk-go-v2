@@ -1325,6 +1325,9 @@ type Workspace struct {
 	// The IP address of the WorkSpace.
 	IpAddress *string
 
+	// The IPv6 address of the WorkSpace.
+	Ipv6Address *string
+
 	// The modification states of the WorkSpace.
 	ModificationStates []ModificationState
 
@@ -1629,6 +1632,9 @@ type WorkspaceDirectory struct {
 	// The IP addresses of the DNS servers for the directory.
 	DnsIpAddresses []string
 
+	// The IPv6 addresses of the DNS servers for the directory.
+	DnsIpv6Addresses []string
+
 	// Endpoint encryption mode that allows you to configure the specified directory
 	// between Standard TLS and FIPS 140-2 validated mode.
 	EndpointEncryptionMode EndpointEncryptionMode
@@ -1842,6 +1848,9 @@ type WorkspaceRequest struct {
 	//
 	// This member is required.
 	UserName *string
+
+	// The IPv6 address for the WorkSpace.
+	Ipv6Address *string
 
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool

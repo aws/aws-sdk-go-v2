@@ -184,6 +184,7 @@ const (
 	StreamGroupStatusActiveWithErrors  StreamGroupStatus = "ACTIVE_WITH_ERRORS"
 	StreamGroupStatusError             StreamGroupStatus = "ERROR"
 	StreamGroupStatusDeleting          StreamGroupStatus = "DELETING"
+	StreamGroupStatusExpired           StreamGroupStatus = "EXPIRED"
 )
 
 // Values returns all known values for StreamGroupStatus. Note that this can be
@@ -198,6 +199,7 @@ func (StreamGroupStatus) Values() []StreamGroupStatus {
 		"ACTIVE_WITH_ERRORS",
 		"ERROR",
 		"DELETING",
+		"EXPIRED",
 	}
 }
 

@@ -67,7 +67,7 @@ type ListContainerInstancesInput struct {
 
 	// Filters the container instances by status. For example, if you specify the
 	// DRAINING status, the results include only container instances that have been set
-	// to DRAINING using [UpdateContainerInstancesState]. If you don't specify this parameter, the default is to
+	// to DRAINING using [UpdateContainerInstancesState]. If you don't specify this parameter, the The default is to
 	// include container instances set to all states other than INACTIVE .
 	//
 	// [UpdateContainerInstancesState]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html

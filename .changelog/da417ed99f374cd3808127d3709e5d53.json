@@ -1,0 +1,8 @@
+{
+    "id": "da417ed9-9f37-4cd3-8081-27d3709e5d53",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

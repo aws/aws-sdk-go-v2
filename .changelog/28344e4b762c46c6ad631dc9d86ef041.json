@@ -1,0 +1,8 @@
+{
+    "id": "28344e4b-762c-46c6-ad63-1dc9d86ef041",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sagemakerfeaturestoreruntime"
+    ]
+}

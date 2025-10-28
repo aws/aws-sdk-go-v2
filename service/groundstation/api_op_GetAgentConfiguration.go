@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	For use by AWS Ground Station Agent and shouldn't be called directly.
+// For use by AWS Ground Station Agent and shouldn't be called directly.
 //
 // Gets the latest configuration information for a registered agent.
 func (c *Client) GetAgentConfiguration(ctx context.Context, params *GetAgentConfigurationInput, optFns ...func(*Options)) (*GetAgentConfigurationOutput, error) {

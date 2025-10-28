@@ -12,15 +12,14 @@ import (
 	"time"
 )
 
-//	Manage how Amazon GameLift Streams streams your applications by using a stream
+//	Stream groups manage how Amazon GameLift Streams allocates resources and
 //
-// group. A stream group is a collection of resources that Amazon GameLift Streams
-// uses to stream your application to end-users. When you create a stream group,
-// you specify an application to stream by default and the type of hardware to use,
-// such as the graphical processing unit (GPU). You can also link additional
-// applications, which allows you to stream those applications using this stream
-// group. Depending on your expected users, you also scale the number of concurrent
-// streams you want to support at one time, and in what locations.
+// handles concurrent streams, allowing you to effectively manage capacity and
+// costs. Within a stream group, you specify an application to stream, streaming
+// locations and their capacity, and the stream class you want to use when
+// streaming applications to your end-users. A stream class defines the hardware
+// configuration of the compute resources that Amazon GameLift Streams will use
+// when streaming, such as the CPU, GPU, and memory.
 //
 // Stream capacity represents the number of concurrent streams that can be active
 // at a time. You set stream capacity per location, per stream group. There are two
@@ -43,11 +42,18 @@ import (
 //
 // To adjust the capacity of any ACTIVE stream group, call [UpdateStreamGroup].
 //
-// If the request is successful, Amazon GameLift Streams begins creating the
-// stream group. Amazon GameLift Streams assigns a unique ID to the stream group
-// resource and sets the status to ACTIVATING . When the stream group reaches
-// ACTIVE status, you can start stream sessions by using [StartStreamSession]. To check the stream
-// group's status, call [GetStreamGroup].
+// If the CreateStreamGroup request is successful, Amazon GameLift Streams assigns
+// a unique ID to the stream group resource and sets the status to ACTIVATING . It
+// can take a few minutes for Amazon GameLift Streams to finish creating the stream
+// group while it searches for unallocated compute resources and provisions them.
+// When complete, the stream group status will be ACTIVE and you can start stream
+// sessions by using [StartStreamSession]. To check the stream group's status, call [GetStreamGroup].
+//
+// Stream groups should be recreated every 3-4 weeks to pick up important service
+// updates and fixes. Stream groups that are older than 180 days can no longer be
+// updated with new application associations. Stream groups expire when they are
+// 365 days old, at which point they can no longer stream sessions. The exact
+// expiration date is indicated by the date value in the ExpiresAt field.
 //
 // [GetStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
 // [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
@@ -227,6 +233,12 @@ type CreateStreamGroupOutput struct {
 	// A descriptive label for the stream group.
 	Description *string
 
+	// The time at which this stream group expires. Timestamps are expressed using in
+	// ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC). After this time, you
+	// will no longer be able to update this stream group or use it to start stream
+	// sessions. Only Get and Delete operations will work on an expired stream group.
+	ExpiresAt *time.Time
+
 	// A unique ID value that is assigned to the resource when it's created. Format
 	// example: sg-1AB2C3De4 .
 	Id *string
@@ -265,12 +277,16 @@ type CreateStreamGroupOutput struct {
 	//   error state. Verify the details of individual locations and remove any locations
 	//   which are in error.
 	//
+	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
+	//   group.
+	//
 	//   - ERROR : An error occurred when the stream group deployed. See StatusReason
 	//   (returned by CreateStreamGroup , GetStreamGroup , and UpdateStreamGroup ) for
 	//   more information.
 	//
-	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
-	//   group.
+	//   - EXPIRED : The stream group is expired and can no longer host streams. This
+	//   typically occurs when a stream group is 365 days old, as indicated by the value
+	//   of ExpiresAt . Create a new stream group to resume streaming capabilities.
 	//
 	//   - UPDATING_LOCATIONS : One or more locations in the stream group are in the
 	//   process of updating (either activating or deleting).

@@ -1,0 +1,8 @@
+{
+    "id": "bb706957-0e58-4279-a2aa-418d7d358b73",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/securityir"
+    ]
+}

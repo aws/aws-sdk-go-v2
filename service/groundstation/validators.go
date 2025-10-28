@@ -832,6 +832,145 @@ func validateAwsGroundStationAgentEndpoint(v *types.AwsGroundStationAgentEndpoin
 	}
 }
 
+func validateAzElEphemeris(v *types.AzElEphemeris) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElEphemeris"}
+	if v.GroundStation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroundStation"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	} else if v.Data != nil {
+		if err := validateAzElSegmentsData(v.Data); err != nil {
+			invalidParams.AddNested("Data", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzElEphemerisFilter(v *types.AzElEphemerisFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElEphemerisFilter"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzElProgramTrackSettings(v *types.AzElProgramTrackSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElProgramTrackSettings"}
+	if v.EphemerisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EphemerisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzElSegment(v *types.AzElSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElSegment"}
+	if v.ReferenceEpoch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferenceEpoch"))
+	}
+	if v.ValidTimeRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValidTimeRange"))
+	} else if v.ValidTimeRange != nil {
+		if err := validateISO8601TimeRange(v.ValidTimeRange); err != nil {
+			invalidParams.AddNested("ValidTimeRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AzElList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AzElList"))
+	} else if v.AzElList != nil {
+		if err := validateTimeAzElList(v.AzElList); err != nil {
+			invalidParams.AddNested("AzElList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzElSegmentList(v []types.AzElSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElSegmentList"}
+	for i := range v {
+		if err := validateAzElSegment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzElSegments(v *types.AzElSegments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElSegments"}
+	if len(v.AngleUnit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AngleUnit"))
+	}
+	if v.AzElSegmentList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AzElSegmentList"))
+	} else if v.AzElSegmentList != nil {
+		if err := validateAzElSegmentList(v.AzElSegmentList); err != nil {
+			invalidParams.AddNested("AzElSegmentList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzElSegmentsData(v types.AzElSegmentsData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzElSegmentsData"}
+	switch uv := v.(type) {
+	case *types.AzElSegmentsDataMemberAzElData:
+		if err := validateAzElSegments(&uv.Value); err != nil {
+			invalidParams.AddNested("[azElData]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComponentStatusData(v *types.ComponentStatusData) error {
 	if v == nil {
 		return nil
@@ -1127,9 +1266,33 @@ func validateEphemerisData(v types.EphemerisData) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EphemerisData"}
 	switch uv := v.(type) {
+	case *types.EphemerisDataMemberAzEl:
+		if err := validateAzElEphemeris(&uv.Value); err != nil {
+			invalidParams.AddNested("[azEl]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.EphemerisDataMemberTle:
 		if err := validateTLEEphemeris(&uv.Value); err != nil {
 			invalidParams.AddNested("[tle]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEphemerisFilter(v types.EphemerisFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EphemerisFilter"}
+	switch uv := v.(type) {
+	case *types.EphemerisFilterMemberAzEl:
+		if err := validateAzElEphemerisFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[azEl]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1186,6 +1349,43 @@ func validateIntegerRange(v *types.IntegerRange) error {
 	}
 	if v.Maximum == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Maximum"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateISO8601TimeRange(v *types.ISO8601TimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ISO8601TimeRange"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProgramTrackSettings(v types.ProgramTrackSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProgramTrackSettings"}
+	switch uv := v.(type) {
+	case *types.ProgramTrackSettingsMemberAzEl:
+		if err := validateAzElProgramTrackSettings(&uv.Value); err != nil {
+			invalidParams.AddNested("[azEl]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1318,6 +1518,44 @@ func validateSpectrumConfig(v *types.SpectrumConfig) error {
 	}
 }
 
+func validateTimeAzEl(v *types.TimeAzEl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeAzEl"}
+	if v.Dt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dt"))
+	}
+	if v.Az == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Az"))
+	}
+	if v.El == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("El"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeAzElList(v []types.TimeAzEl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeAzElList"}
+	for i := range v {
+		if err := validateTimeAzEl(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimeRange(v *types.TimeRange) error {
 	if v == nil {
 		return nil
@@ -1402,6 +1640,25 @@ func validateTrackingConfig(v *types.TrackingConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TrackingConfig"}
 	if len(v.Autotrack) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Autotrack"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrackingOverrides(v *types.TrackingOverrides) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrackingOverrides"}
+	if v.ProgramTrackSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramTrackSettings"))
+	} else if v.ProgramTrackSettings != nil {
+		if err := validateProgramTrackSettings(v.ProgramTrackSettings); err != nil {
+			invalidParams.AddNested("ProgramTrackSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1508,9 +1765,6 @@ func validateOpCreateEphemerisInput(v *CreateEphemerisInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEphemerisInput"}
-	if v.SatelliteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SatelliteId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -1753,6 +2007,11 @@ func validateOpListContactsInput(v *ListContactsInput) error {
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
+	if v.Ephemeris != nil {
+		if err := validateEphemerisFilter(v.Ephemeris); err != nil {
+			invalidParams.AddNested("Ephemeris", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1765,9 +2024,6 @@ func validateOpListEphemeridesInput(v *ListEphemeridesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListEphemeridesInput"}
-	if v.SatelliteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SatelliteId"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
@@ -1830,9 +2086,6 @@ func validateOpReserveContactInput(v *ReserveContactInput) error {
 	if v.MissionProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MissionProfileArn"))
 	}
-	if v.SatelliteArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SatelliteArn"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
@@ -1841,6 +2094,11 @@ func validateOpReserveContactInput(v *ReserveContactInput) error {
 	}
 	if v.GroundStation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroundStation"))
+	}
+	if v.TrackingOverrides != nil {
+		if err := validateTrackingOverrides(v.TrackingOverrides); err != nil {
+			invalidParams.AddNested("TrackingOverrides", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

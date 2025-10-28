@@ -1,0 +1,8 @@
+{
+    "id": "d343c5e4-5464-4069-a1c0-7c2517307e07",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/bcmpricingcalculator"
+    ]
+}

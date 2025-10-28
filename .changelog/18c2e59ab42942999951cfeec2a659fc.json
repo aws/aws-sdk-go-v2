@@ -1,0 +1,8 @@
+{
+    "id": "18c2e59a-b429-4299-9951-cfeec2a659fc",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/codeconnections"
+    ]
+}

@@ -9251,6 +9251,84 @@ func awsAwsjson11_deserializeDocumentBlockedException(v **types.BlockedException
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCanaryConfiguration(v **types.CanaryConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CanaryConfiguration
+	if *v == nil {
+		sv = &types.CanaryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "canaryBakeTimeInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CanaryBakeTimeInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "canaryPercent":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CanaryPercent = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.CanaryPercent = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCapacityProvider(v **types.CapacityProvider, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11771,6 +11849,11 @@ func awsAwsjson11_deserializeDocumentDeploymentConfiguration(v **types.Deploymen
 				sv.BakeTimeInMinutes = ptr.Int32(int32(i64))
 			}
 
+		case "canaryConfiguration":
+			if err := awsAwsjson11_deserializeDocumentCanaryConfiguration(&sv.CanaryConfiguration, value); err != nil {
+				return err
+			}
+
 		case "deploymentCircuitBreaker":
 			if err := awsAwsjson11_deserializeDocumentDeploymentCircuitBreaker(&sv.DeploymentCircuitBreaker, value); err != nil {
 				return err
@@ -11778,6 +11861,11 @@ func awsAwsjson11_deserializeDocumentDeploymentConfiguration(v **types.Deploymen
 
 		case "lifecycleHooks":
 			if err := awsAwsjson11_deserializeDocumentDeploymentLifecycleHookList(&sv.LifecycleHooks, value); err != nil {
+				return err
+			}
+
+		case "linearConfiguration":
+			if err := awsAwsjson11_deserializeDocumentLinearConfiguration(&sv.LinearConfiguration, value); err != nil {
 				return err
 			}
 
@@ -14138,6 +14226,84 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLinearConfiguration(v **types.LinearConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LinearConfiguration
+	if *v == nil {
+		sv = &types.LinearConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "stepBakeTimeInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StepBakeTimeInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "stepPercent":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StepPercent = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.StepPercent = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -19170,6 +19336,40 @@ func awsAwsjson11_deserializeDocumentServiceRevisionSummary(v **types.ServiceRev
 				sv.PendingTaskCount = int32(i64)
 			}
 
+		case "requestedProductionTrafficWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequestedProductionTrafficWeight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.RequestedProductionTrafficWeight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "requestedTaskCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19181,6 +19381,40 @@ func awsAwsjson11_deserializeDocumentServiceRevisionSummary(v **types.ServiceRev
 					return err
 				}
 				sv.RequestedTaskCount = int32(i64)
+			}
+
+		case "requestedTestTrafficWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequestedTestTrafficWeight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.RequestedTestTrafficWeight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "runningTaskCount":

@@ -3230,6 +3230,18 @@ func TestCheckSnapshot_DescribeCapacityReservations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCapacityReservationTopology(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationTopology(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationTopology")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCarrierGateways(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCarrierGateways(context.Background(), nil, func(o *Options) {
@@ -11670,6 +11682,18 @@ func TestUpdateSnapshot_DescribeCapacityReservations(t *testing.T) {
 	_, err := svc.DescribeCapacityReservations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityReservations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityReservationTopology(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationTopology(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationTopology")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

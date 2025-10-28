@@ -3950,6 +3950,36 @@ func awsAwsjson11_serializeDocumentBaselineEbsBandwidthMbpsRequest(v *types.Base
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCanaryConfiguration(v *types.CanaryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CanaryBakeTimeInMinutes != nil {
+		ok := object.Key("canaryBakeTimeInMinutes")
+		ok.Integer(*v.CanaryBakeTimeInMinutes)
+	}
+
+	if v.CanaryPercent != nil {
+		ok := object.Key("canaryPercent")
+		switch {
+		case math.IsNaN(*v.CanaryPercent):
+			ok.String("NaN")
+
+		case math.IsInf(*v.CanaryPercent, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.CanaryPercent, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.CanaryPercent)
+
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCapacityProviderFieldList(v []types.CapacityProviderField, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4660,6 +4690,13 @@ func awsAwsjson11_serializeDocumentDeploymentConfiguration(v *types.DeploymentCo
 		ok.Integer(*v.BakeTimeInMinutes)
 	}
 
+	if v.CanaryConfiguration != nil {
+		ok := object.Key("canaryConfiguration")
+		if err := awsAwsjson11_serializeDocumentCanaryConfiguration(v.CanaryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeploymentCircuitBreaker != nil {
 		ok := object.Key("deploymentCircuitBreaker")
 		if err := awsAwsjson11_serializeDocumentDeploymentCircuitBreaker(v.DeploymentCircuitBreaker, ok); err != nil {
@@ -4670,6 +4707,13 @@ func awsAwsjson11_serializeDocumentDeploymentConfiguration(v *types.DeploymentCo
 	if v.LifecycleHooks != nil {
 		ok := object.Key("lifecycleHooks")
 		if err := awsAwsjson11_serializeDocumentDeploymentLifecycleHookList(v.LifecycleHooks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LinearConfiguration != nil {
+		ok := object.Key("linearConfiguration")
+		if err := awsAwsjson11_serializeDocumentLinearConfiguration(v.LinearConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -5578,6 +5622,36 @@ func awsAwsjson11_serializeDocumentKeyValuePair(v *types.KeyValuePair, value smi
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLinearConfiguration(v *types.LinearConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StepBakeTimeInMinutes != nil {
+		ok := object.Key("stepBakeTimeInMinutes")
+		ok.Integer(*v.StepBakeTimeInMinutes)
+	}
+
+	if v.StepPercent != nil {
+		ok := object.Key("stepPercent")
+		switch {
+		case math.IsNaN(*v.StepPercent):
+			ok.String("NaN")
+
+		case math.IsInf(*v.StepPercent, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.StepPercent, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.StepPercent)
+
+		}
 	}
 
 	return nil

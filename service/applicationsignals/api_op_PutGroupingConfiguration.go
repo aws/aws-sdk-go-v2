@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates the grouping configuration for this account. This operation
-// allows you to define custom grouping attributes that determine how services are
-// logically grouped based on telemetry attributes, Amazon Web Services tags, or
-// predefined mappings. These grouping attributes can then be used to organize and
-// filter services in the Application Signals console and APIs.
+// Creates or updates a grouping configuration that defines how services are
+// organized and grouped in Application Signals dashboards and service maps.
+//
+// Grouping configurations allow you to logically organize services based on
+// attributes such as environment, team ownership, or business function, making it
+// easier to monitor and manage related services together.
 func (c *Client) PutGroupingConfiguration(ctx context.Context, params *PutGroupingConfigurationInput, optFns ...func(*Options)) (*PutGroupingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutGroupingConfigurationInput{}
@@ -34,8 +35,8 @@ func (c *Client) PutGroupingConfiguration(ctx context.Context, params *PutGroupi
 type PutGroupingConfigurationInput struct {
 
 	// An array of grouping attribute definitions that specify how services should be
-	// grouped. Each definition includes a friendly name, source keys to derive the
-	// grouping value from, and an optional default value.
+	// grouped. Each definition includes the grouping name, source keys, and default
+	// values.
 	//
 	// This member is required.
 	GroupingAttributeDefinitions []types.GroupingAttributeDefinition
@@ -45,8 +46,8 @@ type PutGroupingConfigurationInput struct {
 
 type PutGroupingConfigurationOutput struct {
 
-	// A structure containing the updated grouping configuration, including all
-	// grouping attribute definitions and the timestamp when it was last updated.
+	// The created or updated grouping configuration, including all attribute
+	// definitions and metadata such as the update timestamp.
 	//
 	// This member is required.
 	GroupingConfiguration *types.GroupingConfiguration

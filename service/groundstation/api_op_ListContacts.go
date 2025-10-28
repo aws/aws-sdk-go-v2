@@ -48,6 +48,9 @@ type ListContactsInput struct {
 	// This member is required.
 	StatusList []types.ContactStatus
 
+	// Filter for selecting contacts that use a specific ephemeris".
+	Ephemeris types.EphemerisFilter
+
 	// Name of a ground station.
 	GroundStation *string
 

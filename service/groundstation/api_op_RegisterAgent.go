@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	For use by AWS Ground Station Agent and shouldn't be called directly.
+// For use by AWS Ground Station Agent and shouldn't be called directly.
 //
 // Registers a new agent with AWS Ground Station.
 func (c *Client) RegisterAgent(ctx context.Context, params *RegisterAgentInput, optFns ...func(*Options)) (*RegisterAgentOutput, error) {

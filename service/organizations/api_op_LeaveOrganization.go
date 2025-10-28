@@ -51,7 +51,7 @@ import (
 //	outside of an organization do not support tags.
 //
 //	- A newly created account has a waiting period before it can be removed from
-//	its organization. You must wait until at least seven days after the account was
+//	its organization. You must wait until at least four days after the account was
 //	created. Invited accounts aren't subject to this waiting period.
 //
 //	- If you are using an organization principal to call LeaveOrganization across

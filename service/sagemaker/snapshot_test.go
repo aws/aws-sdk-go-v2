@@ -1490,6 +1490,18 @@ func TestCheckSnapshot_DeletePipeline(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteProcessingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProcessingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProcessingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteProject(context.Background(), nil, func(o *Options) {
@@ -1531,6 +1543,18 @@ func TestCheckSnapshot_DeleteTags(t *testing.T) {
 	_, err := svc.DeleteTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTrainingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrainingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTrainingJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5917,6 +5941,18 @@ func TestUpdateSnapshot_DeletePipeline(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteProcessingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProcessingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProcessingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteProject(context.Background(), nil, func(o *Options) {
@@ -5958,6 +5994,18 @@ func TestUpdateSnapshot_DeleteTags(t *testing.T) {
 	_, err := svc.DeleteTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTrainingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrainingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTrainingJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

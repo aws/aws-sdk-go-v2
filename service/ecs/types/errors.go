@@ -64,9 +64,9 @@ func (e *AttributeLimitExceededException) ErrorCode() string {
 }
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your Amazon Web Services account was blocked. For more information, contact [Amazon Web Services Support].
+// Your Amazon Web Services account was blocked. For more information, contact [Amazon Web ServicesSupport].
 //
-// [Amazon Web Services Support]: http://aws.amazon.com/contact-us/
+// [Amazon Web ServicesSupport]: http://aws.amazon.com/contact-us/
 type BlockedException struct {
 	Message *string
 

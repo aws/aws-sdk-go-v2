@@ -173,6 +173,9 @@ type UpdateServiceInput struct {
 	// The details of a capacity provider strategy. You can set a capacity provider
 	// when you create a cluster, run a task, or update a service.
 	//
+	// If you want to use Amazon ECS Managed Instances, you must use the
+	// capacityProviderStrategy request parameter.
+	//
 	// When you use Fargate, the capacity providers are FARGATE or FARGATE_SPOT .
 	//
 	// When you use Amazon EC2, the capacity providers are Auto Scaling groups.

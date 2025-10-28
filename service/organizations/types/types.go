@@ -212,6 +212,16 @@ type DelegatedAdministrator struct {
 	// The friendly name of the delegated administrator's account.
 	Name *string
 
+	// Each state represents a specific phase in the account lifecycle. Use this
+	// information to manage account access, automate workflows, or trigger actions
+	// based on account state changes.
+	//
+	// For more information about account states and their implications, see [Monitor the state of your Amazon Web Services accounts] in the
+	// Organizations User Guide.
+	//
+	// [Monitor the state of your Amazon Web Services accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_account_state.html
+	State AccountState
+
 	// The status of the delegated administrator's account in the organization.
 	Status AccountStatus
 

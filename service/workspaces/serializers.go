@@ -6847,6 +6847,11 @@ func awsAwsjson11_serializeDocumentWorkspaceRequest(v *types.WorkspaceRequest, v
 		ok.String(*v.DirectoryId)
 	}
 
+	if v.Ipv6Address != nil {
+		ok := object.Key("Ipv6Address")
+		ok.String(*v.Ipv6Address)
+	}
+
 	if v.RootVolumeEncryptionEnabled != nil {
 		ok := object.Key("RootVolumeEncryptionEnabled")
 		ok.Boolean(*v.RootVolumeEncryptionEnabled)

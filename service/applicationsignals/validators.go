@@ -511,6 +511,29 @@ func validateAuditTarget(v *types.AuditTarget) error {
 	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	} else if v.Data != nil {
+		if err := validateAuditTargetEntity(v.Data); err != nil {
+			invalidParams.AddNested("Data", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuditTargetEntity(v types.AuditTargetEntity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuditTargetEntity"}
+	switch uv := v.(type) {
+	case *types.AuditTargetEntityMemberCanary:
+		if err := validateCanaryEntity(&uv.Value); err != nil {
+			invalidParams.AddNested("[Canary]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -581,6 +604,21 @@ func validateCalendarInterval(v *types.CalendarInterval) error {
 	}
 	if v.Duration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Duration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCanaryEntity(v *types.CanaryEntity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CanaryEntity"}
+	if v.CanaryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CanaryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

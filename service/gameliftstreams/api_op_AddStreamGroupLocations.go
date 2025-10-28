@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Add locations that can host stream sessions. You configure locations and their
+//	Add locations that can host stream sessions. To add a location, the stream
 //
-// corresponding capacity for each stream group. Creating a stream group in a
-// location that's nearest to your end users can help minimize latency and improve
-// quality.
+// group must be in ACTIVE status. You configure locations and their corresponding
+// capacity for each stream group. Creating a stream group in a location that's
+// nearest to your end users can help minimize latency and improve quality.
 //
 // This operation provisions stream capacity at the specified locations. By
 // default, all locations have 1 or 2 capacity, depending on the stream class

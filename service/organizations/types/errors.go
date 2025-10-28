@@ -512,7 +512,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //	tags that are not compliant with the tag policy requirements for this account.
 //
 //	- WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you
-//	must wait until at least seven days after the account was created. Invited
+//	must wait until at least four days after the account was created. Invited
 //	accounts aren't subject to this waiting period.
 //
 // [Amazon Web Services Support]: https://console.aws.amazon.com/support/home#/

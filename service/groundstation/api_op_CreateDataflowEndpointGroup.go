@@ -36,12 +36,10 @@ func (c *Client) CreateDataflowEndpointGroup(ctx context.Context, params *Create
 
 type CreateDataflowEndpointGroupInput struct {
 
-	// Endpoint details of each endpoint in the dataflow endpoint group.
-	//
-	// All dataflow endpoints within a single dataflow endpoint group must be of the
-	// same type. You cannot mix [AWS Ground Station Agent endpoints]with [Dataflow endpoints] in the same group. If your use case requires
-	// both types of endpoints, you must create separate dataflow endpoint groups for
-	// each type.
+	// Endpoint details of each endpoint in the dataflow endpoint group. All dataflow
+	// endpoints within a single dataflow endpoint group must be of the same type. You
+	// cannot mix [AWS Ground Station Agent endpoints]with [Dataflow endpoints] in the same group. If your use case requires both types of
+	// endpoints, you must create separate dataflow endpoint groups for each type.
 	//
 	// [Dataflow endpoints]: https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html
 	// [AWS Ground Station Agent endpoints]: https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html

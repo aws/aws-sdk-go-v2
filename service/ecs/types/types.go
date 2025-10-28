@@ -237,7 +237,8 @@ type AwsVpcConfiguration struct {
 	//
 	// Consider the following when you set this value:
 	//
-	//   - When you use create-service or update-service , the default is DISABLED .
+	//   - When you use create-service or update-service , the The default is DISABLED
+	//   .
 	//
 	//   - When the service deploymentController is ECS , the value must be DISABLED .
 	AssignPublicIp AssignPublicIp
@@ -268,6 +269,28 @@ type BaselineEbsBandwidthMbpsRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for canary deployment strategy that shifts a fixed percentage of
+// traffic to the new service revision, waits for a specified bake time, then
+// shifts the remaining traffic.
+//
+// This is only valid when you run CreateService or UpdateService with
+// deploymentController set to ECS and a deploymentConfiguration with a strategy
+// set to CANARY .
+type CanaryConfiguration struct {
+
+	// The amount of time in minutes to wait during the canary phase before shifting
+	// the remaining production traffic to the new service revision. Valid values are 0
+	// to 1440 minutes (24 hours). The default value is 10.
+	CanaryBakeTimeInMinutes *int32
+
+	// The percentage of production traffic to shift to the new service revision
+	// during the canary phase. Valid values are 0.1 to 100.0. The default value is
+	// 5.0.
+	CanaryPercent *float64
+
+	noSmithyDocumentSerde
+}
+
 // The details for a capacity provider.
 type CapacityProvider struct {
 
@@ -280,6 +303,8 @@ type CapacityProvider struct {
 	// The cluster that this capacity provider is associated with. Managed instances
 	// capacity providers are cluster-scoped, meaning they can only be used within
 	// their associated cluster.
+	//
+	// This is required for Managed instances.
 	Cluster *string
 
 	// The configuration for the Amazon ECS Managed Instances provider. This includes
@@ -393,9 +418,9 @@ type CapacityProviderStrategyItem struct {
 	//
 	//   - Only one capacity provider in a strategy can have a base defined
 	//
-	//   - Default value is 0 if not specified
+	//   - The default value is 0 if not specified
 	//
-	//   - Valid range: 0 to 100,000
+	//   - The valid range is 0 to 100,000
 	//
 	//   - Base requirements are satisfied first before weight distribution
 	Base int32
@@ -417,9 +442,9 @@ type CapacityProviderStrategyItem struct {
 	//
 	//   - Weight is considered after the base value is satisfied
 	//
-	//   - Default value is 0 if not specified
+	//   - The default value is 0 if not specified
 	//
-	//   - Valid range: 0 to 1,000
+	//   - The valid range is 0 to 1,000
 	//
 	//   - At least one capacity provider must have a weight greater than zero
 	//
@@ -2019,6 +2044,12 @@ type DeploymentConfiguration struct {
 	// You must provide this parameter when you use the BLUE_GREEN deployment strategy.
 	BakeTimeInMinutes *int32
 
+	// Configuration for canary deployment strategy. Only valid when the deployment
+	// strategy is CANARY . This configuration enables shifting a fixed percentage of
+	// traffic for testing, followed by shifting the remaining traffic after a bake
+	// period.
+	CanaryConfiguration *CanaryConfiguration
+
 	// The deployment circuit breaker can only be used for services using the rolling
 	// update ( ECS ) deployment type.
 	//
@@ -2036,6 +2067,11 @@ type DeploymentConfiguration struct {
 	// An array of deployment lifecycle hook objects to run custom logic at specific
 	// stages of the deployment lifecycle.
 	LifecycleHooks []DeploymentLifecycleHook
+
+	// Configuration for linear deployment strategy. Only valid when the deployment
+	// strategy is LINEAR . This configuration enables progressive traffic shifting in
+	// equal percentage increments with configurable bake times between each step.
+	LinearConfiguration *LinearConfiguration
 
 	// If a service is using the rolling update ( ECS ) deployment type, the
 	// maximumPercent parameter represents an upper limit on the number of your
@@ -3315,6 +3351,25 @@ type KeyValuePair struct {
 	// The value of the key-value pair. For environment variables, this is the value
 	// of the environment variable.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for linear deployment strategy that shifts production traffic in
+// equal percentage increments with configurable wait times between each step until
+// 100% of traffic is shifted to the new service revision. This is only valid when
+// you run CreateService or UpdateService with deploymentController set to ECS and
+// a deploymentConfiguration with a strategy set to LINEAR .
+type LinearConfiguration struct {
+
+	// The amount of time in minutes to wait between each traffic shifting step during
+	// a linear deployment. Valid values are 0 to 1440 minutes (24 hours). The default
+	// value is 6. This bake time is not applied after reaching 100% traffic.
+	StepBakeTimeInMinutes *int32
+
+	// The percentage of production traffic to shift in each step during a linear
+	// deployment. Valid values are 3.0 to 100.0. The default value is 10.0.
+	StepPercent *float64
 
 	noSmithyDocumentSerde
 }
@@ -5648,8 +5703,18 @@ type ServiceRevisionSummary struct {
 	// The number of pending tasks for the service revision.
 	PendingTaskCount int32
 
+	// The percentage of production traffic that is directed to this service revision.
+	// This value represents a snapshot of the traffic distribution and may not reflect
+	// real-time changes during active deployments. Valid values are 0.0 to 100.0.
+	RequestedProductionTrafficWeight *float64
+
 	// The number of requested tasks for the service revision.
 	RequestedTaskCount int32
+
+	// The percentage of test traffic that is directed to this service revision. This
+	// value represents a snapshot of the traffic distribution and may not reflect
+	// real-time changes during active deployments. Valid values are 0.0 to 100.0.
+	RequestedTestTrafficWeight *float64
 
 	// The number of running tasks for the service revision.
 	RunningTaskCount int32
@@ -6225,7 +6290,8 @@ type TaskDefinition struct {
 	// If task is specified, all containers within the specified task share the same
 	// process namespace.
 	//
-	// If no value is specified, the default is a private namespace for each container.
+	// If no value is specified, the The default is a private namespace for each
+	// container.
 	//
 	// If the host PID mode is used, there's a heightened risk of undesired process
 	// namespace exposure.
@@ -6275,8 +6341,8 @@ type TaskDefinition struct {
 	RequiresAttributes []Attribute
 
 	// The task launch types the task definition was validated against. The valid
-	// values are EC2 , FARGATE , and EXTERNAL . For more information, see [Amazon ECS launch types] in the
-	// Amazon Elastic Container Service Developer Guide.
+	// values are MANAGED_INSTANCES , EC2 , FARGATE , and EXTERNAL . For more
+	// information, see [Amazon ECS launch types]in the Amazon Elastic Container Service Developer Guide.
 	//
 	// [Amazon ECS launch types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
 	RequiresCompatibilities []Compatibility

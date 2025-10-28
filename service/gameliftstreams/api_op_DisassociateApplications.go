@@ -17,6 +17,7 @@ import (
 // helps avoid interrupting an end-user's stream. Amazon GameLift Streams will not
 // initiate new streams in the stream group using the disassociated application.
 // The disassociate action does not affect the stream capacity of a stream group.
+// To disassociate an application, the stream group must be in ACTIVE status.
 //
 // If you disassociate the default application, Amazon GameLift Streams will
 // automatically choose a new default application from the remaining associated

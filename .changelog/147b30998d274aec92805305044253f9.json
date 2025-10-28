@@ -1,0 +1,8 @@
+{
+    "id": "147b3099-8d27-4aec-9280-5305044253f9",
+    "type": "feature",
+    "description": "Amazon Simple Storage Service / Features: Add conditional writes in CopyObject on destination key to prevent unintended object modifications.",
+    "modules": [
+        "service/s3"
+    ]
+}

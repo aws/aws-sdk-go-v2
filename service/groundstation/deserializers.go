@@ -1303,6 +1303,9 @@ func awsRestjson1_deserializeOpErrorDeleteEphemeris(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsRestjson1_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1701,6 +1704,11 @@ func awsRestjson1_deserializeOpDocumentDescribeContactOutput(v **DescribeContact
 				}
 			}
 
+		case "ephemeris":
+			if err := awsRestjson1_deserializeDocumentEphemerisResponseData(&sv.Ephemeris, value); err != nil {
+				return err
+			}
+
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1801,6 +1809,11 @@ func awsRestjson1_deserializeOpDocumentDescribeContactOutput(v **DescribeContact
 
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "trackingOverrides":
+			if err := awsRestjson1_deserializeDocumentTrackingOverrides(&sv.TrackingOverrides, value); err != nil {
 				return err
 			}
 
@@ -2021,6 +2034,11 @@ func awsRestjson1_deserializeOpDocumentDescribeEphemerisOutput(v **DescribeEphem
 					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
 				}
 				sv.EphemerisId = ptr.String(jtv)
+			}
+
+		case "errorReasons":
+			if err := awsRestjson1_deserializeDocumentEphemerisErrorReasonList(&sv.ErrorReasons, value); err != nil {
+				return err
 			}
 
 		case "invalidReason":
@@ -4935,6 +4953,9 @@ func awsRestjson1_deserializeOpErrorReserveContact(response *smithyhttp.Response
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("ResourceLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -5914,6 +5935,42 @@ func awsRestjson1_deserializeErrorInvalidParameterException(response *smithyhttp
 	return output
 }
 
+func awsRestjson1_deserializeErrorResourceInUseException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ResourceInUseException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentResourceInUseException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorResourceLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ResourceLimitExceededException{}
 	var buff [1024]byte
@@ -6215,6 +6272,46 @@ func awsRestjson1_deserializeDocumentAwsGroundStationAgentEndpoint(v **types.Aws
 					return fmt.Errorf("expected SafeName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAzElProgramTrackSettings(v **types.AzElProgramTrackSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AzElProgramTrackSettings
+	if *v == nil {
+		sv = &types.AzElProgramTrackSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ephemerisId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
+				}
+				sv.EphemerisId = ptr.String(jtv)
 			}
 
 		default:
@@ -6626,6 +6723,11 @@ func awsRestjson1_deserializeDocumentContactData(v **types.ContactData, value in
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ephemeris":
+			if err := awsRestjson1_deserializeDocumentEphemerisResponseData(&sv.Ephemeris, value); err != nil {
+				return err
 			}
 
 		case "errorMessage":
@@ -7670,6 +7772,89 @@ func awsRestjson1_deserializeDocumentEphemerisDescription(v **types.EphemerisDes
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEphemerisErrorReason(v **types.EphemerisErrorReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EphemerisErrorReason
+	if *v == nil {
+		sv = &types.EphemerisErrorReason{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EphemerisErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.EphemerisErrorCode(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorString to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEphemerisErrorReasonList(v *[]types.EphemerisErrorReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EphemerisErrorReason
+	if *v == nil {
+		cv = []types.EphemerisErrorReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EphemerisErrorReason
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEphemerisErrorReason(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEphemerisItem(v **types.EphemerisItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7724,6 +7909,15 @@ func awsRestjson1_deserializeDocumentEphemerisItem(v **types.EphemerisItem, valu
 					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
 				}
 				sv.EphemerisId = ptr.String(jtv)
+			}
+
+		case "ephemerisType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EphemerisType to be of type string, got %T instead", value)
+				}
+				sv.EphemerisType = types.EphemerisType(jtv)
 			}
 
 		case "name":
@@ -7845,6 +8039,55 @@ func awsRestjson1_deserializeDocumentEphemerisMetaData(v **types.EphemerisMetaDa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEphemerisResponseData(v **types.EphemerisResponseData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EphemerisResponseData
+	if *v == nil {
+		sv = &types.EphemerisResponseData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ephemerisId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
+				}
+				sv.EphemerisId = ptr.String(jtv)
+			}
+
+		case "ephemerisType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EphemerisType to be of type string, got %T instead", value)
+				}
+				sv.EphemerisType = types.EphemerisType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEphemerisTypeDescription(v *types.EphemerisTypeDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7865,6 +8108,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "azEl":
+			var mv types.EphemerisDescription
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEphemerisDescription(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EphemerisTypeDescriptionMemberAzEl{Value: mv}
+			break loop
+
 		case "oem":
 			var mv types.EphemerisDescription
 			destAddr := &mv
@@ -8444,6 +8697,46 @@ func awsRestjson1_deserializeDocumentMissionProfileListItem(v **types.MissionPro
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProgramTrackSettings(v *types.ProgramTrackSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ProgramTrackSettings
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "azEl":
+			var mv types.AzElProgramTrackSettings
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAzElProgramTrackSettings(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProgramTrackSettingsMemberAzEl{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRangedConnectionDetails(v **types.RangedConnectionDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8527,6 +8820,46 @@ func awsRestjson1_deserializeDocumentRangedSocketAddress(v **types.RangedSocketA
 		case "portRange":
 			if err := awsRestjson1_deserializeDocumentIntegerRange(&sv.PortRange, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceInUseException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceInUseException
+	if *v == nil {
+		sv = &types.ResourceInUseException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -9251,6 +9584,42 @@ func awsRestjson1_deserializeDocumentTrackingConfig(v **types.TrackingConfig, va
 					return fmt.Errorf("expected Criticality to be of type string, got %T instead", value)
 				}
 				sv.Autotrack = types.Criticality(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTrackingOverrides(v **types.TrackingOverrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrackingOverrides
+	if *v == nil {
+		sv = &types.TrackingOverrides{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "programTrackSettings":
+			if err := awsRestjson1_deserializeDocumentProgramTrackSettings(&sv.ProgramTrackSettings, value); err != nil {
+				return err
 			}
 
 		default:

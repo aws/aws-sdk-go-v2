@@ -140,29 +140,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-west-2",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-cn",

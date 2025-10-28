@@ -2098,6 +2098,12 @@ func awsRestjson1_serializeDocumentAuditTargetEntity(v types.AuditTargetEntity, 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.AuditTargetEntityMemberCanary:
+		av := object.Key("Canary")
+		if err := awsRestjson1_serializeDocumentCanaryEntity(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AuditTargetEntityMemberService:
 		av := object.Key("Service")
 		if err := awsRestjson1_serializeDocumentServiceEntity(&uv.Value, av); err != nil {
@@ -2178,6 +2184,18 @@ func awsRestjson1_serializeDocumentCalendarInterval(v *types.CalendarInterval, v
 	if v.StartTime != nil {
 		ok := object.Key("StartTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCanaryEntity(v *types.CanaryEntity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CanaryName != nil {
+		ok := object.Key("CanaryName")
+		ok.String(*v.CanaryName)
 	}
 
 	return nil

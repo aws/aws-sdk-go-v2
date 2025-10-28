@@ -146,6 +146,164 @@ type AwsGroundStationAgentEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Azimuth elevation ephemeris data.
+//
+// Use this ephemeris type to provide pointing angles directly, rather than
+// satellite orbital elements. Use this when you need precise antenna pointing but
+// have imprecise or unknown satellite trajectory information.
+//
+// The azimuth elevation data specifies the antenna pointing direction at specific
+// times relative to a ground station location. AWS Ground Station uses 4th order
+// Lagrange interpolation to compute pointing angles between the provided data
+// points.
+//
+// AWS Ground Station automatically filters interpolated pointing angles,
+// including only those that are above the site mask elevation of the specified
+// ground station.
+//
+// For more detail about providing azimuth elevation ephemerides to AWS Ground
+// Station, see the [azimuth elevation ephemeris section]of the AWS Ground Station User Guide.
+//
+// [azimuth elevation ephemeris section]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-azimuth-elevation-ephemeris-data.html
+type AzElEphemeris struct {
+
+	// Azimuth elevation segment data.
+	//
+	// You can provide data inline in the request or through an Amazon S3 object
+	// reference.
+	//
+	// This member is required.
+	Data AzElSegmentsData
+
+	// The ground station name for which you're providing azimuth elevation data.
+	//
+	// This ephemeris is specific to this ground station and can't be used at other
+	// locations.
+	//
+	// This member is required.
+	GroundStation *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter for selecting contacts that use a specific AzElEphemeris.
+type AzElEphemerisFilter struct {
+
+	// Unique identifier of the azimuth elevation ephemeris.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Program track settings for AzElEphemeris.
+type AzElProgramTrackSettings struct {
+
+	// Unique identifier of the azimuth elevation ephemeris.
+	//
+	// This member is required.
+	EphemerisId *string
+
+	noSmithyDocumentSerde
+}
+
+// A time segment containing azimuth elevation pointing data.
+//
+// Each segment defines a continuous time period with pointing angle data points.
+// AWS Ground Station uses 4th order Lagrange interpolation between the provided
+// points, so each segment must contain at least five data points.
+type AzElSegment struct {
+
+	// List of time-tagged azimuth elevation data points.
+	//
+	// Must contain at least five points to support 4th order Lagrange interpolation.
+	// Points must be in chronological order with no duplicates.
+	//
+	// This member is required.
+	AzElList []TimeAzEl
+
+	// The reference time for this segment in ISO 8601 format in Coordinated Universal
+	// Time (UTC).
+	//
+	// All time values within the segment's AzElSegment$azElList are specified as offsets in atomic
+	// seconds from this reference epoch.
+	//
+	// Example: 2024-01-15T12:00:00.000Z
+	//
+	// This member is required.
+	ReferenceEpoch *time.Time
+
+	// The valid time range for this segment.
+	//
+	// Specifies the start and end timestamps in ISO 8601 format in Coordinated
+	// Universal Time (UTC). The segment's pointing data must cover this entire time
+	// range.
+	//
+	// This member is required.
+	ValidTimeRange *ISO8601TimeRange
+
+	noSmithyDocumentSerde
+}
+
+// Azimuth elevation segment collection.
+//
+// Contains five or more time-ordered segments that define antenna pointing angles
+// over the ephemeris validity period.
+type AzElSegments struct {
+
+	// The unit of measure for azimuth and elevation angles. All angles in all
+	// segments must use the same unit.
+	//
+	// This member is required.
+	AngleUnit AngleUnits
+
+	// List of azimuth elevation segments.
+	//
+	// Must contain between 1 and 100 segments. Segments must be in chronological
+	// order with no overlaps.
+	//
+	// This member is required.
+	AzElSegmentList []AzElSegment
+
+	noSmithyDocumentSerde
+}
+
+// Container for azimuth elevation segment data.
+//
+// Specify either AzElSegmentsData$s3Object to reference data in Amazon S3, or AzElSegmentsData$azElData to provide data inline.
+//
+// The following types satisfy this interface:
+//
+//	AzElSegmentsDataMemberAzElData
+//	AzElSegmentsDataMemberS3Object
+type AzElSegmentsData interface {
+	isAzElSegmentsData()
+}
+
+// Azimuth elevation segment data provided directly in the request.
+//
+// Use this option for smaller datasets or when Amazon S3 access is not available.
+type AzElSegmentsDataMemberAzElData struct {
+	Value AzElSegments
+
+	noSmithyDocumentSerde
+}
+
+func (*AzElSegmentsDataMemberAzElData) isAzElSegmentsData() {}
+
+// The Amazon S3 object containing azimuth elevation segment data.
+//
+// The Amazon S3 object must contain JSON-formatted azimuth elevation data
+// matching the AzElSegmentsstructure.
+type AzElSegmentsDataMemberS3Object struct {
+	Value S3Object
+
+	noSmithyDocumentSerde
+}
+
+func (*AzElSegmentsDataMemberS3Object) isAzElSegmentsData() {}
+
 // Data on the status of agent components.
 type ComponentStatusData struct {
 
@@ -366,6 +524,9 @@ type ContactData struct {
 
 	// End time of a contact in UTC.
 	EndTime *time.Time
+
+	// The ephemeris that determines antenna pointing for the contact.
+	Ephemeris *EphemerisResponseData
 
 	// Error message of a contact.
 	ErrorMessage *string
@@ -599,21 +760,49 @@ type EndpointDetails struct {
 //
 // The following types satisfy this interface:
 //
+//	EphemerisDataMemberAzEl
 //	EphemerisDataMemberOem
 //	EphemerisDataMemberTle
 type EphemerisData interface {
 	isEphemerisData()
 }
 
-//	Ephemeris data in Orbit Ephemeris Message (OEM) format.
+// Azimuth elevation ephemeris data.
 //
-// AWS Ground Station processes OEM Customer Provided Ephemerides according to the [CCSDS standard]
-// with some extra restrictions. OEM files should be in KVN format. For more detail
-// about the OEM format that AWS Ground Station supports, see [OEM ephemeris format]in the AWS Ground
-// Station user guide.
+// Use this ephemeris type to provide pointing angles directly, rather than
+// satellite orbital elements. Use this when you need precise antenna pointing but
+// have imprecise or unknown satellite trajectory information.
 //
-// [CCSDS standard]: https://public.ccsds.org/Pubs/502x0b3e1.pdf
-// [OEM ephemeris format]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-custom-ephemeris-data.html#oem-ephemeris-format
+// The azimuth elevation data specifies the antenna pointing direction at specific
+// times relative to a ground station location. AWS Ground Station uses 4th order
+// Lagrange interpolation to compute pointing angles between the provided data
+// points.
+//
+// AWS Ground Station automatically filters interpolated pointing angles,
+// including only those that are above the site mask elevation of the specified
+// ground station.
+//
+// For more detail about providing azimuth elevation ephemerides to AWS Ground
+// Station, see the [azimuth elevation ephemeris section]of the AWS Ground Station User Guide.
+//
+// [azimuth elevation ephemeris section]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-azimuth-elevation-ephemeris-data.html
+type EphemerisDataMemberAzEl struct {
+	Value AzElEphemeris
+
+	noSmithyDocumentSerde
+}
+
+func (*EphemerisDataMemberAzEl) isEphemerisData() {}
+
+// Ephemeris data in Orbit Ephemeris Message (OEM) format.
+//
+// AWS Ground Station processes OEM ephemerides according to the [CCSDS standard] with some extra
+// restrictions. OEM files should be in KVN format. For more detail about the OEM
+// format that AWS Ground Station supports, see [OEM ephemeris format]in the AWS Ground Station user
+// guide.
+//
+// [CCSDS standard]: https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf
+// [OEM ephemeris format]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format
 type EphemerisDataMemberOem struct {
 	Value OEMEphemeris
 
@@ -623,6 +812,11 @@ type EphemerisDataMemberOem struct {
 func (*EphemerisDataMemberOem) isEphemerisData() {}
 
 // Two-line element set (TLE) ephemeris.
+//
+// For more detail about providing Two-line element sets to AWS Ground Station,
+// see the [TLE section]of the AWS Ground Station user guide.
+//
+// [TLE section]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-tle-ephemeris-data.html
 type EphemerisDataMemberTle struct {
 	Value TLEEphemeris
 
@@ -637,11 +831,55 @@ type EphemerisDescription struct {
 	// Supplied ephemeris data.
 	EphemerisData *string
 
-	// Source S3 object used for the ephemeris.
+	// Source Amazon S3 object used for the ephemeris.
 	SourceS3Object *S3Object
 
 	noSmithyDocumentSerde
 }
+
+// Detailed error information for ephemeris validation failures.
+//
+// Provides an error code and descriptive message to help diagnose and resolve
+// validation issues.
+type EphemerisErrorReason struct {
+
+	// The error code identifying the type of validation failure.
+	//
+	// See the [Troubleshooting Invalid Ephemerides guide] for error code details.
+	//
+	// [Troubleshooting Invalid Ephemerides guide]: https://docs.aws.amazon.com/ground-station/latest/ug/troubleshooting-invalid-ephemerides.html
+	//
+	// This member is required.
+	ErrorCode EphemerisErrorCode
+
+	// A human-readable message describing the validation failure.
+	//
+	// Provides specific details about what failed and may include suggestions for
+	// remediation.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter for selecting contacts that use a specific ephemeris".
+//
+// The following types satisfy this interface:
+//
+//	EphemerisFilterMemberAzEl
+type EphemerisFilter interface {
+	isEphemerisFilter()
+}
+
+// Filter for AzElEphemeris.
+type EphemerisFilterMemberAzEl struct {
+	Value AzElEphemerisFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*EphemerisFilterMemberAzEl) isEphemerisFilter() {}
 
 // Ephemeris item.
 type EphemerisItem struct {
@@ -655,20 +893,19 @@ type EphemerisItem struct {
 	// The AWS Ground Station ephemeris ID.
 	EphemerisId *string
 
-	// A name string associated with the ephemeris. Used as a human-readable
-	// identifier for the ephemeris.
+	// The type of ephemeris.
+	EphemerisType EphemerisType
+
+	// A name that you can use to identify the ephemeris.
 	Name *string
 
-	// Customer-provided priority score to establish the order in which overlapping
-	// ephemerides should be used.
+	// A priority score that determines which ephemeris to use when multiple
+	// ephemerides overlap.
 	//
-	// The default for customer-provided ephemeris priority is 1, and higher numbers
-	// take precedence.
-	//
-	// Priority must be 1 or greater
+	// Higher numbers take precedence. The default is 1. Must be 1 or greater.
 	Priority *int32
 
-	// Source S3 object used for the ephemeris.
+	// Source Amazon S3 object used for the ephemeris.
 	SourceS3Object *S3Object
 
 	// The status of the ephemeris.
@@ -705,13 +942,37 @@ type EphemerisMetaData struct {
 	noSmithyDocumentSerde
 }
 
+// Ephemeris data for a contact.
+type EphemerisResponseData struct {
+
+	// Type of ephemeris.
+	//
+	// This member is required.
+	EphemerisType EphemerisType
+
+	// Unique identifier of the ephemeris. Appears only for custom ephemerides.
+	EphemerisId *string
+
+	noSmithyDocumentSerde
+}
+
 // The following types satisfy this interface:
 //
+//	EphemerisTypeDescriptionMemberAzEl
 //	EphemerisTypeDescriptionMemberOem
 //	EphemerisTypeDescriptionMemberTle
 type EphemerisTypeDescription interface {
 	isEphemerisTypeDescription()
 }
+
+// Description of ephemeris.
+type EphemerisTypeDescriptionMemberAzEl struct {
+	Value EphemerisDescription
+
+	noSmithyDocumentSerde
+}
+
+func (*EphemerisTypeDescriptionMemberAzEl) isEphemerisTypeDescription() {}
 
 // Description of ephemeris.
 type EphemerisTypeDescriptionMemberOem struct {
@@ -803,6 +1064,26 @@ type IntegerRange struct {
 	noSmithyDocumentSerde
 }
 
+// Time range specified using ISO 8601 format timestamps.
+type ISO8601TimeRange struct {
+
+	// End time in ISO 8601 format in Coordinated Universal Time (UTC).
+	//
+	// Example: 2024-01-15T12:00:00.000Z
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// Start time in ISO 8601 format in Coordinated Universal Time (UTC).
+	//
+	// Example: 2026-11-15T10:28:48.000Z
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // KMS key info.
 //
 // The following types satisfy this interface:
@@ -859,26 +1140,43 @@ type MissionProfileListItem struct {
 	noSmithyDocumentSerde
 }
 
-//	Ephemeris data in Orbit Ephemeris Message (OEM) format.
+// Ephemeris data in Orbit Ephemeris Message (OEM) format.
 //
-// AWS Ground Station processes OEM Customer Provided Ephemerides according to the [CCSDS standard]
-// with some extra restrictions. OEM files should be in KVN format. For more detail
-// about the OEM format that AWS Ground Station supports, see [OEM ephemeris format]in the AWS Ground
-// Station user guide.
+// AWS Ground Station processes OEM ephemerides according to the [CCSDS standard] with some extra
+// restrictions. OEM files should be in KVN format. For more detail about the OEM
+// format that AWS Ground Station supports, see [OEM ephemeris format]in the AWS Ground Station user
+// guide.
 //
-// [CCSDS standard]: https://public.ccsds.org/Pubs/502x0b3e1.pdf
-// [OEM ephemeris format]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-custom-ephemeris-data.html#oem-ephemeris-format
+// [CCSDS standard]: https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf
+// [OEM ephemeris format]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format
 type OEMEphemeris struct {
 
-	// The data for an OEM ephemeris, supplied directly in the request rather than
-	// through an S3 object.
+	// OEM data that you provide directly instead of using an Amazon S3 object.
 	OemData *string
 
-	// Identifies the S3 object to be used as the ephemeris.
+	// The Amazon S3 object that contains the ephemeris data.
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
 }
+
+// Program track settings for an antenna during a contact.
+//
+// The following types satisfy this interface:
+//
+//	ProgramTrackSettingsMemberAzEl
+type ProgramTrackSettings interface {
+	isProgramTrackSettings()
+}
+
+// Program track settings for AzElEphemeris.
+type ProgramTrackSettingsMemberAzEl struct {
+	Value AzElProgramTrackSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramTrackSettingsMemberAzEl) isProgramTrackSettings() {}
 
 // Ingress address of AgentEndpoint with a port range and an optional mtu.
 type RangedConnectionDetails struct {
@@ -910,7 +1208,7 @@ type RangedSocketAddress struct {
 	noSmithyDocumentSerde
 }
 
-// Object stored in S3 containing ephemeris data.
+// Object stored in Amazon S3 containing ephemeris data.
 type S3Object struct {
 
 	// An Amazon S3 Bucket name.
@@ -919,7 +1217,7 @@ type S3Object struct {
 	// An Amazon S3 key for the ephemeris.
 	Key *string
 
-	// For versioned S3 objects, the version to use for the ephemeris.
+	// For versioned Amazon S3 objects, the version to use for the ephemeris.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1063,15 +1361,63 @@ type SpectrumConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Time-tagged azimuth elevation pointing data.
+//
+// Specifies the antenna pointing direction at a specific time offset from the
+// segment's reference epoch.
+type TimeAzEl struct {
+
+	// Azimuth angle at the specified time.
+	//
+	// Valid ranges by unit:
+	//
+	//   - DEGREE_ANGLE : -180 to 360 degrees, measured clockwise from true north
+	//
+	//   - RADIAN : -π to 2π radians, measured clockwise from true north
+	//
+	// This member is required.
+	Az *float64
+
+	// Time offset in atomic seconds from the segment's reference epoch.
+	//
+	// All dt values within a segment must be in ascending order with no duplicates.
+	//
+	// dt values may be:
+	//
+	//   - negative
+	//
+	//   - expressed as fractions of a second
+	//
+	//   - expressed in scientific notation
+	//
+	// This member is required.
+	Dt *float64
+
+	// Elevation angle at the specified time.
+	//
+	// Valid ranges by unit:
+	//
+	//   - DEGREE_ANGLE : -90 to 90 degrees, where 0 is the horizon, 90 is zenith, and
+	//   negative values are below the horizon
+	//
+	//   - RADIAN : -π/2 to π/2 radians, where 0 is the horizon, π/2 is zenith, and
+	//   negative values are below the horizon
+	//
+	// This member is required.
+	El *float64
+
+	noSmithyDocumentSerde
+}
+
 // A time range with a start and end time.
 type TimeRange struct {
 
-	// Time in UTC at which the time range ends.
+	// Unix epoch timestamp in UTC at which the time range ends.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// Time in UTC at which the time range starts.
+	// Unix epoch timestamp in UTC at which the time range starts.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -1092,7 +1438,8 @@ type TLEData struct {
 	// This member is required.
 	TleLine2 *string
 
-	// The valid time range for the TLE. Gaps or overlap are not permitted.
+	// The valid time range for the TLE. Time ranges must be continuous without gaps
+	// or overlaps.
 	//
 	// This member is required.
 	ValidTimeRange *TimeRange
@@ -1101,13 +1448,17 @@ type TLEData struct {
 }
 
 // Two-line element set (TLE) ephemeris.
+//
+// For more detail about providing Two-line element sets to AWS Ground Station,
+// see the [TLE section]of the AWS Ground Station user guide.
+//
+// [TLE section]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-tle-ephemeris-data.html
 type TLEEphemeris struct {
 
-	// Identifies the S3 object to be used as the ephemeris.
+	// The Amazon S3 object that contains the ephemeris data.
 	S3Object *S3Object
 
-	// The data for a TLE ephemeris, supplied directly in the request rather than
-	// through an S3 object.
+	// TLE data that you provide directly instead of using an Amazon S3 object.
 	TleData []TLEData
 
 	noSmithyDocumentSerde
@@ -1121,6 +1472,17 @@ type TrackingConfig struct {
 	//
 	// This member is required.
 	Autotrack Criticality
+
+	noSmithyDocumentSerde
+}
+
+// Overrides the default tracking configuration on an antenna during a contact.
+type TrackingOverrides struct {
+
+	// Program track settings to override for antenna tracking during the contact.
+	//
+	// This member is required.
+	ProgramTrackSettings ProgramTrackSettings
 
 	noSmithyDocumentSerde
 }
@@ -1172,8 +1534,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAzElSegmentsData()         {}
 func (*UnknownUnionMember) isConfigDetails()            {}
 func (*UnknownUnionMember) isConfigTypeData()           {}
 func (*UnknownUnionMember) isEphemerisData()            {}
+func (*UnknownUnionMember) isEphemerisFilter()          {}
 func (*UnknownUnionMember) isEphemerisTypeDescription() {}
 func (*UnknownUnionMember) isKmsKey()                   {}
+func (*UnknownUnionMember) isProgramTrackSettings()     {}

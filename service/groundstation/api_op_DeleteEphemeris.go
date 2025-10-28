@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an ephemeris
+// Delete an ephemeris.
 func (c *Client) DeleteEphemeris(ctx context.Context, params *DeleteEphemerisInput, optFns ...func(*Options)) (*DeleteEphemerisOutput, error) {
 	if params == nil {
 		params = &DeleteEphemerisInput{}

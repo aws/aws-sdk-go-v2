@@ -1,0 +1,8 @@
+{
+    "id": "9cec11e1-77e9-4588-b061-4957624e4c04",
+    "type": "feature",
+    "description": "Added Account State field to the ListDelegatedAdministrators API response.",
+    "modules": [
+        "service/organizations"
+    ]
+}

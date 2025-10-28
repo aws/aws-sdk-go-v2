@@ -581,6 +581,8 @@ type DeploymentStrategy string
 const (
 	DeploymentStrategyRolling   DeploymentStrategy = "ROLLING"
 	DeploymentStrategyBlueGreen DeploymentStrategy = "BLUE_GREEN"
+	DeploymentStrategyLinear    DeploymentStrategy = "LINEAR"
+	DeploymentStrategyCanary    DeploymentStrategy = "CANARY"
 )
 
 // Values returns all known values for DeploymentStrategy. Note that this can be
@@ -591,6 +593,8 @@ func (DeploymentStrategy) Values() []DeploymentStrategy {
 	return []DeploymentStrategy{
 		"ROLLING",
 		"BLUE_GREEN",
+		"LINEAR",
+		"CANARY",
 	}
 }
 

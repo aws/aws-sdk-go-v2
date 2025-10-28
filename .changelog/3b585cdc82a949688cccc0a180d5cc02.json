@@ -1,0 +1,8 @@
+{
+    "id": "3b585cdc-82a9-4968-8ccc-c0a180d5cc02",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

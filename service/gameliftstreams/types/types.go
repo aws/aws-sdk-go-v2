@@ -308,6 +308,12 @@ type StreamGroupSummary struct {
 	// A descriptive label for the stream group.
 	Description *string
 
+	// The time at which this stream group expires. Timestamps are expressed using in
+	// ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC). After this time, you
+	// will no longer be able to update this stream group or use it to start stream
+	// sessions. Only Get and Delete operations will work on an expired stream group.
+	ExpiresAt *time.Time
+
 	// An ID that uniquely identifies the stream group resource. Example ID:
 	// sg-1AB2C3De4 .
 	Id *string
@@ -327,12 +333,16 @@ type StreamGroupSummary struct {
 	//   error state. Verify the details of individual locations and remove any locations
 	//   which are in error.
 	//
+	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
+	//   group.
+	//
 	//   - ERROR : An error occurred when the stream group deployed. See StatusReason
 	//   (returned by CreateStreamGroup , GetStreamGroup , and UpdateStreamGroup ) for
 	//   more information.
 	//
-	//   - DELETING : Amazon GameLift Streams is in the process of deleting the stream
-	//   group.
+	//   - EXPIRED : The stream group is expired and can no longer host streams. This
+	//   typically occurs when a stream group is 365 days old, as indicated by the value
+	//   of ExpiresAt . Create a new stream group to resume streaming capabilities.
 	//
 	//   - UPDATING_LOCATIONS : One or more locations in the stream group are in the
 	//   process of updating (either activating or deleting).

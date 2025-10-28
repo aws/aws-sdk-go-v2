@@ -1,0 +1,8 @@
+{
+    "id": "f1271b26-8461-4544-9e93-fc52b87e6886",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/resourcegroups"
+    ]
+}

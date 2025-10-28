@@ -13848,6 +13848,42 @@ func awsAwsjson11_deserializeDocumentDnsIpAddresses(v *[]string, value interface
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDnsIpv6Addresses(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Ipv6Address to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentErrorDetails(v **types.ErrorDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17293,6 +17329,15 @@ func awsAwsjson11_deserializeDocumentWorkspace(v **types.Workspace, value interf
 				sv.IpAddress = ptr.String(jtv)
 			}
 
+		case "Ipv6Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6Address to be of type string, got %T instead", value)
+				}
+				sv.Ipv6Address = ptr.String(jtv)
+			}
+
 		case "ModificationStates":
 			if err := awsAwsjson11_deserializeDocumentModificationStateList(&sv.ModificationStates, value); err != nil {
 				return err
@@ -18030,6 +18075,11 @@ func awsAwsjson11_deserializeDocumentWorkspaceDirectory(v **types.WorkspaceDirec
 				return err
 			}
 
+		case "DnsIpv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentDnsIpv6Addresses(&sv.DnsIpv6Addresses, value); err != nil {
+				return err
+			}
+
 		case "EndpointEncryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18530,6 +18580,15 @@ func awsAwsjson11_deserializeDocumentWorkspaceRequest(v **types.WorkspaceRequest
 					return fmt.Errorf("expected DirectoryId to be of type string, got %T instead", value)
 				}
 				sv.DirectoryId = ptr.String(jtv)
+			}
+
+		case "Ipv6Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6Address to be of type string, got %T instead", value)
+				}
+				sv.Ipv6Address = ptr.String(jtv)
 			}
 
 		case "RootVolumeEncryptionEnabled":

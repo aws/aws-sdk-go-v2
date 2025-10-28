@@ -1,0 +1,8 @@
+{
+    "id": "6d040483-aa3b-46f5-a340-e872be5f259d",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/pipes"
+    ]
+}

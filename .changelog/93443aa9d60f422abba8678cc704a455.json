@@ -1,0 +1,8 @@
+{
+    "id": "93443aa9-d60f-422a-bba8-678cc704a455",
+    "type": "feature",
+    "description": "Enable use of AzEl ephemerides",
+    "modules": [
+        "service/groundstation"
+    ]
+}

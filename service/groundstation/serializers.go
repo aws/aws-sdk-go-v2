@@ -1563,6 +1563,13 @@ func awsRestjson1_serializeOpDocumentListContactsInput(v *ListContactsInput, val
 		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
 	}
 
+	if v.Ephemeris != nil {
+		ok := object.Key("ephemeris")
+		if err := awsRestjson1_serializeDocumentEphemerisFilter(v.Ephemeris, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GroundStation != nil {
 		ok := object.Key("groundStation")
 		ok.String(*v.GroundStation)
@@ -1761,6 +1768,11 @@ func awsRestjson1_serializeOpDocumentListEphemeridesInput(v *ListEphemeridesInpu
 	if v.EndTime != nil {
 		ok := object.Key("endTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if len(v.EphemerisType) > 0 {
+		ok := object.Key("ephemerisType")
+		ok.String(string(v.EphemerisType))
 	}
 
 	if v.SatelliteId != nil {
@@ -2266,6 +2278,13 @@ func awsRestjson1_serializeOpDocumentReserveContactInput(v *ReserveContactInput,
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrackingOverrides != nil {
+		ok := object.Key("trackingOverrides")
+		if err := awsRestjson1_serializeDocumentTrackingOverrides(v.TrackingOverrides, ok); err != nil {
 			return err
 		}
 	}
@@ -3078,6 +3097,131 @@ func awsRestjson1_serializeDocumentAwsGroundStationAgentEndpoint(v *types.AwsGro
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAzElEphemeris(v *types.AzElEphemeris, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Data != nil {
+		ok := object.Key("data")
+		if err := awsRestjson1_serializeDocumentAzElSegmentsData(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GroundStation != nil {
+		ok := object.Key("groundStation")
+		ok.String(*v.GroundStation)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzElEphemerisFilter(v *types.AzElEphemerisFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzElProgramTrackSettings(v *types.AzElProgramTrackSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EphemerisId != nil {
+		ok := object.Key("ephemerisId")
+		ok.String(*v.EphemerisId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzElSegment(v *types.AzElSegment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AzElList != nil {
+		ok := object.Key("azElList")
+		if err := awsRestjson1_serializeDocumentTimeAzElList(v.AzElList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReferenceEpoch != nil {
+		ok := object.Key("referenceEpoch")
+		ok.String(smithytime.FormatDateTime(*v.ReferenceEpoch))
+	}
+
+	if v.ValidTimeRange != nil {
+		ok := object.Key("validTimeRange")
+		if err := awsRestjson1_serializeDocumentISO8601TimeRange(v.ValidTimeRange, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzElSegmentList(v []types.AzElSegment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAzElSegment(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzElSegments(v *types.AzElSegments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AngleUnit) > 0 {
+		ok := object.Key("angleUnit")
+		ok.String(string(v.AngleUnit))
+	}
+
+	if v.AzElSegmentList != nil {
+		ok := object.Key("azElSegmentList")
+		if err := awsRestjson1_serializeDocumentAzElSegmentList(v.AzElSegmentList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzElSegmentsData(v types.AzElSegmentsData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AzElSegmentsDataMemberAzElData:
+		av := object.Key("azElData")
+		if err := awsRestjson1_serializeDocumentAzElSegments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AzElSegmentsDataMemberS3Object:
+		av := object.Key("s3Object")
+		if err := awsRestjson1_serializeDocumentS3Object(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCapabilityArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3473,6 +3617,12 @@ func awsRestjson1_serializeDocumentEphemerisData(v types.EphemerisData, value sm
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.EphemerisDataMemberAzEl:
+		av := object.Key("azEl")
+		if err := awsRestjson1_serializeDocumentAzElEphemeris(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.EphemerisDataMemberOem:
 		av := object.Key("oem")
 		if err := awsRestjson1_serializeDocumentOEMEphemeris(&uv.Value, av); err != nil {
@@ -3482,6 +3632,24 @@ func awsRestjson1_serializeDocumentEphemerisData(v types.EphemerisData, value sm
 	case *types.EphemerisDataMemberTle:
 		av := object.Key("tle")
 		if err := awsRestjson1_serializeDocumentTLEEphemeris(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEphemerisFilter(v types.EphemerisFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EphemerisFilterMemberAzEl:
+		av := object.Key("azEl")
+		if err := awsRestjson1_serializeDocumentAzElEphemerisFilter(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3591,6 +3759,23 @@ func awsRestjson1_serializeDocumentIpAddressList(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentISO8601TimeRange(v *types.ISO8601TimeRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		ok.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKmsKey(v types.KmsKey, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3631,6 +3816,24 @@ func awsRestjson1_serializeDocumentOEMEphemeris(v *types.OEMEphemeris, value smi
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProgramTrackSettings(v types.ProgramTrackSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ProgramTrackSettingsMemberAzEl:
+		av := object.Key("azEl")
+		if err := awsRestjson1_serializeDocumentAzElProgramTrackSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -3840,6 +4043,80 @@ func awsRestjson1_serializeDocumentTagsMap(v map[string]string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTimeAzEl(v *types.TimeAzEl, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Az != nil {
+		ok := object.Key("az")
+		switch {
+		case math.IsNaN(*v.Az):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Az, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Az, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Az)
+
+		}
+	}
+
+	if v.Dt != nil {
+		ok := object.Key("dt")
+		switch {
+		case math.IsNaN(*v.Dt):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Dt, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Dt, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Dt)
+
+		}
+	}
+
+	if v.El != nil {
+		ok := object.Key("el")
+		switch {
+		case math.IsNaN(*v.El):
+			ok.String("NaN")
+
+		case math.IsInf(*v.El, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.El, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.El)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimeAzElList(v []types.TimeAzEl, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTimeAzEl(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTimeRange(v *types.TimeRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3922,6 +4199,20 @@ func awsRestjson1_serializeDocumentTrackingConfig(v *types.TrackingConfig, value
 	if len(v.Autotrack) > 0 {
 		ok := object.Key("autotrack")
 		ok.String(string(v.Autotrack))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrackingOverrides(v *types.TrackingOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProgramTrackSettings != nil {
+		ok := object.Key("programTrackSettings")
+		if err := awsRestjson1_serializeDocumentProgramTrackSettings(v.ProgramTrackSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

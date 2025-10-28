@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
 
+func ExampleAzElSegmentsData_outputUsage() {
+	var union types.AzElSegmentsData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AzElSegmentsDataMemberAzElData:
+		_ = v.Value // Value is types.AzElSegments
+
+	case *types.AzElSegmentsDataMemberS3Object:
+		_ = v.Value // Value is types.S3Object
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Object
+var _ *types.AzElSegments
+
 func ExampleConfigDetails_outputUsage() {
 	var union types.ConfigDetails
 	// type switches can be used to check the union value
@@ -79,6 +101,9 @@ func ExampleEphemerisData_outputUsage() {
 	var union types.EphemerisData
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.EphemerisDataMemberAzEl:
+		_ = v.Value // Value is types.AzElEphemeris
+
 	case *types.EphemerisDataMemberOem:
 		_ = v.Value // Value is types.OEMEphemeris
 
@@ -96,11 +121,33 @@ func ExampleEphemerisData_outputUsage() {
 
 var _ *types.TLEEphemeris
 var _ *types.OEMEphemeris
+var _ *types.AzElEphemeris
+
+func ExampleEphemerisFilter_outputUsage() {
+	var union types.EphemerisFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EphemerisFilterMemberAzEl:
+		_ = v.Value // Value is types.AzElEphemerisFilter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzElEphemerisFilter
 
 func ExampleEphemerisTypeDescription_outputUsage() {
 	var union types.EphemerisTypeDescription
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.EphemerisTypeDescriptionMemberAzEl:
+		_ = v.Value // Value is types.EphemerisDescription
+
 	case *types.EphemerisTypeDescriptionMemberOem:
 		_ = v.Value // Value is types.EphemerisDescription
 
@@ -143,3 +190,21 @@ func ExampleKmsKey_outputUsage() {
 var _ *string
 var _ *string
 var _ *string
+
+func ExampleProgramTrackSettings_outputUsage() {
+	var union types.ProgramTrackSettings
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProgramTrackSettingsMemberAzEl:
+		_ = v.Value // Value is types.AzElProgramTrackSettings
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzElProgramTrackSettings

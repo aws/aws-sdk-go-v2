@@ -2196,6 +2196,50 @@ type CapacityReservationTargetResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Capacity Reservation topology.
+type CapacityReservationTopology struct {
+
+	// The name of the Availability Zone or Local Zone that the Capacity Reservation
+	// is in.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone or Local Zone that the Capacity Reservation is
+	// in.
+	AvailabilityZoneId *string
+
+	// The ID of the Capacity Block. This parameter is only supported for UltraServer
+	// instances and identifies instances within the UltraServer domain.
+	CapacityBlockId *string
+
+	// The ID of the Capacity Reservation.
+	CapacityReservationId *string
+
+	// The name of the placement group that the Capacity Reservation is in.
+	GroupName *string
+
+	// The instance type.
+	InstanceType *string
+
+	// The network nodes. The nodes are hashed based on your account. Capacity
+	// Reservations from different accounts running under the same server will return a
+	// different hashed list of strings.
+	//
+	// The value is null or empty if:
+	//
+	//   - The instance type is not supported.
+	//
+	//   - The Capacity Reservation is in a state other than active or pending .
+	NetworkNodes []string
+
+	// The current state of the Capacity Reservation. For the list of possible states,
+	// see [DescribeCapacityReservations].
+	//
+	// [DescribeCapacityReservations]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeCapacityReservations.html
+	State *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a carrier gateway.
 type CarrierGateway struct {
 
@@ -9987,8 +10031,8 @@ type InstanceTopology struct {
 	// The name of the Availability Zone or Local Zone that the instance is in.
 	AvailabilityZone *string
 
-	// The ID of the Capacity Block. This parameter is only supported for Ultraserver
-	// instances and identifies instances within the Ultraserver domain.
+	// The ID of the Capacity Block. This parameter is only supported for UltraServer
+	// instances and identifies instances within the UltraServer domain.
 	CapacityBlockId *string
 
 	// The name of the placement group that the instance is in.
@@ -10003,6 +10047,12 @@ type InstanceTopology struct {
 	// The network nodes. The nodes are hashed based on your account. Instances from
 	// different accounts running under the same server will return a different hashed
 	// list of strings.
+	//
+	// The value is null or empty if:
+	//
+	//   - The instance type is not supported.
+	//
+	//   - The instance is in a state other than running .
 	NetworkNodes []string
 
 	// The ID of the Availability Zone or Local Zone that the instance is in.

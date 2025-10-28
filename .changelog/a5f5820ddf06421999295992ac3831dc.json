@@ -1,0 +1,8 @@
+{
+    "id": "a5f5820d-df06-4219-9929-5992ac3831dc",
+    "type": "feature",
+    "description": "Added IPv6 address support for WorkSpaces using Dual-Stack subnets",
+    "modules": [
+        "service/workspaces"
+    ]
+}

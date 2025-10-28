@@ -21,7 +21,7 @@ import (
 //
 //   - Prerequisites:
 //
-//   - You must have a stream group in ACTIVE state
+//   - You must have a stream group in ACTIVE status
 //
 //   - You must have idle or on-demand capacity in a stream group in the location
 //     you want to stream from
