@@ -1,3 +1,7 @@
+# v1.42.0 (2025-10-29)
+
+* **Feature**: Add support for system tool and web citation response.
+
 # v1.41.2 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

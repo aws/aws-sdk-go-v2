@@ -1,3 +1,9 @@
+# Release (2025-10-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.42.0](service/bedrockruntime/CHANGELOG.md#v1420-2025-10-29)
+  * **Feature**: Add support for system tool and web citation response.
+
 # Release (2025-10-28)
 
 ## General Highlights
