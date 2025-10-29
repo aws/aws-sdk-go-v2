@@ -48,6 +48,5 @@ GetRecords
 		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
-		ReadResponseTimeout
 		RequestResponseLogger
 		InterceptTransmit

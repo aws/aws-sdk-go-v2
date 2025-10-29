@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
-	kinesiscust "github.com/aws/aws-sdk-go-v2/service/kinesis/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -228,9 +226,6 @@ func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
-		return err
-	}
-	if err = awshttp.AddResponseReadTimeoutMiddleware(stack, kinesiscust.ReadTimeoutDuration); err != nil {
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {

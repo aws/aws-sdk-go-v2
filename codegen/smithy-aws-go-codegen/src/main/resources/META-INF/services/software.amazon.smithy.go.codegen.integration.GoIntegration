@@ -32,7 +32,6 @@ software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ContentSHA256He
 software.amazon.smithy.aws.go.codegen.customization.service.s3.BackfillS3ObjectSizeMemberShapeType
 software.amazon.smithy.aws.go.codegen.customization.service.machinelearning.MachineLearningCustomizations
 software.amazon.smithy.aws.go.codegen.customization.service.s3.S3AcceptEncodingGzip
-software.amazon.smithy.aws.go.codegen.customization.service.kinesis.KinesisCustomizations
 software.amazon.smithy.aws.go.codegen.customization.service.s3.S3ErrorWith200Status
 software.amazon.smithy.aws.go.codegen.customization.service.route53.Route53Customizations
 software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill
