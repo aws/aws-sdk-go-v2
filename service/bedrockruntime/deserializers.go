@@ -2664,6 +2664,16 @@ loop:
 			uv = &types.CitationLocationMemberDocumentPage{Value: mv}
 			break loop
 
+		case "web":
+			var mv types.WebLocation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWebLocation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CitationLocationMemberWeb{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -2848,6 +2858,14 @@ loop:
 			uv = &types.ContentBlockDeltaMemberText{Value: mv}
 			break loop
 
+		case "toolResult":
+			var mv []types.ToolResultBlockDelta
+			if err := awsRestjson1_deserializeDocumentToolResultBlocksDelta(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ContentBlockDeltaMemberToolResult{Value: mv}
+			break loop
+
 		case "toolUse":
 			var mv types.ToolUseBlockDelta
 			destAddr := &mv
@@ -2937,6 +2955,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "toolResult":
+			var mv types.ToolResultBlockStart
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentToolResultBlockStart(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockStartMemberToolResult{Value: mv}
+			break loop
+
 		case "toolUse":
 			var mv types.ToolUseBlockStart
 			destAddr := &mv
@@ -6323,6 +6351,138 @@ func awsRestjson1_deserializeDocumentTokenUsage(v **types.TokenUsage, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentToolResultBlockDelta(v *types.ToolResultBlockDelta, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ToolResultBlockDelta
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "text":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ToolResultBlockDeltaMemberText{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentToolResultBlocksDelta(v *[]types.ToolResultBlockDelta, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ToolResultBlockDelta
+	if *v == nil {
+		cv = []types.ToolResultBlockDelta{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ToolResultBlockDelta
+		if err := awsRestjson1_deserializeDocumentToolResultBlockDelta(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentToolResultBlockStart(v **types.ToolResultBlockStart, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ToolResultBlockStart
+	if *v == nil {
+		sv = &types.ToolResultBlockStart{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToolResultStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ToolResultStatus(jtv)
+			}
+
+		case "toolUseId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToolUseId to be of type string, got %T instead", value)
+				}
+				sv.ToolUseId = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentToolUseBlockDelta(v **types.ToolUseBlockDelta, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6401,6 +6561,64 @@ func awsRestjson1_deserializeDocumentToolUseBlockStart(v **types.ToolUseBlockSta
 					return fmt.Errorf("expected ToolUseId to be of type string, got %T instead", value)
 				}
 				sv.ToolUseId = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToolUseType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ToolUseType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebLocation(v **types.WebLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebLocation
+	if *v == nil {
+		sv = &types.WebLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:
@@ -8863,6 +9081,15 @@ func awsRestjson1_deserializeDocumentToolResultBlock(v **types.ToolResultBlock, 
 				sv.ToolUseId = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9027,6 +9254,15 @@ func awsRestjson1_deserializeDocumentToolUseBlock(v **types.ToolUseBlock, value 
 					return fmt.Errorf("expected ToolUseId to be of type string, got %T instead", value)
 				}
 				sv.ToolUseId = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToolUseType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ToolUseType(jtv)
 			}
 
 		default:

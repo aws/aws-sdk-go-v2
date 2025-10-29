@@ -9,7 +9,9 @@ import (
 )
 
 // The model must request at least one tool (no text is generated). For example,
-// {"any" : {}} .
+// {"any" : {}} . For more information, see [Call a tool with the Converse API] in the Amazon Bedrock User Guide.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type AnyToolChoice struct {
 	noSmithyDocumentSerde
 }
@@ -91,7 +93,10 @@ type AsyncInvokeSummary struct {
 }
 
 // The Model automatically decides if a tool should be called or whether to
-// generate text instead. For example, {"auto" : {}} .
+// generate text instead. For example, {"auto" : {}} . For more information, see [Call a tool with the Converse API]
+// in the Amazon Bedrock User Guide
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type AutoToolChoice struct {
 	noSmithyDocumentSerde
 }
@@ -155,6 +160,7 @@ func (*CitationGeneratedContentMemberText) isCitationGeneratedContent() {}
 //	CitationLocationMemberDocumentChar
 //	CitationLocationMemberDocumentChunk
 //	CitationLocationMemberDocumentPage
+//	CitationLocationMemberWeb
 type CitationLocation interface {
 	isCitationLocation()
 }
@@ -188,14 +194,23 @@ type CitationLocationMemberDocumentPage struct {
 
 func (*CitationLocationMemberDocumentPage) isCitationLocation() {}
 
+// The web URL that was cited for this reference.
+type CitationLocationMemberWeb struct {
+	Value WebLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*CitationLocationMemberWeb) isCitationLocation() {}
+
 // Configuration settings for enabling and controlling document citations in
 // Converse API responses. When enabled, the model can include citation information
 // that links generated content back to specific source documents.
 type CitationsConfig struct {
 
-	// Specifies whether document citations should be included in the model's
-	// response. When set to true, the model can generate citations that reference the
-	// source documents used to inform the response.
+	// Specifies whether citations from the selected document should be used in the
+	// model's response. When set to true, the model can generate citations that
+	// reference the source documents used to inform the response.
 	//
 	// This member is required.
 	Enabled *bool
@@ -398,6 +413,7 @@ func (*ContentBlockMemberVideo) isContentBlock() {}
 //	ContentBlockDeltaMemberCitation
 //	ContentBlockDeltaMemberReasoningContent
 //	ContentBlockDeltaMemberText
+//	ContentBlockDeltaMemberToolResult
 //	ContentBlockDeltaMemberToolUse
 type ContentBlockDelta interface {
 	isContentBlockDelta()
@@ -433,6 +449,15 @@ type ContentBlockDeltaMemberText struct {
 
 func (*ContentBlockDeltaMemberText) isContentBlockDelta() {}
 
+// An incremental update that contains the results from a tool call.
+type ContentBlockDeltaMemberToolResult struct {
+	Value []ToolResultBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockDeltaMemberToolResult) isContentBlockDelta() {}
+
 // Information about a tool that the model is requesting to use.
 type ContentBlockDeltaMemberToolUse struct {
 	Value ToolUseBlockDelta
@@ -462,10 +487,20 @@ type ContentBlockDeltaEvent struct {
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockStartMemberToolResult
 //	ContentBlockStartMemberToolUse
 type ContentBlockStart interface {
 	isContentBlockStart()
 }
+
+// The
+type ContentBlockStartMemberToolResult struct {
+	Value ToolResultBlockStart
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockStartMemberToolResult) isContentBlockStart() {}
 
 // Information about a tool that the model is requesting to use.
 type ContentBlockStartMemberToolUse struct {
@@ -640,7 +675,7 @@ type ConverseStreamOutputMemberMetadata struct {
 
 func (*ConverseStreamOutputMemberMetadata) isConverseStreamOutput() {}
 
-// The trace object in a response from [ConverseStream]. Currently, you can only trace guardrails.
+// The trace object in a response from [ConverseStream].
 //
 // [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type ConverseStreamTrace struct {
@@ -671,7 +706,7 @@ type ConverseTokensRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The trace object in a response from [Converse]. Currently, you can only trace guardrails.
+// The trace object in a response from [Converse].
 //
 // [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 type ConverseTrace struct {
@@ -1412,7 +1447,9 @@ type GuardrailConverseImageSourceMemberBytes struct {
 func (*GuardrailConverseImageSourceMemberBytes) isGuardrailConverseImageSource() {}
 
 // A text block that contains text that you want to assess with a guardrail. For
-// more information, see GuardrailConverseContentBlock.
+// more information, see [GuardrailConverseContentBlock].
+//
+// [GuardrailConverseContentBlock]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_GuardrailConverseContentBlock.html
 type GuardrailConverseTextBlock struct {
 
 	// The text that you want to guard.
@@ -1606,7 +1643,7 @@ type GuardrailRegexFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The assessment for aPersonally Identifiable Information (PII) policy.
+// The assessment for a Personally Identifiable Information (PII) policy.
 type GuardrailSensitiveInformationPolicyAssessment struct {
 
 	// The PII entities in the assessment.
@@ -1622,7 +1659,9 @@ type GuardrailSensitiveInformationPolicyAssessment struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for a guardrail that you use with the ConverseStream action.
+// Configuration information for a guardrail that you use with the [ConverseStream] action.
+//
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type GuardrailStreamConfiguration struct {
 
 	// The identifier for the guardrail.
@@ -1710,7 +1749,9 @@ type GuardrailTopicPolicyAssessment struct {
 	noSmithyDocumentSerde
 }
 
-// A Top level guardrail trace object. For more information, see ConverseTrace.
+// A Top level guardrail trace object. For more information, see [ConverseTrace].
+//
+// [ConverseTrace]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseTrace.html
 type GuardrailTraceAssessment struct {
 
 	// Provides the reason for the action taken when harmful content is detected.
@@ -2133,9 +2174,11 @@ type S3Location struct {
 }
 
 // The model must request a specific tool. For example, {"tool" : {"name" : "Your
-// tool name"}} .
+// tool name"}} . For more information, see [Call a tool with the Converse API] in the Amazon Bedrock User Guide
 //
 // This field is only supported by Anthropic Claude 3 models.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type SpecificToolChoice struct {
 
 	// The name of the tool that the model must request.
@@ -2146,13 +2189,16 @@ type SpecificToolChoice struct {
 	noSmithyDocumentSerde
 }
 
-// A system content block.
+// Contains configurations for instructions to provide the model for how to handle
+// input. To learn more, see [Using the Converse API].
 //
 // The following types satisfy this interface:
 //
 //	SystemContentBlockMemberCachePoint
 //	SystemContentBlockMemberGuardContent
 //	SystemContentBlockMemberText
+//
+// [Using the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-call.html
 type SystemContentBlock interface {
 	isSystemContentBlock()
 }
@@ -2189,6 +2235,18 @@ type SystemContentBlockMemberText struct {
 }
 
 func (*SystemContentBlockMemberText) isSystemContentBlock() {}
+
+// Specifies a system-defined tool for the model to use. System-defined tools are
+// tools that are created and provided by the model provider.
+type SystemTool struct {
+
+	// The name of the system-defined tool that you want to call.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
 
 // A tag.
 type Tag struct {
@@ -2234,14 +2292,15 @@ type TokenUsage struct {
 }
 
 // Information about a tool that you can use with the Converse API. For more
-// information, see [Tool use (function calling)]in the Amazon Bedrock User Guide.
+// information, see [Call a tool with the Converse API]in the Amazon Bedrock User Guide.
 //
 // The following types satisfy this interface:
 //
 //	ToolMemberCachePoint
+//	ToolMemberSystemTool
 //	ToolMemberToolSpec
 //
-// [Tool use (function calling)]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type Tool interface {
 	isTool()
 }
@@ -2255,6 +2314,15 @@ type ToolMemberCachePoint struct {
 
 func (*ToolMemberCachePoint) isTool() {}
 
+// Specifies the system-defined tool that you want use.
+type ToolMemberSystemTool struct {
+	Value SystemTool
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolMemberSystemTool) isTool() {}
+
 // The specfication for the tool.
 type ToolMemberToolSpec struct {
 	Value ToolSpecification
@@ -2265,14 +2333,15 @@ type ToolMemberToolSpec struct {
 func (*ToolMemberToolSpec) isTool() {}
 
 // Determines which tools the model should request in a call to Converse or
-// ConverseStream . ToolChoice is only supported by Anthropic Claude 3 models and
-// by Mistral AI Mistral Large.
+// ConverseStream . For more information, see [Call a tool with the Converse API] in the Amazon Bedrock User Guide.
 //
 // The following types satisfy this interface:
 //
 //	ToolChoiceMemberAny
 //	ToolChoiceMemberAuto
 //	ToolChoiceMemberTool
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolChoice interface {
 	isToolChoice()
 }
@@ -2297,7 +2366,7 @@ type ToolChoiceMemberAuto struct {
 func (*ToolChoiceMemberAuto) isToolChoice() {}
 
 // The Model must request the specified tool. Only supported by Anthropic Claude 3
-// models.
+// and Amazon Nova models.
 type ToolChoiceMemberTool struct {
 	Value SpecificToolChoice
 
@@ -2323,11 +2392,14 @@ type ToolConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The schema for the tool. The top level schema type must be object .
+// The schema for the tool. The top level schema type must be object . For more
+// information, see [Call a tool with the Converse API]in the Amazon Bedrock User Guide.
 //
 // The following types satisfy this interface:
 //
 //	ToolInputSchemaMemberJson
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolInputSchema interface {
 	isToolInputSchema()
 }
@@ -2344,7 +2416,9 @@ type ToolInputSchemaMemberJson struct {
 func (*ToolInputSchemaMemberJson) isToolInputSchema() {}
 
 // A tool result block that contains the results for a tool request that the model
-// previously made.
+// previously made. For more information, see [Call a tool with the Converse API]in the Amazon Bedrock User Guide.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolResultBlock struct {
 
 	// The content for tool result content block.
@@ -2359,13 +2433,57 @@ type ToolResultBlock struct {
 
 	// The status for the tool result content block.
 	//
-	// This field is only supported Anthropic Claude 3 models.
+	// This field is only supported by Amazon Nova and Anthropic Claude 3 and 4 models.
 	Status ToolResultStatus
+
+	// The type for the tool result content block.
+	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// The tool result content block.
+// Contains incremental updates to tool results information during streaming
+// responses. This allows clients to build up tool results data progressively as
+// the response is generated.
+//
+// The following types satisfy this interface:
+//
+//	ToolResultBlockDeltaMemberText
+type ToolResultBlockDelta interface {
+	isToolResultBlockDelta()
+}
+
+// The reasoning the model used to return the output.
+type ToolResultBlockDeltaMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultBlockDeltaMemberText) isToolResultBlockDelta() {}
+
+// The start of a tool result block. For more information, see [Call a tool with the Converse API] in the Amazon
+// Bedrock User Guide.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type ToolResultBlockStart struct {
+
+	// The ID of the tool that was used to generate this tool result block.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The status of the tool result block.
+	Status ToolResultStatus
+
+	// The type for the tool that was used to generate this tool result block.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// The tool result content block. For more information, see [Call a tool with the Converse API] in the Amazon Bedrock
+// User Guide.
 //
 // The following types satisfy this interface:
 //
@@ -2374,6 +2492,8 @@ type ToolResultBlock struct {
 //	ToolResultContentBlockMemberJson
 //	ToolResultContentBlockMemberText
 //	ToolResultContentBlockMemberVideo
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolResultContentBlock interface {
 	isToolResultContentBlock()
 }
@@ -2389,7 +2509,7 @@ func (*ToolResultContentBlockMemberDocument) isToolResultContentBlock() {}
 
 // A tool result that is an image.
 //
-// This field is only supported by Anthropic Claude 3 models.
+// This field is only supported by Amazon Nova and Anthropic Claude 3 and 4 models.
 type ToolResultContentBlockMemberImage struct {
 	Value ImageBlock
 
@@ -2425,7 +2545,10 @@ type ToolResultContentBlockMemberVideo struct {
 
 func (*ToolResultContentBlockMemberVideo) isToolResultContentBlock() {}
 
-// The specification for the tool.
+// The specification for the tool. For more information, see [Call a tool with the Converse API] in the Amazon
+// Bedrock User Guide.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolSpecification struct {
 
 	// The input schema for the tool in JSON format.
@@ -2446,7 +2569,9 @@ type ToolSpecification struct {
 
 // A tool use content block. Contains information about a tool that the model is
 // requesting be run., The model uses the result from the tool to generate a
-// response.
+// response. For more information, see [Call a tool with the Converse API]in the Amazon Bedrock User Guide.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolUseBlock struct {
 
 	// The input to pass to the tool.
@@ -2464,6 +2589,9 @@ type ToolUseBlock struct {
 	// This member is required.
 	ToolUseId *string
 
+	// The type for the tool request.
+	Type ToolUseType
+
 	noSmithyDocumentSerde
 }
 
@@ -2478,7 +2606,10 @@ type ToolUseBlockDelta struct {
 	noSmithyDocumentSerde
 }
 
-// The start of a tool use block.
+// The start of a tool use block. For more information, see [Call a tool with the Converse API] in the Amazon Bedrock
+// User Guide.
+//
+// [Call a tool with the Converse API]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolUseBlockStart struct {
 
 	// The name of the tool that the model is requesting to use.
@@ -2490,6 +2621,9 @@ type ToolUseBlockStart struct {
 	//
 	// This member is required.
 	ToolUseId *string
+
+	// The type for the tool request.
+	Type ToolUseType
 
 	noSmithyDocumentSerde
 }
@@ -2543,6 +2677,19 @@ type VideoSourceMemberS3Location struct {
 
 func (*VideoSourceMemberS3Location) isVideoSource() {}
 
+// Provides the URL and domain information for the website that was cited when
+// performing a web search.
+type WebLocation struct {
+
+	// The domain that was cited when performing a web search.
+	Domain *string
+
+	// The URL that was cited when performing a web search.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -2580,5 +2727,6 @@ func (*UnknownUnionMember) isSystemContentBlock()                 {}
 func (*UnknownUnionMember) isTool()                               {}
 func (*UnknownUnionMember) isToolChoice()                         {}
 func (*UnknownUnionMember) isToolInputSchema()                    {}
+func (*UnknownUnionMember) isToolResultBlockDelta()               {}
 func (*UnknownUnionMember) isToolResultContentBlock()             {}
 func (*UnknownUnionMember) isVideoSource()                        {}

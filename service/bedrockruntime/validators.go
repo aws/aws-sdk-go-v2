@@ -796,6 +796,21 @@ func validateSystemContentBlocks(v []types.SystemContentBlock) error {
 	}
 }
 
+func validateSystemTool(v *types.SystemTool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemTool"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -840,6 +855,11 @@ func validateTool(v types.Tool) error {
 	case *types.ToolMemberCachePoint:
 		if err := validateCachePointBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[cachePoint]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ToolMemberSystemTool:
+		if err := validateSystemTool(&uv.Value); err != nil {
+			invalidParams.AddNested("[systemTool]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ToolMemberToolSpec:

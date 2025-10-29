@@ -1,0 +1,8 @@
+{
+    "id": "243809ce-3f80-4247-a8a7-1a8414fceeea",
+    "type": "feature",
+    "description": "Add support for system tool and web citation response.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

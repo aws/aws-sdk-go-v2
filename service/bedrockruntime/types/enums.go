@@ -724,6 +724,23 @@ func (ToolResultStatus) Values() []ToolResultStatus {
 	}
 }
 
+type ToolUseType string
+
+// Enum values for ToolUseType
+const (
+	ToolUseTypeServerToolUse ToolUseType = "server_tool_use"
+)
+
+// Values returns all known values for ToolUseType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ToolUseType) Values() []ToolUseType {
+	return []ToolUseType{
+		"server_tool_use",
+	}
+}
+
 type Trace string
 
 // Enum values for Trace

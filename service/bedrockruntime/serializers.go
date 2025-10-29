@@ -1200,6 +1200,12 @@ func awsRestjson1_serializeDocumentCitationLocation(v types.CitationLocation, va
 			return err
 		}
 
+	case *types.CitationLocationMemberWeb:
+		av := object.Key("web")
+		if err := awsRestjson1_serializeDocumentWebLocation(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -2158,6 +2164,18 @@ func awsRestjson1_serializeDocumentSystemContentBlocks(v []types.SystemContentBl
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSystemTool(v *types.SystemTool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2196,6 +2214,12 @@ func awsRestjson1_serializeDocumentTool(v types.Tool, value smithyjson.Value) er
 	case *types.ToolMemberCachePoint:
 		av := object.Key("cachePoint")
 		if err := awsRestjson1_serializeDocumentCachePointBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ToolMemberSystemTool:
+		av := object.Key("systemTool")
+		if err := awsRestjson1_serializeDocumentSystemTool(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -2300,6 +2324,11 @@ func awsRestjson1_serializeDocumentToolResultBlock(v *types.ToolResultBlock, val
 	if v.ToolUseId != nil {
 		ok := object.Key("toolUseId")
 		ok.String(*v.ToolUseId)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
 	}
 
 	return nil
@@ -2422,6 +2451,11 @@ func awsRestjson1_serializeDocumentToolUseBlock(v *types.ToolUseBlock, value smi
 		ok.String(*v.ToolUseId)
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -2463,6 +2497,23 @@ func awsRestjson1_serializeDocumentVideoSource(v types.VideoSource, value smithy
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebLocation(v *types.WebLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Domain != nil {
+		ok := object.Key("domain")
+		ok.String(*v.Domain)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("url")
+		ok.String(*v.Url)
+	}
+
 	return nil
 }
 

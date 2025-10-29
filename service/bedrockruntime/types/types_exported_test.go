@@ -57,6 +57,9 @@ func ExampleCitationLocation_outputUsage() {
 	case *types.CitationLocationMemberDocumentPage:
 		_ = v.Value // Value is types.DocumentPageLocation
 
+	case *types.CitationLocationMemberWeb:
+		_ = v.Value // Value is types.WebLocation
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -68,6 +71,7 @@ func ExampleCitationLocation_outputUsage() {
 
 var _ *types.DocumentPageLocation
 var _ *types.DocumentCharLocation
+var _ *types.WebLocation
 var _ *types.DocumentChunkLocation
 
 func ExampleCitationSourceContent_outputUsage() {
@@ -155,6 +159,9 @@ func ExampleContentBlockDelta_outputUsage() {
 	case *types.ContentBlockDeltaMemberText:
 		_ = v.Value // Value is string
 
+	case *types.ContentBlockDeltaMemberToolResult:
+		_ = v.Value // Value is []types.ToolResultBlockDelta
+
 	case *types.ContentBlockDeltaMemberToolUse:
 		_ = v.Value // Value is types.ToolUseBlockDelta
 
@@ -170,12 +177,16 @@ func ExampleContentBlockDelta_outputUsage() {
 var _ types.ReasoningContentBlockDelta
 var _ *types.ToolUseBlockDelta
 var _ *string
+var _ []types.ToolResultBlockDelta
 var _ *types.CitationsDelta
 
 func ExampleContentBlockStart_outputUsage() {
 	var union types.ContentBlockStart
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockStartMemberToolResult:
+		_ = v.Value // Value is types.ToolResultBlockStart
+
 	case *types.ContentBlockStartMemberToolUse:
 		_ = v.Value // Value is types.ToolUseBlockStart
 
@@ -189,6 +200,7 @@ func ExampleContentBlockStart_outputUsage() {
 }
 
 var _ *types.ToolUseBlockStart
+var _ *types.ToolResultBlockStart
 
 func ExampleConverseOutput_outputUsage() {
 	var union types.ConverseOutput
@@ -576,6 +588,9 @@ func ExampleTool_outputUsage() {
 	case *types.ToolMemberCachePoint:
 		_ = v.Value // Value is types.CachePointBlock
 
+	case *types.ToolMemberSystemTool:
+		_ = v.Value // Value is types.SystemTool
+
 	case *types.ToolMemberToolSpec:
 		_ = v.Value // Value is types.ToolSpecification
 
@@ -590,6 +605,7 @@ func ExampleTool_outputUsage() {
 
 var _ *types.ToolSpecification
 var _ *types.CachePointBlock
+var _ *types.SystemTool
 
 func ExampleToolChoice_outputUsage() {
 	var union types.ToolChoice
@@ -634,6 +650,24 @@ func ExampleToolInputSchema_outputUsage() {
 }
 
 var _ document.Interface
+
+func ExampleToolResultBlockDelta_outputUsage() {
+	var union types.ToolResultBlockDelta
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolResultBlockDeltaMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleToolResultContentBlock_outputUsage() {
 	var union types.ToolResultContentBlock
