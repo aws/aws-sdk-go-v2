@@ -470,7 +470,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<note> <p> is in preview release and is subject to change.</p> </note> <p>Welcome to the Amazon Bedrock AgentCore Control plane API reference. Control plane actions configure, create, modify, and monitor Amazon Web Services resources.</p>",
+                "smithy.api#documentation": "<p>Welcome to the Amazon Bedrock AgentCore Control plane API reference. Control plane actions configure, create, modify, and monitor Amazon Web Services resources.</p>",
                 "smithy.api#title": "Amazon Bedrock AgentCore Control",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1414,6 +1414,38 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#ListBrowsers"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#BrowserSigningConfigInput": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether browser signing is enabled. When enabled, the browser will cryptographically sign HTTP requests to identify itself as an AI agent to bot control vendors.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for enabling browser signing capabilities that allow agents to cryptographically identify themselves to websites using HTTP message signatures.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BrowserSigningConfigOutput": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether browser signing is currently enabled for cryptographic agent identification using HTTP message signatures.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current browser signing configuration that shows whether cryptographic agent identification is enabled for web bot authentication.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#BrowserStatus": {
             "type": "enum",
             "members": {
@@ -2277,6 +2309,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#RecordingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The recording configuration for the browser. When enabled, browser sessions are recorded and stored in the specified Amazon S3 location.</p>"
+                    }
+                },
+                "browserSigning": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserSigningConfigInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser signing configuration that enables cryptographic agent identification using HTTP message signatures for web bot authentication.</p>"
                     }
                 },
                 "clientToken": {
@@ -5514,6 +5552,12 @@
                 "recording": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RecordingConfig"
                 },
+                "browserSigning": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserSigningConfigOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser signing configuration that shows whether cryptographic agent identification is enabled for web bot authentication.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#BrowserStatus",
                     "traits": {
@@ -6468,7 +6512,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$"
+                "smithy.api#pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9-]+)$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#IncludedOauth2ProviderConfigInput": {

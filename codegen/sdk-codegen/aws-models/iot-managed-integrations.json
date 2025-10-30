@@ -254,7 +254,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ ]+$"
+                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ -]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#ActionReference": {
@@ -536,7 +536,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ ]+$"
+                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ -]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#CapabilityProperties": {
@@ -785,6 +785,16 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^(0|[1-9][0-9]*)$"
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#CertificatePem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65536
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#ClaimCertificate": {
@@ -1376,6 +1386,9 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ThrottlingException"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#UnauthorizedException"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#ValidationException"
                 }
             ],
@@ -1634,7 +1647,13 @@
                     "target": "com.amazonaws.iotmanagedintegrations#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#UnauthorizedException"
                 },
                 {
                     "target": "com.amazonaws.iotmanagedintegrations#ValidationException"
@@ -1750,7 +1769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a product credential locker. This operation will trigger the creation of all the manufacturing resources including the Wi-Fi setup key pair and device certificate.</p>",
+                "smithy.api#documentation": "<p>Create a credential locker.</p> <note> <p>This operation will not trigger the creation of all the manufacturing resources.</p> </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/credential-lockers",
@@ -1843,7 +1862,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Create a destination. IoT managed integrations uses the destination to determine where to deliver notifications for a device. </p>",
+                "smithy.api#documentation": "<p> Create a notification destination such as Kinesis Data Streams that receive events and notifications from Managed integrations. Managed integrations uses the destination to determine where to deliver notifications.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/destinations",
@@ -2045,7 +2064,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed thing. A managed thing contains the device identifier, protocol supported, and capabilities of the device in a protocol-specific format.</p>",
+                "smithy.api#documentation": "<p>Creates a managed thing. A managed thing contains the device identifier, protocol supported, and capabilities of the device in a data model format defined by Managed integrations.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/managed-things",
@@ -2325,7 +2344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an over-the-air (OTA) task to update a device.</p>",
+                "smithy.api#documentation": "<p>Create an over-the-air (OTA) task to target a device.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ota-tasks",
@@ -2832,7 +2851,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove a third party account and related devices from an end user.</p>",
+                "smithy.api#documentation": "<p>Remove a third-party account association for an end user.</p> <note> <p>You must first call the <code>DeregisterAccountAssociation</code> to remove the connection between the managed thing and the third-party account before calling the <code>DeleteAccountAssociation</code> API.</p> </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/account-associations/{AccountAssociationId}",
@@ -2878,6 +2897,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotmanagedintegrations#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#UnauthorizedException"
                 },
                 {
                     "target": "com.amazonaws.iotmanagedintegrations#ValidationException"
@@ -2935,7 +2957,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a connector destination for connecting a cloud-to-cloud (C2C) connector to the customer's Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Delete a connector destination linked to a cloud-to-cloud (C2C) connector.</p> <note> <p>Deletion can't be done if the account association has used this connector destination.</p> </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/connector-destinations/{Identifier}",
@@ -3040,7 +3062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a customer-managed destination specified by id. </p>",
+                "smithy.api#documentation": "<p>Deletes a notification destination specified by name. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/destinations/{Name}",
@@ -3154,7 +3176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a managed thing. If a controller is deleted, all of the devices connected to it will have their status changed to <code>PENDING</code>. It is not possible to remove a cloud device.</p>",
+                "smithy.api#documentation": "<p>Delete a managed thing. For direct-connected and hub-connected devices connecting with Managed integrations via a controller, all of the devices connected to it will have their status changed to <code>PENDING</code>. It is not possible to remove a cloud-to-cloud device.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/managed-things/{Identifier}",
@@ -3458,7 +3480,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters an account association, removing the connection between a managed thing and a third-party account.</p>",
+                "smithy.api#documentation": "<p>Deregister an account association from a managed thing.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/managed-thing-associations/deregister",
@@ -4212,7 +4234,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ ]+$"
+                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ -]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#EventType": {
@@ -4494,7 +4516,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets all the information about a connector for a connector developer.</p>",
+                "smithy.api#documentation": "<p>Get configuration details for a cloud connector.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "GetCloudConnector happy path for TP Link to get connector resource",
@@ -4655,7 +4677,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get a connector destination of a cloud-to-cloud (C2C) connector connecting to a customer's Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Get connector destination details linked to a cloud-to-cloud (C2C) connector.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/connector-destinations/{Identifier}",
@@ -5072,7 +5094,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a destination by ID. </p>",
+                "smithy.api#documentation": "<p>Gets a destination by name. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/destinations/{Name}",
@@ -5539,7 +5561,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Get the attributes and capabilities associated with a managed thing.</p>",
+                "smithy.api#documentation": "<p> Get details of a managed thing including its attributes and capabilities.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/managed-things/{Identifier}",
@@ -5662,6 +5684,112 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>A report of the capabilities for the managed thing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.iotmanagedintegrations#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the certificate PEM for a managed IoT thing.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get managed thing certificate",
+                        "input": {
+                            "Identifier": "example-managed-thing-id"
+                        },
+                        "output": {
+                            "ManagedThingId": "example-managed-thing-id",
+                            "CertificatePem": "-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJAKHHH...\n-----END CERTIFICATE-----"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/managed-things-certificate/{Identifier}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetManagedThingCertificateNotFound",
+                        "params": {
+                            "Identifier": "nonExistentId"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificateRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ManagedThingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the managed thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificateResponse": {
+            "type": "structure",
+            "members": {
+                "ManagedThingId": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ManagedThingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the managed thing.</p>"
+                    }
+                },
+                "CertificatePem": {
+                    "target": "com.amazonaws.iotmanagedintegrations#CertificatePem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PEM-encoded certificate for the managed thing.</p>"
                     }
                 }
             },
@@ -6178,7 +6306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Get a notification configuration.</p>",
+                "smithy.api#documentation": "<p> Get a notification configuration for a specified event type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/notification-configurations/{EventType}",
@@ -6288,7 +6416,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the over-the-air (OTA) task.</p>",
+                "smithy.api#documentation": "<p>Get details of the over-the-air (OTA) task by its task id.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ota-tasks/{Identifier}",
@@ -6643,7 +6771,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileId",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The provisioning profile id..</p>"
+                        "smithy.api#documentation": "<p>The provisioning profile id.</p>"
                     }
                 },
                 "ClaimCertificate": {
@@ -6690,7 +6818,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the runtime log configuration for a specific managed thing or for all managed things as a group.</p>",
+                "smithy.api#documentation": "<p>Get the runtime log configuration for a specific managed thing.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/runtime-log-configurations/{ManagedThingId}",
@@ -7633,7 +7761,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of connectors based on permissions. </p>",
+                "smithy.api#documentation": "<p>Returns a list of connectors filtered by its Lambda Amazon Resource Name (ARN) and <code>type</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "ListCloudConnectors happy path to get a list of connector resources",
@@ -8023,7 +8151,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> List all destination names under one Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p> List all notification destinations.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/destinations",
@@ -9898,6 +10026,9 @@
                     "target": "com.amazonaws.iotmanagedintegrations#GetManagedThingCapabilities"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificate"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#GetManagedThingConnectivityData"
                 },
                 {
@@ -11356,7 +11487,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ ]+$"
+                "smithy.api#pattern": "^[/a-zA-Z0-9\\._ -]+$"
             }
         },
         "com.amazonaws.iotmanagedintegrations#ProvisioningProfileArn": {
@@ -11960,7 +12091,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reset a runtime log configuration for a specific managed thing or for all managed things as a group.</p>",
+                "smithy.api#documentation": "<p>Reset a runtime log configuration for a specific managed thing.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/runtime-log-configurations/{ManagedThingId}",
@@ -12666,7 +12797,7 @@
                 "TraceId": {
                     "target": "com.amazonaws.iotmanagedintegrations#TraceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The trace request identifier used to correlate a command request and response. This is specified by the device owner, but will be generated by IoT managed integrations if not provided by the device owner.</p>"
+                        "smithy.api#documentation": "<p>The trace request identifier. This is generated by IoT managed integrations and can be used to trace this command and its related operations in CloudWatch.</p>"
                     }
                 },
                 "Devices": {
@@ -12786,7 +12917,7 @@
                 "TraceId": {
                     "target": "com.amazonaws.iotmanagedintegrations#TraceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The trace request identifier. This is specified by the device owner, but will be generated by IoT managed integrations if not provided by the device owner.</p>"
+                        "smithy.api#documentation": "<p>The trace request identifier. This is generated by IoT managed integrations and can be used to trace this command and its related operations in CloudWatch.</p>"
                     }
                 }
             },
@@ -12965,7 +13096,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> This API is used to start device discovery for hub-connected and third-party-connected devices. The authentication material (install code) is passed as a message to the controller telling it to start the discovery.</p>",
+                "smithy.api#documentation": "<p> This API is used to start device discovery for hub-connected and third-party-connected devices. The authentication material (install code) is delivered as a message to the controller instructing it to start the discovery.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/device-discoveries",
@@ -13581,6 +13712,9 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ThrottlingException"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#UnauthorizedException"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#ValidationException"
                 }
             ],
@@ -13754,7 +13888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Update a destination specified by id. </p>",
+                "smithy.api#documentation": "<p> Update a destination specified by name. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/destinations/{Name}",

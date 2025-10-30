@@ -144,7 +144,7 @@
                 "identityCenterConfiguration": {
                     "target": "com.amazonaws.emrserverless#IdentityCenterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM Identity Center configuration applied to enable trusted identity propagation. </p>"
+                        "smithy.api#documentation": "<p>The IAM Identity Center configuration applied to enable trusted identity propagation.</p>"
                     }
                 }
             },
@@ -482,27 +482,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -1919,10 +1919,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the EMR Serverless created IAM Identity Center Application that provides trusted-identity propagation.</p>"
                     }
+                },
+                "userBackgroundSessionsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables user background sessions for this application so Livy sessions can continue running after users log out of their interactive notebook or their Identity Center sessions expire.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The IAM Identity Center Configuration that includes the Identify Center instance and application ARNs that provide trusted-identity propagation.</p>"
+                "smithy.api#documentation": "<p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>"
             }
         },
         "com.amazonaws.emrserverless#IdentityCenterConfigurationInput": {
@@ -1933,10 +1939,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance.</p>"
                     }
+                },
+                "userBackgroundSessionsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables user background sessions for this application so Livy sessions can continue running after users log out of their interactive notebook or their Identity Center sessions expire.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>"
+                "smithy.api#documentation": "<p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>"
             }
         },
         "com.amazonaws.emrserverless#IdentityCenterInstanceArn": {

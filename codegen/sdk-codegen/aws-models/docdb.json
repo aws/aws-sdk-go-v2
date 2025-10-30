@@ -4836,21 +4836,6 @@
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
                 ],
-                "smithy.test#smokeTests": [
-                    {
-                        "id": "DescribeDBInstancesFailure",
-                        "params": {
-                            "DBInstanceIdentifier": "fake-id"
-                        },
-                        "vendorParams": {
-                            "region": "us-west-2"
-                        },
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": {
-                            "failure": {}
-                        }
-                    }
-                ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {
                         "acceptors": [
@@ -5914,6 +5899,61 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.docdb#FailoverState": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.docdb#FailoverStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the global cluster. Possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>pending</b> – The service received a request to switch over or fail over the global cluster. \n                The global cluster's primary cluster and the specified secondary cluster are being verified before the operation starts.</p>\n            </li>\n            <li>\n               <p>\n                  <b>failing-over</b> – The chosen secondary cluster is being promoted to become the new primary cluster to fail over the global cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>cancelling</b> – The request to switch over or fail over the global cluster was cancelled and the primary cluster and the selected secondary cluster are returning to their previous states.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FromDbClusterArn": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is currently being demoted, and which is associated with this state.</p>"
+                    }
+                },
+                "ToDbClusterArn": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is currently being promoted, and which is associated with this state.</p>"
+                    }
+                },
+                "IsDataLossAllowed": {
+                    "target": "com.amazonaws.docdb#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the operation is a global switchover or a global failover. \n            If data loss is allowed, then the operation is a global failover. Otherwise, it's a switchover.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the state of scheduled or in-process operations on an Amazon DocumentDB global cluster. \n            This data type is empty unless a switchover or failover operation is scheduled or is in progress on the global cluster.</p>"
+            }
+        },
+        "com.amazonaws.docdb#FailoverStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "FAILING_OVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failing-over"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cancelling"
+                    }
+                }
+            }
+        },
         "com.amazonaws.docdb#Filter": {
             "type": "structure",
             "members": {
@@ -6018,6 +6058,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. </p>"
                     }
+                },
+                "FailoverState": {
+                    "target": "com.amazonaws.docdb#FailoverState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data object containing all properties for the current state of an in-process or pending switchover or failover process for this global cluster. \n            This object is empty unless the <code>SwitchoverGlobalCluster</code> or <code>FailoverGlobalCluster</code> operation was called on this global cluster.</p>"
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.docdb#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of global cluster tags.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6080,6 +6132,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. </p>"
                     }
+                },
+                "SynchronizationStatus": {
+                    "target": "com.amazonaws.docdb#GlobalClusterMemberSynchronizationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of synchronization of each Amazon DocumentDB cluster in the global cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6092,6 +6150,23 @@
                 "target": "com.amazonaws.docdb#GlobalClusterMember",
                 "traits": {
                     "smithy.api#xmlName": "GlobalClusterMember"
+                }
+            }
+        },
+        "com.amazonaws.docdb#GlobalClusterMemberSynchronizationStatus": {
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "connected"
+                    }
+                },
+                "PENDING_RESYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-resync"
+                    }
                 }
             }
         },

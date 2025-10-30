@@ -10912,6 +10912,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>"
                     }
+                },
+                "UserBackgroundSessionsEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether users can run background sessions when using Identity Center authentication with Glue services.</p>"
+                    }
                 }
             },
             "traits": {
@@ -22326,6 +22332,12 @@
                     "target": "com.amazonaws.glue#OrchestrationStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>"
+                    }
+                },
+                "UserBackgroundSessionsEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether users can run background sessions when using Identity Center authentication with Glue services.</p>"
                     }
                 }
             },
@@ -45572,6 +45584,12 @@
                     "target": "com.amazonaws.glue#IdentityCenterScopesList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>"
+                    }
+                },
+                "UserBackgroundSessionsEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether users can run background sessions when using Identity Center authentication with Glue services.</p>"
                     }
                 }
             },
