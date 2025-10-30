@@ -247,6 +247,33 @@ type BrowserNetworkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for enabling browser signing capabilities that allow agents to
+// cryptographically identify themselves to websites using HTTP message signatures.
+type BrowserSigningConfigInput struct {
+
+	// Specifies whether browser signing is enabled. When enabled, the browser will
+	// cryptographically sign HTTP requests to identify itself as an AI agent to bot
+	// control vendors.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The current browser signing configuration that shows whether cryptographic
+// agent identification is enabled for web bot authentication.
+type BrowserSigningConfigOutput struct {
+
+	// Indicates whether browser signing is currently enabled for cryptographic agent
+	// identification using HTTP message signatures.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a browser. A browser enables Amazon Bedrock
 // Agent to interact with web content.
 type BrowserSummary struct {

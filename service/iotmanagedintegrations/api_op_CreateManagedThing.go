@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a managed thing. A managed thing contains the device identifier,
-// protocol supported, and capabilities of the device in a protocol-specific
-// format.
+// protocol supported, and capabilities of the device in a data model format
+// defined by Managed integrations.
 func (c *Client) CreateManagedThing(ctx context.Context, params *CreateManagedThingInput, optFns ...func(*Options)) (*CreateManagedThingOutput, error) {
 	if params == nil {
 		params = &CreateManagedThingInput{}

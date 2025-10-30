@@ -1,0 +1,8 @@
+{
+    "id": "e21d21cd-f2aa-4e4a-ab25-c1091a0b9841",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/eksauth"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "ff7fa2f4-25e9-4ef7-86a6-92e6dc8d0539",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/sso"
+    ]
+}

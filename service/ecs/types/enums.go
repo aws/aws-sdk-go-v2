@@ -1307,6 +1307,46 @@ func (Scope) Values() []Scope {
 	}
 }
 
+type ServiceConnectAccessLoggingFormat string
+
+// Enum values for ServiceConnectAccessLoggingFormat
+const (
+	ServiceConnectAccessLoggingFormatText ServiceConnectAccessLoggingFormat = "TEXT"
+	ServiceConnectAccessLoggingFormatJson ServiceConnectAccessLoggingFormat = "JSON"
+)
+
+// Values returns all known values for ServiceConnectAccessLoggingFormat. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceConnectAccessLoggingFormat) Values() []ServiceConnectAccessLoggingFormat {
+	return []ServiceConnectAccessLoggingFormat{
+		"TEXT",
+		"JSON",
+	}
+}
+
+type ServiceConnectIncludeQueryParameters string
+
+// Enum values for ServiceConnectIncludeQueryParameters
+const (
+	ServiceConnectIncludeQueryParametersDisabled ServiceConnectIncludeQueryParameters = "DISABLED"
+	ServiceConnectIncludeQueryParametersEnabled  ServiceConnectIncludeQueryParameters = "ENABLED"
+)
+
+// Values returns all known values for ServiceConnectIncludeQueryParameters. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceConnectIncludeQueryParameters) Values() []ServiceConnectIncludeQueryParameters {
+	return []ServiceConnectIncludeQueryParameters{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type ServiceDeploymentLifecycleStage string
 
 // Enum values for ServiceDeploymentLifecycleStage

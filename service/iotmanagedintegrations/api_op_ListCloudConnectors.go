@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of connectors based on permissions.
+// Returns a list of connectors filtered by its Lambda Amazon Resource Name (ARN)
+// and type .
 func (c *Client) ListCloudConnectors(ctx context.Context, params *ListCloudConnectorsInput, optFns ...func(*Options)) (*ListCloudConnectorsOutput, error) {
 	if params == nil {
 		params = &ListCloudConnectorsInput{}

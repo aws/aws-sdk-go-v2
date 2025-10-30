@@ -76,6 +76,10 @@ type GetBrowserOutput struct {
 	// This member is required.
 	Status types.BrowserStatus
 
+	// The browser signing configuration that shows whether cryptographic agent
+	// identification is enabled for web bot authentication.
+	BrowserSigning *types.BrowserSigningConfigOutput
+
 	// The description of the browser.
 	Description *string
 

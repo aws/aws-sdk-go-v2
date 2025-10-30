@@ -265,8 +265,7 @@ type RegisterTaskDefinitionInput struct {
 	// from the response.
 	RequiresCompatibilities []types.Compatibility
 
-	// The operating system that your tasks definitions run on. A platform family is
-	// specified only for tasks using the Fargate launch type.
+	// The operating system that your tasks definitions run on.
 	RuntimePlatform *types.RuntimePlatform
 
 	// The metadata that you apply to the task definition to help you categorize and

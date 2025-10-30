@@ -27773,6 +27773,11 @@ func awsAwsjson11_serializeOpDocumentCreateGlueIdentityCenterConfigurationInput(
 		}
 	}
 
+	if v.UserBackgroundSessionsEnabled != nil {
+		ok := object.Key("UserBackgroundSessionsEnabled")
+		ok.Boolean(*v.UserBackgroundSessionsEnabled)
+	}
+
 	return nil
 }
 
@@ -33181,6 +33186,11 @@ func awsAwsjson11_serializeOpDocumentUpdateGlueIdentityCenterConfigurationInput(
 		if err := awsAwsjson11_serializeDocumentIdentityCenterScopesList(v.Scopes, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UserBackgroundSessionsEnabled != nil {
+		ok := object.Key("UserBackgroundSessionsEnabled")
+		ok.Boolean(*v.UserBackgroundSessionsEnabled)
 	}
 
 	return nil

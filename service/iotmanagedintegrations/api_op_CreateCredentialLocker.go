@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Create a product credential locker. This operation will trigger the creation of
-// all the manufacturing resources including the Wi-Fi setup key pair and device
-// certificate.
+// Create a credential locker.
+//
+// This operation will not trigger the creation of all the manufacturing resources.
 func (c *Client) CreateCredentialLocker(ctx context.Context, params *CreateCredentialLockerInput, optFns ...func(*Options)) (*CreateCredentialLockerOutput, error) {
 	if params == nil {
 		params = &CreateCredentialLockerInput{}

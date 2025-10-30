@@ -1898,7 +1898,7 @@ type ConfiguredAudienceModelAssociationSummary struct {
 // A table that has been configured for use in a collaboration.
 type ConfiguredTable struct {
 
-	// The columns within the underlying Glue table that can be utilized within
+	// The columns within the underlying Glue table that can be used within
 	// collaborations.
 	//
 	// This member is required.
@@ -5392,11 +5392,41 @@ type WorkerComputeConfiguration struct {
 	// PySpark jobs support a minimum value of 4 and a maximum value of 128.
 	Number *int32
 
+	// The configuration properties for the worker compute environment. These
+	// properties allow you to customize the compute settings for your Clean Rooms
+	// workloads.
+	Properties WorkerComputeConfigurationProperties
+
 	//  The worker compute configuration type.
 	Type WorkerComputeType
 
 	noSmithyDocumentSerde
 }
+
+// The configuration properties that define the compute environment settings for
+// workers in Clean Rooms. These properties enable customization of the underlying
+// compute environment to optimize performance for your specific workloads.
+//
+// The following types satisfy this interface:
+//
+//	WorkerComputeConfigurationPropertiesMemberSpark
+type WorkerComputeConfigurationProperties interface {
+	isWorkerComputeConfigurationProperties()
+}
+
+// The Spark configuration properties for SQL workloads. This map contains
+// key-value pairs that configure Apache Spark settings to optimize performance for
+// your data processing jobs. You can specify up to 50 Spark properties, with each
+// key being 1-200 characters and each value being 0-500 characters. These
+// properties allow you to adjust compute capacity for large datasets and complex
+// workloads.
+type WorkerComputeConfigurationPropertiesMemberSpark struct {
+	Value map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (*WorkerComputeConfigurationPropertiesMemberSpark) isWorkerComputeConfigurationProperties() {}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
@@ -5442,3 +5472,4 @@ func (*UnknownUnionMember) isQueryConstraint()                                  
 func (*UnknownUnionMember) isSchemaTypeProperties()                                {}
 func (*UnknownUnionMember) isSnowflakeTableSchema()                                {}
 func (*UnknownUnionMember) isTableReference()                                      {}
+func (*UnknownUnionMember) isWorkerComputeConfigurationProperties()                {}

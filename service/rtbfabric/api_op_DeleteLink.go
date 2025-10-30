@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a link between RTB applications.
+// Deletes a link between gateways.
 //
-// Permanently removes the connection between RTB applications. This action cannot
-// be undone.
+// Permanently removes the connection between gateways. This action cannot be
+// undone.
 func (c *Client) DeleteLink(ctx context.Context, params *DeleteLinkInput, optFns ...func(*Options)) (*DeleteLinkOutput, error) {
 	if params == nil {
 		params = &DeleteLinkInput{}

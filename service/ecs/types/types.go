@@ -817,7 +817,7 @@ type ContainerDefinition struct {
 	Command []string
 
 	// The number of cpu units reserved for the container. This parameter maps to
-	// CpuShares in the docker container create commandand the --cpu-shares option to
+	// CpuShares in the docker container create command and the --cpu-shares option to
 	// docker run.
 	//
 	// This field is optional for tasks using the Fargate launch type, and the only
@@ -4563,8 +4563,8 @@ type RuntimePlatform struct {
 	// The CPU architecture.
 	//
 	// You can run your Linux tasks on an ARM-based platform by setting the value to
-	// ARM64 . This option is available for tasks that run on Linux Amazon EC2 instance
-	// or Linux containers on Fargate.
+	// ARM64 . This option is available for tasks that run on Linux Amazon EC2
+	// instance, Amazon ECS Managed Instances, or Linux containers on Fargate.
 	CpuArchitecture CPUArchitecture
 
 	// The operating system.
@@ -4840,6 +4840,32 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Service Connect access logging. Access logs provide detailed
+// information about requests made to your service, including request patterns,
+// response codes, and timing data for debugging and monitoring purposes.
+//
+// To enable access logs, you must also specify a logConfiguration in the
+// serviceConnectConfiguration .
+type ServiceConnectAccessLogConfiguration struct {
+
+	// The format for Service Connect access log output. Choose TEXT for
+	// human-readable logs or JSON for structured data that integrates well with log
+	// analysis tools.
+	//
+	// This member is required.
+	Format ServiceConnectAccessLoggingFormat
+
+	// Specifies whether to include query parameters in Service Connect access logs.
+	//
+	// When enabled, query parameters from HTTP requests are included in the access
+	// logs. Consider security and privacy implications when enabling this feature, as
+	// query parameters may contain sensitive information such as request IDs and
+	// tokens. By default, this parameter is DISABLED .
+	IncludeQueryParameters ServiceConnectIncludeQueryParameters
+
+	noSmithyDocumentSerde
+}
+
 // Each alias ("endpoint") is a fully-qualified name and port number that other
 // tasks ("clients") can use to connect to this service.
 //
@@ -4913,6 +4939,16 @@ type ServiceConnectConfiguration struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	// The configuration for Service Connect access logging. Access logs capture
+	// detailed information about requests made to your service, including request
+	// patterns, response codes, and timing data. They can be useful for debugging
+	// connectivity issues, monitoring service performance, and auditing
+	// service-to-service communication for security and compliance purposes.
+	//
+	// To enable access logs, you must also specify a logConfiguration in the
+	// serviceConnectConfiguration .
+	AccessLogConfiguration *ServiceConnectAccessLogConfiguration
 
 	// The log configuration for the container. This parameter maps to LogConfig in
 	// the docker container create command and the --log-driver option to docker run.

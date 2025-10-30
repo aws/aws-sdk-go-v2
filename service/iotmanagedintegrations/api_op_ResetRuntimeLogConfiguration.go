@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reset a runtime log configuration for a specific managed thing or for all
-// managed things as a group.
+// Reset a runtime log configuration for a specific managed thing.
 func (c *Client) ResetRuntimeLogConfiguration(ctx context.Context, params *ResetRuntimeLogConfigurationInput, optFns ...func(*Options)) (*ResetRuntimeLogConfigurationOutput, error) {
 	if params == nil {
 		params = &ResetRuntimeLogConfigurationInput{}

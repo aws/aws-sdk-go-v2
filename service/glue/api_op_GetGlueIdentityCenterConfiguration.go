@@ -47,6 +47,10 @@ type GetGlueIdentityCenterConfigurationOutput struct {
 	// for the Glue configuration.
 	Scopes []string
 
+	// Indicates whether users can run background sessions when using Identity Center
+	// authentication with Glue services.
+	UserBackgroundSessionsEnabled *bool
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -41,6 +41,10 @@ type CreateBrowserInput struct {
 	// This member is required.
 	NetworkConfiguration *types.BrowserNetworkConfiguration
 
+	// The browser signing configuration that enables cryptographic agent
+	// identification using HTTP message signatures for web bot authentication.
+	BrowserSigning *types.BrowserSigningConfigInput
+
 	// A unique, case-sensitive identifier to ensure that the operation completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// ignores the request but does not return an error.

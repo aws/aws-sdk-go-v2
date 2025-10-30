@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters an account association, removing the connection between a managed
-// thing and a third-party account.
+// Deregister an account association from a managed thing.
 func (c *Client) DeregisterAccountAssociation(ctx context.Context, params *DeregisterAccountAssociationInput, optFns ...func(*Options)) (*DeregisterAccountAssociationOutput, error) {
 	if params == nil {
 		params = &DeregisterAccountAssociationInput{}

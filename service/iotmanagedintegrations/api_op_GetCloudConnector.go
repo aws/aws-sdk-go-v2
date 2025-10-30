@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets all the information about a connector for a connector developer.
+// Get configuration details for a cloud connector.
 func (c *Client) GetCloudConnector(ctx context.Context, params *GetCloudConnectorInput, optFns ...func(*Options)) (*GetCloudConnectorOutput, error) {
 	if params == nil {
 		params = &GetCloudConnectorInput{}

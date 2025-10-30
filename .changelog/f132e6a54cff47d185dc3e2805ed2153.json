@@ -1,0 +1,8 @@
+{
+    "id": "f132e6a5-4cff-47d1-85dc-3e2805ed2153",
+    "type": "feature",
+    "description": "Amazon ECS Service Connect now supports Envoy access logs, providing deeper observability into request-level traffic patterns and service interactions.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -14211,6 +14211,97 @@ func awsAwsquery_deserializeDocumentEventSubscriptionsListUnwrapped(v *[]types.E
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentFailoverState(v **types.FailoverState, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FailoverState
+	if *v == nil {
+		sv = &types.FailoverState{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FromDbClusterArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FromDbClusterArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IsDataLossAllowed", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.IsDataLossAllowed = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.FailoverStatus(xtv)
+			}
+
+		case strings.EqualFold("ToDbClusterArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ToDbClusterArn = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentGlobalCluster(v **types.GlobalCluster, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14288,6 +14379,12 @@ func awsAwsquery_deserializeDocumentGlobalCluster(v **types.GlobalCluster, decod
 				sv.EngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("FailoverState", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentFailoverState(&sv.FailoverState, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("GlobalClusterArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -14360,6 +14457,12 @@ func awsAwsquery_deserializeDocumentGlobalCluster(v **types.GlobalCluster, decod
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
 				}
 				sv.StorageEncrypted = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("TagList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:
@@ -14548,6 +14651,19 @@ func awsAwsquery_deserializeDocumentGlobalClusterMember(v **types.GlobalClusterM
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentReadersArnList(&sv.Readers, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SynchronizationStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SynchronizationStatus = types.GlobalClusterMemberSynchronizationStatus(xtv)
 			}
 
 		default:

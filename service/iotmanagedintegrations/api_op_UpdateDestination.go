@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a destination specified by id.
+// Update a destination specified by name.
 func (c *Client) UpdateDestination(ctx context.Context, params *UpdateDestinationInput, optFns ...func(*Options)) (*UpdateDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateDestinationInput{}

@@ -17430,6 +17430,55 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentServiceConnectAccessLogConfiguration(v **types.ServiceConnectAccessLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectAccessLogConfiguration
+	if *v == nil {
+		sv = &types.ServiceConnectAccessLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceConnectAccessLoggingFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.ServiceConnectAccessLoggingFormat(jtv)
+			}
+
+		case "includeQueryParameters":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceConnectIncludeQueryParameters to be of type string, got %T instead", value)
+				}
+				sv.IncludeQueryParameters = types.ServiceConnectIncludeQueryParameters(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentServiceConnectClientAlias(v **types.ServiceConnectClientAlias, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17544,6 +17593,11 @@ func awsAwsjson11_deserializeDocumentServiceConnectConfiguration(v **types.Servi
 
 	for key, value := range shape {
 		switch key {
+		case "accessLogConfiguration":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectAccessLogConfiguration(&sv.AccessLogConfiguration, value); err != nil {
+				return err
+			}
+
 		case "enabled":
 			if value != nil {
 				jtv, ok := value.(bool)

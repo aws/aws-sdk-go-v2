@@ -1,0 +1,8 @@
+{
+    "id": "f01f5fe6-997f-45d8-b506-fb4daa6d0539",
+    "type": "feature",
+    "description": "This release adds the capability to enable User Background Sessions for customers running Trusted Identity Propagation enabled Interactive Sessions on AWS Glue.",
+    "modules": [
+        "service/glue"
+    ]
+}

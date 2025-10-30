@@ -1,0 +1,8 @@
+{
+    "id": "f83ee63b-42f4-4554-9627-c48efbc20a96",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/geoplaces"
+    ]
+}

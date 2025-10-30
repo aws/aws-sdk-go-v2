@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Get the attributes and capabilities associated with a managed thing.
+// Get details of a managed thing including its attributes and capabilities.
 func (c *Client) GetManagedThing(ctx context.Context, params *GetManagedThingInput, optFns ...func(*Options)) (*GetManagedThingOutput, error) {
 	if params == nil {
 		params = &GetManagedThingInput{}

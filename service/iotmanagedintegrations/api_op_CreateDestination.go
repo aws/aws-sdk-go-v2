@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Create a destination. IoT managed integrations uses the destination to
+//	Create a notification destination such as Kinesis Data Streams that receive
 //
-// determine where to deliver notifications for a device.
+// events and notifications from Managed integrations. Managed integrations uses
+// the destination to determine where to deliver notifications.
 func (c *Client) CreateDestination(ctx context.Context, params *CreateDestinationInput, optFns ...func(*Options)) (*CreateDestinationOutput, error) {
 	if params == nil {
 		params = &CreateDestinationInput{}

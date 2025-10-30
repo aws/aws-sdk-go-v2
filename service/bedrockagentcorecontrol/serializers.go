@@ -449,6 +449,13 @@ func awsRestjson1_serializeOpDocumentCreateBrowserInput(v *CreateBrowserInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.BrowserSigning != nil {
+		ok := object.Key("browserSigning")
+		if err := awsRestjson1_serializeDocumentBrowserSigningConfigInput(v.BrowserSigning, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -5107,6 +5114,18 @@ func awsRestjson1_serializeDocumentBrowserNetworkConfiguration(v *types.BrowserN
 		if err := awsRestjson1_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrowserSigningConfigInput(v *types.BrowserSigningConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of a link between RTB applications.
+// Updates the configuration of a link between gateways.
 //
 // Allows you to modify settings and parameters for an existing link.
 func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns ...func(*Options)) (*UpdateLinkOutput, error) {

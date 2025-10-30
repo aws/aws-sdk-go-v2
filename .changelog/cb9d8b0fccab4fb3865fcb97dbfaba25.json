@@ -1,0 +1,8 @@
+{
+    "id": "cb9d8b0f-ccab-4fb3-865f-cb97dbfaba25",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/appflow"
+    ]
+}

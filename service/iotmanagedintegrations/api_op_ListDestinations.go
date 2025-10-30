@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all destination names under one Amazon Web Services account.
+// List all notification destinations.
 func (c *Client) ListDestinations(ctx context.Context, params *ListDestinationsInput, optFns ...func(*Options)) (*ListDestinationsOutput, error) {
 	if params == nil {
 		params = &ListDestinationsInput{}

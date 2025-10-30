@@ -1,0 +1,8 @@
+{
+    "id": "aa7bef80-cd0a-4237-a667-eac30b773209",
+    "type": "documentation",
+    "description": "RTB Fabric documentation update.",
+    "modules": [
+        "service/rtbfabric"
+    ]
+}

@@ -75060,6 +75060,15 @@ func awsAwsjson11_deserializeOpDocumentGetGlueIdentityCenterConfigurationOutput(
 				return err
 			}
 
+		case "UserBackgroundSessionsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.UserBackgroundSessionsEnabled = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

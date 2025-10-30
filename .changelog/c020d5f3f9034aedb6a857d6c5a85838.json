@@ -1,0 +1,8 @@
+{
+    "id": "c020d5f3-f903-4aed-b6a8-57d6c5a85838",
+    "type": "feature",
+    "description": "Adding FailoverState and TagList to GlobalCluster and SynchronizationStatus to GlobalClusterMember.",
+    "modules": [
+        "service/docdb"
+    ]
+}

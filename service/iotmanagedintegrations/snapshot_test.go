@@ -482,6 +482,18 @@ func TestCheckSnapshot_GetManagedThingCapabilities(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetManagedThingCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedThingCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedThingCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetManagedThingConnectivityData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetManagedThingConnectivityData(context.Background(), nil, func(o *Options) {
@@ -1458,6 +1470,18 @@ func TestUpdateSnapshot_GetManagedThingCapabilities(t *testing.T) {
 	_, err := svc.GetManagedThingCapabilities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetManagedThingCapabilities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetManagedThingCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedThingCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedThingCertificate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Get the over-the-air (OTA) task.
+// Get details of the over-the-air (OTA) task by its task id.
 func (c *Client) GetOtaTask(ctx context.Context, params *GetOtaTaskInput, optFns ...func(*Options)) (*GetOtaTaskOutput, error) {
 	if params == nil {
 		params = &GetOtaTaskInput{}

@@ -802,6 +802,41 @@ type EventSubscription struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the state of scheduled or in-process operations on an Amazon
+// DocumentDB global cluster. This data type is empty unless a switchover or
+// failover operation is scheduled or is in progress on the global cluster.
+type FailoverState struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is
+	// currently being demoted, and which is associated with this state.
+	FromDbClusterArn *string
+
+	// Indicates whether the operation is a global switchover or a global failover. If
+	// data loss is allowed, then the operation is a global failover. Otherwise, it's a
+	// switchover.
+	IsDataLossAllowed *bool
+
+	// The current status of the global cluster. Possible values are as follows:
+	//
+	//   - pending – The service received a request to switch over or fail over the
+	//   global cluster. The global cluster's primary cluster and the specified secondary
+	//   cluster are being verified before the operation starts.
+	//
+	//   - failing-over – The chosen secondary cluster is being promoted to become the
+	//   new primary cluster to fail over the global cluster.
+	//
+	//   - cancelling – The request to switch over or fail over the global cluster was
+	//   cancelled and the primary cluster and the selected secondary cluster are
+	//   returning to their previous states.
+	Status FailoverStatus
+
+	// The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is
+	// currently being promoted, and which is associated with this state.
+	ToDbClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
 // A named set of filter values, used to return a more specific list of results.
 // You can use a filter to match a set of resources by specific criteria, such as
 // IDs.
@@ -837,6 +872,12 @@ type GlobalCluster struct {
 	// Indicates the database engine version.
 	EngineVersion *string
 
+	// A data object containing all properties for the current state of an in-process
+	// or pending switchover or failover process for this global cluster. This object
+	// is empty unless the SwitchoverGlobalCluster or FailoverGlobalCluster operation
+	// was called on this global cluster.
+	FailoverState *FailoverState
+
 	// The Amazon Resource Name (ARN) for the global cluster.
 	GlobalClusterArn *string
 
@@ -859,6 +900,9 @@ type GlobalCluster struct {
 	// The storage encryption setting for the global cluster.
 	StorageEncrypted *bool
 
+	// A list of global cluster tags.
+	TagList []Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -877,6 +921,10 @@ type GlobalClusterMember struct {
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Amazon DocumentDB global cluster.
 	Readers []string
+
+	// The status of synchronization of each Amazon DocumentDB cluster in the global
+	// cluster.
+	SynchronizationStatus GlobalClusterMemberSynchronizationStatus
 
 	noSmithyDocumentSerde
 }

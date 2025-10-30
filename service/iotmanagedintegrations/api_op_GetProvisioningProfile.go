@@ -46,7 +46,7 @@ type GetProvisioningProfileOutput struct {
 	// The id of the claim certificate.
 	ClaimCertificate *string
 
-	// The provisioning profile id..
+	// The provisioning profile id.
 	Id *string
 
 	// The name of the provisioning template.

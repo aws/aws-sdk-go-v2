@@ -590,6 +590,26 @@ func (m *validateOpGetManagedThingCapabilities) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetManagedThingCertificate struct {
+}
+
+func (*validateOpGetManagedThingCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedThingCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedThingCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedThingCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetManagedThingConnectivityData struct {
 }
 
@@ -1384,6 +1404,10 @@ func addOpGetEventLogConfigurationValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetManagedThingCapabilitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetManagedThingCapabilities{}, middleware.After)
+}
+
+func addOpGetManagedThingCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedThingCertificate{}, middleware.After)
 }
 
 func addOpGetManagedThingConnectivityDataValidationMiddleware(stack *middleware.Stack) error {
@@ -2510,6 +2534,21 @@ func validateOpGetManagedThingCapabilitiesInput(v *GetManagedThingCapabilitiesIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetManagedThingCapabilitiesInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetManagedThingCertificateInput(v *GetManagedThingCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedThingCertificateInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}

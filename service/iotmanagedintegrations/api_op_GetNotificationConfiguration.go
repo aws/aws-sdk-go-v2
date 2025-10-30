@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Get a notification configuration.
+// Get a notification configuration for a specified event type.
 func (c *Client) GetNotificationConfiguration(ctx context.Context, params *GetNotificationConfigurationInput, optFns ...func(*Options)) (*GetNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &GetNotificationConfigurationInput{}

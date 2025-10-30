@@ -21031,7 +21031,7 @@ func awsRestjson1_deserializeDocumentDifferentialPrivacyColumn(v **types.Differe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -28382,6 +28382,42 @@ func awsRestjson1_deserializeDocumentSnowflakeTableSchemaV1(v **types.SnowflakeT
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSparkProperties(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SparkPropertyValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTableReference(v *types.TableReference, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28690,6 +28726,11 @@ func awsRestjson1_deserializeDocumentWorkerComputeConfiguration(v **types.Worker
 				sv.Number = ptr.Int32(int32(i64))
 			}
 
+		case "properties":
+			if err := awsRestjson1_deserializeDocumentWorkerComputeConfigurationProperties(&sv.Properties, value); err != nil {
+				return err
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -28705,6 +28746,44 @@ func awsRestjson1_deserializeDocumentWorkerComputeConfiguration(v **types.Worker
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkerComputeConfigurationProperties(v *types.WorkerComputeConfigurationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.WorkerComputeConfigurationProperties
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "spark":
+			var mv map[string]string
+			if err := awsRestjson1_deserializeDocumentSparkProperties(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.WorkerComputeConfigurationPropertiesMemberSpark{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

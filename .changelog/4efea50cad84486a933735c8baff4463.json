@@ -1,0 +1,8 @@
+{
+    "id": "4efea50c-ad84-486a-9337-35c8baff4463",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/s3outposts"
+    ]
+}

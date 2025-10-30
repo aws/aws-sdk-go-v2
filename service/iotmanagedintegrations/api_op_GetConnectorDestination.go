@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a connector destination of a cloud-to-cloud (C2C) connector connecting to a
-// customer's Amazon Web Services account.
+// Get connector destination details linked to a cloud-to-cloud (C2C) connector.
 func (c *Client) GetConnectorDestination(ctx context.Context, params *GetConnectorDestinationInput, optFns ...func(*Options)) (*GetConnectorDestinationOutput, error) {
 	if params == nil {
 		params = &GetConnectorDestinationInput{}

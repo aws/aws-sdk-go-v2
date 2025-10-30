@@ -14,10 +14,10 @@ import (
 	"time"
 )
 
-// Retrieves information about a link between RTB applications.
+// Retrieves information about a link between gateways.
 //
 // Returns detailed information about the link configuration, status, and
-// associated RTB applications.
+// associated gateways.
 func (c *Client) GetLink(ctx context.Context, params *GetLinkInput, optFns ...func(*Options)) (*GetLinkOutput, error) {
 	if params == nil {
 		params = &GetLinkInput{}

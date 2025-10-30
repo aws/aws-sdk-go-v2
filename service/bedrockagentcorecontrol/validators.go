@@ -1190,6 +1190,18 @@ func validateBrowserNetworkConfiguration(v *types.BrowserNetworkConfiguration) e
 	}
 }
 
+func validateBrowserSigningConfigInput(v *types.BrowserSigningConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserSigningConfigInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeInterpreterNetworkConfiguration(v *types.CodeInterpreterNetworkConfiguration) error {
 	if v == nil {
 		return nil
@@ -2519,6 +2531,11 @@ func validateOpCreateBrowserInput(v *CreateBrowserInput) error {
 	if v.Recording != nil {
 		if err := validateRecordingConfig(v.Recording); err != nil {
 			invalidParams.AddNested("Recording", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BrowserSigning != nil {
+		if err := validateBrowserSigningConfigInput(v.BrowserSigning); err != nil {
+			invalidParams.AddNested("BrowserSigning", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

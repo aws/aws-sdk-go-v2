@@ -1,0 +1,8 @@
+{
+    "id": "ba5bd3ce-968f-4abc-9a60-cbbd59f4e696",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/serverlessapplicationrepository"
+    ]
+}

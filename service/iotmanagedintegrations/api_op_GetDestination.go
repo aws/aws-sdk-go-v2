@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets a destination by ID.
+// Gets a destination by name.
 func (c *Client) GetDestination(ctx context.Context, params *GetDestinationInput, optFns ...func(*Options)) (*GetDestinationOutput, error) {
 	if params == nil {
 		params = &GetDestinationInput{}

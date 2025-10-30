@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Creates a new link between RTB applications.
+// Creates a new link between gateways.
 //
-// Establishes a connection that allows RTB applications to communicate and
-// exchange bid requests and responses.
+// Establishes a connection that allows gateways to communicate and exchange bid
+// requests and responses.
 func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns ...func(*Options)) (*CreateLinkOutput, error) {
 	if params == nil {
 		params = &CreateLinkInput{}

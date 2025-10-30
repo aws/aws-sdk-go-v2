@@ -4774,6 +4774,11 @@ func awsRestjson1_deserializeOpDocumentGetBrowserOutput(v **GetBrowserOutput, va
 				sv.BrowserId = ptr.String(jtv)
 			}
 
+		case "browserSigning":
+			if err := awsRestjson1_deserializeDocumentBrowserSigningConfigOutput(&sv.BrowserSigning, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12268,6 +12273,46 @@ func awsRestjson1_deserializeDocumentBrowserNetworkConfiguration(v **types.Brows
 		case "vpcConfig":
 			if err := awsRestjson1_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBrowserSigningConfigOutput(v **types.BrowserSigningConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BrowserSigningConfigOutput
+	if *v == nil {
+		sv = &types.BrowserSigningConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
 			}
 
 		default:

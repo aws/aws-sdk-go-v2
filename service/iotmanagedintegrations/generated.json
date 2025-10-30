@@ -43,6 +43,7 @@
         "api_op_GetHubConfiguration.go",
         "api_op_GetManagedThing.go",
         "api_op_GetManagedThingCapabilities.go",
+        "api_op_GetManagedThingCertificate.go",
         "api_op_GetManagedThingConnectivityData.go",
         "api_op_GetManagedThingMetaData.go",
         "api_op_GetManagedThingState.go",

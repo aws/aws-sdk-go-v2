@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists links associated with an RTB application.
+// Lists links associated with gateways.
 //
-// Returns a list of all links for the specified RTB application, including their
-// status and configuration details.
+// Returns a list of all links for the specified gateways, including their status
+// and configuration details.
 func (c *Client) ListLinks(ctx context.Context, params *ListLinksInput, optFns ...func(*Options)) (*ListLinksOutput, error) {
 	if params == nil {
 		params = &ListLinksInput{}

@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove a third party account and related devices from an end user.
+// Remove a third-party account association for an end user.
+//
+// You must first call the DeregisterAccountAssociation to remove the connection
+// between the managed thing and the third-party account before calling the
+// DeleteAccountAssociation API.
 func (c *Client) DeleteAccountAssociation(ctx context.Context, params *DeleteAccountAssociationInput, optFns ...func(*Options)) (*DeleteAccountAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteAccountAssociationInput{}

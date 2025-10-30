@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Rejects a link request between RTB applications.
+// Rejects a link request between gateways.
 //
-// When a requester RTB application requests to link with a responder RTB
-// application, the responder can use this operation to decline the link request.
+// When a requester gateway requests to link with a responder gateway, the
+// responder can use this operation to decline the link request.
 func (c *Client) RejectLink(ctx context.Context, params *RejectLinkInput, optFns ...func(*Options)) (*RejectLinkOutput, error) {
 	if params == nil {
 		params = &RejectLinkInput{}

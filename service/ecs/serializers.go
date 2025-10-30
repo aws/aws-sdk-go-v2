@@ -6502,6 +6502,23 @@ func awsAwsjson11_serializeDocumentSecretList(v []types.Secret, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentServiceConnectAccessLogConfiguration(v *types.ServiceConnectAccessLogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if len(v.IncludeQueryParameters) > 0 {
+		ok := object.Key("includeQueryParameters")
+		ok.String(string(v.IncludeQueryParameters))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServiceConnectClientAlias(v *types.ServiceConnectClientAlias, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6542,6 +6559,13 @@ func awsAwsjson11_serializeDocumentServiceConnectClientAliasList(v []types.Servi
 func awsAwsjson11_serializeDocumentServiceConnectConfiguration(v *types.ServiceConnectConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccessLogConfiguration != nil {
+		ok := object.Key("accessLogConfiguration")
+		if err := awsAwsjson11_serializeDocumentServiceConnectAccessLogConfiguration(v.AccessLogConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	{
 		ok := object.Key("enabled")

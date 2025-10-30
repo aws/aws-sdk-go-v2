@@ -34,6 +34,10 @@ type UpdateGlueIdentityCenterConfigurationInput struct {
 	// levels for the Glue configuration.
 	Scopes []string
 
+	// Specifies whether users can run background sessions when using Identity Center
+	// authentication with Glue services.
+	UserBackgroundSessionsEnabled *bool
+
 	noSmithyDocumentSerde
 }
 

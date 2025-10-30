@@ -1755,6 +1755,11 @@ func awsRestjson1_serializeDocumentIdentityCenterConfigurationInput(v *types.Ide
 		ok.String(*v.IdentityCenterInstanceArn)
 	}
 
+	if v.UserBackgroundSessionsEnabled != nil {
+		ok := object.Key("userBackgroundSessionsEnabled")
+		ok.Boolean(*v.UserBackgroundSessionsEnabled)
+	}
+
 	return nil
 }
 

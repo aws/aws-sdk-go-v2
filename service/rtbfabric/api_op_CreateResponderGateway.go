@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a responder gateway.
+//
+// A domain name or managed endpoint is required.
 func (c *Client) CreateResponderGateway(ctx context.Context, params *CreateResponderGatewayInput, optFns ...func(*Options)) (*CreateResponderGatewayOutput, error) {
 	if params == nil {
 		params = &CreateResponderGatewayInput{}

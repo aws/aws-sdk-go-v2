@@ -269,8 +269,10 @@ type Hive struct {
 	noSmithyDocumentSerde
 }
 
-// The IAM Identity Center Configuration that includes the Identify Center
-// instance and application ARNs that provide trusted-identity propagation.
+// The IAM Identity Center Configuration accepts the Identity Center instance
+// parameter required to enable trusted identity propagation. This configuration
+// allows identity propagation between integrated services and the Identity Center
+// instance.
 type IdentityCenterConfiguration struct {
 
 	// The ARN of the EMR Serverless created IAM Identity Center Application that
@@ -280,17 +282,27 @@ type IdentityCenterConfiguration struct {
 	// The ARN of the IAM Identity Center instance.
 	IdentityCenterInstanceArn *string
 
+	// Enables user background sessions for this application so Livy sessions can
+	// continue running after users log out of their interactive notebook or their
+	// Identity Center sessions expire.
+	UserBackgroundSessionsEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
-// Specifies the IAM Identity Center configuration used to enable or disable
-// trusted identity propagation. When provided, this configuration determines how
-// the application interacts with IAM Identity Center for user authentication and
-// access control.
+// The IAM Identity Center Configuration accepts the Identity Center instance
+// parameter required to enable trusted identity propagation. This configuration
+// allows identity propagation between integrated services and the Identity Center
+// instance.
 type IdentityCenterConfigurationInput struct {
 
 	// The ARN of the IAM Identity Center instance.
 	IdentityCenterInstanceArn *string
+
+	// Enables user background sessions for this application so Livy sessions can
+	// continue running after users log out of their interactive notebook or their
+	// Identity Center sessions expire.
+	UserBackgroundSessionsEnabled *bool
 
 	noSmithyDocumentSerde
 }

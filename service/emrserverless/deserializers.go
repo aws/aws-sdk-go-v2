@@ -3333,6 +3333,15 @@ func awsRestjson1_deserializeDocumentIdentityCenterConfiguration(v **types.Ident
 				sv.IdentityCenterInstanceArn = ptr.String(jtv)
 			}
 
+		case "userBackgroundSessionsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UserBackgroundSessionsEnabled = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

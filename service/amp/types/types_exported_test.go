@@ -7,6 +7,45 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 )
 
+func ExampleAnomalyDetectorConfiguration_outputUsage() {
+	var union types.AnomalyDetectorConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AnomalyDetectorConfigurationMemberRandomCutForest:
+		_ = v.Value // Value is types.RandomCutForestConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RandomCutForestConfiguration
+
+func ExampleAnomalyDetectorMissingDataAction_outputUsage() {
+	var union types.AnomalyDetectorMissingDataAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AnomalyDetectorMissingDataActionMemberMarkAsAnomaly:
+		_ = v.Value // Value is bool
+
+	case *types.AnomalyDetectorMissingDataActionMemberSkip:
+		_ = v.Value // Value is bool
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *bool
+
 func ExampleDestination_outputUsage() {
 	var union types.Destination
 	// type switches can be used to check the union value
@@ -24,6 +63,27 @@ func ExampleDestination_outputUsage() {
 }
 
 var _ *types.AmpConfiguration
+
+func ExampleIgnoreNearExpected_outputUsage() {
+	var union types.IgnoreNearExpected
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IgnoreNearExpectedMemberAmount:
+		_ = v.Value // Value is float64
+
+	case *types.IgnoreNearExpectedMemberRatio:
+		_ = v.Value // Value is float64
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *float64
 
 func ExampleScrapeConfiguration_outputUsage() {
 	var union types.ScrapeConfiguration

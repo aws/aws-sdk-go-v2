@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-// Accepts a link request between RTB applications.
+// Accepts a link request between gateways.
 //
-// When a requester RTB application requests to link with a responder RTB
-// application, the responder can use this operation to accept the link request and
-// establish the connection.
+// When a requester gateway requests to link with a responder gateway, the
+// responder can use this operation to accept the link request and establish the
+// connection.
 func (c *Client) AcceptLink(ctx context.Context, params *AcceptLinkInput, optFns ...func(*Options)) (*AcceptLinkOutput, error) {
 	if params == nil {
 		params = &AcceptLinkInput{}

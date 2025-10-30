@@ -2176,6 +2176,21 @@ func validateSecretList(v []types.Secret) error {
 	}
 }
 
+func validateServiceConnectAccessLogConfiguration(v *types.ServiceConnectAccessLogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceConnectAccessLogConfiguration"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceConnectClientAlias(v *types.ServiceConnectClientAlias) error {
 	if v == nil {
 		return nil
@@ -2226,6 +2241,11 @@ func validateServiceConnectConfiguration(v *types.ServiceConnectConfiguration) e
 	if v.LogConfiguration != nil {
 		if err := validateLogConfiguration(v.LogConfiguration); err != nil {
 			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessLogConfiguration != nil {
+		if err := validateServiceConnectAccessLogConfiguration(v.AccessLogConfiguration); err != nil {
+			invalidParams.AddNested("AccessLogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

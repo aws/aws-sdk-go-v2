@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create an over-the-air (OTA) task to update a device.
+// Create an over-the-air (OTA) task to target a device.
 func (c *Client) CreateOtaTask(ctx context.Context, params *CreateOtaTaskInput, optFns ...func(*Options)) (*CreateOtaTaskOutput, error) {
 	if params == nil {
 		params = &CreateOtaTaskInput{}

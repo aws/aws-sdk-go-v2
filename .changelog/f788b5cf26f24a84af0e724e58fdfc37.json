@@ -1,0 +1,8 @@
+{
+    "id": "f788b5cf-26f2-4a84-af0e-724e58fdfc37",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

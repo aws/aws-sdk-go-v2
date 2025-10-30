@@ -74,6 +74,18 @@ func TestCheckSnapshot_CreateAlertManagerDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAnomalyDetector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_DeleteAlertManagerDefinition(t *testing.T) {
 	_, err := svc.DeleteAlertManagerDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAlertManagerDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAnomalyDetector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -235,6 +259,18 @@ func TestCheckSnapshot_DescribeAlertManagerDefinition(t *testing.T) {
 	_, err := svc.DescribeAlertManagerDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAlertManagerDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAnomalyDetector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +386,18 @@ func TestCheckSnapshot_GetDefaultScraperConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAnomalyDetectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnomalyDetectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAnomalyDetectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRuleGroupsNamespaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRuleGroupsNamespaces(context.Background(), nil, func(o *Options) {
@@ -403,6 +451,18 @@ func TestCheckSnapshot_PutAlertManagerDefinition(t *testing.T) {
 	_, err := svc.PutAlertManagerDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutAlertManagerDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAnomalyDetector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -541,6 +601,18 @@ func TestUpdateSnapshot_CreateAlertManagerDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAnomalyDetector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -606,6 +678,18 @@ func TestUpdateSnapshot_DeleteAlertManagerDefinition(t *testing.T) {
 	_, err := svc.DeleteAlertManagerDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAlertManagerDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAnomalyDetector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -702,6 +786,18 @@ func TestUpdateSnapshot_DescribeAlertManagerDefinition(t *testing.T) {
 	_, err := svc.DescribeAlertManagerDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAlertManagerDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAnomalyDetector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -817,6 +913,18 @@ func TestUpdateSnapshot_GetDefaultScraperConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAnomalyDetectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnomalyDetectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAnomalyDetectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRuleGroupsNamespaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRuleGroupsNamespaces(context.Background(), nil, func(o *Options) {
@@ -870,6 +978,18 @@ func TestUpdateSnapshot_PutAlertManagerDefinition(t *testing.T) {
 	_, err := svc.PutAlertManagerDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAlertManagerDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAnomalyDetector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAnomalyDetector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAnomalyDetector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

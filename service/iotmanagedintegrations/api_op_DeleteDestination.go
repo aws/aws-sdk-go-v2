@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a customer-managed destination specified by id.
+// Deletes a notification destination specified by name.
 func (c *Client) DeleteDestination(ctx context.Context, params *DeleteDestinationInput, optFns ...func(*Options)) (*DeleteDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteDestinationInput{}

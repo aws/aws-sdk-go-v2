@@ -1,0 +1,8 @@
+{
+    "id": "7056b5bf-d7d4-413e-a7dd-1191c4f94f38",
+    "type": "feature",
+    "description": "Added support for advanced Spark configurations to optimize SQL performance",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

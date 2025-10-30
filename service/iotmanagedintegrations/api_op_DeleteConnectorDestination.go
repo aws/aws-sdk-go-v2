@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a connector destination for connecting a cloud-to-cloud (C2C) connector
-// to the customer's Amazon Web Services account.
+// Delete a connector destination linked to a cloud-to-cloud (C2C) connector.
+//
+// Deletion can't be done if the account association has used this connector
+// destination.
 func (c *Client) DeleteConnectorDestination(ctx context.Context, params *DeleteConnectorDestinationInput, optFns ...func(*Options)) (*DeleteConnectorDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteConnectorDestinationInput{}

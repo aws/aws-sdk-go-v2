@@ -1,0 +1,8 @@
+{
+    "id": "96e7935e-e20a-43de-b129-c2f834e08c4a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/applicationcostprofiler"
+    ]
+}

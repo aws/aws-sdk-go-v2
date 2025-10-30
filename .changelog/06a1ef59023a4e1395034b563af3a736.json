@@ -1,0 +1,8 @@
+{
+    "id": "06a1ef59-023a-4e13-9503-4b563af3a736",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/codecommit"
+    ]
+}

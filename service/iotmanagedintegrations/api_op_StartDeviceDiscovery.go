@@ -15,7 +15,7 @@ import (
 //	This API is used to start device discovery for hub-connected and
 //
 // third-party-connected devices. The authentication material (install code) is
-// passed as a message to the controller telling it to start the discovery.
+// delivered as a message to the controller instructing it to start the discovery.
 func (c *Client) StartDeviceDiscovery(ctx context.Context, params *StartDeviceDiscoveryInput, optFns ...func(*Options)) (*StartDeviceDiscoveryOutput, error) {
 	if params == nil {
 		params = &StartDeviceDiscoveryInput{}

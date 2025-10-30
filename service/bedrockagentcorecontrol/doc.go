@@ -3,8 +3,6 @@
 // Package bedrockagentcorecontrol provides the API client, operations, and
 // parameter types for Amazon Bedrock AgentCore Control.
 //
-// is in preview release and is subject to change.
-//
 // Welcome to the Amazon Bedrock AgentCore Control plane API reference. Control
 // plane actions configure, create, modify, and monitor Amazon Web Services
 // resources.

@@ -1,0 +1,8 @@
+{
+    "id": "7902a5e5-3f04-4dd6-b358-38ccdfbdc916",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/auditmanager"
+    ]
+}
