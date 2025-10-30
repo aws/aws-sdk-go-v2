@@ -1,3 +1,8 @@
+# v1.41.1 (2025-10-30)
+
+* **Bug Fix**: Remove arbitrary read timeout on GetRecords which was causing response read panic. See #2752.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2025-10-27)
 
 * **Feature**: Adds support for record sizes up to 10MiB and introduces new UpdateMaxRecordSize API to modify stream record size limits. Adds record size parameters to existing CreateStream and DescribeStreamSummary APIs for request and response payloads respectively.

@@ -1,8 +1,0 @@
-{
-    "id": "bb808fef-6a4a-4cff-ae56-54d4c284927d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/firehose"
-    ]
-}

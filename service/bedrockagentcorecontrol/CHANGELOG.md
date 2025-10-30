@@ -1,3 +1,8 @@
+# v1.12.0 (2025-10-30)
+
+* **Feature**: Web-Bot-Auth support for AgentCore Browser tool to help reduce captcha challenges.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2025-10-23)
 
 * **Feature**: Fixing the service documentation name

@@ -1,8 +1,0 @@
-{
-    "id": "a4111cb9-db0c-4c89-b873-0e070612348e",
-    "type": "feature",
-    "description": "Add cross account VPC endpoint service connectivity support to CustomKeyStore.",
-    "modules": [
-        "service/kms"
-    ]
-}

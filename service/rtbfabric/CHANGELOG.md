@@ -1,3 +1,8 @@
+# v1.1.1 (2025-10-30)
+
+* **Documentation**: RTB Fabric documentation update.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2025-10-24)
 
 * **Feature**: Add support for custom rate limits.

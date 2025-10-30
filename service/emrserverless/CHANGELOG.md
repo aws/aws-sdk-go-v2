@@ -1,3 +1,8 @@
+# v1.37.0 (2025-10-30)
+
+* **Feature**: This release adds the capability to enable User Background Sessions for customers running Trusted Identity Propagation enabled Interactive Sessions on EMR Serverless Applications.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.8 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

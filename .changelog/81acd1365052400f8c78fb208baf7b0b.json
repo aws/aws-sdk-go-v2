@@ -1,8 +1,0 @@
-{
-    "id": "81acd136-5052-400f-8c78-fb208baf7b0b",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/codedeploy"
-    ]
-}

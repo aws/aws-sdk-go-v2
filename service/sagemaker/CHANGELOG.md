@@ -1,3 +1,7 @@
+# v1.218.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.218.0 (2025-10-28)
 
 * **Feature**: Amazon SageMaker now supports deleting training and processing jobs in a terminal status.

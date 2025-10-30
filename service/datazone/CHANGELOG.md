@@ -1,3 +1,7 @@
+# v1.44.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2025-10-24)
 
 * **Feature**: This release adds support for MLflow connections Creation in DataZone

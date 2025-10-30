@@ -1,8 +1,0 @@
-{
-    "id": "3f5465b3-b258-48af-a770-e366ec4a6d43",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/frauddetector"
-    ]
-}

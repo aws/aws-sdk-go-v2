@@ -1,8 +1,0 @@
-{
-    "id": "30e113ea-aa82-4c8a-b410-366ebe2cde52",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/greengrassv2"
-    ]
-}

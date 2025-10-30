@@ -1,8 +1,0 @@
-{
-    "id": "555b1f0c-1585-444b-89fe-e98f4caa5d68",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/elasticache"
-    ]
-}

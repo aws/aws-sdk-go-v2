@@ -1,8 +1,0 @@
-{
-    "id": "8b9770c9-e9ff-4776-8ce0-70da1ba54e92",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/appmesh"
-    ]
-}

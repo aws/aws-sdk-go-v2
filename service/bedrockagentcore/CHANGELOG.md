@@ -1,3 +1,7 @@
+# v1.8.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2025-10-23)
 
 * **Feature**: Fixing the service documentation name

@@ -1,8 +1,0 @@
-{
-    "id": "bede55b6-10a4-4c16-aa6e-62250e37717c",
-    "type": "feature",
-    "description": "Web-Bot-Auth support for AgentCore Browser tool to help reduce captcha challenges.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

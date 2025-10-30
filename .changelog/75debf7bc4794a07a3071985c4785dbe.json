@@ -1,8 +1,0 @@
-{
-    "id": "75debf7b-c479-4a07-a307-1985c4785dbe",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cloudcontrol"
-    ]
-}

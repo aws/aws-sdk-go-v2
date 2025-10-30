@@ -1,3 +1,7 @@
+# v1.65.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2025-10-24)
 
 * **Feature**: Release 3 layer filter support in GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2,GetResourcesStatisticsV2, AutomationRule V2 APIs. Update filter casing in GetResourcesV2, GetResourcesStatisticsV2 APIs. Add new filters in GetFindingsV2, GetFindingStatisticsV2, AutomationRule V2 APIs.

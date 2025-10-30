@@ -1,8 +1,0 @@
-{
-    "id": "2b9dd259-6f2d-4026-b068-6049bb8cddd5",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/codecatalyst"
-    ]
-}

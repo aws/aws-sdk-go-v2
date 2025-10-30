@@ -1,8 +1,0 @@
-{
-    "id": "1f03d280-f303-49f1-822b-03d3e6a29fec",
-    "type": "bugfix",
-    "description": "Deprecate http.AddResponseReadTimeoutMiddleware.",
-    "modules": [
-        "."
-    ]
-}

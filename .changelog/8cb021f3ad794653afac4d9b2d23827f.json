@@ -1,8 +1,0 @@
-{
-    "id": "8cb021f3-ad79-4653-afac-4d9b2d23827f",
-    "type": "bugfix",
-    "description": "Remove arbitrary read timeout on GetRecords which was causing response read panic. See #2752.",
-    "modules": [
-        "service/kinesis"
-    ]
-}

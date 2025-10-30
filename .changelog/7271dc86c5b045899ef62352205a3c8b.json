@@ -1,8 +1,0 @@
-{
-    "id": "7271dc86-c5b0-4589-9ef6-2352205a3c8b",
-    "type": "feature",
-    "description": "Add a new GetManagedThingCertificate API to expose Iot ManagedIntegrations (MI) device certificate, and add  \"-\"  support for name, properties, actions and events in the CapabilityReportCapability object.",
-    "modules": [
-        "service/iotmanagedintegrations"
-    ]
-}

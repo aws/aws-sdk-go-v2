@@ -1,8 +1,0 @@
-{
-    "id": "082595bb-86a2-4771-ba19-4eebff5f64b5",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/neptune"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.5.3 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.2 (2025-10-23)
 
 * **Documentation**: Doc-only update that removes duplicate values from descriptions of ODB peering APIs.

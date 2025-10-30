@@ -1,8 +1,0 @@
-{
-    "id": "e67921d3-2f49-400a-8748-de6e4c193166",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/marketplacereporting"
-    ]
-}

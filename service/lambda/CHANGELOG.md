@@ -1,3 +1,7 @@
+# v1.80.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.80.0 (2025-10-28)
 
 * **Feature**: Added SerializedRequestEntityTooLargeException to Lambda Invoke API

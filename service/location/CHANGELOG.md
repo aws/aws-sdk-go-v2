@@ -1,3 +1,7 @@
+# v1.50.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2025-10-24)
 
 * **Feature**: Added support for mobile app restrictions in Amazon Location API keys.

@@ -1,3 +1,8 @@
+# v1.41.0 (2025-10-30)
+
+* **Feature**: Add Anomaly Detection APIs for Amazon Managed Prometheus
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.5 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

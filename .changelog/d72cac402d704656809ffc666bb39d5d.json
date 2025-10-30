@@ -1,8 +1,0 @@
-{
-    "id": "d72cac40-2d70-4656-809f-fc666bb39d5d",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/devopsguru"
-    ]
-}

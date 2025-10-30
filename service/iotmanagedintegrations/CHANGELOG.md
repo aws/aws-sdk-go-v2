@@ -1,3 +1,8 @@
+# v1.6.0 (2025-10-30)
+
+* **Feature**: Add a new GetManagedThingCertificate API to expose Iot ManagedIntegrations (MI) device certificate, and add  "-"  support for name, properties, actions and events in the CapabilityReportCapability object.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.10 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

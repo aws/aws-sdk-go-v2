@@ -1,8 +1,0 @@
-{
-    "id": "55e211a8-0b74-4e24-bfdb-18c71b5bfa38",
-    "type": "feature",
-    "description": "Add Anomaly Detection APIs for Amazon Managed Prometheus",
-    "modules": [
-        "service/amp"
-    ]
-}

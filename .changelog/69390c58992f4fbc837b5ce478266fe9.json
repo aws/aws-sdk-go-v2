@@ -1,8 +1,0 @@
-{
-    "id": "69390c58-992f-4fbc-837b-5ce478266fe9",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cognitosync"
-    ]
-}

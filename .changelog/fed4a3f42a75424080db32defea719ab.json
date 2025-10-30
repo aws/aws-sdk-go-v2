@@ -1,8 +1,0 @@
-{
-    "id": "fed4a3f4-2a75-4240-80db-32defea719ab",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/cloudsearch"
-    ]
-}

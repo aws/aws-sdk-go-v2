@@ -1,3 +1,114 @@
+# Release (2025-10-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.39.5
+  * **Bug Fix**: Deprecate http.AddResponseReadTimeoutMiddleware.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.41.0](service/amp/CHANGELOG.md#v1410-2025-10-30)
+  * **Feature**: Add Anomaly Detection APIs for Amazon Managed Prometheus
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.36.0](service/apigateway/CHANGELOG.md#v1360-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.43.0](service/appconfig/CHANGELOG.md#v1430-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.51.0](service/appflow/CHANGELOG.md#v1510-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.27.0](service/applicationcostprofiler/CHANGELOG.md#v1270-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.35.0](service/appmesh/CHANGELOG.md#v1350-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.52.0](service/appsync/CHANGELOG.md#v1520-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.14.0](service/artifact/CHANGELOG.md#v1140-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.46.0](service/auditmanager/CHANGELOG.md#v1460-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.51.0](service/bedrockagent/CHANGELOG.md#v1510-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.12.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1120-2025-10-30)
+  * **Feature**: Web-Bot-Auth support for AgentCore Browser tool to help reduce captcha challenges.
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.41.0](service/chime/CHANGELOG.md#v1410-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.37.0](service/cleanrooms/CHANGELOG.md#v1370-2025-10-30)
+  * **Feature**: Added support for advanced Spark configurations to optimize SQL performance
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.29.0](service/cloudcontrol/CHANGELOG.md#v1290-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.30.0](service/clouddirectory/CHANGELOG.md#v1300-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.32.0](service/cloudsearch/CHANGELOG.md#v1320-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.52.0](service/cloudwatch/CHANGELOG.md#v1520-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.21.0](service/codecatalyst/CHANGELOG.md#v1210-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.33.0](service/codecommit/CHANGELOG.md#v1330-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.35.0](service/codedeploy/CHANGELOG.md#v1350-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.29.0](service/cognitosync/CHANGELOG.md#v1290-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.48.0](service/computeoptimizer/CHANGELOG.md#v1480-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.33.0](service/connectcases/CHANGELOG.md#v1330-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.22.0](service/deadline/CHANGELOG.md#v1220-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.40.0](service/devopsguru/CHANGELOG.md#v1400-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.48.0](service/docdb/CHANGELOG.md#v1480-2025-10-30)
+  * **Feature**: Adding FailoverState and TagList to GlobalCluster and SynchronizationStatus to GlobalClusterMember.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.67.0](service/ecs/CHANGELOG.md#v1670-2025-10-30)
+  * **Feature**: Amazon ECS Service Connect now supports Envoy access logs, providing deeper observability into request-level traffic patterns and service interactions.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.12.0](service/eksauth/CHANGELOG.md#v1120-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.51.0](service/elasticache/CHANGELOG.md#v1510-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.37.0](service/emrserverless/CHANGELOG.md#v1370-2025-10-30)
+  * **Feature**: This release adds the capability to enable User Background Sessions for customers running Trusted Identity Propagation enabled Interactive Sessions on EMR Serverless Applications.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.42.0](service/firehose/CHANGELOG.md#v1420-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.41.0](service/frauddetector/CHANGELOG.md#v1410-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.7.0](service/geoplaces/CHANGELOG.md#v170-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.132.0](service/glue/CHANGELOG.md#v11320-2025-10-30)
+  * **Feature**: This release adds the capability to enable User Background Sessions for customers running Trusted Identity Propagation enabled Interactive Sessions on AWS Glue.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.42.0](service/greengrassv2/CHANGELOG.md#v1420-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.30.0](service/ioteventsdata/CHANGELOG.md#v1300-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.6.0](service/iotmanagedintegrations/CHANGELOG.md#v160-2025-10-30)
+  * **Feature**: Add a new GetManagedThingCertificate API to expose Iot ManagedIntegrations (MI) device certificate, and add  "-"  support for name, properties, actions and events in the CapabilityReportCapability object.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.5.0](service/keyspacesstreams/CHANGELOG.md#v150-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.41.1](service/kinesis/CHANGELOG.md#v1411-2025-10-30)
+  * **Bug Fix**: Remove arbitrary read timeout on GetRecords which was causing response read panic. See #2752.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.47.0](service/kms/CHANGELOG.md#v1470-2025-10-30)
+  * **Feature**: Add cross account VPC endpoint service connectivity support to CustomKeyStore.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.20.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v1200-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.7.0](service/marketplacereporting/CHANGELOG.md#v170-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.43.0](service/neptune/CHANGELOG.md#v1430-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.1.1](service/rtbfabric/CHANGELOG.md#v111-2025-10-30)
+  * **Documentation**: RTB Fabric documentation update.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.34.0](service/s3outposts/CHANGELOG.md#v1340-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.38.0](service/sagemakerruntime/CHANGELOG.md#v1380-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.34.0](service/schemas/CHANGELOG.md#v1340-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.30.0](service/serverlessapplicationrepository/CHANGELOG.md#v1300-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.39.0](service/servicecatalog/CHANGELOG.md#v1390-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.30.0](service/sso/CHANGELOG.md#v1300-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.39.0](service/sts/CHANGELOG.md#v1390-2025-10-30)
+  * **Feature**: Update endpoint ruleset parameters casing
+
 # Release (2025-10-29)
 
 ## Module Highlights

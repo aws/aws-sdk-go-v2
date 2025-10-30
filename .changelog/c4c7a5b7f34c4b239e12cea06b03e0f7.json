@@ -1,8 +1,0 @@
-{
-    "id": "c4c7a5b7-f34c-4b23-9e12-cea06b03e0f7",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ioteventsdata"
-    ]
-}

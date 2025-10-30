@@ -1,8 +1,0 @@
-{
-    "id": "97840508-1da5-465c-b38e-34bec323d505",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

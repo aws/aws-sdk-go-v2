@@ -3,4 +3,4 @@
 package attributevalue
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.20.19"
+const goModuleVersion = "1.20.20"

@@ -3,4 +3,4 @@
 package s3control
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.66.5"
+const goModuleVersion = "1.66.6"

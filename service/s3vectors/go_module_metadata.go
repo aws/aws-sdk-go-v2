@@ -3,4 +3,4 @@
 package s3vectors
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.4.10"
+const goModuleVersion = "1.4.11"

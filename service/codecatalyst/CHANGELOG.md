@@ -1,3 +1,8 @@
+# v1.21.0 (2025-10-30)
+
+* **Feature**: Update endpoint ruleset parameters casing
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.10 (2025-10-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

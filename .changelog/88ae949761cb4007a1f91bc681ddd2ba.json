@@ -1,8 +1,0 @@
-{
-    "id": "88ae9497-61cb-4007-a1f9-1bc681ddd2ba",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/appsync"
-    ]
-}

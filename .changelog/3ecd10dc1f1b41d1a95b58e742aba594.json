@@ -1,8 +1,0 @@
-{
-    "id": "3ecd10dc-1f1b-41d1-a95b-58e742aba594",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/keyspacesstreams"
-    ]
-}

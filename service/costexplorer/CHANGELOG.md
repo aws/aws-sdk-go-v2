@@ -1,3 +1,7 @@
+# v1.59.1 (2025-10-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2025-10-27)
 
 * **Feature**: Updated endpoint for eusc-de-east-1 region.
