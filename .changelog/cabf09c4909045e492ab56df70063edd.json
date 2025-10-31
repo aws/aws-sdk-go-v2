@@ -1,0 +1,8 @@
+{
+    "id": "cabf09c4-9090-45e4-92ab-56df70063edd",
+    "type": "feature",
+    "description": "Allow update of platform identifier via UpdateNotebookInstance operation.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

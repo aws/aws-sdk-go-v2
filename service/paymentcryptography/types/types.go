@@ -25,30 +25,30 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata used in generating the CSR
+// The metadata used to create the certificate signing request.
 type CertificateSubjectType struct {
 
-	// Common Name to be used in the certificate signing request
+	// The name you provide to create the certificate signing request.
 	//
 	// This member is required.
 	CommonName *string
 
-	// City to be used in the certificate signing request
+	// The city you provide to create the certificate signing request.
 	City *string
 
-	// Country to be used in the certificate signing request
+	// The city you provide to create the certificate signing request.
 	Country *string
 
-	// Email to be used in the certificate signing request
+	// The email address you provide to create the certificate signing request.
 	EmailAddress *string
 
-	// Organization to be used in the certificate signing request
+	// The organization you provide to create the certificate signing request.
 	Organization *string
 
-	// Organization Unit to be used in the certificate signing request
+	// The organization unit you provide to create the certificate signing request.
 	OrganizationUnit *string
 
-	// State Or Province to be used in the certificate signing request
+	// The state or province you provide to create the certificate signing request.
 	StateOrProvince *string
 
 	noSmithyDocumentSerde
@@ -295,7 +295,7 @@ type ExportTr34KeyBlock struct {
 	// TR-34 key block generated using 2 pass.
 	RandomNonce *string
 
-	// Certificate used for signing the export key
+	// The certificate used to sign the TR-34 key block.
 	SigningKeyCertificate *string
 
 	// Key Identifier used for signing the export key
@@ -518,7 +518,7 @@ type ImportTr34KeyBlock struct {
 	// TR-34 key block generated using 2 pass.
 	RandomNonce *string
 
-	// Key Identifier used for unwrapping the import key
+	// The certificate used to wrap the TR-34 key block.
 	WrappingKeyCertificate *string
 
 	// Key Identifier used for unwrapping the import key
@@ -602,13 +602,16 @@ type Key struct {
 	// the TR-31 spec.
 	DeriveKeyUsage DeriveKeyUsage
 
-	// Indicates whether this key is a multi-region key and its role in the
-	// multi-region key hierarchy.
+	// Indicates whether this key is a Multi-Region key and its role in the
+	// Multi-Region key hierarchy.
 	//
-	// Multi-region keys allow the same key material to be used across multiple Amazon
-	// Web Services Regions. This field specifies whether the key is a primary key
-	// (which can be replicated to other regions) or a replica key (which is a copy of
-	// a primary key in another region).
+	// Multi-Region replication keys allow the same key material to be used across
+	// multiple Amazon Web Services Regions. This field specifies whether the key is a
+	// Primary Region key (PRK) (which can be replicated to other Amazon Web Services
+	// Regions) or a Replica Region key (RRK) (which is a copy of a PRK in another
+	// Region). For more information, see [Multi-Region key replication].
+	//
+	// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 	MultiRegionKeyType MultiRegionKeyType
 
 	// An Amazon Web Services Region identifier in the standard format (e.g., us-east-1
@@ -619,7 +622,8 @@ type Key struct {
 	// is available.
 	PrimaryRegion *string
 
-	// Information about the replication status of the key across different regions.
+	// Information about the replication status of the key across different Amazon Web
+	// Services Regions.
 	//
 	// This field provides details about the current state of key replication,
 	// including any status messages or operational information. It helps track the
@@ -635,11 +639,13 @@ type Key struct {
 	UsageStopTimestamp *time.Time
 
 	// Indicates whether this key is using the account's default replication regions
-	// configuration.
+	// configuration for [Multi-Region key replication].
 	//
 	// When set to true , the key automatically replicates to the regions specified in
 	// the account's default replication settings. When set to false , the key has a
 	// custom replication configuration that overrides the account defaults.
+	//
+	// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 	UsingDefaultReplicationRegions *bool
 
 	noSmithyDocumentSerde
@@ -804,13 +810,16 @@ type KeySummary struct {
 	// This member is required.
 	KeyState KeyState
 
-	// Indicates whether this key is a multi-region key and its role in the
-	// multi-region key hierarchy.
+	// Indicates whether this key is a Multi-Region key and its role in the
+	// Multi-Region key hierarchy.
 	//
-	// Multi-region keys allow the same key material to be used across multiple Amazon
-	// Web Services Regions. This field specifies whether the key is a primary key
-	// (which can be replicated to other regions) or a replica key (which is a copy of
-	// a primary key in another region).
+	// Multi-Region replication keys allow the same key material to be used across
+	// multiple Amazon Web Services Regions. This field specifies whether the key is a
+	// Primary Region key (PRK) (which can be replicated to other Amazon Web Services
+	// Regions) or a Replica Region key (RRK) (which is a copy of a PRK in another
+	// Region). For more information, see [Multi-Region key replication].
+	//
+	// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 	MultiRegionKeyType MultiRegionKeyType
 
 	// An Amazon Web Services Region identifier in the standard format (e.g., us-east-1
@@ -824,18 +833,21 @@ type KeySummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the replication status information for a key in a replication region.
+// Represents the replication status information for a key in a replication region
+// for [Multi-Region key replication].
 //
 // This structure contains details about the current state of key replication,
 // including any status messages and operational information about the replication
 // process.
+//
+// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 type ReplicationStatusType struct {
 
-	// The current status of key replication in this region.
+	// The current status of key replication in this Amazon Web Services Region.
 	//
 	// This field indicates whether the key replication is in progress, completed
 	// successfully, or has encountered an error. Possible values include states such
-	// as SYNCRHONIZED, IN_PROGRESS, DELETE_IN_PROGRESS, or FAILED. This provides
+	// as SYNCRHONIZED , IN_PROGRESS , DELETE_IN_PROGRESS , or FAILED . This provides
 	// visibility into the replication process for monitoring and troubleshooting
 	// purposes.
 	//

@@ -23,10 +23,10 @@ import (
 //   - Deleted fields are not included in the ListFields response.
 //
 //   - Calling CreateCase with a deleted field throws a ValidationException
-//     denoting which field IDs in the request have been deleted.
+//     denoting which field identifiers in the request have been deleted.
 //
-//   - Calling GetCase with a deleted field ID returns the deleted field's value if
-//     one exists.
+//   - Calling GetCase with a deleted field identifier returns the deleted field's
+//     value if one exists.
 //
 //   - Calling UpdateCase with a deleted field ID throws a ValidationException if
 //     the case does not already contain a value for the deleted field. Otherwise it

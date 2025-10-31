@@ -32,8 +32,9 @@ import (
 //
 // Important things to know
 //
-//   - This API returns case IDs, not complete case objects. To retrieve full case
-//     details, you must make additional calls to the [GetCase]API for each returned case ID.
+//   - This API returns case identifiers, not complete case objects. To retrieve
+//     full case details, you must make additional calls to the [GetCase]API for each
+//     returned case ID.
 //
 //   - This API searches across related items content, not case fields. Use the [SearchCases]
 //     API to search within case field values.

@@ -183,6 +183,11 @@ func awsRestjson1_deserializeOpDocumentBatchGetCaseRuleOutput(v **BatchGetCaseRu
 				return err
 			}
 
+		case "unprocessedCaseRules":
+			if err := awsRestjson1_deserializeDocumentBatchGetCaseRuleUnprocessedList(&sv.UnprocessedCaseRules, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6144,6 +6149,9 @@ func awsRestjson1_deserializeOpErrorUpdateCaseRule(response *smithyhttp.Response
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -6455,6 +6463,9 @@ func awsRestjson1_deserializeOpErrorUpdateTemplate(response *smithyhttp.Response
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -7246,6 +7257,42 @@ func awsRestjson1_deserializeDocumentBatchGetCaseRuleList(v *[]types.GetCaseRule
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBatchGetCaseRuleUnprocessedList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CaseRuleId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBatchGetFieldErrorList(v *[]types.FieldError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7502,6 +7549,26 @@ loop:
 			continue
 		}
 		switch key {
+		case "fieldOptions":
+			var mv types.FieldOptionsCaseRule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFieldOptionsCaseRule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CaseRuleDetailsMemberFieldOptions{Value: mv}
+			break loop
+
+		case "hidden":
+			var mv types.HiddenCaseRule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHiddenCaseRule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CaseRuleDetailsMemberHidden{Value: mv}
+			break loop
+
 		case "required":
 			var mv types.RequiredCaseRule
 			destAddr := &mv
@@ -8641,6 +8708,60 @@ func awsRestjson1_deserializeDocumentFieldOptionErrorList(v *[]types.FieldOption
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFieldOptionsCaseRule(v **types.FieldOptionsCaseRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FieldOptionsCaseRule
+	if *v == nil {
+		sv = &types.FieldOptionsCaseRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "childFieldId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldId to be of type string, got %T instead", value)
+				}
+				sv.ChildFieldId = ptr.String(jtv)
+			}
+
+		case "parentChildFieldOptionsMappings":
+			if err := awsRestjson1_deserializeDocumentParentChildFieldOptionsMappingList(&sv.ParentChildFieldOptionsMappings, value); err != nil {
+				return err
+			}
+
+		case "parentFieldId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldId to be of type string, got %T instead", value)
+				}
+				sv.ParentFieldId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFieldOptionsList(v *[]types.FieldOption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9254,6 +9375,51 @@ func awsRestjson1_deserializeDocumentGetFieldResponse(v **types.GetFieldResponse
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHiddenCaseRule(v **types.HiddenCaseRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HiddenCaseRule
+	if *v == nil {
+		sv = &types.HiddenCaseRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "conditions":
+			if err := awsRestjson1_deserializeDocumentBooleanConditionList(&sv.Conditions, value); err != nil {
+				return err
+			}
+
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9655,6 +9821,121 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParentChildFieldOptionsMapping(v **types.ParentChildFieldOptionsMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParentChildFieldOptionsMapping
+	if *v == nil {
+		sv = &types.ParentChildFieldOptionsMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "childFieldOptionValues":
+			if err := awsRestjson1_deserializeDocumentParentChildFieldOptionValueList(&sv.ChildFieldOptionValues, value); err != nil {
+				return err
+			}
+
+		case "parentFieldOptionValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParentChildFieldOptionValue to be of type string, got %T instead", value)
+				}
+				sv.ParentFieldOptionValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParentChildFieldOptionsMappingList(v *[]types.ParentChildFieldOptionsMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ParentChildFieldOptionsMapping
+	if *v == nil {
+		cv = []types.ParentChildFieldOptionsMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ParentChildFieldOptionsMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentParentChildFieldOptionsMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParentChildFieldOptionValueList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ParentChildFieldOptionValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

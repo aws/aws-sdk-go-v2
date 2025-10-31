@@ -94,6 +94,12 @@ func ExampleCaseRuleDetails_outputUsage() {
 	var union types.CaseRuleDetails
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CaseRuleDetailsMemberFieldOptions:
+		_ = v.Value // Value is types.FieldOptionsCaseRule
+
+	case *types.CaseRuleDetailsMemberHidden:
+		_ = v.Value // Value is types.HiddenCaseRule
+
 	case *types.CaseRuleDetailsMemberRequired:
 		_ = v.Value // Value is types.RequiredCaseRule
 
@@ -106,7 +112,9 @@ func ExampleCaseRuleDetails_outputUsage() {
 	}
 }
 
+var _ *types.FieldOptionsCaseRule
 var _ *types.RequiredCaseRule
+var _ *types.HiddenCaseRule
 
 func ExampleCustomFieldsFilter_outputUsage() {
 	var union types.CustomFieldsFilter

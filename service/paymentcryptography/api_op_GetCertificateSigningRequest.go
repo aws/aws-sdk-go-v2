@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to retrieve the public key for a keypair.
+// Creates a certificate signing request (CSR) from a key pair.
 func (c *Client) GetCertificateSigningRequest(ctx context.Context, params *GetCertificateSigningRequestInput, optFns ...func(*Options)) (*GetCertificateSigningRequestOutput, error) {
 	if params == nil {
 		params = &GetCertificateSigningRequestInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetCertificateSigningRequest(ctx context.Context, params *GetCe
 
 type GetCertificateSigningRequestInput struct {
 
-	// Certificate subject data
+	// The metadata used to create the CSR.
 	//
 	// This member is required.
 	CertificateSubject *types.CertificateSubjectType
@@ -39,7 +39,7 @@ type GetCertificateSigningRequestInput struct {
 	// This member is required.
 	KeyIdentifier *string
 
-	// Algorithm used to generate the certificate signing request
+	// The cryptographic algorithm used to sign your CSR.
 	//
 	// This member is required.
 	SigningAlgorithm types.SigningAlgorithmType
@@ -49,7 +49,8 @@ type GetCertificateSigningRequestInput struct {
 
 type GetCertificateSigningRequestOutput struct {
 
-	// Certificate signing request
+	// The certificate signing request generated using the key pair associated with
+	// the key identifier.
 	//
 	// This member is required.
 	CertificateSigningRequest *string

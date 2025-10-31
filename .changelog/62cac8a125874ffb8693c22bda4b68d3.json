@@ -1,0 +1,8 @@
+{
+    "id": "62cac8a1-2587-4ffb-8693-c22bda4b68d3",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/textract"
+    ]
+}

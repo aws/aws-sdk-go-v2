@@ -63,7 +63,11 @@ import (
 // To learn more about the retention modes, see [Run retention mode] in the Amazon Web Services
 // HealthOmics User Guide.
 //
+// You can use Amazon Q CLI to analyze run logs and make performance optimization
+// recommendations. To get started, see the [Amazon Web Services HealthOmics MCP server]on GitHub.
+//
 // [Starting a run]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
+// [Amazon Web Services HealthOmics MCP server]: https://github.com/awslabs/mcp/tree/main/src/aws-healthomics-mcp-server
 // [Run retention mode]: https://docs.aws.amazon.com/omics/latest/dev/run-retention.html
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {

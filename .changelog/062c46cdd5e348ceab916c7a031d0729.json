@@ -1,0 +1,8 @@
+{
+    "id": "062c46cd-d5e3-48ce-ab91-6c7a031d0729",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/emr"
+    ]
+}

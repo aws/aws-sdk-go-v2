@@ -106,6 +106,9 @@ type UpdateNotebookInstanceInput struct {
 	// [Step 2.1: (Optional) Customize a Notebook Instance]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 	LifecycleConfigName *string
 
+	// The platform identifier of the notebook instance runtime environment.
+	PlatformIdentifier *string
+
 	// The Amazon Resource Name (ARN) of the IAM role that SageMaker AI can assume to
 	// access the notebook instance. For more information, see [SageMaker AI Roles].
 	//

@@ -159,7 +159,9 @@ type RuleType string
 
 // Enum values for RuleType
 const (
-	RuleTypeRequired RuleType = "Required"
+	RuleTypeRequired     RuleType = "Required"
+	RuleTypeHidden       RuleType = "Hidden"
+	RuleTypeFieldOptions RuleType = "FieldOptions"
 )
 
 // Values returns all known values for RuleType. Note that this can be expanded in
@@ -169,6 +171,8 @@ const (
 func (RuleType) Values() []RuleType {
 	return []RuleType{
 		"Required",
+		"Hidden",
+		"FieldOptions",
 	}
 }
 

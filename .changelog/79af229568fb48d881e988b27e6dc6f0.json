@@ -1,0 +1,8 @@
+{
+    "id": "79af2295-68fb-48d8-81e9-88b27e6dc6f0",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/kinesis"
+    ]
+}

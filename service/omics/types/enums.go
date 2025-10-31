@@ -1009,9 +1009,10 @@ type WorkflowEngine string
 
 // Enum values for WorkflowEngine
 const (
-	WorkflowEngineWdl      WorkflowEngine = "WDL"
-	WorkflowEngineNextflow WorkflowEngine = "NEXTFLOW"
-	WorkflowEngineCwl      WorkflowEngine = "CWL"
+	WorkflowEngineWdl        WorkflowEngine = "WDL"
+	WorkflowEngineNextflow   WorkflowEngine = "NEXTFLOW"
+	WorkflowEngineCwl        WorkflowEngine = "CWL"
+	WorkflowEngineWdlLenient WorkflowEngine = "WDL_LENIENT"
 )
 
 // Values returns all known values for WorkflowEngine. Note that this can be
@@ -1023,6 +1024,7 @@ func (WorkflowEngine) Values() []WorkflowEngine {
 		"WDL",
 		"NEXTFLOW",
 		"CWL",
+		"WDL_LENIENT",
 	}
 }
 

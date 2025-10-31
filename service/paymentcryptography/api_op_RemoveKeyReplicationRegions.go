@@ -17,7 +17,8 @@ import (
 //
 // When you remove Replication Regions, the key material is securely deleted from
 // those regions and can no longer be used for cryptographic operations there. This
-// operation is irreversible for the specified Amazon Web Services Regions.
+// operation is irreversible for the specified Amazon Web Services Regions. For
+// more information, see [Multi-Region key replication].
 //
 // Ensure that no active cryptographic operations or applications depend on the
 // key in the regions you're removing before performing this operation.
@@ -31,6 +32,7 @@ import (
 //
 // [DisableDefaultKeyReplicationRegions]
 //
+// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 // [DisableDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
 // [AddKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html
 func (c *Client) RemoveKeyReplicationRegions(ctx context.Context, params *RemoveKeyReplicationRegionsInput, optFns ...func(*Options)) (*RemoveKeyReplicationRegionsOutput, error) {

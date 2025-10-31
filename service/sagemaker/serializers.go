@@ -46792,6 +46792,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNotebookInstanceInput(v *UpdateNotebo
 		ok.String(*v.NotebookInstanceName)
 	}
 
+	if v.PlatformIdentifier != nil {
+		ok := object.Key("PlatformIdentifier")
+		ok.String(*v.PlatformIdentifier)
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)

@@ -1171,6 +1171,16 @@ func validateCaseRuleDetails(v types.CaseRuleDetails) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CaseRuleDetails"}
 	switch uv := v.(type) {
+	case *types.CaseRuleDetailsMemberFieldOptions:
+		if err := validateFieldOptionsCaseRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[fieldOptions]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CaseRuleDetailsMemberHidden:
+		if err := validateHiddenCaseRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[hidden]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.CaseRuleDetailsMemberRequired:
 		if err := validateRequiredCaseRule(&uv.Value); err != nil {
 			invalidParams.AddNested("[required]", err.(smithy.InvalidParamsError))
@@ -1541,6 +1551,25 @@ func validateFieldOption(v *types.FieldOption) error {
 	}
 }
 
+func validateFieldOptionsCaseRule(v *types.FieldOptionsCaseRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldOptionsCaseRule"}
+	if v.ParentChildFieldOptionsMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentChildFieldOptionsMappings"))
+	} else if v.ParentChildFieldOptionsMappings != nil {
+		if err := validateParentChildFieldOptionsMappingList(v.ParentChildFieldOptionsMappings); err != nil {
+			invalidParams.AddNested("ParentChildFieldOptionsMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFieldOptionsList(v []types.FieldOption) error {
 	if v == nil {
 		return nil
@@ -1608,6 +1637,28 @@ func validateFileContent(v *types.FileContent) error {
 	}
 }
 
+func validateHiddenCaseRule(v *types.HiddenCaseRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HiddenCaseRule"}
+	if v.DefaultValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultValue"))
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateBooleanConditionList(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLayoutContent(v types.LayoutContent) error {
 	if v == nil {
 		return nil
@@ -1635,6 +1686,41 @@ func validateLayoutSections(v *types.LayoutSections) error {
 	if v.Sections != nil {
 		if err := validateSectionsList(v.Sections); err != nil {
 			invalidParams.AddNested("Sections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParentChildFieldOptionsMapping(v *types.ParentChildFieldOptionsMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParentChildFieldOptionsMapping"}
+	if v.ParentFieldOptionValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentFieldOptionValue"))
+	}
+	if v.ChildFieldOptionValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChildFieldOptionValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParentChildFieldOptionsMappingList(v []types.ParentChildFieldOptionsMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParentChildFieldOptionsMappingList"}
+	for i := range v {
+		if err := validateParentChildFieldOptionsMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1963,9 +2049,6 @@ func validateTemplateRule(v *types.TemplateRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TemplateRule"}
 	if v.CaseRuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaseRuleId"))
-	}
-	if v.FieldId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FieldId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

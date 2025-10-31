@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables multi-region key replication settings for your account, causing new
-// keys to be automatically replicated to the specified Amazon Web Services Regions
-// when created.
+// Enables [Multi-Region key replication] settings for your Amazon Web Services account, causing new keys to be
+// automatically replicated to the specified Amazon Web Services Regions when
+// created.
 //
-// When default Replication Regions are enabled, any new keys created in your
+// When Multi-Region key replication are enabled, any new keys created in your
 // account will automatically be replicated to these regions unless you explicitly
 // override this behavior during key creation. This simplifies key management for
 // applications that operate across multiple regions.
@@ -31,6 +31,7 @@ import (
 //
 // [GetDefaultKeyReplicationRegions]
 //
+// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 // [DisableDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
 // [GetDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
 func (c *Client) EnableDefaultKeyReplicationRegions(ctx context.Context, params *EnableDefaultKeyReplicationRegionsInput, optFns ...func(*Options)) (*EnableDefaultKeyReplicationRegionsOutput, error) {
@@ -52,10 +53,12 @@ func (c *Client) EnableDefaultKeyReplicationRegions(ctx context.Context, params 
 type EnableDefaultKeyReplicationRegionsInput struct {
 
 	// The list of Amazon Web Services Regions to enable as default replication
-	// regions for the account.
+	// regions for the Amazon Web Services account for [Multi-Region key replication].
 	//
 	// New keys created in this account will automatically be replicated to these
 	// regions unless explicitly overridden during key creation.
+	//
+	// [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 	//
 	// This member is required.
 	ReplicationRegions []string

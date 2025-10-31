@@ -271,12 +271,33 @@ func (*CaseFilterMemberOrAll) isCaseFilter() {}
 //
 // The following types satisfy this interface:
 //
+//	CaseRuleDetailsMemberFieldOptions
+//	CaseRuleDetailsMemberHidden
 //	CaseRuleDetailsMemberRequired
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
 type CaseRuleDetails interface {
 	isCaseRuleDetails()
 }
+
+// Which options are available in a child field based on the selected value in a
+// parent field.
+type CaseRuleDetailsMemberFieldOptions struct {
+	Value FieldOptionsCaseRule
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseRuleDetailsMemberFieldOptions) isCaseRuleDetails() {}
+
+// Whether a field is visible, based on values in other fields.
+type CaseRuleDetailsMemberHidden struct {
+	Value HiddenCaseRule
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseRuleDetailsMemberHidden) isCaseRuleDetails() {}
 
 // Required rule type, used to indicate whether a field is required.
 type CaseRuleDetailsMemberRequired struct {
@@ -781,6 +802,24 @@ type FieldOptionError struct {
 	noSmithyDocumentSerde
 }
 
+// Rules that control which options are available in a child field based on the
+// selected value in a parent field.
+type FieldOptionsCaseRule struct {
+
+	// A mapping between a parent field option value and child field option values.
+	//
+	// This member is required.
+	ParentChildFieldOptionsMappings []ParentChildFieldOptionsMapping
+
+	// The identifier of the child field whose options are controlled.
+	ChildFieldId *string
+
+	// The identifier of the parent field that controls options.
+	ParentFieldId *string
+
+	noSmithyDocumentSerde
+}
+
 // Object for the summarized details of the field.
 type FieldSummary struct {
 
@@ -1004,6 +1043,23 @@ type GetFieldResponse struct {
 	noSmithyDocumentSerde
 }
 
+// A rule that controls field visibility based on conditions. Fields can be shown
+// or hidden dynamically based on values in other fields.
+type HiddenCaseRule struct {
+
+	// A list of conditions that determine field visibility.
+	//
+	// This member is required.
+	Conditions []BooleanCondition
+
+	// Whether the field is hidden when no conditions match.
+	//
+	// This member is required.
+	DefaultValue *bool
+
+	noSmithyDocumentSerde
+}
+
 // Object to store configuration of layouts associated to the template.
 type LayoutConfiguration struct {
 
@@ -1136,6 +1192,22 @@ type OperandTwoMemberStringValue struct {
 }
 
 func (*OperandTwoMemberStringValue) isOperandTwo() {}
+
+// A mapping between a parent field option value and child field option values.
+type ParentChildFieldOptionsMapping struct {
+
+	// A list of allowed values in the child field.
+	//
+	// This member is required.
+	ChildFieldOptionValues []string
+
+	// The value in the parent field.
+	//
+	// This member is required.
+	ParentFieldOptionValue *string
+
+	noSmithyDocumentSerde
+}
 
 // Represents the content of a particular type of related item.
 //
@@ -1653,8 +1725,6 @@ type TemplateRule struct {
 	CaseRuleId *string
 
 	// Unique identifier of a field.
-	//
-	// This member is required.
 	FieldId *string
 
 	noSmithyDocumentSerde

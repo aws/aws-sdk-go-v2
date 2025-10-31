@@ -1,0 +1,8 @@
+{
+    "id": "4f2a46b2-5185-4562-bb8f-8ae883866a0f",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/health"
+    ]
+}

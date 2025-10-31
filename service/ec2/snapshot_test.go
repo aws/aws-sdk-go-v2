@@ -1118,6 +1118,30 @@ func TestCheckSnapshot_CreateIpamPool(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateIpamPrefixListResolver(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIpamPrefixListResolver")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIpamPrefixListResolverTarget(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamPrefixListResolverTarget(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIpamPrefixListResolverTarget")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
@@ -2143,6 +2167,30 @@ func TestCheckSnapshot_DeleteIpamPool(t *testing.T) {
 	_, err := svc.DeleteIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIpamPrefixListResolver(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIpamPrefixListResolver")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIpamPrefixListResolverTarget(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamPrefixListResolverTarget(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIpamPrefixListResolverTarget")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3859,6 +3907,30 @@ func TestCheckSnapshot_DescribeIpamPools(t *testing.T) {
 	_, err := svc.DescribeIpamPools(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeIpamPools")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIpamPrefixListResolvers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPrefixListResolvers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamPrefixListResolvers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIpamPrefixListResolverTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPrefixListResolverTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamPrefixListResolverTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6290,6 +6362,42 @@ func TestCheckSnapshot_GetIpamPoolCidrs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIpamPrefixListResolverRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPrefixListResolverRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamPrefixListResolverRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamPrefixListResolverVersionEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPrefixListResolverVersionEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamPrefixListResolverVersionEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamPrefixListResolverVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPrefixListResolverVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamPrefixListResolverVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetIpamResourceCidrs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIpamResourceCidrs(context.Background(), nil, func(o *Options) {
@@ -7063,6 +7171,30 @@ func TestCheckSnapshot_ModifyIpamPool(t *testing.T) {
 	_, err := svc.ModifyIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyIpamPrefixListResolver(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamPrefixListResolver")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyIpamPrefixListResolverTarget(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPrefixListResolverTarget(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamPrefixListResolverTarget")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9577,6 +9709,30 @@ func TestUpdateSnapshot_CreateIpamPool(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateIpamPrefixListResolver(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIpamPrefixListResolver")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIpamPrefixListResolverTarget(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamPrefixListResolverTarget(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIpamPrefixListResolverTarget")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
@@ -10602,6 +10758,30 @@ func TestUpdateSnapshot_DeleteIpamPool(t *testing.T) {
 	_, err := svc.DeleteIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIpamPrefixListResolver(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIpamPrefixListResolver")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIpamPrefixListResolverTarget(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamPrefixListResolverTarget(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIpamPrefixListResolverTarget")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12318,6 +12498,30 @@ func TestUpdateSnapshot_DescribeIpamPools(t *testing.T) {
 	_, err := svc.DescribeIpamPools(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeIpamPools")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIpamPrefixListResolvers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPrefixListResolvers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamPrefixListResolvers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIpamPrefixListResolverTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPrefixListResolverTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamPrefixListResolverTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14749,6 +14953,42 @@ func TestUpdateSnapshot_GetIpamPoolCidrs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIpamPrefixListResolverRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPrefixListResolverRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamPrefixListResolverRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamPrefixListResolverVersionEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPrefixListResolverVersionEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamPrefixListResolverVersionEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamPrefixListResolverVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPrefixListResolverVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamPrefixListResolverVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetIpamResourceCidrs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIpamResourceCidrs(context.Background(), nil, func(o *Options) {
@@ -15522,6 +15762,30 @@ func TestUpdateSnapshot_ModifyIpamPool(t *testing.T) {
 	_, err := svc.ModifyIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyIpamPrefixListResolver(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamPrefixListResolver")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyIpamPrefixListResolverTarget(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPrefixListResolverTarget(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamPrefixListResolverTarget")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

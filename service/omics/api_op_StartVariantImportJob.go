@@ -11,7 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Amazon Web Services HealthOmics variant stores and annotation stores will no
+// longer be open to new customers starting November 7, 2025. If you would like to
+// use variant stores or annotation stores, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [Amazon Web Services HealthOmics variant store and annotation store availability change].
+//
 // Starts a variant import job.
+//
+// [Amazon Web Services HealthOmics variant store and annotation store availability change]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
 func (c *Client) StartVariantImportJob(ctx context.Context, params *StartVariantImportJobInput, optFns ...func(*Options)) (*StartVariantImportJobOutput, error) {
 	if params == nil {
 		params = &StartVariantImportJobInput{}

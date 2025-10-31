@@ -8284,6 +8284,11 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				return err
 			}
 
+		case "audioPitchCorrectionSettings":
+			if err := awsRestjson1_deserializeDocumentAudioPitchCorrectionSettings(&sv.AudioPitchCorrectionSettings, value); err != nil {
+				return err
+			}
+
 		case "audioSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8518,6 +8523,46 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioPitchCorrectionSettings(v **types.AudioPitchCorrectionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioPitchCorrectionSettings
+	if *v == nil {
+		sv = &types.AudioPitchCorrectionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "slowPalPitchCorrection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlowPalPitchCorrection to be of type string, got %T instead", value)
+				}
+				sv.SlowPalPitchCorrection = types.SlowPalPitchCorrection(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioProperties(v **types.AudioProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8730,6 +8775,11 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 					return fmt.Errorf("expected AudioSelectorType to be of type string, got %T instead", value)
 				}
 				sv.SelectorType = types.AudioSelectorType(jtv)
+			}
+
+		case "streams":
+			if err := awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(&sv.Streams, value); err != nil {
+				return err
 			}
 
 		case "tracks":
@@ -22508,6 +22558,46 @@ func awsRestjson1_deserializeDocumentPartnerWatermarking(v **types.PartnerWaterm
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPassthroughSettings(v **types.PassthroughSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PassthroughSettings
+	if *v == nil {
+		sv = &types.PassthroughSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "videoSelectorMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoSelectorMode to be of type string, got %T instead", value)
+				}
+				sv.VideoSelectorMode = types.VideoSelectorMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPolicy(v **types.Policy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24586,6 +24676,19 @@ func awsRestjson1_deserializeDocumentTrackSourceSettings(v **types.TrackSourceSe
 
 	for key, value := range shape {
 		switch key {
+		case "streamNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StreamNumber = ptr.Int32(int32(i64))
+			}
+
 		case "trackNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24951,6 +25054,11 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 
 		case "mpeg2Settings":
 			if err := awsRestjson1_deserializeDocumentMpeg2Settings(&sv.Mpeg2Settings, value); err != nil {
+				return err
+			}
+
+		case "passthroughSettings":
+			if err := awsRestjson1_deserializeDocumentPassthroughSettings(&sv.PassthroughSettings, value); err != nil {
 				return err
 			}
 
@@ -25549,6 +25657,19 @@ func awsRestjson1_deserializeDocumentVideoOverlayPosition(v **types.VideoOverlay
 					return err
 				}
 				sv.Height = ptr.Int32(int32(i64))
+			}
+
+		case "opacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Opacity = ptr.Int32(int32(i64))
 			}
 
 		case "unit":

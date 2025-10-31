@@ -803,6 +803,7 @@ const (
 	AudioSelectorTypeLanguageCode      AudioSelectorType = "LANGUAGE_CODE"
 	AudioSelectorTypeHlsRenditionGroup AudioSelectorType = "HLS_RENDITION_GROUP"
 	AudioSelectorTypeAllPcm            AudioSelectorType = "ALL_PCM"
+	AudioSelectorTypeStream            AudioSelectorType = "STREAM"
 )
 
 // Values returns all known values for AudioSelectorType. Note that this can be
@@ -816,6 +817,7 @@ func (AudioSelectorType) Values() []AudioSelectorType {
 		"LANGUAGE_CODE",
 		"HLS_RENDITION_GROUP",
 		"ALL_PCM",
+		"STREAM",
 	}
 }
 
@@ -2729,6 +2731,7 @@ const (
 	DashManifestStyleBasic    DashManifestStyle = "BASIC"
 	DashManifestStyleCompact  DashManifestStyle = "COMPACT"
 	DashManifestStyleDistinct DashManifestStyle = "DISTINCT"
+	DashManifestStyleFull     DashManifestStyle = "FULL"
 )
 
 // Values returns all known values for DashManifestStyle. Note that this can be
@@ -2740,6 +2743,7 @@ func (DashManifestStyle) Values() []DashManifestStyle {
 		"BASIC",
 		"COMPACT",
 		"DISTINCT",
+		"FULL",
 	}
 }
 
@@ -8661,6 +8665,25 @@ func (SimulateReservedQueue) Values() []SimulateReservedQueue {
 	}
 }
 
+type SlowPalPitchCorrection string
+
+// Enum values for SlowPalPitchCorrection
+const (
+	SlowPalPitchCorrectionDisabled SlowPalPitchCorrection = "DISABLED"
+	SlowPalPitchCorrectionEnabled  SlowPalPitchCorrection = "ENABLED"
+)
+
+// Values returns all known values for SlowPalPitchCorrection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlowPalPitchCorrection) Values() []SlowPalPitchCorrection {
+	return []SlowPalPitchCorrection{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type SrtStylePassthrough string
 
 // Enum values for SrtStylePassthrough
@@ -9375,6 +9398,25 @@ func (VideoOverlayUnit) Values() []VideoOverlayUnit {
 	return []VideoOverlayUnit{
 		"PIXELS",
 		"PERCENTAGE",
+	}
+}
+
+type VideoSelectorMode string
+
+// Enum values for VideoSelectorMode
+const (
+	VideoSelectorModeAuto     VideoSelectorMode = "AUTO"
+	VideoSelectorModeRemuxAll VideoSelectorMode = "REMUX_ALL"
+)
+
+// Values returns all known values for VideoSelectorMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoSelectorMode) Values() []VideoSelectorMode {
+	return []VideoSelectorMode{
+		"AUTO",
+		"REMUX_ALL",
 	}
 }
 

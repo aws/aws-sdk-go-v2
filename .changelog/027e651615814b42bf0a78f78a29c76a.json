@@ -1,0 +1,8 @@
+{
+    "id": "027e6516-1581-4b42-bf0a-78f78a29c76a",
+    "type": "feature",
+    "description": "Update endpoint ruleset parameters casing",
+    "modules": [
+        "service/redshift"
+    ]
+}

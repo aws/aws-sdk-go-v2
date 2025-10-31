@@ -4173,6 +4173,18 @@ func awsRestjson1_serializeDocumentCaseRuleDetails(v types.CaseRuleDetails, valu
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.CaseRuleDetailsMemberFieldOptions:
+		av := object.Key("fieldOptions")
+		if err := awsRestjson1_serializeDocumentFieldOptionsCaseRule(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CaseRuleDetailsMemberHidden:
+		av := object.Key("hidden")
+		if err := awsRestjson1_serializeDocumentHiddenCaseRule(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.CaseRuleDetailsMemberRequired:
 		av := object.Key("required")
 		if err := awsRestjson1_serializeDocumentRequiredCaseRule(&uv.Value, av); err != nil {
@@ -4574,6 +4586,30 @@ func awsRestjson1_serializeDocumentFieldOption(v *types.FieldOption, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFieldOptionsCaseRule(v *types.FieldOptionsCaseRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChildFieldId != nil {
+		ok := object.Key("childFieldId")
+		ok.String(*v.ChildFieldId)
+	}
+
+	if v.ParentChildFieldOptionsMappings != nil {
+		ok := object.Key("parentChildFieldOptionsMappings")
+		if err := awsRestjson1_serializeDocumentParentChildFieldOptionsMappingList(v.ParentChildFieldOptionsMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParentFieldId != nil {
+		ok := object.Key("parentFieldId")
+		ok.String(*v.ParentFieldId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFieldOptionsList(v []types.FieldOption, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4690,6 +4726,25 @@ func awsRestjson1_serializeDocumentFileFilter(v *types.FileFilter, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHiddenCaseRule(v *types.HiddenCaseRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentBooleanConditionList(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultValue != nil {
+		ok := object.Key("defaultValue")
+		ok.Boolean(*v.DefaultValue)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLayoutConfiguration(v *types.LayoutConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4789,6 +4844,49 @@ func awsRestjson1_serializeDocumentOperandTwo(v types.OperandTwo, value smithyjs
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentChildFieldOptionsMapping(v *types.ParentChildFieldOptionsMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChildFieldOptionValues != nil {
+		ok := object.Key("childFieldOptionValues")
+		if err := awsRestjson1_serializeDocumentParentChildFieldOptionValueList(v.ChildFieldOptionValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParentFieldOptionValue != nil {
+		ok := object.Key("parentFieldOptionValue")
+		ok.String(*v.ParentFieldOptionValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentChildFieldOptionsMappingList(v []types.ParentChildFieldOptionsMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentParentChildFieldOptionsMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentChildFieldOptionValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

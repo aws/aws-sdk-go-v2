@@ -33,7 +33,7 @@ func (c *Client) BatchGetCaseRule(ctx context.Context, params *BatchGetCaseRuleI
 
 type BatchGetCaseRuleInput struct {
 
-	// List of case rule identifiers.
+	// A list of case rule identifiers.
 	//
 	// This member is required.
 	CaseRules []types.CaseRuleIdentifier
@@ -48,15 +48,18 @@ type BatchGetCaseRuleInput struct {
 
 type BatchGetCaseRuleOutput struct {
 
-	// List of detailed case rule information.
+	// A list of detailed case rule information.
 	//
 	// This member is required.
 	CaseRules []types.GetCaseRuleResponse
 
-	// List of case rule errors.
+	// A list of case rule errors.
 	//
 	// This member is required.
 	Errors []types.CaseRuleError
+
+	// A list of unprocessed case rule identifiers.
+	UnprocessedCaseRules []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

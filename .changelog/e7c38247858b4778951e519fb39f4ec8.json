@@ -1,0 +1,8 @@
+{
+    "id": "e7c38247-858b-4778-951e-519fb39f4ec8",
+    "type": "feature",
+    "description": "Adds SlowPalPitchCorrection to audio pitch correction settings. Enables opacity for VideoOverlays. Adds REMUX_ALL option to enable multi-rendition passthrough to VideoSelector for allow listed accounts.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

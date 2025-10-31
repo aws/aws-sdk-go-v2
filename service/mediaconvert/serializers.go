@@ -3878,6 +3878,13 @@ func awsRestjson1_serializeDocumentAudioDescription(v *types.AudioDescription, v
 		}
 	}
 
+	if v.AudioPitchCorrectionSettings != nil {
+		ok := object.Key("audioPitchCorrectionSettings")
+		if err := awsRestjson1_serializeDocumentAudioPitchCorrectionSettings(v.AudioPitchCorrectionSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AudioSourceName != nil {
 		ok := object.Key("audioSourceName")
 		ok.String(*v.AudioSourceName)
@@ -3998,6 +4005,18 @@ func awsRestjson1_serializeDocumentAudioNormalizationSettings(v *types.AudioNorm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioPitchCorrectionSettings(v *types.AudioPitchCorrectionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SlowPalPitchCorrection) > 0 {
+		ok := object.Key("slowPalPitchCorrection")
+		ok.String(string(v.SlowPalPitchCorrection))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioSelector(v *types.AudioSelector, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4061,6 +4080,13 @@ func awsRestjson1_serializeDocumentAudioSelector(v *types.AudioSelector, value s
 	if len(v.SelectorType) > 0 {
 		ok := object.Key("selectorType")
 		ok.String(string(v.SelectorType))
+	}
+
+	if v.Streams != nil {
+		ok := object.Key("streams")
+		if err := awsRestjson1_serializeDocument__listOf__integerMin1Max2147483647(v.Streams, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tracks != nil {
@@ -9935,6 +9961,18 @@ func awsRestjson1_serializeDocumentPartnerWatermarking(v *types.PartnerWatermark
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPassthroughSettings(v *types.PassthroughSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.VideoSelectorMode) > 0 {
+		ok := object.Key("videoSelectorMode")
+		ok.String(string(v.VideoSelectorMode))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPolicy(v *types.Policy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10454,6 +10492,11 @@ func awsRestjson1_serializeDocumentTrackSourceSettings(v *types.TrackSourceSetti
 	object := value.Object()
 	defer object.Close()
 
+	if v.StreamNumber != nil {
+		ok := object.Key("streamNumber")
+		ok.Integer(*v.StreamNumber)
+	}
+
 	if v.TrackNumber != nil {
 		ok := object.Key("trackNumber")
 		ok.Integer(*v.TrackNumber)
@@ -10632,6 +10675,13 @@ func awsRestjson1_serializeDocumentVideoCodecSettings(v *types.VideoCodecSetting
 	if v.Mpeg2Settings != nil {
 		ok := object.Key("mpeg2Settings")
 		if err := awsRestjson1_serializeDocumentMpeg2Settings(v.Mpeg2Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PassthroughSettings != nil {
+		ok := object.Key("passthroughSettings")
+		if err := awsRestjson1_serializeDocumentPassthroughSettings(v.PassthroughSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -10916,6 +10966,11 @@ func awsRestjson1_serializeDocumentVideoOverlayPosition(v *types.VideoOverlayPos
 	if v.Height != nil {
 		ok := object.Key("height")
 		ok.Integer(*v.Height)
+	}
+
+	if v.Opacity != nil {
+		ok := object.Key("opacity")
+		ok.Integer(*v.Opacity)
 	}
 
 	if len(v.Unit) > 0 {
