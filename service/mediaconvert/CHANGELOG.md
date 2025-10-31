@@ -1,3 +1,7 @@
+# v1.84.0 (2025-10-31)
+
+* **Feature**: Adds SlowPalPitchCorrection to audio pitch correction settings. Enables opacity for VideoOverlays. Adds REMUX_ALL option to enable multi-rendition passthrough to VideoSelector for allow listed accounts.
+
 # v1.83.2 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

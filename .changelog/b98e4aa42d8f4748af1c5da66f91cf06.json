@@ -1,8 +1,0 @@
-{
-    "id": "b98e4aa4-2d8f-4748-af1c-5da66f91cf06",
-    "type": "feature",
-    "description": "Added WDL_LENIENT engine type that enables implicit typecasting of variable values to its compatible declared types",
-    "modules": [
-        "service/omics"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.26.0 (2025-10-31)
+
+* **Feature**: Allow additional characters in the CertificateSubject for GetCertificateSigningRequest API.
+
 # v1.25.5 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

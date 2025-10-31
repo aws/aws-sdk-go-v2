@@ -1,8 +1,0 @@
-{
-    "id": "81439770-2d6a-4ed3-a8bd-c00c72697a44",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/snowball"
-    ]
-}

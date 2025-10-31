@@ -1,3 +1,23 @@
+# Release (2025-10-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.34.0](service/connectcases/CHANGELOG.md#v1340-2025-10-31)
+  * **Feature**: Added two new case rule types: Parent Child Field Options (restricts child field options based on parent field value) and Hidden (controls child field visibility based on parent field value). Both enable dynamic field behavior within templates.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.260.0](service/ec2/CHANGELOG.md#v12600-2025-10-31)
+  * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports automated prefix list management, allowing you to create rules that automatically populate customer-managed prefix lists with CIDRs from your IPAM pools or AWS resources based on tags, Regions, or other criteria.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.81.0](service/lambda/CHANGELOG.md#v1810-2025-10-31)
+  * **Feature**: Add Python3.14 (python3.14) and Java 25 (java25) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.84.0](service/mediaconvert/CHANGELOG.md#v1840-2025-10-31)
+  * **Feature**: Adds SlowPalPitchCorrection to audio pitch correction settings. Enables opacity for VideoOverlays. Adds REMUX_ALL option to enable multi-rendition passthrough to VideoSelector for allow listed accounts.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.38.0](service/omics/CHANGELOG.md#v1380-2025-10-31)
+  * **Feature**: Added WDL_LENIENT engine type that enables implicit typecasting of variable values to its compatible declared types
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.26.0](service/paymentcryptography/CHANGELOG.md#v1260-2025-10-31)
+  * **Feature**: Allow additional characters in the CertificateSubject for GetCertificateSigningRequest API.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.219.0](service/sagemaker/CHANGELOG.md#v12190-2025-10-31)
+  * **Feature**: Allow update of platform identifier via UpdateNotebookInstance operation.
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.30.0](service/savingsplans/CHANGELOG.md#v1300-2025-10-31)
+  * **Feature**: Add dual-stack endpoint support for Savings Plans
+
 # Release (2025-10-30)
 
 ## General Highlights

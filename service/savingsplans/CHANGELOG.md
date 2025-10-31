@@ -1,3 +1,7 @@
+# v1.30.0 (2025-10-31)
+
+* **Feature**: Add dual-stack endpoint support for Savings Plans
+
 # v1.29.1 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

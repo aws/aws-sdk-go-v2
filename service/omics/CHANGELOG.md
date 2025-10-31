@@ -1,3 +1,7 @@
+# v1.38.0 (2025-10-31)
+
+* **Feature**: Added WDL_LENIENT engine type that enables implicit typecasting of variable values to its compatible declared types
+
 # v1.37.1 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

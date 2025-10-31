@@ -1,3 +1,7 @@
+# v1.219.0 (2025-10-31)
+
+* **Feature**: Allow update of platform identifier via UpdateNotebookInstance operation.
+
 # v1.218.1 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

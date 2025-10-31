@@ -1,8 +1,0 @@
-{
-    "id": "18e9639c-68d8-4075-b399-bc23f9103f7c",
-    "type": "feature",
-    "description": "Allow additional characters in the CertificateSubject for GetCertificateSigningRequest API.",
-    "modules": [
-        "service/paymentcryptography"
-    ]
-}

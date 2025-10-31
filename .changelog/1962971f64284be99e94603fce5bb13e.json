@@ -1,8 +1,0 @@
-{
-    "id": "1962971f-6428-4be9-9e94-603fce5bb13e",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/ssmquicksetup"
-    ]
-}

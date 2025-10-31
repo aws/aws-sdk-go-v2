@@ -1,8 +1,0 @@
-{
-    "id": "cb177091-a76f-4680-9023-7018ebb35da3",
-    "type": "feature",
-    "description": "Add dual-stack endpoint support for Savings Plans",
-    "modules": [
-        "service/savingsplans"
-    ]
-}

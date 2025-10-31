@@ -1,8 +1,0 @@
-{
-    "id": "f947f619-abc4-42d9-9054-d87b30a1552c",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/fsx"
-    ]
-}

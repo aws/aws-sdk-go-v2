@@ -1,3 +1,7 @@
+# v1.81.0 (2025-10-31)
+
+* **Feature**: Add Python3.14 (python3.14) and Java 25 (java25) support to AWS Lambda
+
 # v1.80.1 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

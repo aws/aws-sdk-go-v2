@@ -1,8 +1,0 @@
-{
-    "id": "fb045fb9-0a9f-4e8e-87a0-0582b5a94720",
-    "type": "feature",
-    "description": "Add Python3.14 (python3.14) and Java 25 (java25) support to AWS Lambda",
-    "modules": [
-        "service/lambda"
-    ]
-}

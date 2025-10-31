@@ -1,8 +1,0 @@
-{
-    "id": "87546e7c-fe46-46f2-a010-cc3a4c56c0e8",
-    "type": "feature",
-    "description": "Update endpoint ruleset parameters casing",
-    "modules": [
-        "service/fms"
-    ]
-}
