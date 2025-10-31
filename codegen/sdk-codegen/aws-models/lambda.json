@@ -7143,8 +7143,8 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To get a provisioned concurrency configuration",
-                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To view a provisioned concurrency configuration",
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -7158,8 +7158,8 @@
                         }
                     },
                     {
-                        "title": "To view a provisioned concurrency configuration",
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To get a provisioned concurrency configuration",
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -12499,10 +12499,22 @@
                         "smithy.api#enumValue": "nodejs22.x"
                     }
                 },
+                "java25": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "java25"
+                    }
+                },
                 "nodejs24x": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "nodejs24.x"
+                    }
+                },
+                "python314": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python3.14"
                     }
                 }
             }

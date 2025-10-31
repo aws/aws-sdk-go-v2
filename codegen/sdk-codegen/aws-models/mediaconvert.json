@@ -1464,6 +1464,13 @@
                         "smithy.api#jsonName": "audioNormalizationSettings"
                     }
                 },
+                "AudioPitchCorrectionSettings": {
+                    "target": "com.amazonaws.mediaconvert#AudioPitchCorrectionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for audio pitch correction during framerate conversion.",
+                        "smithy.api#jsonName": "audioPitchCorrectionSettings"
+                    }
+                },
                 "AudioSourceName": {
                     "target": "com.amazonaws.mediaconvert#__stringMax2048",
                     "traits": {
@@ -1739,6 +1746,21 @@
                 "smithy.api#documentation": "Advanced audio normalization settings. Ignore these settings unless you need to comply with a loudness standard."
             }
         },
+        "com.amazonaws.mediaconvert#AudioPitchCorrectionSettings": {
+            "type": "structure",
+            "members": {
+                "SlowPalPitchCorrection": {
+                    "target": "com.amazonaws.mediaconvert#SlowPalPitchCorrection",
+                    "traits": {
+                        "smithy.api#documentation": "Use Slow PAL pitch correction to compensate for audio pitch changes during slow PAL frame rate conversion. This setting only applies when Slow PAL is enabled in your output video codec settings. To automatically apply audio pitch correction: Choose Enabled. MediaConvert automatically applies a pitch correction to your output to match the original content's audio pitch. To not apply audio pitch correction: Keep the default value, Disabled.",
+                        "smithy.api#jsonName": "slowPalPitchCorrection"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for audio pitch correction during framerate conversion."
+            }
+        },
         "com.amazonaws.mediaconvert#AudioProperties": {
             "type": "structure",
             "members": {
@@ -1865,14 +1887,21 @@
                 "SelectorType": {
                     "target": "com.amazonaws.mediaconvert#AudioSelectorType",
                     "traits": {
-                        "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. Language code: Select audio by language using an ISO 639-2 or ISO 639-3 three-letter code in all capital letters. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers.",
+                        "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. If more types of audio data get recognized in the future, these numberings may shift, but the numberings used for Stream mode will not. Language code: Select audio by language using an ISO 639-2 or ISO 639-3 three-letter       code in all capital letters. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers. Stream: Select audio by stream number. Stream numbers include all tracks in the source file, regardless of type, and correspond to either the order of tracks in the file, or if applicable, the stream number metadata of the track. Although all tracks count toward these stream numbers, in this audio selector context, only the stream number of a track containing audio data may be used. If your source file contains a track which is not recognized by the service, then the corresponding stream number will still be reserved for future use. If more types of audio data get recognized in the future, these numberings will not shift.",
                         "smithy.api#jsonName": "selectorType"
+                    }
+                },
+                "Streams": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Identify a track from the input audio to include in this selector by entering the stream index number. These numberings count all tracks in the input file, but only a track containing audio data may be used here. To include several tracks in a single audio selector, specify multiple tracks as follows. Using the console, enter a comma-separated list. For example, type \"1,2,3\" to include tracks 1 through 3.",
+                        "smithy.api#jsonName": "streams"
                     }
                 },
                 "Tracks": {
                     "target": "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Identify a track from the input audio to include in this selector by entering the track index number. To include several tracks in a single audio selector, specify multiple tracks as follows. Using the console, enter a comma-separated list. For example, type \"1,2,3\" to include tracks 1 through 3.",
+                        "smithy.api#documentation": "Identify a track from the input audio to include in this selector by entering the track index number. These numberings include only tracks recognized as audio. If the service recognizes more types of audio tracks in the future, these numberings may shift. To include several tracks in a single audio selector, specify multiple tracks as follows. Using the console, enter a comma-separated list. For example, type \"1,2,3\" to include tracks 1 through 3.",
                         "smithy.api#jsonName": "tracks"
                     }
                 }
@@ -1928,10 +1957,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ALL_PCM"
                     }
+                },
+                "STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAM"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. Language code: Select audio by language using an ISO 639-2 or ISO 639-3 three-letter code in all capital letters. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers."
+                "smithy.api#documentation": "Specify how MediaConvert selects audio content within your input. The default is Track. PID: Select audio by specifying the Packet Identifier (PID) values for MPEG Transport Stream inputs. Use this when you know the exact PID values of your audio streams. Track: Default. Select audio by track number. This is the most common option and works with most input container formats. If more types of audio data get recognized in the future, these numberings may shift, but the numberings used for Stream mode will not. Language code: Select audio by language using an ISO 639-2 or ISO 639-3 three-letter       code in all capital letters. Use this when your source has embedded language metadata and you want to select tracks based on their language. HLS rendition group: Select audio from an HLS rendition group. Use this when your input is an HLS package with multiple audio renditions and you want to select specific rendition groups. All PCM: Select all uncompressed PCM audio tracks from your input automatically. This is useful when you want to include all PCM audio tracks without specifying individual track numbers. Stream: Select audio by stream number. Stream numbers include all tracks in the source file, regardless of type, and correspond to either the order of tracks in the file, or if applicable, the stream number metadata of the track. Although all tracks count toward these stream numbers, in this audio selector context, only the stream number of a track containing audio data may be used. If your source file contains a track which is not recognized by the service, then the corresponding stream number will still be reserved for future use. If more types of audio data get recognized in the future, these numberings will not shift."
             }
         },
         "com.amazonaws.mediaconvert#AudioTypeControl": {
@@ -4124,7 +4159,7 @@
                 "DashManifestStyle": {
                     "target": "com.amazonaws.mediaconvert#DashManifestStyle",
                     "traits": {
-                        "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline in each video Representation: Keep the default value, Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct.",
+                        "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline for outputs that you also specify a Name modifier for: Keep the default value, Basic. Note that if you do not specify a name modifier for an output, MediaConvert will not write a SegmentTimeline for it. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct. To write a SegmentTimeline in each AdaptationSet: Choose Full.",
                         "smithy.api#jsonName": "dashManifestStyle"
                     }
                 },
@@ -6575,7 +6610,7 @@
                 "DashManifestStyle": {
                     "target": "com.amazonaws.mediaconvert#DashManifestStyle",
                     "traits": {
-                        "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline in each video Representation: Keep the default value, Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct.",
+                        "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline for outputs that you also specify a Name modifier for: Keep the default value, Basic. Note that if you do not specify a name modifier for an output, MediaConvert will not write a SegmentTimeline for it. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct. To write a SegmentTimeline in each AdaptationSet: Choose Full.",
                         "smithy.api#jsonName": "dashManifestStyle"
                     }
                 },
@@ -7011,10 +7046,16 @@
                     "traits": {
                         "smithy.api#enumValue": "DISTINCT"
                     }
+                },
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline in each video Representation: Keep the default value, Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct."
+                "smithy.api#documentation": "Specify how MediaConvert writes SegmentTimeline in your output DASH manifest. To write a SegmentTimeline for outputs that you also specify a Name modifier for: Keep the default value, Basic. Note that if you do not specify a name modifier for an output, MediaConvert will not write a SegmentTimeline for it. To write a common SegmentTimeline in the video AdaptationSet: Choose Compact. Note that MediaConvert will still write a SegmentTimeline in any Representation that does not share a common timeline. To write a video AdaptationSet for each different output framerate, and a common SegmentTimeline in each AdaptationSet: Choose Distinct. To write a SegmentTimeline in each AdaptationSet: Choose Full."
             }
         },
         "com.amazonaws.mediaconvert#DataProperties": {
@@ -15300,7 +15341,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -15573,7 +15614,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -20383,7 +20424,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Use this setting only in DASH output groups that include sidecar TTML or IMSC captions. You specify sidecar captions in a separate output from your audio and video. Choose Raw for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files."
+                "smithy.api#documentation": "Use this setting only in DASH output groups that include sidecar TTML, IMSC or WEBVTT captions. You specify sidecar captions in a separate output from your audio and video. Choose Raw for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files."
             }
         },
         "com.amazonaws.mediaconvert#MpdKlvMetadata": {
@@ -20486,7 +20527,7 @@
                 "CaptionContainerType": {
                     "target": "com.amazonaws.mediaconvert#MpdCaptionContainerType",
                     "traits": {
-                        "smithy.api#documentation": "Use this setting only in DASH output groups that include sidecar TTML or IMSC captions. You specify sidecar captions in a separate output from your audio and video. Choose Raw for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files.",
+                        "smithy.api#documentation": "Use this setting only in DASH output groups that include sidecar TTML, IMSC or WEBVTT captions. You specify sidecar captions in a separate output from your audio and video. Choose Raw for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files.",
                         "smithy.api#jsonName": "captionContainerType"
                     }
                 },
@@ -22439,6 +22480,21 @@
                 "smithy.api#documentation": "If you work with a third party video watermarking partner, use the group of settings that correspond with your watermarking partner to include watermarks in your output."
             }
         },
+        "com.amazonaws.mediaconvert#PassthroughSettings": {
+            "type": "structure",
+            "members": {
+                "VideoSelectorMode": {
+                    "target": "com.amazonaws.mediaconvert#VideoSelectorMode",
+                    "traits": {
+                        "smithy.api#documentation": "AUTO will select the highest bitrate input in the video selector source. REMUX_ALL will passthrough all the selected streams in the video selector source. When selecting streams from multiple renditions (i.e. using Stream video selector type): REMUX_ALL will only remux all streams selected, and AUTO will use the highest bitrate video stream among the selected streams as source.",
+                        "smithy.api#jsonName": "videoSelectorMode"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional settings when you set Codec to the value Passthrough."
+            }
+        },
         "com.amazonaws.mediaconvert#Policy": {
             "type": "structure",
             "members": {
@@ -24249,6 +24305,26 @@
                 "smithy.api#documentation": "Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default."
             }
         },
+        "com.amazonaws.mediaconvert#SlowPalPitchCorrection": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use Slow PAL pitch correction to compensate for audio pitch changes during slow PAL frame rate conversion. This setting only applies when Slow PAL is enabled in your output video codec settings. To automatically apply audio pitch correction: Choose Enabled. MediaConvert automatically applies a pitch correction to your output to match the original content's audio pitch. To not apply audio pitch correction: Keep the default value, Disabled."
+            }
+        },
         "com.amazonaws.mediaconvert#SpekeKeyProvider": {
             "type": "structure",
             "members": {
@@ -25118,10 +25194,17 @@
         "com.amazonaws.mediaconvert#TrackSourceSettings": {
             "type": "structure",
             "members": {
+                "StreamNumber": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting to select a single captions track from a source. Stream numbers include all tracks in the source file, regardless of type, and correspond to either the order of tracks in the file, or if applicable, the stream number metadata of the track. Although all tracks count toward these stream numbers, in this caption selector context, only the stream number of a track containing caption data may be used. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one stream per selector. If your source file contains a track which is not recognized by the service, then the corresponding stream number will still be reserved for future use. If more types of caption data get recognized in the future, these numberings will not shift.",
+                        "smithy.api#jsonName": "streamNumber"
+                    }
+                },
                 "TrackNumber": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.",
+                        "smithy.api#documentation": "Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector. If more types of caption data get recognized in the future, these numberings may shift, but the numberings used for streamNumber will not.",
                         "smithy.api#jsonName": "trackNumber"
                     }
                 }
@@ -26370,6 +26453,13 @@
                         "smithy.api#jsonName": "mpeg2Settings"
                     }
                 },
+                "PassthroughSettings": {
+                    "target": "com.amazonaws.mediaconvert#PassthroughSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Optional settings when you set Codec to the value Passthrough.",
+                        "smithy.api#jsonName": "passthroughSettings"
+                    }
+                },
                 "ProresSettings": {
                     "target": "com.amazonaws.mediaconvert#ProresSettings",
                     "traits": {
@@ -26754,6 +26844,13 @@
                         "smithy.api#jsonName": "height"
                     }
                 },
+                "Opacity": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "Use Opacity to specify how much of the underlying video shows through the overlay video. 0 is transparent and 100 is fully opaque. Default is 100.",
+                        "smithy.api#jsonName": "opacity"
+                    }
+                },
                 "Unit": {
                     "target": "com.amazonaws.mediaconvert#VideoOverlayUnit",
                     "traits": {
@@ -26813,7 +26910,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify one or more Transitions for your video overlay. Use Transitions to reposition or resize your overlay over time. To use the same position and size for the duration of your video overlay: Leave blank. To specify a Transition: Enter a value for Start timecode, End Timecode, X Position, Y Position, Width, or Height."
+                "smithy.api#documentation": "Specify one or more Transitions for your video overlay. Use Transitions to reposition or resize your overlay over time. To use the same position and size for the duration of your video overlay: Leave blank. To specify a Transition: Enter a value for Start timecode, End Timecode, X Position, Y Position, Width, Height, or Opacity"
             }
         },
         "com.amazonaws.mediaconvert#VideoOverlayUnit": {
@@ -27061,13 +27158,33 @@
                 "Streams": {
                     "target": "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Specify a stream for MediaConvert to use from your HLS input. Enter an integer corresponding to the stream order in your HLS manifest.",
+                        "smithy.api#documentation": "Specify one or more video streams for MediaConvert to use from your HLS input. Enter an integer corresponding to the stream number, with the first stream in your HLS multivariant playlist starting at 1.For re-encoding workflows, MediaConvert uses the video stream that you select with the highest bitrate as the input.For video passthrough workflows, you specify whether to passthrough a single video stream or multiple video streams under Video selector source in the output video encoding settings.",
                         "smithy.api#jsonName": "streams"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector."
+            }
+        },
+        "com.amazonaws.mediaconvert#VideoSelectorMode": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "REMUX_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMUX_ALL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "AUTO will select the highest bitrate input in the video selector source. REMUX_ALL will passthrough all the selected streams in the video selector source. When selecting streams from multiple renditions (i.e. using Stream video selector type): REMUX_ALL will only remux all streams selected, and AUTO will use the highest bitrate video stream among the selected streams as source."
             }
         },
         "com.amazonaws.mediaconvert#VideoSelectorType": {

@@ -79569,6 +79569,12 @@
                         "smithy.api#documentation": "<p>The IP address type for the notebook instance. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. The notebook instance must be stopped before updating this setting. When you specify <code>dualstack</code>, the subnet must support IPv6 addressing.</p>"
                     }
                 },
+                "PlatformIdentifier": {
+                    "target": "com.amazonaws.sagemaker#PlatformIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform identifier of the notebook instance runtime environment.</p>"
+                    }
+                },
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {

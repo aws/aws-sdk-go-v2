@@ -47,7 +47,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Adds replication Amazon Web Services Regions to an existing Amazon Web Services Payment Cryptography key, enabling the key to be used for cryptographic operations in additional Amazon Web Services Regions.</p> <p>Multi-region keys allow you to use the same key material across multiple Amazon Web Services Regions, providing lower latency for applications distributed across regions. When you add Replication Regions, Amazon Web Services Payment Cryptography securely replicates the key material to the specified Amazon Web Services Regions.</p> <p>The key must be in an active state to add Replication Regions. You can add multiple regions in a single operation, and the key will be available for use in those regions once replication is complete.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RemoveKeyReplicationRegions.html\">RemoveKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html\">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html\">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>"
+                "smithy.api#documentation": "<p>Adds replication Amazon Web Services Regions to an existing Amazon Web Services Payment Cryptography key, enabling the key to be used for cryptographic operations in additional Amazon Web Services Regions.</p> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a> allow you to use the same key material across multiple Amazon Web Services Regions, providing lower latency for applications distributed across regions. When you add Replication Regions, Amazon Web Services Payment Cryptography securely replicates the key material to the specified Amazon Web Services Regions.</p> <p>The key must be in an active state to add Replication Regions. You can add multiple regions in a single operation, and the key will be available for use in those regions once replication is complete.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RemoveKeyReplicationRegions.html\">RemoveKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html\">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html\">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#AddKeyReplicationRegionsInput": {
@@ -182,52 +182,52 @@
                 "CommonName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Common Name to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The name you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 64
                         },
-                        "smithy.api#pattern": "^[A-Za-z]+$",
+                        "smithy.api#pattern": "^[^\\[;\\]<>]+$",
                         "smithy.api#required": {}
                     }
                 },
                 "OrganizationUnit": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Organization Unit to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The organization unit you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 64
                         },
-                        "smithy.api#pattern": "^[A-Za-z]+$"
+                        "smithy.api#pattern": "^[^\\[;\\]<>]+$"
                     }
                 },
                 "Organization": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Organization to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The organization you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 64
                         },
-                        "smithy.api#pattern": "^[A-Za-z]+$"
+                        "smithy.api#pattern": "^[^\\[;\\]<>]+$"
                     }
                 },
                 "City": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "City to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The city you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
                         },
-                        "smithy.api#pattern": "^[A-Za-z]+$"
+                        "smithy.api#pattern": "^[^\\[;\\]<>]+$"
                     }
                 },
                 "Country": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Country to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The city you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 2,
                             "max": 2
@@ -238,18 +238,18 @@
                 "StateOrProvince": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "State Or Province to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The state or province you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
                         },
-                        "smithy.api#pattern": "^[A-Za-z]+$"
+                        "smithy.api#pattern": "^[^\\[;\\]<>]+$"
                     }
                 },
                 "EmailAddress": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Email to be used in the certificate signing request",
+                        "smithy.api#documentation": "<p>The email address you provide to create the certificate signing request.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -259,7 +259,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Metadata used in generating the CSR"
+                "smithy.api#documentation": "<p>The metadata used to create the certificate signing request.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#CertificateType": {
@@ -780,7 +780,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Disables multi-region key replication settings for the specified Amazon Web Services Regions in your account, preventing new keys from being automatically replicated to those regions.</p> <p>After disabling default replication for specific regions, new keys created in your account will not be automatically replicated to those regions. You can still manually add replication to those regions for individual keys using the AddKeyReplicationRegions operation.</p> <p>This operation does not affect existing keys or their current replication configuration.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html\">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html\">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>"
+                "smithy.api#documentation": "<p>Disables <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a> settings for the specified Amazon Web Services Regions in your Amazon Web Services account, preventing new keys from being automatically replicated to those regions.</p> <p>After disabling Multi-Region key replication for specific regions, new keys created in your account will not be automatically replicated to those regions. You can still manually add replication to those regions for individual keys using the <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html\">AddKeyReplicationRegions</a> operation.</p> <p>This operation does not affect existing keys or their current replication configuration.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html\">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html\">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#DisableDefaultKeyReplicationRegionsInput": {
@@ -848,7 +848,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Enables multi-region key replication settings for your account, causing new keys to be automatically replicated to the specified Amazon Web Services Regions when created.</p> <p>When default Replication Regions are enabled, any new keys created in your account will automatically be replicated to these regions unless you explicitly override this behavior during key creation. This simplifies key management for applications that operate across multiple regions.</p> <p>Existing keys are not affected by this operation - only keys created after enabling default replication will be automatically replicated.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html\">DisableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html\">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>"
+                "smithy.api#documentation": "<p>Enables <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a> settings for your Amazon Web Services account, causing new keys to be automatically replicated to the specified Amazon Web Services Regions when created.</p> <p>When Multi-Region key replication are enabled, any new keys created in your account will automatically be replicated to these regions unless you explicitly override this behavior during key creation. This simplifies key management for applications that operate across multiple regions.</p> <p>Existing keys are not affected by this operation - only keys created after enabling default replication will be automatically replicated.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html\">DisableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html\">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#EnableDefaultKeyReplicationRegionsInput": {
@@ -857,7 +857,7 @@
                 "ReplicationRegions": {
                     "target": "com.amazonaws.paymentcryptography#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon Web Services Regions to enable as default replication regions for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>",
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services Regions to enable as default replication regions for the Amazon Web Services account for <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a>.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1181,13 +1181,13 @@
                 "SigningKeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "Key Identifier used for signing the export key"
+                        "smithy.api#documentation": "<p>Key Identifier used for signing the export key</p>"
                     }
                 },
                 "SigningKeyCertificate": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "Certificate used for signing the export key"
+                        "smithy.api#documentation": "<p>The certificate used to sign the TR-34 key block.</p>"
                     }
                 },
                 "KeyBlockFormat": {
@@ -1312,7 +1312,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "Used to retrieve the public key for a keypair."
+                "smithy.api#documentation": "<p>Creates a certificate signing request (CSR) from a key pair.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#GetCertificateSigningRequestInput": {
@@ -1321,21 +1321,21 @@
                 "KeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "Asymmetric key used for generating the certificate signing request",
+                        "smithy.api#documentation": "<p>Asymmetric key used for generating the certificate signing request</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SigningAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#SigningAlgorithmType",
                     "traits": {
-                        "smithy.api#documentation": "Algorithm used to generate the certificate signing request",
+                        "smithy.api#documentation": "<p>The cryptographic algorithm used to sign your CSR.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CertificateSubject": {
                     "target": "com.amazonaws.paymentcryptography#CertificateSubjectType",
                     "traits": {
-                        "smithy.api#documentation": "Certificate subject data",
+                        "smithy.api#documentation": "<p>The metadata used to create the CSR.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1350,7 +1350,7 @@
                 "CertificateSigningRequest": {
                     "target": "com.amazonaws.paymentcryptography#CertificateSigningRequestType",
                     "traits": {
-                        "smithy.api#documentation": "Certificate signing request",
+                        "smithy.api#documentation": "<p>The certificate signing request generated using the key pair associated with the key identifier.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1392,7 +1392,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Retrieves the list of regions where default key replication is currently enabled for your account.</p> <p>This operation returns the current configuration of default Replication Regions. New keys created in your account will be automatically replicated to these regions unless explicitly overridden during key creation.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html\">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html\">DisableDefaultKeyReplicationRegions</a> </p> </li> </ul>"
+                "smithy.api#documentation": "<p>Retrieves the list of Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a> is currently enabled for your Amazon Web Services account.</p> <p>This operation returns the current Multi-Region key replication configuration. New keys created in your account will be automatically replicated to these regions unless explicitly overridden during key creation.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html\">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html\">DisableDefaultKeyReplicationRegions</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#GetDefaultKeyReplicationRegionsInput": {
@@ -2071,13 +2071,13 @@
                 "WrappingKeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "Key Identifier used for unwrapping the import key"
+                        "smithy.api#documentation": "<p>Key Identifier used for unwrapping the import key</p>"
                     }
                 },
                 "WrappingKeyCertificate": {
                     "target": "com.amazonaws.paymentcryptography#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "Key Identifier used for unwrapping the import key"
+                        "smithy.api#documentation": "<p>The certificate used to wrap the TR-34 key block.</p>"
                     }
                 },
                 "WrappedKeyBlock": {
@@ -2258,7 +2258,7 @@
                     "target": "com.amazonaws.paymentcryptography#MultiRegionKeyType",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>",
+                        "smithy.api#documentation": "<p>Indicates whether this key is a Multi-Region key and its role in the Multi-Region key hierarchy.</p> <p>Multi-Region replication keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a Primary Region key (PRK) (which can be replicated to other Amazon Web Services Regions) or a Replica Region key (RRK) (which is a copy of a PRK in another Region). For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a>.</p>",
                         "smithy.api#suppress": [
                             "UnstableTrait"
                         ]
@@ -2277,7 +2277,7 @@
                     "target": "com.amazonaws.paymentcryptography#ReplicationStatus",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Information about the replication status of the key across different regions.</p> <p>This field provides details about the current state of key replication, including any status messages or operational information. It helps track the progress and health of key replication operations.</p>",
+                        "smithy.api#documentation": "<p>Information about the replication status of the key across different Amazon Web Services Regions.</p> <p>This field provides details about the current state of key replication, including any status messages or operational information. It helps track the progress and health of key replication operations.</p>",
                         "smithy.api#suppress": [
                             "UnstableTrait"
                         ]
@@ -2287,7 +2287,7 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Indicates whether this key is using the account's default replication regions configuration.</p> <p>When set to <code>true</code>, the key automatically replicates to the regions specified in the account's default replication settings. When set to <code>false</code>, the key has a custom replication configuration that overrides the account defaults.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether this key is using the account's default replication regions configuration for <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a>.</p> <p>When set to <code>true</code>, the key automatically replicates to the regions specified in the account's default replication settings. When set to <code>false</code>, the key has a custom replication configuration that overrides the account defaults.</p>",
                         "smithy.api#suppress": [
                             "UnstableTrait"
                         ]
@@ -2579,7 +2579,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 48,
+                    "min": 32,
                     "max": 16384
                 },
                 "smithy.api#sensitive": {}
@@ -2843,7 +2843,7 @@
                 "MultiRegionKeyType": {
                     "target": "com.amazonaws.paymentcryptography#MultiRegionKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>"
+                        "smithy.api#documentation": "<p>Indicates whether this key is a Multi-Region key and its role in the Multi-Region key hierarchy.</p> <p>Multi-Region replication keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a Primary Region key (PRK) (which can be replicated to other Amazon Web Services Regions) or a Replica Region key (RRK) (which is a copy of a PRK in another Region). For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a>.</p>"
                     }
                 },
                 "PrimaryRegion": {
@@ -4038,7 +4038,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Removes Replication Regions from an existing Amazon Web Services Payment Cryptography key, disabling the key's availability for cryptographic operations in the specified Amazon Web Services Regions.</p> <p>When you remove Replication Regions, the key material is securely deleted from those regions and can no longer be used for cryptographic operations there. This operation is irreversible for the specified Amazon Web Services Regions.</p> <p>Ensure that no active cryptographic operations or applications depend on the key in the regions you're removing before performing this operation.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html\">AddKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html\">DisableDefaultKeyReplicationRegions</a> </p> </li> </ul>"
+                "smithy.api#documentation": "<p>Removes Replication Regions from an existing Amazon Web Services Payment Cryptography key, disabling the key's availability for cryptographic operations in the specified Amazon Web Services Regions.</p> <p>When you remove Replication Regions, the key material is securely deleted from those regions and can no longer be used for cryptographic operations there. This operation is irreversible for the specified Amazon Web Services Regions. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a>.</p> <important> <p>Ensure that no active cryptographic operations or applications depend on the key in the regions you're removing before performing this operation.</p> </important> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html\">AddKeyReplicationRegions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html\">DisableDefaultKeyReplicationRegions</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.paymentcryptography#RemoveKeyReplicationRegionsInput": {
@@ -4099,7 +4099,7 @@
                 "Status": {
                     "target": "com.amazonaws.paymentcryptography#KeyReplicationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of key replication in this region.</p> <p>This field indicates whether the key replication is in progress, completed successfully, or has encountered an error. Possible values include states such as SYNCRHONIZED, IN_PROGRESS, DELETE_IN_PROGRESS, or FAILED. This provides visibility into the replication process for monitoring and troubleshooting purposes.</p>",
+                        "smithy.api#documentation": "<p>The current status of key replication in this Amazon Web Services Region.</p> <p>This field indicates whether the key replication is in progress, completed successfully, or has encountered an error. Possible values include states such as <code>SYNCRHONIZED</code>, <code>IN_PROGRESS</code>, <code>DELETE_IN_PROGRESS</code>, or <code>FAILED</code>. This provides visibility into the replication process for monitoring and troubleshooting purposes.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4111,7 +4111,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the replication status information for a key in a replication region.</p> <p>This structure contains details about the current state of key replication, including any status messages and operational information about the replication process.</p>"
+                "smithy.api#documentation": "<p>Represents the replication status information for a key in a replication region for <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html\">Multi-Region key replication</a>.</p> <p>This structure contains details about the current state of key replication, including any status messages and operational information about the replication process.</p>"
             }
         },
         "com.amazonaws.paymentcryptography#ResourceArn": {
@@ -4274,7 +4274,7 @@
         "com.amazonaws.paymentcryptography#SigningAlgorithmType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Defines the Algorithm used to generate the certificate signing request",
+                "smithy.api#documentation": "<p>Defines the Algorithm used to generate the certificate signing request</p>",
                 "smithy.api#enum": [
                     {
                         "value": "SHA224",
