@@ -1,0 +1,8 @@
+{
+    "id": "f57b5159-c763-4aff-801b-e013168eb360",
+    "type": "feature",
+    "description": "Adds support for MinimumThroughputBillingCommitment with new UpdateAccountSettings API. Adds support to configure warm throughput for on-demand streams in new UpdateStreamWarmThroughput API and existing CreateStream API and UpdateStreamMode API.",
+    "modules": [
+        "service/kinesis"
+    ]
+}

@@ -1,9 +1,8 @@
-DeleteAgentRuntime
+UpdateAccountSettings
 	Initialize stack step
 		spanInitializeStart
 		InterceptExecution
 		RegisterServiceMetadata
-		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation

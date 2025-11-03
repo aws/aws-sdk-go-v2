@@ -4822,6 +4822,7 @@ const (
 	InstanceTypeM8a48xlarge        InstanceType = "m8a.48xlarge"
 	InstanceTypeM8aMetal24xl       InstanceType = "m8a.metal-24xl"
 	InstanceTypeM8aMetal48xl       InstanceType = "m8a.metal-48xl"
+	InstanceTypeTrn23xlarge        InstanceType = "trn2.3xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -5902,6 +5903,7 @@ func (InstanceType) Values() []InstanceType {
 		"m8a.48xlarge",
 		"m8a.metal-24xl",
 		"m8a.metal-48xl",
+		"trn2.3xlarge",
 	}
 }
 

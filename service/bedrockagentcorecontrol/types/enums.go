@@ -2,6 +2,29 @@
 
 package types
 
+type AgentManagedRuntimeType string
+
+// Enum values for AgentManagedRuntimeType
+const (
+	AgentManagedRuntimeTypePython310 AgentManagedRuntimeType = "PYTHON_3_10"
+	AgentManagedRuntimeTypePython311 AgentManagedRuntimeType = "PYTHON_3_11"
+	AgentManagedRuntimeTypePython312 AgentManagedRuntimeType = "PYTHON_3_12"
+	AgentManagedRuntimeTypePython313 AgentManagedRuntimeType = "PYTHON_3_13"
+)
+
+// Values returns all known values for AgentManagedRuntimeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentManagedRuntimeType) Values() []AgentManagedRuntimeType {
+	return []AgentManagedRuntimeType{
+		"PYTHON_3_10",
+		"PYTHON_3_11",
+		"PYTHON_3_12",
+		"PYTHON_3_13",
+	}
+}
+
 type AgentRuntimeEndpointStatus string
 
 // Enum values for AgentRuntimeEndpointStatus

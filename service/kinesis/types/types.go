@@ -150,6 +150,52 @@ type HashKeyRange struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the request parameters for configuring minimum throughput billing
+// commitment.
+//
+//   - Minimum throughput billing commitments provide cost savings on on-demand
+//     data streams in exchange for committing to a minimum level of throughput usage.
+//
+//   - Commitments have a minimum duration of 24 hours that must be honored before
+//     they can be disabled.
+//
+//   - If you attempt to disable a commitment before the minimum commitment period
+//     ends, the commitment will be scheduled for automatic disable at the earliest
+//     allowed end time.
+//
+//   - You can cancel a pending disable by enabling the commitment again before
+//     the earliest allowed end time.
+type MinimumThroughputBillingCommitmentInput struct {
+
+	// The desired status of the minimum throughput billing commitment.
+	//
+	// This member is required.
+	Status MinimumThroughputBillingCommitmentInputStatus
+
+	noSmithyDocumentSerde
+}
+
+// Represents the current status of minimum throughput billing commitment for an
+// account.
+type MinimumThroughputBillingCommitmentOutput struct {
+
+	// The current status of the minimum throughput billing commitment.
+	//
+	// This member is required.
+	Status MinimumThroughputBillingCommitmentOutputStatus
+
+	// The earliest timestamp when the commitment can be ended.
+	EarliestAllowedEndAt *time.Time
+
+	// The timestamp when the commitment was ended.
+	EndedAt *time.Time
+
+	// The timestamp when the commitment was started.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Represents the output for PutRecords .
 type PutRecordsRequestEntry struct {
 
@@ -553,6 +599,10 @@ type StreamDescriptionSummary struct {
 	// ycapacity mode and a provisioned capacity mode for your data streams.
 	StreamModeDetails *StreamModeDetails
 
+	// The warm throughput in MB/s for the stream. This represents the throughput
+	// capacity that will be immediately available for write operations.
+	WarmThroughput *WarmThroughputObject
+
 	noSmithyDocumentSerde
 }
 
@@ -666,6 +716,22 @@ type Tag struct {
 	// length: 256 characters. Valid characters: Unicode letters, digits, white space,
 	// _ . / = + - % @
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the warm throughput configuration on the stream. This is only
+// present for On-Demand Kinesis Data Streams in accounts that have
+// MinimumThroughputBillingCommitment enabled.
+type WarmThroughputObject struct {
+
+	// The current warm throughput value on the stream. This is the write throughput
+	// in MiBps that the stream is currently scaled to handle.
+	CurrentMiBps *int32
+
+	// The target warm throughput value on the stream. This indicates that the stream
+	// is currently scaling towards this target value.
+	TargetMiBps *int32
 
 	noSmithyDocumentSerde
 }

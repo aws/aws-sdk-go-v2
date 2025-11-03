@@ -8,84 +8,75 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Updates the capacity mode of the data stream. Currently, in Kinesis Data
+// Updates the account-level settings for Amazon Kinesis Data Streams.
 //
-// Streams, you can choose between an on-demand capacity mode and a provisioned
-// capacity mode for your data stream.
+// Updating account settings is a synchronous operation. Upon receiving the
+// request, Kinesis Data Streams will return immediately with your account’s
+// updated settings.
 //
-// If you'd still like to proactively scale your on-demand data stream’s capacity,
-// you can unlock the warm throughput feature for on-demand data streams by
-// enabling MinimumThroughputBillingCommitment for your account. Once your account
-// has MinimumThroughputBillingCommitment enabled, you can specify the warm
-// throughput in MiB per second that your stream can support in writes.
-func (c *Client) UpdateStreamMode(ctx context.Context, params *UpdateStreamModeInput, optFns ...func(*Options)) (*UpdateStreamModeOutput, error) {
+// API limits
+//
+//   - Certain account configurations have minimum commitment windows. Attempting
+//     to update your settings prior to the end of the minimum commitment window might
+//     have certain restrictions.
+//
+//   - This API has a call limit of 5 transactions per second (TPS) for each
+//     Amazon Web Services account. TPS over 5 will initiate the
+//     LimitExceededException .
+func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
-		params = &UpdateStreamModeInput{}
+		params = &UpdateAccountSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStreamMode", params, optFns, c.addOperationUpdateStreamModeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountSettings", params, optFns, c.addOperationUpdateAccountSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateStreamModeOutput)
+	out := result.(*UpdateAccountSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateStreamModeInput struct {
+type UpdateAccountSettingsInput struct {
 
-	//  Specifies the ARN of the data stream whose capacity mode you want to update.
+	// Specifies the minimum throughput billing commitment configuration for your
+	// account.
 	//
 	// This member is required.
-	StreamARN *string
-
-	//  Specifies the capacity mode to which you want to set your data stream.
-	// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
-	// mode and a provisioned capacity mode for your data streams.
-	//
-	// This member is required.
-	StreamModeDetails *types.StreamModeDetails
-
-	// The target warm throughput in MB/s that the stream should be scaled to handle.
-	// This represents the throughput capacity that will be immediately available for
-	// write operations. This field is only valid when the stream mode is being updated
-	// to on-demand.
-	WarmThroughputMiBps *int32
+	MinimumThroughputBillingCommitment *types.MinimumThroughputBillingCommitmentInput
 
 	noSmithyDocumentSerde
 }
 
-func (in *UpdateStreamModeInput) bindEndpointParams(p *EndpointParameters) {
+type UpdateAccountSettingsOutput struct {
 
-	p.StreamARN = in.StreamARN
-	p.OperationType = ptr.String("control")
-}
+	// The updated configuration of the minimum throughput billing commitment for your
+	// account.
+	MinimumThroughputBillingCommitment *types.MinimumThroughputBillingCommitmentOutput
 
-type UpdateStreamModeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateStreamModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStreamMode{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStreamMode{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStreamMode"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountSettings"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -140,10 +131,10 @@ func (c *Client) addOperationUpdateStreamModeMiddlewares(stack *middleware.Stack
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdateStreamModeValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateAccountSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStreamMode(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -206,10 +197,10 @@ func (c *Client) addOperationUpdateStreamModeMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateStreamMode(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "UpdateStreamMode",
+		OperationName: "UpdateAccountSettings",
 	}
 }

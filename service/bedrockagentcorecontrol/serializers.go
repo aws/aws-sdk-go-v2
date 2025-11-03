@@ -1248,6 +1248,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAgentRuntimeInput(v *DeleteAgentR
 		}
 	}
 
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
 	return nil
 }
 
@@ -5008,6 +5012,12 @@ func awsRestjson1_serializeDocumentAgentRuntimeArtifact(v types.AgentRuntimeArti
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.AgentRuntimeArtifactMemberCodeConfiguration:
+		av := object.Key("codeConfiguration")
+		if err := awsRestjson1_serializeDocumentCodeConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AgentRuntimeArtifactMemberContainerConfiguration:
 		av := object.Key("containerConfiguration")
 		if err := awsRestjson1_serializeDocumentContainerConfiguration(&uv.Value, av); err != nil {
@@ -5126,6 +5136,50 @@ func awsRestjson1_serializeDocumentBrowserSigningConfigInput(v *types.BrowserSig
 	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCode(v types.Code, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CodeMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodeConfiguration(v *types.CodeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		if err := awsRestjson1_serializeDocumentCode(v.Code, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EntryPoint != nil {
+		ok := object.Key("entryPoint")
+		if err := awsRestjson1_serializeDocumentEntryPoints(v.EntryPoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Runtime) > 0 {
+		ok := object.Key("runtime")
+		ok.String(string(v.Runtime))
 	}
 
 	return nil
@@ -5411,6 +5465,17 @@ func awsRestjson1_serializeDocumentDeleteMemoryStrategyInput(v *types.DeleteMemo
 		ok.String(*v.MemoryStrategyId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEntryPoints(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -6295,6 +6360,11 @@ func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyj
 	if v.Prefix != nil {
 		ok := object.Key("prefix")
 		ok.String(*v.Prefix)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("versionId")
+		ok.String(*v.VersionId)
 	}
 
 	return nil

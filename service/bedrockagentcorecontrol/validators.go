@@ -1120,6 +1120,11 @@ func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AgentRuntimeArtifact"}
 	switch uv := v.(type) {
+	case *types.AgentRuntimeArtifactMemberCodeConfiguration:
+		if err := validateCodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[codeConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AgentRuntimeArtifactMemberContainerConfiguration:
 		if err := validateContainerConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[containerConfiguration]", err.(smithy.InvalidParamsError))
@@ -1195,6 +1200,50 @@ func validateBrowserSigningConfigInput(v *types.BrowserSigningConfigInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BrowserSigningConfigInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCode(v types.Code) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Code"}
+	switch uv := v.(type) {
+	case *types.CodeMemberS3:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeConfiguration(v *types.CodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeConfiguration"}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	} else if v.Code != nil {
+		if err := validateCode(v.Code); err != nil {
+			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if v.EntryPoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntryPoint"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

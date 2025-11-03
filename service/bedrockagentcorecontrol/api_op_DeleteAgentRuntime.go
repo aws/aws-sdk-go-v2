@@ -34,6 +34,11 @@ type DeleteAgentRuntimeInput struct {
 	// This member is required.
 	AgentRuntimeId *string
 
+	// A unique, case-sensitive identifier to ensure that the operation completes no
+	// more than one time. If this token matches a previous request, the service
+	// ignores the request but does not return an error.
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -120,6 +125,9 @@ func (c *Client) addOperationDeleteAgentRuntimeMiddlewares(stack *middleware.Sta
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opDeleteAgentRuntimeMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAgentRuntimeValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,6 +192,39 @@ func (c *Client) addOperationDeleteAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpDeleteAgentRuntime struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpDeleteAgentRuntime) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpDeleteAgentRuntime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*DeleteAgentRuntimeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteAgentRuntimeInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opDeleteAgentRuntimeMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteAgentRuntime{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteAgentRuntime(region string) *awsmiddleware.RegisterServiceMetadata {

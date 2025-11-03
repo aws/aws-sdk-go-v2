@@ -8,84 +8,59 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
-	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Updates the capacity mode of the data stream. Currently, in Kinesis Data
+// Describes the account-level settings for Amazon Kinesis Data Streams. This
+// operation returns information about the minimum throughput billing commitments
+// and other account-level configurations.
 //
-// Streams, you can choose between an on-demand capacity mode and a provisioned
-// capacity mode for your data stream.
-//
-// If you'd still like to proactively scale your on-demand data stream’s capacity,
-// you can unlock the warm throughput feature for on-demand data streams by
-// enabling MinimumThroughputBillingCommitment for your account. Once your account
-// has MinimumThroughputBillingCommitment enabled, you can specify the warm
-// throughput in MiB per second that your stream can support in writes.
-func (c *Client) UpdateStreamMode(ctx context.Context, params *UpdateStreamModeInput, optFns ...func(*Options)) (*UpdateStreamModeOutput, error) {
+// This API has a call limit of 5 transactions per second (TPS) for each Amazon
+// Web Services account. TPS over 5 will initiate the LimitExceededException .
+func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAccountSettingsInput, optFns ...func(*Options)) (*DescribeAccountSettingsOutput, error) {
 	if params == nil {
-		params = &UpdateStreamModeInput{}
+		params = &DescribeAccountSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStreamMode", params, optFns, c.addOperationUpdateStreamModeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountSettings", params, optFns, c.addOperationDescribeAccountSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateStreamModeOutput)
+	out := result.(*DescribeAccountSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateStreamModeInput struct {
-
-	//  Specifies the ARN of the data stream whose capacity mode you want to update.
-	//
-	// This member is required.
-	StreamARN *string
-
-	//  Specifies the capacity mode to which you want to set your data stream.
-	// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
-	// mode and a provisioned capacity mode for your data streams.
-	//
-	// This member is required.
-	StreamModeDetails *types.StreamModeDetails
-
-	// The target warm throughput in MB/s that the stream should be scaled to handle.
-	// This represents the throughput capacity that will be immediately available for
-	// write operations. This field is only valid when the stream mode is being updated
-	// to on-demand.
-	WarmThroughputMiBps *int32
-
+type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (in *UpdateStreamModeInput) bindEndpointParams(p *EndpointParameters) {
+type DescribeAccountSettingsOutput struct {
 
-	p.StreamARN = in.StreamARN
-	p.OperationType = ptr.String("control")
-}
+	// The current configuration of the minimum throughput billing commitment for your
+	// Amazon Web Services account.
+	MinimumThroughputBillingCommitment *types.MinimumThroughputBillingCommitmentOutput
 
-type UpdateStreamModeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateStreamModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStreamMode{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStreamMode{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccountSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStreamMode"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountSettings"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -140,10 +115,7 @@ func (c *Client) addOperationUpdateStreamModeMiddlewares(stack *middleware.Stack
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdateStreamModeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStreamMode(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -206,10 +178,10 @@ func (c *Client) addOperationUpdateStreamModeMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateStreamMode(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "UpdateStreamMode",
+		OperationName: "DescribeAccountSettings",
 	}
 }

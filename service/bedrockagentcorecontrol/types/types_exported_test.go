@@ -11,6 +11,9 @@ func ExampleAgentRuntimeArtifact_outputUsage() {
 	var union types.AgentRuntimeArtifact
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AgentRuntimeArtifactMemberCodeConfiguration:
+		_ = v.Value // Value is types.CodeConfiguration
+
 	case *types.AgentRuntimeArtifactMemberContainerConfiguration:
 		_ = v.Value // Value is types.ContainerConfiguration
 
@@ -24,6 +27,7 @@ func ExampleAgentRuntimeArtifact_outputUsage() {
 }
 
 var _ *types.ContainerConfiguration
+var _ *types.CodeConfiguration
 
 func ExampleApiSchemaConfiguration_outputUsage() {
 	var union types.ApiSchemaConfiguration
@@ -64,6 +68,24 @@ func ExampleAuthorizerConfiguration_outputUsage() {
 }
 
 var _ *types.CustomJWTAuthorizerConfiguration
+
+func ExampleCode_outputUsage() {
+	var union types.Code
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CodeMemberS3:
+		_ = v.Value // Value is types.S3Location
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Location
 
 func ExampleConsolidationConfiguration_outputUsage() {
 	var union types.ConsolidationConfiguration

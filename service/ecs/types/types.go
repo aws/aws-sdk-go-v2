@@ -237,8 +237,7 @@ type AwsVpcConfiguration struct {
 	//
 	// Consider the following when you set this value:
 	//
-	//   - When you use create-service or update-service , the The default is DISABLED
-	//   .
+	//   - When you use create-service or update-service , the default is DISABLED .
 	//
 	//   - When the service deploymentController is ECS , the value must be DISABLED .
 	AssignPublicIp AssignPublicIp
@@ -269,8 +268,8 @@ type BaselineEbsBandwidthMbpsRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for canary deployment strategy that shifts a fixed percentage of
-// traffic to the new service revision, waits for a specified bake time, then
+// Configuration for a canary deployment strategy that shifts a fixed percentage
+// of traffic to the new service revision, waits for a specified bake time, then
 // shifts the remaining traffic.
 //
 // This is only valid when you run CreateService or UpdateService with
@@ -284,8 +283,8 @@ type CanaryConfiguration struct {
 	CanaryBakeTimeInMinutes *int32
 
 	// The percentage of production traffic to shift to the new service revision
-	// during the canary phase. Valid values are 0.1 to 100.0. The default value is
-	// 5.0.
+	// during the canary phase. Valid values are multiples of 0.1 from 0.1 to 100.0.
+	// The default value is 5.0.
 	CanaryPercent *float64
 
 	noSmithyDocumentSerde
@@ -2192,6 +2191,17 @@ type DeploymentConfiguration struct {
 	//   can validate new service revisions before directing production traffic to them.
 	//   This approach provides a safer way to deploy changes with the ability to quickly
 	//   roll back if needed.
+	//
+	//   - LINEAR - A linear deployment strategy ( LINEAR ) gradually shifts traffic
+	//   from the current production environment to a new environment in equal
+	//   percentages over time. With Amazon ECS linear deployments, you can control the
+	//   pace of traffic shifting and validate new service revisions with increasing
+	//   amounts of production traffic.
+	//
+	//   - CANARY - A canary deployment strategy ( CANARY ) shifts a small percentage
+	//   of traffic to the new service revision first, then shifts the remaining traffic
+	//   all at once after a specified time period. This allows you to test the new
+	//   version with a subset of users before full deployment.
 	Strategy DeploymentStrategy
 
 	noSmithyDocumentSerde
@@ -3364,11 +3374,12 @@ type LinearConfiguration struct {
 
 	// The amount of time in minutes to wait between each traffic shifting step during
 	// a linear deployment. Valid values are 0 to 1440 minutes (24 hours). The default
-	// value is 6. This bake time is not applied after reaching 100% traffic.
+	// value is 6. This bake time is not applied after reaching 100 percent traffic.
 	StepBakeTimeInMinutes *int32
 
 	// The percentage of production traffic to shift in each step during a linear
-	// deployment. Valid values are 3.0 to 100.0. The default value is 10.0.
+	// deployment. Valid values are multiples of 0.1 from 3.0 to 100.0. The default
+	// value is 10.0.
 	StepPercent *float64
 
 	noSmithyDocumentSerde

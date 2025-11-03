@@ -11698,6 +11698,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "codeConfiguration":
+			var mv types.CodeConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCodeConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AgentRuntimeArtifactMemberCodeConfiguration{Value: mv}
+			break loop
+
 		case "containerConfiguration":
 			var mv types.ContainerConfiguration
 			destAddr := &mv
@@ -12460,6 +12470,96 @@ func awsRestjson1_deserializeDocumentBrowserSummary(v **types.BrowserSummary, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCode(v *types.Code, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Code
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CodeMemberS3{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCodeConfiguration(v **types.CodeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeConfiguration
+	if *v == nil {
+		sv = &types.CodeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if err := awsRestjson1_deserializeDocumentCode(&sv.Code, value); err != nil {
+				return err
+			}
+
+		case "entryPoint":
+			if err := awsRestjson1_deserializeDocumentEntryPoints(&sv.EntryPoint, value); err != nil {
+				return err
+			}
+
+		case "runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentManagedRuntimeType to be of type string, got %T instead", value)
+				}
+				sv.Runtime = types.AgentManagedRuntimeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCodeInterpreterNetworkConfiguration(v **types.CodeInterpreterNetworkConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13210,6 +13310,42 @@ func awsRestjson1_deserializeDocumentEncryptionFailure(v **types.EncryptionFailu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEntryPoints(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected entryPoint to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -15838,6 +15974,15 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Prefix = ptr.String(jtv)
+			}
+
+		case "versionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VersionId = ptr.String(jtv)
 			}
 
 		default:

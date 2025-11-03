@@ -134,6 +134,18 @@ func TestCheckSnapshot_DeregisterStreamConsumer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeLimits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeLimits(context.Background(), nil, func(o *Options) {
@@ -458,6 +470,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMaxRecordSize(context.Background(), nil, func(o *Options) {
@@ -487,6 +511,18 @@ func TestCheckSnapshot_UpdateStreamMode(t *testing.T) {
 	_, err := svc.UpdateStreamMode(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateStreamMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamWarmThroughput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateStreamWarmThroughput")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -558,6 +594,18 @@ func TestUpdateSnapshot_DeregisterStreamConsumer(t *testing.T) {
 	_, err := svc.DeregisterStreamConsumer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeregisterStreamConsumer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -889,6 +937,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMaxRecordSize(context.Background(), nil, func(o *Options) {
@@ -918,6 +978,18 @@ func TestUpdateSnapshot_UpdateStreamMode(t *testing.T) {
 	_, err := svc.UpdateStreamMode(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStreamMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamWarmThroughput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateStreamWarmThroughput")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

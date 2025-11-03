@@ -1,0 +1,8 @@
+{
+    "id": "b4cd29d2-014f-4457-9f2f-ae342366de55",
+    "type": "feature",
+    "description": "Fix the AWS Budgets endpoint for the aws-eusc partition.",
+    "modules": [
+        "service/budgets"
+    ]
+}

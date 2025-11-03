@@ -1,0 +1,8 @@
+{
+    "id": "5cc2de7d-ad9c-43f9-8458-3e1e17ad4e7f",
+    "type": "feature",
+    "description": "Adds support for direct code deploy with CreateAgentRuntime and UpdateAgentRuntime",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

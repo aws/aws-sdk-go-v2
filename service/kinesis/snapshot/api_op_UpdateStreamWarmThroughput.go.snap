@@ -1,9 +1,8 @@
-DeleteAgentRuntime
+UpdateStreamWarmThroughput
 	Initialize stack step
 		spanInitializeStart
 		InterceptExecution
 		RegisterServiceMetadata
-		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation

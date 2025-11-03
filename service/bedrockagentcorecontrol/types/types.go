@@ -53,10 +53,21 @@ type AgentRuntime struct {
 //
 // The following types satisfy this interface:
 //
+//	AgentRuntimeArtifactMemberCodeConfiguration
 //	AgentRuntimeArtifactMemberContainerConfiguration
 type AgentRuntimeArtifact interface {
 	isAgentRuntimeArtifact()
 }
+
+// The code configuration for the agent runtime artifact, including the source
+// code location and execution settings.
+type AgentRuntimeArtifactMemberCodeConfiguration struct {
+	Value CodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentRuntimeArtifactMemberCodeConfiguration) isAgentRuntimeArtifact() {}
 
 // The container configuration for the agent artifact.
 type AgentRuntimeArtifactMemberContainerConfiguration struct {
@@ -306,6 +317,50 @@ type BrowserSummary struct {
 
 	// The name of the browser.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The source code configuration that specifies the location and details of the
+// code to be executed.
+//
+// The following types satisfy this interface:
+//
+//	CodeMemberS3
+type Code interface {
+	isCode()
+}
+
+// The Amazon Amazon S3 object that contains the source code for the agent runtime.
+type CodeMemberS3 struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*CodeMemberS3) isCode() {}
+
+// The configuration for the source code that defines how the agent runtime code
+// should be executed, including the code location, runtime environment, and entry
+// point.
+type CodeConfiguration struct {
+
+	// The source code location and configuration details.
+	//
+	// This member is required.
+	Code Code
+
+	// The entry point for the code execution, specifying the function or method that
+	// should be invoked when the code runs.
+	//
+	// This member is required.
+	EntryPoint []string
+
+	// The runtime environment for executing the code (for example, Python 3.9 or
+	// Node.js 18).
+	//
+	// This member is required.
+	Runtime AgentManagedRuntimeType
 
 	noSmithyDocumentSerde
 }
@@ -1934,6 +1989,10 @@ type S3Location struct {
 	// This member is required.
 	Prefix *string
 
+	// The version ID of the Amazon Amazon S3 object. If not specified, the latest
+	// version of the object is used.
+	VersionId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2640,6 +2699,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAgentRuntimeArtifact()                  {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
+func (*UnknownUnionMember) isCode()                                  {}
 func (*UnknownUnionMember) isConsolidationConfiguration()            {}
 func (*UnknownUnionMember) isCredentialProvider()                    {}
 func (*UnknownUnionMember) isCustomConfigurationInput()              {}
