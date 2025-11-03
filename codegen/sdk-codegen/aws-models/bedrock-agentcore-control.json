@@ -49,6 +49,35 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeEndpoints"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AgentManagedRuntimeType": {
+            "type": "enum",
+            "members": {
+                "PYTHON_3_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYTHON_3_10"
+                    }
+                },
+                "PYTHON_3_11": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYTHON_3_11"
+                    }
+                },
+                "PYTHON_3_12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYTHON_3_12"
+                    }
+                },
+                "PYTHON_3_13": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYTHON_3_13"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AgentResource": {
             "type": "resource",
             "identifiers": {
@@ -150,6 +179,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ContainerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The container configuration for the agent artifact.</p>"
+                    }
+                },
+                "codeConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CodeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code configuration for the agent runtime artifact, including the source code location and execution settings.</p>"
                     }
                 }
             },
@@ -1574,6 +1609,53 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,256}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Code": {
+            "type": "union",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Amazon S3 object that contains the source code for the agent runtime.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source code configuration that specifies the location and details of the code to be executed.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CodeConfiguration": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Code",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source code location and configuration details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AgentManagedRuntimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime environment for executing the code (for example, Python 3.9 or Node.js 18).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entryPoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EntryPoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entry point for the code execution, specifying the function or method that should be invoked when the code runs.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the source code that defines how the agent runtime code should be executed, including the code location, runtime environment, and entry point.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CodeInterpreterArn": {
@@ -3892,6 +3974,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -4616,6 +4706,12 @@
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EntryPoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#entryPoint"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#EnvironmentVariableKey": {
@@ -9254,9 +9350,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix for objects in the Amazon S3 bucket. This prefix is added to the object keys to organize the data.</p>",
                         "smithy.api#length": {
-                            "min": 1
+                            "min": 1,
+                            "max": 1024
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the Amazon Amazon S3 object. If not specified, the latest version of the object is used.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 1024
+                        }
                     }
                 }
             },
@@ -12246,6 +12353,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a workload identity.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#entryPoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         }
     }

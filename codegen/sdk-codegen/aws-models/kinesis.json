@@ -297,10 +297,13 @@
                 },
                 {
                     "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Kinesis data stream. A stream captures and transports data records that are\n            continuously emitted from different data sources or <i>producers</i>.\n            Scale-out within a stream is explicitly supported by means of shards, which are uniquely\n            identified groups of data records in a stream.</p>\n         <p>You can create your data stream using either on-demand or provisioned capacity mode.\n            Data streams with an on-demand mode require no capacity planning and automatically scale\n            to handle gigabytes of write and read throughput per minute. With the on-demand mode,\n            Kinesis Data Streams automatically manages the shards in order to provide the necessary\n            throughput. For the data streams with a provisioned mode, you must specify the number of\n            shards for the data stream. Each shard can support reads up to five transactions per\n            second, up to a maximum data read total of 2 MiB per second. Each shard can support\n            writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per\n            second. If the amount of data input increases or decreases, you can add or remove\n            shards.</p>\n         <p>The stream name identifies the stream. The name is scoped to the Amazon Web Services\n            account used by the application. It is also scoped by Amazon Web Services Region. That\n            is, two streams in two different accounts can have the same name, and two streams in the\n            same account, but in two different Regions, can have the same name.</p>\n         <p>\n            <code>CreateStream</code> is an asynchronous operation. Upon receiving a\n                <code>CreateStream</code> request, Kinesis Data Streams immediately returns and sets\n            the stream status to <code>CREATING</code>. After the stream is created, Kinesis Data\n            Streams sets the stream status to <code>ACTIVE</code>. You should perform read and write\n            operations only on an <code>ACTIVE</code> stream. </p>\n         <p>You receive a <code>LimitExceededException</code> when making a\n                <code>CreateStream</code> request when you try to do one of the following:</p>\n         <ul>\n            <li>\n               <p>Have more than five streams in the <code>CREATING</code> state at any point in\n                    time.</p>\n            </li>\n            <li>\n               <p>Create more shards than are authorized for your account.</p>\n            </li>\n         </ul>\n         <p>For the default shard limit for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon\n                Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams\n                Developer Guide</i>. To increase this limit, <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact Amazon Web Services\n                Support</a>.</p>\n         <p>You can use <a>DescribeStreamSummary</a> to check the stream status, which\n            is returned in <code>StreamStatus</code>.</p>\n         <p>\n            <a>CreateStream</a> has a limit of five transactions per second per\n            account.</p>\n         <p>You can add tags to the stream when making a <code>CreateStream</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:CreateStream</code> permission, you must also have the <code>kinesis:AddTagsToStream</code> permission for the stream that will be created. The <code>kinesis:TagResource</code> permission won’t work to tag streams on creation. Tags will take effect from the <code>CREATING</code> status of the stream, but you can't make any updates to the tags until the stream is in <code>ACTIVE</code> state.</p>"
+                "smithy.api#documentation": "<p>Creates a Kinesis data stream. A stream captures and transports data records that are\n            continuously emitted from different data sources or <i>producers</i>.\n            Scale-out within a stream is explicitly supported by means of shards, which are uniquely\n            identified groups of data records in a stream.</p>\n         <p>You can create your data stream using either on-demand or provisioned capacity mode. Data streams with an on-demand mode require no capacity planning and automatically scale to handle gigabytes of write and read throughput per minute. With the on-demand mode, Kinesis Data Streams automatically manages the shards in order to provide the necessary throughput.</p>\n         <p>If you'd still like to proactively scale your on-demand data stream’s capacity, you can unlock the warm throughput feature for on-demand data streams by enabling <code>MinimumThroughputBillingCommitment</code> for your account. Once your account has <code>MinimumThroughputBillingCommitment</code> enabled, you can specify the warm throughput in MiB per second that your stream can support in writes.</p>\n         <p>For the data streams with a provisioned mode, you must specify the number of shards for the data stream. Each shard can support reads up to five transactions per second, up to a maximum data read total of 2 MiB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second. If the amount of data input increases or decreases, you can add or remove shards.</p>\n         <p>The stream name identifies the stream. The name is scoped to the Amazon Web Services\n            account used by the application. It is also scoped by Amazon Web Services Region. That\n            is, two streams in two different accounts can have the same name, and two streams in the\n            same account, but in two different Regions, can have the same name.</p>\n         <p>\n            <code>CreateStream</code> is an asynchronous operation. Upon receiving a\n                <code>CreateStream</code> request, Kinesis Data Streams immediately returns and sets\n            the stream status to <code>CREATING</code>. After the stream is created, Kinesis Data\n            Streams sets the stream status to <code>ACTIVE</code>. You should perform read and write\n            operations only on an <code>ACTIVE</code> stream. </p>\n         <p>You receive a <code>LimitExceededException</code> when making a\n                <code>CreateStream</code> request when you try to do one of the following:</p>\n         <ul>\n            <li>\n               <p>Have more than five streams in the <code>CREATING</code> state at any point in\n                    time.</p>\n            </li>\n            <li>\n               <p>Create more shards than are authorized for your account.</p>\n            </li>\n         </ul>\n         <p>For the default shard or on-demand throughput limits for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To increase this limit, <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact Amazon Web Services Support</a>.</p>\n         <p>You can use <a>DescribeStreamSummary</a> to check the stream status, which\n            is returned in <code>StreamStatus</code>.</p>\n         <p>\n            <a>CreateStream</a> has a limit of five transactions per second per\n            account.</p>\n         <p>You can add tags to the stream when making a <code>CreateStream</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:CreateStream</code> permission, you must also have the <code>kinesis:AddTagsToStream</code> permission for the stream that will be created. The <code>kinesis:TagResource</code> permission won’t work to tag streams on creation. Tags will take effect from the <code>CREATING</code> status of the stream, but you can't make any updates to the tags until the stream is in <code>ACTIVE</code> state.</p>"
             }
         },
         "com.amazonaws.kinesis#CreateStreamInput": {
@@ -329,6 +332,12 @@
                     "target": "com.amazonaws.kinesis#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of up to 50 key-value pairs to use to create the tags. A tag consists of a required key and an optional value.</p>"
+                    }
+                },
+                "WarmThroughputMiBps": {
+                    "target": "com.amazonaws.kinesis#NaturalIntegerObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations.</p>"
                     }
                 },
                 "MaxRecordSizeInKiB": {
@@ -591,6 +600,44 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#DescribeAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#DescribeAccountSettingsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesis#DescribeAccountSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the account-level settings for Amazon Kinesis Data Streams. This operation returns information about the minimum throughput billing commitments and other account-level configurations.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>"
+            }
+        },
+        "com.amazonaws.kinesis#DescribeAccountSettingsInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#DescribeAccountSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "MinimumThroughputBillingCommitment": {
+                    "target": "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current configuration of the minimum throughput billing commitment for your Amazon Web Services account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesis#DescribeLimits": {
@@ -1701,6 +1748,9 @@
                     "target": "com.amazonaws.kinesis#DeregisterStreamConsumer"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#DescribeAccountSettings"
+                },
+                {
                     "target": "com.amazonaws.kinesis#DescribeLimits"
                 },
                 {
@@ -1782,6 +1832,9 @@
                     "target": "com.amazonaws.kinesis#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#UpdateAccountSettings"
+                },
+                {
                     "target": "com.amazonaws.kinesis#UpdateMaxRecordSize"
                 },
                 {
@@ -1789,6 +1842,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesis#UpdateStreamMode"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#UpdateStreamWarmThroughput"
                 }
             ],
             "traits": {
@@ -6430,6 +6486,102 @@
                 }
             }
         },
+        "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentInput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentInputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired status of the minimum throughput billing commitment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the request parameters for configuring minimum throughput billing commitment.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Minimum throughput billing commitments provide cost savings on on-demand data streams in exchange for committing to a minimum level of throughput usage.</p>\n               </li>\n               <li>\n                  <p>Commitments have a minimum duration of 24 hours that must be honored before they can be disabled.</p>\n               </li>\n               <li>\n                  <p>If you attempt to disable a commitment before the minimum commitment period ends, the commitment will be scheduled for automatic disable at the earliest allowed end time.</p>\n               </li>\n               <li>\n                  <p>You can cancel a pending disable by enabling the commitment again before the earliest allowed end time.</p>\n               </li>\n            </ul>\n         </note>"
+            }
+        },
+        "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentInputStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentOutputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the minimum throughput billing commitment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.kinesis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the commitment was started.</p>"
+                    }
+                },
+                "EndedAt": {
+                    "target": "com.amazonaws.kinesis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the commitment was ended.</p>"
+                    }
+                },
+                "EarliestAllowedEndAt": {
+                    "target": "com.amazonaws.kinesis#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The earliest timestamp when the commitment can be ended.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the current status of minimum throughput billing commitment for an account.</p>"
+            }
+        },
+        "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentOutputStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED_UNTIL_EARLIEST_ALLOWED_END": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_UNTIL_EARLIEST_ALLOWED_END"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#NaturalIntegerObject": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.kinesis#NextToken": {
             "type": "string",
             "traits": {
@@ -7761,6 +7913,12 @@
                         "smithy.api#documentation": "<p>The number of enhanced fan-out consumers registered with the stream.</p>"
                     }
                 },
+                "WarmThroughput": {
+                    "target": "com.amazonaws.kinesis#WarmThroughputObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm throughput in MB/s for the stream. This represents the throughput capacity that will be immediately available for write operations.</p>"
+                    }
+                },
                 "MaxRecordSizeInKiB": {
                     "target": "com.amazonaws.kinesis#MaxRecordSizeInKiB",
                     "traits": {
@@ -8253,6 +8411,58 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.kinesis#UpdateAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#UpdateAccountSettingsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesis#UpdateAccountSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the account-level settings for Amazon Kinesis Data Streams.</p>\n         <p>Updating account settings is a synchronous operation. Upon receiving the request, Kinesis Data Streams will return immediately with your account’s updated settings.</p>\n         <p>\n            <b>API limits</b>\n         </p>\n         <ul>\n            <li>\n               <p>Certain account configurations have minimum commitment windows. Attempting to update your settings prior to the end of the minimum commitment window might have certain restrictions.</p>\n            </li>\n            <li>\n               <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.kinesis#UpdateAccountSettingsInput": {
+            "type": "structure",
+            "members": {
+                "MinimumThroughputBillingCommitment": {
+                    "target": "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the minimum throughput billing commitment configuration for your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#UpdateAccountSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "MinimumThroughputBillingCommitment": {
+                    "target": "com.amazonaws.kinesis#MinimumThroughputBillingCommitmentOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration of the minimum throughput billing commitment for your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kinesis#UpdateMaxRecordSize": {
             "type": "operation",
             "input": {
@@ -8440,10 +8650,13 @@
                 },
                 {
                     "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates the capacity mode of the data stream. Currently, in Kinesis Data Streams, you\n            can choose between an <b>on-demand</b> capacity mode and a\n                <b>provisioned</b> capacity mode for your data stream.\n        </p>",
+                "smithy.api#documentation": "<p> Updates the capacity mode of the data stream. Currently, in Kinesis Data Streams, you\n            can choose between an <b>on-demand</b> capacity mode and a\n                <b>provisioned</b> capacity mode for your data stream.\n        </p>\n         <p>If you'd still like to proactively scale your on-demand data stream’s capacity, you can unlock the warm throughput feature for on-demand data streams by enabling <code>MinimumThroughputBillingCommitment</code> for your account. Once your account has <code>MinimumThroughputBillingCommitment</code> enabled, you can specify the warm throughput in MiB per second that your stream can support in writes.</p>",
                 "smithy.rules#staticContextParams": {
                     "OperationType": {
                         "value": "control"
@@ -8470,10 +8683,109 @@
                         "smithy.api#documentation": "<p> Specifies the capacity mode to which you want to set your data stream. Currently, in\n            Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "WarmThroughputMiBps": {
+                    "target": "com.amazonaws.kinesis#NaturalIntegerObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations. This field is only valid when the stream mode is being updated to on-demand.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#UpdateStreamWarmThroughput": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesis#UpdateStreamWarmThroughputInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesis#UpdateStreamWarmThroughputOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the warm throughput configuration for the specified Amazon Kinesis Data Streams on-demand data stream. This operation allows you to proactively scale your on-demand data stream to a specified throughput level, enabling better performance for sudden traffic spikes. </p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the <code>StreamName</code> parameter, or both. It is recommended that you use the <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Updating the warm throughput is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p>\n         <p>This operation is only supported for data streams with the on-demand capacity mode in accounts that have <code>MinimumThroughputBillingCommitment</code> enabled. Provisioned capacity mode streams do not support warm throughput configuration.</p>\n         <p>This operation has the following default limits. By default, you cannot do the following:</p>\n         <ul>\n            <li>\n               <p>Scale to more than 10 GiBps for an on-demand stream.</p>\n            </li>\n            <li>\n               <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>For the default limits for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer\n                    Guide</i>. To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a href=\"https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis\">limits form</a>.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesis#UpdateStreamWarmThroughputInput": {
+            "type": "structure",
+            "members": {
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesis#StreamARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the stream to be updated.</p>",
+                        "smithy.rules#contextParam": {
+                            "name": "StreamARN"
+                        }
+                    }
+                },
+                "StreamName": {
+                    "target": "com.amazonaws.kinesis#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream to be updated.</p>"
+                    }
+                },
+                "WarmThroughputMiBps": {
+                    "target": "com.amazonaws.kinesis#NaturalIntegerObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesis#UpdateStreamWarmThroughputOutput": {
+            "type": "structure",
+            "members": {
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesis#StreamARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the stream that was updated.</p>"
+                    }
+                },
+                "StreamName": {
+                    "target": "com.amazonaws.kinesis#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream that was updated.</p>"
+                    }
+                },
+                "WarmThroughput": {
+                    "target": "com.amazonaws.kinesis#WarmThroughputObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the updated warm throughput configuration for your data stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesis#ValidationException": {
@@ -8486,6 +8798,26 @@
             "traits": {
                 "smithy.api#documentation": "<p>Specifies that you tried to invoke this API for a data stream with the on-demand\n            capacity mode. This API is only supported for data streams with the provisioned capacity\n            mode. </p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.kinesis#WarmThroughputObject": {
+            "type": "structure",
+            "members": {
+                "TargetMiBps": {
+                    "target": "com.amazonaws.kinesis#NaturalIntegerObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target warm throughput value on the stream. This indicates that the stream is currently scaling towards this target value.</p>"
+                    }
+                },
+                "CurrentMiBps": {
+                    "target": "com.amazonaws.kinesis#NaturalIntegerObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current warm throughput value on the stream. This is the write throughput in MiBps that the stream is currently scaled to handle.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the warm throughput configuration on the stream. This is only present for On-Demand Kinesis Data Streams in accounts that have <code>MinimumThroughputBillingCommitment</code> enabled.</p>"
             }
         }
     }
