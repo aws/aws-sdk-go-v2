@@ -1,3 +1,7 @@
+# v1.42.0 (2025-11-03)
+
+* **Feature**: Adds support for MinimumThroughputBillingCommitment with new UpdateAccountSettings API. Adds support to configure warm throughput for on-demand streams in new UpdateStreamWarmThroughput API and existing CreateStream API and UpdateStreamMode API.
+
 # v1.41.1 (2025-10-30)
 
 * **Bug Fix**: Remove arbitrary read timeout on GetRecords which was causing response read panic. See #2752.

@@ -1,3 +1,7 @@
+# v1.41.0 (2025-11-03)
+
+* **Feature**: Fix the AWS Budgets endpoint for the aws-eusc partition.
+
 # v1.40.1 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

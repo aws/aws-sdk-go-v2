@@ -1,3 +1,7 @@
+# v1.67.1 (2025-11-03)
+
+* **Documentation**: Documentation-only update for LINEAR and CANARY deployment strategies.
+
 # v1.67.0 (2025-10-30)
 
 * **Feature**: Amazon ECS Service Connect now supports Envoy access logs, providing deeper observability into request-level traffic patterns and service interactions.

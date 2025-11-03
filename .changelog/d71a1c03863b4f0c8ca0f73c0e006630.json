@@ -1,8 +1,0 @@
-{
-    "id": "d71a1c03-863b-4f0c-8ca0-f73c0e006630",
-    "type": "feature",
-    "description": "Add Amazon EC2 trn2.3xlarge instance type.",
-    "modules": [
-        "service/ec2"
-    ]
-}

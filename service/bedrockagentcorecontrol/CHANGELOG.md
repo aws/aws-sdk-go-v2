@@ -1,3 +1,7 @@
+# v1.13.0 (2025-11-03)
+
+* **Feature**: Adds support for direct code deploy with CreateAgentRuntime and UpdateAgentRuntime
+
 # v1.12.0 (2025-10-30)
 
 * **Feature**: Web-Bot-Auth support for AgentCore Browser tool to help reduce captcha challenges.

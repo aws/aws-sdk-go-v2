@@ -1,3 +1,7 @@
+# v1.261.0 (2025-11-03)
+
+* **Feature**: Add Amazon EC2 trn2.3xlarge instance type.
+
 # v1.260.0 (2025-10-31)
 
 * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports automated prefix list management, allowing you to create rules that automatically populate customer-managed prefix lists with CIDRs from your IPAM pools or AWS resources based on tags, Regions, or other criteria.

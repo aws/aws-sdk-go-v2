@@ -1,3 +1,17 @@
+# Release (2025-11-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.13.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1130-2025-11-03)
+  * **Feature**: Adds support for direct code deploy with CreateAgentRuntime and UpdateAgentRuntime
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.41.0](service/budgets/CHANGELOG.md#v1410-2025-11-03)
+  * **Feature**: Fix the AWS Budgets endpoint for the aws-eusc partition.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.261.0](service/ec2/CHANGELOG.md#v12610-2025-11-03)
+  * **Feature**: Add Amazon EC2 trn2.3xlarge instance type.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.67.1](service/ecs/CHANGELOG.md#v1671-2025-11-03)
+  * **Documentation**: Documentation-only update for LINEAR and CANARY deployment strategies.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.42.0](service/kinesis/CHANGELOG.md#v1420-2025-11-03)
+  * **Feature**: Adds support for MinimumThroughputBillingCommitment with new UpdateAccountSettings API. Adds support to configure warm throughput for on-demand streams in new UpdateStreamWarmThroughput API and existing CreateStream API and UpdateStreamMode API.
+
 # Release (2025-10-31)
 
 ## Module Highlights

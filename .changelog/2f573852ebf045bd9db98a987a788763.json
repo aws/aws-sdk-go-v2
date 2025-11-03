@@ -1,8 +1,0 @@
-{
-    "id": "2f573852-ebf0-45bd-9db9-8a987a788763",
-    "type": "documentation",
-    "description": "Documentation-only update for LINEAR and CANARY deployment strategies.",
-    "modules": [
-        "service/ecs"
-    ]
-}
