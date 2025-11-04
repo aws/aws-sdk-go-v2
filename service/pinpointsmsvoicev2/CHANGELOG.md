@@ -1,3 +1,9 @@
+# v1.26.0 (2025-11-04)
+
+* **Feature**: This release adds support for the CarrierLookup API, which returns information about a destination phone number including if the number is valid, the carrier, and more.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.23.2 which should convey some passive reduction of overall allocations, especially when not using the metrics system.
+
 # v1.25.8 (2025-10-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

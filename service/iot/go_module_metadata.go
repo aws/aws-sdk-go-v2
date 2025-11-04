@@ -3,4 +3,4 @@
 package iot
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.69.8"
+const goModuleVersion = "1.69.9"

@@ -1,3 +1,8 @@
+# v1.26.1 (2025-11-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.23.2 which should convey some passive reduction of overall allocations, especially when not using the metrics system.
+
 # v1.26.0 (2025-10-31)
 
 * **Feature**: Allow additional characters in the CertificateSubject for GetCertificateSigningRequest API.

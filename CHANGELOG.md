@@ -1,3 +1,13 @@
+# Release (2025-11-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.23.2 which should convey some passive reduction of overall allocations, especially when not using the metrics system.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.26.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1260-2025-11-04)
+  * **Feature**: This release adds support for the CarrierLookup API, which returns information about a destination phone number including if the number is valid, the carrier, and more.
+
 # Release (2025-11-03)
 
 ## Module Highlights

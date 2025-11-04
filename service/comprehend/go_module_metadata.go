@@ -3,4 +3,4 @@
 package comprehend
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.40.9"
+const goModuleVersion = "1.40.10"
