@@ -59,8 +59,8 @@ type DescribePoolsInput struct {
 	// The unique identifier of pools to find. This is an array of strings that can be
 	// either the PoolId or PoolArn.
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	PoolIds []string
 
 	noSmithyDocumentSerde

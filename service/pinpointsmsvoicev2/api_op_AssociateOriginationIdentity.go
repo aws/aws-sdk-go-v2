@@ -46,17 +46,19 @@ type AssociateOriginationIdentityInput struct {
 	// PhoneNumberArn, while DescribeSenderIdscan be used to get the values for SenderId and
 	// SenderIdArn.
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.
 	OriginationIdentity *string
 
 	// The pool to update with the new Identity. This value can be either the PoolId
-	// or PoolArn, and you can find these values using DescribePools.
+	// or PoolArn, and you can find these values using [DescribePools].
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS; resource then you must use the
+	// full Amazon Resource Name(ARN).
+	//
+	// [DescribePools]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePools.html
 	//
 	// This member is required.
 	PoolId *string

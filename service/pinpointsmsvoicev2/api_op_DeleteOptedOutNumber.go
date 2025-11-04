@@ -37,8 +37,8 @@ type DeleteOptedOutNumberInput struct {
 
 	// The OptOutListName or OptOutListArn to remove the phone number from.
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.
 	OptOutListName *string

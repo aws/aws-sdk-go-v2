@@ -46,8 +46,8 @@ type DescribeOptOutListsInput struct {
 	// The OptOutLists to show the details of. This is an array of strings that can be
 	// either the OptOutListName or OptOutListArn.
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	OptOutListNames []string
 
 	// Use SELF to filter the list of Opt-Out List to ones your account owns or use

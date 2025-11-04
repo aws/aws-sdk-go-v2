@@ -1,0 +1,8 @@
+{
+    "id": "564a2fb9-ee52-48d6-a5d5-7257917108dd",
+    "type": "feature",
+    "description": "This release adds support for the CarrierLookup API, which returns information about a destination phone number including if the number is valid, the carrier, and more.",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

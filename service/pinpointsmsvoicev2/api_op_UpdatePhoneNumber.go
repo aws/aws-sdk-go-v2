@@ -38,8 +38,8 @@ type UpdatePhoneNumberInput struct {
 	// The unique identifier of the phone number. Valid values for this field can be
 	// either the PhoneNumberId or PhoneNumberArn.
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.
 	PhoneNumberId *string
@@ -52,16 +52,16 @@ type UpdatePhoneNumberInput struct {
 	// phone number is Enabled.
 	InternationalSendingEnabled *bool
 
-	// The OptOutList to add the phone number to. Valid values for this field can be
-	// either the OutOutListName or OutOutListArn.
+	// The OptOutList to add the phone number to. You can use either the opt out list
+	// name or the opt out list ARN.
 	OptOutListName *string
 
-	// By default this is set to false. When an end recipient sends a message that
-	// begins with HELP or STOP to one of your dedicated numbers, AWS End User
-	// Messaging SMS and Voice automatically replies with a customizable message and
-	// adds the end recipient to the OptOutList. When set to true you're responsible
-	// for responding to HELP and STOP requests. You're also responsible for tracking
-	// and honoring opt-out requests.
+	// By default this is set to false. When set to false and an end recipient sends a
+	// message that begins with HELP or STOP to one of your dedicated numbers, End User
+	// MessagingSMS automatically replies with a customizable message and adds the end
+	// recipient to the OptOutList. When set to true you're responsible for responding
+	// to HELP and STOP requests. You're also responsible for tracking and honoring
+	// opt-out requests.
 	SelfManagedOptOutsEnabled *bool
 
 	// The Amazon Resource Name (ARN) of the two way channel.

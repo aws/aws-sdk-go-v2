@@ -13,7 +13,7 @@ import (
 // Deletes an account level monthly spend limit override for sending voice
 // messages. Deleting a spend limit override sets the EnforcedLimit equal to the
 // MaxLimit , which is controlled by Amazon Web Services. For more information on
-// spending limits (quotas) see [Quotas]in the AWS End User Messaging SMS User Guide.
+// spending limits (quotas) see [Quotas]in the End User MessagingSMS User Guide.
 //
 // [Quotas]: https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html
 func (c *Client) DeleteVoiceMessageSpendLimitOverride(ctx context.Context, params *DeleteVoiceMessageSpendLimitOverrideInput, optFns ...func(*Options)) (*DeleteVoiceMessageSpendLimitOverrideOutput, error) {

@@ -388,12 +388,12 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	PhoneNumberArn *string
 
-	// When set to false an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice
-	// automatically replies with a customizable message and adds the end recipient to
-	// the OptOutList. When set to true you're responsible for responding to HELP and
-	// STOP requests. You're also responsible for tracking and honoring opt-out
-	// request. For more information see [Self-managed opt-outs]
+	// When set to false and an end recipient sends a message that begins with HELP or
+	// STOP to one of your dedicated numbers, End User MessagingSMS automatically
+	// replies with a customizable message and adds the end recipient to the
+	// OptOutList. When set to true you're responsible for responding to HELP and STOP
+	// requests. You're also responsible for tracking and honoring opt-out request. For
+	// more information see [Self-managed opt-outs]
 	//
 	// [Self-managed opt-outs]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out
 	//
@@ -487,11 +487,11 @@ type PoolInformation struct {
 	PoolId *string
 
 	// When set to false, an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice
-	// automatically replies with a customizable message and adds the end recipient to
-	// the OptOutList. When set to true you're responsible for responding to HELP and
-	// STOP requests. You're also responsible for tracking and honoring opt-out
-	// requests. For more information see [Self-managed opt-outs]
+	// STOP to one of your dedicated numbers, End User MessagingSMS automatically
+	// replies with a customizable message and adds the end recipient to the
+	// OptOutList. When set to true you're responsible for responding to HELP and STOP
+	// requests. You're also responsible for tracking and honoring opt-out requests.
+	// For more information see [Self-managed opt-outs]
 	//
 	// [Self-managed opt-outs]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out
 	//
@@ -1224,8 +1224,7 @@ type SelectValidation struct {
 
 //	The alphanumeric sender ID in a specific country that you want to describe.
 //
-// For more information on sender IDs see [Requesting sender IDs]in the AWS End User Messaging SMS User
-// Guide.
+// For more information on sender IDs see [Requesting sender IDs]in the End User MessagingSMS User Guide.
 //
 // [Requesting sender IDs]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sender-id-request.html
 type SenderIdAndCountry struct {
@@ -1322,8 +1321,8 @@ type SnsDestination struct {
 }
 
 // Describes the current monthly spend limits for sending voice and text messages.
-// For more information on increasing your monthly spend limit, see [Requesting a spending quota increase]in the AWS End
-// User Messaging SMS User Guide.
+// For more information on increasing your monthly spend limit, see [Requesting a spending quota increase]in the End
+// User MessagingSMS User Guide.
 //
 // [Requesting a spending quota increase]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
 type SpendLimit struct {

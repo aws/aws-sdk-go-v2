@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_AssociateOriginationIdentity.go",
         "api_op_AssociateProtectConfiguration.go",
+        "api_op_CarrierLookup.go",
         "api_op_CreateConfigurationSet.go",
         "api_op_CreateEventDestination.go",
         "api_op_CreateOptOutList.go",

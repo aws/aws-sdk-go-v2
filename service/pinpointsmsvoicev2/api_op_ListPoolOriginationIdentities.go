@@ -35,8 +35,8 @@ type ListPoolOriginationIdentitiesInput struct {
 	// The unique identifier for the pool. This value can be either the PoolId or
 	// PoolArn.
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	//
 	// This member is required.
 	PoolId *string

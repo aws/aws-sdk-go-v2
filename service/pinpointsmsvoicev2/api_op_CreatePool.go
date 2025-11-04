@@ -55,16 +55,19 @@ type CreatePoolInput struct {
 	MessageType types.MessageType
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
-	// SenderId or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
-	// PhoneNumberArn while DescribeSenderIdscan be used to get the values for SenderId and SenderIdArn.
+	// SenderId or SenderIdArn. You can use [DescribePhoneNumbers]to find the values for PhoneNumberId and
+	// PhoneNumberArn, and use [DescribeSenderIds]can be used to get the values for SenderId and
+	// SenderIdArn.
 	//
 	// After the pool is created you can add more origination identities to the pool
 	// by using [AssociateOriginationIdentity].
 	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// If you are using a shared End User MessagingSMS resource then you must use the
+	// full Amazon Resource Name(ARN).
 	//
+	// [DescribeSenderIds]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeSenderIds.html
 	// [AssociateOriginationIdentity]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
+	// [DescribePhoneNumbers]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePhoneNumbers.html
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -75,7 +78,9 @@ type CreatePoolInput struct {
 	ClientToken *string
 
 	// By default this is set to false. When set to true the pool can't be deleted.
-	// You can change this value using the UpdatePoolaction.
+	// You can change this value using the [UpdatePool]action.
+	//
+	// [UpdatePool]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdatePool.html
 	DeletionProtectionEnabled *bool
 
 	// An array of tags (key and value pairs) associated with the pool.
@@ -107,12 +112,12 @@ type CreatePoolOutput struct {
 	// The unique identifier for the pool.
 	PoolId *string
 
-	// By default this is set to false. When an end recipient sends a message that
-	// begins with HELP or STOP to one of your dedicated numbers, AWS End User
-	// Messaging SMS and Voice automatically replies with a customizable message and
-	// adds the end recipient to the OptOutList. When set to true you're responsible
-	// for responding to HELP and STOP requests. You're also responsible for tracking
-	// and honoring opt-out requests.
+	// By default this is set to false. When set to false, and an end recipient sends
+	// a message that begins with HELP or STOP to one of your dedicated numbers, End
+	// User MessagingSMS automatically replies with a customizable message and adds the
+	// end recipient to the OptOutList. When set to true you're responsible for
+	// responding to HELP and STOP requests. You're also responsible for tracking and
+	// honoring opt-out requests.
 	SelfManagedOptOutsEnabled bool
 
 	// Indicates whether shared routes are enabled for the pool. Set to false and only

@@ -647,6 +647,29 @@ func (PhoneNumberFilterName) Values() []PhoneNumberFilterName {
 	}
 }
 
+type PhoneNumberType string
+
+// Enum values for PhoneNumberType
+const (
+	PhoneNumberTypeMobile   PhoneNumberType = "MOBILE"
+	PhoneNumberTypeLandline PhoneNumberType = "LANDLINE"
+	PhoneNumberTypeOther    PhoneNumberType = "OTHER"
+	PhoneNumberTypeInvalid  PhoneNumberType = "INVALID"
+)
+
+// Values returns all known values for PhoneNumberType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PhoneNumberType) Values() []PhoneNumberType {
+	return []PhoneNumberType{
+		"MOBILE",
+		"LANDLINE",
+		"OTHER",
+		"INVALID",
+	}
+}
+
 type PoolFilterName string
 
 // Enum values for PoolFilterName

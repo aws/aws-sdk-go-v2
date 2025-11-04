@@ -86,6 +86,18 @@ func TestCheckSnapshot_AssociateProtectConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CarrierLookup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CarrierLookup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CarrierLookup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1170,18 @@ func TestUpdateSnapshot_AssociateProtectConfiguration(t *testing.T) {
 	_, err := svc.AssociateProtectConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CarrierLookup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CarrierLookup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CarrierLookup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -50,6 +50,26 @@ func (m *validateOpAssociateProtectConfiguration) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCarrierLookup struct {
+}
+
+func (*validateOpCarrierLookup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCarrierLookup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CarrierLookupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCarrierLookupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConfigurationSet struct {
 }
 
@@ -1658,6 +1678,10 @@ func addOpAssociateProtectConfigurationValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpAssociateProtectConfiguration{}, middleware.After)
 }
 
+func addOpCarrierLookupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCarrierLookup{}, middleware.After)
+}
+
 func addOpCreateConfigurationSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfigurationSet{}, middleware.After)
 }
@@ -2705,6 +2729,21 @@ func validateOpAssociateProtectConfigurationInput(v *AssociateProtectConfigurati
 	}
 	if v.ConfigurationSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCarrierLookupInput(v *CarrierLookupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CarrierLookupInput"}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

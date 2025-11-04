@@ -9,97 +9,74 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Deletes an existing pool. Deleting a pool disassociates all origination
-// identities from that pool.
-//
-// If the pool status isn't active or if deletion protection is enabled, an error
-// is returned.
-//
-// A pool is a collection of phone numbers and SenderIds. A pool can include one
-// or more phone numbers and SenderIds that are associated with your Amazon Web
-// Services account.
-func (c *Client) DeletePool(ctx context.Context, params *DeletePoolInput, optFns ...func(*Options)) (*DeletePoolOutput, error) {
+// Returns information about a destination phone number, including whether the
+// number type and whether it is valid, the carrier, and more.
+func (c *Client) CarrierLookup(ctx context.Context, params *CarrierLookupInput, optFns ...func(*Options)) (*CarrierLookupOutput, error) {
 	if params == nil {
-		params = &DeletePoolInput{}
+		params = &CarrierLookupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePool", params, optFns, c.addOperationDeletePoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CarrierLookup", params, optFns, c.addOperationCarrierLookupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeletePoolOutput)
+	out := result.(*CarrierLookupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeletePoolInput struct {
+type CarrierLookupInput struct {
 
-	// The PoolId or PoolArn of the pool to delete. You can use DescribePools to find the values
-	// for PoolId and PoolArn .
-	//
-	// If you are using a shared End User MessagingSMS resource then you must use the
-	// full Amazon Resource Name(ARN).
+	// The phone number that you want to retrieve information about. You can provide
+	// the phone number in various formats including special characters such as
+	// parentheses, brackets, spaces, hyphens, periods, and commas. The service
+	// automatically converts the input to E164 format for processing.
 	//
 	// This member is required.
-	PoolId *string
+	PhoneNumber *string
 
 	noSmithyDocumentSerde
 }
 
-type DeletePoolOutput struct {
+type CarrierLookupOutput struct {
 
-	// The time when the pool was created, in [UNIX epoch time] format.
+	// The phone number in E164 format, sanitized from the original input by removing
+	// any formatting characters.
 	//
-	// [UNIX epoch time]: https://www.epochconverter.com/
-	CreatedTimestamp *time.Time
+	// This member is required.
+	E164PhoneNumber *string
 
-	// The message type that was associated with the deleted pool.
-	MessageType types.MessageType
-
-	// The name of the OptOutList that was associated with the deleted pool.
-	OptOutListName *string
-
-	// The Amazon Resource Name (ARN) of the pool that was deleted.
-	PoolArn *string
-
-	// The PoolId of the pool that was deleted.
-	PoolId *string
-
-	// By default this is set to false. When set to false and an end recipient sends a
-	// message that begins with HELP or STOP to one of your dedicated numbers, End User
-	// MessagingSMS automatically replies with a customizable message and adds the end
-	// recipient to the OptOutList. When set to true you're responsible for responding
-	// to HELP and STOP requests. You're also responsible for tracking and honoring
-	// opt-out requests.
-	SelfManagedOptOutsEnabled bool
-
-	// Indicates whether shared routes are enabled for the pool.
-	SharedRoutesEnabled bool
-
-	// The current status of the pool.
+	// Describes the type of phone number. Valid values are: MOBILE, LANDLINE, OTHER,
+	// and INVALID. Avoid sending SMS or voice messages to INVALID phone numbers, as
+	// these numbers are unlikely to belong to actual recipients.
 	//
-	//   - CREATING: The pool is currently being created and isn't yet available for
-	//   use.
-	//
-	//   - ACTIVE: The pool is active and available for use.
-	//
-	//   - DELETING: The pool is being deleted.
-	Status types.PoolStatus
+	// This member is required.
+	PhoneNumberType types.PhoneNumberType
 
-	// The Amazon Resource Name (ARN) of the TwoWayChannel.
-	TwoWayChannelArn *string
+	// The carrier or service provider that the phone number is currently registered
+	// with. In some countries and regions, this value may be the carrier or service
+	// provider that the phone number was originally registered with.
+	Carrier *string
 
-	// An optional IAM Role Arn for a service to assume, to be able to post inbound
-	// SMS messages.
-	TwoWayChannelRole *string
+	// The name of the country where the phone number was originally registered.
+	Country *string
 
-	// By default this is set to false. When set to true you can receive incoming text
-	// messages from your end recipients.
-	TwoWayEnabled bool
+	// The numeric dialing code for the country or region where the phone number was
+	// originally registered.
+	DialingCountryCode *string
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region
+	// where the phone number was originally registered.
+	IsoCountryCode *string
+
+	// The phone number's mobile country code, for mobile phone number types
+	MCC *string
+
+	// The phone number's mobile network code, for mobile phone number types.
+	MNC *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -107,19 +84,19 @@ type DeletePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeletePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCarrierLookupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePool{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCarrierLookup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePool{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCarrierLookup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePool"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CarrierLookup"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -174,10 +151,10 @@ func (c *Client) addOperationDeletePoolMiddlewares(stack *middleware.Stack, opti
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeletePoolValidationMiddleware(stack); err != nil {
+	if err = addOpCarrierLookupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePool(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCarrierLookup(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -240,10 +217,10 @@ func (c *Client) addOperationDeletePoolMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeletePool(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCarrierLookup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeletePool",
+		OperationName: "CarrierLookup",
 	}
 }

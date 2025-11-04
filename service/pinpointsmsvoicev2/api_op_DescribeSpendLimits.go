@@ -15,7 +15,7 @@ import (
 //
 // When you establish an Amazon Web Services account, the account has initial
 // monthly spend limit in a given Region. For more information on increasing your
-// monthly spend limit, see [Requesting increases to your monthly SMS, MMS, or Voice spending quota]in the AWS End User Messaging SMS User Guide.
+// monthly spend limit, see [Requesting increases to your monthly SMS, MMS, or Voice spending quota]in the End User MessagingSMS User Guide.
 //
 // [Requesting increases to your monthly SMS, MMS, or Voice spending quota]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
 func (c *Client) DescribeSpendLimits(ctx context.Context, params *DescribeSpendLimitsInput, optFns ...func(*Options)) (*DescribeSpendLimitsOutput, error) {

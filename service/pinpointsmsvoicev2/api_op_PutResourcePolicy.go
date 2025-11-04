@@ -11,11 +11,11 @@ import (
 	"time"
 )
 
-// Attaches a resource-based policy to a AWS End User Messaging SMS and Voice
-// resource(phone number, sender Id, phone poll, or opt-out list) that is used for
-// sharing the resource. A shared resource can be a Pool, Opt-out list, Sender Id,
-// or Phone number. For more information about resource-based policies, see [Working with shared resources]in the
-// AWS End User Messaging SMS User Guide.
+// Attaches a resource-based policy to a End User MessagingSMS resource(phone
+// number, sender Id, phone poll, or opt-out list) that is used for sharing the
+// resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone
+// number. For more information about resource-based policies, see [Working with shared resources]in the End User
+// MessagingSMS User Guide.
 //
 // [Working with shared resources]: https://docs.aws.amazon.com/sms-voice/latest/userguide/shared-resources.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
@@ -40,8 +40,8 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice
-	// resource to attach the resource-based policy to.
+	// The Amazon Resource Name (ARN) of the End User MessagingSMS resource to attach
+	// the resource-based policy to.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -59,8 +59,8 @@ type PutResourcePolicyOutput struct {
 	// The JSON formatted Resource Policy.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice
-	// resource attached to the resource-based policy.
+	// The Amazon Resource Name (ARN) of the End User MessagingSMS resource attached
+	// to the resource-based policy.
 	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.

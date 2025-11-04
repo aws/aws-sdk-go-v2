@@ -57,7 +57,7 @@ type CreateEventDestinationInput struct {
 	EventDestinationName *string
 
 	// An array of event types that determine which events to log. If "ALL" is used,
-	// then AWS End User Messaging SMS and Voice logs every event type.
+	// then End User MessagingSMS logs every event type.
 	//
 	// The TEXT_SENT event type is not supported.
 	//
