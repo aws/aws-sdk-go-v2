@@ -29,7 +29,7 @@ func (t *Table[T]) GetItem(ctx context.Context, m Map, optFns ...func(*dynamodb.
 		return nil, err
 	}
 
-	err = t.options.Schema.applyAfterReadExtensions(item)
+	err = t.applyAfterReadExtensions(item)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (t *Table[T]) GetItemWithProjection(ctx context.Context, m Map, proj expres
 		return nil, err
 	}
 
-	err = t.options.Schema.applyAfterReadExtensions(item)
+	err = t.applyAfterReadExtensions(item)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ func (t *Table[T]) GetItemWithProjection(ctx context.Context, m Map, proj expres
 
 // PutItem writes the item without checking for collisions
 func (t *Table[T]) PutItem(ctx context.Context, item *T, optFns ...func(*dynamodb.Options)) (*T, error) {
-	err := t.options.Schema.applyBeforeWriteExtensions(item)
+	err := t.applyBeforeWriteExtensions(item)
 	if err != nil {
 		return nil, err
 	}
@@ -94,12 +94,21 @@ func (t *Table[T]) PutItem(ctx context.Context, item *T, optFns ...func(*dynamod
 		return nil, fmt.Errorf("empty response in PutItem() call")
 	}
 
-	return t.options.Schema.Decode(itemMap)
+	out, err := t.options.Schema.Decode(itemMap)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := t.applyAfterWriteExtensions(out); err != nil {
+		return nil, err
+	}
+
+	return out, nil
 }
 
 // UpdateItem writes the item with additional checks (version checks, etc)
 func (t *Table[T]) UpdateItem(ctx context.Context, item *T, optFns ...func(*dynamodb.Options)) (*T, error) {
-	err := t.options.Schema.applyBeforeWriteExtensions(item)
+	err := t.applyBeforeWriteExtensions(item)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +118,7 @@ func (t *Table[T]) UpdateItem(ctx context.Context, item *T, optFns ...func(*dyna
 		return nil, err
 	}
 
-	expr, err := t.options.Schema.createUpdateExpression(item)
+	expr, err := t.createUpdateExpression(item)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +141,16 @@ func (t *Table[T]) UpdateItem(ctx context.Context, item *T, optFns ...func(*dyna
 		return nil, fmt.Errorf("empty response in UpdateItem() call")
 	}
 
-	return t.options.Schema.Decode(res.Attributes)
+	out, err := t.options.Schema.Decode(res.Attributes)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := t.applyAfterWriteExtensions(out); err != nil {
+		return nil, err
+	}
+
+	return out, nil
 }
 
 func (t *Table[T]) DeleteItem(ctx context.Context, item *T, optFns ...func(*dynamodb.Options)) error {
@@ -193,7 +211,7 @@ func (t *Table[T]) Scan(ctx context.Context, expr expression.Expression, optFns 
 				return nil, err
 			}
 
-			err = t.options.Schema.applyAfterReadExtensions(item)
+			err = t.applyAfterReadExtensions(item)
 			if err != nil {
 				return nil, err
 			}

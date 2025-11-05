@@ -8,8 +8,9 @@ import (
 )
 
 type TableOptions[T any] struct {
-	Schema          *Schema[T]
-	DynamoDBOptions []func(*dynamodb.Options)
+	Schema            *Schema[T]
+	DynamoDBOptions   []func(*dynamodb.Options)
+	ExtensionRegistry *ExtensionRegistry[T]
 }
 
 type Table[T any] struct {
@@ -28,10 +29,13 @@ func NewTable[T any](client Client, fns ...func(options *TableOptions[T])) (*Tab
 		fn(&opts)
 	}
 
-	if opts.Schema == nil {
-		var err error
-		opts.Schema, err = NewSchema[T]()
-		if err != nil {
+	defaultResovers := []resolverFn[T]{
+		resolveDefaultSchema[T],
+		resolveDefaultExtensionRegistry[T],
+	}
+
+	for _, fn := range defaultResovers {
+		if err := fn(&opts); err != nil {
 			return nil, err
 		}
 	}
@@ -40,4 +44,26 @@ func NewTable[T any](client Client, fns ...func(options *TableOptions[T])) (*Tab
 		client:  client,
 		options: opts,
 	}, nil
+}
+
+type resolverFn[T any] func(opts *TableOptions[T]) error
+
+func resolveDefaultSchema[T any](opts *TableOptions[T]) error {
+	if opts.Schema == nil {
+		var err error
+		opts.Schema, err = NewSchema[T]()
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func resolveDefaultExtensionRegistry[T any](opts *TableOptions[T]) error {
+	if opts.ExtensionRegistry == nil {
+		opts.ExtensionRegistry = DefaultExtensionRegistry[T]()
+	}
+
+	return nil
 }

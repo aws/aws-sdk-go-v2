@@ -11,72 +11,155 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	smythyrand "github.com/aws/smithy-go/rand"
 )
 
-type CachedFieldsKey struct{}
-type TableSchemaKey struct{}
+type (
+	// CachedFieldsKey is the context key for storing CachedFields in a context.Context.
+	CachedFieldsKey struct{}
 
-type ExecutionPhase string
-
-const (
-	BeforeWrite ExecutionPhase = "before_write"
-	AfterRead   ExecutionPhase = "after_read"
-	BeforeScan  ExecutionPhase = "before_scan"
-	BeforeQuery ExecutionPhase = "before_query"
+	// TableSchemaKey is the context key for storing a TableSchema in a context.Context.
+	TableSchemaKey struct{}
 )
 
-type Extension interface {
-	IsExtension()
+// BeforeReader is implemented by types that want to run logic
+// before a value of type T is read (e.g., fetched from storage or unmarshaled).
+// The hook receives the context and a pointer to the value that will be read.
+type BeforeReader[T any] interface {
+	BeforeRead(context.Context, *T) error
 }
 
-type BeforeWriter[T any] interface {
-	Extension
-	BeforeWrite(context.Context, *T) error
-}
-
+// AfterReader is implemented by types that want to run logic
+// after a value of type T is read (e.g., fetched from storage or unmarshaled).
+// The hook receives the context and a pointer to the value that was read.
 type AfterReader[T any] interface {
-	Extension
 	AfterRead(context.Context, *T) error
 }
 
-type BeforeQuerier interface {
-	Extension
-	BeforeQuery(context.Context, *dynamodb.QueryInput) error
+// BeforeWriter is implemented by types that want to execute logic
+// before a value of type T is written (e.g., persisted or marshaled).
+// The hook receives the context and a pointer to the value that will be written.
+type BeforeWriter[T any] interface {
+	BeforeWrite(context.Context, *T) error
 }
 
-type BeforeScanner interface {
-	Extension
-	BeforeScan(context.Context, *dynamodb.ScanInput) error
+// AfterWriter is implemented by types that want to execute logic
+// after a value of type T is written (e.g., persisted or marshaled).
+// The hook receives the context and a pointer to the value that was written.
+type AfterWriter[T any] interface {
+	AfterWrite(context.Context, *T) error
 }
 
+//type BeforeQuerier interface {
+//	BeforeQuery(context.Context, *dynamodb.QueryInput) error
+//}
+//
+//type AfterQuerier[T any] interface {
+//	AfterQuery(context.Context, []T) error
+//}
+//
+//type BeforeScanner interface {
+//	BeforeScan(context.Context, *dynamodb.ScanInput) error
+//}
+//
+//type AfterScanner[T any] interface {
+//	AfterScan(context.Context, []T) error
+//}
+
+// ConditionExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildCondition to modify or set the ConditionBuilder used in the update.
+// Typical use cases include optimistic locking, version checks, or enforcing
+// business rules before an update is applied.
+//
+// Used only in UpdateItem() to construct the ConditionExpression for the request.
 type ConditionExpressionBuilder[T any] interface {
-	Extension
+	BeforeWriter[T]
 	BuildCondition(context.Context, *T, **expression.ConditionBuilder) error
 }
+
+// FilterExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildFilter to modify or set the ConditionBuilder used as a filter.
+// This is useful for advanced filtering scenarios, though in your codebase
+// it is only used in UpdateItem().
+//
+// Used only in UpdateItem() to construct the FilterExpression for the request.
 type FilterExpressionBuilder[T any] interface {
-	Extension
+	BeforeWriter[T]
 	BuildFilter(context.Context, *T, **expression.ConditionBuilder) error
 }
+
+// KeyConditionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildKeyCondition to modify or set the KeyConditionBuilder.
+// This is useful for customizing how keys are matched in conditional updates.
+//
+// Used only in UpdateItem() to construct the KeyConditionExpression for the request.
 type KeyConditionBuilder[T any] interface {
-	Extension
+	BeforeWriter[T]
 	BuildKeyCondition(context.Context, *T, **expression.KeyConditionBuilder) error
 }
+
+// ProjectionExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB condition expression during a write operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildProjection to modify or set the ProjectionBuilder.
+// This is useful for controlling which attributes are returned after an update.
+//
+// Used only in UpdateItem() to construct the ProjectionExpression for the request.
 type ProjectionExpressionBuilder[T any] interface {
-	Extension
+	BeforeWriter[T]
 	BuildProjection(context.Context, *T, **expression.ProjectionBuilder) error
 }
+
+// UpdateExpressionBuilder allows a type to inject custom logic for building
+// a DynamoDB update expression during an update operation (UpdateItem).
+// The interface embeds BeforeWriter[T] for pre-write hooks, and provides
+// BuildUpdate to modify or set the UpdateBuilder.
+// This is useful for customizing how attributes are updated, supporting
+// features like atomic counters, version increments, or custom field updates.
+//
+// Used only in UpdateItem() to construct the UpdateExpression for the request.
 type UpdateExpressionBuilder[T any] interface {
-	Extension
+	BeforeWriter[T]
 	BuildUpdate(context.Context, *T, **expression.UpdateBuilder) error
 }
 
-type AutogenerateExtension[T any] struct {
-}
+// AutogenerateExtension provides automatic population of fields marked as
+// "autogenerated" in the schema. It supports two main features:
+//   - Key generation: Assigns a UUID to fields tagged with `autogenerated:key`.
+//   - Timestamp generation: Assigns the current time to fields tagged with `autogenerated:timestamp`.
+//
+// The extension is intended to be used as a BeforeWriter and UpdateExpressionBuilder
+// for types managed by the enhanced DynamoDB client. It inspects the schema's
+// CachedFields and updates fields as needed before write operations or when
+// building update expressions.
+//
+// Supported field types for key generation: string, []byte.
+// Supported field types for timestamp generation: string, []byte, int64, uint64, time.Time.
+//
+// Tag options:
+//   - `autogenerated:key`: Generates a UUID for the field.
+//   - Optionally, add "always" to force regeneration even if the field is non-zero.
+//   - `autogenerated:timestamp`: Sets the field to the current time.
+//   - Optionally, add "always" to force update even if the field is non-zero.
+//
+// Errors are returned if the tag is misconfigured, the field type is unsupported,
+// or if UUID/time generation fails.
+type AutogenerateExtension[T any] struct{}
 
-func (a *AutogenerateExtension[T]) IsExtension() {}
-
+// BeforeWrite scans all CachedFields for the item and automatically populates
+// fields marked as "autogenerated" before a write operation. For each field:
+//   - If tagged with `autogenerated:key`, assigns a UUID if the field is zero
+//     or if the "always" option is present.
+//   - If tagged with `autogenerated:timestamp`, assigns the current time if the
+//     field is zero or if the "always" option is present.
+//
+// Returns an error if tag options are missing, misconfigured, or if assignment fails.
 func (a *AutogenerateExtension[T]) BeforeWrite(ctx context.Context, item *T) error {
 	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
 
@@ -107,6 +190,12 @@ func (a *AutogenerateExtension[T]) BeforeWrite(ctx context.Context, item *T) err
 	return nil
 }
 
+// BuildUpdate scans all CachedFields for the item and, for each field marked
+// as "autogenerated", adds an update statement to the UpdateBuilder:
+//   - For `autogenerated:key`, sets the field to its current value (if not a key field).
+//   - For `autogenerated:timestamp`, sets the field to its current value or nil if zero.
+//
+// Returns an error if tag options are missing, misconfigured, or if assignment fails.
 func (a *AutogenerateExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **expression.UpdateBuilder) error {
 	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
 
@@ -137,6 +226,11 @@ func (a *AutogenerateExtension[T]) BuildUpdate(ctx context.Context, item *T, ub 
 	return nil
 }
 
+// processKey assigns a UUID to the specified field if it is zero or if the
+// "always" option is present. Supports string and []byte fields. Uses the
+// field's getter/setter if provided.
+//
+// Returns an error if the field type is unsupported or if UUID generation fails.
 func (a *AutogenerateExtension[T]) processKey(v *T, f Field, opts []string) error {
 	r := reflect.ValueOf(v)
 	var cv reflect.Value
@@ -187,6 +281,11 @@ func (a *AutogenerateExtension[T]) processKey(v *T, f Field, opts []string) erro
 	return nil
 }
 
+// processTimestamp assigns the current time to the specified field if it is
+// zero or if the "always" option is present. Supports string, []byte, int64,
+// uint64, and time.Time fields. Uses the field's getter/setter if provided.
+//
+// Returns an error if the field type is unsupported or if time assignment fails.
 func (a *AutogenerateExtension[T]) processTimestamp(v *T, f Field, opts []string) error {
 	r := reflect.ValueOf(v)
 	var cv reflect.Value
@@ -241,6 +340,11 @@ func (a *AutogenerateExtension[T]) processTimestamp(v *T, f Field, opts []string
 	return nil
 }
 
+// buildKeyUpdate adds an update statement to the UpdateBuilder for a key field
+// marked as "autogenerated". Only non-key fields are updated. Supports string
+// and []byte fields.
+//
+// Returns an error if the field type is unsupported.
 func (a *AutogenerateExtension[T]) buildKeyUpdate(v *T, f Field, ub **expression.UpdateBuilder) error {
 	var update expression.UpdateBuilder
 	if ub != nil && *ub != nil {
@@ -280,6 +384,11 @@ func (a *AutogenerateExtension[T]) buildKeyUpdate(v *T, f Field, ub **expression
 	return nil
 }
 
+// buildTimestampUpdate adds an update statement to the UpdateBuilder for a
+// timestamp field marked as "autogenerated". Sets the field to its current
+// value or nil if zero. Supports string, []byte, int64, uint64, and time.Time fields.
+//
+// Returns an error if the field type is unsupported.
 func (a *AutogenerateExtension[T]) buildTimestampUpdate(v *T, f Field, ub **expression.UpdateBuilder) error {
 	var update expression.UpdateBuilder
 	if ub != nil && *ub != nil {
@@ -335,10 +444,35 @@ func (a *AutogenerateExtension[T]) buildTimestampUpdate(v *T, f Field, ub **expr
 	return nil
 }
 
+// VersionExtension provides optimistic locking and version control for items
+// in DynamoDB tables. It automatically manages fields marked as "version" in
+// the schema, ensuring that updates only succeed if the version matches or
+// the attribute does not exist.
+//
+// Usage:
+//   - Implements BeforeWriter, ConditionExpressionBuilder, and UpdateExpressionBuilder.
+//   - Used in UpdateItem() to build conditional expressions and increment version fields.
+//
+// Supported field types: string, int64, uint64.
+//   - For string fields, the value is parsed as an integer and incremented.
+//   - For int64/uint64 fields, the value is incremented directly.
+//
+// Errors are returned if the field type is unsupported or if string parsing fails.
 type VersionExtension[T any] struct{}
 
-func (v *VersionExtension[T]) IsExtension() {}
+// BeforeWrite is a no-op for VersionExtension. It does not modify the item
+// before writing. Always returns nil.
+func (v *VersionExtension[T]) BeforeWrite(_ context.Context, _ *T) error { return nil }
 
+// BuildCondition constructs a conditional expression for versioned fields.
+// For each field marked as "version":
+//   - The condition requires that the attribute does not exist OR its value
+//     matches the current version.
+//   - This ensures that updates only succeed if the item is new or the version
+//     matches, providing optimistic locking.
+//
+// The resulting ConditionBuilder is set in cb if any version fields are present.
+// Returns nil unless reflection or field access fails.
 func (v *VersionExtension[T]) BuildCondition(ctx context.Context, item *T, cb **expression.ConditionBuilder) error {
 	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
 
@@ -376,7 +510,7 @@ func (v *VersionExtension[T]) BuildCondition(ctx context.Context, item *T, cb **
 				),
 			)
 		} else {
-			//condition = expression.Equal(expression.Name(f.Name), expression.Value(cv.Interface()))
+			// condition = expression.Equal(expression.Name(f.Name), expression.Value(cv.Interface()))
 			condition = expression.Or(
 				expression.AttributeNotExists(expression.Name(f.Name)),
 				expression.Equal(
@@ -394,6 +528,14 @@ func (v *VersionExtension[T]) BuildCondition(ctx context.Context, item *T, cb **
 	return nil
 }
 
+// BuildUpdate constructs an update expression for versioned fields.
+// For each field marked as "version":
+//   - If the field is a string and zero, it is initialized to "0".
+//   - The value is incremented by 1 (parsed as int for strings).
+//   - For int64/uint64 fields, the value is incremented directly.
+//
+// The resulting UpdateBuilder is set in ub for each version field.
+// Returns an error if the field type is unsupported or if string parsing fails.
 func (v *VersionExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **expression.UpdateBuilder) error {
 	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
 
@@ -443,10 +585,41 @@ func (v *VersionExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **exp
 	return nil
 }
 
+// AtomicCounterExtension provides automatic atomic increment logic for fields
+// marked as "atomiccounter" in the schema. When used as an UpdateExpressionBuilder,
+// it generates DynamoDB update expressions that increment the field value atomically
+// on each update.
+//
+// Usage:
+//   - Implements BeforeWriter and UpdateExpressionBuilder.
+//   - Used in UpdateItem() to build update expressions for atomic counter fields.
+//
+// Supported field types: int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64.
+//
+// Tag options (on the field):
+//   - "atomiccounter|start=0|delta=1"
+//   - start: Initial value if the attribute does not exist (default: 0).
+//   - delta: Amount to increment on each update (default: 1).
+//
+// Errors are returned if the field type is unsupported, tag options are misconfigured,
+// or option values cannot be parsed as integers.
 type AtomicCounterExtension[T any] struct{}
 
-func (v *AtomicCounterExtension[T]) IsExtension() {}
+// BeforeWrite is a no-op for AtomicCounterExtension. It does not modify the item
+// before writing. Always returns nil.
+func (v *AtomicCounterExtension[T]) BeforeWrite(_ context.Context, _ *T) error { return nil }
 
+// BuildUpdate constructs an update expression for atomic counter fields.
+// For each field marked as "atomiccounter":
+//   - The update expression uses DynamoDB's IfNotExists and Plus functions to
+//     atomically increment the field by the specified delta, initializing to
+//     start-delta if the attribute does not exist.
+//   - Tag options "start" and "delta" can be provided to customize the initial
+//     value and increment amount.
+//
+// The resulting UpdateBuilder is set in ub for each atomic counter field.
+// Returns an error if the field type is unsupported, tag options are misconfigured,
+// or option values cannot be parsed as integers.
 func (v *AtomicCounterExtension[T]) BuildUpdate(ctx context.Context, item *T, ub **expression.UpdateBuilder) error {
 	cachedFields := ctx.Value(CachedFieldsKey{}).(*CachedFields)
 

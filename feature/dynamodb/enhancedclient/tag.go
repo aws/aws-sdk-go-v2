@@ -5,10 +5,12 @@ import (
 	"strings"
 )
 
-const defaultTagKey = "dynamodbav"
-const tagIndex = "dynamodbindex"
-const tagGetter = "dynamodbgetter"
-const tagSetter = "dynamodbsetter"
+const (
+	defaultTagKey = "dynamodbav"
+	tagIndex      = "dynamodbindex"
+	tagGetter     = "dynamodbgetter"
+	tagSetter     = "dynamodbsetter"
+)
 
 type Tag struct {
 	Name          string              // `dynamodbav`

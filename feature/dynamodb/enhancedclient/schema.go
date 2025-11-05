@@ -4,22 +4,19 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/aws/smithy-go/middleware"
-
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
+// Schema[T] defines the structure and metadata for a DynamoDB table item of type T.
+// It encapsulates table configuration, key schema, attribute definitions, and options
+// for encoding/decoding items and managing table operations.
 type Schema[T any] struct {
 	options      SchemaOptions
 	cachedFields *CachedFields
 	enc          *Encoder[T]
 	dec          *Decoder[T]
 	typ          reflect.Type
-
-	//generators map[string]enhancedclient2.Generator[T]
-	extensions   map[ExecutionPhase][]Extension
-	interceptors middleware.Stack
 
 	// common
 	attributeDefinitions      []types.AttributeDefinition
@@ -43,6 +40,8 @@ type Schema[T any] struct {
 	replicaUpdates         []types.ReplicationGroupUpdate
 }
 
+// createTableInput constructs a CreateTableInput for the DynamoDB table defined by this schema.
+// It uses the schema's configuration and options to build the request.
 func (s *Schema[T]) createTableInput() (*dynamodb.CreateTableInput, error) {
 	return &dynamodb.CreateTableInput{
 		TableName:                 s.TableName(),
@@ -63,18 +62,24 @@ func (s *Schema[T]) createTableInput() (*dynamodb.CreateTableInput, error) {
 	}, nil
 }
 
+// describeTableInput constructs a DescribeTableInput for the DynamoDB table defined by this schema.
+// It returns the request for describing the table's metadata and status.
 func (s *Schema[T]) describeTableInput() (*dynamodb.DescribeTableInput, error) {
 	return &dynamodb.DescribeTableInput{
 		TableName: s.TableName(),
 	}, nil
 }
 
+// deleteTableInput constructs a DeleteTableInput for the DynamoDB table defined by this schema.
+// It returns the request for deleting the table.
 func (s *Schema[T]) deleteTableInput() (*dynamodb.DeleteTableInput, error) {
 	return &dynamodb.DeleteTableInput{
 		TableName: s.TableName(),
 	}, nil
 }
 
+// createKeyMap generates a key map for the given item using the schema's key definition.
+// The returned map can be used for DynamoDB key-based operations (e.g., GetItem, DeleteItem).
 func (s *Schema[T]) createKeyMap(item *T) (Map, error) {
 	m, err := s.Encode(item)
 	if err != nil {
@@ -90,6 +95,8 @@ func (s *Schema[T]) createKeyMap(item *T) (Map, error) {
 	return m, nil
 }
 
+// NewSchema creates a new Schema[T] instance for the given item type T.
+// Optional configuration functions can be provided to customize schema options.
 func NewSchema[T any](fns ...func(options *SchemaOptions)) (*Schema[T], error) {
 	if reflect.TypeFor[T]().Kind() != reflect.Struct {
 		return nil, fmt.Errorf("NewClient() can only be created from structs, %T given", *new(T))
@@ -124,7 +131,6 @@ func NewSchema[T any](fns ...func(options *SchemaOptions)) (*Schema[T], error) {
 		(*Schema[T]).resolveKeySchema,
 		(*Schema[T]).resolveAttributeDefinitions,
 		(*Schema[T]).resolveSecondaryIndexes,
-		(*Schema[T]).resolveDefaultExtensions,
 	}
 
 	for _, fn := range resolversFns {

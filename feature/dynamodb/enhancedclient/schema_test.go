@@ -348,13 +348,6 @@ func TestSchema(t *testing.T) {
 				"last_name":     16,
 			},
 		},
-		extensions: map[ExecutionPhase][]Extension{
-			"before_write": {
-				&VersionExtension[order]{},
-				&AtomicCounterExtension[order]{},
-				&AutogenerateExtension[order]{},
-			},
-		},
 		enc: NewEncoder[order](),
 		dec: NewDecoder[order](),
 	}
