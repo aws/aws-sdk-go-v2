@@ -1,3 +1,7 @@
+# v1.45.0 (2025-11-05)
+
+* **Feature**: Added support for Project Resource Tags
+
 # v1.44.2 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

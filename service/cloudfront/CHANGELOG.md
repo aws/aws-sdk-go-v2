@@ -1,3 +1,7 @@
+# v1.56.0 (2025-11-05)
+
+* **Feature**: This release adds new and updated API operations. You can now use the IpAddressType field to specify either ipv4 or dualstack for your Anycast static IP list. You can also enable cross-account resource sharing to share your VPC origins with other AWS accounts
+
 # v1.55.4 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

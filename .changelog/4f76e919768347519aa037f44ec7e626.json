@@ -1,8 +1,0 @@
-{
-    "id": "4f76e919-7683-4751-9aa0-37f44ec7e626",
-    "type": "feature",
-    "description": "Launch IPv6 dual-stack support for S3 Express",
-    "modules": [
-        "service/s3"
-    ]
-}

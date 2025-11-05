@@ -1,3 +1,7 @@
+# v1.262.0 (2025-11-05)
+
+* **Feature**: This release adds AvailabilityZoneId support for DescribeFastSnapshotRestores, DisableFastSnapshotRestores, and EnableFastSnapshotRestores APIs.
+
 # v1.261.1 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

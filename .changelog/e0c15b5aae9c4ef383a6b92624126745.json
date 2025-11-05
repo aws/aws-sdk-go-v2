@@ -1,8 +1,0 @@
-{
-    "id": "e0c15b5a-ae9c-4ef3-83a6-b92624126745",
-    "type": "feature",
-    "description": "This release adds AvailabilityZoneId support for DescribeFastSnapshotRestores, DisableFastSnapshotRestores, and EnableFastSnapshotRestores APIs.",
-    "modules": [
-        "service/ec2"
-    ]
-}

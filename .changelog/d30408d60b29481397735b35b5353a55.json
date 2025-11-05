@@ -1,8 +1,0 @@
-{
-    "id": "d30408d6-0b29-4813-9773-5b35b5353a55",
-    "type": "feature",
-    "description": "Introduce CreateDataflowEndpointGroupV2 action",
-    "modules": [
-        "service/groundstation"
-    ]
-}

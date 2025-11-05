@@ -1,3 +1,24 @@
+# Release (2025-11-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.56.0](service/cloudfront/CHANGELOG.md#v1560-2025-11-05)
+  * **Feature**: This release adds new and updated API operations. You can now use the IpAddressType field to specify either ipv4 or dualstack for your Anycast static IP list. You can also enable cross-account resource sharing to share your VPC origins with other AWS accounts
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.45.0](service/datazone/CHANGELOG.md#v1450-2025-11-05)
+  * **Feature**: Added support for Project Resource Tags
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.262.0](service/ec2/CHANGELOG.md#v12620-2025-11-05)
+  * **Feature**: This release adds AvailabilityZoneId support for DescribeFastSnapshotRestores, DisableFastSnapshotRestores, and EnableFastSnapshotRestores APIs.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.63.0](service/fsx/CHANGELOG.md#v1630-2025-11-05)
+  * **Feature**: Amazon FSx now enables secure management of Active Directory credentials through AWS Secrets Manager integration. Customers can use Secret ARNs instead of direct credentials when joining resources to Active Directory domains.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.39.0](service/groundstation/CHANGELOG.md#v1390-2025-11-05)
+  * **Feature**: Introduce CreateDataflowEndpointGroupV2 action
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.90.0](service/s3/CHANGELOG.md#v1900-2025-11-05)
+  * **Feature**: Launch IPv6 dual-stack support for S3 Express
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.220.0](service/sagemaker/CHANGELOG.md#v12200-2025-11-05)
+  * **Feature**: Add new fields in SageMaker Hyperpod DescribeCluster API response: TargetStateCount, SoftwareUpdateStatus and ActiveSoftwareDeploymentConfig to provide AMI update progress visibility .
+
 # Release (2025-11-04)
 
 ## General Highlights

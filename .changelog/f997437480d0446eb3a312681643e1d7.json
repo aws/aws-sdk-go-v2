@@ -1,8 +1,0 @@
-{
-    "id": "f9974374-80d0-446e-b3a3-12681643e1d7",
-    "type": "feature",
-    "description": "Added support for Project Resource Tags",
-    "modules": [
-        "service/datazone"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "6d2175b8-28d9-4677-a572-16be300ff916",
-    "type": "feature",
-    "description": "Add new fields in SageMaker Hyperpod DescribeCluster API response: TargetStateCount, SoftwareUpdateStatus and ActiveSoftwareDeploymentConfig to provide AMI update progress visibility .",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

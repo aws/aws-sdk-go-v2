@@ -1,3 +1,7 @@
+# v1.39.0 (2025-11-05)
+
+* **Feature**: Introduce CreateDataflowEndpointGroupV2 action
+
 # v1.38.2 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
