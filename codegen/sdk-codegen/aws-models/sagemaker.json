@@ -8113,6 +8113,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) desired for the instance group.</p>"
                     }
+                },
+                "TargetStateCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes running a specific image ID since the last software update request.</p>"
+                    }
+                },
+                "SoftwareUpdateStatus": {
+                    "target": "com.amazonaws.sagemaker#SoftwareUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the last software udpate request.</p>"
+                    }
+                },
+                "ActiveSoftwareUpdateConfig": {
+                    "target": "com.amazonaws.sagemaker#DeploymentConfiguration"
                 }
             },
             "traits": {
@@ -16605,8 +16620,7 @@
                     "target": "com.amazonaws.sagemaker#AlgorithmSpecification",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about providing your own algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about providing your own algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>. </p>"
                     }
                 },
                 "RoleArn": {
@@ -16635,8 +16649,7 @@
                     "target": "com.amazonaws.sagemaker#ResourceConfig",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The resources, including the ML compute instances and ML storage volumes, to use for model training. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want SageMaker to use the ML storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The resources, including the ML compute instances and ML storage volumes, to use for model training. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want SageMaker to use the ML storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>"
                     }
                 },
                 "VpcConfig": {
@@ -69000,6 +69013,47 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#SoftwareUpdateStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Succeeded"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "ROLLBACK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RollbackInProgress"
+                    }
+                },
+                "ROLLBACK_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RollbackComplete"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#SortActionsBy": {

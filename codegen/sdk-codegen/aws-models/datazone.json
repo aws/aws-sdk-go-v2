@@ -7214,6 +7214,15 @@
                         "smithy.api#documentation": "<p>The description of the Amazon DataZone project.</p>"
                     }
                 },
+                "resourceTags": {
+                    "target": "com.amazonaws.datazone#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project.</p>",
+                        "smithy.api#length": {
+                            "max": 25
+                        }
+                    }
+                },
                 "glossaryTerms": {
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
@@ -7382,6 +7391,12 @@
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
+                "resourceTags": {
+                    "target": "com.amazonaws.datazone#ResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project.</p>"
+                    }
+                },
                 "glossaryTerms": {
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
@@ -7501,6 +7516,24 @@
                         "smithy.api#documentation": "<p>Project profile status.</p>"
                     }
                 },
+                "projectResourceTags": {
+                    "target": "com.amazonaws.datazone#ProjectResourceTagParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project profile.</p>"
+                    }
+                },
+                "allowCustomProjectResourceTags": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether custom project resource tags are supported.</p>"
+                    }
+                },
+                "projectResourceTagsDescription": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>"
+                    }
+                },
                 "environmentConfigurations": {
                     "target": "com.amazonaws.datazone#EnvironmentConfigurationsList",
                     "traits": {
@@ -7552,6 +7585,24 @@
                     "target": "com.amazonaws.datazone#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>Project profile status.</p>"
+                    }
+                },
+                "projectResourceTags": {
+                    "target": "com.amazonaws.datazone#ProjectResourceTagParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project profile.</p>"
+                    }
+                },
+                "allowCustomProjectResourceTags": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether custom project resource tags are supported.</p>"
+                    }
+                },
+                "projectResourceTagsDescription": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>"
                     }
                 },
                 "environmentConfigurations": {
@@ -19049,6 +19100,12 @@
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
+                "resourceTags": {
+                    "target": "com.amazonaws.datazone#ResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project.</p>"
+                    }
+                },
                 "glossaryTerms": {
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
@@ -19177,6 +19234,24 @@
                     "target": "com.amazonaws.datazone#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the project profile.</p>"
+                    }
+                },
+                "projectResourceTags": {
+                    "target": "com.amazonaws.datazone#ProjectResourceTagParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project profile.</p>"
+                    }
+                },
+                "allowCustomProjectResourceTags": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether custom project resource tags are supported.</p>"
+                    }
+                },
+                "projectResourceTagsDescription": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>"
                     }
                 },
                 "environmentConfigurations": {
@@ -28505,6 +28580,17 @@
                 "smithy.api#documentation": "<p>The summary of a project profile.</p>"
             }
         },
+        "com.amazonaws.datazone#ProjectResourceTagParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ResourceTagParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.datazone#ProjectStatus": {
             "type": "enum",
             "members": {
@@ -30101,6 +30187,92 @@
                 "smithy.api#documentation": "<p>The specified resource cannot be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.datazone#ResourceTag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.datazone#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the resource tag of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.datazone#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the resource tag of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.datazone#ResourceTagSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the resource tag of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource tag of the project.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ResourceTagParameter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.datazone#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the resource tag parameter of the project profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.datazone#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the resource tag parameter key of the project profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isValueEditable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the value of the resource tag parameter of the project profile is editable at the project level.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource tag parameter of the project profile.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ResourceTagSource": {
+            "type": "enum",
+            "members": {
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT"
+                    }
+                },
+                "PROJECT_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT_PROFILE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#ResourceTags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ResourceTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.datazone#Revision": {
@@ -36989,6 +37161,15 @@
                         "smithy.api#documentation": "<p>The description to be updated as part of the <code>UpdateProject</code> action.</p>"
                     }
                 },
+                "resourceTags": {
+                    "target": "com.amazonaws.datazone#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project.</p>",
+                        "smithy.api#length": {
+                            "max": 25
+                        }
+                    }
+                },
                 "glossaryTerms": {
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
@@ -37085,6 +37266,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the project was last updated.</p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.datazone#ResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project.</p>"
                     }
                 },
                 "glossaryTerms": {
@@ -37200,6 +37387,24 @@
                         "smithy.api#documentation": "<p>The status of a project profile.</p>"
                     }
                 },
+                "projectResourceTags": {
+                    "target": "com.amazonaws.datazone#ProjectResourceTagParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project profile.</p>"
+                    }
+                },
+                "allowCustomProjectResourceTags": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether custom project resource tags are supported.</p>"
+                    }
+                },
+                "projectResourceTagsDescription": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>"
+                    }
+                },
                 "environmentConfigurations": {
                     "target": "com.amazonaws.datazone#EnvironmentConfigurationsList",
                     "traits": {
@@ -37251,6 +37456,24 @@
                     "target": "com.amazonaws.datazone#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the project profile.</p>"
+                    }
+                },
+                "projectResourceTags": {
+                    "target": "com.amazonaws.datazone#ProjectResourceTagParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags of the project profile.</p>"
+                    }
+                },
+                "allowCustomProjectResourceTags": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether custom project resource tags are supported.</p>"
+                    }
+                },
+                "projectResourceTagsDescription": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>"
                     }
                 },
                 "environmentConfigurations": {

@@ -221,6 +221,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list.</p>"
+                    }
+                },
                 "AnycastIps": {
                     "target": "com.amazonaws.cloudfront#AnycastIps",
                     "traits": {
@@ -357,6 +363,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last time the Anycast static IP list was modified.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (ETag value) of the Anycast static IP list.</p>"
                     }
                 }
             },
@@ -1543,6 +1561,9 @@
                     "target": "com.amazonaws.cloudfront#DeleteRealtimeLogConfig"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#DeleteResponseHeadersPolicy"
                 },
                 {
@@ -1657,6 +1678,9 @@
                     "target": "com.amazonaws.cloudfront#GetRealtimeLogConfig"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#GetResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#GetResponseHeadersPolicy"
                 },
                 {
@@ -1706,6 +1730,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByOriginRequestPolicyId"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListDistributionsByOwnedResource"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByRealtimeLogConfig"
@@ -1777,6 +1804,9 @@
                     "target": "com.amazonaws.cloudfront#PublishFunction"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#PutResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TagResource"
                 },
                 {
@@ -1784,6 +1814,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UpdateAnycastIpList"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateCachePolicy"
@@ -3911,6 +3944,12 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.cloudfront#Tags"
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>ipv6</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -7107,7 +7146,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a distribution.</p>",
+                "smithy.api#documentation": "<p>Delete a distribution.</p> <important> <p>Before you can delete a distribution, you must disable it, which requires permission to update the distribution. Once deleted, a distribution cannot be recovered.</p> </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2020-05-31/distribution/{Id}",
@@ -7767,6 +7806,58 @@
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the real-time log configuration to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#IllegalDelete"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource policy attached to the CloudFront resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/delete-resource-policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudFront resource for which the resource policy should be deleted.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -8640,6 +8731,85 @@
                 "traits": {
                     "smithy.api#xmlName": "DistributionId"
                 }
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionIdOwner": {
+            "type": "structure",
+            "members": {
+                "DistributionId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the distribution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the distribution. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that pairs a CloudFront distribution ID with its owning Amazon Web Services account ID.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionIdOwnerItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#DistributionIdOwner",
+                "traits": {
+                    "smithy.api#xmlName": "DistributionIdOwner"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DistributionIdOwnerList": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list of <code>DistributionIdOwner</code> objects. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of <code>DistributionIdOwner</code> objects to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IsTruncated": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag that indicates whether more <code>DistributionIdOwner</code> objects remain to be listed. If your results were truncated, you can make a follow-up pagination request using the <code>Marker</code> request parameter to retrieve more results in the list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Quantity": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the actual number of <code>DistributionIdOwner</code> objects included in the list for the current page.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.cloudfront#DistributionIdOwnerItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of <code>DistributionIdOwner</code> objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of distribution IDs and the Amazon Web Services accounts that they belong to.</p>"
             }
         },
         "com.amazonaws.cloudfront#DistributionList": {
@@ -12332,6 +12502,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetResourcePolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the resource policy for the specified CloudFront resource that you own and have shared.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/get-resource-policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudFront resource that is associated with the resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudFront resource that is associated with the resource policy.</p>"
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy in JSON format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#GetResponseHeadersPolicy": {
             "type": "operation",
             "input": {
@@ -14857,6 +15093,82 @@
                     "target": "com.amazonaws.cloudfront#DistributionIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of distribution IDs.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByOwnedResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByOwnedResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByOwnedResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the CloudFront distributions that are associated with the specified resource that you own.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distributionsByOwnedResource/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByOwnedResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudFront resource that you've shared with other Amazon Web Services accounts.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of distributions to return.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByOwnedResourceResult": {
+            "type": "structure",
+            "members": {
+                "DistributionList": {
+                    "target": "com.amazonaws.cloudfront#DistributionIdOwnerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of distributions that are using the shared resource.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 }
@@ -18327,6 +18639,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#PutResourcePolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#IllegalUpdate"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a resource control policy for a given CloudFront resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/put-resource-policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudFront resource for which the policy is being created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON-formatted resource policy to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#PutResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudFront resource for which the policy was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#QueryArgProfile": {
             "type": "structure",
             "members": {
@@ -21212,6 +21597,94 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudfront#UpdateAnycastIpList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateAnycastIpListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateAnycastIpListResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an Anycast static IP list.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/anycast-ip-list/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateAnycastIpListRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Anycast static IP list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>ipv6</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>"
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (ETag value) of the Anycast static IP list that you are updating.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateAnycastIpListResult": {
+            "type": "structure",
+            "members": {
+                "AnycastIpList": {
+                    "target": "com.amazonaws.cloudfront#AnycastIpList",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the Anycast static IP list.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#UpdateCachePolicy": {
             "type": "operation",
             "input": {
@@ -23898,6 +24371,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "AccountId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the Amazon Web Services account that owns the VPC origin.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -23939,6 +24418,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC origin ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the Amazon Web Services account that owns the VPC origin.</p>"
                     }
                 },
                 "OriginReadTimeout": {
@@ -24095,6 +24580,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC origin summary ARN.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the Amazon Web Services account that owns the VPC origin.</p>"
                     }
                 },
                 "OriginEndpointArn": {

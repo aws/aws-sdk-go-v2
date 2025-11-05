@@ -1351,6 +1351,120 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.groundstation#CreateDataflowEndpointGroupV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.groundstation#CreateDataflowEndpointGroupV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.groundstation#CreateDataflowEndpointGroupV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.groundstation#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a <code>DataflowEndpointGroupV2</code> containing the specified list of <code>DataflowEndpoint</code> objects.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/dataflowEndpointGroupV2"
+                }
+            }
+        },
+        "com.amazonaws.groundstation#CreateDataflowEndpointGroupV2Request": {
+            "type": "structure",
+            "members": {
+                "endpoints": {
+                    "target": "com.amazonaws.groundstation#CreateEndpointDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dataflow endpoint group's endpoint definitions</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contactPrePassDurationSeconds": {
+                    "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>"
+                    }
+                },
+                "contactPostPassDurationSeconds": {
+                    "target": "com.amazonaws.groundstation#DataflowEndpointGroupDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.groundstation#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags of a V2 dataflow endpoint group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.groundstation#CreateDataflowEndpointGroupV2Response": {
+            "type": "structure",
+            "members": {
+                "dataflowEndpointGroupId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dataflow endpoint group ID</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#DataflowEndpointGroupV2"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.groundstation#CreateEndpointDetails": {
+            "type": "union",
+            "members": {
+                "uplinkAwsGroundStationAgentEndpoint": {
+                    "target": "com.amazonaws.groundstation#UplinkAwsGroundStationAgentEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for an uplink agent endpoint</p>"
+                    }
+                },
+                "downlinkAwsGroundStationAgentEndpoint": {
+                    "target": "com.amazonaws.groundstation#DownlinkAwsGroundStationAgentEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for a downlink agent endpoint</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Endpoint definition used for creating a dataflow endpoint</p>"
+            }
+        },
+        "com.amazonaws.groundstation#CreateEndpointDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.groundstation#CreateEndpointDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 12
+                }
+            }
+        },
         "com.amazonaws.groundstation#CreateEphemeris": {
             "type": "operation",
             "input": {
@@ -1706,7 +1820,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 120,
+                    "min": 30,
                     "max": 480
                 }
             }
@@ -1722,13 +1836,34 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>"
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#DataflowEndpointGroup"
+                    }
+                ]
             }
         },
         "com.amazonaws.groundstation#DataflowEndpointGroupList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.groundstation#DataflowEndpointListItem"
+            }
+        },
+        "com.amazonaws.groundstation#DataflowEndpointGroupV2": {
+            "type": "resource",
+            "identifiers": {
+                "dataflowEndpointGroupId": {
+                    "target": "com.amazonaws.groundstation#Uuid"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.groundstation#CreateDataflowEndpointGroupV2"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "dataflow-endpoint-group/{dataflowEndpointGroupId}"
+                }
             }
         },
         "com.amazonaws.groundstation#DataflowEndpointListItem": {
@@ -1748,7 +1883,12 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Item in a list of <code>DataflowEndpoint</code> groups.</p>"
+                "smithy.api#documentation": "<p>Item in a list of <code>DataflowEndpoint</code> groups.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#DataflowEndpointGroup"
+                    }
+                ]
             }
         },
         "com.amazonaws.groundstation#DataflowList": {
@@ -1867,7 +2007,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p/>",
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#DataflowEndpointGroup"
+                    }
+                ]
             }
         },
         "com.amazonaws.groundstation#DeleteEphemeris": {
@@ -2376,6 +2521,96 @@
                 "smithy.api#documentation": "<p>Data for agent discovery.</p>"
             }
         },
+        "com.amazonaws.groundstation#DownlinkAwsGroundStationAgentEndpoint": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.groundstation#SafeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Downlink dataflow endpoint name</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataflowDetails": {
+                    "target": "com.amazonaws.groundstation#DownlinkDataflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dataflow details for the downlink endpoint</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Definition for a downlink agent endpoint</p>"
+            }
+        },
+        "com.amazonaws.groundstation#DownlinkAwsGroundStationAgentEndpointDetails": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.groundstation#SafeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Downlink dataflow endpoint name</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataflowDetails": {
+                    "target": "com.amazonaws.groundstation#DownlinkDataflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dataflow details for the downlink endpoint</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentStatus": {
+                    "target": "com.amazonaws.groundstation#AgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the agent associated with the downlink dataflow endpoint</p>"
+                    }
+                },
+                "auditResults": {
+                    "target": "com.amazonaws.groundstation#AuditResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Health audit results for the downlink dataflow endpoint</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for a downlink agent endpoint</p>"
+            }
+        },
+        "com.amazonaws.groundstation#DownlinkConnectionDetails": {
+            "type": "structure",
+            "members": {
+                "agentIpAndPortAddress": {
+                    "target": "com.amazonaws.groundstation#RangedConnectionDetails",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "egressAddressAndPort": {
+                    "target": "com.amazonaws.groundstation#ConnectionDetails",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection details for Ground Station to Agent and Agent to customer</p>"
+            }
+        },
+        "com.amazonaws.groundstation#DownlinkDataflowDetails": {
+            "type": "union",
+            "members": {
+                "agentConnectionDetails": {
+                    "target": "com.amazonaws.groundstation#DownlinkConnectionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Downlink connection details for customer to Agent and Agent to Ground Station</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Dataflow details for a downlink endpoint</p>"
+            }
+        },
         "com.amazonaws.groundstation#DurationInSeconds": {
             "type": "integer",
             "traits": {
@@ -2459,6 +2694,18 @@
                     "target": "com.amazonaws.groundstation#AwsGroundStationAgentEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>An agent endpoint.</p>"
+                    }
+                },
+                "uplinkAwsGroundStationAgentEndpoint": {
+                    "target": "com.amazonaws.groundstation#UplinkAwsGroundStationAgentEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for an uplink agent endpoint</p>"
+                    }
+                },
+                "downlinkAwsGroundStationAgentEndpoint": {
+                    "target": "com.amazonaws.groundstation#DownlinkAwsGroundStationAgentEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for a downlink agent endpoint</p>"
                     }
                 },
                 "healthStatus": {
@@ -3314,6 +3561,97 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.groundstation#GetAgentTaskResponseUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.groundstation#GetAgentTaskResponseUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.groundstation#GetAgentTaskResponseUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.groundstation#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Gets a presigned URL for uploading agent task response logs.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/agentResponseUrl/{agentId}/{taskId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.groundstation#GetAgentTaskResponseUrlRequest": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UUID of agent requesting the response URL.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>GUID of the agent task for which the response URL is being requested.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#Agent"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.groundstation#GetAgentTaskResponseUrlResponse": {
+            "type": "structure",
+            "members": {
+                "agentId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UUID of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.groundstation#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>GUID of the agent task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "presignedLogUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Presigned URL for uploading agent task response logs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#Agent"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.groundstation#GetConfig": {
             "type": "operation",
             "input": {
@@ -3458,7 +3796,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p/>",
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#DataflowEndpointGroup"
+                    }
+                ]
             }
         },
         "com.amazonaws.groundstation#GetDataflowEndpointGroupResponse": {
@@ -3503,7 +3846,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p/>",
-                "smithy.api#output": {}
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.groundstation#DataflowEndpointGroup"
+                    }
+                ]
             }
         },
         "com.amazonaws.groundstation#GetMinuteUsage": {
@@ -3821,6 +4169,9 @@
             "version": "2019-05-23",
             "operations": [
                 {
+                    "target": "com.amazonaws.groundstation#GetAgentTaskResponseUrl"
+                },
+                {
                     "target": "com.amazonaws.groundstation#GetMinuteUsage"
                 },
                 {
@@ -3845,6 +4196,9 @@
                 },
                 {
                     "target": "com.amazonaws.groundstation#DataflowEndpointGroup"
+                },
+                {
+                    "target": "com.amazonaws.groundstation#DataflowEndpointGroupV2"
                 },
                 {
                     "target": "com.amazonaws.groundstation#Ephemeris"
@@ -6207,6 +6561,25 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.groundstation#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "parameterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter name that caused the exception</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.groundstation#SignatureMap": {
             "type": "map",
             "key": {
@@ -6943,6 +7316,96 @@
             "traits": {
                 "smithy.api#documentation": "<p/>",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.groundstation#UplinkAwsGroundStationAgentEndpoint": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.groundstation#SafeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uplink dataflow endpoint name</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataflowDetails": {
+                    "target": "com.amazonaws.groundstation#UplinkDataflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dataflow details for the uplink endpoint</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Definition for an uplink agent endpoint</p>"
+            }
+        },
+        "com.amazonaws.groundstation#UplinkAwsGroundStationAgentEndpointDetails": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.groundstation#SafeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uplink dataflow endpoint name</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataflowDetails": {
+                    "target": "com.amazonaws.groundstation#UplinkDataflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dataflow details for the uplink endpoint</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentStatus": {
+                    "target": "com.amazonaws.groundstation#AgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the agent associated with the uplink dataflow endpoint</p>"
+                    }
+                },
+                "auditResults": {
+                    "target": "com.amazonaws.groundstation#AuditResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Health audit results for the uplink dataflow endpoint</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for an uplink agent endpoint</p>"
+            }
+        },
+        "com.amazonaws.groundstation#UplinkConnectionDetails": {
+            "type": "structure",
+            "members": {
+                "ingressAddressAndPort": {
+                    "target": "com.amazonaws.groundstation#ConnectionDetails",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentIpAndPortAddress": {
+                    "target": "com.amazonaws.groundstation#RangedConnectionDetails",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection details for customer to Agent and Agent to Ground Station</p>"
+            }
+        },
+        "com.amazonaws.groundstation#UplinkDataflowDetails": {
+            "type": "union",
+            "members": {
+                "agentConnectionDetails": {
+                    "target": "com.amazonaws.groundstation#UplinkConnectionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uplink connection details for customer to Agent and Agent to Ground Station</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Dataflow details for an uplink endpoint</p>"
             }
         },
         "com.amazonaws.groundstation#UplinkEchoConfig": {

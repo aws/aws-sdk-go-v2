@@ -4406,6 +4406,16 @@
                 "smithy.api#documentation": "<p>The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),\n            also known as Unix time.</p>"
             }
         },
+        "com.amazonaws.fsx#CustomerSecretsManagerARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 64,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:[^:]{1,63}:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+-[a-zA-Z0-9]{6}$"
+            }
+        },
         "com.amazonaws.fsx#DNSName": {
             "type": "string",
             "traits": {
@@ -10654,6 +10664,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
                     }
+                },
+                "DomainJoinServiceAccountSecret": {
+                    "target": "com.amazonaws.fsx#CustomerSecretsManagerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the service account credentials used to join the file system to your self-managed Active Directory domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10686,17 +10702,13 @@
                 "UserName": {
                     "target": "com.amazonaws.fsx#DirectoryUserName",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.fsx#DirectoryPassword",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain.</p>"
                     }
                 },
                 "DnsIps": {
@@ -10705,6 +10717,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DomainJoinServiceAccountSecret": {
+                    "target": "com.amazonaws.fsx#CustomerSecretsManagerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the self-managed Active Directory domain join service account credentials. \n            When provided, Amazon FSx uses the credentials stored in this secret to join the file system to your self-managed Active Directory domain.</p>\n         <p>The secret must contain two key-value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOMER_MANAGED_ACTIVE_DIRECTORY_USERNAME</code> - The username for the service account</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOMER_MANAGED_ACTIVE_DIRECTORY_PASSWORD</code> - The password for the service account</p>\n            </li>\n         </ul>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html\">\n                Using Amazon FSx for Windows with your self-managed Microsoft Active Directory</a> or \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/self-manage-prereqs.html\">\n                Using Amazon FSx for ONTAP with your self-managed Microsoft Active Directory</a>.</p>"
                     }
                 }
             },
@@ -10749,6 +10767,12 @@
                     "target": "com.amazonaws.fsx#FileSystemAdministratorsGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>For FSx for ONTAP file systems only - Specifies the updated name of the self-managed Active Directory domain group whose members are granted administrative privileges\n            for the Amazon FSx resource.</p>"
+                    }
+                },
+                "DomainJoinServiceAccountSecret": {
+                    "target": "com.amazonaws.fsx#CustomerSecretsManagerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the updated Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the self-managed Active Directory domain join service account credentials. \n            Amazon FSx uses this account to join to your self-managed Active Directory domain.</p>"
                     }
                 }
             },
