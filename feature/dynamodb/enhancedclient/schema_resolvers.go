@@ -9,6 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
+// defaults sets default values for the Schema[T] if not already specified.
+// Ensures billing mode is set to PayPerRequest if unset.
 func (s *Schema[T]) defaults() error {
 	if s.billingMode == "" {
 		s.billingMode = types.BillingModePayPerRequest
@@ -17,6 +19,8 @@ func (s *Schema[T]) defaults() error {
 	return nil
 }
 
+// resolveTableName determines and sets the DynamoDB table name for the schema based on the type T.
+// Returns an error if T is not a struct or pointer to struct.
 func (s *Schema[T]) resolveTableName() error {
 	if s.typ == nil {
 		s.typ = reflect.TypeFor[T]()
@@ -36,8 +40,11 @@ func (s *Schema[T]) resolveTableName() error {
 	return nil
 }
 
+// resolveKeySchema analyzes the cached fields and sets the key schema for the table.
+// Ensures exactly one partition key and at most one sort key are defined.
+// Returns an error if the key configuration is invalid.
 func (s *Schema[T]) resolveKeySchema() error {
-	if s.keySchema != nil && len(s.keySchema) > 0 {
+	if len(s.keySchema) > 0 {
 		return nil
 	}
 
@@ -80,7 +87,8 @@ func (s *Schema[T]) resolveKeySchema() error {
 	return nil
 }
 
-// []types.AttributeDefinition
+// resolveAttributeDefinitions populates the attribute definitions for the table based on key fields and indexes.
+// Only fields used as keys or indexes are included.
 func (s *Schema[T]) resolveAttributeDefinitions() error {
 	for _, f := range s.cachedFields.fields {
 		isKey := f.Tag.Partition || f.Tag.Sort
@@ -106,6 +114,8 @@ func (s *Schema[T]) resolveAttributeDefinitions() error {
 	return nil
 }
 
+// extractIndexes analyzes field index tags and returns mappings for global and local secondary indexes.
+// Returns error if index configuration is ambiguous or invalid.
 func extractIndexes(fields []Field) (map[string][][]int, map[string][][]int, error) {
 	globals := make(map[string][][]int)
 	locals := make(map[string][][]int)
@@ -131,13 +141,10 @@ func extractIndexes(fields []Field) (map[string][][]int, map[string][][]int, err
 			switch {
 			case idx.Global:
 				globals[idx.Name] = append(globals[idx.Name], pos)
-				break
 			case idx.Local:
 				locals[idx.Name] = append(locals[idx.Name], pos)
-				break
 			case !idx.Global && !idx.Local:
 				unknowns[idx.Name] = append(unknowns[idx.Name], pos)
-				break
 			}
 		}
 	}
@@ -164,6 +171,8 @@ func extractIndexes(fields []Field) (map[string][][]int, map[string][][]int, err
 	return globals, locals, nil
 }
 
+// resolveSecondaryIndexes processes the schema's fields to determine global and local secondary indexes.
+// Populates the schema's index definitions and validates key configurations.
 func (s *Schema[T]) resolveSecondaryIndexes() error {
 	globals, locals, err := extractIndexes(s.cachedFields.fields)
 	if err != nil {
@@ -199,21 +208,8 @@ func (s *Schema[T]) resolveSecondaryIndexes() error {
 	return nil
 }
 
-func (s *Schema[T]) resolveDefaultExtensions() error {
-	if s.extensions == nil {
-		s.extensions = map[ExecutionPhase][]Extension{}
-	} else {
-		return nil
-	}
-
-	// register expression builder extensions first
-	s.WithExtension(BeforeWrite, &VersionExtension[T]{})
-	s.WithExtension(BeforeWrite, &AtomicCounterExtension[T]{})
-	s.WithExtension(BeforeWrite, &AutogenerateExtension[T]{})
-
-	return nil
-}
-
+// processGSIs builds GlobalSecondaryIndex definitions from the provided global index mappings.
+// Validates that each index has exactly one partition key and at most one sort key.
 func processGSIs(fields []Field, globals map[string][][]int) ([]types.GlobalSecondaryIndex, error) {
 	gs := make([]types.GlobalSecondaryIndex, 0, len(globals))
 
@@ -274,6 +270,7 @@ func processGSIs(fields []Field, globals map[string][][]int) ([]types.GlobalSeco
 	return gs, nil
 }
 
+// ksSortFunc sorts KeySchemaElements so that the hash key appears before the range key.
 func ksSortFunc(a, b types.KeySchemaElement) int {
 	switch types.KeyTypeHash {
 	case a.KeyType:
@@ -285,6 +282,8 @@ func ksSortFunc(a, b types.KeySchemaElement) int {
 	}
 }
 
+// processLSIs builds LocalSecondaryIndex definitions from the provided local index mappings.
+// Each local index inherits the table's primary key and may define a sort key.
 func processLSIs(fields []Field, tablePrimary types.KeySchemaElement, locals map[string][][]int) ([]types.LocalSecondaryIndex, error) {
 	ls := make([]types.LocalSecondaryIndex, 0, len(locals))
 	numSorts := 0
