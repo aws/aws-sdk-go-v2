@@ -200,6 +200,9 @@ type AnycastIpList struct {
 	// This member is required.
 	Status *string
 
+	// The IP address type for the Anycast static IP list.
+	IpAddressType IpAddressType
+
 	noSmithyDocumentSerde
 }
 
@@ -276,6 +279,12 @@ type AnycastIpListSummary struct {
 	//
 	// This member is required.
 	Status *string
+
+	// The current version (ETag value) of the Anycast static IP list.
+	ETag *string
+
+	// The IP address type for the Anycast static IP list.
+	IpAddressType IpAddressType
 
 	noSmithyDocumentSerde
 }
@@ -2275,6 +2284,64 @@ type DistributionIdList struct {
 
 	// Contains the value that you should use in the Marker field of a subsequent
 	// request to continue listing distribution IDs where you left off.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that pairs a CloudFront distribution ID with its owning Amazon Web
+// Services account ID.
+type DistributionIdOwner struct {
+
+	// The ID of the distribution.
+	//
+	// This member is required.
+	DistributionId *string
+
+	// The ID of the Amazon Web Services account that owns the distribution.
+	//
+	// This member is required.
+	OwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// The list of distribution IDs and the Amazon Web Services accounts that they
+// belong to.
+type DistributionIdOwnerList struct {
+
+	// A flag that indicates whether more DistributionIdOwner objects remain to be
+	// listed. If your results were truncated, you can make a follow-up pagination
+	// request using the Marker request parameter to retrieve more results in the list.
+	//
+	// This member is required.
+	IsTruncated *bool
+
+	// Use this field when paginating results to indicate where to begin in your list
+	// of DistributionIdOwner objects. The response includes distributions in the list
+	// that occur after the marker. To get the next page of the list, set this field's
+	// value to the value of NextMarker from the current page's response.
+	//
+	// This member is required.
+	Marker *string
+
+	// The maximum number of DistributionIdOwner objects to return.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// Specifies the actual number of DistributionIdOwner objects included in the list
+	// for the current page.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The number of DistributionIdOwner objects.
+	Items []DistributionIdOwner
+
+	// A token used for pagination of results returned in the response. You can use
+	// the token from the previous request to define where the current request should
+	// begin.
 	NextMarker *string
 
 	noSmithyDocumentSerde
@@ -6540,6 +6607,9 @@ type VpcOrigin struct {
 	// This member is required.
 	VpcOriginEndpointConfig *VpcOriginEndpointConfig
 
+	// The account ID of the Amazon Web Services account that owns the VPC origin.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -6569,6 +6639,9 @@ type VpcOriginConfig struct {
 	//
 	// [Response timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
 	OriginReadTimeout *int32
+
+	// The account ID of the Amazon Web Services account that owns the VPC origin.
+	OwnerAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -6681,6 +6754,9 @@ type VpcOriginSummary struct {
 	//
 	// This member is required.
 	Status *string
+
+	// The account ID of the Amazon Web Services account that owns the VPC origin.
+	AccountId *string
 
 	noSmithyDocumentSerde
 }

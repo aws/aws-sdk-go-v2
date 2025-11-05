@@ -3709,6 +3709,9 @@ type ClusterEventSummary struct {
 // Details of an instance group in a SageMaker HyperPod cluster.
 type ClusterInstanceGroupDetails struct {
 
+	// The configuration to use when updating the AMI versions.
+	ActiveSoftwareUpdateConfig *DeploymentConfiguration
+
 	// The number of instances that are currently in the instance group of a SageMaker
 	// HyperPod cluster.
 	CurrentCount *int32
@@ -3748,6 +3751,9 @@ type ClusterInstanceGroupDetails struct {
 	// the AMI.
 	ScheduledUpdateConfig *ScheduledUpdateConfig
 
+	// Status of the last software udpate request.
+	SoftwareUpdateStatus SoftwareUpdateStatus
+
 	// The current status of the cluster instance group.
 	//
 	//   - InService : The instance group is active and healthy.
@@ -3767,6 +3773,10 @@ type ClusterInstanceGroupDetails struct {
 	// The number of instances you specified to add to the instance group of a
 	// SageMaker HyperPod cluster.
 	TargetCount *int32
+
+	// The number of nodes running a specific image ID since the last software update
+	// request.
+	TargetStateCount *int32
 
 	// The number you specified to TreadsPerCore in CreateCluster for enabling or
 	// disabling multithreading. For instance types that support multithreading, you

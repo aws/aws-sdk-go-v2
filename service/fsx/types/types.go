@@ -3938,6 +3938,11 @@ type SelfManagedActiveDirectoryAttributes struct {
 	// self-managed AD directory.
 	DnsIps []string
 
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing the service account credentials used to join the file system
+	// to your self-managed Active Directory domain.
+	DomainJoinServiceAccountSecret *string
+
 	// The fully qualified domain name of the self-managed AD directory.
 	DomainName *string
 
@@ -3978,20 +3983,24 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// This member is required.
 	DomainName *string
 
-	// The password for the service account on your self-managed AD domain that Amazon
-	// FSx will use to join to your AD domain.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing the self-managed Active Directory domain join service account
+	// credentials. When provided, Amazon FSx uses the credentials stored in this
+	// secret to join the file system to your self-managed Active Directory domain.
 	//
-	// This member is required.
-	Password *string
-
-	// The user name for the service account on your self-managed AD domain that
-	// Amazon FSx will use to join to your AD domain. This account must have the
-	// permission to join computers to the domain in the organizational unit provided
-	// in OrganizationalUnitDistinguishedName , or in the default location of your AD
-	// domain.
+	// The secret must contain two key-value pairs:
 	//
-	// This member is required.
-	UserName *string
+	//   - CUSTOMER_MANAGED_ACTIVE_DIRECTORY_USERNAME - The username for the service
+	//   account
+	//
+	//   - CUSTOMER_MANAGED_ACTIVE_DIRECTORY_PASSWORD - The password for the service
+	//   account
+	//
+	// For more information, see [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory] or [Using Amazon FSx for ONTAP with your self-managed Microsoft Active Directory].
+	//
+	// [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html
+	// [Using Amazon FSx for ONTAP with your self-managed Microsoft Active Directory]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/self-manage-prereqs.html
+	DomainJoinServiceAccountSecret *string
 
 	// (Optional) The name of the domain group whose members are granted
 	// administrative privileges for the file system. Administrative privileges include
@@ -4013,6 +4022,17 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// [RFC 2253]: https://tools.ietf.org/html/rfc2253
 	OrganizationalUnitDistinguishedName *string
 
+	// The password for the service account on your self-managed AD domain that Amazon
+	// FSx will use to join to your AD domain.
+	Password *string
+
+	// The user name for the service account on your self-managed AD domain that
+	// Amazon FSx will use to join to your AD domain. This account must have the
+	// permission to join computers to the domain in the organizational unit provided
+	// in OrganizationalUnitDistinguishedName , or in the default location of your AD
+	// domain.
+	UserName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -4024,6 +4044,12 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 	// A list of up to three DNS server or domain controller IP addresses in your
 	// self-managed Active Directory domain.
 	DnsIps []string
+
+	// Specifies the updated Amazon Resource Name (ARN) of the Amazon Web Services
+	// Secrets Manager secret containing the self-managed Active Directory domain join
+	// service account credentials. Amazon FSx uses this account to join to your
+	// self-managed Active Directory domain.
+	DomainJoinServiceAccountSecret *string
 
 	// Specifies an updated fully qualified domain name of your self-managed Active
 	// Directory configuration.

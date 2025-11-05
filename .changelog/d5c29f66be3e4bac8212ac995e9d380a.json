@@ -1,0 +1,8 @@
+{
+    "id": "d5c29f66-be3e-4bac-8212-ac995e9d380a",
+    "type": "feature",
+    "description": "Amazon FSx now enables secure management of Active Directory credentials through AWS Secrets Manager integration. Customers can use Secret ARNs instead of direct credentials when joining resources to Active Directory domains.",
+    "modules": [
+        "service/fsx"
+    ]
+}

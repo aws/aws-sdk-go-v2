@@ -40,6 +40,9 @@ type UpdateProjectProfileInput struct {
 	// This member is required.
 	Identifier *string
 
+	// Specifies whether custom project resource tags are supported.
+	AllowCustomProjectResourceTags *bool
+
 	// The description of a project profile.
 	Description *string
 
@@ -51,6 +54,13 @@ type UpdateProjectProfileInput struct {
 
 	// The name of a project profile.
 	Name *string
+
+	// The resource tags of the project profile.
+	ProjectResourceTags []types.ResourceTagParameter
+
+	// Field viewable through the UI that provides a project user with the allowed
+	// resource tag specifications.
+	ProjectResourceTagsDescription *string
 
 	// The status of a project profile.
 	Status types.Status
@@ -80,6 +90,9 @@ type UpdateProjectProfileOutput struct {
 	// This member is required.
 	Name *string
 
+	// Specifies whether custom project resource tags are supported.
+	AllowCustomProjectResourceTags *bool
+
 	// The timestamp at which a project profile is created.
 	CreatedAt *time.Time
 
@@ -94,6 +107,13 @@ type UpdateProjectProfileOutput struct {
 
 	// The timestamp at which a project profile was last updated.
 	LastUpdatedAt *time.Time
+
+	// The resource tags of the project profile.
+	ProjectResourceTags []types.ResourceTagParameter
+
+	// Field viewable through the UI that provides a project user with the allowed
+	// resource tag specifications.
+	ProjectResourceTagsDescription *string
 
 	// The status of the project profile.
 	Status types.Status

@@ -93,6 +93,9 @@ type GetProjectOutput struct {
 	// The status of the project.
 	ProjectStatus types.ProjectStatus
 
+	// The resource tags of the project.
+	ResourceTags []types.ResourceTag
+
 	// The user parameters of a project.
 	UserParameters []types.EnvironmentConfigurationUserParameter
 

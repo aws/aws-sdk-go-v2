@@ -579,6 +579,34 @@ type ContactData struct {
 	noSmithyDocumentSerde
 }
 
+// Endpoint definition used for creating a dataflow endpoint
+//
+// The following types satisfy this interface:
+//
+//	CreateEndpointDetailsMemberDownlinkAwsGroundStationAgentEndpoint
+//	CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint
+type CreateEndpointDetails interface {
+	isCreateEndpointDetails()
+}
+
+// Definition for a downlink agent endpoint
+type CreateEndpointDetailsMemberDownlinkAwsGroundStationAgentEndpoint struct {
+	Value DownlinkAwsGroundStationAgentEndpoint
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateEndpointDetailsMemberDownlinkAwsGroundStationAgentEndpoint) isCreateEndpointDetails() {}
+
+// Definition for an uplink agent endpoint
+type CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint struct {
+	Value UplinkAwsGroundStationAgentEndpoint
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint) isCreateEndpointDetails() {}
+
 // Information about a dataflow edge used in a contact.
 type DataflowDetail struct {
 
@@ -700,6 +728,78 @@ type DiscoveryData struct {
 	noSmithyDocumentSerde
 }
 
+// Definition for a downlink agent endpoint
+type DownlinkAwsGroundStationAgentEndpoint struct {
+
+	// Dataflow details for the downlink endpoint
+	//
+	// This member is required.
+	DataflowDetails DownlinkDataflowDetails
+
+	// Downlink dataflow endpoint name
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for a downlink agent endpoint
+type DownlinkAwsGroundStationAgentEndpointDetails struct {
+
+	// Dataflow details for the downlink endpoint
+	//
+	// This member is required.
+	DataflowDetails DownlinkDataflowDetails
+
+	// Downlink dataflow endpoint name
+	//
+	// This member is required.
+	Name *string
+
+	// Status of the agent associated with the downlink dataflow endpoint
+	AgentStatus AgentStatus
+
+	// Health audit results for the downlink dataflow endpoint
+	AuditResults AuditResults
+
+	noSmithyDocumentSerde
+}
+
+// Connection details for Ground Station to Agent and Agent to customer
+type DownlinkConnectionDetails struct {
+
+	// Ingress address of AgentEndpoint with a port range and an optional mtu.
+	//
+	// This member is required.
+	AgentIpAndPortAddress *RangedConnectionDetails
+
+	// Egress address of AgentEndpoint with an optional mtu.
+	//
+	// This member is required.
+	EgressAddressAndPort *ConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+// Dataflow details for a downlink endpoint
+//
+// The following types satisfy this interface:
+//
+//	DownlinkDataflowDetailsMemberAgentConnectionDetails
+type DownlinkDataflowDetails interface {
+	isDownlinkDataflowDetails()
+}
+
+// Downlink connection details for customer to Agent and Agent to Ground Station
+type DownlinkDataflowDetailsMemberAgentConnectionDetails struct {
+	Value DownlinkConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DownlinkDataflowDetailsMemberAgentConnectionDetails) isDownlinkDataflowDetails() {}
+
 // Object that represents EIRP.
 type Eirp struct {
 
@@ -738,6 +838,9 @@ type EndpointDetails struct {
 	// An agent endpoint.
 	AwsGroundStationAgentEndpoint *AwsGroundStationAgentEndpoint
 
+	// Definition for a downlink agent endpoint
+	DownlinkAwsGroundStationAgentEndpoint *DownlinkAwsGroundStationAgentEndpointDetails
+
 	// A dataflow endpoint.
 	Endpoint *DataflowEndpoint
 
@@ -752,6 +855,9 @@ type EndpointDetails struct {
 	// Endpoint security details including a list of subnets, a list of security
 	// groups and a role to connect streams to instances.
 	SecurityDetails *SecurityDetails
+
+	// Definition for an uplink agent endpoint
+	UplinkAwsGroundStationAgentEndpoint *UplinkAwsGroundStationAgentEndpointDetails
 
 	noSmithyDocumentSerde
 }
@@ -1487,6 +1593,78 @@ type TrackingOverrides struct {
 	noSmithyDocumentSerde
 }
 
+// Definition for an uplink agent endpoint
+type UplinkAwsGroundStationAgentEndpoint struct {
+
+	// Dataflow details for the uplink endpoint
+	//
+	// This member is required.
+	DataflowDetails UplinkDataflowDetails
+
+	// Uplink dataflow endpoint name
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for an uplink agent endpoint
+type UplinkAwsGroundStationAgentEndpointDetails struct {
+
+	// Dataflow details for the uplink endpoint
+	//
+	// This member is required.
+	DataflowDetails UplinkDataflowDetails
+
+	// Uplink dataflow endpoint name
+	//
+	// This member is required.
+	Name *string
+
+	// Status of the agent associated with the uplink dataflow endpoint
+	AgentStatus AgentStatus
+
+	// Health audit results for the uplink dataflow endpoint
+	AuditResults AuditResults
+
+	noSmithyDocumentSerde
+}
+
+// Connection details for customer to Agent and Agent to Ground Station
+type UplinkConnectionDetails struct {
+
+	// Ingress address of AgentEndpoint with a port range and an optional mtu.
+	//
+	// This member is required.
+	AgentIpAndPortAddress *RangedConnectionDetails
+
+	// Egress address of AgentEndpoint with an optional mtu.
+	//
+	// This member is required.
+	IngressAddressAndPort *ConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+// Dataflow details for an uplink endpoint
+//
+// The following types satisfy this interface:
+//
+//	UplinkDataflowDetailsMemberAgentConnectionDetails
+type UplinkDataflowDetails interface {
+	isUplinkDataflowDetails()
+}
+
+// Uplink connection details for customer to Agent and Agent to Ground Station
+type UplinkDataflowDetailsMemberAgentConnectionDetails struct {
+	Value UplinkConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*UplinkDataflowDetailsMemberAgentConnectionDetails) isUplinkDataflowDetails() {}
+
 // Information about an uplink echo Config .
 //
 // Parameters from the AntennaUplinkConfig , corresponding to the specified
@@ -1537,8 +1715,11 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAzElSegmentsData()         {}
 func (*UnknownUnionMember) isConfigDetails()            {}
 func (*UnknownUnionMember) isConfigTypeData()           {}
+func (*UnknownUnionMember) isCreateEndpointDetails()    {}
+func (*UnknownUnionMember) isDownlinkDataflowDetails()  {}
 func (*UnknownUnionMember) isEphemerisData()            {}
 func (*UnknownUnionMember) isEphemerisFilter()          {}
 func (*UnknownUnionMember) isEphemerisTypeDescription() {}
 func (*UnknownUnionMember) isKmsKey()                   {}
 func (*UnknownUnionMember) isProgramTrackSettings()     {}
+func (*UnknownUnionMember) isUplinkDataflowDetails()    {}

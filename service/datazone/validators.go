@@ -5324,6 +5324,23 @@ func validateProjectPolicyGrantPrincipal(v *types.ProjectPolicyGrantPrincipal) e
 	}
 }
 
+func validateProjectResourceTagParameters(v []types.ResourceTagParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectResourceTagParameters"}
+	for i := range v {
+		if err := validateResourceTagParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProjectsForRule(v *types.ProjectsForRule) error {
 	if v == nil {
 		return nil
@@ -5587,6 +5604,27 @@ func validateRequiredMetadataFormList(v []types.MetadataFormReference) error {
 		if err := validateMetadataFormReference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceTagParameter(v *types.ResourceTagParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceTagParameter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.IsValueEditable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsValueEditable"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6759,6 +6797,11 @@ func validateOpCreateProjectProfileInput(v *CreateProjectProfileInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ProjectResourceTags != nil {
+		if err := validateProjectResourceTagParameters(v.ProjectResourceTags); err != nil {
+			invalidParams.AddNested("ProjectResourceTags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.EnvironmentConfigurations != nil {
 		if err := validateEnvironmentConfigurationsList(v.EnvironmentConfigurations); err != nil {
@@ -9380,6 +9423,11 @@ func validateOpUpdateProjectProfileInput(v *UpdateProjectProfileInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.ProjectResourceTags != nil {
+		if err := validateProjectResourceTagParameters(v.ProjectResourceTags); err != nil {
+			invalidParams.AddNested("ProjectResourceTags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.EnvironmentConfigurations != nil {
 		if err := validateEnvironmentConfigurationsList(v.EnvironmentConfigurations); err != nil {

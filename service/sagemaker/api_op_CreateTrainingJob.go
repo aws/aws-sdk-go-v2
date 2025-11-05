@@ -95,34 +95,11 @@ func (c *Client) CreateTrainingJob(ctx context.Context, params *CreateTrainingJo
 
 type CreateTrainingJobInput struct {
 
-	// The registry path of the Docker image that contains the training algorithm and
-	// algorithm-specific metadata, including the input mode. For more information
-	// about algorithms provided by SageMaker, see [Algorithms]. For information about providing
-	// your own algorithms, see [Using Your Own Algorithms with Amazon SageMaker].
-	//
-	// [Algorithms]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-	// [Using Your Own Algorithms with Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
-	//
-	// This member is required.
-	AlgorithmSpecification *types.AlgorithmSpecification
-
 	// Specifies the path to the S3 location where you want to store model artifacts.
 	// SageMaker creates subfolders for the artifacts.
 	//
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
-
-	// The resources, including the ML compute instances and ML storage volumes, to
-	// use for model training.
-	//
-	// ML storage volumes store model artifacts and incremental states. Training
-	// algorithms might also use ML storage volumes for scratch space. If you want
-	// SageMaker to use the ML storage volume to store the training data, choose File
-	// as the TrainingInputMode in the algorithm specification. For distributed
-	// training algorithms, specify an instance count greater than 1.
-	//
-	// This member is required.
-	ResourceConfig *types.ResourceConfig
 
 	// The Amazon Resource Name (ARN) of an IAM role that SageMaker can assume to
 	// perform tasks on your behalf.
@@ -158,6 +135,15 @@ type CreateTrainingJobInput struct {
 	//
 	// This member is required.
 	TrainingJobName *string
+
+	// The registry path of the Docker image that contains the training algorithm and
+	// algorithm-specific metadata, including the input mode. For more information
+	// about algorithms provided by SageMaker, see [Algorithms]. For information about providing
+	// your own algorithms, see [Using Your Own Algorithms with Amazon SageMaker].
+	//
+	// [Algorithms]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+	// [Using Your Own Algorithms with Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+	AlgorithmSpecification *types.AlgorithmSpecification
 
 	// Contains information about the output location for managed spot training
 	// checkpoint data.
@@ -281,6 +267,16 @@ type CreateTrainingJobInput struct {
 	//
 	// [Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
 	RemoteDebugConfig *types.RemoteDebugConfig
+
+	// The resources, including the ML compute instances and ML storage volumes, to
+	// use for model training.
+	//
+	// ML storage volumes store model artifacts and incremental states. Training
+	// algorithms might also use ML storage volumes for scratch space. If you want
+	// SageMaker to use the ML storage volume to store the training data, choose File
+	// as the TrainingInputMode in the algorithm specification. For distributed
+	// training algorithms, specify an instance count greater than 1.
+	ResourceConfig *types.ResourceConfig
 
 	// The number of times to retry the job when the job fails due to an
 	// InternalServerError .

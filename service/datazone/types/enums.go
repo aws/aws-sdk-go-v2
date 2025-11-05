@@ -1398,6 +1398,25 @@ func (ResolutionStrategy) Values() []ResolutionStrategy {
 	}
 }
 
+type ResourceTagSource string
+
+// Enum values for ResourceTagSource
+const (
+	ResourceTagSourceProject        ResourceTagSource = "PROJECT"
+	ResourceTagSourceProjectProfile ResourceTagSource = "PROJECT_PROFILE"
+)
+
+// Values returns all known values for ResourceTagSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceTagSource) Values() []ResourceTagSource {
+	return []ResourceTagSource{
+		"PROJECT",
+		"PROJECT_PROFILE",
+	}
+}
+
 type RuleAction string
 
 // Enum values for RuleAction

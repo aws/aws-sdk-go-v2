@@ -3883,6 +3883,9 @@ type DescribeFastSnapshotRestoreSuccessItem struct {
 	// The Availability Zone.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
+
 	// The time at which fast snapshot restores entered the disabled state.
 	DisabledTime *time.Time
 
@@ -4122,6 +4125,9 @@ type DisableFastSnapshotRestoreStateErrorItem struct {
 	// The Availability Zone.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
+
 	// The error.
 	Error *DisableFastSnapshotRestoreStateError
 
@@ -4133,6 +4139,9 @@ type DisableFastSnapshotRestoreSuccessItem struct {
 
 	// The Availability Zone.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// The time at which fast snapshot restores entered the disabled state.
 	DisabledTime *time.Time
@@ -4938,6 +4947,9 @@ type EnableFastSnapshotRestoreStateErrorItem struct {
 	// The Availability Zone.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
+
 	// The error.
 	Error *EnableFastSnapshotRestoreStateError
 
@@ -4949,6 +4961,9 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 
 	// The Availability Zone.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// The time at which fast snapshot restores entered the disabled state.
 	DisabledTime *time.Time
@@ -11033,27 +11048,25 @@ type IpamPrefixListResolverRule struct {
 // prefix list resolver without any CIDR selection rules, but it will generate
 // empty versions (containing no CIDRs) until you add rules.
 //
-// There are three rule types:
+// There are three rule types. Only 2 of the 3 rule types support conditions -
+// IPAM pool CIDR and Scope resource CIDR. Static CIDR rules cannot have
+// conditions.
 //
 //   - Static CIDR: A fixed list of CIDRs that do not change (like a manual list
-//     replicated across Regions).
+//     replicated across Regions)
 //
 //   - IPAM pool CIDR: CIDRs from specific IPAM pools (like all CIDRs from your
-//     IPAM production pool).
+//     IPAM production pool)
 //
-//   - Scope resource CIDR: CIDRs for Amazon Web Services resources like VPCs,
-//     subnets, and EIPs within a specific IPAM scope.
+// If you choose this option, choose the following:
 //
-// Condition availability by resource type:
+//   - IPAM scope: Select the IPAM scope to search for resources
 //
-//   - Only 2 of the 3 rule types support conditions - IPAM pool CIDR and Scope
-//     resource CIDR. Static CIDR rules cannot have conditions.
+//   - Conditions:
 //
-//   - Condition available for the IPAM pool CIDR resource type:
+//   - Property
 //
-//   - Property:
-//
-//   - IPAM Pool ID
+//   - IPAM pool ID: Select an IPAM pool that contains the resources
 //
 //   - CIDR (like 10.24.34.0/23)
 //
@@ -11061,13 +11074,20 @@ type IpamPrefixListResolverRule struct {
 //
 //   - Value: The value on which to match the condition
 //
-//   - Conditions for the Scope resource CIDR resource type:
+//   - Scope resource CIDR: CIDRs from Amazon Web Services resources like VPCs,
+//     subnets, EIPs within an IPAM scope
+//
+// If you choose this option, choose the following:
+//
+//   - IPAM scope: Select the IPAM scope to search for resources
+//
+//   - Resource type: Select a resource, like a VPC or subnet.
+//
+//   - Conditions:
 //
 //   - Property:
 //
 //   - Resource ID: The unique ID of a resource (like vpc-1234567890abcdef0)
-//
-//   - Resource type (like VPC or Subnet)
 //
 //   - Resource owner (like 111122223333)
 //
@@ -11080,8 +11100,6 @@ type IpamPrefixListResolverRule struct {
 //   - Operation: Equals/Not equals
 //
 //   - Value: The value on which to match the condition
-//
-//   - When setting conditions for a rule, one or more conditions is required.
 type IpamPrefixListResolverRuleCondition struct {
 
 	// A CIDR block to match against. This condition selects CIDRs that fall within or
@@ -11123,27 +11141,25 @@ type IpamPrefixListResolverRuleCondition struct {
 // prefix list resolver without any CIDR selection rules, but it will generate
 // empty versions (containing no CIDRs) until you add rules.
 //
-// There are three rule types:
+// There are three rule types. Only 2 of the 3 rule types support conditions -
+// IPAM pool CIDR and Scope resource CIDR. Static CIDR rules cannot have
+// conditions.
 //
 //   - Static CIDR: A fixed list of CIDRs that do not change (like a manual list
-//     replicated across Regions).
+//     replicated across Regions)
 //
 //   - IPAM pool CIDR: CIDRs from specific IPAM pools (like all CIDRs from your
-//     IPAM production pool).
+//     IPAM production pool)
 //
-//   - Scope resource CIDR: CIDRs for Amazon Web Services resources like VPCs,
-//     subnets, and EIPs within a specific IPAM scope.
+// If you choose this option, choose the following:
 //
-// Condition availability by resource type:
+//   - IPAM scope: Select the IPAM scope to search for resources
 //
-//   - Only 2 of the 3 rule types support conditions - IPAM pool CIDR and Scope
-//     resource CIDR. Static CIDR rules cannot have conditions.
+//   - Conditions:
 //
-//   - Condition available for the IPAM pool CIDR resource type:
+//   - Property
 //
-//   - Property:
-//
-//   - IPAM Pool ID
+//   - IPAM pool ID: Select an IPAM pool that contains the resources
 //
 //   - CIDR (like 10.24.34.0/23)
 //
@@ -11151,13 +11167,20 @@ type IpamPrefixListResolverRuleCondition struct {
 //
 //   - Value: The value on which to match the condition
 //
-//   - Conditions for the Scope resource CIDR resource type:
+//   - Scope resource CIDR: CIDRs from Amazon Web Services resources like VPCs,
+//     subnets, EIPs within an IPAM scope
+//
+// If you choose this option, choose the following:
+//
+//   - IPAM scope: Select the IPAM scope to search for resources
+//
+//   - Resource type: Select a resource, like a VPC or subnet.
+//
+//   - Conditions:
 //
 //   - Property:
 //
 //   - Resource ID: The unique ID of a resource (like vpc-1234567890abcdef0)
-//
-//   - Resource type (like VPC or Subnet)
 //
 //   - Resource owner (like 111122223333)
 //
@@ -11170,8 +11193,6 @@ type IpamPrefixListResolverRuleCondition struct {
 //   - Operation: Equals/Not equals
 //
 //   - Value: The value on which to match the condition
-//
-//   - When setting conditions for a rule, one or more conditions is required.
 type IpamPrefixListResolverRuleConditionRequest struct {
 
 	// The operation to perform when evaluating this condition.
@@ -11215,27 +11236,25 @@ type IpamPrefixListResolverRuleConditionRequest struct {
 // prefix list resolver without any CIDR selection rules, but it will generate
 // empty versions (containing no CIDRs) until you add rules.
 //
-// There are three rule types:
+// There are three rule types. Only 2 of the 3 rule types support conditions -
+// IPAM pool CIDR and Scope resource CIDR. Static CIDR rules cannot have
+// conditions.
 //
 //   - Static CIDR: A fixed list of CIDRs that do not change (like a manual list
-//     replicated across Regions).
+//     replicated across Regions)
 //
 //   - IPAM pool CIDR: CIDRs from specific IPAM pools (like all CIDRs from your
-//     IPAM production pool).
+//     IPAM production pool)
 //
-//   - Scope resource CIDR: CIDRs for Amazon Web Services resources like VPCs,
-//     subnets, and EIPs within a specific IPAM scope.
+// If you choose this option, choose the following:
 //
-// Condition availability by resource type:
+//   - IPAM scope: Select the IPAM scope to search for resources
 //
-//   - Only 2 of the 3 rule types support conditions - IPAM pool CIDR and Scope
-//     resource CIDR. Static CIDR rules cannot have conditions.
+//   - Conditions:
 //
-//   - Condition available for the IPAM pool CIDR resource type:
+//   - Property
 //
-//   - Property:
-//
-//   - IPAM Pool ID
+//   - IPAM pool ID: Select an IPAM pool that contains the resources
 //
 //   - CIDR (like 10.24.34.0/23)
 //
@@ -11243,13 +11262,20 @@ type IpamPrefixListResolverRuleConditionRequest struct {
 //
 //   - Value: The value on which to match the condition
 //
-//   - Conditions for the Scope resource CIDR resource type:
+//   - Scope resource CIDR: CIDRs from Amazon Web Services resources like VPCs,
+//     subnets, EIPs within an IPAM scope
+//
+// If you choose this option, choose the following:
+//
+//   - IPAM scope: Select the IPAM scope to search for resources
+//
+//   - Resource type: Select a resource, like a VPC or subnet.
+//
+//   - Conditions:
 //
 //   - Property:
 //
 //   - Resource ID: The unique ID of a resource (like vpc-1234567890abcdef0)
-//
-//   - Resource type (like VPC or Subnet)
 //
 //   - Resource owner (like 111122223333)
 //
@@ -11262,8 +11288,6 @@ type IpamPrefixListResolverRuleConditionRequest struct {
 //   - Operation: Equals/Not equals
 //
 //   - Value: The value on which to match the condition
-//
-//   - When setting conditions for a rule, one or more conditions is required.
 type IpamPrefixListResolverRuleRequest struct {
 
 	// The type of CIDR selection rule. Valid values include include for selecting

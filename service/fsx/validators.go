@@ -1533,12 +1533,6 @@ func validateSelfManagedActiveDirectoryConfiguration(v *types.SelfManagedActiveD
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if v.DnsIps == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsIps"))
 	}

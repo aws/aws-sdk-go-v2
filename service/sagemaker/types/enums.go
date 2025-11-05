@@ -7553,6 +7553,33 @@ func (SkipModelValidation) Values() []SkipModelValidation {
 	}
 }
 
+type SoftwareUpdateStatus string
+
+// Enum values for SoftwareUpdateStatus
+const (
+	SoftwareUpdateStatusPending            SoftwareUpdateStatus = "Pending"
+	SoftwareUpdateStatusInProgress         SoftwareUpdateStatus = "InProgress"
+	SoftwareUpdateStatusSucceeded          SoftwareUpdateStatus = "Succeeded"
+	SoftwareUpdateStatusFailed             SoftwareUpdateStatus = "Failed"
+	SoftwareUpdateStatusRollbackInProgress SoftwareUpdateStatus = "RollbackInProgress"
+	SoftwareUpdateStatusRollbackComplete   SoftwareUpdateStatus = "RollbackComplete"
+)
+
+// Values returns all known values for SoftwareUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SoftwareUpdateStatus) Values() []SoftwareUpdateStatus {
+	return []SoftwareUpdateStatus{
+		"Pending",
+		"InProgress",
+		"Succeeded",
+		"Failed",
+		"RollbackInProgress",
+		"RollbackComplete",
+	}
+}
+
 type SortActionsBy string
 
 // Enum values for SortActionsBy

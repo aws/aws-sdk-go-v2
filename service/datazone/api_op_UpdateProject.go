@@ -59,6 +59,9 @@ type UpdateProjectInput struct {
 	// only specify the following string for this parameter: latest .
 	ProjectProfileVersion *string
 
+	// The resource tags of the project.
+	ResourceTags map[string]string
+
 	// The user parameters of the project.
 	UserParameters []types.EnvironmentConfigurationUserParameter
 
@@ -114,6 +117,9 @@ type UpdateProjectOutput struct {
 
 	// The status of the project.
 	ProjectStatus types.ProjectStatus
+
+	// The resource tags of the project.
+	ResourceTags []types.ResourceTag
 
 	// The user parameters of the project.
 	UserParameters []types.EnvironmentConfigurationUserParameter

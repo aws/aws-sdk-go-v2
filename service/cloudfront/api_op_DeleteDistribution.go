@@ -11,6 +11,10 @@ import (
 )
 
 // Delete a distribution.
+//
+// Before you can delete a distribution, you must disable it, which requires
+// permission to update the distribution. Once deleted, a distribution cannot be
+// recovered.
 func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistributionInput, optFns ...func(*Options)) (*DeleteDistributionOutput, error) {
 	if params == nil {
 		params = &DeleteDistributionInput{}

@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateDataflowEndpointGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataflowEndpointGroupV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataflowEndpointGroupV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataflowEndpointGroupV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEphemeris(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEphemeris(context.Background(), nil, func(o *Options) {
@@ -199,6 +211,18 @@ func TestCheckSnapshot_GetAgentConfiguration(t *testing.T) {
 	_, err := svc.GetAgentConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAgentConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentTaskResponseUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentTaskResponseUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentTaskResponseUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +517,18 @@ func TestUpdateSnapshot_CreateDataflowEndpointGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataflowEndpointGroupV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataflowEndpointGroupV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataflowEndpointGroupV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEphemeris(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEphemeris(context.Background(), nil, func(o *Options) {
@@ -594,6 +630,18 @@ func TestUpdateSnapshot_GetAgentConfiguration(t *testing.T) {
 	_, err := svc.GetAgentConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAgentConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentTaskResponseUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentTaskResponseUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentTaskResponseUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

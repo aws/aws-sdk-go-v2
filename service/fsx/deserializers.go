@@ -14012,6 +14012,15 @@ func awsAwsjson11_deserializeDocumentSelfManagedActiveDirectoryAttributes(v **ty
 				return err
 			}
 
+		case "DomainJoinServiceAccountSecret":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomerSecretsManagerARN to be of type string, got %T instead", value)
+				}
+				sv.DomainJoinServiceAccountSecret = ptr.String(jtv)
+			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)

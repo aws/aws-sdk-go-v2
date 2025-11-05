@@ -602,6 +602,18 @@ func TestCheckSnapshot_DeleteRealtimeLogConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteResponseHeadersPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResponseHeadersPolicy(context.Background(), nil, func(o *Options) {
@@ -1058,6 +1070,18 @@ func TestCheckSnapshot_GetRealtimeLogConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetResponseHeadersPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResponseHeadersPolicy(context.Background(), nil, func(o *Options) {
@@ -1255,6 +1279,18 @@ func TestCheckSnapshot_ListDistributionsByOriginRequestPolicyId(t *testing.T) {
 	_, err := svc.ListDistributionsByOriginRequestPolicyId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDistributionsByOriginRequestPolicyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDistributionsByOwnedResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByOwnedResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDistributionsByOwnedResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1538,6 +1574,18 @@ func TestCheckSnapshot_PublishFunction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1567,6 +1615,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAnycastIpList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2365,6 +2425,18 @@ func TestUpdateSnapshot_DeleteRealtimeLogConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteResponseHeadersPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResponseHeadersPolicy(context.Background(), nil, func(o *Options) {
@@ -2821,6 +2893,18 @@ func TestUpdateSnapshot_GetRealtimeLogConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetResponseHeadersPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResponseHeadersPolicy(context.Background(), nil, func(o *Options) {
@@ -3018,6 +3102,18 @@ func TestUpdateSnapshot_ListDistributionsByOriginRequestPolicyId(t *testing.T) {
 	_, err := svc.ListDistributionsByOriginRequestPolicyId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDistributionsByOriginRequestPolicyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDistributionsByOwnedResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByOwnedResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDistributionsByOwnedResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3301,6 +3397,18 @@ func TestUpdateSnapshot_PublishFunction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -3330,6 +3438,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAnycastIpList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

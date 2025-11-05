@@ -47668,6 +47668,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 
 	for key, value := range shape {
 		switch key {
+		case "ActiveSoftwareUpdateConfig":
+			if err := awsAwsjson11_deserializeDocumentDeploymentConfiguration(&sv.ActiveSoftwareUpdateConfig, value); err != nil {
+				return err
+			}
+
 		case "CurrentCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -47751,6 +47756,15 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				return err
 			}
 
+		case "SoftwareUpdateStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SoftwareUpdateStatus to be of type string, got %T instead", value)
+				}
+				sv.SoftwareUpdateStatus = types.SoftwareUpdateStatus(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47771,6 +47785,19 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 					return err
 				}
 				sv.TargetCount = ptr.Int32(int32(i64))
+			}
+
+		case "TargetStateCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClusterInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetStateCount = ptr.Int32(int32(i64))
 			}
 
 		case "ThreadsPerCore":

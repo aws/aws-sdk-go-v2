@@ -3471,6 +3471,13 @@ func awsRestjson1_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 		ok.String(*v.ProjectProfileId)
 	}
 
+	if v.ResourceTags != nil {
+		ok := object.Key("resourceTags")
+		if err := awsRestjson1_serializeDocumentTags(v.ResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserParameters != nil {
 		ok := object.Key("userParameters")
 		if err := awsRestjson1_serializeDocumentEnvironmentConfigurationUserParametersList(v.UserParameters, ok); err != nil {
@@ -3677,6 +3684,11 @@ func awsRestjson1_serializeOpDocumentCreateProjectProfileInput(v *CreateProjectP
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowCustomProjectResourceTags != nil {
+		ok := object.Key("allowCustomProjectResourceTags")
+		ok.Boolean(*v.AllowCustomProjectResourceTags)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -3697,6 +3709,18 @@ func awsRestjson1_serializeOpDocumentCreateProjectProfileInput(v *CreateProjectP
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.ProjectResourceTags != nil {
+		ok := object.Key("projectResourceTags")
+		if err := awsRestjson1_serializeDocumentProjectResourceTagParameters(v.ProjectResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProjectResourceTagsDescription != nil {
+		ok := object.Key("projectResourceTagsDescription")
+		ok.String(*v.ProjectResourceTagsDescription)
 	}
 
 	if len(v.Status) > 0 {
@@ -16349,6 +16373,13 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 		ok.String(*v.ProjectProfileVersion)
 	}
 
+	if v.ResourceTags != nil {
+		ok := object.Key("resourceTags")
+		if err := awsRestjson1_serializeDocumentTags(v.ResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserParameters != nil {
 		ok := object.Key("userParameters")
 		if err := awsRestjson1_serializeDocumentEnvironmentConfigurationUserParametersList(v.UserParameters, ok); err != nil {
@@ -16454,6 +16485,11 @@ func awsRestjson1_serializeOpDocumentUpdateProjectProfileInput(v *UpdateProjectP
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowCustomProjectResourceTags != nil {
+		ok := object.Key("allowCustomProjectResourceTags")
+		ok.Boolean(*v.AllowCustomProjectResourceTags)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -16474,6 +16510,18 @@ func awsRestjson1_serializeOpDocumentUpdateProjectProfileInput(v *UpdateProjectP
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.ProjectResourceTags != nil {
+		ok := object.Key("projectResourceTags")
+		if err := awsRestjson1_serializeDocumentProjectResourceTagParameters(v.ProjectResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProjectResourceTagsDescription != nil {
+		ok := object.Key("projectResourceTagsDescription")
+		ok.String(*v.ProjectResourceTagsDescription)
 	}
 
 	if len(v.Status) > 0 {
@@ -19762,6 +19810,19 @@ func awsRestjson1_serializeDocumentProjectProfileList(v []string, value smithyjs
 	return nil
 }
 
+func awsRestjson1_serializeDocumentProjectResourceTagParameters(v []types.ResourceTagParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentResourceTagParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProjectsForRule(v *types.ProjectsForRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20252,6 +20313,28 @@ func awsRestjson1_serializeDocumentRequiredMetadataFormList(v []types.MetadataFo
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceTagParameter(v *types.ResourceTagParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsValueEditable != nil {
+		ok := object.Key("isValueEditable")
+		ok.Boolean(*v.IsValueEditable)
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
 	return nil
 }
 

@@ -70,6 +70,26 @@ func (m *validateOpCreateDataflowEndpointGroup) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataflowEndpointGroupV2 struct {
+}
+
+func (*validateOpCreateDataflowEndpointGroupV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataflowEndpointGroupV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataflowEndpointGroupV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataflowEndpointGroupV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEphemeris struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpGetAgentConfiguration) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAgentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentTaskResponseUrl struct {
+}
+
+func (*validateOpGetAgentTaskResponseUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentTaskResponseUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentTaskResponseUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentTaskResponseUrlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -582,6 +622,10 @@ func addOpCreateDataflowEndpointGroupValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateDataflowEndpointGroup{}, middleware.After)
 }
 
+func addOpCreateDataflowEndpointGroupV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataflowEndpointGroupV2{}, middleware.After)
+}
+
 func addOpCreateEphemerisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEphemeris{}, middleware.After)
 }
@@ -616,6 +660,10 @@ func addOpDescribeEphemerisValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAgentConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentConfiguration{}, middleware.After)
+}
+
+func addOpGetAgentTaskResponseUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentTaskResponseUrl{}, middleware.After)
 }
 
 func addOpGetConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1115,6 +1163,47 @@ func validateConnectionDetails(v *types.ConnectionDetails) error {
 	}
 }
 
+func validateCreateEndpointDetails(v types.CreateEndpointDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointDetails"}
+	switch uv := v.(type) {
+	case *types.CreateEndpointDetailsMemberDownlinkAwsGroundStationAgentEndpoint:
+		if err := validateDownlinkAwsGroundStationAgentEndpoint(&uv.Value); err != nil {
+			invalidParams.AddNested("[downlinkAwsGroundStationAgentEndpoint]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint:
+		if err := validateUplinkAwsGroundStationAgentEndpoint(&uv.Value); err != nil {
+			invalidParams.AddNested("[uplinkAwsGroundStationAgentEndpoint]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateEndpointDetailsList(v []types.CreateEndpointDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointDetailsList"}
+	for i := range v {
+		if err := validateCreateEndpointDetails(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataflowEndpoint(v *types.DataflowEndpoint) error {
 	if v == nil {
 		return nil
@@ -1198,6 +1287,95 @@ func validateDiscoveryData(v *types.DiscoveryData) error {
 	}
 }
 
+func validateDownlinkAwsGroundStationAgentEndpoint(v *types.DownlinkAwsGroundStationAgentEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DownlinkAwsGroundStationAgentEndpoint"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataflowDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataflowDetails"))
+	} else if v.DataflowDetails != nil {
+		if err := validateDownlinkDataflowDetails(v.DataflowDetails); err != nil {
+			invalidParams.AddNested("DataflowDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDownlinkAwsGroundStationAgentEndpointDetails(v *types.DownlinkAwsGroundStationAgentEndpointDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DownlinkAwsGroundStationAgentEndpointDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataflowDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataflowDetails"))
+	} else if v.DataflowDetails != nil {
+		if err := validateDownlinkDataflowDetails(v.DataflowDetails); err != nil {
+			invalidParams.AddNested("DataflowDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDownlinkConnectionDetails(v *types.DownlinkConnectionDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DownlinkConnectionDetails"}
+	if v.AgentIpAndPortAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentIpAndPortAddress"))
+	} else if v.AgentIpAndPortAddress != nil {
+		if err := validateRangedConnectionDetails(v.AgentIpAndPortAddress); err != nil {
+			invalidParams.AddNested("AgentIpAndPortAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EgressAddressAndPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EgressAddressAndPort"))
+	} else if v.EgressAddressAndPort != nil {
+		if err := validateConnectionDetails(v.EgressAddressAndPort); err != nil {
+			invalidParams.AddNested("EgressAddressAndPort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDownlinkDataflowDetails(v types.DownlinkDataflowDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DownlinkDataflowDetails"}
+	switch uv := v.(type) {
+	case *types.DownlinkDataflowDetailsMemberAgentConnectionDetails:
+		if err := validateDownlinkConnectionDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentConnectionDetails]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEirp(v *types.Eirp) error {
 	if v == nil {
 		return nil
@@ -1234,6 +1412,16 @@ func validateEndpointDetails(v *types.EndpointDetails) error {
 	if v.AwsGroundStationAgentEndpoint != nil {
 		if err := validateAwsGroundStationAgentEndpoint(v.AwsGroundStationAgentEndpoint); err != nil {
 			invalidParams.AddNested("AwsGroundStationAgentEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UplinkAwsGroundStationAgentEndpoint != nil {
+		if err := validateUplinkAwsGroundStationAgentEndpointDetails(v.UplinkAwsGroundStationAgentEndpoint); err != nil {
+			invalidParams.AddNested("UplinkAwsGroundStationAgentEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DownlinkAwsGroundStationAgentEndpoint != nil {
+		if err := validateDownlinkAwsGroundStationAgentEndpointDetails(v.DownlinkAwsGroundStationAgentEndpoint); err != nil {
+			invalidParams.AddNested("DownlinkAwsGroundStationAgentEndpoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1667,6 +1855,95 @@ func validateTrackingOverrides(v *types.TrackingOverrides) error {
 	}
 }
 
+func validateUplinkAwsGroundStationAgentEndpoint(v *types.UplinkAwsGroundStationAgentEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UplinkAwsGroundStationAgentEndpoint"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataflowDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataflowDetails"))
+	} else if v.DataflowDetails != nil {
+		if err := validateUplinkDataflowDetails(v.DataflowDetails); err != nil {
+			invalidParams.AddNested("DataflowDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUplinkAwsGroundStationAgentEndpointDetails(v *types.UplinkAwsGroundStationAgentEndpointDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UplinkAwsGroundStationAgentEndpointDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataflowDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataflowDetails"))
+	} else if v.DataflowDetails != nil {
+		if err := validateUplinkDataflowDetails(v.DataflowDetails); err != nil {
+			invalidParams.AddNested("DataflowDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUplinkConnectionDetails(v *types.UplinkConnectionDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UplinkConnectionDetails"}
+	if v.IngressAddressAndPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngressAddressAndPort"))
+	} else if v.IngressAddressAndPort != nil {
+		if err := validateConnectionDetails(v.IngressAddressAndPort); err != nil {
+			invalidParams.AddNested("IngressAddressAndPort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentIpAndPortAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentIpAndPortAddress"))
+	} else if v.AgentIpAndPortAddress != nil {
+		if err := validateRangedConnectionDetails(v.AgentIpAndPortAddress); err != nil {
+			invalidParams.AddNested("AgentIpAndPortAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUplinkDataflowDetails(v types.UplinkDataflowDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UplinkDataflowDetails"}
+	switch uv := v.(type) {
+	case *types.UplinkDataflowDetailsMemberAgentConnectionDetails:
+		if err := validateUplinkConnectionDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentConnectionDetails]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUplinkEchoConfig(v *types.UplinkEchoConfig) error {
 	if v == nil {
 		return nil
@@ -1751,6 +2028,25 @@ func validateOpCreateDataflowEndpointGroupInput(v *CreateDataflowEndpointGroupIn
 	} else if v.EndpointDetails != nil {
 		if err := validateEndpointDetailsList(v.EndpointDetails); err != nil {
 			invalidParams.AddNested("EndpointDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataflowEndpointGroupV2Input(v *CreateDataflowEndpointGroupV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataflowEndpointGroupV2Input"}
+	if v.Endpoints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoints"))
+	} else if v.Endpoints != nil {
+		if err := validateCreateEndpointDetailsList(v.Endpoints); err != nil {
+			invalidParams.AddNested("Endpoints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1904,6 +2200,24 @@ func validateOpGetAgentConfigurationInput(v *GetAgentConfigurationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAgentConfigurationInput"}
 	if v.AgentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentTaskResponseUrlInput(v *GetAgentTaskResponseUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentTaskResponseUrlInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -97,6 +97,46 @@ var _ *types.AntennaUplinkConfig
 var _ *types.AntennaDownlinkConfig
 var _ *types.DataflowEndpointConfig
 
+func ExampleCreateEndpointDetails_outputUsage() {
+	var union types.CreateEndpointDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CreateEndpointDetailsMemberDownlinkAwsGroundStationAgentEndpoint:
+		_ = v.Value // Value is types.DownlinkAwsGroundStationAgentEndpoint
+
+	case *types.CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint:
+		_ = v.Value // Value is types.UplinkAwsGroundStationAgentEndpoint
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DownlinkAwsGroundStationAgentEndpoint
+var _ *types.UplinkAwsGroundStationAgentEndpoint
+
+func ExampleDownlinkDataflowDetails_outputUsage() {
+	var union types.DownlinkDataflowDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DownlinkDataflowDetailsMemberAgentConnectionDetails:
+		_ = v.Value // Value is types.DownlinkConnectionDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DownlinkConnectionDetails
+
 func ExampleEphemerisData_outputUsage() {
 	var union types.EphemerisData
 	// type switches can be used to check the union value
@@ -208,3 +248,21 @@ func ExampleProgramTrackSettings_outputUsage() {
 }
 
 var _ *types.AzElProgramTrackSettings
+
+func ExampleUplinkDataflowDetails_outputUsage() {
+	var union types.UplinkDataflowDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UplinkDataflowDetailsMemberAgentConnectionDetails:
+		_ = v.Value // Value is types.UplinkConnectionDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UplinkConnectionDetails

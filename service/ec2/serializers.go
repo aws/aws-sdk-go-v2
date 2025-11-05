@@ -50560,6 +50560,19 @@ func awsEc2query_serializeDocumentAttributeValue(v *types.AttributeValue, value 
 	return nil
 }
 
+func awsEc2query_serializeDocumentAvailabilityZoneIdStringList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("AvailabilityZoneId")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentAvailabilityZoneStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -75851,6 +75864,13 @@ func awsEc2query_serializeOpDocumentDisableFastSnapshotRestoresInput(v *DisableF
 	object := value.Object()
 	_ = object
 
+	if v.AvailabilityZoneIds != nil {
+		objectKey := object.FlatKey("AvailabilityZoneId")
+		if err := awsEc2query_serializeDocumentAvailabilityZoneIdStringList(v.AvailabilityZoneIds, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityZones != nil {
 		objectKey := object.FlatKey("AvailabilityZone")
 		if err := awsEc2query_serializeDocumentAvailabilityZoneStringList(v.AvailabilityZones, objectKey); err != nil {
@@ -76598,6 +76618,13 @@ func awsEc2query_serializeOpDocumentEnableFastLaunchInput(v *EnableFastLaunchInp
 func awsEc2query_serializeOpDocumentEnableFastSnapshotRestoresInput(v *EnableFastSnapshotRestoresInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AvailabilityZoneIds != nil {
+		objectKey := object.FlatKey("AvailabilityZoneId")
+		if err := awsEc2query_serializeDocumentAvailabilityZoneIdStringList(v.AvailabilityZoneIds, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.AvailabilityZones != nil {
 		objectKey := object.FlatKey("AvailabilityZone")

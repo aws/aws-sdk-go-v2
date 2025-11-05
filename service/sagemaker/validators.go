@@ -16706,9 +16706,7 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v.TrainingJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
 	}
-	if v.AlgorithmSpecification == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AlgorithmSpecification"))
-	} else if v.AlgorithmSpecification != nil {
+	if v.AlgorithmSpecification != nil {
 		if err := validateAlgorithmSpecification(v.AlgorithmSpecification); err != nil {
 			invalidParams.AddNested("AlgorithmSpecification", err.(smithy.InvalidParamsError))
 		}
@@ -16728,9 +16726,7 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ResourceConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfig"))
-	} else if v.ResourceConfig != nil {
+	if v.ResourceConfig != nil {
 		if err := validateResourceConfig(v.ResourceConfig); err != nil {
 			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
 		}

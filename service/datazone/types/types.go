@@ -5143,6 +5143,49 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+// The resource tag of the project.
+type ResourceTag struct {
+
+	// The key of the resource tag of the project.
+	//
+	// This member is required.
+	Key *string
+
+	// The source of the resource tag of the project.
+	//
+	// This member is required.
+	Source ResourceTagSource
+
+	// The value of the resource tag of the project.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The resource tag parameter of the project profile.
+type ResourceTagParameter struct {
+
+	// Specifies whether the value of the resource tag parameter of the project
+	// profile is editable at the project level.
+	//
+	// This member is required.
+	IsValueEditable *bool
+
+	// The key of the resource tag parameter of the project profile.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the resource tag parameter key of the project profile.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The row filter.
 //
 // The following types satisfy this interface:

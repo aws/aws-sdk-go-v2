@@ -40,6 +40,16 @@ type CreateAnycastIpListInput struct {
 	// This member is required.
 	Name *string
 
+	// The IP address type for the Anycast static IP list. You can specify one of the
+	// following options:
+	//
+	//   - ipv4 - Allocate a list of only IPv4 addresses
+	//
+	//   - ipv6 - Allocate a list of only IPv4 addresses
+	//
+	//   - dualstack - Allocate a list of both IPv4 and IPv6 addresses
+	IpAddressType types.IpAddressType
+
 	// A complex type that contains zero or more Tag elements.
 	Tags *types.Tags
 

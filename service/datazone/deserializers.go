@@ -7023,6 +7023,11 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
+		case "resourceTags":
+			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
+				return err
+			}
+
 		case "userParameters":
 			if err := awsRestjson1_deserializeDocumentEnvironmentConfigurationUserParametersList(&sv.UserParameters, value); err != nil {
 				return err
@@ -7299,6 +7304,15 @@ func awsRestjson1_deserializeOpDocumentCreateProjectProfileOutput(v **CreateProj
 
 	for key, value := range shape {
 		switch key {
+		case "allowCustomProjectResourceTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowCustomProjectResourceTags = ptr.Bool(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7382,6 +7396,20 @@ func awsRestjson1_deserializeOpDocumentCreateProjectProfileOutput(v **CreateProj
 					return fmt.Errorf("expected ProjectProfileName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectResourceTags":
+			if err := awsRestjson1_deserializeDocumentProjectResourceTagParameters(&sv.ProjectResourceTags, value); err != nil {
+				return err
+			}
+
+		case "projectResourceTagsDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.ProjectResourceTagsDescription = ptr.String(jtv)
 			}
 
 		case "status":
@@ -19446,6 +19474,11 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
+		case "resourceTags":
+			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
+				return err
+			}
+
 		case "userParameters":
 			if err := awsRestjson1_deserializeDocumentEnvironmentConfigurationUserParametersList(&sv.UserParameters, value); err != nil {
 				return err
@@ -19613,6 +19646,15 @@ func awsRestjson1_deserializeOpDocumentGetProjectProfileOutput(v **GetProjectPro
 
 	for key, value := range shape {
 		switch key {
+		case "allowCustomProjectResourceTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowCustomProjectResourceTags = ptr.Bool(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19696,6 +19738,20 @@ func awsRestjson1_deserializeOpDocumentGetProjectProfileOutput(v **GetProjectPro
 					return fmt.Errorf("expected ProjectProfileName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectResourceTags":
+			if err := awsRestjson1_deserializeDocumentProjectResourceTagParameters(&sv.ProjectResourceTags, value); err != nil {
+				return err
+			}
+
+		case "projectResourceTagsDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.ProjectResourceTagsDescription = ptr.String(jtv)
 			}
 
 		case "status":
@@ -34249,6 +34305,11 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 				sv.ProjectStatus = types.ProjectStatus(jtv)
 			}
 
+		case "resourceTags":
+			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
+				return err
+			}
+
 		case "userParameters":
 			if err := awsRestjson1_deserializeDocumentEnvironmentConfigurationUserParametersList(&sv.UserParameters, value); err != nil {
 				return err
@@ -34422,6 +34483,15 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectProfileOutput(v **UpdateProj
 
 	for key, value := range shape {
 		switch key {
+		case "allowCustomProjectResourceTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowCustomProjectResourceTags = ptr.Bool(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34505,6 +34575,20 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectProfileOutput(v **UpdateProj
 					return fmt.Errorf("expected ProjectProfileName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectResourceTags":
+			if err := awsRestjson1_deserializeDocumentProjectResourceTagParameters(&sv.ProjectResourceTags, value); err != nil {
+				return err
+			}
+
+		case "projectResourceTagsDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.ProjectResourceTagsDescription = ptr.String(jtv)
 			}
 
 		case "status":
@@ -50064,6 +50148,40 @@ func awsRestjson1_deserializeDocumentProjectProfileSummary(v **types.ProjectProf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProjectResourceTagParameters(v *[]types.ResourceTagParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceTagParameter
+	if *v == nil {
+		cv = []types.ResourceTagParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceTagParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourceTagParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProjectsForRule(v **types.ProjectsForRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51379,6 +51497,156 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceTag(v **types.ResourceTag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceTag
+	if *v == nil {
+		sv = &types.ResourceTag{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceTagSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.ResourceTagSource(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceTagParameter(v **types.ResourceTagParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceTagParameter
+	if *v == nil {
+		sv = &types.ResourceTagParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isValueEditable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsValueEditable = ptr.Bool(jtv)
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceTags(v *[]types.ResourceTag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceTag
+	if *v == nil {
+		cv = []types.ResourceTag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceTag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourceTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

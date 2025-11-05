@@ -53,6 +53,9 @@ type CreateProjectInput struct {
 	// The ID of the project profile.
 	ProjectProfileId *string
 
+	// The resource tags of the project.
+	ResourceTags map[string]string
+
 	// The user parameters of the project.
 	UserParameters []types.EnvironmentConfigurationUserParameter
 
@@ -108,6 +111,9 @@ type CreateProjectOutput struct {
 
 	// The status of the Amazon DataZone project that was created.
 	ProjectStatus types.ProjectStatus
+
+	// The resource tags of the project.
+	ResourceTags []types.ResourceTag
 
 	// The user parameters of the project.
 	UserParameters []types.EnvironmentConfigurationUserParameter

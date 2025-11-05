@@ -4549,6 +4549,11 @@ func awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfiguration(v *ty
 		}
 	}
 
+	if v.DomainJoinServiceAccountSecret != nil {
+		ok := object.Key("DomainJoinServiceAccountSecret")
+		ok.String(*v.DomainJoinServiceAccountSecret)
+	}
+
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)
@@ -4586,6 +4591,11 @@ func awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfigurationUpdate
 		if err := awsAwsjson11_serializeDocumentDnsIps(v.DnsIps, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DomainJoinServiceAccountSecret != nil {
+		ok := object.Key("DomainJoinServiceAccountSecret")
+		ok.String(*v.DomainJoinServiceAccountSecret)
 	}
 
 	if v.DomainName != nil {
