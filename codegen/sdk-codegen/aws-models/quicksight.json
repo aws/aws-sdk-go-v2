@@ -118,7 +118,7 @@
                 "AccountName": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account name that you provided for the Amazon Quick Sight subscription in your\n                Amazon Web Services account. You create this name when you sign up for QuickSight. It's unique over all of Amazon Web Services, and it appears only when\n            users sign in.</p>"
+                        "smithy.api#documentation": "<p>The account name that you provided for the Amazon Quick Sight subscription in your\n                Amazon Web Services account. You create this name when you sign up for Quick Suite. It's unique over all of Amazon Web Services, and it appears only when\n            users sign in.</p>"
                     }
                 },
                 "Edition": {
@@ -153,7 +153,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the following account information\n            elements:</p>\n         <ul>\n            <li>\n               <p>Your Quick Sight account name.</p>\n            </li>\n            <li>\n               <p>The edition of Quick Sight that your account is using.</p>\n            </li>\n            <li>\n               <p>The notification email address that is associated with the Quick Sight account.\n            </p>\n            </li>\n            <li>\n               <p>The authentication type of the Quick Sight account.</p>\n            </li>\n            <li>\n               <p>The status of the Quick Sight account's subscription.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A structure that contains the following account information elements:\n          </p>\n         <ul>\n            <li>\n               <p>Your Quick Sight account name.</p>\n            </li>\n            <li>\n               <p>The edition of Quick Sight that your account is using.</p>\n            </li>\n            <li>\n               <p>The notification email address that is associated with the Quick Sight account.\n            </p>\n            </li>\n            <li>\n               <p>The authentication type of the Quick Sight account.</p>\n            </li>\n            <li>\n               <p>The status of the Quick Sight account's subscription.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.quicksight#AccountName": {
@@ -197,7 +197,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an QuickSight account. For more information about turning on public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Quick Suite account. For more information about turning on public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
                     }
                 },
                 "TerminationProtectionEnabled": {
@@ -970,6 +970,70 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AggregateOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for the aggregation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupByColumnNames": {
+                    "target": "com.amazonaws.quicksight#GroupByColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of column names to group by when performing the aggregation. Rows with the same values in\n           these columns will be grouped together.</p>"
+                    }
+                },
+                "Aggregations": {
+                    "target": "com.amazonaws.quicksight#AggregationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of aggregation functions to apply to the grouped data, such as <code>SUM</code>, \n           <code>COUNT</code>, or <code>AVERAGE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that groups rows by specified columns and applies aggregation functions\n           to calculate summary values.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#Aggregation": {
+            "type": "structure",
+            "members": {
+                "AggregationFunction": {
+                    "target": "com.amazonaws.quicksight#DataPrepAggregationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation function to apply, such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>, \n           <code>MIN</code>, <code>MAX</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the new column that will contain the aggregated values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the new column that will contain the aggregated values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines an aggregation function to be applied to grouped data, creating a new column with\n           the calculated result.</p>"
+            }
+        },
         "com.amazonaws.quicksight#AggregationFunction": {
             "type": "structure",
             "members": {
@@ -1009,6 +1073,18 @@
             },
             "value": {
                 "target": "com.amazonaws.quicksight#LimitedString"
+            }
+        },
+        "com.amazonaws.quicksight#AggregationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Aggregation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.quicksight#AggregationPartitionBy": {
@@ -1814,7 +1890,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type of experience you want to embed. For anonymous users, you can embed QuickSight dashboards.</p>"
+                "smithy.api#documentation": "<p>The type of experience you want to embed. For anonymous users, you can embed Quick Suite dashboards.</p>"
             }
         },
         "com.amazonaws.quicksight#AnonymousUserGenerativeQnAEmbeddingConfiguration": {
@@ -1881,6 +1957,74 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#AnswerId"
+            }
+        },
+        "com.amazonaws.quicksight#AppendOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirstSource": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first data source to be included in the append operation.</p>"
+                    }
+                },
+                "SecondSource": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second data source to be appended to the first source.</p>"
+                    }
+                },
+                "AppendedColumns": {
+                    "target": "com.amazonaws.quicksight#AppendedColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of columns to include in the appended result, mapping columns from both sources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that combines rows from two data sources by stacking them vertically (union operation).</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AppendedColumn": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column to include in the appended result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the column in the appended result.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a column that will be included in the result of an append operation, combining data from multiple sources.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AppendedColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AppendedColumn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.quicksight#ApplicationArn": {
@@ -6242,7 +6386,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6360,7 +6504,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>"
                     }
                 },
                 "BrandName": {
@@ -6469,8 +6613,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 128
+                    "min": 0,
+                    "max": 256
                 }
             }
         },
@@ -6983,6 +7127,47 @@
                 "smithy.api#documentation": "<p>A transform operation that casts a column to a different type.</p>"
             }
         },
+        "com.amazonaws.quicksight#CastColumnTypeOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#CastColumnTypeOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CastColumnTypesOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for the type casting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CastColumnTypeOperations": {
+                    "target": "com.amazonaws.quicksight#CastColumnTypeOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of column type casting operations to perform.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that changes the data types of one or more columns in the dataset.</p>"
+            }
+        },
         "com.amazonaws.quicksight#Catalog": {
             "type": "string",
             "traits": {
@@ -7293,6 +7478,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CellValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2047
                 }
             }
         },
@@ -7918,7 +8112,7 @@
                     }
                 },
                 "ColumnNames": {
-                    "target": "com.amazonaws.quicksight#ColumnNameList",
+                    "target": "com.amazonaws.quicksight#ColumnLevelPermissionRuleColumnNameList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of column names.</p>"
                     }
@@ -7926,6 +8120,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A rule defined to grant access on one or more restricted columns.\n            Each dataset can have multiple rules.\n            To create a restricted column, you add it to one or more rules.\n            Each rule must contain at least one column and at least one user or group.\n            To be able to see a restricted column, a user or group needs to be added\n            to a rule for that column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ColumnLevelPermissionRuleColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.quicksight#ColumnLevelPermissionRuleList": {
@@ -7957,17 +8162,6 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                }
-            }
-        },
-        "com.amazonaws.quicksight#ColumnNameList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.quicksight#String"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1
                 }
             }
         },
@@ -8129,6 +8323,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#ColumnTagName"
+            }
+        },
+        "com.amazonaws.quicksight#ColumnToUnpivot": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column to unpivot from the source data.</p>"
+                    }
+                },
+                "NewValue": {
+                    "target": "com.amazonaws.quicksight#CellValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to assign to this column in the unpivoted result, typically the column name or a descriptive label.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a column to be unpivoted, transforming it from a column into rows with associated values.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ColumnToUnpivotList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnToUnpivot"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.quicksight#ColumnTooltipItem": {
@@ -9909,7 +10135,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9960,6 +10186,18 @@
         "com.amazonaws.quicksight#CreateColumnsOperation": {
             "type": "structure",
             "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for creating new calculated columns.</p>"
+                    }
+                },
                 "Columns": {
                     "target": "com.amazonaws.quicksight#CalculatedColumnList",
                     "traits": {
@@ -10294,6 +10532,9 @@
                     "target": "com.amazonaws.quicksight#InternalFailureException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#InvalidDataSetParameterValueException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
                 },
                 {
@@ -10356,7 +10597,11 @@
                 "LogicalTableMap": {
                     "target": "com.amazonaws.quicksight#LogicalTableMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the combination and transformation of the data from the physical\n\t\t\ttables.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-10-23",
+                            "message": "Only used in the legacy data preparation experience."
+                        },
+                        "smithy.api#documentation": "<p>Configures the combination and transformation of the data from the physical\n\t\t\ttables. This parameter is used with the legacy data preparation experience.</p>"
                     }
                 },
                 "ImportMode": {
@@ -10387,13 +10632,21 @@
                 "RowLevelPermissionDataSet": {
                     "target": "com.amazonaws.quicksight#RowLevelPermissionDataSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The row-level security configuration for the data that you want to create.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-10-23",
+                            "message": "Only used in the legacy data preparation experience."
+                        },
+                        "smithy.api#documentation": "<p>The row-level security configuration for the data that you want to create. This parameter is \n\t\t\tused with the legacy data preparation experience.</p>"
                     }
                 },
                 "RowLevelPermissionTagConfiguration": {
                     "target": "com.amazonaws.quicksight#RowLevelPermissionTagConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of tags on a dataset to set row-level security. Row-level security\n\t\t\ttags are currently supported for anonymous embedding only.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-10-23",
+                            "message": "Only used in the legacy data preparation experience."
+                        },
+                        "smithy.api#documentation": "<p>The configuration of tags on a dataset to set row-level security. Row-level security\n\t\t\ttags are currently supported for anonymous embedding only. This parameter is \n\t\t\tused with the legacy data preparation experience.</p>"
                     }
                 },
                 "ColumnLevelPermissionRules": {
@@ -10433,6 +10686,18 @@
                     "target": "com.amazonaws.quicksight#DataSetUseAs",
                     "traits": {
                         "smithy.api#documentation": "<p>The usage of the dataset. <code>RLS_RULES</code> must be specified for RLS permission\n\t\t\tdatasets.</p>"
+                    }
+                },
+                "DataPrepConfiguration": {
+                    "target": "com.amazonaws.quicksight#DataPrepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data preparation configuration for the dataset. This configuration defines the source tables,\n\t\t\ttransformation steps, and destination tables used to prepare the data.\n\t\t\tRequired when using the new data preparation experience.</p>"
+                    }
+                },
+                "SemanticModelConfiguration": {
+                    "target": "com.amazonaws.quicksight#SemanticModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic model configuration for the dataset. This configuration defines how the prepared\n\t\t\tdata is structured for an analysis, including table mappings and row-level security configurations.\n\t\t\tRequired when using the new data preparation experience.</p>"
                     }
                 }
             },
@@ -13337,7 +13602,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 128
                 }
             }
         },
@@ -14056,14 +14321,14 @@
                 "DashboardId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the dashboard that has the visual that you want to embed. The\n                <code>DashboardId</code> can be found in the <code>IDs for developers</code> section\n            of the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console. You can also get the <code>DashboardId</code> with a\n                <code>ListDashboards</code> API operation.</p>",
+                        "smithy.api#documentation": "<p>The ID of the dashboard that has the visual that you want to embed. The\n                <code>DashboardId</code> can be found in the <code>IDs for developers</code> section\n            of the <code>Embed visual</code> pane of the visual's on-visual menu of the Quick Suite console. You can also get the <code>DashboardId</code> with a\n                <code>ListDashboards</code> API operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SheetId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the sheet that the has visual that you want to embed. The\n                <code>SheetId</code> can be found in the <code>IDs for developers</code> section of\n            the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console.</p>",
+                        "smithy.api#documentation": "<p>The ID of the sheet that the has visual that you want to embed. The\n                <code>SheetId</code> can be found in the <code>IDs for developers</code> section of\n            the <code>Embed visual</code> pane of the visual's on-visual menu of the Quick Suite console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14675,6 +14940,146 @@
                 "smithy.api#documentation": "<p>The data point tooltip options.</p>"
             }
         },
+        "com.amazonaws.quicksight#DataPrepAggregationFunction": {
+            "type": "structure",
+            "members": {
+                "SimpleAggregation": {
+                    "target": "com.amazonaws.quicksight#DataPrepSimpleAggregationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A simple aggregation function such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>, \n           <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>"
+                    }
+                },
+                "ListAggregation": {
+                    "target": "com.amazonaws.quicksight#DataPrepListAggregationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list aggregation function that concatenates values from multiple rows into a single delimited string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the type of aggregation function to apply to data during data preparation, supporting simple\n          and list aggregations.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataPrepConfiguration": {
+            "type": "structure",
+            "members": {
+                "SourceTableMap": {
+                    "target": "com.amazonaws.quicksight#SourceTableMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of source tables that provide information about underlying sources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransformStepMap": {
+                    "target": "com.amazonaws.quicksight#TransformStepMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of transformation steps that process the data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationTableMap": {
+                    "target": "com.amazonaws.quicksight#DestinationTableMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of destination tables that receive the final prepared data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for data preparation operations, defining the complete pipeline from source tables \n           through transformations to destination tables.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataPrepListAggregationFunction": {
+            "type": "structure",
+            "members": {
+                "InputColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column containing values to be concatenated.</p>"
+                    }
+                },
+                "Separator": {
+                    "target": "com.amazonaws.quicksight#Separator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string used to separate values in the concatenated result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Distinct": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether to include only distinct values in the concatenated result, removing duplicates.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An aggregation function that concatenates values from multiple rows into a single string with a specified \n           separator.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataPrepSimpleAggregationFunction": {
+            "type": "structure",
+            "members": {
+                "InputColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column on which to perform the aggregation function.</p>"
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.quicksight#DataPrepSimpleAggregationFunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of aggregation function to perform, such as <code>COUNT</code>, <code>SUM</code>, <code>AVERAGE</code>, \n           <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A simple aggregation function that performs standard statistical operations on a column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataPrepSimpleAggregationFunctionType": {
+            "type": "enum",
+            "members": {
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "DISTINCT_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTINCT_COUNT"
+                    }
+                },
+                "SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM"
+                    }
+                },
+                "AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE"
+                    }
+                },
+                "MAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX"
+                    }
+                },
+                "MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DataQAEnabledOption": {
             "type": "structure",
             "members": {
@@ -14822,6 +15227,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The usage of the dataset.</p>"
                     }
+                },
+                "DataPrepConfiguration": {
+                    "target": "com.amazonaws.quicksight#DataPrepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data preparation configuration associated with this dataset.</p>"
+                    }
+                },
+                "SemanticModelConfiguration": {
+                    "target": "com.amazonaws.quicksight#SemanticModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic model configuration associated with this dataset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14848,6 +15265,40 @@
                     "max": 250000
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#DataSetColumnIdMapping": {
+            "type": "structure",
+            "members": {
+                "SourceColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source column ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target column ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Maps a source column identifier to a target column identifier during transform operations.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetColumnIdMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DataSetColumnIdMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.quicksight#DataSetConfiguration": {
@@ -14886,6 +15337,140 @@
                     "min": 0,
                     "max": 30
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetDateComparisonFilterCondition": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#DataSetDateComparisonFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use, such as <code>BEFORE</code>, <code>BEFORE_OR_EQUALS_TO</code>, <code>AFTER</code>, \n           or <code>AFTER_OR_EQUALS_TO</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#DataSetDateFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date value to compare against.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition that compares date values using operators like <code>BEFORE</code>, <code>AFTER</code>, or \n           their inclusive variants.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetDateComparisonFilterOperator": {
+            "type": "enum",
+            "members": {
+                "BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE"
+                    }
+                },
+                "BEFORE_OR_EQUALS_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE_OR_EQUALS_TO"
+                    }
+                },
+                "AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER"
+                    }
+                },
+                "AFTER_OR_EQUALS_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER_OR_EQUALS_TO"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetDateFilterCondition": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the date column to filter.</p>"
+                    }
+                },
+                "ComparisonFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetDateComparisonFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comparison-based filter condition for the date column.</p>"
+                    }
+                },
+                "RangeFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetDateRangeFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A range-based filter condition for the date column, filtering values between minimum and maximum dates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition for date columns, supporting both comparison and range-based filtering.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetDateFilterValue": {
+            "type": "structure",
+            "members": {
+                "StaticValue": {
+                    "target": "com.amazonaws.quicksight#SensitiveTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A static date value used for filtering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a date value used in filter conditions.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetDateRangeFilterCondition": {
+            "type": "structure",
+            "members": {
+                "RangeMinimum": {
+                    "target": "com.amazonaws.quicksight#DataSetDateFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum date value for the range filter.</p>"
+                    }
+                },
+                "RangeMaximum": {
+                    "target": "com.amazonaws.quicksight#DataSetDateFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum date value for the range filter.</p>"
+                    }
+                },
+                "IncludeMinimum": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Whether to include the minimum value in the filter range.</p>"
+                    }
+                },
+                "IncludeMaximum": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Whether to include the maximum value in the filter range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition that filters date values within a specified range.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetEntityResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-]*$"
             }
         },
         "com.amazonaws.quicksight#DataSetFilterAttribute": {
@@ -14996,6 +15581,143 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetNumericComparisonFilterCondition": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericComparisonFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use, such as <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>LESS_THAN</code>, \n           or their variants.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric value to compare against.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition that compares numeric values using operators like <code>EQUALS</code>, <code>GREATER_THAN</code>, \n           or <code>LESS_THAN</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetNumericComparisonFilterOperator": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "DOES_NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOES_NOT_EQUAL"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUALS_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUALS_TO"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "LESS_THAN_OR_EQUALS_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUALS_TO"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetNumericFilterCondition": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the numeric column to filter.</p>"
+                    }
+                },
+                "ComparisonFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericComparisonFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comparison-based filter condition for the numeric column.</p>"
+                    }
+                },
+                "RangeFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericRangeFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A range-based filter condition for the numeric column, filtering values between minimum and maximum numbers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition for numeric columns, supporting both comparison and range-based filtering.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetNumericFilterValue": {
+            "type": "structure",
+            "members": {
+                "StaticValue": {
+                    "target": "com.amazonaws.quicksight#SensitiveDouble",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A static numeric value used for filtering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a numeric value used in filter conditions.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetNumericRangeFilterCondition": {
+            "type": "structure",
+            "members": {
+                "RangeMinimum": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum numeric value for the range filter.</p>"
+                    }
+                },
+                "RangeMaximum": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum numeric value for the range filter.</p>"
+                    }
+                },
+                "IncludeMinimum": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Whether to include the minimum value in the filter range.</p>"
+                    }
+                },
+                "IncludeMaximum": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Whether to include the maximum value in the filter range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition that filters numeric values within a specified range.</p>"
             }
         },
         "com.amazonaws.quicksight#DataSetReference": {
@@ -15115,6 +15837,182 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DataSetStringComparisonFilterCondition": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#DataSetStringComparisonFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>, \n           <code>ENDS_WITH</code>, or their negations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#DataSetStringFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string value to compare against.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition that compares string values using operators like <code>EQUALS</code>, <code>CONTAINS</code>, \n           or <code>STARTS_WITH</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringComparisonFilterOperator": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "DOES_NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOES_NOT_EQUAL"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "DOES_NOT_CONTAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOES_NOT_CONTAIN"
+                    }
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringFilterCondition": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the string column to filter.</p>"
+                    }
+                },
+                "ComparisonFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetStringComparisonFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comparison-based filter condition for the string column.</p>"
+                    }
+                },
+                "ListFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetStringListFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list-based filter condition that includes or excludes values from a specified list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition for string columns, supporting both comparison and list-based filtering.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringFilterStaticValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringFilterStaticValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DataSetStringFilterStaticValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringFilterValue": {
+            "type": "structure",
+            "members": {
+                "StaticValue": {
+                    "target": "com.amazonaws.quicksight#DataSetStringFilterStaticValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A static string value used for filtering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a string value used in filter conditions.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringListFilterCondition": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#DataSetStringListFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list operator to use, either <code>INCLUDE</code> to match values in the list or <code>EXCLUDE</code> to \n           filter out values in the list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.quicksight#DataSetStringListFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of string values to include or exclude in the filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter condition that includes or excludes string values from a specified list.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringListFilterOperator": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetStringListFilterValue": {
+            "type": "structure",
+            "members": {
+                "StaticValues": {
+                    "target": "com.amazonaws.quicksight#DataSetStringFilterStaticValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of static string values used for filtering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a list of string values used in filter conditions.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DataSetSummary": {
             "type": "structure",
             "members": {
@@ -15157,7 +16055,13 @@
                 "RowLevelPermissionDataSet": {
                     "target": "com.amazonaws.quicksight#RowLevelPermissionDataSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The row-level security configuration for the dataset.</p>"
+                        "smithy.api#documentation": "<p>The row-level security configuration for the dataset in the legacy data preparation experience.</p>"
+                    }
+                },
+                "RowLevelPermissionDataSetMap": {
+                    "target": "com.amazonaws.quicksight#RowLevelPermissionDataSetMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row-level security configuration for the dataset in the new data preparation experience.</p>"
                     }
                 },
                 "RowLevelPermissionTagConfigurationApplied": {
@@ -17994,7 +18898,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18351,7 +19255,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18373,7 +19277,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
                     }
                 },
                 "RequestId": {
@@ -20815,7 +21719,7 @@
                 "AccountSettings": {
                     "target": "com.amazonaws.quicksight#AccountSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Quick Sight settings for this Amazon Web Services account. This information\n            includes the edition of Amazon Quick Sight that you subscribed to (Standard or\n            Enterprise) and the notification email for the Amazon Quick Sight subscription. </p>\n         <p>In the Quick Sight console, the Amazon Quick Sight subscription is sometimes referred to\n            as a Quick Sight \"account\" even though it's technically not an account by\n            itself. Instead, it's a subscription to the Amazon Quick Sight service for your\n                Amazon Web Services account. The edition that you subscribe to applies to QuickSight in every Amazon Web Services Region where you use it.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Sight settings for this Amazon Web Services account. This information\n            includes the edition of Amazon Quick Sight that you subscribed to (Standard or\n            Enterprise) and the notification email for the Amazon Quick Sight subscription. </p>\n         <p>In the Quick Sight console, the Amazon Quick Sight subscription is sometimes referred to\n            as a Quick Sight \"account\" even though it's technically not an account by\n            itself. Instead, it's a subscription to the Amazon Quick Sight service for your\n                Amazon Web Services account. The edition that you subscribe to applies to Quick Suite in every Amazon Web Services Region where you use it.</p>"
                     }
                 },
                 "RequestId": {
@@ -21918,7 +22822,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -21968,7 +22872,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -22888,7 +23792,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -22910,7 +23814,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
                     }
                 },
                 "Permissions": {
@@ -23044,7 +23948,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -26156,6 +27060,67 @@
                 "smithy.api#documentation": "<p>The configuration of destination parameter values.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
             }
         },
+        "com.amazonaws.quicksight#DestinationTable": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#DestinationTableAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for the destination table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#DestinationTableSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration that specifies which transform operation provides data to this destination table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a destination table in data preparation that receives the final transformed data.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DestinationTableAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DestinationTableMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#DataSetEntityResourceId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#DestinationTable"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DestinationTableSource": {
+            "type": "structure",
+            "members": {
+                "TransformOperationId": {
+                    "target": "com.amazonaws.quicksight#DataSetEntityResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the transform operation that provides data to the destination table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the source of data for a destination table, including the transform operation and column mappings.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DigitGroupingStyle": {
             "type": "enum",
             "members": {
@@ -28008,13 +28973,42 @@
                 "ConditionExpression": {
                     "target": "com.amazonaws.quicksight#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>"
+                    }
+                },
+                "StringFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetStringFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string-based filter condition within a filter operation.</p>"
+                    }
+                },
+                "NumericFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetNumericFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A numeric-based filter condition within a filter operation.</p>"
+                    }
+                },
+                "DateFilterCondition": {
+                    "target": "com.amazonaws.quicksight#DataSetDateFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date-based filter condition within a filter operation.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A transform operation that filters rows based on a condition.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FilterOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FilterOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.quicksight#FilterOperationSelectedFieldsConfiguration": {
@@ -28317,6 +29311,35 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.quicksight#FiltersOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for filtering.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterOperations": {
+                    "target": "com.amazonaws.quicksight#FilterOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filter operations to apply.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that applies one or more filter conditions.</p>"
             }
         },
         "com.amazonaws.quicksight#FlowDescription": {
@@ -29861,7 +30884,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard or\n            visual in your website, without having to register any reader users. Before you use this\n            action, make sure that you have configured the dashboards and permissions.</p>\n         <p>The following rules apply to the generated URL:</p>\n         <ul>\n            <li>\n               <p>It contains a temporary bearer token. It is valid for 5 minutes after it is\n                    generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n               <p>The URL validity period should not be confused with the actual session\n                    lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter. The resulting user\n                    session is valid for 15 minutes (minimum) to 10 hours (maximum). The default\n                    session duration is 10 hours.</p>\n            </li>\n            <li>\n               <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in\n            the <i>Amazon QuickSight User Guide</i>.</p>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight\n                Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon Quick Suite dashboard or\n            visual in your website, without having to register any reader users. Before you use this\n            action, make sure that you have configured the dashboards and permissions.</p>\n         <p>The following rules apply to the generated URL:</p>\n         <ul>\n            <li>\n               <p>It contains a temporary bearer token. It is valid for 5 minutes after it is\n                    generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n               <p>The URL validity period should not be confused with the actual session\n                    lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter. The resulting user\n                    session is valid for 15 minutes (minimum) to 10 hours (maximum). The default\n                    session duration is 10 hours.</p>\n            </li>\n            <li>\n               <p>You are charged only when the URL is used or there is interaction with Amazon Quick Suite.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in\n            the <i>Amazon Quick Suite User Guide</i>.</p>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon Quick Suite\n                Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/anonymous-user",
@@ -29889,7 +30912,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.quicksight#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Quick Sight namespace that the anonymous user virtually belongs to. If you\n            are not using an Amazon QuickSight custom namespace, set this to\n                <code>default</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Quick Sight namespace that the anonymous user virtually belongs to. If you\n            are not using an Amazon Quick Suite custom namespace, set this to\n                <code>default</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -29953,7 +30976,7 @@
                 "AnonymousUserArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight\n            user.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick Suite\n            user.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30000,7 +31023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight experience\n            in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have\n            configured the relevant Amazon QuickSight resource and permissions.</p>\n         <p>The following rules apply to the generated URL:</p>\n         <ul>\n            <li>\n               <p>It contains a temporary bearer token. It is valid for 5 minutes after it is\n                    generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n               <p>The URL validity period should not be confused with the actual session\n                    lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n               <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours\n                    (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n               <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in\n            the <i>Amazon QuickSight User Guide</i>.</p>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight\n                Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon Quick Suite experience\n            in your website. This action can be used for any type of user registered in an Amazon Quick Suite account. Before you use this action, make sure that you have\n            configured the relevant Amazon Quick Suite resource and permissions.</p>\n         <p>The following rules apply to the generated URL:</p>\n         <ul>\n            <li>\n               <p>It contains a temporary bearer token. It is valid for 5 minutes after it is\n                    generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n               <p>The URL validity period should not be confused with the actual session\n                    lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n               <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours\n                    (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n               <p>You are charged only when the URL is used or there is interaction with Amazon Quick Suite.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in\n            the <i>Amazon Quick Suite User Guide</i>.</p>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon Quick Suite\n                Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/registered-user",
@@ -30035,7 +31058,7 @@
                 "ExperienceConfiguration": {
                     "target": "com.amazonaws.quicksight#RegisteredUserEmbeddingExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The experience that you want to embed. For registered users, you can embed QuickSight dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q search bar,\n            the Amazon Quick Sight Generative Q&A experience, or the entire Amazon Quick Sight console.</p>",
+                        "smithy.api#documentation": "<p>The experience that you want to embed. For registered users, you can embed Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q search bar,\n            the Amazon Quick Sight Generative Q&A experience, or the entire Amazon Quick Sight console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -31484,7 +32507,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a temporary session URL and authorization code(bearer token) that you can\n            use to embed an Amazon Quick Sight read-only dashboard in your website or application.\n            Before you use this command, make sure that you have configured the dashboards and\n            permissions. </p>\n         <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the generated URL:</p>\n         <ul>\n            <li>\n               <p>They must be used together.</p>\n            </li>\n            <li>\n               <p>They can be used one time only.</p>\n            </li>\n            <li>\n               <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n               <p>You are charged only when the URL is used or there is interaction with QuickSight.</p>\n            </li>\n            <li>\n               <p>The resulting user session is valid for 15 minutes (default) up to 10 hours\n                    (maximum). You can use the optional <code>SessionLifetimeInMinutes</code>\n                    parameter to customize session duration.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html\">Embedding Analytics\n                Using GetDashboardEmbedUrl</a> in the <i>Amazon QuickSight User\n                Guide</i>.</p>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight\n                Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates a temporary session URL and authorization code(bearer token) that you can\n            use to embed an Amazon Quick Sight read-only dashboard in your website or application.\n            Before you use this command, make sure that you have configured the dashboards and\n            permissions. </p>\n         <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the generated URL:</p>\n         <ul>\n            <li>\n               <p>They must be used together.</p>\n            </li>\n            <li>\n               <p>They can be used one time only.</p>\n            </li>\n            <li>\n               <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n               <p>You are charged only when the URL is used or there is interaction with Quick Suite.</p>\n            </li>\n            <li>\n               <p>The resulting user session is valid for 15 minutes (default) up to 10 hours\n                    (maximum). You can use the optional <code>SessionLifetimeInMinutes</code>\n                    parameter to customize session duration.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html\">Embedding Analytics\n                Using GetDashboardEmbedUrl</a> in the <i>Amazon Quick Suite User\n                Guide</i>.</p>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon Quick Suite\n                Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url",
@@ -31553,7 +32576,7 @@
                 "UserArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with\n                <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>Active Directory (AD) users or group members</p>\n            </li>\n            <li>\n               <p>Invited nonfederated users</p>\n            </li>\n            <li>\n               <p>IAM users and IAM role-based sessions\n                    authenticated through Federated Single Sign-On using SAML, OpenID Connect, or\n                        IAM federation.</p>\n            </li>\n         </ul>\n         <p>Omit this parameter for users in the third group – IAM users and IAM\n            role-based sessions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite user's Amazon Resource Name (ARN), for use with\n                <code>QUICKSIGHT</code> identity type. You can use this for any Amazon Quick Suite users in your account (readers, authors, or admins) authenticated as one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>Active Directory (AD) users or group members</p>\n            </li>\n            <li>\n               <p>Invited nonfederated users</p>\n            </li>\n            <li>\n               <p>IAM users and IAM role-based sessions\n                    authenticated through Federated Single Sign-On using SAML, OpenID Connect, or\n                        IAM federation.</p>\n            </li>\n         </ul>\n         <p>Omit this parameter for users in the third group – IAM users and IAM\n            role-based sessions.</p>",
                         "smithy.api#httpQuery": "user-arn"
                     }
                 },
@@ -31567,7 +32590,7 @@
                 "AdditionalDashboardIds": {
                     "target": "com.amazonaws.quicksight#AdditionalDashboardIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want anonymous users to have tempporary\n            access to. Currently, the <code>IdentityType</code> parameter must be set to\n                <code>ANONYMOUS</code> because other identity types authenticate as QuickSight or IAM users. For example, if you set \"<code>--dashboard-id\n                dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the\n            session can access all three dashboards.</p>",
+                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want anonymous users to have tempporary\n            access to. Currently, the <code>IdentityType</code> parameter must be set to\n                <code>ANONYMOUS</code> because other identity types authenticate as Quick Suite or IAM users. For example, if you set \"<code>--dashboard-id\n                dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the\n            session can access all three dashboards.</p>",
                         "smithy.api#httpQuery": "additional-dashboard-ids"
                     }
                 }
@@ -31880,7 +32903,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon\n                Amazon Quick Sight console in your web server code. Use\n                <code>GetSessionEmbedUrl</code> where you want to provide an authoring portal that\n            allows users to create data sources, datasets, analyses, and dashboards. The users who\n            access an embedded Amazon Quick Sight console need belong to the author or admin security\n            cohort. If you want to restrict permissions to some of these features, add a custom\n            permissions profile to the user with the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> API operation. Use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>\n            </code> API operation to add a new user with a custom\n            permission profile attached. For more information, see the following sections in the\n                    <i>Amazon QuickSight User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedding\n                        Analytics</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon\n                Amazon Quick Sight console in your web server code. Use\n                <code>GetSessionEmbedUrl</code> where you want to provide an authoring portal that\n            allows users to create data sources, datasets, analyses, and dashboards. The users who\n            access an embedded Amazon Quick Sight console need belong to the author or admin security\n            cohort. If you want to restrict permissions to some of these features, add a custom\n            permissions profile to the user with the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> API operation. Use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>\n            </code> API operation to add a new user with a custom\n            permission profile attached. For more information, see the following sections in the\n                    <i>Amazon Quick Suite User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedding\n                        Analytics</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon Quick Suite Console</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/session-embed-url",
@@ -31916,7 +32939,7 @@
                 "UserArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with\n                <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be\n            authenticated as one of the following:</p>\n         <ol>\n            <li>\n               <p>Active Directory (AD) users or group members</p>\n            </li>\n            <li>\n               <p>Invited nonfederated users</p>\n            </li>\n            <li>\n               <p>IAM users and IAM role-based sessions\n                    authenticated through Federated Single Sign-On using SAML, OpenID Connect, or\n                        IAM federation</p>\n            </li>\n         </ol>\n         <p>Omit this parameter for users in the third group, IAM users and IAM role-based sessions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite user's Amazon Resource Name (ARN), for use with\n                <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon Quick Suite users in your account (readers, authors, or admins). They need to be\n            authenticated as one of the following:</p>\n         <ol>\n            <li>\n               <p>Active Directory (AD) users or group members</p>\n            </li>\n            <li>\n               <p>Invited nonfederated users</p>\n            </li>\n            <li>\n               <p>IAM users and IAM role-based sessions\n                    authenticated through Federated Single Sign-On using SAML, OpenID Connect, or\n                        IAM federation</p>\n            </li>\n         </ol>\n         <p>Omit this parameter for users in the third group, IAM users and IAM role-based sessions.</p>",
                         "smithy.api#httpQuery": "user-arn"
                     }
                 }
@@ -31931,7 +32954,7 @@
                 "EmbedUrl": {
                     "target": "com.amazonaws.quicksight#EmbeddingUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API operation provides the\n            URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a\n            user session that is valid for 10 hours. </p>"
+                        "smithy.api#documentation": "<p>A single-use URL that you can put into your server-side web page to embed your Quick Suite session. This URL is valid for 5 minutes. The API operation provides the\n            URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a\n            user session that is valid for 10 hours. </p>"
                     }
                 },
                 "Status": {
@@ -32207,6 +33230,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A <i>group</i> in Quick Sight consists of a set of users. You can\n            use groups to make it easier to manage access and security. </p>"
+            }
+        },
+        "com.amazonaws.quicksight#GroupByColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.quicksight#GroupDescription": {
@@ -33587,6 +34622,49 @@
                 "smithy.api#documentation": "<p>The parameters that are required to connect to a Impala data source.</p>"
             }
         },
+        "com.amazonaws.quicksight#ImportTableOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#ImportTableOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration that specifies which source table to import and any column mappings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that imports data from a source table.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImportTableOperationSource": {
+            "type": "structure",
+            "members": {
+                "SourceTableId": {
+                    "target": "com.amazonaws.quicksight#DataSetEntityResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source table to import data from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ColumnIdMappings": {
+                    "target": "com.amazonaws.quicksight#DataSetColumnIdMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mappings between source column identifiers and target column identifiers during the import.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the source table and column mappings for an import table operation.</p>"
+            }
+        },
         "com.amazonaws.quicksight#IncludeFolderMembers": {
             "type": "enum",
             "members": {
@@ -34166,6 +35244,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Id": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the input column.</p>"
+                    }
+                },
                 "Type": {
                     "target": "com.amazonaws.quicksight#InputColumnDataType",
                     "traits": {
@@ -34238,7 +35322,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 2048
                 }
             }
@@ -34563,6 +35647,25 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.quicksight#InvalidDataSetParameterValueException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.quicksight#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception thrown when an invalid parameter value is provided for dataset operations.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.quicksight#InvalidNextTokenException": {
             "type": "structure",
             "members": {
@@ -34761,6 +35864,115 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Properties associated with the columns participating in a join.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#JoinOperandProperties": {
+            "type": "structure",
+            "members": {
+                "OutputColumnNameOverrides": {
+                    "target": "com.amazonaws.quicksight#OutputColumnNameOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of column name overrides to apply to the join operand's output columns.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties that control how columns are handled for a join operand, including column name overrides.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#JoinOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LeftOperand": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The left operand for the join operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RightOperand": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The right operand for the join operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#JoinOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of join to perform, such as <code>INNER</code>, <code>LEFT</code>, <code>RIGHT</code>, or <code>OUTER</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OnClause": {
+                    "target": "com.amazonaws.quicksight#JoinOperationOnClause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The join condition that specifies how to match rows between the left and right operands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LeftOperandProperties": {
+                    "target": "com.amazonaws.quicksight#JoinOperandProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties that control how the left operand's columns are handled in the join result.</p>"
+                    }
+                },
+                "RightOperandProperties": {
+                    "target": "com.amazonaws.quicksight#JoinOperandProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties that control how the right operand's columns are handled in the join result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that combines data from two sources based on specified join conditions.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#JoinOperationOnClause": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#JoinOperationType": {
+            "type": "enum",
+            "members": {
+                "INNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INNER"
+                    }
+                },
+                "OUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTER"
+                    }
+                },
+                "LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEFT"
+                    }
+                },
+                "RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIGHT"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#JoinType": {
@@ -42373,6 +43585,12 @@
                         "smithy.api#documentation": "<p>The display name of the column..</p>"
                     }
                 },
+                "Id": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the output column.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.quicksight#ColumnDescriptiveText",
                     "traits": {
@@ -42400,6 +43618,39 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#OutputColumn"
+            }
+        },
+        "com.amazonaws.quicksight#OutputColumnNameOverride": {
+            "type": "structure",
+            "members": {
+                "SourceColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original name of the column from the source transform operation.</p>"
+                    }
+                },
+                "OutputColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name to assign to the column in the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a mapping to override the name of an output column from a transform operation.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OutputColumnNameOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#OutputColumnNameOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.quicksight#OverrideDatasetParameterOperation": {
@@ -43149,6 +44400,28 @@
                 "smithy.api#documentation": "<p>A list of Quick Sight parameters and the list's override values.</p>"
             }
         },
+        "com.amazonaws.quicksight#ParentDataSet": {
+            "type": "structure",
+            "members": {
+                "DataSetArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputColumns": {
+                    "target": "com.amazonaws.quicksight#InputColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of input columns available from the parent dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>References a parent dataset that serves as a data source, including its columns and metadata.</p>"
+            }
+        },
         "com.amazonaws.quicksight#Password": {
             "type": "string",
             "traits": {
@@ -43386,7 +44659,7 @@
                 "Principal": {
                     "target": "com.amazonaws.quicksight#PermissionPrincipalString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the principal. \n            This can be an Amazon QuickSight user, group or namespace associated with the flow.\n            Namespace principal can only be set as a viewer and will grant everyone in the same namespace viewer permissions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the principal. \n            This can be an Amazon Quick Suite user, group or namespace associated with the flow.\n            Namespace principal can only be set as a viewer and will grant everyone in the same namespace viewer permissions.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -43446,6 +44719,12 @@
                     "target": "com.amazonaws.quicksight#S3Source",
                     "traits": {
                         "smithy.api#documentation": "<p>A physical table type for as S3 data source.</p>"
+                    }
+                },
+                "SaaSTable": {
+                    "target": "com.amazonaws.quicksight#SaaSTable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A physical table type for Software-as-a-Service (SaaS) sources.</p>"
                     }
                 }
             },
@@ -43681,6 +44960,27 @@
                 "smithy.api#documentation": "<p>A pie or donut chart.</p>\n         <p>The <code>PieChartVisual</code> structure describes a visual that is a member of the pie chart family.</p>\n         <p>The following charts can be described by using this structure:</p>\n         <ul>\n            <li>\n               <p>Pie charts</p>\n            </li>\n            <li>\n               <p>Donut charts</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html\">Using pie charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/donut-chart.html\">Using donut charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.quicksight#PivotConfiguration": {
+            "type": "structure",
+            "members": {
+                "LabelColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column that contains the labels to be pivoted into separate columns.</p>"
+                    }
+                },
+                "PivotedLabels": {
+                    "target": "com.amazonaws.quicksight#PivotedLabelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of specific label values to pivot into separate columns.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a pivot operation, specifying which column contains labels and how to pivot them.</p>"
+            }
+        },
         "com.amazonaws.quicksight#PivotFieldSortOptions": {
             "type": "structure",
             "members": {
@@ -43715,6 +45015,18 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PivotGroupByColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.quicksight#PivotMeasureFieldList": {
             "type": "list",
             "member": {
@@ -43725,6 +45037,48 @@
                     "min": 0,
                     "max": 40
                 }
+            }
+        },
+        "com.amazonaws.quicksight#PivotOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for pivoting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupByColumnNames": {
+                    "target": "com.amazonaws.quicksight#PivotGroupByColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of column names to group by when performing the pivot operation.</p>"
+                    }
+                },
+                "ValueColumnConfiguration": {
+                    "target": "com.amazonaws.quicksight#ValueColumnConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for how to aggregate values when multiple rows map to the same pivoted column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PivotConfiguration": {
+                    "target": "com.amazonaws.quicksight#PivotConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration that specifies which labels to pivot and how to structure the resulting columns.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that pivots data by converting row values into columns.</p>"
             }
         },
         "com.amazonaws.quicksight#PivotTableAggregatedFieldWells": {
@@ -44539,6 +45893,47 @@
                 "smithy.api#documentation": "<p>The optional configuration of totals cells in a <code>PivotTableVisual</code>.</p>"
             }
         },
+        "com.amazonaws.quicksight#PivotedLabel": {
+            "type": "structure",
+            "members": {
+                "LabelName": {
+                    "target": "com.amazonaws.quicksight#CellValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label value from the source data to be pivoted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the new column created from this pivoted label.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the new column created from this pivoted label.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a label value to be pivoted into a separate column, including the new column name and identifier.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PivotedLabelList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#PivotedLabel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.quicksight#PixelLength": {
             "type": "string",
             "traits": {
@@ -44903,7 +46298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Predicts existing visuals or generates new visuals to answer a given query.</p>\n         <p>This API uses <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html\">trusted identity propagation</a> to ensure that an end user is authenticated and receives the embed URL that is specific to that user. The IAM Identity Center application that the user has logged into needs to have <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html\">trusted Identity Propagation enabled for QuickSight</a> with the scope value set to <code>quicksight:read</code>. Before you use this action, make sure that you have configured the relevant QuickSight resource and permissions.</p>\n         <p>We recommend enabling the <code>QSearchStatus</code> API to unlock the full potential of <code>PredictQnA</code>. When <code>QSearchStatus</code> is enabled, it first checks the specified dashboard for any existing visuals that match the question. If no matching visuals are found, <code>PredictQnA</code> uses generative Q&A to provide an answer. To update the <code>QSearchStatus</code>, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateQuickSightQSearchConfiguration.html\">UpdateQuickSightQSearchConfiguration</a>.</p>",
+                "smithy.api#documentation": "<p>Predicts existing visuals or generates new visuals to answer a given query.</p>\n         <p>This API uses <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html\">trusted identity propagation</a> to ensure that an end user is authenticated and receives the embed URL that is specific to that user. The IAM Identity Center application that the user has logged into needs to have <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html\">trusted Identity Propagation enabled for Quick Suite</a> with the scope value set to <code>quicksight:read</code>. Before you use this action, make sure that you have configured the relevant Quick Suite resource and permissions.</p>\n         <p>We recommend enabling the <code>QSearchStatus</code> API to unlock the full potential of <code>PredictQnA</code>. When <code>QSearchStatus</code> is enabled, it first checks the specified dashboard for any existing visuals that match the question. If no matching visuals are found, <code>PredictQnA</code> uses generative Q&A to provide an answer. To update the <code>QSearchStatus</code>, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateQuickSightQSearchConfiguration.html\">UpdateQuickSightQSearchConfiguration</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/qa/predict",
@@ -45104,8 +46499,20 @@
         "com.amazonaws.quicksight#ProjectOperation": {
             "type": "structure",
             "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for column projection.</p>"
+                    }
+                },
                 "ProjectedColumns": {
-                    "target": "com.amazonaws.quicksight#ProjectedColumnList",
+                    "target": "com.amazonaws.quicksight#ProjectedColumnNameList",
                     "traits": {
                         "smithy.api#documentation": "<p>Projected columns.</p>",
                         "smithy.api#required": {}
@@ -45116,15 +46523,15 @@
                 "smithy.api#documentation": "<p>A transform operation that projects columns. Operations that come after a projection\n            can only refer to projected columns.</p>"
             }
         },
-        "com.amazonaws.quicksight#ProjectedColumnList": {
+        "com.amazonaws.quicksight#ProjectedColumnNameList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#String"
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 2000
+                    "min": 0,
+                    "max": 2048
                 }
             }
         },
@@ -46218,7 +47625,7 @@
                     "name": "quicksight"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n         <p>Amazon Quick Sight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon Quick Sight. </p>",
+                "smithy.api#documentation": "<fullname>Amazon Quick Suite API Reference</fullname>\n         <p>Amazon Quick Sight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon Quick Sight. </p>",
                 "smithy.api#title": "Amazon QuickSight",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -48639,7 +50046,7 @@
                 "QuickSightConsole": {
                     "target": "com.amazonaws.quicksight#RegisteredUserQuickSightConsoleEmbeddingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration details for providing each Amazon Quick Sight console embedding\n            experience. This can be used along with custom permissions to restrict access to certain\n            features. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon Quick Sight Console</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n         <p>Use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html\">GenerateEmbedUrlForRegisteredUser</a>\n            </code> where you want to provide an\n            authoring portal that allows users to create data sources, datasets, analyses, and\n            dashboards. The users who accesses an embedded Amazon Quick Sight console needs to belong\n            to the author or admin security cohort. If you want to restrict permissions to some of\n            these features, add a custom permissions profile to the user with the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> API operation. Use the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>\n            </code> API operation to add a new user with a custom\n            permission profile attached. For more information, see the following sections in the\n                    <i>Amazon QuickSight User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html\">Embedding the Full Functionality of the Amazon Quick Sight Console for\n                        Authenticated Users</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight\n                Developer Portal</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration details for providing each Amazon Quick Sight console embedding\n            experience. This can be used along with custom permissions to restrict access to certain\n            features. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon Quick Sight Console</a> in the\n                    <i>Amazon Quick Suite User Guide</i>.</p>\n         <p>Use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html\">GenerateEmbedUrlForRegisteredUser</a>\n            </code> where you want to provide an\n            authoring portal that allows users to create data sources, datasets, analyses, and\n            dashboards. The users who accesses an embedded Amazon Quick Sight console needs to belong\n            to the author or admin security cohort. If you want to restrict permissions to some of\n            these features, add a custom permissions profile to the user with the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> API operation. Use the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>\n            </code> API operation to add a new user with a custom\n            permission profile attached. For more information, see the following sections in the\n                    <i>Amazon Quick Suite User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html\">Embedding the Full Functionality of the Amazon Quick Sight Console for\n                        Authenticated Users</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon Quick Suite Console</a>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about the high-level steps for embedding and for an interactive\n            demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon Quick Suite\n                Developer Portal</a>.</p>"
                     }
                 },
                 "QSearchBar": {
@@ -48662,7 +50069,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type of experience you want to embed. For registered users, you can embed QuickSight dashboards or the Amazon Quick Sight console.</p>\n         <note>\n            <p>Exactly one of the experience configurations is required. You can choose\n                    <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more\n                than one experience configuration.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The type of experience you want to embed. For registered users, you can embed Quick Suite dashboards or the Amazon Quick Sight console.</p>\n         <note>\n            <p>Exactly one of the experience configurations is required. You can choose\n                    <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more\n                than one experience configuration.</p>\n         </note>"
             }
         },
         "com.amazonaws.quicksight#RegisteredUserGenerativeQnAEmbeddingConfiguration": {
@@ -48671,7 +50078,7 @@
                 "InitialTopicId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the new Q reader experience topic that you want to make the starting topic\n            in the Generative Q&A experience. You can find a topic ID by navigating to the Topics pane in the QuickSight application and opening a topic. The ID is in the URL for the topic that\n            you open.</p>\n         <p>If you don't specify an initial topic or you specify a legacy topic, a list of all\n            shared new reader experience topics is shown in the Generative Q&A experience for\n            your readers. When you select an initial new reader experience topic, you can specify\n            whether or not readers are allowed to select other new reader experience topics from the\n            available ones in the list.</p>"
+                        "smithy.api#documentation": "<p>The ID of the new Q reader experience topic that you want to make the starting topic\n            in the Generative Q&A experience. You can find a topic ID by navigating to the Topics pane in the Quick Suite application and opening a topic. The ID is in the URL for the topic that\n            you open.</p>\n         <p>If you don't specify an initial topic or you specify a legacy topic, a list of all\n            shared new reader experience topics is shown in the Generative Q&A experience for\n            your readers. When you select an initial new reader experience topic, you can specify\n            whether or not readers are allowed to select other new reader experience topics from the\n            available ones in the list.</p>"
                     }
                 }
             },
@@ -48978,6 +50385,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A transform operation that renames a column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RenameColumnOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#RenameColumnOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.quicksight#RenameColumnsOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for column renaming.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RenameColumnOperations": {
+                    "target": "com.amazonaws.quicksight#RenameColumnOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of column rename operations to perform, specifying old and new column names.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that renames one or more columns in the dataset.</p>"
             }
         },
         "com.amazonaws.quicksight#ResizeOption": {
@@ -49498,6 +50946,20 @@
                 "smithy.api#documentation": "<p>Information about rows for a data set SPICE ingestion.</p>"
             }
         },
+        "com.amazonaws.quicksight#RowLevelPermissionConfiguration": {
+            "type": "structure",
+            "members": {
+                "TagConfiguration": {
+                    "target": "com.amazonaws.quicksight#RowLevelPermissionTagConfiguration"
+                },
+                "RowLevelPermissionDataSet": {
+                    "target": "com.amazonaws.quicksight#RowLevelPermissionDataSet"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for row level security.</p>"
+            }
+        },
         "com.amazonaws.quicksight#RowLevelPermissionDataSet": {
             "type": "structure",
             "members": {
@@ -49536,6 +50998,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a dataset that contains permissions for row-level security (RLS).\n            The permissions dataset maps fields to users or groups. For more information, see\n            <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Quick Sight User\n                Guide</i>.</p>\n         <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is\n            not supported for new RLS datasets.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RowLevelPermissionDataSetMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#DataSetEntityResourceId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#RowLevelPermissionDataSet"
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionFormatVersion": {
@@ -49817,6 +51288,35 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
+            }
+        },
+        "com.amazonaws.quicksight#SaaSTable": {
+            "type": "structure",
+            "members": {
+                "DataSourceArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SaaS data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TablePath": {
+                    "target": "com.amazonaws.quicksight#TablePathElementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hierarchical path to the table within the SaaS data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputColumns": {
+                    "target": "com.amazonaws.quicksight#InputColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of input columns available from the SaaS table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A table from a Software-as-a-Service (SaaS) data source, including connection details and column definitions.</p>"
             }
         },
         "com.amazonaws.quicksight#SameSheetTargetVisualConfiguration": {
@@ -51273,7 +52773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for any Q topic that exists in an QuickSight account.</p>",
+                "smithy.api#documentation": "<p>Searches for any Q topic that exists in an Quick Suite account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/search/topics",
@@ -51658,6 +53158,72 @@
                 "smithy.api#documentation": "<p>A structure that represents a semantic entity type.</p>"
             }
         },
+        "com.amazonaws.quicksight#SemanticModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "TableMap": {
+                    "target": "com.amazonaws.quicksight#SemanticTableMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of semantic tables that define the analytical structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the semantic model that defines how prepared data is structured for analysis and reporting.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SemanticTable": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#SemanticTableAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for the semantic table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationTableId": {
+                    "target": "com.amazonaws.quicksight#DataSetEntityResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the destination table from data preparation that provides data to this semantic table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RowLevelPermissionConfiguration": {
+                    "target": "com.amazonaws.quicksight#RowLevelPermissionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for row level security that control data access for this semantic table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A semantic table that represents the final analytical structure of the data.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SemanticTableAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SemanticTableMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#DataSetEntityResourceId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#SemanticTable"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.quicksight#SemanticType": {
             "type": "structure",
             "members": {
@@ -51782,6 +53348,9 @@
             "member": {
                 "target": "com.amazonaws.quicksight#SensitiveTimestamp"
             }
+        },
+        "com.amazonaws.quicksight#Separator": {
+            "type": "string"
         },
         "com.amazonaws.quicksight#SeriesItem": {
             "type": "structure",
@@ -52239,7 +53808,7 @@
                 "Name": {
                     "target": "com.amazonaws.quicksight#SheetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>"
+                        "smithy.api#documentation": "<p>The name of the sheet. This name is displayed on the sheet's tab in the Quick Suite\n            console.</p>"
                     }
                 },
                 "ParameterControls": {
@@ -53100,7 +54669,7 @@
                 "RowLevelPermissionTags": {
                     "target": "com.amazonaws.quicksight#SessionTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to be used for row-level security (RLS). Make sure that the relevant datasets have RLS tags configured before you start a snapshot export job. You can configure the RLS tags of a dataset with a <code>DataSet$RowLevelPermissionTagConfiguration</code> API call.</p>\n         <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in Amazon Quick Sight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags to be used for row-level security (RLS). Make sure that the relevant datasets have RLS tags configured before you start a snapshot export job. You can configure the RLS tags of a dataset with a <code>DataSet$RowLevelPermissionTagConfiguration</code> API call.</p>\n         <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in Amazon Quick Sight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon Quick Suite User Guide</i>.</p>"
                     }
                 }
             },
@@ -53602,6 +55171,41 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#SourceTable": {
+            "type": "structure",
+            "members": {
+                "PhysicalTableId": {
+                    "target": "com.amazonaws.quicksight#DataSetEntityResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the physical table that serves as the data source.</p>"
+                    }
+                },
+                "DataSet": {
+                    "target": "com.amazonaws.quicksight#ParentDataSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A parent dataset that serves as the data source instead of a physical table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A source table that provides initial data from either a physical table or parent dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SourceTableMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#DataSetEntityResourceId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#SourceTable"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
         "com.amazonaws.quicksight#Spacing": {
             "type": "structure",
             "members": {
@@ -53715,7 +55319,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 168000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#SqlServerParameters": {
@@ -55494,6 +57099,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The paginated report options for a table visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TablePathElement": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.quicksight#TablePathElementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the path element.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.quicksight#TablePathElementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the path element.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An element in the hierarchical path to a table within a data source, containing both name and identifier.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TablePathElementId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TablePathElementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TablePathElement"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TablePathElementName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.quicksight#TablePinnedFieldOptions": {
@@ -59580,6 +61235,15 @@
                 "smithy.api#documentation": "<p>A data transformation on a logical table. This is a variant type structure. For this\n            structure to be valid, only one of the attributes can be non-null.</p>"
             }
         },
+        "com.amazonaws.quicksight#TransformOperationAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.quicksight#TransformOperationList": {
             "type": "list",
             "member": {
@@ -59589,6 +61253,110 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TransformOperationSource": {
+            "type": "structure",
+            "members": {
+                "TransformOperationId": {
+                    "target": "com.amazonaws.quicksight#DataSetEntityResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the transform operation that provides input data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ColumnIdMappings": {
+                    "target": "com.amazonaws.quicksight#DataSetColumnIdMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mappings between source column identifiers and target column identifiers for this transformation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the source of data for a transform operation, including the source operation and column mappings.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TransformStep": {
+            "type": "structure",
+            "members": {
+                "ImportTableStep": {
+                    "target": "com.amazonaws.quicksight#ImportTableOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that brings data from a source table.</p>"
+                    }
+                },
+                "ProjectStep": {
+                    "target": "com.amazonaws.quicksight#ProjectOperation"
+                },
+                "FiltersStep": {
+                    "target": "com.amazonaws.quicksight#FiltersOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that applies filter conditions.</p>"
+                    }
+                },
+                "CreateColumnsStep": {
+                    "target": "com.amazonaws.quicksight#CreateColumnsOperation"
+                },
+                "RenameColumnsStep": {
+                    "target": "com.amazonaws.quicksight#RenameColumnsOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that changes the names of one or more columns.</p>"
+                    }
+                },
+                "CastColumnTypesStep": {
+                    "target": "com.amazonaws.quicksight#CastColumnTypesOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that changes the data types of one or more columns.</p>"
+                    }
+                },
+                "JoinStep": {
+                    "target": "com.amazonaws.quicksight#JoinOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that combines data from two sources based on specified join conditions.</p>"
+                    }
+                },
+                "AggregateStep": {
+                    "target": "com.amazonaws.quicksight#AggregateOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that groups data and applies aggregation functions to calculate summary values.</p>"
+                    }
+                },
+                "PivotStep": {
+                    "target": "com.amazonaws.quicksight#PivotOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that converts row values into columns to reshape the data structure.</p>"
+                    }
+                },
+                "UnpivotStep": {
+                    "target": "com.amazonaws.quicksight#UnpivotOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that converts columns into rows to normalize the data structure.</p>"
+                    }
+                },
+                "AppendStep": {
+                    "target": "com.amazonaws.quicksight#AppendOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A transform step that combines rows from multiple sources by stacking them vertically.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A step in data preparation that performs a specific operation on the data.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TransformStepMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#DataSetEntityResourceId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#TransformStep"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
@@ -60228,6 +61996,63 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "String based length that is composed of value and unit in px with Integer.MAX_VALUE as maximum value"
+            }
+        },
+        "com.amazonaws.quicksight#UnpivotOperation": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.quicksight#TransformOperationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#TransformOperationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source transform operation that provides input data for unpivoting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ColumnsToUnpivot": {
+                    "target": "com.amazonaws.quicksight#ColumnToUnpivotList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of columns to unpivot from the source data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnpivotedLabelColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the new column that will contain the unpivoted column names.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnpivotedLabelColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the new column that will contain the unpivoted column names.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnpivotedValueColumnName": {
+                    "target": "com.amazonaws.quicksight#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the new column that will contain the unpivoted values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnpivotedValueColumnId": {
+                    "target": "com.amazonaws.quicksight#ColumnId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the new column that will contain the unpivoted values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transform operation that converts columns into rows, normalizing the data structure.</p>"
             }
         },
         "com.amazonaws.quicksight#UnsupportedPricingPlanException": {
@@ -61195,7 +63020,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an QuickSight application with a token exchange grant. This operation only supports QuickSight applications that are registered with IAM Identity Center.</p>",
+                "smithy.api#documentation": "<p>Updates an Quick Suite application with a token exchange grant. This operation only supports Quick Suite applications that are registered with IAM Identity Center.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/application-with-token-exchange-grant",
@@ -61217,7 +63042,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.quicksight#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the QuickSight application.</p>",
+                        "smithy.api#documentation": "<p>The namespace of the Quick Suite application.</p>",
                         "smithy.api#httpQuery": "namespace",
                         "smithy.api#required": {}
                     }
@@ -61420,7 +63245,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -61471,7 +63296,7 @@
                 "BrandId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the QuickSight brand.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Quick Suite brand.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -62220,6 +64045,9 @@
                     "target": "com.amazonaws.quicksight#InternalFailureException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#InvalidDataSetParameterValueException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
                 },
                 {
@@ -62387,7 +64215,11 @@
                 "LogicalTableMap": {
                     "target": "com.amazonaws.quicksight#LogicalTableMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the combination and transformation of the data from the physical\n\t\t\ttables.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-10-23",
+                            "message": "Only used in the legacy data preparation experience."
+                        },
+                        "smithy.api#documentation": "<p>Configures the combination and transformation of the data from the physical\n\t\t\ttables. This parameter is used with the legacy data preparation experience.</p>"
                     }
                 },
                 "ImportMode": {
@@ -62412,13 +64244,21 @@
                 "RowLevelPermissionDataSet": {
                     "target": "com.amazonaws.quicksight#RowLevelPermissionDataSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The row-level security configuration for the data you want to create.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-10-23",
+                            "message": "Only used in the legacy data preparation experience."
+                        },
+                        "smithy.api#documentation": "<p>The row-level security configuration for the data you want to create. This parameter is used \n\t\t\twith the legacy data preparation experience.</p>"
                     }
                 },
                 "RowLevelPermissionTagConfiguration": {
                     "target": "com.amazonaws.quicksight#RowLevelPermissionTagConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of tags on a dataset to set row-level security. Row-level security\n\t\t\ttags are currently supported for anonymous embedding only.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-10-23",
+                            "message": "Only used in the legacy data preparation experience."
+                        },
+                        "smithy.api#documentation": "<p>The configuration of tags on a dataset to set row-level security. Row-level security\n\t\t\ttags are currently supported for anonymous embedding only. This parameter is used with \n\t\tthe legacy data preparation experience.</p>"
                     }
                 },
                 "ColumnLevelPermissionRules": {
@@ -62441,6 +64281,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the performance optimization of the dataset that contains a\n\t\t\t\t<code>UniqueKey</code> configuration.</p>"
                     }
+                },
+                "DataPrepConfiguration": {
+                    "target": "com.amazonaws.quicksight#DataPrepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data preparation configuration for the dataset. This configuration defines the source tables,\n\t\t\ttransformation steps, and destination tables used to prepare the data.\n\t\t\tRequired when using the new data preparation experience.</p>"
+                    }
+                },
+                "SemanticModelConfiguration": {
+                    "target": "com.amazonaws.quicksight#SemanticModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic model configuration for the dataset. This configuration defines how the prepared\n\t\t\tdata is structured for an analysis, including table mappings and row-level security configurations.\n\t\t\tRequired when using the new data preparation experience.</p>"
+                    }
                 }
             },
             "traits": {
@@ -62459,7 +64311,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
                     }
                 },
                 "IngestionArn": {
@@ -63743,7 +65595,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>This API controls public sharing settings for your entire Quick Sight account, affecting\n                data security and access. When you enable public sharing:</p>\n            <ul>\n               <li>\n                  <p>Dashboards can be shared publicly</p>\n               </li>\n               <li>\n                  <p>This setting affects your entire Amazon Web Services account and all Quick Sight\n                        users</p>\n               </li>\n            </ul>\n            <p>\n               <b>Before proceeding:</b> Ensure you understand the\n                security implications and have proper IAM permissions\n                configured.</p>\n         </important>\n         <p>Use the <code>UpdatePublicSharingSettings</code> operation to turn on or turn off the\n            public sharing settings of an Amazon Quick Sight dashboard.</p>\n         <p>To use this operation, turn on session capacity pricing for your Amazon Quick Sight\n            account.</p>\n         <p>Before you can turn on public sharing on your account, make sure to give public\n            sharing permissions to an administrative user in the Identity and Access Management (IAM) console. For more information on using IAM with Amazon\n            Quick Sight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using QuickSight with IAM</a> in the <i>Amazon Quick Sight\n                User Guide</i>.</p>",
+                "smithy.api#documentation": "<important>\n            <p>This API controls public sharing settings for your entire Quick Sight account, affecting\n                data security and access. When you enable public sharing:</p>\n            <ul>\n               <li>\n                  <p>Dashboards can be shared publicly</p>\n               </li>\n               <li>\n                  <p>This setting affects your entire Amazon Web Services account and all Quick Sight\n                        users</p>\n               </li>\n            </ul>\n            <p>\n               <b>Before proceeding:</b> Ensure you understand the\n                security implications and have proper IAM permissions\n                configured.</p>\n         </important>\n         <p>Use the <code>UpdatePublicSharingSettings</code> operation to turn on or turn off the\n            public sharing settings of an Amazon Quick Sight dashboard.</p>\n         <p>To use this operation, turn on session capacity pricing for your Amazon Quick Sight\n            account.</p>\n         <p>Before you can turn on public sharing on your account, make sure to give public\n            sharing permissions to an administrative user in the Identity and Access Management (IAM) console. For more information on using IAM with Amazon\n            Quick Sight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using Quick Suite with IAM</a> in the <i>Amazon Quick Sight\n                User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/public-sharing-settings",
@@ -63766,7 +65618,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an QuickSight account.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Quick Suite account.</p>"
                     }
                 }
             },
@@ -65782,6 +67634,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The delimiter between values in the file.</p>"
                     }
+                },
+                "CustomCellAddressRange": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom cell address range for Excel files, specifying which cells to import from the spreadsheet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -66228,6 +68086,20 @@
                         "smithy.api#enumValue": "LENIENT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#ValueColumnConfiguration": {
+            "type": "structure",
+            "members": {
+                "AggregationFunction": {
+                    "target": "com.amazonaws.quicksight#DataPrepAggregationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation function to apply when multiple values map to the same pivoted cell.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for how to handle value columns in pivot operations, including aggregation settings.</p>"
             }
         },
         "com.amazonaws.quicksight#ValueWhenUnsetOption": {

@@ -165,7 +165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html\">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> <li> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTable</code> permission to create a table with tags.</p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}",
                     "method": "PUT",
@@ -202,7 +202,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html\">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> <li> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTableBucket</code> permission to create a table bucket with tags.</p> </li> </ul> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets",
                     "method": "PUT",
@@ -224,6 +224,12 @@
                     "target": "com.amazonaws.s3tables#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration to use for the table bucket. This configuration specifies the default encryption settings that will be applied to all tables created in this bucket unless overridden at the table level. The configuration includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.s3tables#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of user-defined tags that you would like to apply to the table bucket that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize and control access to resources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTableBucket</code> permisson to create a table bucket with tags.</p> </note>"
                     }
                 }
             },
@@ -289,6 +295,12 @@
                     "target": "com.amazonaws.s3tables#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration to use for the table. This configuration specifies the encryption algorithm and, if using SSE-KMS, the KMS key to use for encrypting the table. </p> <note> <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html\">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p> </note>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.s3tables#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of user-defined tags that you would like to apply to the table that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize, track costs for, and control access to resources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTable</code> permission to create a table with tags.</p> </note>"
                     }
                 }
             },
@@ -1503,7 +1515,7 @@
                 "name": {
                     "target": "com.amazonaws.s3tables#TableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the maintenance job.</p>",
+                        "smithy.api#documentation": "<p>The name of the table containing the maintenance job status you want to check.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2433,6 +2445,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3tables#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the tags applied to a specified Amazon S3 Tables resource. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to resources. </p> <note> <p>For a list of S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For tables and table buckets, you must have the <code>s3tables:ListTagsForResource</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tag/{resourceArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.s3tables#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you want to list tags for. The tagged resource can be a table bucket or a table. For a list of all S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.s3tables#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined tags that are applied to the resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3tables#MaintenanceStatus": {
             "type": "enum",
             "members": {
@@ -2750,7 +2830,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing table bucket policy for a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add\">Adding a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a new table bucket policy or replaces an existing table bucket policy for a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add\">Adding a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/buckets/{tableBucketARN}/policy",
                     "method": "PUT",
@@ -2841,7 +2921,7 @@
                 "name": {
                     "target": "com.amazonaws.s3tables#TableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the maintenance configuration.</p>",
+                        "smithy.api#documentation": "<p>The name of the table.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2895,7 +2975,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new maintenance configuration or replaces an existing table policy for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-add\">Adding a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTablePolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#documentation": "<p>Creates a new table policy or replaces an existing table policy for a table. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-add\">Adding a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTablePolicy</code> permission to use this operation. </p> </dd> </dl>",
                 "smithy.api#http": {
                     "uri": "/tables/{tableBucketARN}/{namespace}/{name}/policy",
                     "method": "PUT",
@@ -3030,6 +3110,16 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/.+$"
+            }
+        },
         "com.amazonaws.s3tables#ResourcePolicy": {
             "type": "string",
             "traits": {
@@ -3042,6 +3132,17 @@
         "com.amazonaws.s3tables#S3TableBuckets": {
             "type": "service",
             "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3tables#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#UntagResource"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.s3tables#NamespaceResource"
@@ -4282,6 +4383,107 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.s3tables#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#TagKey"
+            }
+        },
+        "com.amazonaws.s3tables#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies one or more user-defined tags to an Amazon S3 Tables resource or updates existing tags. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to your resources. You can add up to 50 tags for each S3 resource. </p> <note> <p>For a list of S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For tables and table buckets, you must have the <code>s3tables:TagResource</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tag/{resourceArn}",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.s3tables#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you're applying tags to. The tagged resource can be a table bucket or a table. For a list of all S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.s3tables#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined tag that you want to add to the specified S3 Tables resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.s3tables#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.s3tables#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.s3tables#TagValue"
+            }
+        },
         "com.amazonaws.s3tables#TooManyRequestsException": {
             "type": "structure",
             "members": {
@@ -4293,6 +4495,75 @@
                 "smithy.api#documentation": "<p>The limit on the number of requests per second was exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.s3tables#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified user-defined tags from an Amazon S3 Tables resource. You can pass one or more tag keys. </p> <note> <p>For a list of S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For tables and table buckets, you must have the <code>s3tables:UntagResource</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/tag/{resourceArn}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.s3tables#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you're removing tags from. The tagged resource can be a table bucket or a table. For a list of all S3 resources that support tagging, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags\">Managing tags for Amazon S3 resources</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.s3tables#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of tag keys that you're removing from the S3 Tables resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.s3tables#UpdateTableMetadataLocation": {

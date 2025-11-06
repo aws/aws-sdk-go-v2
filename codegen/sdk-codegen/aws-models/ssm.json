@@ -6267,7 +6267,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association. Use this action to create an association in multiple Regions and multiple\n   accounts.</p>\n         <note>\n            <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association. Use this action to create an association in multiple Regions and multiple\n   accounts.</p>\n         <note>\n            <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State\n    Manager.</p>\n         </note>"
                     }
                 },
                 "ScheduleOffset": {
@@ -6342,6 +6342,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#MaxDocumentSizeExceeded"
+                },
+                {
+                    "target": "com.amazonaws.ssm#NoLongerSupportedException"
                 },
                 {
                     "target": "com.amazonaws.ssm#TooManyUpdates"
@@ -6602,7 +6605,7 @@
                 "OpsItemType": {
                     "target": "com.amazonaws.ssm#OpsItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of OpsItem to create. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of OpsItem to create. Systems Manager supports the following types of OpsItems:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/aws/issue</code>\n               </p>\n               <p>This type of OpsItem is used for default OpsItems created by OpsCenter. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/insight</code>\n               </p>\n               <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate\n     OpsItems. </p>\n            </li>\n            <li>\n               <p>\n                  <code>/aws/changerequest</code>\n               </p>\n               <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change\n     requests. </p>\n               <important>\n                  <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n               </important>\n            </li>\n         </ul>"
                     }
                 },
                 "OperationalData": {
@@ -12874,7 +12877,7 @@
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether to use S3 dualstack endpoints\n   for the patch snapshot download URL. Set to <code>true</code> to receive a presigned URL that\n   supports both IPv4 and IPv6 connectivity. Set to <code>false</code> to use standard IPv4-only\n   endpoints. Default is <code>false</code>. This parameter is required for managed nodes in\n   IPv6-only environments. </p>"
+                        "smithy.api#documentation": "<p>Specifies whether to use S3 dualstack endpoints for the patch snapshot download URL. Set to\n    <code>true</code> to receive a presigned URL that supports both IPv4 and IPv6 connectivity. Set\n   to <code>false</code> to use standard IPv4-only endpoints. Default is <code>false</code>. This\n   parameter is required for managed nodes in IPv6-only environments. </p>"
                     }
                 }
             },
@@ -18549,7 +18552,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Information about approval reviews for a version of a change template in Change Manager.</p>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Information about approval reviews for a version of a change template in Change Manager.</p>"
             }
         },
         "com.amazonaws.ssm#ListDocumentMetadataHistoryRequest": {
@@ -21007,6 +21010,22 @@
         },
         "com.amazonaws.ssm#NextToken": {
             "type": "string"
+        },
+        "com.amazonaws.ssm#NoLongerSupportedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NoLongerSupported",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The requested operation is no longer supported by Systems Manager.</p>",
+                "smithy.api#error": "client"
+            }
         },
         "com.amazonaws.ssm#Node": {
             "type": "structure",
@@ -25376,13 +25395,13 @@
                     "target": "com.amazonaws.ssm#ApproveAfterDays",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of days after the release date of each patch matched by the rule that the patch\n   is marked as approved in the patch baseline. For example, a value of <code>7</code> means that\n   patches are approved seven days after they are released.</p>\n         <p>This parameter is marked as <code>Required: No</code>, but your request must include a value\n   for either <code>ApproveAfterDays</code> or <code>ApproveUntilDate</code>.</p>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>\n         <important>\n            <p>Use caution when setting this value for Windows Server patch baselines. Because patch\n    updates that are replaced by later updates are removed, setting too broad a value for this\n    parameter can result in crucial patches not being installed. For more information, see the\n     <b>Windows Server</b> tab in the topic <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html\">How security\n     patches are selected</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The number of days after the release date of each patch matched by the rule that the patch\n   is marked as approved in the patch baseline. For example, a value of <code>7</code> means that\n   patches are approved seven days after they are released.</p>\n         <p>Patch Manager evaluates patch release dates using Coordinated Universal Time (UTC). If the\n   day represented by <code>7</code> is <code>2025-11-16</code>, patches released between\n    <code>2025-11-16T00:00:00Z</code> and <code>2025-11-16T23:59:59Z</code> will be included in the\n   approval.</p>\n         <p>This parameter is marked as <code>Required: No</code>, but your request must include a value\n   for either <code>ApproveAfterDays</code> or <code>ApproveUntilDate</code>.</p>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>\n         <important>\n            <p>Use caution when setting this value for Windows Server patch baselines. Because patch\n    updates that are replaced by later updates are removed, setting too broad a value for this\n    parameter can result in crucial patches not being installed. For more information, see the\n     <b>Windows Server</b> tab in the topic <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html\">How security\n     patches are selected</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
                     }
                 },
                 "ApproveUntilDate": {
                     "target": "com.amazonaws.ssm#PatchStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before\n   this date are installed automatically.</p>\n         <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,\n   <code>2024-12-31</code>.</p>\n         <p>This parameter is marked as <code>Required: No</code>, but your request must include a value\n   for either <code>ApproveUntilDate</code> or <code>ApproveAfterDays</code>.</p>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>\n         <important>\n            <p>Use caution when setting this value for Windows Server patch baselines. Because patch\n    updates that are replaced by later updates are removed, setting too broad a value for this\n    parameter can result in crucial patches not being installed. For more information, see the\n     <b>Windows Server</b> tab in the topic <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html\">How security\n     patches are selected</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before\n   this date are installed automatically.</p>\n         <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,\n   <code>2025-11-16</code>.</p>\n         <p>Patch Manager evaluates patch release dates using Coordinated Universal Time (UTC). If you\n   enter the date <code>2025-11-16</code>, patches released between\n    <code>2025-11-16T00:00:00Z</code> and <code>2025-11-16T23:59:59Z</code> will be included in the\n   approval.</p>\n         <p>This parameter is marked as <code>Required: No</code>, but your request must include a value\n   for either <code>ApproveUntilDate</code> or <code>ApproveAfterDays</code>.</p>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>\n         <important>\n            <p>Use caution when setting this value for Windows Server patch baselines. Because patch\n    updates that are replaced by later updates are removed, setting too broad a value for this\n    parameter can result in crucial patches not being installed. For more information, see the\n     <b>Windows Server</b> tab in the topic <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html\">How security\n     patches are selected</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
                     }
                 },
                 "EnableNonSecurity": {
@@ -29160,10 +29179,13 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#InvalidAutomationExecutionParametersException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#NoLongerSupportedException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a change request for Change Manager. The Automation runbooks specified in the\n   change request run only after all required approvals for the change request have been\n   received.</p>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Creates a change request for Change Manager. The Automation runbooks specified in the\n   change request run only after all required approvals for the change request have been\n   received.</p>"
             }
         },
         "com.amazonaws.ssm#StartChangeRequestExecutionRequest": {
@@ -30706,7 +30728,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association. Use this action to update an association in multiple Regions and multiple\n   accounts.</p>\n         <note>\n            <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association. Use this action to update an association in multiple Regions and multiple\n   accounts.</p>\n         <note>\n            <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State\n    Manager.</p>\n         </note>"
                     }
                 },
                 "ScheduleOffset": {
@@ -30956,7 +30978,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates information related to approval reviews for a specific version of a change template\n   in Change Manager.</p>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Systems Manager Change Manager will no longer be open to new \n  customers starting November 7, 2025. If you would like to use Change Manager, sign up prior to that date. Existing customers can\n  continue to use the service as normal. For more information, see\n<a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html\">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>\n         </important>\n         <p>Updates information related to approval reviews for a specific version of a change template\n   in Change Manager.</p>"
             }
         },
         "com.amazonaws.ssm#UpdateDocumentMetadataRequest": {

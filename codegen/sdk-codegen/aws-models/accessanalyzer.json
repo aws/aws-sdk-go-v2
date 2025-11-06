@@ -132,7 +132,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps you to set, verify, and refine your IAM policies by providing a suite of capabilities. Its features include findings for external and unused access, basic and custom policy checks for validating policies, and policy generation to generate fine-grained policies. To start using IAM Access Analyzer to identify external or unused access, you first need to create an analyzer.</p> <p> <b>External access analyzers</b> help identify potential risks of accessing resources by enabling you to identify any resource policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An external principal can be another Amazon Web Services account, a root user, an IAM user or role, a federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to preview public and cross-account access to your resources before deploying permissions changes.</p> <p> <b>Unused access analyzers</b> help identify potential identity access risks by enabling you to identify unused IAM roles, unused access keys, unused console passwords, and IAM principals with unused service and action-level permissions.</p> <p>Beyond findings, IAM Access Analyzer provides basic and custom policy checks to validate IAM policies before deploying permissions changes. You can use policy generation to refine permissions by attaching a policy generated using access activity logged in CloudTrail logs. </p> <p>This guide describes the IAM Access Analyzer operations that you can call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>",
+                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps you to set, verify, and refine your IAM policies by providing a suite of capabilities. Its features include findings for external, internal, and unused access, basic and custom policy checks for validating policies, and policy generation to generate fine-grained policies. To start using IAM Access Analyzer to identify external, internal, or unused access, you first need to create an analyzer.</p> <p> <b>External access analyzers</b> help you identify potential risks of accessing resources by enabling you to identify any resource policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An external principal can be another Amazon Web Services account, a root user, an IAM user or role, a federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to preview public and cross-account access to your resources before deploying permissions changes.</p> <p> <b>Internal access analyzers</b> help you identify which principals within your organization or account have access to selected resources. This analysis supports implementing the principle of least privilege by ensuring that your specified resources can only be accessed by the intended principals within your organization.</p> <p> <b>Unused access analyzers</b> help you identify potential identity access risks by enabling you to identify unused IAM roles, unused access keys, unused console passwords, and IAM principals with unused service and action-level permissions.</p> <p>Beyond findings, IAM Access Analyzer provides basic and custom policy checks to validate IAM policies before deploying permissions changes. You can use policy generation to refine permissions by attaching a policy generated using access activity logged in CloudTrail logs. </p> <p>This guide describes the IAM Access Analyzer operations that you can call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Using Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -1890,7 +1890,7 @@
                 "type": {
                     "target": "com.amazonaws.accessanalyzer#Type",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.</p>",
+                        "smithy.api#documentation": "<p>The type represents the zone of trust or scope for the analyzer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1916,7 +1916,7 @@
                 "tags": {
                     "target": "com.amazonaws.accessanalyzer#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags added to the analyzer.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs applied to the analyzer. The key-value pairs consist of the set of Unicode letters, digits, whitespace, <code>_</code>, <code>.</code>, <code>/</code>, <code>=</code>, <code>+</code>, and <code>-</code>.</p> <p>The tag key is a value that is 1 to 128 characters in length and cannot be prefixed with <code>aws:</code>.</p> <p>The tag value is a value that is 0 to 256 characters in length.</p>"
                     }
                 },
                 "status": {
@@ -1935,7 +1935,7 @@
                 "configuration": {
                     "target": "com.amazonaws.accessanalyzer#AnalyzerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if the analyzer is an external access, unused access, or internal access analyzer.</p>"
+                        "smithy.api#documentation": "<p>Specifies if the analyzer is an external access, unused access, or internal access analyzer. The <a href=\"https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAnalyzer.html\">GetAnalyzer</a> action includes this property in its response if a configuration is specified, while the <a href=\"https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAnalyzers.html\">ListAnalyzers</a> action omits it.</p>"
                     }
                 }
             },
@@ -4213,7 +4213,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a resource that was analyzed.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a resource that was analyzed.</p> <note> <p>This action is supported only for external access analyzers.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/analyzed-resource",
                     "method": "GET",
@@ -4425,7 +4425,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the specified finding. GetFinding and GetFindingV2 both use <code>access-analyzer:GetFinding</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:GetFinding</code> action.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the specified finding. GetFinding and GetFindingV2 both use <code>access-analyzer:GetFinding</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:GetFinding</code> action.</p> <note> <p>GetFinding is supported only for external access analyzers. You must use GetFindingV2 for internal and unused access analyzers.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/finding/{id}",
                     "method": "GET",
@@ -6093,7 +6093,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer. ListFindings and ListFindingsV2 both use <code>access-analyzer:ListFindings</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:ListFindings</code> action.</p> <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer. ListFindings and ListFindingsV2 both use <code>access-analyzer:ListFindings</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:ListFindings</code> action.</p> <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p> <note> <p>ListFindings is supported only for external access analyzers. You must use ListFindingsV2 for internal and unused access analyzers.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/finding",
                     "method": "POST",
@@ -7125,6 +7125,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of active cross-account findings for the resource type.</p>"
                     }
+                },
+                "totalActiveErrors": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of active errors for the resource type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7603,7 +7609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Immediately starts a scan of the policies applied to the specified resource.</p>",
+                "smithy.api#documentation": "<p>Immediately starts a scan of the policies applied to the specified resource.</p> <note> <p>This action is supported only for external access analyzers.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/resource/scan",
                     "method": "POST",
@@ -8240,7 +8246,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the configuration of an existing analyzer.</p>",
+                "smithy.api#documentation": "<p>Modifies the configuration of an existing analyzer.</p> <note> <p>This action is not supported for external access analyzers.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/analyzer/{analyzerName}",
                     "method": "PUT",

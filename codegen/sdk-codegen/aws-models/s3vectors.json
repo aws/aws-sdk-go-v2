@@ -49,6 +49,9 @@
                     "target": "com.amazonaws.s3vectors#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.s3vectors#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
                 }
             ],
@@ -117,7 +120,16 @@
         },
         "com.amazonaws.s3vectors#CreateIndexOutput": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created vector index.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -133,6 +145,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.s3vectors#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
@@ -170,7 +185,16 @@
         },
         "com.amazonaws.s3vectors#CreateVectorBucketOutput": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created vector bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -1639,6 +1663,9 @@
                     "target": "com.amazonaws.s3vectors#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.s3vectors#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
                 }
             ],
@@ -1842,6 +1869,14 @@
                         "smithy.api#documentation": "<p>The vectors in the approximate nearest neighbor search.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "distanceMetric": {
+                    "target": "com.amazonaws.s3vectors#DistanceMetric",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The distance metric that was used for the similarity search calculation. This is the same distance metric that was configured for the vector index when it was created.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
@@ -1852,6 +1887,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.s3vectors#QueryOutputVector"
+            }
+        },
+        "com.amazonaws.s3vectors#RequestTimeoutException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request timed out. Retry your request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 408,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.s3vectors#S3Vectors": {
@@ -1870,7 +1922,7 @@
                     "target": "com.amazonaws.s3vectors#InternalServerException"
                 },
                 {
-                    "target": "com.amazonaws.s3vectors#ServiceQuotaExceededException"
+                    "target": "com.amazonaws.s3vectors#RequestTimeoutException"
                 },
                 {
                     "target": "com.amazonaws.s3vectors#TooManyRequestsException"

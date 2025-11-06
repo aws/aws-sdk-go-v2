@@ -1616,6 +1616,9 @@
                     "target": "com.amazonaws.connect#SearchAvailablePhoneNumbers"
                 },
                 {
+                    "target": "com.amazonaws.connect#SearchContactEvaluations"
+                },
+                {
                     "target": "com.amazonaws.connect#SearchContactFlowModules"
                 },
                 {
@@ -1626,6 +1629,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#SearchEmailAddresses"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchEvaluationForms"
                 },
                 {
                     "target": "com.amazonaws.connect#SearchHoursOfOperationOverrides"
@@ -4711,7 +4717,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP\n    address restrictions or session timeouts</a>. </p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP\n    address restrictions or session timeouts</a>. </p>"
             }
         },
         "com.amazonaws.connect#AuthenticationProfileDescription": {
@@ -4783,7 +4789,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>A summary of a given authentication profile.</p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>A summary of a given authentication profile.</p>"
             }
         },
         "com.amazonaws.connect#AuthenticationProfileSummaryList": {
@@ -4806,6 +4812,81 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.connect#AutoEvaluationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether automated evaluations are enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information about automated evaluations.</p>"
+            }
+        },
+        "com.amazonaws.connect#AutoEvaluationDetails": {
+            "type": "structure",
+            "members": {
+                "AutoEvaluationEnabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether automated evaluation is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutoEvaluationStatus": {
+                    "target": "com.amazonaws.connect#AutoEvaluationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the contact auto-evaluation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about automated evaluations.</p>"
+            }
+        },
+        "com.amazonaws.connect#AutoEvaluationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#AutomaticFailConfiguration": {
+            "type": "structure",
+            "members": {
+                "TargetSection": {
+                    "target": "com.amazonaws.connect#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The referenceId of the target section for auto failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about automatic fail configuration for an evaluation form.</p>"
             }
         },
         "com.amazonaws.connect#AvailableNumberSummary": {
@@ -5300,6 +5381,43 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.connect#BooleanComparisonType": {
+            "type": "enum",
+            "members": {
+                "IS_TRUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IS_TRUE"
+                    }
+                },
+                "IS_FALSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IS_FALSE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#BooleanCondition": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name of the property to be searched.</p>"
+                    }
+                },
+                "ComparisonType": {
+                    "target": "com.amazonaws.connect#BooleanComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean property comparison type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A boolean search condition for Search APIs.</p>"
             }
         },
         "com.amazonaws.connect#BotName": {
@@ -8604,11 +8722,23 @@
                         "smithy.api#documentation": "<p>A scoring strategy of the evaluation form.</p>"
                     }
                 },
+                "AutoEvaluationConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about automated evaluations.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -11479,6 +11609,85 @@
                 "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.\n   Otherwise, null.</p>"
             }
         },
+        "com.amazonaws.connect#DateTimeComparisonType": {
+            "type": "enum",
+            "members": {
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RANGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DateTimeCondition": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name of the datetime property to be searched</p>"
+                    }
+                },
+                "MinValue": {
+                    "target": "com.amazonaws.connect#DateTimeFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A minimum value of the property. </p>"
+                    }
+                },
+                "MaxValue": {
+                    "target": "com.amazonaws.connect#DateTimeFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A maximum value of the property. </p>"
+                    }
+                },
+                "ComparisonType": {
+                    "target": "com.amazonaws.connect#DateTimeComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Datetime property comparison type. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A datetime search condition for Search APIs.</p>"
+            }
+        },
+        "com.amazonaws.connect#DateTimeFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?Z?$"
+            }
+        },
         "com.amazonaws.connect#DateYearMonthDayFormat": {
             "type": "string",
             "traits": {
@@ -11579,6 +11788,85 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DecimalComparisonType": {
+            "type": "enum",
+            "members": {
+                "GREATER_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_OR_EQUAL"
+                    }
+                },
+                "GREATER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER"
+                    }
+                },
+                "LESSER_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESSER_OR_EQUAL"
+                    }
+                },
+                "LESSER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESSER"
+                    }
+                },
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
+                    }
+                },
+                "NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL"
+                    }
+                },
+                "RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RANGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DecimalCondition": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name of the decimal property to be searched.</p>"
+                    }
+                },
+                "MinValue": {
+                    "target": "com.amazonaws.connect#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A minimum value of the decimal property.</p>"
+                    }
+                },
+                "MaxValue": {
+                    "target": "com.amazonaws.connect#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A maximum value of the decimal property.</p>"
+                    }
+                },
+                "ComparisonType": {
+                    "target": "com.amazonaws.connect#DecimalComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of comparison to be made when evaluating the decimal condition. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A decimal search condition for Search APIs.</p>"
             }
         },
         "com.amazonaws.connect#DefaultVocabulary": {
@@ -13486,7 +13774,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Describes the target authentication profile.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Describes the target authentication profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
@@ -17366,6 +17654,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EvaluationType": {
+                    "target": "com.amazonaws.connect#EvaluationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the evaluation. </p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
@@ -17375,6 +17669,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a contact evaluation.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationAcknowledgement": {
+            "type": "structure",
+            "members": {
+                "AcknowledgedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the agent acknowledged the evaluation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AcknowledgedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent who acknowledged the evaluation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AcknowledgerComment": {
+                    "target": "com.amazonaws.connect#EvaluationAcknowledgerCommentString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment from the agent when they confirmed they acknowledged the evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the evaluation acknowledgement.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationAcknowledgementSummary": {
+            "type": "structure",
+            "members": {
+                "AcknowledgedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when an agent acknowledged the evaluation.</p>"
+                    }
+                },
+                "AcknowledgedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent who acknowledged the evaluation.</p>"
+                    }
+                },
+                "AcknowledgerComment": {
+                    "target": "com.amazonaws.connect#EvaluationAcknowledgerCommentString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment from the agent when they confirmed they acknowledged the evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an evaluation acknowledgement.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationAcknowledgerCommentString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3072
+                }
             }
         },
         "com.amazonaws.connect#EvaluationAnswerData": {
@@ -17414,7 +17771,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 128
+                    "max": 300
                 }
             }
         },
@@ -17445,6 +17802,12 @@
                     "target": "com.amazonaws.connect#EvaluationAnswerData",
                     "traits": {
                         "smithy.api#documentation": "<p>The system suggested value for an answer in a contact evaluation.</p>"
+                    }
+                },
+                "SuggestedAnswers": {
+                    "target": "com.amazonaws.connect#EvaluationSuggestedAnswersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Automation suggested answers for the questions.</p>"
                     }
                 }
             },
@@ -17484,6 +17847,54 @@
         },
         "com.amazonaws.connect#EvaluationArn": {
             "type": "string"
+        },
+        "com.amazonaws.connect#EvaluationAutomationRuleCategory": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.connect#QuestionRuleCategoryAutomationLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A category label.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.connect#QuestionRuleCategoryAutomationCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An automation condition for a Contact Lens category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PointsOfInterest": {
+                    "target": "com.amazonaws.connect#EvaluationTranscriptPointsOfInterest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A point of interest in a contact transcript that indicates match of condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Contact Lens category used by evaluation automation.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationAutomationRuleCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationAutomationRuleCategory"
+            }
+        },
+        "com.amazonaws.connect#EvaluationContactLensAnswerAnalysisDetails": {
+            "type": "structure",
+            "members": {
+                "MatchedRuleCategories": {
+                    "target": "com.amazonaws.connect#EvaluationAutomationRuleCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of match rule categories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Analysis details providing explanation for Contact Lens automation decision.</p>"
+            }
         },
         "com.amazonaws.connect#EvaluationForm": {
             "type": "structure",
@@ -17579,6 +17990,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "AutoEvaluationConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The automatic evaluation configuration of an evaluation form.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
@@ -17588,6 +18005,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the evaluation form.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When automated evaluation is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The automatic evaluation configuration of an evaluation form.</p>"
             }
         },
         "com.amazonaws.connect#EvaluationFormContent": {
@@ -17640,6 +18073,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A scoring strategy of the evaluation form.</p>"
                     }
+                },
+                "AutoEvaluationConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the automated evaluation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17684,6 +18123,241 @@
                 "smithy.api#documentation": "<p>Information about an item from an evaluation form. The item must be either a section or a\n   question.</p>"
             }
         },
+        "com.amazonaws.connect#EvaluationFormItemEnablementAction": {
+            "type": "enum",
+            "members": {
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE"
+                    }
+                },
+                "ENABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementCondition": {
+            "type": "structure",
+            "members": {
+                "Operands": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementConditionOperandList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Operands of the enablement condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to be used to be applied to operands if more than one provided. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition for item enablement.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementConditionOperand": {
+            "type": "union",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression of the enablement condition.</p>"
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition for item enablement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operand of the enablement condition.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementConditionOperandList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationFormItemEnablementConditionOperand"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementConfiguration": {
+            "type": "structure",
+            "members": {
+                "Condition": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition for item enablement configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enablement action that if condition is satisfied. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultAction": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enablement action that if condition is not satisfied. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item enablement configuration.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementExpression": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A source item of enablement expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of values from source item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Comparator": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemSourceValuesComparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comparator to be used against list of values. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An expression that defines a basic building block of conditional enablement.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementOperator": {
+            "type": "enum",
+            "members": {
+                "OR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OR"
+                    }
+                },
+                "AND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AND"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementSource": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A type of source item. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RefId": {
+                    "target": "com.amazonaws.connect#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A referenceId of the source item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An enablement expression source item.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementSourceType": {
+            "type": "enum",
+            "members": {
+                "QUESTION_REF_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUESTION_REF_ID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementSourceValue": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A type of source item value. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RefId": {
+                    "target": "com.amazonaws.connect#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A referenceId of the source value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An enablement expression source value.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementSourceValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemEnablementSourceValueType": {
+            "type": "enum",
+            "members": {
+                "OPTION_REF_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTION_REF_ID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormItemSourceValuesComparator": {
+            "type": "enum",
+            "members": {
+                "IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN"
+                    }
+                },
+                "NOT_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_IN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#EvaluationFormItemWeight": {
             "type": "double",
             "traits": {
@@ -17713,6 +18387,12 @@
                     "target": "com.amazonaws.connect#NumericQuestionPropertyValueAutomation",
                     "traits": {
                         "smithy.api#documentation": "<p>The property value of the automation.</p>"
+                    }
+                },
+                "AnswerSource": {
+                    "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A source of automation answer for numeric question.</p>"
                     }
                 }
             },
@@ -17751,6 +18431,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The flag to mark the option as automatic fail. If an automatic fail answer is provided, the\n   overall evaluation gets a score of 0.</p>"
+                    }
+                },
+                "AutomaticFailConfiguration": {
+                    "target": "com.amazonaws.connect#AutomaticFailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A configuration for automatic fail.</p>"
                     }
                 }
             },
@@ -17849,6 +18535,12 @@
                         "smithy.api#documentation": "<p>The properties of the type of question. Text questions do not have to define question type\n   properties.</p>"
                     }
                 },
+                "Enablement": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A question conditional enablement.</p>"
+                    }
+                },
                 "Weight": {
                     "target": "com.amazonaws.connect#EvaluationFormItemWeight",
                     "traits": {
@@ -17868,6 +18560,38 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSource": {
+            "type": "structure",
+            "members": {
+                "SourceType": {
+                    "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The automation answer source type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A question automation answer.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSourceType": {
+            "type": "enum",
+            "members": {
+                "CONTACT_LENS_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT_LENS_DATA"
+                    }
+                },
+                "GEN_AI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GEN_AI"
+                    }
                 }
             }
         },
@@ -17925,6 +18649,12 @@
                     "target": "com.amazonaws.connect#EvaluationFormSingleSelectQuestionProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>The properties of the numeric question.</p>"
+                    }
+                },
+                "Text": {
+                    "target": "com.amazonaws.connect#EvaluationFormTextQuestionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the text question.</p>"
                     }
                 }
             },
@@ -17988,6 +18718,177 @@
                 "smithy.api#documentation": "<p>Information about scoring strategy for an evaluation form.</p>"
             }
         },
+        "com.amazonaws.connect#EvaluationFormSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationFormSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#EvaluationFormSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#EvaluationFormSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition"
+                },
+                "NumberCondition": {
+                    "target": "com.amazonaws.connect#NumberCondition"
+                },
+                "BooleanCondition": {
+                    "target": "com.amazonaws.connect#BooleanCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean search condition.</p>"
+                    }
+                },
+                "DateTimeCondition": {
+                    "target": "com.amazonaws.connect#DateTimeCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Datetime search condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return evaluation forms.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormSearchFilter": {
+            "type": "structure",
+            "members": {
+                "AttributeFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneAttributeFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormSearchSummary": {
+            "type": "structure",
+            "members": {
+                "EvaluationFormId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EvaluationFormArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the evaluation form resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.connect#EvaluationFormTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#EvaluationFormVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#EvaluationFormDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the evaluation form.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the evaluation form was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Who created the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the evaluation form was last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Who changed the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastActivatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the evaluation format was last activated.</p>"
+                    }
+                },
+                "LastActivatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of user who last activated evaluation form.</p>"
+                    }
+                },
+                "LatestVersion": {
+                    "target": "com.amazonaws.connect#VersionNumber",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Latest version of the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActiveVersion": {
+                    "target": "com.amazonaws.connect#VersionNumber",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Active version of the evaluation form.</p>"
+                    }
+                },
+                "AutoEvaluationEnabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether automated evaluation is enabled.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the returned evaluation forms.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormSearchSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationFormSearchSummary"
+            }
+        },
         "com.amazonaws.connect#EvaluationFormSection": {
             "type": "structure",
             "members": {
@@ -18045,14 +18946,21 @@
                 "Options": {
                     "target": "com.amazonaws.connect#EvaluationFormSingleSelectQuestionAutomationOptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The automation options of the single select question.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The automation options of the single select question.</p>"
                     }
                 },
                 "DefaultOptionRefId": {
                     "target": "com.amazonaws.connect#ReferenceId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the default answer option, when none of the automation options match the\n   criteria.</p>"
+                    }
+                },
+                "AnswerSource": {
+                    "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Automation answer source.</p>"
                     }
                 }
             },
@@ -18081,7 +18989,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 20
                 }
             }
@@ -18132,6 +19040,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The flag to mark the option as automatic fail. If an automatic fail answer is provided, the\n   overall evaluation gets a score of 0.</p>"
+                    }
+                },
+                "AutomaticFailConfiguration": {
+                    "target": "com.amazonaws.connect#AutomaticFailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automatic fail is configured on a single select question. </p>"
                     }
                 }
             },
@@ -18277,6 +19191,34 @@
                 "target": "com.amazonaws.connect#EvaluationFormSummary"
             }
         },
+        "com.amazonaws.connect#EvaluationFormTextQuestionAutomation": {
+            "type": "structure",
+            "members": {
+                "AnswerSource": {
+                    "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Automation answer source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the automation configuration in text questions.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormTextQuestionProperties": {
+            "type": "structure",
+            "members": {
+                "Automation": {
+                    "target": "com.amazonaws.connect#EvaluationFormTextQuestionAutomation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The automation properties of the text question.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about properties for a text question in an evaluation form.</p>"
+            }
+        },
         "com.amazonaws.connect#EvaluationFormTitle": {
             "type": "string",
             "traits": {
@@ -18388,6 +19330,26 @@
                 "target": "com.amazonaws.connect#EvaluationFormVersionSummary"
             }
         },
+        "com.amazonaws.connect#EvaluationGenAIAnswerAnalysisDetails": {
+            "type": "structure",
+            "members": {
+                "Justification": {
+                    "target": "com.amazonaws.connect#EvaluationSuggestedAnswerJustification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Generative AI automation answer justification.</p>"
+                    }
+                },
+                "PointsOfInterest": {
+                    "target": "com.amazonaws.connect#EvaluationTranscriptPointsOfInterest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Generative AI automation answer analysis points of interest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An analysis for a generative AI answer to the question.</p>"
+            }
+        },
         "com.amazonaws.connect#EvaluationId": {
             "type": "string"
         },
@@ -18414,10 +19376,28 @@
                         "smithy.api#documentation": "<p>The identifier of the agent who performed the contact.</p>"
                     }
                 },
+                "CalibrationSessionId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calibration session ID that this evaluation belongs to.</p>"
+                    }
+                },
                 "Score": {
                     "target": "com.amazonaws.connect#EvaluationScore",
                     "traits": {
                         "smithy.api#documentation": "<p>The overall score of the contact evaluation.</p>"
+                    }
+                },
+                "AutoEvaluation": {
+                    "target": "com.amazonaws.connect#AutoEvaluationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information related to automated evaluation.</p>"
+                    }
+                },
+                "Acknowledgement": {
+                    "target": "com.amazonaws.connect#EvaluationAcknowledgement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information related to evaluation acknowledgement.</p>"
                     }
                 }
             },
@@ -18461,6 +19441,57 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.connect#EvaluationQuestionAnswerAnalysisDetails": {
+            "type": "union",
+            "members": {
+                "GenAI": {
+                    "target": "com.amazonaws.connect#EvaluationGenAIAnswerAnalysisDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Analysis results from the generative AI automation for the question.</p>"
+                    }
+                },
+                "ContactLens": {
+                    "target": "com.amazonaws.connect#EvaluationContactLensAnswerAnalysisDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Analysis results from the Contact Lens automation for the question.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed analysis results of the automated answer to the evaluation question.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationQuestionAnswerAnalysisType": {
+            "type": "enum",
+            "members": {
+                "CONTACT_LENS_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT_LENS_DATA"
+                    }
+                },
+                "GEN_AI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GEN_AI"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationQuestionInputDetails": {
+            "type": "structure",
+            "members": {
+                "TranscriptType": {
+                    "target": "com.amazonaws.connect#EvaluationTranscriptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Transcript type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the input data used for automated question processing.</p>"
             }
         },
         "com.amazonaws.connect#EvaluationScore": {
@@ -18517,6 +19548,235 @@
                 }
             }
         },
+        "com.amazonaws.connect#EvaluationSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#EvaluationSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#EvaluationSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition"
+                },
+                "NumberCondition": {
+                    "target": "com.amazonaws.connect#NumberCondition"
+                },
+                "BooleanCondition": {
+                    "target": "com.amazonaws.connect#BooleanCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boolean condition search criteria for searching evaluations.</p>"
+                    }
+                },
+                "DateTimeCondition": {
+                    "target": "com.amazonaws.connect#DateTimeCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datetime condition search criteria for searching evaluations.</p>"
+                    }
+                },
+                "DecimalCondition": {
+                    "target": "com.amazonaws.connect#DecimalCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decimal condition search criteria for searching evaluations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return evaluations.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSearchFilter": {
+            "type": "structure",
+            "members": {
+                "AttributeFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneAttributeFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSearchMetadata": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EvaluatorArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the person who evaluated the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactAgentId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the agent who handled the contact.</p>"
+                    }
+                },
+                "CalibrationSessionId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calibration session ID that this evaluation belongs to.</p>"
+                    }
+                },
+                "ScorePercentage": {
+                    "target": "com.amazonaws.connect#EvaluationScorePercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total evaluation score expressed as a percentage.</p>"
+                    }
+                },
+                "ScoreAutomaticFail": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The flag that marks the item as automatic fail. If the item or a child item gets an\n   automatic fail answer, this flag is true.</p>"
+                    }
+                },
+                "ScoreNotApplicable": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The flag to mark the item as not applicable for scoring.</p>"
+                    }
+                },
+                "AutoEvaluationEnabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether auto-evaluation is enabled.</p>"
+                    }
+                },
+                "AutoEvaluationStatus": {
+                    "target": "com.amazonaws.connect#AutoEvaluationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the contact auto evaluation. </p>"
+                    }
+                },
+                "AcknowledgedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the evaluation was acknowledged by the agent.</p>"
+                    }
+                },
+                "AcknowledgedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent who acknowledged the evaluation.</p>"
+                    }
+                },
+                "AcknowledgerComment": {
+                    "target": "com.amazonaws.connect#EvaluationAcknowledgerCommentString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comment from the agent when they acknowledged the evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about an evaluation search.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSearchSummary": {
+            "type": "structure",
+            "members": {
+                "EvaluationId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the contact evaluation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EvaluationArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contact evaluation resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EvaluationFormId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the evaluation form.</p>"
+                    }
+                },
+                "EvaluationFormVersion": {
+                    "target": "com.amazonaws.connect#VersionNumber",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A version of the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.connect#EvaluationSearchMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the evaluation search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#EvaluationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the evaluation. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EvaluationType": {
+                    "target": "com.amazonaws.connect#EvaluationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the evaluation. </p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the evaluation was created, in UTC time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the evaluation was modified last time, in UTC time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of evaluation obtained from the search operation.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSearchSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationSearchSummary"
+            }
+        },
         "com.amazonaws.connect#EvaluationStatus": {
             "type": "enum",
             "members": {
@@ -18532,6 +19792,108 @@
                         "smithy.api#enumValue": "SUBMITTED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswer": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.connect#EvaluationAnswerData"
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#EvaluationSuggestedAnswerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the suggested answer. D</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Input": {
+                    "target": "com.amazonaws.connect#EvaluationQuestionInputDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the input used to question automation.</p>"
+                    }
+                },
+                "AnalysisType": {
+                    "target": "com.amazonaws.connect#EvaluationQuestionAnswerAnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of analysis used to provide suggested answer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisDetails": {
+                    "target": "com.amazonaws.connect#EvaluationQuestionAnswerAnalysisDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed analysis results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the suggested answer for the question.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswerJustification": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswerStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswerTranscriptMillisOffset": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswerTranscriptMillisecondOffsets": {
+            "type": "structure",
+            "members": {
+                "BeginOffsetMillis": {
+                    "target": "com.amazonaws.connect#EvaluationSuggestedAnswerTranscriptMillisOffset",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Offset in milliseconds from the beginning of the transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The milliseconds offset for transcript reference in suggested answer.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswerTranscriptSegment": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#EvaluationSuggestedAnswersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationSuggestedAnswer"
             }
         },
         "com.amazonaws.connect#EvaluationSummary": {
@@ -18565,11 +19927,30 @@
                         "smithy.api#required": {}
                     }
                 },
+                "CalibrationSessionId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calibration session ID that this evaluation belongs to.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.connect#EvaluationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the contact evaluation.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AutoEvaluationEnabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether automated evaluation is enabled.</p>"
+                    }
+                },
+                "AutoEvaluationStatus": {
+                    "target": "com.amazonaws.connect#AutoEvaluationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the contact auto evaluation. </p>"
                     }
                 },
                 "EvaluatorArn": {
@@ -18583,6 +19964,18 @@
                     "target": "com.amazonaws.connect#EvaluationScore",
                     "traits": {
                         "smithy.api#documentation": "<p>The overall score of the contact evaluation.</p>"
+                    }
+                },
+                "Acknowledgement": {
+                    "target": "com.amazonaws.connect#EvaluationAcknowledgementSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information related to evaluation acknowledgement.</p>"
+                    }
+                },
+                "EvaluationType": {
+                    "target": "com.amazonaws.connect#EvaluationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the evaluation. </p>"
                     }
                 },
                 "CreatedTime": {
@@ -18608,6 +20001,86 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#EvaluationSummary"
+            }
+        },
+        "com.amazonaws.connect#EvaluationTranscriptPointOfInterest": {
+            "type": "structure",
+            "members": {
+                "MillisecondOffsets": {
+                    "target": "com.amazonaws.connect#EvaluationSuggestedAnswerTranscriptMillisecondOffsets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Offset in milliseconds from the beginning of transcript.</p>"
+                    }
+                },
+                "TranscriptSegment": {
+                    "target": "com.amazonaws.connect#EvaluationSuggestedAnswerTranscriptSegment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Segment of transcript.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the point of interest in transcript provided to evaluation.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationTranscriptPointsOfInterest": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationTranscriptPointOfInterest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationTranscriptType": {
+            "type": "enum",
+            "members": {
+                "RAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RAW"
+                    }
+                },
+                "REDACTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDACTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "CALIBRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALIBRATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluatorUserUnion": {
+            "type": "union",
+            "members": {
+                "ConnectUserArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the Amazon Connect ARN of the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the entity that performed the action on the evaluation.</p>"
             }
         },
         "com.amazonaws.connect#EventBridgeActionDefinition": {
@@ -21866,7 +23339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web ServicesSupport ticket. </p>",
+                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web Services Support ticket. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/import",
@@ -23625,7 +25098,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/authentication-profiles-summary/{InstanceId}",
@@ -28818,6 +30291,9 @@
         "com.amazonaws.connect#NullableBoolean": {
             "type": "boolean"
         },
+        "com.amazonaws.connect#NullableDouble": {
+            "type": "double"
+        },
         "com.amazonaws.connect#NullableProficiencyLevel": {
             "type": "float",
             "traits": {
@@ -28978,6 +30454,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOMER_HOLD_TIME"
+                    }
+                },
+                "LONGEST_HOLD_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LONGEST_HOLD_DURATION"
+                    }
+                },
+                "NUMBER_OF_HOLDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_OF_HOLDS"
+                    }
+                },
+                "AGENT_INTERACTION_AND_HOLD_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_INTERACTION_AND_HOLD_DURATION"
                     }
                 }
             }
@@ -32253,6 +33747,32 @@
                 "smithy.api#documentation": "<p>Information about the quality of the participant's media connection.</p>"
             }
         },
+        "com.amazonaws.connect#QuestionRuleCategoryAutomationCondition": {
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                },
+                "NOT_PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_PRESENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#QuestionRuleCategoryAutomationLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.connect#Queue": {
             "type": "structure",
             "members": {
@@ -34104,7 +35624,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web ServicesSupport.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web Services Support.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -35783,6 +37303,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#SearchContactEvaluations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchContactEvaluationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchContactEvaluationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches contact evaluations in an Amazon Connect instance, with optional filtering. </p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Find contact evaluations by using specific search criteria.</p>\n            </li>\n            <li>\n               <p>Find contact evaluations that are tagged with a specific set of tags.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>A Search operation, unlike a List operation, takes time to index changes to resource\n     (create, update or delete). If you don't see updated information for recently changed\n     contact evaluations, try calling the API again in a few seconds. Contact Evaluations\n     may not be fully backfilled with historical data in all regions yet, however all recently\n     created Contact Evaluations should be available for search.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-contact-evaluations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchContactEvaluationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#EvaluationSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return contact evaluations.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#EvaluationSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchContactEvaluationsResponse": {
+            "type": "structure",
+            "members": {
+                "EvaluationSearchSummaryList": {
+                    "target": "com.amazonaws.connect#EvaluationSearchSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about contact evaluations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of contact evaluations that matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#SearchContactFlowModules": {
             "type": "operation",
             "input": {
@@ -36446,6 +38065,105 @@
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of email addresses which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SearchEvaluationForms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchEvaluationFormsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchEvaluationFormsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches evaluation forms in an Amazon Connect instance, with optional filtering.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>List all evaluation forms in an instance.</p>\n            </li>\n            <li>\n               <p>Find all evaluation forms that meet specific criteria, such as Title, Description, Status, and more.</p>\n            </li>\n            <li>\n               <p>Find all evaluation forms that are tagged with a specific set of tags.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>A Search operation, unlike a List operation, takes time to index changes to resource\n      (create, update or delete). If you don't see updated information for recently changed\n      contact evaluations, try calling the API again in a few seconds.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n    quotas</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-evaluation-forms",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchEvaluationFormsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#EvaluationFormSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return evaluation forms.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#EvaluationFormSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchEvaluationFormsResponse": {
+            "type": "structure",
+            "members": {
+                "EvaluationFormSearchSummaryList": {
+                    "target": "com.amazonaws.connect#EvaluationFormSearchSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the returned evaluation forms.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of evaluation forms that matched your search query.</p>"
                     }
                 }
             },
@@ -39102,7 +40820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web ServicesSupport. </p>\n         <p>For more information about chat, see the following topics in the <i>Amazon Connect\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see the following topics in the <i>Amazon Connect\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -39289,11 +41007,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "AutoEvaluationConfiguration": {
+                    "target": "com.amazonaws.connect#AutoEvaluationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automated evaluations are enabled.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -40888,6 +42618,12 @@
                     "target": "com.amazonaws.connect#EvaluationNotesMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of question identifiers to note value.</p>"
+                    }
+                },
+                "SubmittedBy": {
+                    "target": "com.amazonaws.connect#EvaluatorUserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user who submitted the contact evaluation.</p>"
                     }
                 }
             },
@@ -42675,7 +44411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Updates the selected authentication profile.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Updates the selected authentication profile.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
@@ -42922,6 +44658,12 @@
                     "target": "com.amazonaws.connect#EvaluationNotesMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of question identifiers to note value.</p>"
+                    }
+                },
+                "UpdatedBy": {
+                    "target": "com.amazonaws.connect#EvaluatorUserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user who updated the contact evaluation.</p>"
                     }
                 }
             },
@@ -43794,6 +45536,12 @@
                         "smithy.api#documentation": "<p>A scoring strategy of the evaluation form.</p>"
                     }
                 },
+                "AutoEvaluationConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automated evaluations are enabled.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
@@ -44080,7 +45828,7 @@
                 "AttributeType": {
                     "target": "com.amazonaws.connect#InstanceAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web ServicesSupport for allowlisting.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web Services Support for allowlisting.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

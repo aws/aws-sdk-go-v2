@@ -1260,6 +1260,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when Backup Vault Lock configuration becomes immutable,\n         meaning it cannot be changed or deleted.</p>\n         <p>If you applied Vault Lock to your vault without specifying a lock date, you can change\n         your Vault Lock settings, or delete Vault Lock from the vault entirely, at any time.</p>\n         <p>This value is in Unix format, Coordinated Universal Time (UTC), and accurate to\n         milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018\n         12:11:30.087 AM.</p>"
                     }
+                },
+                "EncryptionKeyType": {
+                    "target": "com.amazonaws.backup#EncryptionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption key used for the backup vault. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2526,6 +2532,12 @@
                         "smithy.api#documentation": "<p>The maximum retention period that the vault retains its recovery points.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed KMS key to use for encrypting the logically air-gapped backup vault. If not specified, the vault will be encrypted with an Amazon Web Services-owned key managed by Amazon Web Services Backup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2974,7 +2986,7 @@
                 "RestoreTestingSelectionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the restore testing selection for the related restore testing plan.</p>",
+                        "smithy.api#documentation": "<p>The name of the restore testing selection for the related restore testing plan.</p>\n         <p>The name cannot be changed after creation. The name consists of only \n         alphanumeric characters and underscores. Maximum length is 50.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5230,6 +5242,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the latest update to the MPA approval team association for this backup vault.</p>"
                     }
+                },
+                "EncryptionKeyType": {
+                    "target": "com.amazonaws.backup#EncryptionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption key used for the backup vault. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5792,6 +5810,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index\n         associated with the recovery point.</p>"
                     }
+                },
+                "EncryptionKeyType": {
+                    "target": "com.amazonaws.backup#EncryptionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption key used for the recovery point. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6324,6 +6348,23 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#EncryptionKeyType": {
+            "type": "enum",
+            "members": {
+                "AWS_OWNED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_KMS_KEY"
+                    }
+                },
+                "CUSTOMER_MANAGED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_KMS_KEY"
+                    }
+                }
             }
         },
         "com.amazonaws.backup#ExportBackupPlanTemplate": {
@@ -11310,6 +11351,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index associated \n         with the recovery point.</p>"
                     }
+                },
+                "EncryptionKeyType": {
+                    "target": "com.amazonaws.backup#EncryptionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption key used for the recovery point. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11402,6 +11449,12 @@
                     "target": "com.amazonaws.backup#string",
                     "traits": {
                         "smithy.api#documentation": "<p>A string in the form of a detailed message explaining the status of a backup index\n         associated with the recovery point.</p>"
+                    }
+                },
+                "EncryptionKeyType": {
+                    "target": "com.amazonaws.backup#EncryptionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption key used for the recovery point. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>"
                     }
                 }
             },
@@ -12611,7 +12664,7 @@
                 "RestoreTestingSelectionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the restore testing selection \n         that belongs to the related restore testing plan.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the restore testing selection \n         that belongs to the related restore testing plan.</p>\n         <p>The name consists of only alphanumeric characters and underscores. \n         Maximum length is 50.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12685,7 +12738,7 @@
                 "RestoreTestingSelectionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of the restore testing selection that \n         belongs to the related restore testing plan.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the restore testing selection that \n         belongs to the related restore testing plan.</p>\n         <p>The name consists of only alphanumeric characters and underscores. \n         Maximum length is 50.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12735,7 +12788,7 @@
                 "RestoreTestingSelectionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique name of a restore testing selection.</p>",
+                        "smithy.api#documentation": "<p>Unique name of a restore testing selection.</p>\n         <p>The name consists of only alphanumeric characters and underscores. \n         Maximum length is 50.</p>",
                         "smithy.api#required": {}
                     }
                 },
