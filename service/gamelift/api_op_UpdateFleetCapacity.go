@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Container
+//
 // Updates capacity settings for a managed EC2 fleet or managed container fleet.
 // For these fleets, you adjust capacity by changing the number of instances in the
 // fleet. Fleet capacity determines the number of game sessions and players that

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves script records for all Realtime scripts that are associated with the
 // Amazon Web Services account in use.
 //

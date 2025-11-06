@@ -728,6 +728,11 @@ type BackupVaultListMember struct {
 	// [Encryption for backups in Backup]: https://docs.aws.amazon.com/aws-backup/latest/devguide/encryption.html
 	EncryptionKeyArn *string
 
+	// The type of encryption key used for the backup vault. Valid values are
+	// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
+	// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
+	EncryptionKeyType EncryptionKeyType
+
 	// The date and time when Backup Vault Lock configuration becomes immutable,
 	// meaning it cannot be changed or deleted.
 	//
@@ -1549,6 +1554,11 @@ type RecoveryPointByBackupVault struct {
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	EncryptionKeyArn *string
 
+	// The type of encryption key used for the recovery point. Valid values are
+	// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
+	// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
+	EncryptionKeyType EncryptionKeyType
+
 	// Specifies the IAM role ARN used to create the target recovery point; for
 	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
@@ -1657,6 +1667,11 @@ type RecoveryPointByResource struct {
 	// example,
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	EncryptionKeyArn *string
+
+	// The type of encryption key used for the recovery point. Valid values are
+	// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
+	// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
+	EncryptionKeyType EncryptionKeyType
 
 	// This is the current status for the backup index associated with the specified
 	// recovery point.
@@ -2445,6 +2460,9 @@ type RestoreTestingSelectionForCreate struct {
 	// The unique name of the restore testing selection that belongs to the related
 	// restore testing plan.
 	//
+	// The name consists of only alphanumeric characters and underscores. Maximum
+	// length is 50.
+	//
 	// This member is required.
 	RestoreTestingSelectionName *string
 
@@ -2506,6 +2524,9 @@ type RestoreTestingSelectionForGet struct {
 
 	// The unique name of the restore testing selection that belongs to the related
 	// restore testing plan.
+	//
+	// The name consists of only alphanumeric characters and underscores. Maximum
+	// length is 50.
 	//
 	// This member is required.
 	RestoreTestingSelectionName *string
@@ -2576,6 +2597,9 @@ type RestoreTestingSelectionForList struct {
 	RestoreTestingPlanName *string
 
 	// Unique name of a restore testing selection.
+	//
+	// The name consists of only alphanumeric characters and underscores. Maximum
+	// length is 50.
 	//
 	// This member is required.
 	RestoreTestingSelectionName *string

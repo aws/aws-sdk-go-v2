@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Updates the mutable properties of a game session.
 //
 // To update a game session, specify the game session ID and the values you want

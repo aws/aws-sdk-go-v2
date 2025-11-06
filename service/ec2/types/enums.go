@@ -4823,6 +4823,18 @@ const (
 	InstanceTypeM8aMetal24xl       InstanceType = "m8a.metal-24xl"
 	InstanceTypeM8aMetal48xl       InstanceType = "m8a.metal-48xl"
 	InstanceTypeTrn23xlarge        InstanceType = "trn2.3xlarge"
+	InstanceTypeR8aMedium          InstanceType = "r8a.medium"
+	InstanceTypeR8aLarge           InstanceType = "r8a.large"
+	InstanceTypeR8aXlarge          InstanceType = "r8a.xlarge"
+	InstanceTypeR8a2xlarge         InstanceType = "r8a.2xlarge"
+	InstanceTypeR8a4xlarge         InstanceType = "r8a.4xlarge"
+	InstanceTypeR8a8xlarge         InstanceType = "r8a.8xlarge"
+	InstanceTypeR8a12xlarge        InstanceType = "r8a.12xlarge"
+	InstanceTypeR8a16xlarge        InstanceType = "r8a.16xlarge"
+	InstanceTypeR8a24xlarge        InstanceType = "r8a.24xlarge"
+	InstanceTypeR8a48xlarge        InstanceType = "r8a.48xlarge"
+	InstanceTypeR8aMetal24xl       InstanceType = "r8a.metal-24xl"
+	InstanceTypeR8aMetal48xl       InstanceType = "r8a.metal-48xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -5904,6 +5916,18 @@ func (InstanceType) Values() []InstanceType {
 		"m8a.metal-24xl",
 		"m8a.metal-48xl",
 		"trn2.3xlarge",
+		"r8a.medium",
+		"r8a.large",
+		"r8a.xlarge",
+		"r8a.2xlarge",
+		"r8a.4xlarge",
+		"r8a.8xlarge",
+		"r8a.12xlarge",
+		"r8a.16xlarge",
+		"r8a.24xlarge",
+		"r8a.48xlarge",
+		"r8a.metal-24xl",
+		"r8a.metal-48xl",
 	}
 }
 

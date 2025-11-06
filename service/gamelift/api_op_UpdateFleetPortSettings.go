@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Container
+//
 // Updates permissions that allow inbound traffic to connect to game sessions in
 // the fleet.
 //

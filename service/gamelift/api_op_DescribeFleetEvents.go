@@ -12,6 +12,8 @@ import (
 	"time"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves entries from a fleet's event log. Fleet events are initiated by
 // changes in status, such as during fleet creation and termination, changes in
 // capacity, etc. If a fleet has multiple locations, events are also initiated by

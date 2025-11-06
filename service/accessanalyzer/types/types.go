@@ -418,14 +418,17 @@ type AnalyzerSummary struct {
 	// This member is required.
 	Status AnalyzerStatus
 
-	// The type of analyzer, which corresponds to the zone of trust chosen for the
-	// analyzer.
+	// The type represents the zone of trust or scope for the analyzer.
 	//
 	// This member is required.
 	Type Type
 
 	// Specifies if the analyzer is an external access, unused access, or internal
-	// access analyzer.
+	// access analyzer. The [GetAnalyzer]action includes this property in its response if a
+	// configuration is specified, while the [ListAnalyzers]action omits it.
+	//
+	// [GetAnalyzer]: https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAnalyzer.html
+	// [ListAnalyzers]: https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAnalyzers.html
 	Configuration AnalyzerConfiguration
 
 	// The resource that was most recently analyzed by the analyzer.
@@ -441,7 +444,14 @@ type AnalyzerSummary struct {
 	// accounts of the Amazon Web Services organization.
 	StatusReason *StatusReason
 
-	// The tags added to the analyzer.
+	// An array of key-value pairs applied to the analyzer. The key-value pairs
+	// consist of the set of Unicode letters, digits, whitespace, _ , . , / , = , + ,
+	// and - .
+	//
+	// The tag key is a value that is 1 to 128 characters in length and cannot be
+	// prefixed with aws: .
+	//
+	// The tag value is a value that is 0 to 256 characters in length.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -2037,6 +2047,9 @@ type ResourceTypeDetails struct {
 
 	// The total number of active cross-account findings for the resource type.
 	TotalActiveCrossAccount *int32
+
+	// The total number of active errors for the resource type.
+	TotalActiveErrors *int32
 
 	// The total number of active public findings for the resource type.
 	TotalActivePublic *int32

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Creates a managed fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances
 // to host your containerized game servers. Use this operation to define how to
 // deploy a container architecture onto each fleet instance and configure fleet
@@ -74,10 +76,20 @@ import (
 // without a container group are placed in CREATED status.
 //
 // You can update most of the properties of a fleet, including container group
-// definitions, and deploy the update across all fleet instances. Use a fleet
-// update to deploy a new game server version update across the container fleet.
+// definitions, and deploy the update across all fleet instances. Use [UpdateContainerFleet]to deploy a
+// new game server version update across the container fleet.
+//
+// A managed fleet's runtime environment depends on the Amazon Machine Image (AMI)
+// version it uses. When a new fleet is created, Amazon GameLift Servers assigns
+// the latest available AMI version to the fleet, and all compute instances in that
+// fleet are deployed with that version. To update the AMI version, you must create
+// a new fleet. As a best practice, we recommend replacing your managed fleets
+// every 30 days to maintain a secure and up-to-date runtime environment for your
+// hosted game servers. For guidance, see [Security best practices for Amazon GameLift Servers].
 //
 // [fleet creation workflow]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow
+// [Security best practices for Amazon GameLift Servers]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
+// [UpdateContainerFleet]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerFleet.html
 func (c *Client) CreateContainerFleet(ctx context.Context, params *CreateContainerFleetInput, optFns ...func(*Options)) (*CreateContainerFleetOutput, error) {
 	if params == nil {
 		params = &CreateContainerFleetInput{}

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Defines a new matchmaking configuration for use with FlexMatch. Whether your
 // are using FlexMatch with Amazon GameLift Servers hosting or as a standalone
 // matchmaking service, the matchmaking configuration sets out rules for matching

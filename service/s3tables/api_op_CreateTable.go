@@ -24,6 +24,9 @@ import (
 //   - If you use this operation with the optional encryptionConfiguration request
 //     parameter you must have the s3tables:PutTableEncryption permission.
 //
+//   - You must have the s3tables:TagResource permission in addition to
+//     s3tables:CreateTable permission to create a table with tags.
+//
 // Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables
 // maintenance principal access to your KMS key. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
 //
@@ -78,6 +81,17 @@ type CreateTableInput struct {
 
 	// The metadata for the table.
 	Metadata types.TableMetadata
+
+	// A map of user-defined tags that you would like to apply to the table that you
+	// are creating. A tag is a key-value pair that you apply to your resources. Tags
+	// can help you organize, track costs for, and control access to resources. For
+	// more information, see [Tagging for cost allocation or attribute-based access control (ABAC)].
+	//
+	// You must have the s3tables:TagResource permission in addition to
+	// s3tables:CreateTable permission to create a table with tags.
+	//
+	// [Tagging for cost allocation or attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

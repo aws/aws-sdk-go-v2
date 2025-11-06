@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Ends a game session that's currently in progress. Use this action to terminate
 // any game session that isn't in ERROR status. Terminating a game session is the
 // most efficient way to free up a server process when it's hosting a game session

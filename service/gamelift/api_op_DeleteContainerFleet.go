@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Deletes all resources and information related to a container fleet and shuts
 // down currently running fleet instances, including those in remote locations. The
 // container fleet must be in ACTIVE status to be deleted.

@@ -1,0 +1,8 @@
+{
+    "id": "72dd1a22-8a80-41a5-9426-b01b8e2e8255",
+    "type": "feature",
+    "description": "AWS Backup now supports customer-managed keys (CMK) for logically air-gapped vaults, enabling customers to maintain full control over their encryption key lifecycle. This feature helps organizations meet specific internal governance requirements or external regulatory compliance standards.",
+    "modules": [
+        "service/backup"
+    ]
+}

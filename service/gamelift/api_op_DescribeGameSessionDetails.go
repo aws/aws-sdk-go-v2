@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves additional game session properties, including the game session
 // protection policy in force, a set of one or more game sessions in a specific
 // fleet location. You can optionally filter the results by current game session

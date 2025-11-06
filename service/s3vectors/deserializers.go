@@ -53,6 +53,34 @@ func (m *awsRestjson1_deserializeOpCreateIndex) HandleDeserialize(ctx context.Co
 	output := &CreateIndexOutput{}
 	out.Result = output
 
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateIndexOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	span.End()
 	return out, metadata, err
 }
@@ -110,6 +138,9 @@ func awsRestjson1_deserializeOpErrorCreateIndex(response *smithyhttp.Response, m
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -130,6 +161,46 @@ func awsRestjson1_deserializeOpErrorCreateIndex(response *smithyhttp.Response, m
 		return genericError
 
 	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateIndexOutput(v **CreateIndexOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateIndexOutput
+	if *v == nil {
+		sv = &CreateIndexOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "indexArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexArn to be of type string, got %T instead", value)
+				}
+				sv.IndexArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 type awsRestjson1_deserializeOpCreateVectorBucket struct {
@@ -161,6 +232,34 @@ func (m *awsRestjson1_deserializeOpCreateVectorBucket) HandleDeserialize(ctx con
 	}
 	output := &CreateVectorBucketOutput{}
 	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateVectorBucketOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
 
 	span.End()
 	return out, metadata, err
@@ -216,6 +315,9 @@ func awsRestjson1_deserializeOpErrorCreateVectorBucket(response *smithyhttp.Resp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -236,6 +338,46 @@ func awsRestjson1_deserializeOpErrorCreateVectorBucket(response *smithyhttp.Resp
 		return genericError
 
 	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateVectorBucketOutput(v **CreateVectorBucketOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateVectorBucketOutput
+	if *v == nil {
+		sv = &CreateVectorBucketOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "vectorBucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VectorBucketArn to be of type string, got %T instead", value)
+				}
+				sv.VectorBucketArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 type awsRestjson1_deserializeOpDeleteIndex struct {
@@ -319,8 +461,8 @@ func awsRestjson1_deserializeOpErrorDeleteIndex(response *smithyhttp.Response, m
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -425,8 +567,8 @@ func awsRestjson1_deserializeOpErrorDeleteVectorBucket(response *smithyhttp.Resp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -531,8 +673,8 @@ func awsRestjson1_deserializeOpErrorDeleteVectorBucketPolicy(response *smithyhtt
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -649,8 +791,8 @@ func awsRestjson1_deserializeOpErrorDeleteVectors(response *smithyhttp.Response,
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -783,8 +925,8 @@ func awsRestjson1_deserializeOpErrorGetIndex(response *smithyhttp.Response, meta
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -953,8 +1095,8 @@ func awsRestjson1_deserializeOpErrorGetVectorBucket(response *smithyhttp.Respons
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -1123,8 +1265,8 @@ func awsRestjson1_deserializeOpErrorGetVectorBucketPolicy(response *smithyhttp.R
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -1309,8 +1451,8 @@ func awsRestjson1_deserializeOpErrorGetVectors(response *smithyhttp.Response, me
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -1479,8 +1621,8 @@ func awsRestjson1_deserializeOpErrorListIndexes(response *smithyhttp.Response, m
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -1655,8 +1797,8 @@ func awsRestjson1_deserializeOpErrorListVectorBuckets(response *smithyhttp.Respo
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -1834,8 +1976,8 @@ func awsRestjson1_deserializeOpErrorListVectors(response *smithyhttp.Response, m
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -1985,8 +2127,8 @@ func awsRestjson1_deserializeOpErrorPutVectorBucketPolicy(response *smithyhttp.R
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -2102,6 +2244,9 @@ func awsRestjson1_deserializeOpErrorPutVectors(response *smithyhttp.Response, me
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
@@ -2249,8 +2394,8 @@ func awsRestjson1_deserializeOpErrorQueryVectors(response *smithyhttp.Response, 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
-		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -2293,6 +2438,15 @@ func awsRestjson1_deserializeOpDocumentQueryVectorsOutput(v **QueryVectorsOutput
 
 	for key, value := range shape {
 		switch key {
+		case "distanceMetric":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DistanceMetric to be of type string, got %T instead", value)
+				}
+				sv.DistanceMetric = types.DistanceMetric(jtv)
+			}
+
 		case "vectors":
 			if err := awsRestjson1_deserializeDocumentQueryVectorsOutputList(&sv.Vectors, value); err != nil {
 				return err
@@ -2579,6 +2733,42 @@ func awsRestjson1_deserializeErrorNotFoundException(response *smithyhttp.Respons
 	}
 
 	err := awsRestjson1_deserializeDocumentNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorRequestTimeoutException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.RequestTimeoutException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentRequestTimeoutException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3776,6 +3966,46 @@ func awsRestjson1_deserializeDocumentQueryVectorsOutputList(v *[]types.QueryOutp
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTimeoutException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RequestTimeoutException
+	if *v == nil {
+		sv = &types.RequestTimeoutException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

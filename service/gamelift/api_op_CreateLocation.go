@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Anywhere
+//
 // Creates a custom location for use in an Anywhere fleet.
 func (c *Client) CreateLocation(ctx context.Context, params *CreateLocationInput, optFns ...func(*Options)) (*CreateLocationOutput, error) {
 	if params == nil {

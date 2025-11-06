@@ -33,7 +33,7 @@ type DeleteDataSetInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// The ID for the dataset that you want to delete. This ID is unique per Amazon
 	// Web Services Region for each Amazon Web Services account.
 	//
 	// This member is required.
@@ -47,7 +47,7 @@ type DeleteDataSetOutput struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per Amazon
+	// The ID for the dataset that you want to delete. This ID is unique per Amazon
 	// Web Services Region for each Amazon Web Services account.
 	DataSetId *string
 

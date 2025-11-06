@@ -19,6 +19,9 @@ import (
 // To learn about filter keys that you can use to retrieve a list of findings, see [IAM Access Analyzer filter keys]
 // in the IAM User Guide.
 //
+// ListFindings is supported only for external access analyzers. You must use
+// ListFindingsV2 for internal and unused access analyzers.
+//
 // [IAM Access Analyzer filter keys]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
 func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, optFns ...func(*Options)) (*ListFindingsOutput, error) {
 	if params == nil {

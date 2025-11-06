@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Container
+//
 // Retrieves the resource capacity settings for one or more fleets. For a
 // container fleet, this operation also returns counts for game server container
 // groups.

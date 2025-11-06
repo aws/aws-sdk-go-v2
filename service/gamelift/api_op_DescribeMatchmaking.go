@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves one or more matchmaking tickets. Use this operation to retrieve
 // ticket information, including--after a successful match is made--connection
 // information for the resulting new game session.

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Updates the runtime configuration for the specified fleet. The runtime
 // configuration tells Amazon GameLift Servers how to launch server processes on
 // computes in managed EC2 and Anywhere fleets. You can update a fleet's runtime

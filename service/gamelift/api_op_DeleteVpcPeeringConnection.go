@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Removes a VPC peering connection. To delete the connection, you must have a
 // valid authorization for the VPC peering connection that you want to delete..
 //

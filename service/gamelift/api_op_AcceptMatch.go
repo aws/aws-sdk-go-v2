@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Registers a player's acceptance or rejection of a proposed FlexMatch match. A
 // matchmaking configuration may require player acceptance; if so, then matches
 // built with that configuration cannot be completed unless all players accept the

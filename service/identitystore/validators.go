@@ -575,6 +575,38 @@ func validateFilters(v []types.Filter) error {
 	}
 }
 
+func validatePhoto(v *types.Photo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Photo"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePhotos(v []types.Photo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Photos"}
+	for i := range v {
+		if err := validatePhoto(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUniqueAttribute(v *types.UniqueAttribute) error {
 	if v == nil {
 		return nil
@@ -636,6 +668,11 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
 	if v.IdentityStoreId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityStoreId"))
+	}
+	if v.Photos != nil {
+		if err := validatePhotos(v.Photos); err != nil {
+			invalidParams.AddNested("Photos", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

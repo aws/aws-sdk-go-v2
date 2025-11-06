@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Retrieves information about a managed container fleet deployment.
 //
 // Request options

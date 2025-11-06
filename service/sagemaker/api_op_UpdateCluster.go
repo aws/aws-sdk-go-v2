@@ -49,6 +49,13 @@ type UpdateClusterInput struct {
 	// separator between multiple names.
 	InstanceGroupsToDelete []string
 
+	// Determines how instance provisioning is handled during cluster operations. In
+	// Continuous mode, the cluster provisions available instances incrementally and
+	// retries until the target count is reached. The cluster becomes operational once
+	// cluster-level resources are ready. Use CurrentCount and TargetCount in
+	// DescribeCluster to track provisioning progress.
+	NodeProvisioningMode types.ClusterNodeProvisioningMode
+
 	// The node recovery mode to be applied to the SageMaker HyperPod cluster.
 	NodeRecovery types.ClusterNodeRecovery
 

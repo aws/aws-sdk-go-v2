@@ -36,7 +36,7 @@ type AccountInfo struct {
 
 	// The account name that you provided for the Amazon Quick Sight subscription in
 	// your Amazon Web Services account. You create this name when you sign up for
-	// QuickSight. It's unique over all of Amazon Web Services, and it appears only
+	// Quick Suite. It's unique over all of Amazon Web Services, and it appears only
 	// when users sign in.
 	AccountName *string
 
@@ -77,8 +77,8 @@ type AccountSettings struct {
 	// The main notification email for your Quick Sight subscription.
 	NotificationEmail *string
 
-	// A Boolean value that indicates whether public sharing is turned on for an
-	// QuickSight account. For more information about turning on public sharing, see [UpdatePublicSharingSettings].
+	// A Boolean value that indicates whether public sharing is turned on for an Quick
+	// Suite account. For more information about turning on public sharing, see [UpdatePublicSharingSettings].
 	//
 	// [UpdatePublicSharingSettings]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html
 	PublicSharingEnabled bool
@@ -256,6 +256,55 @@ type AggFunction struct {
 
 	// The period field for an Agg function.
 	PeriodField *string
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that groups rows by specified columns and applies
+// aggregation functions to calculate summary values.
+type AggregateOperation struct {
+
+	// The list of aggregation functions to apply to the grouped data, such as SUM ,
+	// COUNT , or AVERAGE .
+	//
+	// This member is required.
+	Aggregations []Aggregation
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The source transform operation that provides input data for the aggregation.
+	//
+	// This member is required.
+	Source *TransformOperationSource
+
+	// The list of column names to group by when performing the aggregation. Rows with
+	// the same values in these columns will be grouped together.
+	GroupByColumnNames []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines an aggregation function to be applied to grouped data, creating a new
+// column with the calculated result.
+type Aggregation struct {
+
+	// The aggregation function to apply, such as SUM , COUNT , AVERAGE , MIN , MAX
+	//
+	// This member is required.
+	AggregationFunction *DataPrepAggregationFunction
+
+	// A unique identifier for the new column that will contain the aggregated values.
+	//
+	// This member is required.
+	NewColumnId *string
+
+	// The name for the new column that will contain the aggregated values.
+	//
+	// This member is required.
+	NewColumnName *string
 
 	noSmithyDocumentSerde
 }
@@ -692,7 +741,7 @@ type AnonymousUserDashboardVisualEmbeddingConfiguration struct {
 }
 
 // The type of experience you want to embed. For anonymous users, you can embed
-// QuickSight dashboards.
+// Quick Suite dashboards.
 type AnonymousUserEmbeddingExperienceConfiguration struct {
 
 	// The type of embedding experience. In this case, Amazon Quick Sight dashboards.
@@ -775,6 +824,47 @@ type APIKeyConnectionMetadata struct {
 
 	// The email address associated with the API key, if required.
 	Email *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a column that will be included in the result of an append operation,
+// combining data from multiple sources.
+type AppendedColumn struct {
+
+	// The name of the column to include in the appended result.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// A unique identifier for the column in the appended result.
+	//
+	// This member is required.
+	NewColumnId *string
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that combines rows from two data sources by stacking them
+// vertically (union operation).
+type AppendOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The list of columns to include in the appended result, mapping columns from
+	// both sources.
+	//
+	// This member is required.
+	AppendedColumns []AppendedColumn
+
+	// The first data source to be included in the append operation.
+	FirstSource *TransformOperationSource
+
+	// The second data source to be appended to the first source.
+	SecondSource *TransformOperationSource
 
 	noSmithyDocumentSerde
 }
@@ -2794,7 +2884,7 @@ type BrandDefinition struct {
 // The details of the brand.
 type BrandDetail struct {
 
-	// The ID of the QuickSight brand.
+	// The ID of the Quick Suite brand.
 	//
 	// This member is required.
 	BrandId *string
@@ -2841,7 +2931,7 @@ type BrandSummary struct {
 	// The Amazon Resource Name (ARN) of the brand.
 	Arn *string
 
-	// The ID of the QuickSight brand.
+	// The ID of the Quick Suite brand.
 	BrandId *string
 
 	// The name of the brand.
@@ -3087,6 +3177,28 @@ type CastColumnTypeOperation struct {
 	// The sub data type of the new column. Sub types are only available for decimal
 	// columns that are part of a SPICE dataset.
 	SubType ColumnDataSubType
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that changes the data types of one or more columns in the
+// dataset.
+type CastColumnTypesOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The list of column type casting operations to perform.
+	//
+	// This member is required.
+	CastColumnTypeOperations []CastColumnTypeOperation
+
+	// The source transform operation that provides input data for the type casting.
+	//
+	// This member is required.
+	Source *TransformOperationSource
 
 	noSmithyDocumentSerde
 }
@@ -3568,6 +3680,20 @@ type ColumnTooltipItem struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a column to be unpivoted, transforming it from a column into rows
+// with associated values.
+type ColumnToUnpivot struct {
+
+	// The name of the column to unpivot from the source data.
+	ColumnName *string
+
+	// The value to assign to this column in the unpivoted result, typically the
+	// column name or a descriptive label.
+	NewValue *string
+
+	noSmithyDocumentSerde
+}
+
 // The aggregated field wells of a combo chart.
 type ComboChartAggregatedFieldWells struct {
 
@@ -4019,6 +4145,13 @@ type CreateColumnsOperation struct {
 	//
 	// This member is required.
 	Columns []CalculatedColumn
+
+	// Alias for this operation.
+	Alias *string
+
+	// The source transform operation that provides input data for creating new
+	// calculated columns.
+	Source *TransformOperationSource
 
 	noSmithyDocumentSerde
 }
@@ -4768,7 +4901,7 @@ type DashboardVisualId struct {
 
 	// The ID of the dashboard that has the visual that you want to embed. The
 	// DashboardId can be found in the IDs for developers section of the Embed visual
-	// pane of the visual's on-visual menu of the QuickSight console. You can also get
+	// pane of the visual's on-visual menu of the Quick Suite console. You can also get
 	// the DashboardId with a ListDashboards API operation.
 	//
 	// This member is required.
@@ -4776,7 +4909,7 @@ type DashboardVisualId struct {
 
 	// The ID of the sheet that the has visual that you want to embed. The SheetId can
 	// be found in the IDs for developers section of the Embed visual pane of the
-	// visual's on-visual menu of the QuickSight console.
+	// visual's on-visual menu of the Quick Suite console.
 	//
 	// This member is required.
 	SheetId *string
@@ -5108,6 +5241,80 @@ type DataPointTooltipOption struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the type of aggregation function to apply to data during data
+// preparation, supporting simple and list aggregations.
+type DataPrepAggregationFunction struct {
+
+	// A list aggregation function that concatenates values from multiple rows into a
+	// single delimited string.
+	ListAggregation *DataPrepListAggregationFunction
+
+	// A simple aggregation function such as SUM , COUNT , AVERAGE , MIN , MAX , MEDIAN
+	// , VARIANCE , or STANDARD_DEVIATION .
+	SimpleAggregation *DataPrepSimpleAggregationFunction
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for data preparation operations, defining the complete pipeline
+// from source tables through transformations to destination tables.
+type DataPrepConfiguration struct {
+
+	// A map of destination tables that receive the final prepared data.
+	//
+	// This member is required.
+	DestinationTableMap map[string]DestinationTable
+
+	// A map of source tables that provide information about underlying sources.
+	//
+	// This member is required.
+	SourceTableMap map[string]SourceTable
+
+	// A map of transformation steps that process the data.
+	//
+	// This member is required.
+	TransformStepMap map[string]TransformStep
+
+	noSmithyDocumentSerde
+}
+
+// An aggregation function that concatenates values from multiple rows into a
+// single string with a specified separator.
+type DataPrepListAggregationFunction struct {
+
+	// Whether to include only distinct values in the concatenated result, removing
+	// duplicates.
+	//
+	// This member is required.
+	Distinct bool
+
+	// The string used to separate values in the concatenated result.
+	//
+	// This member is required.
+	Separator *string
+
+	// The name of the column containing values to be concatenated.
+	InputColumnName *string
+
+	noSmithyDocumentSerde
+}
+
+// A simple aggregation function that performs standard statistical operations on
+// a column.
+type DataPrepSimpleAggregationFunction struct {
+
+	// The type of aggregation function to perform, such as COUNT , SUM , AVERAGE , MIN
+	// , MAX , MEDIAN , VARIANCE , or STANDARD_DEVIATION .
+	//
+	// This member is required.
+	FunctionType DataPrepSimpleAggregationFunctionType
+
+	// The name of the column on which to perform the aggregation function.
+	InputColumnName *string
+
+	noSmithyDocumentSerde
+}
+
 // Adds Q&A capabilities to a dashboard. If no topic is linked, Dashboard Q&A uses
 // the data values that are rendered on the dashboard. End users can use Dashboard
 // Q&A to ask for different slices of the data that they see on the dashboard. If a
@@ -5153,6 +5360,9 @@ type DataSet struct {
 	// The time that this dataset was created.
 	CreatedTime *time.Time
 
+	// The data preparation configuration associated with this dataset.
+	DataPrepConfiguration *DataPrepConfiguration
+
 	// The ID of the dataset. Limited to 96 characters.
 	DataSetId *string
 
@@ -5195,8 +5405,28 @@ type DataSet struct {
 	// The element you can use to define tags for row-level security.
 	RowLevelPermissionTagConfiguration *RowLevelPermissionTagConfiguration
 
+	// The semantic model configuration associated with this dataset.
+	SemanticModelConfiguration *SemanticModelConfiguration
+
 	// The usage of the dataset.
 	UseAs DataSetUseAs
+
+	noSmithyDocumentSerde
+}
+
+// Maps a source column identifier to a target column identifier during transform
+// operations.
+type DataSetColumnIdMapping struct {
+
+	// Source column ID.
+	//
+	// This member is required.
+	SourceColumnId *string
+
+	// Target column ID.
+	//
+	// This member is required.
+	TargetColumnId *string
 
 	noSmithyDocumentSerde
 }
@@ -5212,6 +5442,66 @@ type DataSetConfiguration struct {
 
 	// Placeholder.
 	Placeholder *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that compares date values using operators like BEFORE , AFTER
+// , or their inclusive variants.
+type DataSetDateComparisonFilterCondition struct {
+
+	// The comparison operator to use, such as BEFORE , BEFORE_OR_EQUALS_TO , AFTER ,
+	// or AFTER_OR_EQUALS_TO .
+	//
+	// This member is required.
+	Operator DataSetDateComparisonFilterOperator
+
+	// The date value to compare against.
+	Value *DataSetDateFilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition for date columns, supporting both comparison and range-based
+// filtering.
+type DataSetDateFilterCondition struct {
+
+	// The name of the date column to filter.
+	ColumnName *string
+
+	// A comparison-based filter condition for the date column.
+	ComparisonFilterCondition *DataSetDateComparisonFilterCondition
+
+	// A range-based filter condition for the date column, filtering values between
+	// minimum and maximum dates.
+	RangeFilterCondition *DataSetDateRangeFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+// Represents a date value used in filter conditions.
+type DataSetDateFilterValue struct {
+
+	// A static date value used for filtering.
+	StaticValue *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that filters date values within a specified range.
+type DataSetDateRangeFilterCondition struct {
+
+	// Whether to include the maximum value in the filter range.
+	IncludeMaximum *bool
+
+	// Whether to include the minimum value in the filter range.
+	IncludeMinimum *bool
+
+	// The maximum date value for the range filter.
+	RangeMaximum *DataSetDateFilterValue
+
+	// The minimum date value for the range filter.
+	RangeMinimum *DataSetDateFilterValue
 
 	noSmithyDocumentSerde
 }
@@ -5260,6 +5550,66 @@ type DatasetMetadata struct {
 
 	// The list of named entities definitions.
 	NamedEntities []TopicNamedEntity
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that compares numeric values using operators like EQUALS ,
+// GREATER_THAN , or LESS_THAN .
+type DataSetNumericComparisonFilterCondition struct {
+
+	// The comparison operator to use, such as EQUALS , GREATER_THAN , LESS_THAN , or
+	// their variants.
+	//
+	// This member is required.
+	Operator DataSetNumericComparisonFilterOperator
+
+	// The numeric value to compare against.
+	Value *DataSetNumericFilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition for numeric columns, supporting both comparison and
+// range-based filtering.
+type DataSetNumericFilterCondition struct {
+
+	// The name of the numeric column to filter.
+	ColumnName *string
+
+	// A comparison-based filter condition for the numeric column.
+	ComparisonFilterCondition *DataSetNumericComparisonFilterCondition
+
+	// A range-based filter condition for the numeric column, filtering values between
+	// minimum and maximum numbers.
+	RangeFilterCondition *DataSetNumericRangeFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+// Represents a numeric value used in filter conditions.
+type DataSetNumericFilterValue struct {
+
+	// A static numeric value used for filtering.
+	StaticValue *float64
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that filters numeric values within a specified range.
+type DataSetNumericRangeFilterCondition struct {
+
+	// Whether to include the maximum value in the filter range.
+	IncludeMaximum *bool
+
+	// Whether to include the minimum value in the filter range.
+	IncludeMinimum *bool
+
+	// The maximum numeric value for the range filter.
+	RangeMaximum *DataSetNumericFilterValue
+
+	// The minimum numeric value for the range filter.
+	RangeMinimum *DataSetNumericFilterValue
 
 	noSmithyDocumentSerde
 }
@@ -5381,6 +5731,73 @@ type DataSetSearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A filter condition that compares string values using operators like EQUALS ,
+// CONTAINS , or STARTS_WITH .
+type DataSetStringComparisonFilterCondition struct {
+
+	// The comparison operator to use, such as EQUALS , CONTAINS , STARTS_WITH ,
+	// ENDS_WITH , or their negations.
+	//
+	// This member is required.
+	Operator DataSetStringComparisonFilterOperator
+
+	// The string value to compare against.
+	Value *DataSetStringFilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition for string columns, supporting both comparison and
+// list-based filtering.
+type DataSetStringFilterCondition struct {
+
+	// The name of the string column to filter.
+	ColumnName *string
+
+	// A comparison-based filter condition for the string column.
+	ComparisonFilterCondition *DataSetStringComparisonFilterCondition
+
+	// A list-based filter condition that includes or excludes values from a specified
+	// list.
+	ListFilterCondition *DataSetStringListFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+// Represents a string value used in filter conditions.
+type DataSetStringFilterValue struct {
+
+	// A static string value used for filtering.
+	StaticValue *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition that includes or excludes string values from a specified
+// list.
+type DataSetStringListFilterCondition struct {
+
+	// The list operator to use, either INCLUDE to match values in the list or EXCLUDE
+	// to filter out values in the list.
+	//
+	// This member is required.
+	Operator DataSetStringListFilterOperator
+
+	// The list of string values to include or exclude in the filter.
+	Values *DataSetStringListFilterValue
+
+	noSmithyDocumentSerde
+}
+
+// Represents a list of string values used in filter conditions.
+type DataSetStringListFilterValue struct {
+
+	// A list of static string values used for filtering.
+	StaticValues []string
+
+	noSmithyDocumentSerde
+}
+
 // Dataset summary.
 type DataSetSummary struct {
 
@@ -5405,8 +5822,13 @@ type DataSetSummary struct {
 	// A display name for the dataset.
 	Name *string
 
-	// The row-level security configuration for the dataset.
+	// The row-level security configuration for the dataset in the legacy data
+	// preparation experience.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet
+
+	// The row-level security configuration for the dataset in the new data
+	// preparation experience.
+	RowLevelPermissionDataSetMap map[string]RowLevelPermissionDataSet
 
 	// Whether or not the row level permission tags are applied.
 	RowLevelPermissionTagConfigurationApplied bool
@@ -6606,6 +7028,37 @@ type DestinationParameterValueConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a destination table in data preparation that receives the final
+// transformed data.
+type DestinationTable struct {
+
+	// Alias for the destination table.
+	//
+	// This member is required.
+	Alias *string
+
+	// The source configuration that specifies which transform operation provides data
+	// to this destination table.
+	//
+	// This member is required.
+	Source *DestinationTableSource
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the source of data for a destination table, including the transform
+// operation and column mappings.
+type DestinationTableSource struct {
+
+	// The identifier of the transform operation that provides data to the destination
+	// table.
+	//
+	// This member is required.
+	TransformOperationId *string
+
+	noSmithyDocumentSerde
+}
+
 // The dimension type field.
 type DimensionField struct {
 
@@ -7490,9 +7943,16 @@ type FilterOperation struct {
 
 	// An expression that must evaluate to a Boolean value. Rows for which the
 	// expression evaluates to true are kept in the dataset.
-	//
-	// This member is required.
 	ConditionExpression *string
+
+	// A date-based filter condition within a filter operation.
+	DateFilterCondition *DataSetDateFilterCondition
+
+	// A numeric-based filter condition within a filter operation.
+	NumericFilterCondition *DataSetNumericFilterCondition
+
+	// A string-based filter condition within a filter operation.
+	StringFilterCondition *DataSetStringFilterCondition
 
 	noSmithyDocumentSerde
 }
@@ -7630,6 +8090,27 @@ type FilterSliderControl struct {
 	//
 	//   - RANGE : Filter data that is in a specified range.
 	Type SheetControlSliderType
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that applies one or more filter conditions.
+type FiltersOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The list of filter operations to apply.
+	//
+	// This member is required.
+	FilterOperations []FilterOperation
+
+	// The source transform operation that provides input data for filtering.
+	//
+	// This member is required.
+	Source *TransformOperationSource
 
 	noSmithyDocumentSerde
 }
@@ -9764,6 +10245,38 @@ type ImpalaParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A transform operation that imports data from a source table.
+type ImportTableOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The source configuration that specifies which source table to import and any
+	// column mappings.
+	//
+	// This member is required.
+	Source *ImportTableOperationSource
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the source table and column mappings for an import table operation.
+type ImportTableOperationSource struct {
+
+	// The identifier of the source table to import data from.
+	//
+	// This member is required.
+	SourceTableId *string
+
+	// The mappings between source column identifiers and target column identifiers
+	// during the import.
+	ColumnIdMappings []DataSetColumnIdMapping
+
+	noSmithyDocumentSerde
+}
+
 // The incremental refresh configuration for a dataset.
 type IncrementalRefresh struct {
 
@@ -9841,6 +10354,9 @@ type InputColumn struct {
 	//
 	// This member is required.
 	Type InputColumnDataType
+
+	// A unique identifier for the input column.
+	Id *string
 
 	// The sub data type of the column. Sub types are only available for decimal
 	// columns that are part of a SPICE dataset.
@@ -10090,6 +10606,59 @@ type JoinKeyProperties struct {
 	// columns in a join key. This is used by Quick Sight to optimize query
 	// performance.
 	UniqueKey *bool
+
+	noSmithyDocumentSerde
+}
+
+// Properties that control how columns are handled for a join operand, including
+// column name overrides.
+type JoinOperandProperties struct {
+
+	// A list of column name overrides to apply to the join operand's output columns.
+	//
+	// This member is required.
+	OutputColumnNameOverrides []OutputColumnNameOverride
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that combines data from two sources based on specified
+// join conditions.
+type JoinOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The left operand for the join operation.
+	//
+	// This member is required.
+	LeftOperand *TransformOperationSource
+
+	// The join condition that specifies how to match rows between the left and right
+	// operands.
+	//
+	// This member is required.
+	OnClause *string
+
+	// The right operand for the join operation.
+	//
+	// This member is required.
+	RightOperand *TransformOperationSource
+
+	// The type of join to perform, such as INNER , LEFT , RIGHT , or OUTER .
+	//
+	// This member is required.
+	Type JoinOperationType
+
+	// Properties that control how the left operand's columns are handled in the join
+	// result.
+	LeftOperandProperties *JoinOperandProperties
+
+	// Properties that control how the right operand's columns are handled in the join
+	// result.
+	RightOperandProperties *JoinOperandProperties
 
 	noSmithyDocumentSerde
 }
@@ -11723,6 +12292,9 @@ type OutputColumn struct {
 	// A description for a column.
 	Description *string
 
+	// A unique identifier for the output column.
+	Id *string
+
 	// The display name of the column..
 	Name *string
 
@@ -11731,6 +12303,21 @@ type OutputColumn struct {
 
 	// The data type of the column.
 	Type ColumnDataType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a mapping to override the name of an output column from a transform
+// operation.
+type OutputColumnNameOverride struct {
+
+	// The new name to assign to the column in the output.
+	//
+	// This member is required.
+	OutputColumnName *string
+
+	// The original name of the column from the source transform operation.
+	SourceColumnName *string
 
 	noSmithyDocumentSerde
 }
@@ -12105,6 +12692,23 @@ type ParameterTextFieldControl struct {
 	noSmithyDocumentSerde
 }
 
+// References a parent dataset that serves as a data source, including its columns
+// and metadata.
+type ParentDataSet struct {
+
+	// The Amazon Resource Name (ARN) of the parent dataset.
+	//
+	// This member is required.
+	DataSetArn *string
+
+	// The list of input columns available from the parent dataset.
+	//
+	// This member is required.
+	InputColumns []InputColumn
+
+	noSmithyDocumentSerde
+}
+
 // The options that determine the percentage display format configuration.
 type PercentageDisplayFormatConfiguration struct {
 
@@ -12262,10 +12866,10 @@ type Permission struct {
 	// This member is required.
 	Actions []string
 
-	// The Amazon Resource Name (ARN) of the principal. This can be an Amazon
-	// QuickSight user, group or namespace associated with the flow. Namespace
-	// principal can only be set as a viewer and will grant everyone in the same
-	// namespace viewer permissions.
+	// The Amazon Resource Name (ARN) of the principal. This can be an Amazon Quick
+	// Suite user, group or namespace associated with the flow. Namespace principal can
+	// only be set as a viewer and will grant everyone in the same namespace viewer
+	// permissions.
 	//
 	// This member is required.
 	Principal *string
@@ -12282,6 +12886,7 @@ type Permission struct {
 //	PhysicalTableMemberCustomSql
 //	PhysicalTableMemberRelationalTable
 //	PhysicalTableMemberS3Source
+//	PhysicalTableMemberSaaSTable
 type PhysicalTable interface {
 	isPhysicalTable()
 }
@@ -12312,6 +12917,15 @@ type PhysicalTableMemberS3Source struct {
 }
 
 func (*PhysicalTableMemberS3Source) isPhysicalTable() {}
+
+// A physical table type for Software-as-a-Service (SaaS) sources.
+type PhysicalTableMemberSaaSTable struct {
+	Value SaaSTable
+
+	noSmithyDocumentSerde
+}
+
+func (*PhysicalTableMemberSaaSTable) isPhysicalTable() {}
 
 // The field well configuration of a pie chart.
 type PieChartAggregatedFieldWells struct {
@@ -12448,6 +13062,44 @@ type PieChartVisual struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a pivot operation, specifying which column contains labels
+// and how to pivot them.
+type PivotConfiguration struct {
+
+	// The list of specific label values to pivot into separate columns.
+	//
+	// This member is required.
+	PivotedLabels []PivotedLabel
+
+	// The name of the column that contains the labels to be pivoted into separate
+	// columns.
+	LabelColumnName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a label value to be pivoted into a separate column, including the new
+// column name and identifier.
+type PivotedLabel struct {
+
+	// The label value from the source data to be pivoted.
+	//
+	// This member is required.
+	LabelName *string
+
+	// A unique identifier for the new column created from this pivoted label.
+	//
+	// This member is required.
+	NewColumnId *string
+
+	// The name for the new column created from this pivoted label.
+	//
+	// This member is required.
+	NewColumnName *string
+
+	noSmithyDocumentSerde
+}
+
 // The field sort options for a pivot table sort configuration.
 type PivotFieldSortOptions struct {
 
@@ -12460,6 +13112,37 @@ type PivotFieldSortOptions struct {
 	//
 	// This member is required.
 	SortBy *PivotTableSortBy
+
+	noSmithyDocumentSerde
+}
+
+// A transform operation that pivots data by converting row values into columns.
+type PivotOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// Configuration that specifies which labels to pivot and how to structure the
+	// resulting columns.
+	//
+	// This member is required.
+	PivotConfiguration *PivotConfiguration
+
+	// The source transform operation that provides input data for pivoting.
+	//
+	// This member is required.
+	Source *TransformOperationSource
+
+	// Configuration for how to aggregate values when multiple rows map to the same
+	// pivoted column.
+	//
+	// This member is required.
+	ValueColumnConfiguration *ValueColumnConfiguration
+
+	// The list of column names to group by when performing the pivot operation.
+	GroupByColumnNames []string
 
 	noSmithyDocumentSerde
 }
@@ -13037,6 +13720,12 @@ type ProjectOperation struct {
 	//
 	// This member is required.
 	ProjectedColumns []string
+
+	// Alias for this operation.
+	Alias *string
+
+	// The source transform operation that provides input data for column projection.
+	Source *TransformOperationSource
 
 	noSmithyDocumentSerde
 }
@@ -14036,7 +14725,7 @@ type RegisteredUserDashboardVisualEmbeddingConfiguration struct {
 }
 
 // The type of experience you want to embed. For registered users, you can embed
-// QuickSight dashboards or the Amazon Quick Sight console.
+// Quick Suite dashboards or the Amazon Quick Sight console.
 //
 // Exactly one of the experience configurations is required. You can choose
 // Dashboard or QuickSightConsole . You cannot choose more than one experience
@@ -14067,7 +14756,7 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 
 	// The configuration details for providing each Amazon Quick Sight console
 	// embedding experience. This can be used along with custom permissions to restrict
-	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Amazon QuickSight
+	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Amazon Quick Suite
 	// User Guide.
 	//
 	// Use [GenerateEmbedUrlForRegisteredUser] where you want to provide an authoring portal that allows users to create
@@ -14076,21 +14765,21 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// security cohort. If you want to restrict permissions to some of these features,
 	// add a custom permissions profile to the user with the [UpdateUser]API operation. Use the [RegisterUser]
 	// API operation to add a new user with a custom permission profile attached. For
-	// more information, see the following sections in the Amazon QuickSight User
+	// more information, see the following sections in the Amazon Quick Suite User
 	// Guide:
 	//
 	// [Embedding the Full Functionality of the Amazon Quick Sight Console for Authenticated Users]
 	//
-	// [Customizing Access to the Amazon QuickSight Console]
+	// [Customizing Access to the Amazon Quick Suite Console]
 	//
 	// For more information about the high-level steps for embedding and for an
-	// interactive demo of the ways you can customize embedding, visit the [Amazon QuickSight Developer Portal].
+	// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Suite Developer Portal].
 	//
-	// [Customizing Access to the Amazon QuickSight Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
-	// [Amazon QuickSight Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 	// [Customizing Access to the Amazon Quick Sight Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [Embedding the Full Functionality of the Amazon Quick Sight Console for Authenticated Users]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html
 	// [UpdateUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html
+	// [Amazon Quick Suite Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+	// [Customizing Access to the Amazon Quick Suite Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [GenerateEmbedUrlForRegisteredUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html
 	// [RegisterUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html
 	QuickSightConsole *RegisteredUserQuickSightConsoleEmbeddingConfiguration
@@ -14104,7 +14793,7 @@ type RegisteredUserGenerativeQnAEmbeddingConfiguration struct {
 
 	// The ID of the new Q reader experience topic that you want to make the starting
 	// topic in the Generative Q&A experience. You can find a topic ID by navigating to
-	// the Topics pane in the QuickSight application and opening a topic. The ID is in
+	// the Topics pane in the Quick Suite application and opening a topic. The ID is in
 	// the URL for the topic that you open.
 	//
 	// If you don't specify an initial topic or you specify a legacy topic, a list of
@@ -14292,6 +14981,28 @@ type RenameColumnOperation struct {
 	noSmithyDocumentSerde
 }
 
+// A transform operation that renames one or more columns in the dataset.
+type RenameColumnsOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The list of column rename operations to perform, specifying old and new column
+	// names.
+	//
+	// This member is required.
+	RenameColumnOperations []RenameColumnOperation
+
+	// The source transform operation that provides input data for column renaming.
+	//
+	// This member is required.
+	Source *TransformOperationSource
+
+	noSmithyDocumentSerde
+}
+
 // Permission for the resource.
 type ResourcePermission struct {
 
@@ -14361,6 +15072,25 @@ type RowInfo struct {
 
 	// The total number of rows in the dataset.
 	TotalRowsInDataset *int64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for row level security.
+type RowLevelPermissionConfiguration struct {
+
+	// Information about a dataset that contains permissions for row-level security
+	// (RLS). The permissions dataset maps fields to users or groups. For more
+	// information, see [Using Row-Level Security (RLS) to Restrict Access to a Dataset]in the Quick Sight User Guide.
+	//
+	// The option to deny permissions by setting PermissionPolicy to DENY_ACCESS is
+	// not supported for new RLS datasets.
+	//
+	// [Using Row-Level Security (RLS) to Restrict Access to a Dataset]: https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html
+	RowLevelPermissionDataSet *RowLevelPermissionDataSet
+
+	// The configuration of tags on a dataset to set row-level security.
+	TagConfiguration *RowLevelPermissionTagConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -14537,6 +15267,28 @@ type S3Source struct {
 
 	// Information about the format for the S3 source file or files.
 	UploadSettings *UploadSettings
+
+	noSmithyDocumentSerde
+}
+
+// A table from a Software-as-a-Service (SaaS) data source, including connection
+// details and column definitions.
+type SaaSTable struct {
+
+	// The Amazon Resource Name (ARN) of the SaaS data source.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The list of input columns available from the SaaS table.
+	//
+	// This member is required.
+	InputColumns []InputColumn
+
+	// The hierarchical path to the table within the SaaS data source.
+	//
+	// This member is required.
+	TablePath []TablePathElement
 
 	noSmithyDocumentSerde
 }
@@ -15028,6 +15780,37 @@ type SemanticEntityType struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for the semantic model that defines how prepared data is
+// structured for analysis and reporting.
+type SemanticModelConfiguration struct {
+
+	// A map of semantic tables that define the analytical structure.
+	TableMap map[string]SemanticTable
+
+	noSmithyDocumentSerde
+}
+
+// A semantic table that represents the final analytical structure of the data.
+type SemanticTable struct {
+
+	// Alias for the semantic table.
+	//
+	// This member is required.
+	Alias *string
+
+	// The identifier of the destination table from data preparation that provides
+	// data to this semantic table.
+	//
+	// This member is required.
+	DestinationTableId *string
+
+	// Configuration for row level security that control data access for this semantic
+	// table.
+	RowLevelPermissionConfiguration *RowLevelPermissionConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // A structure that represents a semantic type.
 type SemanticType struct {
 
@@ -15243,8 +16026,8 @@ type SheetDefinition struct {
 	// [Types of layout]: https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html
 	Layouts []Layout
 
-	// The name of the sheet. This name is displayed on the sheet's tab in the
-	// QuickSight console.
+	// The name of the sheet. This name is displayed on the sheet's tab in the Quick
+	// Suite console.
 	Name *string
 
 	// The list of parameter controls that are on a sheet.
@@ -15591,7 +16374,7 @@ type SnapshotAnonymousUser struct {
 	//
 	// These are not the tags that are used for Amazon Web Services resource tagging.
 	// For more information on row level security in Amazon Quick Sight, see [Using Row-Level Security (RLS) with Tags]in the
-	// Amazon QuickSight User Guide.
+	// Amazon Quick Suite User Guide.
 	//
 	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	RowLevelPermissionTags []SessionTag
@@ -15839,6 +16622,19 @@ type SnowflakeParameters struct {
 	// An object that contains information needed to create a data source connection
 	// between an Quick Sight account and Snowflake.
 	OAuthParameters *OAuthParameters
+
+	noSmithyDocumentSerde
+}
+
+// A source table that provides initial data from either a physical table or
+// parent dataset.
+type SourceTable struct {
+
+	// A parent dataset that serves as the data source instead of a physical table.
+	DataSet *ParentDataSet
+
+	// The identifier of the physical table that serves as the data source.
+	PhysicalTableId *string
 
 	noSmithyDocumentSerde
 }
@@ -16507,6 +17303,19 @@ type TablePaginatedReportOptions struct {
 
 	// The visibility of printing table overflow across pages.
 	VerticalOverflowVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// An element in the hierarchical path to a table within a data source, containing
+// both name and identifier.
+type TablePathElement struct {
+
+	// The unique identifier of the path element.
+	Id *string
+
+	// The name of the path element.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -18439,6 +19248,68 @@ type TransformOperationMemberUntagColumnOperation struct {
 
 func (*TransformOperationMemberUntagColumnOperation) isTransformOperation() {}
 
+// Specifies the source of data for a transform operation, including the source
+// operation and column mappings.
+type TransformOperationSource struct {
+
+	// The identifier of the transform operation that provides input data.
+	//
+	// This member is required.
+	TransformOperationId *string
+
+	// The mappings between source column identifiers and target column identifiers
+	// for this transformation.
+	ColumnIdMappings []DataSetColumnIdMapping
+
+	noSmithyDocumentSerde
+}
+
+// A step in data preparation that performs a specific operation on the data.
+type TransformStep struct {
+
+	// A transform step that groups data and applies aggregation functions to
+	// calculate summary values.
+	AggregateStep *AggregateOperation
+
+	// A transform step that combines rows from multiple sources by stacking them
+	// vertically.
+	AppendStep *AppendOperation
+
+	// A transform step that changes the data types of one or more columns.
+	CastColumnTypesStep *CastColumnTypesOperation
+
+	// A transform operation that creates calculated columns. Columns created in one
+	// such operation form a lexical closure.
+	CreateColumnsStep *CreateColumnsOperation
+
+	// A transform step that applies filter conditions.
+	FiltersStep *FiltersOperation
+
+	// A transform step that brings data from a source table.
+	ImportTableStep *ImportTableOperation
+
+	// A transform step that combines data from two sources based on specified join
+	// conditions.
+	JoinStep *JoinOperation
+
+	// A transform step that converts row values into columns to reshape the data
+	// structure.
+	PivotStep *PivotOperation
+
+	// A transform operation that projects columns. Operations that come after a
+	// projection can only refer to projected columns.
+	ProjectStep *ProjectOperation
+
+	// A transform step that changes the names of one or more columns.
+	RenameColumnsStep *RenameColumnsOperation
+
+	// A transform step that converts columns into rows to normalize the data
+	// structure.
+	UnpivotStep *UnpivotOperation
+
+	noSmithyDocumentSerde
+}
+
 // The column option of the transposed table.
 type TransposedTableOption struct {
 
@@ -18749,6 +19620,49 @@ type UniqueValuesComputation struct {
 	noSmithyDocumentSerde
 }
 
+// A transform operation that converts columns into rows, normalizing the data
+// structure.
+type UnpivotOperation struct {
+
+	// Alias for this operation.
+	//
+	// This member is required.
+	Alias *string
+
+	// The list of columns to unpivot from the source data.
+	//
+	// This member is required.
+	ColumnsToUnpivot []ColumnToUnpivot
+
+	// The source transform operation that provides input data for unpivoting.
+	//
+	// This member is required.
+	Source *TransformOperationSource
+
+	// A unique identifier for the new column that will contain the unpivoted column
+	// names.
+	//
+	// This member is required.
+	UnpivotedLabelColumnId *string
+
+	// The name for the new column that will contain the unpivoted column names.
+	//
+	// This member is required.
+	UnpivotedLabelColumnName *string
+
+	// A unique identifier for the new column that will contain the unpivoted values.
+	//
+	// This member is required.
+	UnpivotedValueColumnId *string
+
+	// The name for the new column that will contain the unpivoted values.
+	//
+	// This member is required.
+	UnpivotedValueColumnName *string
+
+	noSmithyDocumentSerde
+}
+
 // A transform operation that removes tags associated with a column.
 type UntagColumnOperation struct {
 
@@ -18770,6 +19684,10 @@ type UploadSettings struct {
 
 	// Whether the file has a header row, or the files each have a header row.
 	ContainsHeader *bool
+
+	// A custom cell address range for Excel files, specifying which cells to import
+	// from the spreadsheet.
+	CustomCellAddressRange *string
 
 	// The delimiter between values in the file.
 	Delimiter *string
@@ -18871,6 +19789,17 @@ type ValidationStrategy struct {
 	//
 	// This member is required.
 	Mode ValidationStrategyMode
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for how to handle value columns in pivot operations, including
+// aggregation settings.
+type ValueColumnConfiguration struct {
+
+	// The aggregation function to apply when multiple values map to the same pivoted
+	// cell.
+	AggregationFunction *DataPrepAggregationFunction
 
 	noSmithyDocumentSerde
 }

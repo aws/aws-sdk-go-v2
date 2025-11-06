@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves the properties for one or more game session queues. When requesting
 // multiple queues, use the pagination parameters to retrieve results as a set of
 // sequential pages. When specifying a list of queues, objects are returned only

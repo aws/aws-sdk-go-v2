@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves a collection of fleet resources in an Amazon Web Services Region. You
 // can filter the result set to find only those fleets that are deployed with a
 // specific build or script. For fleets that have multiple locations, this

@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Deletes a build. This operation permanently deletes the build resource and any
 // uploaded build files. Deleting a build does not affect the status of any active
 // fleets using the build, but you can no longer create new fleets with the deleted

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Container
+//
 // Resumes certain types of activity on fleet instances that were suspended with [StopFleetActions].
 // For multi-location fleets, fleet actions are managed separately for each
 // location. Currently, this operation is used to restart a fleet's auto-scaling

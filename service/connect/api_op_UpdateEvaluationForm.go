@@ -63,6 +63,9 @@ type UpdateEvaluationFormInput struct {
 	// This member is required.
 	Title *string
 
+	// Whether automated evaluations are enabled.
+	AutoEvaluationConfiguration *types.EvaluationFormAutoEvaluationConfiguration
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].

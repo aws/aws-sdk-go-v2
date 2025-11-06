@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Creates or updates a scaling policy for a fleet. Scaling policies are used to
 // automatically scale a fleet's hosting capacity to meet player demand. An active
 // scaling policy instructs Amazon GameLift Servers to track a fleet metric and

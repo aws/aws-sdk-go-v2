@@ -36,7 +36,7 @@ func (c *Client) PutTableMaintenanceConfiguration(ctx context.Context, params *P
 
 type PutTableMaintenanceConfigurationInput struct {
 
-	// The name of the maintenance configuration.
+	// The name of the table.
 	//
 	// This member is required.
 	Name *string

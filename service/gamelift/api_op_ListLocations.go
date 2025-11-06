@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Anywhere
+//
 // Lists all custom and Amazon Web Services locations where Amazon GameLift
 // Servers can host game servers.
 //

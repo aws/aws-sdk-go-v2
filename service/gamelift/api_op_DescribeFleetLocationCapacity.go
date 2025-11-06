@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Container
+//
 // Retrieves the resource capacity settings for a fleet location. The data
 // returned includes the current capacity (number of EC2 instances) and some
 // scaling settings for the requested fleet location. For a managed container

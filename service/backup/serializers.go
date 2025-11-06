@@ -804,6 +804,11 @@ func awsRestjson1_serializeOpDocumentCreateLogicallyAirGappedBackupVaultInput(v 
 		ok.String(*v.CreatorRequestId)
 	}
 
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
 	if v.MaxRetentionDays != nil {
 		ok := object.Key("MaxRetentionDays")
 		ok.Long(*v.MaxRetentionDays)

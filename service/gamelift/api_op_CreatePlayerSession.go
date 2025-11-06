@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Reserves an open player slot in a game session for a player. New player
 // sessions can be created in any game session with an open slot that is in ACTIVE
 // status and has a player creation policy of ACCEPT_ALL . You can add a group of

@@ -643,7 +643,7 @@ type AudioQualityMetricsInfo struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web ServicesSupport.
+// request access to this API, contact Amazon Web Services Support.
 //
 // Information about an authentication profile. An authentication profile is a
 // resource that stores the authentication settings for users in your contact
@@ -714,7 +714,7 @@ type AuthenticationProfile struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web ServicesSupport.
+// request access to this API, contact Amazon Web Services Support.
 //
 // A summary of a given authentication profile.
 type AuthenticationProfileSummary struct {
@@ -744,6 +744,40 @@ type AuthenticationProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information about automated evaluations.
+type AutoEvaluationConfiguration struct {
+
+	// Whether automated evaluations are enabled.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Details about automated evaluations.
+type AutoEvaluationDetails struct {
+
+	// Whether automated evaluation is enabled.
+	//
+	// This member is required.
+	AutoEvaluationEnabled bool
+
+	// The status of the contact auto-evaluation.
+	AutoEvaluationStatus AutoEvaluationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about automatic fail configuration for an evaluation form.
+type AutomaticFailConfiguration struct {
+
+	// The referenceId of the target section for auto failure.
+	TargetSection *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about available phone numbers.
 type AvailableNumberSummary struct {
 
@@ -756,6 +790,18 @@ type AvailableNumberSummary struct {
 
 	// The type of phone number.
 	PhoneNumberType PhoneNumberType
+
+	noSmithyDocumentSerde
+}
+
+// A boolean search condition for Search APIs.
+type BooleanCondition struct {
+
+	// Boolean property comparison type.
+	ComparisonType BooleanComparisonType
+
+	// A name of the property to be searched.
+	FieldName *string
 
 	noSmithyDocumentSerde
 }
@@ -1985,6 +2031,42 @@ type DateReference struct {
 	noSmithyDocumentSerde
 }
 
+// A datetime search condition for Search APIs.
+type DateTimeCondition struct {
+
+	// Datetime property comparison type.
+	ComparisonType DateTimeComparisonType
+
+	// A name of the datetime property to be searched
+	FieldName *string
+
+	// A maximum value of the property.
+	MaxValue *string
+
+	// A minimum value of the property.
+	MinValue *string
+
+	noSmithyDocumentSerde
+}
+
+// A decimal search condition for Search APIs.
+type DecimalCondition struct {
+
+	// The type of comparison to be made when evaluating the decimal condition.
+	ComparisonType DecimalComparisonType
+
+	// A name of the decimal property to be searched.
+	FieldName *string
+
+	// A maximum value of the decimal property.
+	MaxValue *float64
+
+	// A minimum value of the decimal property.
+	MinValue *float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a default vocabulary.
 type DefaultVocabulary struct {
 
@@ -2353,12 +2435,49 @@ type Evaluation struct {
 	// This member is required.
 	Status EvaluationStatus
 
+	// Type of the evaluation.
+	EvaluationType EvaluationType
+
 	// A map of item (section or question) identifiers to score value.
 	Scores map[string]EvaluationScore
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the evaluation acknowledgement.
+type EvaluationAcknowledgement struct {
+
+	// The agent who acknowledged the evaluation.
+	//
+	// This member is required.
+	AcknowledgedBy *string
+
+	// When the agent acknowledged the evaluation.
+	//
+	// This member is required.
+	AcknowledgedTime *time.Time
+
+	// A comment from the agent when they confirmed they acknowledged the evaluation.
+	AcknowledgerComment *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an evaluation acknowledgement.
+type EvaluationAcknowledgementSummary struct {
+
+	// The agent who acknowledged the evaluation.
+	AcknowledgedBy *string
+
+	// The time when an agent acknowledged the evaluation.
+	AcknowledgedTime *time.Time
+
+	// A comment from the agent when they confirmed they acknowledged the evaluation.
+	AcknowledgerComment *string
 
 	noSmithyDocumentSerde
 }
@@ -2414,11 +2533,42 @@ type EvaluationAnswerInput struct {
 // Information about output answers for a contact evaluation.
 type EvaluationAnswerOutput struct {
 
+	// Automation suggested answers for the questions.
+	SuggestedAnswers []EvaluationSuggestedAnswer
+
 	// The system suggested value for an answer in a contact evaluation.
 	SystemSuggestedValue EvaluationAnswerData
 
 	// The value for an answer in a contact evaluation.
 	Value EvaluationAnswerData
+
+	noSmithyDocumentSerde
+}
+
+// The Contact Lens category used by evaluation automation.
+type EvaluationAutomationRuleCategory struct {
+
+	// A category label.
+	//
+	// This member is required.
+	Category *string
+
+	// An automation condition for a Contact Lens category.
+	//
+	// This member is required.
+	Condition QuestionRuleCategoryAutomationCondition
+
+	// A point of interest in a contact transcript that indicates match of condition.
+	PointsOfInterest []EvaluationTranscriptPointOfInterest
+
+	noSmithyDocumentSerde
+}
+
+// Analysis details providing explanation for Contact Lens automation decision.
+type EvaluationContactLensAnswerAnalysisDetails struct {
+
+	// A list of match rule categories.
+	MatchedRuleCategories []EvaluationAutomationRuleCategory
 
 	noSmithyDocumentSerde
 }
@@ -2482,6 +2632,9 @@ type EvaluationForm struct {
 	// This member is required.
 	Title *string
 
+	// The automatic evaluation configuration of an evaluation form.
+	AutoEvaluationConfiguration *EvaluationFormAutoEvaluationConfiguration
+
 	// The description of the evaluation form.
 	Description *string
 
@@ -2491,6 +2644,17 @@ type EvaluationForm struct {
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The automatic evaluation configuration of an evaluation form.
+type EvaluationFormAutoEvaluationConfiguration struct {
+
+	// When automated evaluation is enabled.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -2523,6 +2687,9 @@ type EvaluationFormContent struct {
 	//
 	// This member is required.
 	Title *string
+
+	// The configuration of the automated evaluation.
+	AutoEvaluationConfiguration *EvaluationFormAutoEvaluationConfiguration
 
 	// The description of the evaluation form.
 	Description *string
@@ -2562,13 +2729,136 @@ type EvaluationFormItemMemberSection struct {
 
 func (*EvaluationFormItemMemberSection) isEvaluationFormItem() {}
 
+// A condition for item enablement.
+type EvaluationFormItemEnablementCondition struct {
+
+	// Operands of the enablement condition.
+	//
+	// This member is required.
+	Operands []EvaluationFormItemEnablementConditionOperand
+
+	// The operator to be used to be applied to operands if more than one provided.
+	Operator EvaluationFormItemEnablementOperator
+
+	noSmithyDocumentSerde
+}
+
+// An operand of the enablement condition.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationFormItemEnablementConditionOperandMemberCondition
+//	EvaluationFormItemEnablementConditionOperandMemberExpression
+type EvaluationFormItemEnablementConditionOperand interface {
+	isEvaluationFormItemEnablementConditionOperand()
+}
+
+// A condition for item enablement.
+type EvaluationFormItemEnablementConditionOperandMemberCondition struct {
+	Value EvaluationFormItemEnablementCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormItemEnablementConditionOperandMemberCondition) isEvaluationFormItemEnablementConditionOperand() {
+}
+
+// An expression of the enablement condition.
+type EvaluationFormItemEnablementConditionOperandMemberExpression struct {
+	Value EvaluationFormItemEnablementExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormItemEnablementConditionOperandMemberExpression) isEvaluationFormItemEnablementConditionOperand() {
+}
+
+// An item enablement configuration.
+type EvaluationFormItemEnablementConfiguration struct {
+
+	// An enablement action that if condition is satisfied.
+	//
+	// This member is required.
+	Action EvaluationFormItemEnablementAction
+
+	// A condition for item enablement configuration.
+	//
+	// This member is required.
+	Condition *EvaluationFormItemEnablementCondition
+
+	// An enablement action that if condition is not satisfied.
+	DefaultAction EvaluationFormItemEnablementAction
+
+	noSmithyDocumentSerde
+}
+
+// An expression that defines a basic building block of conditional enablement.
+type EvaluationFormItemEnablementExpression struct {
+
+	// A comparator to be used against list of values.
+	//
+	// This member is required.
+	Comparator EvaluationFormItemSourceValuesComparator
+
+	// A source item of enablement expression.
+	//
+	// This member is required.
+	Source *EvaluationFormItemEnablementSource
+
+	// A list of values from source item.
+	//
+	// This member is required.
+	Values []EvaluationFormItemEnablementSourceValue
+
+	noSmithyDocumentSerde
+}
+
+// An enablement expression source item.
+type EvaluationFormItemEnablementSource struct {
+
+	// A type of source item.
+	//
+	// This member is required.
+	Type EvaluationFormItemEnablementSourceType
+
+	// A referenceId of the source item.
+	RefId *string
+
+	noSmithyDocumentSerde
+}
+
+// An enablement expression source value.
+type EvaluationFormItemEnablementSourceValue struct {
+
+	// A type of source item value.
+	//
+	// This member is required.
+	Type EvaluationFormItemEnablementSourceValueType
+
+	// A referenceId of the source value.
+	RefId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the automation configuration in numeric questions.
 //
 // The following types satisfy this interface:
 //
+//	EvaluationFormNumericQuestionAutomationMemberAnswerSource
 //	EvaluationFormNumericQuestionAutomationMemberPropertyValue
 type EvaluationFormNumericQuestionAutomation interface {
 	isEvaluationFormNumericQuestionAutomation()
+}
+
+// A source of automation answer for numeric question.
+type EvaluationFormNumericQuestionAutomationMemberAnswerSource struct {
+	Value EvaluationFormQuestionAutomationAnswerSource
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormNumericQuestionAutomationMemberAnswerSource) isEvaluationFormNumericQuestionAutomation() {
 }
 
 // The property value of the automation.
@@ -2597,6 +2887,9 @@ type EvaluationFormNumericQuestionOption struct {
 	// The flag to mark the option as automatic fail. If an automatic fail answer is
 	// provided, the overall evaluation gets a score of 0.
 	AutomaticFail bool
+
+	// A configuration for automatic fail.
+	AutomaticFailConfiguration *AutomaticFailConfiguration
 
 	// The score assigned to answer values within the range option.
 	Score int32
@@ -2645,6 +2938,9 @@ type EvaluationFormQuestion struct {
 	// This member is required.
 	Title *string
 
+	// A question conditional enablement.
+	Enablement *EvaluationFormItemEnablementConfiguration
+
 	// The instructions of the section.
 	Instructions *string
 
@@ -2661,6 +2957,17 @@ type EvaluationFormQuestion struct {
 	noSmithyDocumentSerde
 }
 
+// A question automation answer.
+type EvaluationFormQuestionAutomationAnswerSource struct {
+
+	// The automation answer source type.
+	//
+	// This member is required.
+	SourceType EvaluationFormQuestionAutomationAnswerSourceType
+
+	noSmithyDocumentSerde
+}
+
 // Information about properties for a question in an evaluation form. The question
 // type properties must be either for a numeric question or a single select
 // question.
@@ -2669,6 +2976,7 @@ type EvaluationFormQuestion struct {
 //
 //	EvaluationFormQuestionTypePropertiesMemberNumeric
 //	EvaluationFormQuestionTypePropertiesMemberSingleSelect
+//	EvaluationFormQuestionTypePropertiesMemberText
 type EvaluationFormQuestionTypeProperties interface {
 	isEvaluationFormQuestionTypeProperties()
 }
@@ -2692,6 +3000,15 @@ type EvaluationFormQuestionTypePropertiesMemberSingleSelect struct {
 func (*EvaluationFormQuestionTypePropertiesMemberSingleSelect) isEvaluationFormQuestionTypeProperties() {
 }
 
+// The properties of the text question.
+type EvaluationFormQuestionTypePropertiesMemberText struct {
+	Value EvaluationFormTextQuestionProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormQuestionTypePropertiesMemberText) isEvaluationFormQuestionTypeProperties() {}
+
 // Information about scoring strategy for an evaluation form.
 type EvaluationFormScoringStrategy struct {
 
@@ -2704,6 +3021,118 @@ type EvaluationFormScoringStrategy struct {
 	//
 	// This member is required.
 	Status EvaluationFormScoringStatus
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return evaluation forms.
+type EvaluationFormSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []EvaluationFormSearchCriteria
+
+	// Boolean search condition.
+	BooleanCondition *BooleanCondition
+
+	// Datetime search condition.
+	DateTimeCondition *DateTimeCondition
+
+	// A leaf node condition which can be used to specify a numeric condition.
+	//
+	// The currently supported value for FieldName is limit .
+	NumberCondition *NumberCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []EvaluationFormSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type EvaluationFormSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Information about the returned evaluation forms.
+type EvaluationFormSearchSummary struct {
+
+	// Who created the evaluation form.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// When the evaluation form was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the evaluation form resource.
+	//
+	// This member is required.
+	EvaluationFormArn *string
+
+	// The unique identifier for the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormId *string
+
+	// Who changed the evaluation form.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// When the evaluation form was last changed.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// Latest version of the evaluation form.
+	//
+	// This member is required.
+	LatestVersion *int32
+
+	// The status of the evaluation form.
+	//
+	// This member is required.
+	Status EvaluationFormVersionStatus
+
+	// The title of the evaluation form.
+	//
+	// This member is required.
+	Title *string
+
+	// Active version of the evaluation form.
+	ActiveVersion *int32
+
+	// Whether automated evaluation is enabled.
+	AutoEvaluationEnabled bool
+
+	// The description of the evaluation form.
+	Description *string
+
+	// The ID of user who last activated evaluation form.
+	LastActivatedBy *string
+
+	// When the evaluation format was last activated.
+	LastActivatedTime *time.Time
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -2744,14 +3173,15 @@ type EvaluationFormSection struct {
 // the default option is applied.
 type EvaluationFormSingleSelectQuestionAutomation struct {
 
-	// The automation options of the single select question.
-	//
-	// This member is required.
-	Options []EvaluationFormSingleSelectQuestionAutomationOption
+	// Automation answer source.
+	AnswerSource *EvaluationFormQuestionAutomationAnswerSource
 
 	// The identifier of the default answer option, when none of the automation
 	// options match the criteria.
 	DefaultOptionRefId *string
+
+	// The automation options of the single select question.
+	Options []EvaluationFormSingleSelectQuestionAutomationOption
 
 	noSmithyDocumentSerde
 }
@@ -2792,6 +3222,9 @@ type EvaluationFormSingleSelectQuestionOption struct {
 	// The flag to mark the option as automatic fail. If an automatic fail answer is
 	// provided, the overall evaluation gets a score of 0.
 	AutomaticFail bool
+
+	// Whether automatic fail is configured on a single select question.
+	AutomaticFailConfiguration *AutomaticFailConfiguration
 
 	// The score assigned to the answer option.
 	Score int32
@@ -2872,6 +3305,24 @@ type EvaluationFormSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the automation configuration in text questions.
+type EvaluationFormTextQuestionAutomation struct {
+
+	// Automation answer source.
+	AnswerSource *EvaluationFormQuestionAutomationAnswerSource
+
+	noSmithyDocumentSerde
+}
+
+// Information about properties for a text question in an evaluation form.
+type EvaluationFormTextQuestionProperties struct {
+
+	// The automation properties of the text question.
+	Automation *EvaluationFormTextQuestionAutomation
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about an evaluation form.
 type EvaluationFormVersionSummary struct {
 
@@ -2923,6 +3374,18 @@ type EvaluationFormVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An analysis for a generative AI answer to the question.
+type EvaluationGenAIAnswerAnalysisDetails struct {
+
+	// Generative AI automation answer justification.
+	Justification *string
+
+	// Generative AI automation answer analysis points of interest.
+	PointsOfInterest []EvaluationTranscriptPointOfInterest
+
+	noSmithyDocumentSerde
+}
+
 // Metadata information about a contact evaluation.
 type EvaluationMetadata struct {
 
@@ -2935,6 +3398,15 @@ type EvaluationMetadata struct {
 	//
 	// This member is required.
 	EvaluatorArn *string
+
+	// Information related to evaluation acknowledgement.
+	Acknowledgement *EvaluationAcknowledgement
+
+	// Information related to automated evaluation.
+	AutoEvaluation *AutoEvaluationDetails
+
+	// The calibration session ID that this evaluation belongs to.
+	CalibrationSessionId *string
 
 	// The identifier of the agent who performed the contact.
 	ContactAgentId *string
@@ -2959,6 +3431,45 @@ type EvaluationNote struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed analysis results of the automated answer to the evaluation question.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationQuestionAnswerAnalysisDetailsMemberContactLens
+//	EvaluationQuestionAnswerAnalysisDetailsMemberGenAI
+type EvaluationQuestionAnswerAnalysisDetails interface {
+	isEvaluationQuestionAnswerAnalysisDetails()
+}
+
+// Analysis results from the Contact Lens automation for the question.
+type EvaluationQuestionAnswerAnalysisDetailsMemberContactLens struct {
+	Value EvaluationContactLensAnswerAnalysisDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationQuestionAnswerAnalysisDetailsMemberContactLens) isEvaluationQuestionAnswerAnalysisDetails() {
+}
+
+// Analysis results from the generative AI automation for the question.
+type EvaluationQuestionAnswerAnalysisDetailsMemberGenAI struct {
+	Value EvaluationGenAIAnswerAnalysisDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationQuestionAnswerAnalysisDetailsMemberGenAI) isEvaluationQuestionAnswerAnalysisDetails() {
+}
+
+// Details of the input data used for automated question processing.
+type EvaluationQuestionInputDetails struct {
+
+	// Transcript type.
+	TranscriptType EvaluationTranscriptType
+
+	noSmithyDocumentSerde
+}
+
 // Information about scores of a contact evaluation item (section or question).
 type EvaluationScore struct {
 
@@ -2971,6 +3482,186 @@ type EvaluationScore struct {
 
 	// The score percentage for an item in a contact evaluation.
 	Percentage float64
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return evaluations.
+type EvaluationSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []EvaluationSearchCriteria
+
+	// The boolean condition search criteria for searching evaluations.
+	BooleanCondition *BooleanCondition
+
+	// The datetime condition search criteria for searching evaluations.
+	DateTimeCondition *DateTimeCondition
+
+	// The decimal condition search criteria for searching evaluations.
+	DecimalCondition *DecimalCondition
+
+	// A leaf node condition which can be used to specify a numeric condition.
+	//
+	// The currently supported value for FieldName is limit .
+	NumberCondition *NumberCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []EvaluationSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type EvaluationSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information about an evaluation search.
+type EvaluationSearchMetadata struct {
+
+	// The identifier of the contact in this instance of Amazon Connect.
+	//
+	// This member is required.
+	ContactId *string
+
+	// The Amazon Resource Name (ARN) of the person who evaluated the contact.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	// The agent who acknowledged the evaluation.
+	AcknowledgedBy *string
+
+	// When the evaluation was acknowledged by the agent.
+	AcknowledgedTime *time.Time
+
+	// The comment from the agent when they acknowledged the evaluation.
+	AcknowledgerComment *string
+
+	// Whether auto-evaluation is enabled.
+	AutoEvaluationEnabled bool
+
+	// The status of the contact auto evaluation.
+	AutoEvaluationStatus AutoEvaluationStatus
+
+	// The calibration session ID that this evaluation belongs to.
+	CalibrationSessionId *string
+
+	// The unique ID of the agent who handled the contact.
+	ContactAgentId *string
+
+	// The flag that marks the item as automatic fail. If the item or a child item
+	// gets an automatic fail answer, this flag is true.
+	ScoreAutomaticFail bool
+
+	// The flag to mark the item as not applicable for scoring.
+	ScoreNotApplicable bool
+
+	// The total evaluation score expressed as a percentage.
+	ScorePercentage float64
+
+	noSmithyDocumentSerde
+}
+
+// Summary of evaluation obtained from the search operation.
+type EvaluationSearchSummary struct {
+
+	// The date and time when the evaluation was created, in UTC time.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the contact evaluation resource.
+	//
+	// This member is required.
+	EvaluationArn *string
+
+	// A version of the evaluation form.
+	//
+	// This member is required.
+	EvaluationFormVersion *int32
+
+	// A unique identifier for the contact evaluation.
+	//
+	// This member is required.
+	EvaluationId *string
+
+	// The date and time when the evaluation was modified last time, in UTC time.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// Summary information about the evaluation search.
+	//
+	// This member is required.
+	Metadata *EvaluationSearchMetadata
+
+	// The status of the evaluation.
+	//
+	// This member is required.
+	Status EvaluationStatus
+
+	// The unique identifier for the evaluation form.
+	EvaluationFormId *string
+
+	// Type of the evaluation.
+	EvaluationType EvaluationType
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The information about the suggested answer for the question.
+type EvaluationSuggestedAnswer struct {
+
+	// Type of analysis used to provide suggested answer.
+	//
+	// This member is required.
+	AnalysisType EvaluationQuestionAnswerAnalysisType
+
+	// The status of the suggested answer. D
+	//
+	// This member is required.
+	Status EvaluationSuggestedAnswerStatus
+
+	// Detailed analysis results.
+	AnalysisDetails EvaluationQuestionAnswerAnalysisDetails
+
+	// Details about the input used to question automation.
+	Input *EvaluationQuestionInputDetails
+
+	// Information about answer data for a contact evaluation. Answer data must be
+	// either string, numeric, or not applicable.
+	Value EvaluationAnswerData
+
+	noSmithyDocumentSerde
+}
+
+// The milliseconds offset for transcript reference in suggested answer.
+type EvaluationSuggestedAnswerTranscriptMillisecondOffsets struct {
+
+	// Offset in milliseconds from the beginning of the transcript.
+	//
+	// This member is required.
+	BeginOffsetMillis int32
 
 	noSmithyDocumentSerde
 }
@@ -3018,11 +3709,56 @@ type EvaluationSummary struct {
 	// This member is required.
 	Status EvaluationStatus
 
+	// Information related to evaluation acknowledgement.
+	Acknowledgement *EvaluationAcknowledgementSummary
+
+	// Whether automated evaluation is enabled.
+	AutoEvaluationEnabled bool
+
+	// The status of the contact auto evaluation.
+	AutoEvaluationStatus AutoEvaluationStatus
+
+	// The calibration session ID that this evaluation belongs to.
+	CalibrationSessionId *string
+
+	// Type of the evaluation.
+	EvaluationType EvaluationType
+
 	// The overall score of the contact evaluation.
 	Score *EvaluationScore
 
 	noSmithyDocumentSerde
 }
+
+// Information about the point of interest in transcript provided to evaluation.
+type EvaluationTranscriptPointOfInterest struct {
+
+	// Offset in milliseconds from the beginning of transcript.
+	MillisecondOffsets *EvaluationSuggestedAnswerTranscriptMillisecondOffsets
+
+	// Segment of transcript.
+	TranscriptSegment *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the entity that performed the action on the evaluation.
+//
+// The following types satisfy this interface:
+//
+//	EvaluatorUserUnionMemberConnectUserArn
+type EvaluatorUserUnion interface {
+	isEvaluatorUserUnion()
+}
+
+// Represents the Amazon Connect ARN of the user.
+type EvaluatorUserUnionMemberConnectUserArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorUserUnionMemberConnectUserArn) isEvaluatorUserUnion() {}
 
 // The EventBridge action definition.
 type EventBridgeActionDefinition struct {
@@ -8372,9 +9108,12 @@ func (*UnknownUnionMember) isContactMetricValue()                               
 func (*UnknownUnionMember) isCreatedByInfo()                                      {}
 func (*UnknownUnionMember) isEvaluationAnswerData()                               {}
 func (*UnknownUnionMember) isEvaluationFormItem()                                 {}
+func (*UnknownUnionMember) isEvaluationFormItemEnablementConditionOperand()       {}
 func (*UnknownUnionMember) isEvaluationFormNumericQuestionAutomation()            {}
 func (*UnknownUnionMember) isEvaluationFormQuestionTypeProperties()               {}
 func (*UnknownUnionMember) isEvaluationFormSingleSelectQuestionAutomationOption() {}
+func (*UnknownUnionMember) isEvaluationQuestionAnswerAnalysisDetails()            {}
+func (*UnknownUnionMember) isEvaluatorUserUnion()                                 {}
 func (*UnknownUnionMember) isInvalidRequestExceptionReason()                      {}
 func (*UnknownUnionMember) isParticipantTimerValue()                              {}
 func (*UnknownUnionMember) isPredefinedAttributeValues()                          {}

@@ -55,6 +55,9 @@ type SubmitContactEvaluationInput struct {
 	// A map of question identifiers to note value.
 	Notes map[string]types.EvaluationNote
 
+	// The ID of the user who submitted the contact evaluation.
+	SubmittedBy types.EvaluatorUserUnion
+
 	noSmithyDocumentSerde
 }
 

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves the instance limits and current utilization for an Amazon Web
 // Services Region or location. Instance limits control the number of instances,
 // per instance type, per location, that your Amazon Web Services account can use.

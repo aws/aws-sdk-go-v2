@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Deletes an existing matchmaking rule set. To delete the rule set, provide the
 // rule set name. Rule sets cannot be deleted if they are currently being used by a
 // matchmaking configuration.

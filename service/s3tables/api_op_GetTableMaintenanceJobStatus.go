@@ -35,7 +35,7 @@ func (c *Client) GetTableMaintenanceJobStatus(ctx context.Context, params *GetTa
 
 type GetTableMaintenanceJobStatusInput struct {
 
-	// The name of the maintenance job.
+	// The name of the table containing the maintenance job status you want to check.
 	//
 	// This member is required.
 	Name *string

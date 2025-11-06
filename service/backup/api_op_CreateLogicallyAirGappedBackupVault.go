@@ -66,6 +66,11 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	// alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
+	// The ARN of the customer-managed KMS key to use for encrypting the logically
+	// air-gapped backup vault. If not specified, the vault will be encrypted with an
+	// Amazon Web Services-owned key managed by Amazon Web Services Backup.
+	EncryptionKeyArn *string
+
 	noSmithyDocumentSerde
 }
 

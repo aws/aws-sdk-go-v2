@@ -1650,6 +1650,58 @@ func (DataLabelPosition) Values() []DataLabelPosition {
 	}
 }
 
+type DataPrepSimpleAggregationFunctionType string
+
+// Enum values for DataPrepSimpleAggregationFunctionType
+const (
+	DataPrepSimpleAggregationFunctionTypeCount         DataPrepSimpleAggregationFunctionType = "COUNT"
+	DataPrepSimpleAggregationFunctionTypeDistinctCount DataPrepSimpleAggregationFunctionType = "DISTINCT_COUNT"
+	DataPrepSimpleAggregationFunctionTypeSum           DataPrepSimpleAggregationFunctionType = "SUM"
+	DataPrepSimpleAggregationFunctionTypeAverage       DataPrepSimpleAggregationFunctionType = "AVERAGE"
+	DataPrepSimpleAggregationFunctionTypeMax           DataPrepSimpleAggregationFunctionType = "MAX"
+	DataPrepSimpleAggregationFunctionTypeMin           DataPrepSimpleAggregationFunctionType = "MIN"
+)
+
+// Values returns all known values for DataPrepSimpleAggregationFunctionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataPrepSimpleAggregationFunctionType) Values() []DataPrepSimpleAggregationFunctionType {
+	return []DataPrepSimpleAggregationFunctionType{
+		"COUNT",
+		"DISTINCT_COUNT",
+		"SUM",
+		"AVERAGE",
+		"MAX",
+		"MIN",
+	}
+}
+
+type DataSetDateComparisonFilterOperator string
+
+// Enum values for DataSetDateComparisonFilterOperator
+const (
+	DataSetDateComparisonFilterOperatorBefore           DataSetDateComparisonFilterOperator = "BEFORE"
+	DataSetDateComparisonFilterOperatorBeforeOrEqualsTo DataSetDateComparisonFilterOperator = "BEFORE_OR_EQUALS_TO"
+	DataSetDateComparisonFilterOperatorAfter            DataSetDateComparisonFilterOperator = "AFTER"
+	DataSetDateComparisonFilterOperatorAfterOrEqualsTo  DataSetDateComparisonFilterOperator = "AFTER_OR_EQUALS_TO"
+)
+
+// Values returns all known values for DataSetDateComparisonFilterOperator. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetDateComparisonFilterOperator) Values() []DataSetDateComparisonFilterOperator {
+	return []DataSetDateComparisonFilterOperator{
+		"BEFORE",
+		"BEFORE_OR_EQUALS_TO",
+		"AFTER",
+		"AFTER_OR_EQUALS_TO",
+	}
+}
+
 type DataSetFilterAttribute string
 
 // Enum values for DataSetFilterAttribute
@@ -1696,6 +1748,34 @@ func (DataSetImportMode) Values() []DataSetImportMode {
 	}
 }
 
+type DataSetNumericComparisonFilterOperator string
+
+// Enum values for DataSetNumericComparisonFilterOperator
+const (
+	DataSetNumericComparisonFilterOperatorEquals                DataSetNumericComparisonFilterOperator = "EQUALS"
+	DataSetNumericComparisonFilterOperatorDoesNotEqual          DataSetNumericComparisonFilterOperator = "DOES_NOT_EQUAL"
+	DataSetNumericComparisonFilterOperatorGreaterThan           DataSetNumericComparisonFilterOperator = "GREATER_THAN"
+	DataSetNumericComparisonFilterOperatorGreaterThanOrEqualsTo DataSetNumericComparisonFilterOperator = "GREATER_THAN_OR_EQUALS_TO"
+	DataSetNumericComparisonFilterOperatorLessThan              DataSetNumericComparisonFilterOperator = "LESS_THAN"
+	DataSetNumericComparisonFilterOperatorLessThanOrEqualsTo    DataSetNumericComparisonFilterOperator = "LESS_THAN_OR_EQUALS_TO"
+)
+
+// Values returns all known values for DataSetNumericComparisonFilterOperator.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetNumericComparisonFilterOperator) Values() []DataSetNumericComparisonFilterOperator {
+	return []DataSetNumericComparisonFilterOperator{
+		"EQUALS",
+		"DOES_NOT_EQUAL",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUALS_TO",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUALS_TO",
+	}
+}
+
 type DatasetParameterValueType string
 
 // Enum values for DatasetParameterValueType
@@ -1712,6 +1792,54 @@ func (DatasetParameterValueType) Values() []DatasetParameterValueType {
 	return []DatasetParameterValueType{
 		"MULTI_VALUED",
 		"SINGLE_VALUED",
+	}
+}
+
+type DataSetStringComparisonFilterOperator string
+
+// Enum values for DataSetStringComparisonFilterOperator
+const (
+	DataSetStringComparisonFilterOperatorEquals         DataSetStringComparisonFilterOperator = "EQUALS"
+	DataSetStringComparisonFilterOperatorDoesNotEqual   DataSetStringComparisonFilterOperator = "DOES_NOT_EQUAL"
+	DataSetStringComparisonFilterOperatorContains       DataSetStringComparisonFilterOperator = "CONTAINS"
+	DataSetStringComparisonFilterOperatorDoesNotContain DataSetStringComparisonFilterOperator = "DOES_NOT_CONTAIN"
+	DataSetStringComparisonFilterOperatorStartsWith     DataSetStringComparisonFilterOperator = "STARTS_WITH"
+	DataSetStringComparisonFilterOperatorEndsWith       DataSetStringComparisonFilterOperator = "ENDS_WITH"
+)
+
+// Values returns all known values for DataSetStringComparisonFilterOperator. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetStringComparisonFilterOperator) Values() []DataSetStringComparisonFilterOperator {
+	return []DataSetStringComparisonFilterOperator{
+		"EQUALS",
+		"DOES_NOT_EQUAL",
+		"CONTAINS",
+		"DOES_NOT_CONTAIN",
+		"STARTS_WITH",
+		"ENDS_WITH",
+	}
+}
+
+type DataSetStringListFilterOperator string
+
+// Enum values for DataSetStringListFilterOperator
+const (
+	DataSetStringListFilterOperatorInclude DataSetStringListFilterOperator = "INCLUDE"
+	DataSetStringListFilterOperatorExclude DataSetStringListFilterOperator = "EXCLUDE"
+)
+
+// Values returns all known values for DataSetStringListFilterOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetStringListFilterOperator) Values() []DataSetStringListFilterOperator {
+	return []DataSetStringListFilterOperator{
+		"INCLUDE",
+		"EXCLUDE",
 	}
 }
 
@@ -3044,6 +3172,29 @@ func (InputColumnDataType) Values() []InputColumnDataType {
 		"BIT",
 		"BOOLEAN",
 		"JSON",
+	}
+}
+
+type JoinOperationType string
+
+// Enum values for JoinOperationType
+const (
+	JoinOperationTypeInner JoinOperationType = "INNER"
+	JoinOperationTypeOuter JoinOperationType = "OUTER"
+	JoinOperationTypeLeft  JoinOperationType = "LEFT"
+	JoinOperationTypeRight JoinOperationType = "RIGHT"
+)
+
+// Values returns all known values for JoinOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JoinOperationType) Values() []JoinOperationType {
+	return []JoinOperationType{
+		"INNER",
+		"OUTER",
+		"LEFT",
+		"RIGHT",
 	}
 }
 

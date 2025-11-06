@@ -9,14 +9,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Retrieves the group metadata and attributes from GroupId in an identity store.
 //
-// If you have administrator access to a member account, you can use this API from
-// the member account. Read about [member accounts]in the Organizations User Guide.
+// If you have access to a member account, you can use this API operation from the
+// member account. For more information, see [Limiting access to the identity store from member accounts]in the IAM Identity Center User Guide.
 //
-// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+// [Limiting access to the identity store from member accounts]: https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts
 func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, optFns ...func(*Options)) (*DescribeGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGroupInput{}
@@ -62,6 +63,12 @@ type DescribeGroupOutput struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// The date and time the group was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created the group.
+	CreatedBy *string
+
 	// A string containing a description of the group.
 	Description *string
 
@@ -75,6 +82,12 @@ type DescribeGroupOutput struct {
 	// A list of ExternalId objects that contains the identifiers issued to this
 	// resource by an external identity provider.
 	ExternalIds []types.ExternalId
+
+	// The date and time the group was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user or system that last updated the group.
+	UpdatedBy *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

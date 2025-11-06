@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Establishes a VPC peering connection between a virtual private cloud (VPC) in
 // an Amazon Web Services account with the VPC for your Amazon GameLift Servers
 // fleet. VPC peering enables the game servers on your fleet to communicate

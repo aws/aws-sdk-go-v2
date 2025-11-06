@@ -3299,6 +3299,13 @@ func awsRestjson1_serializeOpDocumentCreateEvaluationFormInput(v *CreateEvaluati
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoEvaluationConfiguration != nil {
+		ok := object.Key("AutoEvaluationConfiguration")
+		if err := awsRestjson1_serializeDocumentEvaluationFormAutoEvaluationConfiguration(v.AutoEvaluationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -3319,6 +3326,13 @@ func awsRestjson1_serializeOpDocumentCreateEvaluationFormInput(v *CreateEvaluati
 	if v.ScoringStrategy != nil {
 		ok := object.Key("ScoringStrategy")
 		if err := awsRestjson1_serializeDocumentEvaluationFormScoringStrategy(v.ScoringStrategy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
 	}
@@ -18247,6 +18261,111 @@ func awsRestjson1_serializeOpDocumentSearchAvailablePhoneNumbersInput(v *SearchA
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchContactEvaluations struct {
+}
+
+func (*awsRestjson1_serializeOpSearchContactEvaluations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchContactEvaluations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchContactEvaluationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/search-contact-evaluations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchContactEvaluationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchContactEvaluationsInput(v *SearchContactEvaluationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchContactEvaluationsInput(v *SearchContactEvaluationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SearchCriteria != nil {
+		ok := object.Key("SearchCriteria")
+		if err := awsRestjson1_serializeDocumentEvaluationSearchCriteria(v.SearchCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SearchFilter != nil {
+		ok := object.Key("SearchFilter")
+		if err := awsRestjson1_serializeDocumentEvaluationSearchFilter(v.SearchFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSearchContactFlowModules struct {
 }
 
@@ -18667,6 +18786,111 @@ func awsRestjson1_serializeOpDocumentSearchEmailAddressesInput(v *SearchEmailAdd
 	if v.SearchFilter != nil {
 		ok := object.Key("SearchFilter")
 		if err := awsRestjson1_serializeDocumentEmailAddressSearchFilter(v.SearchFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpSearchEvaluationForms struct {
+}
+
+func (*awsRestjson1_serializeOpSearchEvaluationForms) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchEvaluationForms) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchEvaluationFormsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/search-evaluation-forms")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchEvaluationFormsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchEvaluationFormsInput(v *SearchEvaluationFormsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchEvaluationFormsInput(v *SearchEvaluationFormsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SearchCriteria != nil {
+		ok := object.Key("SearchCriteria")
+		if err := awsRestjson1_serializeDocumentEvaluationFormSearchCriteria(v.SearchCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SearchFilter != nil {
+		ok := object.Key("SearchFilter")
+		if err := awsRestjson1_serializeDocumentEvaluationFormSearchFilter(v.SearchFilter, ok); err != nil {
 			return err
 		}
 	}
@@ -20541,6 +20765,13 @@ func awsRestjson1_serializeOpDocumentStartContactEvaluationInput(v *StartContact
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoEvaluationConfiguration != nil {
+		ok := object.Key("AutoEvaluationConfiguration")
+		if err := awsRestjson1_serializeDocumentAutoEvaluationConfiguration(v.AutoEvaluationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -20554,6 +20785,13 @@ func awsRestjson1_serializeOpDocumentStartContactEvaluationInput(v *StartContact
 	if v.EvaluationFormId != nil {
 		ok := object.Key("EvaluationFormId")
 		ok.String(*v.EvaluationFormId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -22099,6 +22337,13 @@ func awsRestjson1_serializeOpDocumentSubmitContactEvaluationInput(v *SubmitConta
 		}
 	}
 
+	if v.SubmittedBy != nil {
+		ok := object.Key("SubmittedBy")
+		if err := awsRestjson1_serializeDocumentEvaluatorUserUnion(v.SubmittedBy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23258,6 +23503,13 @@ func awsRestjson1_serializeOpDocumentUpdateContactEvaluationInput(v *UpdateConta
 		}
 	}
 
+	if v.UpdatedBy != nil {
+		ok := object.Key("UpdatedBy")
+		if err := awsRestjson1_serializeDocumentEvaluatorUserUnion(v.UpdatedBy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -24214,6 +24466,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateEvaluationFormInput(v *UpdateEval
 func awsRestjson1_serializeOpDocumentUpdateEvaluationFormInput(v *UpdateEvaluationFormInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutoEvaluationConfiguration != nil {
+		ok := object.Key("AutoEvaluationConfiguration")
+		if err := awsRestjson1_serializeDocumentEvaluationFormAutoEvaluationConfiguration(v.AutoEvaluationConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
@@ -28732,6 +28991,47 @@ func awsRestjson1_serializeDocumentAttributes(v map[string]string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutoEvaluationConfiguration(v *types.AutoEvaluationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomaticFailConfiguration(v *types.AutomaticFailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetSection != nil {
+		ok := object.Key("TargetSection")
+		ok.String(*v.TargetSection)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBooleanCondition(v *types.BooleanCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonType) > 0 {
+		ok := object.Key("ComparisonType")
+		ok.String(string(v.ComparisonType))
+	}
+
+	if v.FieldName != nil {
+		ok := object.Key("FieldName")
+		ok.String(*v.FieldName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCampaign(v *types.Campaign, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29472,6 +29772,86 @@ func awsRestjson1_serializeDocumentDateCondition(v *types.DateCondition, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDateTimeCondition(v *types.DateTimeCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonType) > 0 {
+		ok := object.Key("ComparisonType")
+		ok.String(string(v.ComparisonType))
+	}
+
+	if v.FieldName != nil {
+		ok := object.Key("FieldName")
+		ok.String(*v.FieldName)
+	}
+
+	if v.MaxValue != nil {
+		ok := object.Key("MaxValue")
+		ok.String(*v.MaxValue)
+	}
+
+	if v.MinValue != nil {
+		ok := object.Key("MinValue")
+		ok.String(*v.MinValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDecimalCondition(v *types.DecimalCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonType) > 0 {
+		ok := object.Key("ComparisonType")
+		ok.String(string(v.ComparisonType))
+	}
+
+	if v.FieldName != nil {
+		ok := object.Key("FieldName")
+		ok.String(*v.FieldName)
+	}
+
+	if v.MaxValue != nil {
+		ok := object.Key("MaxValue")
+		switch {
+		case math.IsNaN(*v.MaxValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxValue)
+
+		}
+	}
+
+	if v.MinValue != nil {
+		ok := object.Key("MinValue")
+		switch {
+		case math.IsNaN(*v.MinValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MinValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MinValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MinValue)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDisconnectReason(v *types.DisconnectReason, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29753,6 +30133,18 @@ func awsRestjson1_serializeDocumentEvaluationAnswersInputMap(v map[string]types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEvaluationFormAutoEvaluationConfiguration(v *types.EvaluationFormAutoEvaluationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvaluationFormItem(v types.EvaluationFormItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29773,6 +30165,162 @@ func awsRestjson1_serializeDocumentEvaluationFormItem(v types.EvaluationFormItem
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementCondition(v *types.EvaluationFormItemEnablementCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Operands != nil {
+		ok := object.Key("Operands")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementConditionOperandList(v.Operands, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementConditionOperand(v types.EvaluationFormItemEnablementConditionOperand, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EvaluationFormItemEnablementConditionOperandMemberCondition:
+		av := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementCondition(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EvaluationFormItemEnablementConditionOperandMemberExpression:
+		av := object.Key("Expression")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementExpression(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementConditionOperandList(v []types.EvaluationFormItemEnablementConditionOperand, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementConditionOperand(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementConfiguration(v *types.EvaluationFormItemEnablementConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementCondition(v.Condition, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DefaultAction) > 0 {
+		ok := object.Key("DefaultAction")
+		ok.String(string(v.DefaultAction))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementExpression(v *types.EvaluationFormItemEnablementExpression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Comparator) > 0 {
+		ok := object.Key("Comparator")
+		ok.String(string(v.Comparator))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("Source")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementSourceValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementSource(v *types.EvaluationFormItemEnablementSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RefId != nil {
+		ok := object.Key("RefId")
+		ok.String(*v.RefId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementSourceValue(v *types.EvaluationFormItemEnablementSourceValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RefId != nil {
+		ok := object.Key("RefId")
+		ok.String(*v.RefId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormItemEnablementSourceValueList(v []types.EvaluationFormItemEnablementSourceValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementSourceValue(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -29798,6 +30346,12 @@ func awsRestjson1_serializeDocumentEvaluationFormNumericQuestionAutomation(v typ
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.EvaluationFormNumericQuestionAutomationMemberAnswerSource:
+		av := object.Key("AnswerSource")
+		if err := awsRestjson1_serializeDocumentEvaluationFormQuestionAutomationAnswerSource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.EvaluationFormNumericQuestionAutomationMemberPropertyValue:
 		av := object.Key("PropertyValue")
 		if err := awsRestjson1_serializeDocumentNumericQuestionPropertyValueAutomation(&uv.Value, av); err != nil {
@@ -29818,6 +30372,13 @@ func awsRestjson1_serializeDocumentEvaluationFormNumericQuestionOption(v *types.
 	if v.AutomaticFail {
 		ok := object.Key("AutomaticFail")
 		ok.Boolean(v.AutomaticFail)
+	}
+
+	if v.AutomaticFailConfiguration != nil {
+		ok := object.Key("AutomaticFailConfiguration")
+		if err := awsRestjson1_serializeDocumentAutomaticFailConfiguration(v.AutomaticFailConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	{
@@ -29886,6 +30447,13 @@ func awsRestjson1_serializeDocumentEvaluationFormQuestion(v *types.EvaluationFor
 	object := value.Object()
 	defer object.Close()
 
+	if v.Enablement != nil {
+		ok := object.Key("Enablement")
+		if err := awsRestjson1_serializeDocumentEvaluationFormItemEnablementConfiguration(v.Enablement, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Instructions != nil {
 		ok := object.Key("Instructions")
 		ok.String(*v.Instructions)
@@ -29939,6 +30507,18 @@ func awsRestjson1_serializeDocumentEvaluationFormQuestion(v *types.EvaluationFor
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEvaluationFormQuestionAutomationAnswerSource(v *types.EvaluationFormQuestionAutomationAnswerSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SourceType) > 0 {
+		ok := object.Key("SourceType")
+		ok.String(string(v.SourceType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvaluationFormQuestionTypeProperties(v types.EvaluationFormQuestionTypeProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29953,6 +30533,12 @@ func awsRestjson1_serializeDocumentEvaluationFormQuestionTypeProperties(v types.
 	case *types.EvaluationFormQuestionTypePropertiesMemberSingleSelect:
 		av := object.Key("SingleSelect")
 		if err := awsRestjson1_serializeDocumentEvaluationFormSingleSelectQuestionProperties(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EvaluationFormQuestionTypePropertiesMemberText:
+		av := object.Key("Text")
+		if err := awsRestjson1_serializeDocumentEvaluationFormTextQuestionProperties(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -29975,6 +30561,82 @@ func awsRestjson1_serializeDocumentEvaluationFormScoringStrategy(v *types.Evalua
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormSearchConditionList(v []types.EvaluationFormSearchCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEvaluationFormSearchCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormSearchCriteria(v *types.EvaluationFormSearchCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndConditions != nil {
+		ok := object.Key("AndConditions")
+		if err := awsRestjson1_serializeDocumentEvaluationFormSearchConditionList(v.AndConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BooleanCondition != nil {
+		ok := object.Key("BooleanCondition")
+		if err := awsRestjson1_serializeDocumentBooleanCondition(v.BooleanCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DateTimeCondition != nil {
+		ok := object.Key("DateTimeCondition")
+		if err := awsRestjson1_serializeDocumentDateTimeCondition(v.DateTimeCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberCondition != nil {
+		ok := object.Key("NumberCondition")
+		if err := awsRestjson1_serializeDocumentNumberCondition(v.NumberCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrConditions != nil {
+		ok := object.Key("OrConditions")
+		if err := awsRestjson1_serializeDocumentEvaluationFormSearchConditionList(v.OrConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringCondition != nil {
+		ok := object.Key("StringCondition")
+		if err := awsRestjson1_serializeDocumentStringCondition(v.StringCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormSearchFilter(v *types.EvaluationFormSearchFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeFilter != nil {
+		ok := object.Key("AttributeFilter")
+		if err := awsRestjson1_serializeDocumentControlPlaneAttributeFilter(v.AttributeFilter, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -30030,6 +30692,13 @@ func awsRestjson1_serializeDocumentEvaluationFormSection(v *types.EvaluationForm
 func awsRestjson1_serializeDocumentEvaluationFormSingleSelectQuestionAutomation(v *types.EvaluationFormSingleSelectQuestionAutomation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AnswerSource != nil {
+		ok := object.Key("AnswerSource")
+		if err := awsRestjson1_serializeDocumentEvaluationFormQuestionAutomationAnswerSource(v.AnswerSource, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefaultOptionRefId != nil {
 		ok := object.Key("DefaultOptionRefId")
@@ -30089,6 +30758,13 @@ func awsRestjson1_serializeDocumentEvaluationFormSingleSelectQuestionOption(v *t
 		ok.Boolean(v.AutomaticFail)
 	}
 
+	if v.AutomaticFailConfiguration != nil {
+		ok := object.Key("AutomaticFailConfiguration")
+		if err := awsRestjson1_serializeDocumentAutomaticFailConfiguration(v.AutomaticFailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RefId != nil {
 		ok := object.Key("RefId")
 		ok.String(*v.RefId)
@@ -30146,6 +30822,34 @@ func awsRestjson1_serializeDocumentEvaluationFormSingleSelectQuestionProperties(
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEvaluationFormTextQuestionAutomation(v *types.EvaluationFormTextQuestionAutomation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnswerSource != nil {
+		ok := object.Key("AnswerSource")
+		if err := awsRestjson1_serializeDocumentEvaluationFormQuestionAutomationAnswerSource(v.AnswerSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationFormTextQuestionProperties(v *types.EvaluationFormTextQuestionProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Automation != nil {
+		ok := object.Key("Automation")
+		if err := awsRestjson1_serializeDocumentEvaluationFormTextQuestionAutomation(v.Automation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvaluationNote(v *types.EvaluationNote, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30168,6 +30872,105 @@ func awsRestjson1_serializeDocumentEvaluationNotesMap(v map[string]types.Evaluat
 		if err := awsRestjson1_serializeDocumentEvaluationNote(&mapVar, om); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationSearchConditionList(v []types.EvaluationSearchCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEvaluationSearchCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationSearchCriteria(v *types.EvaluationSearchCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndConditions != nil {
+		ok := object.Key("AndConditions")
+		if err := awsRestjson1_serializeDocumentEvaluationSearchConditionList(v.AndConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BooleanCondition != nil {
+		ok := object.Key("BooleanCondition")
+		if err := awsRestjson1_serializeDocumentBooleanCondition(v.BooleanCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DateTimeCondition != nil {
+		ok := object.Key("DateTimeCondition")
+		if err := awsRestjson1_serializeDocumentDateTimeCondition(v.DateTimeCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DecimalCondition != nil {
+		ok := object.Key("DecimalCondition")
+		if err := awsRestjson1_serializeDocumentDecimalCondition(v.DecimalCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberCondition != nil {
+		ok := object.Key("NumberCondition")
+		if err := awsRestjson1_serializeDocumentNumberCondition(v.NumberCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrConditions != nil {
+		ok := object.Key("OrConditions")
+		if err := awsRestjson1_serializeDocumentEvaluationSearchConditionList(v.OrConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringCondition != nil {
+		ok := object.Key("StringCondition")
+		if err := awsRestjson1_serializeDocumentStringCondition(v.StringCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationSearchFilter(v *types.EvaluationSearchFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeFilter != nil {
+		ok := object.Key("AttributeFilter")
+		if err := awsRestjson1_serializeDocumentControlPlaneAttributeFilter(v.AttributeFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluatorUserUnion(v types.EvaluatorUserUnion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EvaluatorUserUnionMemberConnectUserArn:
+		av := object.Key("ConnectUserArn")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

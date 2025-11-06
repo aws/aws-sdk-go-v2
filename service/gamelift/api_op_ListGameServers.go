@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
-//
-// game server groups.
+//	This API works with the following fleet types: EC2 (FleetIQ)
 //
 // Retrieves information on all game servers that are currently active in a
 // specified game server group. You can opt to sort the list by game server age.

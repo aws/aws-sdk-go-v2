@@ -2330,6 +2330,7 @@ const (
 	OperatingSystemAmazonLinux2    OperatingSystem = "AMAZON_LINUX_2"
 	OperatingSystemWindows2016     OperatingSystem = "WINDOWS_2016"
 	OperatingSystemAmazonLinux2023 OperatingSystem = "AMAZON_LINUX_2023"
+	OperatingSystemWindows2022     OperatingSystem = "WINDOWS_2022"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -2343,6 +2344,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"AMAZON_LINUX_2",
 		"WINDOWS_2016",
 		"AMAZON_LINUX_2023",
+		"WINDOWS_2022",
 	}
 }
 

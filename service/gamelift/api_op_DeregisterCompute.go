@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Anywhere
+//
 // Removes a compute resource from an Anywhere fleet. Deregistered computes can no
 // longer host game sessions through Amazon GameLift Servers. Use this operation
 // with an Anywhere fleet that doesn't use the Amazon GameLift Servers Agent For

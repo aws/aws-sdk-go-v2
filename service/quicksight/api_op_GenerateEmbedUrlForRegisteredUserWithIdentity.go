@@ -49,7 +49,7 @@ type GenerateEmbedUrlForRegisteredUserWithIdentityInput struct {
 	AwsAccountId *string
 
 	// The type of experience you want to embed. For registered users, you can embed
-	// QuickSight dashboards or the Amazon Quick Sight console.
+	// Quick Suite dashboards or the Amazon Quick Sight console.
 	//
 	// Exactly one of the experience configurations is required. You can choose
 	// Dashboard or QuickSightConsole . You cannot choose more than one experience

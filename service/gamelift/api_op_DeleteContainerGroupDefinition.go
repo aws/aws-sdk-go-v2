@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a container group definition.
+//	This API works with the following fleet types: Container
 //
 // Request options:
+//
+// Deletes a container group definition.
 //
 //   - Delete an entire container group definition, including all versions.
 //     Specify the container group definition name, or use an ARN value without the

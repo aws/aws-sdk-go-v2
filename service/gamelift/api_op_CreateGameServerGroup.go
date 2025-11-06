@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
-//
-// game server groups.
+//	This API works with the following fleet types: EC2 (FleetIQ)
 //
 // Creates a Amazon GameLift Servers FleetIQ game server group for managing game
 // hosting on a collection of Amazon Elastic Compute Cloud instances for game

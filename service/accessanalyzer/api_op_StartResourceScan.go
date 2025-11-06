@@ -11,6 +11,8 @@ import (
 )
 
 // Immediately starts a scan of the policies applied to the specified resource.
+//
+// This action is supported only for external access analyzers.
 func (c *Client) StartResourceScan(ctx context.Context, params *StartResourceScanInput, optFns ...func(*Options)) (*StartResourceScanOutput, error) {
 	if params == nil {
 		params = &StartResourceScanInput{}

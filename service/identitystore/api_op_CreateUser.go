@@ -37,8 +37,13 @@ type CreateUserInput struct {
 	// A list of Address objects containing addresses associated with the user.
 	Addresses []types.Address
 
+	// The user's birthdate in YYYY-MM-DD format. This field supports standard date
+	// format for storing personal information.
+	Birthdate *string
+
 	// A string containing the name of the user. This value is typically formatted for
-	// display when the user is referenced. For example, "John Doe."
+	// display when the user is referenced. For example, "John Doe." When used in IAM
+	// Identity Center, this parameter is required.
 	DisplayName *string
 
 	// A list of Email objects containing email addresses associated with the user.
@@ -47,7 +52,8 @@ type CreateUserInput struct {
 	// A string containing the geographical region or location of the user.
 	Locale *string
 
-	// An object containing the name of the user.
+	// An object containing the name of the user. When used in IAM Identity Center,
+	// this parameter is required.
 	Name *types.Name
 
 	// A string containing an alternate name for the user.
@@ -55,6 +61,10 @@ type CreateUserInput struct {
 
 	// A list of PhoneNumber objects containing phone numbers associated with the user.
 	PhoneNumbers []types.PhoneNumber
+
+	// A list of photos associated with the user. You can add up to 3 photos per user.
+	// Each photo can include a value, type, display name, and primary designation.
+	Photos []types.Photo
 
 	// A string containing the preferred language of the user. For example, "American
 	// English" or "en-us."
@@ -80,6 +90,10 @@ type CreateUserInput struct {
 	// A string indicating the type of user. Possible values are left unspecified. The
 	// value can vary based on your specific use case.
 	UserType *string
+
+	// The user's personal website or blog URL. This field allows users to provide a
+	// link to their personal or professional website.
+	Website *string
 
 	noSmithyDocumentSerde
 }

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Creates a ContainerGroupDefinition that describes a set of containers for
 // hosting your game server with Amazon GameLift Servers managed containers
 // hosting. An Amazon GameLift Servers container group is similar to a container

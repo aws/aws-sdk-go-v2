@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Retrieves all versions of a container group definition. Use the pagination
 // parameters to retrieve results in a set of sequential pages.
 //

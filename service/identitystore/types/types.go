@@ -5,6 +5,7 @@ package types
 import (
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // The address associated with the specified user.
@@ -151,6 +152,12 @@ type Group struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// The date and time the group was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created the group.
+	CreatedBy *string
+
 	// A string containing a description of the specified group.
 	Description *string
 
@@ -159,11 +166,19 @@ type Group struct {
 	// punctuation, tab, new line, carriage return, space, and nonbreaking space in
 	// this attribute. This value is specified at the time the group is created and
 	// stored as an attribute of the group object in the identity store.
+	//
+	// Prefix search supports a maximum of 1,000 characters for the string.
 	DisplayName *string
 
 	// A list of ExternalId objects that contains the identifiers issued to this
 	// resource by an external identity provider.
 	ExternalIds []ExternalId
+
+	// The date and time the group was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user or system that last updated the group.
+	UpdatedBy *string
 
 	noSmithyDocumentSerde
 }
@@ -177,6 +192,12 @@ type GroupMembership struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// The date and time the group membership was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created the group membership.
+	CreatedBy *string
+
 	// The identifier for a group in the identity store.
 	GroupId *string
 
@@ -187,6 +208,12 @@ type GroupMembership struct {
 
 	// The identifier for a GroupMembership object in an identity store.
 	MembershipId *string
+
+	// The date and time the group membership was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user or system that last updated the group membership.
+	UpdatedBy *string
 
 	noSmithyDocumentSerde
 }
@@ -267,6 +294,32 @@ type PhoneNumber struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a user's photo. Users can have up to 3 photos, with
+// one designated as primary. Supports common image formats, including jpg, jpeg,
+// png, and gif.
+type Photo struct {
+
+	// The photo data or URL. Supported formats include jpg, jpeg, png, and gif. This
+	// field is required for all photo entries.
+	//
+	// This member is required.
+	Value *string
+
+	// A human-readable description of the photo for display purposes. This optional
+	// field provides context about the photo.
+	Display *string
+
+	// Specifies whether this is the user's primary photo. Default value is false .
+	// Only one photo can be designated as primary per user.
+	Primary bool
+
+	// The type of photo. This field is optional and can be used to categorize
+	// different types of photos.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // An entity attribute that's unique to a specific entity.
 type UniqueAttribute struct {
 
@@ -301,8 +354,20 @@ type User struct {
 	// A list of Address objects containing addresses associated with the user.
 	Addresses []Address
 
+	// The user's birthdate in YYYY-MM-DD format. This field stores personal birthdate
+	// information for the user.
+	Birthdate *string
+
+	// The date and time the user was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created the user.
+	CreatedBy *string
+
 	// A string containing the name of the user that is formatted for display when the
 	// user is referenced. For example, "John Doe."
+	//
+	// Prefix search supports a maximum of 1,000 characters for the string.
 	DisplayName *string
 
 	// A list of Email objects containing email addresses associated with the user.
@@ -324,6 +389,10 @@ type User struct {
 	// A list of PhoneNumber objects containing phone numbers associated with the user.
 	PhoneNumbers []PhoneNumber
 
+	// A list of photos associated with the user. Users can have up to 3 photos with
+	// metadata including type, display name, and primary designation.
+	Photos []Photo
+
 	// A string containing the preferred language of the user. For example, "American
 	// English" or "en-us."
 	PreferredLanguage *string
@@ -338,15 +407,28 @@ type User struct {
 	// unspecified. The value can vary based on your specific use case.
 	Title *string
 
+	// The date and time the user was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user or system that last updated the user.
+	UpdatedBy *string
+
 	// A unique string used to identify the user. The length limit is 128 characters.
 	// This value can consist of letters, accented characters, symbols, numbers, and
 	// punctuation. This value is specified at the time the user is created and stored
 	// as an attribute of the user object in the identity store.
 	UserName *string
 
+	// The current status of the user account.
+	UserStatus UserStatus
+
 	// A string indicating the type of user. Possible values are left unspecified. The
 	// value can vary based on your specific use case.
 	UserType *string
+
+	// The user's personal website or blog URL. This field stores website information
+	// for personal or professional use.
+	Website *string
 
 	noSmithyDocumentSerde
 }

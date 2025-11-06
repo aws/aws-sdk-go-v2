@@ -51,6 +51,9 @@ type CreateEvaluationFormInput struct {
 	// This member is required.
 	Title *string
 
+	// Configuration information about automated evaluations.
+	AutoEvaluationConfiguration *types.EvaluationFormAutoEvaluationConfiguration
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
@@ -63,6 +66,10 @@ type CreateEvaluationFormInput struct {
 
 	// A scoring strategy of the evaluation form.
 	ScoringStrategy *types.EvaluationFormScoringStrategy
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

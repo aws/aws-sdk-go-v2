@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Updates settings for a FlexMatch matchmaking configuration. These changes
 // affect all matches and game sessions that are created after the update. To
 // update settings, specify the configuration name to be updated and provide the

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Updates a fleet's mutable attributes, such as game session protection and
 // resource creation limits.
 //
@@ -18,10 +20,17 @@ import (
 // you want to change. If successful, Amazon GameLift Servers returns the
 // identifiers for the updated fleet.
 //
+// A managed fleet's runtime environment, which depends on the fleet's Amazon
+// Machine Image {AMI} version, can't be updated. You must create a new fleet. As a
+// best practice, we recommend replacing your managed fleets every 30 days to
+// maintain a secure and up-to-date runtime environment for your hosted game
+// servers. For guidance, see [Security best practices for Amazon GameLift Servers].
+//
 // # Learn more
 //
 // [Setting up Amazon GameLift Servers fleets]
 //
+// [Security best practices for Amazon GameLift Servers]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
 // [Setting up Amazon GameLift Servers fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {

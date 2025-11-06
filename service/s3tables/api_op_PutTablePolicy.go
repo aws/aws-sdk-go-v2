@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new maintenance configuration or replaces an existing table policy
-// for a table. For more information, see [Adding a table policy]in the Amazon Simple Storage Service
-// User Guide.
+// Creates a new table policy or replaces an existing table policy for a table.
+// For more information, see [Adding a table policy]in the Amazon Simple Storage Service User Guide.
 //
 // Permissions You must have the s3tables:PutTablePolicy permission to use this
 // operation.

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2 (FleetIQ)
+//
 // Lists a game server groups.
 func (c *Client) ListGameServerGroups(ctx context.Context, params *ListGameServerGroupsInput, optFns ...func(*Options)) (*ListGameServerGroupsOutput, error) {
 	if params == nil {

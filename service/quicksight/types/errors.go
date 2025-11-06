@@ -239,6 +239,37 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// An exception thrown when an invalid parameter value is provided for dataset
+// operations.
+type InvalidDataSetParameterValueException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDataSetParameterValueException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDataSetParameterValueException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDataSetParameterValueException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidDataSetParameterValueException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidDataSetParameterValueException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The NextToken value isn't valid.
 type InvalidNextTokenException struct {
 	Message *string

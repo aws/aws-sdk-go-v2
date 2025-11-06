@@ -11,6 +11,8 @@ import (
 	"time"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Requests an authentication token from Amazon GameLift Servers for a compute
 // resource in an Amazon GameLift Servers fleet. Game servers that are running on
 // the compute use this token to communicate with the Amazon GameLift Servers

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves properties for a specific compute resource in an Amazon GameLift
 // Servers fleet. You can list all computes in a fleet by calling [ListCompute].
 //

@@ -65,6 +65,11 @@ type CreateDataSetInput struct {
 	// [ColumnLevelPermissionRule]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html
 	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
 
+	// The data preparation configuration for the dataset. This configuration defines
+	// the source tables, transformation steps, and destination tables used to prepare
+	// the data. Required when using the new data preparation experience.
+	DataPrepConfiguration *types.DataPrepConfiguration
+
 	// The usage configuration to apply to child datasets that reference this dataset
 	// as a source.
 	DataSetUsageConfiguration *types.DataSetUsageConfiguration
@@ -80,7 +85,9 @@ type CreateDataSetInput struct {
 	FolderArns []string
 
 	// Configures the combination and transformation of the data from the physical
-	// tables.
+	// tables. This parameter is used with the legacy data preparation experience.
+	//
+	// Deprecated: Only used in the legacy data preparation experience.
 	LogicalTableMap map[string]types.LogicalTable
 
 	// The configuration for the performance optimization of the dataset that contains
@@ -90,12 +97,24 @@ type CreateDataSetInput struct {
 	// A list of resource permissions on the dataset.
 	Permissions []types.ResourcePermission
 
-	// The row-level security configuration for the data that you want to create.
+	// The row-level security configuration for the data that you want to create. This
+	// parameter is used with the legacy data preparation experience.
+	//
+	// Deprecated: Only used in the legacy data preparation experience.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
 
 	// The configuration of tags on a dataset to set row-level security. Row-level
-	// security tags are currently supported for anonymous embedding only.
+	// security tags are currently supported for anonymous embedding only. This
+	// parameter is used with the legacy data preparation experience.
+	//
+	// Deprecated: Only used in the legacy data preparation experience.
 	RowLevelPermissionTagConfiguration *types.RowLevelPermissionTagConfiguration
+
+	// The semantic model configuration for the dataset. This configuration defines
+	// how the prepared data is structured for an analysis, including table mappings
+	// and row-level security configurations. Required when using the new data
+	// preparation experience.
+	SemanticModelConfiguration *types.SemanticModelConfiguration
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the dataset.

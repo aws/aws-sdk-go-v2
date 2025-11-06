@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Requests authorization to remotely connect to an instance in an Amazon GameLift
 // Servers managed fleet. Use this operation to connect to instances with game
 // servers that use Amazon GameLift Servers server SDK 4.x or earlier. To connect

@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Removes a tag assigned to a Amazon GameLift Servers resource. You can use
 // resource tags to organize Amazon Web Services resources for a range of purposes.
 // This operation handles the permissions necessary to manage tags for Amazon

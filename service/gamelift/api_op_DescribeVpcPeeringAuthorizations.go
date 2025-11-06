@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves valid VPC peering authorizations that are pending for the Amazon Web
 // Services account. This operation returns all VPC peering authorizations and
 // requests for peering. This includes those initiated and received by this

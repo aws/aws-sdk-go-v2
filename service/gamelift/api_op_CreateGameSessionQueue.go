@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Creates a placement queue that processes requests for new game sessions. A
 // queue uses FleetIQ algorithms to locate the best available placement locations
 // for a new game session, and then prompts the game server process to start a new

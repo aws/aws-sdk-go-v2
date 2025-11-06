@@ -52,6 +52,9 @@ type UpdateContactEvaluationInput struct {
 	// A map of question identifiers to note value.
 	Notes map[string]types.EvaluationNote
 
+	// The ID of the user who updated the contact evaluation.
+	UpdatedBy types.EvaluatorUserUnion
+
 	noSmithyDocumentSerde
 }
 

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Updates Realtime script metadata and content.
 //
 // To update script metadata, specify the script ID and provide updated name

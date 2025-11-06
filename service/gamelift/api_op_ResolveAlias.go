@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Attempts to retrieve a fleet ID that is associated with an alias. Specify a
 // unique alias identifier.
 //

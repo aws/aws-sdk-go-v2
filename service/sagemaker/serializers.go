@@ -45804,6 +45804,11 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		}
 	}
 
+	if len(v.NodeProvisioningMode) > 0 {
+		ok := object.Key("NodeProvisioningMode")
+		ok.String(string(v.NodeProvisioningMode))
+	}
+
 	if len(v.NodeRecovery) > 0 {
 		ok := object.Key("NodeRecovery")
 		ok.String(string(v.NodeRecovery))
@@ -46080,6 +46085,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainInput(v *UpdateDomainInput, val
 	if len(v.TagPropagation) > 0 {
 		ok := object.Key("TagPropagation")
 		ok.String(string(v.TagPropagation))
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
 	}
 
 	return nil

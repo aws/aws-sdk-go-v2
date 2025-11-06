@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves information on VPC peering connections. Use this operation to get
 // peering information for all fleets or for one specific fleet ID.
 //

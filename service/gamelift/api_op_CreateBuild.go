@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere
+//
 // Creates a new Amazon GameLift Servers build resource for your game server
 // binary files. Combine game server binaries into a zip file for use with Amazon
 // GameLift Servers.

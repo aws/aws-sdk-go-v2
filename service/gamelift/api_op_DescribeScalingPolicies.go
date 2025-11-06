@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves all scaling policies applied to a fleet.
 //
 // To get a fleet's scaling policies, specify the fleet ID. You can filter this

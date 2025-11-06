@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Finds new players to fill open slots in currently running game sessions. The
 // backfill match process is essentially identical to the process of forming new
 // matches. Backfill requests use the same matchmaker that was used to make the

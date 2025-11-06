@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,12 +54,19 @@ type StartContactEvaluationInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// Whether automated evaluations are enabled.
+	AutoEvaluationConfiguration *types.AutoEvaluationConfiguration
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
 	//
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

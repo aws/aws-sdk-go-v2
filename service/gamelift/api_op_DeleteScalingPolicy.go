@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Deletes a fleet scaling policy. Once deleted, the policy is no longer in force
 // and Amazon GameLift Servers removes all record of it. To delete a scaling
 // policy, specify both the scaling policy name and the fleet ID it is associated

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For the specified group in the specified identity store, updates the group
-// metadata and attributes.
+// Updates the specified group metadata and attributes in the specified identity
+// store.
 func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optFns ...func(*Options)) (*UpdateGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGroupInput{}
@@ -41,7 +41,10 @@ type UpdateGroupInput struct {
 	IdentityStoreId *string
 
 	// A list of AttributeOperation objects to apply to the requested group. These
-	// operations might add, replace, or remove an attribute.
+	// operations might add, replace, or remove an attribute. For more information on
+	// the attributes that can be added, replaced, or removed, see [Group].
+	//
+	// [Group]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html
 	//
 	// This member is required.
 	Operations []types.AttributeOperation

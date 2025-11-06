@@ -15,10 +15,10 @@ import (
 // objects. Filtering for a User by the UserName attribute is deprecated. Instead,
 // use the GetUserId API action.
 //
-// If you have administrator access to a member account, you can use this API from
-// the member account. Read about [member accounts]in the Organizations User Guide.
+// If you have access to a member account, you can use this API operation from the
+// member account. For more information, see [Limiting access to the identity store from member accounts]in the IAM Identity Center User Guide.
 //
-// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+// [Limiting access to the identity store from member accounts]: https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
@@ -44,7 +44,7 @@ type ListUsersInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// A list of Filter objects, which is used in the ListUsers and ListGroups
+	// A list of Filter objects, which is used in the ListUsers and  ListGroups
 	// requests.
 	//
 	// Deprecated: Using filters with ListUsers API is deprecated, please use

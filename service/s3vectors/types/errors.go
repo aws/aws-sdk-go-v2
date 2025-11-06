@@ -234,6 +234,32 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request timed out. Retry your request.
+type RequestTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RequestTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RequestTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Your request exceeds a service quota.
 type ServiceQuotaExceededException struct {
 	Message *string

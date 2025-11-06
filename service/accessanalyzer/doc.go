@@ -5,21 +5,27 @@
 //
 // Identity and Access Management Access Analyzer helps you to set, verify, and
 // refine your IAM policies by providing a suite of capabilities. Its features
-// include findings for external and unused access, basic and custom policy checks
-// for validating policies, and policy generation to generate fine-grained
-// policies. To start using IAM Access Analyzer to identify external or unused
-// access, you first need to create an analyzer.
+// include findings for external, internal, and unused access, basic and custom
+// policy checks for validating policies, and policy generation to generate
+// fine-grained policies. To start using IAM Access Analyzer to identify external,
+// internal, or unused access, you first need to create an analyzer.
 //
-// External access analyzers help identify potential risks of accessing resources
-// by enabling you to identify any resource policies that grant access to an
-// external principal. It does this by using logic-based reasoning to analyze
+// External access analyzers help you identify potential risks of accessing
+// resources by enabling you to identify any resource policies that grant access to
+// an external principal. It does this by using logic-based reasoning to analyze
 // resource-based policies in your Amazon Web Services environment. An external
 // principal can be another Amazon Web Services account, a root user, an IAM user
 // or role, a federated user, an Amazon Web Services service, or an anonymous user.
 // You can also use IAM Access Analyzer to preview public and cross-account access
 // to your resources before deploying permissions changes.
 //
-// Unused access analyzers help identify potential identity access risks by
+// Internal access analyzers help you identify which principals within your
+// organization or account have access to selected resources. This analysis
+// supports implementing the principle of least privilege by ensuring that your
+// specified resources can only be accessed by the intended principals within your
+// organization.
+//
+// Unused access analyzers help you identify potential identity access risks by
 // enabling you to identify unused IAM roles, unused access keys, unused console
 // passwords, and IAM principals with unused service and action-level permissions.
 //
@@ -29,8 +35,8 @@
 // activity logged in CloudTrail logs.
 //
 // This guide describes the IAM Access Analyzer operations that you can call
-// programmatically. For general information about IAM Access Analyzer, see [Identity and Access Management Access Analyzer]in the
+// programmatically. For general information about IAM Access Analyzer, see [Using Identity and Access Management Access Analyzer]in the
 // IAM User Guide.
 //
-// [Identity and Access Management Access Analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html
+// [Using Identity and Access Management Access Analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html
 package accessanalyzer

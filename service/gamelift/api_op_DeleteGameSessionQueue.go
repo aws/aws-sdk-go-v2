@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Deletes a game session queue. Once a queue is successfully deleted, unfulfilled [StartGameSessionPlacement]
 // requests that reference the queue will fail. To delete a queue, specify the
 // queue name.

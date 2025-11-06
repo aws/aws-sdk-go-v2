@@ -98,6 +98,11 @@ type DescribeRecoveryPointOutput struct {
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	EncryptionKeyArn *string
 
+	// The type of encryption key used for the recovery point. Valid values are
+	// CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web
+	// Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.
+	EncryptionKeyType types.EncryptionKeyType
+
 	// Specifies the IAM role ARN used to create the target recovery point; for
 	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string

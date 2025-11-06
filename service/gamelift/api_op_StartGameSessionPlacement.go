@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Makes a request to start a new game session using a game session queue. When
 // processing a placement request, Amazon GameLift Servers looks for the best
 // possible available resource to host the game session, based on how the queue is

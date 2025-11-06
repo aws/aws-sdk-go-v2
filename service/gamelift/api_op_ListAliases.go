@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves all aliases for this Amazon Web Services account. You can filter the
 // result set by alias name and/or routing strategy type. Use the pagination
 // parameters to retrieve results in sequential pages.

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Updates the configuration of a game session queue, which determines how the
 // queue processes new game session requests. To update settings, specify the queue
 // name to be updated and provide the new settings. When updating destinations,

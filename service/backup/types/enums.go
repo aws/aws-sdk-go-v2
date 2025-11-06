@@ -229,6 +229,25 @@ func (CopyJobStatus) Values() []CopyJobStatus {
 	}
 }
 
+type EncryptionKeyType string
+
+// Enum values for EncryptionKeyType
+const (
+	EncryptionKeyTypeAwsOwnedKmsKey        EncryptionKeyType = "AWS_OWNED_KMS_KEY"
+	EncryptionKeyTypeCustomerManagedKmsKey EncryptionKeyType = "CUSTOMER_MANAGED_KMS_KEY"
+)
+
+// Values returns all known values for EncryptionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyType) Values() []EncryptionKeyType {
+	return []EncryptionKeyType{
+		"AWS_OWNED_KMS_KEY",
+		"CUSTOMER_MANAGED_KMS_KEY",
+	}
+}
+
 type Index string
 
 // Enum values for Index

@@ -13737,6 +13737,9 @@ func awsAwsjson11_deserializeOpErrorUpdateGameSession(response *smithyhttp.Respo
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("NotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorNotReadyException(response, errorBody)
+
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorUnauthorizedException(response, errorBody)
 

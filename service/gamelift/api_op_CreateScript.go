@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere
+//
 // Creates a new script record for your Amazon GameLift Servers Realtime script.
 // Realtime scripts are JavaScript that provide configuration settings and optional
 // custom game logic for your game. The script is deployed when you create a Amazon

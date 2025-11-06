@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Retrieves container group definitions for the Amazon Web Services account and
 // Amazon Web Services Region. Use the pagination parameters to retrieve results in
 // a set of sequential pages.

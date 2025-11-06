@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Validates the syntax of a matchmaking rule or rule set. This operation checks
 // that the rule set is using syntactically correct JSON and that it conforms to
 // allowed property expressions. To validate syntax, provide a rule set JSON

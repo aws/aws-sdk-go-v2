@@ -49,6 +49,12 @@ type CreateVectorBucketInput struct {
 }
 
 type CreateVectorBucketOutput struct {
+
+	// The Amazon Resource Name (ARN) of the newly created vector bucket.
+	//
+	// This member is required.
+	VectorBucketArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

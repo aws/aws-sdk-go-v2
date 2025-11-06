@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Creates a fleet of compute resources to host your game servers. Use this
-// operation to set up the following types of fleets based on compute type:
+// operation to set up a fleet for the following compute types:
 //
 // # Managed EC2 fleet
 //
@@ -48,6 +50,14 @@ import (
 // When the fleet status is ACTIVE, you can adjust capacity settings and turn
 // autoscaling on/off for each location.
 //
+// A managed fleet's runtime environment depends on the Amazon Machine Image (AMI)
+// version it uses. When a new fleet is created, Amazon GameLift Servers assigns
+// the latest available AMI version to the fleet, and all compute instances in that
+// fleet are deployed with that version. To update the AMI version, you must create
+// a new fleet. As a best practice, we recommend replacing your managed fleets
+// every 30 days to maintain a secure and up-to-date runtime environment for your
+// hosted game servers. For guidance, see [Security best practices for Amazon GameLift Servers].
+//
 // # Anywhere fleet
 //
 // An Anywhere fleet represents compute resources that are not owned or managed by
@@ -77,6 +87,7 @@ import (
 // [fleet creation workflow]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow
 // [Multi-location fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 // [Debug fleet creation issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
+// [Security best practices for Amazon GameLift Servers]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
 // [Setting up fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves a fresh set of credentials for use when uploading a new set of game
 // build files to Amazon GameLift Servers's Amazon S3. This is done as part of the
 // build creation process; see [CreateBuild].

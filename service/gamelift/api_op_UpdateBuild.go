@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Updates metadata in a build resource, including the build name and version. To
 // update the metadata, specify the build ID to update and provide the new values.
 // If successful, a build object containing the updated metadata is returned.

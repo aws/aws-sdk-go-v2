@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves information about a resource that was analyzed.
+//
+// This action is supported only for external access analyzers.
 func (c *Client) GetAnalyzedResource(ctx context.Context, params *GetAnalyzedResourceInput, optFns ...func(*Options)) (*GetAnalyzedResourceOutput, error) {
 	if params == nil {
 		params = &GetAnalyzedResourceInput{}

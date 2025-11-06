@@ -11,7 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web ServicesSupport.
+// request access to this API, contact Amazon Web Services Support.
 //
 // Updates the selected authentication profile.
 func (c *Client) UpdateAuthenticationProfile(ctx context.Context, params *UpdateAuthenticationProfileInput, optFns ...func(*Options)) (*UpdateAuthenticationProfileOutput, error) {

@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Updates properties for an alias. Specify the unique identifier of the alias to
-// be updated and the new property values. When reassigning an alias to a new
-// fleet, provide an updated routing strategy. If successful, the updated alias
-// record is returned.
+// be updated and the new property values.
+//
+// When reassigning an alias to a new fleet, provide an updated routing strategy.
+// If successful, the updated alias record is returned.
 //
 // # Related actions
 //

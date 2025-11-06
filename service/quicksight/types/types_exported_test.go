@@ -257,6 +257,9 @@ func ExamplePhysicalTable_outputUsage() {
 	case *types.PhysicalTableMemberS3Source:
 		_ = v.Value // Value is types.S3Source
 
+	case *types.PhysicalTableMemberSaaSTable:
+		_ = v.Value // Value is types.SaaSTable
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -269,6 +272,7 @@ func ExamplePhysicalTable_outputUsage() {
 var _ *types.S3Source
 var _ *types.CustomSql
 var _ *types.RelationalTable
+var _ *types.SaaSTable
 
 func ExampleReadAuthenticationMetadata_outputUsage() {
 	var union types.ReadAuthenticationMetadata

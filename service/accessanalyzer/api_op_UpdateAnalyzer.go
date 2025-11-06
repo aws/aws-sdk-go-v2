@@ -12,6 +12,8 @@ import (
 )
 
 // Modifies the configuration of an existing analyzer.
+//
+// This action is not supported for external access analyzers.
 func (c *Client) UpdateAnalyzer(ctx context.Context, params *UpdateAnalyzerInput, optFns ...func(*Options)) (*UpdateAnalyzerOutput, error) {
 	if params == nil {
 		params = &UpdateAnalyzerInput{}

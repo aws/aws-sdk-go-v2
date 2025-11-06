@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves the location of stored game session logs for a specified game session
 // on Amazon GameLift Servers managed fleets. When a game session is terminated,
 // Amazon GameLift Servers automatically stores the logs in Amazon S3 and retains

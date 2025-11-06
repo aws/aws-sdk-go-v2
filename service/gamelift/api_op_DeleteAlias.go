@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Deletes an alias. This operation removes all record of the alias. Game clients
 // attempting to access a server process using the deleted alias receive an error.
 // To delete an alias, specify the alias ID to be deleted.

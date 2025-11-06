@@ -14,6 +14,7 @@ type AccessDeniedException struct {
 	ErrorCodeOverride *string
 
 	RequestId *string
+	Reason    AccessDeniedExceptionReason
 
 	noSmithyDocumentSerde
 }
@@ -107,6 +108,7 @@ type ResourceNotFoundException struct {
 
 	ResourceType ResourceType
 	ResourceId   *string
+	Reason       ResourceNotFoundExceptionReason
 	RequestId    *string
 
 	noSmithyDocumentSerde
@@ -167,6 +169,7 @@ type ThrottlingException struct {
 
 	RequestId         *string
 	RetryAfterSeconds int32
+	Reason            ThrottlingExceptionReason
 
 	noSmithyDocumentSerde
 }
@@ -195,6 +198,7 @@ type ValidationException struct {
 	ErrorCodeOverride *string
 
 	RequestId *string
+	Reason    ValidationExceptionReason
 
 	noSmithyDocumentSerde
 }

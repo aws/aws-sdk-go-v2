@@ -4141,6 +4141,15 @@ func awsRestjson1_deserializeOpDocumentDescribeBackupVaultOutput(v **DescribeBac
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
 
+		case "EncryptionKeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyType = types.EncryptionKeyType(jtv)
+			}
+
 		case "LatestMpaApprovalTeamUpdate":
 			if err := awsRestjson1_deserializeDocumentLatestMpaApprovalTeamUpdate(&sv.LatestMpaApprovalTeamUpdate, value); err != nil {
 				return err
@@ -5325,6 +5334,15 @@ func awsRestjson1_deserializeOpDocumentDescribeRecoveryPointOutput(v **DescribeR
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "EncryptionKeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyType = types.EncryptionKeyType(jtv)
 			}
 
 		case "IamRoleArn":
@@ -19012,6 +19030,15 @@ func awsRestjson1_deserializeDocumentBackupVaultListMember(v **types.BackupVault
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
 
+		case "EncryptionKeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyType = types.EncryptionKeyType(jtv)
+			}
+
 		case "LockDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21975,6 +22002,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointByBackupVault(v **types.Recove
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
 
+		case "EncryptionKeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyType = types.EncryptionKeyType(jtv)
+			}
+
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22248,6 +22284,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointByResource(v **types.RecoveryP
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "EncryptionKeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyType = types.EncryptionKeyType(jtv)
 			}
 
 		case "IndexStatus":

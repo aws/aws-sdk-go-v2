@@ -5448,6 +5448,77 @@ func validateActionConnectorSearchFilterList(v []types.ActionConnectorSearchFilt
 	}
 }
 
+func validateAggregateOperation(v *types.AggregateOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregateOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Aggregations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Aggregations"))
+	} else if v.Aggregations != nil {
+		if err := validateAggregationList(v.Aggregations); err != nil {
+			invalidParams.AddNested("Aggregations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregation(v *types.Aggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Aggregation"}
+	if v.AggregationFunction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationFunction"))
+	} else if v.AggregationFunction != nil {
+		if err := validateDataPrepAggregationFunction(v.AggregationFunction); err != nil {
+			invalidParams.AddNested("AggregationFunction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NewColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewColumnName"))
+	}
+	if v.NewColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewColumnId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationList(v []types.Aggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationList"}
+	for i := range v {
+		if err := validateAggregation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAggregationSortConfiguration(v *types.AggregationSortConfiguration) error {
 	if v == nil {
 		return nil
@@ -5811,6 +5882,73 @@ func validateAPIKeyConnectionMetadata(v *types.APIKeyConnectionMetadata) error {
 	}
 	if v.ApiKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppendedColumn(v *types.AppendedColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppendedColumn"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.NewColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewColumnId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppendedColumnList(v []types.AppendedColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppendedColumnList"}
+	for i := range v {
+		if err := validateAppendedColumn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppendOperation(v *types.AppendOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppendOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.FirstSource != nil {
+		if err := validateTransformOperationSource(v.FirstSource); err != nil {
+			invalidParams.AddNested("FirstSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecondSource != nil {
+		if err := validateTransformOperationSource(v.SecondSource); err != nil {
+			invalidParams.AddNested("SecondSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AppendedColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppendedColumns"))
+	} else if v.AppendedColumns != nil {
+		if err := validateAppendedColumnList(v.AppendedColumns); err != nil {
+			invalidParams.AddNested("AppendedColumns", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8176,6 +8314,52 @@ func validateCastColumnTypeOperation(v *types.CastColumnTypeOperation) error {
 	}
 }
 
+func validateCastColumnTypeOperationList(v []types.CastColumnTypeOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CastColumnTypeOperationList"}
+	for i := range v {
+		if err := validateCastColumnTypeOperation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCastColumnTypesOperation(v *types.CastColumnTypesOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CastColumnTypesOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CastColumnTypeOperations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CastColumnTypeOperations"))
+	} else if v.CastColumnTypeOperations != nil {
+		if err := validateCastColumnTypeOperationList(v.CastColumnTypeOperations); err != nil {
+			invalidParams.AddNested("CastColumnTypeOperations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCategoricalDimensionField(v *types.CategoricalDimensionField) error {
 	if v == nil {
 		return nil
@@ -9132,6 +9316,11 @@ func validateCreateColumnsOperation(v *types.CreateColumnsOperation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateColumnsOperation"}
+	if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Columns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
 	} else if v.Columns != nil {
@@ -9757,11 +9946,163 @@ func validateDataPathSort(v *types.DataPathSort) error {
 	}
 }
 
+func validateDataPrepAggregationFunction(v *types.DataPrepAggregationFunction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataPrepAggregationFunction"}
+	if v.SimpleAggregation != nil {
+		if err := validateDataPrepSimpleAggregationFunction(v.SimpleAggregation); err != nil {
+			invalidParams.AddNested("SimpleAggregation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListAggregation != nil {
+		if err := validateDataPrepListAggregationFunction(v.ListAggregation); err != nil {
+			invalidParams.AddNested("ListAggregation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataPrepConfiguration(v *types.DataPrepConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataPrepConfiguration"}
+	if v.SourceTableMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceTableMap"))
+	} else if v.SourceTableMap != nil {
+		if err := validateSourceTableMap(v.SourceTableMap); err != nil {
+			invalidParams.AddNested("SourceTableMap", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TransformStepMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformStepMap"))
+	} else if v.TransformStepMap != nil {
+		if err := validateTransformStepMap(v.TransformStepMap); err != nil {
+			invalidParams.AddNested("TransformStepMap", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationTableMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTableMap"))
+	} else if v.DestinationTableMap != nil {
+		if err := validateDestinationTableMap(v.DestinationTableMap); err != nil {
+			invalidParams.AddNested("DestinationTableMap", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataPrepListAggregationFunction(v *types.DataPrepListAggregationFunction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataPrepListAggregationFunction"}
+	if v.Separator == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Separator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataPrepSimpleAggregationFunction(v *types.DataPrepSimpleAggregationFunction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataPrepSimpleAggregationFunction"}
+	if len(v.FunctionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataQnAConfigurations(v *types.DataQnAConfigurations) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataQnAConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetColumnIdMapping(v *types.DataSetColumnIdMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetColumnIdMapping"}
+	if v.SourceColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceColumnId"))
+	}
+	if v.TargetColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetColumnId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetColumnIdMappingList(v []types.DataSetColumnIdMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetColumnIdMappingList"}
+	for i := range v {
+		if err := validateDataSetColumnIdMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetDateComparisonFilterCondition(v *types.DataSetDateComparisonFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetDateComparisonFilterCondition"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetDateFilterCondition(v *types.DataSetDateFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetDateFilterCondition"}
+	if v.ComparisonFilterCondition != nil {
+		if err := validateDataSetDateComparisonFilterCondition(v.ComparisonFilterCondition); err != nil {
+			invalidParams.AddNested("ComparisonFilterCondition", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9830,6 +10171,38 @@ func validateDatasetMetadata(v *types.DatasetMetadata) error {
 	if v.NamedEntities != nil {
 		if err := validateTopicNamedEntities(v.NamedEntities); err != nil {
 			invalidParams.AddNested("NamedEntities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetNumericComparisonFilterCondition(v *types.DataSetNumericComparisonFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetNumericComparisonFilterCondition"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetNumericFilterCondition(v *types.DataSetNumericFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetNumericFilterCondition"}
+	if v.ComparisonFilterCondition != nil {
+		if err := validateDataSetNumericComparisonFilterCondition(v.ComparisonFilterCondition); err != nil {
+			invalidParams.AddNested("ComparisonFilterCondition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9987,6 +10360,58 @@ func validateDataSetSearchFilterList(v []types.DataSetSearchFilter) error {
 		if err := validateDataSetSearchFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetStringComparisonFilterCondition(v *types.DataSetStringComparisonFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetStringComparisonFilterCondition"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetStringFilterCondition(v *types.DataSetStringFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetStringFilterCondition"}
+	if v.ComparisonFilterCondition != nil {
+		if err := validateDataSetStringComparisonFilterCondition(v.ComparisonFilterCondition); err != nil {
+			invalidParams.AddNested("ComparisonFilterCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListFilterCondition != nil {
+		if err := validateDataSetStringListFilterCondition(v.ListFilterCondition); err != nil {
+			invalidParams.AddNested("ListFilterCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetStringListFilterCondition(v *types.DataSetStringListFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetStringListFilterCondition"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10742,6 +11167,61 @@ func validateDestinationParameterValueConfiguration(v *types.DestinationParamete
 		if err := validateColumnIdentifier(v.SourceColumn); err != nil {
 			invalidParams.AddNested("SourceColumn", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationTable(v *types.DestinationTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationTable"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateDestinationTableSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationTableMap(v map[string]types.DestinationTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationTableMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateDestinationTable(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationTableSource(v *types.DestinationTableSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationTableSource"}
+	if v.TransformOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformOperationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11658,8 +12138,37 @@ func validateFilterOperation(v *types.FilterOperation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterOperation"}
-	if v.ConditionExpression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConditionExpression"))
+	if v.StringFilterCondition != nil {
+		if err := validateDataSetStringFilterCondition(v.StringFilterCondition); err != nil {
+			invalidParams.AddNested("StringFilterCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NumericFilterCondition != nil {
+		if err := validateDataSetNumericFilterCondition(v.NumericFilterCondition); err != nil {
+			invalidParams.AddNested("NumericFilterCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DateFilterCondition != nil {
+		if err := validateDataSetDateFilterCondition(v.DateFilterCondition); err != nil {
+			invalidParams.AddNested("DateFilterCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterOperationList(v []types.FilterOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterOperationList"}
+	for i := range v {
+		if err := validateFilterOperation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11736,6 +12245,35 @@ func validateFilterSliderControl(v *types.FilterSliderControl) error {
 	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFiltersOperation(v *types.FiltersOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FiltersOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilterOperations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterOperations"))
+	} else if v.FilterOperations != nil {
+		if err := validateFilterOperationList(v.FilterOperations); err != nil {
+			invalidParams.AddNested("FilterOperations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13918,6 +14456,48 @@ func validateImpalaParameters(v *types.ImpalaParameters) error {
 	}
 }
 
+func validateImportTableOperation(v *types.ImportTableOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportTableOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateImportTableOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImportTableOperationSource(v *types.ImportTableOperationSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportTableOperationSource"}
+	if v.SourceTableId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceTableId"))
+	}
+	if v.ColumnIdMappings != nil {
+		if err := validateDataSetColumnIdMappingList(v.ColumnIdMappings); err != nil {
+			invalidParams.AddNested("ColumnIdMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIncrementalRefresh(v *types.IncrementalRefresh) error {
 	if v == nil {
 		return nil
@@ -14171,6 +14751,70 @@ func validateJoinInstruction(v *types.JoinInstruction) error {
 	}
 	if v.OnClause == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OnClause"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJoinOperandProperties(v *types.JoinOperandProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JoinOperandProperties"}
+	if v.OutputColumnNameOverrides == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputColumnNameOverrides"))
+	} else if v.OutputColumnNameOverrides != nil {
+		if err := validateOutputColumnNameOverrideList(v.OutputColumnNameOverrides); err != nil {
+			invalidParams.AddNested("OutputColumnNameOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJoinOperation(v *types.JoinOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JoinOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.LeftOperand == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LeftOperand"))
+	} else if v.LeftOperand != nil {
+		if err := validateTransformOperationSource(v.LeftOperand); err != nil {
+			invalidParams.AddNested("LeftOperand", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RightOperand == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RightOperand"))
+	} else if v.RightOperand != nil {
+		if err := validateTransformOperationSource(v.RightOperand); err != nil {
+			invalidParams.AddNested("RightOperand", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.OnClause == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OnClause"))
+	}
+	if v.LeftOperandProperties != nil {
+		if err := validateJoinOperandProperties(v.LeftOperandProperties); err != nil {
+			invalidParams.AddNested("LeftOperandProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RightOperandProperties != nil {
+		if err := validateJoinOperandProperties(v.RightOperandProperties); err != nil {
+			invalidParams.AddNested("RightOperandProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15563,6 +16207,38 @@ func validateOracleParameters(v *types.OracleParameters) error {
 	}
 }
 
+func validateOutputColumnNameOverride(v *types.OutputColumnNameOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputColumnNameOverride"}
+	if v.OutputColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputColumnName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputColumnNameOverrideList(v []types.OutputColumnNameOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputColumnNameOverrideList"}
+	for i := range v {
+		if err := validateOutputColumnNameOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOverrideDatasetParameterOperation(v *types.OverrideDatasetParameterOperation) error {
 	if v == nil {
 		return nil
@@ -15899,6 +16575,28 @@ func validateParameterTextFieldControl(v *types.ParameterTextFieldControl) error
 	}
 }
 
+func validateParentDataSet(v *types.ParentDataSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParentDataSet"}
+	if v.DataSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetArn"))
+	}
+	if v.InputColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
+	} else if v.InputColumns != nil {
+		if err := validateInputColumnList(v.InputColumns); err != nil {
+			invalidParams.AddNested("InputColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePercentageDisplayFormatConfiguration(v *types.PercentageDisplayFormatConfiguration) error {
 	if v == nil {
 		return nil
@@ -16030,6 +16728,11 @@ func validatePhysicalTable(v types.PhysicalTable) error {
 	case *types.PhysicalTableMemberS3Source:
 		if err := validateS3Source(&uv.Value); err != nil {
 			invalidParams.AddNested("[S3Source]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PhysicalTableMemberSaaSTable:
+		if err := validateSaaSTable(&uv.Value); err != nil {
+			invalidParams.AddNested("[SaaSTable]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -16200,6 +16903,63 @@ func validatePieChartVisual(v *types.PieChartVisual) error {
 	}
 }
 
+func validatePivotConfiguration(v *types.PivotConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotConfiguration"}
+	if v.PivotedLabels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PivotedLabels"))
+	} else if v.PivotedLabels != nil {
+		if err := validatePivotedLabelList(v.PivotedLabels); err != nil {
+			invalidParams.AddNested("PivotedLabels", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePivotedLabel(v *types.PivotedLabel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotedLabel"}
+	if v.LabelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelName"))
+	}
+	if v.NewColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewColumnName"))
+	}
+	if v.NewColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewColumnId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePivotedLabelList(v []types.PivotedLabel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotedLabelList"}
+	for i := range v {
+		if err := validatePivotedLabel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePivotFieldSortOptions(v *types.PivotFieldSortOptions) error {
 	if v == nil {
 		return nil
@@ -16247,6 +17007,42 @@ func validatePivotMeasureFieldList(v []types.MeasureField) error {
 	for i := range v {
 		if err := validateMeasureField(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePivotOperation(v *types.PivotOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValueColumnConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueColumnConfiguration"))
+	} else if v.ValueColumnConfiguration != nil {
+		if err := validateValueColumnConfiguration(v.ValueColumnConfiguration); err != nil {
+			invalidParams.AddNested("ValueColumnConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PivotConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PivotConfiguration"))
+	} else if v.PivotConfiguration != nil {
+		if err := validatePivotConfiguration(v.PivotConfiguration); err != nil {
+			invalidParams.AddNested("PivotConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16885,6 +17681,11 @@ func validateProjectOperation(v *types.ProjectOperation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectOperation"}
+	if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ProjectedColumns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectedColumns"))
 	}
@@ -17628,6 +18429,52 @@ func validateRenameColumnOperation(v *types.RenameColumnOperation) error {
 	}
 }
 
+func validateRenameColumnOperationList(v []types.RenameColumnOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RenameColumnOperationList"}
+	for i := range v {
+		if err := validateRenameColumnOperation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRenameColumnsOperation(v *types.RenameColumnsOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RenameColumnsOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RenameColumnOperations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RenameColumnOperations"))
+	} else if v.RenameColumnOperations != nil {
+		if err := validateRenameColumnOperationList(v.RenameColumnOperations); err != nil {
+			invalidParams.AddNested("RenameColumnOperations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourcePermission(v *types.ResourcePermission) error {
 	if v == nil {
 		return nil
@@ -17670,6 +18517,28 @@ func validateRollingDateConfiguration(v *types.RollingDateConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RollingDateConfiguration"}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRowLevelPermissionConfiguration(v *types.RowLevelPermissionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RowLevelPermissionConfiguration"}
+	if v.TagConfiguration != nil {
+		if err := validateRowLevelPermissionTagConfiguration(v.TagConfiguration); err != nil {
+			invalidParams.AddNested("TagConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RowLevelPermissionDataSet != nil {
+		if err := validateRowLevelPermissionDataSet(v.RowLevelPermissionDataSet); err != nil {
+			invalidParams.AddNested("RowLevelPermissionDataSet", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17829,6 +18698,31 @@ func validateS3Source(v *types.S3Source) error {
 	invalidParams := smithy.InvalidParamsError{Context: "S3Source"}
 	if v.DataSourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if v.InputColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
+	} else if v.InputColumns != nil {
+		if err := validateInputColumnList(v.InputColumns); err != nil {
+			invalidParams.AddNested("InputColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSaaSTable(v *types.SaaSTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SaaSTable"}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if v.TablePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TablePath"))
 	}
 	if v.InputColumns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
@@ -18228,6 +19122,64 @@ func validateSelectedSheetsFilterScopeConfiguration(v *types.SelectedSheetsFilte
 	if v.SheetVisualScopingConfigurations != nil {
 		if err := validateSheetVisualScopingConfigurations(v.SheetVisualScopingConfigurations); err != nil {
 			invalidParams.AddNested("SheetVisualScopingConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSemanticModelConfiguration(v *types.SemanticModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SemanticModelConfiguration"}
+	if v.TableMap != nil {
+		if err := validateSemanticTableMap(v.TableMap); err != nil {
+			invalidParams.AddNested("TableMap", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSemanticTable(v *types.SemanticTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SemanticTable"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.DestinationTableId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTableId"))
+	}
+	if v.RowLevelPermissionConfiguration != nil {
+		if err := validateRowLevelPermissionConfiguration(v.RowLevelPermissionConfiguration); err != nil {
+			invalidParams.AddNested("RowLevelPermissionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSemanticTableMap(v map[string]types.SemanticTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SemanticTableMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateSemanticTable(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -18991,6 +19943,41 @@ func validateSnowflakeParameters(v *types.SnowflakeParameters) error {
 	if v.OAuthParameters != nil {
 		if err := validateOAuthParameters(v.OAuthParameters); err != nil {
 			invalidParams.AddNested("OAuthParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceTable(v *types.SourceTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceTable"}
+	if v.DataSet != nil {
+		if err := validateParentDataSet(v.DataSet); err != nil {
+			invalidParams.AddNested("DataSet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceTableMap(v map[string]types.SourceTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceTableMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateSourceTable(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -20891,6 +21878,111 @@ func validateTransformOperationList(v []types.TransformOperation) error {
 	}
 }
 
+func validateTransformOperationSource(v *types.TransformOperationSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformOperationSource"}
+	if v.TransformOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformOperationId"))
+	}
+	if v.ColumnIdMappings != nil {
+		if err := validateDataSetColumnIdMappingList(v.ColumnIdMappings); err != nil {
+			invalidParams.AddNested("ColumnIdMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformStep(v *types.TransformStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformStep"}
+	if v.ImportTableStep != nil {
+		if err := validateImportTableOperation(v.ImportTableStep); err != nil {
+			invalidParams.AddNested("ImportTableStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProjectStep != nil {
+		if err := validateProjectOperation(v.ProjectStep); err != nil {
+			invalidParams.AddNested("ProjectStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FiltersStep != nil {
+		if err := validateFiltersOperation(v.FiltersStep); err != nil {
+			invalidParams.AddNested("FiltersStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CreateColumnsStep != nil {
+		if err := validateCreateColumnsOperation(v.CreateColumnsStep); err != nil {
+			invalidParams.AddNested("CreateColumnsStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RenameColumnsStep != nil {
+		if err := validateRenameColumnsOperation(v.RenameColumnsStep); err != nil {
+			invalidParams.AddNested("RenameColumnsStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CastColumnTypesStep != nil {
+		if err := validateCastColumnTypesOperation(v.CastColumnTypesStep); err != nil {
+			invalidParams.AddNested("CastColumnTypesStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JoinStep != nil {
+		if err := validateJoinOperation(v.JoinStep); err != nil {
+			invalidParams.AddNested("JoinStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregateStep != nil {
+		if err := validateAggregateOperation(v.AggregateStep); err != nil {
+			invalidParams.AddNested("AggregateStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PivotStep != nil {
+		if err := validatePivotOperation(v.PivotStep); err != nil {
+			invalidParams.AddNested("PivotStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UnpivotStep != nil {
+		if err := validateUnpivotOperation(v.UnpivotStep); err != nil {
+			invalidParams.AddNested("UnpivotStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AppendStep != nil {
+		if err := validateAppendOperation(v.AppendStep); err != nil {
+			invalidParams.AddNested("AppendStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformStepMap(v map[string]types.TransformStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformStepMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateTransformStep(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTransposedTableOption(v *types.TransposedTableOption) error {
 	if v == nil {
 		return nil
@@ -21230,6 +22322,43 @@ func validateUniqueValuesComputation(v *types.UniqueValuesComputation) error {
 	}
 }
 
+func validateUnpivotOperation(v *types.UnpivotOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnpivotOperation"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTransformOperationSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColumnsToUnpivot == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnsToUnpivot"))
+	}
+	if v.UnpivotedLabelColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnpivotedLabelColumnName"))
+	}
+	if v.UnpivotedLabelColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnpivotedLabelColumnId"))
+	}
+	if v.UnpivotedValueColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnpivotedValueColumnName"))
+	}
+	if v.UnpivotedValueColumnId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnpivotedValueColumnId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUntagColumnOperation(v *types.UntagColumnOperation) error {
 	if v == nil {
 		return nil
@@ -21323,6 +22452,23 @@ func validateValidationStrategy(v *types.ValidationStrategy) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ValidationStrategy"}
 	if len(v.Mode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValueColumnConfiguration(v *types.ValueColumnConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValueColumnConfiguration"}
+	if v.AggregationFunction != nil {
+		if err := validateDataPrepAggregationFunction(v.AggregationFunction); err != nil {
+			invalidParams.AddNested("AggregationFunction", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22371,6 +23517,16 @@ func validateOpCreateDataSetInput(v *CreateDataSetInput) error {
 	if v.PerformanceConfiguration != nil {
 		if err := validatePerformanceConfiguration(v.PerformanceConfiguration); err != nil {
 			invalidParams.AddNested("PerformanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataPrepConfiguration != nil {
+		if err := validateDataPrepConfiguration(v.DataPrepConfiguration); err != nil {
+			invalidParams.AddNested("DataPrepConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SemanticModelConfiguration != nil {
+		if err := validateSemanticModelConfiguration(v.SemanticModelConfiguration); err != nil {
+			invalidParams.AddNested("SemanticModelConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -26153,6 +27309,16 @@ func validateOpUpdateDataSetInput(v *UpdateDataSetInput) error {
 	if v.PerformanceConfiguration != nil {
 		if err := validatePerformanceConfiguration(v.PerformanceConfiguration); err != nil {
 			invalidParams.AddNested("PerformanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataPrepConfiguration != nil {
+		if err := validateDataPrepConfiguration(v.DataPrepConfiguration); err != nil {
+			invalidParams.AddNested("DataPrepConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SemanticModelConfiguration != nil {
+		if err := validateSemanticModelConfiguration(v.SemanticModelConfiguration); err != nil {
+			invalidParams.AddNested("SemanticModelConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

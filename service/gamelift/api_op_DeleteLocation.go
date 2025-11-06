@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Anywhere
+//
 // Deletes a custom location.
 //
 // Before deleting a custom location, review any fleets currently using the custom

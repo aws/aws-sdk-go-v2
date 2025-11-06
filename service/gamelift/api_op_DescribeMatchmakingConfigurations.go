@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves the details of FlexMatch matchmaking configurations.
 //
 // This operation offers the following options: (1) retrieve all matchmaking

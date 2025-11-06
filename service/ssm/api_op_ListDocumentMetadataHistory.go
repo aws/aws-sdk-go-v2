@@ -11,8 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Amazon Web Services Systems Manager Change Manager will no longer be open to
+// new customers starting November 7, 2025. If you would like to use Change
+// Manager, sign up prior to that date. Existing customers can continue to use the
+// service as normal. For more information, see [Amazon Web Services Systems Manager Change Manager availability change].
+//
 // Information about approval reviews for a version of a change template in Change
 // Manager.
+//
+// [Amazon Web Services Systems Manager Change Manager availability change]: https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html
 func (c *Client) ListDocumentMetadataHistory(ctx context.Context, params *ListDocumentMetadataHistoryInput, optFns ...func(*Options)) (*ListDocumentMetadataHistoryOutput, error) {
 	if params == nil {
 		params = &ListDocumentMetadataHistoryInput{}

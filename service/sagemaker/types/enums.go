@@ -9074,6 +9074,14 @@ const (
 	TransformInstanceTypeMlInf28xlarge  TransformInstanceType = "ml.inf2.8xlarge"
 	TransformInstanceTypeMlInf224xlarge TransformInstanceType = "ml.inf2.24xlarge"
 	TransformInstanceTypeMlInf248xlarge TransformInstanceType = "ml.inf2.48xlarge"
+	TransformInstanceTypeMlG6Xlarge     TransformInstanceType = "ml.g6.xlarge"
+	TransformInstanceTypeMlG62xlarge    TransformInstanceType = "ml.g6.2xlarge"
+	TransformInstanceTypeMlG64xlarge    TransformInstanceType = "ml.g6.4xlarge"
+	TransformInstanceTypeMlG68xlarge    TransformInstanceType = "ml.g6.8xlarge"
+	TransformInstanceTypeMlG612xlarge   TransformInstanceType = "ml.g6.12xlarge"
+	TransformInstanceTypeMlG616xlarge   TransformInstanceType = "ml.g6.16xlarge"
+	TransformInstanceTypeMlG624xlarge   TransformInstanceType = "ml.g6.24xlarge"
+	TransformInstanceTypeMlG648xlarge   TransformInstanceType = "ml.g6.48xlarge"
 )
 
 // Values returns all known values for TransformInstanceType. Note that this can
@@ -9182,6 +9190,14 @@ func (TransformInstanceType) Values() []TransformInstanceType {
 		"ml.inf2.8xlarge",
 		"ml.inf2.24xlarge",
 		"ml.inf2.48xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
 	}
 }
 

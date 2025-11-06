@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Creates a multiplayer game session for players in a specific fleet location.
 // This operation prompts an available server process to start a game session and
 // retrieves connection information for the new game session. As an alternative,

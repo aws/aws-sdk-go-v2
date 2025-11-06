@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Cancels a game session placement that's in PENDING status. To stop a placement,
 // provide the placement ID value.
 //

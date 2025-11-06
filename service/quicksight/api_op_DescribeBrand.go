@@ -34,7 +34,7 @@ type DescribeBrandInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the QuickSight brand.
+	// The ID of the Quick Suite brand.
 	//
 	// This member is required.
 	BrandId *string

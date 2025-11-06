@@ -214,10 +214,6 @@ type CertificateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // Filters which game servers may be claimed when calling ClaimGameServer .
 type ClaimFilterOption struct {
 
@@ -248,7 +244,12 @@ type Compute struct {
 	ComputeName *string
 
 	// Current status of the compute. A compute must have an ACTIVE status to host
-	// game sessions.
+	// game sessions. Valid values include PENDING , ACTIVE , TERMINATING , and
+	// IMPAIRED .
+	//
+	// While the ComputeStatus enum type is valid for Container based servers, the
+	// result may also include other non-enumerated string values such as "Active" for
+	// fleets which are not Container-based.
 	ComputeStatus ComputeStatus
 
 	// A set of attributes for each container in the compute.
@@ -1559,10 +1560,6 @@ type GameProperty struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // Properties describing a game server that is running on an instance in a game
 // server group.
 //
@@ -1811,10 +1808,6 @@ type GameServerContainerGroupCounts struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // Properties that describe a game server group resource. A game server group
 // manages certain properties related to a corresponding Amazon EC2 Auto Scaling
 // group.
@@ -1920,10 +1913,6 @@ type GameServerGroup struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // Configuration settings for intelligent automatic scaling that uses target
 // tracking. These settings are used to add an Auto Scaling policy when creating
 // the corresponding Auto Scaling group. After the Auto Scaling group is created,
@@ -1950,11 +1939,8 @@ type GameServerGroupAutoScalingPolicy struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
+//	Additional properties, including status, that describe an EC2 instance in a
 //
-// server groups.
-//
-// Additional properties, including status, that describe an EC2 instance in a
 // game server group. Instance configurations are set with game server group
 // properties (see DescribeGameServerGroup and with the EC2 launch template that
 // was used when creating the game server group.
@@ -2505,10 +2491,6 @@ type InstanceCredentials struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // An allowed instance type for a game server group. All game server groups must
 // have at least two instance types defined for it. Amazon GameLift Servers FleetIQ
 // periodically evaluates each defined instance type for viability. It then updates
@@ -2576,10 +2558,6 @@ type IpPermission struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // An Amazon Elastic Compute Cloud launch template that contains configuration
 // settings and game server code to be deployed to all instances in a game server
 // group. The launch template is specified when creating a new game server group.
@@ -3861,10 +3839,6 @@ type TargetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-//	This data type is used with the Amazon GameLift Servers FleetIQ and game
-//
-// server groups.
-//
 // Settings for a target-based scaling policy as part of a [GameServerGroupAutoScalingPolicy] . These settings are
 // used to create a target-based policy that tracks the Amazon GameLift Servers
 // FleetIQ metric "PercentUtilizedGameServers" and specifies a target value for

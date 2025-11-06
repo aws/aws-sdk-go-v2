@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
 // determines which server processes run, and how, on computes in the fleet. For
 // managed EC2 fleets, the runtime configuration describes server processes that
-// run on each fleet instance. can update a fleet's runtime configuration at any
-// time using [UpdateRuntimeConfiguration].
+// run on each fleet instance. You can update a fleet's runtime configuration at
+// any time using [UpdateRuntimeConfiguration].
 //
 // To get the current runtime configuration for a fleet, provide the fleet ID.
 //

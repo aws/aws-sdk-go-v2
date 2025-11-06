@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Container
+//
 // Retrieves the properties for a container fleet. When requesting attributes for
 // multiple fleets, use the pagination parameters to retrieve results as a set of
 // sequential pages.

@@ -95,6 +95,13 @@ type QueryVectorsInput struct {
 
 type QueryVectorsOutput struct {
 
+	// The distance metric that was used for the similarity search calculation. This
+	// is the same distance metric that was configured for the vector index when it was
+	// created.
+	//
+	// This member is required.
+	DistanceMetric types.DistanceMetric
+
 	// The vectors in the approximate nearest neighbor search.
 	//
 	// This member is required.

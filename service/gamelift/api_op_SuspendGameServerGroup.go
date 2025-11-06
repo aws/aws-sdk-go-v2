@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift Servers FleetIQ solution and
-//
-// game server groups.
+//	This API works with the following fleet types: EC2 (FleetIQ)
 //
 // Temporarily stops activity on a game server group without terminating instances
 // or the game server group. You can restart activity by calling ResumeGameServerGroup. You can suspend

@@ -22,6 +22,9 @@ import (
 //   - If you use this operation with the optional encryptionConfiguration
 //     parameter you must have the s3tables:PutTableBucketEncryption permission.
 //
+//   - You must have the s3tables:TagResource permission in addition to
+//     s3tables:CreateTableBucket permission to create a table bucket with tags.
+//
 // [Creating a table bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html
 func (c *Client) CreateTableBucket(ctx context.Context, params *CreateTableBucketInput, optFns ...func(*Options)) (*CreateTableBucketOutput, error) {
 	if params == nil {
@@ -50,6 +53,17 @@ type CreateTableBucketInput struct {
 	// created in this bucket unless overridden at the table level. The configuration
 	// includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.
 	EncryptionConfiguration *types.EncryptionConfiguration
+
+	// A map of user-defined tags that you would like to apply to the table bucket
+	// that you are creating. A tag is a key-value pair that you apply to your
+	// resources. Tags can help you organize and control access to resources. For more
+	// information, see [Tagging for cost allocation or attribute-based access control (ABAC)].
+	//
+	// You must have the s3tables:TagResource permission in addition to
+	// s3tables:CreateTableBucket permisson to create a table bucket with tags.
+	//
+	// [Tagging for cost allocation or attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

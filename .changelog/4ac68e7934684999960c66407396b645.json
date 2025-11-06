@@ -1,0 +1,8 @@
+{
+    "id": "4ac68e79-3468-4999-960c-66407396b645",
+    "type": "feature",
+    "description": "New field totalActiveErrors added to getFindingsStatistics response.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

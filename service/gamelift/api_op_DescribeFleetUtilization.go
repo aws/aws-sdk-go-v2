@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Container
+//
 // Retrieves utilization statistics for one or more fleets. Utilization data
 // provides a snapshot of how the fleet's hosting resources are currently being
 // used. For fleets with remote locations, this operation retrieves data for the

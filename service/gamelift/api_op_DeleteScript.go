@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2
+//
 // Deletes a Realtime script. This operation permanently deletes the script
 // record. If script files were uploaded, they are also deleted (files stored in an
 // S3 bucket are not deleted).

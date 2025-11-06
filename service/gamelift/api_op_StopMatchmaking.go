@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Cancels a matchmaking ticket or match backfill ticket that is currently being
 // processed. To stop the matchmaking operation, specify the ticket ID. If
 // successful, work on the ticket is stopped, and the ticket status is changed to

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Creates an alias for a fleet. In most situations, you can use an alias ID in
 // place of a fleet ID. An alias provides a level of abstraction for a fleet that
 // is useful when redirecting player traffic from one fleet to another, such as

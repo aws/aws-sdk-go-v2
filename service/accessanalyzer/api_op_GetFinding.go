@@ -15,6 +15,9 @@ import (
 // both use access-analyzer:GetFinding in the Action element of an IAM policy
 // statement. You must have permission to perform the access-analyzer:GetFinding
 // action.
+//
+// GetFinding is supported only for external access analyzers. You must use
+// GetFindingV2 for internal and unused access analyzers.
 func (c *Client) GetFinding(ctx context.Context, params *GetFindingInput, optFns ...func(*Options)) (*GetFindingOutput, error) {
 	if params == nil {
 		params = &GetFindingInput{}

@@ -75,6 +75,13 @@ type UpdateDomainInput struct {
 	// to DISABLED .
 	TagPropagation types.TagPropagation
 
+	// The identifier for the VPC used by the domain for network communication. Use
+	// this field only when adding VPC configuration to a SageMaker AI domain used in
+	// Amazon SageMaker Unified Studio that was created without VPC settings. SageMaker
+	// AI doesn't automatically apply VPC updates to existing applications. Stop and
+	// restart your applications to apply the changes.
+	VpcId *string
+
 	noSmithyDocumentSerde
 }
 

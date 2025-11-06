@@ -95,10 +95,35 @@ func ExampleEvaluationFormItem_outputUsage() {
 var _ *types.EvaluationFormQuestion
 var _ *types.EvaluationFormSection
 
+func ExampleEvaluationFormItemEnablementConditionOperand_outputUsage() {
+	var union types.EvaluationFormItemEnablementConditionOperand
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationFormItemEnablementConditionOperandMemberCondition:
+		_ = v.Value // Value is types.EvaluationFormItemEnablementCondition
+
+	case *types.EvaluationFormItemEnablementConditionOperandMemberExpression:
+		_ = v.Value // Value is types.EvaluationFormItemEnablementExpression
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EvaluationFormItemEnablementExpression
+var _ *types.EvaluationFormItemEnablementCondition
+
 func ExampleEvaluationFormNumericQuestionAutomation_outputUsage() {
 	var union types.EvaluationFormNumericQuestionAutomation
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.EvaluationFormNumericQuestionAutomationMemberAnswerSource:
+		_ = v.Value // Value is types.EvaluationFormQuestionAutomationAnswerSource
+
 	case *types.EvaluationFormNumericQuestionAutomationMemberPropertyValue:
 		_ = v.Value // Value is types.NumericQuestionPropertyValueAutomation
 
@@ -112,6 +137,7 @@ func ExampleEvaluationFormNumericQuestionAutomation_outputUsage() {
 }
 
 var _ *types.NumericQuestionPropertyValueAutomation
+var _ *types.EvaluationFormQuestionAutomationAnswerSource
 
 func ExampleEvaluationFormQuestionTypeProperties_outputUsage() {
 	var union types.EvaluationFormQuestionTypeProperties
@@ -123,6 +149,9 @@ func ExampleEvaluationFormQuestionTypeProperties_outputUsage() {
 	case *types.EvaluationFormQuestionTypePropertiesMemberSingleSelect:
 		_ = v.Value // Value is types.EvaluationFormSingleSelectQuestionProperties
 
+	case *types.EvaluationFormQuestionTypePropertiesMemberText:
+		_ = v.Value // Value is types.EvaluationFormTextQuestionProperties
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -132,6 +161,7 @@ func ExampleEvaluationFormQuestionTypeProperties_outputUsage() {
 	}
 }
 
+var _ *types.EvaluationFormTextQuestionProperties
 var _ *types.EvaluationFormSingleSelectQuestionProperties
 var _ *types.EvaluationFormNumericQuestionProperties
 
@@ -152,6 +182,46 @@ func ExampleEvaluationFormSingleSelectQuestionAutomationOption_outputUsage() {
 }
 
 var _ *types.SingleSelectQuestionRuleCategoryAutomation
+
+func ExampleEvaluationQuestionAnswerAnalysisDetails_outputUsage() {
+	var union types.EvaluationQuestionAnswerAnalysisDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationQuestionAnswerAnalysisDetailsMemberContactLens:
+		_ = v.Value // Value is types.EvaluationContactLensAnswerAnalysisDetails
+
+	case *types.EvaluationQuestionAnswerAnalysisDetailsMemberGenAI:
+		_ = v.Value // Value is types.EvaluationGenAIAnswerAnalysisDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EvaluationContactLensAnswerAnalysisDetails
+var _ *types.EvaluationGenAIAnswerAnalysisDetails
+
+func ExampleEvaluatorUserUnion_outputUsage() {
+	var union types.EvaluatorUserUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluatorUserUnionMemberConnectUserArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleInvalidRequestExceptionReason_outputUsage() {
 	var union types.InvalidRequestExceptionReason

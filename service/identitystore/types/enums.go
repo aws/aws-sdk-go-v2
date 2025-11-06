@@ -2,6 +2,23 @@
 
 package types
 
+type AccessDeniedExceptionReason string
+
+// Enum values for AccessDeniedExceptionReason
+const (
+	AccessDeniedExceptionReasonKmsAccessDenied AccessDeniedExceptionReason = "KMS_ACCESS_DENIED"
+)
+
+// Values returns all known values for AccessDeniedExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
+	return []AccessDeniedExceptionReason{
+		"KMS_ACCESS_DENIED",
+	}
+}
+
 type ConflictExceptionReason string
 
 // Enum values for ConflictExceptionReason
@@ -18,6 +35,24 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"UNIQUENESS_CONSTRAINT_VIOLATION",
 		"CONCURRENT_MODIFICATION",
+	}
+}
+
+type ResourceNotFoundExceptionReason string
+
+// Enum values for ResourceNotFoundExceptionReason
+const (
+	ResourceNotFoundExceptionReasonKmsKeyNotFound ResourceNotFoundExceptionReason = "KMS_KEY_NOT_FOUND"
+)
+
+// Values returns all known values for ResourceNotFoundExceptionReason. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReason {
+	return []ResourceNotFoundExceptionReason{
+		"KMS_KEY_NOT_FOUND",
 	}
 }
 
@@ -41,5 +76,64 @@ func (ResourceType) Values() []ResourceType {
 		"USER",
 		"IDENTITY_STORE",
 		"GROUP_MEMBERSHIP",
+	}
+}
+
+type ThrottlingExceptionReason string
+
+// Enum values for ThrottlingExceptionReason
+const (
+	ThrottlingExceptionReasonKmsThrottling ThrottlingExceptionReason = "KMS_THROTTLING"
+)
+
+// Values returns all known values for ThrottlingExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThrottlingExceptionReason) Values() []ThrottlingExceptionReason {
+	return []ThrottlingExceptionReason{
+		"KMS_THROTTLING",
+	}
+}
+
+type UserStatus string
+
+// Enum values for UserStatus
+const (
+	UserStatusEnabled  UserStatus = "ENABLED"
+	UserStatusDisabled UserStatus = "DISABLED"
+)
+
+// Values returns all known values for UserStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserStatus) Values() []UserStatus {
+	return []UserStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ValidationExceptionReason string
+
+// Enum values for ValidationExceptionReason
+const (
+	ValidationExceptionReasonKmsInvalidArn      ValidationExceptionReason = "KMS_INVALID_ARN"
+	ValidationExceptionReasonKmsInvalidKeyUsage ValidationExceptionReason = "KMS_INVALID_KEY_USAGE"
+	ValidationExceptionReasonKmsInvalidState    ValidationExceptionReason = "KMS_INVALID_STATE"
+	ValidationExceptionReasonKmsDisabled        ValidationExceptionReason = "KMS_DISABLED"
+)
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"KMS_INVALID_ARN",
+		"KMS_INVALID_KEY_USAGE",
+		"KMS_INVALID_STATE",
+		"KMS_DISABLED",
 	}
 }

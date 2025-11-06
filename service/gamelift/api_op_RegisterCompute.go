@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: Anywhere, Container
+//
 // Registers a compute resource in an Amazon GameLift Servers Anywhere fleet.
 //
 // For an Anywhere fleet that's running the Amazon GameLift Servers Agent, the

@@ -1488,6 +1488,46 @@ func awsAwsjson11_serializeDocumentPhoneNumbers(v []types.PhoneNumber, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPhoto(v *types.Photo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Display != nil {
+		ok := object.Key("Display")
+		ok.String(*v.Display)
+	}
+
+	if v.Primary {
+		ok := object.Key("Primary")
+		ok.Boolean(v.Primary)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.String(*v.Type)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPhotos(v []types.Photo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPhoto(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUniqueAttribute(v *types.UniqueAttribute, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1564,6 +1604,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 		}
 	}
 
+	if v.Birthdate != nil {
+		ok := object.Key("Birthdate")
+		ok.String(*v.Birthdate)
+	}
+
 	if v.DisplayName != nil {
 		ok := object.Key("DisplayName")
 		ok.String(*v.DisplayName)
@@ -1605,6 +1650,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 		}
 	}
 
+	if v.Photos != nil {
+		ok := object.Key("Photos")
+		if err := awsAwsjson11_serializeDocumentPhotos(v.Photos, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PreferredLanguage != nil {
 		ok := object.Key("PreferredLanguage")
 		ok.String(*v.PreferredLanguage)
@@ -1633,6 +1685,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	if v.UserType != nil {
 		ok := object.Key("UserType")
 		ok.String(*v.UserType)
+	}
+
+	if v.Website != nil {
+		ok := object.Key("Website")
+		ok.String(*v.Website)
 	}
 
 	return nil

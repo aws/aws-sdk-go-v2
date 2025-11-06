@@ -10,7 +10,11 @@
 // This reference guide describes the identity store operations that you can call
 // programmatically and includes detailed information about data types and errors.
 //
-// IAM Identity Center uses the sso and identitystore API namespaces.
+// IAM Identity Center uses the sso , sso-directory , and identitystore API
+// namespaces. The sso-directory and identitystore namespaces authorize access to
+// data in the Identity Store. Make sure your policies with IAM actions from these
+// two namespaces are consistent to avoid conflicting authorization to the same
+// data.
 //
 // [IAM Identity Center User Guide]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
 package identitystore

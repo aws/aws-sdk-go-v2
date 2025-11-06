@@ -2414,6 +2414,18 @@ func TestCheckSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchContactEvaluations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchContactEvaluations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchContactEvaluations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchContactFlowModules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchContactFlowModules(context.Background(), nil, func(o *Options) {
@@ -2455,6 +2467,18 @@ func TestCheckSnapshot_SearchEmailAddresses(t *testing.T) {
 	_, err := svc.SearchEmailAddresses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchEvaluationForms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchEvaluationForms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchEvaluationForms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5857,6 +5881,18 @@ func TestUpdateSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchContactEvaluations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchContactEvaluations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchContactEvaluations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SearchContactFlowModules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchContactFlowModules(context.Background(), nil, func(o *Options) {
@@ -5898,6 +5934,18 @@ func TestUpdateSnapshot_SearchEmailAddresses(t *testing.T) {
 	_, err := svc.SearchEmailAddresses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchEmailAddresses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchEvaluationForms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchEvaluationForms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchEvaluationForms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

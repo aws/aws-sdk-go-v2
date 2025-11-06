@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves properties for an alias. This operation returns all alias metadata
 // and settings. To get an alias's target fleet ID only, use ResolveAlias .
 //

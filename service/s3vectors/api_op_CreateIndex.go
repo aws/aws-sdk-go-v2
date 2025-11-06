@@ -70,6 +70,12 @@ type CreateIndexInput struct {
 }
 
 type CreateIndexOutput struct {
+
+	// The Amazon Resource Name (ARN) of the newly created vector index.
+	//
+	// This member is required.
+	IndexArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

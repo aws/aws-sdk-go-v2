@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This API works with the following fleet types: EC2, Anywhere, Container
+//
 // Retrieves the details for FlexMatch matchmaking rule sets. You can request all
 // existing rule sets for the Region, or provide a list of one or more rule set
 // names. When requesting multiple items, use the pagination parameters to retrieve
