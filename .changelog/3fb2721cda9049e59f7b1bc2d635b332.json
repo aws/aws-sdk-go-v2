@@ -1,8 +1,0 @@
-{
-    "id": "3fb2721c-da90-49e5-9f7b-1bc2d635b332",
-    "type": "feature",
-    "description": "Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.",
-    "modules": [
-        "service/s3vectors"
-    ]
-}

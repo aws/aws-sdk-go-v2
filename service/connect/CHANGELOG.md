@@ -1,3 +1,7 @@
+# v1.144.0 (2025-11-06)
+
+* **Feature**: Added support for Conditional Questions in Evaluation Forms. Introduced Auto Evaluation capability for Evaluation Forms and Contact Evaluations. Added new API operations: SearchEvaluationForms and SearchContactEvaluations.
+
 # v1.143.3 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

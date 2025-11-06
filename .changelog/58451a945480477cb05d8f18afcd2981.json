@@ -1,8 +1,0 @@
-{
-    "id": "58451a94-5480-477c-b05d-8f18afcd2981",
-    "type": "feature",
-    "description": "Add Amazon EC2 R8a instance types",
-    "modules": [
-        "service/ec2"
-    ]
-}

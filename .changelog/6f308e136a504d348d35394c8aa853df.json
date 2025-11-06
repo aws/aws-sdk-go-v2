@@ -1,8 +1,0 @@
-{
-    "id": "6f308e13-6a50-4d34-8d35-394c8aa853df",
-    "type": "feature",
-    "description": "Added support for Conditional Questions in Evaluation Forms. Introduced Auto Evaluation capability for Evaluation Forms and Contact Evaluations. Added new API operations: SearchEvaluationForms and SearchContactEvaluations.",
-    "modules": [
-        "service/connect"
-    ]
-}

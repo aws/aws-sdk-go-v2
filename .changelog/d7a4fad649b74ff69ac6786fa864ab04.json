@@ -1,8 +1,0 @@
-{
-    "id": "d7a4fad6-49b7-4ff6-9ac6-786fa864ab04",
-    "type": "feature",
-    "description": "Adds support for tagging APIs for S3 Tables",
-    "modules": [
-        "service/s3tables"
-    ]
-}

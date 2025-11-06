@@ -1,3 +1,7 @@
+# v1.34.0 (2025-11-06)
+
+* **Feature**: IdentityStore API: added new KMSExceptionReason fields to the Exception object; added multiple new fields to the User APIs - UserStatus, Birthdate, Website and Photos; added multiple new metadata fields for User, Groups and Membership APIs - CreatedAt, CreatedBy, UpdatedAt and UpdatedBy.
+
 # v1.33.3 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

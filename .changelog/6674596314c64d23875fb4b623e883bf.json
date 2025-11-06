@@ -1,8 +1,0 @@
-{
-    "id": "66745963-14c6-4d23-875f-b4b623e883bf",
-    "type": "feature",
-    "description": "Amazon GameLift Servers now supports game builds that use the Windows 2022 operating system.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

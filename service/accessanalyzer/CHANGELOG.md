@@ -1,3 +1,7 @@
+# v1.45.0 (2025-11-06)
+
+* **Feature**: New field totalActiveErrors added to getFindingsStatistics response.
+
 # v1.44.10 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

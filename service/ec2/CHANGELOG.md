@@ -1,3 +1,7 @@
+# v1.263.0 (2025-11-06)
+
+* **Feature**: Add Amazon EC2 R8a instance types
+
 # v1.262.0 (2025-11-05)
 
 * **Feature**: This release adds AvailabilityZoneId support for DescribeFastSnapshotRestores, DisableFastSnapshotRestores, and EnableFastSnapshotRestores APIs.

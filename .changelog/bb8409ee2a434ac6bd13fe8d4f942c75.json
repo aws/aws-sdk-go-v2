@@ -1,8 +1,0 @@
-{
-    "id": "bb8409ee-2a43-4ac6-bd13-fe8d4f942c75",
-    "type": "feature",
-    "description": "Provides NoLongerSupportedException error message",
-    "modules": [
-        "service/ssm"
-    ]
-}

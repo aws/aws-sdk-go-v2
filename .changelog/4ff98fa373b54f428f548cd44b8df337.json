@@ -1,8 +1,0 @@
-{
-    "id": "4ff98fa3-73b5-4f42-8f54-8cd44b8df337",
-    "type": "feature",
-    "description": "Support for New Data Prep Experience",
-    "modules": [
-        "service/quicksight"
-    ]
-}

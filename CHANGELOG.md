@@ -1,3 +1,29 @@
+# Release (2025-11-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.45.0](service/accessanalyzer/CHANGELOG.md#v1450-2025-11-06)
+  * **Feature**: New field totalActiveErrors added to getFindingsStatistics response.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.50.0](service/backup/CHANGELOG.md#v1500-2025-11-06)
+  * **Feature**: AWS Backup now supports customer-managed keys (CMK) for logically air-gapped vaults, enabling customers to maintain full control over their encryption key lifecycle. This feature helps organizations meet specific internal governance requirements or external regulatory compliance standards.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.144.0](service/connect/CHANGELOG.md#v11440-2025-11-06)
+  * **Feature**: Added support for Conditional Questions in Evaluation Forms. Introduced Auto Evaluation capability for Evaluation Forms and Contact Evaluations. Added new API operations: SearchEvaluationForms and SearchContactEvaluations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.263.0](service/ec2/CHANGELOG.md#v12630-2025-11-06)
+  * **Feature**: Add Amazon EC2 R8a instance types
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.48.0](service/gamelift/CHANGELOG.md#v1480-2025-11-06)
+  * **Feature**: Amazon GameLift Servers now supports game builds that use the Windows 2022 operating system.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.34.0](service/identitystore/CHANGELOG.md#v1340-2025-11-06)
+  * **Feature**: IdentityStore API: added new KMSExceptionReason fields to the Exception object; added multiple new fields to the User APIs - UserStatus, Birthdate, Website and Photos; added multiple new metadata fields for User, Groups and Membership APIs - CreatedAt, CreatedBy, UpdatedAt and UpdatedBy.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.96.0](service/quicksight/CHANGELOG.md#v1960-2025-11-06)
+  * **Feature**: Support for New Data Prep Experience
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.11.0](service/s3tables/CHANGELOG.md#v1110-2025-11-06)
+  * **Feature**: Adds support for tagging APIs for S3 Tables
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.5.0](service/s3vectors/CHANGELOG.md#v150-2025-11-06)
+  * **Feature**: Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.221.0](service/sagemaker/CHANGELOG.md#v12210-2025-11-06)
+  * **Feature**: Added NodeProvisioningMode parameter to UpdateCluster API to determine how instance provisioning is handled during cluster operations; in Continuous mode. Added VpcId field in UpdateDomain request for SageMaker Unified Studio domains with no VPC to add a customer VPC.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.67.0](service/ssm/CHANGELOG.md#v1670-2025-11-06)
+  * **Feature**: Provides NoLongerSupportedException error message
+
 # Release (2025-11-05)
 
 ## General Highlights

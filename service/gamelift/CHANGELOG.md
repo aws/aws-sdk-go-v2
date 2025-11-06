@@ -1,3 +1,7 @@
+# v1.48.0 (2025-11-06)
+
+* **Feature**: Amazon GameLift Servers now supports game builds that use the Windows 2022 operating system.
+
 # v1.47.3 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

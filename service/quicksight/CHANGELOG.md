@@ -1,3 +1,7 @@
+# v1.96.0 (2025-11-06)
+
+* **Feature**: Support for New Data Prep Experience
+
 # v1.95.4 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

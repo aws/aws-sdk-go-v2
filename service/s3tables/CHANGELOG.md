@@ -1,3 +1,7 @@
+# v1.11.0 (2025-11-06)
+
+* **Feature**: Adds support for tagging APIs for S3 Tables
+
 # v1.10.9 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions
