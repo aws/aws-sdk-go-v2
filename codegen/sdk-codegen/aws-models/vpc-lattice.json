@@ -718,6 +718,24 @@
                         "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with a sharable service network. The default is false.</p>"
                     }
                 },
+                "customDomainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A custom domain name for your resource configuration. Additionally, provide a DomainVerificationID to prove your ownership of a domain. </p>"
+                    }
+                },
+                "groupDomain": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> (GROUP) The group domain for a group resource configuration. Any domains that you create for the child resource are subdomains of the group domain. Child resources inherit the verification status of the domain. </p>"
+                    }
+                },
+                "domainVerificationIdentifier": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself. </p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
@@ -815,6 +833,30 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason that the request failed.</p>"
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The custom domain name for your resource configuration. </p>"
+                    }
+                },
+                "domainVerificationId": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name verification ID. </p>"
+                    }
+                },
+                "groupDomain": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> (GROUP) The group domain for a group resource configuration. Any domains that you create for the child resource are subdomains of the group domain. Child resources inherit the verification status of the domain. </p>"
+                    }
+                },
+                "domainVerificationArn": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The verification ID ARN </p>"
                     }
                 }
             },
@@ -1315,6 +1357,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the service network resource association. </p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.vpclattice#TagMap",
                     "traits": {
@@ -1351,6 +1399,12 @@
                     "target": "com.amazonaws.vpclattice#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the account that created the association.</p>"
+                    }
+                },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is is enabled for the service network resource association. </p>"
                     }
                 }
             },
@@ -1572,6 +1626,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the VPC association. </p>"
+                    }
+                },
                 "securityGroupIds": {
                     "target": "com.amazonaws.vpclattice#SecurityGroupList",
                     "traits": {
@@ -1586,6 +1646,12 @@
                     "target": "com.amazonaws.vpclattice#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags for the association.</p>"
+                    }
+                },
+                "dnsOptions": {
+                    "target": "com.amazonaws.vpclattice#DnsOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> DNS options for the service network VPC association. </p>"
                     }
                 }
             }
@@ -1622,6 +1688,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IDs of the security groups.</p>"
                     }
+                },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the VPC association. </p>"
+                    }
+                },
+                "dnsOptions": {
+                    "target": "com.amazonaws.vpclattice#DnsOptions"
                 }
             }
         },
@@ -1944,6 +2019,64 @@
         "com.amazonaws.vpclattice#DeleteAuthPolicyResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.vpclattice#DeleteDomainVerification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.vpclattice#DeleteDomainVerificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.vpclattice#DeleteDomainVerificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Deletes the specified domain verification. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/domainverifications/{domainVerificationIdentifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.vpclattice#DeleteDomainVerificationRequest": {
+            "type": "structure",
+            "members": {
+                "domainVerificationIdentifier": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ID of the domain verification to delete. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.vpclattice#DeleteDomainVerificationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.vpclattice#DeleteListener": {
             "type": "operation",
@@ -2900,6 +3033,26 @@
                 "smithy.api#documentation": "<p>Describes the DNS information of a service.</p>"
             }
         },
+        "com.amazonaws.vpclattice#DnsOptions": {
+            "type": "structure",
+            "members": {
+                "privateDnsPreference": {
+                    "target": "com.amazonaws.vpclattice#PrivateDnsPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private DNS is enabled and when the VPC endpoint type is ServiceNetwork or Resource. </p> <ul> <li> <p> <code>ALL_DOMAINS</code> - VPC Lattice provisions private hosted zones for all custom domain names.</p> </li> <li> <p> <code>VERIFIED_DOMAINS_ONLY</code> - VPC Lattice provisions a private hosted zone only if custom domain name has been verified by the provider.</p> </li> <li> <p> <code>VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS</code> - VPC Lattice provisions private hosted zones for all verified custom domain names and other domain names that the resource consumer specifies. The resource consumer specifies the domain names in the privateDnsSpecifiedDomains parameter.</p> </li> <li> <p> <code>SPECIFIED_DOMAINS_ONLY</code> - VPC Lattice provisions a private hosted zone for domain names specified by the resource consumer. The resource consumer specifies the domain names in the privateDnsSpecifiedDomains parameter.</p> </li> </ul>"
+                    }
+                },
+                "privateDnsSpecifiedDomains": {
+                    "target": "com.amazonaws.vpclattice#PrivateDnsSpecifiedDomainsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is <code>VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS</code> or <code>SPECIFIED_DOMAINS_ONLY</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The DNS configuration options. </p>"
+            }
+        },
         "com.amazonaws.vpclattice#DnsResource": {
             "type": "structure",
             "members": {
@@ -2927,6 +3080,123 @@
                     "min": 3,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.vpclattice#DomainVerification": {
+            "type": "resource",
+            "identifiers": {
+                "domainVerificationIdentifier": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.vpclattice#StartDomainVerification"
+            },
+            "read": {
+                "target": "com.amazonaws.vpclattice#GetDomainVerification"
+            },
+            "delete": {
+                "target": "com.amazonaws.vpclattice#DeleteDomainVerification"
+            },
+            "list": {
+                "target": "com.amazonaws.vpclattice#ListDomainVerifications"
+            }
+        },
+        "com.amazonaws.vpclattice#DomainVerificationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:domainverification/dv-[a-fA-F0-9]{17}$"
+            }
+        },
+        "com.amazonaws.vpclattice#DomainVerificationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^dv-[a-fA-F0-9]{17}$"
+            }
+        },
+        "com.amazonaws.vpclattice#DomainVerificationIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^((dv-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:domainverification/dv-[a-fA-F0-9]{17}))$"
+            }
+        },
+        "com.amazonaws.vpclattice#DomainVerificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.vpclattice#DomainVerificationSummary"
+            }
+        },
+        "com.amazonaws.vpclattice#DomainVerificationSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ID of the domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name being verified. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.vpclattice#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the domain verification process. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "txtMethodConfig": {
+                    "target": "com.amazonaws.vpclattice#TxtMethodConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The TXT record configuration used for domain verification. </p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.vpclattice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time that the domain verification was created, in ISO-8601 format. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastVerifiedTime": {
+                    "target": "com.amazonaws.vpclattice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time that the domain was last successfully verified, in ISO-8601 format. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.vpclattice#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tags associated with the domain verification. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Summary information about a domain verification. </p>"
             }
         },
         "com.amazonaws.vpclattice#FailureCode": {
@@ -3148,6 +3418,118 @@
                         "smithy.api#documentation": "<p>The date and time that the auth policy was last updated, in ISO-8601 format.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.vpclattice#GetDomainVerification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.vpclattice#GetDomainVerificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.vpclattice#GetDomainVerificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Retrieves information about a domain verification.ß </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/domainverifications/{domainVerificationIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.vpclattice#GetDomainVerificationRequest": {
+            "type": "structure",
+            "members": {
+                "domainVerificationIdentifier": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ID or ARN of the domain verification to retrieve. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.vpclattice#GetDomainVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ID of the domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name being verified. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.vpclattice#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the domain verification process. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "txtMethodConfig": {
+                    "target": "com.amazonaws.vpclattice#TxtMethodConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The TXT record configuration used for domain verification. </p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.vpclattice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time that the domain verification was created, in ISO-8601 format. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastVerifiedTime": {
+                    "target": "com.amazonaws.vpclattice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time that the domain was last successfully verified, in ISO-8601 format. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.vpclattice#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tags associated with the domain verification. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.vpclattice#GetListener": {
@@ -3419,6 +3801,30 @@
                     "target": "com.amazonaws.vpclattice#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The most recent date and time that the resource configuration was updated, in ISO-8601 format.</p>"
+                    }
+                },
+                "domainVerificationId": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain verification ID. </p>"
+                    }
+                },
+                "domainVerificationArn": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ARN of the domain verification. </p>"
+                    }
+                },
+                "domainVerificationStatus": {
+                    "target": "com.amazonaws.vpclattice#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain verification status. </p>"
+                    }
+                },
+                "groupDomain": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> (GROUP) The group domain for a group resource configuration. Any domains that you create for the child resource are subdomains of the group domain. Child resources inherit the verification status of the domain. </p>"
                     }
                 }
             },
@@ -3960,6 +4366,12 @@
                         "smithy.api#documentation": "<p>The private DNS entry for the service.</p>"
                     }
                 },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled in the service network resource association. </p>"
+                    }
+                },
                 "dnsEntry": {
                     "target": "com.amazonaws.vpclattice#DnsEntry",
                     "traits": {
@@ -3970,6 +4382,12 @@
                     "target": "com.amazonaws.vpclattice#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the association is managed by Amazon.</p>"
+                    }
+                },
+                "domainVerificationStatus": {
+                    "target": "com.amazonaws.vpclattice#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain verification status in the service network resource association. </p>"
                     }
                 }
             },
@@ -4290,6 +4708,12 @@
                         "smithy.api#documentation": "<p>The IDs of the security groups.</p>"
                     }
                 },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled in the VPC association. </p>"
+                    }
+                },
                 "failureMessage": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -4306,6 +4730,12 @@
                     "target": "com.amazonaws.vpclattice#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the association was last updated, in ISO-8601 format.</p>"
+                    }
+                },
+                "dnsOptions": {
+                    "target": "com.amazonaws.vpclattice#DnsOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> DNS options for the service network VPC association. </p>"
                     }
                 }
             }
@@ -4978,6 +5408,90 @@
                 }
             }
         },
+        "com.amazonaws.vpclattice#ListDomainVerifications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.vpclattice#ListDomainVerificationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.vpclattice#ListDomainVerificationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Lists the domain verifications. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/domainverifications"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.vpclattice#ListDomainVerificationsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.vpclattice#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to return. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.vpclattice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination token for the next page of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.vpclattice#ListDomainVerificationsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Information about the domain verifications. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.vpclattice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination token for the next page of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.vpclattice#ListListeners": {
             "type": "operation",
             "input": {
@@ -5117,6 +5631,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the resource configuration of type <code>Group</code>.</p>",
                         "smithy.api#httpQuery": "resourceConfigurationGroupIdentifier"
+                    }
+                },
+                "domainVerificationIdentifier": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain verification ID. </p>",
+                        "smithy.api#httpQuery": "domainVerificationIdentifier"
                     }
                 },
                 "maxResults": {
@@ -6409,6 +6930,9 @@
                     "target": "com.amazonaws.vpclattice#AccessLogSubscription"
                 },
                 {
+                    "target": "com.amazonaws.vpclattice#DomainVerification"
+                },
+                {
                     "target": "com.amazonaws.vpclattice#Listener"
                 },
                 {
@@ -7200,6 +7724,50 @@
                 "target": "com.amazonaws.vpclattice#PortRange"
             }
         },
+        "com.amazonaws.vpclattice#PrivateDnsPreference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "VERIFIED_DOMAINS_ONLY",
+                        "value": "VERIFIED_DOMAINS_ONLY"
+                    },
+                    {
+                        "name": "ALL_DOMAINS",
+                        "value": "ALL_DOMAINS"
+                    },
+                    {
+                        "name": "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+                        "value": "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS"
+                    },
+                    {
+                        "name": "SPECIFIED_DOMAINS_ONLY",
+                        "value": "SPECIFIED_DOMAINS_ONLY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.vpclattice#PrivateDnsSpecifiedDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.vpclattice#PrivateDnsSpecifiedDomainsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.vpclattice#PrivateDnsSpecifiedDomain"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.vpclattice#ProtocolType": {
             "type": "string",
             "traits": {
@@ -7647,6 +8215,24 @@
                     "target": "com.amazonaws.vpclattice#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The most recent date and time that the resource configuration was updated, in ISO-8601 format.</p>"
+                    }
+                },
+                "customDomainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The custom domain name. </p>"
+                    }
+                },
+                "domainVerificationId": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain verification ID. </p>"
+                    }
+                },
+                "groupDomain": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> (GROUP) The group domain for a group resource configuration. Any domains that you create for the child resource are subdomains of the group domain. Child resources inherit the verification status of the domain. </p>"
                     }
                 }
             },
@@ -8823,6 +9409,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The failure code.</p>"
                     }
+                },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the service network resource association. </p>"
+                    }
                 }
             },
             "traits": {
@@ -9201,6 +9793,18 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service network.</p>"
                     }
                 },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the service network VPC association. </p>"
+                    }
+                },
+                "dnsOptions": {
+                    "target": "com.amazonaws.vpclattice#DnsOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The DNS options for the service network VPC association. </p>"
+                    }
+                },
                 "vpcId": {
                     "target": "com.amazonaws.vpclattice#VpcId",
                     "traits": {
@@ -9367,6 +9971,114 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies if the service network should be enabled for sharing.</p>"
+            }
+        },
+        "com.amazonaws.vpclattice#StartDomainVerification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.vpclattice#StartDomainVerificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.vpclattice#StartDomainVerificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Starts the domain verification process for a custom domain name. </p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "uri": "/domainverifications",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.vpclattice#StartDomainVerificationRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.vpclattice#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name to verify ownership for. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.vpclattice#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tags for the domain verification. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.vpclattice#StartDomainVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ID of the domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.vpclattice#DomainVerificationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.vpclattice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name being verified. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.vpclattice#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the domain verification process. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "txtMethodConfig": {
+                    "target": "com.amazonaws.vpclattice#TxtMethodConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The TXT record configuration used for domain verification. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.vpclattice#SubnetId": {
@@ -10005,6 +10717,28 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.vpclattice#TxtMethodConfig": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value that must be added to the TXT record for domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the TXT record that must be created for domain verification. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration for TXT record-based domain verification method. </p>"
             }
         },
         "com.amazonaws.vpclattice#UnhealthyThresholdCount": {
@@ -11159,6 +11893,25 @@
                     {
                         "value": "other",
                         "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.vpclattice#VerificationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "VERIFIED",
+                        "value": "VERIFIED"
+                    },
+                    {
+                        "name": "PENDING",
+                        "value": "PENDING"
+                    },
+                    {
+                        "name": "VERIFICATION_TIMED_OUT",
+                        "value": "VERIFICATION_TIMED_OUT"
                     }
                 ]
             }

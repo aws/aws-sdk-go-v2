@@ -1424,6 +1424,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "remediationTypes": {
+                    "target": "com.amazonaws.controltower#RemediationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the types of remediation actions to apply when creating the landing zone, such as automatic drift correction or compliance enforcement.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.controltower#TagMap",
                     "traits": {
@@ -1487,7 +1493,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in accounts managed by Amazon Web Services Control Tower.</p>",
+                "smithy.api#documentation": "<p>Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in accounts managed by Amazon Web Services Control Tower.</p> <p>Decommissioning a landing zone is a process with significant consequences, and it cannot be undone. We strongly recommend that you perform this decommissioning process only if you intend to stop using your landing zone.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1643,15 +1649,19 @@
                 "controlIdentifier": {
                     "target": "com.amazonaws.controltower#ControlIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and <b>Elective</b> controls are permitted, with the exception of the <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and <b>Elective</b> controls are permitted, with the exception of the <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>"
                     }
                 },
                 "targetIdentifier": {
                     "target": "com.amazonaws.controltower#TargetIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>"
+                    }
+                },
+                "enabledControlIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the enabled control to be disabled, which uniquely identifies the control instance on the target organizational unit.</p>"
                     }
                 }
             },
@@ -1710,6 +1720,12 @@
                     "target": "com.amazonaws.controltower#DriftStatus",
                     "traits": {
                         "smithy.api#documentation": "<p> The drift status of the enabled control.</p> <p>Valid values:</p> <ul> <li> <p> <code>DRIFTED</code>: The <code>enabledControl</code> deployed in this configuration doesn’t match the configuration that Amazon Web Services Control Tower expected. </p> </li> <li> <p> <code>IN_SYNC</code>: The <code>enabledControl</code> deployed in this configuration matches the configuration that Amazon Web Services Control Tower expected.</p> </li> <li> <p> <code>NOT_CHECKING</code>: Amazon Web Services Control Tower does not check drift for this enabled control. Drift is not supported for the control type.</p> </li> <li> <p> <code>UNKNOWN</code>: Amazon Web Services Control Tower is not able to check the drift status for the enabled control. </p> </li> </ul>"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.controltower#EnabledControlDriftTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that categorizes the different types of drift detected for the enabled control.</p>"
                     }
                 }
             },
@@ -2315,12 +2331,6 @@
                         "smithy.api#documentation": "<p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html\">the overview page</a>.</p>"
                     }
                 },
-                "targetRegions": {
-                    "target": "com.amazonaws.controltower#TargetRegions",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Target Amazon Web Services Regions for the enabled control.</p>"
-                    }
-                },
                 "statusSummary": {
                     "target": "com.amazonaws.controltower#EnablementStatusSummary",
                     "traits": {
@@ -2333,6 +2343,18 @@
                         "smithy.api#documentation": "<p>The drift status of the enabled control.</p>"
                     }
                 },
+                "parentIdentifier": {
+                    "target": "com.amazonaws.controltower#ParentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the parent enabled control from which this control inherits its configuration, if applicable.</p>"
+                    }
+                },
+                "targetRegions": {
+                    "target": "com.amazonaws.controltower#TargetRegions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target Amazon Web Services Regions for the enabled control.</p>"
+                    }
+                },
                 "parameters": {
                     "target": "com.amazonaws.controltower#EnabledControlParameterSummaries",
                     "traits": {
@@ -2342,6 +2364,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the enabled control.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlDriftTypes": {
+            "type": "structure",
+            "members": {
+                "inheritance": {
+                    "target": "com.amazonaws.controltower#EnabledControlInheritanceDrift",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates drift related to inheritance configuration between parent and child controls.</p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.controltower#EnabledControlResourceDrift",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates drift related to the underlying Amazon Web Services resources managed by the control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the various categories of drift that can occur for an enabled control resource.</p>"
             }
         },
         "com.amazonaws.controltower#EnabledControlFilter": {
@@ -2364,6 +2406,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>DriftStatus</code> items.</p>"
                     }
+                },
+                "parentIdentifiers": {
+                    "target": "com.amazonaws.controltower#ParentIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters enabled controls by their parent control identifiers, allowing you to find child controls of specific parent controls.</p>"
+                    }
+                },
+                "inheritanceDriftStatuses": {
+                    "target": "com.amazonaws.controltower#DriftStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters enabled controls by their inheritance drift status, allowing you to find controls with specific inheritance-related drift conditions.</p>"
+                    }
+                },
+                "resourceDriftStatuses": {
+                    "target": "com.amazonaws.controltower#DriftStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters enabled controls by their resource drift status, allowing you to find controls with specific resource-related drift conditions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2380,6 +2440,20 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlInheritanceDrift": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.controltower#DriftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of inheritance drift for the enabled control, indicating whether inheritance configuration matches expectations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents drift information related to control inheritance between organizational units.</p>"
             }
         },
         "com.amazonaws.controltower#EnabledControlParameter": {
@@ -2463,19 +2537,33 @@
                 }
             ]
         },
+        "com.amazonaws.controltower#EnabledControlResourceDrift": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.controltower#DriftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of resource drift for the enabled control, indicating whether the underlying resources match the expected configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents drift information related to the underlying Amazon Web Services resources managed by the control.</p>"
+            }
+        },
         "com.amazonaws.controltower#EnabledControlSummary": {
             "type": "structure",
             "members": {
-                "controlIdentifier": {
-                    "target": "com.amazonaws.controltower#ControlIdentifier",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The <code>controlIdentifier</code> of the enabled control.</p>"
-                    }
-                },
                 "arn": {
                     "target": "com.amazonaws.controltower#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the enabled control.</p>"
+                    }
+                },
+                "controlIdentifier": {
+                    "target": "com.amazonaws.controltower#ControlIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>controlIdentifier</code> of the enabled control.</p>"
                     }
                 },
                 "targetIdentifier": {
@@ -2494,6 +2582,12 @@
                     "target": "com.amazonaws.controltower#DriftStatusSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>The drift status of the enabled control.</p>"
+                    }
+                },
+                "parentIdentifier": {
+                    "target": "com.amazonaws.controltower#ParentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the parent enabled control from which this control inherits its configuration, if applicable.</p>"
                     }
                 }
             },
@@ -3061,6 +3155,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The landing zone manifest JSON text file that specifies the landing zone configurations. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "remediationTypes": {
+                    "target": "com.amazonaws.controltower#RemediationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of remediation actions configured for the landing zone, such as automatic drift correction or compliance enforcement.</p>"
                     }
                 },
                 "arn": {
@@ -3758,6 +3858,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An input filter for the <code>ListEnabledControls</code> API that lets you select the types of control operations to view.</p>"
                     }
+                },
+                "includeChildren": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean value that determines whether to include enabled controls from child organizational units in the response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4053,6 +4160,28 @@
                 "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
+        "com.amazonaws.controltower#ParentIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$"
+            }
+        },
+        "com.amazonaws.controltower#ParentIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#ParentIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.controltower#Region": {
             "type": "structure",
             "members": {
@@ -4073,6 +4202,29 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.controltower#RemediationType": {
+            "type": "enum",
+            "members": {
+                "INHERITANCE_DRIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERITANCE_DRIFT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#RemediationTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#RemediationType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
                 }
             }
         },
@@ -4178,7 +4330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Resets an enabled control.</p>",
+                "smithy.api#documentation": "<p>Resets an enabled control. Does not work for controls implemented with SCPs.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4310,7 +4462,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded. The limit is 100 concurrent operations.</p>",
+                "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded. See <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/request-an-increase.html\">Service quotas</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -4780,6 +4932,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch\">Launch your landing zone</a>. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "remediationTypes": {
+                    "target": "com.amazonaws.controltower#RemediationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the types of remediation actions to apply when updating the landing zone configuration.</p>"
                     }
                 },
                 "landingZoneIdentifier": {
