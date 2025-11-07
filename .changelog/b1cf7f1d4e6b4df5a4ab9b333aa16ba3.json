@@ -1,8 +1,0 @@
-{
-    "id": "b1cf7f1d-4e6b-4df5-a4ab-9b333aa16ba3",
-    "type": "feature",
-    "description": "Adds PrivateDnsPreference and PrivateDnsSpecifiedDomains to control private DNS resolution for resource and service network VPC endpoints and IpamScopeExternalAuthorityConfiguration to integrate Amazon VPC IPAM with a third-party IPAM service",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,17 @@
+# Release (2025-11-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.27.0](service/controltower/CHANGELOG.md#v1270-2025-11-07)
+  * **Feature**: Added Parent Identifier support to ListEnabledControls and GetEnabledControl API. Implemented RemediationType support for Landing Zone operations: CreateLandingZone, UpdateLandingZone and GetLandingZone APIs
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.264.0](service/ec2/CHANGELOG.md#v12640-2025-11-07)
+  * **Feature**: Adds PrivateDnsPreference and PrivateDnsSpecifiedDomains to control private DNS resolution for resource and service network VPC endpoints and IpamScopeExternalAuthorityConfiguration to integrate Amazon VPC IPAM with a third-party IPAM service
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.48.0](service/kms/CHANGELOG.md#v1480-2025-11-07)
+  * **Feature**: Added support for new ECC_NIST_EDWARDS25519 AWS KMS key spec
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.53.0](service/opensearch/CHANGELOG.md#v1530-2025-11-07)
+  * **Feature**: This release introduces the Default Application feature, allowing users to set, change, or unset a preferred OpenSearch UI application on a per-region basis for a streamlined and consistent user experience.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.20.0](service/vpclattice/CHANGELOG.md#v1200-2025-11-07)
+  * **Feature**: Amazon VPC Lattice now supports custom domain name for resource configurations
+
 # Release (2025-11-06)
 
 ## Module Highlights

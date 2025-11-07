@@ -1,3 +1,7 @@
+# v1.53.0 (2025-11-07)
+
+* **Feature**: This release introduces the Default Application feature, allowing users to set, change, or unset a preferred OpenSearch UI application on a per-region basis for a streamlined and consistent user experience.
+
 # v1.52.10 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

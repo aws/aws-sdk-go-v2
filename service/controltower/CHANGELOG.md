@@ -1,3 +1,7 @@
+# v1.27.0 (2025-11-07)
+
+* **Feature**: Added Parent Identifier support to ListEnabledControls and GetEnabledControl API. Implemented RemediationType support for Landing Zone operations: CreateLandingZone, UpdateLandingZone and GetLandingZone APIs
+
 # v1.26.10 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.20.0 (2025-11-07)
+
+* **Feature**: Amazon VPC Lattice now supports custom domain name for resource configurations
+
 # v1.19.4 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

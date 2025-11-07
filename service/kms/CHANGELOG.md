@@ -1,3 +1,7 @@
+# v1.48.0 (2025-11-07)
+
+* **Feature**: Added support for new ECC_NIST_EDWARDS25519 AWS KMS key spec
+
 # v1.47.1 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

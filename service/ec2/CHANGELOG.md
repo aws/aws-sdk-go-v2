@@ -1,3 +1,7 @@
+# v1.264.0 (2025-11-07)
+
+* **Feature**: Adds PrivateDnsPreference and PrivateDnsSpecifiedDomains to control private DNS resolution for resource and service network VPC endpoints and IpamScopeExternalAuthorityConfiguration to integrate Amazon VPC IPAM with a third-party IPAM service
+
 # v1.263.0 (2025-11-06)
 
 * **Feature**: Add Amazon EC2 R8a instance types

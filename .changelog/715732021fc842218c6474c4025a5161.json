@@ -1,8 +1,0 @@
-{
-    "id": "71573202-1fc8-4221-8c64-74c4025a5161",
-    "type": "feature",
-    "description": "Added Parent Identifier support to ListEnabledControls and GetEnabledControl API. Implemented RemediationType support for Landing Zone operations: CreateLandingZone, UpdateLandingZone and GetLandingZone APIs",
-    "modules": [
-        "service/controltower"
-    ]
-}

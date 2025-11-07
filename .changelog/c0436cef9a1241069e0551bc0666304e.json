@@ -1,8 +1,0 @@
-{
-    "id": "c0436cef-9a12-4106-9e05-51bc0666304e",
-    "type": "feature",
-    "description": "Added support for new ECC_NIST_EDWARDS25519 AWS KMS key spec",
-    "modules": [
-        "service/kms"
-    ]
-}
