@@ -163,6 +163,12 @@ type SignInput struct {
 	// parameter is a message digest. If you use the DIGEST value with an unhashed
 	// message, the security of the signing operation can be compromised.
 	//
+	// When using ECC_NIST_EDWARDS25519 KMS keys:
+	//
+	//   - ED25519_SHA_512 signing algorithm requires KMS MessageType:RAW
+	//
+	//   - ED25519_PH_SHA_512 signing algorithm requires KMS MessageType:DIGEST
+	//
 	// When the value of MessageType is DIGEST , the length of the Message value must
 	// match the length of hashed messages for the specified signing algorithm.
 	//

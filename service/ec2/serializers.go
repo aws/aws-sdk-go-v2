@@ -52061,6 +52061,18 @@ func awsEc2query_serializeDocumentDnsOptionsSpecification(v *types.DnsOptionsSpe
 		objectKey.Boolean(*v.PrivateDnsOnlyForInboundResolverEndpoint)
 	}
 
+	if v.PrivateDnsPreference != nil {
+		objectKey := object.Key("PrivateDnsPreference")
+		objectKey.String(*v.PrivateDnsPreference)
+	}
+
+	if v.PrivateDnsSpecifiedDomains != nil {
+		objectKey := object.FlatKey("PrivateDnsSpecifiedDomain")
+		if err := awsEc2query_serializeDocumentPrivateDnsSpecifiedDomainSet(v.PrivateDnsSpecifiedDomains, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -52445,6 +52457,23 @@ func awsEc2query_serializeDocumentExportToS3TaskSpecification(v *types.ExportToS
 	if v.S3Prefix != nil {
 		objectKey := object.Key("S3Prefix")
 		objectKey.String(*v.S3Prefix)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentExternalAuthorityConfiguration(v *types.ExternalAuthorityConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ExternalResourceIdentifier != nil {
+		objectKey := object.Key("ExternalResourceIdentifier")
+		objectKey.String(*v.ExternalResourceIdentifier)
+	}
+
+	if len(v.Type) > 0 {
+		objectKey := object.Key("Type")
+		objectKey.String(string(v.Type))
 	}
 
 	return nil
@@ -57575,6 +57604,19 @@ func awsEc2query_serializeDocumentPrivateDnsNameOptionsRequest(v *types.PrivateD
 		objectKey.String(string(v.HostnameType))
 	}
 
+	return nil
+}
+
+func awsEc2query_serializeDocumentPrivateDnsSpecifiedDomainSet(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -64757,6 +64799,13 @@ func awsEc2query_serializeOpDocumentCreateIpamScopeInput(v *CreateIpamScopeInput
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.ExternalAuthorityConfiguration != nil {
+		objectKey := object.Key("ExternalAuthorityConfiguration")
+		if err := awsEc2query_serializeDocumentExternalAuthorityConfiguration(v.ExternalAuthorityConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.IpamId != nil {
@@ -80438,9 +80487,21 @@ func awsEc2query_serializeOpDocumentModifyIpamScopeInput(v *ModifyIpamScopeInput
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if v.ExternalAuthorityConfiguration != nil {
+		objectKey := object.Key("ExternalAuthorityConfiguration")
+		if err := awsEc2query_serializeDocumentExternalAuthorityConfiguration(v.ExternalAuthorityConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.IpamScopeId != nil {
 		objectKey := object.Key("IpamScopeId")
 		objectKey.String(*v.IpamScopeId)
+	}
+
+	if v.RemoveExternalAuthorityConfiguration != nil {
+		objectKey := object.Key("RemoveExternalAuthorityConfiguration")
+		objectKey.Boolean(*v.RemoveExternalAuthorityConfiguration)
 	}
 
 	return nil

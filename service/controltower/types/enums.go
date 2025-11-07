@@ -236,3 +236,20 @@ func (LandingZoneStatus) Values() []LandingZoneStatus {
 		"FAILED",
 	}
 }
+
+type RemediationType string
+
+// Enum values for RemediationType
+const (
+	RemediationTypeInheritanceDrift RemediationType = "INHERITANCE_DRIFT"
+)
+
+// Values returns all known values for RemediationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationType) Values() []RemediationType {
+	return []RemediationType{
+		"INHERITANCE_DRIFT",
+	}
+}

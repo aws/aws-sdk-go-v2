@@ -47,6 +47,10 @@ type CreateServiceNetworkResourceAssociationInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
+	//  Indicates if private DNS is enabled for the service network resource
+	// association.
+	PrivateDnsEnabled *bool
+
 	// A key-value pair to associate with a resource.
 	Tags map[string]string
 
@@ -63,6 +67,10 @@ type CreateServiceNetworkResourceAssociationOutput struct {
 
 	// The ID of the association.
 	Id *string
+
+	//  Indicates if private DNS is is enabled for the service network resource
+	// association.
+	PrivateDnsEnabled *bool
 
 	// The status of the association.
 	Status types.ServiceNetworkResourceAssociationStatus

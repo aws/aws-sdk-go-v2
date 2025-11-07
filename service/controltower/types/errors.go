@@ -111,8 +111,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would cause a service quota to be exceeded. The limit is 100
-// concurrent operations.
+// The request would cause a service quota to be exceeded. See [Service quotas].
+//
+// [Service quotas]: https://docs.aws.amazon.com/controltower/latest/userguide/request-an-increase.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

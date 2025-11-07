@@ -1,0 +1,8 @@
+{
+    "id": "79a3780b-8cda-44b1-aa63-fc36e71ceb14",
+    "type": "feature",
+    "description": "This release introduces the Default Application feature, allowing users to set, change, or unset a preferred OpenSearch UI application on a per-region basis for a streamlined and consistent user experience.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

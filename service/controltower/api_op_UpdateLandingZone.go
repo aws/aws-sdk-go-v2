@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +51,10 @@ type UpdateLandingZoneInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	// Specifies the types of remediation actions to apply when updating the landing
+	// zone configuration.
+	RemediationTypes []types.RemediationType
 
 	noSmithyDocumentSerde
 }

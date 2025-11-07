@@ -53,6 +53,9 @@ type GetServiceNetworkResourceAssociationOutput struct {
 	// The DNS entry for the service.
 	DnsEntry *types.DnsEntry
 
+	//  The domain verification status in the service network resource association.
+	DomainVerificationStatus types.VerificationStatus
+
 	// The failure code.
 	FailureCode *string
 
@@ -68,6 +71,10 @@ type GetServiceNetworkResourceAssociationOutput struct {
 	// The most recent date and time that the association was updated, in ISO-8601
 	// format.
 	LastUpdatedAt *time.Time
+
+	//  Indicates if private DNS is enabled in the service network resource
+	// association.
+	PrivateDnsEnabled *bool
 
 	// The private DNS entry for the service.
 	PrivateDnsEntry *types.DnsEntry

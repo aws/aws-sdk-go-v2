@@ -29,6 +29,9 @@ func (c *Client) ListResourceConfigurations(ctx context.Context, params *ListRes
 
 type ListResourceConfigurationsInput struct {
 
+	//  The domain verification ID.
+	DomainVerificationIdentifier *string
+
 	// The maximum page size.
 	MaxResults *int32
 

@@ -58,8 +58,22 @@ type GetResourceConfigurationOutput struct {
 	// The custom domain name of the resource configuration.
 	CustomDomainName *string
 
+	//  The ARN of the domain verification.
+	DomainVerificationArn *string
+
+	//  The domain verification ID.
+	DomainVerificationId *string
+
+	//  The domain verification status.
+	DomainVerificationStatus types.VerificationStatus
+
 	// The reason the create-resource-configuration request failed.
 	FailureReason *string
+
+	//  (GROUP) The group domain for a group resource configuration. Any domains that
+	// you create for the child resource are subdomains of the group domain. Child
+	// resources inherit the verification status of the domain.
+	GroupDomain *string
 
 	// The ID of the resource configuration.
 	Id *string

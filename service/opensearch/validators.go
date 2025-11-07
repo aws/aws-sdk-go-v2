@@ -1030,6 +1030,26 @@ func (m *validateOpPurchaseReservedInstanceOffering) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutDefaultApplicationSetting struct {
+}
+
+func (*validateOpPutDefaultApplicationSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDefaultApplicationSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDefaultApplicationSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDefaultApplicationSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRejectInboundConnection struct {
 }
 
@@ -1512,6 +1532,10 @@ func addOpListVpcEndpointsForDomainValidationMiddleware(stack *middleware.Stack)
 
 func addOpPurchaseReservedInstanceOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseReservedInstanceOffering{}, middleware.After)
+}
+
+func addOpPutDefaultApplicationSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDefaultApplicationSetting{}, middleware.After)
 }
 
 func addOpRejectInboundConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -2822,6 +2846,24 @@ func validateOpPurchaseReservedInstanceOfferingInput(v *PurchaseReservedInstance
 	}
 	if v.ReservationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDefaultApplicationSettingInput(v *PutDefaultApplicationSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDefaultApplicationSettingInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if v.SetAsDefault == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SetAsDefault"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -4303,6 +4303,32 @@ type DnsOptions struct {
 	// Indicates whether to enable private DNS only for inbound endpoints.
 	PrivateDnsOnlyForInboundResolverEndpoint *bool
 
+	//  The preference for which private domains have a private hosted zone created
+	// for and associated with the specified VPC. Only supported when private DNS is
+	// enabled and when the VPC endpoint type is ServiceNetwork or Resource.
+	//
+	//   - ALL_DOMAINS - VPC Lattice provisions private hosted zones for all custom
+	//   domain names.
+	//
+	//   - VERIFIED_DOMAINS_ONLY - VPC Lattice provisions a private hosted zone only if
+	//   custom domain name has been verified by the provider.
+	//
+	//   - VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS - VPC Lattice provisions private
+	//   hosted zones for all verified custom domain names and other domain names that
+	//   the resource consumer specifies. The resource consumer specifies the domain
+	//   names in the PrivateDnsSpecifiedDomains parameter.
+	//
+	//   - SPECIFIED_DOMAINS_ONLY - VPC Lattice provisions a private hosted zone for
+	//   domain names specified by the resource consumer. The resource consumer specifies
+	//   the domain names in the PrivateDnsSpecifiedDomains parameter.
+	PrivateDnsPreference *string
+
+	//  Indicates which of the private domains to create private hosted zones for and
+	// associate with the specified VPC. Only supported when private DNS is enabled and
+	// the private DNS preference is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or
+	// SPECIFIED_DOMAINS_ONLY .
+	PrivateDnsSpecifiedDomains []string
+
 	noSmithyDocumentSerde
 }
 
@@ -4317,6 +4343,32 @@ type DnsOptionsSpecification struct {
 	// endpoints. It routes traffic that originates from the VPC to the gateway
 	// endpoint and traffic that originates from on-premises to the interface endpoint.
 	PrivateDnsOnlyForInboundResolverEndpoint *bool
+
+	//  The preference for which private domains have a private hosted zone created
+	// for and associated with the specified VPC. Only supported when private DNS is
+	// enabled and when the VPC endpoint type is ServiceNetwork or Resource.
+	//
+	//   - ALL_DOMAINS - VPC Lattice provisions private hosted zones for all custom
+	//   domain names.
+	//
+	//   - VERIFIED_DOMAINS_ONLY - VPC Lattice provisions a private hosted zone only if
+	//   custom domain name has been verified by the provider.
+	//
+	//   - VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS - VPC Lattice provisions private
+	//   hosted zones for all verified custom domain names and other domain names that
+	//   the resource consumer specifies. The resource consumer specifies the domain
+	//   names in the PrivateDnsSpecifiedDomains parameter.
+	//
+	//   - SPECIFIED_DOMAINS_ONLY - VPC Lattice provisions a private hosted zone for
+	//   domain names specified by the resource consumer. The resource consumer specifies
+	//   the domain names in the PrivateDnsSpecifiedDomains parameter.
+	PrivateDnsPreference *string
+
+	//  Indicates which of the private domains to create private hosted zones for and
+	// associate with the specified VPC. Only supported when private DNS is enabled and
+	// the private DNS preference is verified-domains-and-specified-domains or
+	// specified-domains-only.
+	PrivateDnsSpecifiedDomains []string
 
 	noSmithyDocumentSerde
 }
@@ -5497,6 +5549,26 @@ type ExportToS3TaskSpecification struct {
 	// The image is written to a single object in the Amazon S3 bucket at the S3 key
 	// s3prefix + exportTaskId + '.' + diskImageFormat.
 	S3Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that links an Amazon VPC IPAM scope to an external authority
+// system. It specifies the type of external system and the external resource
+// identifier that identifies your account or instance in that system.
+//
+// For more information, see [Integrate VPC IPAM with Infoblox infrastructure] in the Amazon VPC IPAM User Guide..
+//
+// [Integrate VPC IPAM with Infoblox infrastructure]: https://docs.aws.amazon.com/vpc/latest/ipam/integrate-infoblox-ipam.html
+type ExternalAuthorityConfiguration struct {
+
+	// The identifier for the external resource managing this scope. For Infoblox
+	// integrations, this is the Infoblox resource identifier in the format
+	// .identity.account.. .
+	ExternalResourceIdentifier *string
+
+	// The type of external authority.
+	Type IpamScopeExternalAuthorityType
 
 	noSmithyDocumentSerde
 }
@@ -11711,6 +11783,19 @@ type IpamScope struct {
 	// The description of the scope.
 	Description *string
 
+	// The external authority configuration for this IPAM scope, if configured.
+	//
+	// The configuration that links an Amazon VPC IPAM scope to an external authority
+	// system. It specifies the type of external system and the external resource
+	// identifier that identifies your account or instance in that system.
+	//
+	// In IPAM, an external authority is a third-party IP address management system
+	// that provides CIDR blocks when you provision address space for top-level IPAM
+	// pools. This allows you to use your existing IP management system to control
+	// which address ranges are allocated to Amazon Web Services while using Amazon VPC
+	// IPAM to manage subnets within those ranges.
+	ExternalAuthorityConfiguration *IpamScopeExternalAuthorityConfiguration
+
 	// The ARN of the IPAM.
 	IpamArn *string
 
@@ -11743,6 +11828,29 @@ type IpamScope struct {
 	// resources that have a tag with the key Owner and the value TeamA , specify
 	// tag:Owner for the filter name and TeamA for the filter value.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that links an Amazon VPC IPAM scope to an external authority
+// system. It specifies the type of external system and the external resource
+// identifier that identifies your account or instance in that system.
+//
+// In IPAM, an external authority is a third-party IP address management system
+// that provides CIDR blocks when you provision address space for top-level IPAM
+// pools. This allows you to use your existing IP management system to control
+// which address ranges are allocated to Amazon Web Services while using Amazon VPC
+// IPAM to manage subnets within those ranges.
+type IpamScopeExternalAuthorityConfiguration struct {
+
+	// The identifier for the external resource managing this scope. For Infoblox
+	// integrations, this is the Infoblox resource identifier in the format
+	// .identity.account.. .
+	ExternalResourceIdentifier *string
+
+	// The type of external authority managing this scope. Currently supports Infoblox
+	// for integration with Infoblox Universal DDI.
+	Type IpamScopeExternalAuthorityType
 
 	noSmithyDocumentSerde
 }
@@ -16364,7 +16472,7 @@ type PrivateDnsNameConfiguration struct {
 
 	// The verification state of the VPC endpoint service.
 	//
-	// >Consumers of the endpoint service can use the private name only when the state
+	// Consumers of the endpoint service can use the private name only when the state
 	// is verified .
 	State DnsNameState
 

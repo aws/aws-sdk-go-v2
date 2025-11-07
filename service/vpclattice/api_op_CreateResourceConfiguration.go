@@ -64,6 +64,19 @@ type CreateResourceConfigurationInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
+	//  A custom domain name for your resource configuration. Additionally, provide a
+	// DomainVerificationID to prove your ownership of a domain.
+	CustomDomainName *string
+
+	//  The domain verification ID of your verified custom domain name. If you don't
+	// provide an ID, you must configure the DNS settings yourself.
+	DomainVerificationIdentifier *string
+
+	//  (GROUP) The group domain for a group resource configuration. Any domains that
+	// you create for the child resource are subdomains of the group domain. Child
+	// resources inherit the verification status of the domain.
+	GroupDomain *string
+
 	// (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a
 	// resource configuration (for example: 1-65535). You can separate port ranges
 	// using commas (for example: 1,2,22-30).
@@ -112,8 +125,22 @@ type CreateResourceConfigurationOutput struct {
 	// format.
 	CreatedAt *time.Time
 
+	//  The custom domain name for your resource configuration.
+	CustomDomainName *string
+
+	//  The verification ID ARN
+	DomainVerificationArn *string
+
+	//  The domain name verification ID.
+	DomainVerificationId *string
+
 	// The reason that the request failed.
 	FailureReason *string
+
+	//  (GROUP) The group domain for a group resource configuration. Any domains that
+	// you create for the child resource are subdomains of the group domain. Child
+	// resources inherit the verification status of the domain.
+	GroupDomain *string
 
 	// The ID of the resource configuration.
 	Id *string

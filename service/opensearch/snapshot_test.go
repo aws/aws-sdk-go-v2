@@ -566,6 +566,18 @@ func TestCheckSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDefaultApplicationSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDefaultApplicationSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDefaultApplicationSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDirectQueryDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDirectQueryDataSource(context.Background(), nil, func(o *Options) {
@@ -799,6 +811,18 @@ func TestCheckSnapshot_PurchaseReservedInstanceOffering(t *testing.T) {
 	_, err := svc.PurchaseReservedInstanceOffering(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PurchaseReservedInstanceOffering")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutDefaultApplicationSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDefaultApplicationSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutDefaultApplicationSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1477,6 +1501,18 @@ func TestUpdateSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDefaultApplicationSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDefaultApplicationSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDefaultApplicationSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDirectQueryDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDirectQueryDataSource(context.Background(), nil, func(o *Options) {
@@ -1710,6 +1746,18 @@ func TestUpdateSnapshot_PurchaseReservedInstanceOffering(t *testing.T) {
 	_, err := svc.PurchaseReservedInstanceOffering(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PurchaseReservedInstanceOffering")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutDefaultApplicationSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDefaultApplicationSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutDefaultApplicationSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -168,6 +168,10 @@ type DriftStatusSummary struct {
 	//   status for the enabled control.
 	DriftStatus DriftStatus
 
+	// An object that categorizes the different types of drift detected for the
+	// enabled control.
+	Types *EnabledControlDriftTypes
+
 	noSmithyDocumentSerde
 }
 
@@ -382,6 +386,10 @@ type EnabledControlDetails struct {
 	// Array of EnabledControlParameter objects.
 	Parameters []EnabledControlParameterSummary
 
+	// The ARN of the parent enabled control from which this control inherits its
+	// configuration, if applicable.
+	ParentIdentifier *string
+
 	// The deployment summary of the enabled control.
 	StatusSummary *EnablementStatusSummary
 
@@ -397,6 +405,21 @@ type EnabledControlDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the various categories of drift that can occur for an enabled control
+// resource.
+type EnabledControlDriftTypes struct {
+
+	// Indicates drift related to inheritance configuration between parent and child
+	// controls.
+	Inheritance *EnabledControlInheritanceDrift
+
+	// Indicates drift related to the underlying Amazon Web Services resources managed
+	// by the control.
+	Resource *EnabledControlResourceDrift
+
+	noSmithyDocumentSerde
+}
+
 // A structure that returns a set of control identifiers, the control status for
 // each control in the set, and the drift status for each control in the set.
 type EnabledControlFilter struct {
@@ -407,8 +430,31 @@ type EnabledControlFilter struct {
 	// A list of DriftStatus items.
 	DriftStatuses []DriftStatus
 
+	// Filters enabled controls by their inheritance drift status, allowing you to
+	// find controls with specific inheritance-related drift conditions.
+	InheritanceDriftStatuses []DriftStatus
+
+	// Filters enabled controls by their parent control identifiers, allowing you to
+	// find child controls of specific parent controls.
+	ParentIdentifiers []string
+
+	// Filters enabled controls by their resource drift status, allowing you to find
+	// controls with specific resource-related drift conditions.
+	ResourceDriftStatuses []DriftStatus
+
 	// A list of EnablementStatus items.
 	Statuses []EnablementStatus
+
+	noSmithyDocumentSerde
+}
+
+// Represents drift information related to control inheritance between
+// organizational units.
+type EnabledControlInheritanceDrift struct {
+
+	// The status of inheritance drift for the enabled control, indicating whether
+	// inheritance configuration matches expectations.
+	Status DriftStatus
 
 	noSmithyDocumentSerde
 }
@@ -445,6 +491,17 @@ type EnabledControlParameterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Represents drift information related to the underlying Amazon Web Services
+// resources managed by the control.
+type EnabledControlResourceDrift struct {
+
+	// The status of resource drift for the enabled control, indicating whether the
+	// underlying resources match the expected configuration.
+	Status DriftStatus
+
+	noSmithyDocumentSerde
+}
+
 // Returns a summary of information about an enabled control.
 type EnabledControlSummary struct {
 
@@ -456,6 +513,10 @@ type EnabledControlSummary struct {
 
 	// The drift status of the enabled control.
 	DriftStatusSummary *DriftStatusSummary
+
+	// The ARN of the parent enabled control from which this control inherits its
+	// configuration, if applicable.
+	ParentIdentifier *string
 
 	// A short description of the status of the enabled control.
 	StatusSummary *EnablementStatusSummary
@@ -511,6 +572,10 @@ type LandingZoneDetail struct {
 
 	// The latest available version of the landing zone.
 	LatestAvailableVersion *string
+
+	// The types of remediation actions configured for the landing zone, such as
+	// automatic drift correction or compliance enforcement.
+	RemediationTypes []RemediationType
 
 	// The landing zone deployment status. One of ACTIVE , PROCESSING , FAILED .
 	Status LandingZoneStatus

@@ -230,6 +230,18 @@ func TestCheckSnapshot_DeleteAuthPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDomainVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDomainVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteListener(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteListener(context.Background(), nil, func(o *Options) {
@@ -410,6 +422,18 @@ func TestCheckSnapshot_GetAuthPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDomainVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDomainVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetListener(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetListener(context.Background(), nil, func(o *Options) {
@@ -547,6 +571,18 @@ func TestCheckSnapshot_ListAccessLogSubscriptions(t *testing.T) {
 	_, err := svc.ListAccessLogSubscriptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAccessLogSubscriptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDomainVerifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainVerifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDomainVerifications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -751,6 +787,18 @@ func TestCheckSnapshot_RegisterTargets(t *testing.T) {
 	_, err := svc.RegisterTargets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RegisterTargets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartDomainVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDomainVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDomainVerification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1057,6 +1105,18 @@ func TestUpdateSnapshot_DeleteAuthPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDomainVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDomainVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteListener(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteListener(context.Background(), nil, func(o *Options) {
@@ -1237,6 +1297,18 @@ func TestUpdateSnapshot_GetAuthPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDomainVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDomainVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetListener(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetListener(context.Background(), nil, func(o *Options) {
@@ -1374,6 +1446,18 @@ func TestUpdateSnapshot_ListAccessLogSubscriptions(t *testing.T) {
 	_, err := svc.ListAccessLogSubscriptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAccessLogSubscriptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDomainVerifications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainVerifications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDomainVerifications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1578,6 +1662,18 @@ func TestUpdateSnapshot_RegisterTargets(t *testing.T) {
 	_, err := svc.RegisterTargets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterTargets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDomainVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDomainVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDomainVerification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resets an enabled control.
+// Resets an enabled control. Does not work for controls implemented with SCPs.
 func (c *Client) ResetEnabledControl(ctx context.Context, params *ResetEnabledControlInput, optFns ...func(*Options)) (*ResetEnabledControlOutput, error) {
 	if params == nil {
 		params = &ResetEnabledControlInput{}

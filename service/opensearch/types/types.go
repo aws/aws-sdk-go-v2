@@ -103,8 +103,7 @@ type AdvancedSecurityOptions struct {
 	// True if fine-grained access control is enabled.
 	Enabled *bool
 
-	// Container for information about the IAM federation configuration for an
-	// OpenSearch UI application.
+	// Configuration options for IAM identity federation in advanced security settings.
 	IAMFederationOptions *IAMFederationOptionsOutput
 
 	// True if the internal user database is enabled.
@@ -136,8 +135,8 @@ type AdvancedSecurityOptionsInput struct {
 	// True to enable fine-grained access control.
 	Enabled *bool
 
-	// Container for information about the IAM federation configuration for an
-	// OpenSearch UI application.
+	// Input configuration for IAM identity federation within advanced security
+	// options.
 	IAMFederationOptions *IAMFederationOptionsInput
 
 	// True to enable the internal user database.
@@ -1465,34 +1464,31 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// The IAM federation authentication configuration for an Amazon OpenSearch
-// Service domain.
+// Input parameters for configuring IAM identity federation settings.
 type IAMFederationOptionsInput struct {
 
-	// True to enable IAM federation authentication for a domain.
+	// Specifies whether IAM identity federation is enabled for the OpenSearch domain.
 	Enabled *bool
 
-	// Element of the IAM federation assertion to use for backend roles. Default is
-	// roles .
+	// The key in the SAML assertion that contains the user's role information.
 	RolesKey *string
 
-	// Element of the IAM federation assertion to use for the user name. Default is sub
-	// .
+	// The key in the SAML assertion that contains the user's subject identifier.
 	SubjectKey *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the IAM federation options configured for the domain.
+// Output parameters showing the current IAM identity federation configuration.
 type IAMFederationOptionsOutput struct {
 
-	// True if IAM federation is enabled.
+	// Indicates whether IAM identity federation is currently enabled for the domain.
 	Enabled *bool
 
-	// The key used for matching the IAM federation roles attribute.
+	// The configured key in the SAML assertion for the user's role information.
 	RolesKey *string
 
-	// The key used for matching the IAM federation subject attribute.
+	// The configured key in the SAML assertion for the user's subject identifier.
 	SubjectKey *string
 
 	noSmithyDocumentSerde

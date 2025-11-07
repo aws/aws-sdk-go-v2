@@ -74,6 +74,38 @@ type DnsEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The DNS configuration options.
+type DnsOptions struct {
+
+	//  The preference for which private domains have a private hosted zone created
+	// for and associated with the specified VPC. Only supported when private DNS is
+	// enabled and when the VPC endpoint type is ServiceNetwork or Resource.
+	//
+	//   - ALL_DOMAINS - VPC Lattice provisions private hosted zones for all custom
+	//   domain names.
+	//
+	//   - VERIFIED_DOMAINS_ONLY - VPC Lattice provisions a private hosted zone only if
+	//   custom domain name has been verified by the provider.
+	//
+	//   - VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS - VPC Lattice provisions private
+	//   hosted zones for all verified custom domain names and other domain names that
+	//   the resource consumer specifies. The resource consumer specifies the domain
+	//   names in the privateDnsSpecifiedDomains parameter.
+	//
+	//   - SPECIFIED_DOMAINS_ONLY - VPC Lattice provisions a private hosted zone for
+	//   domain names specified by the resource consumer. The resource consumer specifies
+	//   the domain names in the privateDnsSpecifiedDomains parameter.
+	PrivateDnsPreference PrivateDnsPreference
+
+	//  Indicates which of the private domains to create private hosted zones for and
+	// associate with the specified VPC. Only supported when private DNS is enabled and
+	// the private DNS preference is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or
+	// SPECIFIED_DOMAINS_ONLY .
+	PrivateDnsSpecifiedDomains []string
+
+	noSmithyDocumentSerde
+}
+
 // The DNS name of the resource.
 type DnsResource struct {
 
@@ -82,6 +114,48 @@ type DnsResource struct {
 
 	// The type of IP address. Dualstack is currently not supported.
 	IpAddressType ResourceConfigurationIpAddressType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a domain verification.
+type DomainVerificationSummary struct {
+
+	//  The Amazon Resource Name (ARN) of the domain verification.
+	//
+	// This member is required.
+	Arn *string
+
+	//  The date and time that the domain verification was created, in ISO-8601
+	// format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	//  The domain name being verified.
+	//
+	// This member is required.
+	DomainName *string
+
+	//  The ID of the domain verification.
+	//
+	// This member is required.
+	Id *string
+
+	//  The current status of the domain verification process.
+	//
+	// This member is required.
+	Status VerificationStatus
+
+	//  The date and time that the domain was last successfully verified, in ISO-8601
+	// format.
+	LastVerifiedTime *time.Time
+
+	//  The tags associated with the domain verification.
+	Tags map[string]string
+
+	//  The TXT record configuration used for domain verification.
+	TxtMethodConfig *TxtMethodConfig
 
 	noSmithyDocumentSerde
 }
@@ -390,6 +464,17 @@ type ResourceConfigurationSummary struct {
 	// format.
 	CreatedAt *time.Time
 
+	//  The custom domain name.
+	CustomDomainName *string
+
+	//  The domain verification ID.
+	DomainVerificationId *string
+
+	//  (GROUP) The group domain for a group resource configuration. Any domains that
+	// you create for the child resource are subdomains of the group domain. Child
+	// resources inherit the verification status of the domain.
+	GroupDomain *string
+
 	// The ID of the resource configuration.
 	Id *string
 
@@ -688,6 +773,10 @@ type ServiceNetworkResourceAssociationSummary struct {
 	// Specifies whether the association is managed by Amazon.
 	IsManagedAssociation *bool
 
+	//  Indicates if private DNS is enabled for the service network resource
+	// association.
+	PrivateDnsEnabled *bool
+
 	// The private DNS entry for the service.
 	PrivateDnsEntry *DnsEntry
 
@@ -806,11 +895,17 @@ type ServiceNetworkVpcAssociationSummary struct {
 	// The account that created the association.
 	CreatedBy *string
 
+	//  The DNS options for the service network VPC association.
+	DnsOptions *DnsOptions
+
 	// The ID of the association.
 	Id *string
 
 	// The date and time that the association was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
+
+	//  Indicates if private DNS is enabled for the service network VPC association.
+	PrivateDnsEnabled *bool
 
 	// The Amazon Resource Name (ARN) of the service network.
 	ServiceNetworkArn *string
@@ -1028,6 +1123,22 @@ type TargetSummary struct {
 	//
 	//   - UNUSED : Target group is not used in a service.
 	Status TargetStatus
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for TXT record-based domain verification method.
+type TxtMethodConfig struct {
+
+	//  The name of the TXT record that must be created for domain verification.
+	//
+	// This member is required.
+	Name *string
+
+	//  The value that must be added to the TXT record for domain verification.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

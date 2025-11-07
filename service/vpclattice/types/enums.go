@@ -127,6 +127,29 @@ func (ListenerProtocol) Values() []ListenerProtocol {
 	}
 }
 
+type PrivateDnsPreference string
+
+// Enum values for PrivateDnsPreference
+const (
+	PrivateDnsPreferenceVerifiedDomainsOnly                PrivateDnsPreference = "VERIFIED_DOMAINS_ONLY"
+	PrivateDnsPreferenceAllDomains                         PrivateDnsPreference = "ALL_DOMAINS"
+	PrivateDnsPreferenceVerifiedDomainsAndSpecifiedDomains PrivateDnsPreference = "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS"
+	PrivateDnsPreferenceSpecifiedDomainsOnly               PrivateDnsPreference = "SPECIFIED_DOMAINS_ONLY"
+)
+
+// Values returns all known values for PrivateDnsPreference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrivateDnsPreference) Values() []PrivateDnsPreference {
+	return []PrivateDnsPreference{
+		"VERIFIED_DOMAINS_ONLY",
+		"ALL_DOMAINS",
+		"VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+		"SPECIFIED_DOMAINS_ONLY",
+	}
+}
+
 type ProtocolType string
 
 // Enum values for ProtocolType
@@ -605,5 +628,26 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+	}
+}
+
+type VerificationStatus string
+
+// Enum values for VerificationStatus
+const (
+	VerificationStatusVerified             VerificationStatus = "VERIFIED"
+	VerificationStatusPending              VerificationStatus = "PENDING"
+	VerificationStatusVerificationTimedOut VerificationStatus = "VERIFICATION_TIMED_OUT"
+)
+
+// Values returns all known values for VerificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationStatus) Values() []VerificationStatus {
+	return []VerificationStatus{
+		"VERIFIED",
+		"PENDING",
+		"VERIFICATION_TIMED_OUT",
 	}
 }

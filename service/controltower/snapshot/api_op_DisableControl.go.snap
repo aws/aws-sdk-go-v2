@@ -5,7 +5,6 @@ DisableControl
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
-		OperationInputValidation
 		spanInitializeEnd
 	Serialize stack step
 		spanBuildRequestStart

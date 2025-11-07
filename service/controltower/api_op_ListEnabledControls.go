@@ -37,6 +37,10 @@ type ListEnabledControlsInput struct {
 	// of control operations to view.
 	Filter *types.EnabledControlFilter
 
+	// A boolean value that determines whether to include enabled controls from child
+	// organizational units in the response.
+	IncludeChildren bool
+
 	// How many results to return per API call.
 	MaxResults *int32
 

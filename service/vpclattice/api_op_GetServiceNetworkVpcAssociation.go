@@ -50,6 +50,9 @@ type GetServiceNetworkVpcAssociationOutput struct {
 	// The account that created the association.
 	CreatedBy *string
 
+	//  DNS options for the service network VPC association.
+	DnsOptions *types.DnsOptions
+
 	// The failure code.
 	FailureCode *string
 
@@ -61,6 +64,9 @@ type GetServiceNetworkVpcAssociationOutput struct {
 
 	// The date and time that the association was last updated, in ISO-8601 format.
 	LastUpdatedAt *time.Time
+
+	//  Indicates if private DNS is enabled in the VPC association.
+	PrivateDnsEnabled *bool
 
 	// The IDs of the security groups.
 	SecurityGroupIds []string

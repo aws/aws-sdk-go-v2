@@ -290,6 +290,26 @@ func (m *validateOpDeleteAuthPolicy) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDomainVerification struct {
+}
+
+func (*validateOpDeleteDomainVerification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomainVerification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainVerificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainVerificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteListener struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpGetAuthPolicy) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAuthPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDomainVerification struct {
+}
+
+func (*validateOpGetDomainVerification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDomainVerification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDomainVerificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDomainVerificationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1050,26 @@ func (m *validateOpRegisterTargets) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDomainVerification struct {
+}
+
+func (*validateOpStartDomainVerification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDomainVerification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDomainVerificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDomainVerificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1286,6 +1346,10 @@ func addOpDeleteAuthPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAuthPolicy{}, middleware.After)
 }
 
+func addOpDeleteDomainVerificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomainVerification{}, middleware.After)
+}
+
 func addOpDeleteListenerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteListener{}, middleware.After)
 }
@@ -1344,6 +1408,10 @@ func addOpGetAccessLogSubscriptionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetAuthPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAuthPolicy{}, middleware.After)
+}
+
+func addOpGetDomainVerificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDomainVerification{}, middleware.After)
 }
 
 func addOpGetListenerValidationMiddleware(stack *middleware.Stack) error {
@@ -1428,6 +1496,10 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRegisterTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterTargets{}, middleware.After)
+}
+
+func addOpStartDomainVerificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDomainVerification{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2003,6 +2075,21 @@ func validateOpDeleteAuthPolicyInput(v *DeleteAuthPolicyInput) error {
 	}
 }
 
+func validateOpDeleteDomainVerificationInput(v *DeleteDomainVerificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainVerificationInput"}
+	if v.DomainVerificationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainVerificationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteListenerInput(v *DeleteListenerInput) error {
 	if v == nil {
 		return nil
@@ -2236,6 +2323,21 @@ func validateOpGetAuthPolicyInput(v *GetAuthPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAuthPolicyInput"}
 	if v.ResourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDomainVerificationInput(v *GetDomainVerificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDomainVerificationInput"}
+	if v.DomainVerificationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainVerificationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2581,6 +2683,21 @@ func validateOpRegisterTargetsInput(v *RegisterTargetsInput) error {
 		if err := validateTargetList(v.Targets); err != nil {
 			invalidParams.AddNested("Targets", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDomainVerificationInput(v *StartDomainVerificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDomainVerificationInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

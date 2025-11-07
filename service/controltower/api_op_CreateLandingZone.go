@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +44,10 @@ type CreateLandingZoneInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	// Specifies the types of remediation actions to apply when creating the landing
+	// zone, such as automatic drift correction or compliance enforcement.
+	RemediationTypes []types.RemediationType
 
 	// Tags to be applied to the landing zone.
 	Tags map[string]string

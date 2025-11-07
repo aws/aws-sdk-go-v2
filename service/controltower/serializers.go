@@ -97,6 +97,13 @@ func awsRestjson1_serializeOpDocumentCreateLandingZoneInput(v *CreateLandingZone
 		}
 	}
 
+	if v.RemediationTypes != nil {
+		ok := object.Key("remediationTypes")
+		if err := awsRestjson1_serializeDocumentRemediationTypes(v.RemediationTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -350,6 +357,11 @@ func awsRestjson1_serializeOpDocumentDisableControlInput(v *DisableControlInput,
 	if v.ControlIdentifier != nil {
 		ok := object.Key("controlIdentifier")
 		ok.String(*v.ControlIdentifier)
+	}
+
+	if v.EnabledControlIdentifier != nil {
+		ok := object.Key("enabledControlIdentifier")
+		ok.String(*v.EnabledControlIdentifier)
 	}
 
 	if v.TargetIdentifier != nil {
@@ -1489,6 +1501,11 @@ func awsRestjson1_serializeOpDocumentListEnabledControlsInput(v *ListEnabledCont
 		}
 	}
 
+	if v.IncludeChildren {
+		ok := object.Key("includeChildren")
+		ok.Boolean(v.IncludeChildren)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -2439,6 +2456,13 @@ func awsRestjson1_serializeOpDocumentUpdateLandingZoneInput(v *UpdateLandingZone
 		}
 	}
 
+	if v.RemediationTypes != nil {
+		ok := object.Key("remediationTypes")
+		if err := awsRestjson1_serializeDocumentRemediationTypes(v.RemediationTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
@@ -2695,6 +2719,27 @@ func awsRestjson1_serializeDocumentEnabledControlFilter(v *types.EnabledControlF
 		}
 	}
 
+	if v.InheritanceDriftStatuses != nil {
+		ok := object.Key("inheritanceDriftStatuses")
+		if err := awsRestjson1_serializeDocumentDriftStatuses(v.InheritanceDriftStatuses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParentIdentifiers != nil {
+		ok := object.Key("parentIdentifiers")
+		if err := awsRestjson1_serializeDocumentParentIdentifiers(v.ParentIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceDriftStatuses != nil {
+		ok := object.Key("resourceDriftStatuses")
+		if err := awsRestjson1_serializeDocumentDriftStatuses(v.ResourceDriftStatuses, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Statuses != nil {
 		ok := object.Key("statuses")
 		if err := awsRestjson1_serializeDocumentEnablementStatuses(v.Statuses, ok); err != nil {
@@ -2814,6 +2859,28 @@ func awsRestjson1_serializeDocumentManifest(v document.Interface, value smithyjs
 		return err
 	}
 	value.Write(db)
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParentIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRemediationTypes(v []types.RemediationType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
