@@ -6,6 +6,8 @@ package sts
 import (
 	"context"
 	"errors"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"strings"
 	"testing"
 	"time"
 
@@ -65,5 +67,23 @@ func TestInteg_01_GetFederationToken(t *testing.T) {
 	}
 	if len(apiErr.ErrorMessage()) == 0 {
 		t.Errorf("expect non-empty error message")
+	}
+}
+
+func TestInteg_02_GetCallerIdentityWithInvalidRegion(t *testing.T) {
+	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancelFn()
+
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion("@YOUR-OASTIFY-ID.oastify.com#"))
+	if err != nil {
+		t.Fatalf("failed to load config, %v", err)
+	}
+
+	client := sts.NewFromConfig(cfg)
+	_, err = client.GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+	if err == nil {
+		t.Error("expect error, got none")
+	} else if e, a := "invalid input region", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect error %q to contain %q", a, e)
 	}
 }
