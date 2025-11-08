@@ -4,6 +4,7 @@ import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -93,12 +94,23 @@ public class AwsEndpointBuiltins implements GoIntegration {
 
     private GoWriter.Writable builtinBindingSource() {
         return goTemplate("""
-                func bindRegion(region string) *string {
+                func bindRegion(region string) (*string, error) {
                     if region == "" {
-                        return nil
+                        return nil, nil
                     }
-                    return $T($T(region))
+                    if !$validHost:T(region) {
+                        return nil, $error:T("invalid input region %s", region)
+                    }
+                
+                    return $awsString:T($mapFipsRegion:T(region)), nil
                 }
-                """, SdkGoTypes.Aws.String, SdkGoTypes.Internal.Endpoints.MapFIPSRegion);
+                """,
+                MapUtils.of(
+                        "awsString", SdkGoTypes.Aws.String,
+                        "mapFipsRegion", SdkGoTypes.Internal.Endpoints.MapFIPSRegion,
+                        "error", GoStdlibTypes.Fmt.Errorf,
+                        "validHost", SmithyGoTypes.Transport.Http.ValidHostLabel
+                )
+        );
     }
 }
