@@ -1,18 +1,12 @@
 ListBackups
 	Initialize stack step
-		spanInitializeStart
-		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
-		spanInitializeEnd
 	Serialize stack step
-		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
-		InterceptBeforeSerialization
 		OperationSerializer
-		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -20,7 +14,6 @@ ListBackups
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
-		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		spanRetryLoop
@@ -35,20 +28,15 @@ ListBackups
 		DiscoverEndpoint
 		ComputePayloadHash
 		setLegacyContextSigningOptions
-		InterceptBeforeSigning
 		Signing
-		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
-		InterceptAfterDeserialization
 		OperationDeserializer
-		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		DynamoDB:ResponseChecksumValidation
 		RequestResponseLogger
-		InterceptTransmit

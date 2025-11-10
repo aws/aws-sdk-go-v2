@@ -1,19 +1,13 @@
 ListProtocolsLists
 	Initialize stack step
-		spanInitializeStart
-		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
-		spanInitializeEnd
 	Serialize stack step
-		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
-		InterceptBeforeSerialization
 		OperationSerializer
-		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -21,7 +15,6 @@ ListProtocolsLists
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
-		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
 		InterceptBeforeRetryLoop
@@ -34,19 +27,14 @@ ListProtocolsLists
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
-		InterceptBeforeSigning
 		Signing
-		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
-		InterceptAfterDeserialization
 		OperationDeserializer
-		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
-		InterceptTransmit

@@ -1,26 +1,19 @@
 StartCallAnalyticsStreamTranscription
 	Initialize stack step
-		spanInitializeStart
-		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
-		spanInitializeEnd
 	Serialize stack step
-		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
-		InterceptBeforeSerialization
 		OperationSerializer
-		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
-		spanBuildRequestEnd
 	Finalize stack step
 		ComputePayloadHash
 		SigV4ContentSHA256Header
@@ -34,9 +27,7 @@ StartCallAnalyticsStreamTranscription
 		ResolveEndpointV2
 		disableHTTPS
 		setLegacyContextSigningOptions
-		InterceptBeforeSigning
 		Signing
-		InterceptAfterSigning
 		InitializeStreamWriter
 	Deserialize stack step
 		AddRawResponseToMetadata
@@ -44,10 +35,7 @@ StartCallAnalyticsStreamTranscription
 		RequireMinimumProtocol
 		ResponseErrorWrapper
 		RequestIDRetriever
-		InterceptAfterDeserialization
 		OperationDeserializer
-		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
-		InterceptTransmit

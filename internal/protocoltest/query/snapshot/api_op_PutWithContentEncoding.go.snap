@@ -1,18 +1,12 @@
 PutWithContentEncoding
 	Initialize stack step
-		spanInitializeStart
-		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
-		spanInitializeEnd
 	Serialize stack step
-		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
-		InterceptBeforeSerialization
 		OperationSerializer
-		InterceptAfterSerialization
 		RequestCompression
 	Build stack step
 		ClientRequestID
@@ -21,7 +15,6 @@ PutWithContentEncoding
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
-		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
 		InterceptBeforeRetryLoop
@@ -34,19 +27,14 @@ PutWithContentEncoding
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
-		InterceptBeforeSigning
 		Signing
-		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
-		InterceptAfterDeserialization
 		OperationDeserializer
-		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
-		InterceptTransmit

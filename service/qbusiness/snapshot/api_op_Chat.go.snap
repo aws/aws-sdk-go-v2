@@ -1,27 +1,20 @@
 Chat
 	Initialize stack step
-		spanInitializeStart
-		InterceptExecution
 		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
-		spanInitializeEnd
 	Serialize stack step
-		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
-		InterceptBeforeSerialization
 		OperationSerializer
-		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
-		spanBuildRequestEnd
 	Finalize stack step
 		ComputePayloadHash
 		SigV4ContentSHA256Header
@@ -35,9 +28,7 @@ Chat
 		ResolveEndpointV2
 		disableHTTPS
 		setLegacyContextSigningOptions
-		InterceptBeforeSigning
 		Signing
-		InterceptAfterSigning
 		InitializeStreamWriter
 	Deserialize stack step
 		AddRawResponseToMetadata
@@ -45,10 +36,7 @@ Chat
 		RequireMinimumProtocol
 		ResponseErrorWrapper
 		RequestIDRetriever
-		InterceptAfterDeserialization
 		OperationDeserializer
-		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
-		InterceptTransmit
