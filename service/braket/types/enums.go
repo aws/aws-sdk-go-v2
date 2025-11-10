@@ -97,6 +97,26 @@ func (DeviceType) Values() []DeviceType {
 	}
 }
 
+type ExperimentalCapabilitiesEnablementType string
+
+// Enum values for ExperimentalCapabilitiesEnablementType
+const (
+	ExperimentalCapabilitiesEnablementTypeAll  ExperimentalCapabilitiesEnablementType = "ALL"
+	ExperimentalCapabilitiesEnablementTypeNone ExperimentalCapabilitiesEnablementType = "NONE"
+)
+
+// Values returns all known values for ExperimentalCapabilitiesEnablementType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExperimentalCapabilitiesEnablementType) Values() []ExperimentalCapabilitiesEnablementType {
+	return []ExperimentalCapabilitiesEnablementType{
+		"ALL",
+		"NONE",
+	}
+}
+
 type HybridJobAdditionalAttributeName string
 
 // Enum values for HybridJobAdditionalAttributeName

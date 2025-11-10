@@ -1,0 +1,8 @@
+{
+    "id": "4f86a904-a22f-42df-9ff5-caaa8391fb98",
+    "type": "feature",
+    "description": "Include tags filed in CreatePublishingDestinationRequest and DescribePublishingDestinationResponse.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

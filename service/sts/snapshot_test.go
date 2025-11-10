@@ -146,6 +146,18 @@ func TestCheckSnapshot_GetCallerIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDelegatedAccessToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDelegatedAccessToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDelegatedAccessToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFederationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFederationToken(context.Background(), nil, func(o *Options) {
@@ -246,6 +258,18 @@ func TestUpdateSnapshot_GetCallerIdentity(t *testing.T) {
 	_, err := svc.GetCallerIdentity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCallerIdentity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDelegatedAccessToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDelegatedAccessToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDelegatedAccessToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1469,6 +1469,11 @@ func awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(v **GetQuantumTaskOu
 				sv.EndedAt = ptr.Time(t)
 			}
 
+		case "experimentalCapabilities":
+			if err := awsRestjson1_deserializeDocumentExperimentalCapabilities(&sv.ExperimentalCapabilities, value); err != nil {
+				return err
+			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3413,6 +3418,48 @@ func awsRestjson1_deserializeDocumentDeviceSummaryList(v *[]types.DeviceSummary,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentalCapabilities(v *types.ExperimentalCapabilities, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ExperimentalCapabilities
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "enabled":
+			var mv types.ExperimentalCapabilitiesEnablementType
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExperimentalCapabilitiesEnablementType to be of type string, got %T instead", value)
+				}
+				mv = types.ExperimentalCapabilitiesEnablementType(jtv)
+			}
+			uv = &types.ExperimentalCapabilitiesMemberEnabled{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

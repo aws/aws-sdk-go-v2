@@ -55,6 +55,9 @@ type CreatePublishingDestinationInput struct {
 	// The idempotency token for the request.
 	ClientToken *string
 
+	// The tags to be added to a new publishing destination resource.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

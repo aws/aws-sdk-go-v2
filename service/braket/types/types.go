@@ -17,11 +17,11 @@ type ActionMetadata struct {
 	ActionType *string
 
 	// The number of executables in a program set. This is only available for a
-	// Program Set.
+	// program set.
 	ExecutableCount *int64
 
-	// The number of programs in a program set. This is only available for a Program
-	// Set.
+	// The number of programs in a program set. This is only available for a program
+	// set.
 	ProgramCount *int64
 
 	noSmithyDocumentSerde
@@ -142,6 +142,26 @@ type DeviceSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Enabled experimental capabilities for quantum hardware. Note that the use of
+// these features may impact device capabilities and performance beyond its
+// standard specifications.
+//
+// The following types satisfy this interface:
+//
+//	ExperimentalCapabilitiesMemberEnabled
+type ExperimentalCapabilities interface {
+	isExperimentalCapabilities()
+}
+
+// Enabled experimental capabilities.
+type ExperimentalCapabilitiesMemberEnabled struct {
+	Value ExperimentalCapabilitiesEnablementType
+
+	noSmithyDocumentSerde
+}
+
+func (*ExperimentalCapabilitiesMemberEnabled) isExperimentalCapabilities() {}
 
 // Information about the queue for a specified hybrid job.
 type HybridJobQueueInfo struct {
@@ -494,3 +514,14 @@ type SearchQuantumTasksFilter struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isExperimentalCapabilities() {}

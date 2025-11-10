@@ -61,6 +61,60 @@ var _ *bool
 var _ *int64
 var _ []types.AttributeValue
 
+func ExampleCedarTagValue_outputUsage() {
+	var union types.CedarTagValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CedarTagValueMemberBoolean:
+		_ = v.Value // Value is bool
+
+	case *types.CedarTagValueMemberDatetime:
+		_ = v.Value // Value is string
+
+	case *types.CedarTagValueMemberDecimal:
+		_ = v.Value // Value is string
+
+	case *types.CedarTagValueMemberDuration:
+		_ = v.Value // Value is string
+
+	case *types.CedarTagValueMemberEntityIdentifier:
+		_ = v.Value // Value is types.EntityIdentifier
+
+	case *types.CedarTagValueMemberIpaddr:
+		_ = v.Value // Value is string
+
+	case *types.CedarTagValueMemberLong:
+		_ = v.Value // Value is int64
+
+	case *types.CedarTagValueMemberRecord:
+		_ = v.Value // Value is map[string]types.CedarTagValue
+
+	case *types.CedarTagValueMemberSet:
+		_ = v.Value // Value is []types.CedarTagValue
+
+	case *types.CedarTagValueMemberString:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EntityIdentifier
+var _ map[string]types.CedarTagValue
+var _ *string
+var _ *string
+var _ *string
+var _ *string
+var _ *string
+var _ []types.CedarTagValue
+var _ *bool
+var _ *int64
+
 func ExampleConfiguration_outputUsage() {
 	var union types.Configuration
 	// type switches can be used to check the union value

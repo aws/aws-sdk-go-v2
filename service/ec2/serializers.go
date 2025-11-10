@@ -54163,6 +54163,11 @@ func awsEc2query_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 		objectKey.Integer(*v.OnDemandMaxPricePercentageOverLowestPrice)
 	}
 
+	if v.RequireEncryptionInTransit != nil {
+		objectKey := object.Key("RequireEncryptionInTransit")
+		objectKey.Boolean(*v.RequireEncryptionInTransit)
+	}
+
 	if v.RequireHibernateSupport != nil {
 		objectKey := object.Key("RequireHibernateSupport")
 		objectKey.Boolean(*v.RequireHibernateSupport)
@@ -54329,6 +54334,11 @@ func awsEc2query_serializeDocumentInstanceRequirementsRequest(v *types.InstanceR
 	if v.OnDemandMaxPricePercentageOverLowestPrice != nil {
 		objectKey := object.Key("OnDemandMaxPricePercentageOverLowestPrice")
 		objectKey.Integer(*v.OnDemandMaxPricePercentageOverLowestPrice)
+	}
+
+	if v.RequireEncryptionInTransit != nil {
+		objectKey := object.Key("RequireEncryptionInTransit")
+		objectKey.Boolean(*v.RequireEncryptionInTransit)
 	}
 
 	if v.RequireHibernateSupport != nil {

@@ -2050,6 +2050,96 @@ func awsAwsjson10_serializeDocumentBatchIsAuthorizedWithTokenInputList(v []types
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCedarTagRecordAttribute(v map[string]types.CedarTagValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentCedarTagValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCedarTagSetAttribute(v []types.CedarTagValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentCedarTagValue(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCedarTagValue(v types.CedarTagValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CedarTagValueMemberBoolean:
+		av := object.Key("boolean")
+		av.Boolean(uv.Value)
+
+	case *types.CedarTagValueMemberDatetime:
+		av := object.Key("datetime")
+		av.String(uv.Value)
+
+	case *types.CedarTagValueMemberDecimal:
+		av := object.Key("decimal")
+		av.String(uv.Value)
+
+	case *types.CedarTagValueMemberDuration:
+		av := object.Key("duration")
+		av.String(uv.Value)
+
+	case *types.CedarTagValueMemberEntityIdentifier:
+		av := object.Key("entityIdentifier")
+		if err := awsAwsjson10_serializeDocumentEntityIdentifier(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CedarTagValueMemberIpaddr:
+		av := object.Key("ipaddr")
+		av.String(uv.Value)
+
+	case *types.CedarTagValueMemberLong:
+		av := object.Key("long")
+		av.Long(uv.Value)
+
+	case *types.CedarTagValueMemberRecord:
+		av := object.Key("record")
+		if err := awsAwsjson10_serializeDocumentCedarTagRecordAttribute(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CedarTagValueMemberSet:
+		av := object.Key("set")
+		if err := awsAwsjson10_serializeDocumentCedarTagSetAttribute(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CedarTagValueMemberString:
+		av := object.Key("string")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentClientIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2199,6 +2289,22 @@ func awsAwsjson10_serializeDocumentEntityAttributes(v map[string]types.Attribute
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentEntityCedarTags(v map[string]types.CedarTagValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentCedarTagValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentEntityIdentifier(v *types.EntityIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2237,6 +2343,13 @@ func awsAwsjson10_serializeDocumentEntityItem(v *types.EntityItem, value smithyj
 	if v.Parents != nil {
 		ok := object.Key("parents")
 		if err := awsAwsjson10_serializeDocumentParentList(v.Parents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentEntityCedarTags(v.Tags, ok); err != nil {
 			return err
 		}
 	}

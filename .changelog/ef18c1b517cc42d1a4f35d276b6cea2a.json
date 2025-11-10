@@ -1,0 +1,8 @@
+{
+    "id": "ef18c1b5-17cc-42d1-a4f3-5d276b6cea2a",
+    "type": "feature",
+    "description": "Added GetDelegatedAccessToken API, which is not available for general use at this time.",
+    "modules": [
+        "service/sts"
+    ]
+}

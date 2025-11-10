@@ -1171,6 +1171,10 @@ type NetworkAccessConfiguration struct {
 	// identifier.
 	EniId *string
 
+	// The IPv6 addresses of the elastic network interface that is attached to
+	// instances in your VPC.
+	EniIpv6Addresses []string
+
 	// The private IP address of the elastic network interface that is attached to
 	// instances in your VPC.
 	EniPrivateIpAddress *string

@@ -981,6 +981,13 @@ func awsRestjson1_serializeOpDocumentCreatePublishingDestinationInput(v *CreateP
 		ok.String(string(v.DestinationType))
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

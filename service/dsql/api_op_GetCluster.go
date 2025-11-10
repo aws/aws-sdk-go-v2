@@ -72,6 +72,9 @@ type GetClusterOutput struct {
 	// The current encryption configuration details for the cluster.
 	EncryptionDetails *types.EncryptionDetails
 
+	// The connection endpoint for the cluster.
+	Endpoint *string
+
 	// Returns the current multi-Region cluster configuration, including witness
 	// region and linked cluster information.
 	MultiRegionProperties *types.MultiRegionProperties

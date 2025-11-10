@@ -70,6 +70,9 @@ type CreateQuantumTaskInput struct {
 	// This value conforms to the media type: application/json
 	DeviceParameters *string
 
+	// Enable experimental capabilities for the quantum task.
+	ExperimentalCapabilities types.ExperimentalCapabilities
+
 	// The token for an Amazon Braket hybrid job that associates it with the quantum
 	// task.
 	JobToken *string

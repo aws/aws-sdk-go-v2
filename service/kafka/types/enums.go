@@ -191,6 +191,25 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type RebalancingStatus string
+
+// Enum values for RebalancingStatus
+const (
+	RebalancingStatusPaused RebalancingStatus = "PAUSED"
+	RebalancingStatusActive RebalancingStatus = "ACTIVE"
+)
+
+// Values returns all known values for RebalancingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RebalancingStatus) Values() []RebalancingStatus {
+	return []RebalancingStatus{
+		"PAUSED",
+		"ACTIVE",
+	}
+}
+
 type ReplicationStartingPositionType string
 
 // Enum values for ReplicationStartingPositionType

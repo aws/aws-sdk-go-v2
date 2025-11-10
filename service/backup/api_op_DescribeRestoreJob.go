@@ -85,6 +85,14 @@ type DescribeRestoreJobOutput struct {
 	// example, arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string
 
+	// This is a boolean value indicating whether the restore job is a parent
+	// (composite) restore job.
+	IsParent bool
+
+	// This is the unique identifier of the parent restore job for the selected
+	// restore job.
+	ParentJobId *string
+
 	// Contains an estimated percentage that is complete of a job at the time the job
 	// status was queried.
 	PercentDone *string

@@ -214,6 +214,15 @@ func awsRestjson1_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 				return err
 			}
 
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Endpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -809,6 +818,15 @@ func awsRestjson1_deserializeOpDocumentGetClusterOutput(v **GetClusterOutput, va
 		case "encryptionDetails":
 			if err := awsRestjson1_deserializeDocumentEncryptionDetails(&sv.EncryptionDetails, value); err != nil {
 				return err
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Endpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
 			}
 
 		case "identifier":

@@ -1,0 +1,8 @@
+{
+    "id": "f051fff6-280b-4010-9d72-d9efa454d403",
+    "type": "feature",
+    "description": "Added new invoicing get-invoice-pdf API Operation",
+    "modules": [
+        "service/invoicing"
+    ]
+}

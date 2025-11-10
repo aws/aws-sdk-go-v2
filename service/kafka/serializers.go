@@ -342,6 +342,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.Rebalancing != nil {
+		ok := object.Key("rebalancing")
+		if err := awsRestjson1_serializeDocumentRebalancing(v.Rebalancing, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.StorageMode) > 0 {
 		ok := object.Key("storageMode")
 		ok.String(string(v.StorageMode))
@@ -4191,6 +4198,107 @@ func awsRestjson1_serializeOpDocumentUpdateMonitoringInput(v *UpdateMonitoringIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateRebalancing struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateRebalancing) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateRebalancing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateRebalancingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/rebalancing")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateRebalancingInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateRebalancingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateRebalancingInput(v *UpdateRebalancingInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateRebalancingInput(v *UpdateRebalancingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("currentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	if v.Rebalancing != nil {
+		ok := object.Key("rebalancing")
+		if err := awsRestjson1_serializeDocumentRebalancing(v.Rebalancing, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateReplicationInfo struct {
 }
 
@@ -5159,6 +5267,13 @@ func awsRestjson1_serializeDocumentProvisionedRequest(v *types.ProvisionedReques
 		}
 	}
 
+	if v.Rebalancing != nil {
+		ok := object.Key("rebalancing")
+		if err := awsRestjson1_serializeDocumentRebalancing(v.Rebalancing, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.StorageMode) > 0 {
 		ok := object.Key("storageMode")
 		ok.String(string(v.StorageMode))
@@ -5191,6 +5306,18 @@ func awsRestjson1_serializeDocumentPublicAccess(v *types.PublicAccess, value smi
 	if v.Type != nil {
 		ok := object.Key("type")
 		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRebalancing(v *types.Rebalancing, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

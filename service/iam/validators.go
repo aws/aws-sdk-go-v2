@@ -170,6 +170,26 @@ func (m *validateOpCreateAccountAlias) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDelegationRequest struct {
+}
+
+func (*validateOpCreateDelegationRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDelegationRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDelegationRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDelegationRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGroup struct {
 }
 
@@ -2682,6 +2702,10 @@ func addOpCreateAccountAliasValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateAccountAlias{}, middleware.After)
 }
 
+func addOpCreateDelegationRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDelegationRequest{}, middleware.After)
+}
+
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
 }
@@ -3346,6 +3370,33 @@ func validateOpCreateAccountAliasInput(v *CreateAccountAliasInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccountAliasInput"}
 	if v.AccountAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDelegationRequestInput(v *CreateDelegationRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDelegationRequestInput"}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if v.RequestorWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestorWorkflowId"))
+	}
+	if v.NotificationChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationChannel"))
+	}
+	if v.SessionDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionDuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

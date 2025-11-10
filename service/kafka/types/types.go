@@ -284,6 +284,11 @@ type ClusterInfo struct {
 	// Settings for open monitoring using Prometheus.
 	OpenMonitoring *OpenMonitoring
 
+	// Contains information about intelligent rebalancing for new MSK Provisioned
+	// clusters with Express brokers. By default, intelligent rebalancing status is
+	// ACTIVE.
+	Rebalancing *Rebalancing
+
 	// The state of the cluster. The possible states are ACTIVE, CREATING, DELETING,
 	// FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
 	State ClusterState
@@ -860,6 +865,10 @@ type MutableClusterInfo struct {
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoring
 
+	// Describes the intelligent rebalancing configuration of an MSK Provisioned
+	// cluster with Express brokers.
+	Rebalancing *Rebalancing
+
 	// This controls storage mode for supported storage tiers.
 	StorageMode StorageMode
 
@@ -996,6 +1005,13 @@ type Provisioned struct {
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoringInfo
 
+	// Specifies whether or not intelligent rebalancing is turned on for a newly
+	// created MSK Provisioned cluster with Express brokers. Intelligent rebalancing
+	// performs automatic partition balancing operations when you scale your clusters
+	// up or down. By default, intelligent rebalancing is ACTIVE for all new
+	// Express-based clusters.
+	Rebalancing *Rebalancing
+
 	// This controls storage mode for supported storage tiers.
 	StorageMode StorageMode
 
@@ -1047,6 +1063,11 @@ type ProvisionedRequest struct {
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoringInfo
 
+	// Specifies if intelligent rebalancing is turned on for your MSK Provisioned
+	// cluster with Express brokers. For all new Express-based clusters that you
+	// create, intelligent rebalancing is turned on by default.
+	Rebalancing *Rebalancing
+
 	// This controls storage mode for supported storage tiers.
 	StorageMode StorageMode
 
@@ -1073,6 +1094,20 @@ type PublicAccess struct {
 	// The value DISABLED indicates that public access is turned off.
 	// SERVICE_PROVIDED_EIPS indicates that public access is turned on.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether or not intelligent rebalancing is turned on for a newly
+// created MSK Provisioned cluster with Express brokers. Intelligent rebalancing
+// performs automatic partition balancing operations when you scale your clusters
+// up or down. By default, intelligent rebalancing is ACTIVE for all new
+// Express-based clusters.
+type Rebalancing struct {
+
+	// Intelligent rebalancing status. The default intelligent rebalancing status is
+	// ACTIVE for all new Express-based clusters.
+	Status RebalancingStatus
 
 	noSmithyDocumentSerde
 }

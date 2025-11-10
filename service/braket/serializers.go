@@ -441,6 +441,13 @@ func awsRestjson1_serializeOpDocumentCreateQuantumTaskInput(v *CreateQuantumTask
 		ok.String(*v.DeviceParameters)
 	}
 
+	if v.ExperimentalCapabilities != nil {
+		ok := object.Key("experimentalCapabilities")
+		if err := awsRestjson1_serializeDocumentExperimentalCapabilities(v.ExperimentalCapabilities, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JobToken != nil {
 		ok := object.Key("jobToken")
 		ok.String(*v.JobToken)
@@ -1305,6 +1312,22 @@ func awsRestjson1_serializeDocumentDeviceConfig(v *types.DeviceConfig, value smi
 		ok.String(*v.Device)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExperimentalCapabilities(v types.ExperimentalCapabilities, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ExperimentalCapabilitiesMemberEnabled:
+		av := object.Key("enabled")
+		av.String(string(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

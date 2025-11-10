@@ -1,0 +1,8 @@
+{
+    "id": "942f57b7-798a-4075-a19d-a1c1fc896ae3",
+    "type": "feature",
+    "description": "Adds ExperimentalCapabilities field to CreateQuantumTask request and GetQuantumTask response objects. Enables use of experimental software capabilities when creating quantum tasks.",
+    "modules": [
+        "service/braket"
+    ]
+}

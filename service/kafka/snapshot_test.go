@@ -650,6 +650,18 @@ func TestCheckSnapshot_UpdateMonitoring(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRebalancing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRebalancing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRebalancing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateReplicationInfo(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateReplicationInfo(context.Background(), nil, func(o *Options) {
@@ -1266,6 +1278,18 @@ func TestUpdateSnapshot_UpdateMonitoring(t *testing.T) {
 	_, err := svc.UpdateMonitoring(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMonitoring")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRebalancing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRebalancing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRebalancing")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

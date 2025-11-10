@@ -42,9 +42,14 @@ type GetLoggingConfigurationInput struct {
 	// from various sources for normalization, analysis, and management. For
 	// information, see [Collecting data from Amazon Web Services services]in the Amazon Security Lake user guide.
 	//
+	// The log scope CLOUDWATCH_TELEMETRY_RULE_MANAGED indicates a configuration that
+	// is managed through Amazon CloudWatch Logs for telemetry data collection and
+	// analysis. For information, see [What is Amazon CloudWatch Logs ?]in the Amazon CloudWatch Logs user guide.
+	//
 	// Default: CUSTOMER
 	//
 	// [Collecting data from Amazon Web Services services]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+	// [What is Amazon CloudWatch Logs ?]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
 	LogScope types.LogScope
 
 	// Used to distinguish between various logging options. Currently, there is one

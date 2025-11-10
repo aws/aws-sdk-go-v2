@@ -57,6 +57,7 @@
         "api_op_UpdateConfiguration.go",
         "api_op_UpdateConnectivity.go",
         "api_op_UpdateMonitoring.go",
+        "api_op_UpdateRebalancing.go",
         "api_op_UpdateReplicationInfo.go",
         "api_op_UpdateSecurity.go",
         "api_op_UpdateStorage.go",

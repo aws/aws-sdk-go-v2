@@ -1,0 +1,8 @@
+{
+    "id": "bc8238af-a233-48cb-bc9b-165e7f6e4fb1",
+    "type": "feature",
+    "description": "AWS Appstream support for IPv6",
+    "modules": [
+        "service/appstream"
+    ]
+}

@@ -13792,6 +13792,11 @@ func awsAwsjson11_deserializeDocumentNetworkAccessConfiguration(v **types.Networ
 				sv.EniId = ptr.String(jtv)
 			}
 
+		case "EniIpv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.EniIpv6Addresses, value); err != nil {
+				return err
+			}
+
 		case "EniPrivateIpAddress":
 			if value != nil {
 				jtv, ok := value.(string)

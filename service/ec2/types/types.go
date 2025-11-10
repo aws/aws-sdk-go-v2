@@ -9469,6 +9469,15 @@ type InstanceRequirements struct {
 	// [GetInstanceTypesFromInstanceRequirements]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html
 	OnDemandMaxPricePercentageOverLowestPrice *int32
 
+	// Specifies whether instance types must support encrypting in-transit traffic
+	// between instances. For more information, including the supported instance types,
+	// see [Encryption in transit]in the Amazon EC2 User Guide.
+	//
+	// Default: false
+	//
+	// [Encryption in transit]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit
+	RequireEncryptionInTransit *bool
+
 	// Indicates whether instance types must support hibernation for On-Demand
 	// Instances.
 	//
@@ -9838,6 +9847,15 @@ type InstanceRequirementsRequest struct {
 	// [GetSpotPlacementScores]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
 	// [GetInstanceTypesFromInstanceRequirements]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html
 	OnDemandMaxPricePercentageOverLowestPrice *int32
+
+	// Specifies whether instance types must support encrypting in-transit traffic
+	// between instances. For more information, including the supported instance types,
+	// see [Encryption in transit]in the Amazon EC2 User Guide.
+	//
+	// Default: false
+	//
+	// [Encryption in transit]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit
+	RequireEncryptionInTransit *bool
 
 	// Indicates whether instance types must support hibernation for On-Demand
 	// Instances.

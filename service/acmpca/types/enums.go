@@ -235,6 +235,9 @@ const (
 	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
 	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
 	KeyAlgorithmEcSecp521r1  KeyAlgorithm = "EC_secp521r1"
+	KeyAlgorithmMlDsa44      KeyAlgorithm = "ML_DSA_44"
+	KeyAlgorithmMlDsa65      KeyAlgorithm = "ML_DSA_65"
+	KeyAlgorithmMlDsa87      KeyAlgorithm = "ML_DSA_87"
 	KeyAlgorithmSm2          KeyAlgorithm = "SM2"
 )
 
@@ -250,6 +253,9 @@ func (KeyAlgorithm) Values() []KeyAlgorithm {
 		"EC_prime256v1",
 		"EC_secp384r1",
 		"EC_secp521r1",
+		"ML_DSA_44",
+		"ML_DSA_65",
+		"ML_DSA_87",
 		"SM2",
 	}
 }
@@ -372,6 +378,9 @@ const (
 	SigningAlgorithmSha384withrsa   SigningAlgorithm = "SHA384WITHRSA"
 	SigningAlgorithmSha512withrsa   SigningAlgorithm = "SHA512WITHRSA"
 	SigningAlgorithmSm3withsm2      SigningAlgorithm = "SM3WITHSM2"
+	SigningAlgorithmMlDsa44         SigningAlgorithm = "ML_DSA_44"
+	SigningAlgorithmMlDsa65         SigningAlgorithm = "ML_DSA_65"
+	SigningAlgorithmMlDsa87         SigningAlgorithm = "ML_DSA_87"
 )
 
 // Values returns all known values for SigningAlgorithm. Note that this can be
@@ -387,6 +396,9 @@ func (SigningAlgorithm) Values() []SigningAlgorithm {
 		"SHA384WITHRSA",
 		"SHA512WITHRSA",
 		"SM3WITHSM2",
+		"ML_DSA_44",
+		"ML_DSA_65",
+		"ML_DSA_87",
 	}
 }
 

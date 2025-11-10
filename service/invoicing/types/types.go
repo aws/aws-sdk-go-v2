@@ -189,6 +189,24 @@ type InvoiceCurrencyAmount struct {
 	noSmithyDocumentSerde
 }
 
+// Invoice document data.
+type InvoicePDF struct {
+
+	// The pre-signed URL to download the invoice document.
+	DocumentUrl *string
+
+	// The pre-signed URL expiration date of the invoice document.
+	DocumentUrlExpirationDate *time.Time
+
+	//  Your unique invoice ID.
+	InvoiceId *string
+
+	// List of supplemental documents associated with the invoice.
+	SupplementalDocuments []SupplementalDocument
+
+	noSmithyDocumentSerde
+}
+
 // Contains high-level information about the invoice receiver.
 type InvoiceProfile struct {
 
@@ -376,6 +394,18 @@ type ResourceTag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Supplemental document associated with the invoice.
+type SupplementalDocument struct {
+
+	// The pre-signed URL to download invoice supplemental document.
+	DocumentUrl *string
+
+	// The pre-signed URL expiration date of invoice supplemental document.
+	DocumentUrlExpirationDate *time.Time
 
 	noSmithyDocumentSerde
 }

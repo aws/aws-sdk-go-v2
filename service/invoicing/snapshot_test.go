@@ -98,6 +98,18 @@ func TestCheckSnapshot_DeleteInvoiceUnit(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInvoicePDF(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvoicePDF(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInvoicePDF")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInvoiceUnit(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInvoiceUnit(context.Background(), nil, func(o *Options) {
@@ -210,6 +222,18 @@ func TestUpdateSnapshot_DeleteInvoiceUnit(t *testing.T) {
 	_, err := svc.DeleteInvoiceUnit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteInvoiceUnit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetInvoicePDF(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvoicePDF(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInvoicePDF")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -881,6 +881,69 @@ func validateBatchIsAuthorizedWithTokenInputList(v []types.BatchIsAuthorizedWith
 	}
 }
 
+func validateCedarTagRecordAttribute(v map[string]types.CedarTagValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CedarTagRecordAttribute"}
+	for key := range v {
+		if err := validateCedarTagValue(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCedarTagSetAttribute(v []types.CedarTagValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CedarTagSetAttribute"}
+	for i := range v {
+		if err := validateCedarTagValue(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCedarTagValue(v types.CedarTagValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CedarTagValue"}
+	switch uv := v.(type) {
+	case *types.CedarTagValueMemberEntityIdentifier:
+		if err := validateEntityIdentifier(&uv.Value); err != nil {
+			invalidParams.AddNested("[entityIdentifier]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CedarTagValueMemberRecord:
+		if err := validateCedarTagRecordAttribute(uv.Value); err != nil {
+			invalidParams.AddNested("[record]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CedarTagValueMemberSet:
+		if err := validateCedarTagSetAttribute(uv.Value); err != nil {
+			invalidParams.AddNested("[set]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCognitoGroupConfiguration(v *types.CognitoGroupConfiguration) error {
 	if v == nil {
 		return nil
@@ -1012,6 +1075,23 @@ func validateEntityAttributes(v map[string]types.AttributeValue) error {
 	}
 }
 
+func validateEntityCedarTags(v map[string]types.CedarTagValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityCedarTags"}
+	for key := range v {
+		if err := validateCedarTagValue(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEntityIdentifier(v *types.EntityIdentifier) error {
 	if v == nil {
 		return nil
@@ -1050,6 +1130,11 @@ func validateEntityItem(v *types.EntityItem) error {
 	if v.Parents != nil {
 		if err := validateParentList(v.Parents); err != nil {
 			invalidParams.AddNested("Parents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateEntityCedarTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -270,6 +270,23 @@ type ContextEntry struct {
 	noSmithyDocumentSerde
 }
 
+type DelegationPermission struct {
+
+	//
+	Parameters []PolicyParameter
+
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources.
+	//
+	// For more information about ARNs, go to [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	PolicyTemplateArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The reason that the service-linked role deletion failed.
 //
 // This data type is used as a response element in the [GetServiceLinkedRoleDeletionStatus] operation.
@@ -1059,6 +1076,20 @@ type PolicyGroup struct {
 
 	// The name (friendly name, not ARN) identifying the group.
 	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
+type PolicyParameter struct {
+
+	//
+	Name *string
+
+	//
+	Type PolicyParameterTypeEnum
+
+	//
+	Values []string
 
 	noSmithyDocumentSerde
 }

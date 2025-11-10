@@ -3905,10 +3905,6 @@ type MlflowPropertiesInput struct {
 	// The tracking server ARN as part of the MLflow properties of a connection.
 	TrackingServerArn *string
 
-	// The name of the tracking server as part of the MLflow properties of a
-	// connection.
-	TrackingServerName *string
-
 	noSmithyDocumentSerde
 }
 
@@ -3918,10 +3914,6 @@ type MlflowPropertiesOutput struct {
 	// The tracking server ARN as part of the MLflow properties of a connection.
 	TrackingServerArn *string
 
-	// The name of the tracking server as part of the MLflow properties of a
-	// connection.
-	TrackingServerName *string
-
 	noSmithyDocumentSerde
 }
 
@@ -3930,10 +3922,6 @@ type MlflowPropertiesPatch struct {
 
 	// The tracking server ARN as part of the MLflow properties of a connection.
 	TrackingServerArn *string
-
-	// The name of the tracking server as part of the MLflow properties of a
-	// connection.
-	TrackingServerName *string
 
 	noSmithyDocumentSerde
 }

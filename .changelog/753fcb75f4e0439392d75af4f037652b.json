@@ -1,0 +1,8 @@
+{
+    "id": "753fcb75-f4e0-4393-92d7-5af4f037652b",
+    "type": "feature",
+    "description": "Amazon EC2 Fleet customers can now filter instance types based on encryption-in-transit support using Attribute-Based Instance Type Selection (ABIS), eliminating the manual effort of identifying and selecting compatible instance types for security-sensitive workloads.",
+    "modules": [
+        "service/ec2"
+    ]
+}

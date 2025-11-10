@@ -37,7 +37,7 @@ type ActionIdentifier struct {
 // Contains information about the runtime context for a request for which an
 // authorization decision is made.
 //
-// This data type is used as a member of the [ContextDefinition] structure which is uses as a request
+// This data type is used as a member of the [ContextDefinition] structure which is used as a request
 // parameter for the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken] operations.
 //
 // The following types satisfy this interface:
@@ -65,7 +65,7 @@ type AttributeValue interface {
 //
 // Example: {"boolean": true}
 //
-// [Boolean]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean
+// [Boolean]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool
 type AttributeValueMemberBoolean struct {
 	Value bool
 
@@ -115,8 +115,7 @@ func (*AttributeValueMemberDuration) isAttributeValue() {}
 
 // An attribute value of type [EntityIdentifier].
 //
-// Example: "entityIdentifier": { "entityId": "<id>", "entityType": "<entity
-// type>"}
+// Example: {"entityIdentifier": { "entityId": "alice", "entityType": "User"} }
 //
 // [EntityIdentifier]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html
 type AttributeValueMemberEntityIdentifier struct {
@@ -144,7 +143,7 @@ func (*AttributeValueMemberIpaddr) isAttributeValue() {}
 //
 // Example: {"long": 0}
 //
-// [Long]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long
+// [Long]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long
 type AttributeValueMemberLong struct {
 	Value int64
 
@@ -157,7 +156,7 @@ func (*AttributeValueMemberLong) isAttributeValue() {}
 //
 // Example: {"record": { "keyName": {} } }
 //
-// [Record]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record
+// [Record]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record
 type AttributeValueMemberRecord struct {
 	Value map[string]AttributeValue
 
@@ -170,7 +169,7 @@ func (*AttributeValueMemberRecord) isAttributeValue() {}
 //
 // Example: {"set": [ {} ] }
 //
-// [Set]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set
+// [Set]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set
 type AttributeValueMemberSet struct {
 	Value []AttributeValue
 
@@ -183,7 +182,7 @@ func (*AttributeValueMemberSet) isAttributeValue() {}
 //
 // Example: {"string": "abc"}
 //
-// [String]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string
+// [String]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string
 type AttributeValueMemberString struct {
 	Value string
 
@@ -384,6 +383,163 @@ type BatchIsAuthorizedWithTokenOutputItem struct {
 
 	noSmithyDocumentSerde
 }
+
+// The value of an entity's Cedar tag.
+//
+// This data type is used as a member of the [EntityItem] structure that forms the body of the
+// Entities request parameter for the [IsAuthorized], [BatchIsAuthorized], [IsAuthorizedWithToken], and [BatchIsAuthorizedWithToken] operations.
+//
+// The following types satisfy this interface:
+//
+//	CedarTagValueMemberBoolean
+//	CedarTagValueMemberDatetime
+//	CedarTagValueMemberDecimal
+//	CedarTagValueMemberDuration
+//	CedarTagValueMemberEntityIdentifier
+//	CedarTagValueMemberIpaddr
+//	CedarTagValueMemberLong
+//	CedarTagValueMemberRecord
+//	CedarTagValueMemberSet
+//	CedarTagValueMemberString
+//
+// [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
+// [EntityItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityItem.html
+// [BatchIsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html
+type CedarTagValue interface {
+	isCedarTagValue()
+}
+
+// A Cedar tag value of [Boolean] type.
+//
+// Example: {"boolean": false}
+//
+// [Boolean]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool
+type CedarTagValueMemberBoolean struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberBoolean) isCedarTagValue() {}
+
+// A Cedar tag value of [datetime] type.
+//
+// Example: {"datetime": "2025-11-04T11:35:00.000+0100"}
+//
+// [datetime]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime
+type CedarTagValueMemberDatetime struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberDatetime) isCedarTagValue() {}
+
+// A Cedar tag value of [decimal] type.
+//
+// Example: {"decimal": "-2.0"}
+//
+// [decimal]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal
+type CedarTagValueMemberDecimal struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberDecimal) isCedarTagValue() {}
+
+// A Cedar tag value of [duration] type.
+//
+// Example: {"duration": "-1d12h"}
+//
+// [duration]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration
+type CedarTagValueMemberDuration struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberDuration) isCedarTagValue() {}
+
+// A Cedar tag value of type [EntityIdentifier].
+//
+// Example: {"entityIdentifier": { "entityId": "alice", "entityType": "User"} }
+//
+// [EntityIdentifier]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html
+type CedarTagValueMemberEntityIdentifier struct {
+	Value EntityIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberEntityIdentifier) isCedarTagValue() {}
+
+// A Cedar tag value of [ipaddr] type.
+//
+// Example: {"ip": "10.50.0.0/24"}
+//
+// [ipaddr]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr
+type CedarTagValueMemberIpaddr struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberIpaddr) isCedarTagValue() {}
+
+// A Cedar tag value of [Long] type.
+//
+// Example: {"long": 0}
+//
+// [Long]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long
+type CedarTagValueMemberLong struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberLong) isCedarTagValue() {}
+
+// A Cedar tag value of [Record] type.
+//
+// Example: {"record": { "keyName": {} } }
+//
+// [Record]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record
+type CedarTagValueMemberRecord struct {
+	Value map[string]CedarTagValue
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberRecord) isCedarTagValue() {}
+
+// A Cedar tag value of [Set] type.
+//
+// Example: {"set": [ { "string": "abc" } ] }
+//
+// [Set]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set
+type CedarTagValueMemberSet struct {
+	Value []CedarTagValue
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberSet) isCedarTagValue() {}
+
+// A Cedar tag value of [String] type.
+//
+// Example: {"string": "abc"}
+//
+// [String]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string
+type CedarTagValueMemberString struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CedarTagValueMemberString) isCedarTagValue() {}
 
 // The type of entity that a policy store maps to groups from an Amazon Cognito
 // user pool identity source.
@@ -893,6 +1049,9 @@ type EntityItem struct {
 	// 91 groups if one of those groups is a member of eight groups, for a total of
 	// 100: one entity, 91 entity parents, and eight parents of parents.
 	Parents []EntityIdentifier
+
+	// A list of cedar tags for the entity.
+	Tags map[string]CedarTagValue
 
 	noSmithyDocumentSerde
 }
@@ -2293,6 +2452,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAttributeValue()                    {}
+func (*UnknownUnionMember) isCedarTagValue()                     {}
 func (*UnknownUnionMember) isConfiguration()                     {}
 func (*UnknownUnionMember) isConfigurationDetail()               {}
 func (*UnknownUnionMember) isConfigurationItem()                 {}

@@ -49,6 +49,10 @@ type ListRestoreJobsInput struct {
 	// Returns only restore jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 
+	// This is a filter to list child (nested) restore jobs based on parent restore
+	// job ID.
+	ByParentJobId *string
+
 	// Include this parameter to return only restore jobs for the specified resources:
 	//
 	//   - Aurora for Amazon Aurora

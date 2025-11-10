@@ -11,6 +11,7 @@
         "api_op_BatchGetInvoiceProfile.go",
         "api_op_CreateInvoiceUnit.go",
         "api_op_DeleteInvoiceUnit.go",
+        "api_op_GetInvoicePDF.go",
         "api_op_GetInvoiceUnit.go",
         "api_op_ListInvoiceSummaries.go",
         "api_op_ListInvoiceUnits.go",

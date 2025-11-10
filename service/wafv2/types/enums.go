@@ -844,8 +844,9 @@ type LogScope string
 
 // Enum values for LogScope
 const (
-	LogScopeCustomer     LogScope = "CUSTOMER"
-	LogScopeSecurityLake LogScope = "SECURITY_LAKE"
+	LogScopeCustomer                       LogScope = "CUSTOMER"
+	LogScopeSecurityLake                   LogScope = "SECURITY_LAKE"
+	LogScopeCloudwatchTelemetryRuleManaged LogScope = "CLOUDWATCH_TELEMETRY_RULE_MANAGED"
 )
 
 // Values returns all known values for LogScope. Note that this can be expanded in
@@ -856,6 +857,7 @@ func (LogScope) Values() []LogScope {
 	return []LogScope{
 		"CUSTOMER",
 		"SECURITY_LAKE",
+		"CLOUDWATCH_TELEMETRY_RULE_MANAGED",
 	}
 }
 

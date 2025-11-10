@@ -646,6 +646,76 @@ func (m *awsAwsquery_serializeOpCreateAccountAlias) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateDelegationRequest struct {
+}
+
+func (*awsAwsquery_serializeOpCreateDelegationRequest) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateDelegationRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateDelegationRequestInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateDelegationRequest")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentCreateDelegationRequestInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateGroup struct {
 }
 
@@ -11513,12 +11583,77 @@ func awsAwsquery_serializeDocumentContextKeyValueListType(v []string, value quer
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDelegationPermission(v *types.DelegationPermission, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Parameters != nil {
+		objectKey := object.Key("Parameters")
+		if err := awsAwsquery_serializeDocumentPolicyParameterListType(v.Parameters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PolicyTemplateArn != nil {
+		objectKey := object.Key("PolicyTemplateArn")
+		objectKey.String(*v.PolicyTemplateArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentEntityListType(v []types.EntityType, value query.Value) error {
 	array := value.Array("member")
 
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPolicyParameter(v *types.PolicyParameter, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Name != nil {
+		objectKey := object.Key("Name")
+		objectKey.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		objectKey := object.Key("Type")
+		objectKey.String(string(v.Type))
+	}
+
+	if v.Values != nil {
+		objectKey := object.Key("Values")
+		if err := awsAwsquery_serializeDocumentPolicyParameterValuesListType(v.Values, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPolicyParameterListType(v []types.PolicyParameter, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentPolicyParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPolicyParameterValuesListType(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -11740,6 +11875,60 @@ func awsAwsquery_serializeOpDocumentCreateAccountAliasInput(v *CreateAccountAlia
 	if v.AccountAlias != nil {
 		objectKey := object.Key("AccountAlias")
 		objectKey.String(*v.AccountAlias)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentCreateDelegationRequestInput(v *CreateDelegationRequestInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.NotificationChannel != nil {
+		objectKey := object.Key("NotificationChannel")
+		objectKey.String(*v.NotificationChannel)
+	}
+
+	if v.OnlySendByOwner {
+		objectKey := object.Key("OnlySendByOwner")
+		objectKey.Boolean(v.OnlySendByOwner)
+	}
+
+	if v.OwnerAccountId != nil {
+		objectKey := object.Key("OwnerAccountId")
+		objectKey.String(*v.OwnerAccountId)
+	}
+
+	if v.Permissions != nil {
+		objectKey := object.Key("Permissions")
+		if err := awsAwsquery_serializeDocumentDelegationPermission(v.Permissions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.RedirectUrl != nil {
+		objectKey := object.Key("RedirectUrl")
+		objectKey.String(*v.RedirectUrl)
+	}
+
+	if v.RequestMessage != nil {
+		objectKey := object.Key("RequestMessage")
+		objectKey.String(*v.RequestMessage)
+	}
+
+	if v.RequestorWorkflowId != nil {
+		objectKey := object.Key("RequestorWorkflowId")
+		objectKey.String(*v.RequestorWorkflowId)
+	}
+
+	if v.SessionDuration != nil {
+		objectKey := object.Key("SessionDuration")
+		objectKey.Integer(*v.SessionDuration)
 	}
 
 	return nil

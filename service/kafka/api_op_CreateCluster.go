@@ -68,6 +68,11 @@ type CreateClusterInput struct {
 	// The settings for open monitoring.
 	OpenMonitoring *types.OpenMonitoringInfo
 
+	// Specifies if intelligent rebalancing should be turned on for the new MSK
+	// Provisioned cluster with Express brokers. By default, intelligent rebalancing
+	// status is ACTIVE for all new clusters.
+	Rebalancing *types.Rebalancing
+
 	// This controls storage mode for supported storage tiers.
 	StorageMode types.StorageMode
 

@@ -1,0 +1,8 @@
+{
+    "id": "b91b6151-bffd-4381-925e-a9ba40233b20",
+    "type": "feature",
+    "description": "Amazon Verified Permissions / Features : Adds support for entity Cedar tags.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

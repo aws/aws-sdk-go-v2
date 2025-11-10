@@ -48257,15 +48257,6 @@ func awsRestjson1_deserializeDocumentMlflowPropertiesOutput(v **types.MlflowProp
 				sv.TrackingServerArn = ptr.String(jtv)
 			}
 
-		case "trackingServerName":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.TrackingServerName = ptr.String(jtv)
-			}
-
 		default:
 			_, _ = key, value
 

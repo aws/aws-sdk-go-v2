@@ -96,6 +96,9 @@ type GetQuantumTaskOutput struct {
 	// The time at which the quantum task ended.
 	EndedAt *time.Time
 
+	// Enabled experimental capabilities for the quantum task, if any.
+	ExperimentalCapabilities types.ExperimentalCapabilities
+
 	// The reason that a quantum task failed.
 	FailureReason *string
 

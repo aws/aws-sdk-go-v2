@@ -19341,11 +19341,6 @@ func awsRestjson1_serializeDocumentMlflowPropertiesInput(v *types.MlflowProperti
 		ok.String(*v.TrackingServerArn)
 	}
 
-	if v.TrackingServerName != nil {
-		ok := object.Key("trackingServerName")
-		ok.String(*v.TrackingServerName)
-	}
-
 	return nil
 }
 
@@ -19356,11 +19351,6 @@ func awsRestjson1_serializeDocumentMlflowPropertiesPatch(v *types.MlflowProperti
 	if v.TrackingServerArn != nil {
 		ok := object.Key("trackingServerArn")
 		ok.String(*v.TrackingServerArn)
-	}
-
-	if v.TrackingServerName != nil {
-		ok := object.Key("trackingServerName")
-		ok.String(*v.TrackingServerName)
 	}
 
 	return nil

@@ -850,6 +850,26 @@ func (m *validateOpUpdateMonitoring) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRebalancing struct {
+}
+
+func (*validateOpUpdateRebalancing) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRebalancing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRebalancingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRebalancingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateReplicationInfo struct {
 }
 
@@ -1076,6 +1096,10 @@ func addOpUpdateConnectivityValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateMonitoringValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitoring{}, middleware.After)
+}
+
+func addOpUpdateRebalancingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRebalancing{}, middleware.After)
 }
 
 func addOpUpdateReplicationInfoValidationMiddleware(stack *middleware.Stack) error {
@@ -2440,6 +2464,27 @@ func validateOpUpdateMonitoringInput(v *UpdateMonitoringInput) error {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRebalancingInput(v *UpdateRebalancingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRebalancingInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.Rebalancing == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rebalancing"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

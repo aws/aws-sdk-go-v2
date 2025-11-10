@@ -6269,6 +6269,24 @@ func awsRestjson1_deserializeOpDocumentDescribeRestoreJobOutput(v **DescribeRest
 				sv.IamRoleArn = ptr.String(jtv)
 			}
 
+		case "IsParent":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean2 to be of type *bool, got %T instead", value)
+				}
+				sv.IsParent = jtv
+			}
+
+		case "ParentJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.ParentJobId = ptr.String(jtv)
+			}
+
 		case "PercentDone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23761,6 +23779,24 @@ func awsRestjson1_deserializeDocumentRestoreJobsListMember(v **types.RestoreJobs
 					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
 				}
 				sv.IamRoleArn = ptr.String(jtv)
+			}
+
+		case "IsParent":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean2 to be of type *bool, got %T instead", value)
+				}
+				sv.IsParent = jtv
+			}
+
+		case "ParentJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.ParentJobId = ptr.String(jtv)
 			}
 
 		case "PercentDone":

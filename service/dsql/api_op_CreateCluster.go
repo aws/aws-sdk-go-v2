@@ -142,6 +142,9 @@ type CreateClusterOutput struct {
 	// creation process, including the KMS key identifier and encryption state.
 	EncryptionDetails *types.EncryptionDetails
 
+	// The connection endpoint for the created cluster.
+	Endpoint *string
+
 	// The multi-Region cluster configuration details that were set during cluster
 	// creation
 	MultiRegionProperties *types.MultiRegionProperties

@@ -170,6 +170,18 @@ func TestCheckSnapshot_CreateAccountAlias(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDelegationRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDelegationRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDelegationRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGroup(context.Background(), nil, func(o *Options) {
@@ -2130,6 +2142,18 @@ func TestUpdateSnapshot_CreateAccountAlias(t *testing.T) {
 	_, err := svc.CreateAccountAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateAccountAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDelegationRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDelegationRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDelegationRequest")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

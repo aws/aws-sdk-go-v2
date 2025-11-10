@@ -70,6 +70,26 @@ func (m *validateOpDeleteInvoiceUnit) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInvoicePDF struct {
+}
+
+func (*validateOpGetInvoicePDF) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInvoicePDF) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInvoicePDFInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInvoicePDFInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInvoiceUnit struct {
 }
 
@@ -200,6 +220,10 @@ func addOpCreateInvoiceUnitValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteInvoiceUnitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInvoiceUnit{}, middleware.After)
+}
+
+func addOpGetInvoicePDFValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInvoicePDF{}, middleware.After)
 }
 
 func addOpGetInvoiceUnitValidationMiddleware(stack *middleware.Stack) error {
@@ -385,6 +409,21 @@ func validateOpDeleteInvoiceUnitInput(v *DeleteInvoiceUnitInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInvoiceUnitInput"}
 	if v.InvoiceUnitArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvoiceUnitArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInvoicePDFInput(v *GetInvoicePDFInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInvoicePDFInput"}
+	if v.InvoiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

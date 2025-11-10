@@ -3581,6 +3581,11 @@ func awsRestjson1_deserializeOpDocumentDescribePublishingDestinationOutput(v **D
 				sv.Status = types.PublishingStatus(jtv)
 			}
 
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

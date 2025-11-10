@@ -17,6 +17,7 @@
         "api_op_ChangePassword.go",
         "api_op_CreateAccessKey.go",
         "api_op_CreateAccountAlias.go",
+        "api_op_CreateDelegationRequest.go",
         "api_op_CreateGroup.go",
         "api_op_CreateInstanceProfile.go",
         "api_op_CreateLoginProfile.go",
