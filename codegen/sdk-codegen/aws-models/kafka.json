@@ -697,6 +697,13 @@
                         "smithy.api#jsonName": "brokerNodeGroupInfo"
                     }
                 },
+                "Rebalancing": {
+                    "target": "com.amazonaws.kafka#Rebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about intelligent rebalancing for new MSK Provisioned clusters with Express brokers. By default, intelligent rebalancing status is ACTIVE.</p>",
+                        "smithy.api#jsonName": "rebalancing"
+                    }
+                },
                 "ClientAuthentication": {
                     "target": "com.amazonaws.kafka#ClientAuthentication",
                     "traits": {
@@ -1588,6 +1595,13 @@
                         "smithy.api#documentation": "<p>Information about the broker nodes in the cluster.</p>",
                         "smithy.api#jsonName": "brokerNodeGroupInfo",
                         "smithy.api#required": {}
+                    }
+                },
+                "Rebalancing": {
+                    "target": "com.amazonaws.kafka#Rebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if intelligent rebalancing should be turned on for the new MSK Provisioned cluster with Express brokers. By default, intelligent rebalancing status is ACTIVE for all new clusters.</p>",
+                        "smithy.api#jsonName": "rebalancing"
                     }
                 },
                 "ClientAuthentication": {
@@ -4045,6 +4059,9 @@
                     "target": "com.amazonaws.kafka#UpdateMonitoring"
                 },
                 {
+                    "target": "com.amazonaws.kafka#UpdateRebalancing"
+                },
+                {
                     "target": "com.amazonaws.kafka#UpdateReplicationInfo"
                 },
                 {
@@ -6378,6 +6395,13 @@
                         "smithy.api#documentation": "<p>Describes brokers being changed during a broker count update.</p>",
                         "smithy.api#jsonName": "brokerCountUpdateInfo"
                     }
+                },
+                "Rebalancing": {
+                    "target": "com.amazonaws.kafka#Rebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the intelligent rebalancing configuration of an MSK Provisioned cluster with Express brokers.</p>",
+                        "smithy.api#jsonName": "rebalancing"
+                    }
                 }
             },
             "traits": {
@@ -6603,6 +6627,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Rebalancing": {
+                    "target": "com.amazonaws.kafka#Rebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not intelligent rebalancing is turned on for a newly created MSK Provisioned cluster with Express brokers. Intelligent rebalancing performs automatic partition balancing operations when you scale your clusters up or down.  By default, intelligent rebalancing is ACTIVE for all new Express-based clusters.</p>",
+                        "smithy.api#jsonName": "rebalancing"
+                    }
+                },
                 "CurrentBrokerSoftwareInfo": {
                     "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
                     "traits": {
@@ -6697,6 +6728,13 @@
                         "smithy.api#documentation": "<p>Information about the brokers.</p>",
                         "smithy.api#jsonName": "brokerNodeGroupInfo",
                         "smithy.api#required": {}
+                    }
+                },
+                "Rebalancing": {
+                    "target": "com.amazonaws.kafka#Rebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if intelligent rebalancing is turned on for your MSK Provisioned cluster with Express brokers. For all new Express-based clusters that you create, intelligent rebalancing is turned on by default.</p>",
+                        "smithy.api#jsonName": "rebalancing"
                     }
                 },
                 "ClientAuthentication": {
@@ -6881,6 +6919,41 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#Rebalancing": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.kafka#RebalancingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Intelligent rebalancing status. The default intelligent rebalancing status is ACTIVE for all new Express-based clusters.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether or not intelligent rebalancing is turned on for a newly created MSK Provisioned cluster with Express brokers. Intelligent rebalancing performs automatic partition balancing operations when you scale your clusters up or down. By default, intelligent rebalancing is ACTIVE for all new Express-based clusters.</p>"
+            }
+        },
+        "com.amazonaws.kafka#RebalancingStatus": {
+            "type": "enum",
+            "members": {
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Intelligent rebalancing status. The default intelligent rebalancing status is ACTIVE for all new Express-based clusters.</p>"
             }
         },
         "com.amazonaws.kafka#RebootBroker": {
@@ -8683,6 +8756,102 @@
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#jsonName": "clusterArn"
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateRebalancing": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateRebalancingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateRebalancingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this resource to update the intelligent rebalancing status of an Amazon MSK Provisioned cluster with Express brokers.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/rebalancing",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateRebalancingRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current version of the cluster.</p>",
+                        "smithy.api#jsonName": "currentVersion",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rebalancing": {
+                    "target": "com.amazonaws.kafka#Rebalancing",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies if intelligent rebalancing should be turned on for your cluster. The default intelligent rebalancing status is ACTIVE for all new MSK Provisioned clusters that you create with Express brokers.</p>",
+                        "smithy.api#jsonName": "rebalancing",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateRebalancingResponse": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster whose intelligent rebalancing status you've updated.</p>",
                         "smithy.api#jsonName": "clusterArn"
                     }
                 },

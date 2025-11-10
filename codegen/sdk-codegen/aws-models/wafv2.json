@@ -4989,7 +4989,7 @@
                 "LogScope": {
                     "target": "com.amazonaws.wafv2#LogScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>The log scope <code>CLOUDWATCH_TELEMETRY_RULE_MANAGED</code> indicates a configuration that is managed through Amazon CloudWatch Logs for telemetry data collection and analysis. For information, see \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch Logs ?</a>\n       in the <i>Amazon CloudWatch Logs user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -6386,7 +6386,7 @@
                 "LogScope": {
                     "target": "com.amazonaws.wafv2#LogScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>The log scope <code>CLOUDWATCH_TELEMETRY_RULE_MANAGED</code> indicates a configuration that is managed through Amazon CloudWatch Logs for telemetry data collection and analysis. For information, see \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch Logs ?</a>\n       in the <i>Amazon CloudWatch Logs user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -8064,7 +8064,7 @@
                 "LogScope": {
                     "target": "com.amazonaws.wafv2#LogScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>The log scope <code>CLOUDWATCH_TELEMETRY_RULE_MANAGED</code> indicates a configuration that is managed through Amazon CloudWatch Logs for telemetry data collection and analysis. For information, see \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch Logs ?</a>\n       in the <i>Amazon CloudWatch Logs user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -8643,6 +8643,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SECURITY_LAKE"
                     }
+                },
+                "CLOUDWATCH_TELEMETRY_RULE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDWATCH_TELEMETRY_RULE_MANAGED"
+                    }
                 }
             }
         },
@@ -8702,7 +8708,7 @@
                 "LogScope": {
                     "target": "com.amazonaws.wafv2#LogScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>The log scope <code>CLOUDWATCH_TELEMETRY_RULE_MANAGED</code> indicates a configuration that is managed through Amazon CloudWatch Logs for telemetry data collection and analysis. For information, see \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch Logs ?</a>\n       in the <i>Amazon CloudWatch Logs user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },

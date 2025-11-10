@@ -2626,6 +2626,13 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#jsonName": "clientToken"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to a new publishing destination resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
                 }
             },
             "traits": {
@@ -4383,6 +4390,13 @@
                         "smithy.api#documentation": "<p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code>\n      and <code>KmsKeyArn</code> of the publishing destination.</p>",
                         "smithy.api#jsonName": "destinationProperties",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the publishing destination resource.</p>",
+                        "smithy.api#jsonName": "tags"
                     }
                 }
             },

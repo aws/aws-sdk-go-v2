@@ -3305,6 +3305,24 @@
                         "smithy.api#enumValue": "EC_secp521r1"
                     }
                 },
+                "ML_DSA_44": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML_DSA_44"
+                    }
+                },
+                "ML_DSA_65": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML_DSA_65"
+                    }
+                },
+                "ML_DSA_87": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML_DSA_87"
+                    }
+                },
                 "SM2": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4313,6 +4331,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SM3WITHSM2"
+                    }
+                },
+                "ML_DSA_44": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML_DSA_44"
+                    }
+                },
+                "ML_DSA_65": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML_DSA_65"
+                    }
+                },
+                "ML_DSA_87": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML_DSA_87"
                     }
                 }
             }

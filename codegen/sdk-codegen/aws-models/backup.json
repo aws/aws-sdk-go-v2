@@ -6169,6 +6169,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This describes the restore job deletion status.</p>"
                     }
+                },
+                "IsParent": {
+                    "target": "com.amazonaws.backup#Boolean2",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is a boolean value indicating whether the restore job is a parent (composite) restore job.</p>"
+                    }
+                },
+                "ParentJobId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the unique identifier of the parent restore job for the selected restore job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10451,6 +10464,13 @@
                         "smithy.api#documentation": "<p>This returns only restore testing jobs that match the \n         specified resource Amazon Resource Name (ARN).</p>",
                         "smithy.api#httpQuery": "restoreTestingPlanArn"
                     }
+                },
+                "ByParentJobId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a filter to list child (nested) restore jobs based on parent restore job ID.</p>",
+                        "smithy.api#httpQuery": "parentJobId"
+                    }
                 }
             },
             "traits": {
@@ -12294,6 +12314,19 @@
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date on which a recovery point was created.</p>"
+                    }
+                },
+                "IsParent": {
+                    "target": "com.amazonaws.backup#Boolean2",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is a boolean value indicating whether the restore job is a parent (composite) restore job.</p>"
+                    }
+                },
+                "ParentJobId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the unique identifier of the parent restore job for the selected restore job.</p>"
                     }
                 },
                 "CreatedBy": {

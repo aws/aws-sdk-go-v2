@@ -27,13 +27,13 @@
                 "programCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of programs in a program set. This is only available for a Program Set.</p>"
+                        "smithy.api#documentation": "<p>The number of programs in a program set. This is only available for a program set.</p>"
                     }
                 },
                 "executableCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of executables in a program set. This is only available for a Program Set.</p>"
+                        "smithy.api#documentation": "<p>The number of executables in a program set. This is only available for a program set.</p>"
                     }
                 }
             },
@@ -1277,6 +1277,12 @@
                             "max": 1
                         }
                     }
+                },
+                "experimentalCapabilities": {
+                    "target": "com.amazonaws.braket#ExperimentalCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable experimental capabilities for the quantum task.</p>"
+                    }
                 }
             }
         },
@@ -1494,6 +1500,35 @@
                     {
                         "value": "SIMULATOR",
                         "name": "SIMULATOR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#ExperimentalCapabilities": {
+            "type": "union",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.braket#ExperimentalCapabilitiesEnablementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled experimental capabilities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enabled experimental capabilities for quantum hardware. Note that the use of these features may impact device capabilities and performance beyond its standard specifications.</p>"
+            }
+        },
+        "com.amazonaws.braket#ExperimentalCapabilitiesEnablementType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -1960,6 +1995,12 @@
                     "target": "com.amazonaws.braket#ActionMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata about the action performed by the quantum task, including information about the type of action and program counts.</p>"
+                    }
+                },
+                "experimentalCapabilities": {
+                    "target": "com.amazonaws.braket#ExperimentalCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled experimental capabilities for the quantum task, if any.</p>"
                     }
                 }
             }

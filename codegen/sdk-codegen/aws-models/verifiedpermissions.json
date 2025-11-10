@@ -83,37 +83,37 @@
                 "boolean": {
                     "target": "com.amazonaws.verifiedpermissions#BooleanAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean\">Boolean</a> type.</p> <p>Example: <code>{\"boolean\": true}</code> </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool\">Boolean</a> type.</p> <p>Example: <code>{\"boolean\": true}</code> </p>"
                     }
                 },
                 "entityIdentifier": {
                     "target": "com.amazonaws.verifiedpermissions#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of type <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html\">EntityIdentifier</a>.</p> <p>Example: <code>\"entityIdentifier\": { \"entityId\": \"&lt;id&gt;\", \"entityType\": \"&lt;entity type&gt;\"}</code> </p>"
+                        "smithy.api#documentation": "<p>An attribute value of type <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html\">EntityIdentifier</a>.</p> <p>Example: <code>{\"entityIdentifier\": { \"entityId\": \"alice\", \"entityType\": \"User\"} }</code> </p>"
                     }
                 },
                 "long": {
                     "target": "com.amazonaws.verifiedpermissions#LongAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long\">Long</a> type.</p> <p>Example: <code>{\"long\": 0}</code> </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long\">Long</a> type.</p> <p>Example: <code>{\"long\": 0}</code> </p>"
                     }
                 },
                 "string": {
                     "target": "com.amazonaws.verifiedpermissions#StringAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string\">String</a> type.</p> <p>Example: <code>{\"string\": \"abc\"}</code> </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string\">String</a> type.</p> <p>Example: <code>{\"string\": \"abc\"}</code> </p>"
                     }
                 },
                 "set": {
                     "target": "com.amazonaws.verifiedpermissions#SetAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set\">Set</a> type.</p> <p>Example: <code>{\"set\": [ {} ] }</code> </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set\">Set</a> type.</p> <p>Example: <code>{\"set\": [ {} ] }</code> </p>"
                     }
                 },
                 "record": {
                     "target": "com.amazonaws.verifiedpermissions#RecordAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record\">Record</a> type.</p> <p>Example: <code>{\"record\": { \"keyName\": {} } }</code> </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record\">Record</a> type.</p> <p>Example: <code>{\"record\": { \"keyName\": {} } }</code> </p>"
                     }
                 },
                 "ipaddr": {
@@ -142,7 +142,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html\">ContextDefinition</a> structure which is uses as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>"
+                "smithy.api#documentation": "<p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html\">ContextDefinition</a> structure which is used as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#Audience": {
@@ -1073,6 +1073,89 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#CedarTagRecordAttribute": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.verifiedpermissions#CedarTagValue"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#CedarTagSetAttribute": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.verifiedpermissions#CedarTagValue"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#CedarTagValue": {
+            "type": "union",
+            "members": {
+                "boolean": {
+                    "target": "com.amazonaws.verifiedpermissions#BooleanAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool\">Boolean</a> type.</p> <p>Example: <code>{\"boolean\": false}</code> </p>"
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of type <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html\">EntityIdentifier</a>.</p> <p>Example: <code>{\"entityIdentifier\": { \"entityId\": \"alice\", \"entityType\": \"User\"} }</code> </p>"
+                    }
+                },
+                "long": {
+                    "target": "com.amazonaws.verifiedpermissions#LongAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long\">Long</a> type.</p> <p>Example: <code>{\"long\": 0}</code> </p>"
+                    }
+                },
+                "string": {
+                    "target": "com.amazonaws.verifiedpermissions#StringAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string\">String</a> type.</p> <p>Example: <code>{\"string\": \"abc\"}</code> </p>"
+                    }
+                },
+                "set": {
+                    "target": "com.amazonaws.verifiedpermissions#CedarTagSetAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set\">Set</a> type.</p> <p>Example: <code>{\"set\": [ { \"string\": \"abc\" } ] }</code> </p>"
+                    }
+                },
+                "record": {
+                    "target": "com.amazonaws.verifiedpermissions#CedarTagRecordAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record\">Record</a> type.</p> <p>Example: <code>{\"record\": { \"keyName\": {} } }</code> </p>"
+                    }
+                },
+                "ipaddr": {
+                    "target": "com.amazonaws.verifiedpermissions#IpAddr",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr\">ipaddr</a> type.</p> <p>Example: <code>{\"ip\": \"10.50.0.0/24\"}</code> </p>"
+                    }
+                },
+                "decimal": {
+                    "target": "com.amazonaws.verifiedpermissions#Decimal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal\">decimal</a> type.</p> <p>Example: <code>{\"decimal\": \"-2.0\"}</code> </p>"
+                    }
+                },
+                "datetime": {
+                    "target": "com.amazonaws.verifiedpermissions#DatetimeAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime\">datetime</a> type.</p> <p>Example: <code>{\"datetime\": \"2025-11-04T11:35:00.000+0100\"}</code> </p>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.verifiedpermissions#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Cedar tag value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration\">duration</a> type.</p> <p>Example: <code>{\"duration\": \"-1d12h\"}</code> </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value of an entity's Cedar tag.</p> <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityItem.html\">EntityItem</a> structure that forms the body of the <code>Entities</code> request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html\">BatchIsAuthorized</a>, <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a>, and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html\">BatchIsAuthorizedWithToken</a> operations.</p>"
+            }
+        },
         "com.amazonaws.verifiedpermissions#CedarVersion": {
             "type": "enum",
             "members": {
@@ -1521,7 +1604,13 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to create a Cedar policy and save it in the specified policy store"
+                    "documentation": "Grants permission to create a Cedar policy and save it in the specified policy store",
+                    "relativeDocumentation": "API_CreatePolicy.html",
+                    "resources": {
+                        "required": {
+                            "policy-store": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Creates a Cedar policy and saves it in the specified policy store. You can create either a static policy or a policy linked to a policy template.</p> <ul> <li> <p>To create a static policy, provide the Cedar policy text in the <code>StaticPolicy</code> section of the <code>PolicyDefinition</code>.</p> </li> <li> <p>To create a policy that is dynamically linked to a policy template, specify the policy template ID and the principal and resource to associate with this policy in the <code>templateLinked</code> section of the <code>PolicyDefinition</code>. If the policy template is ever updated, any policies linked to the policy template automatically use the updated template.</p> </li> </ul> <note> <p>Creating a policy causes it to be validated against the schema in the policy store. If the policy doesn't pass validation, the operation fails and the policy isn't stored.</p> </note> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
                 "smithy.api#examples": [
@@ -2324,6 +2413,15 @@
                 "target": "com.amazonaws.verifiedpermissions#AttributeValue"
             }
         },
+        "com.amazonaws.verifiedpermissions#EntityCedarTags": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.verifiedpermissions#CedarTagValue"
+            }
+        },
         "com.amazonaws.verifiedpermissions#EntityId": {
             "type": "string",
             "traits": {
@@ -2387,6 +2485,12 @@
                     "target": "com.amazonaws.verifiedpermissions#ParentList",
                     "traits": {
                         "smithy.api#documentation": "<p>The parent entities in the hierarchy that contains the entity. A principal or resource entity can be defined with at most 99 <i>transitive parents</i> per authorization request. </p> <p>A transitive parent is an entity in the hierarchy of entities including all direct parents, and parents of parents. For example, a user can be a member of 91 groups if one of those groups is a member of eight groups, for a total of 100: one entity, 91 entity parents, and eight parents of parents. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.verifiedpermissions#EntityCedarTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of cedar tags for the entity.</p>"
                     }
                 }
             },

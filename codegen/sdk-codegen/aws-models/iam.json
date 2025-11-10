@@ -61,6 +61,9 @@
                     "target": "com.amazonaws.iam#CreateAccountAlias"
                 },
                 {
+                    "target": "com.amazonaws.iam#CreateDelegationRequest"
+                },
+                {
                     "target": "com.amazonaws.iam#CreateGroup"
                 },
                 {
@@ -3170,6 +3173,123 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.iam#CreateDelegationRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#CreateDelegationRequestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#CreateDelegationRequestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#EntityAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is currently unavailable for general use.</p>"
+            }
+        },
+        "com.amazonaws.iam#CreateDelegationRequestRequest": {
+            "type": "structure",
+            "members": {
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.iam#accountIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iam#delegationRequestDescriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.iam#DelegationPermission",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestMessage": {
+                    "target": "com.amazonaws.iam#requestMessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "RequestorWorkflowId": {
+                    "target": "com.amazonaws.iam#requestorWorkflowIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedirectUrl": {
+                    "target": "com.amazonaws.iam#redirectUrlType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "NotificationChannel": {
+                    "target": "com.amazonaws.iam#notificationChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionDuration": {
+                    "target": "com.amazonaws.iam#sessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OnlySendByOwner": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#CreateDelegationRequestResponse": {
+            "type": "structure",
+            "members": {
+                "ConsoleDeepLink": {
+                    "target": "com.amazonaws.iam#consoleDeepLinkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#CreateGroup": {
             "type": "operation",
             "input": {
@@ -4308,6 +4428,23 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#DelegationPermission": {
+            "type": "structure",
+            "members": {
+                "PolicyTemplateArn": {
+                    "target": "com.amazonaws.iam#arnType"
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.iam#policyParameterListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
             }
         },
         "com.amazonaws.iam#DeleteAccessKey": {
@@ -12465,6 +12602,49 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iam#PolicyParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.iam#policyParameterNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.iam#policyParameterValuesListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.iam#PolicyParameterTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.iam#PolicyParameterTypeEnum": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "string"
+                    }
+                },
+                "STRING_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stringList"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iam#PolicyRole": {
             "type": "structure",
             "members": {
@@ -16802,6 +16982,12 @@
                 "smithy.api#pattern": "^[a-z0-9]([a-z0-9]|-(?!-)){1,61}[a-z0-9]$"
             }
         },
+        "com.amazonaws.iam#accountIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
         "com.amazonaws.iam#allUsers": {
             "type": "boolean"
         },
@@ -16937,6 +17123,15 @@
                 }
             }
         },
+        "com.amazonaws.iam#consoleDeepLinkType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.iam#credentialAgeDays": {
             "type": "integer",
             "traits": {
@@ -16967,6 +17162,26 @@
         },
         "com.amazonaws.iam#dateType": {
             "type": "timestamp"
+        },
+        "com.amazonaws.iam#delegationRequestDescriptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
+            }
+        },
+        "com.amazonaws.iam#delegationRequestIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w-]+$"
+            }
         },
         "com.amazonaws.iam#deleteConflictMessage": {
             "type": "string"
@@ -17226,6 +17441,15 @@
         "com.amazonaws.iam#noSuchEntityMessage": {
             "type": "string"
         },
+        "com.amazonaws.iam#notificationChannelType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 400
+                }
+            }
+        },
         "com.amazonaws.iam#openIdIdpCommunicationErrorExceptionMessage": {
             "type": "string"
         },
@@ -17379,6 +17603,36 @@
                 }
             }
         },
+        "com.amazonaws.iam#policyParameterListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#PolicyParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iam#policyParameterNameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iam#policyParameterValueType": {
+            "type": "string"
+        },
+        "com.amazonaws.iam#policyParameterValuesListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#policyParameterValueType"
+            }
+        },
         "com.amazonaws.iam#policyPathType": {
             "type": "string",
             "traits": {
@@ -17498,8 +17752,37 @@
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
+        "com.amazonaws.iam#redirectUrlType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^http(s?)://[a-zA-Z0-9._/-]*(\\?[a-zA-Z0-9._=&-]*)?(#[a-zA-Z0-9._/-]*)?$"
+            }
+        },
         "com.amazonaws.iam#reportGenerationLimitExceededMessage": {
             "type": "string"
+        },
+        "com.amazonaws.iam#requestMessageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
+            }
+        },
+        "com.amazonaws.iam#requestorWorkflowIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 400
+                }
+            }
         },
         "com.amazonaws.iam#responseMarkerType": {
             "type": "string"
@@ -17648,6 +17931,15 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^[\\w+=,.@-]*$"
+            }
+        },
+        "com.amazonaws.iam#sessionDurationType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 3600,
+                    "max": 43200
+                }
             }
         },
         "com.amazonaws.iam#sortKeyType": {

@@ -7319,6 +7319,12 @@
                         "smithy.api#documentation": "<p>The private IP address of the elastic network interface that is attached to instances in your VPC.</p>"
                     }
                 },
+                "EniIpv6Addresses": {
+                    "target": "com.amazonaws.appstream#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 addresses of the elastic network interface that is attached to instances in your VPC.</p>"
+                    }
+                },
                 "EniId": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {

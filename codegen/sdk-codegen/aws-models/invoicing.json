@@ -598,6 +598,100 @@
                 "smithy.api#documentation": "<p>An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. </p>"
             }
         },
+        "com.amazonaws.invoicing#GetInvoicePDF": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#GetInvoicePDFRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#GetInvoicePDFResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a URL to download the invoice document and supplemental documents associated with an invoice. The URLs are pre-signed and have expiration time. For special cases like Brazil, where Amazon Web Services generated invoice identifiers and government provided identifiers do not match, use the Amazon Web Services generated invoice identifier when making API requests. To grant IAM permission to use this operation, the caller needs the <code>invoicing:GetInvoicePDF</code> policy action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetInvoicePDF without supplemental documents",
+                        "input": {
+                            "InvoiceId": "abc123"
+                        },
+                        "output": {
+                            "InvoicePDF": {
+                                "InvoiceId": "abc123",
+                                "DocumentUrl": "https://abcd123.com?securityTokenForDoc",
+                                "DocumentUrlExpirationDate": "2025-04-01T01:00:00.000Z",
+                                "SupplementalDocuments": []
+                            }
+                        }
+                    },
+                    {
+                        "title": "GetInvoicePDF with supplemental documents",
+                        "input": {
+                            "InvoiceId": "abc123"
+                        },
+                        "output": {
+                            "InvoicePDF": {
+                                "InvoiceId": "abc123",
+                                "DocumentUrl": "https://abcd123.com?securityTokenForDoc",
+                                "DocumentUrlExpirationDate": "2025-04-01T01:00:00.000Z",
+                                "SupplementalDocuments": [
+                                    {
+                                        "DocumentUrl": "https://abcd123.com?securityTokenForSupplementalDoc",
+                                        "DocumentUrlExpirationDate": "2025-04-01T01:00:00.000Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.invoicing#GetInvoicePDFRequest": {
+            "type": "structure",
+            "members": {
+                "InvoiceId": {
+                    "target": "com.amazonaws.invoicing#StringWithoutNewLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Your unique invoice ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#GetInvoicePDFResponse": {
+            "type": "structure",
+            "members": {
+                "InvoicePDF": {
+                    "target": "com.amazonaws.invoicing#InvoicePDF",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The invoice document and supplemental documents associated with the invoice. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.invoicing#GetInvoiceUnit": {
             "type": "operation",
             "input": {
@@ -798,6 +892,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The amount charged after taxes, in the preferred currency. </p>"
+            }
+        },
+        "com.amazonaws.invoicing#InvoicePDF": {
+            "type": "structure",
+            "members": {
+                "InvoiceId": {
+                    "target": "com.amazonaws.invoicing#StringWithoutNewLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Your unique invoice ID. </p>"
+                    }
+                },
+                "DocumentUrl": {
+                    "target": "com.amazonaws.invoicing#StringWithoutNewLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URL to download the invoice document. </p>"
+                    }
+                },
+                "DocumentUrlExpirationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URL expiration date of the invoice document.</p>"
+                    }
+                },
+                "SupplementalDocuments": {
+                    "target": "com.amazonaws.invoicing#SupplementalDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of supplemental documents associated with the invoice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Invoice document data. </p>"
             }
         },
         "com.amazonaws.invoicing#InvoiceProfile": {
@@ -1113,6 +1239,9 @@
                 },
                 {
                     "target": "com.amazonaws.invoicing#DeleteInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#GetInvoicePDF"
                 },
                 {
                     "target": "com.amazonaws.invoicing#GetInvoiceUnit"
@@ -2572,6 +2701,32 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.invoicing#SupplementalDocument": {
+            "type": "structure",
+            "members": {
+                "DocumentUrl": {
+                    "target": "com.amazonaws.invoicing#StringWithoutNewLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URL to download invoice supplemental document.</p>"
+                    }
+                },
+                "DocumentUrlExpirationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URL expiration date of invoice supplemental document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Supplemental document associated with the invoice.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#SupplementalDocuments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#SupplementalDocument"
             }
         },
         "com.amazonaws.invoicing#TagResource": {
