@@ -1,3 +1,7 @@
+# v1.45.0 (2025-11-10)
+
+* **Feature**: Amazon MSK now supports intelligent rebalancing for MSK Express brokers.
+
 # v1.44.3 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

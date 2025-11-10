@@ -1,3 +1,7 @@
+# v1.7.0 (2025-11-10)
+
+* **Feature**: Added new invoicing get-invoice-pdf API Operation
+
 # v1.6.12 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

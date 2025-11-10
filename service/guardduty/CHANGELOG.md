@@ -1,3 +1,7 @@
+# v1.66.0 (2025-11-10)
+
+* **Feature**: Include tags filed in CreatePublishingDestinationRequest and DescribePublishingDestinationResponse.
+
 # v1.65.4 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.30.0 (2025-11-10)
+
+* **Feature**: Amazon Verified Permissions / Features : Adds support for entity Cedar tags.
+
 # v1.29.9 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

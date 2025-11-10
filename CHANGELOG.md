@@ -1,3 +1,38 @@
+# Release (2025-11-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.46.0](service/acmpca/CHANGELOG.md#v1460-2025-11-10)
+  * **Feature**: Private Certificate Authority service now supports ML-DSA key algorithms.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.51.0](service/appstream/CHANGELOG.md#v1510-2025-11-10)
+  * **Feature**: AWS Appstream support for IPv6
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.51.0](service/backup/CHANGELOG.md#v1510-2025-11-10)
+  * **Feature**: AWS Backup supports backups of Amazon EKS clusters, including Kubernetes cluster state and persistent storage attached to the EKS cluster via a persistent volume claim (EBS volumes, EFS file systems, and S3 buckets).
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.38.0](service/braket/CHANGELOG.md#v1380-2025-11-10)
+  * **Feature**: Adds ExperimentalCapabilities field to CreateQuantumTask request and GetQuantumTask response objects. Enables use of experimental software capabilities when creating quantum tasks.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.46.0](service/datazone/CHANGELOG.md#v1460-2025-11-10)
+  * **Feature**: Remove trackingServerName from DataZone Connection MLflowProperties
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.11.0](service/dsql/CHANGELOG.md#v1110-2025-11-10)
+  * **Feature**: Cluster endpoint added to CreateCluster and GetCluster API responses
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.265.0](service/ec2/CHANGELOG.md#v12650-2025-11-10)
+  * **Feature**: Amazon EC2 Fleet customers can now filter instance types based on encryption-in-transit support using Attribute-Based Instance Type Selection (ABIS), eliminating the manual effort of identifying and selecting compatible instance types for security-sensitive workloads.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.66.0](service/guardduty/CHANGELOG.md#v1660-2025-11-10)
+  * **Feature**: Include tags filed in CreatePublishingDestinationRequest and DescribePublishingDestinationResponse.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.50.0](service/iam/CHANGELOG.md#v1500-2025-11-10)
+  * **Feature**: Added CreateDelegationRequest API, which is not available for general use at this time.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.7.0](service/invoicing/CHANGELOG.md#v170-2025-11-10)
+  * **Feature**: Added new invoicing get-invoice-pdf API Operation
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.45.0](service/kafka/CHANGELOG.md#v1450-2025-11-10)
+  * **Feature**: Amazon MSK now supports intelligent rebalancing for MSK Express brokers.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.40.0](service/sts/CHANGELOG.md#v1400-2025-11-10)
+  * **Feature**: Added GetDelegatedAccessToken API, which is not available for general use at this time.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.30.0](service/verifiedpermissions/CHANGELOG.md#v1300-2025-11-10)
+  * **Feature**: Amazon Verified Permissions / Features : Adds support for entity Cedar tags.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.69.0](service/wafv2/CHANGELOG.md#v1690-2025-11-10)
+  * **Feature**: AWS WAF now supports CLOUDWATCH_TELEMETRY_RULE_MANAGED as a LogScope option, enabling automated logging configuration through Amazon CloudWatch Logs for telemetry data collection and analysis.
+
 # Release (2025-11-07)
 
 ## Module Highlights

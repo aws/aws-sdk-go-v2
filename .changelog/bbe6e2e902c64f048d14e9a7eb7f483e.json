@@ -1,8 +1,0 @@
-{
-    "id": "bbe6e2e9-02c6-4f04-8d14-e9a7eb7f483e",
-    "type": "feature",
-    "description": "AWS Backup supports backups of Amazon EKS clusters, including Kubernetes cluster state and persistent storage attached to the EKS cluster via a persistent volume claim (EBS volumes, EFS file systems, and S3 buckets).",
-    "modules": [
-        "service/backup"
-    ]
-}

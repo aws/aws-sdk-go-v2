@@ -1,8 +1,0 @@
-{
-    "id": "debfb1fa-b6aa-4f54-8ec1-a85e3cd3e250",
-    "type": "feature",
-    "description": "Private Certificate Authority service now supports ML-DSA key algorithms.",
-    "modules": [
-        "service/acmpca"
-    ]
-}

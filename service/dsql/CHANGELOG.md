@@ -1,3 +1,7 @@
+# v1.11.0 (2025-11-10)
+
+* **Feature**: Cluster endpoint added to CreateCluster and GetCluster API responses
+
 # v1.10.2 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

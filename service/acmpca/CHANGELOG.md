@@ -1,3 +1,7 @@
+# v1.46.0 (2025-11-10)
+
+* **Feature**: Private Certificate Authority service now supports ML-DSA key algorithms.
+
 # v1.45.3 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

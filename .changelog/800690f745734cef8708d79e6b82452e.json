@@ -1,8 +1,0 @@
-{
-    "id": "800690f7-4573-4cef-8708-d79e6b82452e",
-    "type": "feature",
-    "description": "Added CreateDelegationRequest API, which is not available for general use at this time.",
-    "modules": [
-        "service/iam"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.69.0 (2025-11-10)
+
+* **Feature**: AWS WAF now supports CLOUDWATCH_TELEMETRY_RULE_MANAGED as a LogScope option, enabling automated logging configuration through Amazon CloudWatch Logs for telemetry data collection and analysis.
+
 # v1.68.4 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

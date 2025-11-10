@@ -1,3 +1,7 @@
+# v1.38.0 (2025-11-10)
+
+* **Feature**: Adds ExperimentalCapabilities field to CreateQuantumTask request and GetQuantumTask response objects. Enables use of experimental software capabilities when creating quantum tasks.
+
 # v1.37.10 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

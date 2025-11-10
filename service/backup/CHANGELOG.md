@@ -1,3 +1,7 @@
+# v1.51.0 (2025-11-10)
+
+* **Feature**: AWS Backup supports backups of Amazon EKS clusters, including Kubernetes cluster state and persistent storage attached to the EKS cluster via a persistent volume claim (EBS volumes, EFS file systems, and S3 buckets).
+
 # v1.50.0 (2025-11-06)
 
 * **Feature**: AWS Backup now supports customer-managed keys (CMK) for logically air-gapped vaults, enabling customers to maintain full control over their encryption key lifecycle. This feature helps organizations meet specific internal governance requirements or external regulatory compliance standards.

@@ -1,8 +1,0 @@
-{
-    "id": "917664c8-97e8-48c1-9bf9-a92ff9cdb9b3",
-    "type": "feature",
-    "description": "Amazon MSK now supports intelligent rebalancing for MSK Express brokers.",
-    "modules": [
-        "service/kafka"
-    ]
-}

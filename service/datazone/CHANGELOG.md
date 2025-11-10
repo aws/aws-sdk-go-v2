@@ -1,3 +1,7 @@
+# v1.46.0 (2025-11-10)
+
+* **Feature**: Remove trackingServerName from DataZone Connection MLflowProperties
+
 # v1.45.0 (2025-11-05)
 
 * **Feature**: Added support for Project Resource Tags

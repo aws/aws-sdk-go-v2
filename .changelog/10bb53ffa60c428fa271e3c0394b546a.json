@@ -1,8 +1,0 @@
-{
-    "id": "10bb53ff-a60c-428f-a271-e3c0394b546a",
-    "type": "feature",
-    "description": "Remove trackingServerName from DataZone Connection MLflowProperties",
-    "modules": [
-        "service/datazone"
-    ]
-}

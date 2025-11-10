@@ -1,8 +1,0 @@
-{
-    "id": "e5cea38d-1dfd-4804-a3ee-2eaa4b44c45a",
-    "type": "feature",
-    "description": "AWS WAF now supports CLOUDWATCH_TELEMETRY_RULE_MANAGED as a LogScope option, enabling automated logging configuration through Amazon CloudWatch Logs for telemetry data collection and analysis.",
-    "modules": [
-        "service/wafv2"
-    ]
-}
