@@ -137,6 +137,12 @@
                         "smithy.api#enumValue": "ap-southeast-5"
                     }
                 },
+                "AP_SOUTHEAST_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-6"
+                    }
+                },
                 "AP_SOUTHEAST_7": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -526,9 +532,9 @@
                 ],
                 "aws.iam#iamResource": {
                     "name": "case",
-                    "relativeDocumentation": "case.html"
+                    "relativeDocumentation": "cases.html"
                 },
-                "smithy.api#documentation": "Represents a case used to track the incident response lifecycle"
+                "smithy.api#documentation": "Represents a case that is used to track the incident response lifecycle"
             }
         },
         "com.amazonaws.securityir#CaseArn": {
@@ -913,6 +919,116 @@
                     "max": 6
                 },
                 "smithy.api#pattern": "^\\d{6}$"
+            }
+        },
+        "com.amazonaws.securityir#CommunicationPreferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityir#CommunicationType"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.securityir#CommunicationType": {
+            "type": "enum",
+            "members": {
+                "CASE_CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Created"
+                    }
+                },
+                "CASE_UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Updated"
+                    }
+                },
+                "CASE_ACKNOWLEDGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Acknowledged"
+                    }
+                },
+                "CASE_CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Closed"
+                    }
+                },
+                "CASE_UPDATED_TO_SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Updated To Service Managed"
+                    }
+                },
+                "CASE_UPDATE_CASE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Status Updated"
+                    }
+                },
+                "CASE_PENDING_CUSTOMER_ACTION_REMINDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Pending Customer Action Reminder"
+                    }
+                },
+                "CASE_ATTACHMENT_URL_UPLOADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Attachment Url Uploaded"
+                    }
+                },
+                "CASE_COMMENT_ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Comment Added"
+                    }
+                },
+                "CASE_COMMENT_UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Case Comment Updated"
+                    }
+                },
+                "MEMBERSHIP_CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Membership Created"
+                    }
+                },
+                "MEMBERSHIP_UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Membership Updated"
+                    }
+                },
+                "MEMBERSHIP_CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Membership Cancelled"
+                    }
+                },
+                "REGISTER_DELEGATED_ADMINISTRATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Register Delegated Administrator"
+                    }
+                },
+                "DEREGISTER_DELEGATED_ADMINISTRATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deregister Delegated Administrator"
+                    }
+                },
+                "DISABLE_AWS_SERVICE_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disable AWS Service Access"
+                    }
+                }
             }
         },
         "com.amazonaws.securityir#ConflictException": {
@@ -2369,6 +2485,12 @@
                         "smithy.api#documentation": "<p/>",
                         "smithy.api#required": {}
                     }
+                },
+                "communicationPreferences": {
+                    "target": "com.amazonaws.securityir#CommunicationPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
                 }
             },
             "traits": {
@@ -3320,7 +3442,7 @@
                     "name": "membership",
                     "relativeDocumentation": "select-a-membership-account.html"
                 },
-                "smithy.api#documentation": "Represents a membership to manage service level preferences"
+                "smithy.api#documentation": "Represents a membership that is used to manage service level preferences"
             }
         },
         "com.amazonaws.securityir#MembershipAccountRelationshipStatus": {
@@ -3561,7 +3683,7 @@
         "com.amazonaws.securityir#PrincipalId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "((^AWS Responder)|(^\\d{12}$)|(^security-ir.amazonaws.com))"
+                "smithy.api#pattern": "((^AWS Responder)|(^\\d{12}$)|(^arn:([^:]*aws[^:]*):(?:(?:iam)::\\d{12}:(?:user|role|group|root)(?:(?:/[^/]+)+)?|(?:sts)::\\d{12}:assumed-role/[^/]+/[^/]+)$)|(^security-ir.amazonaws.com))"
             }
         },
         "com.amazonaws.securityir#ResolverType": {

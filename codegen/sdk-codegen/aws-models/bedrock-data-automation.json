@@ -737,11 +737,63 @@
                 "smithy.api#documentation": "List of Audio Extraction Category Type"
             }
         },
+        "com.amazonaws.bedrockdataautomation#AudioGenerativeOutputLanguage": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for Audio output language"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioInputLanguages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#Language"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of supported audio languages"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioLanguageConfiguration": {
+            "type": "structure",
+            "members": {
+                "inputLanguages": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioInputLanguages"
+                },
+                "generativeOutputLanguage": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioGenerativeOutputLanguage"
+                },
+                "identifyMultipleLanguages": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Enable multiple language identification in audio"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional configuration for audio language settings"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#AudioOverrideConfiguration": {
             "type": "structure",
             "members": {
                 "modalityProcessing": {
                     "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                },
+                "languageConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioLanguageConfiguration"
                 }
             },
             "traits": {
@@ -2423,6 +2475,80 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]+$"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#Language": {
+            "type": "enum",
+            "members": {
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EN"
+                    }
+                },
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DE"
+                    }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ES"
+                    }
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FR"
+                    }
+                },
+                "IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IT"
+                    }
+                },
+                "PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT"
+                    }
+                },
+                "JA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JA"
+                    }
+                },
+                "KO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KO"
+                    }
+                },
+                "CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CN"
+                    }
+                },
+                "TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TW"
+                    }
+                },
+                "HK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HK"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Supported input languages"
             }
         },
         "com.amazonaws.bedrockdataautomation#ListBlueprints": {

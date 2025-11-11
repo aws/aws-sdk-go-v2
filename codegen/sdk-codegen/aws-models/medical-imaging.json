@@ -1135,6 +1135,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the authorizer's Lambda function.</p>"
                     }
+                },
+                "losslessStorageFormat": {
+                    "target": "com.amazonaws.medicalimaging#LosslessStorageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lossless storage format for the datastore.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1673,6 +1679,12 @@
                     "target": "com.amazonaws.medicalimaging#LambdaArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the authorizer's Lambda function.</p>"
+                    }
+                },
+                "losslessStorageFormat": {
+                    "target": "com.amazonaws.medicalimaging#LosslessStorageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datastore's lossless storage format.</p>"
                     }
                 },
                 "datastoreArn": {
@@ -2479,6 +2491,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The flag to determine whether the image set is primary or not.</p>"
                     }
+                },
+                "lastAccessedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the image set was last accessed.</p>"
+                    }
+                },
+                "storageTier": {
+                    "target": "com.amazonaws.medicalimaging#StorageTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage tier of the image set.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2759,6 +2783,18 @@
                     "target": "com.amazonaws.medicalimaging#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The time an image set was last updated.</p>"
+                    }
+                },
+                "lastAccessedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the image set was last accessed.</p>"
+                    }
+                },
+                "storageTier": {
+                    "target": "com.amazonaws.medicalimaging#StorageTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set's storage tier.</p>"
                     }
                 },
                 "DICOMTags": {
@@ -3228,6 +3264,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#LosslessStorageFormat": {
+            "type": "enum",
+            "members": {
+                "HTJ2K": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTJ2K"
+                    }
+                },
+                "JPEG_2000_LOSSLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JPEG_2000_LOSSLESS"
+                    }
+                }
             }
         },
         "com.amazonaws.medicalimaging#Message": {
@@ -3808,6 +3861,28 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#StorageTier": {
+            "type": "enum",
+            "members": {
+                "FREQUENT_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Frequent access storage tier for image sets that are accessed regularly",
+                        "smithy.api#enumValue": "FREQUENT_ACCESS"
+                    }
+                },
+                "ARCHIVE_INSTANT_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Archive instant access storage tier for image sets that are accessed infrequently",
+                        "smithy.api#enumValue": "ARCHIVE_INSTANT_ACCESS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Storage tier for image sets"
             }
         },
         "com.amazonaws.medicalimaging#TagKey": {

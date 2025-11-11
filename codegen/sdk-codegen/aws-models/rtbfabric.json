@@ -344,7 +344,15 @@
                         "documentation": "Create an inbound external link for a responder gateway",
                         "input": {
                             "gatewayId": "rtb-gw-12345678",
-                            "clientToken": "randomClientToken"
+                            "clientToken": "randomClientToken",
+                            "logSettings": {
+                                "applicationLogs": {
+                                    "sampling": {
+                                        "errorLog": 100.0,
+                                        "filterLog": 0.0
+                                    }
+                                }
+                            }
                         },
                         "output": {
                             "gatewayId": "rtb-gw-12345678",
@@ -365,7 +373,15 @@
                         "id": "CreateInboundExternalLink",
                         "params": {
                             "gatewayId": "rtb-gw-12345",
-                            "clientToken": "abc123def456"
+                            "clientToken": "abc123def456",
+                            "logSettings": {
+                                "applicationLogs": {
+                                    "sampling": {
+                                        "errorLog": 100.0,
+                                        "filterLog": 0.0
+                                    }
+                                }
+                            }
                         },
                         "vendorParamsShape": "aws.test#AwsVendorParams",
                         "vendorParams": {
@@ -401,6 +417,12 @@
                     "target": "com.amazonaws.rtbfabric#LinkAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>Attributes of the link.</p>"
+                    }
+                },
+                "logSettings": {
+                    "target": "com.amazonaws.rtbfabric#LinkLogSettings",
+                    "traits": {
+                        "smithy.api#required": {}
                     }
                 },
                 "tags": {
@@ -707,7 +729,15 @@
                         "input": {
                             "gatewayId": "rtb-gw-12345678",
                             "publicEndpoint": "https://external-responder.example.com",
-                            "clientToken": "12345678-1234-1234-1234-123456789012"
+                            "clientToken": "12345678-1234-1234-1234-123456789012",
+                            "logSettings": {
+                                "applicationLogs": {
+                                    "sampling": {
+                                        "errorLog": 100.0,
+                                        "filterLog": 0.0
+                                    }
+                                }
+                            }
                         },
                         "output": {
                             "gatewayId": "rtb-gw-12345678",
@@ -728,7 +758,15 @@
                         "params": {
                             "gatewayId": "rtb-gw-12345",
                             "publicEndpoint": "https://example.com",
-                            "clientToken": "mno345pqr678"
+                            "clientToken": "mno345pqr678",
+                            "logSettings": {
+                                "applicationLogs": {
+                                    "sampling": {
+                                        "errorLog": 100.0,
+                                        "filterLog": 0.0
+                                    }
+                                }
+                            }
                         },
                         "vendorParamsShape": "aws.test#AwsVendorParams",
                         "vendorParams": {
@@ -760,10 +798,19 @@
                         "smithy.api#required": {}
                     }
                 },
+                "attributes": {
+                    "target": "com.amazonaws.rtbfabric#LinkAttributes"
+                },
                 "publicEndpoint": {
                     "target": "com.amazonaws.rtbfabric#URL",
                     "traits": {
                         "smithy.api#documentation": "<p>The public endpoint of the link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logSettings": {
+                    "target": "com.amazonaws.rtbfabric#LinkLogSettings",
+                    "traits": {
                         "smithy.api#required": {}
                     }
                 },
@@ -2123,6 +2170,9 @@
                         "smithy.api#documentation": "<p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>",
                         "smithy.api#notProperty": {}
                     }
+                },
+                "logSettings": {
+                    "target": "com.amazonaws.rtbfabric#LinkLogSettings"
                 }
             },
             "traits": {
@@ -2602,6 +2652,9 @@
                         "smithy.api#documentation": "<p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>",
                         "smithy.api#notProperty": {}
                     }
+                },
+                "logSettings": {
+                    "target": "com.amazonaws.rtbfabric#LinkLogSettings"
                 }
             },
             "traits": {
@@ -4766,53 +4819,27 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://rtbfabric-fips.us-gov-west-1.api.aws"
+                                    "url": "https://rtbfabric-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rtbfabric-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://rtbfabric.us-gov-west-1.api.aws"
+                                    "url": "https://rtbfabric.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://rtbfabric.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -4922,27 +4949,53 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://rtbfabric-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://rtbfabric-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rtbfabric-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://rtbfabric.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://rtbfabric.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rtbfabric.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
