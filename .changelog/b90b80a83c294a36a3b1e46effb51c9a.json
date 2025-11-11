@@ -2,7 +2,7 @@
     "id": "b90b80a8-3c29-4a36-a3b1-e46effb51c9a",
     "type": "bugfix",
     "collapse": true,
-    "description": "Return validation error if input region is not a valid label host",
+    "description": "Return validation error if input region is not a valid host label.",
     "modules": [
         "internal/kitchensinktest",
         "internal/protocoltest/awsrestjson",
