@@ -2159,6 +2159,17 @@ func awsRestjson1_serializeDocumentAWSAccountIds(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCommunicationPreferences(v []types.CommunicationType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImpactedAccounts(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2209,6 +2220,13 @@ func awsRestjson1_serializeDocumentImpactedServicesList(v []string, value smithy
 func awsRestjson1_serializeDocumentIncidentResponder(v *types.IncidentResponder, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CommunicationPreferences != nil {
+		ok := object.Key("communicationPreferences")
+		if err := awsRestjson1_serializeDocumentCommunicationPreferences(v.CommunicationPreferences, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Email != nil {
 		ok := object.Key("email")

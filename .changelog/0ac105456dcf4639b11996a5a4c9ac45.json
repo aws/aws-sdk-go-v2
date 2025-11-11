@@ -1,0 +1,8 @@
+{
+    "id": "0ac10545-6dcf-4639-b119-96a5a4c9ac45",
+    "type": "feature",
+    "description": "AWS Site-to-Site VPN now supports VPN connections with up to 5 Gbps bandwidth per tunnel, a 4x improvement from existing limit of 1.25 Gbps.",
+    "modules": [
+        "service/ec2"
+    ]
+}

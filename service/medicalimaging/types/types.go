@@ -145,6 +145,9 @@ type DatastoreProperties struct {
 	// The ARN of the authorizer's Lambda function.
 	LambdaAuthorizerArn *string
 
+	// The datastore's lossless storage format.
+	LosslessStorageFormat LosslessStorageFormat
+
 	// The timestamp when the data store was last updated.
 	UpdatedAt *time.Time
 
@@ -427,6 +430,12 @@ type ImageSetsMetadataSummary struct {
 
 	// The flag to determine whether the image set is primary or not.
 	IsPrimary *bool
+
+	// When the image set was last accessed.
+	LastAccessedAt *time.Time
+
+	// The image set's storage tier.
+	StorageTier StorageTier
 
 	// The time an image set was last updated.
 	UpdatedAt *time.Time

@@ -39,10 +39,18 @@ type CreateOutboundExternalLinkInput struct {
 	// This member is required.
 	GatewayId *string
 
+	// Describes the settings for a link log.
+	//
+	// This member is required.
+	LogSettings *types.LinkLogSettings
+
 	// The public endpoint of the link.
 	//
 	// This member is required.
 	PublicEndpoint *string
+
+	// Describes the attributes of a link.
+	Attributes *types.LinkAttributes
 
 	// A map of the key-value pairs of the tag or tags to assign to the resource.
 	Tags map[string]string

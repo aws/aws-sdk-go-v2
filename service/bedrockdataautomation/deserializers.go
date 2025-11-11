@@ -2634,6 +2634,96 @@ func awsRestjson1_deserializeDocumentAudioExtractionCategoryTypes(v *[]types.Aud
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioInputLanguages(v *[]types.Language, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Language
+	if *v == nil {
+		cv = []types.Language{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Language
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Language to be of type string, got %T instead", value)
+			}
+			col = types.Language(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioLanguageConfiguration(v **types.AudioLanguageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioLanguageConfiguration
+	if *v == nil {
+		sv = &types.AudioLanguageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "generativeOutputLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioGenerativeOutputLanguage to be of type string, got %T instead", value)
+				}
+				sv.GenerativeOutputLanguage = types.AudioGenerativeOutputLanguage(jtv)
+			}
+
+		case "identifyMultipleLanguages":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IdentifyMultipleLanguages = ptr.Bool(jtv)
+			}
+
+		case "inputLanguages":
+			if err := awsRestjson1_deserializeDocumentAudioInputLanguages(&sv.InputLanguages, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioOverrideConfiguration(v **types.AudioOverrideConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2656,6 +2746,11 @@ func awsRestjson1_deserializeDocumentAudioOverrideConfiguration(v **types.AudioO
 
 	for key, value := range shape {
 		switch key {
+		case "languageConfiguration":
+			if err := awsRestjson1_deserializeDocumentAudioLanguageConfiguration(&sv.LanguageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "modalityProcessing":
 			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
 				return err

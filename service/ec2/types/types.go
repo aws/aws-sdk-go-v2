@@ -24466,6 +24466,13 @@ type VpnConnectionOptions struct {
 	// The transit gateway attachment ID in use for the VPN tunnel.
 	TransportTransitGatewayAttachmentId *string
 
+	//  The configured bandwidth for the VPN tunnel. Represents the current throughput
+	// capacity setting for the tunnel connection. standard tunnel bandwidth supports
+	// up to 1.25 Gbps per tunnel while large supports up to 5 Gbps per tunnel. If no
+	// tunnel bandwidth was specified for the connection, standard is used as the
+	// default value.
+	TunnelBandwidth VpnTunnelBandwidth
+
 	// Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
 	TunnelInsideIpVersion TunnelInsideIpVersion
 
@@ -24522,6 +24529,13 @@ type VpnConnectionOptionsSpecification struct {
 	//
 	// Required if OutsideIpAddressType is set to PrivateIpv4 .
 	TransportTransitGatewayAttachmentId *string
+
+	//  The desired bandwidth specification for the VPN tunnel, used when creating or
+	// modifying VPN connection options to set the tunnel's throughput capacity.
+	// standard supports up to 1.25 Gbps per tunnel, while large supports up to 5 Gbps
+	// per tunnel. The default value is standard . Existing VPN connections without a
+	// bandwidth setting will automatically default to standard .
+	TunnelBandwidth VpnTunnelBandwidth
 
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.
 	//

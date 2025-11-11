@@ -83,6 +83,9 @@ type GetImageSetOutput struct {
 	// The flag to determine whether the image set is primary or not.
 	IsPrimary *bool
 
+	// When the image set was last accessed.
+	LastAccessedAt *time.Time
+
 	// The error message thrown if an image set action fails.
 	Message *string
 
@@ -90,6 +93,9 @@ type GetImageSetOutput struct {
 	// specific image set version. If an image set was copied or updated using the
 	// force flag, this object will contain the forced flag.
 	Overrides *types.Overrides
+
+	// The storage tier of the image set.
+	StorageTier types.StorageTier
 
 	// The timestamp when image set properties were updated.
 	UpdatedAt *time.Time

@@ -4724,6 +4724,42 @@ func awsRestjson1_deserializeDocumentCaseEditItems(v *[]types.CaseEditItem, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCommunicationPreferences(v *[]types.CommunicationType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CommunicationType
+	if *v == nil {
+		cv = []types.CommunicationType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CommunicationType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CommunicationType to be of type string, got %T instead", value)
+			}
+			col = types.CommunicationType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5134,6 +5170,11 @@ func awsRestjson1_deserializeDocumentIncidentResponder(v **types.IncidentRespond
 
 	for key, value := range shape {
 		switch key {
+		case "communicationPreferences":
+			if err := awsRestjson1_deserializeDocumentCommunicationPreferences(&sv.CommunicationPreferences, value); err != nil {
+				return err
+			}
+
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -44,6 +44,9 @@ type CreateDatastoreInput struct {
 	// The ARN of the authorizer's Lambda function.
 	LambdaAuthorizerArn *string
 
+	// The lossless storage format for the datastore.
+	LosslessStorageFormat types.LosslessStorageFormat
+
 	// The tags provided when creating a data store.
 	Tags map[string]string
 

@@ -1446,9 +1446,51 @@ func awsRestjson1_serializeDocumentAudioExtractionCategoryTypes(v []types.AudioE
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioInputLanguages(v []types.Language, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioLanguageConfiguration(v *types.AudioLanguageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GenerativeOutputLanguage) > 0 {
+		ok := object.Key("generativeOutputLanguage")
+		ok.String(string(v.GenerativeOutputLanguage))
+	}
+
+	if v.IdentifyMultipleLanguages != nil {
+		ok := object.Key("identifyMultipleLanguages")
+		ok.Boolean(*v.IdentifyMultipleLanguages)
+	}
+
+	if v.InputLanguages != nil {
+		ok := object.Key("inputLanguages")
+		if err := awsRestjson1_serializeDocumentAudioInputLanguages(v.InputLanguages, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioOverrideConfiguration(v *types.AudioOverrideConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.LanguageConfiguration != nil {
+		ok := object.Key("languageConfiguration")
+		if err := awsRestjson1_serializeDocumentAudioLanguageConfiguration(v.LanguageConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ModalityProcessing != nil {
 		ok := object.Key("modalityProcessing")

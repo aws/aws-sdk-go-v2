@@ -39,6 +39,11 @@ type CreateInboundExternalLinkInput struct {
 	// This member is required.
 	GatewayId *string
 
+	// Describes the settings for a link log.
+	//
+	// This member is required.
+	LogSettings *types.LinkLogSettings
+
 	// Attributes of the link.
 	Attributes *types.LinkAttributes
 

@@ -70,6 +70,9 @@ type GetOutboundExternalLinkOutput struct {
 	// The timestamp of when the outbound external link was created.
 	CreatedAt *time.Time
 
+	// Describes the settings for a link log.
+	LogSettings *types.LinkLogSettings
+
 	// A map of the key-value pairs for the tag or tags assigned to the specified
 	// resource.
 	Tags map[string]string

@@ -1050,6 +1050,13 @@ func validateOpCreateInboundExternalLinkInput(v *CreateInboundExternalLinkInput)
 			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LogSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogSettings"))
+	} else if v.LogSettings != nil {
+		if err := validateLinkLogSettings(v.LogSettings); err != nil {
+			invalidParams.AddNested("LogSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1098,8 +1105,20 @@ func validateOpCreateOutboundExternalLinkInput(v *CreateOutboundExternalLinkInpu
 	if v.GatewayId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
 	}
+	if v.Attributes != nil {
+		if err := validateLinkAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.PublicEndpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicEndpoint"))
+	}
+	if v.LogSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogSettings"))
+	} else if v.LogSettings != nil {
+		if err := validateLinkLogSettings(v.LogSettings); err != nil {
+			invalidParams.AddNested("LogSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -221,6 +221,11 @@ func awsRestjson1_serializeOpDocumentCreateDatastoreInput(v *CreateDatastoreInpu
 		ok.String(*v.LambdaAuthorizerArn)
 	}
 
+	if len(v.LosslessStorageFormat) > 0 {
+		ok := object.Key("losslessStorageFormat")
+		ok.String(string(v.LosslessStorageFormat))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

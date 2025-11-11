@@ -33,8 +33,26 @@ type AudioExtractionCategoryTypeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Optional configuration for audio language settings
+type AudioLanguageConfiguration struct {
+
+	// Configuration for Audio output language
+	GenerativeOutputLanguage AudioGenerativeOutputLanguage
+
+	// Enable multiple language identification in audio
+	IdentifyMultipleLanguages *bool
+
+	// List of supported audio languages
+	InputLanguages []Language
+
+	noSmithyDocumentSerde
+}
+
 // Override Configuration of Audio
 type AudioOverrideConfiguration struct {
+
+	// Optional configuration for audio language settings
+	LanguageConfiguration *AudioLanguageConfiguration
 
 	// Configuration to enable/disable processing of modality
 	ModalityProcessing *ModalityProcessingConfiguration

@@ -473,15 +473,13 @@ type ComputeResource struct {
 	//   , and c7i instance families) that matches the resource demands of the job
 	//   queue.
 	//
-	//   - default_arm64 to choose x86 based instance types (from the m6g , c6g , r6g ,
+	//   - default_arm64 to choose ARM based instance types (from the m6g , c6g , r6g ,
 	//   and c7g instance families) that matches the resource demands of the job queue.
 	//
 	// Starting on 11/01/2025 the behavior of optimal is going to be changed to match
-	// default_x86_64 .
-	//
-	// During the change your instance families could be updated to a newer
-	// generation. You do not need to perform any actions for the upgrade to happen.
-	// For more information about change, see [Optimal instance type configuration to receive automatic instance family updates].
+	// default_x86_64 . During the change your instance families could be updated to a
+	// newer generation. You do not need to perform any actions for the upgrade to
+	// happen. For more information about change, see [Optimal instance type configuration to receive automatic instance family updates].
 	//
 	// Instance family availability varies by Amazon Web Services Region. For example,
 	// some Amazon Web Services Regions may not have any fourth generation instance
@@ -762,11 +760,9 @@ type ComputeResourceUpdate struct {
 	//   and c7g instance families) that matches the resource demands of the job queue.
 	//
 	// Starting on 11/01/2025 the behavior of optimal is going to be changed to match
-	// default_x86_64 .
-	//
-	// During the change your instance families could be updated to a newer
-	// generation. You do not need to perform any actions for the upgrade to happen.
-	// For more information about change, see [Optimal instance type configuration to receive automatic instance family updates].
+	// default_x86_64 . During the change your instance families could be updated to a
+	// newer generation. You do not need to perform any actions for the upgrade to
+	// happen. For more information about change, see [Optimal instance type configuration to receive automatic instance family updates].
 	//
 	// Instance family availability varies by Amazon Web Services Region. For example,
 	// some Amazon Web Services Regions may not have any fourth generation instance
@@ -1565,15 +1561,12 @@ type Ec2Configuration struct {
 	//
 	// ECS_AL2023_NVIDIA doesn't support p3 and g3 instance types.
 	//
-	// EKS If the imageIdOverride parameter isn't specified, then a recent [Amazon EKS-optimized Amazon Linux AMI] ( EKS_AL2 )
-	// is used. If a new image type is specified in an update, but neither an imageId
+	// EKS If the imageIdOverride parameter isn't specified, then a recent [Amazon EKS-optimized Amazon Linux 2023 AMI] ( EKS_AL2023
+	// ) is used. If a new image type is specified in an update, but neither an imageId
 	// nor a imageIdOverride parameter is specified, then the latest Amazon EKS
 	// optimized AMI for that image type that Batch supports is used.
 	//
-	// Starting end of October 2025 Amazon EKS optimized Amazon Linux 2023 AMIs will
-	// be the default on Batch for EKS versions prior to 1.33. Starting from Kubernetes
-	// version 1.33, EKS optimized Amazon Linux 2023 AMIs will be the default when it
-	// becomes supported on Batch.
+	// Amazon Linux 2023 AMIs are the default on Batch for Amazon EKS.
 	//
 	// Amazon Web Services will end support for Amazon EKS AL2-optimized and
 	// AL2-accelerated AMIs, starting 11/26/25. You can continue using Batch-provided
@@ -1583,20 +1576,19 @@ type Ec2Configuration struct {
 	// Amazon Web Services. For more information on upgrading from AL2 to AL2023, see [How to upgrade from EKS AL2 to EKS AL2023]
 	// in the Batch User Guide.
 	//
-	// EKS_AL2 [Amazon Linux 2]: Default for all non-GPU instance families.
+	// EKS_AL2 [Amazon Linux 2]: Used for non-GPU instance families.
 	//
-	// EKS_AL2_NVIDIA [Amazon Linux 2 (accelerated)]: Default for all GPU instance families (for example, P4 and G4 )
-	// and can be used for all non Amazon Web Services Graviton-based instance types.
+	// EKS_AL2_NVIDIA [Amazon Linux 2 (accelerated)]: Used for GPU instance families (for example, P4 and G4 ) and
+	// can be used for all non Amazon Web Services Graviton-based instance types.
 	//
-	// EKS_AL2023 [Amazon Linux 2023]: Batch supports Amazon Linux 2023.
+	// EKS_AL2023 [Amazon Linux 2023]: Default for non-GPU instance families.
 	//
 	// Amazon Linux 2023 does not support A1 instances.
 	//
-	// EKS_AL2023_NVIDIA [Amazon Linux 2023 (accelerated)]: GPU instance families and can be used for all non Amazon
-	// Web Services Graviton-based instance types.
+	// EKS_AL2023_NVIDIA [Amazon Linux 2023 (accelerated)]: Default for GPU instance families and can be used for all
+	// non Amazon Web Services Graviton-based instance types.
 	//
 	// [Amazon Linux 2023]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
-	// [Amazon EKS-optimized Amazon Linux AMI]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [How to upgrade from EKS AL2 to EKS AL2023]: https://docs.aws.amazon.com/batch/latest/userguide/eks-migration-2023.html
 	// [Amazon Linux 2 (GPU)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
 	// [Amazon Linux 2023 (GPU)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
@@ -1605,6 +1597,7 @@ type Ec2Configuration struct {
 	// [Amazon ECS-optimized Amazon Linux 2 AMI]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
 	// [Amazon Linux 2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [How to migrate from ECS AL2 to ECS AL2023]: https://docs.aws.amazon.com/batch/latest/userguide/ecs-migration-2023.html
+	// [Amazon EKS-optimized Amazon Linux 2023 AMI]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	//
 	// This member is required.
 	ImageType *string

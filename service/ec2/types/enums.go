@@ -11657,6 +11657,25 @@ func (VpnStaticRouteSource) Values() []VpnStaticRouteSource {
 	}
 }
 
+type VpnTunnelBandwidth string
+
+// Enum values for VpnTunnelBandwidth
+const (
+	VpnTunnelBandwidthStandard VpnTunnelBandwidth = "standard"
+	VpnTunnelBandwidthLarge    VpnTunnelBandwidth = "large"
+)
+
+// Values returns all known values for VpnTunnelBandwidth. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpnTunnelBandwidth) Values() []VpnTunnelBandwidth {
+	return []VpnTunnelBandwidth{
+		"standard",
+		"large",
+	}
+}
+
 type VpnTunnelProvisioningStatus string
 
 // Enum values for VpnTunnelProvisioningStatus

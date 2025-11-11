@@ -61296,6 +61296,11 @@ func awsEc2query_serializeDocumentVpnConnectionOptionsSpecification(v *types.Vpn
 		objectKey.String(*v.TransportTransitGatewayAttachmentId)
 	}
 
+	if len(v.TunnelBandwidth) > 0 {
+		objectKey := object.Key("TunnelBandwidth")
+		objectKey.String(string(v.TunnelBandwidth))
+	}
+
 	if len(v.TunnelInsideIpVersion) > 0 {
 		objectKey := object.Key("TunnelInsideIpVersion")
 		objectKey.String(string(v.TunnelInsideIpVersion))

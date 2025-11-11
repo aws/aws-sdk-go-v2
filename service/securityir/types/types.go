@@ -115,6 +115,9 @@ type IncidentResponder struct {
 	// This member is required.
 	Name *string
 
+	//
+	CommunicationPreferences []CommunicationType
+
 	noSmithyDocumentSerde
 }
 

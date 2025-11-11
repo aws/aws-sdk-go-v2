@@ -226,6 +226,13 @@ func awsRestjson1_serializeOpDocumentCreateInboundExternalLinkInput(v *CreateInb
 		ok.String(*v.ClientToken)
 	}
 
+	if v.LogSettings != nil {
+		ok := object.Key("logSettings")
+		if err := awsRestjson1_serializeDocumentLinkLogSettings(v.LogSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -442,9 +449,23 @@ func awsRestjson1_serializeOpDocumentCreateOutboundExternalLinkInput(v *CreateOu
 	object := value.Object()
 	defer object.Close()
 
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentLinkAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.LogSettings != nil {
+		ok := object.Key("logSettings")
+		if err := awsRestjson1_serializeDocumentLinkLogSettings(v.LogSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PublicEndpoint != nil {

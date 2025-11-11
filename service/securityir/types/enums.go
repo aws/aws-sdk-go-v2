@@ -19,6 +19,7 @@ const (
 	AwsRegionApSoutheast3 AwsRegion = "ap-southeast-3"
 	AwsRegionApSoutheast4 AwsRegion = "ap-southeast-4"
 	AwsRegionApSoutheast5 AwsRegion = "ap-southeast-5"
+	AwsRegionApSoutheast6 AwsRegion = "ap-southeast-6"
 	AwsRegionApSoutheast7 AwsRegion = "ap-southeast-7"
 	AwsRegionCaCentral1   AwsRegion = "ca-central-1"
 	AwsRegionCaWest1      AwsRegion = "ca-west-1"
@@ -62,6 +63,7 @@ func (AwsRegion) Values() []AwsRegion {
 		"ap-southeast-3",
 		"ap-southeast-4",
 		"ap-southeast-5",
+		"ap-southeast-6",
 		"ap-southeast-7",
 		"ca-central-1",
 		"ca-west-1",
@@ -157,6 +159,53 @@ func (ClosureCode) Values() []ClosureCode {
 		"Not Resolved",
 		"False Positive",
 		"Duplicate",
+	}
+}
+
+type CommunicationType string
+
+// Enum values for CommunicationType
+const (
+	CommunicationTypeCaseCreated                       CommunicationType = "Case Created"
+	CommunicationTypeCaseUpdated                       CommunicationType = "Case Updated"
+	CommunicationTypeCaseAcknowledged                  CommunicationType = "Case Acknowledged"
+	CommunicationTypeCaseClosed                        CommunicationType = "Case Closed"
+	CommunicationTypeCaseUpdatedToServiceManaged       CommunicationType = "Case Updated To Service Managed"
+	CommunicationTypeCaseUpdateCaseStatus              CommunicationType = "Case Status Updated"
+	CommunicationTypeCasePendingCustomerActionReminder CommunicationType = "Case Pending Customer Action Reminder"
+	CommunicationTypeCaseAttachmentUrlUploaded         CommunicationType = "Case Attachment Url Uploaded"
+	CommunicationTypeCaseCommentAdded                  CommunicationType = "Case Comment Added"
+	CommunicationTypeCaseCommentUpdated                CommunicationType = "Case Comment Updated"
+	CommunicationTypeMembershipCreated                 CommunicationType = "Membership Created"
+	CommunicationTypeMembershipUpdated                 CommunicationType = "Membership Updated"
+	CommunicationTypeMembershipCancelled               CommunicationType = "Membership Cancelled"
+	CommunicationTypeRegisterDelegatedAdministrator    CommunicationType = "Register Delegated Administrator"
+	CommunicationTypeDeregisterDelegatedAdministrator  CommunicationType = "Deregister Delegated Administrator"
+	CommunicationTypeDisableAwsServiceAccess           CommunicationType = "Disable AWS Service Access"
+)
+
+// Values returns all known values for CommunicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommunicationType) Values() []CommunicationType {
+	return []CommunicationType{
+		"Case Created",
+		"Case Updated",
+		"Case Acknowledged",
+		"Case Closed",
+		"Case Updated To Service Managed",
+		"Case Status Updated",
+		"Case Pending Customer Action Reminder",
+		"Case Attachment Url Uploaded",
+		"Case Comment Added",
+		"Case Comment Updated",
+		"Membership Created",
+		"Membership Updated",
+		"Membership Cancelled",
+		"Register Delegated Administrator",
+		"Deregister Delegated Administrator",
+		"Disable AWS Service Access",
 	}
 }
 

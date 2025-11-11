@@ -2397,6 +2397,11 @@ func awsRestjson1_deserializeOpDocumentGetInboundExternalLinkOutput(v **GetInbou
 				sv.LinkId = ptr.String(jtv)
 			}
 
+		case "logSettings":
+			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
+			}
+
 		case "pendingFlowModules":
 			if err := awsRestjson1_deserializeDocumentModuleConfigurationList(&sv.PendingFlowModules, value); err != nil {
 				return err
@@ -2887,6 +2892,11 @@ func awsRestjson1_deserializeOpDocumentGetOutboundExternalLinkOutput(v **GetOutb
 					return fmt.Errorf("expected LinkId to be of type string, got %T instead", value)
 				}
 				sv.LinkId = ptr.String(jtv)
+			}
+
+		case "logSettings":
+			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
 			}
 
 		case "publicEndpoint":

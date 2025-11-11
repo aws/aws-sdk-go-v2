@@ -23,6 +23,26 @@ func (AudioExtractionCategoryType) Values() []AudioExtractionCategoryType {
 	}
 }
 
+type AudioGenerativeOutputLanguage string
+
+// Enum values for AudioGenerativeOutputLanguage
+const (
+	AudioGenerativeOutputLanguageDefault AudioGenerativeOutputLanguage = "DEFAULT"
+	AudioGenerativeOutputLanguageEn      AudioGenerativeOutputLanguage = "EN"
+)
+
+// Values returns all known values for AudioGenerativeOutputLanguage. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioGenerativeOutputLanguage) Values() []AudioGenerativeOutputLanguage {
+	return []AudioGenerativeOutputLanguage{
+		"DEFAULT",
+		"EN",
+	}
+}
+
 type AudioStandardGenerativeFieldType string
 
 // Enum values for AudioStandardGenerativeFieldType
@@ -258,6 +278,43 @@ func (ImageStandardGenerativeFieldType) Values() []ImageStandardGenerativeFieldT
 	return []ImageStandardGenerativeFieldType{
 		"IMAGE_SUMMARY",
 		"IAB",
+	}
+}
+
+type Language string
+
+// Enum values for Language
+const (
+	LanguageEn Language = "EN"
+	LanguageDe Language = "DE"
+	LanguageEs Language = "ES"
+	LanguageFr Language = "FR"
+	LanguageIt Language = "IT"
+	LanguagePt Language = "PT"
+	LanguageJa Language = "JA"
+	LanguageKo Language = "KO"
+	LanguageCn Language = "CN"
+	LanguageTw Language = "TW"
+	LanguageHk Language = "HK"
+)
+
+// Values returns all known values for Language. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Language) Values() []Language {
+	return []Language{
+		"EN",
+		"DE",
+		"ES",
+		"FR",
+		"IT",
+		"PT",
+		"JA",
+		"KO",
+		"CN",
+		"TW",
+		"HK",
 	}
 }
 
