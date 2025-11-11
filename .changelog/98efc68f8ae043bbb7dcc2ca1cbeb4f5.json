@@ -1,8 +1,0 @@
-{
-    "id": "98efc68f-8ae0-43bb-b7dc-c2ca1cbeb4f5",
-    "type": "feature",
-    "description": "Added support for configuring communication preferences as well as clearly displaying case comment author identities.",
-    "modules": [
-        "service/securityir"
-    ]
-}

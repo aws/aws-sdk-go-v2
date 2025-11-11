@@ -1,3 +1,7 @@
+# v1.20.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.20.0 (2025-11-07)
 
 * **Feature**: Amazon VPC Lattice now supports custom domain name for resource configurations

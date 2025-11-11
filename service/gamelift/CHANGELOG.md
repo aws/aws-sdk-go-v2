@@ -1,3 +1,7 @@
+# v1.48.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.48.0 (2025-11-06)
 
 * **Feature**: Amazon GameLift Servers now supports game builds that use the Windows 2022 operating system.

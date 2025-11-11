@@ -1,3 +1,8 @@
+# v1.9.0 (2025-11-11)
+
+* **Feature**: Added support for configuring communication preferences as well as clearly displaying case comment author identities.
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.8.12 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

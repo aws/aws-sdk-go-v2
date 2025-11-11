@@ -1,3 +1,7 @@
+# v1.48.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.48.0 (2025-11-07)
 
 * **Feature**: Added support for new ECC_NIST_EDWARDS25519 AWS KMS key spec

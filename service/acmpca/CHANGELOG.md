@@ -1,3 +1,7 @@
+# v1.46.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.46.0 (2025-11-10)
 
 * **Feature**: Private Certificate Authority service now supports ML-DSA key algorithms.

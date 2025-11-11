@@ -3,4 +3,4 @@
 package redshift
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.59.5"
+const goModuleVersion = "1.59.6"

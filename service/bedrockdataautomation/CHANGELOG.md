@@ -1,3 +1,8 @@
+# v1.11.0 (2025-11-11)
+
+* **Feature**: Added support for Language Expansion feature for BDA Audio modality.
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.10.4 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

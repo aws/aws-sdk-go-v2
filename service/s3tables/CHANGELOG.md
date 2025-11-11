@@ -1,3 +1,7 @@
+# v1.11.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.11.0 (2025-11-06)
 
 * **Feature**: Adds support for tagging APIs for S3 Tables

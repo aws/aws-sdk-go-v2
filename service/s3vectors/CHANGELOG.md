@@ -1,3 +1,7 @@
+# v1.5.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.5.0 (2025-11-06)
 
 * **Feature**: Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.

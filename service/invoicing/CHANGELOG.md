@@ -1,3 +1,7 @@
+# v1.7.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.7.0 (2025-11-10)
 
 * **Feature**: Added new invoicing get-invoice-pdf API Operation

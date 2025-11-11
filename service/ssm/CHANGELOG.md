@@ -1,3 +1,7 @@
+# v1.67.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.67.0 (2025-11-06)
 
 * **Feature**: Provides NoLongerSupportedException error message

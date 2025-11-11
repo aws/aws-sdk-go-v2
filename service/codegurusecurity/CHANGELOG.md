@@ -1,3 +1,7 @@
+# v1.16.14 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.16.13 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

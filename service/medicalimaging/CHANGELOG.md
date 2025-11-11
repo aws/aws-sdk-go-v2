@@ -1,3 +1,8 @@
+# v1.23.0 (2025-11-11)
+
+* **Feature**: Added new fields in existing APIs.
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.22.3 (2025-11-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

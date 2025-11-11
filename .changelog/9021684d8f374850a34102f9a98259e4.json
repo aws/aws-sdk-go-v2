@@ -1,8 +1,0 @@
-{
-    "id": "9021684d-8f37-4850-a341-02f9a98259e4",
-    "type": "documentation",
-    "description": "Documentation-only update: update API and doc descriptions per EKS ImageType default value switch from AL2 to AL2023.",
-    "modules": [
-        "service/batch"
-    ]
-}

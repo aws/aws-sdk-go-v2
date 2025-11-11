@@ -1,8 +1,0 @@
-{
-    "id": "a48d4d70-6ec1-454c-91a4-11b9d1249e5c",
-    "type": "feature",
-    "description": "Added support for Language Expansion feature for BDA Audio modality.",
-    "modules": [
-        "service/bedrockdataautomation"
-    ]
-}

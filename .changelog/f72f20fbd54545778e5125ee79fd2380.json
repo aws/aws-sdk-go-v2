@@ -1,8 +1,0 @@
-{
-    "id": "f72f20fb-d545-4577-8e51-25ee79fd2380",
-    "type": "feature",
-    "description": "Added new fields in existing APIs.",
-    "modules": [
-        "service/medicalimaging"
-    ]
-}

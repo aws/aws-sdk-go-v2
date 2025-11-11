@@ -1,3 +1,7 @@
+# v1.26.1 (2025-11-11)
+
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.26.0 (2025-11-04)
 
 * **Feature**: This release adds support for the CarrierLookup API, which returns information about a destination phone number including if the number is valid, the carrier, and more.

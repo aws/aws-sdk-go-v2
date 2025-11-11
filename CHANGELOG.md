@@ -1,3 +1,23 @@
+# Release (2025-11-11)
+
+## General Highlights
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.58.5](service/batch/CHANGELOG.md#v1585-2025-11-11)
+  * **Documentation**: Documentation-only update: update API and doc descriptions per EKS ImageType default value switch from AL2 to AL2023.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.11.0](service/bedrockdataautomation/CHANGELOG.md#v1110-2025-11-11)
+  * **Feature**: Added support for Language Expansion feature for BDA Audio modality.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.266.0](service/ec2/CHANGELOG.md#v12660-2025-11-11)
+  * **Feature**: AWS Site-to-Site VPN now supports VPN connections with up to 5 Gbps bandwidth per tunnel, a 4x improvement from existing limit of 1.25 Gbps.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.23.0](service/medicalimaging/CHANGELOG.md#v1230-2025-11-11)
+  * **Feature**: Added new fields in existing APIs.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.2.0](service/rtbfabric/CHANGELOG.md#v120-2025-11-11)
+  * **Feature**: Added LogSettings and LinkAttribute fields to external links
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.9.0](service/securityir/CHANGELOG.md#v190-2025-11-11)
+  * **Feature**: Added support for configuring communication preferences as well as clearly displaying case comment author identities.
+
 # Release (2025-11-10)
 
 ## General Highlights

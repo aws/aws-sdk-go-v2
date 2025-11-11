@@ -1,8 +1,0 @@
-{
-    "id": "51702000-10fd-4b8f-8c18-a73eeea6970a",
-    "type": "feature",
-    "description": "Added LogSettings and LinkAttribute fields to external links",
-    "modules": [
-        "service/rtbfabric"
-    ]
-}

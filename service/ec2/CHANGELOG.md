@@ -1,3 +1,8 @@
+# v1.266.0 (2025-11-11)
+
+* **Feature**: AWS Site-to-Site VPN now supports VPN connections with up to 5 Gbps bandwidth per tunnel, a 4x improvement from existing limit of 1.25 Gbps.
+* **Bug Fix**: Return validation error if input region is not a valid host label.
+
 # v1.265.0 (2025-11-10)
 
 * **Feature**: Amazon EC2 Fleet customers can now filter instance types based on encryption-in-transit support using Attribute-Based Instance Type Selection (ABIS), eliminating the manual effort of identifying and selecting compatible instance types for security-sensitive workloads.
