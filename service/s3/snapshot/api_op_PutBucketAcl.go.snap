@@ -1,25 +1,19 @@
 PutBucketAcl
 	Initialize stack step
-		spanInitializeStart
-		InterceptExecution
 		AWSChecksum:SetupInputContext
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
 		OperationInputValidation
-		spanInitializeEnd
 	Serialize stack step
-		spanBuildRequestStart
 		putBucketContext
 		setOperationInput
 		ResolveEndpoint
 		S3:ProcessARNResource
 		S3:ObjectLambdaEndpoint
 		serializeImmutableHostnameBucket
-		InterceptBeforeSerialization
 		OperationSerializer
-		InterceptAfterSerialization
 		S3:UpdateEndpoint
 		S3:RemoveBucketFromPathMiddleware
 		isExpressUserAgent
@@ -31,7 +25,6 @@ PutBucketAcl
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
-		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		spanRetryLoop
@@ -48,19 +41,14 @@ PutBucketAcl
 		ComputePayloadHash
 		SigV4ContentSHA256Header
 		setLegacyContextSigningOptions
-		InterceptBeforeSigning
 		Signing
-		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
-		InterceptAfterDeserialization
 		OperationDeserializer
-		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
-		InterceptTransmit
