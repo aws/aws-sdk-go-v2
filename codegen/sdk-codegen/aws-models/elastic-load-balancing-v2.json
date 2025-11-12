@@ -60,7 +60,7 @@
                 "TargetGroupArn": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is\n        <code>forward</code> and you want to route to a single target group. To route to one or more\n      target groups, use <code>ForwardConfig</code> instead.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is\n        <code>forward</code> and you want to route to a single target group. To route to multiple\n      target groups, you must use <code>ForwardConfig</code> instead.</p>"
                     }
                 },
                 "AuthenticateOidcConfig": {
@@ -96,12 +96,18 @@
                 "ForwardConfig": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ForwardActionConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information for creating an action that distributes requests among one or more target\n      groups. For Network Load Balancers, you can specify a single target group. Specify only when\n        <code>Type</code> is <code>forward</code>. If you specify both <code>ForwardConfig</code>\n      and <code>TargetGroupArn</code>, you can specify only one target group using\n        <code>ForwardConfig</code> and it must be the same target group specified in\n        <code>TargetGroupArn</code>.</p>"
+                        "smithy.api#documentation": "<p>Information for creating an action that distributes requests among multiple target\n      groups. Specify only when <code>Type</code> is <code>forward</code>.</p>\n         <p>If you specify both <code>ForwardConfig</code> and <code>TargetGroupArn</code>, you can \n      specify only one target group using <code>ForwardConfig</code> and it must be the same \n      target group specified in <code>TargetGroupArn</code>.</p>"
+                    }
+                },
+                "JwtValidationConfig": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[HTTPS listeners] Information for validating JWT access tokens in client requests.\n      Specify only when <code>Type</code> is <code>jwt-validation</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an action.</p>\n         <p>Each rule must include exactly one of the following types of actions:\n      <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be\n      the last action to be performed.</p>"
+                "smithy.api#documentation": "<p>Information about an action.</p>\n         <p>Each rule must include exactly one of the following routing actions: <code>forward</code>, \n      <code>fixed-response</code>, or <code>redirect</code>, and it must be the last \n      action to be performed.</p>\n         <p>Optionally, a rule for an HTTPS listener can also include one of the following \n      user authentication actions: <code>authenticate-oidc</code>,\n      <code>authenticate-cognito</code>, or <code>jwt-validation</code>.</p>"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#ActionOrder": {
@@ -144,6 +150,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "fixed-response"
+                    }
+                },
+                "JWT_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jwt-validation"
                     }
                 }
             }
@@ -2993,7 +3005,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified rules or the rules for the specified listener. You must specify\n      either a listener or one or more rules.</p>",
+                "smithy.api#documentation": "<p>Describes the specified rules or the rules for the specified listener. You must specify\n      either a listener or rules.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To describe a rule",
@@ -5329,7 +5341,7 @@
                 "TargetGroups": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target groups. For Network Load Balancers, you can specify a single target\n      group.</p>"
+                        "smithy.api#documentation": "<p>The target groups.</p>"
                     }
                 },
                 "TargetGroupStickinessConfig": {
@@ -5865,6 +5877,115 @@
         },
         "com.amazonaws.elasticloadbalancingv2#IsDefault": {
             "type": "boolean"
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaim": {
+            "type": "structure",
+            "members": {
+                "Format": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimFormatEnum",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The format of the claim value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the claim. You can't specify <code>exp</code>, <code>iss</code>, \n      <code>nbf</code>, or <code>iat</code> because we validate them by default.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The claim value. The maximum size of the list is 10. \n      Each value can be up to 256 characters in length.\n      If the format is <code>space-separated-values</code>, the values\n      can't include spaces.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an additional claim to validate.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimFormatEnum": {
+            "type": "enum",
+            "members": {
+                "SINGLE_STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "single-string"
+                    }
+                },
+                "STRING_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "string-array"
+                    }
+                },
+                "SPACE_SEPARATED_VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "space-separated-values"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimName": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimValue": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimValue"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaims": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaim"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionConfig": {
+            "type": "structure",
+            "members": {
+                "JwksEndpoint": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionJwksEndpoint",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK)\n        that are used to validate signatures from the provider.</p>\n         <p>This must be a full URL, including the HTTPS protocol, the domain, and the path.\n        The maximum length is 256 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Issuer": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionIssuer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The issuer of the JWT. The maximum length is 256 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalClaims": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaims",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional claims to validate. The maximum size of the list is 10.\n      We validate the <code>exp</code>, <code>iss</code>, <code>nbf</code>, \n      and <code>iat</code> claims by default.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a JSON Web Token (JWT) validation action.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionIssuer": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#JwtValidationActionJwksEndpoint": {
+            "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#LastModifiedTime": {
             "type": "timestamp"
@@ -8743,7 +8864,7 @@
                 "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic": {
                     "target": "com.amazonaws.elasticloadbalancingv2#EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to evaluate inbound security group rules for traffic sent to a \n      Network Load Balancer through Amazon Web Services PrivateLink. The default is <code>on</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to evaluate inbound security group rules for traffic sent to a \n      Network Load Balancer through Amazon Web Services PrivateLink. Applies only if the load balancer \n      has an associated security group. The default is <code>on</code>.</p>"
                     }
                 }
             },
@@ -9474,7 +9595,7 @@
                 "DurationSeconds": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupStickinessDurationSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time period, in seconds, during which requests from a client should be routed to the\n      same target group. The range is 1-604800 seconds (7 days). You must specify this value when\n      enabling target group stickiness.</p>"
+                        "smithy.api#documentation": "<p>[Application Load Balancers] The time period, in seconds, during which requests from a\n      client should be routed to the same target group. The range is 1-604800 seconds (7 days). You\n      must specify this value when enabling target group stickiness.</p>"
                     }
                 }
             },
@@ -9529,7 +9650,7 @@
                 "Reason": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetHealthReasonEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason code.</p>\n         <p>If the target state is <code>healthy</code>, a reason code is not provided.</p>\n         <p>If the target state is <code>initial</code>, the reason code can be one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Elb.RegistrationInProgress</code> - The target is in the process of being registered\n          with the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Elb.InitialHealthChecking</code> - The load balancer is still sending the target the\n          minimum number of health checks required to determine its health status.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>unhealthy</code>, the reason code can be one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.ResponseCodeMismatch</code> - The health checks did not return an\n          expected HTTP code. Applies only to Application Load Balancers and Gateway Load\n          Balancers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.Timeout</code> - The health check requests timed out. Applies only to\n          Application Load Balancers and Gateway Load Balancers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.FailedHealthChecks</code> - The load balancer received an error while\n          establishing a connection to the target or the target response was malformed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Elb.InternalError</code> - The health checks failed due to an internal error.\n          Applies only to Application Load Balancers.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>unused</code>, the reason code can be one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.NotRegistered</code> - The target is not registered with the target\n          group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.NotInUse</code> - The target group is not used by any load balancer or\n          the target is in an Availability Zone that is not enabled for its load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.InvalidState</code> - The target is in the stopped or terminated\n          state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.IpUnusable</code> - The target IP address is reserved for use by a load\n          balancer.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>draining</code>, the reason code can be the following\n      value:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.DeregistrationInProgress</code> - The target is in the process of being\n          deregistered and the deregistration delay period has not expired.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>unavailable</code>, the reason code can be the following\n      value:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.HealthCheckDisabled</code> - Health checks are disabled for the target\n          group. Applies only to Application Load Balancers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Elb.InternalError</code> - Target health is unavailable due to an internal\n          error. Applies only to Network Load Balancers.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The reason code.</p>\n         <p>If the target state is <code>healthy</code>, a reason code is not provided.</p>\n         <p>If the target state is <code>initial</code>, the reason code can be one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Elb.RegistrationInProgress</code> - The target is in the process of being registered\n          with the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Elb.InitialHealthChecking</code> - The load balancer is still sending the target the\n          minimum number of health checks required to determine its health status.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>unhealthy</code>, the reason code can be one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.ResponseCodeMismatch</code> - The health checks did not return an\n          expected HTTP code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.Timeout</code> - The health check requests timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.FailedHealthChecks</code> - The load balancer received an error while\n          establishing a connection to the target or the target response was malformed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Elb.InternalError</code> - The health checks failed due to an internal error.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>unused</code>, the reason code can be one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.NotRegistered</code> - The target is not registered with the target\n          group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.NotInUse</code> - The target group is not used by any load balancer or\n          the target is in an Availability Zone that is not enabled for its load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.InvalidState</code> - The target is in the stopped or terminated\n          state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Target.IpUnusable</code> - The target IP address is reserved for use by a load\n          balancer.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>draining</code>, the reason code can be the following\n      value:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.DeregistrationInProgress</code> - The target is in the process of being\n          deregistered and the deregistration delay period has not expired.</p>\n            </li>\n         </ul>\n         <p>If the target state is <code>unavailable</code>, the reason code can be the following\n      value:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Target.HealthCheckDisabled</code> - Health checks are disabled for the target\n          group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Elb.InternalError</code> - Target health is unavailable due to an internal\n          error.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Description": {

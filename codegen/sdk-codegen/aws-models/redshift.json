@@ -1749,6 +1749,15 @@
                 }
             }
         },
+        "com.amazonaws.redshift#ClusterIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#String",
+                "traits": {
+                    "smithy.api#xmlName": "ClusterIdentifier"
+                }
+            }
+        },
         "com.amazonaws.redshift#ClusterList": {
             "type": "list",
             "member": {
@@ -9819,6 +9828,70 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.redshift#GetIdentityCenterAuthToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#GetIdentityCenterAuthTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#GetIdentityCenterAuthTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftInvalidParameterFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates an encrypted authentication token that propagates the caller's \n            Amazon Web Services IAM Identity Center identity to Amazon Redshift clusters. This API extracts the \n            Amazon Web Services IAM Identity Center identity from enhanced credentials and creates a secure token \n            that Amazon Redshift drivers can use for authentication.</p>\n         <p>The token is encrypted using Key Management Service (KMS) and can only be \n            decrypted by the specified Amazon Redshift clusters. The token contains the caller's \n            Amazon Web Services IAM Identity Center identity information and is valid for a limited time period.</p>\n         <p>This API is exclusively for use with Amazon Web Services IAM Identity Center enhanced credentials. If the \n            caller is not using enhanced credentials with embedded Amazon Web Services IAM Identity Center identity, the API will \n            return an error.</p>"
+            }
+        },
+        "com.amazonaws.redshift#GetIdentityCenterAuthTokenRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterIds": {
+                    "target": "com.amazonaws.redshift#ClusterIdentifierList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of cluster identifiers that the generated token can be used with. \n            The token will be scoped to only allow authentication to the specified clusters.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ClusterIds</code> must contain at least 1 cluster identifier.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ClusterIds</code> can hold a maximum of 20 cluster identifiers.</p>\n            </li>\n            <li>\n               <p>Cluster identifiers must be 1 to 63 characters in length.</p>\n            </li>\n            <li>\n               <p>The characters accepted for cluster identifiers are the following:</p>\n               <ul>\n                  <li>\n                     <p>Alphanumeric characters</p>\n                  </li>\n                  <li>\n                     <p>Hyphens</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Cluster identifiers must start with a letter.</p>\n            </li>\n            <li>\n               <p>Cluster identifiers can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for <code>GetIdentityCenterAuthToken</code>.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#GetIdentityCenterAuthTokenResponse": {
+            "type": "structure",
+            "members": {
+                "Token": {
+                    "target": "com.amazonaws.redshift#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encrypted authentication token containing the caller's Amazon Web Services IAM Identity Center identity information. \n            This token is encrypted using Key Management Service and can only be decrypted by the specified Amazon Redshift clusters. \n            Use this token with Amazon Redshift drivers to authenticate using your Amazon Web Services IAM Identity Center identity.</p>"
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when the token expires. After this timestamp, \n            the token will no longer be valid for authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response from GetIdentityCenterAuthToken containing the encrypted authentication token and expiration time.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions": {
             "type": "operation",
             "input": {
@@ -14459,6 +14532,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshift#RedshiftInvalidParameterFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RedshiftInvalidParameter",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request contains one or more invalid parameters. \n            This error occurs when required parameters are missing, \n            parameter values are outside acceptable ranges, \n            or parameter formats are incorrect.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshift#RedshiftServiceVersion20121201": {
             "type": "service",
             "version": "2012-12-01",
@@ -14762,6 +14852,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#GetClusterCredentialsWithIAM"
+                },
+                {
+                    "target": "com.amazonaws.redshift#GetIdentityCenterAuthToken"
                 },
                 {
                     "target": "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions"

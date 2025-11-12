@@ -522,6 +522,60 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#DeleteTableBucketMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#DeleteTableBucketMetricsConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the metrics configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableBucketMetricsConfiguration</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/metrics",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#DeleteTableBucketMetricsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3tables#DeleteTableBucketPolicy": {
             "type": "operation",
             "input": {
@@ -1141,6 +1195,80 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the maintenance configuration for the table bucket.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableBucketMetricsConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableBucketMetricsConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the metrics configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketMetricsConfiguration</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/metrics",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketMetricsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketMetricsConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the metrics configuration.</p>"
                     }
                 }
             },
@@ -2801,6 +2929,60 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.s3tables#PutTableBucketMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableBucketMetricsConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the metrics configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketMetricsConfiguration</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/metrics",
+                    "method": "PUT",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketMetricsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.s3tables#PutTableBucketPolicy": {
             "type": "operation",
             "input": {
@@ -3986,16 +4168,25 @@
                     "target": "com.amazonaws.s3tables#DeleteTableBucket"
                 },
                 {
+                    "target": "com.amazonaws.s3tables#DeleteTableBucketMetricsConfiguration"
+                },
+                {
                     "target": "com.amazonaws.s3tables#GetTableBucket"
                 },
                 {
                     "target": "com.amazonaws.s3tables#GetTableBucketMaintenanceConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.s3tables#GetTableBucketMetricsConfiguration"
+                },
+                {
                     "target": "com.amazonaws.s3tables#ListTableBuckets"
                 },
                 {
                     "target": "com.amazonaws.s3tables#PutTableBucketMaintenanceConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableBucketMetricsConfiguration"
                 }
             ],
             "traits": {

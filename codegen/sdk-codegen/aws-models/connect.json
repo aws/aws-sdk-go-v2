@@ -4706,6 +4706,10 @@
                 "PeriodicSessionDuration": {
                     "target": "com.amazonaws.connect#AccessTokenDuration",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "10/31/2025",
+                            "message": "PeriodicSessionDuration is deprecated. Use SessionInactivityDuration instead."
+                        },
                         "smithy.api#documentation": "<p>The short lived session duration configuration for users logged in to Amazon Connect, in\n   minutes. This value determines the maximum possible time before an agent is authenticated. For\n   more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure the session duration</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
                     }
                 },
@@ -4713,6 +4717,19 @@
                     "target": "com.amazonaws.connect#RefreshTokenDuration",
                     "traits": {
                         "smithy.api#documentation": "<p>The long lived session duration for users logged in to Amazon Connect, in minutes. After\n   this time period, users must log in again. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure the session duration</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                    }
+                },
+                "SessionInactivityDuration": {
+                    "target": "com.amazonaws.connect#InactivityDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period, in minutes, before an agent is automatically signed out of the contact center when they go inactive.</p>"
+                    }
+                },
+                "SessionInactivityHandlingEnabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Determines if automatic logout on user inactivity is enabled.</p>"
                     }
                 }
             },
@@ -23406,6 +23423,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#InactivityDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 15,
+                    "max": 720
+                }
             }
         },
         "com.amazonaws.connect#InboundAdditionalRecipients": {
@@ -44465,7 +44491,24 @@
                 "PeriodicSessionDuration": {
                     "target": "com.amazonaws.connect#AccessTokenDuration",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "10/31/2025",
+                            "message": "PeriodicSessionDuration is deprecated. Use SessionInactivityDuration instead."
+                        },
                         "smithy.api#documentation": "<p>The short lived session duration configuration for users logged in to Amazon Connect, in\n   minutes. This value determines the maximum possible time before an agent is authenticated. For\n   more information, For more information on how to configure IP addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure session timeouts</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>"
+                    }
+                },
+                "SessionInactivityDuration": {
+                    "target": "com.amazonaws.connect#InactivityDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period, in minutes, before an agent is automatically signed out of the contact center when they go inactive.</p>"
+                    }
+                },
+                "SessionInactivityHandlingEnabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Determines if automatic logout on user inactivity is enabled.</p>"
                     }
                 }
             },

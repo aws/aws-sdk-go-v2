@@ -162,6 +162,12 @@
                     "target": "com.amazonaws.databasemigrationservice#BatchStartRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#CancelMetadataModelConversion"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#CancelMetadataModelCreation"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#CancelReplicationTaskAssessmentRun"
                 },
                 {
@@ -306,10 +312,19 @@
                     "target": "com.amazonaws.databasemigrationservice#DescribeInstanceProfiles"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModel"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelAssessments"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildren"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelConversions"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreations"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelExportsAsScript"
@@ -376,6 +391,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ExportMetadataModelAssessment"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#GetTargetSelectionRules"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ImportCertificate"
@@ -448,6 +466,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StartMetadataModelConversion"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#StartMetadataModelCreation"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StartMetadataModelExportAsScript"
@@ -1798,6 +1819,118 @@
         },
         "com.amazonaws.databasemigrationservice#BooleanOptional": {
             "type": "boolean"
+        },
+        "com.amazonaws.databasemigrationservice#CancelMetadataModelConversion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#CancelMetadataModelConversionMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#CancelMetadataModelConversionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels a single metadata model conversion operation that was started with <code>StartMetadataModelConversion</code>.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CancelMetadataModelConversionMessage": {
+            "type": "structure",
+            "members": {
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the metadata model conversion operation to cancel. This operation was initiated by StartMetadataModelConversion.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CancelMetadataModelConversionResponse": {
+            "type": "structure",
+            "members": {
+                "Request": {
+                    "target": "com.amazonaws.databasemigrationservice#SchemaConversionRequest"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CancelMetadataModelCreation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#CancelMetadataModelCreationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#CancelMetadataModelCreationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels a single metadata model creation operation that was started with <code>StartMetadataModelCreation</code>.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CancelMetadataModelCreationMessage": {
+            "type": "structure",
+            "members": {
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the metadata model creation operation to cancel. This operation was initiated by <code>StartMetadataModelCreation</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CancelMetadataModelCreationResponse": {
+            "type": "structure",
+            "members": {
+                "Request": {
+                    "target": "com.amazonaws.databasemigrationservice#SchemaConversionRequest"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.databasemigrationservice#CancelReplicationTaskAssessmentRun": {
             "type": "operation",
@@ -7475,6 +7608,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets detailed information about the specified metadata model, including its definition and corresponding converted objects in the target database if applicable.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeMetadataModelAssessments": {
             "type": "operation",
             "input": {
@@ -7579,6 +7732,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildren": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildrenMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildrenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of child metadata models for the specified metadata model in the database hierarchy.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "MetadataModelChildren",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildrenMessage": {
+            "type": "structure",
+            "members": {
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string that specifies which metadata model's children to retrieve. Only one selection rule with \"rule-action\": \"explicit\" can be provided. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html\">Selection Rules</a> in the DMS User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Origin": {
+                    "target": "com.amazonaws.databasemigrationservice#OriginTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to retrieve metadata from the source or target tree. Valid values: SOURCE | TARGET</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique pagination token that indicates where the next page should start. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of metadata model children to include in the response. If more items exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildrenResponse": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique pagination token that makes it possible to display the next page of metadata model children. If a marker is returned, there are more metadata model children available.</p>"
+                    }
+                },
+                "MetadataModelChildren": {
+                    "target": "com.amazonaws.databasemigrationservice#MetadataModelReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of child metadata models.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeMetadataModelConversions": {
             "type": "operation",
             "input": {
@@ -7676,6 +7916,85 @@
                     "target": "com.amazonaws.databasemigrationservice#SchemaConversionRequestList",
                     "traits": {
                         "smithy.api#documentation": "<p>A paginated list of metadata model conversions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of metadata model creation requests for a migration project.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Requests",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreationsMessage": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters applied to the metadata model creation requests described in the form of key-value pairs. The supported filters are request-id and status.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests. If Marker is returned by a previous response, there are more metadata model creation requests available.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of metadata model creation requests to include in the response. If more requests exist than the specified MaxRecords value, a pagination token is provided in the response so that you can retrieve the remaining results.</p>"
+                    }
+                },
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreationsResponse": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests. If Marker is returned, there are more metadata model creation requests available.</p>"
+                    }
+                },
+                "Requests": {
+                    "target": "com.amazonaws.databasemigrationservice#SchemaConversionRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata model creation requests. The ExportSqlDetails field will never be populated for the DescribeMetadataModelCreations operation.</p>"
                     }
                 }
             },
@@ -7988,6 +8307,67 @@
                     "target": "com.amazonaws.databasemigrationservice#SchemaConversionRequestList",
                     "traits": {
                         "smithy.api#documentation": "<p>A paginated list of metadata model imports.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelMessage": {
+            "type": "structure",
+            "members": {
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string that specifies which metadata model to retrieve. Only one selection rule with \"rule-action\": \"explicit\" can be provided. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html\">Selection Rules</a> in the DMS User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Origin": {
+                    "target": "com.amazonaws.databasemigrationservice#OriginTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to retrieve metadata from the source or target tree. Valid values: SOURCE | TARGET</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeMetadataModelResponse": {
+            "type": "structure",
+            "members": {
+                "MetadataModelName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metadata model.</p>"
+                    }
+                },
+                "MetadataModelType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the metadata model.</p>"
+                    }
+                },
+                "TargetMetadataModels": {
+                    "target": "com.amazonaws.databasemigrationservice#MetadataModelReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of counterpart metadata models in the target. This field is populated only when Origin is SOURCE and after the object has been converted by DMS Schema Conversion.</p>"
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL text of the metadata model. This field might not be populated for some metadata models.</p>"
                     }
                 }
             },
@@ -11098,6 +11478,65 @@
                 "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#GetTargetSelectionRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#GetTargetSelectionRulesMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#GetTargetSelectionRulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Converts source selection rules into their target counterparts for schema conversion operations.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#GetTargetSelectionRulesMessage": {
+            "type": "structure",
+            "members": {
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string representing the source selection rules for conversion. Selection rules must contain only supported metadata model types. For more information, see Selection Rules in the DMS User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#GetTargetSelectionRulesResponse": {
+            "type": "structure",
+            "members": {
+                "TargetSelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string representing the counterpart selection rules in the target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#IBMDb2Settings": {
             "type": "structure",
             "members": {
@@ -12180,6 +12619,46 @@
                         "smithy.api#enumValue": "json-unformatted"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#MetadataModelProperties": {
+            "type": "union",
+            "members": {
+                "StatementProperties": {
+                    "target": "com.amazonaws.databasemigrationservice#StatementProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the statement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of metadata model in JSON format. This object is a Union. Only one member of this object can be specified or returned.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#MetadataModelReference": {
+            "type": "structure",
+            "members": {
+                "MetadataModelName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metadata model.</p>"
+                    }
+                },
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string representing metadata model location.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a metadata model, including its name and selection rules for location identification.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#MetadataModelReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#MetadataModelReference"
             }
         },
         "com.amazonaws.databasemigrationservice#MicrosoftSQLServerSettings": {
@@ -18500,6 +18979,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#StartMetadataModelCreation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#StartMetadataModelCreationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#StartMetadataModelCreationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceQuotaExceededFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates source metadata model of the given type with the specified properties for schema conversion operations.</p>\n         <note>\n            <p>This action supports only these directions: from SQL Server to Aurora PostgreSQL, or from SQL Server to RDS for PostgreSQL.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartMetadataModelCreationMessage": {
+            "type": "structure",
+            "members": {
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string that specifies the location where the metadata model will be created. Selection rules must specify a single schema. For more information, see Selection Rules in the DMS User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetadataModelName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metadata model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.databasemigrationservice#MetadataModelProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of metadata model in JSON format. This object is a Union. Only one member of this object can be specified or returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartMetadataModelCreationResponse": {
+            "type": "structure",
+            "members": {
+                "RequestIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the metadata model creation operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#StartMetadataModelExportAsScript": {
             "type": "operation",
             "input": {
@@ -19294,6 +19849,21 @@
                         "smithy.api#enumValue": "reload-target"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StatementProperties": {
+            "type": "structure",
+            "members": {
+                "Definition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL text of the statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the statement for metadata model creation.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#StopDataMigration": {

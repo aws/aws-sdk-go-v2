@@ -672,7 +672,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmImage": {
@@ -8751,6 +8751,12 @@
                         "smithy.api#enumValue": "ml.p6-b200.48xlarge"
                     }
                 },
+                "ML_TRN2_3XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn2.3xlarge"
+                    }
+                },
                 "ML_TRN2_48XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -9986,7 +9992,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositoryContains": {
@@ -16662,8 +16668,7 @@
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies how long a managed Spot training job has to complete. When the job reaches the time limit, SageMaker ends the training job. Use this API to cap model training costs.</p> <p>To stop a job, SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so the results of training are not lost. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies how long a managed Spot training job has to complete. When the job reaches the time limit, SageMaker ends the training job. Use this API to cap model training costs.</p> <p>To stop a job, SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so the results of training are not lost. </p>"
                     }
                 },
                 "Tags": {
@@ -28883,9 +28888,7 @@
                 "AlgorithmSpecification": {
                     "target": "com.amazonaws.sagemaker#AlgorithmSpecification",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Information about the algorithm used for training, and algorithm metadata. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Information about the algorithm used for training, and algorithm metadata. </p>"
                     }
                 },
                 "RoleArn": {
@@ -28909,9 +28912,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.sagemaker#ResourceConfig",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Resources, including ML compute instances and ML storage volumes, that are configured for model training. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Resources, including ML compute instances and ML storage volumes, that are configured for model training. </p>"
                     }
                 },
                 "WarmPoolStatus": {
@@ -50558,7 +50559,7 @@
                     "min": 20,
                     "max": 258
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:ml-reservation/"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z0-9\\-]{1,14}/"
             }
         },
         "com.amazonaws.sagemaker#MlTools": {
@@ -52435,7 +52436,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageArnList": {
@@ -52462,9 +52463,7 @@
                 "Image": {
                     "target": "com.amazonaws.sagemaker#ContainerImage",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Elastic Container Registry (Amazon ECR) path where inference code is stored.</p> <p>If you are using your own custom algorithm instead of an algorithm provided by SageMaker, the inference code must meet SageMaker requirements. SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Elastic Container Registry (Amazon ECR) path where inference code is stored.</p> <p>If you are using your own custom algorithm instead of an algorithm provided by SageMaker, the inference code must meet SageMaker requirements. SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>.</p>"
                     }
                 },
                 "ImageDigest": {
@@ -52614,7 +52613,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageGroupSortBy": {
@@ -62104,7 +62103,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ProjectEntityName": {
