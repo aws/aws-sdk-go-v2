@@ -2734,6 +2734,34 @@ func (e *RedshiftIdcApplicationQuotaExceededFault) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// The request contains one or more invalid parameters. This error occurs when
+// required parameters are missing, parameter values are outside acceptable ranges,
+// or parameter formats are incorrect.
+type RedshiftInvalidParameterFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RedshiftInvalidParameterFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RedshiftInvalidParameterFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RedshiftInvalidParameterFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RedshiftInvalidParameter"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RedshiftInvalidParameterFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // User already has a reservation with the given identifier.
 type ReservedNodeAlreadyExistsFault struct {
 	Message *string

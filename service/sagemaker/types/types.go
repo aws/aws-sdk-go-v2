@@ -12842,19 +12842,6 @@ type ModelPackage struct {
 // Describes the Docker container for the model package.
 type ModelPackageContainerDefinition struct {
 
-	// The Amazon Elastic Container Registry (Amazon ECR) path where inference code is
-	// stored.
-	//
-	// If you are using your own custom algorithm instead of an algorithm provided by
-	// SageMaker, the inference code must meet SageMaker requirements. SageMaker
-	// supports both registry/repository[:tag] and registry/repository[@digest] image
-	// path formats. For more information, see [Using Your Own Algorithms with Amazon SageMaker].
-	//
-	// [Using Your Own Algorithms with Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
-	//
-	// This member is required.
-	Image *string
-
 	// The additional data source that is used during inference in the Docker
 	// container for your model package.
 	AdditionalS3DataSource *AdditionalS3DataSource
@@ -12872,6 +12859,17 @@ type ModelPackageContainerDefinition struct {
 
 	// The framework version of the Model Package Container Image.
 	FrameworkVersion *string
+
+	// The Amazon Elastic Container Registry (Amazon ECR) path where inference code is
+	// stored.
+	//
+	// If you are using your own custom algorithm instead of an algorithm provided by
+	// SageMaker, the inference code must meet SageMaker requirements. SageMaker
+	// supports both registry/repository[:tag] and registry/repository[@digest] image
+	// path formats. For more information, see [Using Your Own Algorithms with Amazon SageMaker].
+	//
+	// [Using Your Own Algorithms with Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+	Image *string
 
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.

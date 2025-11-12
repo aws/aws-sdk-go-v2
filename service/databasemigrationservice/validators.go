@@ -70,6 +70,46 @@ func (m *validateOpBatchStartRecommendations) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelMetadataModelConversion struct {
+}
+
+func (*validateOpCancelMetadataModelConversion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelMetadataModelConversion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelMetadataModelConversionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelMetadataModelConversionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelMetadataModelCreation struct {
+}
+
+func (*validateOpCancelMetadataModelCreation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelMetadataModelCreation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelMetadataModelCreationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelMetadataModelCreationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelReplicationTaskAssessmentRun struct {
 }
 
@@ -950,6 +990,26 @@ func (m *validateOpDescribeMetadataModelAssessments) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMetadataModelChildren struct {
+}
+
+func (*validateOpDescribeMetadataModelChildren) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMetadataModelChildren) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMetadataModelChildrenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMetadataModelChildrenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeMetadataModelConversions struct {
 }
 
@@ -965,6 +1025,26 @@ func (m *validateOpDescribeMetadataModelConversions) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeMetadataModelConversionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeMetadataModelCreations struct {
+}
+
+func (*validateOpDescribeMetadataModelCreations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMetadataModelCreations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMetadataModelCreationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMetadataModelCreationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1025,6 +1105,26 @@ func (m *validateOpDescribeMetadataModelImports) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeMetadataModelImportsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeMetadataModel struct {
+}
+
+func (*validateOpDescribeMetadataModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMetadataModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMetadataModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMetadataModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1365,6 +1465,26 @@ func (m *validateOpExportMetadataModelAssessment) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpExportMetadataModelAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTargetSelectionRules struct {
+}
+
+func (*validateOpGetTargetSelectionRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTargetSelectionRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTargetSelectionRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTargetSelectionRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1810,6 +1930,26 @@ func (m *validateOpStartMetadataModelConversion) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMetadataModelCreation struct {
+}
+
+func (*validateOpStartMetadataModelCreation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMetadataModelCreation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMetadataModelCreationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMetadataModelCreationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMetadataModelExportAsScript struct {
 }
 
@@ -2062,6 +2202,14 @@ func addOpBatchStartRecommendationsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpBatchStartRecommendations{}, middleware.After)
 }
 
+func addOpCancelMetadataModelConversionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelMetadataModelConversion{}, middleware.After)
+}
+
+func addOpCancelMetadataModelCreationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelMetadataModelCreation{}, middleware.After)
+}
+
 func addOpCancelReplicationTaskAssessmentRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelReplicationTaskAssessmentRun{}, middleware.After)
 }
@@ -2238,8 +2386,16 @@ func addOpDescribeMetadataModelAssessmentsValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpDescribeMetadataModelAssessments{}, middleware.After)
 }
 
+func addOpDescribeMetadataModelChildrenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMetadataModelChildren{}, middleware.After)
+}
+
 func addOpDescribeMetadataModelConversionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeMetadataModelConversions{}, middleware.After)
+}
+
+func addOpDescribeMetadataModelCreationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMetadataModelCreations{}, middleware.After)
 }
 
 func addOpDescribeMetadataModelExportsAsScriptValidationMiddleware(stack *middleware.Stack) error {
@@ -2252,6 +2408,10 @@ func addOpDescribeMetadataModelExportsToTargetValidationMiddleware(stack *middle
 
 func addOpDescribeMetadataModelImportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeMetadataModelImports{}, middleware.After)
+}
+
+func addOpDescribeMetadataModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMetadataModel{}, middleware.After)
 }
 
 func addOpDescribeMigrationProjectsValidationMiddleware(stack *middleware.Stack) error {
@@ -2320,6 +2480,10 @@ func addOpDescribeTableStatisticsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpExportMetadataModelAssessmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportMetadataModelAssessment{}, middleware.After)
+}
+
+func addOpGetTargetSelectionRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTargetSelectionRules{}, middleware.After)
 }
 
 func addOpImportCertificateValidationMiddleware(stack *middleware.Stack) error {
@@ -2408,6 +2572,10 @@ func addOpStartMetadataModelAssessmentValidationMiddleware(stack *middleware.Sta
 
 func addOpStartMetadataModelConversionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMetadataModelConversion{}, middleware.After)
+}
+
+func addOpStartMetadataModelCreationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMetadataModelCreation{}, middleware.After)
 }
 
 func addOpStartMetadataModelExportAsScriptValidationMiddleware(stack *middleware.Stack) error {
@@ -2558,6 +2726,25 @@ func validateFilterList(v []types.Filter) error {
 	}
 }
 
+func validateMetadataModelProperties(v types.MetadataModelProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataModelProperties"}
+	switch uv := v.(type) {
+	case *types.MetadataModelPropertiesMemberStatementProperties:
+		if err := validateStatementProperties(&uv.Value); err != nil {
+			invalidParams.AddNested("[StatementProperties]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNeptuneSettings(v *types.NeptuneSettings) error {
 	if v == nil {
 		return nil
@@ -2640,6 +2827,21 @@ func validateStartRecommendationsRequestEntryList(v []types.StartRecommendations
 		if err := validateStartRecommendationsRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStatementProperties(v *types.StatementProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StatementProperties"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2752,6 +2954,42 @@ func validateOpBatchStartRecommendationsInput(v *BatchStartRecommendationsInput)
 		if err := validateStartRecommendationsRequestEntryList(v.Data); err != nil {
 			invalidParams.AddNested("Data", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelMetadataModelConversionInput(v *CancelMetadataModelConversionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelMetadataModelConversionInput"}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if v.RequestIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelMetadataModelCreationInput(v *CancelMetadataModelCreationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelMetadataModelCreationInput"}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if v.RequestIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3563,6 +3801,27 @@ func validateOpDescribeMetadataModelAssessmentsInput(v *DescribeMetadataModelAss
 	}
 }
 
+func validateOpDescribeMetadataModelChildrenInput(v *DescribeMetadataModelChildrenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetadataModelChildrenInput"}
+	if v.SelectionRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionRules"))
+	}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if len(v.Origin) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeMetadataModelConversionsInput(v *DescribeMetadataModelConversionsInput) error {
 	if v == nil {
 		return nil
@@ -3575,6 +3834,26 @@ func validateOpDescribeMetadataModelConversionsInput(v *DescribeMetadataModelCon
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeMetadataModelCreationsInput(v *DescribeMetadataModelCreationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetadataModelCreationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3635,6 +3914,27 @@ func validateOpDescribeMetadataModelImportsInput(v *DescribeMetadataModelImports
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeMetadataModelInput(v *DescribeMetadataModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetadataModelInput"}
+	if v.SelectionRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionRules"))
+	}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if len(v.Origin) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3920,6 +4220,24 @@ func validateOpExportMetadataModelAssessmentInput(v *ExportMetadataModelAssessme
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportMetadataModelAssessmentInput"}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if v.SelectionRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionRules"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTargetSelectionRulesInput(v *GetTargetSelectionRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTargetSelectionRulesInput"}
 	if v.MigrationProjectIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
 	}
@@ -4328,6 +4646,34 @@ func validateOpStartMetadataModelConversionInput(v *StartMetadataModelConversion
 	}
 	if v.SelectionRules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SelectionRules"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMetadataModelCreationInput(v *StartMetadataModelCreationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMetadataModelCreationInput"}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if v.SelectionRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionRules"))
+	}
+	if v.MetadataModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataModelName"))
+	}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	} else if v.Properties != nil {
+		if err := validateMetadataModelProperties(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,7 +12,7 @@ import (
 )
 
 // Describes the specified rules or the rules for the specified listener. You must
-// specify either a listener or one or more rules.
+// specify either a listener or rules.
 func (c *Client) DescribeRules(ctx context.Context, params *DescribeRulesInput, optFns ...func(*Options)) (*DescribeRulesOutput, error) {
 	if params == nil {
 		params = &DescribeRulesInput{}

@@ -7322,6 +7322,29 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a single AMI in the ancestry chain and its source (parent)
+// AMI.
+type ImageAncestryEntry struct {
+
+	// The date and time when this AMI was created.
+	CreationDate *time.Time
+
+	// The ID of this AMI.
+	ImageId *string
+
+	// The owner alias ( amazon | aws-backup-vault | aws-marketplace ) of this AMI, if
+	// one is assigned. Otherwise, the value is null .
+	ImageOwnerAlias *string
+
+	// The ID of the parent AMI.
+	SourceImageId *string
+
+	// The Amazon Web Services Region of the parent AMI.
+	SourceImageRegion *string
+
+	noSmithyDocumentSerde
+}
+
 // The criteria that are evaluated to determine which AMIs are discoverable and
 // usable in your account for the specified Amazon Web Services Region.
 //

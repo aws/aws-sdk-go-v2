@@ -4314,6 +4314,12 @@ func awsRestjson1_serializeDocumentSource(v types.Source, value smithyjson.Value
 			return err
 		}
 
+	case *types.SourceMemberVpcConfiguration:
+		av := object.Key("vpcConfiguration")
+		if err := awsRestjson1_serializeDocumentVpcConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4351,5 +4357,26 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConfiguration(v *types.VpcConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsRestjson1_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsRestjson1_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }

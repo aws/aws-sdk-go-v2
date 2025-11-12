@@ -23148,6 +23148,16 @@ func awsRestjson1_serializeOpDocumentUpdateAuthenticationProfileInput(v *UpdateA
 		ok.Integer(*v.PeriodicSessionDuration)
 	}
 
+	if v.SessionInactivityDuration != nil {
+		ok := object.Key("SessionInactivityDuration")
+		ok.Integer(*v.SessionInactivityDuration)
+	}
+
+	if v.SessionInactivityHandlingEnabled != nil {
+		ok := object.Key("SessionInactivityHandlingEnabled")
+		ok.Boolean(*v.SessionInactivityHandlingEnabled)
+	}
+
 	return nil
 }
 

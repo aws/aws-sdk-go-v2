@@ -6230,6 +6230,18 @@ func TestCheckSnapshot_GetHostReservationPurchasePreview(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetImageAncestry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetImageAncestry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetImageAncestry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetImageBlockPublicAccessState(context.Background(), nil, func(o *Options) {
@@ -14814,6 +14826,18 @@ func TestUpdateSnapshot_GetHostReservationPurchasePreview(t *testing.T) {
 	_, err := svc.GetHostReservationPurchasePreview(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetHostReservationPurchasePreview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetImageAncestry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetImageAncestry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetImageAncestry")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

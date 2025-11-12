@@ -128,6 +128,9 @@ func ExampleSource_outputUsage() {
 	case *types.SourceMemberEksConfiguration:
 		_ = v.Value // Value is types.EksConfiguration
 
+	case *types.SourceMemberVpcConfiguration:
+		_ = v.Value // Value is types.VpcConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -137,4 +140,5 @@ func ExampleSource_outputUsage() {
 	}
 }
 
+var _ *types.VpcConfiguration
 var _ *types.EksConfiguration

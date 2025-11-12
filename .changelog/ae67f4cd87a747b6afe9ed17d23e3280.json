@@ -1,0 +1,8 @@
+{
+    "id": "ae67f4cd-87a7-47b6-afe9-ed17d23e3280",
+    "type": "feature",
+    "description": "Adds support for request metrics metrics APIs for S3 Tables",
+    "modules": [
+        "service/s3tables"
+    ]
+}

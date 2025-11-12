@@ -50,11 +50,6 @@ type DescribeTrainingJobInput struct {
 
 type DescribeTrainingJobOutput struct {
 
-	// Information about the algorithm used for training, and algorithm metadata.
-	//
-	// This member is required.
-	AlgorithmSpecification *types.AlgorithmSpecification
-
 	// A timestamp that indicates when the training job was created.
 	//
 	// This member is required.
@@ -65,12 +60,6 @@ type DescribeTrainingJobOutput struct {
 	//
 	// This member is required.
 	ModelArtifacts *types.ModelArtifacts
-
-	// Resources, including ML compute instances and ML storage volumes, that are
-	// configured for model training.
-	//
-	// This member is required.
-	ResourceConfig *types.ResourceConfig
 
 	//  Provides detailed information about the state of the training job. For
 	// detailed information on the secondary status of the training job, see
@@ -169,6 +158,9 @@ type DescribeTrainingJobOutput struct {
 	//
 	// This member is required.
 	TrainingJobStatus types.TrainingJobStatus
+
+	// Information about the algorithm used for training, and algorithm metadata.
+	AlgorithmSpecification *types.AlgorithmSpecification
 
 	// The Amazon Resource Name (ARN) of an AutoML job.
 	AutoMLJobArn *string
@@ -297,6 +289,10 @@ type DescribeTrainingJobOutput struct {
 	//
 	// [Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
 	RemoteDebugConfig *types.RemoteDebugConfig
+
+	// Resources, including ML compute instances and ML storage volumes, that are
+	// configured for model training.
+	ResourceConfig *types.ResourceConfig
 
 	// The number of times to retry the job when the job fails due to an
 	// InternalServerError .

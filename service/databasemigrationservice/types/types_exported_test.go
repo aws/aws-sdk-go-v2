@@ -78,3 +78,21 @@ func ExampleErrorDetails_outputUsage() {
 }
 
 var _ *types.DefaultErrorDetails
+
+func ExampleMetadataModelProperties_outputUsage() {
+	var union types.MetadataModelProperties
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MetadataModelPropertiesMemberStatementProperties:
+		_ = v.Value // Value is types.StatementProperties
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StatementProperties

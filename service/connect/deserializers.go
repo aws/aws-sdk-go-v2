@@ -46871,6 +46871,28 @@ func awsRestjson1_deserializeDocumentAuthenticationProfile(v **types.Authenticat
 				sv.PeriodicSessionDuration = ptr.Int32(int32(i64))
 			}
 
+		case "SessionInactivityDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InactivityDuration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SessionInactivityDuration = ptr.Int32(int32(i64))
+			}
+
+		case "SessionInactivityHandlingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SessionInactivityHandlingEnabled = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

@@ -1226,6 +1226,29 @@ func validateSource(v types.Source) error {
 			invalidParams.AddNested("[eksConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.SourceMemberVpcConfiguration:
+		if err := validateVpcConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[vpcConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcConfiguration(v *types.VpcConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcConfiguration"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

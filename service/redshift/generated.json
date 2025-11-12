@@ -108,6 +108,7 @@
         "api_op_FailoverPrimaryCompute.go",
         "api_op_GetClusterCredentials.go",
         "api_op_GetClusterCredentialsWithIAM.go",
+        "api_op_GetIdentityCenterAuthToken.go",
         "api_op_GetReservedNodeExchangeConfigurationOptions.go",
         "api_op_GetReservedNodeExchangeOfferings.go",
         "api_op_GetResourcePolicy.go",

@@ -130,6 +130,26 @@ func (m *validateOpDeleteTableBucket) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTableBucketMetricsConfiguration struct {
+}
+
+func (*validateOpDeleteTableBucketMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTableBucketMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTableBucketMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTableBucketMetricsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTableBucketPolicy struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpGetTableBucketMaintenanceConfiguration) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTableBucketMaintenanceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableBucketMetricsConfiguration struct {
+}
+
+func (*validateOpGetTableBucketMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableBucketMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableBucketMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableBucketMetricsConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +530,26 @@ func (m *validateOpPutTableBucketMaintenanceConfiguration) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTableBucketMetricsConfiguration struct {
+}
+
+func (*validateOpPutTableBucketMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableBucketMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableBucketMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableBucketMetricsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutTableBucketPolicy struct {
 }
 
@@ -654,6 +714,10 @@ func addOpDeleteTableBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTableBucket{}, middleware.After)
 }
 
+func addOpDeleteTableBucketMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTableBucketMetricsConfiguration{}, middleware.After)
+}
+
 func addOpDeleteTableBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTableBucketPolicy{}, middleware.After)
 }
@@ -680,6 +744,10 @@ func addOpGetTableBucketValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTableBucketMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableBucketMaintenanceConfiguration{}, middleware.After)
+}
+
+func addOpGetTableBucketMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableBucketMetricsConfiguration{}, middleware.After)
 }
 
 func addOpGetTableBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -724,6 +792,10 @@ func addOpPutTableBucketEncryptionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpPutTableBucketMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTableBucketMaintenanceConfiguration{}, middleware.After)
+}
+
+func addOpPutTableBucketMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableBucketMetricsConfiguration{}, middleware.After)
 }
 
 func addOpPutTableBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -981,6 +1053,21 @@ func validateOpDeleteTableBucketInput(v *DeleteTableBucketInput) error {
 	}
 }
 
+func validateOpDeleteTableBucketMetricsConfigurationInput(v *DeleteTableBucketMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTableBucketMetricsConfigurationInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTableBucketPolicyInput(v *DeleteTableBucketPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1091,6 +1178,21 @@ func validateOpGetTableBucketMaintenanceConfigurationInput(v *GetTableBucketMain
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketMaintenanceConfigurationInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableBucketMetricsConfigurationInput(v *GetTableBucketMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketMetricsConfigurationInput"}
 	if v.TableBucketARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
 	}
@@ -1301,6 +1403,21 @@ func validateOpPutTableBucketMaintenanceConfigurationInput(v *PutTableBucketMain
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTableBucketMetricsConfigurationInput(v *PutTableBucketMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableBucketMetricsConfigurationInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

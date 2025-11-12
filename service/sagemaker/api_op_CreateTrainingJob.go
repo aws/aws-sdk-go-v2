@@ -118,18 +118,6 @@ type CreateTrainingJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Specifies a limit to how long a model training job can run. It also specifies
-	// how long a managed Spot training job has to complete. When the job reaches the
-	// time limit, SageMaker ends the training job. Use this API to cap model training
-	// costs.
-	//
-	// To stop a job, SageMaker sends the algorithm the SIGTERM signal, which delays
-	// job termination for 120 seconds. Algorithms can use this 120-second window to
-	// save the model artifacts, so the results of training are not lost.
-	//
-	// This member is required.
-	StoppingCondition *types.StoppingCondition
-
 	// The name of the training job. The name must be unique within an Amazon Web
 	// Services Region in an Amazon Web Services account.
 	//
@@ -285,6 +273,16 @@ type CreateTrainingJobInput struct {
 	// Contains information about attribute-based access control (ABAC) for the
 	// training job.
 	SessionChainingConfig *types.SessionChainingConfig
+
+	// Specifies a limit to how long a model training job can run. It also specifies
+	// how long a managed Spot training job has to complete. When the job reaches the
+	// time limit, SageMaker ends the training job. Use this API to cap model training
+	// costs.
+	//
+	// To stop a job, SageMaker sends the algorithm the SIGTERM signal, which delays
+	// job termination for 120 seconds. Algorithms can use this 120-second window to
+	// save the model artifacts, so the results of training are not lost.
+	StoppingCondition *types.StoppingCondition
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or

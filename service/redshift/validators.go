@@ -1330,6 +1330,26 @@ func (m *validateOpGetClusterCredentials) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetIdentityCenterAuthToken struct {
+}
+
+func (*validateOpGetIdentityCenterAuthToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIdentityCenterAuthToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIdentityCenterAuthTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIdentityCenterAuthTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetReservedNodeExchangeConfigurationOptions struct {
 }
 
@@ -2332,6 +2352,10 @@ func addOpFailoverPrimaryComputeValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetClusterCredentialsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetClusterCredentials{}, middleware.After)
+}
+
+func addOpGetIdentityCenterAuthTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIdentityCenterAuthToken{}, middleware.After)
 }
 
 func addOpGetReservedNodeExchangeConfigurationOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -4028,6 +4052,21 @@ func validateOpGetClusterCredentialsInput(v *GetClusterCredentialsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetClusterCredentialsInput"}
 	if v.DbUser == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbUser"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIdentityCenterAuthTokenInput(v *GetIdentityCenterAuthTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIdentityCenterAuthTokenInput"}
+	if v.ClusterIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

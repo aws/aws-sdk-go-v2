@@ -11646,9 +11646,6 @@ func validateModelPackageContainerDefinition(v *types.ModelPackageContainerDefin
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModelPackageContainerDefinition"}
-	if v.Image == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Image"))
-	}
 	if v.ModelDataSource != nil {
 		if err := validateModelDataSource(v.ModelDataSource); err != nil {
 			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
@@ -16735,9 +16732,6 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.StoppingCondition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

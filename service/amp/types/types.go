@@ -841,6 +841,7 @@ type ScraperSummary struct {
 // The following types satisfy this interface:
 //
 //	SourceMemberEksConfiguration
+//	SourceMemberVpcConfiguration
 type Source interface {
 	isSource()
 }
@@ -854,6 +855,18 @@ type SourceMemberEksConfiguration struct {
 
 func (*SourceMemberEksConfiguration) isSource() {}
 
+// The Amazon VPC configuration for the Prometheus collector when connecting to
+// Amazon MSK clusters. This configuration enables secure, private network
+// connectivity between the collector and your Amazon MSK cluster within your
+// Amazon VPC.
+type SourceMemberVpcConfiguration struct {
+	Value VpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceMemberVpcConfiguration) isSource() {}
+
 // Information about a field passed into a request that resulted in an exception.
 type ValidationExceptionField struct {
 
@@ -866,6 +879,29 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon VPC configuration that specifies the network settings for a
+// Prometheus collector to securely connect to Amazon MSK clusters. This
+// configuration includes the security groups and subnets that control network
+// access and placement for the collector.
+type VpcConfiguration struct {
+
+	// The security group IDs that control network access for the Prometheus
+	// collector. These security groups must allow the collector to communicate with
+	// your Amazon MSK cluster on the required ports.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The subnet IDs where the Prometheus collector will be deployed. The subnets
+	// must be in the same Amazon VPC as your Amazon MSK cluster and have network
+	// connectivity to the cluster.
+	//
+	// This member is required.
+	SubnetIds []string
 
 	noSmithyDocumentSerde
 }

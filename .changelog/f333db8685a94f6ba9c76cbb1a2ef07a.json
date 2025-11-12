@@ -1,0 +1,8 @@
+{
+    "id": "f333db86-85a9-4f6b-a9c7-6cbb1a2ef07a",
+    "type": "feature",
+    "description": "Added support of SQL statements creation, metadata model discovery and selection rules transformation.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

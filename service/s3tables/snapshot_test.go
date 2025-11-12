@@ -146,6 +146,18 @@ func TestCheckSnapshot_DeleteTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTableBucketMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTableBucketMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTableBucketMetricsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTableBucketPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTableBucketPolicy(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTableBucketMaintenanceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTableBucketMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTableBucketMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -367,6 +391,18 @@ func TestCheckSnapshot_PutTableBucketMaintenanceConfiguration(t *testing.T) {
 	_, err := svc.PutTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutTableBucketMaintenanceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTableBucketMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTableBucketMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -541,6 +577,18 @@ func TestUpdateSnapshot_DeleteTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTableBucketMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTableBucketMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTableBucketMetricsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTableBucketPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTableBucketPolicy(context.Background(), nil, func(o *Options) {
@@ -618,6 +666,18 @@ func TestUpdateSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTableBucketMaintenanceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTableBucketMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTableBucketMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -762,6 +822,18 @@ func TestUpdateSnapshot_PutTableBucketMaintenanceConfiguration(t *testing.T) {
 	_, err := svc.PutTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutTableBucketMaintenanceConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTableBucketMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTableBucketMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

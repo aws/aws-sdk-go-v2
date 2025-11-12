@@ -1837,6 +1837,7 @@ const (
 	ClusterInstanceTypeMlP5e48xlarge      ClusterInstanceType = "ml.p5e.48xlarge"
 	ClusterInstanceTypeMlP5en48xlarge     ClusterInstanceType = "ml.p5en.48xlarge"
 	ClusterInstanceTypeMlP6B20048xlarge   ClusterInstanceType = "ml.p6-b200.48xlarge"
+	ClusterInstanceTypeMlTrn23xlarge      ClusterInstanceType = "ml.trn2.3xlarge"
 	ClusterInstanceTypeMlTrn248xlarge     ClusterInstanceType = "ml.trn2.48xlarge"
 	ClusterInstanceTypeMlC6iLarge         ClusterInstanceType = "ml.c6i.large"
 	ClusterInstanceTypeMlC6iXlarge        ClusterInstanceType = "ml.c6i.xlarge"
@@ -1958,6 +1959,7 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.p5e.48xlarge",
 		"ml.p5en.48xlarge",
 		"ml.p6-b200.48xlarge",
+		"ml.trn2.3xlarge",
 		"ml.trn2.48xlarge",
 		"ml.c6i.large",
 		"ml.c6i.xlarge",

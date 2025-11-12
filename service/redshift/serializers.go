@@ -7014,6 +7014,76 @@ func (m *awsAwsquery_serializeOpGetClusterCredentialsWithIAM) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpGetIdentityCenterAuthToken struct {
+}
+
+func (*awsAwsquery_serializeOpGetIdentityCenterAuthToken) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetIdentityCenterAuthToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetIdentityCenterAuthTokenInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetIdentityCenterAuthToken")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentGetIdentityCenterAuthTokenInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpGetReservedNodeExchangeConfigurationOptions struct {
 }
 
@@ -9790,6 +9860,16 @@ func awsAwsquery_serializeDocumentAuthorizedTokenIssuerList(v []types.Authorized
 		if err := awsAwsquery_serializeDocumentAuthorizedTokenIssuer(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentClusterIdentifierList(v []string, value query.Value) error {
+	array := value.Array("ClusterIdentifier")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -13280,6 +13360,20 @@ func awsAwsquery_serializeOpDocumentGetClusterCredentialsWithIAMInput(v *GetClus
 	if v.DurationSeconds != nil {
 		objectKey := object.Key("DurationSeconds")
 		objectKey.Integer(*v.DurationSeconds)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentGetIdentityCenterAuthTokenInput(v *GetIdentityCenterAuthTokenInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIds != nil {
+		objectKey := object.Key("ClusterIds")
+		if err := awsAwsquery_serializeDocumentClusterIdentifierList(v.ClusterIds, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

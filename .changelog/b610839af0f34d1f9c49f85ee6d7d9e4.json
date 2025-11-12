@@ -1,0 +1,8 @@
+{
+    "id": "b610839a-f0f3-4d1f-9c49-f85ee6d7d9e4",
+    "type": "feature",
+    "description": "Adds complete AMI ancestry tracing from immediate parent through each preceding generation back to the root AMI",
+    "modules": [
+        "service/ec2"
+    ]
+}

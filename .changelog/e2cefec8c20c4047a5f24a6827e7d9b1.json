@@ -1,0 +1,8 @@
+{
+    "id": "e2cefec8-c20c-4047-a5f2-4a6827e7d9b1",
+    "type": "feature",
+    "description": "Add VPC source configuration support enabling Amazon Managed Service for Prometheus Collector to collect metrics from MSK clusters.",
+    "modules": [
+        "service/amp"
+    ]
+}

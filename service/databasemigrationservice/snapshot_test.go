@@ -98,6 +98,30 @@ func TestCheckSnapshot_BatchStartRecommendations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelMetadataModelConversion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelMetadataModelConversion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelMetadataModelConversion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CancelMetadataModelCreation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelMetadataModelCreation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelMetadataModelCreation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelReplicationTaskAssessmentRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelReplicationTaskAssessmentRun(context.Background(), nil, func(o *Options) {
@@ -674,6 +698,18 @@ func TestCheckSnapshot_DescribeInstanceProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeMetadataModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetadataModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMetadataModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeMetadataModelAssessments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeMetadataModelAssessments(context.Background(), nil, func(o *Options) {
@@ -686,11 +722,35 @@ func TestCheckSnapshot_DescribeMetadataModelAssessments(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeMetadataModelChildren(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetadataModelChildren(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMetadataModelChildren")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeMetadataModelConversions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeMetadataModelConversions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeMetadataModelConversions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeMetadataModelCreations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetadataModelCreations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMetadataModelCreations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -955,6 +1015,18 @@ func TestCheckSnapshot_ExportMetadataModelAssessment(t *testing.T) {
 	_, err := svc.ExportMetadataModelAssessment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ExportMetadataModelAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTargetSelectionRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTargetSelectionRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTargetSelectionRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1250,6 +1322,18 @@ func TestCheckSnapshot_StartMetadataModelConversion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartMetadataModelCreation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMetadataModelCreation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMetadataModelCreation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMetadataModelExportAsScript(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMetadataModelExportAsScript(context.Background(), nil, func(o *Options) {
@@ -1434,6 +1518,30 @@ func TestUpdateSnapshot_BatchStartRecommendations(t *testing.T) {
 	_, err := svc.BatchStartRecommendations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchStartRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelMetadataModelConversion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelMetadataModelConversion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelMetadataModelConversion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelMetadataModelCreation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelMetadataModelCreation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelMetadataModelCreation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2017,6 +2125,18 @@ func TestUpdateSnapshot_DescribeInstanceProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeMetadataModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetadataModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMetadataModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeMetadataModelAssessments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeMetadataModelAssessments(context.Background(), nil, func(o *Options) {
@@ -2029,11 +2149,35 @@ func TestUpdateSnapshot_DescribeMetadataModelAssessments(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeMetadataModelChildren(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetadataModelChildren(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMetadataModelChildren")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeMetadataModelConversions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeMetadataModelConversions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeMetadataModelConversions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMetadataModelCreations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetadataModelCreations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMetadataModelCreations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2298,6 +2442,18 @@ func TestUpdateSnapshot_ExportMetadataModelAssessment(t *testing.T) {
 	_, err := svc.ExportMetadataModelAssessment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ExportMetadataModelAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTargetSelectionRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTargetSelectionRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTargetSelectionRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2586,6 +2742,18 @@ func TestUpdateSnapshot_StartMetadataModelConversion(t *testing.T) {
 	_, err := svc.StartMetadataModelConversion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartMetadataModelConversion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMetadataModelCreation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMetadataModelCreation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMetadataModelCreation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1802,6 +1802,38 @@ type MariaDbDataProviderSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The properties of metadata model in JSON format. This object is a Union. Only
+// one member of this object can be specified or returned.
+//
+// The following types satisfy this interface:
+//
+//	MetadataModelPropertiesMemberStatementProperties
+type MetadataModelProperties interface {
+	isMetadataModelProperties()
+}
+
+// The properties of the statement.
+type MetadataModelPropertiesMemberStatementProperties struct {
+	Value StatementProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*MetadataModelPropertiesMemberStatementProperties) isMetadataModelProperties() {}
+
+// A reference to a metadata model, including its name and selection rules for
+// location identification.
+type MetadataModelReference struct {
+
+	// The name of the metadata model.
+	MetadataModelName *string
+
+	// The JSON string representing metadata model location.
+	SelectionRules *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines a Microsoft SQL Server data provider.
 type MicrosoftSqlServerDataProviderSettings struct {
 
@@ -5001,6 +5033,17 @@ type StartRecommendationsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The properties of the statement for metadata model creation.
+type StatementProperties struct {
+
+	// The SQL text of the statement.
+	//
+	// This member is required.
+	Definition *string
+
+	noSmithyDocumentSerde
+}
+
 // In response to a request by the DescribeReplicationSubnetGroups operation, this
 // object identifies a subnet by its given Availability Zone, subnet identifier,
 // and status.
@@ -5363,5 +5406,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDataProviderSettings() {}
-func (*UnknownUnionMember) isErrorDetails()         {}
+func (*UnknownUnionMember) isDataProviderSettings()    {}
+func (*UnknownUnionMember) isErrorDetails()            {}
+func (*UnknownUnionMember) isMetadataModelProperties() {}

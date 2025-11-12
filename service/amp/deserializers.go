@@ -9960,6 +9960,16 @@ loop:
 			uv = &types.SourceMemberEksConfiguration{Value: mv}
 			break loop
 
+		case "vpcConfiguration":
+			var mv types.VpcConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVpcConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SourceMemberVpcConfiguration{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -10283,6 +10293,47 @@ func awsRestjson1_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcConfiguration
+	if *v == nil {
+		sv = &types.VpcConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "securityGroupIds":
+			if err := awsRestjson1_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
+				return err
+			}
+
+		case "subnetIds":
+			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

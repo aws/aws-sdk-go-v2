@@ -708,7 +708,17 @@ type AuthenticationProfile struct {
 	// Administrator Guide.
 	//
 	// [Configure the session duration]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+	//
+	// Deprecated: PeriodicSessionDuration is deprecated. Use
+	// SessionInactivityDuration instead.
 	PeriodicSessionDuration *int32
+
+	// The period, in minutes, before an agent is automatically signed out of the
+	// contact center when they go inactive.
+	SessionInactivityDuration *int32
+
+	// Determines if automatic logout on user inactivity is enabled.
+	SessionInactivityHandlingEnabled *bool
 
 	noSmithyDocumentSerde
 }
