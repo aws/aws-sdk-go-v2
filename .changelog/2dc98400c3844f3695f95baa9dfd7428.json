@@ -2,6 +2,7 @@
     "id": "2dc98400-c384-4f36-95f9-5baa9dfd7428",
     "type": "bugfix",
     "description": "Reduce allocation overhead when the client doesn't have any HTTP interceptors configured.",
+    "collapse": true,
     "modules": [
         "internal/kitchensinktest",
         "internal/protocoltest/awsrestjson",

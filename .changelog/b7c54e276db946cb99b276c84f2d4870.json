@@ -2,6 +2,7 @@
     "id": "b7c54e27-6db9-46cb-99b2-76c84f2d4870",
     "type": "bugfix",
     "description": "Further reduce allocation overhead when the metrics system isn't in-use.",
+    "collapse": true,
     "modules": [
         "internal/kitchensinktest",
         "internal/protocoltest/awsrestjson",

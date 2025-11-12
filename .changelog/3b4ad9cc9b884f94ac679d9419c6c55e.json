@@ -2,6 +2,7 @@
     "id": "3b4ad9cc-9b88-4f94-ac67-9d9419c6c55e",
     "type": "bugfix",
     "description": "Remove blank trace spans towards the beginning of the request that added no additional information. This conveys a slight reduction in overall allocations.",
+    "collapse": true,
     "modules": [
         "internal/kitchensinktest",
         "internal/protocoltest/awsrestjson",
