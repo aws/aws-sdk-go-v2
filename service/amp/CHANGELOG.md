@@ -1,3 +1,10 @@
+# v1.42.0 (2025-11-12)
+
+* **Feature**: Add VPC source configuration support enabling Amazon Managed Service for Prometheus Collector to collect metrics from MSK clusters.
+* **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
+* **Bug Fix**: Reduce allocation overhead when the client doesn't have any HTTP interceptors configured.
+* **Bug Fix**: Remove blank trace spans towards the beginning of the request that added no additional information. This conveys a slight reduction in overall allocations.
+
 # v1.41.2 (2025-11-11)
 
 * **Bug Fix**: Return validation error if input region is not a valid host label.

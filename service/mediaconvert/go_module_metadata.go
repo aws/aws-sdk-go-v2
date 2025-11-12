@@ -3,4 +3,4 @@
 package mediaconvert
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.84.2"
+const goModuleVersion = "1.84.3"

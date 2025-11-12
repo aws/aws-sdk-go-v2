@@ -1,8 +1,0 @@
-{
-    "id": "05d8ee1d-867f-494e-8f05-e6f02f36c27c",
-    "type": "feature",
-    "description": "Updated Authentication Profile APIs to add support for automatic logout on user inactivity",
-    "modules": [
-        "service/connect"
-    ]
-}

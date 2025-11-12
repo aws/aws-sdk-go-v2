@@ -2,22 +2,22 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.39.6
-	github.com/aws/aws-sdk-go-v2/config v1.31.19
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.20.6
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.52.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.266.0
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.81.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.90.1
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.66.8
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.14
-	github.com/aws/aws-sdk-go-v2/service/sts v1.40.1
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.32.9
+	github.com/aws/aws-sdk-go-v2/config v1.31.20
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.20.7
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.52.6
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.267.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.81.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.90.2
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.66.9
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.15
+	github.com/aws/aws-sdk-go-v2/service/sts v1.40.2
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.32.10
 	github.com/aws/smithy-go v1.23.2
 )
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.3 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.18.23 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.18.24 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.13 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.13 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.13 // indirect
@@ -28,8 +28,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.13 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.13 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.13 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.30.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.30.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.7 // indirect
 )
 
 go 1.23

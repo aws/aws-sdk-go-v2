@@ -1,3 +1,29 @@
+# Release (2025-11-12)
+
+## General Highlights
+* **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
+* **Bug Fix**: Reduce allocation overhead when the client doesn't have any HTTP interceptors configured.
+* **Bug Fix**: Remove blank trace spans towards the beginning of the request that added no additional information. This conveys a slight reduction in overall allocations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.42.0](service/amp/CHANGELOG.md#v1420-2025-11-12)
+  * **Feature**: Add VPC source configuration support enabling Amazon Managed Service for Prometheus Collector to collect metrics from MSK clusters.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.145.0](service/connect/CHANGELOG.md#v11450-2025-11-12)
+  * **Feature**: Updated Authentication Profile APIs to add support for automatic logout on user inactivity
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.59.0](service/databasemigrationservice/CHANGELOG.md#v1590-2025-11-12)
+  * **Feature**: Added support of SQL statements creation, metadata model discovery and selection rules transformation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.267.0](service/ec2/CHANGELOG.md#v12670-2025-11-12)
+  * **Feature**: Adds complete AMI ancestry tracing from immediate parent through each preceding generation back to the root AMI
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.52.0](service/elasticloadbalancingv2/CHANGELOG.md#v1520-2025-11-12)
+  * **Feature**: This release expands ALB Authentication to support JWT verification and adds support for a new JWT validation action in listener rule.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.60.0](service/redshift/CHANGELOG.md#v1600-2025-11-12)
+  * **Feature**: Added GetIdentityCenterAuthToken API to retrieve encrypted authentication tokens for Identity Center integrated applications. This API enables programmatic access to secure Identity Center tokens with proper error handling and parameter validation across supported SDK languages.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.12.0](service/s3tables/CHANGELOG.md#v1120-2025-11-12)
+  * **Feature**: Adds support for request metrics metrics APIs for S3 Tables
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.222.0](service/sagemaker/CHANGELOG.md#v12220-2025-11-12)
+  * **Feature**: Add support for trn2.3xlarge instance type for SageMaker Hyperpod
+
 # Release (2025-11-11)
 
 ## General Highlights

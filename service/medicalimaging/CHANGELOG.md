@@ -1,3 +1,9 @@
+# v1.23.1 (2025-11-12)
+
+* **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
+* **Bug Fix**: Reduce allocation overhead when the client doesn't have any HTTP interceptors configured.
+* **Bug Fix**: Remove blank trace spans towards the beginning of the request that added no additional information. This conveys a slight reduction in overall allocations.
+
 # v1.23.0 (2025-11-11)
 
 * **Feature**: Added new fields in existing APIs.

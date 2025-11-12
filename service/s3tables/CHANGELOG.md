@@ -1,3 +1,10 @@
+# v1.12.0 (2025-11-12)
+
+* **Feature**: Adds support for request metrics metrics APIs for S3 Tables
+* **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
+* **Bug Fix**: Reduce allocation overhead when the client doesn't have any HTTP interceptors configured.
+* **Bug Fix**: Remove blank trace spans towards the beginning of the request that added no additional information. This conveys a slight reduction in overall allocations.
+
 # v1.11.1 (2025-11-11)
 
 * **Bug Fix**: Return validation error if input region is not a valid host label.

@@ -1,3 +1,10 @@
+# v1.267.0 (2025-11-12)
+
+* **Feature**: Adds complete AMI ancestry tracing from immediate parent through each preceding generation back to the root AMI
+* **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
+* **Bug Fix**: Reduce allocation overhead when the client doesn't have any HTTP interceptors configured.
+* **Bug Fix**: Remove blank trace spans towards the beginning of the request that added no additional information. This conveys a slight reduction in overall allocations.
+
 # v1.266.0 (2025-11-11)
 
 * **Feature**: AWS Site-to-Site VPN now supports VPN connections with up to 5 Gbps bandwidth per tunnel, a 4x improvement from existing limit of 1.25 Gbps.
