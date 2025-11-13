@@ -956,14 +956,14 @@
                 "MappingType": {
                     "target": "com.amazonaws.controlcatalog#MappingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of mapping relationship between the control and other entities. Indicates whether the mapping is to a framework or common control.</p>",
+                        "smithy.api#documentation": "<p>The type of mapping relationship between the control and other entities.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Mapping": {
                     "target": "com.amazonaws.controlcatalog#Mapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the mapping relationship, containing either framework or common control information.</p>",
+                        "smithy.api#documentation": "<p>The details of the mapping relationship, for example, containing framework, common control, or related control information.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1023,6 +1023,29 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.controlcatalog#ControlParameter"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlRelationType": {
+            "type": "enum",
+            "members": {
+                "COMPLEMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLEMENTARY"
+                    }
+                },
+                "ALTERNATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALTERNATIVE"
+                    }
+                },
+                "MUTUALLY_EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUTUALLY_EXCLUSIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.controlcatalog#ControlResource": {
@@ -2016,6 +2039,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The common control mapping details when the mapping type relates to a common control.</p>"
                     }
+                },
+                "RelatedControl": {
+                    "target": "com.amazonaws.controlcatalog#RelatedControlMappingDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about controls that are related to the specified control.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2035,6 +2064,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "COMMON_CONTROL"
+                    }
+                },
+                "RELATED_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELATED_CONTROL"
                     }
                 }
             }
@@ -2251,6 +2286,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control is available for deployment. For more information about scope, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html\">Global services</a>.</p> <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#RelatedControlMappingDetails": {
+            "type": "structure",
+            "members": {
+                "ControlArn": {
+                    "target": "com.amazonaws.controlcatalog#ControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a control.</p>"
+                    }
+                },
+                "RelationType": {
+                    "target": "com.amazonaws.controlcatalog#ControlRelationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an enumerated value that represents the relationship between two or more controls.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes a control's relationship status with other controls.</p>"
             }
         },
         "com.amazonaws.controlcatalog#ResourceNotFoundException": {

@@ -7799,6 +7799,18 @@
                     "traits": {
                         "smithy.api#enumValue": "GENEVE"
                     }
+                },
+                "QUIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC"
+                    }
+                },
+                "TCP_QUIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP_QUIC"
+                    }
                 }
             }
         },
@@ -7843,6 +7855,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elasticloadbalancingv2#QueryStringKeyValuePair"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#QuicServerId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#RedirectActionConfig": {
@@ -9340,6 +9361,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#ZoneName",
                     "traits": {
                         "smithy.api#documentation": "<p>An Availability Zone or <code>all</code>. This determines whether the target receives \n      traffic from the load balancer nodes in the specified Availability Zone or from all enabled \n      Availability Zones for the load balancer.</p>\n         <p>For Application Load Balancer target groups, the specified Availability Zone value is only applicable \n      when cross-zone load balancing is off. Otherwise the parameter is ignored and treated \n      as <code>all</code>.</p>\n         <p>This parameter is not supported if the target type of the target group is\n      <code>instance</code> or <code>alb</code>.</p>\n         <p>If the target type is <code>ip</code> and the IP address is in a subnet of the VPC for the target group, \n      the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside \n      the VPC, this parameter is required.</p>\n         <p>For Application Load Balancer target groups with cross-zone load balancing off, if the target type \n      is <code>ip</code> and the IP address is outside of the VPC for the target group, this should be an \n      Availability Zone inside the VPC for the target group.</p>\n         <p>If the target type is <code>lambda</code>, this parameter is optional and the only\n      supported value is <code>all</code>.</p>"
+                    }
+                },
+                "QuicServerId": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#QuicServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server ID for the targets. This value is required if the protocol is \n      <code>QUIC</code> or <code>TCP_QUIC</code> and can't be used with other protocols.</p>\n         <p>The ID consists of the <code>0x</code> prefix followed by 16 hexadecimal characters. \n      Any letters must be lowercase. The value must be unique at the listener level. You can't \n      modify the server ID for a registered target. You must deregister the target and then \n      provide a new server ID when you register the target again.</p>"
                     }
                 }
             },

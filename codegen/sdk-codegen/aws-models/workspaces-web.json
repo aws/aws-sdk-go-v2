@@ -1437,6 +1437,19 @@
                 ]
             }
         },
+        "com.amazonaws.workspacesweb#BlockedCategories": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#Category"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.workspacesweb#BrowserPolicy": {
             "type": "string",
             "traits": {
@@ -1482,6 +1495,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The additional encryption context of the browser settings.</p>"
                     }
+                },
+                "webContentFilteringPolicy": {
+                    "target": "com.amazonaws.workspacesweb#WebContentFilteringPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1516,6 +1535,9 @@
                 },
                 "associatedPortalArns": {
                     "target": "com.amazonaws.workspacesweb#ArnList"
+                },
+                "webContentFilteringPolicy": {
+                    "target": "com.amazonaws.workspacesweb#WebContentFilteringPolicy"
                 }
             },
             "create": {
@@ -1582,6 +1604,173 @@
                 },
                 "smithy.api#pattern": "^[_\\-\\d\\w]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#Category": {
+            "type": "enum",
+            "members": {
+                "CULTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cults"
+                    }
+                },
+                "GAMBLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gambling"
+                    }
+                },
+                "NUDITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Nudity"
+                    }
+                },
+                "PORNOGRAPHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pornography"
+                    }
+                },
+                "SEX_EDUCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SexEducation"
+                    }
+                },
+                "TASTELESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tasteless"
+                    }
+                },
+                "VIOLENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Violence"
+                    }
+                },
+                "DOWNLOAD_SITES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DownloadSites"
+                    }
+                },
+                "IMAGE_SHARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImageSharing"
+                    }
+                },
+                "PEER_TO_PEER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PeerToPeer"
+                    }
+                },
+                "STREAMING_MEDIA_AND_DOWNLOADS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StreamingMediaAndDownloads"
+                    }
+                },
+                "GENERATIVE_AI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GenerativeAI"
+                    }
+                },
+                "CRIMINAL_ACTIVITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CriminalActivity"
+                    }
+                },
+                "HACKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hacking"
+                    }
+                },
+                "HATE_AND_INTOLERANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HateAndIntolerance"
+                    }
+                },
+                "ILLEGAL_DRUG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IllegalDrug"
+                    }
+                },
+                "ILLEGAL_SOFTWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IllegalSoftware"
+                    }
+                },
+                "SCHOOL_CHEATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SchoolCheating"
+                    }
+                },
+                "SELF_HARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SelfHarm"
+                    }
+                },
+                "WEAPONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Weapons"
+                    }
+                },
+                "CHAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Chat"
+                    }
+                },
+                "GAMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Games"
+                    }
+                },
+                "INSTANT_MESSAGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstantMessaging"
+                    }
+                },
+                "PROFESSIONAL_NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProfessionalNetwork"
+                    }
+                },
+                "SOCIAL_NETWORKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SocialNetworking"
+                    }
+                },
+                "WEB_BASED_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WebBasedEmail"
+                    }
+                },
+                "PARKED_DOMAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ParkedDomains"
+                    }
+                }
             }
         },
         "com.amazonaws.workspacesweb#Certificate": {
@@ -1914,8 +2103,7 @@
                 "browserPolicy": {
                     "target": "com.amazonaws.workspacesweb#BrowserPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string containing Chrome Enterprise policies that will be applied to all\n         streaming sessions.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A JSON string containing Chrome Enterprise policies that will be applied to all\n         streaming sessions.</p>"
                     }
                 },
                 "clientToken": {
@@ -1923,6 +2111,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request.</p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.\n      </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "webContentFilteringPolicy": {
+                    "target": "com.amazonaws.workspacesweb#WebContentFilteringPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>"
                     }
                 }
             },
@@ -4428,6 +4622,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SessionEnd"
+                    }
+                },
+                "URL_BLOCK_BY_CONTENT_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UrlBlockByContentFilter"
                     }
                 }
             }
@@ -9060,6 +9260,12 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "webContentFilteringPolicy": {
+                    "target": "com.amazonaws.workspacesweb#WebContentFilteringPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10014,6 +10220,25 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#UrlPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#UrlPatternList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#UrlPattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.workspacesweb#UserAccessLoggingSettings": {
             "type": "structure",
             "members": {
@@ -10485,6 +10710,32 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^vpc-[0-9a-z]*$"
+            }
+        },
+        "com.amazonaws.workspacesweb#WebContentFilteringPolicy": {
+            "type": "structure",
+            "members": {
+                "blockedCategories": {
+                    "target": "com.amazonaws.workspacesweb#BlockedCategories",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Categories of websites that are blocked on the end user’s browsers.</p>"
+                    }
+                },
+                "allowedUrls": {
+                    "target": "com.amazonaws.workspacesweb#UrlPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URLs and domains that are always accessible to end users.</p>"
+                    }
+                },
+                "blockedUrls": {
+                    "target": "com.amazonaws.workspacesweb#UrlPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URLs and domains that end users cannot access.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>"
             }
         },
         "com.amazonaws.workspacesweb#keyArn": {

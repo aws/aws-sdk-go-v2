@@ -206,7 +206,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates a public third-party extension, such as a resource or module, to make it\n      available for use in stack templates in your current account and Region. It can also create\n      CloudFormation Hooks, which allow you to evaluate resource configurations before CloudFormation\n      provisions them. Hooks integrate with both CloudFormation and Cloud Control API operations.</p>\n         <p>After you activate an extension, you can use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to set specific properties for the extension.</p>\n         <p>To see which extensions have been activated, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html\">ListTypes</a>. To see\n      configuration details for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public-activate-extension.html\">Activate a\n        third-party public extension in your account</a> in the\n        <i>CloudFormation User Guide</i>. For information about creating Hooks, see the\n        <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation\n        Hooks User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Activates a public third-party extension, such as a resource or module, to make it\n      available for use in stack templates in your current account and Region. It can also create\n      CloudFormation Hooks, which allow you to evaluate resource configurations before CloudFormation\n      provisions them. Hooks integrate with both CloudFormation and Cloud Control API operations.</p>\n         <p>After you activate an extension, you can use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to set specific properties for the extension.</p>\n         <p>To see which extensions have been activated, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html\">ListTypes</a>. To see\n      configuration details for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public-activate-extension.html\">Activate a\n        third-party public extension in your account</a> in the\n        <i>CloudFormation User Guide</i>. For information about creating Hooks, see the\n        <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation Hooks User Guide</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -322,6 +322,132 @@
                 "smithy.api#documentation": "<p>The resource with the name requested already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#Annotation": {
+            "type": "structure",
+            "members": {
+                "AnnotationName": {
+                    "target": "com.amazonaws.cloudformation#AnnotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the evaluation logic that was used when invoking the Hook. For\n   Control Tower, this is the control ID. For Guard, this is the rule ID. For Lambda and custom\n   Hooks, this is a user-defined identifier.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#AnnotationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Hook invocation from the downstream service.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.cloudformation#RemediationMessageStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The explanation for the specific status assigned to this Hook invocation. For\n   example, \"Bucket does not block public access\".</p>"
+                    }
+                },
+                "RemediationMessage": {
+                    "target": "com.amazonaws.cloudformation#RemediationMessageRemediationMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Suggests what to change if your Hook returns a <code>FAILED</code> status. For\n   example, \"Block public access to the bucket\".</p>"
+                    }
+                },
+                "RemediationLink": {
+                    "target": "com.amazonaws.cloudformation#AnnotationRemediationLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL that you can access for additional remediation guidance.</p>"
+                    }
+                },
+                "SeverityLevel": {
+                    "target": "com.amazonaws.cloudformation#AnnotationSeverityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative risk associated with any violations of this type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>Annotation</code> data type.</p>\n         <p>A <code>GetHookResult</code> call returns detailed information and remediation guidance from Control Tower,\n   Guard, Lambda, or custom Hooks for a Hook invocation result.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#AnnotationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#Annotation"
+            }
+        },
+        "com.amazonaws.cloudformation#AnnotationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#AnnotationRemediationLink": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5120
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#AnnotationSeverityLevel": {
+            "type": "enum",
+            "members": {
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMATIONAL"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRITICAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#AnnotationStatus": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudformation#Arn": {
@@ -549,7 +675,7 @@
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<note>\n            <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response that\n        describes all resources in the account.</p>\n            <p>The IAM policy below can be added to IAM policies when you want to limit\n        resource-level permissions and avoid returning a response when no parameter is sent in the\n        request:</p>\n            <p>\n               <code>{ \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Deny\", \"Action\":\n          \"cloudformation:DescribeStacks\", \"NotResource\": \"arn:aws:cloudformation:*:*:stack/*/*\" }]\n          }</code>\n            </p>\n         </note>\n         <p>The name or the unique stack ID that's associated with the stack.</p>",
+                        "smithy.api#documentation": "<note>\n            <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response that\n        describes all resources in the account.</p>\n            <p>The IAM policy below can be added to IAM policies when you want to limit\n        resource-level permissions and avoid returning a response when no parameter is sent in the\n        request:</p>\n            <p>\n               <code>{ \"Version\": \"2012-10-17\",\t\t \t \t  \"Statement\": [{ \"Effect\": \"Deny\",\n          \"Action\": \"cloudformation:DescribeStacks\", \"NotResource\":\n          \"arn:aws:cloudformation:*:*:stack/*/*\" }] }</code>\n            </p>\n         </note>\n         <p>The name or the unique stack ID that's associated with the stack.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -766,7 +892,7 @@
                 "TargetType": {
                     "target": "com.amazonaws.cloudformation#HookTargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>"
+                        "smithy.api#documentation": "<p>The Hook target type.</p>"
                     }
                 },
                 "ResourceTargetDetails": {
@@ -1237,6 +1363,9 @@
                     "target": "com.amazonaws.cloudformation#GetGeneratedTemplate"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#GetHookResult"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#GetStackPolicy"
                 },
                 {
@@ -1378,7 +1507,7 @@
                     "name": "cloudformation"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>CloudFormation</fullname>\n         <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments predictably and\n   repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store,\n   Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective\n   applications without creating or configuring the underlying Amazon Web Services infrastructure.</p>\n         <p>With CloudFormation, you declare all your resources and dependencies in a template file. The\n   template defines a collection of resources as a single unit called a stack. CloudFormation creates\n   and deletes all member resources of the stack together and manages all dependencies between the\n   resources for you.</p>\n         <p>For more information about CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation product page</a>.</p>\n         <p>CloudFormation makes use of other Amazon Web Services products. If you need additional technical information\n   about a specific Amazon Web Services product, you can find the product's technical documentation at <a href=\"https://docs.aws.amazon.com/\">docs.aws.amazon.com</a>.</p>",
+                "smithy.api#documentation": "<fullname>CloudFormation</fullname>\n         <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments predictably and\n      repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store,\n      Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective\n      applications without creating or configuring the underlying Amazon Web Services infrastructure.</p>\n         <p>With CloudFormation, you declare all your resources and dependencies in a template file. The\n      template defines a collection of resources as a single unit called a stack. CloudFormation creates\n      and deletes all member resources of the stack together and manages all dependencies between\n      the resources for you.</p>\n         <p>For more information about CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation product page</a>.</p>\n         <p>CloudFormation makes use of other Amazon Web Services products. If you need additional technical information\n      about a specific Amazon Web Services product, you can find the product's technical documentation at <a href=\"https://docs.aws.amazon.com/\">docs.aws.amazon.com</a>.</p>",
                 "smithy.api#title": "AWS CloudFormation",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
@@ -2509,19 +2638,19 @@
                 "TemplateBody": {
                     "target": "com.amazonaws.cloudformation#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the body of the revised template, with a minimum length of 1\n      byte and a maximum length of 51,200 bytes. CloudFormation generates the change set by comparing\n      this template with the template of the stack that you specified.</p>\n         <p>Conditional: You must specify only <code>TemplateBody</code> or\n      <code>TemplateURL</code>.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the body of the revised template, with a minimum length of 1\n      byte and a maximum length of 51,200 bytes. CloudFormation generates the change set by comparing\n      this template with the template of the stack that you specified.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n        <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n        <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
                     }
                 },
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the file that contains the revised template. The URL must point to a template\n      (max size: 1 MB) that's located in an Amazon S3 bucket or a Systems Manager document. CloudFormation\n      generates the change set by comparing this template with the stack that you specified. The\n      location for an Amazon S3 bucket must start with <code>https://</code>. URLs from S3 static\n      websites are not supported.</p>\n         <p>Conditional: You must specify only <code>TemplateBody</code> or\n      <code>TemplateURL</code>.</p>"
+                        "smithy.api#documentation": "<p>The URL of the file that contains the revised template. The URL must point to a template\n      (max size: 1 MB) that's located in an Amazon S3 bucket or a Systems Manager document. CloudFormation\n      generates the change set by comparing this template with the stack that you specified. The\n      location for an Amazon S3 bucket must start with <code>https://</code>. URLs from S3 static\n      websites are not supported.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n        <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n        <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
                     }
                 },
                 "UsePreviousTemplate": {
                     "target": "com.amazonaws.cloudformation#UsePreviousTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to reuse the template that's associated with the stack to create the change\n      set.</p>"
+                        "smithy.api#documentation": "<p>Whether to reuse the template that's associated with the stack to create the change\n      set.</p>\n         <p>When using templates with the <code>AWS::LanguageExtensions</code> transform, provide the\n      template instead of using <code>UsePreviousTemplate</code> to ensure new parameter values and\n      Systems Manager parameter updates are applied correctly. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html\">AWS::LanguageExtensions transform</a>.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n        <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n        <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
                     }
                 },
                 "Parameters": {
@@ -2533,13 +2662,13 @@
                 "Capabilities": {
                     "target": "com.amazonaws.cloudformation#Capabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>In some cases, you must explicitly acknowledge that your stack template contains certain\n      capabilities in order for CloudFormation to create the stack.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>\n               </p>\n               <p>Some stack templates might include resources that can affect permissions in your\n          Amazon Web Services account; for example, by creating new IAM users. For those stacks, you must\n          explicitly acknowledge this by specifying one of these capabilities.</p>\n               <p>The following IAM resources require you to specify either the\n            <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>\n               <ul>\n                  <li>\n                     <p>If you have IAM resources, you can specify either capability.</p>\n                  </li>\n                  <li>\n                     <p>If you have IAM resources with custom names, you <i>must</i>\n              specify <code>CAPABILITY_NAMED_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>If you don't specify either of these capabilities, CloudFormation returns an\n                <code>InsufficientCapabilities</code> error.</p>\n                  </li>\n               </ul>\n               <p>If your stack template contains these resources, we suggest that you review all\n          permissions associated with them and edit their permissions if necessary.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html\">\n                AWS::IAM::AccessKey</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html\">\n                AWS::IAM::Group</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html\"> AWS::IAM::ManagedPolicy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html\">\n                AWS::IAM::Policy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html\">\n                AWS::IAM::Role</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html\">\n                AWS::IAM::User</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html\">AWS::IAM::UserToGroupAddition</a>\n                     </p>\n                  </li>\n               </ul>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities\">Acknowledging IAM resources in CloudFormation templates</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPABILITY_AUTO_EXPAND</code>\n               </p>\n               <p>Some template contain macros. Macros perform custom processing on templates; this can\n          include simple actions like find-and-replace operations, all the way to extensive\n          transformations of entire templates. Because of this, users typically create a change set\n          from the processed template, so that they can review the changes resulting from the macros\n          before actually creating the stack. If your stack template contains one or more macros,\n          and you choose to create a stack directly from the processed template, without first\n          reviewing the resulting changes in a change set, you must acknowledge this capability.\n          This includes the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html\">AWS::Include</a>\n          and <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html\">AWS::Serverless</a> transforms, which are macros hosted by CloudFormation.</p>\n               <note>\n                  <p>This capacity doesn't apply to creating change sets, and specifying it when creating\n            change sets has no effect.</p>\n                  <p>If you want to create a stack from a stack template that contains macros\n              <i>and</i> nested stacks, you must create or update the stack directly\n            from the template using the <a>CreateStack</a> or <a>UpdateStack</a> action, and specifying this capability.</p>\n               </note>\n               <p>For more information about macros, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html\">Perform custom processing\n            on CloudFormation templates with template macros</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>In some cases, you must explicitly acknowledge that your stack template contains certain\n      capabilities in order for CloudFormation to create the stack.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>\n               </p>\n               <p>Some stack templates might include resources that can affect permissions in your\n          Amazon Web Services account, for example, by creating new IAM users. For those stacks, you must\n          explicitly acknowledge this by specifying one of these capabilities.</p>\n               <p>The following IAM resources require you to specify either the\n            <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>\n               <ul>\n                  <li>\n                     <p>If you have IAM resources, you can specify either capability.</p>\n                  </li>\n                  <li>\n                     <p>If you have IAM resources with custom names, you <i>must</i>\n              specify <code>CAPABILITY_NAMED_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>If you don't specify either of these capabilities, CloudFormation returns an\n                <code>InsufficientCapabilities</code> error.</p>\n                  </li>\n               </ul>\n               <p>If your stack template contains these resources, we suggest that you review all\n          permissions associated with them and edit their permissions if necessary.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html\">\n                AWS::IAM::AccessKey</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html\">\n                AWS::IAM::Group</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html\"> AWS::IAM::ManagedPolicy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html\">\n                AWS::IAM::Policy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html\">\n                AWS::IAM::Role</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html\">\n                AWS::IAM::User</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html\">AWS::IAM::UserToGroupAddition</a>\n                     </p>\n                  </li>\n               </ul>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities\">Acknowledging IAM resources in CloudFormation templates</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPABILITY_AUTO_EXPAND</code>\n               </p>\n               <p>Some template contain macros. Macros perform custom processing on templates; this can\n          include simple actions like find-and-replace operations, all the way to extensive\n          transformations of entire templates. Because of this, users typically create a change set\n          from the processed template, so that they can review the changes resulting from the macros\n          before actually creating the stack. If your stack template contains one or more macros,\n          and you choose to create a stack directly from the processed template, without first\n          reviewing the resulting changes in a change set, you must acknowledge this capability.\n          This includes the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html\">AWS::Include</a>\n          and <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html\">AWS::Serverless</a> transforms, which are macros hosted by CloudFormation.</p>\n               <note>\n                  <p>This capacity doesn't apply to creating change sets, and specifying it when creating\n            change sets has no effect.</p>\n                  <p>If you want to create a stack from a stack template that contains macros\n              <i>and</i> nested stacks, you must create or update the stack directly\n            from the template using the <a>CreateStack</a> or <a>UpdateStack</a> action, and specifying this capability.</p>\n               </note>\n               <p>For more information about macros, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html\">Perform custom processing\n            on CloudFormation templates with template macros</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
                     }
                 },
                 "ResourceTypes": {
                     "target": "com.amazonaws.cloudformation#ResourceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The template resource types that you have permissions to work with if you execute this\n      change set, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or\n        <code>Custom::MyCustomInstance</code>.</p>\n         <p>If the list of resource types doesn't include a resource type that you're updating, the\n      stack update fails. By default, CloudFormation grants permissions to all resource types. IAM\n      uses this parameter for condition keys in IAM policies for CloudFormation. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html\">Control access with\n        Identity and Access Management</a> in the <i>CloudFormation User Guide</i>.</p>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>\n      or <code>Custom::MyCustomInstance</code>.</p>\n         <p>If the list of resource types doesn't include a resource type that you're updating, the\n      stack update fails. By default, CloudFormation grants permissions to all resource types. IAM\n      uses this parameter for condition keys in IAM policies for CloudFormation. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html\">Control CloudFormation\n        access with Identity and Access Management</a> in the <i>CloudFormation User Guide</i>.</p>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
                     }
                 },
                 "RoleARN": {
@@ -2844,7 +2973,7 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.cloudformation#ResourceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The template resource types that you have permissions to work with for this create stack\n      action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or\n        <code>Custom::MyCustomInstance</code>. Use the following syntax to describe template\n      resource types: <code>AWS::*</code> (for all Amazon Web Services resources), <code>Custom::*</code> (for all\n      custom resources), <code>Custom::<i>logical_ID</i>\n            </code> (for a specific custom resource),\n        <code>AWS::<i>service_name</i>::*</code> (for all resources of a particular\n      Amazon Web Services service), and\n          <code>AWS::<i>service_name</i>::<i>resource_logical_ID</i>\n            </code> (for a specific Amazon Web Services resource).</p>\n         <p>If the list of resource types doesn't include a resource that you're creating, the stack\n      creation fails. By default, CloudFormation grants permissions to all resource types. IAM uses\n      this parameter for CloudFormation-specific condition keys in IAM policies. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html\">Control access with\n        Identity and Access Management</a>.</p>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>\n      or <code>Custom::MyCustomInstance</code>.</p>\n         <p>If the list of resource types doesn't include a resource that you're creating, the stack\n      creation fails. By default, CloudFormation grants permissions to all resource types. IAM uses\n      this parameter for CloudFormation-specific condition keys in IAM policies. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html\">Control CloudFormation\n        access with Identity and Access Management</a>.</p>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
                     }
                 },
                 "RoleARN": {
@@ -3789,7 +3918,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of limits that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -3887,7 +4016,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns hook-related information for the change set and a list of changes that CloudFormation\n      makes when you run the change set.</p>"
+                "smithy.api#documentation": "<p>Returns Hook-related information for the change set and a list of changes that\n      CloudFormation makes when you run the change set.</p>"
             }
         },
         "com.amazonaws.cloudformation#DescribeChangeSetHooksInput": {
@@ -3910,7 +4039,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string, provided by the <code>DescribeChangeSetHooks</code> response output, that\n      identifies the next page of information that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "LogicalResourceId": {
@@ -3948,7 +4077,7 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#ChangeSetHooksStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the status of the change set hook.</p>"
+                        "smithy.api#documentation": "<p>Provides the status of the change set Hook.</p>"
                     }
                 },
                 "NextToken": {
@@ -3994,7 +4123,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (provided by the <a>DescribeChangeSet</a> response output) that\n      identifies the next page of information that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "IncludePropertyValues": {
@@ -4573,13 +4702,15 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the unique stack ID that's associated with the stack, which aren't always\n      interchangeable:</p>\n         <ul>\n            <li>\n               <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p>\n            </li>\n            <li>\n               <p>Deleted stacks: You must specify the unique stack ID.</p>\n            </li>\n         </ul>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or the unique stack ID that's associated with the stack, which aren't always\n      interchangeable:</p>\n         <ul>\n            <li>\n               <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p>\n            </li>\n            <li>\n               <p>Deleted stacks: You must specify the unique stack ID.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of events that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -4892,7 +5023,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of stack resource drift results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -5604,13 +5735,13 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackName",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response\n        that describes all resources in the account, which can impact performance. This requires\n          <code>ListStacks</code> and <code>DescribeStacks</code> permissions.</p>\n            <p>Consider using the <a>ListStacks</a> API if you're not passing a parameter to\n          <code>StackName</code>.</p>\n            <p>The IAM policy below can be added to IAM policies when you want to limit\n        resource-level permissions and avoid returning a response when no parameter is sent in the\n        request:</p>\n            <p>{ \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Deny\", \"Action\":\n        \"cloudformation:DescribeStacks\", \"NotResource\": \"arn:aws:cloudformation:*:*:stack/*/*\" }]\n        }</p>\n         </note>\n         <p>The name or the unique stack ID that's associated with the stack, which aren't always\n      interchangeable:</p>\n         <ul>\n            <li>\n               <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p>\n            </li>\n            <li>\n               <p>Deleted stacks: You must specify the unique stack ID.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<note>\n            <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response\n        that describes all resources in the account, which can impact performance. This requires\n          <code>ListStacks</code> and <code>DescribeStacks</code> permissions.</p>\n            <p>Consider using the <a>ListStacks</a> API if you're not passing a parameter to\n          <code>StackName</code>.</p>\n            <p>The IAM policy below can be added to IAM policies when you want to limit\n        resource-level permissions and avoid returning a response when no parameter is sent in the\n        request:</p>\n            <p>{ \"Version\": \"2012-10-17\",\t\t \t \t  \"Statement\": [{ \"Effect\": \"Deny\", \"Action\":\n        \"cloudformation:DescribeStacks\", \"NotResource\": \"arn:aws:cloudformation:*:*:stack/*/*\" }]\n        }</p>\n         </note>\n         <p>The name or the unique stack ID that's associated with the stack, which aren't always\n      interchangeable:</p>\n         <ul>\n            <li>\n               <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p>\n            </li>\n            <li>\n               <p>Deleted stacks: You must specify the unique stack ID.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of stacks that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -5759,7 +5890,7 @@
                 "Schema": {
                     "target": "com.amazonaws.cloudformation#TypeSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schema that defines the extension.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource type\n        schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i> and the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation\n        Hooks User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>The schema that defines the extension.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource type\n        schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i> and the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation Hooks User Guide</a>.</p>"
                     }
                 },
                 "ProvisioningType": {
@@ -6759,6 +6890,123 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudformation#GetHookResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#GetHookResultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#GetHookResultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#HookResultNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information and remediation guidance for a Hook invocation\n      result.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#GetHookResultInput": {
+            "type": "structure",
+            "members": {
+                "HookResultId": {
+                    "target": "com.amazonaws.cloudformation#HookInvocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the Hook invocation result that you want details about.\n      You can get the ID from the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListHookResults.html\">ListHookResults</a>\n      operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#GetHookResultOutput": {
+            "type": "structure",
+            "members": {
+                "HookResultId": {
+                    "target": "com.amazonaws.cloudformation#HookInvocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Hook result.</p>"
+                    }
+                },
+                "InvocationPoint": {
+                    "target": "com.amazonaws.cloudformation#HookInvocationPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific point in the provisioning process where the Hook is invoked.</p>"
+                    }
+                },
+                "FailureMode": {
+                    "target": "com.amazonaws.cloudformation#HookFailureMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure mode of the invocation.</p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#HookTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Hook that was invoked.</p>"
+                    }
+                },
+                "OriginalTypeName": {
+                    "target": "com.amazonaws.cloudformation#HookTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original public type name of the Hook when an alias is used.</p>\n         <p>For example, if you activate <code>AWS::Hooks::GuardHook</code> with alias\n      <code>MyCompany::Custom::GuardHook</code>, then <code>TypeName</code> will be\n      <code>MyCompany::Custom::GuardHook</code> and <code>OriginalTypeName</code> will be\n      <code>AWS::Hooks::GuardHook</code>. </p>"
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudformation#HookTypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the Hook that was invoked.</p>"
+                    }
+                },
+                "TypeConfigurationVersionId": {
+                    "target": "com.amazonaws.cloudformation#HookTypeConfigurationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the Hook configuration data that was used during\n      invocation.</p>"
+                    }
+                },
+                "TypeArn": {
+                    "target": "com.amazonaws.cloudformation#HookTypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Hook.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#HookStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Hook invocation. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HOOK_IN_PROGRESS</code>: The Hook is currently running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed validation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_FAILED</code>: The Hook encountered an error during execution.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "HookStatusReason": {
+                    "target": "com.amazonaws.cloudformation#HookStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides additional details about the Hook invocation status.</p>"
+                    }
+                },
+                "InvokedAt": {
+                    "target": "com.amazonaws.cloudformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Hook was invoked.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.cloudformation#HookTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the target of the Hook invocation.</p>"
+                    }
+                },
+                "Annotations": {
+                    "target": "com.amazonaws.cloudformation#AnnotationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects with additional information and guidance that can help you resolve a\n      failed Hook invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudformation#GetStackPolicy": {
             "type": "operation",
             "input": {
@@ -6794,7 +7042,7 @@
                 "StackPolicyBody": {
                     "target": "com.amazonaws.cloudformation#StackPolicyBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>Structure that contains the stack policy body. (For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html\">Prevent updates to stack resources</a> in the\n      <i>CloudFormation User Guide</i>.)</p>"
+                        "smithy.api#documentation": "<p>Structure that contains the stack policy body. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html\">Prevent updates to stack resources</a> in the\n      <i>CloudFormation User Guide</i>.</p>"
                     }
                 }
             },
@@ -7276,12 +7524,12 @@
                 "HookExecutionTarget": {
                     "target": "com.amazonaws.cloudformation#HookResultId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the target stack or request token of the Cloud Control API operation.</p>\n         <p>Only shown in responses when the request does not specify <code>TargetType</code> and\n    <code>TargetId</code> filters.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target stack or request token of the Cloud Control API operation.</p>\n         <p>Only shown in responses when the request does not specify <code>TargetType</code> and\n    <code>TargetId</code> filters.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a Hook invocation, its status, and the reason for its status.</p>"
+                "smithy.api#documentation": "<p>A <code>ListHookResults</code> call returns a summary of a Hook invocation.</p>"
             }
         },
         "com.amazonaws.cloudformation#HookStatus": {
@@ -7320,6 +7568,85 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.cloudformation#HookTarget": {
+            "type": "structure",
+            "members": {
+                "TargetType": {
+                    "target": "com.amazonaws.cloudformation#HookTargetType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The target type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetTypeName": {
+                    "target": "com.amazonaws.cloudformation#HookTargetTypeName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The target name, for example, <code>AWS::S3::Bucket</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.cloudformation#HookTargetId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the Hook invocation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.cloudformation#HookTargetAction",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The action that invoked the Hook.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>HookTarget</code> data type.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#HookTargetAction": {
+            "type": "enum",
+            "members": {
+                "CREATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE"
+                    }
+                },
+                "UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#HookTargetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^_]*$"
             }
         },
         "com.amazonaws.cloudformation#HookTargetType": {
@@ -7711,7 +8038,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (provided by the <a>ListChangeSets</a> response output) that\n      identifies the next page of change sets that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -7764,7 +8091,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (provided by the <a>ListExports</a> response output) that identifies\n      the next page of exported output values that you asked to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -7816,7 +8143,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -7864,7 +8191,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns summaries of invoked Hooks. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html\">View invocation\n        summaries for CloudFormation Hooks</a> in the <i>CloudFormation Hooks User Guide</i>.</p>\n         <p>This operation supports the following parameter combinations:</p>\n         <ul>\n            <li>\n               <p>No parameters: Returns all Hook invocation summaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> only: Returns summaries for a specific Hook.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> and <code>Status</code>: Returns summaries for a specific\n          Hook filtered by status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TargetId</code> and <code>TargetType</code>: Returns summaries for a specific\n          Hook invocation target.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns summaries of invoked Hooks. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html\">View invocation\n        summaries for CloudFormation Hooks</a> in the <i>CloudFormation Hooks User Guide</i>.</p>\n         <p>This operation supports the following parameter combinations:</p>\n         <ul>\n            <li>\n               <p>No parameters: Returns all Hook invocation summaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> only: Returns summaries for a specific Hook.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TypeArn</code> and <code>Status</code>: Returns summaries for a specific Hook\n          filtered by status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TargetId</code> and <code>TargetType</code>: Returns summaries for a specific\n          Hook invocation target.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudformation#ListHookResultsInput": {
@@ -7891,13 +8218,13 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#HookStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters results by the status of Hook invocations. Can only be used in\n      combination with <code>TypeArn</code>. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HOOK_IN_PROGRESS</code>: The Hook is currently running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed\n          successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed\n          validation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_FAILED</code>: The Hook encountered an error during\n          execution.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters results by the status of Hook invocations. Can only be used in combination with\n        <code>TypeArn</code>. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HOOK_IN_PROGRESS</code>: The Hook is currently running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed validation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK_FAILED</code>: The Hook encountered an error during execution.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of events that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -7923,7 +8250,7 @@
                 "HookResults": {
                     "target": "com.amazonaws.cloudformation#HookResultSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>HookResultSummary</code> structures that provides the status and\n      Hook status reason for each Hook invocation for the specified\n      target.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>HookResultSummary</code> structures that provides the status and Hook\n      status reason for each Hook invocation for the specified target.</p>"
                     }
                 },
                 "NextToken": {
@@ -7997,7 +8324,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (provided by the <a>ListImports</a> response output) that identifies\n      the next page of stacks that are importing the specified exported output value.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -8130,7 +8457,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8284,7 +8611,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8342,7 +8669,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of resource scan results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8419,7 +8746,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response\n      object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call this action again and assign that token to the request object's\n        <code>NextToken</code> parameter. If there are no remaining results, the previous response\n      object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8526,7 +8853,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous request didn't return all the remaining results, the response's\n        <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call <code>ListStackInstances</code> again and assign that token to the request\n      object's <code>NextToken</code> parameter. If there are no remaining results, the previous\n      response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8616,7 +8943,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to\n      a token. To retrieve the next set of results, call this action again and assign that token to\n      the request object's <code>NextToken</code> parameter. If the request returns all results,\n        <code>NextToken</code> is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8682,7 +9009,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to\n      a token. To retrieve the next set of results, call this action again and assign that token to\n      the request object's <code>NextToken</code> parameter. If the request returns all results,\n        <code>NextToken</code> is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8749,7 +9076,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of stack resources that you want to\n      retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -8810,7 +9137,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of deployment targets that you want to\n      retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8898,7 +9225,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous request didn't return all the remaining results, the response object's\n        <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call <code>ListStackSetOperationResults</code> again and assign that token to the\n      request object's <code>NextToken</code> parameter. If there are no remaining results, the\n      previous response object's <code>NextToken</code> parameter is set to\n      <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -8981,7 +9308,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response\n      object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call <code>ListStackSetOperations</code> again and assign that token to the request\n      object's <code>NextToken</code> parameter. If there are no remaining results, the previous\n      response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -9045,7 +9372,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all the remaining results, the response\n      object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call <code>ListStackSets</code> again and assign that token to the request object's\n        <code>NextToken</code> parameter. If there are no remaining results, the previous response\n      object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -9127,7 +9454,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that identifies the next page of stacks that you want to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "StackStatusFilter": {
@@ -9222,7 +9549,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all the remaining results, the response\n      object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call this action again and assign that token to the request object's\n        <code>NextToken</code> parameter. If there are no remaining results, the previous response\n      object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -9303,7 +9630,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response\n      object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call this action again and assign that token to the request object's\n        <code>NextToken</code> parameter. If there are no remaining results, the previous response\n      object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 },
                 "DeprecatedStatus": {
@@ -9409,7 +9736,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudformation#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all the remaining results, the response\n      object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of\n      results, call this action again and assign that token to the request object's\n        <code>NextToken</code> parameter. If there are no remaining results, the previous response\n      object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
                     }
                 }
             },
@@ -9897,7 +10224,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Output data type.</p>"
+                "smithy.api#documentation": "<p>The <code>Output</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#OutputKey": {
@@ -9941,7 +10268,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Parameter data type.</p>"
+                "smithy.api#documentation": "<p>The <code>Parameter</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#ParameterConstraints": {
@@ -9999,7 +10326,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ParameterDeclaration data type.</p>"
+                "smithy.api#documentation": "<p>The <code>ParameterDeclaration</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#ParameterDeclarations": {
@@ -10655,6 +10982,24 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudformation#ScannedResource"
+            }
+        },
+        "com.amazonaws.cloudformation#RemediationMessageRemediationMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16384
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#RemediationMessageStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16384
+                }
             }
         },
         "com.amazonaws.cloudformation#Replacement": {
@@ -12036,7 +12381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration data for a CloudFormation extension, such as a resource or Hook,\n      in the given account and Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html\">Edit configuration\n        data for extensions in your account</a> in the\n      <i>CloudFormation User Guide</i>.</p>\n         <p>To view the current configuration data for an extension, refer to the\n        <code>ConfigurationSchema</code> element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>\n         <important>\n            <p>It's strongly recommended that you use dynamic references to restrict sensitive\n        configuration definitions, such as third-party credentials. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html\">Specify values stored in other services using dynamic references</a> in the\n          <i>CloudFormation User Guide</i>.</p>\n         </important>\n         <p>For more information about setting the configuration data for resource types, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining the account-level configuration of an extension</a> in the\n        <i>CloudFormation Command Line Interface (CLI) User Guide</i>. For more information about setting the configuration\n      data for Hooks, see the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation\n        Hooks User Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration data for a CloudFormation extension, such as a resource or Hook,\n      in the given account and Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html\">Edit configuration\n        data for extensions in your account</a> in the\n      <i>CloudFormation User Guide</i>.</p>\n         <p>To view the current configuration data for an extension, refer to the\n        <code>ConfigurationSchema</code> element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>\n         <important>\n            <p>It's strongly recommended that you use dynamic references to restrict sensitive\n        configuration definitions, such as third-party credentials. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html\">Specify values stored in other services using dynamic references</a> in the\n          <i>CloudFormation User Guide</i>.</p>\n         </important>\n         <p>For more information about setting the configuration data for resource types, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining the account-level configuration of an extension</a> in the\n        <i>CloudFormation Command Line Interface (CLI) User Guide</i>. For more information about setting the configuration\n      data for Hooks, see the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html\">CloudFormation Hooks User Guide</a>.</p>"
             }
         },
         "com.amazonaws.cloudformation#SetTypeConfigurationInput": {
@@ -12367,7 +12712,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Stack data type.</p>"
+                "smithy.api#documentation": "<p>The <code>Stack</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#StackDefinition": {
@@ -12631,7 +12976,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The StackEvent data type.</p>"
+                "smithy.api#documentation": "<p>The <code>StackEvent</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#StackEvents": {
@@ -13532,7 +13877,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The StackResource data type.</p>"
+                "smithy.api#documentation": "<p>The <code>StackResource</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#StackResourceDetail": {
@@ -14884,7 +15229,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The StackSummary Data Type</p>"
+                "smithy.api#documentation": "<p>The <code>StackSummary</code> Data Type</p>"
             }
         },
         "com.amazonaws.cloudformation#Stacks": {
@@ -15070,7 +15415,7 @@
                     "target": "com.amazonaws.cloudformation#TagKey",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A string used to identify this tag. You can specify a maximum of\n   128 characters for a tag key. Tags owned by Amazon Web Services have the reserved prefix:\n   <code>aws:</code>.</p>",
+                        "smithy.api#documentation": "<p>A string used to identify this tag. You can specify a maximum of 128 characters for a tag\n   key. Tags owned by Amazon Web Services have the reserved prefix: <code>aws:</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15078,7 +15423,7 @@
                     "target": "com.amazonaws.cloudformation#TagValue",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A string that contains the value for this tag. You can specify a\n   maximum of 256 characters for a tag value.</p>",
+                        "smithy.api#documentation": "<p>A string that contains the value for this tag. You can specify a maximum of 256 characters\n   for a tag value.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15194,7 +15539,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The TemplateParameter data type.</p>"
+                "smithy.api#documentation": "<p>The <code>TemplateParameter</code> data type.</p>"
             }
         },
         "com.amazonaws.cloudformation#TemplateParameters": {
@@ -16137,7 +16482,7 @@
                 "UsePreviousTemplate": {
                     "target": "com.amazonaws.cloudformation#UsePreviousTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reuse the existing template that is associated with the stack that you are\n      updating.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n        <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n        <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>Reuse the existing template that is associated with the stack that you are\n      updating.</p>\n         <p>When using templates with the <code>AWS::LanguageExtensions</code> transform, provide the\n      template instead of using <code>UsePreviousTemplate</code> to ensure new parameter values and\n      Systems Manager parameter updates are applied correctly. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html\">AWS::LanguageExtensions transform</a>.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n        <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n        <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
                     }
                 },
                 "StackPolicyDuringUpdateBody": {
@@ -16167,7 +16512,7 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.cloudformation#ResourceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The template resource types that you have permissions to work with for this update stack\n      action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or\n        <code>Custom::MyCustomInstance</code>.</p>\n         <p>If the list of resource types doesn't include a resource that you're updating, the stack\n      update fails. By default, CloudFormation grants permissions to all resource types. IAM uses this\n      parameter for CloudFormation-specific condition keys in IAM policies. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html\">Control access with\n        Identity and Access Management</a>.</p>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>\n      or <code>Custom::MyCustomInstance</code>.</p>\n         <p>If the list of resource types doesn't include a resource that you're updating, the stack\n      update fails. By default, CloudFormation grants permissions to all resource types. IAM uses this\n      parameter for CloudFormation-specific condition keys in IAM policies. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html\">Control CloudFormation\n        access with Identity and Access Management</a>.</p>\n         <note>\n            <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can\n        be specified.</p>\n         </note>"
                     }
                 },
                 "RoleARN": {
