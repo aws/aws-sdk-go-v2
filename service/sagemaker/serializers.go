@@ -23125,6 +23125,17 @@ func awsAwsjson11_serializeDocumentArtifactSourceTypes(v []types.ArtifactSourceT
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAssignedGroupPatternsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAssumableRoleArns(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -27451,6 +27462,17 @@ func awsAwsjson11_serializeDocumentGroupingAttributeNames(v []string, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGroupPatternsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGroups(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -31469,6 +31491,20 @@ func awsAwsjson11_serializeDocumentPartnerAppConfig(v *types.PartnerAppConfig, v
 		}
 	}
 
+	if v.AssignedGroupPatterns != nil {
+		ok := object.Key("AssignedGroupPatterns")
+		if err := awsAwsjson11_serializeDocumentAssignedGroupPatternsList(v.AssignedGroupPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleGroupAssignments != nil {
+		ok := object.Key("RoleGroupAssignments")
+		if err := awsAwsjson11_serializeDocumentRoleGroupAssignmentsList(v.RoleGroupAssignments, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -32957,6 +32993,38 @@ func awsAwsjson11_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 		ok.Integer(*v.MaximumRetryAttempts)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRoleGroupAssignment(v *types.RoleGroupAssignment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupPatterns != nil {
+		ok := object.Key("GroupPatterns")
+		if err := awsAwsjson11_serializeDocumentGroupPatternsList(v.GroupPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleName != nil {
+		ok := object.Key("RoleName")
+		ok.String(*v.RoleName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRoleGroupAssignmentsList(v []types.RoleGroupAssignment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRoleGroupAssignment(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -38195,6 +38263,11 @@ func awsAwsjson11_serializeOpDocumentCreatePartnerAppInput(v *CreatePartnerAppIn
 		ok.String(*v.ClientToken)
 	}
 
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		ok := object.Key("EnableAutoMinorVersionUpgrade")
+		ok.Boolean(*v.EnableAutoMinorVersionUpgrade)
+	}
+
 	if v.EnableIamSessionBasedIdentity != nil {
 		ok := object.Key("EnableIamSessionBasedIdentity")
 		ok.Boolean(*v.EnableIamSessionBasedIdentity)
@@ -40672,6 +40745,11 @@ func awsAwsjson11_serializeOpDocumentDescribePartnerAppInput(v *DescribePartnerA
 	if v.Arn != nil {
 		ok := object.Key("Arn")
 		ok.String(*v.Arn)
+	}
+
+	if v.IncludeAvailableUpgrade != nil {
+		ok := object.Key("IncludeAvailableUpgrade")
+		ok.Boolean(*v.IncludeAvailableUpgrade)
 	}
 
 	return nil
@@ -46862,6 +46940,11 @@ func awsAwsjson11_serializeOpDocumentUpdatePartnerAppInput(v *UpdatePartnerAppIn
 		}
 	}
 
+	if v.AppVersion != nil {
+		ok := object.Key("AppVersion")
+		ok.String(*v.AppVersion)
+	}
+
 	if v.Arn != nil {
 		ok := object.Key("Arn")
 		ok.String(*v.Arn)
@@ -46870,6 +46953,11 @@ func awsAwsjson11_serializeOpDocumentUpdatePartnerAppInput(v *UpdatePartnerAppIn
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		ok := object.Key("EnableAutoMinorVersionUpgrade")
+		ok.Boolean(*v.EnableAutoMinorVersionUpgrade)
 	}
 
 	if v.EnableIamSessionBasedIdentity != nil {

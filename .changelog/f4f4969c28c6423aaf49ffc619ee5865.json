@@ -1,0 +1,8 @@
+{
+    "id": "f4f4969c-28c6-423a-af49-ffc619ee5865",
+    "type": "feature",
+    "description": "Lowers minimum duration for black video generator. Adds support for embedding and signing C2PA content credentials in DASH and CMAF HLS outputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

@@ -23,6 +23,27 @@ func (ControlBehavior) Values() []ControlBehavior {
 	}
 }
 
+type ControlRelationType string
+
+// Enum values for ControlRelationType
+const (
+	ControlRelationTypeComplementary     ControlRelationType = "COMPLEMENTARY"
+	ControlRelationTypeAlternative       ControlRelationType = "ALTERNATIVE"
+	ControlRelationTypeMutuallyExclusive ControlRelationType = "MUTUALLY_EXCLUSIVE"
+)
+
+// Values returns all known values for ControlRelationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlRelationType) Values() []ControlRelationType {
+	return []ControlRelationType{
+		"COMPLEMENTARY",
+		"ALTERNATIVE",
+		"MUTUALLY_EXCLUSIVE",
+	}
+}
+
 type ControlScope string
 
 // Enum values for ControlScope
@@ -69,8 +90,9 @@ type MappingType string
 
 // Enum values for MappingType
 const (
-	MappingTypeFramework     MappingType = "FRAMEWORK"
-	MappingTypeCommonControl MappingType = "COMMON_CONTROL"
+	MappingTypeFramework      MappingType = "FRAMEWORK"
+	MappingTypeCommonControl  MappingType = "COMMON_CONTROL"
+	MappingTypeRelatedControl MappingType = "RELATED_CONTROL"
 )
 
 // Values returns all known values for MappingType. Note that this can be expanded
@@ -81,5 +103,6 @@ func (MappingType) Values() []MappingType {
 	return []MappingType{
 		"FRAMEWORK",
 		"COMMON_CONTROL",
+		"RELATED_CONTROL",
 	}
 }

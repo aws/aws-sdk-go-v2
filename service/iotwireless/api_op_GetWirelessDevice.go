@@ -62,8 +62,8 @@ type GetWirelessDeviceOutput struct {
 	// The name of the resource.
 	Name *string
 
-	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
-	// information.
+	// The integration status of the Device Location feature for LoRaWAN and Sidewalk
+	// devices.
 	Positioning types.PositioningConfigStatus
 
 	// Sidewalk device object.

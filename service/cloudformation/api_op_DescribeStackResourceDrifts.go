@@ -53,7 +53,8 @@ type DescribeStackResourceDriftsInput struct {
 	// set of results.
 	MaxResults *int32
 
-	// A string that identifies the next page of stack resource drift results.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// The resource drift status values to use as filters for the resource drift

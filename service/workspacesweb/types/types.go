@@ -31,6 +31,11 @@ type BrowserSettings struct {
 	// settings.
 	CustomerManagedKey *string
 
+	// The policy that specifies which URLs end users are allowed to access or which
+	// URLs or domain categories they are restricted from accessing for enhanced
+	// security.
+	WebContentFilteringPolicy *WebContentFilteringPolicy
+
 	noSmithyDocumentSerde
 }
 
@@ -1064,6 +1069,23 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The policy that specifies which URLs end users are allowed to access or which
+// URLs or domain categories they are restricted from accessing for enhanced
+// security.
+type WebContentFilteringPolicy struct {
+
+	// URLs and domains that are always accessible to end users.
+	AllowedUrls []string
+
+	// Categories of websites that are blocked on the end user’s browsers.
+	BlockedCategories []Category
+
+	// URLs and domains that end users cannot access.
+	BlockedUrls []string
 
 	noSmithyDocumentSerde
 }

@@ -71,11 +71,8 @@ type ListStackSetOperationResultsInput struct {
 	// set of results.
 	MaxResults *int32
 
-	// If the previous request didn't return all the remaining results, the response
-	// object's NextToken parameter value is set to a token. To retrieve the next set
-	// of results, call ListStackSetOperationResults again and assign that token to
-	// the request object's NextToken parameter. If there are no remaining results,
-	// the previous response object's NextToken parameter is set to null .
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	noSmithyDocumentSerde

@@ -83,6 +83,37 @@ type AccountLimit struct {
 	noSmithyDocumentSerde
 }
 
+// The Annotation data type.
+//
+// A GetHookResult call returns detailed information and remediation guidance from
+// Control Tower, Guard, Lambda, or custom Hooks for a Hook invocation result.
+type Annotation struct {
+
+	// An identifier for the evaluation logic that was used when invoking the Hook.
+	// For Control Tower, this is the control ID. For Guard, this is the rule ID. For
+	// Lambda and custom Hooks, this is a user-defined identifier.
+	AnnotationName *string
+
+	// A URL that you can access for additional remediation guidance.
+	RemediationLink *string
+
+	// Suggests what to change if your Hook returns a FAILED status. For example,
+	// "Block public access to the bucket".
+	RemediationMessage *string
+
+	// The relative risk associated with any violations of this type.
+	SeverityLevel AnnotationSeverityLevel
+
+	// The status of the Hook invocation from the downstream service.
+	Status AnnotationStatus
+
+	// The explanation for the specific status assigned to this Hook invocation. For
+	// example, "Bucket does not block public access".
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes whether StackSets automatically deploys to Organizations accounts
 // that are added to a target organization or organizational unit (OU). For more
 // information, see [Enable or disable automatic deployments for StackSets in Organizations]in the CloudFormation User Guide.
@@ -209,7 +240,7 @@ type ChangeSetHookTargetDetails struct {
 	// Required if TargetType is RESOURCE .
 	ResourceTargetDetails *ChangeSetHookResourceTargetDetails
 
-	// The name of the type.
+	// The Hook target type.
 	TargetType HookTargetType
 
 	noSmithyDocumentSerde
@@ -348,13 +379,14 @@ type Export struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Hook invocation, its status, and the reason for its status.
+// A ListHookResults call returns a summary of a Hook invocation.
 type HookResultSummary struct {
 
 	// The failure mode of the invocation.
 	FailureMode HookFailureMode
 
-	// The ARN of the target stack or request token of the Cloud Control API operation.
+	// The Amazon Resource Name (ARN) of the target stack or request token of the
+	// Cloud Control API operation.
 	//
 	// Only shown in responses when the request does not specify TargetType and
 	// TargetId filters.
@@ -404,6 +436,32 @@ type HookResultSummary struct {
 
 	// The version of the Hook that was invoked.
 	TypeVersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The HookTarget data type.
+type HookTarget struct {
+
+	// The action that invoked the Hook.
+	//
+	// This member is required.
+	Action HookTargetAction
+
+	// The unique identifier of the Hook invocation target.
+	//
+	// This member is required.
+	TargetId *string
+
+	// The target type.
+	//
+	// This member is required.
+	TargetType HookTargetType
+
+	// The target name, for example, AWS::S3::Bucket .
+	//
+	// This member is required.
+	TargetTypeName *string
 
 	noSmithyDocumentSerde
 }

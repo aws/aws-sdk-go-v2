@@ -5170,6 +5170,16 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 		ok.String(string(v.AudioTrackType))
 	}
 
+	if len(v.C2paManifest) > 0 {
+		ok := object.Key("c2paManifest")
+		ok.String(string(v.C2paManifest))
+	}
+
+	if v.CertificateSecret != nil {
+		ok := object.Key("certificateSecret")
+		ok.String(*v.CertificateSecret)
+	}
+
 	if len(v.DescriptiveVideoServiceFlag) > 0 {
 		ok := object.Key("descriptiveVideoServiceFlag")
 		ok.String(string(v.DescriptiveVideoServiceFlag))
@@ -5198,6 +5208,11 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	if len(v.Scte35Source) > 0 {
 		ok := object.Key("scte35Source")
 		ok.String(string(v.Scte35Source))
+	}
+
+	if v.SigningKmsKey != nil {
+		ok := object.Key("signingKmsKey")
+		ok.String(*v.SigningKmsKey)
 	}
 
 	if len(v.TimedMetadata) > 0 {
@@ -9169,9 +9184,19 @@ func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smith
 		ok.String(string(v.AudioDuration))
 	}
 
+	if len(v.C2paManifest) > 0 {
+		ok := object.Key("c2paManifest")
+		ok.String(string(v.C2paManifest))
+	}
+
 	if len(v.CaptionContainerType) > 0 {
 		ok := object.Key("captionContainerType")
 		ok.String(string(v.CaptionContainerType))
+	}
+
+	if v.CertificateSecret != nil {
+		ok := object.Key("certificateSecret")
+		ok.String(*v.CertificateSecret)
 	}
 
 	if len(v.KlvMetadata) > 0 {
@@ -9192,6 +9217,11 @@ func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smith
 	if len(v.Scte35Source) > 0 {
 		ok := object.Key("scte35Source")
 		ok.String(string(v.Scte35Source))
+	}
+
+	if v.SigningKmsKey != nil {
+		ok := object.Key("signingKmsKey")
+		ok.String(*v.SigningKmsKey)
 	}
 
 	if len(v.TimedMetadata) > 0 {
@@ -9964,6 +9994,11 @@ func awsRestjson1_serializeDocumentPartnerWatermarking(v *types.PartnerWatermark
 func awsRestjson1_serializeDocumentPassthroughSettings(v *types.PassthroughSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.FrameControl) > 0 {
+		ok := object.Key("frameControl")
+		ok.String(string(v.FrameControl))
+	}
 
 	if len(v.VideoSelectorMode) > 0 {
 		ok := object.Key("videoSelectorMode")

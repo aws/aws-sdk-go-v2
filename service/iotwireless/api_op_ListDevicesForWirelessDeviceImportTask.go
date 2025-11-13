@@ -61,6 +61,12 @@ type ListDevicesForWirelessDeviceImportTaskOutput struct {
 	// additional results.
 	NextToken *string
 
+	// The integration status of the Device Location feature for Sidewalk devices.
+	Positioning types.PositioningConfigStatus
+
+	// The Sidewalk object containing Sidewalk-related device information.
+	Sidewalk *types.SidewalkListDevicesForImportInfo
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

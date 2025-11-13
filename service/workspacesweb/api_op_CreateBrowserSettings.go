@@ -31,14 +31,12 @@ func (c *Client) CreateBrowserSettings(ctx context.Context, params *CreateBrowse
 
 type CreateBrowserSettingsInput struct {
 
-	// A JSON string containing Chrome Enterprise policies that will be applied to all
-	// streaming sessions.
-	//
-	// This member is required.
-	BrowserPolicy *string
-
 	// Additional encryption context of the browser settings.
 	AdditionalEncryptionContext map[string]string
+
+	// A JSON string containing Chrome Enterprise policies that will be applied to all
+	// streaming sessions.
+	BrowserPolicy *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
@@ -55,6 +53,11 @@ type CreateBrowserSettingsInput struct {
 
 	// The tags to add to the browser settings resource. A tag is a key-value pair.
 	Tags []types.Tag
+
+	// The policy that specifies which URLs end users are allowed to access or which
+	// URLs or domain categories they are restricted from accessing for enhanced
+	// security.
+	WebContentFilteringPolicy *types.WebContentFilteringPolicy
 
 	noSmithyDocumentSerde
 }

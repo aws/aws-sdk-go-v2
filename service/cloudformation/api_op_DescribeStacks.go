@@ -41,7 +41,8 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 // The input for DescribeStacks action.
 type DescribeStacksInput struct {
 
-	// A string that identifies the next page of stacks that you want to retrieve.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// If you don't pass a parameter to StackName , the API returns a response that

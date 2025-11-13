@@ -55,6 +55,9 @@ type StartSingleWirelessDeviceImportTaskInput struct {
 	// The name of the wireless device for which an import task is being started.
 	DeviceName *string
 
+	// The integration status of the Device Location feature for Sidewalk devices.
+	Positioning types.PositioningConfigStatus
+
 	// The tag to attach to the specified resource. Tags are metadata that you can use
 	// to manage a resource.
 	Tags []types.Tag

@@ -1960,6 +1960,20 @@ type CmfcSettings struct {
 	// setting.
 	AudioTrackType CmfcAudioTrackType
 
+	// When enabled, a C2PA compliant manifest will be generated, signed and embeded
+	// in the output. For more information on C2PA, see
+	// https://c2pa.org/specifications/specifications/2.1/index.html
+	C2paManifest CmfcC2paManifest
+
+	// Specify the name or ARN of the AWS Secrets Manager secret that contains your
+	// C2PA public certificate chain in PEM format. Provide a valid secret name or ARN.
+	// Note that your MediaConvert service role must allow access to this secret. The
+	// public certificate chain is added to the COSE header (x5chain) for signature
+	// validation. Include the signer's certificate and all intermediate certificates.
+	// Do not include the root certificate. For details on COSE, see:
+	// https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
+	CertificateSecret *string
+
 	// Specify whether to flag this audio track as descriptive video service (DVS) in
 	// your HLS parent manifest. When you choose Flag, MediaConvert includes the
 	// parameter CHARACTERISTICS="public.accessibility.describes-video" in the
@@ -2004,6 +2018,11 @@ type CmfcSettings struct {
 	// appear in this output. Choose None if you don't want those SCTE-35 markers in
 	// this output.
 	Scte35Source CmfcScte35Source
+
+	// Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your
+	// MP4 output. Provide a valid KMS key ARN. Note that your MediaConvert service
+	// role must allow access to this key.
+	SigningKmsKey *string
 
 	// To include ID3 metadata in this output: Set ID3 metadata to Passthrough.
 	// Specify this ID3 metadata in Custom ID3 metadata inserter. MediaConvert writes
@@ -5527,7 +5546,7 @@ type InputVideoGenerator struct {
 	Channels *int32
 
 	// Specify the duration, in milliseconds, for your video generator input. Enter an
-	// integer from 50 to 86400000.
+	// integer from 1 to 86400000.
 	Duration *int32
 
 	// Specify the denominator of the fraction that represents the frame rate for your
@@ -6859,6 +6878,11 @@ type MpdSettings struct {
 	// between audio and video duration will depend on your output audio codec.
 	AudioDuration MpdAudioDuration
 
+	// When enabled, a C2PA compliant manifest will be generated, signed and embeded
+	// in the output. For more information on C2PA, see
+	// https://c2pa.org/specifications/specifications/2.1/index.html
+	C2paManifest MpdC2paManifest
+
 	// Use this setting only in DASH output groups that include sidecar TTML, IMSC or
 	// WEBVTT captions. You specify sidecar captions in a separate output from your
 	// audio and video. Choose Raw for captions in a single XML file in a raw
@@ -6866,6 +6890,15 @@ type MpdSettings struct {
 	// fragmented MP4 files. This set of fragmented MP4 files is separate from your
 	// video and audio fragmented MP4 files.
 	CaptionContainerType MpdCaptionContainerType
+
+	// Specify the name or ARN of the AWS Secrets Manager secret that contains your
+	// C2PA public certificate chain in PEM format. Provide a valid secret name or ARN.
+	// Note that your MediaConvert service role must allow access to this secret. The
+	// public certificate chain is added to the COSE header (x5chain) for signature
+	// validation. Include the signer's certificate and all intermediate certificates.
+	// Do not include the root certificate. For details on COSE, see:
+	// https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
+	CertificateSecret *string
 
 	// To include key-length-value metadata in this output: Set KLV metadata insertion
 	// to Passthrough. MediaConvert reads KLV metadata present in your input and writes
@@ -6895,6 +6928,11 @@ type MpdSettings struct {
 	// appear in this output. Choose None if you don't want those SCTE-35 markers in
 	// this output.
 	Scte35Source MpdScte35Source
+
+	// Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your
+	// MP4 output. Provide a valid KMS key ARN. Note that your MediaConvert service
+	// role must allow access to this key.
+	SigningKmsKey *string
 
 	// To include ID3 metadata in this output: Set ID3 metadata to Passthrough.
 	// Specify this ID3 metadata in Custom ID3 metadata inserter. MediaConvert writes
@@ -7753,6 +7791,18 @@ type PartnerWatermarking struct {
 
 // Optional settings when you set Codec to the value Passthrough.
 type PassthroughSettings struct {
+
+	// Choose how MediaConvert handles start and end times for input clipping with
+	// video passthrough. Your input video codec must be H.264 or H.265 to use IFRAME.
+	// To clip at the nearest IDR-frame: Choose Nearest IDR. If an IDR-frame is not
+	// found at the frame that you specify, MediaConvert uses the next compatible
+	// IDR-frame. Note that your output may be shorter than your input clip duration.
+	// To clip at the nearest I-frame: Choose Nearest I-frame. If an I-frame is not
+	// found at the frame that you specify, MediaConvert uses the next compatible
+	// I-frame. Note that your output may be shorter than your input clip duration. We
+	// only recommend this setting for special workflows, and when you choose this
+	// setting your output may not be compatible with most players.
+	FrameControl FrameControl
 
 	// AUTO will select the highest bitrate input in the video selector source.
 	// REMUX_ALL will passthrough all the selected streams in the video selector

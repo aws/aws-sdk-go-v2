@@ -18,7 +18,7 @@ import (
 //
 // Deprecated: This operation is no longer supported.
 //
-// [GetResourcePosition]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html
+// [GetResourcePosition]: https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_GetResourcePosition.html
 func (c *Client) GetPosition(ctx context.Context, params *GetPositionInput, optFns ...func(*Options)) (*GetPositionOutput, error) {
 	if params == nil {
 		params = &GetPositionInput{}

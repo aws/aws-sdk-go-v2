@@ -190,23 +190,17 @@ type CreateStackInput struct {
 	// [Parameter]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
 	Parameters []types.Parameter
 
-	// The template resource types that you have permissions to work with for this
-	// create stack action, such as AWS::EC2::Instance , AWS::EC2::* , or
-	// Custom::MyCustomInstance . Use the following syntax to describe template
-	// resource types: AWS::* (for all Amazon Web Services resources), Custom::* (for
-	// all custom resources), Custom::logical_ID  (for a specific custom resource),
-	// AWS::service_name::* (for all resources of a particular Amazon Web Services
-	// service), and AWS::service_name::resource_logical_ID  (for a specific Amazon
-	// Web Services resource).
+	// Specifies which resource types you can work with, such as AWS::EC2::Instance or
+	// Custom::MyCustomInstance .
 	//
 	// If the list of resource types doesn't include a resource that you're creating,
 	// the stack creation fails. By default, CloudFormation grants permissions to all
 	// resource types. IAM uses this parameter for CloudFormation-specific condition
-	// keys in IAM policies. For more information, see [Control access with Identity and Access Management].
+	// keys in IAM policies. For more information, see [Control CloudFormation access with Identity and Access Management].
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
+	// [Control CloudFormation access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
 	ResourceTypes []string
 
 	// When set to true , newly created resources are deleted when the operation rolls

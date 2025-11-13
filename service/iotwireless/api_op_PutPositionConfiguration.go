@@ -18,7 +18,7 @@ import (
 //
 // Deprecated: This operation is no longer supported.
 //
-// [UpdateResourcePosition]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html
+// [UpdateResourcePosition]: https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_UpdateResourcePosition.html
 func (c *Client) PutPositionConfiguration(ctx context.Context, params *PutPositionConfigurationInput, optFns ...func(*Options)) (*PutPositionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutPositionConfigurationInput{}

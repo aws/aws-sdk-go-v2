@@ -2002,9 +2002,6 @@ func validateOpCreateBrowserSettingsInput(v *CreateBrowserSettingsInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.BrowserPolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BrowserPolicy"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

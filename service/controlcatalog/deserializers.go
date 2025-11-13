@@ -2369,6 +2369,16 @@ loop:
 			uv = &types.MappingMemberFramework{Value: mv}
 			break loop
 
+		case "RelatedControl":
+			var mv types.RelatedControlMappingDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRelatedControlMappingDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MappingMemberRelatedControl{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -2542,6 +2552,55 @@ func awsRestjson1_deserializeDocumentRegionConfiguration(v **types.RegionConfigu
 					return fmt.Errorf("expected ControlScope to be of type string, got %T instead", value)
 				}
 				sv.Scope = types.ControlScope(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRelatedControlMappingDetails(v **types.RelatedControlMappingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RelatedControlMappingDetails
+	if *v == nil {
+		sv = &types.RelatedControlMappingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ControlArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlArn to be of type string, got %T instead", value)
+				}
+				sv.ControlArn = ptr.String(jtv)
+			}
+
+		case "RelationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlRelationType to be of type string, got %T instead", value)
+				}
+				sv.RelationType = types.ControlRelationType(jtv)
 			}
 
 		default:

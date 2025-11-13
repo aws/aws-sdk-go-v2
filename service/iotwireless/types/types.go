@@ -1695,6 +1695,12 @@ type SidewalkCreateWirelessDevice struct {
 	// The ID of the Sidewalk device profile.
 	DeviceProfileId *string
 
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
+
+	// The Sidewalk manufacturing serial number.
+	SidewalkManufacturingSn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1712,6 +1718,9 @@ type SidewalkDevice struct {
 
 	// The ID of the Sidewalk device profile.
 	DeviceProfileId *string
+
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
 
 	// The Sidewalk device private keys that will be used for onboarding the device.
 	PrivateKeys []CertificateList
@@ -1778,6 +1787,9 @@ type SidewalkGetStartImportInfo struct {
 	// List of Sidewalk devices that are added to the import task.
 	DeviceCreationFileList []string
 
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
+
 	// The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
 	// bucket.
 	Role *string
@@ -1797,6 +1809,9 @@ type SidewalkListDevice struct {
 	// Sidewalk object used by list functions.
 	DeviceProfileId *string
 
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
+
 	// The sidewalk device identification.
 	SidewalkId *string
 
@@ -1805,6 +1820,25 @@ type SidewalkListDevice struct {
 
 	// The status of the Sidewalk devices, such as provisioned or registered.
 	Status WirelessDeviceSidewalkStatus
+
+	noSmithyDocumentSerde
+}
+
+// The Sidewalk-related object containing positioning information used to
+// configure Sidewalk devices during import.
+type SidewalkListDevicesForImportInfo struct {
+
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
+
+	noSmithyDocumentSerde
+}
+
+// The Positioning object of the Sidewalk device.
+type SidewalkPositioning struct {
+
+	// The location destination name of the Sidewalk device.
+	DestinationName *string
 
 	noSmithyDocumentSerde
 }
@@ -1837,6 +1871,9 @@ type SidewalkSendDataToDevice struct {
 // Information about an import task created for an individual Sidewalk device.
 type SidewalkSingleStartImportInfo struct {
 
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
+
 	// The Sidewalk manufacturing serial number (SMSN) of the device added to the
 	// import task.
 	SidewalkManufacturingSn *string
@@ -1850,6 +1887,9 @@ type SidewalkStartImportInfo struct {
 	// The CSV file contained in an S3 bucket that's used for adding devices to an
 	// import task.
 	DeviceCreationFile *string
+
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
 
 	// The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
 	// bucket.
@@ -1873,6 +1913,15 @@ type SidewalkUpdateImportInfo struct {
 	// The CSV file contained in an S3 bucket that's used for appending devices to an
 	// existing import task.
 	DeviceCreationFile *string
+
+	noSmithyDocumentSerde
+}
+
+// Sidewalk object for updating a wireless device.
+type SidewalkUpdateWirelessDevice struct {
+
+	// The Positioning object of the Sidewalk device.
+	Positioning *SidewalkPositioning
 
 	noSmithyDocumentSerde
 }
@@ -2285,6 +2334,9 @@ type WirelessDeviceImportTask struct {
 	// waiting in the queue to be onboarded.
 	PendingImportedDeviceCount *int64
 
+	// The integration status of the Device Location feature for Sidewalk devices.
+	Positioning PositioningConfigStatus
+
 	// The Sidewalk-related information of the wireless device import task.
 	Sidewalk *SidewalkGetStartImportInfo
 
@@ -2350,6 +2402,10 @@ type WirelessDeviceStatistics struct {
 
 	// The name of the resource.
 	Name *string
+
+	// The integration status of the Device Location feature for LoRaWAN and Amazon
+	// Sidewalk enabled devices.
+	Positioning PositioningConfigStatus
 
 	// The Sidewalk account credentials.
 	Sidewalk *SidewalkListDevice

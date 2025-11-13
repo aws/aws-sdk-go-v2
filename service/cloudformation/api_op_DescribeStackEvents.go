@@ -37,9 +37,6 @@ func (c *Client) DescribeStackEvents(ctx context.Context, params *DescribeStackE
 // The input for DescribeStackEvents action.
 type DescribeStackEventsInput struct {
 
-	// A string that identifies the next page of events that you want to retrieve.
-	NextToken *string
-
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
 	//
@@ -47,7 +44,13 @@ type DescribeStackEventsInput struct {
 	//   ID.
 	//
 	//   - Deleted stacks: You must specify the unique stack ID.
+	//
+	// This member is required.
 	StackName *string
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 
 	noSmithyDocumentSerde
 }
@@ -133,6 +136,9 @@ func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpDescribeStackEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStackEvents(options.Region), middleware.Before); err != nil {

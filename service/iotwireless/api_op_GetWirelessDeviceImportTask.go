@@ -70,6 +70,10 @@ type GetWirelessDeviceImportTaskOutput struct {
 	// queue to be onboarded.
 	PendingImportedDeviceCount *int64
 
+	// The integration status of the Device Location feature for LoRaWAN and Sidewalk
+	// devices.
+	Positioning types.PositioningConfigStatus
+
 	// The Sidewalk-related information about an import task.
 	Sidewalk *types.SidewalkGetStartImportInfo
 

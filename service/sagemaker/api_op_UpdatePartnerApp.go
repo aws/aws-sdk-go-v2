@@ -34,11 +34,21 @@ type UpdatePartnerAppInput struct {
 	// This member is required.
 	Arn *string
 
+	// The semantic version to upgrade the SageMaker Partner AI App to. Must be the
+	// same semantic version returned in the AvailableUpgrade field from
+	// DescribePartnerApp . Version skipping and downgrades are not supported.
+	AppVersion *string
+
 	// Configuration settings for the SageMaker Partner AI App.
 	ApplicationConfig *types.PartnerAppConfig
 
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
+
+	// When set to TRUE , the SageMaker Partner AI App is automatically upgraded to the
+	// latest minor version during the next scheduled maintenance window, if one is
+	// available.
+	EnableAutoMinorVersionUpgrade *bool
 
 	// When set to TRUE , the SageMaker Partner AI App sets the Amazon Web Services IAM
 	// session name or the authenticated IAM user as the identity of the SageMaker

@@ -325,13 +325,15 @@ type ProtocolEnum string
 
 // Enum values for ProtocolEnum
 const (
-	ProtocolEnumHttp   ProtocolEnum = "HTTP"
-	ProtocolEnumHttps  ProtocolEnum = "HTTPS"
-	ProtocolEnumTcp    ProtocolEnum = "TCP"
-	ProtocolEnumTls    ProtocolEnum = "TLS"
-	ProtocolEnumUdp    ProtocolEnum = "UDP"
-	ProtocolEnumTcpUdp ProtocolEnum = "TCP_UDP"
-	ProtocolEnumGeneve ProtocolEnum = "GENEVE"
+	ProtocolEnumHttp    ProtocolEnum = "HTTP"
+	ProtocolEnumHttps   ProtocolEnum = "HTTPS"
+	ProtocolEnumTcp     ProtocolEnum = "TCP"
+	ProtocolEnumTls     ProtocolEnum = "TLS"
+	ProtocolEnumUdp     ProtocolEnum = "UDP"
+	ProtocolEnumTcpUdp  ProtocolEnum = "TCP_UDP"
+	ProtocolEnumGeneve  ProtocolEnum = "GENEVE"
+	ProtocolEnumQuic    ProtocolEnum = "QUIC"
+	ProtocolEnumTcpQuic ProtocolEnum = "TCP_QUIC"
 )
 
 // Values returns all known values for ProtocolEnum. Note that this can be
@@ -347,6 +349,8 @@ func (ProtocolEnum) Values() []ProtocolEnum {
 		"UDP",
 		"TCP_UDP",
 		"GENEVE",
+		"QUIC",
+		"TCP_QUIC",
 	}
 }
 

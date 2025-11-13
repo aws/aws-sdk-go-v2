@@ -46,6 +46,52 @@ func (AccountGateStatus) Values() []AccountGateStatus {
 	}
 }
 
+type AnnotationSeverityLevel string
+
+// Enum values for AnnotationSeverityLevel
+const (
+	AnnotationSeverityLevelInformational AnnotationSeverityLevel = "INFORMATIONAL"
+	AnnotationSeverityLevelLow           AnnotationSeverityLevel = "LOW"
+	AnnotationSeverityLevelMedium        AnnotationSeverityLevel = "MEDIUM"
+	AnnotationSeverityLevelHigh          AnnotationSeverityLevel = "HIGH"
+	AnnotationSeverityLevelCritical      AnnotationSeverityLevel = "CRITICAL"
+)
+
+// Values returns all known values for AnnotationSeverityLevel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnnotationSeverityLevel) Values() []AnnotationSeverityLevel {
+	return []AnnotationSeverityLevel{
+		"INFORMATIONAL",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"CRITICAL",
+	}
+}
+
+type AnnotationStatus string
+
+// Enum values for AnnotationStatus
+const (
+	AnnotationStatusPassed  AnnotationStatus = "PASSED"
+	AnnotationStatusFailed  AnnotationStatus = "FAILED"
+	AnnotationStatusSkipped AnnotationStatus = "SKIPPED"
+)
+
+// Values returns all known values for AnnotationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnnotationStatus) Values() []AnnotationStatus {
+	return []AnnotationStatus{
+		"PASSED",
+		"FAILED",
+		"SKIPPED",
+	}
+}
+
 type AttributeChangeType string
 
 // Enum values for AttributeChangeType
@@ -617,6 +663,29 @@ func (HookStatus) Values() []HookStatus {
 		"HOOK_COMPLETE_SUCCEEDED",
 		"HOOK_COMPLETE_FAILED",
 		"HOOK_FAILED",
+	}
+}
+
+type HookTargetAction string
+
+// Enum values for HookTargetAction
+const (
+	HookTargetActionCreate HookTargetAction = "CREATE"
+	HookTargetActionUpdate HookTargetAction = "UPDATE"
+	HookTargetActionDelete HookTargetAction = "DELETE"
+	HookTargetActionImport HookTargetAction = "IMPORT"
+)
+
+// Values returns all known values for HookTargetAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HookTargetAction) Values() []HookTargetAction {
+	return []HookTargetAction{
+		"CREATE",
+		"UPDATE",
+		"DELETE",
+		"IMPORT",
 	}
 }
 

@@ -120,14 +120,13 @@ type ControlMapping struct {
 	// This member is required.
 	ControlArn *string
 
-	// The details of the mapping relationship, containing either framework or common
-	// control information.
+	// The details of the mapping relationship, for example, containing framework,
+	// common control, or related control information.
 	//
 	// This member is required.
 	Mapping Mapping
 
 	// The type of mapping relationship between the control and other entities.
-	// Indicates whether the mapping is to a framework or common control.
 	//
 	// This member is required.
 	MappingType MappingType
@@ -399,6 +398,7 @@ type ImplementationSummary struct {
 //
 //	MappingMemberCommonControl
 //	MappingMemberFramework
+//	MappingMemberRelatedControl
 type Mapping interface {
 	isMapping()
 }
@@ -422,6 +422,15 @@ type MappingMemberFramework struct {
 }
 
 func (*MappingMemberFramework) isMapping() {}
+
+// Returns information about controls that are related to the specified control.
+type MappingMemberRelatedControl struct {
+	Value RelatedControlMappingDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*MappingMemberRelatedControl) isMapping() {}
 
 // An optional filter that narrows the list of objectives to a specific domain.
 type ObjectiveFilter struct {
@@ -510,6 +519,21 @@ type RegionConfiguration struct {
 
 	// Regions in which the control is available to be deployed.
 	DeployableRegions []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a control's relationship status with other controls.
+type RelatedControlMappingDetails struct {
+
+	// Returns an enumerated value that represents the relationship between two or
+	// more controls.
+	//
+	// This member is required.
+	RelationType ControlRelationType
+
+	// The unique identifier of a control.
+	ControlArn *string
 
 	noSmithyDocumentSerde
 }

@@ -34,7 +34,8 @@ func (c *Client) ListStacks(ctx context.Context, params *ListStacksInput, optFns
 // The input for ListStacks action.
 type ListStacksInput struct {
 
-	// A string that identifies the next page of stacks that you want to retrieve.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// Stack status to use as a filter. Specify one or more stack status codes to list

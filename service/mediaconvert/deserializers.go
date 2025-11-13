@@ -11057,6 +11057,24 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				sv.AudioTrackType = types.CmfcAudioTrackType(jtv)
 			}
 
+		case "c2paManifest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcC2paManifest to be of type string, got %T instead", value)
+				}
+				sv.C2paManifest = types.CmfcC2paManifest(jtv)
+			}
+
+		case "certificateSecret":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09 to be of type string, got %T instead", value)
+				}
+				sv.CertificateSecret = ptr.String(jtv)
+			}
+
 		case "descriptiveVideoServiceFlag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11109,6 +11127,15 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 					return fmt.Errorf("expected CmfcScte35Source to be of type string, got %T instead", value)
 				}
 				sv.Scte35Source = types.CmfcScte35Source(jtv)
+			}
+
+		case "signingKmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 to be of type string, got %T instead", value)
+				}
+				sv.SigningKmsKey = ptr.String(jtv)
 			}
 
 		case "timedMetadata":
@@ -17839,7 +17866,7 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin50Max86400000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin1Max86400000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -20735,6 +20762,15 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				sv.AudioDuration = types.MpdAudioDuration(jtv)
 			}
 
+		case "c2paManifest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdC2paManifest to be of type string, got %T instead", value)
+				}
+				sv.C2paManifest = types.MpdC2paManifest(jtv)
+			}
+
 		case "captionContainerType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20742,6 +20778,15 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 					return fmt.Errorf("expected MpdCaptionContainerType to be of type string, got %T instead", value)
 				}
 				sv.CaptionContainerType = types.MpdCaptionContainerType(jtv)
+			}
+
+		case "certificateSecret":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09 to be of type string, got %T instead", value)
+				}
+				sv.CertificateSecret = ptr.String(jtv)
 			}
 
 		case "klvMetadata":
@@ -20778,6 +20823,15 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 					return fmt.Errorf("expected MpdScte35Source to be of type string, got %T instead", value)
 				}
 				sv.Scte35Source = types.MpdScte35Source(jtv)
+			}
+
+		case "signingKmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 to be of type string, got %T instead", value)
+				}
+				sv.SigningKmsKey = ptr.String(jtv)
 			}
 
 		case "timedMetadata":
@@ -22580,6 +22634,15 @@ func awsRestjson1_deserializeDocumentPassthroughSettings(v **types.PassthroughSe
 
 	for key, value := range shape {
 		switch key {
+		case "frameControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FrameControl to be of type string, got %T instead", value)
+				}
+				sv.FrameControl = types.FrameControl(jtv)
+			}
+
 		case "videoSelectorMode":
 			if value != nil {
 				jtv, ok := value.(string)

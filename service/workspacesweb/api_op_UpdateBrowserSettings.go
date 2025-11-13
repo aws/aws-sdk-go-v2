@@ -48,6 +48,11 @@ type UpdateBrowserSettingsInput struct {
 	// Amazon Web Services SDK.
 	ClientToken *string
 
+	// The policy that specifies which URLs end users are allowed to access or which
+	// URLs or domain categories they are restricted from accessing for enhanced
+	// security.
+	WebContentFilteringPolicy *types.WebContentFilteringPolicy
+
 	noSmithyDocumentSerde
 }
 

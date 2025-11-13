@@ -44,7 +44,8 @@ func (c *Client) ListHookResults(ctx context.Context, params *ListHookResultsInp
 
 type ListHookResultsInput struct {
 
-	// A string that identifies the next page of events that you want to retrieve.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// Filters results by the status of Hook invocations. Can only be used in

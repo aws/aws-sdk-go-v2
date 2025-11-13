@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List wireless devices that have been added to an import task.
+// List of import tasks and summary information of onboarding status of devices in
+// each import task.
 func (c *Client) ListWirelessDeviceImportTasks(ctx context.Context, params *ListWirelessDeviceImportTasksInput, optFns ...func(*Options)) (*ListWirelessDeviceImportTasksOutput, error) {
 	if params == nil {
 		params = &ListWirelessDeviceImportTasksInput{}

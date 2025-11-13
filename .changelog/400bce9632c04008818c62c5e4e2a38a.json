@@ -1,0 +1,8 @@
+{
+    "id": "400bce96-32c0-4008-818c-62c5e4e2a38a",
+    "type": "feature",
+    "description": "Updated endpoint and service metadata",
+    "modules": [
+        "service/rds"
+    ]
+}

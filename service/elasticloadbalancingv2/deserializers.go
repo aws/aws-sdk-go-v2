@@ -15804,6 +15804,19 @@ func awsAwsquery_deserializeDocumentTargetDescription(v **types.TargetDescriptio
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("QuicServerId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.QuicServerId = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

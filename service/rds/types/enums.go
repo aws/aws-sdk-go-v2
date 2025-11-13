@@ -172,7 +172,6 @@ type ClusterScalabilityType string
 const (
 	ClusterScalabilityTypeStandard  ClusterScalabilityType = "standard"
 	ClusterScalabilityTypeLimitless ClusterScalabilityType = "limitless"
-	ClusterScalabilityTypeScaleout  ClusterScalabilityType = "scaleout"
 )
 
 // Values returns all known values for ClusterScalabilityType. Note that this can
@@ -183,7 +182,6 @@ func (ClusterScalabilityType) Values() []ClusterScalabilityType {
 	return []ClusterScalabilityType{
 		"standard",
 		"limitless",
-		"scaleout",
 	}
 }
 

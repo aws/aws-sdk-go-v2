@@ -29,7 +29,7 @@ func (c *Client) ListWirelessDevices(ctx context.Context, params *ListWirelessDe
 
 type ListWirelessDevicesInput struct {
 
-	// A filter to list only the wireless devices that use this destination.
+	// A filter to list only the wireless devices that use as uplink destination.
 	DestinationName *string
 
 	// A filter to list only the wireless devices that use this device profile.

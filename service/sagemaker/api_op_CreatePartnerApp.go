@@ -62,6 +62,11 @@ type CreatePartnerAppInput struct {
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
 
+	// When set to TRUE , the SageMaker Partner AI App is automatically upgraded to the
+	// latest minor version during the next scheduled maintenance window, if one is
+	// available. Default is FALSE .
+	EnableAutoMinorVersionUpgrade *bool
+
 	// When set to TRUE , the SageMaker Partner AI App sets the Amazon Web Services IAM
 	// session name or the authenticated IAM user as the identity of the SageMaker
 	// Partner AI App user.

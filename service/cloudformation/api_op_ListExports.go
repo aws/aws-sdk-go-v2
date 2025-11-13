@@ -36,8 +36,8 @@ func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optF
 
 type ListExportsInput struct {
 
-	// A string (provided by the ListExports response output) that identifies the next page of
-	// exported output values that you asked to retrieve.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	noSmithyDocumentSerde

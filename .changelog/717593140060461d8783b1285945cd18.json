@@ -1,0 +1,8 @@
+{
+    "id": "71759314-0060-461d-8783-b1285945cd18",
+    "type": "feature",
+    "description": "Support for managing web content filtering for defining, tracking and regulating type of content accessed with WorkSpaces Secure Browser as part of browser settings.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

@@ -61,8 +61,8 @@ type CreateWirelessDeviceInput struct {
 	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
-	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
-	// information.
+	// The integration status of the Device Location feature for LoRaWAN and Sidewalk
+	// devices.
 	Positioning types.PositioningConfigStatus
 
 	// The device configuration information to use to create the Sidewalk device.

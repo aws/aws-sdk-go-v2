@@ -7638,6 +7638,11 @@ func awsRestjson1_serializeOpDocumentStartSingleWirelessDeviceImportTaskInput(v 
 		ok.String(*v.DeviceName)
 	}
 
+	if len(v.Positioning) > 0 {
+		ok := object.Key("Positioning")
+		ok.String(string(v.Positioning))
+	}
+
 	if v.Sidewalk != nil {
 		ok := object.Key("Sidewalk")
 		if err := awsRestjson1_serializeDocumentSidewalkSingleStartImportInfo(v.Sidewalk, ok); err != nil {
@@ -7736,6 +7741,11 @@ func awsRestjson1_serializeOpDocumentStartWirelessDeviceImportTaskInput(v *Start
 	if v.DestinationName != nil {
 		ok := object.Key("DestinationName")
 		ok.String(*v.DestinationName)
+	}
+
+	if len(v.Positioning) > 0 {
+		ok := object.Key("Positioning")
+		ok.String(string(v.Positioning))
 	}
 
 	if v.Sidewalk != nil {
@@ -9309,6 +9319,13 @@ func awsRestjson1_serializeOpDocumentUpdateWirelessDeviceInput(v *UpdateWireless
 	if len(v.Positioning) > 0 {
 		ok := object.Key("Positioning")
 		ok.String(string(v.Positioning))
+	}
+
+	if v.Sidewalk != nil {
+		ok := object.Key("Sidewalk")
+		if err := awsRestjson1_serializeDocumentSidewalkUpdateWirelessDevice(v.Sidewalk, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -11449,6 +11466,18 @@ func awsRestjson1_serializeDocumentSidewalkCreateWirelessDevice(v *types.Sidewal
 		ok.String(*v.DeviceProfileId)
 	}
 
+	if v.Positioning != nil {
+		ok := object.Key("Positioning")
+		if err := awsRestjson1_serializeDocumentSidewalkPositioning(v.Positioning, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SidewalkManufacturingSn != nil {
+		ok := object.Key("SidewalkManufacturingSn")
+		ok.String(*v.SidewalkManufacturingSn)
+	}
+
 	return nil
 }
 
@@ -11459,6 +11488,18 @@ func awsRestjson1_serializeDocumentSidewalkEventNotificationConfigurations(v *ty
 	if len(v.AmazonIdEventTopic) > 0 {
 		ok := object.Key("AmazonIdEventTopic")
 		ok.String(string(v.AmazonIdEventTopic))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSidewalkPositioning(v *types.SidewalkPositioning, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationName != nil {
+		ok := object.Key("DestinationName")
+		ok.String(*v.DestinationName)
 	}
 
 	return nil
@@ -11502,6 +11543,13 @@ func awsRestjson1_serializeDocumentSidewalkSingleStartImportInfo(v *types.Sidewa
 	object := value.Object()
 	defer object.Close()
 
+	if v.Positioning != nil {
+		ok := object.Key("Positioning")
+		if err := awsRestjson1_serializeDocumentSidewalkPositioning(v.Positioning, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SidewalkManufacturingSn != nil {
 		ok := object.Key("SidewalkManufacturingSn")
 		ok.String(*v.SidewalkManufacturingSn)
@@ -11517,6 +11565,13 @@ func awsRestjson1_serializeDocumentSidewalkStartImportInfo(v *types.SidewalkStar
 	if v.DeviceCreationFile != nil {
 		ok := object.Key("DeviceCreationFile")
 		ok.String(*v.DeviceCreationFile)
+	}
+
+	if v.Positioning != nil {
+		ok := object.Key("Positioning")
+		if err := awsRestjson1_serializeDocumentSidewalkPositioning(v.Positioning, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Role != nil {
@@ -11546,6 +11601,20 @@ func awsRestjson1_serializeDocumentSidewalkUpdateImportInfo(v *types.SidewalkUpd
 	if v.DeviceCreationFile != nil {
 		ok := object.Key("DeviceCreationFile")
 		ok.String(*v.DeviceCreationFile)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSidewalkUpdateWirelessDevice(v *types.SidewalkUpdateWirelessDevice, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Positioning != nil {
+		ok := object.Key("Positioning")
+		if err := awsRestjson1_serializeDocumentSidewalkPositioning(v.Positioning, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

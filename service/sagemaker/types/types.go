@@ -2465,6 +2465,21 @@ type Autotune struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an available upgrade for a SageMaker Partner AI App,
+// including the version number and release notes.
+type AvailableUpgrade struct {
+
+	// A list of release notes describing the changes and improvements included in the
+	// available upgrade version.
+	ReleaseNotes []string
+
+	// The semantic version number of the available upgrade for the SageMaker Partner
+	// AI App.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an error that occurred during the node addition operation.
 type BatchAddClusterNodesError struct {
 
@@ -14962,6 +14977,20 @@ type PartnerAppConfig struct {
 	// specific to the user and application.
 	Arguments map[string]string
 
+	// A list of Amazon Web Services IAM Identity Center group patterns that can
+	// access the SageMaker Partner AI App. Group names support wildcard matching using
+	// * . An empty list indicates the app will not use Identity Center group features.
+	// All groups specified in RoleGroupAssignments must match patterns in this list.
+	AssignedGroupPatterns []string
+
+	// A map of in-app roles to Amazon Web Services IAM Identity Center group
+	// patterns. Groups assigned to specific roles receive those permissions, while
+	// groups in AssignedGroupPatterns but not in this map receive default in-app role
+	// depending on app type. Group patterns support wildcard matching using * .
+	// Currently supported by Fiddler version 1.3 and later with roles: ORG_MEMBER
+	// (default) and ORG_ADMIN .
+	RoleGroupAssignments []RoleGroupAssignment
+
 	noSmithyDocumentSerde
 }
 
@@ -17716,6 +17745,26 @@ type RetryStrategy struct {
 	//
 	// This member is required.
 	MaximumRetryAttempts *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines the mapping between an in-app role and the AWS IAM Identity Center
+// group patterns that should be assigned to that role within the SageMaker Partner
+// AI App.
+type RoleGroupAssignment struct {
+
+	// A list of AWS IAM Identity Center group patterns that should be assigned to the
+	// specified role. Group patterns support wildcard matching using * .
+	//
+	// This member is required.
+	GroupPatterns []string
+
+	// The name of the in-app role within the SageMaker Partner AI App. The specific
+	// roles available depend on the app type and version.
+	//
+	// This member is required.
+	RoleName *string
 
 	noSmithyDocumentSerde
 }

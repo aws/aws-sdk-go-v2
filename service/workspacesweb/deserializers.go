@@ -11747,6 +11747,42 @@ func awsRestjson1_deserializeDocumentArnList(v *[]string, value interface{}) err
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBlockedCategories(v *[]types.Category, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Category
+	if *v == nil {
+		cv = []types.Category{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Category
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Category to be of type string, got %T instead", value)
+			}
+			col = types.Category(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBrowserSettings(v **types.BrowserSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11804,6 +11840,11 @@ func awsRestjson1_deserializeDocumentBrowserSettings(v **types.BrowserSettings, 
 					return fmt.Errorf("expected keyArn to be of type string, got %T instead", value)
 				}
 				sv.CustomerManagedKey = ptr.String(jtv)
+			}
+
+		case "webContentFilteringPolicy":
+			if err := awsRestjson1_deserializeDocumentWebContentFilteringPolicy(&sv.WebContentFilteringPolicy, value); err != nil {
+				return err
 			}
 
 		default:
@@ -15342,6 +15383,42 @@ func awsRestjson1_deserializeDocumentTrustStoreSummaryList(v *[]types.TrustStore
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentUrlPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected UrlPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentUserAccessLoggingSettings(v **types.UserAccessLoggingSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15926,6 +16003,52 @@ func awsRestjson1_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebContentFilteringPolicy(v **types.WebContentFilteringPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebContentFilteringPolicy
+	if *v == nil {
+		sv = &types.WebContentFilteringPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedUrls":
+			if err := awsRestjson1_deserializeDocumentUrlPatternList(&sv.AllowedUrls, value); err != nil {
+				return err
+			}
+
+		case "blockedCategories":
+			if err := awsRestjson1_deserializeDocumentBlockedCategories(&sv.BlockedCategories, value); err != nil {
+				return err
+			}
+
+		case "blockedUrls":
+			if err := awsRestjson1_deserializeDocumentUrlPatternList(&sv.BlockedUrls, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

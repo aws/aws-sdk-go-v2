@@ -717,6 +717,13 @@ func awsRestjson1_serializeOpDocumentCreateBrowserSettingsInput(v *CreateBrowser
 		}
 	}
 
+	if v.WebContentFilteringPolicy != nil {
+		ok := object.Key("webContentFilteringPolicy")
+		if err := awsRestjson1_serializeDocumentWebContentFilteringPolicy(v.WebContentFilteringPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5274,6 +5281,13 @@ func awsRestjson1_serializeOpDocumentUpdateBrowserSettingsInput(v *UpdateBrowser
 		ok.String(*v.ClientToken)
 	}
 
+	if v.WebContentFilteringPolicy != nil {
+		ok := object.Key("webContentFilteringPolicy")
+		if err := awsRestjson1_serializeDocumentWebContentFilteringPolicy(v.WebContentFilteringPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6295,6 +6309,17 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBlockedCategories(v []types.Category, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCertificateList(v [][]byte, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6753,6 +6778,45 @@ func awsRestjson1_serializeDocumentToolbarConfiguration(v *types.ToolbarConfigur
 	if len(v.VisualMode) > 0 {
 		ok := object.Key("visualMode")
 		ok.String(string(v.VisualMode))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUrlPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebContentFilteringPolicy(v *types.WebContentFilteringPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedUrls != nil {
+		ok := object.Key("allowedUrls")
+		if err := awsRestjson1_serializeDocumentUrlPatternList(v.AllowedUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BlockedCategories != nil {
+		ok := object.Key("blockedCategories")
+		if err := awsRestjson1_serializeDocumentBlockedCategories(v.BlockedCategories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BlockedUrls != nil {
+		ok := object.Key("blockedUrls")
+		if err := awsRestjson1_serializeDocumentUrlPatternList(v.BlockedUrls, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "c95edb4a-2a8b-46e6-b54c-d969c7843daa",
+    "type": "feature",
+    "description": "Add Amazon ECR FIPS PrivateLink endpoint support",
+    "modules": [
+        "service/ecr"
+    ]
+}

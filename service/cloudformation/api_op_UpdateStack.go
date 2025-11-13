@@ -161,18 +161,17 @@ type UpdateStackInput struct {
 	// [Parameter]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
 	Parameters []types.Parameter
 
-	// The template resource types that you have permissions to work with for this
-	// update stack action, such as AWS::EC2::Instance , AWS::EC2::* , or
+	// Specifies which resource types you can work with, such as AWS::EC2::Instance or
 	// Custom::MyCustomInstance .
 	//
 	// If the list of resource types doesn't include a resource that you're updating,
 	// the stack update fails. By default, CloudFormation grants permissions to all
 	// resource types. IAM uses this parameter for CloudFormation-specific condition
-	// keys in IAM policies. For more information, see [Control access with Identity and Access Management].
+	// keys in IAM policies. For more information, see [Control CloudFormation access with Identity and Access Management].
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
+	// [Control CloudFormation access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
 	ResourceTypes []string
 
 	// When set to true , newly created resources are deleted when the operation rolls
@@ -267,8 +266,15 @@ type UpdateStackInput struct {
 	// Reuse the existing template that is associated with the stack that you are
 	// updating.
 	//
+	// When using templates with the AWS::LanguageExtensions transform, provide the
+	// template instead of using UsePreviousTemplate to ensure new parameter values
+	// and Systems Manager parameter updates are applied correctly. For more
+	// information, see [AWS::LanguageExtensions transform].
+	//
 	// Conditional: You must specify only one of the following parameters: TemplateBody
 	// , TemplateURL , or set the UsePreviousTemplate to true .
+	//
+	// [AWS::LanguageExtensions transform]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html
 	UsePreviousTemplate *bool
 
 	noSmithyDocumentSerde

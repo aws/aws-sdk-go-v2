@@ -4728,6 +4728,11 @@ func awsAwsquery_serializeDocumentTargetDescription(v *types.TargetDescription, 
 		objectKey.Integer(*v.Port)
 	}
 
+	if v.QuicServerId != nil {
+		objectKey := object.Key("QuicServerId")
+		objectKey.String(*v.QuicServerId)
+	}
+
 	return nil
 }
 

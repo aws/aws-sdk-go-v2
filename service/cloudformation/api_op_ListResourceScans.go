@@ -35,7 +35,8 @@ type ListResourceScansInput struct {
 	// set of results. The default value is 10. The maximum value is 100.
 	MaxResults *int32
 
-	// A string that identifies the next page of resource scan results.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	// The scan type that you want to get summary information about. The default is

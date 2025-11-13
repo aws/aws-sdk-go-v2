@@ -38,6 +38,75 @@ func (BrowserType) Values() []BrowserType {
 	}
 }
 
+type Category string
+
+// Enum values for Category
+const (
+	CategoryCults                      Category = "Cults"
+	CategoryGambling                   Category = "Gambling"
+	CategoryNudity                     Category = "Nudity"
+	CategoryPornography                Category = "Pornography"
+	CategorySexEducation               Category = "SexEducation"
+	CategoryTasteless                  Category = "Tasteless"
+	CategoryViolence                   Category = "Violence"
+	CategoryDownloadSites              Category = "DownloadSites"
+	CategoryImageSharing               Category = "ImageSharing"
+	CategoryPeerToPeer                 Category = "PeerToPeer"
+	CategoryStreamingMediaAndDownloads Category = "StreamingMediaAndDownloads"
+	CategoryGenerativeAi               Category = "GenerativeAI"
+	CategoryCriminalActivity           Category = "CriminalActivity"
+	CategoryHacking                    Category = "Hacking"
+	CategoryHateAndIntolerance         Category = "HateAndIntolerance"
+	CategoryIllegalDrug                Category = "IllegalDrug"
+	CategoryIllegalSoftware            Category = "IllegalSoftware"
+	CategorySchoolCheating             Category = "SchoolCheating"
+	CategorySelfHarm                   Category = "SelfHarm"
+	CategoryWeapons                    Category = "Weapons"
+	CategoryChat                       Category = "Chat"
+	CategoryGames                      Category = "Games"
+	CategoryInstantMessaging           Category = "InstantMessaging"
+	CategoryProfessionalNetwork        Category = "ProfessionalNetwork"
+	CategorySocialNetworking           Category = "SocialNetworking"
+	CategoryWebBasedEmail              Category = "WebBasedEmail"
+	CategoryParkedDomains              Category = "ParkedDomains"
+)
+
+// Values returns all known values for Category. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Category) Values() []Category {
+	return []Category{
+		"Cults",
+		"Gambling",
+		"Nudity",
+		"Pornography",
+		"SexEducation",
+		"Tasteless",
+		"Violence",
+		"DownloadSites",
+		"ImageSharing",
+		"PeerToPeer",
+		"StreamingMediaAndDownloads",
+		"GenerativeAI",
+		"CriminalActivity",
+		"Hacking",
+		"HateAndIntolerance",
+		"IllegalDrug",
+		"IllegalSoftware",
+		"SchoolCheating",
+		"SelfHarm",
+		"Weapons",
+		"Chat",
+		"Games",
+		"InstantMessaging",
+		"ProfessionalNetwork",
+		"SocialNetworking",
+		"WebBasedEmail",
+		"ParkedDomains",
+	}
+}
+
 type EnabledType string
 
 // Enum values for EnabledType
@@ -77,6 +146,7 @@ const (
 	EventSessionStart                              Event = "SessionStart"
 	EventSessionDisconnect                         Event = "SessionDisconnect"
 	EventSessionEnd                                Event = "SessionEnd"
+	EventUrlBlockByContentFilter                   Event = "UrlBlockByContentFilter"
 )
 
 // Values returns all known values for Event. Note that this can be expanded in
@@ -101,6 +171,7 @@ func (Event) Values() []Event {
 		"SessionStart",
 		"SessionDisconnect",
 		"SessionEnd",
+		"UrlBlockByContentFilter",
 	}
 }
 

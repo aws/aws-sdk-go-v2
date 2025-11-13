@@ -77,7 +77,7 @@ type CreateChangeSetInput struct {
 	//   - CAPABILITY_IAM and CAPABILITY_NAMED_IAM
 	//
 	// Some stack templates might include resources that can affect permissions in
-	//   your Amazon Web Services account; for example, by creating new IAM users. For
+	//   your Amazon Web Services account, for example, by creating new IAM users. For
 	//   those stacks, you must explicitly acknowledge this by specifying one of these
 	//   capabilities.
 	//
@@ -220,19 +220,18 @@ type CreateChangeSetInput struct {
 	// set. For more information, see the Parameterdata type.
 	Parameters []types.Parameter
 
-	// The template resource types that you have permissions to work with if you
-	// execute this change set, such as AWS::EC2::Instance , AWS::EC2::* , or
+	// Specifies which resource types you can work with, such as AWS::EC2::Instance or
 	// Custom::MyCustomInstance .
 	//
 	// If the list of resource types doesn't include a resource type that you're
 	// updating, the stack update fails. By default, CloudFormation grants permissions
 	// to all resource types. IAM uses this parameter for condition keys in IAM
-	// policies for CloudFormation. For more information, see [Control access with Identity and Access Management]in the CloudFormation
+	// policies for CloudFormation. For more information, see [Control CloudFormation access with Identity and Access Management]in the CloudFormation
 	// User Guide.
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
+	// [Control CloudFormation access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html
 	ResourceTypes []string
 
 	// The resources to import into your stack.
@@ -263,7 +262,8 @@ type CreateChangeSetInput struct {
 	// the change set by comparing this template with the template of the stack that
 	// you specified.
 	//
-	// Conditional: You must specify only TemplateBody or TemplateURL .
+	// Conditional: You must specify only one of the following parameters: TemplateBody
+	// , TemplateURL , or set the UsePreviousTemplate to true .
 	TemplateBody *string
 
 	// The URL of the file that contains the revised template. The URL must point to a
@@ -272,11 +272,22 @@ type CreateChangeSetInput struct {
 	// template with the stack that you specified. The location for an Amazon S3 bucket
 	// must start with https:// . URLs from S3 static websites are not supported.
 	//
-	// Conditional: You must specify only TemplateBody or TemplateURL .
+	// Conditional: You must specify only one of the following parameters: TemplateBody
+	// , TemplateURL , or set the UsePreviousTemplate to true .
 	TemplateURL *string
 
 	// Whether to reuse the template that's associated with the stack to create the
 	// change set.
+	//
+	// When using templates with the AWS::LanguageExtensions transform, provide the
+	// template instead of using UsePreviousTemplate to ensure new parameter values
+	// and Systems Manager parameter updates are applied correctly. For more
+	// information, see [AWS::LanguageExtensions transform].
+	//
+	// Conditional: You must specify only one of the following parameters: TemplateBody
+	// , TemplateURL , or set the UsePreviousTemplate to true .
+	//
+	// [AWS::LanguageExtensions transform]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html
 	UsePreviousTemplate *bool
 
 	noSmithyDocumentSerde

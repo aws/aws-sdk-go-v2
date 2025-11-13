@@ -48,9 +48,12 @@ type UpdateWirelessDeviceInput struct {
 	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
-	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
-	// information.
+	// The integration status of the Device Location feature for LoRaWAN and Sidewalk
+	// devices.
 	Positioning types.PositioningConfigStatus
+
+	// The updated sidewalk properties.
+	Sidewalk *types.SidewalkUpdateWirelessDevice
 
 	noSmithyDocumentSerde
 }

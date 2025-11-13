@@ -35,6 +35,10 @@ type DescribePartnerAppInput struct {
 	// This member is required.
 	Arn *string
 
+	// When set to TRUE , the response includes available upgrade information for the
+	// SageMaker Partner AI App. Default is FALSE .
+	IncludeAvailableUpgrade *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -49,12 +53,24 @@ type DescribePartnerAppOutput struct {
 	// The authorization type that users use to access the SageMaker Partner AI App.
 	AuthType types.PartnerAppAuthType
 
+	// A map of available minor version upgrades for the SageMaker Partner AI App. The
+	// key is the semantic version number, and the value is a list of release notes for
+	// that version. A null value indicates no upgrades are available.
+	AvailableUpgrade *types.AvailableUpgrade
+
 	// The URL of the SageMaker Partner AI App that the Application SDK uses to
 	// support in-app calls for the user.
 	BaseUrl *string
 
 	// The time that the SageMaker Partner AI App was created.
 	CreationTime *time.Time
+
+	// The end-of-life date for the current version of the SageMaker Partner AI App.
+	CurrentVersionEolDate *time.Time
+
+	// Indicates whether the SageMaker Partner AI App is configured for automatic
+	// minor version upgrades during scheduled maintenance windows.
+	EnableAutoMinorVersionUpgrade *bool
 
 	// When set to TRUE , the SageMaker Partner AI App sets the Amazon Web Services IAM
 	// session name or the authenticated IAM user as the identity of the SageMaker

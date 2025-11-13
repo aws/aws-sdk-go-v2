@@ -53,6 +53,7 @@
         "api_op_ExecuteChangeSet.go",
         "api_op_ExecuteStackRefactor.go",
         "api_op_GetGeneratedTemplate.go",
+        "api_op_GetHookResult.go",
         "api_op_GetStackPolicy.go",
         "api_op_GetTemplate.go",
         "api_op_GetTemplateSummary.go",

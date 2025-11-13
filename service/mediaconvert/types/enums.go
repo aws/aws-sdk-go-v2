@@ -2037,6 +2037,25 @@ func (CmfcAudioTrackType) Values() []CmfcAudioTrackType {
 	}
 }
 
+type CmfcC2paManifest string
+
+// Enum values for CmfcC2paManifest
+const (
+	CmfcC2paManifestInclude CmfcC2paManifest = "INCLUDE"
+	CmfcC2paManifestExclude CmfcC2paManifest = "EXCLUDE"
+)
+
+// Values returns all known values for CmfcC2paManifest. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcC2paManifest) Values() []CmfcC2paManifest {
+	return []CmfcC2paManifest{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
 type CmfcDescriptiveVideoServiceFlag string
 
 // Enum values for CmfcDescriptiveVideoServiceFlag
@@ -3883,6 +3902,25 @@ func (Format) Values() []Format {
 		"matroska",
 		"webm",
 		"mxf",
+	}
+}
+
+type FrameControl string
+
+// Enum values for FrameControl
+const (
+	FrameControlNearestIdrframe FrameControl = "NEAREST_IDRFRAME"
+	FrameControlNearestIframe   FrameControl = "NEAREST_IFRAME"
+)
+
+// Values returns all known values for FrameControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FrameControl) Values() []FrameControl {
+	return []FrameControl{
+		"NEAREST_IDRFRAME",
+		"NEAREST_IFRAME",
 	}
 }
 
@@ -7161,6 +7199,25 @@ func (MpdAudioDuration) Values() []MpdAudioDuration {
 	return []MpdAudioDuration{
 		"DEFAULT_CODEC_DURATION",
 		"MATCH_VIDEO_DURATION",
+	}
+}
+
+type MpdC2paManifest string
+
+// Enum values for MpdC2paManifest
+const (
+	MpdC2paManifestInclude MpdC2paManifest = "INCLUDE"
+	MpdC2paManifestExclude MpdC2paManifest = "EXCLUDE"
+)
+
+// Values returns all known values for MpdC2paManifest. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpdC2paManifest) Values() []MpdC2paManifest {
+	return []MpdC2paManifest{
+		"INCLUDE",
+		"EXCLUDE",
 	}
 }
 

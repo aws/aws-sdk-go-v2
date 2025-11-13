@@ -17,6 +17,9 @@ func ExampleMapping_outputUsage() {
 	case *types.MappingMemberFramework:
 		_ = v.Value // Value is types.FrameworkMappingDetails
 
+	case *types.MappingMemberRelatedControl:
+		_ = v.Value // Value is types.RelatedControlMappingDetails
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -27,4 +30,5 @@ func ExampleMapping_outputUsage() {
 }
 
 var _ *types.FrameworkMappingDetails
+var _ *types.RelatedControlMappingDetails
 var _ *types.CommonControlMappingDetails

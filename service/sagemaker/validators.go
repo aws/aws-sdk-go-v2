@@ -12549,6 +12549,23 @@ func validateParameterRanges(v *types.ParameterRanges) error {
 	}
 }
 
+func validatePartnerAppConfig(v *types.PartnerAppConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartnerAppConfig"}
+	if v.RoleGroupAssignments != nil {
+		if err := validateRoleGroupAssignmentsList(v.RoleGroupAssignments); err != nil {
+			invalidParams.AddNested("RoleGroupAssignments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePipelineDefinitionS3Location(v *types.PipelineDefinitionS3Location) error {
 	if v == nil {
 		return nil
@@ -13186,6 +13203,41 @@ func validateRetryStrategy(v *types.RetryStrategy) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RetryStrategy"}
 	if v.MaximumRetryAttempts == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaximumRetryAttempts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoleGroupAssignment(v *types.RoleGroupAssignment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoleGroupAssignment"}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.GroupPatterns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupPatterns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoleGroupAssignmentsList(v []types.RoleGroupAssignment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoleGroupAssignmentsList"}
+	for i := range v {
+		if err := validateRoleGroupAssignment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -16429,6 +16481,11 @@ func validateOpCreatePartnerAppInput(v *CreatePartnerAppInput) error {
 	}
 	if v.Tier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
+	}
+	if v.ApplicationConfig != nil {
+		if err := validatePartnerAppConfig(v.ApplicationConfig); err != nil {
+			invalidParams.AddNested("ApplicationConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.AuthType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
@@ -20687,6 +20744,11 @@ func validateOpUpdatePartnerAppInput(v *UpdatePartnerAppInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePartnerAppInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.ApplicationConfig != nil {
+		if err := validatePartnerAppConfig(v.ApplicationConfig); err != nil {
+			invalidParams.AddNested("ApplicationConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

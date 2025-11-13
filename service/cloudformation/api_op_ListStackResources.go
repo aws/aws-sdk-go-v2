@@ -44,8 +44,8 @@ type ListStackResourcesInput struct {
 	// This member is required.
 	StackName *string
 
-	// A string that identifies the next page of stack resources that you want to
-	// retrieve.
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	noSmithyDocumentSerde
