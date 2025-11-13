@@ -1,8 +1,0 @@
-{
-    "id": "32adefd0-8573-4eca-bbc6-bcab86de0bf3",
-    "type": "feature",
-    "description": "QUIC and TCP_QUIC protocol support for Network Load Balancer (NLB). This capability enables customers to forward QUIC traffic to their targets with ultra-low latency while maintaining session stickiness using QUIC Connection IDs.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

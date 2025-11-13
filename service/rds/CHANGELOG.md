@@ -1,3 +1,7 @@
+# v1.109.0 (2025-11-13)
+
+* **Feature**: Updated endpoint and service metadata
+
 # v1.108.9 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

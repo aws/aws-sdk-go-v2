@@ -1,8 +1,0 @@
-{
-    "id": "53872cc0-4d93-46e5-a09c-139bbeeca52f",
-    "type": "feature",
-    "description": "CloudFormation now supports GetHookResult API with annotations to retrieve structured compliance check results and remediation guidance for each evaluated resource, replacing the previous single-message limitation with detailed validation outcomes.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

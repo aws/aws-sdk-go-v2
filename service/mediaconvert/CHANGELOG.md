@@ -1,3 +1,7 @@
+# v1.85.0 (2025-11-13)
+
+* **Feature**: Lowers minimum duration for black video generator. Adds support for embedding and signing C2PA content credentials in DASH and CMAF HLS outputs.
+
 # v1.84.3 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

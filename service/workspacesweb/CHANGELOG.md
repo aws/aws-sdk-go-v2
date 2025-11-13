@@ -1,3 +1,7 @@
+# v1.34.0 (2025-11-13)
+
+* **Feature**: Support for managing web content filtering for defining, tracking and regulating type of content accessed with WorkSpaces Secure Browser as part of browser settings.
+
 # v1.33.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

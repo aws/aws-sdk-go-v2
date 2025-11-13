@@ -1,3 +1,7 @@
+# v1.54.0 (2025-11-13)
+
+* **Feature**: Integration of Device Location with Amazon Sidewalk network for Amazon Sidewalk enabled devices
+
 # v1.53.11 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

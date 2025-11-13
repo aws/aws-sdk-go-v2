@@ -1,3 +1,7 @@
+# v1.223.0 (2025-11-13)
+
+* **Feature**: Added support for minor version upgrades and AWS Identity Center integration for SageMaker Hadron Partner Apps, enabling automated version management and IdC group-based access control.
+
 # v1.222.0 (2025-11-12)
 
 * **Feature**: Add support for trn2.3xlarge instance type for SageMaker Hyperpod

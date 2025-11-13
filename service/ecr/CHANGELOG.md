@@ -1,3 +1,7 @@
+# v1.52.0 (2025-11-13)
+
+* **Feature**: Add Amazon ECR FIPS PrivateLink endpoint support
+
 # v1.51.4 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

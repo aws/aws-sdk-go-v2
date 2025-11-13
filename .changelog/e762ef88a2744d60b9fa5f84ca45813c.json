@@ -1,8 +1,0 @@
-{
-    "id": "e762ef88-a274-4d60-b9fa-5f84ca45813c",
-    "type": "feature",
-    "description": "Added support for minor version upgrades and AWS Identity Center integration for SageMaker Hadron Partner Apps, enabling automated version management and IdC group-based access control.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

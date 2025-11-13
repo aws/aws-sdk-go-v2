@@ -1,3 +1,7 @@
+# v1.14.0 (2025-11-13)
+
+* **Feature**: Added support for related control mappings with new RELATED_CONTROL mapping type in ListControlMappings API.
+
 # v1.13.12 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

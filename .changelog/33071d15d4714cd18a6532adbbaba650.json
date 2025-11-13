@@ -1,8 +1,0 @@
-{
-    "id": "33071d15-d471-4cd1-8a65-32adbbaba650",
-    "type": "feature",
-    "description": "Integration of Device Location with Amazon Sidewalk network for Amazon Sidewalk enabled devices",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.53.0 (2025-11-13)
+
+* **Feature**: QUIC and TCP_QUIC protocol support for Network Load Balancer (NLB). This capability enables customers to forward QUIC traffic to their targets with ultra-low latency while maintaining session stickiness using QUIC Connection IDs.
+
 # v1.52.0 (2025-11-12)
 
 * **Feature**: This release expands ALB Authentication to support JWT verification and adds support for a new JWT validation action in listener rule.

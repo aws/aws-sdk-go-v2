@@ -1,3 +1,7 @@
+# v1.69.0 (2025-11-13)
+
+* **Feature**: CloudFormation now supports GetHookResult API with annotations to retrieve structured compliance check results and remediation guidance for each evaluated resource, replacing the previous single-message limitation with detailed validation outcomes.
+
 # v1.68.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

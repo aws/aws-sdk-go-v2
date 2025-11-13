@@ -1,8 +1,0 @@
-{
-    "id": "c6a4256a-5041-4bee-8a8b-f41fbd75872b",
-    "type": "feature",
-    "description": "Added support for related control mappings with new RELATED_CONTROL mapping type in ListControlMappings API.",
-    "modules": [
-        "service/controlcatalog"
-    ]
-}

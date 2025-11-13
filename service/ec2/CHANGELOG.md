@@ -1,3 +1,7 @@
+# v1.268.0 (2025-11-13)
+
+* **Feature**: Added support for new accelerator types ("media") and accelerator names ("L4", "L40s", "GAUDI_HL_205", "INFERENTIA2", "TRAINIUM", "TRAINIUM2", "U30") in Attributes Based Instance Type Selection for launched instance types.
+
 # v1.267.0 (2025-11-12)
 
 * **Feature**: Adds complete AMI ancestry tracing from immediate parent through each preceding generation back to the root AMI

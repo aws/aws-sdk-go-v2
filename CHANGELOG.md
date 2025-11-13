@@ -1,3 +1,27 @@
+# Release (2025-11-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.69.0](service/cloudformation/CHANGELOG.md#v1690-2025-11-13)
+  * **Feature**: CloudFormation now supports GetHookResult API with annotations to retrieve structured compliance check results and remediation guidance for each evaluated resource, replacing the previous single-message limitation with detailed validation outcomes.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.14.0](service/controlcatalog/CHANGELOG.md#v1140-2025-11-13)
+  * **Feature**: Added support for related control mappings with new RELATED_CONTROL mapping type in ListControlMappings API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.268.0](service/ec2/CHANGELOG.md#v12680-2025-11-13)
+  * **Feature**: Added support for new accelerator types ("media") and accelerator names ("L4", "L40s", "GAUDI_HL_205", "INFERENTIA2", "TRAINIUM", "TRAINIUM2", "U30") in Attributes Based Instance Type Selection for launched instance types.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.52.0](service/ecr/CHANGELOG.md#v1520-2025-11-13)
+  * **Feature**: Add Amazon ECR FIPS PrivateLink endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.53.0](service/elasticloadbalancingv2/CHANGELOG.md#v1530-2025-11-13)
+  * **Feature**: QUIC and TCP_QUIC protocol support for Network Load Balancer (NLB). This capability enables customers to forward QUIC traffic to their targets with ultra-low latency while maintaining session stickiness using QUIC Connection IDs.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.54.0](service/iotwireless/CHANGELOG.md#v1540-2025-11-13)
+  * **Feature**: Integration of Device Location with Amazon Sidewalk network for Amazon Sidewalk enabled devices
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.85.0](service/mediaconvert/CHANGELOG.md#v1850-2025-11-13)
+  * **Feature**: Lowers minimum duration for black video generator. Adds support for embedding and signing C2PA content credentials in DASH and CMAF HLS outputs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.109.0](service/rds/CHANGELOG.md#v11090-2025-11-13)
+  * **Feature**: Updated endpoint and service metadata
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.223.0](service/sagemaker/CHANGELOG.md#v12230-2025-11-13)
+  * **Feature**: Added support for minor version upgrades and AWS Identity Center integration for SageMaker Hadron Partner Apps, enabling automated version management and IdC group-based access control.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.34.0](service/workspacesweb/CHANGELOG.md#v1340-2025-11-13)
+  * **Feature**: Support for managing web content filtering for defining, tracking and regulating type of content accessed with WorkSpaces Secure Browser as part of browser settings.
+
 # Release (2025-11-12)
 
 ## General Highlights
