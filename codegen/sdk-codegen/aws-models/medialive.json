@@ -25528,11 +25528,7 @@
         "com.amazonaws.medialive#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for MaxResults",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 1000
-                }
+                "smithy.api#documentation": "Placeholder documentation for MaxResults"
             }
         },
         "com.amazonaws.medialive#MediaConnectFlow": {
@@ -38779,644 +38775,391 @@
         "com.amazonaws.medialive#__integerMax5": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMax5",
-                "smithy.api#range": {
-                    "max": 5
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMax5"
             }
         },
         "com.amazonaws.medialive#__integerMin0": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0",
-                "smithy.api#range": {
-                    "min": 0
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max10": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max10",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 10
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max10"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max100": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max100",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 100
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max100"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max1000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max1000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 1000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max1000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max10000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max10000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 10000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max10000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max1000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max1000000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 1000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max1000000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max100000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max100000000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 100000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max100000000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max128": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max128",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 128
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max128"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max15": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max15",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 15
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max15"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max2000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max2000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 2000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max2000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max255": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max255",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 255
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max255"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max3": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max3",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 3
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max3"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max30": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max30",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 30
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max30"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max32768": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max32768",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 32768
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max32768"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max3600": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max3600",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 3600
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max3600"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max40000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max40000000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 40000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max40000000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max500": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max500",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 500
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max500"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max600": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max600",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 600
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max600"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max65535": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max65535",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 65535
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max65535"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max65536": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max65536",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 65536
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max65536"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max7": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max7",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 7
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max7"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max8000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8000000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 8000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8000000"
             }
         },
         "com.amazonaws.medialive#__integerMin0Max8191": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8191",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 8191
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8191"
             }
         },
         "com.amazonaws.medialive#__integerMin1": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1",
-                "smithy.api#range": {
-                    "min": 1
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1"
             }
         },
         "com.amazonaws.medialive#__integerMin100": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin100",
-                "smithy.api#range": {
-                    "min": 100
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin100"
             }
         },
         "com.amazonaws.medialive#__integerMin1000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1000",
-                "smithy.api#range": {
-                    "min": 1000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1000"
             }
         },
         "com.amazonaws.medialive#__integerMin1000000Max100000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1000000Max100000000",
-                "smithy.api#range": {
-                    "min": 1000000,
-                    "max": 100000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1000000Max100000000"
             }
         },
         "com.amazonaws.medialive#__integerMin100000Max100000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max100000000",
-                "smithy.api#range": {
-                    "min": 100000,
-                    "max": 100000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max100000000"
             }
         },
         "com.amazonaws.medialive#__integerMin100000Max40000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max40000000",
-                "smithy.api#range": {
-                    "min": 100000,
-                    "max": 40000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max40000000"
             }
         },
         "com.amazonaws.medialive#__integerMin100000Max80000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max80000000",
-                "smithy.api#range": {
-                    "min": 100000,
-                    "max": 80000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max80000000"
             }
         },
         "com.amazonaws.medialive#__integerMin1000Max30000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1000Max30000",
-                "smithy.api#range": {
-                    "min": 1000,
-                    "max": 30000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1000Max30000"
             }
         },
         "com.amazonaws.medialive#__integerMin10Max86400": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin10Max86400",
-                "smithy.api#range": {
-                    "min": 10,
-                    "max": 86400
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin10Max86400"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max10": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max10",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 10
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max10"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max1000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max1000000",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 1000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max1000000"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max16": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max16",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 16
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max16"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max20": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max20",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 20
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max20"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max3003": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max3003",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 3003
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max3003"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max31": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max31",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 31
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max31"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max32": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max32",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 32
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max32"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max3600000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max3600000",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 3600000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max3600000"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max4": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max4",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 4
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max4"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max5": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max5",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 5
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max5"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max51": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max51",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 51
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max51"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max6": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max6",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 6
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max6"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max8": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max8",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 8
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max8"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max800": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max800",
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 800
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max800"
             }
         },
         "com.amazonaws.medialive#__integerMin256Max3840": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin256Max3840",
-                "smithy.api#range": {
-                    "min": 256,
-                    "max": 3840
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin256Max3840"
             }
         },
         "com.amazonaws.medialive#__integerMin25Max10000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin25Max10000",
-                "smithy.api#range": {
-                    "min": 25,
-                    "max": 10000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin25Max10000"
             }
         },
         "com.amazonaws.medialive#__integerMin25Max2000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin25Max2000",
-                "smithy.api#range": {
-                    "min": 25,
-                    "max": 2000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin25Max2000"
             }
         },
         "com.amazonaws.medialive#__integerMin3": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin3",
-                "smithy.api#range": {
-                    "min": 3
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin3"
             }
         },
         "com.amazonaws.medialive#__integerMin30": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin30",
-                "smithy.api#range": {
-                    "min": 30
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin30"
             }
         },
         "com.amazonaws.medialive#__integerMin32Max8191": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin32Max8191",
-                "smithy.api#range": {
-                    "min": 32,
-                    "max": 8191
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin32Max8191"
             }
         },
         "com.amazonaws.medialive#__integerMin40Max16000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin40Max16000",
-                "smithy.api#range": {
-                    "min": 40,
-                    "max": 16000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin40Max16000"
             }
         },
         "com.amazonaws.medialive#__integerMin4Max20": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin4Max20",
-                "smithy.api#range": {
-                    "min": 4,
-                    "max": 20
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin4Max20"
             }
         },
         "com.amazonaws.medialive#__integerMin50000Max12000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max12000000",
-                "smithy.api#range": {
-                    "min": 50000,
-                    "max": 12000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max12000000"
             }
         },
         "com.amazonaws.medialive#__integerMin50000Max24000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max24000000",
-                "smithy.api#range": {
-                    "min": 50000,
-                    "max": 24000000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max24000000"
             }
         },
         "com.amazonaws.medialive#__integerMin64Max2160": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin64Max2160",
-                "smithy.api#range": {
-                    "min": 64,
-                    "max": 2160
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin64Max2160"
             }
         },
         "com.amazonaws.medialive#__integerMin800Max3000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin800Max3000",
-                "smithy.api#range": {
-                    "min": 800,
-                    "max": 3000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin800Max3000"
             }
         },
         "com.amazonaws.medialive#__integerMin80Max800": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin80Max800",
-                "smithy.api#range": {
-                    "min": 80,
-                    "max": 800
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin80Max800"
             }
         },
         "com.amazonaws.medialive#__integerMin96Max600": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin96Max600",
-                "smithy.api#range": {
-                    "min": 96,
-                    "max": 600
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMin96Max600"
             }
         },
         "com.amazonaws.medialive#__integerMinNegative1000Max1000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative1000Max1000",
-                "smithy.api#range": {
-                    "min": -1000,
-                    "max": 1000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative1000Max1000"
             }
         },
         "com.amazonaws.medialive#__integerMinNegative5Max5": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative5Max5",
-                "smithy.api#range": {
-                    "min": -5,
-                    "max": 5
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative5Max5"
             }
         },
         "com.amazonaws.medialive#__integerMinNegative60Max6": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative60Max6",
-                "smithy.api#range": {
-                    "min": -60,
-                    "max": 6
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative60Max6"
             }
         },
         "com.amazonaws.medialive#__integerMinNegative60Max60": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative60Max60",
-                "smithy.api#range": {
-                    "min": -60,
-                    "max": 60
-                }
+                "smithy.api#documentation": "Placeholder documentation for __integerMinNegative60Max60"
             }
         },
         "com.amazonaws.medialive#__listOfAdditionalDestinations": {
@@ -40310,41 +40053,25 @@
         "com.amazonaws.medialive#__longMin0Max1099511627775": {
             "type": "long",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __longMin0Max1099511627775",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 1099511627775
-                }
+                "smithy.api#documentation": "Placeholder documentation for __longMin0Max1099511627775"
             }
         },
         "com.amazonaws.medialive#__longMin0Max4294967295": {
             "type": "long",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __longMin0Max4294967295",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 4294967295
-                }
+                "smithy.api#documentation": "Placeholder documentation for __longMin0Max4294967295"
             }
         },
         "com.amazonaws.medialive#__longMin0Max8589934591": {
             "type": "long",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __longMin0Max8589934591",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 8589934591
-                }
+                "smithy.api#documentation": "Placeholder documentation for __longMin0Max8589934591"
             }
         },
         "com.amazonaws.medialive#__longMin0Max86400000": {
             "type": "long",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __longMin0Max86400000",
-                "smithy.api#range": {
-                    "min": 0,
-                    "max": 86400000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __longMin0Max86400000"
             }
         },
         "com.amazonaws.medialive#__string": {
@@ -40356,283 +40083,181 @@
         "com.amazonaws.medialive#__stringMax100": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax100",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 100
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax100"
             }
         },
         "com.amazonaws.medialive#__stringMax1000": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax1000",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1000
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax1000"
             }
         },
         "com.amazonaws.medialive#__stringMax2048": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax2048",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 2048
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax2048"
             }
         },
         "com.amazonaws.medialive#__stringMax255": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax255",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 255
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax255"
             }
         },
         "com.amazonaws.medialive#__stringMax256": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax256",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 256
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax256"
             }
         },
         "com.amazonaws.medialive#__stringMax32": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax32",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 32
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax32"
             }
         },
         "com.amazonaws.medialive#__stringMax64": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMax64",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 64
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMax64"
             }
         },
         "com.amazonaws.medialive#__stringMin0Max1024": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin0Max1024",
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1024
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin0Max1024"
             }
         },
         "com.amazonaws.medialive#__stringMin1": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1",
-                "smithy.api#length": {
-                    "min": 1
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max2048": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max2048",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 2048
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max2048"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max2048PatternArn": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max2048PatternArn",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 2048
-                },
-                "smithy.api#pattern": "^arn.+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max2048PatternArn"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max255": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max255",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 255
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max255"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max255PatternS": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max255PatternS",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 255
-                },
-                "smithy.api#pattern": "^[^\\s]+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max255PatternS"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max256": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max256",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max256"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max256PatternS": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max256PatternS",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
-                },
-                "smithy.api#pattern": "^[\\S]+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max256PatternS"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max35": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max35",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 35
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max35"
             }
         },
         "com.amazonaws.medialive#__stringMin1Max7": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max7",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 7
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max7"
             }
         },
         "com.amazonaws.medialive#__stringMin2Max2": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin2Max2",
-                "smithy.api#length": {
-                    "min": 2,
-                    "max": 2
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin2Max2"
             }
         },
         "com.amazonaws.medialive#__stringMin32Max32": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin32Max32",
-                "smithy.api#length": {
-                    "min": 32,
-                    "max": 32
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin32Max32"
             }
         },
         "com.amazonaws.medialive#__stringMin34Max34": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin34Max34",
-                "smithy.api#length": {
-                    "min": 34,
-                    "max": 34
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin34Max34"
             }
         },
         "com.amazonaws.medialive#__stringMin3Max3": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin3Max3",
-                "smithy.api#length": {
-                    "min": 3,
-                    "max": 3
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin3Max3"
             }
         },
         "com.amazonaws.medialive#__stringMin6Max6": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin6Max6",
-                "smithy.api#length": {
-                    "min": 6,
-                    "max": 6
-                }
+                "smithy.api#documentation": "Placeholder documentation for __stringMin6Max6"
             }
         },
         "com.amazonaws.medialive#__stringMin7Max11PatternAws097": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringMin7Max11PatternAws097",
-                "smithy.api#length": {
-                    "min": 7,
-                    "max": 11
-                },
-                "smithy.api#pattern": "^(aws-)?[0-9]{7}$"
+                "smithy.api#documentation": "Placeholder documentation for __stringMin7Max11PatternAws097"
             }
         },
         "com.amazonaws.medialive#__stringPattern010920300": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPattern010920300",
-                "smithy.api#pattern": "^([0,1]?[0-9]|2[0-3]):00$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPattern010920300"
             }
         },
         "com.amazonaws.medialive#__stringPatternArnMedialiveCloudwatchAlarmTemplate": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveCloudwatchAlarmTemplate",
-                "smithy.api#pattern": "^arn:.+:medialive:.+:cloudwatch-alarm-template:.+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveCloudwatchAlarmTemplate"
             }
         },
         "com.amazonaws.medialive#__stringPatternArnMedialiveCloudwatchAlarmTemplateGroup": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup",
-                "smithy.api#pattern": "^arn:.+:medialive:.+:cloudwatch-alarm-template-group:.+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup"
             }
         },
         "com.amazonaws.medialive#__stringPatternArnMedialiveEventbridgeRuleTemplate": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveEventbridgeRuleTemplate",
-                "smithy.api#pattern": "^arn:.+:medialive:.+:eventbridge-rule-template:.+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveEventbridgeRuleTemplate"
             }
         },
         "com.amazonaws.medialive#__stringPatternArnMedialiveEventbridgeRuleTemplateGroup": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveEventbridgeRuleTemplateGroup",
-                "smithy.api#pattern": "^arn:.+:medialive:.+:eventbridge-rule-template-group:.+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveEventbridgeRuleTemplateGroup"
             }
         },
         "com.amazonaws.medialive#__stringPatternArnMedialiveSignalMap": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveSignalMap",
-                "smithy.api#pattern": "^arn:.+:medialive:.+:signal-map:.+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPatternArnMedialiveSignalMap"
             }
         },
         "com.amazonaws.medialive#__stringPatternS": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __stringPatternS",
-                "smithy.api#pattern": "^[^\\s]+$"
+                "smithy.api#documentation": "Placeholder documentation for __stringPatternS"
             }
         },
         "com.amazonaws.medialive#__timestamp": {

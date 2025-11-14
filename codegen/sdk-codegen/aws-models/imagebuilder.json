@@ -1510,8 +1510,7 @@
                 "components": {
                     "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Components for build and test that are included in the container recipe.\n\t\t\tRecipes require a minimum of one build component, and can \n\t\t\thave a maximum of 20 build and test components in any combination.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The components included in the container recipe.</p>"
                     }
                 },
                 "instanceConfiguration": {
@@ -2042,8 +2041,7 @@
                 "components": {
                     "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The components included in the image recipe.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The components included in the image recipe.</p>"
                     }
                 },
                 "parentImage": {
