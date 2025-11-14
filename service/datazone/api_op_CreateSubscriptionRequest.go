@@ -51,6 +51,12 @@ type CreateSubscriptionRequestInput struct {
 	// This member is required.
 	SubscribedPrincipals []types.SubscribedPrincipalInput
 
+	// The asset permissions of the subscription request.
+	AssetPermissions []types.AssetPermission
+
+	// The asset scopes of the subscription request.
+	AssetScopes []types.AcceptedAssetScope
+
 	// A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
 	ClientToken *string

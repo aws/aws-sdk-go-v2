@@ -328,6 +328,9 @@ func awsRestjson1_deserializeOpErrorAcceptSubscriptionRequest(response *smithyht
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -7887,6 +7890,15 @@ func awsRestjson1_deserializeOpDocumentCreateSubscriptionGrantOutput(v **CreateS
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
+			}
+
 		case "grantedEntity":
 			if err := awsRestjson1_deserializeDocumentGrantedEntity(&sv.GrantedEntity, value); err != nil {
 				return err
@@ -8076,6 +8088,9 @@ func awsRestjson1_deserializeOpErrorCreateSubscriptionRequest(response *smithyht
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -11675,6 +11690,15 @@ func awsRestjson1_deserializeOpDocumentDeleteSubscriptionGrantOutput(v **DeleteS
 					return fmt.Errorf("expected DomainId to be of type string, got %T instead", value)
 				}
 				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
 			}
 
 		case "grantedEntity":
@@ -20519,6 +20543,15 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionGrantOutput(v **GetSubscri
 					return fmt.Errorf("expected DomainId to be of type string, got %T instead", value)
 				}
 				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
 			}
 
 		case "grantedEntity":
@@ -35091,6 +35124,15 @@ func awsRestjson1_deserializeOpDocumentUpdateSubscriptionGrantStatusOutput(v **U
 				sv.DomainId = ptr.String(jtv)
 			}
 
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
+			}
+
 		case "grantedEntity":
 			if err := awsRestjson1_deserializeDocumentGrantedEntity(&sv.GrantedEntity, value); err != nil {
 				return err
@@ -49154,6 +49196,44 @@ func awsRestjson1_deserializeDocumentOwnerUserPropertiesOutput(v **types.OwnerUs
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPermissions(v *types.Permissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Permissions
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3":
+			var mv []types.S3Permission
+			if err := awsRestjson1_deserializeDocumentS3Permissions(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.PermissionsMemberS3{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPhysicalConnectionRequirements(v **types.PhysicalConnectionRequirements, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52410,6 +52490,42 @@ func awsRestjson1_deserializeDocumentS3LocationList(v *[]string, value interface
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3Permissions(v *[]types.S3Permission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.S3Permission
+	if *v == nil {
+		cv = []types.S3Permission{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.S3Permission
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected S3Permission to be of type string, got %T instead", value)
+			}
+			col = types.S3Permission(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3PropertiesOutput(v **types.S3PropertiesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -53653,6 +53769,11 @@ func awsRestjson1_deserializeDocumentSubscribedAsset(v **types.SubscribedAsset, 
 				}
 			}
 
+		case "permissions":
+			if err := awsRestjson1_deserializeDocumentPermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -53748,6 +53869,11 @@ func awsRestjson1_deserializeDocumentSubscribedAssetListing(v **types.Subscribed
 				return err
 			}
 
+		case "permissions":
+			if err := awsRestjson1_deserializeDocumentPermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -53788,6 +53914,55 @@ func awsRestjson1_deserializeDocumentSubscribedAssets(v *[]types.SubscribedAsset
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubscribedGroup(v **types.SubscribedGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubscribedGroup
+	if *v == nil {
+		sv = &types.SubscribedGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupProfileId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupProfileName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -53985,6 +54160,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "group":
+			var mv types.SubscribedGroup
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSubscribedGroup(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SubscribedPrincipalMemberGroup{Value: mv}
+			break loop
+
 		case "project":
 			var mv types.SubscribedProject
 			destAddr := &mv
@@ -53993,6 +54178,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.SubscribedPrincipalMemberProject{Value: mv}
+			break loop
+
+		case "user":
+			var mv types.SubscribedUser
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSubscribedUser(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SubscribedPrincipalMemberUser{Value: mv}
 			break loop
 
 		default:
@@ -54163,6 +54358,51 @@ func awsRestjson1_deserializeDocumentSubscribedProject(v **types.SubscribedProje
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSubscribedUser(v **types.SubscribedUser, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubscribedUser
+	if *v == nil {
+		sv = &types.SubscribedUser{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "details":
+			if err := awsRestjson1_deserializeDocumentUserProfileDetails(&sv.Details, value); err != nil {
+				return err
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserProfileId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSubscriptionGrants(v *[]types.SubscriptionGrantSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -54256,6 +54496,15 @@ func awsRestjson1_deserializeDocumentSubscriptionGrantSummary(v **types.Subscrip
 					return fmt.Errorf("expected DomainId to be of type string, got %T instead", value)
 				}
 				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
 			}
 
 		case "grantedEntity":

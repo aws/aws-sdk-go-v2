@@ -1489,6 +1489,25 @@ func (RuleType) Values() []RuleType {
 	}
 }
 
+type S3Permission string
+
+// Enum values for S3Permission
+const (
+	S3PermissionRead  S3Permission = "READ"
+	S3PermissionWrite S3Permission = "WRITE"
+)
+
+// Values returns all known values for S3Permission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3Permission) Values() []S3Permission {
+	return []S3Permission{
+		"READ",
+		"WRITE",
+	}
+}
+
 type SearchOutputAdditionalAttribute string
 
 // Enum values for SearchOutputAdditionalAttribute

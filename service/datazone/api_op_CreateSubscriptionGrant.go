@@ -103,6 +103,9 @@ type CreateSubscriptionGrantOutput struct {
 	// The assets for which the subscription grant is created.
 	Assets []types.SubscribedAsset
 
+	// The environment ID for which subscription grant is created.
+	EnvironmentId *string
+
 	// The identifier of the subscription grant.
 	//
 	// Deprecated: Multiple subscriptions can exist for a single grant

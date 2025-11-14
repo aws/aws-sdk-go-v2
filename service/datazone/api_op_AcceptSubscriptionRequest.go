@@ -41,6 +41,9 @@ type AcceptSubscriptionRequestInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The asset permissions of the accept subscription request.
+	AssetPermissions []types.AssetPermission
+
 	// The asset scopes of the accept subscription request.
 	AssetScopes []types.AcceptedAssetScope
 

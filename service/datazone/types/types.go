@@ -557,6 +557,22 @@ type AssetListingItemAdditionalAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The asset permissions.
+type AssetPermission struct {
+
+	// The asset ID as part of the asset permissions.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The details as part of the asset permissions.
+	//
+	// This member is required.
+	Permissions Permissions
+
+	noSmithyDocumentSerde
+}
+
 // The revision of an inventory asset.
 type AssetRevision struct {
 
@@ -3229,13 +3245,12 @@ type IamPropertiesPatch struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an IAM user profile in Amazon DataZone.
 type IamUserProfileDetails struct {
 
-	// The ARN of an IAM user profile in Amazon DataZone.
+	// The ARN of the IAM user.
 	Arn *string
 
-	// Principal ID of the IAM user.
+	// The principal ID as part of the IAM user profile details.
 	PrincipalId *string
 
 	noSmithyDocumentSerde
@@ -4251,6 +4266,24 @@ type OwnerUserPropertiesOutput struct {
 
 	noSmithyDocumentSerde
 }
+
+// The asset permissions.
+//
+// The following types satisfy this interface:
+//
+//	PermissionsMemberS3
+type Permissions interface {
+	isPermissions()
+}
+
+// The S3 details of the asset permissions.
+type PermissionsMemberS3 struct {
+	Value []S3Permission
+
+	noSmithyDocumentSerde
+}
+
+func (*PermissionsMemberS3) isPermissions() {}
 
 // Physical connection requirements of a connection.
 type PhysicalConnectionRequirements struct {
@@ -5938,16 +5971,16 @@ type SparkGluePropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-// The single sign-on details of the user profile.
+// The SSO user profile detail.
 type SsoUserProfileDetails struct {
 
-	// The first name included in the single sign-on details of the user profile.
+	// The first name as part of the SSO user profile detail.
 	FirstName *string
 
-	// The last name included in the single sign-on details of the user profile.
+	// The last name as part of the SSO user profile detail.
 	LastName *string
 
-	// The username included in the single sign-on details of the user profile.
+	// The username as part of the SSO user profile detail.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -5985,6 +6018,9 @@ type SubscribedAsset struct {
 	// The timestamp of when the subscription grant to the asset is created.
 	GrantedTimestamp *time.Time
 
+	// The asset permissions.
+	Permissions Permissions
+
 	// The target name of the asset for which the subscription grant is created.
 	TargetName *string
 
@@ -6014,6 +6050,30 @@ type SubscribedAssetListing struct {
 	// The glossary terms attached to the published asset for which the subscription
 	// grant is created.
 	GlossaryTerms []DetailedGlossaryTerm
+
+	// The asset permissions.
+	Permissions Permissions
+
+	noSmithyDocumentSerde
+}
+
+// The group that subscribes to the asset.
+type SubscribedGroup struct {
+
+	// The ID of the subscribed group.
+	Id *string
+
+	// The name of the subscribed group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the subscribed group.
+type SubscribedGroupInput struct {
+
+	// The ID of the subscribed group.
+	Identifier *string
 
 	noSmithyDocumentSerde
 }
@@ -6103,10 +6163,21 @@ func (*SubscribedListingItemMemberProductListing) isSubscribedListingItem() {}
 //
 // The following types satisfy this interface:
 //
+//	SubscribedPrincipalMemberGroup
 //	SubscribedPrincipalMemberProject
+//	SubscribedPrincipalMemberUser
 type SubscribedPrincipal interface {
 	isSubscribedPrincipal()
 }
+
+// The subscribed group.
+type SubscribedPrincipalMemberGroup struct {
+	Value SubscribedGroup
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedPrincipalMemberGroup) isSubscribedPrincipal() {}
 
 // The project that has the subscription grant.
 type SubscribedPrincipalMemberProject struct {
@@ -6117,14 +6188,34 @@ type SubscribedPrincipalMemberProject struct {
 
 func (*SubscribedPrincipalMemberProject) isSubscribedPrincipal() {}
 
+// The subscribed user.
+type SubscribedPrincipalMemberUser struct {
+	Value SubscribedUser
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedPrincipalMemberUser) isSubscribedPrincipal() {}
+
 // The principal that is to be given a subscriptiong grant.
 //
 // The following types satisfy this interface:
 //
+//	SubscribedPrincipalInputMemberGroup
 //	SubscribedPrincipalInputMemberProject
+//	SubscribedPrincipalInputMemberUser
 type SubscribedPrincipalInput interface {
 	isSubscribedPrincipalInput()
 }
+
+// The subscribed group.
+type SubscribedPrincipalInputMemberGroup struct {
+	Value SubscribedGroupInput
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedPrincipalInputMemberGroup) isSubscribedPrincipalInput() {}
 
 // The project that is to be given a subscription grant.
 type SubscribedPrincipalInputMemberProject struct {
@@ -6134,6 +6225,15 @@ type SubscribedPrincipalInputMemberProject struct {
 }
 
 func (*SubscribedPrincipalInputMemberProject) isSubscribedPrincipalInput() {}
+
+// The subscribed user.
+type SubscribedPrincipalInputMemberUser struct {
+	Value SubscribedUserInput
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedPrincipalInputMemberUser) isSubscribedPrincipalInput() {}
 
 // The data product listing.
 type SubscribedProductListing struct {
@@ -6175,6 +6275,27 @@ type SubscribedProject struct {
 type SubscribedProjectInput struct {
 
 	// The identifier of the project that is to be given a subscription grant.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The subscribed user.
+type SubscribedUser struct {
+
+	// The subscribed user details.
+	Details UserProfileDetails
+
+	// The ID of the subscribed user.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// The subscribed user.
+type SubscribedUserInput struct {
+
+	// The ID of the subscribed user.
 	Identifier *string
 
 	noSmithyDocumentSerde
@@ -6226,6 +6347,9 @@ type SubscriptionGrantSummary struct {
 
 	// The assets included in the subscription grant.
 	Assets []SubscribedAsset
+
+	// The environment ID of the subscription grant.
+	EnvironmentId *string
 
 	// The ID of the subscription.
 	//
@@ -6657,7 +6781,7 @@ type UserPolicyGrantPrincipalMemberUserIdentifier struct {
 
 func (*UserPolicyGrantPrincipalMemberUserIdentifier) isUserPolicyGrantPrincipal() {}
 
-// The details of the user profile in Amazon DataZone.
+// The user profile details.
 //
 // The following types satisfy this interface:
 //
@@ -6667,7 +6791,7 @@ type UserProfileDetails interface {
 	isUserProfileDetails()
 }
 
-// The IAM details included in the user profile details.
+// The IAM details of the user profile.
 type UserProfileDetailsMemberIam struct {
 	Value IamUserProfileDetails
 
@@ -6676,7 +6800,7 @@ type UserProfileDetailsMemberIam struct {
 
 func (*UserProfileDetailsMemberIam) isUserProfileDetails() {}
 
-// The single sign-on details included in the user profile details.
+// The SSO details of the user profile.
 type UserProfileDetailsMemberSso struct {
 	Value SsoUserProfileDetails
 
@@ -6741,6 +6865,7 @@ func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}
 func (*UnknownUnionMember) isOwnerProperties()               {}
 func (*UnknownUnionMember) isOwnerPropertiesOutput()         {}
+func (*UnknownUnionMember) isPermissions()                   {}
 func (*UnknownUnionMember) isPolicyGrantDetail()             {}
 func (*UnknownUnionMember) isPolicyGrantPrincipal()          {}
 func (*UnknownUnionMember) isProjectGrantFilter()            {}

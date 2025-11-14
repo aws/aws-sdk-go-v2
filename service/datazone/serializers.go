@@ -233,6 +233,13 @@ func awsRestjson1_serializeOpDocumentAcceptSubscriptionRequestInput(v *AcceptSub
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetPermissions != nil {
+		ok := object.Key("assetPermissions")
+		if err := awsRestjson1_serializeDocumentAssetPermissions(v.AssetPermissions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AssetScopes != nil {
 		ok := object.Key("assetScopes")
 		if err := awsRestjson1_serializeDocumentAcceptedAssetScopes(v.AssetScopes, ok); err != nil {
@@ -4064,6 +4071,20 @@ func awsRestjson1_serializeOpHttpBindingsCreateSubscriptionRequestInput(v *Creat
 func awsRestjson1_serializeOpDocumentCreateSubscriptionRequestInput(v *CreateSubscriptionRequestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AssetPermissions != nil {
+		ok := object.Key("assetPermissions")
+		if err := awsRestjson1_serializeDocumentAssetPermissions(v.AssetPermissions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetScopes != nil {
+		ok := object.Key("assetScopes")
+		if err := awsRestjson1_serializeDocumentAcceptedAssetScopes(v.AssetScopes, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
@@ -12203,8 +12224,16 @@ func awsRestjson1_serializeOpHttpBindingsListSubscriptionGrantsInput(v *ListSubs
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.OwningGroupId != nil {
+		encoder.SetQuery("owningGroupId").String(*v.OwningGroupId)
+	}
+
 	if v.OwningProjectId != nil {
 		encoder.SetQuery("owningProjectId").String(*v.OwningProjectId)
+	}
+
+	if v.OwningUserId != nil {
+		encoder.SetQuery("owningUserId").String(*v.OwningUserId)
 	}
 
 	if len(v.SortBy) > 0 {
@@ -12310,8 +12339,16 @@ func awsRestjson1_serializeOpHttpBindingsListSubscriptionRequestsInput(v *ListSu
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.OwningGroupId != nil {
+		encoder.SetQuery("owningGroupId").String(*v.OwningGroupId)
+	}
+
 	if v.OwningProjectId != nil {
 		encoder.SetQuery("owningProjectId").String(*v.OwningProjectId)
+	}
+
+	if v.OwningUserId != nil {
+		encoder.SetQuery("owningUserId").String(*v.OwningUserId)
 	}
 
 	if len(v.SortBy) > 0 {
@@ -12413,8 +12450,16 @@ func awsRestjson1_serializeOpHttpBindingsListSubscriptionsInput(v *ListSubscript
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.OwningGroupId != nil {
+		encoder.SetQuery("owningGroupId").String(*v.OwningGroupId)
+	}
+
 	if v.OwningProjectId != nil {
 		encoder.SetQuery("owningProjectId").String(*v.OwningProjectId)
+	}
+
+	if v.OwningUserId != nil {
+		encoder.SetQuery("owningUserId").String(*v.OwningUserId)
 	}
 
 	if len(v.SortBy) > 0 {
@@ -17459,6 +17504,38 @@ func awsRestjson1_serializeDocumentAssetFilterConfiguration(v types.AssetFilterC
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssetPermission(v *types.AssetPermission, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("permissions")
+		if err := awsRestjson1_serializeDocumentPermissions(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetPermissions(v []types.AssetPermission, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetPermission(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAssetTargetNameMap(v *types.AssetTargetNameMap, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19559,6 +19636,24 @@ func awsRestjson1_serializeDocumentOwnerUserProperties(v *types.OwnerUserPropert
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPermissions(v types.Permissions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PermissionsMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3Permissions(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPhysicalConnectionRequirements(v *types.PhysicalConnectionRequirements, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20572,6 +20667,17 @@ func awsRestjson1_serializeDocumentS3LocationList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3Permissions(v []types.S3Permission, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3PropertiesInput(v *types.S3PropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20900,6 +21006,18 @@ func awsRestjson1_serializeDocumentSubnetIdList(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSubscribedGroupInput(v *types.SubscribedGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSubscribedListingInput(v *types.SubscribedListingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20930,9 +21048,21 @@ func awsRestjson1_serializeDocumentSubscribedPrincipalInput(v types.SubscribedPr
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.SubscribedPrincipalInputMemberGroup:
+		av := object.Key("group")
+		if err := awsRestjson1_serializeDocumentSubscribedGroupInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.SubscribedPrincipalInputMemberProject:
 		av := object.Key("project")
 		if err := awsRestjson1_serializeDocumentSubscribedProjectInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SubscribedPrincipalInputMemberUser:
+		av := object.Key("user")
+		if err := awsRestjson1_serializeDocumentSubscribedUserInput(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -20960,6 +21090,18 @@ func awsRestjson1_serializeDocumentSubscribedPrincipalInputs(v []types.Subscribe
 }
 
 func awsRestjson1_serializeDocumentSubscribedProjectInput(v *types.SubscribedProjectInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubscribedUserInput(v *types.SubscribedUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

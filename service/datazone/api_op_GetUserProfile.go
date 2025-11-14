@@ -47,7 +47,7 @@ type GetUserProfileInput struct {
 
 type GetUserProfileOutput struct {
 
-	// The details of the user profile in Amazon DataZone.
+	// The user profile details.
 	Details types.UserProfileDetails
 
 	// the identifier of the Amazon DataZone domain of which you want to get the user

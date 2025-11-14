@@ -89,6 +89,9 @@ type DeleteSubscriptionGrantOutput struct {
 	// The assets for which the subsctiption grant that is deleted gave access.
 	Assets []types.SubscribedAsset
 
+	// The ID of the environment in which the subscription grant is deleted.
+	EnvironmentId *string
+
 	// The identifier of the subsctiption whose subscription grant is to be deleted.
 	//
 	// Deprecated: Multiple subscriptions can exist for a single grant

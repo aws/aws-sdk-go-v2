@@ -52,10 +52,18 @@ type ListSubscriptionRequestsInput struct {
 	// subscription requests.
 	NextToken *string
 
+	// The ID of the owning group.
+	OwningGroupId *string
+
 	// The identifier of the project for the subscription requests.
 	OwningProjectId *string
 
+	// The ID of the owning user.
+	OwningUserId *string
+
 	// Specifies the way to sort the results of this action.
+	//
+	// Deprecated: Results are always sorted by updatedAt
 	SortBy types.SortKey
 
 	// Specifies the sort order for the results of this action.

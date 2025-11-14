@@ -1,0 +1,8 @@
+{
+    "id": "dd6013bc-f3a9-4a5a-b141-55aa5d0d3e15",
+    "type": "feature",
+    "description": "Removed all the value constraint (min/max) for the shape definitions (e.g. integerMin0Max3600) on the C2j models to get rid of the need to request an exemption from the SDK team whenever a shape definition (e.g. integerMin0Max3600) is changed.",
+    "modules": [
+        "service/medialive"
+    ]
+}

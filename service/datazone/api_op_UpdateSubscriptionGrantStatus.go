@@ -112,6 +112,9 @@ type UpdateSubscriptionGrantStatusOutput struct {
 	// The details of the asset for which the subscription grant is created.
 	Assets []types.SubscribedAsset
 
+	// The ID of the environment in which the subscription grant is updated.
+	EnvironmentId *string
+
 	// The identifier of the subscription.
 	//
 	// Deprecated: Multiple subscriptions can exist for a single grant

@@ -597,6 +597,24 @@ func ExampleOwnerPropertiesOutput_outputUsage() {
 var _ *types.OwnerGroupPropertiesOutput
 var _ *types.OwnerUserPropertiesOutput
 
+func ExamplePermissions_outputUsage() {
+	var union types.Permissions
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PermissionsMemberS3:
+		_ = v.Value // Value is []types.S3Permission
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.S3Permission
+
 func ExamplePolicyGrantDetail_outputUsage() {
 	var union types.PolicyGrantDetail
 	// type switches can be used to check the union value
@@ -1085,8 +1103,14 @@ func ExampleSubscribedPrincipal_outputUsage() {
 	var union types.SubscribedPrincipal
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SubscribedPrincipalMemberGroup:
+		_ = v.Value // Value is types.SubscribedGroup
+
 	case *types.SubscribedPrincipalMemberProject:
 		_ = v.Value // Value is types.SubscribedProject
+
+	case *types.SubscribedPrincipalMemberUser:
+		_ = v.Value // Value is types.SubscribedUser
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -1098,13 +1122,21 @@ func ExampleSubscribedPrincipal_outputUsage() {
 }
 
 var _ *types.SubscribedProject
+var _ *types.SubscribedGroup
+var _ *types.SubscribedUser
 
 func ExampleSubscribedPrincipalInput_outputUsage() {
 	var union types.SubscribedPrincipalInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SubscribedPrincipalInputMemberGroup:
+		_ = v.Value // Value is types.SubscribedGroupInput
+
 	case *types.SubscribedPrincipalInputMemberProject:
 		_ = v.Value // Value is types.SubscribedProjectInput
+
+	case *types.SubscribedPrincipalInputMemberUser:
+		_ = v.Value // Value is types.SubscribedUserInput
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -1116,6 +1148,8 @@ func ExampleSubscribedPrincipalInput_outputUsage() {
 }
 
 var _ *types.SubscribedProjectInput
+var _ *types.SubscribedUserInput
+var _ *types.SubscribedGroupInput
 
 func ExampleUserPolicyGrantPrincipal_outputUsage() {
 	var union types.UserPolicyGrantPrincipal

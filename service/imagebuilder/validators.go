@@ -2110,9 +2110,7 @@ func validateOpCreateContainerRecipeInput(v *CreateContainerRecipeInput) error {
 	if v.SemanticVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
 	}
-	if v.Components == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Components"))
-	} else if v.Components != nil {
+	if v.Components != nil {
 		if err := validateComponentConfigurationList(v.Components); err != nil {
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
 		}
@@ -2227,9 +2225,7 @@ func validateOpCreateImageRecipeInput(v *CreateImageRecipeInput) error {
 	if v.SemanticVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
 	}
-	if v.Components == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Components"))
-	} else if v.Components != nil {
+	if v.Components != nil {
 		if err := validateComponentConfigurationList(v.Components); err != nil {
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
 		}

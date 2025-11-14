@@ -52,7 +52,7 @@ type UpdateUserProfileInput struct {
 
 type UpdateUserProfileOutput struct {
 
-	// The details of the user profile in Amazon DataZone.
+	// The results of the UpdateUserProfile action.
 	Details types.UserProfileDetails
 
 	// The identifier of the Amazon DataZone domain in which a user profile is updated.

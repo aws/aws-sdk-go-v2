@@ -4749,6 +4749,9 @@ type Ec2InstanceConnectEndpoint struct {
 	// The Availability Zone of the EC2 Instance Connect Endpoint.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone of the EC2 Instance Connect Endpoint.
+	AvailabilityZoneId *string
+
 	// The date and time that the EC2 Instance Connect Endpoint was created.
 	CreatedAt *time.Time
 

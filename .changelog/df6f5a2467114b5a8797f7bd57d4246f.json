@@ -1,0 +1,8 @@
+{
+    "id": "df6f5a24-6711-4b5a-8797-f7bd57d4246f",
+    "type": "feature",
+    "description": "This release adds AvailabilityZoneId support for CreateInstanceConnectEndpoint, DescribeInstanceConnectEndpoints, and DeleteInstanceConnectEndpoint APIs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

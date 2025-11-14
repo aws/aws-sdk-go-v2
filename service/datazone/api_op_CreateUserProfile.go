@@ -51,7 +51,7 @@ type CreateUserProfileInput struct {
 
 type CreateUserProfileOutput struct {
 
-	// The details of the user profile in Amazon DataZone.
+	// The user profile details.
 	Details types.UserProfileDetails
 
 	// The identifier of the Amazon DataZone domain in which a user profile is created.

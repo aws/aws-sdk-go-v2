@@ -38,11 +38,6 @@ type CreateImageRecipeInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The components included in the image recipe.
-	//
-	// This member is required.
-	Components []types.ComponentConfiguration
-
 	// The name of the image recipe.
 	//
 	// This member is required.
@@ -92,6 +87,9 @@ type CreateImageRecipeInput struct {
 
 	// The block device mappings of the image recipe.
 	BlockDeviceMappings []types.InstanceBlockDeviceMapping
+
+	// The components included in the image recipe.
+	Components []types.ComponentConfiguration
 
 	// The description of the image recipe.
 	Description *string

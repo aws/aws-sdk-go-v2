@@ -4249,6 +4249,41 @@ func validateAssetFilterConfiguration(v types.AssetFilterConfiguration) error {
 	}
 }
 
+func validateAssetPermission(v *types.AssetPermission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetPermission"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetPermissions(v []types.AssetPermission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetPermissions"}
+	for i := range v {
+		if err := validateAssetPermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetTargetNameMap(v *types.AssetTargetNameMap) error {
 	if v == nil {
 		return nil
@@ -6086,6 +6121,11 @@ func validateOpAcceptSubscriptionRequestInput(v *AcceptSubscriptionRequestInput)
 			invalidParams.AddNested("AssetScopes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AssetPermissions != nil {
+		if err := validateAssetPermissions(v.AssetPermissions); err != nil {
+			invalidParams.AddNested("AssetPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6911,6 +6951,16 @@ func validateOpCreateSubscriptionRequestInput(v *CreateSubscriptionRequestInput)
 	if v.MetadataForms != nil {
 		if err := validateMetadataFormInputs(v.MetadataForms); err != nil {
 			invalidParams.AddNested("MetadataForms", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetPermissions != nil {
+		if err := validateAssetPermissions(v.AssetPermissions); err != nil {
+			invalidParams.AddNested("AssetPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetScopes != nil {
+		if err := validateAcceptedAssetScopes(v.AssetScopes); err != nil {
+			invalidParams.AddNested("AssetScopes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
