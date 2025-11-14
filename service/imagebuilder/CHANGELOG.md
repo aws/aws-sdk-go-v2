@@ -1,3 +1,7 @@
+# v1.49.0 (2025-11-14)
+
+* **Feature**: EC2 Image Builder now supports invoking Lambda functions and executing Step Functions state machine through image workflows.
+
 # v1.48.6 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

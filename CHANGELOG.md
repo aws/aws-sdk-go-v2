@@ -1,3 +1,13 @@
+# Release (2025-11-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.47.0](service/datazone/CHANGELOG.md#v1470-2025-11-14)
+  * **Feature**: Adds support for granting read and write access to Amazon S3 general purpose buckets using CreateSubscriptionRequest and AcceptSubscriptionRequest APIs. Also adds search filters for SSOUser and SSOGroup to ListSubscriptions APIs and deprecates "sortBy" parameter for ListSubscriptions APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.269.0](service/ec2/CHANGELOG.md#v12690-2025-11-14)
+  * **Feature**: This release adds AvailabilityZoneId support for CreateInstanceConnectEndpoint, DescribeInstanceConnectEndpoints, and DeleteInstanceConnectEndpoint APIs.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.49.0](service/imagebuilder/CHANGELOG.md#v1490-2025-11-14)
+  * **Feature**: EC2 Image Builder now supports invoking Lambda functions and executing Step Functions state machine through image workflows.
+
 # Release (2025-11-13)
 
 ## Module Highlights

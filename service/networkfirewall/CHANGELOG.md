@@ -1,3 +1,7 @@
+# v1.57.8 (2025-11-14)
+
+* No change notes available for this release.
+
 # v1.57.7 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
