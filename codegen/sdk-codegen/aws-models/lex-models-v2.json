@@ -2082,6 +2082,26 @@
         "com.amazonaws.lexmodelsv2#AnswerField": {
             "type": "string"
         },
+        "com.amazonaws.lexmodelsv2#AssistedNluMode": {
+            "type": "enum",
+            "members": {
+                "Primary": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Primary"
+                    }
+                },
+                "Fallback": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Fallback"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the operational mode for Assisted Natural Language Understanding. This enum determines how the enhanced NLU capabilities integrate with standard intent recognition.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AssociatedTranscript": {
             "type": "structure",
             "members": {
@@ -18154,13 +18174,19 @@
                     "target": "com.amazonaws.lexmodelsv2#Enabled",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether the assisted nlu feature is enabled.</p>",
+                        "smithy.api#documentation": "<p>Determines whether the Assisted NLU feature is enabled for the bot. When set to <code>true</code>, Amazon Lex uses advanced models to improve intent recognition and slot resolution, with the default being <code>false</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "assistedNluMode": {
+                    "target": "com.amazonaws.lexmodelsv2#AssistedNluMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, or <code>Fallback</code> to use it only when standard NLU confidence is low.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether the assisted nlu feature is turned on or off.</p>"
+                "smithy.api#documentation": "<p>Configures the Assisted Natural Language Understanding (NLU) feature for your bot. This specification determines whether enhanced intent recognition and utterance understanding capabilities are active.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#NonEmptyString": {
@@ -19143,7 +19169,7 @@
                 "nluImprovement": {
                     "target": "com.amazonaws.lexmodelsv2#NluImprovementSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing specifications for the assisted nlu feature.</p>"
+                        "smithy.api#documentation": "<p>An object containing specifications for the Assisted NLU feature within the bot's runtime settings. These settings determine how the bot processes and interprets user utterances during conversations.</p>"
                     }
                 }
             },

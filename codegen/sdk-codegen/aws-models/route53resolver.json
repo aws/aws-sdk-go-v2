@@ -1974,6 +1974,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DNS_TUNNELING"
                     }
+                },
+                "DICTIONARY_DGA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DICTIONARY_DGA"
+                    }
                 }
             }
         },

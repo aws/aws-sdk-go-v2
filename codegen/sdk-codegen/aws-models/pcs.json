@@ -44,7 +44,7 @@
                         "documentation": "Filters access by a list of tag keys that are allowed in the request",
                         "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
                     },
-                    "pcs:ResourceName": {
+                    "ResourceName": {
                         "type": "String",
                         "documentation": "Filters creation of resources with a certain name"
                     }
@@ -957,7 +957,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down.</p> <p>Default: <code>600</code> </p>",
                         "smithy.api#range": {
-                            "min": 1
+                            "min": 1,
+                            "max": 10000000
                         }
                     }
                 },
@@ -973,10 +974,22 @@
                         "smithy.api#documentation": "<p>The shared Slurm key for authentication, also known as the <b>cluster secret</b>.</p>"
                     }
                 },
+                "jwtAuth": {
+                    "target": "com.amazonaws.pcs#JwtAuth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JWT authentication configuration for Slurm REST API access.</p>"
+                    }
+                },
                 "accounting": {
                     "target": "com.amazonaws.pcs#Accounting",
                     "traits": {
                         "smithy.api#documentation": "<p>The accounting configuration includes configurable settings for Slurm accounting.</p>"
+                    }
+                },
+                "slurmRest": {
+                    "target": "com.amazonaws.pcs#SlurmRest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Slurm REST API configuration for the cluster.</p>"
                     }
                 }
             },
@@ -992,7 +1005,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down.</p> <p>Default: <code>600</code> </p>",
                         "smithy.api#range": {
-                            "min": 1
+                            "min": 1,
+                            "max": 10000000
                         }
                     }
                 },
@@ -1006,6 +1020,12 @@
                     "target": "com.amazonaws.pcs#AccountingRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>The accounting configuration includes configurable settings for Slurm accounting.</p>"
+                    }
+                },
+                "slurmRest": {
+                    "target": "com.amazonaws.pcs#SlurmRestRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Slurm REST API configuration for the cluster.</p>"
                     }
                 }
             },
@@ -2183,6 +2203,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SLURMDBD"
                     }
+                },
+                "SLURMRESTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLURMRESTD"
+                    }
                 }
             }
         },
@@ -2515,6 +2541,42 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.pcs#JwtAuth": {
+            "type": "structure",
+            "members": {
+                "jwtKey": {
+                    "target": "com.amazonaws.pcs#JwtKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JWT key for Slurm REST API authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The JWT authentication configuration for Slurm REST API access.</p>"
+            }
+        },
+        "com.amazonaws.pcs#JwtKey": {
+            "type": "structure",
+            "members": {
+                "secretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the JWT key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the AWS Secrets Manager secret containing the JWT key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The JWT key stored in AWS Secrets Manager for Slurm REST API authentication.</p>"
             }
         },
         "com.amazonaws.pcs#ListClusters": {
@@ -3674,6 +3736,53 @@
                 "target": "com.amazonaws.pcs#SlurmCustomSetting"
             }
         },
+        "com.amazonaws.pcs#SlurmRest": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.pcs#SlurmRestMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>"
+            }
+        },
+        "com.amazonaws.pcs#SlurmRestMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pcs#SlurmRestRequest": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.pcs#SlurmRestMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>"
+            }
+        },
         "com.amazonaws.pcs#SpotAllocationStrategy": {
             "type": "enum",
             "members": {
@@ -3761,7 +3870,7 @@
                 "target": "com.amazonaws.pcs#TagResourceRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.pcs#TagResourceResponse"
             },
             "errors": [
                 {
@@ -3825,6 +3934,13 @@
                 ]
             }
         },
+        "com.amazonaws.pcs#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pcs#TagValue": {
             "type": "string",
             "traits": {
@@ -3864,7 +3980,7 @@
                 "target": "com.amazonaws.pcs#UntagResourceRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.pcs#UntagResourceResponse"
             },
             "errors": [
                 {
@@ -3924,6 +4040,13 @@
                         }
                     }
                 ]
+            }
+        },
+        "com.amazonaws.pcs#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pcs#UpdateAccountingRequest": {
@@ -4050,7 +4173,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down.</p> <p>Default: <code>600</code> </p>",
                         "smithy.api#range": {
-                            "min": 1
+                            "min": 1,
+                            "max": 10000000
                         }
                     }
                 },
@@ -4064,6 +4188,12 @@
                     "target": "com.amazonaws.pcs#UpdateAccountingRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>The accounting configuration includes configurable settings for Slurm accounting.</p>"
+                    }
+                },
+                "slurmRest": {
+                    "target": "com.amazonaws.pcs#UpdateSlurmRestRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Slurm REST API configuration for the cluster.</p>"
                     }
                 }
             },
@@ -4309,6 +4439,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Additional options related to the Slurm scheduler.</p>"
+            }
+        },
+        "com.amazonaws.pcs#UpdateSlurmRestRequest": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.pcs#SlurmRestMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API.</p>"
             }
         },
         "com.amazonaws.pcs#ValidationException": {

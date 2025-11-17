@@ -781,6 +781,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "TargetLogicallyAirGappedBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a logically air-gapped vault. ARN must be in the same account and Region.\n         If provided, supported fully managed resources back up directly to logically air-gapped vault,\n         while other supported resources create a temporary (billable) snapshot in backup vault,\n         then copy it to logically air-gapped vault. Unsupported resources only back up to the specified\n         backup vault.</p>"
+                    }
+                },
                 "ScheduleExpression": {
                     "target": "com.amazonaws.backup#CronExpression",
                     "traits": {
@@ -861,6 +867,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "TargetLogicallyAirGappedBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a logically air-gapped vault. ARN must be in the same account and Region.\n         If provided, supported fully managed resources back up directly to logically air-gapped vault,\n         while other supported resources create a temporary (billable) snapshot in backup vault,\n         then copy it to logically air-gapped vault. Unsupported resources only back up to the specified\n         backup vault.</p>"
                     }
                 },
                 "ScheduleExpression": {
@@ -1711,6 +1723,12 @@
                 },
                 "CreatedBy": {
                     "target": "com.amazonaws.backup#RecoveryPointCreator"
+                },
+                "CreatedByBackupJobId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup job ID that initiated this copy job. Only applicable to scheduled copy\n            jobs and automatic copy jobs to logically air-gapped vault.</p>"
+                    }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
@@ -5457,7 +5475,7 @@
                 "GlobalSettings": {
                     "target": "com.amazonaws.backup#GlobalSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the flags <code>isCrossAccountBackupEnabled</code> and\n          <code>isMpaEnabled</code> ('Mpa' refers to multi-party approval).</p>"
+                        "smithy.api#documentation": "<p>The status of the flags <code>isCrossAccountBackupEnabled</code>,\n         <code>isMpaEnabled</code> ('Mpa' refers to multi-party approval), and <code>isDelegatedAdministratorEnabled</code>.</p>"
                     }
                 },
                 "LastUpdateTime": {
@@ -8134,10 +8152,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the value is true, your backup plan transitions supported resources to \n         archive (cold) storage tier in accordance with your lifecycle settings.</p>"
                     }
+                },
+                "DeleteAfterEvent": {
+                    "target": "com.amazonaws.backup#LifecycleDeleteAfterEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event after which a recovery point is deleted. A recovery point with both\n            <code>DeleteAfterDays</code> and <code>DeleteAfterEvent</code> will delete after\n            whichever condition is satisfied first. Not valid as an input.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the time period, in days, before a recovery point transitions to cold storage \n         or is deleted.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, on the console, the retention setting must be 90 days greater than the\n         transition to cold after days setting. The transition to cold after days setting can't\n         be changed after a backup has been transitioned to cold.</p>\n         <p>Resource types that can transition to cold storage are listed in the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource\">Feature \n         availability by resource</a> table. Backup ignores this expression for\n         other resource types.</p>\n         <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely, \n         specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>"
+            }
+        },
+        "com.amazonaws.backup#LifecycleDeleteAfterEvent": {
+            "type": "enum",
+            "members": {
+                "DELETE_AFTER_COPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_AFTER_COPY"
+                    }
+                }
             }
         },
         "com.amazonaws.backup#LimitExceededException": {
@@ -9104,6 +9139,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This is an optional parameter that can be used to \n         filter out jobs with a MessageCategory which matches the \n         value you input.</p>\n         <p>Example strings may include <code>AccessDenied</code>, \n         <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and \n         <code>INVALIDPARAMETERS</code>.</p>\n         <p>View \n         <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html\">Monitoring</a>\n         for a list of accepted strings.</p>\n         <p>The the value ANY returns count of all message categories.</p>\n         <p>\n            <code>AGGREGATE_ALL</code> aggregates job counts \n            for all message categories and returns the sum.</p>",
                         "smithy.api#httpQuery": "messageCategory"
+                    }
+                },
+                "BySourceRecoveryPointArn": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters copy jobs by the specified source recovery point ARN.</p>",
+                        "smithy.api#httpQuery": "sourceRecoveryPointArn"
                     }
                 }
             },
@@ -13118,6 +13160,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "LogicallyAirGappedBackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a logically air-gapped vault. ARN must be in the same account and Region.\n         If provided, supported fully managed resources back up directly to logically air-gapped vault,\n         while other supported resources create a temporary (billable) snapshot in backup vault,\n         then copy it to logically air-gapped vault. Unsupported resources only back up to the specified\n         backup vault.</p>"
+                    }
+                },
                 "ResourceArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
@@ -13938,7 +13986,7 @@
                 "GlobalSettings": {
                     "target": "com.amazonaws.backup#GlobalSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inputs can include:</p>\n         <p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:\n            <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false\n            --region us-west-2</code>.</p>\n         <p>A value for Multi-party approval, styled as \"Mpa\": <code>isMpaEnabled</code>. Values can\n         be true or false. Example:\n         <code>update-global-settings --global-settings isMpaEnabled=false\n            --region us-west-2</code>.</p>"
+                        "smithy.api#documentation": "<p>Inputs can include:</p>\n         <p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:\n            <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false\n            --region us-west-2</code>.</p>\n         <p>A value for Multi-party approval, styled as \"Mpa\": <code>isMpaEnabled</code>. Values can\n         be true or false. Example:\n         <code>update-global-settings --global-settings isMpaEnabled=false\n            --region us-west-2</code>.</p>\n         <p>A value for Backup Service-Linked Role creation, styled as<code>isDelegatedAdministratorEnabled</code>.\n         Values can be true or false. Example:\n         <code>update-global-settings --global-settings isDelegatedAdministratorEnabled=false\n            --region us-west-2</code>.</p>"
                     }
                 }
             },

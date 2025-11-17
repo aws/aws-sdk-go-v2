@@ -232,6 +232,9 @@
                     "target": "com.amazonaws.glue#DeleteIntegration"
                 },
                 {
+                    "target": "com.amazonaws.glue#DeleteIntegrationResourceProperty"
+                },
+                {
                     "target": "com.amazonaws.glue#DeleteIntegrationTableProperties"
                 },
                 {
@@ -575,6 +578,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#ListEntities"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListIntegrationResourceProperties"
                 },
                 {
                     "target": "com.amazonaws.glue#ListJobs"
@@ -11076,14 +11082,14 @@
                     }
                 },
                 "SourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the source resource for the integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the target resource for the integration.</p>",
                         "smithy.api#required": {}
@@ -11172,7 +11178,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
                         "smithy.api#required": {}
@@ -11189,6 +11195,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resource properties associated with the integration target.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#IntegrationTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata assigned to the resource consisting of a list of key-value pairs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11199,10 +11211,16 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ResourcePropertyArn": {
+                    "target": "com.amazonaws.glue#String512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>"
                     }
                 },
                 "SourceProcessingProperties": {
@@ -11226,14 +11244,14 @@
             "type": "structure",
             "members": {
                 "SourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the source resource for the integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the target resource for the integration.</p>",
                         "smithy.api#required": {}
@@ -11353,7 +11371,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating \n      integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for \n      creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.\n    </p>",
                         "smithy.api#required": {}
@@ -15832,18 +15850,75 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.glue#DeleteIntegrationResourceProperty": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteIntegrationResourcePropertyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteIntegrationResourcePropertyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is used for deleting the <code>ResourceProperty</code> of the Glue connection (for the source) or Glue database ARN (for the target).</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteIntegrationResourcePropertyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.glue#String512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteIntegrationResourcePropertyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#DeleteIntegrationResponse": {
             "type": "structure",
             "members": {
                 "SourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the source for the integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the target for the integration.</p>",
                         "smithy.api#required": {}
@@ -15957,7 +16032,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
                         "smithy.api#required": {}
@@ -17369,7 +17444,7 @@
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource in the integration.</p>"
                     }
@@ -22385,7 +22460,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
                         "smithy.api#required": {}
@@ -22400,9 +22475,15 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>"
+                    }
+                },
+                "ResourcePropertyArn": {
+                    "target": "com.amazonaws.glue#String512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>"
                     }
                 },
                 "SourceProcessingProperties": {
@@ -22461,7 +22542,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving \n      properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration \n      table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.\n    </p>",
                         "smithy.api#required": {}
@@ -22483,7 +22564,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving \n      properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration \n      table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.\n    </p>"
                     }
@@ -27741,14 +27822,14 @@
             "type": "structure",
             "members": {
                 "SourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the source resource for the integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the target resource for the integration.</p>",
                         "smithy.api#required": {}
@@ -27853,14 +27934,14 @@
             "type": "structure",
             "members": {
                 "SourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN for the source of the integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN for the target of the integration.</p>",
                         "smithy.api#required": {}
@@ -27956,7 +28037,7 @@
                 "RefreshInterval": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align \n      the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from  \n    15 minutes to 8640 minutes (six days). Currently supports creation of <code>RefreshInterval</code> only.</p>"
+                        "smithy.api#documentation": "<p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align \n      the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from  \n    15 minutes to 8640 minutes (six days).</p>"
                     }
                 },
                 "SourceProperties": {
@@ -28128,6 +28209,77 @@
                 "smithy.api#documentation": "<p>The data processed through your integration exceeded your quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.glue#IntegrationResourceProperty": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.glue#String512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourcePropertyArn": {
+                    "target": "com.amazonaws.glue#String512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>"
+                    }
+                },
+                "SourceProcessingProperties": {
+                    "target": "com.amazonaws.glue#SourceProcessingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource properties associated with the integration source.</p>"
+                    }
+                },
+                "TargetProcessingProperties": {
+                    "target": "com.amazonaws.glue#TargetProcessingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource properties associated with the integration target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure representing an integration resource property.</p>"
+            }
+        },
+        "com.amazonaws.glue#IntegrationResourcePropertyFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#String128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter. Supported filter keys are <code>SourceArn</code> and <code>TargetArn</code>.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.glue#IntegrationResourcePropertyFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for integration resource properties.</p>"
+            }
+        },
+        "com.amazonaws.glue#IntegrationResourcePropertyFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IntegrationResourcePropertyFilter"
+            }
+        },
+        "com.amazonaws.glue#IntegrationResourcePropertyFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#String128"
+            }
+        },
+        "com.amazonaws.glue#IntegrationResourcePropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IntegrationResourceProperty"
             }
         },
         "com.amazonaws.glue#IntegrationSourcePropertiesMap": {
@@ -31363,6 +31515,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#ListIntegrationResourceProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListIntegrationResourcePropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListIntegrationResourcePropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List integration resource properties for a single customer. It supports the filters, maxRecords and markers.</p>"
+            }
+        },
+        "com.amazonaws.glue#ListIntegrationResourcePropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.glue#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the pagination token for next page, initial value is <code>null</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.glue#IntegrationResourcePropertyFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filters, supported filter Key is <code>SourceArn</code> and <code>TargetArn</code>.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.glue#IntegrationInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is total number of items to be evaluated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListIntegrationResourcePropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "IntegrationResourcePropertyList": {
+                    "target": "com.amazonaws.glue#IntegrationResourcePropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of integration resource property meeting the filter criteria.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.glue#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the pagination token for the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#ListJobs": {
             "type": "operation",
             "input": {
@@ -33122,7 +33355,10 @@
                     }
                 },
                 "IntegrationConfig": {
-                    "target": "com.amazonaws.glue#IntegrationConfig"
+                    "target": "com.amazonaws.glue#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the integration. Currently, only the RefreshInterval can be modified. </p>"
+                    }
                 },
                 "IntegrationName": {
                     "target": "com.amazonaws.glue#String128",
@@ -33139,14 +33375,14 @@
             "type": "structure",
             "members": {
                 "SourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the source for the integration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the target for the integration.</p>",
                         "smithy.api#required": {}
@@ -33217,7 +33453,10 @@
                     }
                 },
                 "IntegrationConfig": {
-                    "target": "com.amazonaws.glue#IntegrationConfig"
+                    "target": "com.amazonaws.glue#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration settings for the integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -42211,6 +42450,15 @@
                 "smithy.api#documentation": "<p>Specifies options related to data preview for viewing a sample of your data.</p>"
             }
         },
+        "com.amazonaws.glue#String1024": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.glue#String128": {
             "type": "string",
             "traits": {
@@ -42226,6 +42474,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.glue#String512": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
                 }
             }
         },
@@ -45708,7 +45965,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
                         "smithy.api#required": {}
@@ -45735,9 +45992,15 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>"
+                    }
+                },
+                "ResourcePropertyArn": {
+                    "target": "com.amazonaws.glue#String512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>"
                     }
                 },
                 "SourceProcessingProperties": {
@@ -45796,7 +46059,7 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.glue#String128",
+                    "target": "com.amazonaws.glue#String512",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
                         "smithy.api#required": {}

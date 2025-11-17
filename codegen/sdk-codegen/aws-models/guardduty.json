@@ -8403,6 +8403,9 @@
                     "target": "com.amazonaws.guardduty#ListTrustedEntitySets"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#SendObjectMalwareScan"
+                },
+                {
                     "target": "com.amazonaws.guardduty#StartMalwareScan"
                 },
                 {
@@ -15223,6 +15226,35 @@
                 "target": "com.amazonaws.guardduty#S3ObjectDetail"
             }
         },
+        "com.amazonaws.guardduty#S3ObjectForSendObjectMalwareScan": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket containing the object to scan. The bucket must have GuardDuty Malware Protection enabled.</p>",
+                        "smithy.api#jsonName": "bucket"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key (name) of the S3 object to scan for malware. This must be the full key path of the object within the bucket.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the S3 object to scan. If not specified, the latest version of the object is scanned.</p>",
+                        "smithy.api#jsonName": "versionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 object path to initiate a scan, including bucket name, object key, and optional version ID.</p>"
+            }
+        },
         "com.amazonaws.guardduty#S3ObjectUids": {
             "type": "list",
             "member": {
@@ -15736,6 +15768,56 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#SecurityGroup"
+            }
+        },
+        "com.amazonaws.guardduty#SendObjectMalwareScan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#SendObjectMalwareScanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#SendObjectMalwareScanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a malware scan for a specific S3 object. This API allows you to perform on-demand malware scanning of individual objects in S3 buckets that have Malware Protection for S3 enabled.</p>\n         <p>When you use this API, the Amazon Web Services service terms for GuardDuty Malware\n      Protection apply. For more information, see <a href=\"http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty\">Amazon Web Services service terms for GuardDuty Malware Protection</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/object-malware-scan/send",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#SendObjectMalwareScanRequest": {
+            "type": "structure",
+            "members": {
+                "S3Object": {
+                    "target": "com.amazonaws.guardduty#S3ObjectForSendObjectMalwareScan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object information for the object you want to scan. The bucket must have a Malware Protection plan configured to use this API.</p>",
+                        "smithy.api#jsonName": "s3Object"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#SendObjectMalwareScanResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.guardduty#SensitiveString": {

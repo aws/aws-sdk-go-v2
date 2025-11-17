@@ -2647,7 +2647,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code>, <code>docdb</code>, and <code>sybase</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4454,7 +4454,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code>, <code>docdb</code>, and <code>sybase</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
                     }
                 },
                 "Virtual": {
@@ -4568,6 +4568,9 @@
                 },
                 "OracleSettings": {
                     "target": "com.amazonaws.databasemigrationservice#OracleDataProviderSettings"
+                },
+                "SybaseAseSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#SybaseAseDataProviderSettings"
                 },
                 "MicrosoftSqlServerSettings": {
                     "target": "com.amazonaws.databasemigrationservice#MicrosoftSqlServerDataProviderSettings"
@@ -13192,7 +13195,7 @@
                 "Engine": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
+                        "smithy.api#documentation": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, \n         <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, \n         <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code>, <code>docdb</code>, and <code>sybase</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>"
                     }
                 },
                 "Virtual": {
@@ -15768,6 +15771,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.databasemigrationservice#PremigrationAssessmentStatus"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ProcessedObject": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database object.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the database object. For example, a table, view, procedure, and so on.</p>"
+                    }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data provider. This parameter can store one of the following values: \n         <code>\"SOURCE\"</code> or <code>\"TARGET\"</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The database object that the schema conversion operation currently uses.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#Progress": {
+            "type": "structure",
+            "members": {
+                "ProgressPercent": {
+                    "target": "com.amazonaws.databasemigrationservice#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percent complete for the current step of the schema conversion operation.</p>"
+                    }
+                },
+                "TotalObjects": {
+                    "target": "com.amazonaws.databasemigrationservice#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of objects in this schema conversion operation.</p>"
+                    }
+                },
+                "ProgressStep": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The step of the schema conversion operation. This parameter can store one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> – The operation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LOADING_METADATA</code> – Loads metadata from the source database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COUNTING_OBJECTS</code> – Determines the number of objects involved \n            in the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ANALYZING</code> – Analyzes the source database objects.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONVERTING</code> – Converts the source database objects to a format compatible \n            with the target database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPLYING</code> – Applies the converted code to the target database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHED</code> – The operation completed successfully.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ProcessedObject": {
+                    "target": "com.amazonaws.databasemigrationservice#ProcessedObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database object that the schema conversion operation currently uses.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the progress of the schema conversion operation.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#ProvisionData": {
@@ -18422,6 +18484,9 @@
                 },
                 "ExportSqlDetails": {
                     "target": "com.amazonaws.databasemigrationservice#ExportSqlDetails"
+                },
+                "Progress": {
+                    "target": "com.amazonaws.databasemigrationservice#Progress"
                 }
             },
             "traits": {
@@ -20174,6 +20239,50 @@
                 "traits": {
                     "smithy.api#xmlName": "SupportedEndpointType"
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#SybaseAseDataProviderSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the SAP ASE server.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port value for the SAP ASE data provider.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name on the SAP ASE data provider.</p>"
+                    }
+                },
+                "SslMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DmsSslModeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSL mode used to connect to the SAP ASE data provider. \n         The default value is <code>none</code>.</p>"
+                    }
+                },
+                "EncryptPassword": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to encrypt the password when connecting to the Sybase ASE database. When set to true, the connection password is encrypted during transmission. Default is true.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines an SAP ASE data provider.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#SybaseSettings": {

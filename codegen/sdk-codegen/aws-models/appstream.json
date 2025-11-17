@@ -48,7 +48,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and AppStream 2.0. When you specify an interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>"
+                "smithy.api#documentation": "<p>Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and WorkSpaces Applications. When you specify an interface endpoint for a stack, users of the stack can connect to WorkSpaces Applications only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>"
             }
         },
         "com.amazonaws.appstream#AccessEndpointList": {
@@ -216,6 +216,32 @@
                 "smithy.api#documentation": "<p>The collection of license usage records.</p>"
             }
         },
+        "com.amazonaws.appstream#AgentSoftwareVersion": {
+            "type": "enum",
+            "members": {
+                "CURRENT_LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURRENT_LATEST"
+                    }
+                },
+                "ALWAYS_LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALWAYS_LATEST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The image type is the type of AppStream image resource."
+            }
+        },
+        "com.amazonaws.appstream#AmiName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9().\\-/_]{3,128}$"
+            }
+        },
         "com.amazonaws.appstream#AppBlock": {
             "type": "structure",
             "members": {
@@ -280,7 +306,7 @@
                 "State": {
                     "target": "com.amazonaws.appstream#AppBlockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the app block.</p>\n         <p>An app block with AppStream 2.0 packaging will be in the <code>INACTIVE</code> state\n            if no application package (VHD) is assigned to it. After an application package (VHD) is\n            created by an app block builder for an app block, it becomes <code>ACTIVE</code>. </p>\n         <p>Custom app blocks are always in the <code>ACTIVE</code> state and no action is required to use them.</p>"
+                        "smithy.api#documentation": "<p>The state of the app block.</p>\n         <p>An app block with WorkSpaces Applications packaging will be in the <code>INACTIVE</code> state\n            if no application package (VHD) is assigned to it. After an application package (VHD) is\n            created by an app block builder for an app block, it becomes <code>ACTIVE</code>. </p>\n         <p>Custom app blocks are always in the <code>ACTIVE</code> state and no action is required to use them.</p>"
                     }
                 },
                 "AppBlockErrors": {
@@ -291,7 +317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an app block.</p>\n         <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the\n           virtual hard disk in an S3 bucket. It also stores the setup script with details about\n           how to mount the virtual hard disk. The virtual hard disk includes the application\n           binaries and other files necessary to launch your applications. Multiple applications\n           can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
+                "smithy.api#documentation": "<p>Describes an app block.</p>\n         <p>App blocks are a WorkSpaces Applications resource that stores the details about the\n           virtual hard disk in an S3 bucket. It also stores the setup script with details about\n           how to mount the virtual hard disk. The virtual hard disk includes the application\n           binaries and other files necessary to launch your applications. Multiple applications\n           can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
             }
         },
         "com.amazonaws.appstream#AppBlockBuilder": {
@@ -563,6 +589,38 @@
                 "target": "com.amazonaws.appstream#AppBlock"
             }
         },
+        "com.amazonaws.appstream#AppCatalogConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ApplicationConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.appstream#AppDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_. -]{0,99}$"
+            }
+        },
+        "com.amazonaws.appstream#AppName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,99}$"
+            }
+        },
         "com.amazonaws.appstream#AppVisibility": {
             "type": "enum",
             "members": {
@@ -705,6 +763,61 @@
                     "min": 0,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.appstream#ApplicationConfig": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#AppName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the application. This is a required field that must be unique within the application catalog and between 1-100 characters, matching the pattern ^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,99}$.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#AppDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name shown to users for this application. This field is optional and can be 0-100 characters, matching the pattern ^[a-zA-Z0-9][a-zA-Z0-9_. -]{0,99}$.</p>"
+                    }
+                },
+                "AbsoluteAppPath": {
+                    "target": "com.amazonaws.appstream#FilePath",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The absolute path to the executable file that launches the application. This is a required field that can be 1-32767 characters to support Windows extended file paths. Use escaped file path strings like \"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\notepad.exe\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AbsoluteIconPath": {
+                    "target": "com.amazonaws.appstream#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute path to the icon file for the application. This field is optional and can be 1-32767 characters. If not provided, the icon is derived from the executable. Use PNG images with proper transparency for the best user experience.</p>"
+                    }
+                },
+                "AbsoluteManifestPath": {
+                    "target": "com.amazonaws.appstream#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute path to the prewarm manifest file for this application. This field is optional and only applicable when using application-specific manifests. The path can be 1-32767 characters and should point to a text file containing file paths to prewarm.</p>"
+                    }
+                },
+                "WorkingDirectory": {
+                    "target": "com.amazonaws.appstream#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory to use when launching the application. This field is optional and can be 0-32767 characters. Use escaped file path strings like \"C:\\\\\\\\Path\\\\\\\\To\\\\\\\\Working\\\\\\\\Directory\".</p>"
+                    }
+                },
+                "LaunchParameters": {
+                    "target": "com.amazonaws.appstream#LaunchParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch parameters to pass to the application executable. This field is optional and can be 0-1024 characters. Use escaped strings with the full list of required parameters, such as PowerShell script paths or command-line arguments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an application in the imported image's application catalog. This structure defines how applications appear and launch for users.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.appstream#ApplicationFleetAssociation": {
@@ -1534,7 +1647,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an app block.</p>\n         <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the\n            virtual hard disk in an S3 bucket. It also stores the setup script with details about\n            how to mount the virtual hard disk. The virtual hard disk includes the application\n            binaries and other files necessary to launch your applications. Multiple applications\n            can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
+                "smithy.api#documentation": "<p>Creates an app block.</p>\n         <p>App blocks are a WorkSpaces Applications resource that stores the details about the\n            virtual hard disk in an S3 bucket. It also stores the setup script with details about\n            how to mount the virtual hard disk. The virtual hard disk includes the application\n            binaries and other files necessary to launch your applications. Multiple applications\n            can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
             }
         },
         "com.amazonaws.appstream#CreateAppBlockBuilder": {
@@ -1607,7 +1720,7 @@
                 "Tags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to associate with the app block builder. A tag is a key-value pair, and the\n            value is optional. For example, Environment=Test. If you do not specify a value,\n            Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags to associate with the app block builder. A tag is a key-value pair, and the\n            value is optional. For example, Environment=Test. If you do not specify a value,\n            Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "Platform": {
@@ -1643,7 +1756,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To\n            assume a role, the app block builder calls the AWS Security Token Service (STS)\n                <code>AssumeRole</code> API operation and passes the ARN of the role to use. The\n            operation creates a new session with temporary credentials. AppStream 2.0 retrieves the\n            temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To\n            assume a role, the app block builder calls the AWS Security Token Service (STS)\n                <code>AssumeRole</code> API operation and passes the ARN of the role to use. The\n            operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the\n            temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "AccessEndpoints": {
@@ -1830,7 +1943,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an application.</p>\n         <p>Applications are an Amazon AppStream 2.0 resource that stores the details about how to\n            launch applications on Elastic fleet streaming instances. An application consists of the\n            launch details, icon, and display name. Applications are associated with an app block\n            that contains the application binaries and other files. The applications assigned to an\n            Elastic fleet are the applications users can launch. </p>\n         <p>This is only supported for Elastic fleets.</p>"
+                "smithy.api#documentation": "<p>Creates an application.</p>\n         <p>Applications are a WorkSpaces Applications resource that stores the details about how to\n            launch applications on Elastic fleet streaming instances. An application consists of the\n            launch details, icon, and display name. Applications are associated with an app block\n            that contains the application binaries and other files. The applications assigned to an\n            Elastic fleet are the applications users can launch. </p>\n         <p>This is only supported for Elastic fleets.</p>"
             }
         },
         "com.amazonaws.appstream#CreateApplicationRequest": {
@@ -1959,7 +2072,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
+                "smithy.api#documentation": "<p>Creates a Directory Config object in WorkSpaces Applications. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
             }
         },
         "com.amazonaws.appstream#CreateDirectoryConfigRequest": {
@@ -2035,7 +2148,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new entitlement. Entitlements control access to specific applications within\n            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user\n            identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all\n            applications in a stack. Entitlements don't apply to the desktop stream view\n            application, or to applications managed by a dynamic app provider using the Dynamic\n            Application Framework.</p>"
+                "smithy.api#documentation": "<p>Creates a new entitlement. Entitlements control access to specific applications within\n            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user\n            identities. WorkSpaces Applications user pool and streaming URL users are entitled to all\n            applications in a stack. Entitlements don't apply to the desktop stream view\n            application, or to applications managed by a dynamic app provider using the Dynamic\n            Application Framework.</p>"
             }
         },
         "com.amazonaws.appstream#CreateEntitlementRequest": {
@@ -2091,6 +2204,99 @@
                     "target": "com.amazonaws.appstream#Entitlement",
                     "traits": {
                         "smithy.api#documentation": "<p>The entitlement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateExportImageTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateExportImageTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateExportImageTaskResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidRoleException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotAvailableException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a task to export a WorkSpaces Applications image to an EC2 AMI. This allows you to use your customized WorkSpaces Applications images with other AWS services or for backup purposes.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateExportImageTaskRequest": {
+            "type": "structure",
+            "members": {
+                "ImageName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the WorkSpaces Applications image to export. The image must be in an available state and owned by your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AmiName": {
+                    "target": "com.amazonaws.appstream#AmiName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name for the exported EC2 AMI. This is a required field that must be unique within your account and region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows WorkSpaces Applications to create the AMI. The role must have permissions to copy images, describe images, and create tags, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the exported AMI. These tags help you organize and manage your EC2 AMIs.</p>"
+                    }
+                },
+                "AmiDescription": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description for the exported AMI. This description will be applied to the resulting EC2 AMI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateExportImageTaskResult": {
+            "type": "structure",
+            "members": {
+                "ExportImageTask": {
+                    "target": "com.amazonaws.appstream#ExportImageTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the export image task that was created, including the task ID and initial state.</p>"
                     }
                 }
             },
@@ -2172,7 +2378,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2233,7 +2439,7 @@
                 "Tags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "IdleDisconnectTimeoutInSeconds": {
@@ -2245,13 +2451,13 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "StreamView": {
                     "target": "com.amazonaws.appstream#StreamView",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n         <p>The default value is <code>APP</code>.</p>"
+                        "smithy.api#documentation": "<p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n         <p>The default value is <code>APP</code>.</p>"
                     }
                 },
                 "Platform": {
@@ -2282,6 +2488,12 @@
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>"
+                    }
+                },
+                "RootVolumeConfig": {
+                    "target": "com.amazonaws.appstream#VolumeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the root volume of fleet instances. Use this to customize storage capacity from 200 GB up to 500 GB based on your application requirements.</p>"
                     }
                 }
             },
@@ -2377,7 +2589,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2402,7 +2614,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "EnableDefaultInternetAccess": {
@@ -2420,19 +2632,25 @@
                 "AppstreamAgentVersion": {
                     "target": "com.amazonaws.appstream#AppstreamAgentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>"
+                        "smithy.api#documentation": "<p>The version of the WorkSpaces Applications agent to use for this image builder. To use the latest version of the WorkSpaces Applications agent, specify [LATEST]. </p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "AccessEndpoints": {
                     "target": "com.amazonaws.appstream#AccessEndpointList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
+                    }
+                },
+                "RootVolumeConfig": {
+                    "target": "com.amazonaws.appstream#VolumeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the root volume of the image builder. Use this to customize storage capacity from 200 GB up to 500 GB based on your application installation requirements.</p>"
                     }
                 },
                 "SoftwaresToInstall": {
@@ -2514,7 +2732,7 @@
                 "StreamingURL": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL to start the AppStream 2.0 streaming session.</p>"
+                        "smithy.api#documentation": "<p>The URL to start the WorkSpaces Applications streaming session.</p>"
                     }
                 },
                 "Expires": {
@@ -2522,6 +2740,129 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateImportedImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateImportedImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateImportedImageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#DryRunOperationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#IncompatibleImageException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidRoleException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a custom WorkSpaces Applications image by importing an EC2 AMI. This allows you to use your own customized AMI to create WorkSpaces Applications images that support additional instance types beyond the standard stream.* instances.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateImportedImageRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique name for the imported image. The name must be between 1 and 100 characters and can contain letters, numbers, underscores, periods, and hyphens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceAmiId": {
+                    "target": "com.amazonaws.appstream#PhotonAmiId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the EC2 AMI to import. The AMI must meet specific requirements including Windows Server 2022 Full Base, UEFI boot mode, TPM 2.0 support, and proper drivers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows WorkSpaces Applications to access your AMI. The role must have permissions to modify image attributes and describe images, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#ImageImportDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description for the imported image. The description must match approved regex patterns and can be up to 256 characters.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#ImageImportDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional display name for the imported image. The display name must match approved regex patterns and can be up to 100 characters.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the imported image. Tags help you organize and manage your WorkSpaces Applications resources.</p>"
+                    }
+                },
+                "RuntimeValidationConfig": {
+                    "target": "com.amazonaws.appstream#RuntimeValidationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for runtime validation of the imported image. When specified, WorkSpaces Applications provisions an instance to test streaming functionality, which helps ensure the image is suitable for use.</p>"
+                    }
+                },
+                "AgentSoftwareVersion": {
+                    "target": "com.amazonaws.appstream#AgentSoftwareVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the WorkSpaces Applications agent to use for the imported image. Choose CURRENT_LATEST to use the agent version available at the time of import, or ALWAYS_LATEST to automatically update to the latest agent version when new versions are released.</p>"
+                    }
+                },
+                "AppCatalogConfig": {
+                    "target": "com.amazonaws.appstream#AppCatalogConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the application catalog of the imported image. This allows you to specify applications available for streaming, including their paths, icons, and launch parameters. This field contains sensitive data.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.appstream#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to true, performs validation checks without actually creating the imported image. Use this to verify your configuration before executing the actual import operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateImportedImageResult": {
+            "type": "structure",
+            "members": {
+                "Image": {
+                    "target": "com.amazonaws.appstream#Image"
                 }
             },
             "traits": {
@@ -2622,19 +2963,19 @@
                 "Tags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "AccessEndpoints": {
                     "target": "com.amazonaws.appstream#AccessEndpointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
+                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints.</p>"
                     }
                 },
                 "EmbedHostDomains": {
                     "target": "com.amazonaws.appstream#EmbedHostDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>"
+                        "smithy.api#documentation": "<p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions. </p>"
                     }
                 },
                 "StreamingExperienceSettings": {
@@ -2685,7 +3026,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>"
+                "smithy.api#documentation": "<p>Creates a temporary URL to start an WorkSpaces Applications streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>"
             }
         },
         "com.amazonaws.appstream#CreateStreamingURLRequest": {
@@ -2730,7 +3071,7 @@
                 "SessionContext": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 }
             },
@@ -2744,7 +3085,7 @@
                 "StreamingURL": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL to start the AppStream 2.0 streaming session.</p>"
+                        "smithy.api#documentation": "<p>The URL to start the WorkSpaces Applications streaming session.</p>"
                     }
                 },
                 "Expires": {
@@ -2890,7 +3231,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software.</p>\n         <p>For more information, see the \"Update an Image by Using\n            Managed AppStream 2.0 Image Updates\" section in <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html\">Administer Your AppStream 2.0 Images</a>, in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new image with the latest Windows operating system updates, driver updates, and WorkSpaces Applications agent software.</p>\n         <p>For more information, see the \"Update an Image by Using\n            Managed WorkSpaces Applications Image Updates\" section in <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html\">Administer Your WorkSpaces Applications Images</a>, in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
             }
         },
         "com.amazonaws.appstream#CreateUpdatedImageRequest": {
@@ -2927,13 +3268,13 @@
                 "newImageTags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "dryRun": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to display the status of image update availability before WorkSpaces Applications initiates the process of creating a new updated image. If this value is set to <code>true</code>, WorkSpaces Applications displays whether image updates are available. If this value is set to <code>false</code>, WorkSpaces Applications initiates the process of creating a new updated image without displaying whether image updates are available.</p>"
                     }
                 }
             },
@@ -2994,7 +3335,7 @@
                 "S3BucketName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket where generated reports are stored.</p>\n         <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script\n            configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is\n            unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0\n            uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, \n            when you enable usage reports, AppStream 2.0 creates a new S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where generated reports are stored.</p>\n         <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script\n            configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is\n            unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications\n            uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, \n            when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>"
                     }
                 },
                 "Schedule": {
@@ -3247,7 +3588,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified Directory Config object from WorkSpaces Applications. This object includes the information required to join streaming instances to an Active Directory domain.</p>"
             }
         },
         "com.amazonaws.appstream#DeleteDirectoryConfigRequest": {
@@ -4150,7 +4491,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. \n        </p>\n         <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more specified Directory Config objects for WorkSpaces Applications, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. \n        </p>\n         <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>"
             }
         },
         "com.amazonaws.appstream#DescribeDirectoryConfigsRequest": {
@@ -5214,7 +5555,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. </p>"
+                "smithy.api#documentation": "<p>Disables the specified user in the user pool. Users can't sign in to WorkSpaces Applications until they are re-enabled. This action does not delete the user. </p>"
             }
         },
         "com.amazonaws.appstream#DisableUserRequest": {
@@ -5586,6 +5927,19 @@
                 }
             }
         },
+        "com.amazonaws.appstream#DryRunOperationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appstream#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The exception that is thrown when a dry run operation is requested. This indicates that the validation checks have been performed successfully, but no actual resources were created or modified.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 412
+            }
+        },
         "com.amazonaws.appstream#DynamicAppProvidersEnabled": {
             "type": "enum",
             "members": {
@@ -5643,7 +5997,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.</p>"
+                "smithy.api#documentation": "<p>Enables a user in the user pool. After being enabled, users can sign in to WorkSpaces Applications and open applications from the stacks to which they are assigned.</p>"
             }
         },
         "com.amazonaws.appstream#EnableUserRequest": {
@@ -5754,7 +6108,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an entitlement. Entitlements control access to specific applications within\n            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user\n            identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all\n            applications in a stack. Entitlements don't apply to the desktop stream view\n            application, or to applications managed by a dynamic app provider using the Dynamic\n            Application Framework.</p>"
+                "smithy.api#documentation": "<p>Specifies an entitlement. Entitlements control access to specific applications within\n            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user\n            identities. WorkSpaces Applications user pool and streaming URL users are entitled to all\n            applications in a stack. Entitlements don't apply to the desktop stream view\n            application, or to applications managed by a dynamic app provider using the Dynamic\n            Application Framework.</p>"
             }
         },
         "com.amazonaws.appstream#EntitlementAlreadyExistsException": {
@@ -5777,7 +6131,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the\n            associated value when a user identity federates into an Amazon AppStream 2.0 SAML\n            application.</p>\n         <p>The following are valid values:</p>\n         <ul>\n            <li>\n               <p>roles</p>\n            </li>\n            <li>\n               <p>department </p>\n            </li>\n            <li>\n               <p>organization </p>\n            </li>\n            <li>\n               <p>groups </p>\n            </li>\n            <li>\n               <p>title </p>\n            </li>\n            <li>\n               <p>costCenter </p>\n            </li>\n            <li>\n               <p>userType</p>\n            </li>\n         </ul>\n         <p> </p>",
+                        "smithy.api#documentation": "<p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the\n            associated value when a user identity federates into a WorkSpaces Applications SAML\n            application.</p>\n         <p>The following are valid values:</p>\n         <ul>\n            <li>\n               <p>roles</p>\n            </li>\n            <li>\n               <p>department </p>\n            </li>\n            <li>\n               <p>organization </p>\n            </li>\n            <li>\n               <p>groups </p>\n            </li>\n            <li>\n               <p>title </p>\n            </li>\n            <li>\n               <p>costCenter </p>\n            </li>\n            <li>\n               <p>userType</p>\n            </li>\n         </ul>\n         <p> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5785,13 +6139,13 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A value that is matched to a supported SAML attribute name when a user identity\n            federates into an Amazon AppStream 2.0 SAML application. </p>",
+                        "smithy.api#documentation": "<p>A value that is matched to a supported SAML attribute name when a user identity\n            federates into a WorkSpaces Applications SAML application. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An attribute associated with an entitlement. Application entitlements work by matching\n            a supported SAML 2.0 attribute name to a value when a user identity federates to an\n            Amazon AppStream 2.0 SAML application.</p>"
+                "smithy.api#documentation": "<p>An attribute associated with an entitlement. Application entitlements work by matching\n            a supported SAML 2.0 attribute name to a value when a user identity federates to a WorkSpaces Applications SAML application.</p>"
             }
         },
         "com.amazonaws.appstream#EntitlementAttributeList": {
@@ -5891,6 +6245,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.appstream#ExportImageTask": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "com.amazonaws.appstream#UUID",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the export image task. Use this ID to track the task's progress and retrieve its details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the WorkSpaces Applications image being exported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AmiName": {
+                    "target": "com.amazonaws.appstream#AmiName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the EC2 AMI that will be created by this export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time when the export image task was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AmiDescription": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description that will be applied to the exported EC2 AMI.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.appstream#ExportImageTaskState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the export image task, such as PENDING, RUNNING, COMPLETED, or FAILED.</p>"
+                    }
+                },
+                "AmiId": {
+                    "target": "com.amazonaws.appstream#PhotonAmiId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 AMI that was created by this export task. This field is only populated when the task completes successfully.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that will be applied to the exported EC2 AMI.</p>"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.appstream#ErrorDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about any errors that occurred during the export process. This field is only populated when the task fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an export image task, including its current state, timestamps, and any error details.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ExportImageTaskState": {
+            "type": "enum",
+            "members": {
+                "EXPORTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPORTING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#ExportImageTasks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ExportImageTask"
+            }
+        },
         "com.amazonaws.appstream#FeedbackURL": {
             "type": "string",
             "traits": {
@@ -5898,6 +6351,64 @@
                     "min": 0,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.appstream#FilePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32767
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.appstream#Filter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#FilterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the filter. Valid filter names depend on the operation being performed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.appstream#FilterValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The values for the filter. Multiple values can be specified for a single filter name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for narrowing down the results when listing export image tasks. Filters allow you to specify criteria such as task state or creation date.</p>"
+            }
+        },
+        "com.amazonaws.appstream#FilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$"
+            }
+        },
+        "com.amazonaws.appstream#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_:/.-]{0,200}$"
+            }
+        },
+        "com.amazonaws.appstream#FilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#FilterValue"
+            }
+        },
+        "com.amazonaws.appstream#Filters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#Filter"
             }
         },
         "com.amazonaws.appstream#Fleet": {
@@ -5947,7 +6458,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6024,13 +6535,13 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "StreamView": {
                     "target": "com.amazonaws.appstream#StreamView",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n         <p>The default value is <code>APP</code>.</p>"
+                        "smithy.api#documentation": "<p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n         <p>The default value is <code>APP</code>.</p>"
                     }
                 },
                 "Platform": {
@@ -6061,6 +6572,12 @@
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>"
+                    }
+                },
+                "RootVolumeConfig": {
+                    "target": "com.amazonaws.appstream#VolumeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current configuration of the root volume for fleet instances, including the storage size in GB.</p>"
                     }
                 }
             },
@@ -6111,6 +6628,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MAX_SESSIONS_PER_INSTANCE"
+                    }
+                },
+                "VOLUME_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME_CONFIGURATION"
                     }
                 }
             },
@@ -6329,6 +6852,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
                     }
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
                 }
             }
         },
@@ -6397,6 +6926,54 @@
                         "smithy.api#enumValue": "ELASTIC"
                     }
                 }
+            }
+        },
+        "com.amazonaws.appstream#GetExportImageTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#GetExportImageTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#GetExportImageTaskResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an export image task, including its current state, progress, and any error details.</p>"
+            }
+        },
+        "com.amazonaws.appstream#GetExportImageTaskRequest": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "com.amazonaws.appstream#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export image task to retrieve information about.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#GetExportImageTaskResult": {
+            "type": "structure",
+            "members": {
+                "ExportImageTask": {
+                    "target": "com.amazonaws.appstream#ExportImageTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the export image task, including its current state, created date, and any error details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#Image": {
@@ -6491,7 +7068,7 @@
                 "AppstreamAgentVersion": {
                     "target": "com.amazonaws.appstream#AppstreamAgentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent to use for instances that are launched from this image. </p>"
+                        "smithy.api#documentation": "<p>The version of the WorkSpaces Applications agent to use for instances that are launched from this image. </p>"
                     }
                 },
                 "ImagePermissions": {
@@ -6509,7 +7086,7 @@
                 "LatestAppstreamAgentVersion": {
                     "target": "com.amazonaws.appstream#LatestAppstreamAgentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the image is using the latest AppStream 2.0 agent version or not.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the image is using the latest WorkSpaces Applications agent version or not.</p>"
                     }
                 },
                 "SupportedInstanceFamilies": {
@@ -6521,7 +7098,7 @@
                 "DynamicAppProvidersEnabled": {
                     "target": "com.amazonaws.appstream#DynamicAppProvidersEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether dynamic app providers are enabled within an AppStream 2.0 image or not.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether dynamic app providers are enabled within an WorkSpaces Applications image or not.</p>"
                     }
                 },
                 "ImageSharedWithOthers": {
@@ -6534,6 +7111,12 @@
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the image includes license-included applications.</p>"
+                    }
+                },
+                "ImageType": {
+                    "target": "com.amazonaws.appstream#ImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the image. Images created through AMI import have type \"custom\", while WorkSpaces Applications provided images have type \"native\". Custom images support additional instance types including GeneralPurpose, MemoryOptimized, ComputeOptimized, and Accelerated instance families.</p>"
                     }
                 }
             },
@@ -6585,7 +7168,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type for the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance type for the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Platform": {
@@ -6597,7 +7180,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "State": {
@@ -6642,7 +7225,7 @@
                 "AppstreamAgentVersion": {
                     "target": "com.amazonaws.appstream#AppstreamAgentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent that is currently being used by the image builder. </p>"
+                        "smithy.api#documentation": "<p>The version of the WorkSpaces Applications agent that is currently being used by the image builder. </p>"
                     }
                 },
                 "AccessEndpoints": {
@@ -6651,10 +7234,16 @@
                         "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
                     }
                 },
+                "RootVolumeConfig": {
+                    "target": "com.amazonaws.appstream#VolumeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current configuration of the root volume for the image builder, including the storage size in GB.</p>"
+                    }
+                },
                 "LatestAppstreamAgentVersion": {
                     "target": "com.amazonaws.appstream#LatestAppstreamAgentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the image builder is using the latest AppStream 2.0 agent version or not.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the image builder is using the latest WorkSpaces Applications agent version or not.</p>"
                     }
                 }
             },
@@ -6748,6 +7337,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SYNCING_APPS"
                     }
+                },
+                "PENDING_IMAGE_IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_IMAGE_IMPORT"
+                    }
                 }
             }
         },
@@ -6786,6 +7381,26 @@
                         "smithy.api#enumValue": "IMAGE_UNAVAILABLE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.appstream#ImageImportDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.() -]+$"
+            }
+        },
+        "com.amazonaws.appstream#ImageImportDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.() -]+$"
             }
         },
         "com.amazonaws.appstream#ImageList": {
@@ -6875,6 +7490,12 @@
                     "traits": {
                         "smithy.api#enumValue": "IMPORTING"
                     }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
                 }
             }
         },
@@ -6918,7 +7539,39 @@
                     "traits": {
                         "smithy.api#enumValue": "IMAGE_COPY_FAILURE"
                     }
+                },
+                "IMAGE_UPDATE_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_UPDATE_FAILURE"
+                    }
+                },
+                "IMAGE_IMPORT_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_IMPORT_FAILURE"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.appstream#ImageType": {
+            "type": "enum",
+            "members": {
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "NATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The image type is the type of AppStream image resource."
             }
         },
         "com.amazonaws.appstream#IncompatibleImageException": {
@@ -6932,6 +7585,12 @@
                 "smithy.api#documentation": "<p>The image can't be updated because it's not compatible for updates.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.appstream#InstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+(\\.[a-z0-9-]+)+\\.(small|medium|large|xlarge|\\d+xlarge|metal)$"
             }
         },
         "com.amazonaws.appstream#Integer": {
@@ -7017,6 +7676,17 @@
                         "smithy.api#enumValue": "FALSE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.appstream#LaunchParameters": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[^\\x00]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.appstream#LimitExceededException": {
@@ -7219,6 +7889,69 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.appstream#ListExportImageTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#ListExportImageTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#ListExportImageTasksResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists export image tasks, with optional filtering and pagination. Use this operation to monitor the status of multiple export operations.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ListExportImageTasksRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.appstream#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filters to apply when listing export image tasks. Filters help you narrow down the results based on specific criteria.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of export image tasks to return in a single request. The valid range is 1-500, with a default of 50.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request. Use this to retrieve the next page of results when there are more tasks than the MaxResults limit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#ListExportImageTasksResult": {
+            "type": "structure",
+            "members": {
+                "ExportImageTasks": {
+                    "target": "com.amazonaws.appstream#ExportImageTasks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of export image tasks that match the specified criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use for retrieving the next page of results. This field is only present when there are more results available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -7233,7 +7966,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of all tags for the specified WorkSpaces Applications resource. You can tag WorkSpaces Applications image builders, images, fleets, and stacks.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
             }
         },
         "com.amazonaws.appstream#ListTagsForResourceRequest": {
@@ -7322,7 +8055,7 @@
                 "EniIpv6Addresses": {
                     "target": "com.amazonaws.appstream#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv6 addresses of the elastic network interface that is attached to instances in your VPC.</p>"
+                        "smithy.api#documentation": "<p>The IPv6 addresses assigned to the elastic network interface. This field supports IPv6 connectivity for WorkSpaces Applications instances.</p>"
                     }
                 },
                 "EniId": {
@@ -7445,6 +8178,9 @@
                     "target": "com.amazonaws.appstream#CreateEntitlement"
                 },
                 {
+                    "target": "com.amazonaws.appstream#CreateExportImageTask"
+                },
+                {
                     "target": "com.amazonaws.appstream#CreateFleet"
                 },
                 {
@@ -7452,6 +8188,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateImageBuilderStreamingURL"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateImportedImage"
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateStack"
@@ -7592,6 +8331,9 @@
                     "target": "com.amazonaws.appstream#ExpireSession"
                 },
                 {
+                    "target": "com.amazonaws.appstream#GetExportImageTask"
+                },
+                {
                     "target": "com.amazonaws.appstream#ListAssociatedFleets"
                 },
                 {
@@ -7599,6 +8341,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#ListEntitledApplications"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ListExportImageTasks"
                 },
                 {
                     "target": "com.amazonaws.appstream#ListTagsForResource"
@@ -7667,7 +8412,7 @@
                     "name": "appstream"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon AppStream 2.0</fullname>\n         <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p>\n         <note>\n            <p>You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>\n         </note>\n         <p>To learn more about AppStream 2.0, see the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>Amazon WorkSpaces Applications</fullname>\n         <p>This is the <i>Amazon WorkSpaces Applications API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in WorkSpaces Applications. WorkSpaces Applications is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. WorkSpaces Applications manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p>\n         <note>\n            <p>You can call the WorkSpaces Applications API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access WorkSpaces Applications API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>\n         </note>\n         <p>To learn more about WorkSpaces Applications, see the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"http://aws.amazon.com/appstream2\">Amazon WorkSpaces Applications product page</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon WorkSpaces Applications documentation</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon AppStream",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -8487,6 +9232,12 @@
                 }
             }
         },
+        "com.amazonaws.appstream#PhotonAmiId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^ami-[a-z0-9]{8,17}$"
+            }
+        },
         "com.amazonaws.appstream#PlatformType": {
             "type": "enum",
             "members": {
@@ -8589,7 +9340,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>AppStream 2.0 can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>",
+                "smithy.api#documentation": "<p>WorkSpaces Applications can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8686,6 +9437,20 @@
                 "smithy.api#documentation": "<p>The specified resource was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.appstream#RuntimeValidationConfig": {
+            "type": "structure",
+            "members": {
+                "IntendedInstanceType": {
+                    "target": "com.amazonaws.appstream#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type to use for runtime validation testing. It's recommended to use the same instance type you plan to use for your fleet to ensure accurate validation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for runtime validation of imported images. This structure specifies the instance type to use for testing the imported image's streaming capabilities.</p>"
             }
         },
         "com.amazonaws.appstream#S3Bucket": {
@@ -9132,13 +9897,13 @@
                 "AccessEndpoints": {
                     "target": "com.amazonaws.appstream#AccessEndpointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. </p>"
+                        "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints. </p>"
                     }
                 },
                 "EmbedHostDomains": {
                     "target": "com.amazonaws.appstream#EmbedHostDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>"
+                        "smithy.api#documentation": "<p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions.</p>"
                     }
                 },
                 "StreamingExperienceSettings": {
@@ -9456,7 +10221,7 @@
                 "AppstreamAgentVersion": {
                     "target": "com.amazonaws.appstream#AppstreamAgentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>"
+                        "smithy.api#documentation": "<p>The version of the WorkSpaces Applications agent to use for this image builder. To use the latest version of the WorkSpaces Applications agent, specify [LATEST]. </p>"
                     }
                 }
             },
@@ -9702,7 +10467,7 @@
                 "DomainsRequireAdminConsent": {
                     "target": "com.amazonaws.appstream#DomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OneDrive for Business domains where you require admin consent when users try to link their OneDrive account to AppStream 2.0. The attribute can only be specified when ConnectorType=ONE_DRIVE.</p>"
+                        "smithy.api#documentation": "<p>The OneDrive for Business domains where you require admin consent when users try to link their OneDrive account to WorkSpaces Applications. The attribute can only be specified when ConnectorType=ONE_DRIVE.</p>"
                     }
                 }
             },
@@ -9851,7 +10616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p>\n         <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, \n                this operation updates its value.</p>\n         <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.\n                To disassociate tags from your resources, use <a>UntagResource</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified WorkSpaces Applications resource. You can tag WorkSpaces Applications image builders, images, fleets, and stacks.</p>\n         <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, \n                this operation updates its value.</p>\n         <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.\n                To disassociate tags from your resources, use <a>UntagResource</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
             }
         },
         "com.amazonaws.appstream#TagResourceRequest": {
@@ -10087,6 +10852,12 @@
         "com.amazonaws.appstream#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.appstream#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
         "com.amazonaws.appstream#UntagResource": {
             "type": "operation",
             "input": {
@@ -10101,7 +10872,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p>\n         <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Disassociates one or more specified tags from the specified WorkSpaces Applications resource.</p>\n         <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
             }
         },
         "com.amazonaws.appstream#UntagResourceRequest": {
@@ -10229,7 +11000,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To\n            assume a role, the app block builder calls the AWS Security Token Service (STS)\n            <code>AssumeRole</code> API operation and passes the ARN of the role to use. The\n            operation creates a new session with temporary credentials. AppStream 2.0 retrieves the\n            temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To\n            assume a role, the app block builder calls the AWS Security Token Service (STS)\n            <code>AssumeRole</code> API operation and passes the ARN of the role to use. The\n            operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the\n            temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "AccessEndpoints": {
@@ -10387,7 +11158,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
+                "smithy.api#documentation": "<p>Updates the specified Directory Config object in WorkSpaces Applications. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
             }
         },
         "com.amazonaws.appstream#UpdateDirectoryConfigRequest": {
@@ -10591,7 +11362,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ComputeCapacity": {
@@ -10664,13 +11435,13 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>"
                     }
                 },
                 "StreamView": {
                     "target": "com.amazonaws.appstream#StreamView",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n         <p>The default value is <code>APP</code>.</p>"
+                        "smithy.api#documentation": "<p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n         <p>The default value is <code>APP</code>.</p>"
                     }
                 },
                 "Platform": {
@@ -10701,6 +11472,12 @@
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>"
+                    }
+                },
+                "RootVolumeConfig": {
+                    "target": "com.amazonaws.appstream#VolumeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration for the root volume of fleet instances. Note that volume size cannot be decreased below the image volume size.</p>"
                     }
                 }
             },
@@ -10894,13 +11671,13 @@
                 "AccessEndpoints": {
                     "target": "com.amazonaws.appstream#AccessEndpointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>"
+                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints.</p>"
                     }
                 },
                 "EmbedHostDomains": {
                     "target": "com.amazonaws.appstream#EmbedHostDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>"
+                        "smithy.api#documentation": "<p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions. </p>"
                     }
                 },
                 "StreamingExperienceSettings": {
@@ -11072,7 +11849,7 @@
                 "S3BucketName": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket where generated reports are stored.</p>\n         <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script\n            configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is\n            unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0\n            uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, \n            when you enable usage reports, AppStream 2.0 creates a new S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where generated reports are stored.</p>\n         <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script\n            configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is\n            unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications\n            uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, \n            when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>"
                     }
                 },
                 "Schedule": {
@@ -11388,6 +12165,20 @@
                         "smithy.api#enumValue": "SHARED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.appstream#VolumeConfig": {
+            "type": "structure",
+            "members": {
+                "VolumeSizeInGb": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the root volume in GB. Valid range is 200-500 GB. The default is 200 GB, which is included in the hourly instance rate. Additional storage beyond 200 GB incurs extra charges and applies to instances regardless of their running state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the root volume of fleet instances and image builders. This allows you to customize the storage capacity beyond the default 200 GB.</p>"
             }
         },
         "com.amazonaws.appstream#VpcConfig": {
