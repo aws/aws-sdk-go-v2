@@ -500,6 +500,13 @@ type BackupRule struct {
 	// the start window time is over).
 	StartWindowMinutes *int64
 
+	// The ARN of a logically air-gapped vault. ARN must be in the same account and
+	// Region. If provided, supported fully managed resources back up directly to
+	// logically air-gapped vault, while other supported resources create a temporary
+	// (billable) snapshot in backup vault, then copy it to logically air-gapped vault.
+	// Unsupported resources only back up to the specified backup vault.
+	TargetLogicallyAirGappedBackupVaultArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -587,6 +594,13 @@ type BackupRuleInput struct {
 	// ) or until the job status changes to EXPIRED (which is expected to occur when
 	// the start window time is over).
 	StartWindowMinutes *int64
+
+	// The ARN of a logically air-gapped vault. ARN must be in the same account and
+	// Region. If provided, supported fully managed resources back up directly to
+	// logically air-gapped vault, while other supported resources create a temporary
+	// (billable) snapshot in backup vault, then copy it to logically air-gapped vault.
+	// Unsupported resources only back up to the specified backup vault.
+	TargetLogicallyAirGappedBackupVaultArn *string
 
 	noSmithyDocumentSerde
 }
@@ -994,6 +1008,10 @@ type CopyJob struct {
 	// Contains information about the backup plan and rule that Backup used to
 	// initiate the recovery point backup.
 	CreatedBy *RecoveryPointCreator
+
+	// The backup job ID that initiated this copy job. Only applicable to scheduled
+	// copy jobs and automatic copy jobs to logically air-gapped vault.
+	CreatedByBackupJobId *string
 
 	// The date and time a copy job is created, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
@@ -1446,6 +1464,11 @@ type Lifecycle struct {
 	// must be at least 90 days after the number of days specified in
 	// MoveToColdStorageAfterDays .
 	DeleteAfterDays *int64
+
+	// The event after which a recovery point is deleted. A recovery point with both
+	// DeleteAfterDays and DeleteAfterEvent will delete after whichever condition is
+	// satisfied first. Not valid as an input.
+	DeleteAfterEvent LifecycleDeleteAfterEvent
 
 	// The number of days after creation that a recovery point is moved to cold
 	// storage.

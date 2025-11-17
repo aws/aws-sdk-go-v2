@@ -35,8 +35,8 @@ type DescribeGlobalSettingsInput struct {
 
 type DescribeGlobalSettingsOutput struct {
 
-	// The status of the flags isCrossAccountBackupEnabled and isMpaEnabled ('Mpa'
-	// refers to multi-party approval).
+	// The status of the flags isCrossAccountBackupEnabled , isMpaEnabled ('Mpa'
+	// refers to multi-party approval), and isDelegatedAdministratorEnabled .
 	GlobalSettings map[string]string
 
 	// The date and time that the flag isCrossAccountBackupEnabled was last updated.

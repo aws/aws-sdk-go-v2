@@ -50,6 +50,25 @@ func (Action) Values() []Action {
 	}
 }
 
+type AgentSoftwareVersion string
+
+// Enum values for AgentSoftwareVersion
+const (
+	AgentSoftwareVersionCurrentLatest AgentSoftwareVersion = "CURRENT_LATEST"
+	AgentSoftwareVersionAlwaysLatest  AgentSoftwareVersion = "ALWAYS_LATEST"
+)
+
+// Values returns all known values for AgentSoftwareVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentSoftwareVersion) Values() []AgentSoftwareVersion {
+	return []AgentSoftwareVersion{
+		"CURRENT_LATEST",
+		"ALWAYS_LATEST",
+	}
+}
+
 type AppBlockBuilderAttribute string
 
 // Enum values for AppBlockBuilderAttribute
@@ -249,6 +268,27 @@ func (DynamicAppProvidersEnabled) Values() []DynamicAppProvidersEnabled {
 	}
 }
 
+type ExportImageTaskState string
+
+// Enum values for ExportImageTaskState
+const (
+	ExportImageTaskStateExporting ExportImageTaskState = "EXPORTING"
+	ExportImageTaskStateCompleted ExportImageTaskState = "COMPLETED"
+	ExportImageTaskStateFailed    ExportImageTaskState = "FAILED"
+)
+
+// Values returns all known values for ExportImageTaskState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportImageTaskState) Values() []ExportImageTaskState {
+	return []ExportImageTaskState{
+		"EXPORTING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type FleetAttribute string
 
 // Enum values for FleetAttribute
@@ -260,6 +300,7 @@ const (
 	FleetAttributeUsbDeviceFilterStrings           FleetAttribute = "USB_DEVICE_FILTER_STRINGS"
 	FleetAttributeSessionScriptS3Location          FleetAttribute = "SESSION_SCRIPT_S3_LOCATION"
 	FleetAttributeMaxSessionsPerInstance           FleetAttribute = "MAX_SESSIONS_PER_INSTANCE"
+	FleetAttributeVolumeConfiguration              FleetAttribute = "VOLUME_CONFIGURATION"
 )
 
 // Values returns all known values for FleetAttribute. Note that this can be
@@ -275,6 +316,7 @@ func (FleetAttribute) Values() []FleetAttribute {
 		"USB_DEVICE_FILTER_STRINGS",
 		"SESSION_SCRIPT_S3_LOCATION",
 		"MAX_SESSIONS_PER_INSTANCE",
+		"VOLUME_CONFIGURATION",
 	}
 }
 
@@ -312,6 +354,7 @@ const (
 	FleetErrorCodeDomainJoinErrorDsMachineAccountQuotaExceeded      FleetErrorCode = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
 	FleetErrorCodeDomainJoinNerrPasswordExpired                     FleetErrorCode = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
 	FleetErrorCodeDomainJoinInternalServiceError                    FleetErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+	FleetErrorCodeValidationError                                   FleetErrorCode = "VALIDATION_ERROR"
 )
 
 // Values returns all known values for FleetErrorCode. Note that this can be
@@ -350,6 +393,7 @@ func (FleetErrorCode) Values() []FleetErrorCode {
 		"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED",
 		"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED",
 		"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR",
+		"VALIDATION_ERROR",
 	}
 }
 
@@ -414,6 +458,7 @@ const (
 	ImageBuilderStatePendingQualification ImageBuilderState = "PENDING_QUALIFICATION"
 	ImageBuilderStatePendingSyncingApps   ImageBuilderState = "PENDING_SYNCING_APPS"
 	ImageBuilderStateSyncingApps          ImageBuilderState = "SYNCING_APPS"
+	ImageBuilderStatePendingImageImport   ImageBuilderState = "PENDING_IMAGE_IMPORT"
 )
 
 // Values returns all known values for ImageBuilderState. Note that this can be
@@ -435,6 +480,7 @@ func (ImageBuilderState) Values() []ImageBuilderState {
 		"PENDING_QUALIFICATION",
 		"PENDING_SYNCING_APPS",
 		"SYNCING_APPS",
+		"PENDING_IMAGE_IMPORT",
 	}
 }
 
@@ -481,13 +527,14 @@ type ImageState string
 
 // Enum values for ImageState
 const (
-	ImageStatePending   ImageState = "PENDING"
-	ImageStateAvailable ImageState = "AVAILABLE"
-	ImageStateFailed    ImageState = "FAILED"
-	ImageStateCopying   ImageState = "COPYING"
-	ImageStateDeleting  ImageState = "DELETING"
-	ImageStateCreating  ImageState = "CREATING"
-	ImageStateImporting ImageState = "IMPORTING"
+	ImageStatePending    ImageState = "PENDING"
+	ImageStateAvailable  ImageState = "AVAILABLE"
+	ImageStateFailed     ImageState = "FAILED"
+	ImageStateCopying    ImageState = "COPYING"
+	ImageStateDeleting   ImageState = "DELETING"
+	ImageStateCreating   ImageState = "CREATING"
+	ImageStateImporting  ImageState = "IMPORTING"
+	ImageStateValidating ImageState = "VALIDATING"
 )
 
 // Values returns all known values for ImageState. Note that this can be expanded
@@ -503,6 +550,7 @@ func (ImageState) Values() []ImageState {
 		"DELETING",
 		"CREATING",
 		"IMPORTING",
+		"VALIDATING",
 	}
 }
 
@@ -513,6 +561,8 @@ const (
 	ImageStateChangeReasonCodeInternalError            ImageStateChangeReasonCode = "INTERNAL_ERROR"
 	ImageStateChangeReasonCodeImageBuilderNotAvailable ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
 	ImageStateChangeReasonCodeImageCopyFailure         ImageStateChangeReasonCode = "IMAGE_COPY_FAILURE"
+	ImageStateChangeReasonCodeImageUpdateFailure       ImageStateChangeReasonCode = "IMAGE_UPDATE_FAILURE"
+	ImageStateChangeReasonCodeImageImportFailure       ImageStateChangeReasonCode = "IMAGE_IMPORT_FAILURE"
 )
 
 // Values returns all known values for ImageStateChangeReasonCode. Note that this
@@ -524,6 +574,27 @@ func (ImageStateChangeReasonCode) Values() []ImageStateChangeReasonCode {
 		"INTERNAL_ERROR",
 		"IMAGE_BUILDER_NOT_AVAILABLE",
 		"IMAGE_COPY_FAILURE",
+		"IMAGE_UPDATE_FAILURE",
+		"IMAGE_IMPORT_FAILURE",
+	}
+}
+
+type ImageType string
+
+// Enum values for ImageType
+const (
+	ImageTypeCustom ImageType = "CUSTOM"
+	ImageTypeNative ImageType = "NATIVE"
+)
+
+// Values returns all known values for ImageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageType) Values() []ImageType {
+	return []ImageType{
+		"CUSTOM",
+		"NATIVE",
 	}
 }
 

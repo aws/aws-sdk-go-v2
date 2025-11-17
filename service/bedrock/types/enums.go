@@ -202,9 +202,10 @@ type AutomatedReasoningPolicyBuildResultAssetType string
 
 // Enum values for AutomatedReasoningPolicyBuildResultAssetType
 const (
-	AutomatedReasoningPolicyBuildResultAssetTypeBuildLog         AutomatedReasoningPolicyBuildResultAssetType = "BUILD_LOG"
-	AutomatedReasoningPolicyBuildResultAssetTypeQualityReport    AutomatedReasoningPolicyBuildResultAssetType = "QUALITY_REPORT"
-	AutomatedReasoningPolicyBuildResultAssetTypePolicyDefinition AutomatedReasoningPolicyBuildResultAssetType = "POLICY_DEFINITION"
+	AutomatedReasoningPolicyBuildResultAssetTypeBuildLog           AutomatedReasoningPolicyBuildResultAssetType = "BUILD_LOG"
+	AutomatedReasoningPolicyBuildResultAssetTypeQualityReport      AutomatedReasoningPolicyBuildResultAssetType = "QUALITY_REPORT"
+	AutomatedReasoningPolicyBuildResultAssetTypePolicyDefinition   AutomatedReasoningPolicyBuildResultAssetType = "POLICY_DEFINITION"
+	AutomatedReasoningPolicyBuildResultAssetTypeGeneratedTestCases AutomatedReasoningPolicyBuildResultAssetType = "GENERATED_TEST_CASES"
 )
 
 // Values returns all known values for
@@ -217,6 +218,7 @@ func (AutomatedReasoningPolicyBuildResultAssetType) Values() []AutomatedReasonin
 		"BUILD_LOG",
 		"QUALITY_REPORT",
 		"POLICY_DEFINITION",
+		"GENERATED_TEST_CASES",
 	}
 }
 

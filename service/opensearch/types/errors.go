@@ -327,6 +327,33 @@ func (e *SlotNotAvailableException) ErrorCode() string {
 }
 func (e *SlotNotAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was denied due to request throttling. Reduce the frequency of your
+// requests and try again.
+type ThrottlingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An exception for accessing or deleting a resource that doesn't exist.
 type ValidationException struct {
 	Message *string

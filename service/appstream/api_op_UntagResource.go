@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates one or more specified tags from the specified AppStream 2.0
-// resource.
+// Disassociates one or more specified tags from the specified WorkSpaces
+// Applications resource.
 //
 // To list the current tags for your resources, use ListTagsForResource.
 //
-// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+// For more information about tags, see [Tagging Your Resources] in the Amazon WorkSpaces Applications
 // Administration Guide.
 //
 // [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html

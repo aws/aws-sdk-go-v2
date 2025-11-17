@@ -9,10 +9,10 @@ import (
 
 // Describes an interface VPC endpoint (interface endpoint) that lets you create a
 // private connection between the virtual private cloud (VPC) that you specify and
-// AppStream 2.0. When you specify an interface endpoint for a stack, users of the
-// stack can connect to AppStream 2.0 only through that endpoint. When you specify
-// an interface endpoint for an image builder, administrators can connect to the
-// image builder only through that endpoint.
+// WorkSpaces Applications. When you specify an interface endpoint for a stack,
+// users of the stack can connect to WorkSpaces Applications only through that
+// endpoint. When you specify an interface endpoint for an image builder,
+// administrators can connect to the image builder only through that endpoint.
 type AccessEndpoint struct {
 
 	// The type of interface endpoint.
@@ -69,7 +69,7 @@ type AdminAppLicenseUsageRecord struct {
 
 // Describes an app block.
 //
-// App blocks are an Amazon AppStream 2.0 resource that stores the details about
+// App blocks are a WorkSpaces Applications resource that stores the details about
 // the virtual hard disk in an S3 bucket. It also stores the setup script with
 // details about how to mount the virtual hard disk. The virtual hard disk includes
 // the application binaries and other files necessary to launch your applications.
@@ -118,9 +118,10 @@ type AppBlock struct {
 
 	// The state of the app block.
 	//
-	// An app block with AppStream 2.0 packaging will be in the INACTIVE state if no
-	// application package (VHD) is assigned to it. After an application package (VHD)
-	// is created by an app block builder for an app block, it becomes ACTIVE .
+	// An app block with WorkSpaces Applications packaging will be in the INACTIVE
+	// state if no application package (VHD) is assigned to it. After an application
+	// package (VHD) is created by an app block builder for an app block, it becomes
+	// ACTIVE .
 	//
 	// Custom app blocks are always in the ACTIVE state and no action is required to
 	// use them.
@@ -266,6 +267,55 @@ type Application struct {
 	Platforms []PlatformType
 
 	// The working directory for the application.
+	WorkingDirectory *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an application in the imported image's application catalog.
+// This structure defines how applications appear and launch for users.
+type ApplicationConfig struct {
+
+	// The absolute path to the executable file that launches the application. This is
+	// a required field that can be 1-32767 characters to support Windows extended file
+	// paths. Use escaped file path strings like
+	// "C:\\\\Windows\\\\System32\\\\notepad.exe".
+	//
+	// This member is required.
+	AbsoluteAppPath *string
+
+	// The name of the application. This is a required field that must be unique
+	// within the application catalog and between 1-100 characters, matching the
+	// pattern ^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,99}$.
+	//
+	// This member is required.
+	Name *string
+
+	// The absolute path to the icon file for the application. This field is optional
+	// and can be 1-32767 characters. If not provided, the icon is derived from the
+	// executable. Use PNG images with proper transparency for the best user
+	// experience.
+	AbsoluteIconPath *string
+
+	// The absolute path to the prewarm manifest file for this application. This field
+	// is optional and only applicable when using application-specific manifests. The
+	// path can be 1-32767 characters and should point to a text file containing file
+	// paths to prewarm.
+	AbsoluteManifestPath *string
+
+	// The display name shown to users for this application. This field is optional
+	// and can be 0-100 characters, matching the pattern ^[a-zA-Z0-9][a-zA-Z0-9_.
+	// -]{0,99}$.
+	DisplayName *string
+
+	// The launch parameters to pass to the application executable. This field is
+	// optional and can be 0-1024 characters. Use escaped strings with the full list of
+	// required parameters, such as PowerShell script paths or command-line arguments.
+	LaunchParameters *string
+
+	// The working directory to use when launching the application. This field is
+	// optional and can be 0-32767 characters. Use escaped file path strings like
+	// "C:\\\\Path\\\\To\\\\Working\\\\Directory".
 	WorkingDirectory *string
 
 	noSmithyDocumentSerde
@@ -470,7 +520,7 @@ type EntitledApplication struct {
 
 // Specifies an entitlement. Entitlements control access to specific applications
 // within a stack, based on user attributes. Entitlements apply to SAML 2.0
-// federated user identities. Amazon AppStream 2.0 user pool and streaming URL
+// federated user identities. WorkSpaces Applications user pool and streaming URL
 // users are entitled to all applications in a stack. Entitlements don't apply to
 // the desktop stream view application, or to applications managed by a dynamic app
 // provider using the Dynamic Application Framework.
@@ -510,11 +560,11 @@ type Entitlement struct {
 
 // An attribute associated with an entitlement. Application entitlements work by
 // matching a supported SAML 2.0 attribute name to a value when a user identity
-// federates to an Amazon AppStream 2.0 SAML application.
+// federates to a WorkSpaces Applications SAML application.
 type EntitlementAttribute struct {
 
 	// A supported AWS IAM SAML PrincipalTag attribute that is matched to the
-	// associated value when a user identity federates into an Amazon AppStream 2.0
+	// associated value when a user identity federates into a WorkSpaces Applications
 	// SAML application.
 	//
 	// The following are valid values:
@@ -537,7 +587,7 @@ type EntitlementAttribute struct {
 	Name *string
 
 	// A value that is matched to a supported SAML attribute name when a user identity
-	// federates into an Amazon AppStream 2.0 SAML application.
+	// federates into a WorkSpaces Applications SAML application.
 	//
 	// This member is required.
 	Value *string
@@ -553,6 +603,71 @@ type ErrorDetails struct {
 
 	// The error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an export image task, including its current state,
+// timestamps, and any error details.
+type ExportImageTask struct {
+
+	// The name of the EC2 AMI that will be created by this export task.
+	//
+	// This member is required.
+	AmiName *string
+
+	// The date and time when the export image task was created.
+	//
+	// This member is required.
+	CreatedDate *time.Time
+
+	// The ARN of the WorkSpaces Applications image being exported.
+	//
+	// This member is required.
+	ImageArn *string
+
+	// The unique identifier for the export image task. Use this ID to track the
+	// task's progress and retrieve its details.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The description that will be applied to the exported EC2 AMI.
+	AmiDescription *string
+
+	// The ID of the EC2 AMI that was created by this export task. This field is only
+	// populated when the task completes successfully.
+	AmiId *string
+
+	// Details about any errors that occurred during the export process. This field is
+	// only populated when the task fails.
+	ErrorDetails []ErrorDetails
+
+	// The current state of the export image task, such as PENDING, RUNNING,
+	// COMPLETED, or FAILED.
+	State ExportImageTaskState
+
+	// The tags that will be applied to the exported EC2 AMI.
+	TagSpecifications map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for narrowing down the results when listing export image tasks.
+// Filters allow you to specify criteria such as task state or creation date.
+type Filter struct {
+
+	// The name of the filter. Valid filter names depend on the operation being
+	// performed.
+	//
+	// This member is required.
+	Name *string
+
+	// The values for the filter. Multiple values can be specified for a single filter
+	// name.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -619,8 +734,6 @@ type Fleet struct {
 	//
 	//   - stream.graphics-design.4xlarge
 	//
-	//   - stream.graphics-desktop.2xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge
@@ -632,12 +745,6 @@ type Fleet struct {
 	//   - stream.graphics.g4dn.12xlarge
 	//
 	//   - stream.graphics.g4dn.16xlarge
-	//
-	//   - stream.graphics-pro.4xlarge
-	//
-	//   - stream.graphics-pro.8xlarge
-	//
-	//   - stream.graphics-pro.16xlarge
 	//
 	//   - stream.graphics.g5.xlarge
 	//
@@ -735,13 +842,14 @@ type Fleet struct {
 	// The ARN of the IAM role that is applied to the fleet. To assume a role, the
 	// fleet instance calls the AWS Security Token Service (STS) AssumeRole API
 	// operation and passes the ARN of the role to use. The operation creates a new
-	// session with temporary credentials. AppStream 2.0 retrieves the temporary
-	// credentials and creates the appstream_machine_role credential profile on the
-	// instance.
+	// session with temporary credentials. WorkSpaces Applications retrieves the
+	// temporary credentials and creates the appstream_machine_role credential profile
+	// on the instance.
 	//
-	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances] in the Amazon WorkSpaces Applications Administration
+	// Guide.
 	//
-	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -792,14 +900,18 @@ type Fleet struct {
 	// The platform of the fleet.
 	Platform PlatformType
 
+	// The current configuration of the root volume for fleet instances, including the
+	// storage size in GB.
+	RootVolumeConfig *VolumeConfig
+
 	// The S3 location of the session scripts configuration zip file. This only
 	// applies to Elastic fleets.
 	SessionScriptS3Location *S3Location
 
-	// The AppStream 2.0 view that is displayed to your users when they stream from
-	// the fleet. When APP is specified, only the windows of applications opened by
-	// users display. When DESKTOP is specified, the standard desktop that is provided
-	// by the operating system displays.
+	// The WorkSpaces Applications view that is displayed to your users when they
+	// stream from the fleet. When APP is specified, only the windows of applications
+	// opened by users display. When DESKTOP is specified, the standard desktop that
+	// is provided by the operating system displays.
 	//
 	// The default value is APP .
 	StreamView StreamView
@@ -836,8 +948,8 @@ type Image struct {
 	// The applications associated with the image.
 	Applications []Application
 
-	// The version of the AppStream 2.0 agent to use for instances that are launched
-	// from this image.
+	// The version of the WorkSpaces Applications agent to use for instances that are
+	// launched from this image.
 	AppstreamAgentVersion *string
 
 	// The ARN of the image.
@@ -855,8 +967,8 @@ type Image struct {
 	// The image name to display.
 	DisplayName *string
 
-	// Indicates whether dynamic app providers are enabled within an AppStream 2.0
-	// image or not.
+	// Indicates whether dynamic app providers are enabled within an WorkSpaces
+	// Applications image or not.
 	DynamicAppProvidersEnabled DynamicAppProvidersEnabled
 
 	// The name of the image builder that was used to create the private image. If the
@@ -877,8 +989,14 @@ type Image struct {
 	// Indicates whether the image is shared with another account ID.
 	ImageSharedWithOthers ImageSharedWithOthers
 
-	// Indicates whether the image is using the latest AppStream 2.0 agent version or
-	// not.
+	// The type of the image. Images created through AMI import have type "custom",
+	// while WorkSpaces Applications provided images have type "native". Custom images
+	// support additional instance types including GeneralPurpose, MemoryOptimized,
+	// ComputeOptimized, and Accelerated instance families.
+	ImageType ImageType
+
+	// Indicates whether the image is using the latest WorkSpaces Applications agent
+	// version or not.
 	LatestAppstreamAgentVersion LatestAppstreamAgentVersion
 
 	// Indicates whether the image includes license-included applications.
@@ -938,8 +1056,8 @@ type ImageBuilder struct {
 	// endpoints.
 	AccessEndpoints []AccessEndpoint
 
-	// The version of the AppStream 2.0 agent that is currently being used by the
-	// image builder.
+	// The version of the WorkSpaces Applications agent that is currently being used
+	// by the image builder.
 	AppstreamAgentVersion *string
 
 	// The ARN for the image builder.
@@ -964,13 +1082,14 @@ type ImageBuilder struct {
 	// The ARN of the IAM role that is applied to the image builder. To assume a role,
 	// the image builder calls the AWS Security Token Service (STS) AssumeRole API
 	// operation and passes the ARN of the role to use. The operation creates a new
-	// session with temporary credentials. AppStream 2.0 retrieves the temporary
-	// credentials and creates the appstream_machine_role credential profile on the
-	// instance.
+	// session with temporary credentials. WorkSpaces Applications retrieves the
+	// temporary credentials and creates the appstream_machine_role credential profile
+	// on the instance.
 	//
-	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances] in the Amazon WorkSpaces Applications Administration
+	// Guide.
 	//
-	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The ARN of the image from which this builder was created.
@@ -1028,8 +1147,6 @@ type ImageBuilder struct {
 	//
 	//   - stream.graphics-design.4xlarge
 	//
-	//   - stream.graphics-desktop.2xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge
@@ -1041,12 +1158,6 @@ type ImageBuilder struct {
 	//   - stream.graphics.g4dn.12xlarge
 	//
 	//   - stream.graphics.g4dn.16xlarge
-	//
-	//   - stream.graphics-pro.4xlarge
-	//
-	//   - stream.graphics-pro.8xlarge
-	//
-	//   - stream.graphics-pro.16xlarge
 	//
 	//   - stream.graphics.g5.xlarge
 	//
@@ -1091,8 +1202,8 @@ type ImageBuilder struct {
 	//   - stream.graphics.gr6f.4xlarge
 	InstanceType *string
 
-	// Indicates whether the image builder is using the latest AppStream 2.0 agent
-	// version or not.
+	// Indicates whether the image builder is using the latest WorkSpaces Applications
+	// agent version or not.
 	LatestAppstreamAgentVersion LatestAppstreamAgentVersion
 
 	// Describes the network details of the fleet or image builder instance.
@@ -1100,6 +1211,10 @@ type ImageBuilder struct {
 
 	// The operating system platform of the image builder.
 	Platform PlatformType
+
+	// The current configuration of the root volume for the image builder, including
+	// the storage size in GB.
+	RootVolumeConfig *VolumeConfig
 
 	// The state of the image builder.
 	State ImageBuilderState
@@ -1171,8 +1286,8 @@ type NetworkAccessConfiguration struct {
 	// identifier.
 	EniId *string
 
-	// The IPv6 addresses of the elastic network interface that is attached to
-	// instances in your VPC.
+	// The IPv6 addresses assigned to the elastic network interface. This field
+	// supports IPv6 connectivity for WorkSpaces Applications instances.
 	EniIpv6Addresses []string
 
 	// The private IP address of the elastic network interface that is attached to
@@ -1193,6 +1308,19 @@ type ResourceError struct {
 
 	// The time the error occurred.
 	ErrorTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for runtime validation of imported images. This structure
+// specifies the instance type to use for testing the imported image's streaming
+// capabilities.
+type RuntimeValidationConfig struct {
+
+	// The instance type to use for runtime validation testing. It's recommended to
+	// use the same instance type you plan to use for your fleet to ensure accurate
+	// validation results.
+	IntendedInstanceType *string
 
 	noSmithyDocumentSerde
 }
@@ -1417,7 +1545,8 @@ type Stack struct {
 	Name *string
 
 	// The list of virtual private cloud (VPC) interface endpoint objects. Users of
-	// the stack can connect to AppStream 2.0 only through the specified endpoints.
+	// the stack can connect to WorkSpaces Applications only through the specified
+	// endpoints.
 	AccessEndpoints []AccessEndpoint
 
 	// The persistent application settings for users of the stack.
@@ -1435,9 +1564,9 @@ type Stack struct {
 	// The stack name to display.
 	DisplayName *string
 
-	// The domains where AppStream 2.0 streaming sessions can be embedded in an
-	// iframe. You must approve the domains that you want to host embedded AppStream
-	// 2.0 streaming sessions.
+	// The domains where WorkSpaces Applications streaming sessions can be embedded in
+	// an iframe. You must approve the domains that you want to host embedded
+	// WorkSpaces Applications streaming sessions.
 	EmbedHostDomains []string
 
 	// The URL that users are redirected to after they click the Send Feedback link.
@@ -1488,8 +1617,8 @@ type StorageConnector struct {
 	Domains []string
 
 	// The OneDrive for Business domains where you require admin consent when users
-	// try to link their OneDrive account to AppStream 2.0. The attribute can only be
-	// specified when ConnectorType=ONE_DRIVE.
+	// try to link their OneDrive account to WorkSpaces Applications. The attribute can
+	// only be specified when ConnectorType=ONE_DRIVE.
 	DomainsRequireAdminConsent []string
 
 	// The ARN of the storage connector.
@@ -1562,11 +1691,12 @@ type UsageReportSubscription struct {
 	// The Amazon S3 bucket where generated reports are stored.
 	//
 	// If you enabled on-instance session scripts and Amazon S3 logging for your
-	// session script configuration, AppStream 2.0 created an S3 bucket to store the
-	// script output. The bucket is unique to your account and Region. When you enable
-	// usage reporting in this case, AppStream 2.0 uses the same bucket to store your
-	// usage reports. If you haven't already enabled on-instance session scripts, when
-	// you enable usage reports, AppStream 2.0 creates a new S3 bucket.
+	// session script configuration, WorkSpaces Applications created an S3 bucket to
+	// store the script output. The bucket is unique to your account and Region. When
+	// you enable usage reporting in this case, WorkSpaces Applications uses the same
+	// bucket to store your usage reports. If you haven't already enabled on-instance
+	// session scripts, when you enable usage reports, WorkSpaces Applications creates
+	// a new S3 bucket.
 	S3BucketName *string
 
 	// The schedule for generating usage reports.
@@ -1693,6 +1823,19 @@ type UserStackAssociationError struct {
 
 	// Information about the user and associated stack.
 	UserStackAssociation *UserStackAssociation
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the root volume of fleet instances and image builders. This
+// allows you to customize the storage capacity beyond the default 200 GB.
+type VolumeConfig struct {
+
+	// The size of the root volume in GB. Valid range is 200-500 GB. The default is
+	// 200 GB, which is included in the hourly instance rate. Additional storage beyond
+	// 200 GB incurs extra charges and applies to instances regardless of their running
+	// state.
+	VolumeSizeInGb *int32
 
 	noSmithyDocumentSerde
 }

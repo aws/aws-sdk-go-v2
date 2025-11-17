@@ -489,6 +489,27 @@ func (InboundConnectionStatusCode) Values() []InboundConnectionStatusCode {
 	}
 }
 
+type IndexStatus string
+
+// Enum values for IndexStatus
+const (
+	IndexStatusCreated IndexStatus = "CREATED"
+	IndexStatusUpdated IndexStatus = "UPDATED"
+	IndexStatusDeleted IndexStatus = "DELETED"
+)
+
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IndexStatus) Values() []IndexStatus {
+	return []IndexStatus{
+		"CREATED",
+		"UPDATED",
+		"DELETED",
+	}
+}
+
 type InitiatedBy string
 
 // Enum values for InitiatedBy

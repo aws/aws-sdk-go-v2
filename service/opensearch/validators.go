@@ -230,6 +230,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIndex struct {
+}
+
+func (*validateOpCreateIndex) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIndex) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIndexInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateOutboundConnection struct {
 }
 
@@ -385,6 +405,26 @@ func (m *validateOpDeleteInboundConnection) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteInboundConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIndex struct {
+}
+
+func (*validateOpDeleteIndex) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIndex) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIndexInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIndexInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -765,6 +805,26 @@ func (m *validateOpGetDomainMaintenanceStatus) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDomainMaintenanceStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIndex struct {
+}
+
+func (*validateOpGetIndex) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIndex) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIndexInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIndexInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1230,6 +1290,26 @@ func (m *validateOpUpdateDomainConfig) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIndex struct {
+}
+
+func (*validateOpUpdateIndex) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIndex) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIndexInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePackage struct {
 }
 
@@ -1374,6 +1454,10 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIndex{}, middleware.After)
+}
+
 func addOpCreateOutboundConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOutboundConnection{}, middleware.After)
 }
@@ -1404,6 +1488,10 @@ func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteInboundConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInboundConnection{}, middleware.After)
+}
+
+func addOpDeleteIndexValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIndex{}, middleware.After)
 }
 
 func addOpDeleteOutboundConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1480,6 +1568,10 @@ func addOpGetDirectQueryDataSourceValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetDomainMaintenanceStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomainMaintenanceStatus{}, middleware.After)
+}
+
+func addOpGetIndexValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIndex{}, middleware.After)
 }
 
 func addOpGetPackageVersionHistoryValidationMiddleware(stack *middleware.Stack) error {
@@ -1572,6 +1664,10 @@ func addOpUpdateDirectQueryDataSourceValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateDomainConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomainConfig{}, middleware.After)
+}
+
+func addOpUpdateIndexValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIndex{}, middleware.After)
 }
 
 func addOpUpdatePackageValidationMiddleware(stack *middleware.Stack) error {
@@ -2195,6 +2291,27 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 }
 
+func validateOpCreateIndexInput(v *CreateIndexInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIndexInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.IndexSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexSchema"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateOutboundConnectionInput(v *CreateOutboundConnectionInput) error {
 	if v == nil {
 		return nil
@@ -2348,6 +2465,24 @@ func validateOpDeleteInboundConnectionInput(v *DeleteInboundConnectionInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInboundConnectionInput"}
 	if v.ConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIndexInput(v *DeleteIndexInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIndexInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2648,6 +2783,24 @@ func validateOpGetDomainMaintenanceStatusInput(v *GetDomainMaintenanceStatusInpu
 	}
 	if v.MaintenanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaintenanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIndexInput(v *GetIndexInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIndexInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3036,6 +3189,27 @@ func validateOpUpdateDomainConfigInput(v *UpdateDomainConfigInput) error {
 		if err := validateOffPeakWindowOptions(v.OffPeakWindowOptions); err != nil {
 			invalidParams.AddNested("OffPeakWindowOptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIndexInput(v *UpdateIndexInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIndexInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.IndexSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexSchema"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

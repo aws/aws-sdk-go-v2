@@ -290,6 +290,26 @@ func (m *validateOpCreateEntitlement) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateExportImageTask struct {
+}
+
+func (*validateOpCreateExportImageTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExportImageTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExportImageTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExportImageTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFleet struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpCreateImageBuilderStreamingURL) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateImageBuilderStreamingURLInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateImportedImage struct {
+}
+
+func (*validateOpCreateImportedImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateImportedImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateImportedImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateImportedImageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1090,26 @@ func (m *validateOpListEntitledApplications) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListExportImageTasks struct {
+}
+
+func (*validateOpListExportImageTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExportImageTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExportImageTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExportImageTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1466,6 +1526,10 @@ func addOpCreateEntitlementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEntitlement{}, middleware.After)
 }
 
+func addOpCreateExportImageTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExportImageTask{}, middleware.After)
+}
+
 func addOpCreateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFleet{}, middleware.After)
 }
@@ -1476,6 +1540,10 @@ func addOpCreateImageBuilderValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpCreateImageBuilderStreamingURLValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateImageBuilderStreamingURL{}, middleware.After)
+}
+
+func addOpCreateImportedImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateImportedImage{}, middleware.After)
 }
 
 func addOpCreateStackValidationMiddleware(stack *middleware.Stack) error {
@@ -1618,6 +1686,10 @@ func addOpListEntitledApplicationsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpListEntitledApplications{}, middleware.After)
 }
 
+func addOpListExportImageTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExportImageTasks{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1722,6 +1794,41 @@ func validateAccessEndpointList(v []types.AccessEndpoint) error {
 	}
 }
 
+func validateAppCatalogConfig(v []types.ApplicationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppCatalogConfig"}
+	for i := range v {
+		if err := validateApplicationConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplicationConfig(v *types.ApplicationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicationConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AbsoluteAppPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AbsoluteAppPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateApplicationSettings(v *types.ApplicationSettings) error {
 	if v == nil {
 		return nil
@@ -1762,6 +1869,41 @@ func validateEntitlementAttributeList(v []types.EntitlementAttribute) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EntitlementAttributeList"}
 	for i := range v {
 		if err := validateEntitlementAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilter(v *types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilters(v []types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filters"}
+	for i := range v {
+		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2248,6 +2390,27 @@ func validateOpCreateEntitlementInput(v *CreateEntitlementInput) error {
 	}
 }
 
+func validateOpCreateExportImageTaskInput(v *CreateExportImageTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExportImageTaskInput"}
+	if v.ImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if v.AmiName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AmiName"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	if v == nil {
 		return nil
@@ -2301,6 +2464,32 @@ func validateOpCreateImageBuilderStreamingURLInput(v *CreateImageBuilderStreamin
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImageBuilderStreamingURLInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateImportedImageInput(v *CreateImportedImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateImportedImageInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SourceAmiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceAmiId"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if v.AppCatalogConfig != nil {
+		if err := validateAppCatalogConfig(v.AppCatalogConfig); err != nil {
+			invalidParams.AddNested("AppCatalogConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2917,6 +3106,23 @@ func validateOpListEntitledApplicationsInput(v *ListEntitledApplicationsInput) e
 	}
 	if v.EntitlementName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntitlementName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExportImageTasksInput(v *ListExportImageTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExportImageTasksInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

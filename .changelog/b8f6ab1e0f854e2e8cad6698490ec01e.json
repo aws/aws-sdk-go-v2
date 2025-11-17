@@ -1,0 +1,8 @@
+{
+    "id": "b8f6ab1e-0f85-4e2e-8cad-6698490ec01e",
+    "type": "feature",
+    "description": "Adds support for LLM as Primary, allowing usage of LLMs as the default NLU system.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

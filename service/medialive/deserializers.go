@@ -29801,6 +29801,24 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				sv.SceneChangeDetect = types.Av1SceneChangeDetect(jtv)
 			}
 
+		case "spatialAq":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Av1SpatialAq to be of type string, got %T instead", value)
+				}
+				sv.SpatialAq = types.Av1SpatialAq(jtv)
+			}
+
+		case "temporalAq":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Av1TemporalAq to be of type string, got %T instead", value)
+				}
+				sv.TemporalAq = types.Av1TemporalAq(jtv)
+			}
+
 		case "timecodeBurninSettings":
 			if err := awsRestjson1_deserializeDocumentTimecodeBurninSettings(&sv.TimecodeBurninSettings, value); err != nil {
 				return err
@@ -36226,6 +36244,11 @@ func awsRestjson1_deserializeDocumentH265ColorSpaceSettings(v **types.H265ColorS
 				return err
 			}
 
+		case "hlg2020Settings":
+			if err := awsRestjson1_deserializeDocumentHlg2020Settings(&sv.Hlg2020Settings, value); err != nil {
+				return err
+			}
+
 		case "rec601Settings":
 			if err := awsRestjson1_deserializeDocumentRec601Settings(&sv.Rec601Settings, value); err != nil {
 				return err
@@ -36820,6 +36843,37 @@ func awsRestjson1_deserializeDocumentHdr10Settings(v **types.Hdr10Settings, valu
 				sv.MaxFall = ptr.Int32(int32(i64))
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHlg2020Settings(v **types.Hlg2020Settings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Hlg2020Settings
+	if *v == nil {
+		sv = &types.Hlg2020Settings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 

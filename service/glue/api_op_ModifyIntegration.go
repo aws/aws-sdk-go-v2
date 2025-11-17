@@ -41,7 +41,8 @@ type ModifyIntegrationInput struct {
 	// A description of the integration.
 	Description *string
 
-	// Properties associated with the integration.
+	// The configuration settings for the integration. Currently, only the
+	// RefreshInterval can be modified.
 	IntegrationConfig *types.IntegrationConfig
 
 	// A unique name for an integration in Glue.
@@ -111,7 +112,7 @@ type ModifyIntegrationOutput struct {
 	// A list of errors associated with the integration modification.
 	Errors []types.IntegrationError
 
-	// Properties associated with the integration.
+	// The updated configuration settings for the integration.
 	IntegrationConfig *types.IntegrationConfig
 
 	// The ARN of a KMS key used for encrypting the channel.

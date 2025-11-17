@@ -13247,6 +13247,55 @@ func awsAwsjson11_deserializeDocumentRecurringCharges(v *[]types.RecurringCharge
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRemoteAccessEndpoints(v **types.RemoteAccessEndpoints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteAccessEndpoints
+	if *v == nil {
+		sv = &types.RemoteAccessEndpoints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "interactiveEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveURL to be of type string, got %T instead", value)
+				}
+				sv.InteractiveEndpoint = ptr.String(jtv)
+			}
+
+		case "remoteDriverEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveURL to be of type string, got %T instead", value)
+				}
+				sv.RemoteDriverEndpoint = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRemoteAccessSession(v **types.RemoteAccessSession, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13294,15 +13343,6 @@ func awsAwsjson11_deserializeDocumentRemoteAccessSession(v **types.RemoteAccessS
 					return fmt.Errorf("expected BillingMethod to be of type string, got %T instead", value)
 				}
 				sv.BillingMethod = types.BillingMethod(jtv)
-			}
-
-		case "clientId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ClientId to be of type string, got %T instead", value)
-				}
-				sv.ClientId = ptr.String(jtv)
 			}
 
 		case "created":
@@ -13354,13 +13394,9 @@ func awsAwsjson11_deserializeDocumentRemoteAccessSession(v **types.RemoteAccessS
 				sv.Endpoint = ptr.String(jtv)
 			}
 
-		case "hostAddress":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected HostAddress to be of type string, got %T instead", value)
-				}
-				sv.HostAddress = ptr.String(jtv)
+		case "endpoints":
+			if err := awsAwsjson11_deserializeDocumentRemoteAccessEndpoints(&sv.Endpoints, value); err != nil {
+				return err
 			}
 
 		case "instanceArn":
@@ -13397,33 +13433,6 @@ func awsAwsjson11_deserializeDocumentRemoteAccessSession(v **types.RemoteAccessS
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
-			}
-
-		case "remoteDebugEnabled":
-			if value != nil {
-				jtv, ok := value.(bool)
-				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
-				}
-				sv.RemoteDebugEnabled = ptr.Bool(jtv)
-			}
-
-		case "remoteRecordAppArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected AmazonResourceName to be of type string, got %T instead", value)
-				}
-				sv.RemoteRecordAppArn = ptr.String(jtv)
-			}
-
-		case "remoteRecordEnabled":
-			if value != nil {
-				jtv, ok := value.(bool)
-				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
-				}
-				sv.RemoteRecordEnabled = ptr.Bool(jtv)
 			}
 
 		case "result":

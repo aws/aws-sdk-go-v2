@@ -1,0 +1,8 @@
+{
+    "id": "1befbfff-af68-409e-a814-d13fdb516e51",
+    "type": "feature",
+    "description": "Added support for the managed Slurm REST API endpoint",
+    "modules": [
+        "service/pcs"
+    ]
+}

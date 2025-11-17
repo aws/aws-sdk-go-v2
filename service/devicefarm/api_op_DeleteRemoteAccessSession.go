@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a completed remote access session and its results.
+// Deletes a completed remote access session and its results. You cannot delete a
+// remote access session if it is still active.
+//
+// You cannot undo this operation.
 func (c *Client) DeleteRemoteAccessSession(ctx context.Context, params *DeleteRemoteAccessSessionInput, optFns ...func(*Options)) (*DeleteRemoteAccessSessionOutput, error) {
 	if params == nil {
 		params = &DeleteRemoteAccessSessionInput{}

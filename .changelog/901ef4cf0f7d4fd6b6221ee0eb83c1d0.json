@@ -1,0 +1,8 @@
+{
+    "id": "901ef4cf-0f7d-4fd6-b622-1ee0eb83c1d0",
+    "type": "feature",
+    "description": "This release adds support for interacting with devices during a remote access session using the remoteDriverEndpoint interface",
+    "modules": [
+        "service/devicefarm"
+    ]
+}

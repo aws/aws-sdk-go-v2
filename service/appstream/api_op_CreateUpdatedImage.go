@@ -12,12 +12,13 @@ import (
 )
 
 // Creates a new image with the latest Windows operating system updates, driver
-// updates, and AppStream 2.0 agent software.
+// updates, and WorkSpaces Applications agent software.
 //
-// For more information, see the "Update an Image by Using Managed AppStream 2.0
-// Image Updates" section in [Administer Your AppStream 2.0 Images], in the Amazon AppStream 2.0 Administration Guide.
+// For more information, see the "Update an Image by Using Managed WorkSpaces
+// Applications Image Updates" section in [Administer Your WorkSpaces Applications Images], in the Amazon WorkSpaces Applications
+// Administration Guide.
 //
-// [Administer Your AppStream 2.0 Images]: https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html
+// [Administer Your WorkSpaces Applications Images]: https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html
 func (c *Client) CreateUpdatedImage(ctx context.Context, params *CreateUpdatedImageInput, optFns ...func(*Options)) (*CreateUpdatedImageOutput, error) {
 	if params == nil {
 		params = &CreateUpdatedImageInput{}
@@ -47,11 +48,11 @@ type CreateUpdatedImageInput struct {
 	NewImageName *string
 
 	// Indicates whether to display the status of image update availability before
-	// AppStream 2.0 initiates the process of creating a new updated image. If this
-	// value is set to true , AppStream 2.0 displays whether image updates are
-	// available. If this value is set to false , AppStream 2.0 initiates the process
-	// of creating a new updated image without displaying whether image updates are
-	// available.
+	// WorkSpaces Applications initiates the process of creating a new updated image.
+	// If this value is set to true , WorkSpaces Applications displays whether image
+	// updates are available. If this value is set to false , WorkSpaces Applications
+	// initiates the process of creating a new updated image without displaying whether
+	// image updates are available.
 	DryRun *bool
 
 	// The description to display for the new image.
@@ -71,7 +72,7 @@ type CreateUpdatedImageInput struct {
 	//
 	// If you do not specify a value, the value is set to an empty string.
 	//
-	// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+	// For more information about tags, see [Tagging Your Resources] in the Amazon WorkSpaces Applications
 	// Administration Guide.
 	//
 	// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html

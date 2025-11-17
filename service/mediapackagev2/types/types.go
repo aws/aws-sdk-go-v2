@@ -1089,7 +1089,7 @@ type IngestEndpoint struct {
 type InputSwitchConfiguration struct {
 
 	// When true, AWS Elemental MediaPackage performs input switching based on the
-	// MQCS. Default is true. This setting is valid only when InputType is CMAF .
+	// MQCS. Default is false. This setting is valid only when InputType is CMAF .
 	MQCSInputSwitching *bool
 
 	// For CMAF inputs, indicates which input MediaPackage should prefer when both
@@ -1286,6 +1286,17 @@ type Scte struct {
 	// output.
 	ScteFilter []ScteFilter
 
+	// Controls whether SCTE-35 messages are included in segment files.
+	//
+	//   - None – SCTE-35 messages are not included in segments (default)
+	//
+	//   - All – SCTE-35 messages are embedded in segment data
+	//
+	// For DASH manifests, when set to All , an InbandEventStream tag signals that
+	// SCTE messages are present in segments. This setting works independently of
+	// manifest ad markers.
+	ScteInSegments ScteInSegments
+
 	noSmithyDocumentSerde
 }
 
@@ -1316,6 +1327,9 @@ type ScteHls struct {
 	// you want MediaPackage to do with the ad markers.
 	//
 	// Value description:
+	//
+	//   - SCTE35_ENHANCED - Generate industry-standard CUE tag ad markers in HLS
+	//   manifests based on SCTE-35 input messages from the input stream.
 	//
 	//   - DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program transition
 	//   events in TS and CMAF manifests. If you use DATERANGE, you must set a

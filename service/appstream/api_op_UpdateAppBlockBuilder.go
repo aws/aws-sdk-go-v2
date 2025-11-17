@@ -58,13 +58,14 @@ type UpdateAppBlockBuilderInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the app block
 	// builder. To assume a role, the app block builder calls the AWS Security Token
 	// Service (STS) AssumeRole API operation and passes the ARN of the role to use.
-	// The operation creates a new session with temporary credentials. AppStream 2.0
-	// retrieves the temporary credentials and creates the appstream_machine_role
-	// credential profile on the instance.
+	// The operation creates a new session with temporary credentials. WorkSpaces
+	// Applications retrieves the temporary credentials and creates the
+	// appstream_machine_role credential profile on the instance.
 	//
-	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances] in the Amazon WorkSpaces Applications Administration
+	// Guide.
 	//
-	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The instance type to use when launching the app block builder. The following

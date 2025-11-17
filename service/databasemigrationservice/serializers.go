@@ -7447,6 +7447,12 @@ func awsAwsjson11_serializeDocumentDataProviderSettings(v types.DataProviderSett
 			return err
 		}
 
+	case *types.DataProviderSettingsMemberSybaseAseSettings:
+		av := object.Key("SybaseAseSettings")
+		if err := awsAwsjson11_serializeDocumentSybaseAseDataProviderSettings(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -9726,6 +9732,43 @@ func awsAwsjson11_serializeDocumentSubnetIdentifierList(v []string, value smithy
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSybaseAseDataProviderSettings(v *types.SybaseAseDataProviderSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.EncryptPassword != nil {
+		ok := object.Key("EncryptPassword")
+		ok.Boolean(*v.EncryptPassword)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if len(v.SslMode) > 0 {
+		ok := object.Key("SslMode")
+		ok.String(string(v.SslMode))
+	}
+
 	return nil
 }
 

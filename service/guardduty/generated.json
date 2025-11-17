@@ -74,6 +74,7 @@
         "api_op_ListThreatEntitySets.go",
         "api_op_ListThreatIntelSets.go",
         "api_op_ListTrustedEntitySets.go",
+        "api_op_SendObjectMalwareScan.go",
         "api_op_StartMalwareScan.go",
         "api_op_StartMonitoringMembers.go",
         "api_op_StopMonitoringMembers.go",

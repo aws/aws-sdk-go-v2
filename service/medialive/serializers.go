@@ -12473,6 +12473,16 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		ok.String(string(v.SceneChangeDetect))
 	}
 
+	if len(v.SpatialAq) > 0 {
+		ok := object.Key("spatialAq")
+		ok.String(string(v.SpatialAq))
+	}
+
+	if len(v.TemporalAq) > 0 {
+		ok := object.Key("temporalAq")
+		ok.String(string(v.TemporalAq))
+	}
+
 	if v.TimecodeBurninSettings != nil {
 		ok := object.Key("timecodeBurninSettings")
 		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
@@ -14565,6 +14575,13 @@ func awsRestjson1_serializeDocumentH265ColorSpaceSettings(v *types.H265ColorSpac
 		}
 	}
 
+	if v.Hlg2020Settings != nil {
+		ok := object.Key("hlg2020Settings")
+		if err := awsRestjson1_serializeDocumentHlg2020Settings(v.Hlg2020Settings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Rec601Settings != nil {
 		ok := object.Key("rec601Settings")
 		if err := awsRestjson1_serializeDocumentRec601Settings(v.Rec601Settings, ok); err != nil {
@@ -14852,6 +14869,13 @@ func awsRestjson1_serializeDocumentHdr10Settings(v *types.Hdr10Settings, value s
 		ok := object.Key("maxFall")
 		ok.Integer(*v.MaxFall)
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHlg2020Settings(v *types.Hlg2020Settings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }

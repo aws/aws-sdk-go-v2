@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Dissociates multiple packages from a domain simulatneously.
+// Dissociates multiple packages from a domain simultaneously.
 func (c *Client) DissociatePackages(ctx context.Context, params *DissociatePackagesInput, optFns ...func(*Options)) (*DissociatePackagesOutput, error) {
 	if params == nil {
 		params = &DissociatePackagesInput{}

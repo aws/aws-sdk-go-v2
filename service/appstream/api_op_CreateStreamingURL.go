@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-// Creates a temporary URL to start an AppStream 2.0 streaming session for the
-// specified user. A streaming URL enables application streaming to be tested
-// without user setup.
+// Creates a temporary URL to start an WorkSpaces Applications streaming session
+// for the specified user. A streaming URL enables application streaming to be
+// tested without user setup.
 func (c *Client) CreateStreamingURL(ctx context.Context, params *CreateStreamingURLInput, optFns ...func(*Options)) (*CreateStreamingURLOutput, error) {
 	if params == nil {
 		params = &CreateStreamingURLInput{}
@@ -52,8 +52,8 @@ type CreateStreamingURLInput struct {
 	// operating system desktop. To do so, specify Desktop.
 	ApplicationId *string
 
-	// The session context. For more information, see [Session Context] in the Amazon AppStream 2.0
-	// Administration Guide.
+	// The session context. For more information, see [Session Context] in the Amazon WorkSpaces
+	// Applications Administration Guide.
 	//
 	// [Session Context]: https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
 	SessionContext *string
@@ -70,7 +70,7 @@ type CreateStreamingURLOutput struct {
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
 	Expires *time.Time
 
-	// The URL to start the AppStream 2.0 streaming session.
+	// The URL to start the WorkSpaces Applications streaming session.
 	StreamingURL *string
 
 	// Metadata pertaining to the operation's result.

@@ -854,6 +854,18 @@ func TestCheckSnapshot_DeleteIntegration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIntegrationResourceProperty(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntegrationResourceProperty(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIntegrationResourceProperty")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteIntegrationTableProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteIntegrationTableProperties(context.Background(), nil, func(o *Options) {
@@ -2227,6 +2239,18 @@ func TestCheckSnapshot_ListEntities(t *testing.T) {
 	_, err := svc.ListEntities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEntities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIntegrationResourceProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrationResourceProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIntegrationResourceProperties")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3937,6 +3961,18 @@ func TestUpdateSnapshot_DeleteIntegration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIntegrationResourceProperty(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntegrationResourceProperty(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIntegrationResourceProperty")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteIntegrationTableProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteIntegrationTableProperties(context.Background(), nil, func(o *Options) {
@@ -5310,6 +5346,18 @@ func TestUpdateSnapshot_ListEntities(t *testing.T) {
 	_, err := svc.ListEntities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEntities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIntegrationResourceProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrationResourceProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIntegrationResourceProperties")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

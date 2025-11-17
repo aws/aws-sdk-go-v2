@@ -30573,6 +30573,15 @@ func awsRestjson1_deserializeDocumentNluImprovementSpecification(v **types.NluIm
 
 	for key, value := range shape {
 		switch key {
+		case "assistedNluMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssistedNluMode to be of type string, got %T instead", value)
+				}
+				sv.AssistedNluMode = types.AssistedNluMode(jtv)
+			}
+
 		case "enabled":
 			if value != nil {
 				jtv, ok := value.(bool)

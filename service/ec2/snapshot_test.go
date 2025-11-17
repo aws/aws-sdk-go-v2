@@ -3818,6 +3818,30 @@ func TestCheckSnapshot_DescribeInstances(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInstanceSqlHaHistoryStates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceSqlHaHistoryStates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInstanceSqlHaHistoryStates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeInstanceSqlHaStates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceSqlHaStates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInstanceSqlHaStates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeInstanceStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstanceStatus(context.Background(), nil, func(o *Options) {
@@ -5378,6 +5402,18 @@ func TestCheckSnapshot_DisableImageDeregistrationProtection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableInstanceSqlHaStandbyDetections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableInstanceSqlHaStandbyDetections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableInstanceSqlHaStandbyDetections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableIpamOrganizationAdminAccount(context.Background(), nil, func(o *Options) {
@@ -5815,6 +5851,18 @@ func TestCheckSnapshot_EnableImageDeregistrationProtection(t *testing.T) {
 	_, err := svc.EnableImageDeregistrationProtection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableImageDeregistrationProtection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableInstanceSqlHaStandbyDetections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableInstanceSqlHaStandbyDetections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12421,6 +12469,30 @@ func TestUpdateSnapshot_DescribeInstances(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeInstanceSqlHaHistoryStates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceSqlHaHistoryStates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInstanceSqlHaHistoryStates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeInstanceSqlHaStates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceSqlHaStates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInstanceSqlHaStates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeInstanceStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstanceStatus(context.Background(), nil, func(o *Options) {
@@ -13981,6 +14053,18 @@ func TestUpdateSnapshot_DisableImageDeregistrationProtection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableInstanceSqlHaStandbyDetections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableInstanceSqlHaStandbyDetections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableInstanceSqlHaStandbyDetections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableIpamOrganizationAdminAccount(context.Background(), nil, func(o *Options) {
@@ -14418,6 +14502,18 @@ func TestUpdateSnapshot_EnableImageDeregistrationProtection(t *testing.T) {
 	_, err := svc.EnableImageDeregistrationProtection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableImageDeregistrationProtection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableInstanceSqlHaStandbyDetections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableInstanceSqlHaStandbyDetections")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

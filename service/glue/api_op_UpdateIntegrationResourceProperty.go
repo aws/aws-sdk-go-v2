@@ -52,6 +52,10 @@ type UpdateIntegrationResourcePropertyOutput struct {
 	// The connection ARN of the source, or the database ARN of the target.
 	ResourceArn *string
 
+	// The resource ARN created through this create API. The format is something like
+	// arn:aws:glue:::integrationresourceproperty/*
+	ResourcePropertyArn *string
+
 	// The resource properties associated with the integration source.
 	SourceProcessingProperties *types.SourceProcessingProperties
 

@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Directory Config object from AppStream 2.0. This object
-// includes the information required to join streaming instances to an Active
-// Directory domain.
+// Deletes the specified Directory Config object from WorkSpaces Applications.
+// This object includes the information required to join streaming instances to an
+// Active Directory domain.
 func (c *Client) DeleteDirectoryConfig(ctx context.Context, params *DeleteDirectoryConfigInput, optFns ...func(*Options)) (*DeleteDirectoryConfigOutput, error) {
 	if params == nil {
 		params = &DeleteDirectoryConfigInput{}

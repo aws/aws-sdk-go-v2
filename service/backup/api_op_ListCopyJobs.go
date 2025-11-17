@@ -112,6 +112,9 @@ type ListCopyJobsInput struct {
 	//   - VirtualMachine for VMware virtual machines
 	ByResourceType *string
 
+	// Filters copy jobs by the specified source recovery point ARN.
+	BySourceRecoveryPointArn *string
+
 	// Returns only copy jobs that are in the specified state.
 	ByState types.CopyJobState
 

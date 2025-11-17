@@ -140,6 +140,9 @@ func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
 	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildLog
 
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyGeneratedTestCases
+
 	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinition
 
@@ -158,6 +161,7 @@ func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
 var _ *types.AutomatedReasoningPolicyBuildLog
 var _ *types.AutomatedReasoningPolicyDefinitionQualityReport
 var _ *types.AutomatedReasoningPolicyDefinition
+var _ *types.AutomatedReasoningPolicyGeneratedTestCases
 
 func ExampleAutomatedReasoningPolicyBuildStepContext_outputUsage() {
 	var union types.AutomatedReasoningPolicyBuildStepContext

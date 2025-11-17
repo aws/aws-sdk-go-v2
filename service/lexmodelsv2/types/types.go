@@ -3605,13 +3605,22 @@ type NewCustomVocabularyItem struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies whether the assisted nlu feature is turned on or off.
+// Configures the Assisted Natural Language Understanding (NLU) feature for your
+// bot. This specification determines whether enhanced intent recognition and
+// utterance understanding capabilities are active.
 type NluImprovementSpecification struct {
 
-	// Specifies whether the assisted nlu feature is enabled.
+	// Determines whether the Assisted NLU feature is enabled for the bot. When set to
+	// true , Amazon Lex uses advanced models to improve intent recognition and slot
+	// resolution, with the default being false .
 	//
 	// This member is required.
 	Enabled bool
+
+	// Specifies the mode for Assisted NLU operation. Use Primary to make Assisted NLU
+	// the primary intent recognition method, or Fallback to use it only when standard
+	// NLU confidence is low.
+	AssistedNluMode AssistedNluMode
 
 	noSmithyDocumentSerde
 }
@@ -4103,7 +4112,9 @@ type RuntimeHintValue struct {
 // from Amazon Bedrock that you can turn on for your bot.
 type RuntimeSettings struct {
 
-	// An object containing specifications for the assisted nlu feature.
+	// An object containing specifications for the Assisted NLU feature within the
+	// bot's runtime settings. These settings determine how the bot processes and
+	// interprets user utterances during conversations.
 	NluImprovement *NluImprovementSpecification
 
 	// An object containing specifications for the assisted slot resolution feature.

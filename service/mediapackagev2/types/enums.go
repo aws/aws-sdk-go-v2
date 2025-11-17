@@ -486,6 +486,25 @@ func (ScteFilter) Values() []ScteFilter {
 	}
 }
 
+type ScteInSegments string
+
+// Enum values for ScteInSegments
+const (
+	ScteInSegmentsNone ScteInSegments = "NONE"
+	ScteInSegmentsAll  ScteInSegments = "ALL"
+)
+
+// Values returns all known values for ScteInSegments. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScteInSegments) Values() []ScteInSegments {
+	return []ScteInSegments{
+		"NONE",
+		"ALL",
+	}
+}
+
 type TsEncryptionMethod string
 
 // Enum values for TsEncryptionMethod

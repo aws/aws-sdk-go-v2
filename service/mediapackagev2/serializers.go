@@ -3814,6 +3814,11 @@ func awsRestjson1_serializeDocumentScte(v *types.Scte, value smithyjson.Value) e
 		}
 	}
 
+	if len(v.ScteInSegments) > 0 {
+		ok := object.Key("ScteInSegments")
+		ok.String(string(v.ScteInSegments))
+	}
+
 	return nil
 }
 

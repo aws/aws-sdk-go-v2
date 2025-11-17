@@ -90,15 +90,15 @@ type ListModelInvocationJobsInput struct {
 	//   location.
 	//
 	//   - Failed – This job has failed. Check the failure message for any further
-	//   details. For further assistance, reach out to the [Amazon Web ServicesSupport Center].
+	//   details. For further assistance, reach out to the [Amazon Web Services Support Center].
 	//
 	//   - Stopped – This job was stopped by a user.
 	//
 	//   - Stopping – This job is being stopped by a user.
 	//
 	// [Format and upload your batch inference data]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html
-	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home/
 	// [Quotas for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html
+	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home/
 	StatusEquals types.ModelInvocationJobStatus
 
 	// Specify a time to filter for batch inference jobs that were submitted after the

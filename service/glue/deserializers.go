@@ -8238,6 +8238,135 @@ func awsAwsjson11_deserializeOpErrorDeleteIntegration(response *smithyhttp.Respo
 	}
 }
 
+type awsAwsjson11_deserializeOpDeleteIntegrationResourceProperty struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteIntegrationResourceProperty) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteIntegrationResourceProperty) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteIntegrationResourceProperty(response, &metadata)
+	}
+	output := &DeleteIntegrationResourcePropertyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteIntegrationResourcePropertyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteIntegrationResourceProperty(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("EntityNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDeleteIntegrationTableProperties struct {
 }
 
@@ -22171,6 +22300,135 @@ func awsAwsjson11_deserializeOpErrorListEntities(response *smithyhttp.Response, 
 
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListIntegrationResourceProperties struct {
+}
+
+func (*awsAwsjson11_deserializeOpListIntegrationResourceProperties) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListIntegrationResourceProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListIntegrationResourceProperties(response, &metadata)
+	}
+	output := &ListIntegrationResourcePropertiesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListIntegrationResourcePropertiesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListIntegrationResourceProperties(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("EntityNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -50621,7 +50879,7 @@ func awsAwsjson11_deserializeDocumentInboundIntegration(v **types.InboundIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
@@ -50639,7 +50897,7 @@ func awsAwsjson11_deserializeDocumentInboundIntegration(v **types.InboundIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
@@ -50789,7 +51047,7 @@ func awsAwsjson11_deserializeDocumentIntegration(v **types.Integration, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
@@ -50812,7 +51070,7 @@ func awsAwsjson11_deserializeDocumentIntegration(v **types.Integration, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
@@ -51208,6 +51466,99 @@ func awsAwsjson11_deserializeDocumentIntegrationQuotaExceededFault(v **types.Int
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIntegrationResourceProperty(v **types.IntegrationResourceProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IntegrationResourceProperty
+	if *v == nil {
+		sv = &types.IntegrationResourceProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "ResourcePropertyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
+				}
+				sv.ResourcePropertyArn = ptr.String(jtv)
+			}
+
+		case "SourceProcessingProperties":
+			if err := awsAwsjson11_deserializeDocumentSourceProcessingProperties(&sv.SourceProcessingProperties, value); err != nil {
+				return err
+			}
+
+		case "TargetProcessingProperties":
+			if err := awsAwsjson11_deserializeDocumentTargetProcessingProperties(&sv.TargetProcessingProperties, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIntegrationResourcePropertyList(v *[]types.IntegrationResourceProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IntegrationResourceProperty
+	if *v == nil {
+		cv = []types.IntegrationResourceProperty{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IntegrationResourceProperty
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIntegrationResourceProperty(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -70872,7 +71223,7 @@ func awsAwsjson11_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
@@ -70895,7 +71246,7 @@ func awsAwsjson11_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
@@ -70935,9 +71286,18 @@ func awsAwsjson11_deserializeOpDocumentCreateIntegrationResourcePropertyOutput(v
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "ResourcePropertyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
+				}
+				sv.ResourcePropertyArn = ptr.String(jtv)
 			}
 
 		case "SourceProcessingProperties":
@@ -72232,7 +72592,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteIntegrationOutput(v **DeleteIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
@@ -72255,11 +72615,42 @@ func awsAwsjson11_deserializeOpDocumentDeleteIntegrationOutput(v **DeleteIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDeleteIntegrationResourcePropertyOutput(v **DeleteIntegrationResourcePropertyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteIntegrationResourcePropertyOutput
+	if *v == nil {
+		sv = &DeleteIntegrationResourcePropertyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -75104,9 +75495,18 @@ func awsAwsjson11_deserializeOpDocumentGetIntegrationResourcePropertyOutput(v **
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "ResourcePropertyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
+				}
+				sv.ResourcePropertyArn = ptr.String(jtv)
 			}
 
 		case "SourceProcessingProperties":
@@ -75154,7 +75554,7 @@ func awsAwsjson11_deserializeOpDocumentGetIntegrationTablePropertiesOutput(v **G
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
@@ -78326,6 +78726,51 @@ func awsAwsjson11_deserializeOpDocumentListEntitiesOutput(v **ListEntitiesOutput
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentListIntegrationResourcePropertiesOutput(v **ListIntegrationResourcePropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListIntegrationResourcePropertiesOutput
+	if *v == nil {
+		sv = &ListIntegrationResourcePropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IntegrationResourcePropertyList":
+			if err := awsAwsjson11_deserializeDocumentIntegrationResourcePropertyList(&sv.IntegrationResourcePropertyList, value); err != nil {
+				return err
+			}
+
+		case "Marker":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String1024 to be of type string, got %T instead", value)
+				}
+				sv.Marker = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -78955,7 +79400,7 @@ func awsAwsjson11_deserializeOpDocumentModifyIntegrationOutput(v **ModifyIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
@@ -78978,7 +79423,7 @@ func awsAwsjson11_deserializeOpDocumentModifyIntegrationOutput(v **ModifyIntegra
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
@@ -80961,9 +81406,18 @@ func awsAwsjson11_deserializeOpDocumentUpdateIntegrationResourcePropertyOutput(v
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
 				}
 				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "ResourcePropertyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String512 to be of type string, got %T instead", value)
+				}
+				sv.ResourcePropertyArn = ptr.String(jtv)
 			}
 
 		case "SourceProcessingProperties":

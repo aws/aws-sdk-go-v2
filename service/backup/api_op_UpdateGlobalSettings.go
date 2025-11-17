@@ -39,6 +39,11 @@ type UpdateGlobalSettingsInput struct {
 	// A value for Multi-party approval, styled as "Mpa": isMpaEnabled . Values can be
 	// true or false. Example: update-global-settings --global-settings
 	// isMpaEnabled=false --region us-west-2 .
+	//
+	// A value for Backup Service-Linked Role creation, styled as
+	// isDelegatedAdministratorEnabled . Values can be true or false. Example:
+	// update-global-settings --global-settings isDelegatedAdministratorEnabled=false
+	// --region us-west-2 .
 	GlobalSettings map[string]string
 
 	noSmithyDocumentSerde

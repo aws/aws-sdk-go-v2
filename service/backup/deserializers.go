@@ -18666,6 +18666,15 @@ func awsRestjson1_deserializeDocumentBackupRule(v **types.BackupRule, value inte
 				sv.TargetBackupVaultName = ptr.String(jtv)
 			}
 
+		case "TargetLogicallyAirGappedBackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.TargetLogicallyAirGappedBackupVaultArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19800,6 +19809,15 @@ func awsRestjson1_deserializeDocumentCopyJob(v **types.CopyJob, value interface{
 		case "CreatedBy":
 			if err := awsRestjson1_deserializeDocumentRecoveryPointCreator(&sv.CreatedBy, value); err != nil {
 				return err
+			}
+
+		case "CreatedByBackupJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.CreatedByBackupJobId = ptr.String(jtv)
 			}
 
 		case "CreationDate":
@@ -21503,6 +21521,15 @@ func awsRestjson1_deserializeDocumentLifecycle(v **types.Lifecycle, value interf
 					return err
 				}
 				sv.DeleteAfterDays = ptr.Int64(i64)
+			}
+
+		case "DeleteAfterEvent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LifecycleDeleteAfterEvent to be of type string, got %T instead", value)
+				}
+				sv.DeleteAfterEvent = types.LifecycleDeleteAfterEvent(jtv)
 			}
 
 		case "MoveToColdStorageAfterDays":

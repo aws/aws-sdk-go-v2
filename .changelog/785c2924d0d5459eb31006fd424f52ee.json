@@ -1,0 +1,8 @@
+{
+    "id": "785c2924-d0d5-459e-b310-06fd424f52ee",
+    "type": "feature",
+    "description": "Amazon MWAA now offers serverless deployment, eliminating operational overhead while optimizing costs. The service supports YAML and Python-based workflows, with 80+ AWS Operators. It provides isolated execution, IAM permissions, and automatic scaling with pay-per-use pricing.",
+    "modules": [
+        "service/mwaaserverless"
+    ]
+}

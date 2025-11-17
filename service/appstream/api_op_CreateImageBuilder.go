@@ -82,8 +82,6 @@ type CreateImageBuilderInput struct {
 	//
 	//   - stream.graphics-design.4xlarge
 	//
-	//   - stream.graphics-desktop.2xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge
@@ -95,12 +93,6 @@ type CreateImageBuilderInput struct {
 	//   - stream.graphics.g4dn.12xlarge
 	//
 	//   - stream.graphics.g4dn.16xlarge
-	//
-	//   - stream.graphics-pro.4xlarge
-	//
-	//   - stream.graphics-pro.8xlarge
-	//
-	//   - stream.graphics-pro.16xlarge
 	//
 	//   - stream.graphics.g5.xlarge
 	//
@@ -156,8 +148,9 @@ type CreateImageBuilderInput struct {
 	// can connect to the image builder only through the specified endpoints.
 	AccessEndpoints []types.AccessEndpoint
 
-	// The version of the AppStream 2.0 agent to use for this image builder. To use
-	// the latest version of the AppStream 2.0 agent, specify [LATEST].
+	// The version of the WorkSpaces Applications agent to use for this image builder.
+	// To use the latest version of the WorkSpaces Applications agent, specify
+	// [LATEST].
 	AppstreamAgentVersion *string
 
 	// The description to display.
@@ -176,13 +169,14 @@ type CreateImageBuilderInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder.
 	// To assume a role, the image builder calls the AWS Security Token Service (STS)
 	// AssumeRole API operation and passes the ARN of the role to use. The operation
-	// creates a new session with temporary credentials. AppStream 2.0 retrieves the
-	// temporary credentials and creates the appstream_machine_role credential profile
-	// on the instance.
+	// creates a new session with temporary credentials. WorkSpaces Applications
+	// retrieves the temporary credentials and creates the appstream_machine_role
+	// credential profile on the instance.
 	//
-	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances] in the Amazon WorkSpaces Applications Administration
+	// Guide.
 	//
-	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The ARN of the public, private, or shared image to use.
@@ -190,6 +184,11 @@ type CreateImageBuilderInput struct {
 
 	// The name of the image used to create the image builder.
 	ImageName *string
+
+	// The configuration for the root volume of the image builder. Use this to
+	// customize storage capacity from 200 GB up to 500 GB based on your application
+	// installation requirements.
+	RootVolumeConfig *types.VolumeConfig
 
 	// The list of license included applications to install on the image builder
 	// during creation.
@@ -310,7 +309,7 @@ type CreateImageBuilderInput struct {
 	//
 	// If you do not specify a value, the value is set to an empty string.
 	//
-	// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+	// For more information about tags, see [Tagging Your Resources] in the Amazon WorkSpaces Applications
 	// Administration Guide.
 	//
 	// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html

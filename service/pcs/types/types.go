@@ -146,6 +146,9 @@ type ClusterSlurmConfiguration struct {
 	// The shared Slurm key for authentication, also known as the cluster secret.
 	AuthKey *SlurmAuthKey
 
+	// The JWT authentication configuration for Slurm REST API access.
+	JwtAuth *JwtAuth
+
 	// The time (in seconds) before an idle node is scaled down.
 	//
 	// Default: 600
@@ -153,6 +156,9 @@ type ClusterSlurmConfiguration struct {
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
+
+	// The Slurm REST API configuration for the cluster.
+	SlurmRest *SlurmRest
 
 	noSmithyDocumentSerde
 }
@@ -171,6 +177,9 @@ type ClusterSlurmConfigurationRequest struct {
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
+
+	// The Slurm REST API configuration for the cluster.
+	SlurmRest *SlurmRestRequest
 
 	noSmithyDocumentSerde
 }
@@ -486,6 +495,32 @@ type InstanceConfig struct {
 	//
 	// Example: t2.xlarge
 	InstanceType *string
+
+	noSmithyDocumentSerde
+}
+
+// The JWT authentication configuration for Slurm REST API access.
+type JwtAuth struct {
+
+	// The JWT key for Slurm REST API authentication.
+	JwtKey *JwtKey
+
+	noSmithyDocumentSerde
+}
+
+// The JWT key stored in AWS Secrets Manager for Slurm REST API authentication.
+type JwtKey struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the
+	// JWT key.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// The version of the AWS Secrets Manager secret containing the JWT key.
+	//
+	// This member is required.
+	SecretVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -809,6 +844,32 @@ type SlurmCustomSetting struct {
 	noSmithyDocumentSerde
 }
 
+// The Slurm REST API configuration includes settings for enabling and configuring
+// the Slurm REST API. It's a property of the ClusterSlurmConfiguration object.
+type SlurmRest struct {
+
+	// The default value for mode is STANDARD . A value of STANDARD means the Slurm
+	// REST API is enabled.
+	//
+	// This member is required.
+	Mode SlurmRestMode
+
+	noSmithyDocumentSerde
+}
+
+// The Slurm REST API configuration includes settings for enabling and configuring
+// the Slurm REST API. It's a property of the ClusterSlurmConfiguration object.
+type SlurmRestRequest struct {
+
+	// The default value for mode is STANDARD . A value of STANDARD means the Slurm
+	// REST API is enabled.
+	//
+	// This member is required.
+	Mode SlurmRestMode
+
+	noSmithyDocumentSerde
+}
+
 // Additional configuration when you specify SPOT as the purchaseOption for the
 // CreateComputeNodeGroup API action.
 type SpotOptions struct {
@@ -863,6 +924,9 @@ type UpdateClusterSlurmConfigurationRequest struct {
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
 
+	// The Slurm REST API configuration for the cluster.
+	SlurmRest *UpdateSlurmRestRequest
+
 	noSmithyDocumentSerde
 }
 
@@ -880,6 +944,17 @@ type UpdateQueueSlurmConfigurationRequest struct {
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
+// The Slurm REST API configuration includes settings for enabling and configuring
+// the Slurm REST API.
+type UpdateSlurmRestRequest struct {
+
+	// The default value for mode is STANDARD . A value of STANDARD means the Slurm
+	// REST API is enabled.
+	Mode SlurmRestMode
 
 	noSmithyDocumentSerde
 }

@@ -105,6 +105,13 @@ type StartBackupJobInput struct {
 	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
+	// The ARN of a logically air-gapped vault. ARN must be in the same account and
+	// Region. If provided, supported fully managed resources back up directly to
+	// logically air-gapped vault, while other supported resources create a temporary
+	// (billable) snapshot in backup vault, then copy it to logically air-gapped vault.
+	// Unsupported resources only back up to the specified backup vault.
+	LogicallyAirGappedBackupVaultArn *string
+
 	// The tags to assign to the resources.
 	RecoveryPointTags map[string]string
 

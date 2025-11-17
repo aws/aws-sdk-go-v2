@@ -107,8 +107,9 @@ type DnsThreatProtection string
 
 // Enum values for DnsThreatProtection
 const (
-	DnsThreatProtectionDga          DnsThreatProtection = "DGA"
-	DnsThreatProtectionDnsTunneling DnsThreatProtection = "DNS_TUNNELING"
+	DnsThreatProtectionDga           DnsThreatProtection = "DGA"
+	DnsThreatProtectionDnsTunneling  DnsThreatProtection = "DNS_TUNNELING"
+	DnsThreatProtectionDictionaryDga DnsThreatProtection = "DICTIONARY_DGA"
 )
 
 // Values returns all known values for DnsThreatProtection. Note that this can be
@@ -119,6 +120,7 @@ func (DnsThreatProtection) Values() []DnsThreatProtection {
 	return []DnsThreatProtection{
 		"DGA",
 		"DNS_TUNNELING",
+		"DICTIONARY_DGA",
 	}
 }
 

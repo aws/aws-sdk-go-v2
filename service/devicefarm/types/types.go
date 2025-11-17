@@ -280,6 +280,8 @@ type Device struct {
 	// Remote debugging is [no longer supported].
 	//
 	// [no longer supported]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
+	//
+	// Deprecated: Direct Device Access is no longer available.
 	RemoteDebugEnabled *bool
 
 	// The resolution of the device.
@@ -1078,6 +1080,21 @@ type RecurringCharge struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the remote endpoints for viewing and controlling a device during a
+// remote access session.
+type RemoteAccessEndpoints struct {
+
+	// URL for viewing and interacting with the device during the remote access
+	// session.
+	InteractiveEndpoint *string
+
+	// URL for controlling the device using WebDriver-compliant clients, like Appium,
+	// during the remote access session.
+	RemoteDriverEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about the remote access session.
 type RemoteAccessSession struct {
 
@@ -1092,14 +1109,6 @@ type RemoteAccessSession struct {
 	//
 	// [AWS Device Farm terminology]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology
 	BillingMethod BillingMethod
-
-	// Unique identifier of your client for the remote access session. Only returned
-	// if remote debugging is enabled for the remote access session.
-	//
-	// Remote debugging is [no longer supported].
-	//
-	// [no longer supported]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-	ClientId *string
 
 	// The date and time the remote access session was created.
 	Created *time.Time
@@ -1122,31 +1131,25 @@ type RemoteAccessSession struct {
 	// [no longer supported]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
 	DeviceUdid *string
 
-	// The endpoint for the remote access sesssion.
+	// The endpoint for the remote access session. This field is deprecated, and is
+	// replaced by the new endpoints.interactiveEndpoint field.
+	//
+	// Deprecated: This field is deprecated, and is replaced by the new
+	// endpoints.interactiveEndpoint field.
 	Endpoint *string
 
-	// IP address of the EC2 host where you need to connect to remotely debug devices.
-	// Only returned if remote debugging is enabled for the remote access session.
-	//
-	// Remote debugging is [no longer supported].
-	//
-	// [no longer supported]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-	HostAddress *string
+	// Represents the remote endpoints for viewing and controlling a device during a
+	// remote access session.
+	Endpoints *RemoteAccessEndpoints
 
 	// The ARN of the instance.
 	InstanceArn *string
 
-	// The interaction mode of the remote access session. Valid values are:
+	// The interaction mode of the remote access session. Changing the interactive
+	// mode of remote access sessions is no longer available.
 	//
-	//   - INTERACTIVE: You can interact with the iOS device by viewing, touching, and
-	//   rotating the screen. You cannot run XCUITest framework-based tests in this mode.
-	//
-	//   - NO_VIDEO: You are connected to the device, but cannot interact with it or
-	//   view the screen. This mode has the fastest test execution speed. You can run
-	//   XCUITest framework-based tests in this mode.
-	//
-	//   - VIDEO_ONLY: You can view the screen, but cannot touch or rotate it. You can
-	//   run XCUITest framework-based tests and watch the screen in this mode.
+	// Deprecated: Changing the interactive mode of Remote Access sessions is no
+	// longer available.
 	InteractionMode InteractionMode
 
 	// A message about the remote access session.
@@ -1154,21 +1157,6 @@ type RemoteAccessSession struct {
 
 	// The name of the remote access session.
 	Name *string
-
-	// This flag is set to true if remote debugging is enabled for the remote access
-	// session.
-	//
-	// Remote debugging is [no longer supported].
-	//
-	// [no longer supported]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-	RemoteDebugEnabled *bool
-
-	// The ARN for the app to be recorded in the remote access session.
-	RemoteRecordAppArn *string
-
-	// This flag is set to true if remote recording is enabled for the remote access
-	// session.
-	RemoteRecordEnabled *bool
 
 	// The result of the remote access session. Can be any of the following:
 	//

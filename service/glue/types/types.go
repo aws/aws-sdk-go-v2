@@ -5759,7 +5759,7 @@ type IntegrationConfig struct {
 	// loads should occur. This parameter provides flexibility to align the refresh
 	// rate with your specific data update patterns, system load considerations, and
 	// performance optimization goals. Time increment can be set from 15 minutes to
-	// 8640 minutes (six days). Currently supports creation of RefreshInterval only.
+	// 8640 minutes (six days).
 	RefreshInterval *string
 
 	//  A collection of key-value pairs that specify additional properties for the
@@ -5843,6 +5843,39 @@ type IntegrationPartition struct {
 	//
 	//   - hour - Extracts the hour from timestamp values (e.g., 2023-01-15-14)
 	FunctionSpec *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure representing an integration resource property.
+type IntegrationResourceProperty struct {
+
+	// The connection ARN of the source, or the database ARN of the target.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The resource ARN created through this create API. The format is something like
+	// arn:aws:glue:::integrationresourceproperty/*
+	ResourcePropertyArn *string
+
+	// The resource properties associated with the integration source.
+	SourceProcessingProperties *SourceProcessingProperties
+
+	// The resource properties associated with the integration target.
+	TargetProcessingProperties *TargetProcessingProperties
+
+	noSmithyDocumentSerde
+}
+
+// A filter for integration resource properties.
+type IntegrationResourcePropertyFilter struct {
+
+	// The name of the filter. Supported filter keys are SourceArn and TargetArn .
+	Name *string
+
+	// A list of filter values.
+	Values []string
 
 	noSmithyDocumentSerde
 }

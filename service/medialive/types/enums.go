@@ -659,6 +659,44 @@ func (Av1SceneChangeDetect) Values() []Av1SceneChangeDetect {
 	}
 }
 
+type Av1SpatialAq string
+
+// Enum values for Av1SpatialAq
+const (
+	Av1SpatialAqDisabled Av1SpatialAq = "DISABLED"
+	Av1SpatialAqEnabled  Av1SpatialAq = "ENABLED"
+)
+
+// Values returns all known values for Av1SpatialAq. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1SpatialAq) Values() []Av1SpatialAq {
+	return []Av1SpatialAq{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type Av1TemporalAq string
+
+// Enum values for Av1TemporalAq
+const (
+	Av1TemporalAqDisabled Av1TemporalAq = "DISABLED"
+	Av1TemporalAqEnabled  Av1TemporalAq = "ENABLED"
+)
+
+// Values returns all known values for Av1TemporalAq. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1TemporalAq) Values() []Av1TemporalAq {
+	return []Av1TemporalAq{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type AvailBlankingState string
 
 // Enum values for AvailBlankingState

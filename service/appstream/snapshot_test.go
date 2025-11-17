@@ -230,6 +230,18 @@ func TestCheckSnapshot_CreateEntitlement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateExportImageTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExportImageTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateExportImageTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFleet(context.Background(), nil, func(o *Options) {
@@ -259,6 +271,18 @@ func TestCheckSnapshot_CreateImageBuilderStreamingURL(t *testing.T) {
 	_, err := svc.CreateImageBuilderStreamingURL(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateImageBuilderStreamingURL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateImportedImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateImportedImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateImportedImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,6 +842,18 @@ func TestCheckSnapshot_ExpireSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetExportImageTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExportImageTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExportImageTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAssociatedFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssociatedFleets(context.Background(), nil, func(o *Options) {
@@ -847,6 +883,18 @@ func TestCheckSnapshot_ListEntitledApplications(t *testing.T) {
 	_, err := svc.ListEntitledApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEntitledApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExportImageTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExportImageTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExportImageTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1237,6 +1285,18 @@ func TestUpdateSnapshot_CreateEntitlement(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateExportImageTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExportImageTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateExportImageTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFleet(context.Background(), nil, func(o *Options) {
@@ -1266,6 +1326,18 @@ func TestUpdateSnapshot_CreateImageBuilderStreamingURL(t *testing.T) {
 	_, err := svc.CreateImageBuilderStreamingURL(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateImageBuilderStreamingURL")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateImportedImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateImportedImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateImportedImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1825,6 +1897,18 @@ func TestUpdateSnapshot_ExpireSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetExportImageTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExportImageTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExportImageTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAssociatedFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssociatedFleets(context.Background(), nil, func(o *Options) {
@@ -1854,6 +1938,18 @@ func TestUpdateSnapshot_ListEntitledApplications(t *testing.T) {
 	_, err := svc.ListEntitledApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEntitledApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExportImageTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExportImageTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExportImageTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

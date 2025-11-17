@@ -33,6 +33,34 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The exception that is thrown when a dry run operation is requested. This
+// indicates that the validation checks have been performed successfully, but no
+// actual resources were created or modified.
+type DryRunOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DryRunOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DryRunOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DryRunOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DryRunOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The entitlement already exists.
 type EntitlementAlreadyExistsException struct {
 	Message *string
@@ -244,8 +272,9 @@ func (e *OperationNotPermittedException) ErrorCode() string {
 }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AppStream 2.0 can’t process the request right now because the Describe calls
-// from your AWS account are being throttled by Amazon EC2. Try again later.
+// WorkSpaces Applications can’t process the request right now because the
+// Describe calls from your AWS account are being throttled by Amazon EC2. Try
+// again later.
 type RequestLimitExceededException struct {
 	Message *string
 

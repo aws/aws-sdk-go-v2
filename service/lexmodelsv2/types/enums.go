@@ -601,6 +601,25 @@ func (AnalyticsUtteranceSortByName) Values() []AnalyticsUtteranceSortByName {
 	}
 }
 
+type AssistedNluMode string
+
+// Enum values for AssistedNluMode
+const (
+	AssistedNluModePrimary  AssistedNluMode = "Primary"
+	AssistedNluModeFallback AssistedNluMode = "Fallback"
+)
+
+// Values returns all known values for AssistedNluMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssistedNluMode) Values() []AssistedNluMode {
+	return []AssistedNluMode{
+		"Primary",
+		"Fallback",
+	}
+}
+
 type AssociatedTranscriptFilterName string
 
 // Enum values for AssociatedTranscriptFilterName

@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Deletes a Selenium testing project and all content generated under it.
+//	Deletes a Selenium testing project and all content generated under it. You
+//
+// cannot delete a project if it has active sessions.
 //
 // You cannot undo this operation.
-//
-// You cannot delete a project if it has active sessions.
 func (c *Client) DeleteTestGridProject(ctx context.Context, params *DeleteTestGridProjectInput, optFns ...func(*Options)) (*DeleteTestGridProjectOutput, error) {
 	if params == nil {
 		params = &DeleteTestGridProjectInput{}

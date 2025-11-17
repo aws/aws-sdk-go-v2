@@ -9410,6 +9410,15 @@ func awsRestjson1_deserializeDocumentScte(v **types.Scte, value interface{}) err
 				return err
 			}
 
+		case "ScteInSegments":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScteInSegments to be of type string, got %T instead", value)
+				}
+				sv.ScteInSegments = types.ScteInSegments(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

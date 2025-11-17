@@ -1214,6 +1214,13 @@ func awsAwsjson10_serializeDocumentClusterSlurmConfigurationRequest(v *types.Clu
 		}
 	}
 
+	if v.SlurmRest != nil {
+		ok := object.Key("slurmRest")
+		if err := awsAwsjson10_serializeDocumentSlurmRestRequest(v.SlurmRest, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1424,6 +1431,18 @@ func awsAwsjson10_serializeDocumentSlurmCustomSettings(v []types.SlurmCustomSett
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentSlurmRestRequest(v *types.SlurmRestRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSpotOptions(v *types.SpotOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1509,6 +1528,13 @@ func awsAwsjson10_serializeDocumentUpdateClusterSlurmConfigurationRequest(v *typ
 		}
 	}
 
+	if v.SlurmRest != nil {
+		ok := object.Key("slurmRest")
+		if err := awsAwsjson10_serializeDocumentUpdateSlurmRestRequest(v.SlurmRest, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1535,6 +1561,18 @@ func awsAwsjson10_serializeDocumentUpdateQueueSlurmConfigurationRequest(v *types
 		if err := awsAwsjson10_serializeDocumentSlurmCustomSettings(v.SlurmCustomSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateSlurmRestRequest(v *types.UpdateSlurmRestRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil

@@ -18676,6 +18676,16 @@ loop:
 			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog{Value: mv}
 			break loop
 
+		case "generatedTestCases":
+			var mv types.AutomatedReasoningPolicyGeneratedTestCases
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCases(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases{Value: mv}
+			break loop
+
 		case "policyDefinition":
 			var mv types.AutomatedReasoningPolicyDefinition
 			destAddr := &mv
@@ -20224,6 +20234,134 @@ func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyDisjointRuleSetList
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCase(v **types.AutomatedReasoningPolicyGeneratedTestCase, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyGeneratedTestCase
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyGeneratedTestCase{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expectedAggregatedFindingsResult":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningCheckResult to be of type string, got %T instead", value)
+				}
+				sv.ExpectedAggregatedFindingsResult = types.AutomatedReasoningCheckResult(jtv)
+			}
+
+		case "guardContent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyTestGuardContent to be of type string, got %T instead", value)
+				}
+				sv.GuardContent = ptr.String(jtv)
+			}
+
+		case "queryContent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutomatedReasoningPolicyTestQueryContent to be of type string, got %T instead", value)
+				}
+				sv.QueryContent = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCaseList(v *[]types.AutomatedReasoningPolicyGeneratedTestCase, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedReasoningPolicyGeneratedTestCase
+	if *v == nil {
+		cv = []types.AutomatedReasoningPolicyGeneratedTestCase{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedReasoningPolicyGeneratedTestCase
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCase(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCases(v **types.AutomatedReasoningPolicyGeneratedTestCases, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedReasoningPolicyGeneratedTestCases
+	if *v == nil {
+		sv = &types.AutomatedReasoningPolicyGeneratedTestCases{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "generatedTestCases":
+			if err := awsRestjson1_deserializeDocumentAutomatedReasoningPolicyGeneratedTestCaseList(&sv.GeneratedTestCases, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified Directory Config object in AppStream 2.0. This object
-// includes the configuration information required to join fleets and image
+// Updates the specified Directory Config object in WorkSpaces Applications. This
+// object includes the configuration information required to join fleets and image
 // builders to Microsoft Active Directory domains.
 func (c *Client) UpdateDirectoryConfig(ctx context.Context, params *UpdateDirectoryConfigInput, optFns ...func(*Options)) (*UpdateDirectoryConfigOutput, error) {
 	if params == nil {

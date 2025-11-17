@@ -5492,11 +5492,6 @@ func awsAwsjson11_serializeOpDocumentCreateRemoteAccessSessionInput(v *CreateRem
 		ok.String(*v.AppArn)
 	}
 
-	if v.ClientId != nil {
-		ok := object.Key("clientId")
-		ok.String(*v.ClientId)
-	}
-
 	if v.Configuration != nil {
 		ok := object.Key("configuration")
 		if err := awsAwsjson11_serializeDocumentCreateRemoteAccessSessionConfiguration(v.Configuration, ok); err != nil {
@@ -5529,29 +5524,9 @@ func awsAwsjson11_serializeOpDocumentCreateRemoteAccessSessionInput(v *CreateRem
 		ok.String(*v.ProjectArn)
 	}
 
-	if v.RemoteDebugEnabled != nil {
-		ok := object.Key("remoteDebugEnabled")
-		ok.Boolean(*v.RemoteDebugEnabled)
-	}
-
-	if v.RemoteRecordAppArn != nil {
-		ok := object.Key("remoteRecordAppArn")
-		ok.String(*v.RemoteRecordAppArn)
-	}
-
-	if v.RemoteRecordEnabled != nil {
-		ok := object.Key("remoteRecordEnabled")
-		ok.Boolean(*v.RemoteRecordEnabled)
-	}
-
 	if v.SkipAppResign != nil {
 		ok := object.Key("skipAppResign")
 		ok.Boolean(*v.SkipAppResign)
-	}
-
-	if v.SshPublicKey != nil {
-		ok := object.Key("sshPublicKey")
-		ok.String(*v.SshPublicKey)
 	}
 
 	return nil

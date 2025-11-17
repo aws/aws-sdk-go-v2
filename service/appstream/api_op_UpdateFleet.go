@@ -86,13 +86,14 @@ type UpdateFleetInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume
 	// a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole
 	// API operation and passes the ARN of the role to use. The operation creates a new
-	// session with temporary credentials. AppStream 2.0 retrieves the temporary
-	// credentials and creates the appstream_machine_role credential profile on the
-	// instance.
+	// session with temporary credentials. WorkSpaces Applications retrieves the
+	// temporary credentials and creates the appstream_machine_role credential profile
+	// on the instance.
 	//
-	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances] in the Amazon WorkSpaces Applications Administration
+	// Guide.
 	//
-	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -177,8 +178,6 @@ type UpdateFleetInput struct {
 	//
 	//   - stream.graphics-design.4xlarge
 	//
-	//   - stream.graphics-desktop.2xlarge
-	//
 	//   - stream.graphics.g4dn.xlarge
 	//
 	//   - stream.graphics.g4dn.2xlarge
@@ -190,12 +189,6 @@ type UpdateFleetInput struct {
 	//   - stream.graphics.g4dn.12xlarge
 	//
 	//   - stream.graphics.g4dn.16xlarge
-	//
-	//   - stream.graphics-pro.4xlarge
-	//
-	//   - stream.graphics-pro.8xlarge
-	//
-	//   - stream.graphics-pro.16xlarge
 	//
 	//   - stream.graphics.g5.xlarge
 	//
@@ -275,14 +268,18 @@ type UpdateFleetInput struct {
 	// for Elastic fleets.
 	Platform types.PlatformType
 
+	// The updated configuration for the root volume of fleet instances. Note that
+	// volume size cannot be decreased below the image volume size.
+	RootVolumeConfig *types.VolumeConfig
+
 	// The S3 location of the session scripts configuration zip file. This only
 	// applies to Elastic fleets.
 	SessionScriptS3Location *types.S3Location
 
-	// The AppStream 2.0 view that is displayed to your users when they stream from
-	// the fleet. When APP is specified, only the windows of applications opened by
-	// users display. When DESKTOP is specified, the standard desktop that is provided
-	// by the operating system displays.
+	// The WorkSpaces Applications view that is displayed to your users when they
+	// stream from the fleet. When APP is specified, only the windows of applications
+	// opened by users display. When DESKTOP is specified, the standard desktop that
+	// is provided by the operating system displays.
 	//
 	// The default value is APP .
 	StreamView types.StreamView

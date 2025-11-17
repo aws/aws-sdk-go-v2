@@ -313,6 +313,23 @@ func (LegalHoldStatus) Values() []LegalHoldStatus {
 	}
 }
 
+type LifecycleDeleteAfterEvent string
+
+// Enum values for LifecycleDeleteAfterEvent
+const (
+	LifecycleDeleteAfterEventDeleteAfterCopy LifecycleDeleteAfterEvent = "DELETE_AFTER_COPY"
+)
+
+// Values returns all known values for LifecycleDeleteAfterEvent. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LifecycleDeleteAfterEvent) Values() []LifecycleDeleteAfterEvent {
+	return []LifecycleDeleteAfterEvent{
+		"DELETE_AFTER_COPY",
+	}
+}
+
 type MpaRevokeSessionStatus string
 
 // Enum values for MpaRevokeSessionStatus

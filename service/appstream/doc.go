@@ -3,26 +3,27 @@
 // Package appstream provides the API client, operations, and parameter types for
 // Amazon AppStream.
 //
-// # Amazon AppStream 2.0
+// # Amazon WorkSpaces Applications
 //
-// This is the Amazon AppStream 2.0 API Reference. This documentation provides
-// descriptions and syntax for each of the actions and data types in AppStream 2.0.
-// AppStream 2.0 is a fully managed, secure application streaming service that lets
-// you stream desktop applications to users without rewriting applications.
-// AppStream 2.0 manages the AWS resources that are required to host and run your
-// applications, scales automatically, and provides access to your users on demand.
+// This is the Amazon WorkSpaces Applications API Reference. This documentation
+// provides descriptions and syntax for each of the actions and data types in
+// WorkSpaces Applications. WorkSpaces Applications is a fully managed, secure
+// application streaming service that lets you stream desktop applications to users
+// without rewriting applications. WorkSpaces Applications manages the AWS
+// resources that are required to host and run your applications, scales
+// automatically, and provides access to your users on demand.
 //
-// You can call the AppStream 2.0 API operations by using an interface VPC
-// endpoint (interface endpoint). For more information, see [Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint]in the Amazon
-// AppStream 2.0 Administration Guide.
+// You can call the WorkSpaces Applications API operations by using an interface
+// VPC endpoint (interface endpoint). For more information, see [Access WorkSpaces Applications API Operations and CLI Commands Through an Interface VPC Endpoint]in the Amazon
+// WorkSpaces Applications Administration Guide.
 //
-// To learn more about AppStream 2.0, see the following resources:
+// To learn more about WorkSpaces Applications, see the following resources:
 //
-// [Amazon AppStream 2.0 product page]
+// [Amazon WorkSpaces Applications product page]
 //
-// [Amazon AppStream 2.0 documentation]
+// [Amazon WorkSpaces Applications documentation]
 //
-// [Amazon AppStream 2.0 product page]: http://aws.amazon.com/appstream2
-// [Amazon AppStream 2.0 documentation]: http://aws.amazon.com/documentation/appstream2
-// [Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint]: https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html
+// [Amazon WorkSpaces Applications documentation]: http://aws.amazon.com/documentation/appstream2
+// [Access WorkSpaces Applications API Operations and CLI Commands Through an Interface VPC Endpoint]: https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html
+// [Amazon WorkSpaces Applications product page]: http://aws.amazon.com/appstream2
 package appstream

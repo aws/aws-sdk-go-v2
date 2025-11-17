@@ -854,6 +854,18 @@ func TestCheckSnapshot_ListTrustedEntitySets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendObjectMalwareScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendObjectMalwareScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendObjectMalwareScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMalwareScan(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMalwareScan(context.Background(), nil, func(o *Options) {
@@ -1854,6 +1866,18 @@ func TestUpdateSnapshot_ListTrustedEntitySets(t *testing.T) {
 	_, err := svc.ListTrustedEntitySets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTrustedEntitySets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendObjectMalwareScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendObjectMalwareScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendObjectMalwareScan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

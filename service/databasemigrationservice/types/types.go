@@ -500,8 +500,8 @@ type DataProvider struct {
 
 	// The type of database engine for the data provider. Valid values include "aurora"
 	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
-	// , mariadb , mongodb , db2 , db2-zos and docdb . A value of "aurora" represents
-	// Amazon Aurora MySQL-Compatible Edition.
+	// , mariadb , mongodb , db2 , db2-zos , docdb , and sybase . A value of "aurora"
+	// represents Amazon Aurora MySQL-Compatible Edition.
 	Engine *string
 
 	// The settings in JSON format for a data provider.
@@ -564,6 +564,7 @@ type DataProviderDescriptorDefinition struct {
 //	DataProviderSettingsMemberOracleSettings
 //	DataProviderSettingsMemberPostgreSqlSettings
 //	DataProviderSettingsMemberRedshiftSettings
+//	DataProviderSettingsMemberSybaseAseSettings
 type DataProviderSettings interface {
 	isDataProviderSettings()
 }
@@ -657,6 +658,15 @@ type DataProviderSettingsMemberRedshiftSettings struct {
 }
 
 func (*DataProviderSettingsMemberRedshiftSettings) isDataProviderSettings() {}
+
+// Provides information that defines an SAP ASE data provider.
+type DataProviderSettingsMemberSybaseAseSettings struct {
+	Value SybaseAseDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberSybaseAseSettings) isDataProviderSettings() {}
 
 // Provides error information about a schema conversion operation.
 type DefaultErrorDetails struct {
@@ -3092,6 +3102,59 @@ type PremigrationAssessmentStatus struct {
 	noSmithyDocumentSerde
 }
 
+// The database object that the schema conversion operation currently uses.
+type ProcessedObject struct {
+
+	// The type of the data provider. This parameter can store one of the following
+	// values: "SOURCE" or "TARGET" .
+	EndpointType *string
+
+	// The name of the database object.
+	Name *string
+
+	// The type of the database object. For example, a table, view, procedure, and so
+	// on.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the progress of the schema conversion operation.
+type Progress struct {
+
+	// The name of the database object that the schema conversion operation currently
+	// uses.
+	ProcessedObject *ProcessedObject
+
+	// The percent complete for the current step of the schema conversion operation.
+	ProgressPercent *float64
+
+	// The step of the schema conversion operation. This parameter can store one of
+	// the following values:
+	//
+	//   - IN_PROGRESS – The operation is running.
+	//
+	//   - LOADING_METADATA – Loads metadata from the source database.
+	//
+	//   - COUNTING_OBJECTS – Determines the number of objects involved in the
+	//   operation.
+	//
+	//   - ANALYZING – Analyzes the source database objects.
+	//
+	//   - CONVERTING – Converts the source database objects to a format compatible
+	//   with the target database.
+	//
+	//   - APPLYING – Applies the converted code to the target database.
+	//
+	//   - FINISHED – The operation completed successfully.
+	ProgressStep *string
+
+	// The number of objects in this schema conversion operation.
+	TotalObjects int64
+
+	noSmithyDocumentSerde
+}
+
 // Information about provisioning resources for an DMS serverless replication.
 type ProvisionData struct {
 
@@ -4917,6 +4980,9 @@ type SchemaConversionRequest struct {
 	// The migration project ARN.
 	MigrationProjectArn *string
 
+	// Provides information about the progress of the schema conversion operation.
+	Progress *Progress
+
 	// The identifier for the schema conversion action.
 	RequestIdentifier *string
 
@@ -5088,6 +5154,33 @@ type SupportedEndpointType struct {
 
 	// Indicates if change data capture (CDC) is supported.
 	SupportsCDC bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines an SAP ASE data provider.
+type SybaseAseDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the SAP ASE data provider.
+	DatabaseName *string
+
+	// Specifies whether to encrypt the password when connecting to the Sybase ASE
+	// database. When set to true, the connection password is encrypted during
+	// transmission. Default is true.
+	EncryptPassword *bool
+
+	// The port value for the SAP ASE data provider.
+	Port *int32
+
+	// The name of the SAP ASE server.
+	ServerName *string
+
+	// The SSL mode used to connect to the SAP ASE data provider. The default value is
+	// none .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }

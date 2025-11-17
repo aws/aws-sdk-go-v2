@@ -4863,6 +4863,10 @@ func awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(v *ListCopyJobsInput,
 		encoder.SetQuery("resourceType").String(*v.ByResourceType)
 	}
 
+	if v.BySourceRecoveryPointArn != nil {
+		encoder.SetQuery("sourceRecoveryPointArn").String(*v.BySourceRecoveryPointArn)
+	}
+
 	if len(v.ByState) > 0 {
 		encoder.SetQuery("state").String(string(v.ByState))
 	}
@@ -6960,6 +6964,11 @@ func awsRestjson1_serializeOpDocumentStartBackupJobInput(v *StartBackupJobInput,
 		}
 	}
 
+	if v.LogicallyAirGappedBackupVaultArn != nil {
+		ok := object.Key("LogicallyAirGappedBackupVaultArn")
+		ok.String(*v.LogicallyAirGappedBackupVaultArn)
+	}
+
 	if v.RecoveryPointTags != nil {
 		ok := object.Key("RecoveryPointTags")
 		if err := awsRestjson1_serializeDocumentTags(v.RecoveryPointTags, ok); err != nil {
@@ -8591,6 +8600,11 @@ func awsRestjson1_serializeDocumentBackupRuleInput(v *types.BackupRuleInput, val
 		ok.String(*v.TargetBackupVaultName)
 	}
 
+	if v.TargetLogicallyAirGappedBackupVaultArn != nil {
+		ok := object.Key("TargetLogicallyAirGappedBackupVaultArn")
+		ok.String(*v.TargetLogicallyAirGappedBackupVaultArn)
+	}
+
 	return nil
 }
 
@@ -8993,6 +9007,11 @@ func awsRestjson1_serializeDocumentLifecycle(v *types.Lifecycle, value smithyjso
 	if v.DeleteAfterDays != nil {
 		ok := object.Key("DeleteAfterDays")
 		ok.Long(*v.DeleteAfterDays)
+	}
+
+	if len(v.DeleteAfterEvent) > 0 {
+		ok := object.Key("DeleteAfterEvent")
+		ok.String(string(v.DeleteAfterEvent))
 	}
 
 	if v.MoveToColdStorageAfterDays != nil {

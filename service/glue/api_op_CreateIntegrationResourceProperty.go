@@ -42,6 +42,9 @@ type CreateIntegrationResourcePropertyInput struct {
 	// The resource properties associated with the integration source.
 	SourceProcessingProperties *types.SourceProcessingProperties
 
+	// Metadata assigned to the resource consisting of a list of key-value pairs.
+	Tags []types.Tag
+
 	// The resource properties associated with the integration target.
 	TargetProcessingProperties *types.TargetProcessingProperties
 
@@ -54,6 +57,10 @@ type CreateIntegrationResourcePropertyOutput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The resource ARN created through this create API. The format is something like
+	// arn:aws:glue:::integrationresourceproperty/*
+	ResourcePropertyArn *string
 
 	// The resource properties associated with the integration source.
 	SourceProcessingProperties *types.SourceProcessingProperties

@@ -472,6 +472,11 @@ func validateClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfiguration
 			invalidParams.AddNested("Accounting", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SlurmRest != nil {
+		if err := validateSlurmRestRequest(v.SlurmRest); err != nil {
+			invalidParams.AddNested("SlurmRest", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -588,6 +593,21 @@ func validateSlurmCustomSettings(v []types.SlurmCustomSetting) error {
 		if err := validateSlurmCustomSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlurmRestRequest(v *types.SlurmRestRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlurmRestRequest"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

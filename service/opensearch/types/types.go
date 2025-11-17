@@ -213,8 +213,8 @@ type AIMLOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration settings for an OpenSearch application. For more information, see
-// see [Using the OpenSearch user interface in Amazon OpenSearch Service].
+// Configuration settings for an OpenSearch application. For more information, see [Using the OpenSearch user interface in Amazon OpenSearch Service]
+// .
 //
 // [Using the OpenSearch user interface in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html
 type AppConfig struct {
@@ -1149,7 +1149,7 @@ type DomainPackageDetails struct {
 type DomainStatus struct {
 
 	// The Amazon Resource Name (ARN) of the domain. For more information, see [IAM identifiers] in the
-	// AWS Identity and Access Management User Guide.
+	// Amazon Web Services Identity and Access Management User Guide.
 	//
 	// [IAM identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 	//

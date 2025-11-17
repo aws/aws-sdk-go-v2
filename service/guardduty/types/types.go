@@ -3587,6 +3587,25 @@ type S3ObjectDetail struct {
 	noSmithyDocumentSerde
 }
 
+// The S3 object path to initiate a scan, including bucket name, object key, and
+// optional version ID.
+type S3ObjectForSendObjectMalwareScan struct {
+
+	// The name of the S3 bucket containing the object to scan. The bucket must have
+	// GuardDuty Malware Protection enabled.
+	Bucket *string
+
+	// The key (name) of the S3 object to scan for malware. This must be the full key
+	// path of the object within the bucket.
+	Key *string
+
+	// The version ID of the S3 object to scan. If not specified, the latest version
+	// of the object is scanned.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about malware scans associated with GuardDuty Malware
 // Protection for EC2.
 type Scan struct {

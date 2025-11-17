@@ -13607,6 +13607,11 @@ func awsRestjson1_serializeDocumentNluImprovementSpecification(v *types.NluImpro
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AssistedNluMode) > 0 {
+		ok := object.Key("assistedNluMode")
+		ok.String(string(v.AssistedNluMode))
+	}
+
 	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)

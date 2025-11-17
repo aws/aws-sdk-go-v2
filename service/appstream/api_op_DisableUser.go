@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the specified user in the user pool. Users can't sign in to AppStream
-// 2.0 until they are re-enabled. This action does not delete the user.
+// Disables the specified user in the user pool. Users can't sign in to WorkSpaces
+// Applications until they are re-enabled. This action does not delete the user.
 func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optFns ...func(*Options)) (*DisableUserOutput, error) {
 	if params == nil {
 		params = &DisableUserInput{}

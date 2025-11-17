@@ -1,0 +1,8 @@
+{
+    "id": "f4abb694-6d33-49d5-a848-2ab19d5f8176",
+    "type": "feature",
+    "description": "This release adds index operation APIs to support Automatic Semantic Enrichment feature",
+    "modules": [
+        "service/opensearch"
+    ]
+}

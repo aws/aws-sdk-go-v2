@@ -684,6 +684,18 @@ type Av1Settings struct {
 	// ENABLED or DISABLED.
 	SceneChangeDetect Av1SceneChangeDetect
 
+	// Spatial AQ makes adjustments within each frame based on spatial variation of
+	// content complexity. Enabled: MediaLive will determine the appropriate level of
+	// spatial AQ to apply. Disabled: No spatial AQ. For more information, see the
+	// topic about video adaptive quantization in the MediaLive user guide.
+	SpatialAq Av1SpatialAq
+
+	// Temporal AQ makes adjustments within each frame based on variations in content
+	// complexity over time. Enabled: MediaLive will determine the appropriate level of
+	// temporal AQ to apply. Disabled: No temporal AQ. For more information, see the
+	// topic about video adaptive quantization in the MediaLive user guide.
+	TemporalAq Av1TemporalAq
+
 	// Configures the timecode burn-in feature. If you enable this feature, the
 	// timecode will become part of the video.
 	TimecodeBurninSettings *TimecodeBurninSettings
@@ -3074,6 +3086,9 @@ type H265ColorSpaceSettings struct {
 	// Hdr10 Settings
 	Hdr10Settings *Hdr10Settings
 
+	// Hlg2020 Settings
+	Hlg2020Settings *Hlg2020Settings
+
 	// Rec601 Settings
 	Rec601Settings *Rec601Settings
 
@@ -3337,6 +3352,11 @@ type Hdr10Settings struct {
 	// video stream or file.
 	MaxFall *int32
 
+	noSmithyDocumentSerde
+}
+
+// Hlg2020 Settings
+type Hlg2020Settings struct {
 	noSmithyDocumentSerde
 }
 

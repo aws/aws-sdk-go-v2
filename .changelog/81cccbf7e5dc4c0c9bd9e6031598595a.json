@@ -1,0 +1,8 @@
+{
+    "id": "81cccbf7-e5dc-4c0c-9bd9-e6031598595a",
+    "type": "feature",
+    "description": "Amazon Glue Releasing 2 the new API ListIntegrationResourceProperties and DeleteIntegrationResourceProperty along with minor improvement on existing API(s).",
+    "modules": [
+        "service/glue"
+    ]
+}

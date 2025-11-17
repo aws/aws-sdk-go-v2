@@ -2977,6 +2977,29 @@ func (GroupBy) Values() []GroupBy {
 	}
 }
 
+type HaStatus string
+
+// Enum values for HaStatus
+const (
+	HaStatusProcessing HaStatus = "processing"
+	HaStatusActive     HaStatus = "active"
+	HaStatusStandby    HaStatus = "standby"
+	HaStatusInvalid    HaStatus = "invalid"
+)
+
+// Values returns all known values for HaStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HaStatus) Values() []HaStatus {
+	return []HaStatus{
+		"processing",
+		"active",
+		"standby",
+		"invalid",
+	}
+}
+
 type HostMaintenance string
 
 // Enum values for HostMaintenance
@@ -9839,6 +9862,25 @@ func (SpreadLevel) Values() []SpreadLevel {
 	return []SpreadLevel{
 		"host",
 		"rack",
+	}
+}
+
+type SqlServerLicenseUsage string
+
+// Enum values for SqlServerLicenseUsage
+const (
+	SqlServerLicenseUsageFull   SqlServerLicenseUsage = "full"
+	SqlServerLicenseUsageWaived SqlServerLicenseUsage = "waived"
+)
+
+// Values returns all known values for SqlServerLicenseUsage. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SqlServerLicenseUsage) Values() []SqlServerLicenseUsage {
+	return []SqlServerLicenseUsage{
+		"full",
+		"waived",
 	}
 }
 

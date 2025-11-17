@@ -1310,6 +1310,26 @@ func (m *validateOpDeleteIntegration) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIntegrationResourceProperty struct {
+}
+
+func (*validateOpDeleteIntegrationResourceProperty) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIntegrationResourceProperty) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIntegrationResourcePropertyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIntegrationResourcePropertyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteIntegrationTableProperties struct {
 }
 
@@ -4548,6 +4568,10 @@ func addOpDeleteDevEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIntegration{}, middleware.After)
+}
+
+func addOpDeleteIntegrationResourcePropertyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIntegrationResourceProperty{}, middleware.After)
 }
 
 func addOpDeleteIntegrationTablePropertiesValidationMiddleware(stack *middleware.Stack) error {
@@ -10817,6 +10841,21 @@ func validateOpDeleteIntegrationInput(v *DeleteIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationInput"}
 	if v.IntegrationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIntegrationResourcePropertyInput(v *DeleteIntegrationResourcePropertyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationResourcePropertyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
