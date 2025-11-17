@@ -1,3 +1,7 @@
+# v1.52.0 (2025-11-17)
+
+* **Feature**: AWS Backup now supports specifying a logically air-gapped backup vault as a primary backup target in backup plans and on-demand backup jobs.
+
 # v1.51.2 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

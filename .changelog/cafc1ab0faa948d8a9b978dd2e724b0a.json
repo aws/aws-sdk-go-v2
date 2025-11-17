@@ -1,8 +1,0 @@
-{
-    "id": "cafc1ab0-faa9-48d8-a9b9-78dd2e724b0a",
-    "type": "feature",
-    "description": "This release introduces new APIs: DescribeInstanceSqlHaStates, DescribeInstanceSqlHaHistoryStates, EnableInstanceSqlHaStandbyDetections and DisableInstanceSqlHaStandbyDetections on Amazon EC2, allowing customers to enroll and monitor SQL Server licensing fee savings for their SQL HA EC2 instances.",
-    "modules": [
-        "service/ec2"
-    ]
-}

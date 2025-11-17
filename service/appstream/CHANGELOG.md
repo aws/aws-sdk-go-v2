@@ -1,3 +1,7 @@
+# v1.52.0 (2025-11-17)
+
+* **Feature**: Adding support for additional instances and extended storage
+
 # v1.51.2 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

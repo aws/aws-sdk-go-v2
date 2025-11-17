@@ -1,8 +1,0 @@
-{
-    "id": "9ee765f9-e585-4670-8a1f-5407c8acf13e",
-    "type": "feature",
-    "description": "Adds configurations for spatial/temporal adaptive quantization in AV1 codec, and conversion to HLG output color space in H265 codec.",
-    "modules": [
-        "service/medialive"
-    ]
-}

@@ -3,4 +3,4 @@
 package mediapackagev2
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.32.5"
+const goModuleVersion = "1.33.0"

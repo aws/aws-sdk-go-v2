@@ -1,3 +1,7 @@
+# v1.67.0 (2025-11-17)
+
+* **Feature**: Add S3 On-Demand Object Scanning
+
 # v1.66.2 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

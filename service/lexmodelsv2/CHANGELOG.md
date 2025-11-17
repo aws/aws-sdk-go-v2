@@ -1,3 +1,7 @@
+# v1.57.0 (2025-11-17)
+
+* **Feature**: Adds support for LLM as Primary, allowing usage of LLMs as the default NLU system.
+
 # v1.56.12 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

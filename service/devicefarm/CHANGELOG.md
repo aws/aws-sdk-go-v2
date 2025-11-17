@@ -1,3 +1,7 @@
+# v1.37.0 (2025-11-17)
+
+* **Feature**: This release adds support for interacting with devices during a remote access session using the remoteDriverEndpoint interface
+
 # v1.36.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

@@ -1,3 +1,7 @@
+# v1.33.0 (2025-11-17)
+
+* **Feature**: Add support for SCTE messages in Segment file output
+
 # v1.32.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

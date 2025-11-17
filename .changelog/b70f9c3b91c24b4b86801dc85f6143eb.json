@@ -1,8 +1,0 @@
-{
-    "id": "b70f9c3b-91c2-4b4b-8680-1dc85f6143eb",
-    "type": "feature",
-    "description": "Adding DICTIONARY_DGA to dns-threat-protection as a new enum type. Customers can now set rules for dictionary dga protection",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

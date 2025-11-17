@@ -1,3 +1,7 @@
+# v1.86.0 (2025-11-17)
+
+* **Feature**: Adds configurations for spatial/temporal adaptive quantization in AV1 codec, and conversion to HLG output color space in H265 codec.
+
 # v1.85.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

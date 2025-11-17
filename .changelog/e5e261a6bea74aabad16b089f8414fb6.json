@@ -1,8 +1,0 @@
-{
-    "id": "e5e261a6-bea7-4aab-ad16-b089f8414fb6",
-    "type": "feature",
-    "description": "Add support for SCTE messages in Segment file output",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

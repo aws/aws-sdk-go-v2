@@ -1,8 +1,0 @@
-{
-    "id": "9f198f13-e1d7-48a0-87c2-093e0f4fbeba",
-    "type": "feature",
-    "description": "This release introduces the SAP ASE(Sybase) Data Provider for AWS Data Migration Service (DMS). In addition, DMS Schema Conversion now supports this provider, enabling customers to migrate SAP ASE(Sybase) databases to Amazon RDS for PostgreSQL or Aurora PostgreSQL seamlessly.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

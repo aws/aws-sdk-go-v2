@@ -1,3 +1,7 @@
+# v1.41.0 (2025-11-17)
+
+* **Feature**: Adding DICTIONARY_DGA to dns-threat-protection as a new enum type. Customers can now set rules for dictionary dga protection
+
 # v1.40.12 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

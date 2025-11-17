@@ -1,3 +1,7 @@
+# v1.54.0 (2025-11-17)
+
+* **Feature**: This release adds index operation APIs to support Automatic Semantic Enrichment feature
+
 # v1.53.2 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

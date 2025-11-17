@@ -1,8 +1,0 @@
-{
-    "id": "680f2976-e4bd-4953-a57e-1c78c7f6a172",
-    "type": "feature",
-    "description": "Add S3 On-Demand Object Scanning",
-    "modules": [
-        "service/guardduty"
-    ]
-}

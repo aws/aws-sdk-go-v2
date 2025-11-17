@@ -1,3 +1,7 @@
+# v1.133.0 (2025-11-17)
+
+* **Feature**: Amazon Glue Releasing 2 the new API ListIntegrationResourceProperties and DeleteIntegrationResourceProperty along with minor improvement on existing API(s).
+
 # v1.132.3 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.
