@@ -1,3 +1,7 @@
+# v1.53.0 (2025-11-18)
+
+* **Feature**: AWS Backup now supports a low-cost warm storage tier for Amazon S3 backup data.
+
 # v1.52.0 (2025-11-17)
 
 * **Feature**: AWS Backup now supports specifying a logically air-gapped backup vault as a primary backup target in backup plans and on-demand backup jobs.

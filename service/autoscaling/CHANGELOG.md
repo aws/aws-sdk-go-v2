@@ -1,3 +1,7 @@
+# v1.61.0 (2025-11-18)
+
+* **Feature**: This release adds the new LaunchInstances API, which can launch instances synchronously in an AutoScaling group. The API also returns instances info and launch error back immediately.
+
 # v1.60.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

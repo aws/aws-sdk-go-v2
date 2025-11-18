@@ -1,8 +1,0 @@
-{
-    "id": "3b3119f7-59c9-41d8-96f3-74b9be5b70d6",
-    "type": "feature",
-    "description": "New CloudFormation DescribeEvents API with operation ID tracking and failure filtering capabilities to quickly identify root causes of deployment failures. Also, a DeploymentMode parameter for the CreateChangeSet API that enables creation of drift-aware change sets for safe drift management.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

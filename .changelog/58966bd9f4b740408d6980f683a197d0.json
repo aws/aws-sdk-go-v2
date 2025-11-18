@@ -1,8 +1,0 @@
-{
-    "id": "58966bd9-f4b7-4040-8d69-80f683a197d0",
-    "type": "feature",
-    "description": "AssociateWebACL, UpdateWebACL and PutLoggingConfiguration will now throw WAFFeatureNotIncludedInPricingPlanException when the request contains a feature that is not included in the CloudFront pricing plan of the WebACL.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

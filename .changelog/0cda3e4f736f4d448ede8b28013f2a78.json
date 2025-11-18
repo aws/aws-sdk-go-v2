@@ -1,8 +1,0 @@
-{
-    "id": "0cda3e4f-736f-4d44-8ede-8b28013f2a78",
-    "type": "feature",
-    "description": "AWS Backup now supports a low-cost warm storage tier for Amazon S3 backup data.",
-    "modules": [
-        "service/backup"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "72f2f40a-74b8-4d87-be7b-20631e69ede3",
-    "type": "feature",
-    "description": "Amazon MSK adds three new APIs, ListTopics, DescribeTopic, and DescribeTopicPartitions for viewing Kafka topics in your MSK clusters.",
-    "modules": [
-        "service/kafka"
-    ]
-}

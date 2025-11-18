@@ -1,3 +1,7 @@
+# v1.43.0 (2025-11-18)
+
+* **Feature**: Amazon Bedrock Runtime Service Tier Support Launch
+
 # v1.42.4 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

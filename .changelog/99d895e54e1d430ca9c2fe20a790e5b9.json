@@ -1,8 +1,0 @@
-{
-    "id": "99d895e5-4e1d-430c-a9c2-fe20a790e5b9",
-    "type": "feature",
-    "description": "Adds support for European Sovereign Cloud ARNs in Storage Gateway API parameters.",
-    "modules": [
-        "service/storagegateway"
-    ]
-}

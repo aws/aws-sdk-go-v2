@@ -1,3 +1,29 @@
+# Release (2025-11-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.61.0](service/autoscaling/CHANGELOG.md#v1610-2025-11-18)
+  * **Feature**: This release adds the new LaunchInstances API, which can launch instances synchronously in an AutoScaling group. The API also returns instances info and launch error back immediately.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.53.0](service/backup/CHANGELOG.md#v1530-2025-11-18)
+  * **Feature**: AWS Backup now supports a low-cost warm storage tier for Amazon S3 backup data.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.43.0](service/bedrockruntime/CHANGELOG.md#v1430-2025-11-18)
+  * **Feature**: Amazon Bedrock Runtime Service Tier Support Launch
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.70.0](service/cloudformation/CHANGELOG.md#v1700-2025-11-18)
+  * **Feature**: New CloudFormation DescribeEvents API with operation ID tracking and failure filtering capabilities to quickly identify root causes of deployment failures. Also, a DeploymentMode parameter for the CreateChangeSet API that enables creation of drift-aware change sets for safe drift management.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.59.0](service/cloudwatchlogs/CHANGELOG.md#v1590-2025-11-18)
+  * **Feature**: CloudWatch Logs updates: Added capability to setup a recurring schedule for log insights queries. Logs introduced Scheduled Queries (managed through Create/Update/Get/Delete/List/History Scheduled Query APIs). For more information, see CloudWatch Logs API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.146.0](service/connect/CHANGELOG.md#v11460-2025-11-18)
+  * **Feature**: This release added support for ring timer configuration for campaign calls.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.271.0](service/ec2/CHANGELOG.md#v12710-2025-11-18)
+  * **Feature**: AWS Site-to-Site VPN now supports VPN Concentrator, a new feature that enables customers to connect multiple low-bandwidth sites connections through a single attachment, simplifying multi-site connectivity for distributed enterprises.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.51.0](service/iam/CHANGELOG.md#v1510-2025-11-18)
+  * **Feature**: Added the AssociateDelegationRequest, GetDelegationRequest, AcceptDelegationRequest, RejectDelegatonRequest, ListDelegationRequests, UpdateDelegationRequest, SendDelegationToken and GetHumanReadableSummary APIs for the IAM temporary delegation feature.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.46.0](service/kafka/CHANGELOG.md#v1460-2025-11-18)
+  * **Feature**: Amazon MSK adds three new APIs, ListTopics, DescribeTopic, and DescribeTopicPartitions for viewing Kafka topics in your MSK clusters.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.31.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1310-2025-11-18)
+  * **Feature**: Add support for new ListRequiredTags API used to retrieve the required tags specified in a customer's effective tag policy.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.70.0](service/wafv2/CHANGELOG.md#v1700-2025-11-18)
+  * **Feature**: AssociateWebACL, UpdateWebACL and PutLoggingConfiguration will now throw WAFFeatureNotIncludedInPricingPlanException when the request contains a feature that is not included in the CloudFront pricing plan of the WebACL.
+
 # Release (2025-11-17)
 
 ## Module Highlights

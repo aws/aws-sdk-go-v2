@@ -1,3 +1,7 @@
+# v1.31.0 (2025-11-18)
+
+* **Feature**: Add support for new ListRequiredTags API used to retrieve the required tags specified in a customer's effective tag policy.
+
 # v1.30.13 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

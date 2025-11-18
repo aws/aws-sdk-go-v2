@@ -1,3 +1,7 @@
+# v1.46.0 (2025-11-18)
+
+* **Feature**: Amazon MSK adds three new APIs, ListTopics, DescribeTopic, and DescribeTopicPartitions for viewing Kafka topics in your MSK clusters.
+
 # v1.45.2 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

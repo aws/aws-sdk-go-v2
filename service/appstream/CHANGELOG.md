@@ -1,3 +1,7 @@
+# v1.52.1 (2025-11-18)
+
+* No change notes available for this release.
+
 # v1.52.0 (2025-11-17)
 
 * **Feature**: Adding support for additional instances and extended storage

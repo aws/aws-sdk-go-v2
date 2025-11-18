@@ -1,3 +1,7 @@
+# v1.146.0 (2025-11-18)
+
+* **Feature**: This release added support for ring timer configuration for campaign calls.
+
 # v1.145.0 (2025-11-12)
 
 * **Feature**: Updated Authentication Profile APIs to add support for automatic logout on user inactivity
