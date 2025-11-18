@@ -352,6 +352,11 @@ func validateConverseTokensRequest(v *types.ConverseTokensRequest) error {
 			invalidParams.AddNested("System", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ToolConfig != nil {
+		if err := validateToolConfiguration(v.ToolConfig); err != nil {
+			invalidParams.AddNested("ToolConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -732,6 +737,21 @@ func validateS3Location(v *types.S3Location) error {
 	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
 	if v.Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceTier(v *types.ServiceTier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceTier"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1139,6 +1159,11 @@ func validateOpConverseInput(v *ConverseInput) error {
 			invalidParams.AddNested("GuardrailConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ServiceTier != nil {
+		if err := validateServiceTier(v.ServiceTier); err != nil {
+			invalidParams.AddNested("ServiceTier", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1172,6 +1197,11 @@ func validateOpConverseStreamInput(v *ConverseStreamInput) error {
 	if v.GuardrailConfig != nil {
 		if err := validateGuardrailStreamConfiguration(v.GuardrailConfig); err != nil {
 			invalidParams.AddNested("GuardrailConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceTier != nil {
+		if err := validateServiceTier(v.ServiceTier); err != nil {
+			invalidParams.AddNested("ServiceTier", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

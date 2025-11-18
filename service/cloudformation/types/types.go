@@ -357,6 +357,16 @@ type DeploymentTargets struct {
 	noSmithyDocumentSerde
 }
 
+// Event filter allows you to focus on specific events in an operation.
+type EventFilter struct {
+
+	// When set to true, only returns failed events within the operation. This helps
+	// quickly identify root causes for a failed operation.
+	FailedEvents *bool
+
+	noSmithyDocumentSerde
+}
+
 // The Export structure describes the exported output values for a stack.
 //
 // For more information, see [Get exported outputs from a deployed CloudFormation stack].
@@ -466,6 +476,22 @@ type HookTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Contains drift information for a resource property, including actual value,
+// previous deployment value, and drift detection timestamp.
+type LiveResourceDrift struct {
+
+	// The current live configuration value of the resource property.
+	ActualValue *string
+
+	// The timestamp when drift was detected for this resource property.
+	DriftDetectionTimestamp *time.Time
+
+	// The configuration value from the previous CloudFormation deployment.
+	PreviousValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains logging configuration information for an extension.
 type LoggingConfig struct {
 
@@ -537,6 +563,107 @@ type ModuleInfo struct {
 	//
 	//     AWS::First::Example::MODULE/AWS::Second::Example::MODULE
 	TypeHierarchy *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a CloudFormation operation.
+type OperationEntry struct {
+
+	// The unique identifier for the operation.
+	OperationId *string
+
+	// The type of operation.
+	OperationType OperationType
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about an event that occurred during a
+// CloudFormation operation.
+type OperationEvent struct {
+
+	// A unique identifier for the request that initiated this operation.
+	ClientRequestToken *string
+
+	// Additional status information about the operation.
+	DetailedStatus DetailedStatus
+
+	// The time when the event ended.
+	EndTime *time.Time
+
+	// A unique identifier for this event.
+	EventId *string
+
+	// The type of event.
+	EventType EventType
+
+	// Specifies how Hook failures are handled.
+	HookFailureMode HookFailureMode
+
+	// The point in the operation lifecycle when the Hook was invoked.
+	HookInvocationPoint HookInvocationPoint
+
+	// The status of the Hook invocation.
+	HookStatus HookStatus
+
+	// Additional information about the Hook status.
+	HookStatusReason *string
+
+	// The type name of the Hook that was invoked.
+	HookType *string
+
+	// The logical name of the resource as specified in the template.
+	LogicalResourceId *string
+
+	// The unique identifier of the operation this event belongs to.
+	OperationId *string
+
+	// The current status of the operation.
+	OperationStatus BeaconStackOperationStatus
+
+	// The type of operation.
+	OperationType OperationType
+
+	// The name or unique identifier that corresponds to a physical instance ID of a
+	// resource.
+	PhysicalResourceId *string
+
+	// The properties used to create the resource.
+	ResourceProperties *string
+
+	// Current status of the resource.
+	ResourceStatus ResourceStatus
+
+	// Success or failure message associated with the resource.
+	ResourceStatusReason *string
+
+	// Type of resource.
+	ResourceType *string
+
+	// The unique ID name of the instance of the stack.
+	StackId *string
+
+	// The time when the event started.
+	StartTime *time.Time
+
+	// Time the status was updated.
+	Timestamp *time.Time
+
+	// Specifies how validation failures are handled.
+	ValidationFailureMode HookFailureMode
+
+	// The name of the validation that was performed.
+	ValidationName *string
+
+	// The path within the resource where the validation was applied.
+	ValidationPath *string
+
+	// The status of the validation.
+	ValidationStatus ValidationStatus
+
+	// Additional information about the validation status.
+	ValidationStatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -733,8 +860,9 @@ type ResourceChange struct {
 
 	// The action that CloudFormation takes on the resource, such as Add (adds a new
 	// resource), Modify (changes a resource), Remove (deletes a resource), Import
-	// (imports a resource), or Dynamic (exact action for the resource can't be
-	// determined).
+	// (imports a resource), Dynamic (exact action for the resource can't be
+	// determined), or SyncWithActual (resource will not be changed, only
+	// CloudFormation metadata will change).
 	Action ChangeAction
 
 	// An encoded JSON string that contains the context of the resource after the
@@ -780,6 +908,10 @@ type ResourceChange struct {
 	//   taken.
 	PolicyAction PolicyAction
 
+	// Information about the resource's state from the previous CloudFormation
+	// deployment.
+	PreviousDeploymentContext *string
+
 	// For the Modify action, indicates whether CloudFormation will replace the
 	// resource by creating a new one and deleting the old one. This value depends on
 	// the value of the RequiresRecreation property in the ResourceTargetDefinition
@@ -793,6 +925,26 @@ type ResourceChange struct {
 	// RequiresRecreation value of Always has the most impact, followed by Conditional
 	// , and then Never .
 	Replacement Replacement
+
+	// List of resource attributes for which drift was ignored.
+	ResourceDriftIgnoredAttributes []ResourceDriftIgnoredAttribute
+
+	// The drift status of the resource. Valid values:
+	//
+	//   - IN_SYNC – The resource matches its template definition.
+	//
+	//   - MODIFIED – Resource properties were modified outside CloudFormation.
+	//
+	//   - DELETED – The resource was deleted outside CloudFormation.
+	//
+	//   - NOT_CHECKED – CloudFormation doesn’t currently return this value.
+	//
+	//   - UNKNOWN – Drift status could not be determined.
+	//
+	//   - UNSUPPORTED – Resource type does not support actual state comparison.
+	//
+	// Only present for drift-aware change sets.
+	ResourceDriftStatus StackResourceDriftStatus
 
 	// The type of CloudFormation resource, such as AWS::S3::Bucket .
 	ResourceType *string
@@ -840,6 +992,9 @@ type ResourceChangeDetail struct {
 	//   Automatic because the nested stack's template might have changed. Changes to a
 	//   nested stack's template aren't visible to CloudFormation until you run an update
 	//   on the parent stack.
+	//
+	//   - NoModification entities are changes made to the template that matches the
+	//   actual state of the resource.
 	ChangeSource ChangeSource
 
 	// Indicates whether CloudFormation can determine the target value, and whether
@@ -945,6 +1100,24 @@ type ResourceDetail struct {
 
 	// The warnings generated for this resource.
 	Warnings []WarningDetail
+
+	noSmithyDocumentSerde
+}
+
+// The ResourceDriftIgnoredAttribute data type.
+type ResourceDriftIgnoredAttribute struct {
+
+	// Path of the resource attribute for which drift was ignored.
+	Path *string
+
+	// Reason why drift was ignored for the attribute, can have 2 possible values:
+	//
+	//   - WRITE_ONLY_PROPERTY - Property is not included in read response for the
+	//   resource’s live state.
+	//
+	//   - MANAGED_BY_AWS - Property is managed by an Amazon Web Services service and
+	//   is expected to be dynamically modified.
+	Reason DriftIgnoredReason
 
 	noSmithyDocumentSerde
 }
@@ -1057,6 +1230,13 @@ type ResourceTargetDefinition struct {
 	// truncated.
 	AfterValue *string
 
+	// Indicates the source of the after value. Valid value:
+	//
+	//   - TEMPLATE – The after value comes from the new template.
+	//
+	// Only present for drift-aware change sets.
+	AfterValueFrom AfterValueFrom
+
 	// Indicates which resource attribute is triggering this update, such as a change
 	// in the resource attribute's Metadata , Properties , or Tags .
 	Attribute ResourceAttribute
@@ -1068,11 +1248,28 @@ type ResourceTargetDefinition struct {
 	//   - Remove The item will be removed.
 	//
 	//   - Modify The item will be modified.
+	//
+	//   - SyncWithActual The drift status of this item will be reset but the item will
+	//   not be modified.
 	AttributeChangeType AttributeChangeType
 
 	// The value of the property before the change is executed. Large values can be
 	// truncated.
 	BeforeValue *string
+
+	// Indicates the source of the before value. Valid values:
+	//
+	//   - ACTUAL_STATE – The before value represents current actual state.
+	//
+	//   - PREVIOUS_DEPLOYMENT_STATE – The before value represents the previous
+	//   CloudFormation deployment state.
+	//
+	// Only present for drift-aware change sets.
+	BeforeValueFrom BeforeValueFrom
+
+	// Detailed drift information for the resource property, including actual values,
+	// previous deployment values, and drift detection timestamps.
+	Drift *LiveResourceDrift
 
 	// If the Attribute value is Properties , the name of the property. For all other
 	// attributes, the value is null.
@@ -1349,6 +1546,9 @@ type Stack struct {
 	// [Protect a CloudFormation stack from being deleted]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
 	EnableTerminationProtection *bool
 
+	// Information about the most recent operations performed on this stack.
+	LastOperations []OperationEntry
+
 	// The time the stack was last updated. This field will only be returned if the
 	// stack has been updated at least once.
 	LastUpdatedTime *time.Time
@@ -1565,6 +1765,9 @@ type StackEvent struct {
 
 	// The logical name of the resource specified in the template.
 	LogicalResourceId *string
+
+	// The unique identifier of the operation that generated this stack event.
+	OperationId *string
 
 	// The name or unique identifier associated with the physical instance of the
 	// resource.
@@ -2886,6 +3089,9 @@ type StackSummary struct {
 	//
 	// [Detect unmanaged configuration changes to stacks and resources with drift detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
 	DriftInformation *StackDriftInformationSummary
+
+	// Information about the most recent operations performed on this stack.
+	LastOperations []OperationEntry
 
 	// The time the stack was last updated. This field will only be returned if the
 	// stack has been updated at least once.

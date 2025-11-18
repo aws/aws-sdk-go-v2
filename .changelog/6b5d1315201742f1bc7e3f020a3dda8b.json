@@ -1,0 +1,8 @@
+{
+    "id": "6b5d1315-2017-42f1-bc7e-3f020a3dda8b",
+    "type": "feature",
+    "description": "CloudWatch Logs updates: Added capability to setup a recurring schedule for log insights queries. Logs introduced Scheduled Queries (managed through Create/Update/Get/Delete/List/History Scheduled Query APIs). For more information, see CloudWatch Logs API documentation.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

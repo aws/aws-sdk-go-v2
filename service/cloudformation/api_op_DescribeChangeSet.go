@@ -79,6 +79,10 @@ type DescribeChangeSetOutput struct {
 	// The start time when the change set was created, in UTC.
 	CreationTime *time.Time
 
+	// The deployment mode specified when the change set was created. Valid value is
+	// REVERT_DRIFT . Only present for drift-aware change sets.
+	DeploymentMode types.DeploymentMode
+
 	// Information about the change set.
 	Description *string
 
@@ -144,6 +148,19 @@ type DescribeChangeSetOutput struct {
 	// Specifies the change set ID of the root change set in the current nested change
 	// set hierarchy.
 	RootChangeSetId *string
+
+	// The drift status of the stack when the change set was created. Valid values:
+	//
+	//   - DRIFTED – The stack has drifted from its last deployment.
+	//
+	//   - IN_SYNC – The stack is in sync with its last deployment.
+	//
+	//   - NOT_CHECKED – CloudFormation doesn’t currently return this value.
+	//
+	//   - UNKNOWN – The drift status could not be determined.
+	//
+	// Only present for drift-aware change sets.
+	StackDriftStatus types.StackDriftStatus
 
 	// The Amazon Resource Name (ARN) of the stack that's associated with the change
 	// set.
@@ -466,6 +483,79 @@ func changeSetCreateCompleteStateRetryable(ctx context.Context, input *DescribeC
 		return false, err
 	}
 	return true, nil
+}
+
+// DescribeChangeSetPaginatorOptions is the paginator options for DescribeChangeSet
+type DescribeChangeSetPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeChangeSetPaginator is a paginator for DescribeChangeSet
+type DescribeChangeSetPaginator struct {
+	options   DescribeChangeSetPaginatorOptions
+	client    DescribeChangeSetAPIClient
+	params    *DescribeChangeSetInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeChangeSetPaginator returns a new DescribeChangeSetPaginator
+func NewDescribeChangeSetPaginator(client DescribeChangeSetAPIClient, params *DescribeChangeSetInput, optFns ...func(*DescribeChangeSetPaginatorOptions)) *DescribeChangeSetPaginator {
+	if params == nil {
+		params = &DescribeChangeSetInput{}
+	}
+
+	options := DescribeChangeSetPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeChangeSetPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeChangeSetPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeChangeSet page.
+func (p *DescribeChangeSetPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeChangeSetOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeChangeSet(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 // DescribeChangeSetAPIClient is a client that implements the DescribeChangeSet

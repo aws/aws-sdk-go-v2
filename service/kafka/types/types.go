@@ -1352,6 +1352,45 @@ type Tls struct {
 	noSmithyDocumentSerde
 }
 
+// Includes identification info about the topic.
+type TopicInfo struct {
+
+	// Number of out-of-sync replicas for a topic.
+	OutOfSyncReplicaCount *int32
+
+	// Partition count for a topic.
+	PartitionCount *int32
+
+	// Replication factor for a topic.
+	ReplicationFactor *int32
+
+	// The Amazon Resource Name (ARN) of the topic.
+	TopicArn *string
+
+	// Name for a topic.
+	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a topic partition.
+type TopicPartitionInfo struct {
+
+	// The list of in-sync replica broker IDs for the partition.
+	Isr []int32
+
+	// The leader broker ID for the partition.
+	Leader *int32
+
+	// The partition ID.
+	Partition *int32
+
+	// The list of replica broker IDs for the partition.
+	Replicas []int32
+
+	noSmithyDocumentSerde
+}
+
 // Details about topic replication.
 type TopicReplication struct {
 

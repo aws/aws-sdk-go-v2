@@ -250,6 +250,26 @@ func (m *validateOpCreateRestoreTestingSelection) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTieringConfiguration struct {
+}
+
+func (*validateOpCreateTieringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTieringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTieringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTieringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBackupPlan struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpDeleteRestoreTestingSelection) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRestoreTestingSelectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTieringConfiguration struct {
+}
+
+func (*validateOpDeleteTieringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTieringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTieringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTieringConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -985,6 +1025,26 @@ func (m *validateOpGetRestoreTestingSelection) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRestoreTestingSelectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTieringConfiguration struct {
+}
+
+func (*validateOpGetTieringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTieringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTieringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTieringConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1570,6 +1630,26 @@ func (m *validateOpUpdateRestoreTestingSelection) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTieringConfiguration struct {
+}
+
+func (*validateOpUpdateTieringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTieringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTieringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTieringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateBackupVaultMpaApprovalTeamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateBackupVaultMpaApprovalTeam{}, middleware.After)
 }
@@ -1618,6 +1698,10 @@ func addOpCreateRestoreTestingSelectionValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpCreateRestoreTestingSelection{}, middleware.After)
 }
 
+func addOpCreateTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTieringConfiguration{}, middleware.After)
+}
+
 func addOpDeleteBackupPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackupPlan{}, middleware.After)
 }
@@ -1660,6 +1744,10 @@ func addOpDeleteRestoreTestingPlanValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteRestoreTestingSelectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRestoreTestingSelection{}, middleware.After)
+}
+
+func addOpDeleteTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTieringConfiguration{}, middleware.After)
 }
 
 func addOpDescribeBackupJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1764,6 +1852,10 @@ func addOpGetRestoreTestingPlanValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetRestoreTestingSelectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRestoreTestingSelection{}, middleware.After)
+}
+
+func addOpGetTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTieringConfiguration{}, middleware.After)
 }
 
 func addOpListBackupPlanVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1880,6 +1972,10 @@ func addOpUpdateRestoreTestingPlanValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateRestoreTestingSelectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRestoreTestingSelection{}, middleware.After)
+}
+
+func addOpUpdateTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTieringConfiguration{}, middleware.After)
 }
 
 func validateBackupPlanInput(v *types.BackupPlanInput) error {
@@ -2191,6 +2287,44 @@ func validateReportSetting(v *types.ReportSetting) error {
 	}
 }
 
+func validateResourceSelection(v *types.ResourceSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceSelection"}
+	if v.Resources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
+	}
+	if v.TieringDownSettingsInDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringDownSettingsInDays"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceSelections(v []types.ResourceSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceSelections"}
+	for i := range v {
+		if err := validateResourceSelection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRestoreTestingPlanForCreate(v *types.RestoreTestingPlanForCreate) error {
 	if v == nil {
 		return nil
@@ -2247,6 +2381,53 @@ func validateRestoreTestingSelectionForUpdate(v *types.RestoreTestingSelectionFo
 		if err := validateProtectedResourceConditions(v.ProtectedResourceConditions); err != nil {
 			invalidParams.AddNested("ProtectedResourceConditions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTieringConfigurationInputForCreate(v *types.TieringConfigurationInputForCreate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TieringConfigurationInputForCreate"}
+	if v.TieringConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringConfigurationName"))
+	}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.ResourceSelection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceSelection"))
+	} else if v.ResourceSelection != nil {
+		if err := validateResourceSelections(v.ResourceSelection); err != nil {
+			invalidParams.AddNested("ResourceSelection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTieringConfigurationInputForUpdate(v *types.TieringConfigurationInputForUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TieringConfigurationInputForUpdate"}
+	if v.ResourceSelection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceSelection"))
+	} else if v.ResourceSelection != nil {
+		if err := validateResourceSelections(v.ResourceSelection); err != nil {
+			invalidParams.AddNested("ResourceSelection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2498,6 +2679,25 @@ func validateOpCreateRestoreTestingSelectionInput(v *CreateRestoreTestingSelecti
 	}
 }
 
+func validateOpCreateTieringConfigurationInput(v *CreateTieringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTieringConfigurationInput"}
+	if v.TieringConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringConfiguration"))
+	} else if v.TieringConfiguration != nil {
+		if err := validateTieringConfigurationInputForCreate(v.TieringConfiguration); err != nil {
+			invalidParams.AddNested("TieringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBackupPlanInput(v *DeleteBackupPlanInput) error {
 	if v == nil {
 		return nil
@@ -2664,6 +2864,21 @@ func validateOpDeleteRestoreTestingSelectionInput(v *DeleteRestoreTestingSelecti
 	}
 	if v.RestoreTestingSelectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestoreTestingSelectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTieringConfigurationInput(v *DeleteTieringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTieringConfigurationInput"}
+	if v.TieringConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringConfigurationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3078,6 +3293,21 @@ func validateOpGetRestoreTestingSelectionInput(v *GetRestoreTestingSelectionInpu
 	}
 	if v.RestoreTestingSelectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestoreTestingSelectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTieringConfigurationInput(v *GetTieringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTieringConfigurationInput"}
+	if v.TieringConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringConfigurationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3593,6 +3823,28 @@ func validateOpUpdateRestoreTestingSelectionInput(v *UpdateRestoreTestingSelecti
 	}
 	if v.RestoreTestingSelectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestoreTestingSelectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTieringConfigurationInput(v *UpdateTieringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTieringConfigurationInput"}
+	if v.TieringConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringConfigurationName"))
+	}
+	if v.TieringConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TieringConfiguration"))
+	} else if v.TieringConfiguration != nil {
+		if err := validateTieringConfigurationInputForUpdate(v.TieringConfiguration); err != nil {
+			invalidParams.AddNested("TieringConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

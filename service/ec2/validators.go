@@ -2670,6 +2670,26 @@ func (m *validateOpCreateVpcPeeringConnection) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpnConcentrator struct {
+}
+
+func (*validateOpCreateVpnConcentrator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpnConcentrator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpnConcentratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpnConcentratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVpnConnection struct {
 }
 
@@ -4285,6 +4305,26 @@ func (m *validateOpDeleteVpcPeeringConnection) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteVpcPeeringConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpnConcentrator struct {
+}
+
+func (*validateOpDeleteVpnConcentrator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpnConcentrator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpnConcentratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpnConcentratorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -10602,6 +10642,10 @@ func addOpCreateVpcPeeringConnectionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateVpcPeeringConnection{}, middleware.After)
 }
 
+func addOpCreateVpnConcentratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpnConcentrator{}, middleware.After)
+}
+
 func addOpCreateVpnConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpnConnection{}, middleware.After)
 }
@@ -10924,6 +10968,10 @@ func addOpDeleteVpcValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteVpcPeeringConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVpcPeeringConnection{}, middleware.After)
+}
+
+func addOpDeleteVpnConcentratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpnConcentrator{}, middleware.After)
 }
 
 func addOpDeleteVpnConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -15426,6 +15474,21 @@ func validateOpCreateVpcPeeringConnectionInput(v *CreateVpcPeeringConnectionInpu
 	}
 }
 
+func validateOpCreateVpnConcentratorInput(v *CreateVpnConcentratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpnConcentratorInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVpnConnectionInput(v *CreateVpnConnectionInput) error {
 	if v == nil {
 		return nil
@@ -16660,6 +16723,21 @@ func validateOpDeleteVpcPeeringConnectionInput(v *DeleteVpcPeeringConnectionInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcPeeringConnectionInput"}
 	if v.VpcPeeringConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcPeeringConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpnConcentratorInput(v *DeleteVpnConcentratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpnConcentratorInput"}
+	if v.VpnConcentratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpnConcentratorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

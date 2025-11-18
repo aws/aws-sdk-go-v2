@@ -8900,6 +8900,7 @@ const (
 	ResourceTypeIpamPrefixListResolver                                 ResourceType = "ipam-prefix-list-resolver"
 	ResourceTypeIpamPrefixListResolverTarget                           ResourceType = "ipam-prefix-list-resolver-target"
 	ResourceTypeCapacityManagerDataExport                              ResourceType = "capacity-manager-data-export"
+	ResourceTypeVpnConcentrator                                        ResourceType = "vpn-concentrator"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -9008,6 +9009,7 @@ func (ResourceType) Values() []ResourceType {
 		"ipam-prefix-list-resolver",
 		"ipam-prefix-list-resolver-target",
 		"capacity-manager-data-export",
+		"vpn-concentrator",
 	}
 }
 
@@ -10527,6 +10529,7 @@ type TransitGatewayAttachmentResourceType string
 const (
 	TransitGatewayAttachmentResourceTypeVpc                  TransitGatewayAttachmentResourceType = "vpc"
 	TransitGatewayAttachmentResourceTypeVpn                  TransitGatewayAttachmentResourceType = "vpn"
+	TransitGatewayAttachmentResourceTypeVpnConcentrator      TransitGatewayAttachmentResourceType = "vpn-concentrator"
 	TransitGatewayAttachmentResourceTypeDirectConnectGateway TransitGatewayAttachmentResourceType = "direct-connect-gateway"
 	TransitGatewayAttachmentResourceTypeConnect              TransitGatewayAttachmentResourceType = "connect"
 	TransitGatewayAttachmentResourceTypePeering              TransitGatewayAttachmentResourceType = "peering"
@@ -10543,6 +10546,7 @@ func (TransitGatewayAttachmentResourceType) Values() []TransitGatewayAttachmentR
 	return []TransitGatewayAttachmentResourceType{
 		"vpc",
 		"vpn",
+		"vpn-concentrator",
 		"direct-connect-gateway",
 		"connect",
 		"peering",
@@ -11636,6 +11640,23 @@ const (
 func (VpcTenancy) Values() []VpcTenancy {
 	return []VpcTenancy{
 		"default",
+	}
+}
+
+type VpnConcentratorType string
+
+// Enum values for VpnConcentratorType
+const (
+	VpnConcentratorTypeIpsec1 VpnConcentratorType = "ipsec.1"
+)
+
+// Values returns all known values for VpnConcentratorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpnConcentratorType) Values() []VpnConcentratorType {
+	return []VpnConcentratorType{
+		"ipsec.1",
 	}
 }
 

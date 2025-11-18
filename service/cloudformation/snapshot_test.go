@@ -326,6 +326,18 @@ func TestCheckSnapshot_DescribeChangeSetHooks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeGeneratedTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeGeneratedTemplate(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1398,18 @@ func TestUpdateSnapshot_DescribeChangeSetHooks(t *testing.T) {
 	_, err := svc.DescribeChangeSetHooks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeChangeSetHooks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -71,6 +71,10 @@ type RollbackStackInput struct {
 
 type RollbackStackOutput struct {
 
+	// A unique identifier for this rollback operation that can be used to track the
+	// operation's progress and events.
+	OperationId *string
+
 	// Unique identifier of the stack.
 	StackId *string
 

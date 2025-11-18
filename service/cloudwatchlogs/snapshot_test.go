@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateLogStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateScheduledQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAccountPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAccountPolicy(context.Background(), nil, func(o *Options) {
@@ -331,6 +343,18 @@ func TestCheckSnapshot_DeleteRetentionPolicy(t *testing.T) {
 	_, err := svc.DeleteRetentionPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRetentionPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteScheduledQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -722,6 +746,30 @@ func TestCheckSnapshot_GetQueryResults(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetScheduledQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetScheduledQueryHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScheduledQueryHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetScheduledQueryHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransformer(context.Background(), nil, func(o *Options) {
@@ -787,6 +835,18 @@ func TestCheckSnapshot_ListLogGroupsForQuery(t *testing.T) {
 	_, err := svc.ListLogGroupsForQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListLogGroupsForQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListScheduledQueries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScheduledQueries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListScheduledQueries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1153,6 +1213,18 @@ func TestCheckSnapshot_UpdateLogAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateScheduledQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateKmsKey(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateKmsKey(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1302,18 @@ func TestUpdateSnapshot_CreateLogStream(t *testing.T) {
 	_, err := svc.CreateLogStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateLogStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateScheduledQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1422,6 +1506,18 @@ func TestUpdateSnapshot_DeleteRetentionPolicy(t *testing.T) {
 	_, err := svc.DeleteRetentionPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRetentionPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteScheduledQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1813,6 +1909,30 @@ func TestUpdateSnapshot_GetQueryResults(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetScheduledQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetScheduledQueryHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScheduledQueryHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetScheduledQueryHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransformer(context.Background(), nil, func(o *Options) {
@@ -1878,6 +1998,18 @@ func TestUpdateSnapshot_ListLogGroupsForQuery(t *testing.T) {
 	_, err := svc.ListLogGroupsForQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListLogGroupsForQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListScheduledQueries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScheduledQueries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListScheduledQueries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2238,6 +2370,18 @@ func TestUpdateSnapshot_UpdateLogAnomalyDetector(t *testing.T) {
 	_, err := svc.UpdateLogAnomalyDetector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLogAnomalyDetector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateScheduledQuery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateScheduledQuery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateScheduledQuery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

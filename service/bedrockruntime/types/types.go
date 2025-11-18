@@ -587,6 +587,9 @@ type ConverseStreamMetadataEvent struct {
 	// Model performance configuration metadata for the conversation stream event.
 	PerformanceConfig *PerformanceConfiguration
 
+	// Specifies the processing tier configuration used for serving the request.
+	ServiceTier *ServiceTier
+
 	// The trace object in the response from [ConverseStream] that contains information about the
 	// guardrail behavior.
 	//
@@ -695,6 +698,11 @@ type ConverseStreamTrace struct {
 // you to count tokens for conversation-based inference requests.
 type ConverseTokensRequest struct {
 
+	// The additionalModelRequestFields of Converse input request to count tokens for.
+	// Use this field when you want to pass additional parameters that the model
+	// supports.
+	AdditionalModelRequestFields document.Interface
+
 	// An array of messages to count tokens for.
 	Messages []Message
 
@@ -702,6 +710,10 @@ type ConverseTokensRequest struct {
 	// instructions or context to the model about how it should behave or respond. The
 	// token count will include any system content provided.
 	System []SystemContentBlock
+
+	// The toolConfig of Converse input request to count tokens for. Configuration
+	// information for the tools that the model can use when generating a response.
+	ToolConfig *ToolConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2169,6 +2181,17 @@ type S3Location struct {
 
 	// If the bucket belongs to another AWS account, specify that account's ID.
 	BucketOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the processing tier configuration used for serving the request.
+type ServiceTier struct {
+
+	// Specifies the processing tier type used for serving the request.
+	//
+	// This member is required.
+	Type ServiceTierType
 
 	noSmithyDocumentSerde
 }

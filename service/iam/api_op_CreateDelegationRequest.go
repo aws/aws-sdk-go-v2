@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is currently unavailable for general use.
+// Creates an IAM delegation request for temporary access delegation.
+//
+// This API is not available for general use. In order to use this API, a caller
+// first need to go through an onboarding process described in the [partner onboarding documentation].
+//
+// [partner onboarding documentation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html
 func (c *Client) CreateDelegationRequest(ctx context.Context, params *CreateDelegationRequestInput, optFns ...func(*Options)) (*CreateDelegationRequestOutput, error) {
 	if params == nil {
 		params = &CreateDelegationRequestInput{}
@@ -29,41 +34,79 @@ func (c *Client) CreateDelegationRequest(ctx context.Context, params *CreateDele
 
 type CreateDelegationRequestInput struct {
 
-	//
+	// A description of the delegation request.
 	//
 	// This member is required.
 	Description *string
 
+	// The notification channel for updates about the delegation request.
 	//
+	// At this time,only SNS topic ARNs are accepted for notification. This topic ARN
+	// must have a resource policy granting SNS:Publish permission to the IAM service
+	// principal ( iam.amazonaws.com ). See [partner onboarding documentation] for more details.
+	//
+	// [partner onboarding documentation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html
 	//
 	// This member is required.
 	NotificationChannel *string
 
-	//
+	// The permissions to be delegated in this delegation request.
 	//
 	// This member is required.
 	Permissions *types.DelegationPermission
 
+	// The workflow ID associated with the requestor.
 	//
+	// This is the unique identifier on the partner side that can be used to track the
+	// progress of the request.
+	//
+	// IAM maintains a uniqueness check on this workflow id for each request - if a
+	// workflow id for an existing request is passed, this API call will fail.
 	//
 	// This member is required.
 	RequestorWorkflowId *string
 
+	// The duration for which the delegated session should remain active, in seconds.
 	//
+	// The active time window for the session starts when the customer calls the [SendDelegationToken] API.
+	//
+	// [SendDelegationToken]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html
 	//
 	// This member is required.
 	SessionDuration *int32
 
+	// Specifies whether the delegation token should only be sent by the owner.
 	//
+	// This flag prevents any party other than the owner from calling
+	// SendDelegationToken API for this delegation request. This behavior becomes
+	// useful when the delegation request owner needs to be present for subsequent
+	// partner interactions, but the delegation request was sent to a more privileged
+	// user for approval due to the owner lacking sufficient delegation permissions.
 	OnlySendByOwner bool
 
+	// The Amazon Web Services account ID this delegation request is targeted to.
 	//
+	// If the account ID is not known, this parameter can be omitted, resulting in a
+	// request that can be associated by any account. If the account ID passed, then
+	// the created delegation request can only be associated with an identity of that
+	// target account.
 	OwnerAccountId *string
 
+	// The URL to redirect to after the delegation request is processed.
 	//
+	// This URL is used by the IAM console to show a link to the customer to re-load
+	// the partner workflow.
 	RedirectUrl *string
 
+	// A message explaining the reason for the delegation request.
 	//
+	// Requesters can utilize this field to add a custom note to the delegation
+	// request. This field is different from the description such that this is to be
+	// utilized for a custom messaging on a case-by-case basis.
+	//
+	// For example, if the current delegation request is in response to a previous
+	// request being rejected, this explanation can be added to the request via this
+	// field.
 	RequestMessage *string
 
 	noSmithyDocumentSerde
@@ -71,10 +114,16 @@ type CreateDelegationRequestInput struct {
 
 type CreateDelegationRequestOutput struct {
 
+	// A deep link URL to the Amazon Web Services Management Console for managing the
+	// delegation request.
 	//
+	// For a console based workflow, partners should redirect the customer to this
+	// URL. If the customer is not logged in to any Amazon Web Services account, the
+	// Amazon Web Services workflow will automatically direct the customer to log in
+	// and then display the delegation request approval page.
 	ConsoleDeepLink *string
 
-	//
+	// The unique identifier for the created delegation request.
 	DelegationRequestId *string
 
 	// Metadata pertaining to the operation's result.

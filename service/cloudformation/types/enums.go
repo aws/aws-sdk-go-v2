@@ -46,6 +46,23 @@ func (AccountGateStatus) Values() []AccountGateStatus {
 	}
 }
 
+type AfterValueFrom string
+
+// Enum values for AfterValueFrom
+const (
+	AfterValueFromTemplate AfterValueFrom = "TEMPLATE"
+)
+
+// Values returns all known values for AfterValueFrom. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AfterValueFrom) Values() []AfterValueFrom {
+	return []AfterValueFrom{
+		"TEMPLATE",
+	}
+}
+
 type AnnotationSeverityLevel string
 
 // Enum values for AnnotationSeverityLevel
@@ -96,9 +113,10 @@ type AttributeChangeType string
 
 // Enum values for AttributeChangeType
 const (
-	AttributeChangeTypeAdd    AttributeChangeType = "Add"
-	AttributeChangeTypeRemove AttributeChangeType = "Remove"
-	AttributeChangeTypeModify AttributeChangeType = "Modify"
+	AttributeChangeTypeAdd            AttributeChangeType = "Add"
+	AttributeChangeTypeRemove         AttributeChangeType = "Remove"
+	AttributeChangeTypeModify         AttributeChangeType = "Modify"
+	AttributeChangeTypeSyncWithActual AttributeChangeType = "SyncWithActual"
 )
 
 // Values returns all known values for AttributeChangeType. Note that this can be
@@ -110,6 +128,47 @@ func (AttributeChangeType) Values() []AttributeChangeType {
 		"Add",
 		"Remove",
 		"Modify",
+		"SyncWithActual",
+	}
+}
+
+type BeaconStackOperationStatus string
+
+// Enum values for BeaconStackOperationStatus
+const (
+	BeaconStackOperationStatusInProgress BeaconStackOperationStatus = "IN_PROGRESS"
+	BeaconStackOperationStatusSucceeded  BeaconStackOperationStatus = "SUCCEEDED"
+	BeaconStackOperationStatusFailed     BeaconStackOperationStatus = "FAILED"
+)
+
+// Values returns all known values for BeaconStackOperationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BeaconStackOperationStatus) Values() []BeaconStackOperationStatus {
+	return []BeaconStackOperationStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type BeforeValueFrom string
+
+// Enum values for BeforeValueFrom
+const (
+	BeforeValueFromPreviousDeploymentState BeforeValueFrom = "PREVIOUS_DEPLOYMENT_STATE"
+	BeforeValueFromActualState             BeforeValueFrom = "ACTUAL_STATE"
+)
+
+// Values returns all known values for BeforeValueFrom. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BeforeValueFrom) Values() []BeforeValueFrom {
+	return []BeforeValueFrom{
+		"PREVIOUS_DEPLOYMENT_STATE",
+		"ACTUAL_STATE",
 	}
 }
 
@@ -180,11 +239,12 @@ type ChangeAction string
 
 // Enum values for ChangeAction
 const (
-	ChangeActionAdd     ChangeAction = "Add"
-	ChangeActionModify  ChangeAction = "Modify"
-	ChangeActionRemove  ChangeAction = "Remove"
-	ChangeActionImport  ChangeAction = "Import"
-	ChangeActionDynamic ChangeAction = "Dynamic"
+	ChangeActionAdd            ChangeAction = "Add"
+	ChangeActionModify         ChangeAction = "Modify"
+	ChangeActionRemove         ChangeAction = "Remove"
+	ChangeActionImport         ChangeAction = "Import"
+	ChangeActionDynamic        ChangeAction = "Dynamic"
+	ChangeActionSyncWithActual ChangeAction = "SyncWithActual"
 )
 
 // Values returns all known values for ChangeAction. Note that this can be
@@ -198,6 +258,7 @@ func (ChangeAction) Values() []ChangeAction {
 		"Remove",
 		"Import",
 		"Dynamic",
+		"SyncWithActual",
 	}
 }
 
@@ -283,6 +344,7 @@ const (
 	ChangeSourceResourceAttribute  ChangeSource = "ResourceAttribute"
 	ChangeSourceDirectModification ChangeSource = "DirectModification"
 	ChangeSourceAutomatic          ChangeSource = "Automatic"
+	ChangeSourceNoModification     ChangeSource = "NoModification"
 )
 
 // Values returns all known values for ChangeSource. Note that this can be
@@ -296,6 +358,7 @@ func (ChangeSource) Values() []ChangeSource {
 		"ResourceAttribute",
 		"DirectModification",
 		"Automatic",
+		"NoModification",
 	}
 }
 
@@ -351,6 +414,23 @@ func (DeletionMode) Values() []DeletionMode {
 	return []DeletionMode{
 		"STANDARD",
 		"FORCE_DELETE_STACK",
+	}
+}
+
+type DeploymentMode string
+
+// Enum values for DeploymentMode
+const (
+	DeploymentModeRevertDrift DeploymentMode = "REVERT_DRIFT"
+)
+
+// Values returns all known values for DeploymentMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentMode) Values() []DeploymentMode {
+	return []DeploymentMode{
+		"REVERT_DRIFT",
 	}
 }
 
@@ -413,6 +493,25 @@ func (DifferenceType) Values() []DifferenceType {
 	}
 }
 
+type DriftIgnoredReason string
+
+// Enum values for DriftIgnoredReason
+const (
+	DriftIgnoredReasonManagedByAws      DriftIgnoredReason = "MANAGED_BY_AWS"
+	DriftIgnoredReasonWriteOnlyProperty DriftIgnoredReason = "WRITE_ONLY_PROPERTY"
+)
+
+// Values returns all known values for DriftIgnoredReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DriftIgnoredReason) Values() []DriftIgnoredReason {
+	return []DriftIgnoredReason{
+		"MANAGED_BY_AWS",
+		"WRITE_ONLY_PROPERTY",
+	}
+}
+
 type EvaluationType string
 
 // Enum values for EvaluationType
@@ -429,6 +528,31 @@ func (EvaluationType) Values() []EvaluationType {
 	return []EvaluationType{
 		"Static",
 		"Dynamic",
+	}
+}
+
+type EventType string
+
+// Enum values for EventType
+const (
+	EventTypeStackEvent          EventType = "STACK_EVENT"
+	EventTypeProgressEvent       EventType = "PROGRESS_EVENT"
+	EventTypeValidationError     EventType = "VALIDATION_ERROR"
+	EventTypeProvisioningError   EventType = "PROVISIONING_ERROR"
+	EventTypeHookInvocationError EventType = "HOOK_INVOCATION_ERROR"
+)
+
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"STACK_EVENT",
+		"PROGRESS_EVENT",
+		"VALIDATION_ERROR",
+		"PROVISIONING_ERROR",
+		"HOOK_INVOCATION_ERROR",
 	}
 }
 
@@ -829,6 +953,33 @@ func (OperationStatus) Values() []OperationStatus {
 		"IN_PROGRESS",
 		"SUCCESS",
 		"FAILED",
+	}
+}
+
+type OperationType string
+
+// Enum values for OperationType
+const (
+	OperationTypeCreateStack      OperationType = "CREATE_STACK"
+	OperationTypeUpdateStack      OperationType = "UPDATE_STACK"
+	OperationTypeDeleteStack      OperationType = "DELETE_STACK"
+	OperationTypeContinueRollback OperationType = "CONTINUE_ROLLBACK"
+	OperationTypeRollback         OperationType = "ROLLBACK"
+	OperationTypeCreateChangeset  OperationType = "CREATE_CHANGESET"
+)
+
+// Values returns all known values for OperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationType) Values() []OperationType {
+	return []OperationType{
+		"CREATE_STACK",
+		"UPDATE_STACK",
+		"DELETE_STACK",
+		"CONTINUE_ROLLBACK",
+		"ROLLBACK",
+		"CREATE_CHANGESET",
 	}
 }
 
@@ -1442,11 +1593,12 @@ type StackResourceDriftStatus string
 
 // Enum values for StackResourceDriftStatus
 const (
-	StackResourceDriftStatusInSync     StackResourceDriftStatus = "IN_SYNC"
-	StackResourceDriftStatusModified   StackResourceDriftStatus = "MODIFIED"
-	StackResourceDriftStatusDeleted    StackResourceDriftStatus = "DELETED"
-	StackResourceDriftStatusNotChecked StackResourceDriftStatus = "NOT_CHECKED"
-	StackResourceDriftStatusUnknown    StackResourceDriftStatus = "UNKNOWN"
+	StackResourceDriftStatusInSync      StackResourceDriftStatus = "IN_SYNC"
+	StackResourceDriftStatusModified    StackResourceDriftStatus = "MODIFIED"
+	StackResourceDriftStatusDeleted     StackResourceDriftStatus = "DELETED"
+	StackResourceDriftStatusNotChecked  StackResourceDriftStatus = "NOT_CHECKED"
+	StackResourceDriftStatusUnknown     StackResourceDriftStatus = "UNKNOWN"
+	StackResourceDriftStatusUnsupported StackResourceDriftStatus = "UNSUPPORTED"
 )
 
 // Values returns all known values for StackResourceDriftStatus. Note that this
@@ -1460,6 +1612,7 @@ func (StackResourceDriftStatus) Values() []StackResourceDriftStatus {
 		"DELETED",
 		"NOT_CHECKED",
 		"UNKNOWN",
+		"UNSUPPORTED",
 	}
 }
 
@@ -1745,6 +1898,25 @@ func (TypeTestsStatus) Values() []TypeTestsStatus {
 		"FAILED",
 		"IN_PROGRESS",
 		"NOT_TESTED",
+	}
+}
+
+type ValidationStatus string
+
+// Enum values for ValidationStatus
+const (
+	ValidationStatusFailed  ValidationStatus = "FAILED"
+	ValidationStatusSkipped ValidationStatus = "SKIPPED"
+)
+
+// Values returns all known values for ValidationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationStatus) Values() []ValidationStatus {
+	return []ValidationStatus{
+		"FAILED",
+		"SKIPPED",
 	}
 }
 

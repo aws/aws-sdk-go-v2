@@ -48124,6 +48124,22 @@ func awsRestjson1_deserializeDocumentContact(v **types.Contact, value interface{
 				sv.RelatedContactId = ptr.String(jtv)
 			}
 
+		case "RingStartTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RingStartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "RoutingCriteria":
 			if err := awsRestjson1_deserializeDocumentRoutingCriteria(&sv.RoutingCriteria, value); err != nil {
 				return err

@@ -29,6 +29,13 @@ import (
 //     service that the resource belongs to as well as permissions for adding tags. For
 //     more information, see the documentation for each service.
 //
+//   - When you use the [Amazon Web Services Resource Groups Tagging API]to update tags for Amazon Web Services CloudFormation
+//     stack sets, Amazon Web Services calls the [Amazon Web Services CloudFormation UpdateStack]UpdateStack operation. This
+//     operation may initiate additional resource property updates in addition to the
+//     desired tag updates. To avoid unexpected resource updates, Amazon Web Services
+//     recommends that you only apply or update tags to your CloudFormation stack sets
+//     using Amazon Web Services CloudFormation.
+//
 // Do not store personally identifiable information (PII) or other confidential or
 // sensitive information in tags. We use tags to provide you with billing and
 // administration services. Tags are not intended to be used for private or
@@ -41,10 +48,18 @@ import (
 // resource. For example, to tag an Amazon EC2 instance using the TagResources
 // operation, you must have both of the following permissions:
 //
-//   - tag:TagResource
+//   - tag:TagResources
 //
 //   - ec2:CreateTags
 //
+// In addition, some services might have specific requirements for tagging some
+// types of resources. For example, to tag an Amazon S3 bucket, you must also have
+// the s3:GetBucketTagging permission. If the expected minimum permissions don't
+// work, check the documentation for that service's tagging APIs for more
+// information.
+//
+// [Amazon Web Services CloudFormation UpdateStack]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html
+// [Amazon Web Services Resource Groups Tagging API]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
 // [Services that support the Resource Groups Tagging API]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
 // [Tag Naming and Usage Conventions]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
 func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, optFns ...func(*Options)) (*TagResourcesOutput, error) {

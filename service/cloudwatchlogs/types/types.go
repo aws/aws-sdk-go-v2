@@ -655,6 +655,18 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for destinations where scheduled query results are delivered,
+// such as S3 buckets or EventBridge event buses.
+type DestinationConfiguration struct {
+
+	// Configuration for delivering query results to an Amazon S3 bucket.
+	//
+	// This member is required.
+	S3Configuration *S3Configuration
+
+	noSmithyDocumentSerde
+}
+
 // The entity associated with the log events in a PutLogEvents call.
 type Entity struct {
 
@@ -2382,6 +2394,24 @@ type ResultField struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration details for delivering scheduled query results to an Amazon S3
+// bucket.
+type S3Configuration struct {
+
+	// The S3 URI where query results will be stored (e.g., s3://bucket-name/prefix/).
+	//
+	// This member is required.
+	DestinationIdentifier *string
+
+	// The ARN of the IAM role that CloudWatch Logs will assume to write results to
+	// the S3 bucket.
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains delivery configurations that apply only when the
 // delivery destination resource is an S3 bucket.
 type S3DeliveryConfiguration struct {
@@ -2398,6 +2428,66 @@ type S3DeliveryConfiguration struct {
 	//
 	// [DescribeConfigurationTemplates]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html
 	SuffixPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a destination where scheduled query results are processed and
+// delivered.
+type ScheduledQueryDestination struct {
+
+	// The destination identifier (S3 URI or EventBridge ARN).
+	DestinationIdentifier *string
+
+	// The type of destination (S3 or EVENTBRIDGE).
+	DestinationType ScheduledQueryDestinationType
+
+	// Error message if the destination processing failed.
+	ErrorMessage *string
+
+	// The processed identifier returned for the destination (S3 key or event ID).
+	ProcessedIdentifier *string
+
+	// The processing status for this destination (IN_PROGRESS, ERROR, FAILED, or
+	// COMPLETE).
+	Status ActionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a scheduled query, used in list operations.
+type ScheduledQuerySummary struct {
+
+	// The time when the scheduled query was created.
+	CreationTime *int64
+
+	// Configuration for destinations where the query results are delivered.
+	DestinationConfiguration *DestinationConfiguration
+
+	// The status of the last execution (Running, Complete, Failed, Timeout, or
+	// InvalidQuery).
+	LastExecutionStatus ExecutionStatus
+
+	// The time when the scheduled query was last executed.
+	LastTriggeredTime *int64
+
+	// The time when the scheduled query was last updated.
+	LastUpdatedTime *int64
+
+	// The name of the scheduled query.
+	Name *string
+
+	// The cron expression that defines when the scheduled query runs.
+	ScheduleExpression *string
+
+	// The ARN of the scheduled query.
+	ScheduledQueryArn *string
+
+	// The current state of the scheduled query (ENABLED or DISABLED).
+	State ScheduledQueryState
+
+	// The timezone in which the schedule expression is evaluated.
+	Timezone *string
 
 	noSmithyDocumentSerde
 }
@@ -2604,6 +2694,32 @@ type TransformedLogRecord struct {
 
 	// The log event message after being transformed.
 	TransformedEventMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A record of a scheduled query execution, including its status and destination
+// processing information.
+type TriggerHistoryRecord struct {
+
+	// The list of destinations where the scheduled query results were delivered for
+	// this execution. This includes S3 buckets and EventBridge targets configured for
+	// the scheduled query.
+	Destinations []ScheduledQueryDestination
+
+	// The error message if the scheduled query execution failed. This field is only
+	// populated when the execution status indicates a failure.
+	ErrorMessage *string
+
+	// The status of the query execution (SUCCEEDED, FAILED, TIMEOUT, or
+	// INVALID_QUERY).
+	ExecutionStatus ExecutionStatus
+
+	// The unique identifier for the query execution.
+	QueryId *string
+
+	// The time when the scheduled query was triggered, in Unix epoch time.
+	TriggeredTimestamp *int64
 
 	noSmithyDocumentSerde
 }

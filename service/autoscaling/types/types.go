@@ -883,6 +883,32 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains details about a collection of instances launched in the Auto Scaling
+//
+// group.
+type InstanceCollection struct {
+
+	//  The Availability Zone where the instances were launched.
+	AvailabilityZone *string
+
+	//  The Availability Zone ID where the instances in this collection were launched.
+	AvailabilityZoneId *string
+
+	//  A list of instance IDs for the successfully launched instances.
+	InstanceIds []string
+
+	//  The instance type of the launched instances.
+	InstanceType *string
+
+	//  The market type for the instances (On-Demand or Spot).
+	MarketType *string
+
+	//  The ID of the subnet where the instances were launched.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an instance maintenance policy.
 //
 // For more information, see [Set instance maintenance policy] in the Amazon EC2 Auto Scaling User Guide.
@@ -1633,6 +1659,35 @@ type LaunchConfiguration struct {
 	//
 	// [Instance metadata and user data]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 	UserData *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about errors encountered during instance launch attempts.
+type LaunchInstancesError struct {
+
+	//  The Availability Zone where the instance launch was attempted.
+	AvailabilityZone *string
+
+	//  The Availability Zone ID where the launch error occurred.
+	AvailabilityZoneId *string
+
+	//  The error code representing the type of error encountered (e.g.,
+	// InsufficientInstanceCapacity).
+	ErrorCode *string
+
+	//  A descriptive message providing details about the error encountered during the
+	// launch attempt.
+	ErrorMessage *string
+
+	//  The instance type that failed to launch.
+	InstanceType *string
+
+	//  The market type (On-Demand or Spot) that encountered the launch error.
+	MarketType *string
+
+	//  The subnet ID where the instance launch was attempted.
+	SubnetId *string
 
 	noSmithyDocumentSerde
 }

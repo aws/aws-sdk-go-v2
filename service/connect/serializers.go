@@ -21568,6 +21568,11 @@ func awsRestjson1_serializeOpDocumentStartOutboundVoiceContactInput(v *StartOutb
 		ok.String(*v.RelatedContactId)
 	}
 
+	if v.RingTimeoutInSeconds != nil {
+		ok := object.Key("RingTimeoutInSeconds")
+		ok.Integer(*v.RingTimeoutInSeconds)
+	}
+
 	if v.SourcePhoneNumber != nil {
 		ok := object.Key("SourcePhoneNumber")
 		ok.String(*v.SourcePhoneNumber)

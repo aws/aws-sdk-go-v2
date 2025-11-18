@@ -13,6 +13,7 @@
         "api_op_GetResources.go",
         "api_op_GetTagKeys.go",
         "api_op_GetTagValues.go",
+        "api_op_ListRequiredTags.go",
         "api_op_StartReportCreation.go",
         "api_op_TagResources.go",
         "api_op_UntagResources.go",

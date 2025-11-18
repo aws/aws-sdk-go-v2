@@ -128,6 +128,37 @@ func (e *WAFExpiredManagedRuleGroupVersionException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
+// The operation failed because the specified WAF feature isn't supported by the
+// CloudFront pricing plan associated with the web ACL.
+type WAFFeatureNotIncludedInPricingPlanException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	DisallowedFeatures []DisallowedFeature
+
+	noSmithyDocumentSerde
+}
+
+func (e *WAFFeatureNotIncludedInPricingPlanException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WAFFeatureNotIncludedInPricingPlanException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Your request is valid, but WAF couldn’t perform the operation because of a
 // system problem. Retry your request.
 type WAFInternalErrorException struct {

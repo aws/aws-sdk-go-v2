@@ -111,12 +111,13 @@ type GetMetricDataV2Input struct {
 	//   CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
 	//   contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
 	//   EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION | EVALUATION_SOURCE
-	//   | FEATURE | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID |
-	//   FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE |
-	//   FLOWS_RESOURCE_ID | FORM_VERSION | INITIATION_METHOD |
-	//   INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
-	//   PARENT_FLOWS_RESOURCE_ID | RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE |
-	//   ROUTING_STEP_EXPRESSION | QUEUE | Q_CONNECT_ENABLED |
+	//   | EVALUATOR_ID | FEATURE | FLOW_ACTION_ID | FLOW_TYPE |
+	//   FLOWS_MODULE_RESOURCE_ID | FLOWS_NEXT_RESOURCE_ID |
+	//   FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
+	//   FORM_VERSION | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
+	//   INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID |
+	//   RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
+	//   QUEUE | Q_CONNECT_ENABLED |
 	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
@@ -258,6 +259,13 @@ type GetMetricDataV2Input struct {
 	// UI name: [Average after contact work time]
 	//
 	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_AGENT_CONCURRENCY Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Average agent concurrency]
 	//
 	// AVG_AGENT_CONNECTING_TIME Unit: Seconds
 	//
@@ -1325,6 +1333,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts transferred out by agent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
 	// [Average agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-api-connecting-time
 	// [Maximum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-flow-time
+	// [Average agent concurrency]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-concurrency
 	// [Average contact duration]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-contact-duration
 	// [Non-adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-adherent-time
 	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
@@ -1420,9 +1429,9 @@ type GetMetricDataV2Input struct {
 	// CAMPAIGN_EXCLUDED_EVENT_TYPE | CAMPAIGN_EXECUTION_TIMESTAMP | CASE_TEMPLATE_ARN
 	// | CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
 	// DISCONNECT_REASON | EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION
-	// | EVALUATION_SOURCE | FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID |
-	// FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE | FORM_VERSION |
-	// INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
+	// | EVALUATION_SOURCE | EVALUATOR_ID | FLOWS_RESOURCE_ID |
+	// FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
+	// FORM_VERSION | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
 	// INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
 	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION
 	//

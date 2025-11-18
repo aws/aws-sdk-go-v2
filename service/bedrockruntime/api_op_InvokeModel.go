@@ -118,6 +118,9 @@ type InvokeModelInput struct {
 	// Model performance settings for the request.
 	PerformanceConfigLatency types.PerformanceConfigLatency
 
+	// Specifies the processing tier type used for serving the request.
+	ServiceTier types.ServiceTierType
+
 	// Specifies whether to enable or disable the Bedrock trace. If enabled, you can
 	// see the full Bedrock trace.
 	Trace types.Trace
@@ -143,6 +146,9 @@ type InvokeModelOutput struct {
 
 	// Model performance settings for the request.
 	PerformanceConfigLatency types.PerformanceConfigLatency
+
+	// Specifies the processing tier type used for serving the request.
+	ServiceTier types.ServiceTierType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -1,0 +1,8 @@
+{
+    "id": "0b691206-73cb-43ff-9159-601fc5b2f200",
+    "type": "feature",
+    "description": "This release adds the new LaunchInstances API, which can launch instances synchronously in an AutoScaling group. The API also returns instances info and launch error back immediately.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

@@ -65,6 +65,22 @@ type FailureInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Information that describes the required tags for a given resource type.
+type RequiredTag struct {
+
+	// Describes the CloudFormation resource type assigned the required tag keys.
+	CloudFormationResourceTypes []string
+
+	// These tag keys are marked as required in the report_required_tag_for block of
+	// the effective tag policy.
+	ReportingTagKeys []string
+
+	// Describes the resource type for the required tag keys.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of resource ARNs and the tags (keys and values) that are associated with
 // each.
 type ResourceTagMapping struct {

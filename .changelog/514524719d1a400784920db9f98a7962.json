@@ -1,0 +1,8 @@
+{
+    "id": "51452471-9d1a-4007-8492-0db9f98a7962",
+    "type": "feature",
+    "description": "AWS Site-to-Site VPN now supports VPN Concentrator, a new feature that enables customers to connect multiple low-bandwidth sites connections through a single attachment, simplifying multi-site connectivity for distributed enterprises.",
+    "modules": [
+        "service/ec2"
+    ]
+}

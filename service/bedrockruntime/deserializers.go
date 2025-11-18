@@ -411,6 +411,11 @@ func awsRestjson1_deserializeOpDocumentConverseOutput(v **ConverseOutput, value 
 				return err
 			}
 
+		case "serviceTier":
+			if err := awsRestjson1_deserializeDocumentServiceTier(&sv.ServiceTier, value); err != nil {
+				return err
+			}
+
 		case "stopReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1111,6 +1116,11 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeModelOutput(v *InvokeModelOutpu
 		v.PerformanceConfigLatency = types.PerformanceConfigLatency(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("X-Amzn-Bedrock-Service-Tier"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ServiceTier = types.ServiceTierType(headerValues[0])
+	}
+
 	return nil
 }
 func awsRestjson1_deserializeOpDocumentInvokeModelOutput(v *InvokeModelOutput, body io.ReadCloser, contentLength int64) error {
@@ -1271,6 +1281,11 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeModelWithResponseStreamOutput(v
 	if headerValues := response.Header.Values("X-Amzn-Bedrock-PerformanceConfig-Latency"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.PerformanceConfigLatency = types.PerformanceConfigLatency(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Amzn-Bedrock-Service-Tier"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ServiceTier = types.ServiceTierType(headerValues[0])
 	}
 
 	return nil
@@ -3107,6 +3122,11 @@ func awsRestjson1_deserializeDocumentConverseStreamMetadataEvent(v **types.Conve
 
 		case "performanceConfig":
 			if err := awsRestjson1_deserializeDocumentPerformanceConfiguration(&sv.PerformanceConfig, value); err != nil {
+				return err
+			}
+
+		case "serviceTier":
+			if err := awsRestjson1_deserializeDocumentServiceTier(&sv.ServiceTier, value); err != nil {
 				return err
 			}
 
@@ -6252,6 +6272,46 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceTier(v **types.ServiceTier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceTier
+	if *v == nil {
+		sv = &types.ServiceTier{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceTierType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ServiceTierType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

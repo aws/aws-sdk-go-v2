@@ -283,6 +283,10 @@ type UpdateStackInput struct {
 // The output for an UpdateStack action.
 type UpdateStackOutput struct {
 
+	// A unique identifier for this update operation that can be used to track the
+	// operation's progress and events.
+	OperationId *string
+
 	// Unique identifier of the stack.
 	StackId *string
 

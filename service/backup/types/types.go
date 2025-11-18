@@ -1996,6 +1996,36 @@ type ReportSetting struct {
 	noSmithyDocumentSerde
 }
 
+// This contains metadata about resource selection for tiering configurations.
+//
+// You can specify up to 5 different resource selections per tiering
+// configuration. Data moved to lower-cost tier remains there until deletion
+// (one-way transition).
+type ResourceSelection struct {
+
+	// The type of Amazon Web Services resource; for example, S3 for Amazon S3. For
+	// tiering configurations, this is currently limited to S3 .
+	//
+	// This member is required.
+	ResourceType *string
+
+	// An array of strings that either contains ARNs of the associated resources or
+	// contains a wildcard * to specify all resources. You can specify up to 100
+	// specific resources per tiering configuration.
+	//
+	// This member is required.
+	Resources []string
+
+	// The number of days after creation within a backup vault that an object can
+	// transition to the low cost warm storage tier. Must be a positive integer between
+	// 60 and 36500 days.
+	//
+	// This member is required.
+	TieringDownSettingsInDays *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a restore access backup vault.
 type RestoreAccessBackupVaultListMember struct {
 
@@ -2696,6 +2726,121 @@ type ScheduledPlanExecutionMember struct {
 	// The unique identifier of the backup rule that will execute at the scheduled
 	// time.
 	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a tiering configuration.
+type TieringConfiguration struct {
+
+	// The name of the backup vault where the tiering configuration applies. Use * to
+	// apply to all backup vaults.
+	//
+	// This member is required.
+	BackupVaultName *string
+
+	// An array of resource selection objects that specify which resources are
+	// included in the tiering configuration and their tiering settings.
+	//
+	// This member is required.
+	ResourceSelection []ResourceSelection
+
+	// The unique name of the tiering configuration. This cannot be changed after
+	// creation, and it must consist of only alphanumeric characters and underscores.
+	//
+	// This member is required.
+	TieringConfigurationName *string
+
+	// The date and time a tiering configuration was created, in Unix format and
+	// Coordinated Universal Time (UTC). The value of CreationTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087AM.
+	CreationTime *time.Time
+
+	// This is a unique string that identifies the request and allows failed requests
+	// to be retried without the risk of running the operation twice.
+	CreatorRequestId *string
+
+	// The date and time a tiering configuration was updated, in Unix format and
+	// Coordinated Universal Time (UTC). The value of LastUpdatedTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087AM.
+	LastUpdatedTime *time.Time
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the tiering
+	// configuration.
+	TieringConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a tiering configuration for create operations.
+type TieringConfigurationInputForCreate struct {
+
+	// The name of the backup vault where the tiering configuration applies. Use * to
+	// apply to all backup vaults.
+	//
+	// This member is required.
+	BackupVaultName *string
+
+	// An array of resource selection objects that specify which resources are
+	// included in the tiering configuration and their tiering settings.
+	//
+	// This member is required.
+	ResourceSelection []ResourceSelection
+
+	// The unique name of the tiering configuration. This cannot be changed after
+	// creation, and it must consist of only alphanumeric characters and underscores.
+	//
+	// This member is required.
+	TieringConfigurationName *string
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a tiering configuration for update operations.
+type TieringConfigurationInputForUpdate struct {
+
+	// The name of the backup vault where the tiering configuration applies. Use * to
+	// apply to all backup vaults.
+	//
+	// This member is required.
+	BackupVaultName *string
+
+	// An array of resource selection objects that specify which resources are
+	// included in the tiering configuration and their tiering settings.
+	//
+	// This member is required.
+	ResourceSelection []ResourceSelection
+
+	noSmithyDocumentSerde
+}
+
+// This contains metadata about a tiering configuration returned in a list.
+type TieringConfigurationsListMember struct {
+
+	// The name of the backup vault where the tiering configuration applies. Use * to
+	// apply to all backup vaults.
+	BackupVaultName *string
+
+	// The date and time a tiering configuration was created, in Unix format and
+	// Coordinated Universal Time (UTC). The value of CreationTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087AM.
+	CreationTime *time.Time
+
+	// The date and time a tiering configuration was updated, in Unix format and
+	// Coordinated Universal Time (UTC). The value of LastUpdatedTime is accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087AM.
+	LastUpdatedTime *time.Time
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the tiering
+	// configuration.
+	TieringConfigurationArn *string
+
+	// The unique name of the tiering configuration.
+	TieringConfigurationName *string
 
 	noSmithyDocumentSerde
 }

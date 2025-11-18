@@ -1247,6 +1247,9 @@ type Contact struct {
 	// [related]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html#relatedcontactid
 	RelatedContactId *string
 
+	// The timestamp when ringing started for a campaign call.
+	RingStartTimestamp *time.Time
+
 	// Latest routing criteria on the contact.
 	RoutingCriteria *RoutingCriteria
 

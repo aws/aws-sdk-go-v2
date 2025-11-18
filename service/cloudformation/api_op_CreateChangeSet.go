@@ -169,6 +169,17 @@ type CreateChangeSetInput struct {
 	// requests to ensure that CloudFormation successfully received them.
 	ClientToken *string
 
+	// Determines how CloudFormation handles configuration drift during deployment.
+	//
+	//   - REVERT_DRIFT – Creates a drift-aware change set that brings actual resource
+	//   states in line with template definitions. Provides a three-way comparison
+	//   between actual state, previous deployment state, and desired state.
+	//
+	// For more information, see [Using drift-aware change sets] in the CloudFormation User Guide.
+	//
+	// [Using drift-aware change sets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html
+	DeploymentMode types.DeploymentMode
+
 	// A description to help you identify this change set.
 	Description *string
 

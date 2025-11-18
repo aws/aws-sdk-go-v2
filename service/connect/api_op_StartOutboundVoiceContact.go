@@ -30,6 +30,10 @@ import (
 // TrafficType = CAMPAIGN , you must submit a service quota increase request to the
 // quota [Amazon Connect campaigns].
 //
+// For Preview dialing mode, only the Amazon Connect outbound campaigns service
+// principal is allowed to assume a role in your account and call this API with
+// OutboundStrategy.
+//
 // [Amazon Connect Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 // [Amazon Connect campaigns]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
@@ -128,6 +132,10 @@ type StartOutboundVoiceContactInput struct {
 	// are limited to the individual contact ID. There are no limits to the number of
 	// contacts that can be linked by using RelatedContactId .
 	RelatedContactId *string
+
+	// The maximum time the outbound call will wait for the destination to answer the
+	// call, in seconds
+	RingTimeoutInSeconds *int32
 
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.

@@ -1910,6 +1910,18 @@ func TestCheckSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateVpnConcentrator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpnConcentrator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVpnConcentrator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVpnConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpnConnection(context.Background(), nil, func(o *Options) {
@@ -2923,6 +2935,18 @@ func TestCheckSnapshot_DeleteVpcPeeringConnection(t *testing.T) {
 	_, err := svc.DeleteVpcPeeringConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVpcPeeringConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteVpnConcentrator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpnConcentrator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVpnConcentrator")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5167,6 +5191,18 @@ func TestCheckSnapshot_DescribeVpcs(t *testing.T) {
 	_, err := svc.DescribeVpcs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeVpcs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeVpnConcentrators(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpnConcentrators(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpnConcentrators")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10561,6 +10597,18 @@ func TestUpdateSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateVpnConcentrator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpnConcentrator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVpnConcentrator")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVpnConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpnConnection(context.Background(), nil, func(o *Options) {
@@ -11574,6 +11622,18 @@ func TestUpdateSnapshot_DeleteVpcPeeringConnection(t *testing.T) {
 	_, err := svc.DeleteVpcPeeringConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVpcPeeringConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteVpnConcentrator(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpnConcentrator(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVpnConcentrator")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13818,6 +13878,18 @@ func TestUpdateSnapshot_DescribeVpcs(t *testing.T) {
 	_, err := svc.DescribeVpcs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeVpcs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeVpnConcentrators(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpnConcentrators(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpnConcentrators")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

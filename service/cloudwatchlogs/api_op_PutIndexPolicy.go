@@ -35,6 +35,8 @@ import (
 // Standard log class. Default field indexes are automatically available for the
 // following fields:
 //
+//   - @logStream
+//
 //   - @aws.region
 //
 //   - @aws.account

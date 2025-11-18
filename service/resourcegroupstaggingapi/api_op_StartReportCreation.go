@@ -17,10 +17,22 @@ import (
 //
 // The generated report is saved to the following location:
 //
-//	s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv
+//	s3://amzn-s3-demo-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv
+//
+// For more information about evaluating resource compliance with tag policies,
+// including the required permissions, review [Permissions for evaluating organization-wide compliance]in the Tagging Amazon Web Services
+// Resources and Tag Editor user guide.
 //
 // You can call this operation only from the organization's management account and
 // from the us-east-1 Region.
+//
+// If the account associated with the identity used to call StartReportCreation is
+// different from the account that owns the Amazon S3 bucket, there must be a
+// bucket policy attached to the bucket to provide access. For more information,
+// review [Amazon S3 bucket policy for report storage]in the Tagging Amazon Web Services Resources and Tag Editor user guide.
+//
+// [Amazon S3 bucket policy for report storage]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy
+// [Permissions for evaluating organization-wide compliance]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-permissions-org
 func (c *Client) StartReportCreation(ctx context.Context, params *StartReportCreationInput, optFns ...func(*Options)) (*StartReportCreationOutput, error) {
 	if params == nil {
 		params = &StartReportCreationInput{}
@@ -40,10 +52,10 @@ type StartReportCreationInput struct {
 
 	// The name of the Amazon S3 bucket where the report will be stored; for example:
 	//
-	//     awsexamplebucket
+	//     amzn-s3-demo-bucket
 	//
 	// For more information on S3 bucket requirements, including an example bucket
-	// policy, see the example S3 bucket policy on this page.
+	// policy, see the example Amazon S3 bucket policy on this page.
 	//
 	// This member is required.
 	S3Bucket *string

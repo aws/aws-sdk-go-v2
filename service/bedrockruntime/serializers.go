@@ -276,6 +276,13 @@ func awsRestjson1_serializeOpDocumentConverseInput(v *ConverseInput, value smith
 		}
 	}
 
+	if v.ServiceTier != nil {
+		ok := object.Key("serviceTier")
+		if err := awsRestjson1_serializeDocumentServiceTier(v.ServiceTier, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.System != nil {
 		ok := object.Key("system")
 		if err := awsRestjson1_serializeDocumentSystemContentBlocks(v.System, ok); err != nil {
@@ -431,6 +438,13 @@ func awsRestjson1_serializeOpDocumentConverseStreamInput(v *ConverseStreamInput,
 	if v.RequestMetadata != nil {
 		ok := object.Key("requestMetadata")
 		if err := awsRestjson1_serializeDocumentRequestMetadata(v.RequestMetadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServiceTier != nil {
+		ok := object.Key("serviceTier")
+		if err := awsRestjson1_serializeDocumentServiceTier(v.ServiceTier, ok); err != nil {
 			return err
 		}
 	}
@@ -724,6 +738,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		encoder.SetHeader(locationName).String(string(v.PerformanceConfigLatency))
 	}
 
+	if len(v.ServiceTier) > 0 {
+		locationName := "X-Amzn-Bedrock-Service-Tier"
+		encoder.SetHeader(locationName).String(string(v.ServiceTier))
+	}
+
 	if len(v.Trace) > 0 {
 		locationName := "X-Amzn-Bedrock-Trace"
 		encoder.SetHeader(locationName).String(string(v.Trace))
@@ -835,6 +854,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 	if len(v.PerformanceConfigLatency) > 0 {
 		locationName := "X-Amzn-Bedrock-Performanceconfig-Latency"
 		encoder.SetHeader(locationName).String(string(v.PerformanceConfigLatency))
+	}
+
+	if len(v.ServiceTier) > 0 {
+		locationName := "X-Amzn-Bedrock-Service-Tier"
+		encoder.SetHeader(locationName).String(string(v.ServiceTier))
 	}
 
 	if len(v.Trace) > 0 {
@@ -1381,6 +1405,13 @@ func awsRestjson1_serializeDocumentConverseTokensRequest(v *types.ConverseTokens
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Messages != nil {
 		ok := object.Key("messages")
 		if err := awsRestjson1_serializeDocumentMessages(v.Messages, ok); err != nil {
@@ -1391,6 +1422,13 @@ func awsRestjson1_serializeDocumentConverseTokensRequest(v *types.ConverseTokens
 	if v.System != nil {
 		ok := object.Key("system")
 		if err := awsRestjson1_serializeDocumentSystemContentBlocks(v.System, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ToolConfig != nil {
+		ok := object.Key("toolConfig")
+		if err := awsRestjson1_serializeDocumentToolConfiguration(v.ToolConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -2103,6 +2141,18 @@ func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyj
 	if v.Uri != nil {
 		ok := object.Key("uri")
 		ok.String(*v.Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceTier(v *types.ServiceTier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

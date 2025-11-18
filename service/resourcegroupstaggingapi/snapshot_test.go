@@ -122,6 +122,18 @@ func TestCheckSnapshot_GetTagValues(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRequiredTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRequiredTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRequiredTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartReportCreation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartReportCreation(context.Background(), nil, func(o *Options) {
@@ -210,6 +222,18 @@ func TestUpdateSnapshot_GetTagValues(t *testing.T) {
 	_, err := svc.GetTagValues(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTagValues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRequiredTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRequiredTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRequiredTags")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -319,6 +319,29 @@ func (TargetCompressionType) Values() []TargetCompressionType {
 	}
 }
 
+type TopicState string
+
+// Enum values for TopicState
+const (
+	TopicStateCreating TopicState = "CREATING"
+	TopicStateUpdating TopicState = "UPDATING"
+	TopicStateDeleting TopicState = "DELETING"
+	TopicStateActive   TopicState = "ACTIVE"
+)
+
+// Values returns all known values for TopicState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicState) Values() []TopicState {
+	return []TopicState{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+	}
+}
+
 type UserIdentityType string
 
 // Enum values for UserIdentityType

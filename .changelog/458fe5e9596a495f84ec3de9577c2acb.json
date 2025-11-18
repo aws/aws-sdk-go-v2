@@ -1,0 +1,8 @@
+{
+    "id": "458fe5e9-596a-495f-84ec-3de9577c2acb",
+    "type": "feature",
+    "description": "Amazon Bedrock Runtime Service Tier Support Launch",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

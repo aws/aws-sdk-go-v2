@@ -1549,6 +1549,76 @@ func (m *awsAwsquery_serializeOpDescribeChangeSetHooks) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeEvents struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeEvents) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeEventsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeEvents")
+	body.Key("Version").String("2010-05-15")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeEventsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeGeneratedTemplate struct {
 }
 
@@ -6306,6 +6376,18 @@ func awsAwsquery_serializeDocumentDeploymentTargets(v *types.DeploymentTargets, 
 	return nil
 }
 
+func awsAwsquery_serializeDocumentEventFilter(v *types.EventFilter, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.FailedEvents != nil {
+		objectKey := object.Key("FailedEvents")
+		objectKey.Boolean(*v.FailedEvents)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentJazzLogicalResourceIds(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -7181,6 +7263,11 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 		objectKey.String(*v.ClientToken)
 	}
 
+	if len(v.DeploymentMode) > 0 {
+		objectKey := object.Key("DeploymentMode")
+		objectKey.String(string(v.DeploymentMode))
+	}
+
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
@@ -7838,6 +7925,40 @@ func awsAwsquery_serializeOpDocumentDescribeChangeSetInput(v *DescribeChangeSetI
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
+	}
+
+	if v.StackName != nil {
+		objectKey := object.Key("StackName")
+		objectKey.String(*v.StackName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeEventsInput(v *DescribeEventsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ChangeSetName != nil {
+		objectKey := object.Key("ChangeSetName")
+		objectKey.String(*v.ChangeSetName)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.Key("Filters")
+		if err := awsAwsquery_serializeDocumentEventFilter(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.OperationId != nil {
+		objectKey := object.Key("OperationId")
+		objectKey.String(*v.OperationId)
 	}
 
 	if v.StackName != nil {

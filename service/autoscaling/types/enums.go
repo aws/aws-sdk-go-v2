@@ -572,6 +572,25 @@ func (RefreshStrategy) Values() []RefreshStrategy {
 	}
 }
 
+type RetryStrategy string
+
+// Enum values for RetryStrategy
+const (
+	RetryStrategyRetryWithGroupConfiguration RetryStrategy = "retry-with-group-configuration"
+	RetryStrategyNone                        RetryStrategy = "none"
+)
+
+// Values returns all known values for RetryStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetryStrategy) Values() []RetryStrategy {
+	return []RetryStrategy{
+		"retry-with-group-configuration",
+		"none",
+	}
+}
+
 type ScaleInProtectedInstances string
 
 // Enum values for ScaleInProtectedInstances

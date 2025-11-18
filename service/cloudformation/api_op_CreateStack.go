@@ -272,6 +272,10 @@ type CreateStackInput struct {
 // The output for a CreateStack action.
 type CreateStackOutput struct {
 
+	// A unique identifier for this stack operation that can be used to track the
+	// operation's progress and events.
+	OperationId *string
+
 	// Unique identifier of the stack.
 	StackId *string
 

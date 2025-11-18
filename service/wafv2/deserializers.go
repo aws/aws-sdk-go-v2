@@ -119,6 +119,9 @@ func awsAwsjson11_deserializeOpErrorAssociateWebACL(response *smithyhttp.Respons
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("WAFFeatureNotIncludedInPricingPlanException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFFeatureNotIncludedInPricingPlanException(response, errorBody)
+
 	case strings.EqualFold("WAFInternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
 
@@ -5534,6 +5537,9 @@ func awsAwsjson11_deserializeOpErrorPutLoggingConfiguration(response *smithyhttp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("WAFFeatureNotIncludedInPricingPlanException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFFeatureNotIncludedInPricingPlanException(response, errorBody)
+
 	case strings.EqualFold("WAFInternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
 
@@ -6692,6 +6698,9 @@ func awsAwsjson11_deserializeOpErrorUpdateWebACL(response *smithyhttp.Response, 
 	case strings.EqualFold("WAFExpiredManagedRuleGroupVersionException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFExpiredManagedRuleGroupVersionException(response, errorBody)
 
+	case strings.EqualFold("WAFFeatureNotIncludedInPricingPlanException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFFeatureNotIncludedInPricingPlanException(response, errorBody)
+
 	case strings.EqualFold("WAFInternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
 
@@ -6854,6 +6863,41 @@ func awsAwsjson11_deserializeErrorWAFExpiredManagedRuleGroupVersionException(res
 
 	output := &types.WAFExpiredManagedRuleGroupVersionException{}
 	err := awsAwsjson11_deserializeDocumentWAFExpiredManagedRuleGroupVersionException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorWAFFeatureNotIncludedInPricingPlanException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.WAFFeatureNotIncludedInPricingPlanException{}
+	err := awsAwsjson11_deserializeDocumentWAFFeatureNotIncludedInPricingPlanException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -9459,6 +9503,89 @@ func awsAwsjson11_deserializeDocumentDefaultAction(v **types.DefaultAction, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDisallowedFeature(v **types.DisallowedFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DisallowedFeature
+	if *v == nil {
+		sv = &types.DisallowedFeature{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Feature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PricingPlanFeatureName to be of type string, got %T instead", value)
+				}
+				sv.Feature = ptr.String(jtv)
+			}
+
+		case "RequiredPricingPlan":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequiredPricingPlanName to be of type string, got %T instead", value)
+				}
+				sv.RequiredPricingPlan = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDisallowedFeatures(v *[]types.DisallowedFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DisallowedFeature
+	if *v == nil {
+		cv = []types.DisallowedFeature{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DisallowedFeature
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDisallowedFeature(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -16432,6 +16559,51 @@ func awsAwsjson11_deserializeDocumentWAFExpiredManagedRuleGroupVersionException(
 
 	for key, value := range shape {
 		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWAFFeatureNotIncludedInPricingPlanException(v **types.WAFFeatureNotIncludedInPricingPlanException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WAFFeatureNotIncludedInPricingPlanException
+	if *v == nil {
+		sv = &types.WAFFeatureNotIncludedInPricingPlanException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisallowedFeatures":
+			if err := awsAwsjson11_deserializeDocumentDisallowedFeatures(&sv.DisallowedFeatures, value); err != nil {
+				return err
+			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)

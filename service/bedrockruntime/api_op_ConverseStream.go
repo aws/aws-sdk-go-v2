@@ -164,6 +164,9 @@ type ConverseStreamInput struct {
 	// Key-value pairs that you can use to filter invocation logs.
 	RequestMetadata map[string]string
 
+	// Specifies the processing tier configuration used for serving the request.
+	ServiceTier *types.ServiceTier
+
 	// A prompt that provides instructions or context to the model about the task it
 	// should perform, or the persona it should adopt during the conversation.
 	System []types.SystemContentBlock

@@ -1161,6 +1161,19 @@ type DefaultAction struct {
 	noSmithyDocumentSerde
 }
 
+// A WAF feature that is not supported by the CloudFront pricing plan associated
+// with the web ACL.
+type DisallowedFeature struct {
+
+	// The name of the disallowed WAF feature.
+	Feature *string
+
+	// The name of the CloudFront pricing plan required to use the WAF feature.
+	RequiredPricingPlan *string
+
+	noSmithyDocumentSerde
+}
+
 // The name of the field in the request payload that contains your customer's
 // email.
 //

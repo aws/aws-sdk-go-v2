@@ -30,6 +30,7 @@
         "api_op_DescribeAccountLimits.go",
         "api_op_DescribeChangeSet.go",
         "api_op_DescribeChangeSetHooks.go",
+        "api_op_DescribeEvents.go",
         "api_op_DescribeGeneratedTemplate.go",
         "api_op_DescribeOrganizationsAccess.go",
         "api_op_DescribePublisher.go",

@@ -1,0 +1,8 @@
+{
+    "id": "af50ceeb-34b5-45d8-a940-595bdc885d49",
+    "type": "feature",
+    "description": "Added the AssociateDelegationRequest, GetDelegationRequest, AcceptDelegationRequest, RejectDelegatonRequest, ListDelegationRequests, UpdateDelegationRequest, SendDelegationToken and GetHumanReadableSummary APIs for the IAM temporary delegation feature.",
+    "modules": [
+        "service/iam"
+    ]
+}

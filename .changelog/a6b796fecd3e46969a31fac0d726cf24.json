@@ -1,0 +1,8 @@
+{
+    "id": "a6b796fe-cd3e-4696-9a31-fac0d726cf24",
+    "type": "feature",
+    "description": "Add support for new ListRequiredTags API used to retrieve the required tags specified in a customer's effective tag policy.",
+    "modules": [
+        "service/resourcegroupstaggingapi"
+    ]
+}

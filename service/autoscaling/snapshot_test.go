@@ -662,6 +662,18 @@ func TestCheckSnapshot_GetPredictiveScalingForecast(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_LaunchInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.LaunchInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "LaunchInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutLifecycleHook(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutLifecycleHook(context.Background(), nil, func(o *Options) {
@@ -1434,6 +1446,18 @@ func TestUpdateSnapshot_GetPredictiveScalingForecast(t *testing.T) {
 	_, err := svc.GetPredictiveScalingForecast(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPredictiveScalingForecast")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_LaunchInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.LaunchInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "LaunchInstances")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
