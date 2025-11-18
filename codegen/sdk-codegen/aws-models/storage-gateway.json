@@ -6798,7 +6798,7 @@
                     "min": 7,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$"
+                "smithy.api#pattern": "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$"
             }
         },
         "com.amazonaws.storagegateway#LastSoftwareUpdate": {
@@ -8651,7 +8651,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):iam::([0-9]+):role/(\\S+)$"
+                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):iam::([0-9]+):role/(\\S+)$"
             }
         },
         "com.amazonaws.storagegateway#SMBFileShareInfo": {
@@ -10879,7 +10879,7 @@
                     "min": 50,
                     "max": 500
                 },
-                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$"
+                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$"
             }
         },
         "com.amazonaws.storagegateway#TapeARNs": {
@@ -12487,7 +12487,7 @@
                     "min": 50,
                     "max": 500
                 },
-                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:gateway\\/(.+)\\/volume\\/vol-(\\S+)$"
+                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*|-eusc)):storagegateway:[a-z\\-0-9]+:[0-9]+:gateway\\/(.+)\\/volume\\/vol-(\\S+)$"
             }
         },
         "com.amazonaws.storagegateway#VolumeARNs": {

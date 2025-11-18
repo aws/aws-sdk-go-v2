@@ -3263,6 +3263,214 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#DescribeTopic": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DescribeTopicRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DescribeTopicResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns topic details of this topic on a MSK cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/topics/{TopicName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DescribeTopicPartitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DescribeTopicPartitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DescribeTopicPartitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns partition details of this topic on a MSK cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/topics/{TopicName}/partitions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Partitions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kafka#DescribeTopicPartitionsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kafka topic name that uniquely identifies the topic.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeTopicPartitionsResponse": {
+            "type": "structure",
+            "members": {
+                "Partitions": {
+                    "target": "com.amazonaws.kafka#__listOfTopicPartitionInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of partition information for the topic.</p>",
+                        "smithy.api#jsonName": "partitions"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of a DescribeTopicPartitions operation is truncated, the call returns NextToken in the response. \n               To get another batch of configurations, provide this token in your next request.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeTopicRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kafka topic name that uniquely identifies the topic.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeTopicResponse": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>",
+                        "smithy.api#jsonName": "topicArn"
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kafka topic name of the topic.</p>",
+                        "smithy.api#jsonName": "topicName"
+                    }
+                },
+                "ReplicationFactor": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication factor of the topic.</p>",
+                        "smithy.api#jsonName": "replicationFactor"
+                    }
+                },
+                "PartitionCount": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition count of the topic.</p>",
+                        "smithy.api#jsonName": "partitionCount"
+                    }
+                },
+                "Configs": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Topic configurations encoded as a Base64 string.</p>",
+                        "smithy.api#jsonName": "configs"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kafka#TopicState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the topic.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#DescribeVpcConnection": {
             "type": "operation",
             "input": {
@@ -3969,6 +4177,12 @@
                     "target": "com.amazonaws.kafka#DescribeReplicator"
                 },
                 {
+                    "target": "com.amazonaws.kafka#DescribeTopic"
+                },
+                {
+                    "target": "com.amazonaws.kafka#DescribeTopicPartitions"
+                },
+                {
                     "target": "com.amazonaws.kafka#DescribeVpcConnection"
                 },
                 {
@@ -4015,6 +4229,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ListTopics"
                 },
                 {
                     "target": "com.amazonaws.kafka#ListVpcConnections"
@@ -6196,6 +6413,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#ListTopics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#ListTopicsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#ListTopicsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List topics in a MSK cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/topics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Topics",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kafka#ListTopicsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "TopicNameFilter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns topics starting with given name.</p>",
+                        "smithy.api#httpQuery": "topicNameFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#ListTopicsResponse": {
+            "type": "structure",
+            "members": {
+                "Topics": {
+                    "target": "com.amazonaws.kafka#__listOfTopicInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List containing topics info.</p>",
+                        "smithy.api#jsonName": "topics"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paginated results marker. When the result of a ListTopics operation is truncated, the call returns NextToken in the response. \n               To get another batch of configurations, provide this token in your next request.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#ListVpcConnections": {
             "type": "operation",
             "input": {
@@ -7782,6 +8098,85 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.kafka#TopicInfo": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>",
+                        "smithy.api#jsonName": "topicArn"
+                    }
+                },
+                "TopicName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name for a topic.</p>",
+                        "smithy.api#jsonName": "topicName"
+                    }
+                },
+                "ReplicationFactor": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication factor for a topic.</p>",
+                        "smithy.api#jsonName": "replicationFactor"
+                    }
+                },
+                "PartitionCount": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Partition count for a topic.</p>",
+                        "smithy.api#jsonName": "partitionCount"
+                    }
+                },
+                "OutOfSyncReplicaCount": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of out-of-sync replicas for a topic.</p>",
+                        "smithy.api#jsonName": "outOfSyncReplicaCount"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Includes identification info about the topic.</p>"
+            }
+        },
+        "com.amazonaws.kafka#TopicPartitionInfo": {
+            "type": "structure",
+            "members": {
+                "Partition": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition ID.</p>",
+                        "smithy.api#jsonName": "partition"
+                    }
+                },
+                "Leader": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The leader broker ID for the partition.</p>",
+                        "smithy.api#jsonName": "leader"
+                    }
+                },
+                "Replicas": {
+                    "target": "com.amazonaws.kafka#__listOf__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of replica broker IDs for the partition.</p>",
+                        "smithy.api#jsonName": "replicas"
+                    }
+                },
+                "Isr": {
+                    "target": "com.amazonaws.kafka#__listOf__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of in-sync replica broker IDs for the partition.</p>",
+                        "smithy.api#jsonName": "isr"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a topic partition.</p>"
+            }
+        },
         "com.amazonaws.kafka#TopicReplication": {
             "type": "structure",
             "members": {
@@ -7892,6 +8287,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for updating the topic replication of a replicator.</p>"
+            }
+        },
+        "com.amazonaws.kafka#TopicState": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a topic request.</p>"
             }
         },
         "com.amazonaws.kafka#Unauthenticated": {
@@ -9736,6 +10163,18 @@
                 "target": "com.amazonaws.kafka#ReplicatorSummary"
             }
         },
+        "com.amazonaws.kafka#__listOfTopicInfo": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#TopicInfo"
+            }
+        },
+        "com.amazonaws.kafka#__listOfTopicPartitionInfo": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#TopicPartitionInfo"
+            }
+        },
         "com.amazonaws.kafka#__listOfUnprocessedScramSecret": {
             "type": "list",
             "member": {
@@ -9758,6 +10197,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#__double"
+            }
+        },
+        "com.amazonaws.kafka#__listOf__integer": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#__integer"
             }
         },
         "com.amazonaws.kafka#__listOf__string": {

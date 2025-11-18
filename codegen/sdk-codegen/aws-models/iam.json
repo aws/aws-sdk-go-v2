@@ -34,6 +34,9 @@
             "version": "2010-05-08",
             "operations": [
                 {
+                    "target": "com.amazonaws.iam#AcceptDelegationRequest"
+                },
+                {
                     "target": "com.amazonaws.iam#AddClientIDToOpenIDConnectProvider"
                 },
                 {
@@ -41,6 +44,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#AddUserToGroup"
+                },
+                {
+                    "target": "com.amazonaws.iam#AssociateDelegationRequest"
                 },
                 {
                     "target": "com.amazonaws.iam#AttachGroupPolicy"
@@ -226,10 +232,16 @@
                     "target": "com.amazonaws.iam#GetCredentialReport"
                 },
                 {
+                    "target": "com.amazonaws.iam#GetDelegationRequest"
+                },
+                {
                     "target": "com.amazonaws.iam#GetGroup"
                 },
                 {
                     "target": "com.amazonaws.iam#GetGroupPolicy"
+                },
+                {
+                    "target": "com.amazonaws.iam#GetHumanReadableSummary"
                 },
                 {
                     "target": "com.amazonaws.iam#GetInstanceProfile"
@@ -296,6 +308,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#ListAttachedUserPolicies"
+                },
+                {
+                    "target": "com.amazonaws.iam#ListDelegationRequests"
                 },
                 {
                     "target": "com.amazonaws.iam#ListEntitiesForPolicy"
@@ -403,6 +418,9 @@
                     "target": "com.amazonaws.iam#PutUserPolicy"
                 },
                 {
+                    "target": "com.amazonaws.iam#RejectDelegationRequest"
+                },
+                {
                     "target": "com.amazonaws.iam#RemoveClientIDFromOpenIDConnectProvider"
                 },
                 {
@@ -416,6 +434,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#ResyncMFADevice"
+                },
+                {
+                    "target": "com.amazonaws.iam#SendDelegationToken"
                 },
                 {
                     "target": "com.amazonaws.iam#SetDefaultPolicyVersion"
@@ -485,6 +506,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#UpdateAssumeRolePolicy"
+                },
+                {
+                    "target": "com.amazonaws.iam#UpdateDelegationRequest"
                 },
                 {
                     "target": "com.amazonaws.iam#UpdateGroup"
@@ -2176,6 +2200,44 @@
                 }
             }
         },
+        "com.amazonaws.iam#AcceptDelegationRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#AcceptDelegationRequestRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Accepts a delegation request, granting the requested temporary access.</p>\n         <p>Once the delegation request is accepted, it is eligible to send the exchange token to the partner.\n            The <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html\">SendDelegationToken</a>\n             API has to be explicitly called to send the delegation token.\n        </p>\n         <p>At the time of acceptance, IAM records the details and the state of the identity that called this API.\n            This is the identity that gets mapped to the delegated credential.\n        </p>\n         <p>An accepted request may be rejected before the exchange token is sent to the partner.</p>"
+            }
+        },
+        "com.amazonaws.iam#AcceptDelegationRequestRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the delegation request to accept.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.iam#AccessAdvisorUsageGranularityType": {
             "type": "enum",
             "members": {
@@ -2556,6 +2618,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iam#arnType"
+            }
+        },
+        "com.amazonaws.iam#AssociateDelegationRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#AssociateDelegationRequestRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a delegation request with the current identity.</p>\n         <p>If the partner that created the delegation request has specified the owner account during creation,\n            only an identity from that owner account can call the <code>AssociateDelegationRequest</code> API for\n            the specified delegation request. Once the <code>AssociateDelegationRequest</code> API call is successful,\n            the ARN of the current calling identity will be stored as the\n            <code>ownerId</code>\n            of the request.\n        </p>\n         <p>If the partner that created the delegation request has not specified the owner account during creation,\n            any caller from any account can call the <code>AssociateDelegationRequest</code> API for\n            the delegation request. Once this API call is successful, the ARN of the current calling identity will be stored as the\n            <code>ownerId</code>\n            and the Amazon Web Services account ID of the current calling identity will be stored as the\n            <code>ownerAccount</code>\n            of the request.\n        </p>\n         <p>\n            For more details, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions\">\n                Managing Permissions for Delegation Requests</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#AssociateDelegationRequestRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the delegation request to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iam#AttachGroupPolicy": {
@@ -3199,7 +3302,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is currently unavailable for general use.</p>"
+                "smithy.api#documentation": "<p>Creates an IAM delegation request for temporary access delegation.</p>\n         <p>This API is not available for general use. In order to use this API, a caller first need to\n            go through an onboarding process described in the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html\">partner onboarding documentation</a>.\n        </p>"
             }
         },
         "com.amazonaws.iam#CreateDelegationRequestRequest": {
@@ -3208,53 +3311,53 @@
                 "OwnerAccountId": {
                     "target": "com.amazonaws.iam#accountIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID this delegation request is targeted to.</p>\n         <p>If the account ID is not known, this parameter can be omitted, resulting in a request that can be associated by\n      any account. If the account ID passed, then the created delegation request can only be associated with an\n      identity of that target account.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.iam#delegationRequestDescriptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>A description of the delegation request.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Permissions": {
                     "target": "com.amazonaws.iam#DelegationPermission",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The permissions to be delegated in this delegation request.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RequestMessage": {
                     "target": "com.amazonaws.iam#requestMessageType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A message explaining the reason for the delegation request.</p>\n         <p>Requesters can utilize this field to add a custom note to the delegation request. This field is different from the\n      description such that this is to be utilized for a custom messaging on a case-by-case basis.</p>\n         <p>For example, if the current delegation request is in response to a previous request being rejected, this explanation\n         can be added to the request via this field.</p>"
                     }
                 },
                 "RequestorWorkflowId": {
                     "target": "com.amazonaws.iam#requestorWorkflowIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The workflow ID associated with the requestor.</p>\n         <p>This is the unique identifier on the partner side that  can be used to track the progress of the request.</p>\n         <p>IAM maintains a uniqueness check on this workflow id for each request - if a workflow id for an existing request\n         is passed, this API call will fail.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RedirectUrl": {
                     "target": "com.amazonaws.iam#redirectUrlType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The URL to redirect to after the delegation request is processed.</p>\n         <p>This URL is used by the IAM console to show a link to the customer to re-load the partner workflow.</p>"
                     }
                 },
                 "NotificationChannel": {
                     "target": "com.amazonaws.iam#notificationChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The notification channel for updates about the delegation request.</p>\n         <p>At this time,only SNS topic ARNs are accepted for notification. This topic ARN must have a resource policy granting\n         <code>SNS:Publish</code> permission to the IAM service principal (<code>iam.amazonaws.com</code>). See\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html\">partner onboarding documentation</a> for more details.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SessionDuration": {
                     "target": "com.amazonaws.iam#sessionDurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The duration for which the delegated session should remain active, in seconds.</p>\n         <p>The active time window for the session starts when the customer calls the\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html\">SendDelegationToken</a> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3262,7 +3365,7 @@
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Specifies whether the delegation token should only be sent by the owner.</p>\n         <p>This flag prevents any party other than the owner from calling <code>SendDelegationToken</code> API for this delegation request.\n         This behavior becomes useful when the delegation request owner needs to be present for subsequent partner interactions, but the delegation request was sent\n         to a more privileged user for approval due to the owner lacking sufficient delegation permissions.\n      </p>"
                     }
                 }
             },
@@ -3276,13 +3379,13 @@
                 "ConsoleDeepLink": {
                     "target": "com.amazonaws.iam#consoleDeepLinkType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A deep link URL to the Amazon Web Services Management Console for managing the delegation request.</p>\n         <p>For a console based workflow, partners should redirect the customer to this URL.\n         If the customer is not logged in to any Amazon Web Services account, the Amazon Web Services workflow will\n      automatically direct the customer to log in and then display the delegation request approval page.</p>"
                     }
                 },
                 "DelegationRequestId": {
                     "target": "com.amazonaws.iam#delegationRequestIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the created delegation request.</p>"
                     }
                 }
             },
@@ -4434,17 +4537,137 @@
             "type": "structure",
             "members": {
                 "PolicyTemplateArn": {
-                    "target": "com.amazonaws.iam#arnType"
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This ARN maps to a pre-registered policy content for this partner.\n         See the <a href=\"\">partner onboarding documentation</a> to understand how to create a delegation template.</p>"
+                    }
                 },
                 "Parameters": {
                     "target": "com.amazonaws.iam#policyParameterListType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A list of policy parameters that define the scope and constraints of the delegated permissions.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Contains information about the permissions being delegated in a delegation request.</p>"
+            }
+        },
+        "com.amazonaws.iam#DelegationRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the delegation request.</p>"
+                    }
+                },
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.iam#accountIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services account ID of the owner of the delegation request.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iam#delegationRequestDescriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the delegation request. This is a message that is provided by the Amazon Web Services\n         partner that filed the delegation request.</p>"
+                    }
+                },
+                "RequestMessage": {
+                    "target": "com.amazonaws.iam#requestMessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom message that is added to the delegation request by the partner.</p>\n         <p>This element is different from the <code>Description</code> element such that this is a\n      request specific message injected by the partner. The <code>Description</code> is typically\n         a generic explanation of what the delegation request is targeted to do.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.iam#DelegationPermission"
+                },
+                "PermissionPolicy": {
+                    "target": "com.amazonaws.iam#permissionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>JSON content of the associated permission policy of this delegation request.</p>"
+                    }
+                },
+                "RolePermissionRestrictionArns": {
+                    "target": "com.amazonaws.iam#rolePermissionRestrictionArnListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>PermissionPolicy</code> includes role creation permissions, this element will\n      include the list of permissions boundary policies associated with the role creation.\n      See <a href=\"IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM entities</a>\n         for more details about IAM permission boundaries.\n      </p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.iam#ownerIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the owner of this delegation request.</p>"
+                    }
+                },
+                "ApproverId": {
+                    "target": "com.amazonaws.iam#arnType"
+                },
+                "State": {
+                    "target": "com.amazonaws.iam#stateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of this delegation request.</p>\n         <p>See the <a href=\"IAM/latest/UserGuide/temporary-delegation-building-integration.html\">Understanding the Request Lifecycle</a> for an explanation of how these\n      states are transitioned.</p>"
+                    }
+                },
+                "RequestorId": {
+                    "target": "com.amazonaws.iam#accountIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identity of the requestor of this delegation request. This will be an Amazon Web Services account ID.</p>"
+                    }
+                },
+                "RequestorName": {
+                    "target": "com.amazonaws.iam#requestorNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name of the requestor.</p>"
+                    }
+                },
+                "CreateDate": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creation date (timestamp) of this delegation request.</p>"
+                    }
+                },
+                "SessionDuration": {
+                    "target": "com.amazonaws.iam#sessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life-time of the requested session credential.</p>"
+                    }
+                },
+                "RedirectUrl": {
+                    "target": "com.amazonaws.iam#redirectUrlType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL to be redirected to once the delegation request is approved. Partners provide this URL when\n      creating the delegation request.</p>"
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.iam#notesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notes added to this delegation request, if this request was updated via the\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateDelegationRequest.html\">UpdateDelegationRequest</a>\n      API.</p>"
+                    }
+                },
+                "RejectionReason": {
+                    "target": "com.amazonaws.iam#notesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reasons for rejecting this delegation request, if this request was rejected. See also\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_RejectDelegationRequest.html\">RejectDelegationRequest</a>\n         API documentation.\n      </p>"
+                    }
+                },
+                "OnlySendByOwner": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A flag indicating whether the\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html\">SendDelegationToken</a>\n      must be called by the owner of this delegation request. This is set by the requesting partner.</p>"
+                    }
+                },
+                "UpdatedTime": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last updated timestamp of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a delegation request, including its status, permissions, and associated metadata.</p>"
             }
         },
         "com.amazonaws.iam#DeleteAccessKey": {
@@ -6441,7 +6664,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a report for service last accessed data for Organizations. You can generate a\n            report for any entities (organization root, organizational unit, or account) or policies\n            in your organization.</p>\n         <p>To call this operation, you must be signed in using your Organizations management account\n            credentials. You can use your long-term IAM user or root user credentials, or temporary\n            credentials from assuming an IAM role. SCPs must be enabled for your organization\n            root. You must have the required IAM and Organizations permissions. For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Refining permissions using service last accessed data</a> in the\n                <i>IAM User Guide</i>.</p>\n         <p>You can generate a service last accessed data report for entities by specifying only\n            the entity's path. This data includes a list of services that are allowed by any service\n            control policies (SCPs) that apply to the entity.</p>\n         <p>You can generate a service last accessed data report for a policy by specifying an\n            entity's path and an optional Organizations policy ID. This data includes a list of services that\n            are allowed by the specified SCP.</p>\n         <p>For each service in both report types, the data includes the most recent account\n            activity that the policy allows to account principals in the entity or the entity's\n            children. For important information about the data, reporting period, permissions\n            required, troubleshooting, and supported Regions see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Reducing permissions using\n                service last accessed data</a> in the\n            <i>IAM User Guide</i>.</p>\n         <important>\n            <p>The data includes all attempts to access Amazon Web Services, not just the successful ones. This\n                includes all attempts that were made using the Amazon Web Services Management Console, the Amazon Web Services API through any\n                of the SDKs, or any of the command line tools. An unexpected entry in the service\n                last accessed data does not mean that an account has been compromised, because the\n                request might have been denied. Refer to your CloudTrail logs as the authoritative\n                source for information about all API calls and whether they were successful or\n                denied access. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html\">Logging IAM events with\n                    CloudTrail</a> in the <i>IAM User Guide</i>.</p>\n         </important>\n         <p>This operation returns a <code>JobId</code>. Use this parameter in the <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html\">GetOrganizationsAccessReport</a>\n            </code> operation to check the status of\n            the report generation. To check the status of this request, use the <code>JobId</code>\n            parameter in the <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html\">GetOrganizationsAccessReport</a>\n            </code> operation and test the\n                <code>JobStatus</code> response parameter. When the job is complete, you can\n            retrieve the report.</p>\n         <p>To generate a service last accessed data report for entities, specify an entity path\n            without specifying the optional Organizations policy ID. The type of entity that you specify\n            determines the data returned in the report.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Root</b> – When you specify the\n                    organizations root as the entity, the resulting report lists all of the services\n                    allowed by SCPs that are attached to your root. For each service, the report\n                    includes data for all accounts in your organization except the\n                    management account, because the management account is not limited by SCPs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OU</b> – When you specify an\n                    organizational unit (OU) as the entity, the resulting report lists all of the\n                    services allowed by SCPs that are attached to the OU and its parents. For each\n                    service, the report includes data for all accounts in the OU or its children.\n                    This data excludes the management account, because the management account is not\n                    limited by SCPs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>management account</b> – When you specify the\n                    management account, the resulting report lists all Amazon Web Services services, because the\n                    management account is not limited by SCPs. For each service, the report includes\n                    data for only the management account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Account</b> – When you specify another\n                    account as the entity, the resulting report lists all of the services allowed by\n                    SCPs that are attached to the account and its parents. For each service, the\n                    report includes data for only the specified account.</p>\n            </li>\n         </ul>\n         <p>To generate a service last accessed data report for policies, specify an entity path\n            and the optional Organizations policy ID. The type of entity that you specify determines the data\n            returned for each service.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Root</b> – When you specify the root\n                    entity and a policy ID, the resulting report lists all of the services that are\n                    allowed by the specified SCP. For each service, the report includes data for all\n                    accounts in your organization to which the SCP applies. This data excludes the\n                    management account, because the management account is not limited by SCPs. If the\n                    SCP is not attached to any entities in the organization, then the report will\n                    return a list of services with no data.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OU</b> – When you specify an OU entity and\n                    a policy ID, the resulting report lists all of the services that are allowed by\n                    the specified SCP. For each service, the report includes data for all accounts\n                    in the OU or its children to which the SCP applies. This means that other\n                    accounts outside the OU that are affected by the SCP might not be included in\n                    the data. This data excludes the management account, because the\n                    management account is not limited by SCPs. If the SCP is not attached to the OU\n                    or one of its children, the report will return a list of services with no\n                    data.</p>\n            </li>\n            <li>\n               <p>\n                  <b>management account</b> – When you specify the\n                    management account, the resulting report lists all Amazon Web Services services, because the\n                    management account is not limited by SCPs. If you specify a policy ID in the CLI\n                    or API, the policy is ignored. For each service, the report includes data for\n                    only the management account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Account</b> – When you specify another\n                    account entity and a policy ID, the resulting report lists all of the services\n                    that are allowed by the specified SCP. For each service, the report includes\n                    data for only the specified account. This means that other accounts in the\n                    organization that are affected by the SCP might not be included in the data. If\n                    the SCP is not attached to the account, the report will return a list of\n                    services with no data.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Service last accessed data does not use other policy types when determining\n                whether a principal could access a service. These other policy types include\n                identity-based policies, resource-based policies, access control lists, IAM\n                permissions boundaries, and STS assume role policies. It only applies SCP logic.\n                For more about the evaluation of policy types, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics\">Evaluating policies</a> in the\n                <i>IAM User Guide</i>.</p>\n         </note>\n         <p>For more information about service last accessed data, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Reducing policy scope by\n                viewing user activity</a> in the <i>IAM User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Generates a report for service last accessed data for Organizations. You can generate a\n            report for any entities (organization root, organizational unit, or account) or policies\n            in your organization.</p>\n         <p>To call this operation, you must be signed in using your Organizations management account\n            credentials. You can use your long-term IAM user or root user credentials, or temporary\n            credentials from assuming an IAM role. SCPs must be enabled for your organization\n            root. You must have the required IAM and Organizations permissions. For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Refining permissions using service last accessed data</a> in the\n                <i>IAM User Guide</i>.</p>\n         <p>You can generate a service last accessed data report for entities by specifying only\n            the entity's path. This data includes a list of services that are allowed by any service\n            control policies (SCPs) that apply to the entity.</p>\n         <p>You can generate a service last accessed data report for a policy by specifying an\n            entity's path and an optional Organizations policy ID. This data includes a list of services that\n            are allowed by the specified SCP.</p>\n         <p>For each service in both report types, the data includes the most recent account\n            activity that the policy allows to account principals in the entity or the entity's\n            children. For important information about the data, reporting period, permissions\n            required, troubleshooting, and supported Regions see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Reducing permissions using\n                service last accessed data</a> in the\n            <i>IAM User Guide</i>.</p>\n         <important>\n            <p>The data includes all attempts to access Amazon Web Services, not just the successful ones. This\n                includes all attempts that were made using the Amazon Web Services Management Console, the Amazon Web Services API through any\n                of the SDKs, or any of the command line tools. An unexpected entry in the service\n                last accessed data does not mean that an account has been compromised, because the\n                request might have been denied. Refer to your CloudTrail logs as the authoritative\n                source for information about all API calls and whether they were successful or\n                denied access. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html\">Logging IAM events with\n                    CloudTrail</a> in the <i>IAM User Guide</i>.</p>\n         </important>\n         <p>This operation returns a <code>JobId</code>. Use this parameter in the <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html\">GetOrganizationsAccessReport</a>\n            </code> operation to check the status of\n            the report generation. To check the status of this request, use the <code>JobId</code>\n            parameter in the <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOrganizationsAccessReport.html\">GetOrganizationsAccessReport</a>\n            </code> operation and test the\n                <code>JobStatus</code> response parameter. When the job is complete, you can\n            retrieve the report.</p>\n         <p>To generate a service last accessed data report for entities, specify an entity path\n            without specifying the optional Organizations policy ID. The type of entity that you specify\n            determines the data returned in the report.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Root</b> – When you specify the\n                    organizations root as the entity, the resulting report lists all of the services\n                    allowed by SCPs that are attached to your root. For each service, the report\n                    includes data for all accounts in your organization except the\n                    management account, because the management account is not limited by SCPs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OU</b> – When you specify an\n                    organizational unit (OU) as the entity, the resulting report lists all of the\n                    services allowed by SCPs that are attached to the OU and its parents. For each\n                    service, the report includes data for all accounts in the OU or its children.\n                    This data excludes the management account, because the management account is not\n                    limited by SCPs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>management account</b> – When you specify the\n                    management account, the resulting report lists all Amazon Web Services services, because the\n                    management account is not limited by SCPs. For each service, the report includes\n                    data for only the management account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Account</b> – When you specify another\n                    account as the entity, the resulting report lists all of the services allowed by\n                    SCPs that are attached to the account and its parents. For each service, the\n                    report includes data for only the specified account.</p>\n            </li>\n         </ul>\n         <p>To generate a service last accessed data report for policies, specify an entity path\n            and the optional Organizations policy ID. The type of entity that you specify determines the data\n            returned for each service.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Root</b> – When you specify the root\n                    entity and a policy ID, the resulting report lists all of the services that are\n                    allowed by the specified SCP. For each service, the report includes data for all\n                    accounts in your organization to which the SCP applies. This data excludes the\n                    management account, because the management account is not limited by SCPs. If the\n                    SCP is not attached to any entities in the organization, then the report will\n                    return a list of services with no data.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OU</b> – When you specify an OU entity and\n                    a policy ID, the resulting report lists all of the services that are allowed by\n                    the specified SCP. For each service, the report includes data for all accounts\n                    in the OU or its children to which the SCP applies. This means that other\n                    accounts outside the OU that are affected by the SCP might not be included in\n                    the data. This data excludes the management account, because the\n                    management account is not limited by SCPs. If the SCP is not attached to the OU\n                    or one of its children, the report will return a list of services with no\n                    data.</p>\n            </li>\n            <li>\n               <p>\n                  <b>management account</b> – When you specify the\n                    management account, the resulting report lists all Amazon Web Services services, because the\n                    management account is not limited by SCPs. If you specify a policy ID in the CLI\n                    or API, the policy is ignored. For each service, the report includes data for\n                    only the management account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Account</b> – When you specify another\n                    account entity and a policy ID, the resulting report lists all of the services\n                    that are allowed by the specified SCP. For each service, the report includes\n                    data for only the specified account. This means that other accounts in the\n                    organization that are affected by the SCP might not be included in the data. If\n                    the SCP is not attached to the account, the report will return a list of\n                    services with no data.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Service last accessed data does not use other policy types when determining\n                whether a principal could access a service. These other policy types include\n                identity-based policies, resource-based policies, access control lists, IAM\n                permissions boundaries, and STS assume role policies. It only applies SCP logic.\n                For more about the evaluation of policy types, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics\">Evaluating policies</a> in the\n                <i>IAM User Guide</i>.</p>\n         </note>\n         <p>For more information about service last accessed data, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Reducing policy scope by\n                viewing user activity</a> in the <i>IAM User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To generate a service last accessed data report for an organizational unit",
@@ -6508,7 +6731,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a report that includes details about when an IAM resource (user, group,\n            role, or policy) was last used in an attempt to access Amazon Web Services services. Recent activity\n            usually appears within four hours. IAM reports activity for at least the last 400\n            days, or less if your Region began supporting this feature within the last year. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period\">Regions where data is tracked</a>. For more information about services and\n            actions for which action last accessed information is displayed, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-action-last-accessed.html\">IAM\n                action last accessed information services and actions</a>.</p>\n         <important>\n            <p>The service last accessed data includes all attempts to access an Amazon Web Services API, not\n                just the successful ones. This includes all attempts that were made using the\n                Amazon Web Services Management Console, the Amazon Web Services API through any of the SDKs, or any of the command line tools.\n                An unexpected entry in the service last accessed data does not mean that your\n                account has been compromised, because the request might have been denied. Refer to\n                your CloudTrail logs as the authoritative source for information about all API calls\n                and whether they were successful or denied access. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html\">Logging\n                    IAM events with CloudTrail</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </important>\n         <p>The <code>GenerateServiceLastAccessedDetails</code> operation returns a\n                <code>JobId</code>. Use this parameter in the following operations to retrieve the\n            following details from your report: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetails.html\">GetServiceLastAccessedDetails</a> – Use this operation for\n                    users, groups, roles, or policies to list every Amazon Web Services service that the resource\n                    could access using permissions policies. For each service, the response includes\n                    information about the most recent access attempt.</p>\n               <p>The <code>JobId</code> returned by\n                        <code>GenerateServiceLastAccessedDetail</code> must be used by the same role\n                    within a session, or by the same user when used to call\n                        <code>GetServiceLastAccessedDetail</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetailsWithEntities.html\">GetServiceLastAccessedDetailsWithEntities</a> – Use this\n                    operation for groups and policies to list information about the associated\n                    entities (users or roles) that attempted to access a specific Amazon Web Services service.\n                </p>\n            </li>\n         </ul>\n         <p>To check the status of the <code>GenerateServiceLastAccessedDetails</code> request,\n            use the <code>JobId</code> parameter in the same operations and test the\n                <code>JobStatus</code> response parameter.</p>\n         <p>For additional information about the permissions policies that allow an identity\n            (user, group, or role) to access specific services, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPoliciesGrantingServiceAccess.html\">ListPoliciesGrantingServiceAccess</a> operation.</p>\n         <note>\n            <p>Service last accessed data does not use other policy types when determining\n                whether a resource could access a service. These other policy types include\n                resource-based policies, access control lists, Organizations policies, IAM permissions\n                boundaries, and STS assume role policies. It only applies permissions policy\n                logic. For more about the evaluation of policy types, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics\">Evaluating policies</a> in the\n                <i>IAM User Guide</i>.</p>\n         </note>\n         <p>For more information about service and action last accessed data, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Reducing permissions using service last accessed data</a> in the\n                <i>IAM User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Generates a report that includes details about when an IAM resource (user, group,\n            role, or policy) was last used in an attempt to access Amazon Web Services services. Recent activity\n            usually appears within four hours. IAM reports activity for at least the last 400\n            days, or less if your Region began supporting this feature within the last year. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period\">Regions where data is tracked</a>. For more information about services and\n            actions for which action last accessed information is displayed, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-action-last-accessed.html\">IAM\n                action last accessed information services and actions</a>.</p>\n         <important>\n            <p>The service last accessed data includes all attempts to access an Amazon Web Services API, not\n                just the successful ones. This includes all attempts that were made using the\n                Amazon Web Services Management Console, the Amazon Web Services API through any of the SDKs, or any of the command line tools.\n                An unexpected entry in the service last accessed data does not mean that your\n                account has been compromised, because the request might have been denied. Refer to\n                your CloudTrail logs as the authoritative source for information about all API calls\n                and whether they were successful or denied access. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html\">Logging\n                    IAM events with CloudTrail</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </important>\n         <p>The <code>GenerateServiceLastAccessedDetails</code> operation returns a\n                <code>JobId</code>. Use this parameter in the following operations to retrieve the\n            following details from your report: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetails.html\">GetServiceLastAccessedDetails</a> – Use this operation for\n                    users, groups, roles, or policies to list every Amazon Web Services service that the resource\n                    could access using permissions policies. For each service, the response includes\n                    information about the most recent access attempt.</p>\n               <p>The <code>JobId</code> returned by\n                        <code>GenerateServiceLastAccessedDetail</code> must be used by the same role\n                    within a session, or by the same user when used to call\n                        <code>GetServiceLastAccessedDetail</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServiceLastAccessedDetailsWithEntities.html\">GetServiceLastAccessedDetailsWithEntities</a> – Use this\n                    operation for groups and policies to list information about the associated\n                    entities (users or roles) that attempted to access a specific Amazon Web Services service.\n                </p>\n            </li>\n         </ul>\n         <p>To check the status of the <code>GenerateServiceLastAccessedDetails</code> request,\n            use the <code>JobId</code> parameter in the same operations and test the\n                <code>JobStatus</code> response parameter.</p>\n         <p>For additional information about the permissions policies that allow an identity\n            (user, group, or role) to access specific services, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPoliciesGrantingServiceAccess.html\">ListPoliciesGrantingServiceAccess</a> operation.</p>\n         <note>\n            <p>Service last accessed data does not use other policy types when determining\n                whether a resource could access a service. These other policy types include\n                resource-based policies, access control lists, Organizations policies, IAM permissions\n                boundaries, and STS assume role policies. It only applies permissions policy\n                logic. For more about the evaluation of policy types, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics\">Evaluating policies</a> in the\n                <i>IAM User Guide</i>.</p>\n         </note>\n         <p>For more information about service and action last accessed data, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html\">Reducing permissions using service last accessed data</a> in the\n                <i>IAM User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To generate a service last accessed data report for a policy",
@@ -6964,6 +7187,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iam#GetDelegationRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#GetDelegationRequestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#GetDelegationRequestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a specific delegation request.</p>\n         <p>\n            If a delegation request has no owner or owner account, <code>GetDelegationRequest</code> for that delegation request can be called by any account.\n            If the owner account is assigned but there is\n            no owner id, only identities within that owner account can call <code>GetDelegationRequest</code>\n            for the delegation request. Once the delegation request is fully owned, the owner of the request gets\n            a default permission to get that delegation request. For more details, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions\">\n                Managing Permissions for Delegation Requests</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#GetDelegationRequestRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the delegation request to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DelegationPermissionCheck": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to perform a permission check for the delegation request.</p>\n         <p>If set to true, the <code>GetDelegationRequest</code> API call will start a permission check process. This process\n      calculates whether the caller has sufficient permissions to cover the asks from this delegation request.</p>\n         <p>Setting this parameter to true does not guarantee an answer in the response. See the <code>PermissionCheckStatus</code>\n      and the <code>PermissionCheckResult</code> response attributes for further details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#GetDelegationRequestResponse": {
+            "type": "structure",
+            "members": {
+                "DelegationRequest": {
+                    "target": "com.amazonaws.iam#DelegationRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delegation request object containing all details about the request.</p>"
+                    }
+                },
+                "PermissionCheckStatus": {
+                    "target": "com.amazonaws.iam#permissionCheckStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the permission check for the delegation request.</p>\n         <p>This value indicates the status of the process to check whether the caller has sufficient permissions to cover the requested actions in the delegation request.\n      Since this is an asynchronous process, there are three potential values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> : The permission check process has started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> : The permission check process has completed. The <code>PermissionCheckResult</code> will include the result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> : The permission check process has failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PermissionCheckResult": {
+                    "target": "com.amazonaws.iam#permissionCheckResultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the permission check, indicating whether the caller has sufficient permissions to cover the requested permissions.\n      This is an approximate result.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOWED</code> : The caller has sufficient permissions cover all the requested permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DENIED</code> : The caller does not have sufficient permissions to cover all the requested permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSURE</code> : It is not possible to determine whether the caller has all the permissions needed.\n               This output is most likely for cases when the caller has permissions with conditions.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#GetGroup": {
             "type": "operation",
             "input": {
@@ -7122,6 +7413,76 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the response to a successful <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroup.html\">GetGroup</a> request. </p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iam#GetHumanReadableSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#GetHumanReadableSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#GetHumanReadableSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a human readable summary for a given entity. At this time, the only supported\n            entity type is <code>delegation-request</code>\n         </p>\n         <p>This method uses a Large Language Model (LLM) to generate the summary.</p>\n         <p>\n            If a delegation request has no owner or owner account, <code>GetHumanReadableSummary</code> for that delegation request can be called by any account.\n            If the owner account is assigned but there is\n            no owner id, only identities within that owner account can call <code>GetHumanReadableSummary</code>\n            for the delegation request to retrieve a summary of that request.\n            Once the delegation request is fully owned, the owner of the request gets\n            a default permission to get that delegation request. For more details, read\n            <a href=\"\">default permissions granted to delegation requests</a>. These rules are identical to\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetDelegationRequest.html\">GetDelegationRequest</a>\n            API behavior, such that a party who has permissions to call\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetDelegationRequest.html\">GetDelegationRequest</a>\n            for a given delegation request will always be able to retrieve the human readable summary for that request.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#GetHumanReadableSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "EntityArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Arn of the entity to be summarized. At this time, the only supported\n         entity type is <code>delegation-request</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.iam#localeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the locale to use for the summary generation. The\n      supported locale strings are based on the <a href=\"/awsconsolehelpdocs/latest/gsg/change-language.html#supported-languages\">\n            Supported languages of the Amazon Web Services Management Console\n         </a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#GetHumanReadableSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "SummaryContent": {
+                    "target": "com.amazonaws.iam#summaryContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary content in the specified locale. Summary content is non-empty only if the\n      <code>SummaryState</code> is <code>AVAILABLE</code>.</p>"
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.iam#localeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale that this response was generated for. This maps to the input locale.</p>"
+                    }
+                },
+                "SummaryState": {
+                    "target": "com.amazonaws.iam#summaryStateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of summary generation. This generation process is asynchronous and this attribute indicates the\n      state of the generation process.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -7542,14 +7903,14 @@
                 "JobCreationDate": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the report job was created.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the report job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "JobCompletionDate": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the generated report job was completed or failed.</p>\n         <p>This field is null if the job is still in progress, as indicated by a job status value\n            of <code>IN_PROGRESS</code>.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the generated report job was completed or failed.</p>\n         <p>This field is null if the job is still in progress, as indicated by a job status value\n            of <code>IN_PROGRESS</code>.</p>"
                     }
                 },
                 "NumberOfServicesAccessible": {
@@ -7567,7 +7928,7 @@
                 "AccessDetails": {
                     "target": "com.amazonaws.iam#AccessDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains details about the most recent attempt to access the\n            service.</p>"
+                        "smithy.api#documentation": "<p>An object that contains details about the most recent attempt to access the\n            service.</p>"
                     }
                 },
                 "IsTruncated": {
@@ -8194,21 +8555,21 @@
                 "JobCreationDate": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the report job was created.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the report job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServicesLastAccessed": {
                     "target": "com.amazonaws.iam#ServicesLastAccessed",
                     "traits": {
-                        "smithy.api#documentation": "<p> A <code>ServiceLastAccessed</code> object that contains details about the most recent\n            attempt to access the service.</p>",
+                        "smithy.api#documentation": "<p> A <code>ServiceLastAccessed</code> object that contains details about the most recent\n            attempt to access the service.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "JobCompletionDate": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the generated report job was completed or failed.</p>\n         <p>This field is null if the job is still in progress, as indicated by a job status value\n            of <code>IN_PROGRESS</code>.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the generated report job was completed or failed.</p>\n         <p>This field is null if the job is still in progress, as indicated by a job status value\n            of <code>IN_PROGRESS</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8306,7 +8667,7 @@
                 "ServiceNamespace": {
                     "target": "com.amazonaws.iam#serviceNamespaceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service namespace for an Amazon Web Services service. Provide the service namespace to learn\n            when the IAM entity last attempted to access the specified service.</p>\n         <p>To learn the service namespace for a service, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Actions, resources, and condition keys for Amazon Web Services services</a> in the\n                <i>IAM User Guide</i>. Choose the name of the service to view\n            details for that service. In the first paragraph, find the service prefix. For example,\n                <code>(service prefix: a4b)</code>. For more information about service namespaces,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services\n                service namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The service namespace for an Amazon Web Services service. Provide the service namespace to learn\n            when the IAM entity last attempted to access the specified service.</p>\n         <p>To learn the service namespace for a service, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Actions, resources, and condition keys for Amazon Web Services services</a> in the\n                <i>IAM User Guide</i>. Choose the name of the service to view\n            details for that service. In the first paragraph, find the service prefix. For example,\n                <code>(service prefix: a4b)</code>. For more information about service namespaces,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services\n                service namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8340,21 +8701,21 @@
                 "JobCreationDate": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the report job was created.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the report job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "JobCompletionDate": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the generated report job was completed or failed.</p>\n         <p>This field is null if the job is still in progress, as indicated by a job status value\n            of <code>IN_PROGRESS</code>.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n                format</a>, when the generated report job was completed or failed.</p>\n         <p>This field is null if the job is still in progress, as indicated by a job status value\n            of <code>IN_PROGRESS</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EntityDetailsList": {
                     "target": "com.amazonaws.iam#entityDetailsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <code>EntityDetailsList</code> object that contains details about when an IAM\n            entity (user or role) used group or policy permissions in an attempt to access the\n            specified Amazon Web Services service.</p>",
+                        "smithy.api#documentation": "<p>An <code>EntityDetailsList</code> object that contains details about when an IAM\n            entity (user or role) used group or policy permissions in an attempt to access the\n            specified Amazon Web Services service.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9348,6 +9709,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iam#ListDelegationRequests": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#ListDelegationRequestsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#ListDelegationRequestsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists delegation requests based on the specified criteria.</p>\n         <p>If a delegation request has no owner, even if it is assigned to a specific account, it will not be part of the\n            <code>ListDelegationRequests</code> output for that account.</p>\n         <p>\n            For more details, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions\">\n                Managing Permissions for Delegation Requests</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#ListDelegationRequestsRequest": {
+            "type": "structure",
+            "members": {
+                "OwnerId": {
+                    "target": "com.amazonaws.iam#ownerIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner ID to filter delegation requests by.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.iam#markerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter only when paginating results and only after you receive a response\n         indicating that the results are truncated. Set it to the value of the\n         <code>Marker</code>\n         element in the response that you received to indicate where the next\n         call should start.\n      </p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.iam#maxItemsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this only when paginating results to indicate the maximum number of items you\n         want in the response. If additional items exist beyond the maximum you specify, the\n         <code>IsTruncated</code>\n         response element is <code>true</code>.\n      </p>\n         <p>If you do not include this parameter, the number of items defaults to 100. Note that\n         IAM may return fewer results, even when there are more results available. In that case,\n         the <code>IsTruncated</code> response element returns <code>true</code>, and\n         <code>Marker</code>\n         contains a value to include in the subsequent call that tells the\n         service where to continue from.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#ListDelegationRequestsResponse": {
+            "type": "structure",
+            "members": {
+                "DelegationRequests": {
+                    "target": "com.amazonaws.iam#delegationRequestsListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of delegation requests that match the specified criteria.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.iam#markerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>isTruncated</code> is <code>true</code>, this element is present and contains the value to use for the <code>Marker</code> parameter in a subsequent pagination request.</p>"
+                    }
+                },
+                "isTruncated": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return.\n         If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#ListEntitiesForPolicy": {
             "type": "operation",
             "input": {
@@ -9401,7 +9838,7 @@
                 "PolicyUsageFilter": {
                     "target": "com.amazonaws.iam#PolicyUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy usage method to use for filtering the results.</p>\n         <p>To list only permissions policies,\n                set <code>PolicyUsageFilter</code> to <code>PermissionsPolicy</code>. To list only\n            the policies used to set permissions boundaries, set the value\n                to <code>PermissionsBoundary</code>.</p>\n         <p>This parameter is optional. If it is not included, all policies are returned. </p>"
+                        "smithy.api#documentation": "<p>The policy usage method to use for filtering the results.</p>\n         <p>To list only permissions policies,\n                set <code>PolicyUsageFilter</code> to <code>PermissionsPolicy</code>. To list only\n            the policies used to set permissions boundaries, set the value\n                to <code>PermissionsBoundary</code>.</p>\n         <p>This parameter is optional. If it is not included, all policies are returned. </p>"
                     }
                 },
                 "Marker": {
@@ -10496,7 +10933,7 @@
                 "ServiceNamespaces": {
                     "target": "com.amazonaws.iam#serviceNamespaceListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service namespace for the Amazon Web Services services whose policies you want to list.</p>\n         <p>To learn the service namespace for a service, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Actions, resources, and condition keys for Amazon Web Services services</a> in the\n                <i>IAM User Guide</i>. Choose the name of the service to view\n            details for that service. In the first paragraph, find the service prefix. For example,\n                <code>(service prefix: a4b)</code>. For more information about service namespaces,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services\n                service namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The service namespace for the Amazon Web Services services whose policies you want to list.</p>\n         <p>To learn the service namespace for a service, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Actions, resources, and condition keys for Amazon Web Services services</a> in the\n                <i>IAM User Guide</i>. Choose the name of the service to view\n            details for that service. In the first paragraph, find the service prefix. For example,\n                <code>(service prefix: a4b)</code>. For more information about service namespaces,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services\n                service namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10511,7 +10948,7 @@
                 "PoliciesGrantingServiceAccess": {
                     "target": "com.amazonaws.iam#listPolicyGrantingServiceAccessResponseListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>ListPoliciesGrantingServiceAccess</code> object that contains details about\n            the permissions policies attached to the specified identity (user, group, or\n            role).</p>",
+                        "smithy.api#documentation": "<p>A <code>ListPoliciesGrantingServiceAccess</code> object that contains details about\n            the permissions policies attached to the specified identity (user, group, or\n            role).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10558,7 +10995,7 @@
                 "PolicyUsageFilter": {
                     "target": "com.amazonaws.iam#PolicyUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy usage method to use for filtering the results.</p>\n         <p>To list only permissions policies,\n                set <code>PolicyUsageFilter</code> to <code>PermissionsPolicy</code>. To list only\n            the policies used to set permissions boundaries, set the value\n                to <code>PermissionsBoundary</code>.</p>\n         <p>This parameter is optional. If it is not included, all policies are returned. </p>"
+                        "smithy.api#documentation": "<p>The policy usage method to use for filtering the results.</p>\n         <p>To list only permissions policies,\n                set <code>PolicyUsageFilter</code> to <code>PermissionsPolicy</code>. To list only\n            the policies used to set permissions boundaries, set the value\n                to <code>PermissionsBoundary</code>.</p>\n         <p>This parameter is optional. If it is not included, all policies are returned. </p>"
                     }
                 },
                 "Marker": {
@@ -12608,24 +13045,24 @@
                 "Name": {
                     "target": "com.amazonaws.iam#policyParameterNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the policy parameter.</p>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.iam#policyParameterValuesListType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The allowed values for the policy parameter.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.iam#PolicyParameterTypeEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The data type of the policy parameter value.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Contains information about a policy parameter used to customize delegated permissions.</p>"
             }
         },
         "com.amazonaws.iam#PolicyParameterTypeEnum": {
@@ -13135,6 +13572,53 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.iam#RejectDelegationRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#RejectDelegationRequestRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Rejects a delegation request, denying the requested temporary access.</p>\n         <p>Once a request is rejected, it cannot be accepted or updated later. Rejected requests expire after 7 days.</p>\n         <p>When rejecting a request, an optional explanation can be added using the <code>Notes</code> request parameter.</p>\n         <p>\n            For more details, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions\">\n                Managing Permissions for Delegation Requests</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#RejectDelegationRequestRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the delegation request to reject.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.iam#notesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional notes explaining the reason for rejecting the delegation request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iam#RemoveClientIDFromOpenIDConnectProvider": {
@@ -13910,6 +14394,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about an SSH public key, without the key's body or\n         fingerprint.</p>\n         <p>This data type is used as a response element in the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSSHPublicKeys.html\">ListSSHPublicKeys</a>\n         operation.</p>"
+            }
+        },
+        "com.amazonaws.iam#SendDelegationToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#SendDelegationTokenRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends the exchange token for an accepted delegation request.</p>\n         <p>The exchange token is sent to the partner via an asynchronous notification channel, established by the partner.</p>\n         <p>The delegation request must be in the <code>ACCEPTED</code> state when calling this API. After the\n            <code>SendDelegationToken</code> API\n            call is successful, the request transitions to a <code>FINALIZED</code> state and cannot be rolled back. However, a user may reject\n        an accepted request before the <code>SendDelegationToken</code> API is called.</p>\n         <p>\n            For more details, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions\">\n                Managing Permissions for Delegation Requests</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#SendDelegationTokenRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the delegation request for which to send the token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iam#ServerCertificate": {
@@ -15828,6 +16353,53 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.iam#UpdateDelegationRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#UpdateDelegationRequestRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing delegation request with additional information. When the delegation\n            request is updated, it reaches the <code>PENDING_APPROVAL</code> state.\n        </p>\n         <p>Once a delegation request has an owner, that owner gets a default permission to update the\n            delegation request. For more details, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions\">\n                Managing Permissions for Delegation Requests</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.iam#UpdateDelegationRequestRequest": {
+            "type": "structure",
+            "members": {
+                "DelegationRequestId": {
+                    "target": "com.amazonaws.iam#delegationRequestIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the delegation request to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.iam#notesType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional notes or comments to add to the delegation request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.iam#UpdateGroup": {
             "type": "operation",
             "input": {
@@ -17183,6 +17755,12 @@
                 "smithy.api#pattern": "^[\\w-]+$"
             }
         },
+        "com.amazonaws.iam#delegationRequestsListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#DelegationRequest"
+            }
+        },
         "com.amazonaws.iam#deleteConflictMessage": {
             "type": "string"
         },
@@ -17386,6 +17964,15 @@
                 "target": "com.amazonaws.iam#ListPoliciesGrantingServiceAccessEntry"
             }
         },
+        "com.amazonaws.iam#localeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 12
+                }
+            }
+        },
         "com.amazonaws.iam#malformedCertificateMessage": {
             "type": "string"
         },
@@ -17441,13 +18028,24 @@
         "com.amazonaws.iam#noSuchEntityMessage": {
             "type": "string"
         },
+        "com.amazonaws.iam#notesType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
+            }
+        },
         "com.amazonaws.iam#notificationChannelType": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
                     "max": 400
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:_.-]+$"
             }
         },
         "com.amazonaws.iam#openIdIdpCommunicationErrorExceptionMessage": {
@@ -17467,6 +18065,16 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^p-[0-9a-zA-Z_]{8,128}$"
+            }
+        },
+        "com.amazonaws.iam#ownerIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:/+=,.@_-]+$"
             }
         },
         "com.amazonaws.iam#passwordPolicyViolationMessage": {
@@ -17511,6 +18119,55 @@
                 },
                 "smithy.api#pattern": "^(\\u002F)|(\\u002F[\\u0021-\\u007E]+\\u002F)$"
             }
+        },
+        "com.amazonaws.iam#permissionCheckResultType": {
+            "type": "enum",
+            "members": {
+                "ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOWED"
+                    }
+                },
+                "DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENIED"
+                    }
+                },
+                "UNSURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iam#permissionCheckStatusType": {
+            "type": "enum",
+            "members": {
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iam#permissionType": {
+            "type": "string"
         },
         "com.amazonaws.iam#policyDescriptionType": {
             "type": "string",
@@ -17621,11 +18278,15 @@
                 "smithy.api#length": {
                     "min": 5,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^[ -~]+$"
             }
         },
         "com.amazonaws.iam#policyParameterValueType": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[ -~]+$"
+            }
         },
         "com.amazonaws.iam#policyParameterValuesListType": {
             "type": "list",
@@ -17775,13 +18436,24 @@
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
             }
         },
+        "com.amazonaws.iam#requestorNameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
+            }
+        },
         "com.amazonaws.iam#requestorWorkflowIdType": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 5,
                     "max": 400
-                }
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]+$"
             }
         },
         "com.amazonaws.iam#responseMarkerType": {
@@ -17829,6 +18501,12 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.iam#rolePermissionRestrictionArnListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#arnType"
             }
         },
         "com.amazonaws.iam#serialNumberType": {
@@ -17937,7 +18615,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 3600,
+                    "min": 300,
                     "max": 43200
                 }
             }
@@ -17971,6 +18649,53 @@
                 }
             }
         },
+        "com.amazonaws.iam#stateType": {
+            "type": "enum",
+            "members": {
+                "UNASSIGNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNASSIGNED"
+                    }
+                },
+                "ASSIGNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSIGNED"
+                    }
+                },
+                "PENDING_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL"
+                    }
+                },
+                "FINALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINALIZED"
+                    }
+                },
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iam#statusType": {
             "type": "enum",
             "members": {
@@ -17996,6 +18721,15 @@
         },
         "com.amazonaws.iam#stringType": {
             "type": "string"
+        },
+        "com.amazonaws.iam#summaryContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000
+                }
+            }
         },
         "com.amazonaws.iam#summaryKeyType": {
             "type": "enum",
@@ -18213,6 +18947,35 @@
             },
             "value": {
                 "target": "com.amazonaws.iam#summaryValueType"
+            }
+        },
+        "com.amazonaws.iam#summaryStateType": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_AVAILABLE"
+                    }
+                },
+                "NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_SUPPORTED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#summaryValueType": {

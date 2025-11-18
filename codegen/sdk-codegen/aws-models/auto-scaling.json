@@ -1303,6 +1303,9 @@
                     "target": "com.amazonaws.autoscaling#GetPredictiveScalingForecast"
                 },
                 {
+                    "target": "com.amazonaws.autoscaling#LaunchInstances"
+                },
+                {
                     "target": "com.amazonaws.autoscaling#PutLifecycleHook"
                 },
                 {
@@ -2303,6 +2306,18 @@
                 "smithy.api#documentation": "<p>\n            Describes an Availability Zone distribution.\n        </p>"
             }
         },
+        "com.amazonaws.autoscaling#AvailabilityZoneIdsLimit1": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.autoscaling#AvailabilityZoneImpairmentPolicy": {
             "type": "structure",
             "members": {
@@ -2327,6 +2342,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+            }
+        },
+        "com.amazonaws.autoscaling#AvailabilityZonesLimit1": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.autoscaling#BakeTime": {
@@ -2818,6 +2845,16 @@
                 "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
             }
         },
+        "com.amazonaws.autoscaling#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-_\\/]+$"
+            }
+        },
         "com.amazonaws.autoscaling#CompleteLifecycleAction": {
             "type": "operation",
             "input": {
@@ -3122,7 +3159,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen19",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance used to base the launch configuration on. If specified, Amazon\n            EC2 Auto Scaling uses the configuration values from the specified instance to create a\n            new launch configuration. To get the instance ID, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> API operation. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html\">Create an Auto Scaling group using parameters from an existing instance</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ID of the instance used to base the launch configuration on. If specified, Amazon EC2 Auto Scaling uses the configuration values from the specified instance to create a\n            new launch configuration. To get the instance ID, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> API operation. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html\">Create an Auto Scaling group using parameters from an existing instance</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "MinSize": {
@@ -6421,6 +6458,23 @@
         "com.amazonaws.autoscaling#HonorCooldown": {
             "type": "boolean"
         },
+        "com.amazonaws.autoscaling#IdempotentParameterMismatchError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IdempotentParameterMismatch",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n            Indicates that the parameters in the current request do not match the parameters from a previous request with the same client token within the idempotency window.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.autoscaling#ImpairedZoneHealthCheckBehavior": {
             "type": "enum",
             "members": {
@@ -6514,6 +6568,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an EC2 instance.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceCollection": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The instance type of the launched instances.\n        </p>"
+                    }
+                },
+                "MarketType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The market type for the instances (On-Demand or Spot).\n        </p>"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the subnet where the instances were launched.\n        </p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zone where the instances were launched.\n        </p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zone ID where the instances in this collection were launched.\n        </p>"
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.autoscaling#InstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of instance IDs for the successfully launched instances.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains details about a collection of instances launched in the Auto Scaling group.\n        </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceCollections": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#InstanceCollection"
             }
         },
         "com.amazonaws.autoscaling#InstanceGeneration": {
@@ -7393,6 +7497,171 @@
                         "smithy.api#documentation": "<p>A string that indicates that the response contains more items than can be returned in\n            a single response. To receive additional items, specify this string for the\n                <code>NextToken</code> value when requesting the next set of items. This value is\n            null when there are no more items to return.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.autoscaling#LaunchInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscaling#LaunchInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscaling#LaunchInstancesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#IdempotentParameterMismatchError"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#ResourceContentionFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Launches a specified number of instances in an Auto Scaling group. Returns instance IDs and\n            other details if launch is successful or error details if launch is unsuccessful. </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#LaunchInstancesError": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The instance type that failed to launch.\n        </p>"
+                    }
+                },
+                "MarketType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The market type (On-Demand or Spot) that encountered the launch error.\n        </p>"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The subnet ID where the instance launch was attempted.\n        </p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zone where the instance launch was attempted.\n        </p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zone ID where the launch error occurred.\n        </p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The error code representing the type of error encountered (e.g., InsufficientInstanceCapacity).\n        </p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.autoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A descriptive message providing details about the error encountered during the launch attempt.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains details about errors encountered during instance launch attempts.\n        </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#LaunchInstancesErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#LaunchInstancesError"
+            }
+        },
+        "com.amazonaws.autoscaling#LaunchInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The name of the Auto Scaling group to launch instances into.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestedCapacity": {
+                    "target": "com.amazonaws.autoscaling#RequestedCapacity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The number of instances to launch. Although this value can exceed 100 for instance weights, the actual instance count is limited to 100 instances per launch.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.autoscaling#ClientToken",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            A unique, case-sensitive identifier to ensure idempotency of the request. \n        </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZonesLimit1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zones for the instance launch. Must match or be included in the Auto Scaling group's Availability Zone configuration. Either <code>AvailabilityZones</code> or <code>SubnetIds</code> must be specified for groups with multiple Availability Zone configurations. \n        </p>"
+                    }
+                },
+                "AvailabilityZoneIds": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneIdsLimit1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of Availability Zone IDs where instances should be launched. Must match or be included in the group's AZ configuration. You cannot specify both AvailabilityZones and AvailabilityZoneIds. Required for multi-AZ groups, optional for single-AZ groups.\n        </p>"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.autoscaling#SubnetIdsLimit1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The subnet IDs for the instance launch. Either <code>AvailabilityZones</code> or <code>SubnetIds</code> must be specified. If both are specified, the subnets must reside in the specified Availability Zones.\n        </p>"
+                    }
+                },
+                "RetryStrategy": {
+                    "target": "com.amazonaws.autoscaling#RetryStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to retry asynchronously if the synchronous launch fails. Valid values are NONE (default, no async retry) and RETRY_WITH_GROUP_CONFIGURATION (increase desired capacity and retry with group configuration).\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.autoscaling#LaunchInstancesResult": {
+            "type": "structure",
+            "members": {
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the Auto Scaling group where the instances were launched.\n        </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.autoscaling#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The idempotency token used for the request, either customer-specified or auto-generated.\n        </p>"
+                    }
+                },
+                "Instances": {
+                    "target": "com.amazonaws.autoscaling#InstanceCollections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of successfully launched instances including details such as instance type, Availability Zone, subnet, lifecycle state, and instance IDs.\n        </p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.autoscaling#LaunchInstancesErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of errors encountered during the launch attempt including details about failed instance launches with their corresponding error codes and messages.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.autoscaling#LaunchTemplate": {
@@ -9602,6 +9871,14 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#RequestedCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.autoscaling#ResourceContentionFault": {
             "type": "structure",
             "members": {
@@ -9682,6 +9959,23 @@
                         }
                     }
                 ]
+            }
+        },
+        "com.amazonaws.autoscaling#RetryStrategy": {
+            "type": "enum",
+            "members": {
+                "RETRY_WITH_GROUP_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "retry-with-group-configuration"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
             }
         },
         "com.amazonaws.autoscaling#ReturnData": {
@@ -10592,6 +10886,18 @@
         },
         "com.amazonaws.autoscaling#String": {
             "type": "string"
+        },
+        "com.amazonaws.autoscaling#SubnetIdsLimit1": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
         },
         "com.amazonaws.autoscaling#SuspendProcesses": {
             "type": "operation",

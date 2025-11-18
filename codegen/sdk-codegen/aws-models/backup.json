@@ -1290,6 +1290,12 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_]{2,50}$"
             }
         },
+        "com.amazonaws.backup#BackupVaultNameOrWildcard": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(\\*|[a-zA-Z0-9\\-\\_]{2,50})$"
+            }
+        },
         "com.amazonaws.backup#Boolean": {
             "type": "boolean"
         },
@@ -3013,6 +3019,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.backup#CreateTieringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateTieringConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateTieringConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a tiering configuration.</p>\n         <p>A tiering configuration enables automatic movement of backup data to a lower-cost storage tier based on the age of backed-up objects in the backup vault.</p>\n         <p>Each vault can only have one vault-specific tiering configuration, in addition to any global configuration that applies to all vaults.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/tiering-configurations",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateTieringConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TieringConfiguration": {
+                    "target": "com.amazonaws.backup#TieringConfigurationInputForCreate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tiering configuration must contain a unique <code>TieringConfigurationName</code> string\n         you create and must contain a <code>BackupVaultName</code> and <code>ResourceSelection</code>.\n         You may optionally include a <code>CreatorRequestId</code> string.</p>\n         <p>The <code>TieringConfigurationName</code> is a unique string that is the name of the\n         tiering configuration. This cannot be changed after creation, and it must consist of only\n         alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TieringConfigurationTags": {
+                    "target": "com.amazonaws.backup#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the tiering configuration.</p>"
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.backup#CreatorRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a unique string that identifies the request and\n         allows failed requests to be retried without the risk of running\n         the operation twice. This parameter is optional. If used, this\n         parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#CreateTieringConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the created\n         tiering configuration.</p>"
+                    }
+                },
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This unique string is the name of the tiering configuration.</p>\n         <p>The name cannot be changed after creation. The name consists of only\n         alphanumeric characters and underscores. Maximum length is 200.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was created, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#CreatorRequestId": {
+            "type": "string"
+        },
         "com.amazonaws.backup#CronExpression": {
             "type": "string"
         },
@@ -3057,6 +3158,9 @@
                     "target": "com.amazonaws.backup#CreateRestoreTestingSelection"
                 },
                 {
+                    "target": "com.amazonaws.backup#CreateTieringConfiguration"
+                },
+                {
                     "target": "com.amazonaws.backup#DeleteBackupPlan"
                 },
                 {
@@ -3088,6 +3192,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#DeleteRestoreTestingSelection"
+                },
+                {
+                    "target": "com.amazonaws.backup#DeleteTieringConfiguration"
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeBackupJob"
@@ -3177,6 +3284,9 @@
                     "target": "com.amazonaws.backup#GetSupportedResourceTypes"
                 },
                 {
+                    "target": "com.amazonaws.backup#GetTieringConfiguration"
+                },
+                {
                     "target": "com.amazonaws.backup#ListBackupJobs"
                 },
                 {
@@ -3255,6 +3365,9 @@
                     "target": "com.amazonaws.backup#ListTags"
                 },
                 {
+                    "target": "com.amazonaws.backup#ListTieringConfigurations"
+                },
+                {
                     "target": "com.amazonaws.backup#PutBackupVaultAccessPolicy"
                 },
                 {
@@ -3316,6 +3429,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#UpdateRestoreTestingSelection"
+                },
+                {
+                    "target": "com.amazonaws.backup#UpdateTieringConfiguration"
                 }
             ],
             "traits": {
@@ -4827,6 +4943,61 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteTieringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DeleteTieringConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#DeleteTieringConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the tiering configuration specified by a tiering configuration name.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tiering-configurations/{TieringConfigurationName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteTieringConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a tiering configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteTieringConfigurationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.backup#DependencyFailureException": {
@@ -7694,6 +7865,68 @@
                     "target": "com.amazonaws.backup#ResourceTypes",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a string with the supported Amazon Web Services resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>CloudFormation</code> for CloudFormation</p>\n            </li>\n            <li>\n               <p>\n                  <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p>\n            </li>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>FSx</code> for Amazon FSx</p>\n            </li>\n            <li>\n               <p>\n                  <code>Neptune</code> for Amazon Neptune</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redshift</code> for Amazon Redshift</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>\n            </li>\n            <li>\n               <p>\n                  <code>SAP HANA on Amazon EC2</code> for SAP HANA databases \n            on Amazon Elastic Compute Cloud instances</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n            <li>\n               <p>\n                  <code>Timestream</code> for Amazon Timestream</p>\n            </li>\n            <li>\n               <p>\n                  <code>VirtualMachine</code> for VMware virtual machines</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#GetTieringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#GetTieringConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#GetTieringConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns <code>TieringConfiguration</code> details for the specified\n         <code>TieringConfigurationName</code>. The details are the body of a tiering configuration\n         in JSON format, in addition to configuration metadata.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tiering-configurations/{TieringConfigurationName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#GetTieringConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a tiering configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#GetTieringConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "TieringConfiguration": {
+                    "target": "com.amazonaws.backup#TieringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the body of a tiering configuration. Includes <code>TieringConfigurationName</code>.</p>"
                     }
                 }
             },
@@ -10803,6 +11036,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.backup#ListTieringConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListTieringConfigurationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListTieringConfigurationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of tiering configurations.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tiering-configurations",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TieringConfigurations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListTieringConfigurationsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request\n         is made to return <code>MaxResults</code> number of items, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListTieringConfigurationsOutput": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurations": {
+                    "target": "com.amazonaws.backup#TieringConfigurationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tiering configurations returned by the <code>ListTieringConfigurations</code> call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request\n         is made to return <code>MaxResults</code> number of items, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#Long": {
             "type": "long"
         },
@@ -11986,6 +12293,41 @@
             "traits": {
                 "smithy.api#documentation": "<p>A resource that is required for the action doesn't exist.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.backup#ResourceSelection": {
+            "type": "structure",
+            "members": {
+                "Resources": {
+                    "target": "com.amazonaws.backup#ResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of strings that either contains ARNs of the associated resources\n         or contains a wildcard <code>*</code> to specify all resources.\n         You can specify up to 100 specific resources per tiering configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TieringDownSettingsInDays": {
+                    "target": "com.amazonaws.backup#TieringDownSettingsInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days after creation within a backup vault that an object can transition to the low cost warm storage tier.\n         Must be a positive integer between 60 and 36500 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.backup#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource; for example, <code>S3</code> for Amazon S3.\n         For tiering configurations, this is currently limited to <code>S3</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about resource selection for tiering configurations.</p>\n         <p>You can specify up to 5 different resource selections per tiering configuration.\n         Data moved to lower-cost tier remains there until deletion (one-way transition).</p>"
+            }
+        },
+        "com.amazonaws.backup#ResourceSelections": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ResourceSelection"
             }
         },
         "com.amazonaws.backup#ResourceType": {
@@ -13696,6 +14038,172 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.backup#TieringConfiguration": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the tiering configuration. This cannot be changed\n         after creation, and it must consist of only alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TieringConfigurationArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the\n         tiering configuration.</p>"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultNameOrWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault where the tiering configuration applies.\n         Use <code>*</code> to apply to all backup vaults.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceSelection": {
+                    "target": "com.amazonaws.backup#ResourceSelections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of resource selection objects that specify which resources\n         are included in the tiering configuration and their tiering settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.backup#CreatorRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a unique string that identifies the request and\n         allows failed requests to be retried without the risk of running\n         the operation twice.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was created, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was updated, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>LastUpdatedTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a tiering configuration.</p>"
+            }
+        },
+        "com.amazonaws.backup#TieringConfigurationInputForCreate": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the tiering configuration. This cannot be changed\n         after creation, and it must consist of only alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultNameOrWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault where the tiering configuration applies.\n         Use <code>*</code> to apply to all backup vaults.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceSelection": {
+                    "target": "com.amazonaws.backup#ResourceSelections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of resource selection objects that specify which resources\n         are included in the tiering configuration and their tiering settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a tiering configuration for create operations.</p>"
+            }
+        },
+        "com.amazonaws.backup#TieringConfigurationInputForUpdate": {
+            "type": "structure",
+            "members": {
+                "ResourceSelection": {
+                    "target": "com.amazonaws.backup#ResourceSelections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of resource selection objects that specify which resources\n         are included in the tiering configuration and their tiering settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultNameOrWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault where the tiering configuration applies.\n         Use <code>*</code> to apply to all backup vaults.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a tiering configuration for update operations.</p>"
+            }
+        },
+        "com.amazonaws.backup#TieringConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_]{1,200}$"
+            }
+        },
+        "com.amazonaws.backup#TieringConfigurationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#TieringConfigurationsListMember"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tiering configurations.</p>"
+            }
+        },
+        "com.amazonaws.backup#TieringConfigurationsListMember": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the\n         tiering configuration.</p>"
+                    }
+                },
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the tiering configuration.</p>"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultNameOrWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup vault where the tiering configuration applies.\n         Use <code>*</code> to apply to all backup vaults.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was created, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was updated, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>LastUpdatedTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains metadata about a tiering configuration returned in a list.</p>"
+            }
+        },
+        "com.amazonaws.backup#TieringDownSettingsInDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 36500
+                }
+            }
+        },
         "com.amazonaws.backup#Timezone": {
             "type": "string"
         },
@@ -14541,6 +15049,102 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time the update completed for the restore \n         testing selection.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateTieringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#UpdateTieringConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#UpdateTieringConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request will send changes to your specified tiering\n         configuration. <code>TieringConfigurationName</code>\n         cannot be updated after it is created.</p>\n         <p>\n            <code>ResourceSelection</code> can contain:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Resources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TieringDownSettingsInDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/tiering-configurations/{TieringConfigurationName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateTieringConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a tiering configuration to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TieringConfiguration": {
+                    "target": "com.amazonaws.backup#TieringConfigurationInputForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the body of a tiering configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateTieringConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "TieringConfigurationArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the updated\n         tiering configuration.</p>"
+                    }
+                },
+                "TieringConfigurationName": {
+                    "target": "com.amazonaws.backup#TieringConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This unique string is the name of the tiering configuration.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was created, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a tiering configuration was updated, in Unix format\n         and Coordinated Universal Time (UTC). The value of <code>LastUpdatedTime</code>\n         is accurate to milliseconds. For example, the value 1516925490.087 represents\n         Friday, January 26, 2018 12:11:30.087AM.</p>"
                     }
                 }
             },

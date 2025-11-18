@@ -1807,6 +1807,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.wafv2#WAFFeatureNotIncludedInPricingPlanException"
+                },
+                {
                     "target": "com.amazonaws.wafv2#WAFInternalErrorException"
                 },
                 {
@@ -5518,6 +5521,37 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wafv2#DisallowedFeature": {
+            "type": "structure",
+            "members": {
+                "Feature": {
+                    "target": "com.amazonaws.wafv2#PricingPlanFeatureName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the disallowed WAF feature.</p>"
+                    }
+                },
+                "RequiredPricingPlan": {
+                    "target": "com.amazonaws.wafv2#RequiredPricingPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudFront pricing plan required to use the WAF feature.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A WAF feature that is not supported by the CloudFront pricing plan associated with the web ACL.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#DisallowedFeatures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#DisallowedFeature"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.wafv2#DisassociateWebACL": {
@@ -9934,6 +9968,16 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#PricingPlanFeatureName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w\\-]+$"
+            }
+        },
         "com.amazonaws.wafv2#ProductDescription": {
             "type": "string",
             "traits": {
@@ -9990,6 +10034,9 @@
                 "target": "com.amazonaws.wafv2#PutLoggingConfigurationResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFFeatureNotIncludedInPricingPlanException"
+                },
                 {
                     "target": "com.amazonaws.wafv2#WAFInternalErrorException"
                 },
@@ -10884,6 +10931,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The criteria for inspecting account creation requests, used by the ACFP rule group to validate and track account creation attempts.  </p>\n         <p>This is part of the <code>AWSManagedRulesACFPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>In these settings, you specify how your application accepts account creation attempts\n           by providing the request payload type and the names of the fields \n           within the request body where the username, password, email, and primary address and phone number fields are provided. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#RequiredPricingPlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w\\-]+$"
             }
         },
         "com.amazonaws.wafv2#ResourceArn": {
@@ -12882,6 +12939,9 @@
                     "target": "com.amazonaws.wafv2#WAFExpiredManagedRuleGroupVersionException"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#WAFFeatureNotIncludedInPricingPlanException"
+                },
+                {
                     "target": "com.amazonaws.wafv2#WAFInternalErrorException"
                 },
                 {
@@ -13215,6 +13275,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The operation failed because the specified version for the managed rule group has\n         expired. You can retrieve the available versions for the managed rule group by calling\n            <a>ListAvailableManagedRuleGroupVersions</a>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.wafv2#WAFFeatureNotIncludedInPricingPlanException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wafv2#ErrorMessage"
+                },
+                "DisallowedFeatures": {
+                    "target": "com.amazonaws.wafv2#DisallowedFeatures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the disallowed WAF features.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because the specified WAF feature isn't supported by the CloudFront pricing plan associated with the web ACL.</p>",
                 "smithy.api#error": "client"
             }
         },

@@ -1675,6 +1675,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
                     }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1728,6 +1734,12 @@
                     "target": "com.amazonaws.bedrockruntime#PerformanceConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
+                    }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
                     }
                 }
             },
@@ -1808,6 +1820,12 @@
                     "target": "com.amazonaws.bedrockruntime#PerformanceConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance configuration metadata for the conversation stream event.</p>"
+                    }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
                     }
                 }
             },
@@ -1978,6 +1996,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>"
                     }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2032,6 +2056,18 @@
                     "target": "com.amazonaws.bedrockruntime#SystemContentBlocks",
                     "traits": {
                         "smithy.api#documentation": "<p>The system content blocks to count tokens for. System content provides instructions or context to the model about how it should behave or respond. The token count will include any system content provided.</p>"
+                    }
+                },
+                "toolConfig": {
+                    "target": "com.amazonaws.bedrockruntime#ToolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The toolConfig of Converse input request to count tokens for. Configuration information for the tools that the model can use when generating a response.</p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additionalModelRequestFields of Converse input request to count tokens for. Use this field when you want to pass additional parameters that the model supports.</p>"
                     }
                 }
             },
@@ -4866,6 +4902,13 @@
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
                     }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Service-Tier"
+                    }
                 }
             },
             "traits": {
@@ -4896,6 +4939,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
+                    }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Service-Tier"
                     }
                 }
             },
@@ -5188,6 +5238,13 @@
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
                     }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Service-Tier"
+                    }
                 }
             },
             "traits": {
@@ -5218,6 +5275,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Model performance settings for the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-PerformanceConfig-Latency"
+                    }
+                },
+                "serviceTier": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Service-Tier"
                     }
                 }
             },
@@ -5863,6 +5927,44 @@
                 "smithy.api#documentation": "<p>Your request exceeds the service quota for your account. You can view your quotas at <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html\">Viewing service quotas</a>. You can resubmit your request later.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockruntime#ServiceTier": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceTierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the processing tier configuration used for serving the request.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ServiceTierType": {
+            "type": "enum",
+            "members": {
+                "PRIORITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "priority"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "FLEX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "flex"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockruntime#ServiceUnavailableException": {
