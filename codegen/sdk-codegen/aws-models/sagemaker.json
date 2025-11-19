@@ -13076,6 +13076,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sets whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.</p>"
                     }
+                },
+                "MetricsConfig": {
+                    "target": "com.amazonaws.sagemaker#MetricsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters for utilization metrics.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23669,6 +23675,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.</p>"
                     }
+                },
+                "MetricsConfig": {
+                    "target": "com.amazonaws.sagemaker#MetricsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters for utilization metrics.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23783,6 +23795,12 @@
                     "target": "com.amazonaws.sagemaker#ProductionVariantSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html\">ProductionVariantSummary</a> objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on <code>ProductionVariants</code>.</p>"
+                    }
+                },
+                "MetricsConfig": {
+                    "target": "com.amazonaws.sagemaker#MetricsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters for utilization metrics.</p>"
                     }
                 }
             },
@@ -32045,6 +32063,9 @@
             "type": "boolean"
         },
         "com.amazonaws.sagemaker#EnableCapture": {
+            "type": "boolean"
+        },
+        "com.amazonaws.sagemaker#EnableEnhancedMetrics": {
             "type": "boolean"
         },
         "com.amazonaws.sagemaker#EnableInfraCheck": {
@@ -50550,6 +50571,60 @@
                 "smithy.api#pattern": "^.+$"
             }
         },
+        "com.amazonaws.sagemaker#MetricPublishFrequencyInSeconds": {
+            "type": "intEnum",
+            "members": {
+                "FREQ_10_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 10 seconds frequency</p>",
+                        "smithy.api#enumValue": 10
+                    }
+                },
+                "FREQ_30_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 30 seconds frequency</p>",
+                        "smithy.api#enumValue": 30
+                    }
+                },
+                "FREQ_60_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 60 seconds frequency</p>",
+                        "smithy.api#enumValue": 60
+                    }
+                },
+                "FREQ_120_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 120 seconds frequency</p>",
+                        "smithy.api#enumValue": 120
+                    }
+                },
+                "FREQ_180_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 180 seconds frequency</p>",
+                        "smithy.api#enumValue": 180
+                    }
+                },
+                "FREQ_240_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 240 seconds frequency</p>",
+                        "smithy.api#enumValue": 240
+                    }
+                },
+                "FREQ_300_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics publishing at 300 seconds frequency</p>",
+                        "smithy.api#enumValue": 300
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MetricRegex": {
             "type": "string",
             "traits": {
@@ -50605,6 +50680,26 @@
         },
         "com.amazonaws.sagemaker#MetricValue": {
             "type": "float"
+        },
+        "com.amazonaws.sagemaker#MetricsConfig": {
+            "type": "structure",
+            "members": {
+                "EnableEnhancedMetrics": {
+                    "target": "com.amazonaws.sagemaker#EnableEnhancedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable enhanced metrics for the endpoint. Enhanced metrics provide utilization data at instance and container granularity. Container granularity is supported for Inference Components. The default is <code>False</code>.</p>"
+                    }
+                },
+                "MetricPublishFrequencyInSeconds": {
+                    "target": "com.amazonaws.sagemaker#MetricPublishFrequencyInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency, in seconds, at which utilization metrics are published to Amazon CloudWatch. The default is <code>60</code> seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for Utilization metrics.</p>"
+            }
         },
         "com.amazonaws.sagemaker#MetricsSource": {
             "type": "structure",
@@ -64681,11 +64776,10 @@
                     }
                 },
                 "VolumeSizeInGB": {
-                    "target": "com.amazonaws.sagemaker#VolumeSizeInGB",
+                    "target": "com.amazonaws.sagemaker#OptionalVolumeSizeInGB",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>When using an ML instance with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes\">NVMe SSD volumes</a>, SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type instance's storage capacity. SageMaker configures storage paths for training datasets, checkpoints, model artifacts, and outputs to use the entire capacity of the instance storage. For example, ML instance families with the NVMe-type instance storage include <code>ml.p4d</code>, <code>ml.g4dn</code>, and <code>ml.g5</code>. </p> <p>When using an ML instance with the EBS-only storage option and without instance storage, you must define the size of EBS volume through <code>VolumeSizeInGB</code> in the <code>ResourceConfig</code> API. For example, ML instance families that use EBS volumes include <code>ml.c5</code> and <code>ml.p2</code>. </p> <p>To look up instance types and their instance storage types and volumes, see <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a>.</p> <p>To find the default local paths defined by the SageMaker training platform, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html\">Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>When using an ML instance with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes\">NVMe SSD volumes</a>, SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type instance's storage capacity. SageMaker configures storage paths for training datasets, checkpoints, model artifacts, and outputs to use the entire capacity of the instance storage. For example, ML instance families with the NVMe-type instance storage include <code>ml.p4d</code>, <code>ml.g4dn</code>, and <code>ml.g5</code>. </p> <p>When using an ML instance with the EBS-only storage option and without instance storage, you must define the size of EBS volume through <code>VolumeSizeInGB</code> in the <code>ResourceConfig</code> API. For example, ML instance families that use EBS volumes include <code>ml.c5</code> and <code>ml.p2</code>. </p> <p>To look up instance types and their instance storage types and volumes, see <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a>.</p> <p>To find the default local paths defined by the SageMaker training platform, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html\">Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs</a>.</p>"
                     }
                 },
                 "VolumeKmsKeyId": {
@@ -65201,13 +65295,13 @@
                 "GroupPatterns": {
                     "target": "com.amazonaws.sagemaker#GroupPatternsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of AWS IAM Identity Center group patterns that should be assigned to the specified role. Group patterns support wildcard matching using <code>*</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services IAM Identity Center group patterns that should be assigned to the specified role. Group patterns support wildcard matching using <code>*</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the mapping between an in-app role and the AWS IAM Identity Center group patterns that should be assigned to that role within the SageMaker Partner AI App.</p>"
+                "smithy.api#documentation": "<p>Defines the mapping between an in-app role and the Amazon Web Services IAM Identity Center group patterns that should be assigned to that role within the SageMaker Partner AI App.</p>"
             }
         },
         "com.amazonaws.sagemaker#RoleGroupAssignmentsList": {

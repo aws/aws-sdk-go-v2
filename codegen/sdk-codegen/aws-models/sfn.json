@@ -2853,6 +2853,15 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.sfn#ExceptionHandlerIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.sfn#ExecutionAbortedEventDetails": {
             "type": "structure",
             "members": {
@@ -3403,7 +3412,7 @@
                 "timestamp": {
                     "target": "com.amazonaws.sfn#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time the event occurred.</p>",
+                        "smithy.api#documentation": "<p>The date and time the event occurred, expressed in seconds and fractional milliseconds since the Unix epoch, which is defined as January 1, 1970, at 00:00:00 Coordinated Universal Time (UTC).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4106,6 +4115,54 @@
                     "traits": {
                         "smithy.api#documentation": "<p>JSON string that contains the set of workflow variables after execution of the state. The set will include variables assigned in the state and variables set up as test state input.</p>"
                     }
+                },
+                "errorDetails": {
+                    "target": "com.amazonaws.sfn#InspectionErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing data about a handled exception in the tested state.</p>"
+                    }
+                },
+                "afterItemsPath": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective input after the ItemsPath filter is applied. Not populated when the QueryLanguage is JSONata.</p>"
+                    }
+                },
+                "afterItemSelector": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the inputs for each Map iteration, transformed by the ItemSelector specified in a Map state.</p>"
+                    }
+                },
+                "afterItemBatcher": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective input after the ItemBatcher filter is applied in a Map state.</p>"
+                    }
+                },
+                "afterItemsPointer": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective input after the ItemsPointer filter is applied in a Map state.</p>"
+                    }
+                },
+                "toleratedFailureCount": {
+                    "target": "com.amazonaws.sfn#InspectionToleratedFailureCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tolerated failure threshold for a Map state as defined in number of Map state iterations.</p>"
+                    }
+                },
+                "toleratedFailurePercentage": {
+                    "target": "com.amazonaws.sfn#InspectionToleratedFailurePercentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tolerated failure threshold for a Map state as defined in percentage of Map state iterations.</p>"
+                    }
+                },
+                "maxConcurrency": {
+                    "target": "com.amazonaws.sfn#InspectionMaxConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The max concurrency of the Map state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4189,6 +4246,32 @@
                 "smithy.api#documentation": "<p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP response information. The <code>inspectionLevel</code> request parameter specifies which details are returned.</p>"
             }
         },
+        "com.amazonaws.sfn#InspectionErrorDetails": {
+            "type": "structure",
+            "members": {
+                "catchIndex": {
+                    "target": "com.amazonaws.sfn#ExceptionHandlerIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array index of the Catch which handled the exception.</p>"
+                    }
+                },
+                "retryIndex": {
+                    "target": "com.amazonaws.sfn#ExceptionHandlerIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array index of the Retry which handled the exception.</p>"
+                    }
+                },
+                "retryBackoffIntervalSeconds": {
+                    "target": "com.amazonaws.sfn#RetryBackoffIntervalSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds of the backoff for a retry on a failed state invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing data about a handled exception in the tested state.</p>"
+            }
+        },
         "com.amazonaws.sfn#InspectionLevel": {
             "type": "enum",
             "members": {
@@ -4210,6 +4293,34 @@
                         "smithy.api#enumValue": "TRACE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sfn#InspectionMaxConcurrency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sfn#InspectionToleratedFailureCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sfn#InspectionToleratedFailurePercentage": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.sfn#InvalidArn": {
@@ -5196,6 +5307,14 @@
                 "smithy.api#documentation": "<p>Contains details about an iteration of a Map state.</p>"
             }
         },
+        "com.amazonaws.sfn#MapIterationFailureCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.sfn#MapRunExecutionCounts": {
             "type": "structure",
             "members": {
@@ -5534,6 +5653,75 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.sfn#MockErrorOutput": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.sfn#SensitiveError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string denoting the error code of the exception thrown when invoking the tested state. This field is required if <code>mock.errorOutput</code> is specified.</p>"
+                    }
+                },
+                "cause": {
+                    "target": "com.amazonaws.sfn#SensitiveCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the cause of the exception thrown when executing the state's logic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON object that contains a mocked error.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MockInput": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string containing the mocked result of the state invocation.</p>"
+                    }
+                },
+                "errorOutput": {
+                    "target": "com.amazonaws.sfn#MockErrorOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mocked error output when calling TestState. When specified, the mocked response is returned as a JSON object that contains an <code>error</code> and <code>cause</code> field.</p>"
+                    }
+                },
+                "fieldValidationMode": {
+                    "target": "com.amazonaws.sfn#MockResponseValidationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the level of strictness when validating mocked results against their respective API models. Values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STRICT</code>: All required fields must be present, and all present fields must conform to the API's schema.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PRESENT</code>: All present fields must conform to the API's schema.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: No validation is performed.</p>\n            </li>\n         </ul>\n         <p>If no value is specified, the default value is <code>STRICT</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON object that contains a mocked <code>result</code> or <code>errorOutput</code>.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MockResponseValidationMode": {
+            "type": "enum",
+            "members": {
+                "STRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRICT"
+                    }
+                },
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sfn#Name": {
             "type": "string",
             "traits": {
@@ -5734,6 +5922,23 @@
                 "smithy.api#documentation": "<p>Could not find the referenced resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.sfn#RetrierRetryCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sfn#RetryBackoffIntervalSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.sfn#RevealSecrets": {
@@ -5986,7 +6191,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 262144
+                    "max": 1048576
                 },
                 "smithy.api#sensitive": {}
             }
@@ -7137,10 +7342,42 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine. Using this API, you can test the following:</p>\n         <ul>\n            <li>\n               <p>A state's <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow\">input and output processing</a> data flow</p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html\">Amazon Web Services service integration</a> request and response</p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/call-https-apis.html\">HTTP Task</a> request and response</p>\n            </li>\n         </ul>\n         <p>You can call this API on only one state at a time. The states that you can test include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types\">All Task types</a> except <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html\">Activity</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html\">Pass</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html\">Wait</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html\">Choice</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html\">Succeed</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html\">Fail</a>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>TestState</code> API assumes an IAM role which must contain the required IAM permissions for the resources your state is accessing. For information about the permissions a state might need, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions\">IAM permissions to test a state</a>.</p>\n         <p>The <code>TestState</code> API can run for up to five minutes. If the execution of a state exceeds this duration, it fails with the <code>States.Timeout</code> error.</p>\n         <p>\n            <code>TestState</code> doesn't support <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html\">Activity tasks</a>, <code>.sync</code> or <code>.waitForTaskToken</code>\n            <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html\">service integration patterns</a>, <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html\">Parallel</a>, or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html\">Map</a> states.</p>",
+                "smithy.api#documentation": "<p>Accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine. Using this API, you can test the following:</p>\n         <ul>\n            <li>\n               <p>A state's <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow\">input and output processing</a> data flow</p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html\">Amazon Web Services service integration</a> request and response</p>\n            </li>\n            <li>\n               <p>An <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/call-https-apis.html\">HTTP Task</a> request and response</p>\n            </li>\n         </ul>\n         <p>You can call this API on only one state at a time. The states that you can test include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types\">All Task types</a> except <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html\">Activity</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html\">Pass</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html\">Wait</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html\">Choice</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html\">Succeed</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html\">Fail</a>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>TestState</code> API assumes an IAM role which must contain the required IAM permissions for the resources your state is accessing. For information about the permissions a state might need, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions\">IAM permissions to test a state</a>.</p>\n         <p>The <code>TestState</code> API can run for up to five minutes. If the execution of a state exceeds this duration, it fails with the <code>States.Timeout</code> error.</p>\n         <p>\n            <code>TestState</code> only supports the following when a mock is specified: <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html\">Activity tasks</a>, <code>.sync</code> or <code>.waitForTaskToken</code>\n            <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html\">service integration patterns</a>, <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html\">Parallel</a>, or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html\">Map</a> states.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "sync-"
                 }
+            }
+        },
+        "com.amazonaws.sfn#TestStateConfiguration": {
+            "type": "structure",
+            "members": {
+                "retrierRetryCount": {
+                    "target": "com.amazonaws.sfn#RetrierRetryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of retry attempts that have occurred for the state's Retry that applies to the mocked error.</p>"
+                    }
+                },
+                "errorCausedByState": {
+                    "target": "com.amazonaws.sfn#TestStateStateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the state from which an error originates when an error is mocked for a Map or Parallel state.</p>"
+                    }
+                },
+                "mapIterationFailureCount": {
+                    "target": "com.amazonaws.sfn#MapIterationFailureCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Map state iterations that failed during the Map state invocation.</p>"
+                    }
+                },
+                "mapItemReaderData": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data read by ItemReader in Distributed Map states as found in its original source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for the tested state.</p>"
             }
         },
         "com.amazonaws.sfn#TestStateInput": {
@@ -7149,7 +7386,7 @@
                 "definition": {
                     "target": "com.amazonaws.sfn#Definition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> (ASL) definition of the state.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> (ASL) definition of the state or state machine.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7182,6 +7419,30 @@
                     "target": "com.amazonaws.sfn#SensitiveData",
                     "traits": {
                         "smithy.api#documentation": "<p>JSON object literal that sets variables used in the state under test. Object keys are the variable names and values are the variable values.</p>"
+                    }
+                },
+                "stateName": {
+                    "target": "com.amazonaws.sfn#TestStateStateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Denotes the particular state within a state machine definition to be tested. If this field is specified, the <code>definition</code> must contain a fully-formed state machine definition.</p>"
+                    }
+                },
+                "mock": {
+                    "target": "com.amazonaws.sfn#MockInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a mocked result or error for the state under test.</p>\n         <p>A mock can only be specified for Task, Map, or Parallel states. If it is specified for another state type, an exception will be thrown.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.sfn#SensitiveData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string representing a valid Context object for the state under test. This field may only be specified if a mock is specified in the same request.</p>"
+                    }
+                },
+                "stateConfiguration": {
+                    "target": "com.amazonaws.sfn#TestStateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for the state under test.</p>"
                     }
                 }
             },
@@ -7231,6 +7492,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sfn#TestStateStateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.sfn#TimeoutInSeconds": {

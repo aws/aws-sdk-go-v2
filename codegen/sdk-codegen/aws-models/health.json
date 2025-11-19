@@ -849,7 +849,7 @@
                 "statusCode": {
                     "target": "com.amazonaws.health#entityStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The most recent status of the entity affected by the event. The possible values are\n            <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, and <code>UNKNOWN</code>.</p>"
+                        "smithy.api#documentation": "<p>The most recent status of the entity affected by the event. The possible values are\n            <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, <code>UNKNOWN</code>, <code>PENDING</code>, and <code>RESOLVED</code>.</p>"
                     }
                 },
                 "tags": {
@@ -1945,6 +1945,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>\n         <ul>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the\n                  <code>affectedAccounts</code> value is always empty.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then\n               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your\n               organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you\n               have Amazon Web Services accounts that use that service, those account IDs appear in the\n               response.</p>\n            </li>\n            <li>\n               <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the\n                  <code>eventArn</code> that you specified in the request is invalid or doesn't\n               exist.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "actionability": {
+                    "target": "com.amazonaws.health#EventActionability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actionability classification of the event. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>. Events with <code>ACTION_REQUIRED</code> actionability require customer action to resolve or mitigate the event. Events with <code>ACTION_MAY_BE_REQUIRED</code> actionability indicates that the current status is unknown or conditional and inspection is needed to determine if action is required.\nEvents with <code>INFORMATIONAL</code> actionability are provided for awareness and do not require immediate action.</p>"
+                    }
+                },
+                "personas": {
+                    "target": "com.amazonaws.health#EventPersonaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of persona classifications that indicate the target audience for the event. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>. Events can be associated with multiple personas to indicate relevance to different teams or roles within an organization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1970,6 +1982,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The values used to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a> and <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a> operations.</p>"
+            }
+        },
+        "com.amazonaws.health#EventActionability": {
+            "type": "enum",
+            "members": {
+                "ACTION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_REQUIRED"
+                    }
+                },
+                "ACTION_MAY_BE_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_MAY_BE_REQUIRED"
+                    }
+                },
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMATIONAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.health#EventActionabilityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#EventActionability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.health#EventAggregate": {
@@ -2083,6 +2130,12 @@
         "com.amazonaws.health#EventFilter": {
             "type": "structure",
             "members": {
+                "actionabilities": {
+                    "target": "com.amazonaws.health#EventActionabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actionability values to filter events. Use this to filter events based on whether they require action (<code>ACTION_REQUIRED</code>), may require action (<code>ACTION_MAY_BE_REQUIRED</code>) or are informational (<code>INFORMATIONAL</code>).</p>"
+                    }
+                },
                 "eventArns": {
                     "target": "com.amazonaws.health#eventArnList",
                     "traits": {
@@ -2160,6 +2213,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of event status codes.</p>"
                     }
+                },
+                "personas": {
+                    "target": "com.amazonaws.health#EventPersonaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of persona values to filter events. Use this to filter events based on their target audience: <code>OPERATIONS</code>, <code>SECURITY</code>, or <code>BILLING</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2170,6 +2229,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.health#Event"
+            }
+        },
+        "com.amazonaws.health#EventPersona": {
+            "type": "enum",
+            "members": {
+                "OPERATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATIONS"
+                    }
+                },
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY"
+                    }
+                },
+                "BILLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.health#EventPersonaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#EventPersona"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.health#EventType": {
@@ -2192,6 +2286,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"
                     }
+                },
+                "actionability": {
+                    "target": "com.amazonaws.health#EventTypeActionability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actionability classification of the event. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>. Events with <code>ACTION_REQUIRED</code> actionability require customer action to resolve or mitigate the event. Events with <code>ACTION_MAY_BE_REQUIRED</code> actionability indicates that the current status is unknown or conditional and inspection is needed to determine if action is required.\nEvents with <code>INFORMATIONAL</code> actionability are provided for awareness and do not require immediate action.</p>"
+                    }
+                },
+                "personas": {
+                    "target": "com.amazonaws.health#EventTypePersonaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of persona classifications that indicate the target audience for the event. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>. Events can be associated with multiple personas to indicate relevance to different teams or roles within an organization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2206,6 +2312,41 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[^:/]{3,100}$"
+            }
+        },
+        "com.amazonaws.health#EventTypeActionability": {
+            "type": "enum",
+            "members": {
+                "ACTION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_REQUIRED"
+                    }
+                },
+                "ACTION_MAY_BE_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_MAY_BE_REQUIRED"
+                    }
+                },
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMATIONAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.health#EventTypeActionabilityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#EventTypeActionability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.health#EventTypeCategoryList": {
@@ -2252,6 +2393,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of event type category codes. Possible values are\n<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,\nthe <code>investigation</code> value isn't supported at this time.</p>"
                     }
+                },
+                "actionabilities": {
+                    "target": "com.amazonaws.health#EventTypeActionabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actionability values to filter event types. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>.</p>"
+                    }
+                },
+                "personas": {
+                    "target": "com.amazonaws.health#EventTypePersonaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of persona classifications to filter event types. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2262,6 +2415,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.health#EventType"
+            }
+        },
+        "com.amazonaws.health#EventTypePersona": {
+            "type": "enum",
+            "members": {
+                "OPERATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATIONS"
+                    }
+                },
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY"
+                    }
+                },
+                "BILLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.health#EventTypePersonaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#EventTypePersona"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.health#InvalidPaginationToken": {
@@ -2445,6 +2633,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The most recent status of the event. Possible values are <code>open</code>,\n            <code>closed</code>, and <code>upcoming</code>.</p>"
                     }
+                },
+                "actionability": {
+                    "target": "com.amazonaws.health#EventActionability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actionability classification of the event. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>. Events with <code>ACTION_REQUIRED</code> actionability require customer action to resolve or mitigate the event. Events with <code>ACTION_MAY_BE_REQUIRED</code> actionability indicates that the current status is unknown or conditional and inspection is needed to determine if action is required.\nEvents with <code>INFORMATIONAL</code> actionability are provided for awareness and do not require immediate action.</p>"
+                    }
+                },
+                "personas": {
+                    "target": "com.amazonaws.health#EventPersonaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of persona classifications that indicate the target audience for the event. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>. Events can be associated with multiple personas to indicate relevance to different teams or roles within an organization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2536,6 +2736,12 @@
         "com.amazonaws.health#OrganizationEventFilter": {
             "type": "structure",
             "members": {
+                "actionabilities": {
+                    "target": "com.amazonaws.health#EventActionabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actionability values to filter events. Use this to filter events based on whether they require action (<code>ACTION_REQUIRED</code>), may require action (<code>ACTION_MAY_BE_REQUIRED</code>) or are informational (<code>INFORMATIONAL</code>).</p>"
+                    }
+                },
                 "eventTypeCodes": {
                     "target": "com.amazonaws.health#eventTypeList2",
                     "traits": {
@@ -2591,6 +2797,12 @@
                     "target": "com.amazonaws.health#eventStatusCodeList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of event status codes.</p>"
+                    }
+                },
+                "personas": {
+                    "target": "com.amazonaws.health#EventPersonaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of persona values to filter events. Use this to filter events based on their target audience: <code>OPERATIONS</code>, <code>SECURITY</code>, or <code>BILLING</code>.</p>"
                     }
                 }
             },

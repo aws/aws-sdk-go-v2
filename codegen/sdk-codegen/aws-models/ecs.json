@@ -3676,6 +3676,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to propagate tags from the capacity provider to the Amazon ECS\n\t\t\tManaged Instances. When enabled, tags applied to the capacity provider are automatically\n\t\t\tapplied to all instances launched by this provider.</p>"
                     }
+                },
+                "infrastructureOptimization": {
+                    "target": "com.amazonaws.ecs#InfrastructureOptimization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how Amazon ECS Managed Instances optimizes the infrastastructure in your capacity provider. \n\t\tProvides control over the delay between when EC2 instances become idle or underutilized and when Amazon ECS optimizes them.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7781,6 +7787,20 @@
                 "target": "com.amazonaws.ecs#InferenceAccelerator"
             }
         },
+        "com.amazonaws.ecs#InfrastructureOptimization": {
+            "type": "structure",
+            "members": {
+                "scaleInAfter": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. \n\t\tA longer delay increases the likelihood of placing new tasks on idle or underutilized instances instances, reducing startup time. \n\t\tA shorter delay helps reduce infrastructure costs by optimizing idle or underutilized instances,instances more quickly.</p>\n         <p>Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>null</code> - Uses the default optimization behavior.</p>\n            </li>\n            <li>\n               <p>\n                  <code>-1</code> - Disables automatic infrastructure optimization.</p>\n            </li>\n            <li>\n               <p>A value between <code>0</code> and <code>3600</code> (inclusive) - Specifies the number of seconds to wait before optimizing instances.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that controls how Amazon ECS optimizes your infrastructure.</p>"
+            }
+        },
         "com.amazonaws.ecs#InstanceGeneration": {
             "type": "enum",
             "members": {
@@ -9887,6 +9907,12 @@
                     "target": "com.amazonaws.ecs#PropagateMITags",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether tags from the capacity provider are automatically applied to Amazon\n\t\t\tECS Managed Instances. This helps with cost allocation and resource management by\n\t\t\tensuring consistent tagging across your infrastructure.</p>"
+                    }
+                },
+                "infrastructureOptimization": {
+                    "target": "com.amazonaws.ecs#InfrastructureOptimization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how Amazon ECS Managed Instances optimizes the infrastastructure in your capacity provider. \n\t\tConfigure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle or underutilized EC2 instances optimization delay.</p>"
                     }
                 }
             },
@@ -16720,6 +16746,12 @@
                     "target": "com.amazonaws.ecs#PropagateMITags",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated tag propagation setting. When changed, this affects only new instances\n\t\t\tlaunched after the update.</p>"
+                    }
+                },
+                "infrastructureOptimization": {
+                    "target": "com.amazonaws.ecs#InfrastructureOptimization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated infrastructure optimization configuration. \n\t\tChanges to this setting affect how Amazon ECS optimizes instances going forward.</p>"
                     }
                 }
             },

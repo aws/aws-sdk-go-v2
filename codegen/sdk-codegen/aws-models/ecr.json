@@ -88,6 +88,9 @@
                     "target": "com.amazonaws.ecr#DeleteRepositoryPolicy"
                 },
                 {
+                    "target": "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusion"
+                },
+                {
                     "target": "com.amazonaws.ecr#DescribeImageReplicationStatus"
                 },
                 {
@@ -136,7 +139,13 @@
                     "target": "com.amazonaws.ecr#InitiateLayerUpload"
                 },
                 {
+                    "target": "com.amazonaws.ecr#ListImageReferrers"
+                },
+                {
                     "target": "com.amazonaws.ecr#ListImages"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ListPullTimeUpdateExclusions"
                 },
                 {
                     "target": "com.amazonaws.ecr#ListTagsForResource"
@@ -166,6 +175,9 @@
                     "target": "com.amazonaws.ecr#PutReplicationConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.ecr#RegisterPullTimeUpdateExclusion"
+                },
+                {
                     "target": "com.amazonaws.ecr#SetRepositoryPolicy"
                 },
                 {
@@ -179,6 +191,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UpdateImageStorageClass"
                 },
                 {
                     "target": "com.amazonaws.ecr#UpdatePullThroughCacheRule"
@@ -2262,11 +2277,93 @@
                 }
             }
         },
+        "com.amazonaws.ecr#Annotations": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ecr#String"
+            },
+            "value": {
+                "target": "com.amazonaws.ecr#String"
+            }
+        },
         "com.amazonaws.ecr#Arch": {
             "type": "string"
         },
         "com.amazonaws.ecr#Arn": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#ArtifactStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ArtifactStatusFilter": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ArtifactType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.ecr#ArtifactTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ArtifactType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
         },
         "com.amazonaws.ecr#Attribute": {
             "type": "structure",
@@ -2793,6 +2890,18 @@
                 }
             }
         },
+        "com.amazonaws.ecr#BlockedByOrganizationPolicyException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation did not succeed because the account is managed by a organization policy.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecr#CompleteLayerUpload": {
             "type": "operation",
             "input": {
@@ -2955,7 +3064,7 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.ecr#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR (<code>ecr</code>) –\n                    <code><accountId>.dkr.ecr.<region>.amazonaws.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) – <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) –\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) –\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) –\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) – <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) –\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) – <code>quay.io</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR (<code>ecr</code>) –\n                        <code><accountId>.dkr.ecr.<region>.amazonaws.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) – <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) –\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) –\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) –\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) – <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) –\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) – <code>quay.io</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3167,7 +3276,7 @@
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates a repository creation template with a list of filters that define which image tags can override the default image tag mutability setting.</p>"
+                        "smithy.api#documentation": "<p>A list of filters that specify which image tags should be excluded from the repository\n            creation template's image tag mutability setting.</p>"
                     }
                 },
                 "repositoryPolicy": {
@@ -3251,13 +3360,13 @@
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates a repository with a list of filters that define which image tags can override the default image tag mutability setting.</p>"
+                        "smithy.api#documentation": "<p>A list of filters that specify which image tags should be excluded from the\n            repository's image tag mutability setting.</p>"
                     }
                 },
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.ecr#ImageScanningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image scanning configuration for the repository. This determines whether images\n            are scanned for known vulnerabilities after being pushed to the repository.</p>"
+                        "smithy.api#documentation": "<important>\n            <p>The <code>imageScanningConfiguration</code> parameter is being deprecated, in\n                favor of specifying the image scanning configuration at the registry level. For more\n                information, see <code>PutRegistryScanningConfiguration</code>.</p>\n         </important>\n         <p>The image scanning configuration for the repository. This determines whether images\n            are scanned for known vulnerabilities after being pushed to the repository.</p>"
                     }
                 },
                 "encryptionConfiguration": {
@@ -3295,7 +3404,7 @@
                     "min": 50,
                     "max": 612
                 },
-                "smithy.api#pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"
+                "smithy.api#pattern": "^arn:aws(-\\w+)*:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"
             }
         },
         "com.amazonaws.ecr#CustomRoleArn": {
@@ -3882,6 +3991,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#ExclusionNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a principal from the pull time update exclusion list for a registry. Once removed, Amazon ECR will resume updating the pull time if the specified principal pulls an image.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove a principal from the pull time exclusion list",
+                        "documentation": "This example removes an IAM role from the pull time update exclusion list. Amazon ECR will resume recording image pull timestamps for this principal.",
+                        "input": {
+                            "principalArn": "arn:aws:iam::012345678910:role/ECRAccess"
+                        },
+                        "output": {
+                            "principalArn": "arn:aws:iam::012345678910:role/ECRAccess"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusionRequest": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.ecr#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM principal to remove from the pull time update exclusion list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusionResponse": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.ecr#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM principal that was removed from the pull time update exclusion list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#DescribeImageReplicationStatus": {
             "type": "operation",
             "input": {
@@ -4129,7 +4308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about the images in a repository.</p>\n         <note>\n            <p>Starting with Docker version 1.9, the Docker client compresses image layers before\n                pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n                command shows the uncompressed image size. Therefore, Docker might return a larger\n                image than the image shown in the Amazon Web Services Management Console.</p>\n         </note>\n         <important>\n            <p>The new version of Amazon ECR <i>Basic Scanning</i> doesn't use the\n                <a>ImageDetail$imageScanFindingsSummary</a> and\n                <a>ImageDetail$imageScanStatus</a>\n                attributes from the API response to return scan results.\n                Use the <a>DescribeImageScanFindings</a> API instead. For more\n                information about Amazon Web Services native basic scanning, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\"> Scan images for software\n                    vulnerabilities in Amazon ECR</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Returns metadata about the images in a repository.</p>\n         <note>\n            <p>Starting with Docker version 1.9, the Docker client compresses image layers before\n                pushing them to a V2 Docker registry. The output of the <code>docker images</code>\n                command shows the uncompressed image size. Therefore, Docker might return a larger\n                image than the image shown in the Amazon Web Services Management Console.</p>\n         </note>\n         <important>\n            <p>The new version of Amazon ECR\n                <i>Basic Scanning</i> doesn't use the <a>ImageDetail$imageScanFindingsSummary</a> and <a>ImageDetail$imageScanStatus</a> attributes from the API response to\n                return scan results. Use the <a>DescribeImageScanFindings</a> API\n                instead. For more information about Amazon Web Services native basic scanning, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\"> Scan\n                    images for software vulnerabilities in Amazon ECR</a>.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4145,6 +4324,12 @@
                     "target": "com.amazonaws.ecr#TagStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag status with which to filter your <a>DescribeImages</a> results. You\n            can filter results based on whether they are <code>TAGGED</code> or\n                <code>UNTAGGED</code>.</p>"
+                    }
+                },
+                "imageStatus": {
+                    "target": "com.amazonaws.ecr#ImageStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image status with which to filter your <a>DescribeImages</a> results. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.</p>"
                     }
                 }
             },
@@ -4752,11 +4937,44 @@
         "com.amazonaws.ecr#ExceptionMessage": {
             "type": "string"
         },
+        "com.amazonaws.ecr#ExclusionAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified pull time update exclusion already exists for the registry.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ExclusionNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified pull time update exclusion was not found.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecr#ExpirationTimestamp": {
             "type": "timestamp"
         },
         "com.amazonaws.ecr#ExploitAvailable": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#FiftyMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
         },
         "com.amazonaws.ecr#FilePath": {
             "type": "string"
@@ -5509,6 +5727,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EXPIRE"
                     }
+                },
+                "TRANSITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSITION"
+                    }
                 }
             }
         },
@@ -5524,6 +5748,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The specified image has already been pushed, and there were no changes to the manifest\n            or image tag after the last push.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ImageArchivedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified image is archived and cannot be scanned.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5602,6 +5838,30 @@
                     "target": "com.amazonaws.ecr#RecordedPullTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded\n            the last image pull.</p>\n         <note>\n            <p>Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For\n                example, if you pull an image once a day then the <code>lastRecordedPullTime</code>\n                timestamp will indicate the exact time that the image was last pulled. However, if\n                you pull an image once an hour, because Amazon ECR refreshes the\n                    <code>lastRecordedPullTime</code> timestamp at least once every 24 hours, the\n                result may not be the exact time that the image was last pulled.</p>\n         </note>"
+                    }
+                },
+                "subjectManifestDigest": {
+                    "target": "com.amazonaws.ecr#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The digest of the subject manifest for images that are referrers.</p>"
+                    }
+                },
+                "imageStatus": {
+                    "target": "com.amazonaws.ecr#ImageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the image.</p>"
+                    }
+                },
+                "lastArchivedAt": {
+                    "target": "com.amazonaws.ecr#LastArchivedAtTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, when the image was last transitioned to Amazon ECR archive.</p>"
+                    }
+                },
+                "lastActivatedAt": {
+                    "target": "com.amazonaws.ecr#LastActivatedAtTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, when the image was last restored from Amazon ECR archive to Amazon ECR standard.</p>"
                     }
                 }
             },
@@ -5718,6 +5978,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UpstreamUnavailable"
                     }
+                },
+                "ImageInaccessible": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImageInaccessible"
+                    }
                 }
             }
         },
@@ -5787,6 +6053,59 @@
             "traits": {
                 "smithy.api#documentation": "<p>The image requested does not exist in the specified repository.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ImageReferrer": {
+            "type": "structure",
+            "members": {
+                "digest": {
+                    "target": "com.amazonaws.ecr#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The digest of the artifact manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mediaType": {
+                    "target": "com.amazonaws.ecr#MediaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The media type of the artifact manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "artifactType": {
+                    "target": "com.amazonaws.ecr#ArtifactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string identifying the type of artifact.</p>"
+                    }
+                },
+                "size": {
+                    "target": "com.amazonaws.ecr#ImageSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size, in bytes, of the artifact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "annotations": {
+                    "target": "com.amazonaws.ecr#Annotations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of annotations associated with the artifact.</p>"
+                    }
+                },
+                "artifactStatus": {
+                    "target": "com.amazonaws.ecr#ArtifactStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the artifact. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, or <code>ACTIVATING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing an artifact associated with a subject image.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ImageReferrerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ImageReferrer"
             }
         },
         "com.amazonaws.ecr#ImageReplicationStatus": {
@@ -5973,6 +6292,70 @@
         "com.amazonaws.ecr#ImageSizeInBytes": {
             "type": "long"
         },
+        "com.amazonaws.ecr#ImageStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ImageStatusFilter": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ImageStorageClassUpdateNotSupportedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested image storage class update is not supported.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecr#ImageTag": {
             "type": "string",
             "traits": {
@@ -6035,20 +6418,20 @@
                 "filterType": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of filter to use for excluding image tags from the repository's mutability setting.</p>",
+                        "smithy.api#documentation": "<p>The type of filter to apply for excluding image tags from mutability settings.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "filter": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value to use when filtering image tags. Must be either a regular expression pattern or a tag prefix value based on the specified filter type.</p>",
+                        "smithy.api#documentation": "<p>The filter value used to match image tags for exclusion from mutability\n            settings.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.</p>"
+                "smithy.api#documentation": "<p>A filter that specifies which image tags should be excluded from the repository's\n            image tag mutability setting.</p>"
             }
         },
         "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterType": {
@@ -6292,6 +6675,12 @@
                 "smithy.api#pattern": "^$|arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key\\/[a-z0-9-]+$"
             }
         },
+        "com.amazonaws.ecr#LastActivatedAtTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.ecr#LastArchivedAtTimestamp": {
+            "type": "timestamp"
+        },
         "com.amazonaws.ecr#Layer": {
             "type": "structure",
             "members": {
@@ -6352,6 +6741,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
                     }
                 }
             }
@@ -6571,6 +6966,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The priority of the applied rule.</p>"
                     }
+                },
+                "storageClass": {
+                    "target": "com.amazonaws.ecr#LifecyclePolicyStorageClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage class of the image.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6620,6 +7021,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of expiring images.</p>"
                     }
+                },
+                "transitioningImageTotalCounts": {
+                    "target": "com.amazonaws.ecr#TransitioningImageTotalCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count of images that will be transitioned to each storage class.\n            This field is only present if at least one image will be transitoned in the summary.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6634,6 +7041,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of action to be taken.</p>"
                     }
+                },
+                "targetStorageClass": {
+                    "target": "com.amazonaws.ecr#LifecyclePolicyTargetStorageClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target storage class for the action. This is only present when the <code>type</code> is <code>TRANSITION.</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -6645,6 +7058,34 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ecr#LifecyclePolicyStorageClass": {
+            "type": "enum",
+            "members": {
+                "ARCHIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVE"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#LifecyclePolicyTargetStorageClass": {
+            "type": "enum",
+            "members": {
+                "ARCHIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVE"
+                    }
                 }
             }
         },
@@ -6688,6 +7129,217 @@
             "traits": {
                 "smithy.api#documentation": "<p>The operation did not succeed because it would have exceeded a service limit for your\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html\">Amazon ECR service quotas</a> in\n            the Amazon Elastic Container Registry User Guide.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ListImageReferrers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#ListImageReferrersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#ListImageReferrersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the artifacts associated with a specified subject image.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list both active and archived artifacts",
+                        "documentation": "This example lists all artifacts including those that have been archived, by specifying the artifactStatus filter as ANY.",
+                        "input": {
+                            "repositoryName": "sample-repo",
+                            "subjectId": {
+                                "imageDigest": "sha256:943e640159415616581703a53fa4ed87e96740655fd67daf2d2146a35337bce5"
+                            },
+                            "filter": {
+                                "artifactStatus": "ANY"
+                            }
+                        },
+                        "output": {
+                            "referrers": [
+                                {
+                                    "digest": "sha256:270c60be5b6ed41e6e7c505ac0c4e2577748affc14147bcba76b533604dc7a07",
+                                    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+                                    "artifactType": "application/vnd.dev.sigstore.bundle.v0.3+json",
+                                    "size": 888,
+                                    "annotations": {
+                                        "dev.sigstore.bundle.predicateType": "https://sigstore.dev/cosign/sign/v1",
+                                        "dev.sigstore.bundle.content": "dsse-envelope",
+                                        "org.opencontainers.image.created": "2025-11-17T22:00:33Z"
+                                    },
+                                    "artifactStatus": "ACTIVE"
+                                },
+                                {
+                                    "digest": "sha256:5a1c89f2b3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0",
+                                    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+                                    "artifactType": "application/vnd.dev.sigstore.bundle.v0.2+json",
+                                    "size": 856,
+                                    "annotations": {
+                                        "dev.sigstore.bundle.predicateType": "https://sigstore.dev/cosign/sign/v1",
+                                        "org.opencontainers.image.created": "2025-10-15T14:30:00Z"
+                                    },
+                                    "artifactStatus": "ARCHIVED"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list artifacts associated with a subject image",
+                        "documentation": "This example lists all artifacts (such as Sigstore signatures) that reference a specific container image in the sample-repo repository.",
+                        "input": {
+                            "repositoryName": "sample-repo",
+                            "subjectId": {
+                                "imageDigest": "sha256:943e640159415616581703a53fa4ed87e96740655fd67daf2d2146a35337bce5"
+                            }
+                        },
+                        "output": {
+                            "referrers": [
+                                {
+                                    "digest": "sha256:270c60be5b6ed41e6e7c505ac0c4e2577748affc14147bcba76b533604dc7a07",
+                                    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+                                    "artifactType": "application/vnd.dev.sigstore.bundle.v0.3+json",
+                                    "size": 888,
+                                    "annotations": {
+                                        "dev.sigstore.bundle.predicateType": "https://sigstore.dev/cosign/sign/v1",
+                                        "dev.sigstore.bundle.content": "dsse-envelope",
+                                        "org.opencontainers.image.created": "2025-11-17T22:00:33Z"
+                                    },
+                                    "artifactStatus": "ACTIVE"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list artifacts of a specific type",
+                        "documentation": "This example lists only Sigstore bundle artifacts associated with a subject image by filtering on the artifact type.",
+                        "input": {
+                            "repositoryName": "sample-repo",
+                            "subjectId": {
+                                "imageDigest": "sha256:943e640159415616581703a53fa4ed87e96740655fd67daf2d2146a35337bce5"
+                            },
+                            "filter": {
+                                "artifactTypes": [
+                                    "application/vnd.dev.sigstore.bundle.v0.3+json"
+                                ]
+                            }
+                        },
+                        "output": {
+                            "referrers": [
+                                {
+                                    "digest": "sha256:270c60be5b6ed41e6e7c505ac0c4e2577748affc14147bcba76b533604dc7a07",
+                                    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+                                    "artifactType": "application/vnd.dev.sigstore.bundle.v0.3+json",
+                                    "size": 888,
+                                    "annotations": {
+                                        "dev.sigstore.bundle.predicateType": "https://sigstore.dev/cosign/sign/v1",
+                                        "dev.sigstore.bundle.content": "dsse-envelope",
+                                        "org.opencontainers.image.created": "2025-11-17T22:00:33Z"
+                                    },
+                                    "artifactStatus": "ACTIVE"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecr#ListImageReferrersFilter": {
+            "type": "structure",
+            "members": {
+                "artifactTypes": {
+                    "target": "com.amazonaws.ecr#ArtifactTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The artifact types with which to filter your <a>ListImageReferrers</a> results.</p>"
+                    }
+                },
+                "artifactStatus": {
+                    "target": "com.amazonaws.ecr#ArtifactStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The artifact status with which to filter your <a>ListImageReferrers</a> results. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, <code>ACTIVATING</code>, or <code>ANY</code>. If not specified, only artifacts with <code>ACTIVE</code> status are returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a filter on a <a>ListImageReferrers</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ListImageReferrersRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to list image referrers. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that contains the subject image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subjectId": {
+                    "target": "com.amazonaws.ecr#SubjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the image digest of the subject image for which to retrieve associated artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.ecr#ListImageReferrersFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter key and value with which to filter your <code>ListImageReferrers</code>\n            results. If no filter is specified, only artifacts with <code>ACTIVE</code> status are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListImageReferrers</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value. This value is\n                <code>null</code> when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecr#FiftyMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of image referrer results returned by <code>ListImageReferrers</code> in paginated\n            output. When this parameter is used, <code>ListImageReferrers</code> only returns\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. The remaining results of the initial request can be seen by sending\n            another <code>ListImageReferrers</code> request with the returned <code>nextToken</code> value.\n            This value can be between 1 and 50. If this parameter is\n            not used, then <code>ListImageReferrers</code> returns up to 50 results and a\n                <code>nextToken</code> value, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#ListImageReferrersResponse": {
+            "type": "structure",
+            "members": {
+                "referrers": {
+                    "target": "com.amazonaws.ecr#ImageReferrerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of artifacts associated with the subject image.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListImageReferrers</code>\n            request. When the results of a <code>ListImageReferrers</code> request exceed\n                <code>maxResults</code>, this value can be used to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ecr#ListImages": {
@@ -6757,7 +7409,13 @@
                 "tagStatus": {
                     "target": "com.amazonaws.ecr#TagStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag status with which to filter your <a>ListImages</a> results. You can\n            filter results based on whether they are <code>TAGGED</code> or\n            <code>UNTAGGED</code>.</p>"
+                        "smithy.api#documentation": "<p>The tag status with which to filter your <a>ListImages</a> results.</p>"
+                    }
+                },
+                "imageStatus": {
+                    "target": "com.amazonaws.ecr#ImageStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image status with which to filter your <a>ListImages</a> results. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.</p>"
                     }
                 }
             },
@@ -6817,6 +7475,97 @@
                     "target": "com.amazonaws.ecr#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListImages</code>\n            request. When the results of a <code>ListImages</code> request exceed\n                <code>maxResults</code>, this value can be used to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecr#ListPullTimeUpdateExclusions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#ListPullTimeUpdateExclusionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#ListPullTimeUpdateExclusionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the IAM principals that are excluded from having their image pull times recorded.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list all pull time update exclusions",
+                        "documentation": "This example lists all IAM principals that are excluded from having their image pull timestamps recorded in the registry.",
+                        "output": {
+                            "pullTimeUpdateExclusions": [
+                                "arn:aws:iam::012345678910:role/ECRAccess"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list pull time update exclusions with pagination",
+                        "documentation": "This example lists pull time update exclusions with pagination, requesting a maximum of 2 results per page.",
+                        "input": {
+                            "maxResults": 2
+                        },
+                        "output": {
+                            "pullTimeUpdateExclusions": [
+                                "arn:aws:iam::012345678910:role/ECRAccess",
+                                "arn:aws:iam::012345678910:role/CICDPipeline"
+                            ],
+                            "nextToken": "eyJlbmNyeXB0ZWREYXRhIjpbXX0="
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecr#ListPullTimeUpdateExclusionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.ecr#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of pull time update exclusion results returned by <code>ListPullTimeUpdateExclusions</code> in\n            paginated output. When this parameter is used, <code>ListPullTimeUpdateExclusions</code> only returns\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. The remaining results of the initial request can be seen by sending\n            another <code>ListPullTimeUpdateExclusions</code> request with the returned <code>nextToken</code> value.\n            This value can be between 1 and 1000. If this parameter is\n            not used, then <code>ListPullTimeUpdateExclusions</code> returns up to 100 results and a\n                <code>nextToken</code> value, if applicable.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListPullTimeUpdateExclusions</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value. This value is\n                <code>null</code> when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#ListPullTimeUpdateExclusionsResponse": {
+            "type": "structure",
+            "members": {
+                "pullTimeUpdateExclusions": {
+                    "target": "com.amazonaws.ecr#PullTimeUpdateExclusionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of IAM principal ARNs that are excluded from having their image pull times recorded.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListPullTimeUpdateExclusions</code>\n            request. When the results of a <code>ListPullTimeUpdateExclusions</code> request exceed\n                <code>maxResults</code>, this value can be used to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
                     }
                 }
             },
@@ -7007,6 +7756,16 @@
                 "target": "com.amazonaws.ecr#Prefix"
             }
         },
+        "com.amazonaws.ecr#PrincipalArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:(role|user)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"
+            }
+        },
         "com.amazonaws.ecr#ProxyEndpoint": {
             "type": "string"
         },
@@ -7120,6 +7879,18 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ecr#PullTimeUpdateExclusionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#PrincipalArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
                     "max": 100
                 }
             }
@@ -7271,7 +8042,7 @@
                 "imageTag": {
                     "target": "com.amazonaws.ecr#ImageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag to associate with the image. This parameter is required for images that use\n            the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.</p>"
+                        "smithy.api#documentation": "<p>The tag to associate with the image. This parameter is optional.</p>"
                     }
                 },
                 "imageDigest": {
@@ -7428,7 +8199,7 @@
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates or updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>"
+                        "smithy.api#documentation": "<p>A list of filters that specify which image tags should be excluded from the image tag\n            mutability setting being applied.</p>"
                     }
                 }
             },
@@ -7460,7 +8231,7 @@
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns a list of filters that were defined for a repository. These filters determine which image tags can override the default image tag mutability setting of the repository.</p>"
+                        "smithy.api#documentation": "<p>The list of filters that specify which image tags are excluded from the repository's\n            image tag mutability setting.</p>"
                     }
                 }
             },
@@ -7615,6 +8386,9 @@
                 "target": "com.amazonaws.ecr#PutRegistryScanningConfigurationResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.ecr#BlockedByOrganizationPolicyException"
+                },
                 {
                     "target": "com.amazonaws.ecr#InvalidParameterException"
                 },
@@ -7793,6 +8567,70 @@
                     "max": 25
                 },
                 "smithy.api#pattern": "^[0-9a-z-]{2,25}$"
+            }
+        },
+        "com.amazonaws.ecr#RegisterPullTimeUpdateExclusion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#RegisterPullTimeUpdateExclusionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#RegisterPullTimeUpdateExclusionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#ExclusionAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds an IAM principal to the pull time update exclusion list for a registry. Amazon ECR will not record the pull time if an excluded principal pulls an image.</p>"
+            }
+        },
+        "com.amazonaws.ecr#RegisterPullTimeUpdateExclusionRequest": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.ecr#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM principal to exclude from having image pull times recorded.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#RegisterPullTimeUpdateExclusionResponse": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.ecr#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM principal that was added to the pull time update exclusion list.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecr#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, when the exclusion was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ecr#RegistryId": {
@@ -8052,7 +8890,7 @@
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.</p>"
+                        "smithy.api#documentation": "<p>A list of filters that specify which image tags are excluded from the repository's\n            image tag mutability setting.</p>"
                     }
                 },
                 "imageScanningConfiguration": {
@@ -8114,13 +8952,13 @@
                 "imageTagMutability": {
                     "target": "com.amazonaws.ecr#ImageTagMutability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten.\n            If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which\n            will prevent them from being overwritten.</p>"
+                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be\n            overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the\n            repository will be immutable which will prevent them from being overwritten.</p>"
                     }
                 },
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.</p>"
+                        "smithy.api#documentation": "<p>A list of filters that specify which image tags are excluded from the repository\n            creation template's image tag mutability setting.</p>"
                     }
                 },
                 "repositoryPolicy": {
@@ -8545,6 +9383,12 @@
                     "traits": {
                         "smithy.api#enumValue": "LIMIT_EXCEEDED"
                     }
+                },
+                "IMAGE_ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_ARCHIVED"
+                    }
                 }
             }
         },
@@ -8813,6 +9657,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.ecr#ImageArchivedException"
+                },
+                {
                     "target": "com.amazonaws.ecr#ImageNotFoundException"
                 },
                 {
@@ -8835,7 +9682,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a basic image vulnerability scan.</p>\n         <p> A basic image scan can only be started once per 24\n            hours on an individual image. This limit includes if an image was scanned on initial\n            push. You can start up to 100,000 basic scans per 24 hours. This limit includes both scans on initial push\n            and scans initiated by the StartImageScan API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning-basic.html\">Basic scanning</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts a basic image vulnerability scan.</p>\n         <p> A basic image scan can only be started once per 24 hours on an individual image. This\n            limit includes if an image was scanned on initial push. You can start up to 100,000\n            basic scans per 24 hours. This limit includes both scans on initial push and scans\n            initiated by the StartImageScan API. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning-basic.html\">Basic scanning</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#StartImageScanRequest": {
@@ -8988,6 +9835,24 @@
         "com.amazonaws.ecr#Status": {
             "type": "string"
         },
+        "com.amazonaws.ecr#String": {
+            "type": "string"
+        },
+        "com.amazonaws.ecr#SubjectIdentifier": {
+            "type": "structure",
+            "members": {
+                "imageDigest": {
+                    "target": "com.amazonaws.ecr#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The digest of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that identifies an image subject.</p>"
+            }
+        },
         "com.amazonaws.ecr#Tag": {
             "type": "structure",
             "members": {
@@ -9118,6 +9983,23 @@
                 "target": "com.amazonaws.ecr#TagValue"
             }
         },
+        "com.amazonaws.ecr#TargetStorageClass": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "ARCHIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecr#TemplateAlreadyExistsException": {
             "type": "structure",
             "members": {
@@ -9155,6 +10037,32 @@
             "traits": {
                 "smithy.api#documentation": "<p>The list of tags on the repository is over the limit. The maximum number of tags that\n            can be applied to a repository is 50.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#TransitioningImageTotalCount": {
+            "type": "structure",
+            "members": {
+                "targetStorageClass": {
+                    "target": "com.amazonaws.ecr#LifecyclePolicyTargetStorageClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target storage class.</p>"
+                    }
+                },
+                "imageTotalCount": {
+                    "target": "com.amazonaws.ecr#ImageCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of images transitioning to the storage class.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The total count of images transitioning to a storage class.</p>"
+            }
+        },
+        "com.amazonaws.ecr#TransitioningImageTotalCounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#TransitioningImageTotalCount"
             }
         },
         "com.amazonaws.ecr#Type": {
@@ -9290,6 +10198,143 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#UpdateImageStorageClass": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#UpdateImageStorageClassRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#UpdateImageStorageClassResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#ImageNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ImageStorageClassUpdateNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Transitions an image between storage classes. You can transition images from Amazon ECR standard storage class to Amazon ECR archival storage class for long-term storage, or restore archived images back to Amazon ECR standard.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To transition an image to Amazon ECR Archive",
+                        "documentation": "This example transitions an image with a specific digest in the hello-repository repository to Amazon ECR Archive storage for long-term archival.",
+                        "input": {
+                            "registryId": "724772093679",
+                            "repositoryName": "hello-repository",
+                            "imageId": {
+                                "imageDigest": "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b"
+                            },
+                            "targetStorageClass": "ARCHIVE"
+                        },
+                        "output": {
+                            "registryId": "724772093679",
+                            "repositoryName": "hello-repository",
+                            "imageId": {
+                                "imageDigest": "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b"
+                            },
+                            "imageStatus": "ARCHIVED"
+                        }
+                    },
+                    {
+                        "title": "To restore an archived image to Amazon ECR Standard",
+                        "documentation": "This example restores an archived image with a specific digest back to Amazon ECR Standard storage.",
+                        "input": {
+                            "registryId": "724772093679",
+                            "repositoryName": "hello-repository",
+                            "imageId": {
+                                "imageDigest": "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b"
+                            },
+                            "targetStorageClass": "STANDARD"
+                        },
+                        "output": {
+                            "registryId": "724772093679",
+                            "repositoryName": "hello-repository",
+                            "imageId": {
+                                "imageDigest": "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b"
+                            },
+                            "imageStatus": "ACTIVATING"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecr#UpdateImageStorageClassRequest": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image to transition. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that contains the image to transition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetStorageClass": {
+                    "target": "com.amazonaws.ecr#TargetStorageClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target storage class for the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#UpdateImageStorageClassResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier"
+                },
+                "imageStatus": {
+                    "target": "com.amazonaws.ecr#ImageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the image after the call to UpdateImageStorageClass is complete. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#UpdatePullThroughCacheRule": {
             "type": "operation",
             "input": {
@@ -9350,7 +10395,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to the\n            ECR upstream registry. This role must be in the same account as the registry that you\n            are configuring.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to\n            the ECR upstream registry. This role must be in the same account as the registry that\n            you are configuring.</p>"
                     }
                 }
             },
@@ -9462,7 +10507,7 @@
                 "imageTagMutabilityExclusionFilters": {
                     "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>"
+                        "smithy.api#documentation": "<p>A list of filters that specify which image tags should be excluded from the repository\n            creation template's image tag mutability setting.</p>"
                     }
                 },
                 "repositoryPolicy": {

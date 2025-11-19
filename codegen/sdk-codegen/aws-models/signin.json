@@ -1,0 +1,1295 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.signin#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating the specific type of access denial\nCan be TOKEN_EXPIRED, AUTHCODE_EXPIRED, USER_CREDENTIALS_CHANGED, or INSUFFICIENT_PERMISSIONS",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message explaining the access denial\nProvides specific information about why access was denied",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown for access denied scenarios with flexible HTTP status mapping\n\nRuntime HTTP Status Code Mapping:\n- HTTP 401 (Unauthorized): TOKEN_EXPIRED, AUTHCODE_EXPIRED\n- HTTP 403 (Forbidden): USER_CREDENTIALS_CHANGED, INSUFFICIENT_PERMISSIONS\n\nThe specific HTTP status code is determined at runtime based on the error enum value.\nConsumers should use the error field to determine the specific access denial reason.",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.signin#AccessToken": {
+            "type": "structure",
+            "members": {
+                "accessKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "AWS access key ID for temporary credentials",
+                        "smithy.api#jsonName": "accessKeyId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretAccessKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "AWS secret access key for temporary credentials",
+                        "smithy.api#jsonName": "secretAccessKey",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "AWS session token for temporary credentials",
+                        "smithy.api#jsonName": "sessionToken",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "AWS credentials structure containing temporary access credentials\n\nThe scoped-down, 15 minute duration AWS credentials.\nScoping down will be based on CLI policy (CLI team needs to create it).\nSimilar to cloud shell implementation.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.signin#AuthorizationCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Authorization code received from AWS Sign-In /v1/authorize endpoint\n\nThe authorization code received from AWS Sign-In from /v1/authorize.\nUsed in auth code redemption flow only.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.signin#ClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Client identifier pattern for AWS Sign-In devtools clients\n\nThe ARN used by client as part of Sign-In onboarding. Expected values:\n- arn:aws:signin:::devtools/cross-device (for cross-device devtools login)\n- arn:aws:signin:::devtools/same-device (for same-device devtools login)\n\nThis will be finalized after consulting with UX as this is visible to end customer.",
+                "smithy.api#pattern": "^arn:aws:signin:::devtools/(cross-device|same-device)$"
+            }
+        },
+        "com.amazonaws.signin#CodeVerifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "PKCE code verifier for OAuth 2.0 security\n\nPKCE code verifier to prove possession of the original code challenge.\nUsed to prevent authorization code interception attacks in public clients.\nMust be 43-128 characters using unreserved characters [A-Z] / [a-z] / [0-9] / \"-\" / \".\" / \"_\" / \"~\"",
+                "smithy.api#length": {
+                    "min": 43,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-._~]+$"
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2Token": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#CreateOAuth2TokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#CreateOAuth2TokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "CreateOAuth2Token API\n\nPath: /v1/token\nRequest Method: POST\nContent-Type: application/json or application/x-www-form-urlencoded\n\nThis API implements OAuth 2.0 flows for AWS Sign-In CLI clients, supporting both:\n1. Authorization code redemption (grant_type=authorization_code) - NOT idempotent\n2. Token refresh (grant_type=refresh_token) - Idempotent within token validity window\n\nThe operation behavior is determined by the grant_type parameter in the request body:\n\n**Authorization Code Flow (NOT Idempotent):**\n- JSON or form-encoded body with client_id, grant_type=authorization_code, code, redirect_uri, code_verifier\n- Returns access_token, token_type, expires_in, refresh_token, and id_token\n- Each authorization code can only be used ONCE for security (prevents replay attacks)\n\n**Token Refresh Flow (Idempotent):**\n- JSON or form-encoded body with client_id, grant_type=refresh_token, refresh_token\n- Returns access_token, token_type, expires_in, and refresh_token (no id_token)\n- Multiple calls with same refresh_token return consistent results within validity window\n\nAuthentication and authorization:\n- Confidential clients: sigv4 signing required with signin:ExchangeToken permissions\n- CLI clients (public): authn/authz skipped based on client_id & grant_type\n\nNote: This operation cannot be marked as @idempotent because it handles both idempotent\n(token refresh) and non-idempotent (auth code redemption) flows in a single endpoint.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/token"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "TokenOperationSmokeTest",
+                        "params": {
+                            "tokenInput": {
+                                "clientId": "arn:aws:signin:::devtools/same-device",
+                                "grantType": "authorization_code",
+                                "code": "test-code",
+                                "redirectUri": "https://example.com",
+                                "codeVerifier": "test-code-verifier-1234567890abcdefghijklmnop"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {},
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenRequest": {
+            "type": "structure",
+            "members": {
+                "tokenInput": {
+                    "target": "com.amazonaws.signin#CreateOAuth2TokenRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "Flattened token operation inputs\nThe specific operation is determined by grant_type in the request body",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input structure for CreateOAuth2Token operation\n\nContains flattened token operation inputs for both authorization code and refresh token flows.\nThe operation type is determined by the grant_type parameter in the request body.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenRequestBody": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.signin#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "The client identifier (ARN) used during Sign-In onboarding\nRequired for both authorization code and refresh token flows",
+                        "smithy.api#jsonName": "clientId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "grantType": {
+                    "target": "com.amazonaws.signin#GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 grant type - determines which flow is used\nMust be \"authorization_code\" or \"refresh_token\"",
+                        "smithy.api#jsonName": "grantType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.signin#AuthorizationCode",
+                    "traits": {
+                        "smithy.api#documentation": "The authorization code received from /v1/authorize\nRequired only when grant_type=authorization_code"
+                    }
+                },
+                "redirectUri": {
+                    "target": "com.amazonaws.signin#RedirectUri",
+                    "traits": {
+                        "smithy.api#documentation": "The redirect URI that must match the original authorization request\nRequired only when grant_type=authorization_code",
+                        "smithy.api#jsonName": "redirectUri"
+                    }
+                },
+                "codeVerifier": {
+                    "target": "com.amazonaws.signin#CodeVerifier",
+                    "traits": {
+                        "smithy.api#documentation": "PKCE code verifier to prove possession of the original code challenge\nRequired only when grant_type=authorization_code",
+                        "smithy.api#jsonName": "codeVerifier"
+                    }
+                },
+                "refreshToken": {
+                    "target": "com.amazonaws.signin#RefreshToken",
+                    "traits": {
+                        "smithy.api#documentation": "The refresh token returned from auth_code redemption\nRequired only when grant_type=refresh_token",
+                        "smithy.api#jsonName": "refreshToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request body payload for CreateOAuth2Token operation\n\nThe operation type is determined by the grant_type parameter:\n- grant_type=authorization_code: Requires code, redirect_uri, code_verifier\n- grant_type=refresh_token: Requires refresh_token"
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenResponse": {
+            "type": "structure",
+            "members": {
+                "tokenOutput": {
+                    "target": "com.amazonaws.signin#CreateOAuth2TokenResponseBody",
+                    "traits": {
+                        "smithy.api#documentation": "Flattened token operation outputs\nThe specific response fields depend on the grant_type used in the request",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output structure for CreateOAuth2Token operation\n\nContains flattened token operation outputs for both authorization code and refresh token flows.\nThe response content depends on the grant_type from the original request.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenResponseBody": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "com.amazonaws.signin#AccessToken",
+                    "traits": {
+                        "smithy.api#documentation": "Scoped-down AWS credentials (15 minute duration)\nPresent for both authorization code redemption and token refresh",
+                        "smithy.api#jsonName": "accessToken",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tokenType": {
+                    "target": "com.amazonaws.signin#TokenType",
+                    "traits": {
+                        "smithy.api#documentation": "Token type indicating this is AWS SigV4 credentials\nValue is \"aws_sigv4\" for both flows",
+                        "smithy.api#jsonName": "tokenType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.signin#ExpiresIn",
+                    "traits": {
+                        "smithy.api#documentation": "Time to expiry in seconds (maximum 900)\nPresent for both authorization code redemption and token refresh",
+                        "smithy.api#jsonName": "expiresIn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "refreshToken": {
+                    "target": "com.amazonaws.signin#RefreshToken",
+                    "traits": {
+                        "smithy.api#documentation": "Encrypted refresh token with cnf.jkt (SHA-256 thumbprint of presented jwk)\nAlways present in responses (required for both flows)",
+                        "smithy.api#jsonName": "refreshToken",
+                        "smithy.api#required": {}
+                    }
+                },
+                "idToken": {
+                    "target": "com.amazonaws.signin#IdToken",
+                    "traits": {
+                        "smithy.api#documentation": "ID token containing user identity information\nPresent only in authorization code redemption response (grant_type=authorization_code)\nNot included in token refresh responses",
+                        "smithy.api#jsonName": "idToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response body payload for CreateOAuth2Token operation\n\nThe response content depends on the grant_type from the request:\n- grant_type=authorization_code: Returns all fields including refresh_token and id_token\n- grant_type=refresh_token: Returns access_token, token_type, expires_in, refresh_token (no id_token)"
+            }
+        },
+        "com.amazonaws.signin#ExpiresIn": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Time to expiry in seconds\n\nThe time to expiry in seconds, for these purposes will be at most 900 (15 minutes).",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.signin#GrantType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "OAuth 2.0 grant type parameter\n\nFor auth code redemption: Must be \"authorization_code\"\nFor token refresh: Must be \"refresh_token\"\n\nBased on client_id & grant_type, authn/authz is skipped for CLI endpoints.",
+                "smithy.api#pattern": "^(authorization_code|refresh_token)$"
+            }
+        },
+        "com.amazonaws.signin#IdToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ID token containing user identity information\n\nEncoded JWT token containing user identity claims and authentication context.\nReturned only in authorization code redemption responses (grant_type=authorization_code).\nContains user identity information such as ARN and other identity claims.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.signin#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating server error\nWill be SERVER_ERROR for internal server errors",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message explaining the server error\nMay include error details for debugging purposes",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown when an internal server error occurs\n\nHTTP Status Code: 500 Internal Server Error\n\nUsed for unexpected server-side errors that prevent request processing.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.signin#OAuth2ErrorCode": {
+            "type": "enum",
+            "members": {
+                "TOKEN_EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Token has expired and needs to be refreshed",
+                        "smithy.api#enumValue": "TOKEN_EXPIRED"
+                    }
+                },
+                "USER_CREDENTIALS_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "User credentials have been changed",
+                        "smithy.api#enumValue": "USER_CREDENTIALS_CHANGED"
+                    }
+                },
+                "INSUFFICIENT_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Insufficient permissions to perform this operation",
+                        "smithy.api#enumValue": "INSUFFICIENT_PERMISSIONS"
+                    }
+                },
+                "AUTHCODE_EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Authorization code has expired",
+                        "smithy.api#enumValue": "AUTHCODE_EXPIRED"
+                    }
+                },
+                "SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Internal server error occurred",
+                        "smithy.api#enumValue": "server_error"
+                    }
+                },
+                "INVALID_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed",
+                        "smithy.api#enumValue": "INVALID_REQUEST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "OAuth 2.0 error codes returned by the server\n\nStandard OAuth 2.0 error codes used in error responses to indicate\nthe specific type of error that occurred during token operations."
+            }
+        },
+        "com.amazonaws.signin#RedirectUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Redirect URI for OAuth 2.0 flow validation\n\nThe same redirect URI used in the authorization request. This must match exactly\nwhat was sent in the original authorization request for security validation.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.signin#RefreshToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Encrypted refresh token with cnf.jkt\n\nThis is the encrypted refresh token returned from auth code redemption.\nThe token content includes cnf.jkt (SHA-256 thumbprint of the presented jwk).\nUsed in subsequent token refresh requests.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.signin#Signin": {
+            "type": "service",
+            "version": "2023-01-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.signin#CreateOAuth2Token"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Signin",
+                    "arnNamespace": "signin",
+                    "endpointPrefix": "signin"
+                },
+                "aws.auth#sigv4": {
+                    "name": "signin"
+                },
+                "aws.endpoints#standardRegionalEndpoints": {
+                    "partitionSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://{region}.signin.aws.amazon.com"
+                            }
+                        ],
+                        "aws-cn": [
+                            {
+                                "endpoint": "https://{region}.signin.amazonaws.cn"
+                            }
+                        ],
+                        "aws-us-gov": [
+                            {
+                                "endpoint": "https://{region}.signin.amazonaws-us-gov.com"
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#documentation": "AWS Sign-In manages authentication for AWS services. This service provides\nsecure authentication flows for accessing AWS resources from the console and developer tools.",
+                "smithy.api#title": "AWS Sign-In Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://{Region}.signin.aws.amazon.com",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-cn"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://{Region}.signin.amazonaws.cn",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://{Region}.signin.amazonaws-us-gov.com",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://signin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://signin-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://signin.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://us-east-1.signin.aws.amazon.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://cn-northwest-1.signin.amazonaws.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://signin.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://us-gov-west-1.signin.amazonaws-us-gov.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.signin#TokenType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Token type parameter indicating credential usage\n\nA parameter which indicates to the client how the token must be used.\nValue is \"aws_sigv4\" (instead of typical \"Bearer\" for other OAuth systems)\nto indicate that the client must de-serialize the token and use it to generate a signature.",
+                "smithy.api#pattern": "^aws_sigv4$"
+            }
+        },
+        "com.amazonaws.signin#TooManyRequestsError": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating the specific type of error\nWill be INVALID_REQUEST for rate limiting scenarios",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message about the rate limiting\nMay include retry-after information or rate limit details",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown when rate limit is exceeded\n\nHTTP Status Code: 429 Too Many Requests\n\nPossible OAuth2ErrorCode values:\n- INVALID_REQUEST: Rate limiting, too many requests, abuse prevention\n\nPossible causes:\n- Too many token requests from the same client\n- Rate limiting based on client_id or IP address\n- Abuse prevention mechanisms triggered\n- Service protection against excessive token generation",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.signin#ValidationException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "OAuth 2.0 error code indicating validation failure\nWill be INVALID_REQUEST for validation errors",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Detailed message explaining the validation failure\nProvides specific information about which validation failed",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Error thrown when request validation fails\n\nHTTP Status Code: 400 Bad Request\n\nUsed for request validation errors such as malformed parameters,\nmissing required fields, or invalid parameter values.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

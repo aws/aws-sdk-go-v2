@@ -44,7 +44,7 @@
                 "DomainList": {
                     "target": "com.amazonaws.rum#AppMonitorDomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. \n      </p>"
+                        "smithy.api#documentation": "<p> List the domain names for which your application has administrative authority. </p>"
                     }
                 },
                 "Id": {
@@ -86,24 +86,30 @@
                 "DataStorage": {
                     "target": "com.amazonaws.rum#DataStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains information about whether this app monitor stores a copy of\n         the telemetry data that RUM collects using CloudWatch Logs.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains information about whether this app monitor stores a copy of the telemetry data that RUM collects using CloudWatch Logs.</p>"
                     }
                 },
                 "CustomEvents": {
                     "target": "com.amazonaws.rum#CustomEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n      custom events.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send custom events.</p> <p>For more information about custom events, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
                     }
                 },
                 "DeobfuscationConfiguration": {
                     "target": "com.amazonaws.rum#DeobfuscationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
+                        "smithy.api#documentation": "<p> A structure that contains the configuration for how an app monitor can deobfuscate stack traces. </p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.rum#AppMonitorPlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform type for this app monitor. Valid values are <code>Web</code> for web applications , <code>Android</code> for Android applications, and <code>iOS</code> for IOS applications.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A RUM app monitor collects telemetry data from your application and sends that\n         data to RUM. The data includes performance and reliability information such as page load time, client-side errors, \n         and user behavior.</p>"
+                "smithy.api#documentation": "<p>A RUM app monitor collects telemetry data from your application and sends that data to RUM. The data includes performance and reliability information such as page load time, client-side errors, and user behavior.</p>"
             }
         },
         "com.amazonaws.rum#AppMonitorConfiguration": {
@@ -112,56 +118,56 @@
                 "IdentityPoolId": {
                     "target": "com.amazonaws.rum#IdentityPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Cognito identity pool \n         that is used to authorize the sending of data to RUM.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.</p>"
                     }
                 },
                 "ExcludedPages": {
                     "target": "com.amazonaws.rum#Pages",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of URLs in your website or application to exclude from RUM data collection.</p>\n         <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>"
+                        "smithy.api#documentation": "<p>A list of URLs in your website or application to exclude from RUM data collection.</p> <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>"
                     }
                 },
                 "IncludedPages": {
                     "target": "com.amazonaws.rum#Pages",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. </p>\n         <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>"
+                        "smithy.api#documentation": "<p>If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. </p> <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>"
                     }
                 },
                 "FavoritePages": {
                     "target": "com.amazonaws.rum#FavoritePages",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of pages in your application that are to be displayed with a \"favorite\" icon\n         in the CloudWatch RUM console.</p>"
+                        "smithy.api#documentation": "<p>A list of pages in your application that are to be displayed with a \"favorite\" icon in the CloudWatch RUM console.</p>"
                     }
                 },
                 "SessionSampleRate": {
                     "target": "com.amazonaws.rum#SessionSampleRate",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the portion of user sessions to use for RUM data collection. Choosing a higher portion gives you\n      more data but also incurs more costs.</p>\n         <p>The range for this value is 0 to 1 inclusive. Setting this to 1 means that 100% of user sessions are sampled, and setting\n         it to 0.1 means that 10% of user sessions are sampled.</p>\n         <p>If you omit this parameter, the default of 0.1 is used, and 10% of sessions will be sampled.</p>"
+                        "smithy.api#documentation": "<p>Specifies the portion of user sessions to use for RUM data collection. Choosing a higher portion gives you more data but also incurs more costs.</p> <p>The range for this value is 0 to 1 inclusive. Setting this to 1 means that 100% of user sessions are sampled, and setting it to 0.1 means that 10% of user sessions are sampled.</p> <p>If you omit this parameter, the default of 0.1 is used, and 10% of sessions will be sampled.</p>"
                     }
                 },
                 "GuestRoleArn": {
                     "target": "com.amazonaws.rum#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool \n      that is used to authorize the sending of data to RUM.</p>\n         <note>\n            <p>It is possible that an app monitor does not have a value for <code>GuestRoleArn</code>. For example, \n         this can happen when you use the console to create an app monitor and you allow CloudWatch RUM to \n         create a new identity pool for Authorization. In this case, <code>GuestRoleArn</code> is not present in the \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_GetAppMonitor.html\">GetAppMonitor</a>\n        response because it is not stored by the service.</p>\n            <p>If this issue affects you, you can take one of the following steps:</p>\n            <ul>\n               <li>\n                  <p>Use the Cloud Development Kit (CDK) to create an identity pool and the associated IAM\n            role, and use that for your app monitor.</p>\n               </li>\n               <li>\n                  <p>Make a separate <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetIdentityPoolRoles.html\">GetIdentityPoolRoles</a>\n               call to Amazon Cognito to retrieve \n               the <code>GuestRoleArn</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.</p> <note> <p>It is possible that an app monitor does not have a value for <code>GuestRoleArn</code>. For example, this can happen when you use the console to create an app monitor and you allow CloudWatch RUM to create a new identity pool for Authorization. In this case, <code>GuestRoleArn</code> is not present in the <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_GetAppMonitor.html\">GetAppMonitor</a> response because it is not stored by the service.</p> <p>If this issue affects you, you can take one of the following steps:</p> <ul> <li> <p>Use the Cloud Development Kit (CDK) to create an identity pool and the associated IAM role, and use that for your app monitor.</p> </li> <li> <p>Make a separate <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetIdentityPoolRoles.html\">GetIdentityPoolRoles</a> call to Amazon Cognito to retrieve the <code>GuestRoleArn</code>.</p> </li> </ul> </note>"
                     }
                 },
                 "AllowCookies": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you set this to <code>true</code>, the RUM web client sets two cookies, a session\n         cookie and a user cookie. The cookies allow the RUM web client to collect data relating to\n         the number of users an application has and the behavior of the application across a\n         sequence of events. Cookies are stored in the top-level domain of the current page.</p>"
+                        "smithy.api#documentation": "<p>If you set this to <code>true</code>, the RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.</p>"
                     }
                 },
                 "Telemetries": {
                     "target": "com.amazonaws.rum#Telemetries",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists the types of telemetry data that this app monitor is to collect.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>errors</code> indicates that RUM collects data about unhandled JavaScript errors raised\n         by your application.</p>\n            </li>\n            <li>\n               <p>\n                  <code>performance</code> indicates that RUM collects performance data about how your application\n            and its resources are loaded and rendered. This includes Core Web Vitals.</p>\n            </li>\n            <li>\n               <p>\n                  <code>http</code> indicates that RUM collects data about HTTP errors thrown by your application.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array that lists the types of telemetry data that this app monitor is to collect.</p> <ul> <li> <p> <code>errors</code> indicates that RUM collects data about unhandled JavaScript errors raised by your application.</p> </li> <li> <p> <code>performance</code> indicates that RUM collects performance data about how your application and its resources are loaded and rendered. This includes Core Web Vitals.</p> </li> <li> <p> <code>http</code> indicates that RUM collects data about HTTP errors thrown by your application.</p> </li> </ul>"
                     }
                 },
                 "EnableXRay": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you set this to <code>true</code>, RUM enables X-Ray tracing for\n         the user sessions that RUM samples. RUM adds an X-Ray trace header to allowed\n         HTTP requests. It also records an X-Ray segment for allowed HTTP requests.\n         You can see traces and segments from these user sessions in the X-Ray console\n         and the CloudWatch ServiceLens console. For more information, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html\">What is X-Ray?</a>\n         </p>"
+                        "smithy.api#documentation": "<p>If you set this to <code>true</code>, RUM enables X-Ray tracing for the user sessions that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests. You can see traces and segments from these user sessions in the X-Ray console and the CloudWatch ServiceLens console. For more information, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html\">What is X-Ray?</a> </p>"
                     }
                 }
             },
@@ -235,6 +241,25 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^(?!\\.)[\\.\\-_#A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.rum#AppMonitorPlatform": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "WEB",
+                        "value": "Web"
+                    },
+                    {
+                        "name": "ANDROID",
+                        "value": "Android"
+                    },
+                    {
+                        "name": "IOS",
+                        "value": "iOS"
+                    }
+                ]
             }
         },
         "com.amazonaws.rum#AppMonitorResource": {
@@ -332,6 +357,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current state of this app monitor.</p>"
                     }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.rum#AppMonitorPlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform type for this app monitor. Valid values are <code>Web</code> for web applications, <code>Android</code> for Android applications, and <code>iOS</code> for IOS applications.</p>"
+                    }
                 }
             },
             "traits": {
@@ -382,7 +413,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid\n         destinations include CloudWatch and Evidently.</p>\n         <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics\n         are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect \n            with CloudWatch RUM</a>.</p>\n         <p>In addition to these default metrics, you can choose to send extended metrics, custom\n         metrics, or both.</p>\n         <ul>\n            <li>\n               <p>Extended metrics let you send metrics with additional dimensions that aren't included in the\n               default metrics. You can also send extended metrics to both Evidently and CloudWatch. The valid dimension names for the additional dimensions for extended\n               metrics are <code>BrowserName</code>, <code>CountryCode</code>,\n                  <code>DeviceType</code>, <code>FileType</code>, <code>OSName</code>, and\n                  <code>PageId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n                  Extended metrics that you can send to CloudWatch and CloudWatch\n                  Evidently</a>.</p>\n            </li>\n            <li>\n               <p>Custom metrics are metrics that you define. You can send custom metrics to CloudWatch.\n                  CloudWatch Evidently, or both. With custom metrics, you can use any metric\n               name and namespace. To derive the metrics, you can use any custom events, built-in\n               events, custom attributes, or default attributes. </p>\n               <p>You can't send custom metrics to the <code>AWS/RUM</code> namespace. You must send custom metrics to a \n               custom namespace that you define. The namespace that you use can't start with <code>AWS/</code>. \n               CloudWatch RUM prepends <code>RUM/CustomMetrics/</code> to the custom namespace that you define, \n               so the final namespace for your metrics in CloudWatch is \n         <code>RUM/CustomMetrics/<i>your-custom-namespace</i>\n                  </code>.</p>\n            </li>\n         </ul>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>\n         <p>The maximum number of metric definitions that one destination can contain is 2000.</p>\n         <p>Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension\n         value counts as a custom metric. For more information, see \n         <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n         <p>You must have\n         already created a destination for the metrics before you send them. For more information, see \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>\n         <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,\n      those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
+                "smithy.api#documentation": "<p>Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently.</p> <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect with CloudWatch RUM</a>.</p> <p>In addition to these default metrics, you can choose to send extended metrics, custom metrics, or both.</p> <ul> <li> <p>Extended metrics let you send metrics with additional dimensions that aren't included in the default metrics. You can also send extended metrics to both Evidently and CloudWatch. The valid dimension names for the additional dimensions for extended metrics are <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>, <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\"> Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p> </li> <li> <p>Custom metrics are metrics that you define. You can send custom metrics to CloudWatch. CloudWatch Evidently, or both. With custom metrics, you can use any metric name and namespace. To derive the metrics, you can use any custom events, built-in events, custom attributes, or default attributes. </p> <p>You can't send custom metrics to the <code>AWS/RUM</code> namespace. You must send custom metrics to a custom namespace that you define. The namespace that you use can't start with <code>AWS/</code>. CloudWatch RUM prepends <code>RUM/CustomMetrics/</code> to the custom namespace that you define, so the final namespace for your metrics in CloudWatch is <code>RUM/CustomMetrics/<i>your-custom-namespace</i> </code>.</p> </li> </ul> <p>The maximum number of metric definitions that you can specify in one <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p> <p>The maximum number of metric definitions that one destination can contain is 2000.</p> <p>Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>You must have already created a destination for the metrics before you send them. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p> <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchCreateRumMetricDefinitions.html"
                 },
@@ -420,7 +451,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines one error caused by a \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>\n      operation.</p>"
+                "smithy.api#documentation": "<p>A structure that defines one error caused by a <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a> operation.</p>"
             }
         },
         "com.amazonaws.rum#BatchCreateRumMetricDefinitionsErrors": {
@@ -444,14 +475,14 @@
                 "Destination": {
                     "target": "com.amazonaws.rum#MetricDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and\n            <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the\n         Amazon Resource Name (ARN) of the CloudWatchEvidently experiment that will receive\n         the metrics and an IAM role that has permission to write to the\n         experiment.</p>",
+                        "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the Amazon Resource Name (ARN) of the CloudWatchEvidently experiment that will receive the metrics and an IAM role that has permission to write to the experiment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this \n         experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter.</p> <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
                     }
                 },
                 "MetricDefinitions": {
@@ -510,7 +541,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified metrics from being sent to an extended metrics destination.</p>\n         <p>If some metric definition IDs specified in a <code>BatchDeleteRumMetricDefinitions</code> operations are not valid,\n         those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still \n         deleted.</p>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchDeleteRumMetricDefinitions</code> operation is 200.</p>",
+                "smithy.api#documentation": "<p>Removes the specified metrics from being sent to an extended metrics destination.</p> <p>If some metric definition IDs specified in a <code>BatchDeleteRumMetricDefinitions</code> operations are not valid, those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still deleted.</p> <p>The maximum number of metric definitions that you can specify in one <code>BatchDeleteRumMetricDefinitions</code> operation is 200.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchDeleteRumMetricDefinitions.html"
                 },
@@ -548,7 +579,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines one error caused by a \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchDeleteRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>\n         operation.</p>"
+                "smithy.api#documentation": "<p>A structure that defines one error caused by a <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchDeleteRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a> operation.</p>"
             }
         },
         "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsErrors": {
@@ -572,7 +603,7 @@
                 "Destination": {
                     "target": "com.amazonaws.rum#MetricDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the destination where you want to stop sending the specified metrics. Valid values are <code>CloudWatch</code> and\n         <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to \n         be the destination and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#documentation": "<p>Defines the destination where you want to stop sending the specified metrics. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.</p>",
                         "smithy.api#httpQuery": "destination",
                         "smithy.api#required": {}
                     }
@@ -580,7 +611,7 @@
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter. </p>\n         <p>This parameter specifies\n         the ARN of the Evidently experiment that was receiving the metrics that are being deleted.</p>",
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter. </p> <p>This parameter specifies the ARN of the Evidently experiment that was receiving the metrics that are being deleted.</p>",
                         "smithy.api#httpQuery": "destinationArn"
                     }
                 },
@@ -668,7 +699,7 @@
                 "Destination": {
                     "target": "com.amazonaws.rum#MetricDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of destination that you want to view metrics for. Valid values are <code>CloudWatch</code> \n         and <code>Evidently</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of destination that you want to view metrics for. Valid values are <code>CloudWatch</code> and <code>Evidently</code>.</p>",
                         "smithy.api#httpQuery": "destination",
                         "smithy.api#required": {}
                     }
@@ -676,14 +707,14 @@
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter\n         specifies the ARN of the Evidently experiment that corresponds to the destination.</p>",
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter.</p> <p>This parameter specifies the ARN of the Evidently experiment that corresponds to the destination.</p>",
                         "smithy.api#httpQuery": "destinationArn"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.rum#MaxResultsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can \n         specify is 100.</p>\n         <p>To retrieve the remaining results, make another call with the returned \n         <code>NextToken</code> value. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -702,13 +733,13 @@
                 "MetricDefinitions": {
                     "target": "com.amazonaws.rum#MetricDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that display information about the metrics that are sent by the specified\n         app monitor to the specified destination.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that display information about the metrics that are sent by the specified app monitor to the specified destination.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to \n         retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of results.</p>"
                     }
                 }
             }
@@ -774,7 +805,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from your application and sends that\n      data to RUM. The data includes performance and reliability information such as page load time, client-side errors, \n      and user behavior.</p>\n         <p>You use this operation only to create a new app monitor. To update an existing app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_UpdateAppMonitor.html\">UpdateAppMonitor</a> instead.</p>\n         <p>After you create an app monitor, sign in to the CloudWatch RUM console to get \n         the JavaScript code snippet to add to your web application. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet\n         that I've already generated?</a>\n         </p>",
+                "smithy.api#documentation": "<p>Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from your application and sends that data to RUM. The data includes performance and reliability information such as page load time, client-side errors, and user behavior.</p> <p>You use this operation only to create a new app monitor. To update an existing app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_UpdateAppMonitor.html\">UpdateAppMonitor</a> instead.</p> <p>After you create an app monitor, sign in to the CloudWatch RUM console to get the JavaScript code snippet to add to your web application. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet that I've already generated?</a> </p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/CreateAppMonitor.html"
                 },
@@ -805,37 +836,43 @@
                 "DomainList": {
                     "target": "com.amazonaws.rum#AppMonitorDomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. The <code>CreateAppMonitor</code> requires either the domain or the domain list.\n      </p>"
+                        "smithy.api#documentation": "<p> List the domain names for which your application has administrative authority. The <code>CreateAppMonitor</code> requires either the domain or the domain list. </p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.rum#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the app monitor.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n         permissions by granting a user\n         permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with an app monitor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the app monitor.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with an app monitor.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 },
                 "AppMonitorConfiguration": {
                     "target": "com.amazonaws.rum#AppMonitorConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains much of the configuration data for the app monitor. If you are using \n         Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the \n         Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own \n         authorization method. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html\">Authorize your application\n            to send data to Amazon Web Services</a>.</p>\n         <p>If you omit this argument, the sample rate used for RUM is set to 10% of the user sessions.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains much of the configuration data for the app monitor. If you are using Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own authorization method. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html\">Authorize your application to send data to Amazon Web Services</a>.</p> <p>If you omit this argument, the sample rate used for RUM is set to 10% of the user sessions.</p>"
                     }
                 },
                 "CwLogEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM \n         sends a copy of this telemetry data to Amazon CloudWatch Logs\n         in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur\n         Amazon CloudWatch Logs charges.</p>\n         <p>If you omit this parameter, the default is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges.</p> <p>If you omit this parameter, the default is <code>false</code>.</p>"
                     }
                 },
                 "CustomEvents": {
                     "target": "com.amazonaws.rum#CustomEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. If you omit this parameter, custom events are <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send custom events. If you omit this parameter, custom events are <code>DISABLED</code>.</p> <p>For more information about custom events, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
                     }
                 },
                 "DeobfuscationConfiguration": {
                     "target": "com.amazonaws.rum#DeobfuscationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
+                        "smithy.api#documentation": "<p> A structure that contains the configuration for how an app monitor can deobfuscate stack traces. </p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.rum#AppMonitorPlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform type for the app monitor. Valid values are <code>Web</code> for web applications, <code>Android</code> for Android applications, and <code>iOS</code> for IOS applications. If you omit this parameter, the default is <code>Web</code>.</p>"
                     }
                 }
             }
@@ -857,7 +894,7 @@
                 "Status": {
                     "target": "com.amazonaws.rum#CustomEventsStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send custom events. The default is for custom events to be <code>DISABLED</code>.</p>"
                     }
                 }
             },
@@ -886,7 +923,7 @@
                 "CwLogEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicated whether the app monitor stores copies of the data\n         that RUM collects in CloudWatch Logs.</p>"
+                        "smithy.api#documentation": "<p>Indicated whether the app monitor stores copies of the data that RUM collects in CloudWatch Logs.</p>"
                     }
                 },
                 "CwLogGroup": {
@@ -897,7 +934,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the information about whether the app monitor stores copies of the data\n      that RUM collects in CloudWatch Logs. If it does, this structure also contains the name of the log group.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the information about whether the app monitor stores copies of the data that RUM collects in CloudWatch Logs. If it does, this structure also contains the name of the log group.</p>"
             }
         },
         "com.amazonaws.rum#DataStorage": {
@@ -906,12 +943,12 @@
                 "CwLog": {
                     "target": "com.amazonaws.rum#CwLog",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the information about whether the app monitor stores copies of the data\n         that RUM collects in CloudWatch Logs. If it does, this structure also contains the name of the log group.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the information about whether the app monitor stores copies of the data that RUM collects in CloudWatch Logs. If it does, this structure also contains the name of the log group.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about whether this app monitor stores a copy of\n         the telemetry data that RUM collects using CloudWatch Logs.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about whether this app monitor stores a copy of the telemetry data that RUM collects using CloudWatch Logs.</p>"
             }
         },
         "com.amazonaws.rum#DeleteAppMonitor": {
@@ -1027,7 +1064,7 @@
                 "PolicyRevisionId": {
                     "target": "com.amazonaws.rum#PolicyRevisionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. \n         If the revision ID that you provide doesn't match the latest policy revision ID, the request will be rejected with an <code>InvalidPolicyRevisionIdException</code> error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. If the revision ID that you provide doesn't match the latest policy revision ID, the request will be rejected with an <code>InvalidPolicyRevisionIdException</code> error.</p>",
                         "smithy.api#httpQuery": "policyRevisionId"
                     }
                 }
@@ -1079,7 +1116,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops\n         sending extended metrics to that destination.</p>",
+                "smithy.api#documentation": "<p>Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops sending extended metrics to that destination.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1111,7 +1148,7 @@
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter. This parameter\n         specifies the ARN of the Evidently experiment that corresponds to the destination to delete.</p>",
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter. This parameter specifies the ARN of the Evidently experiment that corresponds to the destination to delete.</p>",
                         "smithy.api#httpQuery": "destinationArn"
                     }
                 }
@@ -1127,12 +1164,12 @@
                 "JavaScriptSourceMaps": {
                     "target": "com.amazonaws.rum#JavaScriptSourceMaps",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.\n      </p>"
+                        "smithy.api#documentation": "<p> A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
+                "smithy.api#documentation": "<p> A structure that contains the configuration for how an app monitor can deobfuscate stack traces. </p>"
             }
         },
         "com.amazonaws.rum#DeobfuscationS3Uri": {
@@ -1142,7 +1179,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^s3://[a-z0-9][-.a-z0-9]{1,61}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"
+                "smithy.api#pattern": "^s3://[a-z0-9][-.a-z0-9]{1,62}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"
             }
         },
         "com.amazonaws.rum#DeobfuscationStatus": {
@@ -1295,7 +1332,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the raw performance events that RUM has collected from your web application,\n         so that you can do your own processing or analysis of this data.</p>",
+                "smithy.api#documentation": "<p>Retrieves the raw performance events that RUM has collected from your web application, so that you can do your own processing or analysis of this data.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1331,7 +1368,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rum#QueryFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n         more sets of key-value pairs that you specify.</p>"
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.</p>"
                     }
                 },
                 "MaxResults": {
@@ -1361,7 +1398,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.rum#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of\n         results.</p>"
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of results.</p>"
                     }
                 }
             }
@@ -1538,19 +1575,19 @@
                 "Status": {
                     "target": "com.amazonaws.rum#DeobfuscationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be <code>DISABLED</code>.\n      </p>",
+                        "smithy.api#documentation": "<p> Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be <code>DISABLED</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "S3Uri": {
                     "target": "com.amazonaws.rum#DeobfuscationS3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.\n      </p>"
+                        "smithy.api#documentation": "<p> The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.\n      </p>"
+                "smithy.api#documentation": "<p> A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps. </p>"
             }
         },
         "com.amazonaws.rum#JsonValue": {
@@ -1603,7 +1640,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.rum#MaxResultsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can \n      specify is 100.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -1622,7 +1659,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of\n         results.</p>"
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of results.</p>"
                     }
                 },
                 "AppMonitorSummaries": {
@@ -1656,7 +1693,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of destinations that you have created to receive RUM extended metrics, \n         for the specified app monitor.</p>\n         <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html\">AddRumMetrics</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of destinations that you have created to receive RUM extended metrics, for the specified app monitor.</p> <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html\">AddRumMetrics</a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1686,7 +1723,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.rum#MaxResultsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can \n         specify is 100.</p>\n         <p>To retrieve the remaining results, make another call with the returned \n         <code>NextToken</code> value. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -1705,13 +1742,13 @@
                 "Destinations": {
                     "target": "com.amazonaws.rum#MetricDestinationSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of CloudWatch RUM extended metrics destinations associated with the app monitor that \n      you specified.</p>"
+                        "smithy.api#documentation": "<p>The list of CloudWatch RUM extended metrics destinations associated with the app monitor that you specified.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to \n         retrieve the next set of results.</p>"
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to retrieve the next set of results.</p>"
                     }
                 }
             }
@@ -1837,30 +1874,30 @@
                 "UnitLabel": {
                     "target": "com.amazonaws.rum#UnitLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this field only if you are sending this metric to CloudWatch. It defines\n         the CloudWatch metric unit that this metric is measured in. </p>"
+                        "smithy.api#documentation": "<p>Use this field only if you are sending this metric to CloudWatch. It defines the CloudWatch metric unit that this metric is measured in. </p>"
                     }
                 },
                 "DimensionKeys": {
                     "target": "com.amazonaws.rum#DimensionKeysMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch The value of this field is used only if the metric destination is <code>CloudWatch</code>.\n         If the metric destination is <code>Evidently</code>, the value of <code>DimensionKeys</code> is ignored.</p>"
+                        "smithy.api#documentation": "<p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch The value of this field is used only if the metric destination is <code>CloudWatch</code>. If the metric destination is <code>Evidently</code>, the value of <code>DimensionKeys</code> is ignored.</p>"
                     }
                 },
                 "EventPattern": {
                     "target": "com.amazonaws.rum#EventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pattern that defines the metric. RUM checks events that happen in a user's session\n      against the pattern, and events that match the pattern are sent to the metric destination.</p>\n         <p>If the metrics destination\n      is <code>CloudWatch</code> and the event\n      also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
+                        "smithy.api#documentation": "<p>The pattern that defines the metric. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.</p> <p>If the metrics destination is <code>CloudWatch</code> and the event also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
                     }
                 },
                 "Namespace": {
                     "target": "com.amazonaws.rum#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this metric definition is for a custom metric instead of an extended metric, this field displays\n      the metric namespace that the custom metric is published to.</p>"
+                        "smithy.api#documentation": "<p>If this metric definition is for a custom metric instead of an extended metric, this field displays the metric namespace that the custom metric is published to.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that displays the definition of one extended metric that RUM sends\n         to CloudWatch or CloudWatch Evidently. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Additional metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>"
+                "smithy.api#documentation": "<p>A structure that displays the definition of one extended metric that RUM sends to CloudWatch or CloudWatch Evidently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\"> Additional metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>"
             }
         },
         "com.amazonaws.rum#MetricDefinitionId": {
@@ -1884,43 +1921,43 @@
                 "Name": {
                     "target": "com.amazonaws.rum#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the metric that is defined in this structure. For custom metrics, you can specify \n         any name that you like. For extended metrics, valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PerformanceNavigationDuration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceResourceDuration\n            </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationSatisfiedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationToleratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationFrustratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsCumulativeLayoutShift</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsFirstInputDelay</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsLargestContentfulPaint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>JsErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HttpErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionCount</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name for the metric that is defined in this structure. For custom metrics, you can specify any name that you like. For extended metrics, valid values are the following:</p> <ul> <li> <p> <code>PerformanceNavigationDuration</code> </p> </li> <li> <p> <code>PerformanceResourceDuration </code> </p> </li> <li> <p> <code>NavigationSatisfiedTransaction</code> </p> </li> <li> <p> <code>NavigationToleratedTransaction</code> </p> </li> <li> <p> <code>NavigationFrustratedTransaction</code> </p> </li> <li> <p> <code>WebVitalsCumulativeLayoutShift</code> </p> </li> <li> <p> <code>WebVitalsFirstInputDelay</code> </p> </li> <li> <p> <code>WebVitalsLargestContentfulPaint</code> </p> </li> <li> <p> <code>JsErrorCount</code> </p> </li> <li> <p> <code>HttpErrorCount</code> </p> </li> <li> <p> <code>SessionCount</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ValueKey": {
                     "target": "com.amazonaws.rum#ValueKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field within the event object that the metric value is sourced from.</p>\n         <p>If you omit this field, a hardcoded value of 1 is pushed as the metric value. This is\n         useful if you want to count the number of events that the filter catches. </p>\n         <p>If this metric is sent to CloudWatch Evidently, this field will be passed to\n         Evidently raw. Evidently will handle data extraction from the event.</p>"
+                        "smithy.api#documentation": "<p>The field within the event object that the metric value is sourced from.</p> <p>If you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you want to count the number of events that the filter catches. </p> <p>If this metric is sent to CloudWatch Evidently, this field will be passed to Evidently raw. Evidently will handle data extraction from the event.</p>"
                     }
                 },
                 "UnitLabel": {
                     "target": "com.amazonaws.rum#UnitLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CloudWatch metric unit to use for this metric. If you omit this field, the metric\n      is recorded with no unit.</p>"
+                        "smithy.api#documentation": "<p>The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.</p>"
                     }
                 },
                 "DimensionKeys": {
                     "target": "com.amazonaws.rum#DimensionKeysMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p>\n         <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"metadata.pageId\": \"PageId\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.browserName\": \"BrowserName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.deviceType\": \"DeviceType\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.osName\": \"OSName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.countryCode\": \"CountryCode\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"event_details.fileType\": \"FileType\"</code>\n               </p>\n            </li>\n         </ul>\n         <p> For both extended metrics and custom metrics, \n         all dimensions listed in this field\n         must also be included in <code>EventPattern</code>.</p>"
+                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p> <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:</p> <ul> <li> <p> <code>\"metadata.pageId\": \"PageId\"</code> </p> </li> <li> <p> <code>\"metadata.browserName\": \"BrowserName\"</code> </p> </li> <li> <p> <code>\"metadata.deviceType\": \"DeviceType\"</code> </p> </li> <li> <p> <code>\"metadata.osName\": \"OSName\"</code> </p> </li> <li> <p> <code>\"metadata.countryCode\": \"CountryCode\"</code> </p> </li> <li> <p> <code>\"event_details.fileType\": \"FileType\"</code> </p> </li> </ul> <p> For both extended metrics and custom metrics, all dimensions listed in this field must also be included in <code>EventPattern</code>.</p>"
                     }
                 },
                 "EventPattern": {
                     "target": "com.amazonaws.rum#EventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session\n         against the pattern, and events that match the pattern are sent to the metric destination.</p>\n         <p>When you define extended metrics, the metric definition is not valid if <code>EventPattern</code>\n      is omitted.</p>\n         <p>Example event patterns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.js_error_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Safari\" ], } }'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Firefox\" ]\n            },\n            \"event_details\": {\n            \"duration\": [{\n            \"numeric\": [ \"&lt;\", 2000 ]\n            }]\n            }\n            }'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Safari\" ],\n            \"countryCode\": [ \"US\" ]\n            },\n            \"event_details\": {\n            \"duration\": [{\n            \"numeric\": [ \"&gt;=\", 2000, \"&lt;\", 8000 ]\n            }]\n            }\n            }'</code>\n               </p>\n            </li>\n         </ul>\n         <p>If the metrics destination is <code>CloudWatch</code> and the event also matches a value\n         in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
+                        "smithy.api#documentation": "<p>The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.</p> <p>When you define extended metrics, the metric definition is not valid if <code>EventPattern</code> is omitted.</p> <p>Example event patterns:</p> <ul> <li> <p> <code>'{ \"event_type\": [\"com.amazon.rum.js_error_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], } }'</code> </p> </li> <li> <p> <code>'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Firefox\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"&lt;\", 2000 ] }] } }'</code> </p> </li> <li> <p> <code>'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], \"countryCode\": [ \"US\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"&gt;=\", 2000, \"&lt;\", 8000 ] }] } }'</code> </p> </li> </ul> <p>If the metrics destination is <code>CloudWatch</code> and the event also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
                     }
                 },
                 "Namespace": {
                     "target": "com.amazonaws.rum#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this structure is for a custom metric instead of an extended metrics, use this parameter to define the \n         metric namespace for that custom metric. Do not specify this parameter if this structure is for an extended metric.</p>\n         <p>You cannot use any string that starts with <code>AWS/</code> for your namespace.</p>"
+                        "smithy.api#documentation": "<p>If this structure is for a custom metric instead of an extended metrics, use this parameter to define the metric namespace for that custom metric. Do not specify this parameter if this structure is for an extended metric.</p> <p>You cannot use any string that starts with <code>AWS/</code> for your namespace.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to define one extended metric or custom metric that RUM will send\n         to CloudWatch or CloudWatch Evidently. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-and-extended-metrics.html\">\n            Custom metrics and extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>This structure is validated differently for extended metrics and custom metrics. For extended metrics\n      that are sent to the <code>AWS/RUM</code> namespace, the following validations apply:</p>\n         <ul>\n            <li>\n               <p>The <code>Namespace</code> parameter must be omitted or set to <code>AWS/RUM</code>.</p>\n            </li>\n            <li>\n               <p>Only certain combinations of values for <code>Name</code>, <code>ValueKey</code>, and\n                  <code>EventPattern</code> are valid. In addition to what is displayed in the\n               following list, the <code>EventPattern</code> can also include information used by\n               the <code>DimensionKeys</code> field.</p>\n               <ul>\n                  <li>\n                     <p>If <code>Name</code> is <code>PerformanceNavigationDuration</code>, then\n                  <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.performance_navigation_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>PerformanceResourceDuration</code>, then\n                  <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.performance_resource_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>NavigationSatisfiedTransaction</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\n                     \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n                     \"event_details\": {\n                     \"duration\": [{\n                     \"numeric\": [\"&gt;\",2000]\n                     }]\n                     }\n                     }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>NavigationToleratedTransaction</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\n                     \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n                     \"event_details\": {\n                     \"duration\": [{\n                     \"numeric\": [\"&gt;=\",2000,\"&lt;\"8000]\n                     }]\n                     }\n                     }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>NavigationFrustratedTransaction</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\n                     \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n                     \"event_details\": {\n                     \"duration\": [{\n                     \"numeric\": [\"&gt;=\",8000]\n                     }]\n                     }\n                     }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>WebVitalsCumulativeLayoutShift</code>, then\n                  <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.cumulative_layout_shift_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>WebVitalsFirstInputDelay</code>, then\n                  <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.first_input_delay_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>WebVitalsLargestContentfulPaint</code>, then\n                  <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.largest_contentful_paint_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>JsErrorCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.js_error_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>HttpErrorCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.http_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>SessionCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.session_start_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>PageViewCount</code>, then\n                  <code>ValueKey</code>must be null and the <code>EventPattern</code>\n                  must include <code>{\"event_type\":[\"com.amazon.rum.page_view_event\"]}</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>Http4xxCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\": [\"com.amazon.rum.http_event\"],\"event_details\":{\"response\":{\"status\":[{\"numeric\":[\"&gt;=\",400,\"&lt;\",500]}]}}} }</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>If <code>Name</code> is <code>Http5xxCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\": [\"com.amazon.rum.http_event\"],\"event_details\":{\"response\":{\"status\":[{\"numeric\":[\"&gt;=\",500,\"&lt;=\",599]}]}}} }</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For custom metrics, the following validation rules apply:</p>\n         <ul>\n            <li>\n               <p>The namespace can't be omitted and can't be <code>AWS/RUM</code>. You can use the <code>AWS/RUM</code>\n         namespace only for extended metrics.</p>\n            </li>\n            <li>\n               <p>All dimensions listed in the <code>DimensionKeys</code> field must be present in the value\n         of <code>EventPattern</code>.</p>\n            </li>\n            <li>\n               <p>The values that you specify for <code>ValueKey</code>, <code>EventPattern</code>, and \n            <code>DimensionKeys</code> must be fields in RUM events, so all first-level keys in these fields must \n            be one of the keys in the list later in this section.</p>\n            </li>\n            <li>\n               <p>If you set a value for <code>EventPattern</code>, it must be a JSON object.</p>\n            </li>\n            <li>\n               <p>For every non-empty <code>event_details</code>, there must be a non-empty <code>event_type</code>.</p>\n            </li>\n            <li>\n               <p>If <code>EventPattern</code> contains an <code>event_details</code> field, \n            it must also contain an <code>event_type</code>. For every built-in <code>event_type</code> that you use, you must use \n            a value for <code>event_details</code> that corresponds to that\n        <code>event_type</code>. For information about event details that correspond to event types, see  \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails\">\n               RUM event details</a>.</p>\n            </li>\n            <li>\n               <p>In <code>EventPattern</code>, any JSON array must contain only one value.</p>\n            </li>\n         </ul>\n         <p>Valid key values for first-level keys in the <code>ValueKey</code>, <code>EventPattern</code>, and \n         <code>DimensionKeys</code> fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>account_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application_Id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application_version</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>batch_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_details</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_interaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_timestamp</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>event_version</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>log_stream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>metadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sessionId</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>user_details</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>userId</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this structure to define one extended metric or custom metric that RUM will send to CloudWatch or CloudWatch Evidently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-and-extended-metrics.html\"> Custom metrics and extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p> <p>This structure is validated differently for extended metrics and custom metrics. For extended metrics that are sent to the <code>AWS/RUM</code> namespace, the following validations apply:</p> <ul> <li> <p>The <code>Namespace</code> parameter must be omitted or set to <code>AWS/RUM</code>.</p> </li> <li> <p>Only certain combinations of values for <code>Name</code>, <code>ValueKey</code>, and <code>EventPattern</code> are valid. In addition to what is displayed in the following list, the <code>EventPattern</code> can also include information used by the <code>DimensionKeys</code> field.</p> <ul> <li> <p>If <code>Name</code> is <code>PerformanceNavigationDuration</code>, then <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.performance_navigation_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>PerformanceResourceDuration</code>, then <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.performance_resource_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>NavigationSatisfiedTransaction</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"event_details\": { \"duration\": [{ \"numeric\": [\"&gt;\",2000] }] } }</code> </p> </li> <li> <p>If <code>Name</code> is <code>NavigationToleratedTransaction</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"event_details\": { \"duration\": [{ \"numeric\": [\"&gt;=\",2000,\"&lt;\"8000] }] } }</code> </p> </li> <li> <p>If <code>Name</code> is <code>NavigationFrustratedTransaction</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"event_details\": { \"duration\": [{ \"numeric\": [\"&gt;=\",8000] }] } }</code> </p> </li> <li> <p>If <code>Name</code> is <code>WebVitalsCumulativeLayoutShift</code>, then <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.cumulative_layout_shift_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>WebVitalsFirstInputDelay</code>, then <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.first_input_delay_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>WebVitalsLargestContentfulPaint</code>, then <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.largest_contentful_paint_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>JsErrorCount</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.js_error_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>HttpErrorCount</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.http_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>SessionCount</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.session_start_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>PageViewCount</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{\"event_type\":[\"com.amazon.rum.page_view_event\"]}</code> </p> </li> <li> <p>If <code>Name</code> is <code>Http4xxCount</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{\"event_type\": [\"com.amazon.rum.http_event\"],\"event_details\":{\"response\":{\"status\":[{\"numeric\":[\"&gt;=\",400,\"&lt;\",500]}]}}} }</code> </p> </li> <li> <p>If <code>Name</code> is <code>Http5xxCount</code>, then <code>ValueKey</code>must be null and the <code>EventPattern</code> must include <code>{\"event_type\": [\"com.amazon.rum.http_event\"],\"event_details\":{\"response\":{\"status\":[{\"numeric\":[\"&gt;=\",500,\"&lt;=\",599]}]}}} }</code> </p> </li> </ul> </li> </ul> <p>For custom metrics, the following validation rules apply:</p> <ul> <li> <p>The namespace can't be omitted and can't be <code>AWS/RUM</code>. You can use the <code>AWS/RUM</code> namespace only for extended metrics.</p> </li> <li> <p>All dimensions listed in the <code>DimensionKeys</code> field must be present in the value of <code>EventPattern</code>.</p> </li> <li> <p>The values that you specify for <code>ValueKey</code>, <code>EventPattern</code>, and <code>DimensionKeys</code> must be fields in RUM events, so all first-level keys in these fields must be one of the keys in the list later in this section.</p> </li> <li> <p>If you set a value for <code>EventPattern</code>, it must be a JSON object.</p> </li> <li> <p>For every non-empty <code>event_details</code>, there must be a non-empty <code>event_type</code>.</p> </li> <li> <p>If <code>EventPattern</code> contains an <code>event_details</code> field, it must also contain an <code>event_type</code>. For every built-in <code>event_type</code> that you use, you must use a value for <code>event_details</code> that corresponds to that <code>event_type</code>. For information about event details that correspond to event types, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails\"> RUM event details</a>.</p> </li> <li> <p>In <code>EventPattern</code>, any JSON array must contain only one value.</p> </li> </ul> <p>Valid key values for first-level keys in the <code>ValueKey</code>, <code>EventPattern</code>, and <code>DimensionKeys</code> fields:</p> <ul> <li> <p> <code>account_id</code> </p> </li> <li> <p> <code>application_Id</code> </p> </li> <li> <p> <code>application_version</code> </p> </li> <li> <p> <code>application_name</code> </p> </li> <li> <p> <code>batch_id</code> </p> </li> <li> <p> <code>event_details</code> </p> </li> <li> <p> <code>event_id</code> </p> </li> <li> <p> <code>event_interaction</code> </p> </li> <li> <p> <code>event_timestamp</code> </p> </li> <li> <p> <code>event_type</code> </p> </li> <li> <p> <code>event_version</code> </p> </li> <li> <p> <code>log_stream</code> </p> </li> <li> <p> <code>metadata</code> </p> </li> <li> <p> <code>sessionId</code> </p> </li> <li> <p> <code>user_details</code> </p> </li> <li> <p> <code>userId</code> </p> </li> </ul>"
             }
         },
         "com.amazonaws.rum#MetricDefinitions": {
@@ -1962,18 +1999,18 @@
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the destination is <code>Evidently</code>, this specifies the ARN of the Evidently experiment that receives\n       the metrics.</p>"
+                        "smithy.api#documentation": "<p>If the destination is <code>Evidently</code>, this specifies the ARN of the Evidently experiment that receives the metrics.</p>"
                     }
                 },
                 "IamRoleArn": {
                     "target": "com.amazonaws.rum#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This field appears only when the destination is <code>Evidently</code>. It specifies\n         the ARN of the IAM role that is used to write to the Evidently experiment that receives the metrics.</p>"
+                        "smithy.api#documentation": "<p>This field appears only when the destination is <code>Evidently</code>. It specifies the ARN of the IAM role that is used to write to the Evidently experiment that receives the metrics.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that displays information about one destination that CloudWatch RUM sends\n      extended metrics to.</p>"
+                "smithy.api#documentation": "<p>A structure that displays information about one destination that CloudWatch RUM sends extended metrics to.</p>"
             }
         },
         "com.amazonaws.rum#MetricDestinationSummaryList": {
@@ -2092,7 +2129,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to assign a resource-based policy to a CloudWatch RUM app monitor to control access to it. Each app monitor can \n         have one resource-based policy. The maximum size of the policy is 4 KB. To learn more about using resource policies with RUM, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>",
+                "smithy.api#documentation": "<p>Use this operation to assign a resource-based policy to a CloudWatch RUM app monitor to control access to it. Each app monitor can have one resource-based policy. The maximum size of the policy is 4 KB. To learn more about using resource policies with RUM, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -2107,7 +2144,7 @@
                 "Name": {
                     "target": "com.amazonaws.rum#AppMonitorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the app monitor that you want to apply this resource-based policy to. To find the names of your app monitors, you can use\n         the <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html\">ListAppMonitors</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The name of the app monitor that you want to apply this resource-based policy to. To find the names of your app monitors, you can use the <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html\">ListAppMonitors</a> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2115,14 +2152,14 @@
                 "PolicyDocument": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON to use as the resource policy. The document can be up to 4 KB in size. For more information about the contents and syntax \n         for this policy, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>",
+                        "smithy.api#documentation": "<p>The JSON to use as the resource policy. The document can be up to 4 KB in size. For more information about the contents and syntax for this policy, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PolicyRevisionId": {
                     "target": "com.amazonaws.rum#PolicyRevisionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.</p>\n         <p>When you assign a policy revision ID, then later requests about that policy will be rejected with an <code>InvalidPolicyRevisionIdException</code> error\n         if they don't provide the correct current revision ID.</p>"
+                        "smithy.api#documentation": "<p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.</p> <p>When you assign a policy revision ID, then later requests about that policy will be rejected with an <code>InvalidPolicyRevisionIdException</code> error if they don't provide the correct current revision ID.</p>"
                     }
                 }
             },
@@ -2176,7 +2213,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends telemetry events about your application performance and user behavior to CloudWatch RUM. The code \n      snippet that RUM generates for you to add to your application includes <code>PutRumEvents</code> operations to \n      send this data to RUM.</p>\n         <p>Each <code>PutRumEvents</code> operation can send a batch of events from one user session.</p>",
+                "smithy.api#documentation": "<p>Sends telemetry events about your application performance and user behavior to CloudWatch RUM. The code snippet that RUM generates for you to add to your application includes <code>PutRumEvents</code> operations to send this data to RUM.</p> <p>Each <code>PutRumEvents</code> operation can send a batch of events from one user session.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "dataplane."
                 },
@@ -2239,7 +2276,7 @@
                 "Alias": {
                     "target": "com.amazonaws.rum#Alias",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the app monitor uses a resource-based policy that requires <code>PutRumEvents</code> requests to specify a certain alias,\n         specify that alias here. This alias will be compared to the <code>rum:alias</code> context key in the resource-based policy.  For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>"
+                        "smithy.api#documentation": "<p>If the app monitor uses a resource-based policy that requires <code>PutRumEvents</code> requests to specify a certain alias, specify that alias here. This alias will be compared to the <code>rum:alias</code> context key in the resource-based policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html\">Using resource-based policies with CloudWatch RUM</a>.</p>"
                     }
                 }
             }
@@ -2277,7 +2314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send\n         extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p>\n         <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html\">BatchCreateRumMetricDefinitions</a>.</p>",
+                "smithy.api#documentation": "<p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p> <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html\">BatchCreateRumMetricDefinitions</a>.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/PutRumMetricsDestination.html"
                 },
@@ -2304,20 +2341,20 @@
                 "Destination": {
                     "target": "com.amazonaws.rum#MetricDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the destination to send the metrics to. Valid values are <code>CloudWatch</code> and\n         <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to \n         be the destination and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#documentation": "<p>Defines the destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter only if <code>Destination</code> is <code>Evidently</code>. This parameter specifies\n      the ARN of the Evidently experiment that will receive the extended metrics.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter only if <code>Destination</code> is <code>Evidently</code>. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.</p>"
                     }
                 },
                 "IamRoleArn": {
                     "target": "com.amazonaws.rum#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, don't use this parameter.</p>\n         <p>This parameter specifies\n         the ARN of an IAM role that RUM will assume to write to the Evidently \n         experiment that you are sending metrics to. This role must have permission to write to that experiment.</p>\n         <p>If you specify this parameter, you must be signed on to a role that has <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">PassRole</a> permissions attached to it, to allow\n         the role to be passed. The <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM\">\n            CloudWatchAmazonCloudWatchRUMFullAccess</a>\n          policy doesn't include <code>PassRole</code>\n         permissions.</p>"
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, don't use this parameter.</p> <p>This parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.</p> <p>If you specify this parameter, you must be signed on to a role that has <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">PassRole</a> permissions attached to it, to allow the role to be passed. The <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM\"> CloudWatchAmazonCloudWatchRUMFullAccess</a> policy doesn't include <code>PassRole</code> permissions.</p>"
                     }
                 }
             }
@@ -2332,7 +2369,7 @@
                 "Name": {
                     "target": "com.amazonaws.rum#QueryFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a key to search for. \n      The filter returns only the events that match the <code>Name</code>\n         and <code>Values</code> that you specify.\n      </p>\n         <p>Valid values for <code>Name</code> are <code>Browser</code> | <code>Device</code> | <code>Country</code> |\n         <code>Page</code> | <code>OS</code> | <code>EventType</code> | <code>Invert</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of a key to search for. The filter returns only the events that match the <code>Name</code> and <code>Values</code> that you specify. </p> <p>Valid values for <code>Name</code> are <code>Browser</code> | <code>Device</code> | <code>Country</code> | <code>Page</code> | <code>OS</code> | <code>EventType</code> | <code>Invert</code> </p>"
                     }
                 },
                 "Values": {
@@ -2343,7 +2380,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines a key and values that you can use to filter the results. The\n         only performance events that are returned are those that have values matching the ones that\n         you specify in one of your <code>QueryFilter</code> structures.</p>\n         <p>For example, you could specify <code>Browser</code> as the <code>Name</code>\n      and specify <code>Chrome,Firefox</code> as the <code>Values</code> to return \n      events generated only from those browsers.</p>\n         <p>Specifying <code>Invert</code> as the <code>Name</code>\n         works as a \"not equal to\" filter. For example, specify <code>Invert</code> as the <code>Name</code>\n         and specify <code>Chrome</code> as the value to return all events except events from \n         user sessions with the Chrome browser.</p>"
+                "smithy.api#documentation": "<p>A structure that defines a key and values that you can use to filter the results. The only performance events that are returned are those that have values matching the ones that you specify in one of your <code>QueryFilter</code> structures.</p> <p>For example, you could specify <code>Browser</code> as the <code>Name</code> and specify <code>Chrome,Firefox</code> as the <code>Values</code> to return events generated only from those browsers.</p> <p>Specifying <code>Invert</code> as the <code>Name</code> works as a \"not equal to\" filter. For example, specify <code>Invert</code> as the <code>Name</code> and specify <code>Chrome</code> as the value to return all events except events from user sessions with the Chrome browser.</p>"
             }
         },
         "com.amazonaws.rum#QueryFilterKey": {
@@ -2425,7 +2462,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about \n       your web application performance from actual user sessions in real time. The data collected includes page load \n       times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and \n       also see breakdowns by the browsers and devices that your customers use.</p>\n         <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch \n       RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error \n       messages, stack traces, and user sessions. You can also use RUM to \n       understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>",
+                "smithy.api#documentation": "<p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about your web application performance from actual user sessions in real time. The data collected includes page load times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and also see breakdowns by the browsers and devices that your customers use.</p> <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error messages, stack traces, and user sessions. You can also use RUM to understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>",
                 "smithy.api#title": "CloudWatch RUM",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3191,7 +3228,7 @@
                 "metadata": {
                     "target": "com.amazonaws.rum#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata about this event, which contains a JSON serialization of the identity of the user for\n         this session. The user information comes from information such as the HTTP user-agent request header\n         and document interface.</p>"
+                        "smithy.api#documentation": "<p>Metadata about this event, which contains a JSON serialization of the identity of the user for this session. The user information comes from information such as the HTTP user-agent request header and document interface.</p>"
                     }
                 },
                 "details": {
@@ -3203,7 +3240,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the information for one performance event that RUM collects from a user session with your\n      application.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the information for one performance event that RUM collects from a user session with your application.</p>"
             }
         },
         "com.amazonaws.rum#RumEventList": {
@@ -3308,7 +3345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, \n       the only resources that \n       can be tagged app monitors.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. \n       If you specify a new tag key for the resource, \n       this tag is appended to the list of tags associated\n       with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces\n       the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, the only resources that can be tagged app monitors.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}"
@@ -3430,7 +3467,7 @@
                     "target": "com.amazonaws.rum#QueryTimestamp",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The end of the time range to retrieve performance events from. If you omit this, the time \n      range extends to the time that this operation is performed.</p>"
+                        "smithy.api#documentation": "<p>The end of the time range to retrieve performance events from. If you omit this, the time range extends to the time that this operation is performed.</p>"
                     }
                 }
             },
@@ -3533,7 +3570,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor\n         configuration that you specify in this operation are changed. For any parameters that you omit, the existing\n         values are kept.</p>\n         <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use\n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <p>To create a new app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html\">CreateAppMonitor</a>.</p>\n         <p>After you update an app monitor, sign in to the CloudWatch RUM console to get \n         the updated JavaScript code snippet to add to your web application. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet\n            that I've already generated?</a>\n         </p>",
+                "smithy.api#documentation": "<p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor configuration that you specify in this operation are changed. For any parameters that you omit, the existing values are kept.</p> <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html\">TagResource</a>.</p> <p>To create a new app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html\">CreateAppMonitor</a>.</p> <p>After you update an app monitor, sign in to the CloudWatch RUM console to get the updated JavaScript code snippet to add to your web application. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet that I've already generated?</a> </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -3561,31 +3598,31 @@
                 "DomainList": {
                     "target": "com.amazonaws.rum#AppMonitorDomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list.\n      </p>"
+                        "smithy.api#documentation": "<p> List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list. </p>"
                     }
                 },
                 "AppMonitorConfiguration": {
                     "target": "com.amazonaws.rum#AppMonitorConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains much of the configuration data for the app monitor. If you are using \n         Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the \n         Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own \n         authorization method. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html\">Authorize your application\n            to send data to Amazon Web Services</a>.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains much of the configuration data for the app monitor. If you are using Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own authorization method. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html\">Authorize your application to send data to Amazon Web Services</a>.</p>"
                     }
                 },
                 "CwLogEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM \n         sends a copy of this telemetry data to Amazon CloudWatch Logs\n         in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur\n         Amazon CloudWatch Logs charges.</p>"
+                        "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges.</p>"
                     }
                 },
                 "CustomEvents": {
                     "target": "com.amazonaws.rum#CustomEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send custom events. The default is for custom events to be <code>DISABLED</code>.</p> <p>For more information about custom events, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
                     }
                 },
                 "DeobfuscationConfiguration": {
                     "target": "com.amazonaws.rum#DeobfuscationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
+                        "smithy.api#documentation": "<p> A structure that contains the configuration for how an app monitor can deobfuscate stack traces. </p>"
                     }
                 }
             }
@@ -3626,7 +3663,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For \n         more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>.</p>",
+                "smithy.api#documentation": "<p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/UpdateRumMetricDefinitions.html"
                 },
@@ -3653,14 +3690,14 @@
                 "Destination": {
                     "target": "com.amazonaws.rum#MetricDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment \n         that will receive\n         the metrics and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that will receive the metrics and an IAM role that has permission to write to the experiment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationArn": {
                     "target": "com.amazonaws.rum#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this \n         experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter.</p> <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
                     }
                 },
                 "MetricDefinition": {
@@ -3699,7 +3736,7 @@
                 "userId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user for this user session. This ID is generated by RUM and does not include any \n      personally identifiable information about the user.</p>",
+                        "smithy.api#documentation": "<p>The ID of the user for this user session. This ID is generated by RUM and does not include any personally identifiable information about the user.</p>",
                         "smithy.api#length": {
                             "min": 36,
                             "max": 36

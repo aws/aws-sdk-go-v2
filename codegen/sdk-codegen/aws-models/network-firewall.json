@@ -2530,6 +2530,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp indicating when the rule group was last modified.</p>"
                     }
+                },
+                "VendorName": {
+                    "target": "com.amazonaws.networkfirewall#VendorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Marketplace vendor that provides this rule group.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.networkfirewall#ProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the product listing associated with this rule group.</p>"
+                    }
+                },
+                "ListingName": {
+                    "target": "com.amazonaws.networkfirewall#ListingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the product listing for this rule group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4775,6 +4793,12 @@
                         "smithy.api#documentation": "<p>Indicates the general category of the Amazon Web Services managed rule group.</p>"
                     }
                 },
+                "SubscriptionStatus": {
+                    "target": "com.amazonaws.networkfirewall#SubscriptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to show only rule groups with the specified subscription status. Use this to find subscribed or unsubscribed rule groups.</p>"
+                    }
+                },
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
@@ -5028,6 +5052,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.networkfirewall#ListingName": {
+            "type": "string"
         },
         "com.amazonaws.networkfirewall#LogDestinationConfig": {
             "type": "structure",
@@ -6387,6 +6414,18 @@
                     "traits": {
                         "smithy.api#enumValue": "CAPACITY_CONSTRAINED"
                     }
+                },
+                "NOT_SUBSCRIBED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_SUBSCRIBED"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
                 }
             }
         },
@@ -6495,6 +6534,9 @@
                     "max": 65535
                 }
             }
+        },
+        "com.amazonaws.networkfirewall#ProductId": {
+            "type": "string"
         },
         "com.amazonaws.networkfirewall#ProtocolNumber": {
             "type": "integer",
@@ -6738,6 +6780,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ACTIVE_THREAT_DEFENSE"
                     }
+                },
+                "PARTNER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTNER_MANAGED"
+                    }
                 }
             }
         },
@@ -6892,6 +6940,12 @@
                     "target": "com.amazonaws.networkfirewall#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule group.</p>"
+                    }
+                },
+                "VendorName": {
+                    "target": "com.amazonaws.networkfirewall#VendorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Marketplace seller that provides this rule group.</p>"
                     }
                 }
             },
@@ -8092,6 +8146,23 @@
                 "target": "com.amazonaws.networkfirewall#SubnetMapping"
             }
         },
+        "com.amazonaws.networkfirewall#SubscriptionStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_SUBSCRIBED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_SUBSCRIBED"
+                    }
+                },
+                "SUBSCRIBED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBSCRIBED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkfirewall#Summary": {
             "type": "structure",
             "members": {
@@ -8893,6 +8964,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
@@ -9901,6 +9975,9 @@
             "member": {
                 "target": "com.amazonaws.networkfirewall#VariableDefinition"
             }
+        },
+        "com.amazonaws.networkfirewall#VendorName": {
+            "type": "string"
         },
         "com.amazonaws.networkfirewall#VpcEndpointAssociation": {
             "type": "structure",

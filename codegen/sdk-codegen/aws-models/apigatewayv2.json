@@ -29,6 +29,32 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.apigatewayv2#ACMManaged": {
+            "type": "structure",
+            "members": {
+                "CertificateArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The certificate ARN.</p>",
+                        "smithy.api#jsonName": "certificateArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin3Max256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The domain name.</p>",
+                        "smithy.api#jsonName": "domainName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a domain name and certificate for a portal.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -228,6 +254,18 @@
                     "target": "com.amazonaws.apigatewayv2#CreateModel"
                 },
                 {
+                    "target": "com.amazonaws.apigatewayv2#CreatePortal"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#CreatePortalProduct"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#CreateProductPage"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#CreateProductRestEndpointPage"
+                },
+                {
                     "target": "com.amazonaws.apigatewayv2#CreateRoute"
                 },
                 {
@@ -273,6 +311,21 @@
                     "target": "com.amazonaws.apigatewayv2#DeleteModel"
                 },
                 {
+                    "target": "com.amazonaws.apigatewayv2#DeletePortal"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#DeletePortalProduct"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#DeletePortalProductSharingPolicy"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#DeleteProductPage"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#DeleteProductRestEndpointPage"
+                },
+                {
                     "target": "com.amazonaws.apigatewayv2#DeleteRoute"
                 },
                 {
@@ -292,6 +345,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigatewayv2#DeleteVpcLink"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#DisablePortal"
                 },
                 {
                     "target": "com.amazonaws.apigatewayv2#ExportApi"
@@ -348,6 +404,21 @@
                     "target": "com.amazonaws.apigatewayv2#GetModelTemplate"
                 },
                 {
+                    "target": "com.amazonaws.apigatewayv2#GetPortal"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#GetPortalProduct"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicy"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#GetProductPage"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#GetProductRestEndpointPage"
+                },
+                {
                     "target": "com.amazonaws.apigatewayv2#GetRoute"
                 },
                 {
@@ -381,7 +452,28 @@
                     "target": "com.amazonaws.apigatewayv2#ImportApi"
                 },
                 {
+                    "target": "com.amazonaws.apigatewayv2#ListPortalProducts"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ListPortals"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ListProductPages"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ListProductRestEndpointPages"
+                },
+                {
                     "target": "com.amazonaws.apigatewayv2#ListRoutingRules"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#PreviewPortal"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#PublishPortal"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicy"
                 },
                 {
                     "target": "com.amazonaws.apigatewayv2#PutRoutingRule"
@@ -421,6 +513,18 @@
                 },
                 {
                     "target": "com.amazonaws.apigatewayv2#UpdateModel"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#UpdatePortal"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#UpdatePortalProduct"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#UpdateProductPage"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPage"
                 },
                 {
                     "target": "com.amazonaws.apigatewayv2#UpdateRoute"
@@ -1370,6 +1474,28 @@
                 "smithy.api#documentation": "<p>Represents an Amazon Resource Name (ARN).</p>"
             }
         },
+        "com.amazonaws.apigatewayv2#Authorization": {
+            "type": "structure",
+            "members": {
+                "CognitoConfig": {
+                    "target": "com.amazonaws.apigatewayv2#CognitoConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Cognito configuration.</p>",
+                        "smithy.api#jsonName": "cognitoConfig"
+                    }
+                },
+                "None": {
+                    "target": "com.amazonaws.apigatewayv2#None",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide no authorization for your portal. This makes your portal publicly accesible on the web.</p>",
+                        "smithy.api#jsonName": "none"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an authorization configuration for a portal.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#AuthorizationScopes": {
             "type": "list",
             "member": {
@@ -1533,6 +1659,41 @@
                 "smithy.api#documentation": "<p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.apigatewayv2#CognitoConfig": {
+            "type": "structure",
+            "members": {
+                "AppClientId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The app client ID.</p>",
+                        "smithy.api#jsonName": "appClientId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user pool ARN.</p>",
+                        "smithy.api#jsonName": "userPoolArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolDomain": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The user pool domain.</p>",
+                        "smithy.api#jsonName": "userPoolDomain",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for using Amazon Cognito user pools to control access to your portal.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#ConflictException": {
@@ -3087,6 +3248,542 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.apigatewayv2#CreatePortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#CreatePortalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#CreatePortalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a portal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/portals",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreatePortalProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#CreatePortalProductRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#CreatePortalProductResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new portal product.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/portalproducts",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreatePortalProductRequest": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the portal product.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the portal product as it appears in a published portal.</p>",
+                        "smithy.api#jsonName": "displayName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the post operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreatePortalProductResponse": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the portal product.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the portal product.</p>",
+                        "smithy.api#jsonName": "displayName"
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual ordering of the product pages and product REST endpoint pages in a published portal.</p>",
+                        "smithy.api#jsonName": "displayOrder"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal product was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "PortalProductArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal product.</p>",
+                        "smithy.api#jsonName": "portalProductArn"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#jsonName": "portalProductId"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreatePortalRequest": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.apigatewayv2#Authorization",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The authentication configuration for the portal.</p>",
+                        "smithy.api#jsonName": "authorization",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointConfigurationRequest",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The domain configuration for the portal. Use a default domain provided by API Gateway or provide a fully-qualified domain name that you own.</p>",
+                        "smithy.api#jsonName": "endpointConfiguration",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludedPortalProductArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the portal products included in the portal.</p>",
+                        "smithy.api#jsonName": "includedPortalProductArns"
+                    }
+                },
+                "LogoUri": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1092",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI for the portal logo image that is displayed in the portal header.</p>",
+                        "smithy.api#jsonName": "logoUri"
+                    }
+                },
+                "PortalContent": {
+                    "target": "com.amazonaws.apigatewayv2#PortalContent",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The content of the portal.</p>",
+                        "smithy.api#jsonName": "portalContent",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RumAppMonitorName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon CloudWatch RUM app monitor for the portal.</p>",
+                        "smithy.api#jsonName": "rumAppMonitorName"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the post operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreatePortalResponse": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.apigatewayv2#Authorization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization for the portal. Supports Cognito-based user authentication or no authentication.</p>",
+                        "smithy.api#jsonName": "authorization"
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointConfigurationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration.</p>",
+                        "smithy.api#jsonName": "endpointConfiguration"
+                    }
+                },
+                "IncludedPortalProductArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the portal products included in the portal.</p>",
+                        "smithy.api#jsonName": "includedPortalProductArns"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal configuration was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "LastPublished": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last published.</p>",
+                        "smithy.api#jsonName": "lastPublished"
+                    }
+                },
+                "LastPublishedDescription": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-written description of the changes made in the last published version of the portal.</p>",
+                        "smithy.api#jsonName": "lastPublishedDescription"
+                    }
+                },
+                "PortalArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal.</p>",
+                        "smithy.api#jsonName": "portalArn"
+                    }
+                },
+                "PortalContent": {
+                    "target": "com.amazonaws.apigatewayv2#PortalContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name, description, and theme for the portal.</p>",
+                        "smithy.api#jsonName": "portalContent"
+                    }
+                },
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#jsonName": "portalId"
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.apigatewayv2#PublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current publishing status of the portal.</p>",
+                        "smithy.api#jsonName": "publishStatus"
+                    }
+                },
+                "RumAppMonitorName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon CloudWatch RUM app monitor.</p>",
+                        "smithy.api#jsonName": "rumAppMonitorName"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information for failed portal operations. Contains details about any issues encountered during portal creation or publishing.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreateProductPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#CreateProductPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#CreateProductPageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new product page for a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productpages",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreateProductPageRequest": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayContent",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The content of the product page.</p>",
+                        "smithy.api#jsonName": "displayContent",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the post operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreateProductPageResponse": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the product page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "ProductPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the product page.</p>",
+                        "smithy.api#jsonName": "productPageArn"
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product page identifier.</p>",
+                        "smithy.api#jsonName": "productPageId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreateProductRestEndpointPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#CreateProductRestEndpointPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#CreateProductRestEndpointPageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a product REST endpoint page for a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productrestendpointpages",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreateProductRestEndpointPageRequest": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointDisplayContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestEndpointIdentifier": {
+                    "target": "com.amazonaws.apigatewayv2#RestEndpointIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The REST endpoint identifier.</p>",
+                        "smithy.api#jsonName": "restEndpointIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TryItState": {
+                    "target": "com.amazonaws.apigatewayv2#TryItState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The try it state of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "tryItState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the post operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#CreateProductRestEndpointPageResponse": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointDisplayContentResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display content.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the product REST endpoint page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "ProductRestEndpointPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageArn"
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product REST endpoint page identifier.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageId"
+                    }
+                },
+                "RestEndpointIdentifier": {
+                    "target": "com.amazonaws.apigatewayv2#RestEndpointIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The REST endpoint identifier.</p>",
+                        "smithy.api#jsonName": "restEndpointIdentifier"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apigatewayv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "TryItState": {
+                    "target": "com.amazonaws.apigatewayv2#TryItState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The try it state.</p>",
+                        "smithy.api#jsonName": "tryItState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.apigatewayv2#CreateRoute": {
             "type": "operation",
             "input": {
@@ -3929,6 +4626,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.apigatewayv2#CustomColors": {
+            "type": "structure",
+            "members": {
+                "AccentColor": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max16",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Represents the accent color.</p>",
+                        "smithy.api#jsonName": "accentColor",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackgroundColor": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max16",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Represents the background color.</p>",
+                        "smithy.api#jsonName": "backgroundColor",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorValidationColor": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max16",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The errorValidationColor.</p>",
+                        "smithy.api#jsonName": "errorValidationColor",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HeaderColor": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max16",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Represents the header color.</p>",
+                        "smithy.api#jsonName": "headerColor",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NavigationColor": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max16",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Represents the navigation color.</p>",
+                        "smithy.api#jsonName": "navigationColor",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TextColor": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max16",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Represents the text color.</p>",
+                        "smithy.api#jsonName": "textColor",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents custom colors for a published portal.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#DeleteAccessLogSettings": {
             "type": "operation",
             "input": {
@@ -4406,6 +5165,254 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.apigatewayv2#DeletePortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#DeletePortalRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a portal.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/portals/{PortalId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeletePortalProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#DeletePortalProductRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/portalproducts/{PortalProductId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeletePortalProductRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeletePortalProductSharingPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#DeletePortalProductSharingPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the sharing policy for a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/portalproducts/{PortalProductId}/sharingpolicy",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeletePortalProductSharingPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeletePortalRequest": {
+            "type": "structure",
+            "members": {
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeleteProductPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#DeleteProductPageRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a product page of a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeleteProductPageRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeleteProductRestEndpointPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#DeleteProductRestEndpointPageRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a product REST endpoint page.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#DeleteProductRestEndpointPageRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product REST endpoint identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.apigatewayv2#DeleteRoute": {
             "type": "operation",
             "input": {
@@ -4859,6 +5866,140 @@
                 "smithy.api#documentation": "<p>Represents a deployment status.</p>"
             }
         },
+        "com.amazonaws.apigatewayv2#DisablePortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#DisablePortalRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the publication of a portal portal.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v2/portals/{PortalId}/publish",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#DisablePortalRequest": {
+            "type": "structure",
+            "members": {
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#DisplayContent": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max32768",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The body.</p>",
+                        "smithy.api#jsonName": "body",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The title.</p>",
+                        "smithy.api#jsonName": "title",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the product page.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#DisplayContentOverrides": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max32768",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default, this is the documentation of your REST API from API Gateway. You can provide custom documentation to override this value.</p>",
+                        "smithy.api#jsonName": "body"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for your REST API. By default, API Gateway uses the default execute API endpoint. You can provide a custom domain to override this value.</p>",
+                        "smithy.api#jsonName": "endpoint"
+                    }
+                },
+                "OperationName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation name of the product REST endpoint.</p>",
+                        "smithy.api#jsonName": "operationName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains any values that override the default configuration generated from API Gateway.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#DisplayOrder": {
+            "type": "structure",
+            "members": {
+                "Contents": {
+                    "target": "com.amazonaws.apigatewayv2#__listOfSection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of sections which include section name and list of product REST endpoints for a product.</p>",
+                        "smithy.api#jsonName": "contents"
+                    }
+                },
+                "OverviewPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the overview page.</p>",
+                        "smithy.api#jsonName": "overviewPageArn"
+                    }
+                },
+                "ProductPageArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product page ARNs.</p>",
+                        "smithy.api#jsonName": "productPageArns"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The display order.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#DomainName": {
             "type": "structure",
             "members": {
@@ -5041,6 +6182,121 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#EndpointConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AcmManaged": {
+                    "target": "com.amazonaws.apigatewayv2#ACMManaged",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a domain name and certificate for a portal.</p>",
+                        "smithy.api#jsonName": "acmManaged"
+                    }
+                },
+                "None": {
+                    "target": "com.amazonaws.apigatewayv2#None",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the default portal domain name that is generated and managed by API Gateway.</p>",
+                        "smithy.api#jsonName": "none"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an endpoint configuration.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#EndpointConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "CertificateArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the ACM certificate.</p>",
+                        "smithy.api#jsonName": "certificateArn"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin3Max256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name.</p>",
+                        "smithy.api#jsonName": "domainName"
+                    }
+                },
+                "PortalDefaultDomainName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin3Max256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The portal default domain name. This domain name is generated and managed by API Gateway.</p>",
+                        "smithy.api#jsonName": "portalDefaultDomainName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalDomainHostedZoneId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max64",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The portal domain hosted zone identifier.</p>",
+                        "smithy.api#jsonName": "portalDomainHostedZoneId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an endpoint configuration.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#EndpointDisplayContent": {
+            "type": "structure",
+            "members": {
+                "None": {
+                    "target": "com.amazonaws.apigatewayv2#None",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your product REST endpoint contains no overrides, the none object is returned.</p>",
+                        "smithy.api#jsonName": "none"
+                    }
+                },
+                "Overrides": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayContentOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overrides for endpoint display content.</p>",
+                        "smithy.api#jsonName": "overrides"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the endpoint display content.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#EndpointDisplayContentResponse": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max32768",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API documentation.</p>",
+                        "smithy.api#jsonName": "body"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max1024",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URL to invoke your REST API.</p>",
+                        "smithy.api#jsonName": "endpoint",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation name.</p>",
+                        "smithy.api#jsonName": "operationName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The product REST endpoint page.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#EndpointType": {
@@ -6026,6 +7282,7 @@
                 "DomainNameArn": {
                     "target": "com.amazonaws.apigatewayv2#Arn",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the DomainName resource.</p>",
                         "smithy.api#jsonName": "domainNameArn"
                     }
                 },
@@ -6835,6 +8092,577 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
                         "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#GetPortalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#GetPortalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a portal.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portals/{PortalId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#GetPortalProductRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#GetPortalProductResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts/{PortalProductId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalProductRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the resource owner of the portal product.</p>",
+                        "smithy.api#httpQuery": "resourceOwnerAccountId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalProductResponse": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a portal product.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name.</p>",
+                        "smithy.api#jsonName": "displayName"
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display order.</p>",
+                        "smithy.api#jsonName": "displayOrder"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal product was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "PortalProductArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal product.</p>",
+                        "smithy.api#jsonName": "portalProductArn"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#jsonName": "portalProductId"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the sharing policy for a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts/{PortalProductId}/sharingpolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyDocument": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max307200",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product sharing policy.</p>",
+                        "smithy.api#jsonName": "policyDocument"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#jsonName": "portalProductId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalRequest": {
+            "type": "structure",
+            "members": {
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetPortalResponse": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.apigatewayv2#Authorization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization for the portal.</p>",
+                        "smithy.api#jsonName": "authorization"
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointConfigurationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration.</p>",
+                        "smithy.api#jsonName": "endpointConfiguration"
+                    }
+                },
+                "IncludedPortalProductArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the portal products included in the portal.</p>",
+                        "smithy.api#jsonName": "includedPortalProductArns"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "LastPublished": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last published.</p>",
+                        "smithy.api#jsonName": "lastPublished"
+                    }
+                },
+                "LastPublishedDescription": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish description used when the portal was last published.</p>",
+                        "smithy.api#jsonName": "lastPublishedDescription"
+                    }
+                },
+                "PortalArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal.</p>",
+                        "smithy.api#jsonName": "portalArn"
+                    }
+                },
+                "PortalContent": {
+                    "target": "com.amazonaws.apigatewayv2#PortalContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>",
+                        "smithy.api#jsonName": "portalContent"
+                    }
+                },
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#jsonName": "portalId"
+                    }
+                },
+                "Preview": {
+                    "target": "com.amazonaws.apigatewayv2#Preview",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the preview endpoint and the any possible error messages during preview generation.</p>",
+                        "smithy.api#jsonName": "preview"
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.apigatewayv2#PublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status of a portal.</p>",
+                        "smithy.api#jsonName": "publishStatus"
+                    }
+                },
+                "RumAppMonitorName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch RUM app monitor name.</p>",
+                        "smithy.api#jsonName": "rumAppMonitorName"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetProductPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#GetProductPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#GetProductPageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a product page of a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetProductPageRequest": {
+            "type": "structure",
+            "members": {
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the resource owner of the portal product.</p>",
+                        "smithy.api#httpQuery": "resourceOwnerAccountId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetProductPageResponse": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the product page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "ProductPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the product page.</p>",
+                        "smithy.api#jsonName": "productPageArn"
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product page identifier.</p>",
+                        "smithy.api#jsonName": "productPageId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetProductRestEndpointPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#GetProductRestEndpointPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#GetProductRestEndpointPageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a product REST endpoint page.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetProductRestEndpointPageRequest": {
+            "type": "structure",
+            "members": {
+                "IncludeRawDisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query parameter to include raw display content.</p>",
+                        "smithy.api#httpQuery": "includeRawDisplayContent"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product REST endpoint identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the resource owner of the portal product.</p>",
+                        "smithy.api#httpQuery": "resourceOwnerAccountId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#GetProductRestEndpointPageResponse": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointDisplayContentResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the product REST endpoint page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "ProductRestEndpointPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageArn"
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product REST endpoint page identifier.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageId"
+                    }
+                },
+                "RawDisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw display content of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "rawDisplayContent"
+                    }
+                },
+                "RestEndpointIdentifier": {
+                    "target": "com.amazonaws.apigatewayv2#RestEndpointIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The REST endpoint identifier.</p>",
+                        "smithy.api#jsonName": "restEndpointIdentifier"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apigatewayv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "TryItState": {
+                    "target": "com.amazonaws.apigatewayv2#TryItState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The try it state.</p>",
+                        "smithy.api#jsonName": "tryItState"
                     }
                 }
             },
@@ -7843,6 +9671,50 @@
                 "smithy.api#documentation": "<p>The identifier.</p>"
             }
         },
+        "com.amazonaws.apigatewayv2#IdentifierParts": {
+            "type": "structure",
+            "members": {
+                "Method": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max20",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The method of the product REST endpoint.</p>",
+                        "smithy.api#jsonName": "method",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max4096",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The path of the product REST endpoint.</p>",
+                        "smithy.api#jsonName": "path",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestApiId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The REST API ID of the product REST endpoint.</p>",
+                        "smithy.api#jsonName": "restApiId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max128",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The stage of the product REST endpoint.</p>",
+                        "smithy.api#jsonName": "stage",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier parts of a product REST endpoint.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#IdentitySourceList": {
             "type": "list",
             "member": {
@@ -8364,6 +10236,337 @@
                 "smithy.api#documentation": "<p>Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.</p>"
             }
         },
+        "com.amazonaws.apigatewayv2#ListPortalProducts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#ListPortalProductsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#ListPortalProductsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists portal products.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListPortalProductsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of elements to be returned for this resource.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "ResourceOwner": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource owner of the portal product.</p>",
+                        "smithy.api#httpQuery": "resourceOwner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListPortalProductsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.apigatewayv2#__listOfPortalProductSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elements from this collection.</p>",
+                        "smithy.api#jsonName": "items"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListPortals": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#ListPortalsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#ListPortalsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists portals.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portals",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListPortalsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of elements to be returned for this resource.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListPortalsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.apigatewayv2#__listOfPortalSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elements from this collection.</p>",
+                        "smithy.api#jsonName": "items"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListProductPages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#ListProductPagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#ListProductPagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the product pages for a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productpages",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListProductPagesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of elements to be returned for this resource.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the resource owner of the portal product.</p>",
+                        "smithy.api#httpQuery": "resourceOwnerAccountId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListProductPagesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.apigatewayv2#__listOfProductPageSummaryNoBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elements from this collection.</p>",
+                        "smithy.api#jsonName": "items"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListProductRestEndpointPages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#ListProductRestEndpointPagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#ListProductRestEndpointPagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the product REST endpoint pages of a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productrestendpointpages",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListProductRestEndpointPagesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of elements to be returned for this resource.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the resource owner of the portal product.</p>",
+                        "smithy.api#httpQuery": "resourceOwnerAccountId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#ListProductRestEndpointPagesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.apigatewayv2#__listOfProductRestEndpointPageSummaryNoBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elements from this collection.</p>",
+                        "smithy.api#jsonName": "items"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.apigatewayv2#ListRoutingRules": {
             "type": "operation",
             "input": {
@@ -8587,6 +10790,13 @@
                 "smithy.api#documentation": "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>"
             }
         },
+        "com.amazonaws.apigatewayv2#None": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The none option.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#NotFoundException": {
             "type": "structure",
             "members": {
@@ -8652,6 +10862,486 @@
                 "smithy.api#documentation": "<p>Represents passthrough behavior for an integration response. Supported only for WebSocket APIs.</p>"
             }
         },
+        "com.amazonaws.apigatewayv2#PortalContent": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the portal.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin3Max255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The display name for the portal.</p>",
+                        "smithy.api#jsonName": "displayName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Theme": {
+                    "target": "com.amazonaws.apigatewayv2#PortalTheme",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The theme for the portal.</p>",
+                        "smithy.api#jsonName": "theme",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#PortalProductSummary": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The description.</p>",
+                        "smithy.api#jsonName": "description",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The display name of a portal product.</p>",
+                        "smithy.api#jsonName": "displayName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the portal product was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalProductArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of a portal product.</p>",
+                        "smithy.api#jsonName": "portalProductArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#jsonName": "portalProductId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a portal product.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#PortalSummary": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.apigatewayv2#Authorization",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The authorization of the portal.</p>",
+                        "smithy.api#jsonName": "authorization",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointConfigurationResponse",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The endpoint configuration of the portal.</p>",
+                        "smithy.api#jsonName": "endpointConfiguration",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludedPortalProductArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARNs of the portal products included in the portal.</p>",
+                        "smithy.api#jsonName": "includedPortalProductArns",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastPublished": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last published.</p>",
+                        "smithy.api#jsonName": "lastPublished"
+                    }
+                },
+                "LastPublishedDescription": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the portal the last time it was published.</p>",
+                        "smithy.api#jsonName": "lastPublishedDescription"
+                    }
+                },
+                "PortalArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the portal.</p>",
+                        "smithy.api#jsonName": "portalArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalContent": {
+                    "target": "com.amazonaws.apigatewayv2#PortalContent",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>",
+                        "smithy.api#jsonName": "portalContent",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#jsonName": "portalId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Preview": {
+                    "target": "com.amazonaws.apigatewayv2#Preview",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the preview endpoint and the any possible error messages during preview generation.</p>",
+                        "smithy.api#jsonName": "preview"
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.apigatewayv2#PublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status.</p>",
+                        "smithy.api#jsonName": "publishStatus"
+                    }
+                },
+                "RumAppMonitorName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch RUM app monitor name.</p>",
+                        "smithy.api#jsonName": "rumAppMonitorName"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a portal summary.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#PortalTheme": {
+            "type": "structure",
+            "members": {
+                "CustomColors": {
+                    "target": "com.amazonaws.apigatewayv2#CustomColors",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Defines custom color values.</p>",
+                        "smithy.api#jsonName": "customColors",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogoLastUploaded": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the logo was last uploaded.</p>",
+                        "smithy.api#jsonName": "logoLastUploaded"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the theme for a portal.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#Preview": {
+            "type": "structure",
+            "members": {
+                "PreviewStatus": {
+                    "target": "com.amazonaws.apigatewayv2#PreviewStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the preview.</p>",
+                        "smithy.api#jsonName": "previewStatus",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreviewUrl": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the preview.</p>",
+                        "smithy.api#jsonName": "previewUrl"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the preview status and preview URL.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#PreviewPortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#PreviewPortalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#PreviewPortalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a portal preview.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/portals/{PortalId}/preview",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#PreviewPortalRequest": {
+            "type": "structure",
+            "members": {
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#PreviewPortalResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#PreviewStatus": {
+            "type": "enum",
+            "members": {
+                "PREVIEW_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVIEW_IN_PROGRESS"
+                    }
+                },
+                "PREVIEW_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVIEW_FAILED"
+                    }
+                },
+                "PREVIEW_READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVIEW_READY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the preview status.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#ProductPageSummaryNoBody": {
+            "type": "structure",
+            "members": {
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the product page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PageTitle": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The page title.</p>",
+                        "smithy.api#jsonName": "pageTitle",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the product page.</p>",
+                        "smithy.api#jsonName": "productPageArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The product page identifier.</p>",
+                        "smithy.api#jsonName": "productPageId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a product page summary without listing any page content.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#ProductRestEndpointPageSummaryNoBody": {
+            "type": "structure",
+            "members": {
+                "Endpoint": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max1024",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The endpoint of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "endpoint",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the product REST endpoint page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation name of the product REST endpoint.</p>",
+                        "smithy.api#jsonName": "operationName"
+                    }
+                },
+                "ProductRestEndpointPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The product REST endpoint page identifier.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestEndpointIdentifier": {
+                    "target": "com.amazonaws.apigatewayv2#RestEndpointIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The REST endpoint identifier.</p>",
+                        "smithy.api#jsonName": "restEndpointIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apigatewayv2#Status",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "TryItState": {
+                    "target": "com.amazonaws.apigatewayv2#TryItState",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The try it state of a product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "tryItState",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a product REST endpoint page, without providing the page content.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#ProtocolType": {
             "type": "enum",
             "members": {
@@ -8670,6 +11360,167 @@
             },
             "traits": {
                 "smithy.api#documentation": "Represents a protocol type."
+            }
+        },
+        "com.amazonaws.apigatewayv2#PublishPortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#PublishPortalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#PublishPortalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes a portal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/portals/{PortalId}/publish",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#PublishPortalRequest": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the portal. When the portal is published, this description becomes the last published description.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the post operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#PublishPortalResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#PublishStatus": {
+            "type": "enum",
+            "members": {
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                },
+                "PUBLISH_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISH_IN_PROGRESS"
+                    }
+                },
+                "PUBLISH_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISH_FAILED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a publish status.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the sharing policy for a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/portalproducts/{PortalProductId}/sharingpolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "PolicyDocument": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max307200",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The product sharing policy.</p>",
+                        "smithy.api#jsonName": "policyDocument",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the put operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#PutRoutingRule": {
@@ -9062,6 +11913,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#RestEndpointIdentifier": {
+            "type": "structure",
+            "members": {
+                "IdentifierParts": {
+                    "target": "com.amazonaws.apigatewayv2#IdentifierParts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier parts of the REST endpoint identifier.</p>",
+                        "smithy.api#jsonName": "identifierParts"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The REST API endpoint identifier.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#Route": {
@@ -9492,6 +12358,32 @@
                 }
             }
         },
+        "com.amazonaws.apigatewayv2#Section": {
+            "type": "structure",
+            "members": {
+                "ProductRestEndpointPageArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARNs of the product REST endpoint pages in a portal product.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageArns",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SectionName": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The section name.</p>",
+                        "smithy.api#jsonName": "sectionName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the section name and list of product REST endpoints for a product.</p>"
+            }
+        },
         "com.amazonaws.apigatewayv2#SecurityGroupIdList": {
             "type": "list",
             "member": {
@@ -9651,6 +12543,54 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The stage variable map.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#Status": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status.</p>"
+            }
+        },
+        "com.amazonaws.apigatewayv2#StatusException": {
+            "type": "structure",
+            "members": {
+                "Exception": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception.</p>",
+                        "smithy.api#jsonName": "exception"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a StatusException.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#StringWithLengthBetween0And1024": {
@@ -9854,6 +12794,26 @@
                 "smithy.api#documentation": "<p>A limit has been exceeded. See the accompanying error message for details.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.apigatewayv2#TryItState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the try it state for a product REST endpoint page.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#UntagResource": {
@@ -10699,6 +13659,7 @@
                 "DomainNameArn": {
                     "target": "com.amazonaws.apigatewayv2#Arn",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the DomainName resource.</p>",
                         "smithy.api#jsonName": "domainNameArn"
                     }
                 },
@@ -11327,6 +14288,564 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The schema for the model. For application/json models, this should be JSON schema draft 4 model.</p>",
                         "smithy.api#jsonName": "schema"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdatePortal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#UpdatePortalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#UpdatePortalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a portal.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v2/portals/{PortalId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdatePortalProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#UpdatePortalProductRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#UpdatePortalProductResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the portal product.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v2/portalproducts/{PortalProductId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdatePortalProductRequest": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The displayName.</p>",
+                        "smithy.api#jsonName": "displayName"
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display order.</p>",
+                        "smithy.api#jsonName": "displayOrder"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the patch operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdatePortalProductResponse": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the portal product.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin1Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of a portal product.</p>",
+                        "smithy.api#jsonName": "displayName"
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display order that the portal products will appear in a portal.</p>",
+                        "smithy.api#jsonName": "displayOrder"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal product was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "PortalProductArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal product.</p>",
+                        "smithy.api#jsonName": "portalProductArn"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#jsonName": "portalProductId"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdatePortalRequest": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.apigatewayv2#Authorization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization of the portal.</p>",
+                        "smithy.api#jsonName": "authorization"
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointConfigurationRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an endpoint configuration.</p>",
+                        "smithy.api#jsonName": "endpointConfiguration"
+                    }
+                },
+                "IncludedPortalProductArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the portal products included in the portal.</p>",
+                        "smithy.api#jsonName": "includedPortalProductArns"
+                    }
+                },
+                "LogoUri": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1092",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logo URI.</p>",
+                        "smithy.api#jsonName": "logoUri"
+                    }
+                },
+                "PortalContent": {
+                    "target": "com.amazonaws.apigatewayv2#PortalContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>",
+                        "smithy.api#jsonName": "portalContent"
+                    }
+                },
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RumAppMonitorName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch RUM app monitor name.</p>",
+                        "smithy.api#jsonName": "rumAppMonitorName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the patch operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdatePortalResponse": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.apigatewayv2#Authorization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization for the portal.</p>",
+                        "smithy.api#jsonName": "authorization"
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointConfigurationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration.</p>",
+                        "smithy.api#jsonName": "endpointConfiguration"
+                    }
+                },
+                "IncludedPortalProductArns": {
+                    "target": "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the portal products included in the portal.</p>",
+                        "smithy.api#jsonName": "includedPortalProductArns"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "LastPublished": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the portal was last published.</p>",
+                        "smithy.api#jsonName": "lastPublished"
+                    }
+                },
+                "LastPublishedDescription": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description associated with the last time the portal was published.</p>",
+                        "smithy.api#jsonName": "lastPublishedDescription"
+                    }
+                },
+                "PortalArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal.</p>",
+                        "smithy.api#jsonName": "portalArn"
+                    }
+                },
+                "PortalContent": {
+                    "target": "com.amazonaws.apigatewayv2#PortalContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>",
+                        "smithy.api#jsonName": "portalContent"
+                    }
+                },
+                "PortalId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal identifier.</p>",
+                        "smithy.api#jsonName": "portalId"
+                    }
+                },
+                "Preview": {
+                    "target": "com.amazonaws.apigatewayv2#Preview",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the preview endpoint and the any possible error messages during preview generation.</p>",
+                        "smithy.api#jsonName": "preview"
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.apigatewayv2#PublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publishStatus.</p>",
+                        "smithy.api#jsonName": "publishStatus"
+                    }
+                },
+                "RumAppMonitorName": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch RUM app monitor name.</p>",
+                        "smithy.api#jsonName": "rumAppMonitorName"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apigatewayv2#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdateProductPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#UpdateProductPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#UpdateProductPageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a product page of a portal product.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdateProductPageRequest": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the patch operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdateProductPageResponse": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#DisplayContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the product page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "ProductPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the product page.</p>",
+                        "smithy.api#jsonName": "productPageArn"
+                    }
+                },
+                "ProductPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product page identifier.</p>",
+                        "smithy.api#jsonName": "productPageId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigatewayv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigatewayv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a product REST endpoint page.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPageRequest": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointDisplayContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display content.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "PortalProductId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The portal product identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product REST endpoint identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TryItState": {
+                    "target": "com.amazonaws.apigatewayv2#TryItState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The try it state of a product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "tryItState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for the patch operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPageResponse": {
+            "type": "structure",
+            "members": {
+                "DisplayContent": {
+                    "target": "com.amazonaws.apigatewayv2#EndpointDisplayContentResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "displayContent"
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.apigatewayv2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the product REST endpoint page was last modified.</p>",
+                        "smithy.api#jsonName": "lastModified"
+                    }
+                },
+                "ProductRestEndpointPageArn": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageArn"
+                    }
+                },
+                "ProductRestEndpointPageId": {
+                    "target": "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product REST endpoint page identifier.</p>",
+                        "smithy.api#jsonName": "productRestEndpointPageId"
+                    }
+                },
+                "RestEndpointIdentifier": {
+                    "target": "com.amazonaws.apigatewayv2#RestEndpointIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The REST endpoint identifier.</p>",
+                        "smithy.api#jsonName": "restEndpointIdentifier"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apigatewayv2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "StatusException": {
+                    "target": "com.amazonaws.apigatewayv2#StatusException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status exception information.</p>",
+                        "smithy.api#jsonName": "statusException"
+                    }
+                },
+                "TryItState": {
+                    "target": "com.amazonaws.apigatewayv2#TryItState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The try it state of a product REST endpoint page.</p>",
+                        "smithy.api#jsonName": "tryItState"
                     }
                 }
             },
@@ -12236,6 +15755,30 @@
                 "target": "com.amazonaws.apigatewayv2#Model"
             }
         },
+        "com.amazonaws.apigatewayv2#__listOfPortalProductSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigatewayv2#PortalProductSummary"
+            }
+        },
+        "com.amazonaws.apigatewayv2#__listOfPortalSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigatewayv2#PortalSummary"
+            }
+        },
+        "com.amazonaws.apigatewayv2#__listOfProductPageSummaryNoBody": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigatewayv2#ProductPageSummaryNoBody"
+            }
+        },
+        "com.amazonaws.apigatewayv2#__listOfProductRestEndpointPageSummaryNoBody": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigatewayv2#ProductRestEndpointPageSummaryNoBody"
+            }
+        },
         "com.amazonaws.apigatewayv2#__listOfRoute": {
             "type": "list",
             "member": {
@@ -12272,6 +15815,12 @@
                 "target": "com.amazonaws.apigatewayv2#RoutingRuleMatchHeaderValue"
             }
         },
+        "com.amazonaws.apigatewayv2#__listOfSection": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigatewayv2#Section"
+            }
+        },
         "com.amazonaws.apigatewayv2#__listOfSelectionKey": {
             "type": "list",
             "member": {
@@ -12296,8 +15845,195 @@
                 "target": "com.amazonaws.apigatewayv2#__string"
             }
         },
+        "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigatewayv2#__stringMin20Max2048"
+            }
+        },
         "com.amazonaws.apigatewayv2#__string": {
             "type": "string"
+        },
+        "com.amazonaws.apigatewayv2#__stringMin0Max1024": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin0Max1092": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1092
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin0Max255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin10Max2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max1024": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max128": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max16": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max20": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max307200": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 307200
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max32768": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32768
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max4096": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max50": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin1Max64": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin20Max2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin3Max255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.apigatewayv2#__stringMin3Max256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.apigatewayv2#__timestampIso8601": {
             "type": "timestamp",

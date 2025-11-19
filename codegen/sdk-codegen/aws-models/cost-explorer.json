@@ -1798,18 +1798,21 @@
                 "MonitorType": {
                     "target": "com.amazonaws.costexplorer#MonitorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The possible type values. </p>",
+                        "smithy.api#documentation": "<p>The type of the monitor. </p>\n         <p>Set this to <code>DIMENSIONAL</code> for an Amazon Web Services managed monitor.\n            Amazon Web Services managed monitors automatically track up to the top 5,000 values by\n            cost within a dimension of your choosing. Each dimension value is evaluated\n            independently. If you start incurring cost in a new value of your chosen dimension, it\n            will automatically be analyzed by an Amazon Web Services managed monitor.</p>\n         <p>Set this to <code>CUSTOM</code> for a customer managed monitor. Customer managed\n            monitors let you select specific dimension values that get monitored in aggregate.\n        </p>\n         <p>For more information about monitor types, see <a href=\"https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html#monitor-type-def\">Monitor\n            types</a> in the <i>Billing and Cost Management User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MonitorDimension": {
                     "target": "com.amazonaws.costexplorer#MonitorDimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dimensions to evaluate. </p>"
+                        "smithy.api#documentation": "<p>For customer managed monitors, do not specify this field.</p>\n         <p>For Amazon Web Services managed monitors, this field controls which cost dimension is\n            automatically analyzed by the monitor. For <code>TAG</code> and <code>COST_CATEGORY\n            </code> dimensions, you must also specify MonitorSpecification to configure the specific\n            tag or cost category key to analyze.</p>"
                     }
                 },
                 "MonitorSpecification": {
-                    "target": "com.amazonaws.costexplorer#Expression"
+                    "target": "com.amazonaws.costexplorer#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to control what costs the monitor analyzes for anomalies.</p>\n         <p>For Amazon Web Services managed monitors:</p>\n         <ul>\n            <li>\n               <p>If MonitorDimension is <code>SERVICE</code> or <code>LINKED_ACCOUNT</code>, do\n                    not specify this field</p>\n            </li>\n            <li>\n               <p>If MonitorDimension is <code>TAG</code>, set this field to <code>{ \"Tags\": {\n                        \"Key\": \"your tag key\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>If MonitorDimension is <code>COST_CATEGORY</code>, set this field to <code>{\n                        \"CostCategories\": { \"Key\": \"your cost category key\" } }</code>\n               </p>\n            </li>\n         </ul>\n         <p>For customer managed monitors:</p>\n         <ul>\n            <li>\n               <p>To track linked accounts, set this field to <code>{ \"Dimensions\": { \"Key\":\n                        \"LINKED_ACCOUNT\", \"Values\": [ \"your list of up to 10 account IDs\" ] } }\n                        </code>\n               </p>\n            </li>\n            <li>\n               <p>To track cost allocation tags, set this field to <code>{ \"Tags\": { \"Key\":\n                        \"your tag key\", \"Values\": [ \"your list of up to 10 tag values\" ] } }\n                        </code>\n               </p>\n            </li>\n            <li>\n               <p>To track cost categories, set this field to<code>{ \"CostCategories\": { \"Key\":\n                        \"your cost category key\", \"Values\": [ \"your cost category value\" ] } }\n                        </code>\n               </p>\n            </li>\n         </ul>"
+                    }
                 },
                 "DimensionalValueCount": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
@@ -7755,6 +7758,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "LINKED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT"
+                    }
+                },
+                "TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG"
+                    }
+                },
+                "COST_CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_CATEGORY"
                     }
                 }
             }

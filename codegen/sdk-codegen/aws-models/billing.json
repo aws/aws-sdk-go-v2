@@ -748,85 +748,43 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://billing-fips.us-gov-west-1.api.aws"
+                                    "url": "https://billing-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://billing-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://billing.us-gov-west-1.api.aws"
+                                    "url": "https://billing.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://billing.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -1000,43 +958,85 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://billing-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://billing-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://billing.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://billing.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -1528,6 +1528,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "BILLING_TRANSFER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_TRANSFER"
+                    }
+                },
+                "BILLING_TRANSFER_SHOWBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_TRANSFER_SHOWBACK"
                     }
                 }
             }
@@ -2258,6 +2270,12 @@
                         "smithy.api#documentation": "<p>The type of billing view.</p>"
                     }
                 },
+                "names": {
+                    "target": "com.amazonaws.billing#StringSearches",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filters the list of billing views by name. You can specify search criteria to match billing view names based on the search option provided. </p>"
+                    }
+                },
                 "ownerAccountId": {
                     "target": "com.amazonaws.billing#AccountId",
                     "traits": {
@@ -2622,6 +2640,27 @@
                 }
             }
         },
+        "com.amazonaws.billing#SearchOption": {
+            "type": "enum",
+            "members": {
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#SearchValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\+=\\.\\-@ ]+$"
+            }
+        },
         "com.amazonaws.billing#ServiceCode": {
             "type": "string",
             "traits": {
@@ -2677,6 +2716,40 @@
                 "smithy.api#documentation": "<p> You've reached the limit of resources you can create, or exceeded the size of an individual resource. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.billing#StringSearch": {
+            "type": "structure",
+            "members": {
+                "searchOption": {
+                    "target": "com.amazonaws.billing#SearchOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of search operation to perform on the string value. Determines how the search value is matched against the target field. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "searchValue": {
+                    "target": "com.amazonaws.billing#SearchValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The string value to use in the search operation. This value is compared against the target field using the specified search option. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A structure that defines how to search for string values. You can specify a search option and the value to search for. </p>"
+            }
+        },
+        "com.amazonaws.billing#StringSearches": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#StringSearch"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.billing#TagKey": {

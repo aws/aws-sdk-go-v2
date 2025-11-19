@@ -1775,7 +1775,7 @@
                 "InvokedViaFunctionUrl": {
                     "target": "com.amazonaws.lambda#InvokedViaFunctionUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>Restricts the <code>lambda:InvokeFunction</code> action to function URL calls. When set to <code>true</code>, this prevents the principal from invoking the function by any means other than the function URL. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Control access to Lambda function URLs</a>.</p>"
+                        "smithy.api#documentation": "<p>Restricts the <code>lambda:InvokeFunction</code> action to function URL calls. When specified, this option prevents the principal from invoking the function by any means other than the function URL. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html\">Control access to Lambda function URLs</a>.</p>"
                     }
                 }
             },
@@ -2765,7 +2765,7 @@
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
+                        "smithy.api#documentation": "<p>(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
                     }
                 }
             },
@@ -3056,6 +3056,12 @@
                     "target": "com.amazonaws.lambda#LoggingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The function's Amazon CloudWatch Logs configuration settings.</p>"
+                    }
+                },
+                "TenancyConfig": {
+                    "target": "com.amazonaws.lambda#TenancyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for multi-tenant applications that use Lambda functions. Defines tenant isolation settings and resource allocations. Required for functions supporting multiple tenants.</p>"
                     }
                 }
             },
@@ -4542,7 +4548,7 @@
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
+                        "smithy.api#documentation": "<p>(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
                     }
                 }
             },
@@ -5245,6 +5251,12 @@
                     "target": "com.amazonaws.lambda#LoggingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The function's Amazon CloudWatch Logs configuration settings.</p>"
+                    }
+                },
+                "TenancyConfig": {
+                    "target": "com.amazonaws.lambda#TenancyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function's tenant isolation configuration settings. Determines whether the Lambda function runs on a shared or dedicated infrastructure per unique tenant.</p>"
                     }
                 }
             },
@@ -7143,8 +7155,8 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To view a provisioned concurrency configuration",
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To get a provisioned concurrency configuration",
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -7158,8 +7170,8 @@
                         }
                     },
                     {
-                        "title": "To get a provisioned concurrency configuration",
-                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To view a provisioned concurrency configuration",
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -7617,6 +7629,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify a version or alias to invoke a published version of the function.</p>",
                         "smithy.api#httpQuery": "Qualifier"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.lambda#TenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the tenant in a multi-tenant Lambda function.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Tenant-Id"
                     }
                 }
             },
@@ -8190,6 +8209,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The JSON that you want to provide to your Lambda function as input.</p> <p>You can enter the JSON directly. For example, <code>--payload '{ \"key\": \"value\" }'</code>. You can also specify a file path. For example, <code>--payload file://payload.json</code>.</p>",
                         "smithy.api#httpPayload": {}
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.lambda#TenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the tenant in a multi-tenant Lambda function.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Tenant-Id"
                     }
                 }
             },
@@ -10920,18 +10946,18 @@
                 "MinimumPollers": {
                     "target": "com.amazonaws.lambda#MinimumNumberOfPollers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of event pollers this event source can scale down to.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of event pollers this event source can scale down to. For Amazon SQS events source mappings, default is 2, and minimum 2 required. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.</p>"
                     }
                 },
                 "MaximumPollers": {
                     "target": "com.amazonaws.lambda#MaximumNumberOfPollers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of event pollers this event source can scale up to.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\"> provisioned mode</a> configuration for the event source. Use Provisioned Mode to customize the minimum and maximum number of event pollers for your event source. An event poller is a compute unit that provides approximately 5 MBps of throughput.</p>"
+                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\"> provisioned mode</a> configuration for the event source. Use Provisioned Mode to customize the minimum and maximum number of event pollers for your event source.</p>"
             }
         },
         "com.amazonaws.lambda#PublishLayerVersion": {
@@ -12499,12 +12525,6 @@
                         "smithy.api#enumValue": "nodejs22.x"
                     }
                 },
-                "java25": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "java25"
-                    }
-                },
                 "nodejs24x": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -12515,6 +12535,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "python3.14"
+                    }
+                },
+                "java25": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "java25"
                     }
                 }
             }
@@ -13368,6 +13394,42 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.lambda#TenancyConfig": {
+            "type": "structure",
+            "members": {
+                "TenantIsolationMode": {
+                    "target": "com.amazonaws.lambda#TenantIsolationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tenant isolation mode allows for invocation to be sent to a corresponding execution environment dedicated to a specific tenant ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the tenant isolation mode configuration for a Lambda function. This allows you to configure specific tenant isolation strategies for your function invocations. Tenant isolation configuration cannot be modified after function creation.</p>"
+            }
+        },
+        "com.amazonaws.lambda#TenantId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\._:\\/=+\\-@ ]+$"
+            }
+        },
+        "com.amazonaws.lambda#TenantIsolationMode": {
+            "type": "enum",
+            "members": {
+                "PER_TENANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PER_TENANT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lambda#ThrottleReason": {
             "type": "enum",
             "members": {
@@ -14052,7 +14114,7 @@
                 "ProvisionedPollerConfig": {
                     "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
+                        "smithy.api#documentation": "<p>(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">provisioned mode</a>.</p>"
                     }
                 }
             },

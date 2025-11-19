@@ -3974,6 +3974,16 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connectcampaignsv2#RingTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Ring timeout for outbound calls",
+                "smithy.api#range": {
+                    "min": 15,
+                    "max": 60
+                }
+            }
+        },
         "com.amazonaws.connectcampaignsv2#Schedule": {
             "type": "structure",
             "members": {
@@ -4541,6 +4551,9 @@
                 },
                 "answerMachineDetectionConfig": {
                     "target": "com.amazonaws.connectcampaignsv2#AnswerMachineDetectionConfig"
+                },
+                "ringTimeout": {
+                    "target": "com.amazonaws.connectcampaignsv2#RingTimeout"
                 }
             },
             "traits": {
@@ -4561,6 +4574,9 @@
                 },
                 "answerMachineDetectionConfig": {
                     "target": "com.amazonaws.connectcampaignsv2#AnswerMachineDetectionConfig"
+                },
+                "ringTimeout": {
+                    "target": "com.amazonaws.connectcampaignsv2#RingTimeout"
                 }
             },
             "traits": {

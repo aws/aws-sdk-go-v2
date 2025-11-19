@@ -1120,6 +1120,12 @@
                         "smithy.api#documentation": "<p>The title or identifier of the source document being cited.</p>"
                     }
                 },
+                "source": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source from the original search result that provided the cited content.</p>"
+                    }
+                },
                 "sourceContent": {
                     "target": "com.amazonaws.bedrockruntime#CitationSourceContentList",
                     "traits": {
@@ -1182,6 +1188,12 @@
                     "target": "com.amazonaws.bedrockruntime#DocumentChunkLocation",
                     "traits": {
                         "smithy.api#documentation": "<p>The chunk-level location within the document where the cited content is found, typically used for documents that have been segmented into logical chunks.</p>"
+                    }
+                },
+                "searchResultLocation": {
+                    "target": "com.amazonaws.bedrockruntime#SearchResultLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search result location where the cited content is found, including the search result index and block positions within the content array.</p>"
                     }
                 }
             },
@@ -1279,6 +1291,12 @@
                         "smithy.api#documentation": "<p>The title or identifier of the source document being cited.</p>"
                     }
                 },
+                "source": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source from the original search result that provided the cited content.</p>"
+                    }
+                },
                 "sourceContent": {
                     "target": "com.amazonaws.bedrockruntime#CitationSourceContentListDelta",
                     "traits": {
@@ -1370,6 +1388,12 @@
                     "target": "com.amazonaws.bedrockruntime#CitationsContentBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>A content block that contains both generated text and associated citation information, providing traceability between the response and source documents.</p>"
+                    }
+                },
+                "searchResult": {
+                    "target": "com.amazonaws.bedrockruntime#SearchResultBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Search result to include in the message.</p>"
                     }
                 }
             },
@@ -5916,6 +5940,97 @@
                 "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
             }
         },
+        "com.amazonaws.bedrockruntime#SearchResultBlock": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source URL or identifier for the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive title for the search result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrockruntime#SearchResultContentBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of search result content block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "citations": {
+                    "target": "com.amazonaws.bedrockruntime#CitationsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration setting for citations</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A search result block that enables natural citations with proper source attribution for retrieved content.</p> <note> <p>This field is only supported by Anthropic Claude Opus 4.1, Opus 4, Sonnet 4.5, Sonnet 4, Sonnet 3.7, and 3.5 Haiku models.</p> </note>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#SearchResultContentBlock": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual text content</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A block within a search result that contains the content.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#SearchResultContentBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#SearchResultContentBlock"
+            }
+        },
+        "com.amazonaws.bedrockruntime#SearchResultLocation": {
+            "type": "structure",
+            "members": {
+                "searchResultIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the search result content block where the cited content is found.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "start": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting position in the content array where the cited content begins.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "end": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending position in the content array where the cited content ends.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a search result location within the content array, providing positioning information for cited content using search result index and block positions.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -6582,6 +6697,12 @@
                     "target": "com.amazonaws.bedrockruntime#VideoBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>A tool result that is video.</p>"
+                    }
+                },
+                "searchResult": {
+                    "target": "com.amazonaws.bedrockruntime#SearchResultBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tool result that is a search result.</p>"
                     }
                 }
             },

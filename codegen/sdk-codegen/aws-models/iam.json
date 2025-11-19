@@ -193,6 +193,9 @@
                     "target": "com.amazonaws.iam#DisableOrganizationsRootSessions"
                 },
                 {
+                    "target": "com.amazonaws.iam#DisableOutboundWebIdentityFederation"
+                },
+                {
                     "target": "com.amazonaws.iam#EnableMFADevice"
                 },
                 {
@@ -200,6 +203,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#EnableOrganizationsRootSessions"
+                },
+                {
+                    "target": "com.amazonaws.iam#EnableOutboundWebIdentityFederation"
                 },
                 {
                     "target": "com.amazonaws.iam#GenerateCredentialReport"
@@ -257,6 +263,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#GetOrganizationsAccessReport"
+                },
+                {
+                    "target": "com.amazonaws.iam#GetOutboundWebIdentityFederationInfo"
                 },
                 {
                     "target": "com.amazonaws.iam#GetPolicy"
@@ -6100,6 +6109,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iam#DisableOutboundWebIdentityFederation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#FeatureDisabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables the outbound identity federation feature for your Amazon Web Services account. When disabled, IAM principals in the account cannot \n            use the <code>GetWebIdentityToken</code> API to obtain JSON Web Tokens (JWTs) for authentication with external services. This operation \n            does not affect tokens that were issued before the feature was disabled.</p>"
+            }
+        },
         "com.amazonaws.iam#DuplicateCertificateException": {
             "type": "structure",
             "members": {
@@ -6335,6 +6361,37 @@
                     "target": "com.amazonaws.iam#FeaturesListType",
                     "traits": {
                         "smithy.api#documentation": "<p>The features you have enabled for centralized root access.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iam#EnableOutboundWebIdentityFederation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#EnableOutboundWebIdentityFederationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#FeatureEnabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables the outbound identity federation feature for your Amazon Web Services account. When enabled, IAM principals in your account \n            can use the <code>GetWebIdentityToken</code> API to obtain JSON Web Tokens (JWTs) for secure authentication with external services. \n            This operation also generates a unique issuer URL for your Amazon Web Services account. </p>"
+            }
+        },
+        "com.amazonaws.iam#EnableOutboundWebIdentityFederationResponse": {
+            "type": "structure",
+            "members": {
+                "IssuerIdentifier": {
+                    "target": "com.amazonaws.iam#stringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique issuer URL for your Amazon Web Services account that hosts the OpenID Connect (OIDC) discovery endpoints \n            at <code>/.well-known/openid-configuration and /.well-known/jwks.json</code>. The OpenID Connect (OIDC) discovery endpoints contain verification keys and metadata necessary \n            for token verification.</p>"
                     }
                 }
             },
@@ -6584,6 +6641,46 @@
             }
         },
         "com.amazonaws.iam#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iam#FeatureDisabledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iam#FeatureDisabledMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "FeatureDisabled",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The request failed because outbound identity federation is already disabled for your Amazon Web Services account. You cannot disable the feature multiple times</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.iam#FeatureDisabledMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iam#FeatureEnabledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iam#FeatureEnabledMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "FeatureEnabled",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The request failed because outbound identity federation is already enabled for your Amazon Web Services account. You\n      cannot enable the feature multiple times. To fetch the current configuration (including the unique issuer URL), use the <code>GetOutboundWebIdentityFederationInfo</code> operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iam#FeatureEnabledMessage": {
             "type": "string"
         },
         "com.amazonaws.iam#FeatureType": {
@@ -7946,6 +8043,44 @@
                 },
                 "ErrorDetails": {
                     "target": "com.amazonaws.iam#ErrorDetails"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iam#GetOutboundWebIdentityFederationInfo": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#GetOutboundWebIdentityFederationInfoResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#FeatureDisabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the configuration information for the outbound identity federation feature in your Amazon Web Services account. The response includes the unique issuer URL for your \n            Amazon Web Services account and the current enabled/disabled status of the feature. Use this operation to obtain the issuer URL that you need to configure trust relationships with external services.</p>"
+            }
+        },
+        "com.amazonaws.iam#GetOutboundWebIdentityFederationInfoResponse": {
+            "type": "structure",
+            "members": {
+                "IssuerIdentifier": {
+                    "target": "com.amazonaws.iam#stringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique issuer URL for your Amazon Web Services account that hosts the OpenID Connect (OIDC) discovery endpoints at \n            <code>/.well-known/openid-configuration and /.well-known/jwks.json</code>. The OpenID Connect (OIDC) discovery endpoints contain verification keys and metadata necessary for token verification.</p>"
+                    }
+                },
+                "JwtVendingEnabled": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether outbound identity federation is currently enabled for your \n            Amazon Web Services account. When true, IAM principals in the account can call the <code>GetWebIdentityToken</code> API to obtain JSON Web Tokens (JWTs) for authentication with external services. </p>"
+                    }
                 }
             },
             "traits": {

@@ -9227,6 +9227,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.cloudwatchlogs#MappingVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#MatchPattern": {
             "type": "string",
             "traits": {
@@ -9290,13 +9300,13 @@
                 "fieldSelectionCriteria": {
                     "target": "com.amazonaws.cloudwatchlogs#FieldSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was specified when the metric filter was created.</p>"
+                        "smithy.api#documentation": "<p>The filter expression that specifies which log events are processed by this metric filter\n      based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was\n      specified when the metric filter was created.</p>"
                     }
                 },
                 "emitSystemFieldDimensions": {
                     "target": "com.amazonaws.cloudwatchlogs#EmitSystemFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the <code>emitSystemFieldDimensions</code> value if it was specified when the metric filter was created.</p>"
+                        "smithy.api#documentation": "<p>The list of system fields that are emitted as additional dimensions in the generated\n      metrics. Returns the <code>emitSystemFieldDimensions</code> value if it was specified when the\n      metric filter was created.</p>"
                     }
                 }
             },
@@ -9514,6 +9524,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "V1.1"
+                    }
+                },
+                "V1_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V1.5"
                     }
                 }
             }
@@ -10139,10 +10155,16 @@
                         "smithy.api#documentation": "<p>Specify which version of the OCSF schema to use for the transformed log events.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "mappingVersion": {
+                    "target": "com.amazonaws.cloudwatchlogs#MappingVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the specific release of the Open Cybersecurity Schema Framework (OCSF)\n      transformer being used to parse OCSF data. Defaults to the latest version if not specified. Does not automatically update.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This processor converts logs into <a href=\"https://ocsf.io\">Open Cybersecurity Schema\n        Framework (OCSF)</a> events.</p>\n         <p>For more information about this processor including examples, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF\"> parseToOSCF</a> in the <i>CloudWatch Logs User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>This processor converts logs into <a href=\"https://ocsf.io\">Open Cybersecurity Schema\n        Framework (OCSF)</a> events.</p>\n         <p>For more information about this processor including examples, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF\">parseToOCSF</a> in the <i>CloudWatch Logs User Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#ParseVPC": {
@@ -10863,7 +10885,7 @@
                 "logType": {
                     "target": "com.amazonaws.cloudwatchlogs#LogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid value is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and\n            <code>PCS_JOBCOMP_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid value is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and\n            <code>PCS_JOBCOMP_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11327,13 +11349,13 @@
                 "fieldSelectionCriteria": {
                     "target": "com.amazonaws.cloudwatchlogs#FieldSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter expression that specifies which log events should be processed by this metric filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region = \"us-east-1\"</code> or <code>@aws.account IN [\"123456789012\", \"987654321098\"]</code>. Maximum length: 2000 characters.</p>"
+                        "smithy.api#documentation": "<p>A filter expression that specifies which log events should be processed by this metric\n      filter based on system fields such as source account and source region. Uses selection\n      criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>,\n        <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region =\n        \"us-east-1\"</code> or <code>@aws.account IN [\"123456789012\", \"987654321098\"]</code>. Maximum\n      length: 2000 characters.</p>"
                     }
                 },
                 "emitSystemFieldDimensions": {
                     "target": "com.amazonaws.cloudwatchlogs#EmitSystemFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of system fields to emit as additional dimensions in the generated metrics. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help identify the source of centralized log data and count toward the total dimension limit for metric filters.</p>"
+                        "smithy.api#documentation": "<p>A list of system fields to emit as additional dimensions in the generated metrics. Valid\n      values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help\n      identify the source of centralized log data and count toward the total dimension limit for\n      metric filters.</p>"
                     }
                 }
             },
@@ -11454,7 +11476,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a resource policy allowing other Amazon Web Services services to put log events to this account, such as Amazon Route 53. This API has the following restrictions:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Supported actions</b> - Policy only supports <code>logs:PutLogEvents</code> and <code>logs:CreateLogStream </code> actions</p>\n            </li>\n            <li>\n               <p>\n                  <b>Supported principals</b> - Policy only applies when operations are invoked by Amazon Web Services service principals (not IAM users, roles, or cross-account principals</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy limits</b> - An account can have a maximum of 10 policies without resourceARN and one per LogGroup resourceARN</p>\n            </li>\n         </ul>\n         <important>\n            <p>Resource policies with actions invoked by non-Amazon Web Services service principals (such as IAM users, roles, or other Amazon Web Services accounts) will not be enforced. For access control involving these principals, use the IAM policies.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates or updates a resource policy allowing other Amazon Web Services services to put\n      log events to this account, such as Amazon Route 53. This API has the following\n      restrictions:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Supported actions</b> - Policy only supports\n            <code>logs:PutLogEvents</code> and <code>logs:CreateLogStream </code> actions</p>\n            </li>\n            <li>\n               <p>\n                  <b>Supported principals</b> - Policy only applies when\n          operations are invoked by Amazon Web Services service principals (not IAM\n          users, roles, or cross-account principals</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy limits</b> - An account can have a maximum of 10\n          policies without resourceARN and one per LogGroup resourceARN</p>\n            </li>\n         </ul>\n         <important>\n            <p>Resource policies with actions invoked by non-Amazon Web Services service principals\n        (such as IAM users, roles, or other Amazon Web Services accounts) will not be\n        enforced. For access control involving these principals, use the IAM\n        policies.</p>\n         </important>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutResourcePolicyRequest": {
@@ -11469,7 +11491,7 @@
                 "policyDocument": {
                     "target": "com.amazonaws.cloudwatchlogs#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to\n      put logs to this account. This is formatted as a JSON string. This parameter is\n      required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of\n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a> and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a> condition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with\n      the resource making the call from Route 53 to CloudWatch Logs. You would also\n      replace the value of <code>SourceAccount</code> with the Amazon Web Services account ID making\n      that call.</p>\n         <p></p>\n         <p>\n            <code>{ \"Version\": \"2012-10-17\",\t\t \t \t  \"Statement\": [ { \"Sid\": \"Route53LogsToCloudWatchLogs\",\n        \"Effect\": \"Allow\", \"Principal\": { \"Service\": [ \"route53.amazonaws.com\" ] }, \"Action\":\n        \"logs:PutLogEvents\", \"Resource\": \"logArn\", \"Condition\": { \"ArnLike\": { \"aws:SourceArn\":\n        \"myRoute53ResourceArn\" }, \"StringEquals\": { \"aws:SourceAccount\": \"myAwsAccountId\" } } } ]\n        }</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to\n      put logs to this account. This is formatted as a JSON string. This parameter is\n      required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of\n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a> and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a> condition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with\n      the resource making the call from Route 53 to CloudWatch Logs. You would also\n      replace the value of <code>SourceAccount</code> with the Amazon Web Services account ID making\n      that call.</p>\n         <p></p>\n         <p>\n            <code>{ \"Version\": \"2012-10-17\",\t\t \t \t  \"Statement\": [ { \"Sid\":\n        \"Route53LogsToCloudWatchLogs\", \"Effect\": \"Allow\", \"Principal\": { \"Service\": [\n        \"route53.amazonaws.com\" ] }, \"Action\": \"logs:PutLogEvents\", \"Resource\": \"logArn\",\n        \"Condition\": { \"ArnLike\": { \"aws:SourceArn\": \"myRoute53ResourceArn\" }, \"StringEquals\": {\n        \"aws:SourceAccount\": \"myAwsAccountId\" } } } ] }</code>\n         </p>"
                     }
                 },
                 "resourceArn": {
@@ -11641,13 +11663,13 @@
                 "fieldSelectionCriteria": {
                     "target": "com.amazonaws.cloudwatchlogs#FieldSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter expression that specifies which log events should be processed by this subscription filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region NOT IN [\"cn-north-1\"]</code> or <code>@aws.account = \"123456789012\" AND @aws.region = \"us-east-1\"</code>. Maximum length: 2000 characters.</p>"
+                        "smithy.api#documentation": "<p>A filter expression that specifies which log events should be processed by this\n      subscription filter based on system fields such as source account and source region. Uses\n      selection criteria syntax with operators like <code>=</code>, <code>!=</code>,\n        <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example:\n        <code>@aws.region NOT IN [\"cn-north-1\"]</code> or <code>@aws.account = \"123456789012\" AND\n        @aws.region = \"us-east-1\"</code>. Maximum length: 2000 characters.</p>"
                     }
                 },
                 "emitSystemFields": {
                     "target": "com.amazonaws.cloudwatchlogs#EmitSystemFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of system fields to include in the log events sent to the subscription destination. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide source information for centralized log data in the forwarded payload.</p>"
+                        "smithy.api#documentation": "<p>A list of system fields to include in the log events sent to the subscription destination.\n      Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide\n      source information for centralized log data in the forwarded payload.</p>"
                     }
                 }
             },
@@ -12423,13 +12445,13 @@
                 "destinationType": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryDestinationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of destination (S3 or EVENTBRIDGE).</p>"
+                        "smithy.api#documentation": "<p>The type of destination (S3).</p>"
                     }
                 },
                 "destinationIdentifier": {
                     "target": "com.amazonaws.cloudwatchlogs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination identifier (S3 URI or EventBridge ARN).</p>"
+                        "smithy.api#documentation": "<p>The destination identifier (S3 URI).</p>"
                     }
                 },
                 "status": {
@@ -12441,7 +12463,7 @@
                 "processedIdentifier": {
                     "target": "com.amazonaws.cloudwatchlogs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The processed identifier returned for the destination (S3 key or event ID).</p>"
+                        "smithy.api#documentation": "<p>The processed identifier returned for the destination (S3 key).</p>"
                     }
                 },
                 "errorMessage": {
@@ -13322,13 +13344,13 @@
                 "fieldSelectionCriteria": {
                     "target": "com.amazonaws.cloudwatchlogs#FieldSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was specified when the subscription filter was created.</p>"
+                        "smithy.api#documentation": "<p>The filter expression that specifies which log events are processed by this subscription\n      filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was\n      specified when the subscription filter was created.</p>"
                     }
                 },
                 "emitSystemFields": {
                     "target": "com.amazonaws.cloudwatchlogs#EmitSystemFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of system fields that are included in the log events sent to the subscription destination. Returns the <code>emitSystemFields</code> value if it was specified when the subscription filter was created.</p>"
+                        "smithy.api#documentation": "<p>The list of system fields that are included in the log events sent to the subscription\n      destination. Returns the <code>emitSystemFields</code> value if it was specified when the\n      subscription filter was created.</p>"
                     }
                 }
             },
@@ -13925,7 +13947,7 @@
                 "executionStatus": {
                     "target": "com.amazonaws.cloudwatchlogs#ExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the query execution (SUCCEEDED, FAILED, TIMEOUT, or INVALID_QUERY).</p>"
+                        "smithy.api#documentation": "<p>The status of the query execution (Running, Complete, Failed, Timeout, or InvalidQuery).</p>"
                     }
                 },
                 "triggeredTimestamp": {
@@ -13943,7 +13965,7 @@
                 "destinations": {
                     "target": "com.amazonaws.cloudwatchlogs#ScheduledQueryDestinationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of destinations where the scheduled query results were delivered for this execution. This includes S3 buckets and EventBridge targets configured for the scheduled query.</p>"
+                        "smithy.api#documentation": "<p>The list of destinations where the scheduled query results were delivered for this execution. This includes S3 buckets configured for the scheduled query.</p>"
                     }
                 }
             },

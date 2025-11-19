@@ -8317,8 +8317,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8353,8 +8353,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8405,8 +8405,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8433,8 +8433,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8461,8 +8461,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8489,8 +8489,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8517,8 +8517,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8545,8 +8545,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8620,8 +8620,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8658,8 +8658,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8696,8 +8696,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8734,8 +8734,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8803,8 +8803,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8853,8 +8853,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8880,8 +8880,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8942,8 +8942,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -8978,8 +8978,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9030,8 +9030,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9058,8 +9058,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9086,8 +9086,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9114,8 +9114,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9142,8 +9142,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9170,8 +9170,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9245,8 +9245,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9283,8 +9283,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9321,8 +9321,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9359,8 +9359,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9428,8 +9428,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9478,8 +9478,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9505,8 +9505,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9567,8 +9567,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9603,8 +9603,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9655,8 +9655,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9683,8 +9683,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9711,8 +9711,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9739,8 +9739,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9767,8 +9767,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9795,8 +9795,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9870,8 +9870,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9908,8 +9908,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9946,8 +9946,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -9984,8 +9984,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -10053,8 +10053,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -10103,8 +10103,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -10130,8 +10130,8 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingName": "dynamodb",
+                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1"
                                             }
                                         ]
@@ -14211,33 +14211,13 @@
                             }
                         },
                         {
-                            "documentation": "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}",
+                            "documentation": "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
                             "expect": {
                                 "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
                             },
                             "params": {
-                                "Endpoint": "https://dynamodb.eu-west-1.api.aws",
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.us-west-2.api.aws",
-                                "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
-                            "expect": {
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-                            },
-                            "params": {
-                                "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
-                                "Region": "cn-north-1"
+                                "Endpoint": "https://dynamodb.us-east-1.api.aws",
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -14251,12 +14231,44 @@
                             }
                         },
                         {
-                            "documentation": "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
+                            "documentation": "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
                             "expect": {
                                 "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
                             },
                             "params": {
-                                "Endpoint": "https://dynamodb.us-east-1.api.aws",
+                                "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.us-west-2.api.aws",
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}",
+                            "expect": {
+                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+                            },
+                            "params": {
+                                "Endpoint": "https://dynamodb.eu-west-1.api.aws",
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
                                 "Region": "us-east-1"
                             }
                         },
@@ -14269,18 +14281,6 @@
                             },
                             "params": {
                                 "Endpoint": "https://111111111111.ddb.us-east-1.api.aws",
-                                "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
                                 "Region": "us-east-1"
                             }
                         }
@@ -16557,8 +16557,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 2
+                    "min": 1
                 }
             }
         },
@@ -19207,7 +19206,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Throughput exceeds the current throughput quota for your account. For detailed\n            information about why the request was throttled and the ARN of the impacted resource,\n            find the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> field in the returned exception. Contact <a href=\"https://aws.amazon.com/support\">Amazon Web ServicesSupport</a> to request a quota\n            increase.</p>",
+                "smithy.api#documentation": "<p>Throughput exceeds the current throughput quota for your account. For detailed\n            information about why the request was throttled and the ARN of the impacted resource,\n            find the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> field in the returned exception. Contact <a href=\"https://aws.amazon.com/support\">Amazon Web Services Support</a> to request a quota\n            increase.</p>",
                 "smithy.api#error": "client"
             }
         },

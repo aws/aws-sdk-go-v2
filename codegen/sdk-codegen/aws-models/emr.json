@@ -873,6 +873,46 @@
                 "smithy.api#documentation": "<p>The definition of a CloudWatch metric alarm, which determines when an automatic scaling\n         activity is triggered. When the defined alarm conditions are satisfied, scaling activity\n         begins.</p>"
             }
         },
+        "com.amazonaws.emr#CloudWatchLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies if CloudWatch logging is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogGroupName": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch log group where logs are published.</p>"
+                    }
+                },
+                "LogStreamNamePrefix": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix of the log stream name.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the encryption key used to encrypt the logs.</p>"
+                    }
+                },
+                "LogTypes": {
+                    "target": "com.amazonaws.emr#LogTypesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of log types to file names for publishing logs to the standard output or standard error streams for CloudWatch. Valid log types include STEP_LOGS, SPARK_DRIVER, and SPARK_EXECUTOR. Valid file names for each type include STDOUT and STDERR.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Holds CloudWatch log configuration settings and metadata that specify settings like log files to monitor and where to send them.</p>"
+            }
+        },
         "com.amazonaws.emr#Cluster": {
             "type": "structure",
             "members": {
@@ -1084,6 +1124,12 @@
                     "target": "com.amazonaws.emr#BooleanObject",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
+                },
+                "MonitoringConfiguration": {
+                    "target": "com.amazonaws.emr#MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains Cloudwatch log configuration metadata and settings.</p>"
                     }
                 }
             },
@@ -5224,7 +5270,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, indicates that the instance group uses Spot Instances. This is the maximum\n         price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set\n         the amount equal to the On-Demand price, or specify an amount in USD.</p>"
+                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n         <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
                     }
                 },
                 "InstanceType": {
@@ -5336,7 +5382,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, indicates that the instance group uses Spot Instances. This is the maximum\n         price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set\n         the amount equal to the On-Demand price, or specify an amount in USD.</p>"
+                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n         <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
                     }
                 },
                 "InstanceType": {
@@ -5424,7 +5470,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, indicates that the instance group uses Spot Instances. This is the maximum\n         price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set\n         the amount equal to the On-Demand price, or specify an amount in USD.</p>"
+                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n         <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
                     }
                 },
                 "InstanceType": {
@@ -6074,7 +6120,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n            <code>InstanceType</code>. Expressed in USD.</p>"
+                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n         <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n         <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
                     }
                 },
                 "BidPriceAsPercentageOfOnDemandPrice": {
@@ -7572,6 +7618,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#LogTypesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emr#XmlString"
+            },
+            "value": {
+                "target": "com.amazonaws.emr#XmlStringList"
+            }
+        },
         "com.amazonaws.emr#Long": {
             "type": "long"
         },
@@ -7804,6 +7859,20 @@
             "traits": {
                 "smithy.api#documentation": "<p>Change the size of some instance groups.</p>",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#MonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogConfiguration": {
+                    "target": "com.amazonaws.emr#CloudWatchLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudWatch log configuration settings and metadata that specify settings like log files to monitor and where to send them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains CloudWatch log configuration metadata and settings.</p>"
             }
         },
         "com.amazonaws.emr#NewSupportedProductsList": {
@@ -9193,6 +9262,12 @@
                     "target": "com.amazonaws.emr#BooleanObject",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
+                },
+                "MonitoringConfiguration": {
+                    "target": "com.amazonaws.emr#MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains CloudWatch log configuration metadata and settings.</p>"
                     }
                 }
             },

@@ -3788,6 +3788,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n        By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n        IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
                     }
+                },
+                "FsrmConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsFsrmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. FSRM is disabled by default.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12687,6 +12693,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n            By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n            IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
                     }
+                },
+                "FsrmConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsFsrmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. FSRM is disabled by default.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13716,10 +13728,38 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For MULTI_AZ_1 deployment types, the IPv6 address of the primary, or preferred, file server.\n            Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients\n            that are not joined to a Microsoft Active Directory. Applicable for all Windows file system\n            deployment types. This IPv6 address is temporarily unavailable when the file system is undergoing\n            maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the\n            file system's DNSName instead.</p>"
                     }
+                },
+                "FsrmConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsFsrmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. FSRM is disabled by default.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for this Microsoft Windows file system.</p>"
+            }
+        },
+        "com.amazonaws.fsx#WindowsFsrmConfiguration": {
+            "type": "structure",
+            "members": {
+                "FsrmServiceEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether FSRM is enabled or disabled on the file system.  When <code>TRUE</code>, the FSRM service is enabled and monitor file operations according to \n            configured policies. When <code>FALSE</code> or omitted, FSRM is disabled. The default value is <code>FALSE</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventLogDestination": {
+                    "target": "com.amazonaws.fsx#GeneralARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the destination of the FSRM event logs.\n            The destination can be any Amazon CloudWatch Logs log group ARN or\n            Amazon Kinesis Data Firehose delivery stream ARN.</p>\n         <p>The name of the Amazon CloudWatch Logs log group must begin with\n            the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n            Firehose delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n         <p>The destination ARN (either CloudWatch Logs log group or Kinesis\n            Data Firehose delivery stream) must be in the same Amazon Web Services partition,\n            Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. When FSRM is enabled, you can \n            manage and monitor storage quotas, file screening, storage reports, and file classification.</p>"
             }
         }
     }

@@ -808,14 +808,21 @@
                 "LinkedAccountIds": {
                     "target": "com.amazonaws.billingconductor#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account IDs that make up the billing group. Account IDs must be a part of the consolidated billing family, and not associated with another billing group.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The account IDs that make up the billing group. Account IDs must be a part of the consolidated billing family, and not associated with another billing group.</p>"
                     }
                 },
                 "AutoAssociate": {
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.</p>"
+                    }
+                },
+                "ResponsibilityTransferArn": {
+                    "target": "com.amazonaws.billingconductor#ResponsibilityTransferArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the transfer relationship owned by the Bill Transfer account (caller account). When specified, the PrimaryAccountId is no longer required. </p>"
                     }
                 }
             },
@@ -848,7 +855,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 30
                 }
             }
@@ -1095,7 +1102,7 @@
         "com.amazonaws.billingconductor#Association": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^((arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[0-9]{12}|MONITORED|UNMONITORED)$"
+                "smithy.api#pattern": "^((arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[a-zA-Z0-9]{10,12}|MONITORED|UNMONITORED)$"
             }
         },
         "com.amazonaws.billingconductor#Attribute": {
@@ -1538,6 +1545,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if the billing group has automatic account association (<code>AutoAssociate</code>) enabled.</p>"
                     }
+                },
+                "BillingGroupType": {
+                    "target": "com.amazonaws.billingconductor#BillingGroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of billing group. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1569,6 +1582,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PRIMARY_ACCOUNT_MISSING"
                     }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
                 }
             }
         },
@@ -1586,6 +1605,35 @@
         },
         "com.amazonaws.billingconductor#BillingGroupStatusReason": {
             "type": "string"
+        },
+        "com.amazonaws.billingconductor#BillingGroupType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "TRANSFER_BILLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSFER_BILLING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billingconductor#BillingGroupTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#BillingGroupType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
         },
         "com.amazonaws.billingconductor#BillingPeriod": {
             "type": "string",
@@ -1929,10 +1977,16 @@
                     }
                 },
                 "ComputationRule": {
-                    "target": "com.amazonaws.billingconductor#ComputationRuleEnum"
+                    "target": "com.amazonaws.billingconductor#ComputationRuleEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies how the custom line item charges are computed. </p>"
+                    }
                 },
                 "PresentationDetails": {
-                    "target": "com.amazonaws.billingconductor#PresentationObject"
+                    "target": "com.amazonaws.billingconductor#PresentationObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Details controlling how the custom line item charges are presented in the bill. Contains specifications for which service the charges will be shown under. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2507,13 +2561,13 @@
                 "ComputationRule": {
                     "target": "com.amazonaws.billingconductor#ComputationRuleEnum",
                     "traits": {
-                        "smithy.api#documentation": "The display settings of the custom line item"
+                        "smithy.api#documentation": "<p> The computation rule that determines how the custom line item charges are computed and reflected in the bill. </p>"
                     }
                 },
                 "PresentationDetails": {
                     "target": "com.amazonaws.billingconductor#PresentationObject",
                     "traits": {
-                        "smithy.api#documentation": "The presentation configuration of the custom line item"
+                        "smithy.api#documentation": "<p> Configuration details specifying how the custom line item charges are presented, including which service the charges are shown under. </p>"
                     }
                 }
             },
@@ -2714,13 +2768,13 @@
                 "ComputationRule": {
                     "target": "com.amazonaws.billingconductor#ComputationRuleEnum",
                     "traits": {
-                        "smithy.api#documentation": "The display settings of the custom line item"
+                        "smithy.api#documentation": "<p> The computation rule for a specific version of a custom line item, determining how charges are computed and reflected in the bill. </p>"
                     }
                 },
                 "PresentationDetails": {
                     "target": "com.amazonaws.billingconductor#PresentationObject",
                     "traits": {
-                        "smithy.api#documentation": "The presentation configuration of the custom line item"
+                        "smithy.api#documentation": "<p> Presentation configuration for a specific version of a custom line item, specifying how charges are displayed in the bill. </p>"
                     }
                 }
             },
@@ -3310,13 +3364,13 @@
                 "Values": {
                     "target": "com.amazonaws.billingconductor#LineItemFilterValuesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values of the line item filter. This specifies the values to filter on. Currently, you can only exclude Savings Plan discounts.</p>",
+                        "smithy.api#documentation": "<p>The values of the line item filter. This specifies the values to filter on. Currently, you can only exclude Savings Plans discounts.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A representation of the line item filter for your custom line item. You can use line item filters to include or exclude specific resource values from the billing group's total cost. For example, if you create a custom line item and you want to filter out a value, such as Savings Plan discounts, you can update <code>LineItemFilter</code> to exclude it.</p>"
+                "smithy.api#documentation": "<p>A representation of the line item filter for your custom line item. You can use line item filters to include or exclude specific resource values from the billing group's total cost. For example, if you create a custom line item and you want to filter out a value, such as Savings Plans discounts, you can update <code>LineItemFilter</code> to exclude it.</p>"
             }
         },
         "com.amazonaws.billingconductor#LineItemFilterAttributeName": {
@@ -3348,7 +3402,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1
                 }
             }
@@ -3478,6 +3532,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.</p>"
+                    }
+                },
+                "ResponsibilityTransferArn": {
+                    "target": "com.amazonaws.billingconductor#ResponsibilityTransferArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the transfer relationship for the billing group. </p>"
                     }
                 }
             },
@@ -3652,6 +3712,30 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.</p>"
+                    }
+                },
+                "PrimaryAccountIds": {
+                    "target": "com.amazonaws.billingconductor#PrimaryAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of primary account IDs to filter the billing groups. </p>"
+                    }
+                },
+                "BillingGroupTypes": {
+                    "target": "com.amazonaws.billingconductor#BillingGroupTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filter billing groups by their type. </p>"
+                    }
+                },
+                "Names": {
+                    "target": "com.amazonaws.billingconductor#StringSearches",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filter billing groups by their names. </p>"
+                    }
+                },
+                "ResponsibilityTransferArns": {
+                    "target": "com.amazonaws.billingconductor#ResponsibilityTransferArnsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filter billing groups by their responsibility transfer ARNs. </p>"
                     }
                 }
             },
@@ -4772,13 +4856,13 @@
                 "Service": {
                     "target": "com.amazonaws.billingconductor#Service",
                     "traits": {
-                        "smithy.api#documentation": "This defines the service of where the custom line item is presented",
+                        "smithy.api#documentation": "<p> The service under which the custom line item charges will be presented. Must be a string between 1 and 128 characters matching the pattern \"<code>^[a-zA-Z0-9]+$</code>\". </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The presentation configuration of the custom line item"
+                "smithy.api#documentation": "<p> An object that defines how custom line item charges are presented in the bill, containing specifications for service presentation. </p>"
             }
         },
         "com.amazonaws.billingconductor#PricingPlan": {
@@ -5168,6 +5252,18 @@
                 }
             }
         },
+        "com.amazonaws.billingconductor#PrimaryAccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.billingconductor#ProformaCost": {
             "type": "string"
         },
@@ -5201,10 +5297,49 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.billingconductor#ResponsibilityTransferArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::\\d{12}:transfer/o-[a-z0-9]{10,32}/(billing)/(inbound|outbound)/rt-[0-9a-z]{8,32}$"
+            }
+        },
+        "com.amazonaws.billingconductor#ResponsibilityTransferArnsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#ResponsibilityTransferArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.billingconductor#RetryAfterSeconds": {
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.billingconductor#SearchOption": {
+            "type": "enum",
+            "members": {
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billingconductor#SearchValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\+=\\.\\-@ ]+$"
             }
         },
         "com.amazonaws.billingconductor#Service": {
@@ -5261,6 +5396,40 @@
         },
         "com.amazonaws.billingconductor#String": {
             "type": "string"
+        },
+        "com.amazonaws.billingconductor#StringSearch": {
+            "type": "structure",
+            "members": {
+                "SearchOption": {
+                    "target": "com.amazonaws.billingconductor#SearchOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The search option to be applied when performing the string search. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SearchValue": {
+                    "target": "com.amazonaws.billingconductor#SearchValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value to search for within the specified string field. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A structure that defines string search parameters. </p>"
+            }
+        },
+        "com.amazonaws.billingconductor#StringSearches": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#StringSearch"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
         },
         "com.amazonaws.billingconductor#TagKey": {
             "type": "string",
@@ -5580,6 +5749,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.</p>"
+                    }
+                },
+                "ResponsibilityTransferArn": {
+                    "target": "com.amazonaws.billingconductor#ResponsibilityTransferArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the transfer relationship. Note: Modifications to the ResponsibilityTransferArn are not permitted for existing billing groups. </p>"
                     }
                 }
             },
@@ -6542,6 +6717,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ILLEGAL_TYPE"
+                    }
+                },
+                "ILLEGAL_BILLING_GROUP_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ILLEGAL_BILLING_GROUP_TYPE"
                     }
                 },
                 "ILLEGAL_ENDED_BILLINGGROUP": {
