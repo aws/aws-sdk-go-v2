@@ -4005,6 +4005,11 @@ func awsRestjson1_serializeDocumentTelephonyChannelSubtypeParameters(v *types.Te
 		ok.String(*v.DestinationPhoneNumber)
 	}
 
+	if v.RingTimeout != nil {
+		ok := object.Key("ringTimeout")
+		ok.Integer(*v.RingTimeout)
+	}
+
 	return nil
 }
 
@@ -4027,6 +4032,11 @@ func awsRestjson1_serializeDocumentTelephonyOutboundConfig(v *types.TelephonyOut
 	if v.ConnectSourcePhoneNumber != nil {
 		ok := object.Key("connectSourcePhoneNumber")
 		ok.String(*v.ConnectSourcePhoneNumber)
+	}
+
+	if v.RingTimeout != nil {
+		ok := object.Key("ringTimeout")
+		ok.Integer(*v.RingTimeout)
 	}
 
 	return nil

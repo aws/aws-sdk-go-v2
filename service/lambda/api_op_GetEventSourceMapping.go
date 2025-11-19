@@ -152,8 +152,8 @@ type GetEventSourceMappingOutput struct {
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32
 
-	// (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
-	// configuration for the event source. For more information, see [provisioned mode].
+	// (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned
+	// mode configuration for the event source. For more information, see [provisioned mode].
 	//
 	// [provisioned mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
 	ProvisionedPollerConfig *types.ProvisionedPollerConfig

@@ -157,6 +157,9 @@ type RunJobFlowInput struct {
 	//  The specified managed scaling policy for an Amazon EMR cluster.
 	ManagedScalingPolicy *types.ManagedScalingPolicy
 
+	// Contains CloudWatch log configuration metadata and settings.
+	MonitoringConfiguration *types.MonitoringConfiguration
+
 	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use
 	// Applications.
 	//

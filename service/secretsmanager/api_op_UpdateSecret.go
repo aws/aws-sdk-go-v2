@@ -158,6 +158,12 @@ type UpdateSecretInput struct {
 	// must also avoid logging the information in this field.
 	SecretString *string
 
+	// The exact string that identifies the third-party partner that holds the
+	// external secret. For more information, see [Managed external secret partners].
+	//
+	// [Managed external secret partners]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+	Type *string
+
 	noSmithyDocumentSerde
 }
 

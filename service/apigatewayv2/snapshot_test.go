@@ -158,6 +158,54 @@ func TestCheckSnapshot_CreateModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProductRestEndpointPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRoute(context.Background(), nil, func(o *Options) {
@@ -338,6 +386,66 @@ func TestCheckSnapshot_DeleteModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeletePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePortalProductSharingPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePortalProductSharingPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePortalProductSharingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProductRestEndpointPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRoute(context.Background(), nil, func(o *Options) {
@@ -415,6 +523,18 @@ func TestCheckSnapshot_DeleteVpcLink(t *testing.T) {
 	_, err := svc.DeleteVpcLink(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVpcLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisablePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisablePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisablePortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -638,6 +758,66 @@ func TestCheckSnapshot_GetModelTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPortalProductSharingPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPortalProductSharingPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPortalProductSharingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProductRestEndpointPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRoute(context.Background(), nil, func(o *Options) {
@@ -770,11 +950,95 @@ func TestCheckSnapshot_ImportApi(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPortalProducts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPortalProducts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPortalProducts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProductPages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProductPages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProductPages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProductRestEndpointPages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProductRestEndpointPages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProductRestEndpointPages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRoutingRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRoutingRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRoutingRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PreviewPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PreviewPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PreviewPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PublishPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PublishPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PublishPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutPortalProductSharingPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutPortalProductSharingPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutPortalProductSharingPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -938,6 +1202,54 @@ func TestCheckSnapshot_UpdateModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProductRestEndpointPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRoute(context.Background(), nil, func(o *Options) {
@@ -1074,6 +1386,54 @@ func TestUpdateSnapshot_CreateModel(t *testing.T) {
 	_, err := svc.CreateModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProductRestEndpointPage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1261,6 +1621,66 @@ func TestUpdateSnapshot_DeleteModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeletePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePortalProductSharingPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePortalProductSharingPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePortalProductSharingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProductRestEndpointPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteRoute(context.Background(), nil, func(o *Options) {
@@ -1338,6 +1758,18 @@ func TestUpdateSnapshot_DeleteVpcLink(t *testing.T) {
 	_, err := svc.DeleteVpcLink(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVpcLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisablePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisablePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisablePortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1561,6 +1993,66 @@ func TestUpdateSnapshot_GetModelTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPortalProductSharingPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPortalProductSharingPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPortalProductSharingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProductRestEndpointPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRoute(context.Background(), nil, func(o *Options) {
@@ -1693,11 +2185,95 @@ func TestUpdateSnapshot_ImportApi(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPortalProducts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPortalProducts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPortalProducts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProductPages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProductPages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProductPages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProductRestEndpointPages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProductRestEndpointPages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProductRestEndpointPages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRoutingRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRoutingRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRoutingRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PreviewPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PreviewPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PreviewPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PublishPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PublishPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PublishPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutPortalProductSharingPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutPortalProductSharingPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutPortalProductSharingPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1854,6 +2430,54 @@ func TestUpdateSnapshot_UpdateModel(t *testing.T) {
 	_, err := svc.UpdateModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePortalProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePortalProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePortalProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProductPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProductPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProductPage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProductRestEndpointPage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProductRestEndpointPage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProductRestEndpointPage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -5845,6 +5845,9 @@ func awsAwsjson10_deserializeOpErrorUpdateFirewallAnalysisSettings(response *smi
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
 
+	case strings.EqualFold("InvalidTokenException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidTokenException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -11129,6 +11132,15 @@ func awsAwsjson10_deserializeDocumentRuleGroupMetadata(v **types.RuleGroupMetada
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "VendorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VendorName to be of type string, got %T instead", value)
+				}
+				sv.VendorName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15128,6 +15140,24 @@ func awsAwsjson10_deserializeOpDocumentDescribeRuleGroupMetadataOutput(v **Descr
 				}
 			}
 
+		case "ListingName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ListingName to be of type string, got %T instead", value)
+				}
+				sv.ListingName = ptr.String(jtv)
+			}
+
+		case "ProductId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductId to be of type string, got %T instead", value)
+				}
+				sv.ProductId = ptr.String(jtv)
+			}
+
 		case "RuleGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15158,6 +15188,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeRuleGroupMetadataOutput(v **Descr
 					return fmt.Errorf("expected RuleGroupType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.RuleGroupType(jtv)
+			}
+
+		case "VendorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VendorName to be of type string, got %T instead", value)
+				}
+				sv.VendorName = ptr.String(jtv)
 			}
 
 		default:

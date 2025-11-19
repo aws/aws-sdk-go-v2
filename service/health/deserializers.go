@@ -2315,6 +2315,15 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "actionability":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventActionability to be of type string, got %T instead", value)
+				}
+				sv.Actionability = types.EventActionability(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2390,6 +2399,11 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "personas":
+			if err := awsAwsjson11_deserializeDocumentEventPersonaList(&sv.Personas, value); err != nil {
+				return err
 			}
 
 		case "region":
@@ -2745,6 +2759,42 @@ func awsAwsjson11_deserializeDocumentEventMetadata(v *map[string]string, value i
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEventPersonaList(v *[]types.EventPersona, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EventPersona
+	if *v == nil {
+		cv = []types.EventPersona{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EventPersona
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EventPersona to be of type string, got %T instead", value)
+			}
+			col = types.EventPersona(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEventType(v **types.EventType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2767,6 +2817,15 @@ func awsAwsjson11_deserializeDocumentEventType(v **types.EventType, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "actionability":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventTypeActionability to be of type string, got %T instead", value)
+				}
+				sv.Actionability = types.EventTypeActionability(jtv)
+			}
+
 		case "category":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2783,6 +2842,11 @@ func awsAwsjson11_deserializeDocumentEventType(v **types.EventType, value interf
 					return fmt.Errorf("expected eventTypeCode to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
+			}
+
+		case "personas":
+			if err := awsAwsjson11_deserializeDocumentEventTypePersonaList(&sv.Personas, value); err != nil {
+				return err
 			}
 
 		case "service":
@@ -2830,6 +2894,42 @@ func awsAwsjson11_deserializeDocumentEventTypeList(v *[]types.EventType, value i
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEventTypePersonaList(v *[]types.EventTypePersona, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EventTypePersona
+	if *v == nil {
+		cv = []types.EventTypePersona{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EventTypePersona
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EventTypePersona to be of type string, got %T instead", value)
+			}
+			col = types.EventTypePersona(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -3063,6 +3163,15 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 
 	for key, value := range shape {
 		switch key {
+		case "actionability":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventActionability to be of type string, got %T instead", value)
+				}
+				sv.Actionability = types.EventActionability(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3129,6 +3238,11 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "personas":
+			if err := awsAwsjson11_deserializeDocumentEventPersonaList(&sv.Personas, value); err != nil {
+				return err
 			}
 
 		case "region":

@@ -88,6 +88,11 @@ type CreateAppMonitorInput struct {
 	// The CreateAppMonitor requires either the domain or the domain list.
 	DomainList []string
 
+	// The platform type for the app monitor. Valid values are Web for web
+	// applications, Android for Android applications, and iOS for IOS applications.
+	// If you omit this parameter, the default is Web .
+	Platform types.AppMonitorPlatform
+
 	// Assigns one or more tags (key-value pairs) to the app monitor.
 	//
 	// Tags can help you organize and categorize your resources. You can also use them

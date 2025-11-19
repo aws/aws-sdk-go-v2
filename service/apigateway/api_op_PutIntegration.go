@@ -105,6 +105,9 @@ type PutIntegrationInput struct {
 	// type value is the key in this map, and the template (as a String) is the value.
 	RequestTemplates map[string]string
 
+	//  The response transfer mode of the integration.
+	ResponseTransferMode types.ResponseTransferMode
+
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds. You can increase the default value to longer than 29
 	// seconds for Regional or private APIs only.
@@ -219,6 +222,9 @@ type PutIntegrationOutput struct {
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
 	RequestTemplates map[string]string
+
+	//  The response transfer mode of the integration.
+	ResponseTransferMode types.ResponseTransferMode
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds. You can increase the default value to longer than 29

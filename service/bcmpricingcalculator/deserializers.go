@@ -7352,6 +7352,15 @@ func awsAwsjson10_deserializeDocumentBillScenarioSummary(v **types.BillScenarioS
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7391,6 +7400,15 @@ func awsAwsjson10_deserializeDocumentBillScenarioSummary(v **types.BillScenarioS
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":
@@ -9718,6 +9736,31 @@ func awsAwsjson10_deserializeOpDocumentCreateBillEstimateOutput(v **CreateBillEs
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
+		case "costCategoryGroupSharingPreferenceEffectiveDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CostCategoryGroupSharingPreferenceEffectiveDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "costSummary":
 			if err := awsAwsjson10_deserializeDocumentBillEstimateCostSummary(&sv.CostSummary, value); err != nil {
 				return err
@@ -9762,6 +9805,15 @@ func awsAwsjson10_deserializeOpDocumentCreateBillEstimateOutput(v **CreateBillEs
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":
@@ -9827,6 +9879,15 @@ func awsAwsjson10_deserializeOpDocumentCreateBillScenarioOutput(v **CreateBillSc
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9866,6 +9927,15 @@ func awsAwsjson10_deserializeOpDocumentCreateBillScenarioOutput(v **CreateBillSc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":
@@ -10191,6 +10261,31 @@ func awsAwsjson10_deserializeOpDocumentGetBillEstimateOutput(v **GetBillEstimate
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
+		case "costCategoryGroupSharingPreferenceEffectiveDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CostCategoryGroupSharingPreferenceEffectiveDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "costSummary":
 			if err := awsAwsjson10_deserializeDocumentBillEstimateCostSummary(&sv.CostSummary, value); err != nil {
 				return err
@@ -10235,6 +10330,15 @@ func awsAwsjson10_deserializeOpDocumentGetBillEstimateOutput(v **GetBillEstimate
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":
@@ -10300,6 +10404,15 @@ func awsAwsjson10_deserializeOpDocumentGetBillScenarioOutput(v **GetBillScenario
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10339,6 +10452,15 @@ func awsAwsjson10_deserializeOpDocumentGetBillScenarioOutput(v **GetBillScenario
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":
@@ -11165,6 +11287,31 @@ func awsAwsjson10_deserializeOpDocumentUpdateBillEstimateOutput(v **UpdateBillEs
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
+		case "costCategoryGroupSharingPreferenceEffectiveDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CostCategoryGroupSharingPreferenceEffectiveDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "costSummary":
 			if err := awsAwsjson10_deserializeDocumentBillEstimateCostSummary(&sv.CostSummary, value); err != nil {
 				return err
@@ -11209,6 +11356,15 @@ func awsAwsjson10_deserializeOpDocumentUpdateBillEstimateOutput(v **UpdateBillEs
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":
@@ -11274,6 +11430,15 @@ func awsAwsjson10_deserializeOpDocumentUpdateBillScenarioOutput(v **UpdateBillSc
 				return err
 			}
 
+		case "costCategoryGroupSharingPreferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryArn to be of type string, got %T instead", value)
+				}
+				sv.CostCategoryGroupSharingPreferenceArn = ptr.String(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11313,6 +11478,15 @@ func awsAwsjson10_deserializeOpDocumentUpdateBillScenarioOutput(v **UpdateBillSc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "groupSharingPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupSharingPreferenceEnum to be of type string, got %T instead", value)
+				}
+				sv.GroupSharingPreference = types.GroupSharingPreferenceEnum(jtv)
 			}
 
 		case "id":

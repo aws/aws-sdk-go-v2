@@ -1,0 +1,8 @@
+{
+    "id": "68b01cc3-4beb-46e3-bc72-ef06f8762447",
+    "type": "feature",
+    "description": "Added new enum value (AWS::EKS::Cluster) for type field under MonitorLocalResource",
+    "modules": [
+        "service/networkflowmonitor"
+    ]
+}

@@ -945,6 +945,9 @@ func ExampleRuleDetail_outputUsage() {
 	var union types.RuleDetail
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.RuleDetailMemberGlossaryTermEnforcementDetail:
+		_ = v.Value // Value is types.GlossaryTermEnforcementDetail
+
 	case *types.RuleDetailMemberMetadataFormEnforcementDetail:
 		_ = v.Value // Value is types.MetadataFormEnforcementDetail
 
@@ -958,6 +961,7 @@ func ExampleRuleDetail_outputUsage() {
 }
 
 var _ *types.MetadataFormEnforcementDetail
+var _ *types.GlossaryTermEnforcementDetail
 
 func ExampleRuleTarget_outputUsage() {
 	var union types.RuleTarget

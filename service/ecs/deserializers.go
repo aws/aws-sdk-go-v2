@@ -13621,6 +13621,50 @@ func awsAwsjson11_deserializeDocumentInferenceAccelerators(v *[]types.InferenceA
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInfrastructureOptimization(v **types.InfrastructureOptimization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InfrastructureOptimization
+	if *v == nil {
+		sv = &types.InfrastructureOptimization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scaleInAfter":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScaleInAfter = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInstanceGenerationSet(v *[]types.InstanceGeneration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14812,6 +14856,11 @@ func awsAwsjson11_deserializeDocumentManagedInstancesProvider(v **types.ManagedI
 
 	for key, value := range shape {
 		switch key {
+		case "infrastructureOptimization":
+			if err := awsAwsjson11_deserializeDocumentInfrastructureOptimization(&sv.InfrastructureOptimization, value); err != nil {
+				return err
+			}
+
 		case "infrastructureRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

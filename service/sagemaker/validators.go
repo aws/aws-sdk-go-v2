@@ -13131,9 +13131,6 @@ func validateResourceConfig(v *types.ResourceConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfig"}
-	if v.VolumeSizeInGB == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
-	}
 	if v.InstanceGroups != nil {
 		if err := validateInstanceGroups(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))

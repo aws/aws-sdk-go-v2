@@ -1630,6 +1630,13 @@ func awsRestjson1_serializeOpDocumentCreateInputInput(v *CreateInputInput, value
 		ok.String(*v.RoleArn)
 	}
 
+	if v.RouterSettings != nil {
+		ok := object.Key("routerSettings")
+		if err := awsRestjson1_serializeDocumentRouterSettings(v.RouterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SdiSources != nil {
 		ok := object.Key("sdiSources")
 		if err := awsRestjson1_serializeDocumentInputSdiSources(v.SdiSources, ok); err != nil {
@@ -9951,6 +9958,13 @@ func awsRestjson1_serializeOpDocumentUpdateInputInput(v *UpdateInputInput, value
 		}
 	}
 
+	if v.SpecialRouterSettings != nil {
+		ok := object.Key("specialRouterSettings")
+		if err := awsRestjson1_serializeDocumentSpecialRouterSettings(v.SpecialRouterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SrtSettings != nil {
 		ok := object.Key("srtSettings")
 		if err := awsRestjson1_serializeDocumentSrtSettingsRequest(v.SrtSettings, ok); err != nil {
@@ -11486,6 +11500,19 @@ func awsRestjson1_serializeDocument__listOfRouteCreateRequest(v []types.RouteCre
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentRouteCreateRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfRouterDestinationSettings(v []types.RouterDestinationSettings, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRouterDestinationSettings(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -18092,6 +18119,42 @@ func awsRestjson1_serializeDocumentRouteCreateRequest(v *types.RouteCreateReques
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRouterDestinationSettings(v *types.RouterDestinationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityZoneName != nil {
+		ok := object.Key("availabilityZoneName")
+		ok.String(*v.AvailabilityZoneName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouterSettings(v *types.RouterSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destinations != nil {
+		ok := object.Key("destinations")
+		if err := awsRestjson1_serializeDocument__listOfRouterDestinationSettings(v.Destinations, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.EncryptionType) > 0 {
+		ok := object.Key("encryptionType")
+		ok.String(string(v.EncryptionType))
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRouteUpdateRequest(v *types.RouteUpdateRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18739,6 +18802,18 @@ func awsRestjson1_serializeDocumentSmpte2110ReceiverGroupSettings(v *types.Smpte
 func awsRestjson1_serializeDocumentSmpteTtDestinationSettings(v *types.SmpteTtDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSpecialRouterSettings(v *types.SpecialRouterSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RouterArn != nil {
+		ok := object.Key("routerArn")
+		ok.String(*v.RouterArn)
+	}
 
 	return nil
 }

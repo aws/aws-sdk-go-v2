@@ -6735,6 +6735,11 @@ func awsAwsjson11_serializeDocumentParseToOCSF(v *types.ParseToOCSF, value smith
 		ok.String(string(v.EventSource))
 	}
 
+	if v.MappingVersion != nil {
+		ok := object.Key("mappingVersion")
+		ok.String(*v.MappingVersion)
+	}
+
 	if len(v.OcsfVersion) > 0 {
 		ok := object.Key("ocsfVersion")
 		ok.String(string(v.OcsfVersion))

@@ -48,6 +48,13 @@ type GetBillEstimateOutput struct {
 	//  The time period covered by the bill estimate.
 	BillInterval *types.BillInterval
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
+	// Timestamp of the effective date of the cost category used in the group sharing
+	// settings.
+	CostCategoryGroupSharingPreferenceEffectiveDate *time.Time
+
 	//  A summary of the estimated costs.
 	CostSummary *types.BillEstimateCostSummary
 
@@ -59,6 +66,10 @@ type GetBillEstimateOutput struct {
 
 	//  An error message if the bill estimate retrieval failed.
 	FailureMessage *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
 
 	//  The name of the retrieved bill estimate.
 	Name *string

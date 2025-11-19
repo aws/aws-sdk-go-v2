@@ -29416,6 +29416,23 @@ func awsAwsjson11_serializeDocumentMetricDefinitionList(v []types.MetricDefiniti
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMetricsConfig(v *types.MetricsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableEnhancedMetrics != nil {
+		ok := object.Key("EnableEnhancedMetrics")
+		ok.Boolean(*v.EnableEnhancedMetrics)
+	}
+
+	if v.MetricPublishFrequencyInSeconds != 0 {
+		ok := object.Key("MetricPublishFrequencyInSeconds")
+		ok.Integer(v.MetricPublishFrequencyInSeconds)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMetricsSource(v *types.MetricsSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -36700,6 +36717,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointConfigInput(v *CreateEndpoint
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
+	}
+
+	if v.MetricsConfig != nil {
+		ok := object.Key("MetricsConfig")
+		if err := awsAwsjson11_serializeDocumentMetricsConfig(v.MetricsConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ProductionVariants != nil {

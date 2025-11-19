@@ -20,6 +20,22 @@ type AccessLogSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a domain name and certificate for a portal.
+type ACMManaged struct {
+
+	// The certificate ARN.
+	//
+	// This member is required.
+	CertificateArn *string
+
+	// The domain name.
+	//
+	// This member is required.
+	DomainName *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an API.
 type Api struct {
 
@@ -122,6 +138,19 @@ type ApiMapping struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an authorization configuration for a portal.
+type Authorization struct {
+
+	// The Amazon Cognito configuration.
+	CognitoConfig *CognitoConfig
+
+	// Provide no authorization for your portal. This makes your portal publicly
+	// accesible on the web.
+	None *None
+
+	noSmithyDocumentSerde
+}
+
 // Represents an authorizer.
 type Authorizer struct {
 
@@ -211,6 +240,28 @@ type Authorizer struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for using Amazon Cognito user pools to control access to your
+// portal.
+type CognitoConfig struct {
+
+	// The app client ID.
+	//
+	// This member is required.
+	AppClientId *string
+
+	// The user pool ARN.
+	//
+	// This member is required.
+	UserPoolArn *string
+
+	// The user pool domain.
+	//
+	// This member is required.
+	UserPoolDomain *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a CORS configuration. Supported only for HTTP APIs. See [Configuring CORS] for more
 // information.
 //
@@ -240,6 +291,42 @@ type Cors struct {
 	noSmithyDocumentSerde
 }
 
+// Represents custom colors for a published portal.
+type CustomColors struct {
+
+	// Represents the accent color.
+	//
+	// This member is required.
+	AccentColor *string
+
+	// Represents the background color.
+	//
+	// This member is required.
+	BackgroundColor *string
+
+	// The errorValidationColor.
+	//
+	// This member is required.
+	ErrorValidationColor *string
+
+	// Represents the header color.
+	//
+	// This member is required.
+	HeaderColor *string
+
+	// Represents the navigation color.
+	//
+	// This member is required.
+	NavigationColor *string
+
+	// Represents the text color.
+	//
+	// This member is required.
+	TextColor *string
+
+	noSmithyDocumentSerde
+}
+
 // An immutable representation of an API that can be called by users. A Deployment
 // must be associated with a Stage for it to be callable over the internet.
 type Deployment struct {
@@ -261,6 +348,56 @@ type Deployment struct {
 
 	// The description for the deployment.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the product page.
+type DisplayContent struct {
+
+	// The body.
+	//
+	// This member is required.
+	Body *string
+
+	// The title.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains any values that override the default configuration generated from API
+// Gateway.
+type DisplayContentOverrides struct {
+
+	// By default, this is the documentation of your REST API from API Gateway. You
+	// can provide custom documentation to override this value.
+	Body *string
+
+	// The URL for your REST API. By default, API Gateway uses the default execute API
+	// endpoint. You can provide a custom domain to override this value.
+	Endpoint *string
+
+	// The operation name of the product REST endpoint.
+	OperationName *string
+
+	noSmithyDocumentSerde
+}
+
+// The display order.
+type DisplayOrder struct {
+
+	// Represents a list of sections which include section name and list of product
+	// REST endpoints for a product.
+	Contents []Section
+
+	// The ARN of the overview page.
+	OverviewPageArn *string
+
+	// The product page ARNs.
+	ProductPageArns []string
 
 	noSmithyDocumentSerde
 }
@@ -341,6 +478,97 @@ type DomainNameConfiguration struct {
 	// The Transport Layer Security (TLS) version of the security policy for this
 	// domain name. The valid values are TLS_1_0 and TLS_1_2.
 	SecurityPolicy SecurityPolicy
+
+	noSmithyDocumentSerde
+}
+
+// Represents an endpoint configuration.
+type EndpointConfigurationRequest struct {
+
+	// Represents a domain name and certificate for a portal.
+	AcmManaged *ACMManaged
+
+	// Use the default portal domain name that is generated and managed by API Gateway.
+	None *None
+
+	noSmithyDocumentSerde
+}
+
+// Represents an endpoint configuration.
+type EndpointConfigurationResponse struct {
+
+	// The portal default domain name. This domain name is generated and managed by
+	// API Gateway.
+	//
+	// This member is required.
+	PortalDefaultDomainName *string
+
+	// The portal domain hosted zone identifier.
+	//
+	// This member is required.
+	PortalDomainHostedZoneId *string
+
+	// The ARN of the ACM certificate.
+	CertificateArn *string
+
+	// The domain name.
+	DomainName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the endpoint display content.
+type EndpointDisplayContent struct {
+
+	// If your product REST endpoint contains no overrides, the none object is
+	// returned.
+	None *None
+
+	// The overrides for endpoint display content.
+	Overrides *DisplayContentOverrides
+
+	noSmithyDocumentSerde
+}
+
+// The product REST endpoint page.
+type EndpointDisplayContentResponse struct {
+
+	// The URL to invoke your REST API.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The API documentation.
+	Body *string
+
+	// The operation name.
+	OperationName *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifier parts of a product REST endpoint.
+type IdentifierParts struct {
+
+	// The method of the product REST endpoint.
+	//
+	// This member is required.
+	Method *string
+
+	// The path of the product REST endpoint.
+	//
+	// This member is required.
+	Path *string
+
+	// The REST API ID of the product REST endpoint.
+	//
+	// This member is required.
+	RestApiId *string
+
+	// The stage of the product REST endpoint.
+	//
+	// This member is required.
+	Stage *string
 
 	noSmithyDocumentSerde
 }
@@ -669,12 +897,248 @@ type MutualTlsAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+// The none option.
+type None struct {
+	noSmithyDocumentSerde
+}
+
 // Validation constraints imposed on parameters of a request (path, query string,
 // headers).
 type ParameterConstraints struct {
 
 	// Whether or not the parameter is required.
 	Required *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the content that is visible to portal consumers including the themes,
+// display names, and description.
+type PortalContent struct {
+
+	// The display name for the portal.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The theme for the portal.
+	//
+	// This member is required.
+	Theme *PortalTheme
+
+	// A description of the portal.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a portal product.
+type PortalProductSummary struct {
+
+	// The description.
+	//
+	// This member is required.
+	Description *string
+
+	// The display name of a portal product.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The timestamp when the portal product was last modified.
+	//
+	// This member is required.
+	LastModified *time.Time
+
+	// The ARN of a portal product.
+	//
+	// This member is required.
+	PortalProductArn *string
+
+	// The portal product identifier.
+	//
+	// This member is required.
+	PortalProductId *string
+
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a portal summary.
+type PortalSummary struct {
+
+	// The authorization of the portal.
+	//
+	// This member is required.
+	Authorization *Authorization
+
+	// The endpoint configuration of the portal.
+	//
+	// This member is required.
+	EndpointConfiguration *EndpointConfigurationResponse
+
+	// The ARNs of the portal products included in the portal.
+	//
+	// This member is required.
+	IncludedPortalProductArns []string
+
+	// The timestamp when the portal was last modified.
+	//
+	// This member is required.
+	LastModified *time.Time
+
+	// The ARN of the portal.
+	//
+	// This member is required.
+	PortalArn *string
+
+	// Contains the content that is visible to portal consumers including the themes,
+	// display names, and description.
+	//
+	// This member is required.
+	PortalContent *PortalContent
+
+	// The portal identifier.
+	//
+	// This member is required.
+	PortalId *string
+
+	// The timestamp when the portal was last published.
+	LastPublished *time.Time
+
+	// The description of the portal the last time it was published.
+	LastPublishedDescription *string
+
+	// Represents the preview endpoint and the any possible error messages during
+	// preview generation.
+	Preview *Preview
+
+	// The publish status.
+	PublishStatus PublishStatus
+
+	// The CloudWatch RUM app monitor name.
+	RumAppMonitorName *string
+
+	// The status exception information.
+	StatusException *StatusException
+
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the theme for a portal.
+type PortalTheme struct {
+
+	// Defines custom color values.
+	//
+	// This member is required.
+	CustomColors *CustomColors
+
+	// The timestamp when the logo was last uploaded.
+	LogoLastUploaded *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains the preview status and preview URL.
+type Preview struct {
+
+	// The status of the preview.
+	//
+	// This member is required.
+	PreviewStatus PreviewStatus
+
+	// The URL of the preview.
+	PreviewUrl *string
+
+	// The status exception information.
+	StatusException *StatusException
+
+	noSmithyDocumentSerde
+}
+
+// Represents a product page summary without listing any page content.
+type ProductPageSummaryNoBody struct {
+
+	// The timestamp when the product page was last modified.
+	//
+	// This member is required.
+	LastModified *time.Time
+
+	// The page title.
+	//
+	// This member is required.
+	PageTitle *string
+
+	// The ARN of the product page.
+	//
+	// This member is required.
+	ProductPageArn *string
+
+	// The product page identifier.
+	//
+	// This member is required.
+	ProductPageId *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a product REST endpoint page, without providing the page content.
+type ProductRestEndpointPageSummaryNoBody struct {
+
+	// The endpoint of the product REST endpoint page.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The timestamp when the product REST endpoint page was last modified.
+	//
+	// This member is required.
+	LastModified *time.Time
+
+	// The ARN of the product REST endpoint page.
+	//
+	// This member is required.
+	ProductRestEndpointPageArn *string
+
+	// The product REST endpoint page identifier.
+	//
+	// This member is required.
+	ProductRestEndpointPageId *string
+
+	// The REST endpoint identifier.
+	//
+	// This member is required.
+	RestEndpointIdentifier *RestEndpointIdentifier
+
+	// The status.
+	//
+	// This member is required.
+	Status Status
+
+	// The try it state of a product REST endpoint page.
+	//
+	// This member is required.
+	TryItState TryItState
+
+	// The operation name of the product REST endpoint.
+	OperationName *string
+
+	// The status exception information.
+	StatusException *StatusException
+
+	noSmithyDocumentSerde
+}
+
+// The REST API endpoint identifier.
+type RestEndpointIdentifier struct {
+
+	// The identifier parts of the REST endpoint identifier.
+	IdentifierParts *IdentifierParts
 
 	noSmithyDocumentSerde
 }
@@ -899,6 +1363,22 @@ type RoutingRuleMatchHeaderValue struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the section name and list of product REST endpoints for a product.
+type Section struct {
+
+	// The ARNs of the product REST endpoint pages in a portal product.
+	//
+	// This member is required.
+	ProductRestEndpointPageArns []string
+
+	// The section name.
+	//
+	// This member is required.
+	SectionName *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an API stage.
 type Stage struct {
 
@@ -953,6 +1433,18 @@ type Stage struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a StatusException.
+type StatusException struct {
+
+	// The exception.
+	Exception *string
+
+	// The error message.
+	Message *string
 
 	noSmithyDocumentSerde
 }

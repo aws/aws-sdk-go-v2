@@ -1,0 +1,8 @@
+{
+    "id": "ccf7a279-dea8-434c-9bac-9747cb6b93a0",
+    "type": "feature",
+    "description": "This release adds support for Billing Transfers, enabling management of billing transfers with billing groups on AWS Billing Conductor.",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

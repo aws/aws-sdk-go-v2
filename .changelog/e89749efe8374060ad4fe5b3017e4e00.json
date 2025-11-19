@@ -1,0 +1,8 @@
+{
+    "id": "e89749ef-e837-4060-ad4f-e5b3017e4e00",
+    "type": "feature",
+    "description": "AWS CloudTrail now supports Insights for data events, expanding beyond management events to automatically detect unusual activity on data plane operations.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

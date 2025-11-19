@@ -68,10 +68,11 @@ type CreateCustomLineItemInput struct {
 	// any further actions.
 	ClientToken *string
 
-	// The display settings of the custom line item
+	//  Specifies how the custom line item charges are computed.
 	ComputationRule types.ComputationRuleEnum
 
-	// The presentation configuration of the custom line item
+	//  Details controlling how the custom line item charges are presented in the
+	// bill. Contains specifications for which service the charges will be shown under.
 	PresentationDetails *types.PresentationObject
 
 	//  A map that contains tag keys and tag values that are attached to a custom line

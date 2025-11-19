@@ -1,0 +1,8 @@
+{
+    "id": "65302246-ee38-452f-b7b2-d6f9a7fb9951",
+    "type": "feature",
+    "description": "Added support for Amazon ECS Managed Instances infrastructure optimization configuration.",
+    "modules": [
+        "service/ecs"
+    ]
+}

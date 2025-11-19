@@ -34,6 +34,7 @@ type BillingGroupStatus string
 const (
 	BillingGroupStatusActive                BillingGroupStatus = "ACTIVE"
 	BillingGroupStatusPrimaryAccountMissing BillingGroupStatus = "PRIMARY_ACCOUNT_MISSING"
+	BillingGroupStatusPending               BillingGroupStatus = "PENDING"
 )
 
 // Values returns all known values for BillingGroupStatus. Note that this can be
@@ -44,6 +45,26 @@ func (BillingGroupStatus) Values() []BillingGroupStatus {
 	return []BillingGroupStatus{
 		"ACTIVE",
 		"PRIMARY_ACCOUNT_MISSING",
+		"PENDING",
+	}
+}
+
+type BillingGroupType string
+
+// Enum values for BillingGroupType
+const (
+	BillingGroupTypeStandard        BillingGroupType = "STANDARD"
+	BillingGroupTypeTransferBilling BillingGroupType = "TRANSFER_BILLING"
+)
+
+// Values returns all known values for BillingGroupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingGroupType) Values() []BillingGroupType {
+	return []BillingGroupType{
+		"STANDARD",
+		"TRANSFER_BILLING",
 	}
 }
 
@@ -260,6 +281,23 @@ func (PricingRuleType) Values() []PricingRuleType {
 	}
 }
 
+type SearchOption string
+
+// Enum values for SearchOption
+const (
+	SearchOptionStartsWith SearchOption = "STARTS_WITH"
+)
+
+// Values returns all known values for SearchOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchOption) Values() []SearchOption {
+	return []SearchOption{
+		"STARTS_WITH",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
@@ -316,6 +354,7 @@ const (
 	ValidationExceptionReasonIllegalBillingEntity                           ValidationExceptionReason = "ILLEGAL_BILLING_ENTITY"
 	ValidationExceptionReasonIllegalModifierPercentage                      ValidationExceptionReason = "ILLEGAL_MODIFIER_PERCENTAGE"
 	ValidationExceptionReasonIllegalType                                    ValidationExceptionReason = "ILLEGAL_TYPE"
+	ValidationExceptionReasonIllegalBillingGroupType                        ValidationExceptionReason = "ILLEGAL_BILLING_GROUP_TYPE"
 	ValidationExceptionReasonIllegalEndedBillinggroup                       ValidationExceptionReason = "ILLEGAL_ENDED_BILLINGGROUP"
 	ValidationExceptionReasonIllegalTieringInput                            ValidationExceptionReason = "ILLEGAL_TIERING_INPUT"
 	ValidationExceptionReasonIllegalOperation                               ValidationExceptionReason = "ILLEGAL_OPERATION"
@@ -388,6 +427,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"ILLEGAL_BILLING_ENTITY",
 		"ILLEGAL_MODIFIER_PERCENTAGE",
 		"ILLEGAL_TYPE",
+		"ILLEGAL_BILLING_GROUP_TYPE",
 		"ILLEGAL_ENDED_BILLINGGROUP",
 		"ILLEGAL_TIERING_INPUT",
 		"ILLEGAL_OPERATION",

@@ -67551,6 +67551,59 @@ func awsAwsjson11_deserializeDocumentMetricDefinitionList(v *[]types.MetricDefin
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMetricsConfig(v **types.MetricsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricsConfig
+	if *v == nil {
+		sv = &types.MetricsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableEnhancedMetrics":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableEnhancedMetrics to be of type *bool, got %T instead", value)
+				}
+				sv.EnableEnhancedMetrics = ptr.Bool(jtv)
+			}
+
+		case "MetricPublishFrequencyInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MetricPublishFrequencyInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MetricPublishFrequencyInSeconds = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMetricSpecification(v *types.MetricSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -83405,7 +83458,7 @@ func awsAwsjson11_deserializeDocumentResourceConfig(v **types.ResourceConfig, va
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected VolumeSizeInGB to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected OptionalVolumeSizeInGB to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -100766,6 +100819,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeEndpointConfigOutput(v **Describe
 				sv.KmsKeyId = ptr.String(jtv)
 			}
 
+		case "MetricsConfig":
+			if err := awsAwsjson11_deserializeDocumentMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
+			}
+
 		case "ProductionVariants":
 			if err := awsAwsjson11_deserializeDocumentProductionVariantList(&sv.ProductionVariants, value); err != nil {
 				return err
@@ -100907,6 +100965,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeEndpointOutput(v **DescribeEndpoi
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MetricsConfig":
+			if err := awsAwsjson11_deserializeDocumentMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
 			}
 
 		case "PendingDeploymentSummary":

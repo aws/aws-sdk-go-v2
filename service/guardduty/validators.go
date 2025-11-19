@@ -810,6 +810,26 @@ func (m *validateOpGetMalwareProtectionPlan) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMalwareScan struct {
+}
+
+func (*validateOpGetMalwareScan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMalwareScan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMalwareScanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMalwareScanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMalwareScanSettings struct {
 }
 
@@ -1730,6 +1750,10 @@ func addOpGetMalwareProtectionPlanValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetMalwareProtectionPlan{}, middleware.After)
 }
 
+func addOpGetMalwareScanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMalwareScan{}, middleware.After)
+}
+
 func addOpGetMalwareScanSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMalwareScanSettings{}, middleware.After)
 }
@@ -1939,6 +1963,21 @@ func validateDataSourceConfigurations(v *types.DataSourceConfigurations) error {
 	}
 }
 
+func validateIncrementalScanDetails(v *types.IncrementalScanDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncrementalScanDetails"}
+	if v.BaselineResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKubernetesAuditLogsConfiguration(v *types.KubernetesAuditLogsConfiguration) error {
 	if v == nil {
 		return nil
@@ -2061,6 +2100,21 @@ func validateOrganizationS3LogsConfiguration(v *types.OrganizationS3LogsConfigur
 	}
 }
 
+func validateRecoveryPoint(v *types.RecoveryPoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPoint"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3LogsConfiguration(v *types.S3LogsConfiguration) error {
 	if v == nil {
 		return nil
@@ -2141,6 +2195,31 @@ func validateScanResourceCriteria(v *types.ScanResourceCriteria) error {
 	if v.Exclude != nil {
 		if err := validateScanCriterion(v.Exclude); err != nil {
 			invalidParams.AddNested("Exclude", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartMalwareScanConfiguration(v *types.StartMalwareScanConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMalwareScanConfiguration"}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.IncrementalScanDetails != nil {
+		if err := validateIncrementalScanDetails(v.IncrementalScanDetails); err != nil {
+			invalidParams.AddNested("IncrementalScanDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecoveryPoint != nil {
+		if err := validateRecoveryPoint(v.RecoveryPoint); err != nil {
+			invalidParams.AddNested("RecoveryPoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2879,6 +2958,21 @@ func validateOpGetMalwareProtectionPlanInput(v *GetMalwareProtectionPlanInput) e
 	}
 }
 
+func validateOpGetMalwareScanInput(v *GetMalwareScanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMalwareScanInput"}
+	if v.ScanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMalwareScanSettingsInput(v *GetMalwareScanSettingsInput) error {
 	if v == nil {
 		return nil
@@ -3210,6 +3304,11 @@ func validateOpStartMalwareScanInput(v *StartMalwareScanInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartMalwareScanInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.ScanConfiguration != nil {
+		if err := validateStartMalwareScanConfiguration(v.ScanConfiguration); err != nil {
+			invalidParams.AddNested("ScanConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -743,6 +743,13 @@ func awsAwsjson10_serializeDocumentFilters(v *types.Filters, value smithyjson.Va
 		}
 	}
 
+	if v.BillSourceAccounts != nil {
+		ok := object.Key("BillSourceAccounts")
+		if err := awsAwsjson10_serializeDocumentAccountIdList(v.BillSourceAccounts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InvoiceReceivers != nil {
 		ok := object.Key("InvoiceReceivers")
 		if err := awsAwsjson10_serializeDocumentAccountIdList(v.InvoiceReceivers, ok); err != nil {
@@ -818,9 +825,16 @@ func awsAwsjson10_serializeDocumentInvoiceUnitRule(v *types.InvoiceUnitRule, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillSourceAccounts != nil {
+		ok := object.Key("BillSourceAccounts")
+		if err := awsAwsjson10_serializeDocumentRuleAccountIdList(v.BillSourceAccounts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LinkedAccounts != nil {
 		ok := object.Key("LinkedAccounts")
-		if err := awsAwsjson10_serializeDocumentAccountIdList(v.LinkedAccounts, ok); err != nil {
+		if err := awsAwsjson10_serializeDocumentRuleAccountIdList(v.LinkedAccounts, ok); err != nil {
 			return err
 		}
 	}
@@ -865,6 +879,17 @@ func awsAwsjson10_serializeDocumentResourceTagList(v []types.ResourceTag, value 
 		if err := awsAwsjson10_serializeDocumentResourceTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRuleAccountIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

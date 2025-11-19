@@ -1,0 +1,8 @@
+{
+    "id": "1640e5aa-2d36-45aa-b3f5-746f76d1120d",
+    "type": "feature",
+    "description": "Add support for scanning and viewing scan results for backup resource types",
+    "modules": [
+        "service/guardduty"
+    ]
+}

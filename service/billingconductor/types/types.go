@@ -28,15 +28,18 @@ type AccountAssociationsListElement struct {
 // resemble the linked accounts in a consolidated billing family.
 type AccountGrouping struct {
 
-	// The account IDs that make up the billing group. Account IDs must be a part of
-	// the consolidated billing family, and not associated with another billing group.
-	//
-	// This member is required.
-	LinkedAccountIds []string
-
 	// Specifies if this billing group will automatically associate newly added Amazon
 	// Web Services accounts that join your consolidated billing family.
 	AutoAssociate *bool
+
+	// The account IDs that make up the billing group. Account IDs must be a part of
+	// the consolidated billing family, and not associated with another billing group.
+	LinkedAccountIds []string
+
+	//  The Amazon Resource Name (ARN) that identifies the transfer relationship owned
+	// by the Bill Transfer account (caller account). When specified, the
+	// PrimaryAccountId is no longer required.
+	ResponsibilityTransferArn *string
 
 	noSmithyDocumentSerde
 }
@@ -151,6 +154,9 @@ type BillingGroupListElement struct {
 	// The Amazon Resource Number (ARN) that can be used to uniquely identify the
 	// billing group.
 	Arn *string
+
+	//  The type of billing group.
+	BillingGroupType BillingGroupType
 
 	// The preferences and settings that will be used to compute the Amazon Web
 	// Services charges for a billing group.
@@ -312,7 +318,8 @@ type CustomLineItemListElement struct {
 	// line item.
 	ChargeDetails *ListCustomLineItemChargeDetails
 
-	// The display settings of the custom line item
+	//  The computation rule that determines how the custom line item charges are
+	// computed and reflected in the bill.
 	ComputationRule ComputationRuleEnum
 
 	// The time created.
@@ -332,7 +339,8 @@ type CustomLineItemListElement struct {
 	// The custom line item's name.
 	Name *string
 
-	// The presentation configuration of the custom line item
+	//  Configuration details specifying how the custom line item charges are
+	// presented, including which service the charges are shown under.
 	PresentationDetails *PresentationObject
 
 	// The product code that's associated with the custom line item.
@@ -378,7 +386,8 @@ type CustomLineItemVersionListElement struct {
 	//  A representation of the charge details of a custom line item.
 	ChargeDetails *ListCustomLineItemChargeDetails
 
-	// The display settings of the custom line item
+	//  The computation rule for a specific version of a custom line item, determining
+	// how charges are computed and reflected in the bill.
 	ComputationRule ComputationRuleEnum
 
 	// The time when the custom line item version was created.
@@ -399,7 +408,8 @@ type CustomLineItemVersionListElement struct {
 	// The name of the custom line item.
 	Name *string
 
-	// The presentation configuration of the custom line item
+	//  Presentation configuration for a specific version of a custom line item,
+	// specifying how charges are displayed in the bill.
 	PresentationDetails *PresentationObject
 
 	// The product code that’s associated with the custom line item.
@@ -440,7 +450,7 @@ type FreeTierConfig struct {
 // A representation of the line item filter for your custom line item. You can use
 // line item filters to include or exclude specific resource values from the
 // billing group's total cost. For example, if you create a custom line item and
-// you want to filter out a value, such as Savings Plan discounts, you can update
+// you want to filter out a value, such as Savings Plans discounts, you can update
 // LineItemFilter to exclude it.
 type LineItemFilter struct {
 
@@ -457,7 +467,7 @@ type LineItemFilter struct {
 	MatchOption MatchOption
 
 	// The values of the line item filter. This specifies the values to filter on.
-	// Currently, you can only exclude Savings Plan discounts.
+	// Currently, you can only exclude Savings Plans discounts.
 	//
 	// This member is required.
 	Values []LineItemFilterValue
@@ -500,6 +510,10 @@ type ListBillingGroupAccountGrouping struct {
 	// Web Services accounts that join your consolidated billing family.
 	AutoAssociate *bool
 
+	//  The Amazon Resource Name (ARN) that identifies the transfer relationship for
+	// the billing group.
+	ResponsibilityTransferArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -524,8 +538,20 @@ type ListBillingGroupsFilter struct {
 	// Web Services accounts that join your consolidated billing family.
 	AutoAssociate *bool
 
+	//  Filter billing groups by their type.
+	BillingGroupTypes []BillingGroupType
+
+	//  Filter billing groups by their names.
+	Names []StringSearch
+
 	// The pricing plan Amazon Resource Names (ARNs) to retrieve information.
 	PricingPlan *string
+
+	//  A list of primary account IDs to filter the billing groups.
+	PrimaryAccountIds []string
+
+	//  Filter billing groups by their responsibility transfer ARNs.
+	ResponsibilityTransferArns []string
 
 	//  A list of billing groups to retrieve their current status for a specific time
 	// range
@@ -679,10 +705,14 @@ type ListResourcesAssociatedToCustomLineItemResponseElement struct {
 	noSmithyDocumentSerde
 }
 
-// The presentation configuration of the custom line item
+//	An object that defines how custom line item charges are presented in the bill,
+//
+// containing specifications for service presentation.
 type PresentationObject struct {
 
-	// This defines the service of where the custom line item is presented
+	//  The service under which the custom line item charges will be presented. Must
+	// be a string between 1 and 128 characters matching the pattern " ^[a-zA-Z0-9]+$
+	// ".
 	//
 	// This member is required.
 	Service *string
@@ -777,6 +807,22 @@ type PricingRuleListElement struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines string search parameters.
+type StringSearch struct {
+
+	//  The search option to be applied when performing the string search.
+	//
+	// This member is required.
+	SearchOption SearchOption
+
+	//  The value to search for within the specified string field.
+	//
+	// This member is required.
+	SearchValue *string
+
+	noSmithyDocumentSerde
+}
+
 // The set of tiering configurations for the pricing rule.
 type Tiering struct {
 
@@ -794,6 +840,11 @@ type UpdateBillingGroupAccountGrouping struct {
 	// Specifies if this billing group will automatically associate newly added Amazon
 	// Web Services accounts that join your consolidated billing family.
 	AutoAssociate *bool
+
+	//  The Amazon Resource Name (ARN) that identifies the transfer relationship.
+	// Note: Modifications to the ResponsibilityTransferArn are not permitted for
+	// existing billing groups.
+	ResponsibilityTransferArn *string
 
 	noSmithyDocumentSerde
 }

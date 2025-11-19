@@ -1592,6 +1592,11 @@ func awsRestjson1_deserializeOpDocumentCreateFunctionOutput(v **CreateFunctionOu
 				sv.StateReasonCode = types.StateReasonCode(jtv)
 			}
 
+		case "TenancyConfig":
+			if err := awsRestjson1_deserializeDocumentTenancyConfig(&sv.TenancyConfig, value); err != nil {
+				return err
+			}
+
 		case "Timeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5082,6 +5087,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionConfigurationOutput(v **GetFun
 					return fmt.Errorf("expected StateReasonCode to be of type string, got %T instead", value)
 				}
 				sv.StateReasonCode = types.StateReasonCode(jtv)
+			}
+
+		case "TenancyConfig":
+			if err := awsRestjson1_deserializeDocumentTenancyConfig(&sv.TenancyConfig, value); err != nil {
+				return err
 			}
 
 		case "Timeout":
@@ -10143,6 +10153,11 @@ func awsRestjson1_deserializeOpDocumentPublishVersionOutput(v **PublishVersionOu
 				sv.StateReasonCode = types.StateReasonCode(jtv)
 			}
 
+		case "TenancyConfig":
+			if err := awsRestjson1_deserializeDocumentTenancyConfig(&sv.TenancyConfig, value); err != nil {
+				return err
+			}
+
 		case "Timeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12977,6 +12992,11 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionCodeOutput(v **UpdateFuncti
 				sv.StateReasonCode = types.StateReasonCode(jtv)
 			}
 
+		case "TenancyConfig":
+			if err := awsRestjson1_deserializeDocumentTenancyConfig(&sv.TenancyConfig, value); err != nil {
+				return err
+			}
+
 		case "Timeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13434,6 +13454,11 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionConfigurationOutput(v **Upd
 					return fmt.Errorf("expected StateReasonCode to be of type string, got %T instead", value)
 				}
 				sv.StateReasonCode = types.StateReasonCode(jtv)
+			}
+
+		case "TenancyConfig":
+			if err := awsRestjson1_deserializeDocumentTenancyConfig(&sv.TenancyConfig, value); err != nil {
+				return err
 			}
 
 		case "Timeout":
@@ -18376,6 +18401,11 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				sv.StateReasonCode = types.StateReasonCode(jtv)
 			}
 
+		case "TenancyConfig":
+			if err := awsRestjson1_deserializeDocumentTenancyConfig(&sv.TenancyConfig, value); err != nil {
+				return err
+			}
+
 		case "Timeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21744,6 +21774,46 @@ func awsRestjson1_deserializeDocumentTagsError(v **types.TagsError, value interf
 					return fmt.Errorf("expected TagsErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTenancyConfig(v **types.TenancyConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TenancyConfig
+	if *v == nil {
+		sv = &types.TenancyConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TenantIsolationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TenantIsolationMode to be of type string, got %T instead", value)
+				}
+				sv.TenantIsolationMode = types.TenantIsolationMode(jtv)
 			}
 
 		default:

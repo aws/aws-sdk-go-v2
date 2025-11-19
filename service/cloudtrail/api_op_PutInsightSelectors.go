@@ -11,11 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lets you enable Insights event logging by specifying the Insights selectors
-// that you want to enable on an existing trail or event data store. You also use
-// PutInsightSelectors to turn off Insights event logging, by passing an empty list
-// of Insights types. The valid Insights event types are ApiErrorRateInsight and
-// ApiCallRateInsight .
+// Lets you enable Insights event logging on specific event categories by
+// specifying the Insights selectors that you want to enable on an existing trail
+// or event data store. You also use PutInsightSelectors to turn off Insights
+// event logging, by passing an empty list of Insights types. The valid Insights
+// event types are ApiErrorRateInsight and ApiCallRateInsight , and valid
+// EventCategories are Management and Data .
+//
+// Insights on data events are not supported on event data stores. For event data
+// stores, you can only enable Insights on management events.
 //
 // To enable Insights on an event data store, you must specify the ARNs (or ID
 // suffix of the ARNs) for the source event data store ( EventDataStore ) and the
@@ -27,6 +31,15 @@ import (
 //
 // To log Insights events for a trail, you must specify the name ( TrailName ) of
 // the CloudTrail trail for which you want to change or add Insights selectors.
+//
+//   - For Management events Insights: To log CloudTrail Insights on the API call
+//     rate, the trail or event data store must log write management events. To log
+//     CloudTrail Insights on the API error rate, the trail or event data store must
+//     log read or write management events.
+//
+//   - For Data events Insights: To log CloudTrail Insights on the API call rate
+//     or API error rate, the trail must log read or write data events. Data events
+//     Insights are not supported on event data store.
 //
 // To log CloudTrail Insights events on API call volume, the trail or event data
 // store must log write management events. To log CloudTrail Insights events on
@@ -55,15 +68,18 @@ func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSele
 
 type PutInsightSelectorsInput struct {
 
-	// A JSON string that contains the Insights types you want to log on a trail or
-	// event data store. ApiCallRateInsight and ApiErrorRateInsight are valid Insight
-	// types.
+	// Contains the Insights types you want to log on a specific category of events on
+	// a trail or event data store. ApiCallRateInsight and ApiErrorRateInsight are
+	// valid Insight types.The EventCategory field can specify Management or Data
+	// events or both. For event data store, you can log Insights for management events
+	// only.
 	//
 	// The ApiCallRateInsight Insights type analyzes write-only management API calls
-	// that are aggregated per minute against a baseline API call volume.
+	// or read and write data API calls that are aggregated per minute against a
+	// baseline API call volume.
 	//
-	// The ApiErrorRateInsight Insights type analyzes management API calls that result
-	// in error codes. The error is shown if the API call is unsuccessful.
+	// The ApiErrorRateInsight Insights type analyzes management and data API calls
+	// that result in error codes. The error is shown if the API call is unsuccessful.
 	//
 	// This member is required.
 	InsightSelectors []types.InsightSelector
@@ -99,9 +115,11 @@ type PutInsightSelectorsOutput struct {
 	// want to change or add Insights selectors.
 	EventDataStoreArn *string
 
-	// A JSON string that contains the Insights event types that you want to log on a
-	// trail or event data store. The valid Insights types are ApiErrorRateInsight and
-	// ApiCallRateInsight .
+	// Contains the Insights types you want to log on a specific category of events in
+	// a trail or event data store. ApiCallRateInsight and ApiErrorRateInsight are
+	// valid Insight types.The EventCategory field can specify Management or Data
+	// events or both. For event data store, you can only log Insights for management
+	// events only.
 	InsightSelectors []types.InsightSelector
 
 	//  The ARN of the destination event data store that logs Insights events.

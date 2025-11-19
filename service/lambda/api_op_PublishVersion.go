@@ -228,6 +228,10 @@ type PublishVersionOutput struct {
 	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
 
+	// The function's tenant isolation configuration settings. Determines whether the
+	// Lambda function runs on a shared or dedicated infrastructure per unique tenant.
+	TenancyConfig *types.TenancyConfig
+
 	// The amount of time in seconds that Lambda allows a function to run before
 	// stopping it.
 	Timeout *int32

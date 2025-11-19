@@ -411,6 +411,11 @@ func awsRestjson1_serializeOpDocumentCreateAppMonitorInput(v *CreateAppMonitorIn
 		ok.String(*v.Name)
 	}
 
+	if len(v.Platform) > 0 {
+		ok := object.Key("Platform")
+		ok.String(string(v.Platform))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

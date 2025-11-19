@@ -1,0 +1,8 @@
+{
+    "id": "82017119-72ac-42cb-a3ff-d7ba1562c85a",
+    "type": "feature",
+    "description": "Added the EnableOutboundWebIdentityFederation, DisableOutboundWebIdentityFederation and GetOutboundWebIdentityFederationInfo APIs for the IAM outbound federation feature.",
+    "modules": [
+        "service/iam"
+    ]
+}

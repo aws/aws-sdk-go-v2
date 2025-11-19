@@ -8140,6 +8140,19 @@ func awsRestjson1_deserializeDocumentTelephonyOutboundConfig(v **types.Telephony
 				sv.ConnectSourcePhoneNumber = ptr.String(jtv)
 			}
 
+		case "ringTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RingTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RingTimeout = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 

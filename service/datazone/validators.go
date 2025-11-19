@@ -130,6 +130,46 @@ func (m *validateOpAssociateGovernedTerms) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetAttributesMetadata struct {
+}
+
+func (*validateOpBatchGetAttributesMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetAttributesMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetAttributesMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetAttributesMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchPutAttributesMetadata struct {
+}
+
+func (*validateOpBatchPutAttributesMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchPutAttributesMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchPutAttributesMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchPutAttributesMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelMetadataGenerationRun struct {
 }
 
@@ -3270,6 +3310,26 @@ func (m *validateOpUpdateProjectProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRootDomainUnitOwner struct {
+}
+
+func (*validateOpUpdateRootDomainUnitOwner) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRootDomainUnitOwner) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRootDomainUnitOwnerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRootDomainUnitOwnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRule struct {
 }
 
@@ -3392,6 +3452,14 @@ func addOpAssociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) 
 
 func addOpAssociateGovernedTermsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateGovernedTerms{}, middleware.After)
+}
+
+func addOpBatchGetAttributesMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetAttributesMetadata{}, middleware.After)
+}
+
+func addOpBatchPutAttributesMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchPutAttributesMetadata{}, middleware.After)
 }
 
 func addOpCancelMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
@@ -4022,6 +4090,10 @@ func addOpUpdateProjectProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateProjectProfile{}, middleware.After)
 }
 
+func addOpUpdateRootDomainUnitOwnerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRootDomainUnitOwner{}, middleware.After)
+}
+
 func addOpUpdateRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRule{}, middleware.After)
 }
@@ -4326,6 +4398,45 @@ func validateAssetTypesForRule(v *types.AssetTypesForRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AssetTypesForRule"}
 	if len(v.SelectionMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SelectionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeInput(v *types.AttributeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeInput"}
+	if v.AttributeIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeIdentifier"))
+	}
+	if v.Forms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
+	} else if v.Forms != nil {
+		if err := validateFormInputList(v.Forms); err != nil {
+			invalidParams.AddNested("Forms", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributes(v []types.AttributeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Attributes"}
+	for i := range v {
+		if err := validateAttributeInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6232,6 +6343,58 @@ func validateOpAssociateGovernedTermsInput(v *AssociateGovernedTermsInput) error
 	}
 	if v.GovernedGlossaryTerms == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GovernedGlossaryTerms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetAttributesMetadataInput(v *BatchGetAttributesMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAttributesMetadataInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if v.AttributeIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchPutAttributesMetadataInput(v *BatchPutAttributesMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchPutAttributesMetadataInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9483,6 +9646,27 @@ func validateOpUpdateProjectProfileInput(v *UpdateProjectProfileInput) error {
 		if err := validateEnvironmentConfigurationsList(v.EnvironmentConfigurations); err != nil {
 			invalidParams.AddNested("EnvironmentConfigurations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRootDomainUnitOwnerInput(v *UpdateRootDomainUnitOwnerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRootDomainUnitOwnerInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.CurrentOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentOwner"))
+	}
+	if v.NewOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewOwner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -43,7 +43,8 @@ func (c *Client) StopReplicationToReplica(ctx context.Context, params *StopRepli
 
 type StopReplicationToReplicaInput struct {
 
-	// The ARN of the primary secret.
+	// The name of the secret or the replica ARN. The replica ARN is the same as the
+	// original primary secret ARN expect the Region is changed to the replica Region.
 	//
 	// This member is required.
 	SecretId *string

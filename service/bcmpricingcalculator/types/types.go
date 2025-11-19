@@ -770,6 +770,9 @@ type BillScenarioSummary struct {
 	//  The time period covered by the bill scenario.
 	BillInterval *BillInterval
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
 	//  The timestamp when the bill scenario was created.
 	CreatedAt *time.Time
 
@@ -778,6 +781,10 @@ type BillScenarioSummary struct {
 
 	//  An error message if the bill scenario creation or processing failed.
 	FailureMessage *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference GroupSharingPreferenceEnum
 
 	//  The name of the bill scenario.
 	Name *string

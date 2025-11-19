@@ -554,6 +554,18 @@ func TestCheckSnapshot_GetMalwareProtectionPlan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMalwareScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMalwareScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMalwareScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMalwareScanSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMalwareScanSettings(context.Background(), nil, func(o *Options) {
@@ -763,6 +775,18 @@ func TestCheckSnapshot_ListMalwareProtectionPlans(t *testing.T) {
 	_, err := svc.ListMalwareProtectionPlans(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListMalwareProtectionPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMalwareScans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMalwareScans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMalwareScans")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1573,6 +1597,18 @@ func TestUpdateSnapshot_GetMalwareProtectionPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMalwareScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMalwareScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMalwareScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMalwareScanSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMalwareScanSettings(context.Background(), nil, func(o *Options) {
@@ -1782,6 +1818,18 @@ func TestUpdateSnapshot_ListMalwareProtectionPlans(t *testing.T) {
 	_, err := svc.ListMalwareProtectionPlans(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListMalwareProtectionPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMalwareScans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMalwareScans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMalwareScans")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -81,6 +81,9 @@ type InvokeWithResponseStreamInput struct {
 	// The alias name.
 	Qualifier *string
 
+	// The identifier of the tenant in a multi-tenant Lambda function.
+	TenantId *string
+
 	noSmithyDocumentSerde
 }
 

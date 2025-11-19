@@ -1,0 +1,8 @@
+{
+    "id": "ffd6a78a-ce79-4c91-975e-1d4c6bd045fc",
+    "type": "feature",
+    "description": "Extended Global Secondary Index (GSI) composite keys to support up to 8 attributes.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

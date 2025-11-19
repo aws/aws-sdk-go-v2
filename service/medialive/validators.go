@@ -2661,6 +2661,23 @@ func validate__listOfPipelinePauseStateSettings(v []types.PipelinePauseStateSett
 	}
 }
 
+func validate__listOfRouterDestinationSettings(v []types.RouterDestinationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRouterDestinationSettings"}
+	for i := range v {
+		if err := validateRouterDestinationSettings(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfScheduleAction(v []types.ScheduleAction) error {
 	if v == nil {
 		return nil
@@ -4454,6 +4471,38 @@ func validateRemixSettings(v *types.RemixSettings) error {
 	}
 }
 
+func validateRouterDestinationSettings(v *types.RouterDestinationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterDestinationSettings"}
+	if v.AvailabilityZoneName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterSettings(v *types.RouterSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterSettings"}
+	if v.Destinations != nil {
+		if err := validate__listOfRouterDestinationSettings(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRtmpOutputSettings(v *types.RtmpOutputSettings) error {
 	if v == nil {
 		return nil
@@ -5253,6 +5302,11 @@ func validateOpCreateInputInput(v *CreateInputInput) error {
 	if v.MulticastSettings != nil {
 		if err := validateMulticastSettingsCreateRequest(v.MulticastSettings); err != nil {
 			invalidParams.AddNested("MulticastSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RouterSettings != nil {
+		if err := validateRouterSettings(v.RouterSettings); err != nil {
+			invalidParams.AddNested("RouterSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

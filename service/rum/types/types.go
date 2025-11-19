@@ -51,6 +51,10 @@ type AppMonitor struct {
 	// The name of the app monitor.
 	Name *string
 
+	// The platform type for this app monitor. Valid values are Web for web
+	// applications , Android for Android applications, and iOS for IOS applications.
+	Platform AppMonitorPlatform
+
 	// The current state of the app monitor.
 	State StateEnum
 
@@ -177,6 +181,10 @@ type AppMonitorSummary struct {
 
 	// The name of this app monitor.
 	Name *string
+
+	// The platform type for this app monitor. Valid values are Web for web
+	// applications, Android for Android applications, and iOS for IOS applications.
+	Platform AppMonitorPlatform
 
 	// The current state of this app monitor.
 	State StateEnum

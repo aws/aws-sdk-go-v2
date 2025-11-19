@@ -297,6 +297,11 @@ func validateContentBlock(v types.ContentBlock) error {
 			invalidParams.AddNested("[reasoningContent]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ContentBlockMemberSearchResult:
+		if err := validateSearchResultBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[searchResult]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberToolResult:
 		if err := validateToolResultBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolResult]", err.(smithy.InvalidParamsError))
@@ -745,6 +750,68 @@ func validateS3Location(v *types.S3Location) error {
 	}
 }
 
+func validateSearchResultBlock(v *types.SearchResultBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchResultBlock"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateSearchResultContentBlocks(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Citations != nil {
+		if err := validateCitationsConfig(v.Citations); err != nil {
+			invalidParams.AddNested("Citations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchResultContentBlock(v *types.SearchResultContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchResultContentBlock"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchResultContentBlocks(v []types.SearchResultContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchResultContentBlocks"}
+	for i := range v {
+		if err := validateSearchResultContentBlock(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceTier(v *types.ServiceTier) error {
 	if v == nil {
 		return nil
@@ -974,6 +1041,11 @@ func validateToolResultContentBlock(v types.ToolResultContentBlock) error {
 	case *types.ToolResultContentBlockMemberImage:
 		if err := validateImageBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ToolResultContentBlockMemberSearchResult:
+		if err := validateSearchResultBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[searchResult]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ToolResultContentBlockMemberVideo:

@@ -1341,6 +1341,10 @@ type RuleGroupMetadata struct {
 	// group after you create it.
 	Name *string
 
+	// The name of the Amazon Web Services Marketplace seller that provides this rule
+	// group.
+	VendorName *string
+
 	noSmithyDocumentSerde
 }
 

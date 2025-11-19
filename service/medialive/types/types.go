@@ -3936,6 +3936,9 @@ type Input struct {
 	// creation.
 	RoleArn *string
 
+	// Information about any MediaConnect router association with this input.
+	RouterSettings *RouterInputSettings
+
 	// SDI Sources for this Input.
 	SdiSources []string
 
@@ -6728,6 +6731,67 @@ type RouteCreateRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Placeholder documentation for RouterDestination
+type RouterDestination struct {
+
+	// The Availability Zone (AZ) names of the AZs this destination is created in.
+	AvailabilityZoneName *string
+
+	// ARN of the output from MediaConnect Router currently connected to this input.
+	RouterOutputArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for RouterDestinationSettings
+type RouterDestinationSettings struct {
+
+	// Availability Zone for this MediaConnect Router destination.
+	//
+	// This member is required.
+	AvailabilityZoneName *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings for a MediaConnect Router Input.
+type RouterInputSettings struct {
+
+	// MediaConnect Router destinations associated with the MediaLive Input.
+	Destinations []RouterDestination
+
+	// Encryption configuration for MediaConnect router. When using SECRETS_MANAGER
+	// encryption, you must provide the ARN of the secret used to encrypt data in
+	// transit. When using AUTOMATIC encryption, a service-managed secret will be used
+	// instead.
+	EncryptionType RouterEncryptionType
+
+	// ARN of the secret used to encrypt this input.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// This is the collection of settings that are used during the creation of a
+// MediaConnect router input.
+type RouterSettings struct {
+
+	// Destinations for the input from MediaConnect Router. Provide one for a
+	// single-pipeline input and two for a standard input.
+	Destinations []RouterDestinationSettings
+
+	// Encryption configuration for MediaConnect router. When using SECRETS_MANAGER
+	// encryption, you must provide the ARN of the secret used to encrypt data in
+	// transit. When using AUTOMATIC encryption, a service-managed secret will be used
+	// instead.
+	EncryptionType RouterEncryptionType
+
+	// ARN of the secret used to encrypt this input.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Used in UpdateNetworkRequest.
 type RouteUpdateRequest struct {
 
@@ -7367,6 +7431,19 @@ type Smpte2110ReceiverGroupSettings struct {
 
 // Smpte Tt Destination Settings
 type SmpteTtDestinationSettings struct {
+	noSmithyDocumentSerde
+}
+
+// When using MediaConnect Router as the source of a MediaLive input there's a
+// special handoff that occurs when a router output is created. This group of
+// settings is set on your behalf by the MediaConnect Router service using this set
+// of settings. This setting object can only by used by that service.
+type SpecialRouterSettings struct {
+
+	// This is the arn of the MediaConnect Router resource being associated with the
+	// MediaLive Input.
+	RouterArn *string
+
 	noSmithyDocumentSerde
 }
 

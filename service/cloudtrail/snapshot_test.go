@@ -458,6 +458,18 @@ func TestCheckSnapshot_ListImports(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInsightsData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInsightsData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInsightsData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListInsightsMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInsightsMetricData(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1170,18 @@ func TestUpdateSnapshot_ListImports(t *testing.T) {
 	_, err := svc.ListImports(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListImports")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInsightsData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInsightsData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInsightsData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

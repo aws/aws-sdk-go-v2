@@ -85,6 +85,13 @@ type UpdateFlowSourceInput struct {
 	// reference is maintained for legacy purposes only.
 	Protocol types.Protocol
 
+	// Indicates whether to enable or disable router integration for this flow source.
+	RouterIntegrationState types.State
+
+	// The encryption configuration for the flow source when router integration is
+	// enabled.
+	RouterIntegrationTransitDecryption *types.FlowTransitEncryption
+
 	// The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32

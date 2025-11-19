@@ -1099,6 +1099,7 @@ const (
 	ErrorCodeAccountIsIsolated                     ErrorCode = "ACCOUNT_IS_ISOLATED"
 	ErrorCodeEc2SsmResourceDataSyncLimitExceeded   ErrorCode = "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED"
 	ErrorCodeEc2SsmAssociationVersionLimitExceeded ErrorCode = "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
+	ErrorCodeBlockedByOrganizationPolicy           ErrorCode = "BLOCKED_BY_ORGANIZATION_POLICY"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
@@ -1123,6 +1124,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"ACCOUNT_IS_ISOLATED",
 		"EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED",
 		"EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED",
+		"BLOCKED_BY_ORGANIZATION_POLICY",
 	}
 }
 
@@ -2084,6 +2086,7 @@ const (
 	ScanStatusReasonUnsupportedLanguage                          ScanStatusReason = "UNSUPPORTED_LANGUAGE"
 	ScanStatusReasonNoScanConfigurationAssociated                ScanStatusReason = "NO_SCAN_CONFIGURATION_ASSOCIATED"
 	ScanStatusReasonScanInProgress                               ScanStatusReason = "SCAN_IN_PROGRESS"
+	ScanStatusReasonImageArchived                                ScanStatusReason = "IMAGE_ARCHIVED"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -2124,6 +2127,7 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"UNSUPPORTED_LANGUAGE",
 		"NO_SCAN_CONFIGURATION_ASSOCIATED",
 		"SCAN_IN_PROGRESS",
+		"IMAGE_ARCHIVED",
 	}
 }
 

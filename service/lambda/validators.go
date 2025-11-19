@@ -1587,6 +1587,21 @@ func validateFileSystemConfigList(v []types.FileSystemConfig) error {
 	}
 }
 
+func validateTenancyConfig(v *types.TenancyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TenancyConfig"}
+	if len(v.TenantIsolationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantIsolationMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddLayerVersionPermissionInput(v *AddLayerVersionPermissionInput) error {
 	if v == nil {
 		return nil
@@ -1715,6 +1730,11 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.EphemeralStorage != nil {
 		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
 			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TenancyConfig != nil {
+		if err := validateTenancyConfig(v.TenancyConfig); err != nil {
+			invalidParams.AddNested("TenancyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -98,9 +98,10 @@ type CreateTrailInput struct {
 	// account for an organization in Organizations.
 	IsOrganizationTrail *bool
 
-	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail.
-	// The value can be an alias name prefixed by alias/ , a fully specified ARN to an
-	// alias, a fully specified ARN to a key, or a globally unique identifier.
+	// Specifies the KMS key ID to use to encrypt the logs and digest files delivered
+	// by CloudTrail. The value can be an alias name prefixed by alias/ , a fully
+	// specified ARN to an alias, a fully specified ARN to a key, or a globally unique
+	// identifier.
 	//
 	// CloudTrail also supports KMS multi-Region keys. For more information about
 	// multi-Region keys, see [Using multi-Region keys]in the Key Management Service Developer Guide.

@@ -1085,6 +1085,11 @@ func validateCreateFileSystemWindowsConfiguration(v *types.CreateFileSystemWindo
 			invalidParams.AddNested("AuditLogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FsrmConfiguration != nil {
+		if err := validateWindowsFsrmConfiguration(v.FsrmConfiguration); err != nil {
+			invalidParams.AddNested("FsrmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1638,6 +1643,11 @@ func validateUpdateFileSystemWindowsConfiguration(v *types.UpdateFileSystemWindo
 			invalidParams.AddNested("AuditLogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FsrmConfiguration != nil {
+		if err := validateWindowsFsrmConfiguration(v.FsrmConfiguration); err != nil {
+			invalidParams.AddNested("FsrmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1716,6 +1726,21 @@ func validateWindowsAuditLogCreateConfiguration(v *types.WindowsAuditLogCreateCo
 	}
 	if len(v.FileShareAccessAuditLogLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FileShareAccessAuditLogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWindowsFsrmConfiguration(v *types.WindowsFsrmConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WindowsFsrmConfiguration"}
+	if v.FsrmServiceEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FsrmServiceEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

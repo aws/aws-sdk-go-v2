@@ -35,8 +35,15 @@ type UpdateBillScenarioInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
 	//  The new expiration date for the bill scenario.
 	ExpiresAt *time.Time
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
 
 	//  The new name for the bill scenario.
 	Name *string
@@ -54,6 +61,9 @@ type UpdateBillScenarioOutput struct {
 	//  The time period covered by the updated bill scenario.
 	BillInterval *types.BillInterval
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
 	//  The timestamp when the bill scenario was originally created.
 	CreatedAt *time.Time
 
@@ -62,6 +72,10 @@ type UpdateBillScenarioOutput struct {
 
 	//  An error message if the bill scenario update failed.
 	FailureMessage *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
 
 	//  The updated name of the bill scenario.
 	Name *string

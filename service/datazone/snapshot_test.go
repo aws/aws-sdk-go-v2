@@ -134,6 +134,30 @@ func TestCheckSnapshot_AssociateGovernedTerms(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetAttributesMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetAttributesMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetAttributesMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchPutAttributesMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutAttributesMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchPutAttributesMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelMetadataGenerationRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelMetadataGenerationRun(context.Background(), nil, func(o *Options) {
@@ -2030,6 +2054,18 @@ func TestCheckSnapshot_UpdateProjectProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRootDomainUnitOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRootDomainUnitOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRootDomainUnitOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRule(context.Background(), nil, func(o *Options) {
@@ -2154,6 +2190,30 @@ func TestUpdateSnapshot_AssociateGovernedTerms(t *testing.T) {
 	_, err := svc.AssociateGovernedTerms(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateGovernedTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetAttributesMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetAttributesMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetAttributesMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchPutAttributesMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutAttributesMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchPutAttributesMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4050,6 +4110,18 @@ func TestUpdateSnapshot_UpdateProjectProfile(t *testing.T) {
 	_, err := svc.UpdateProjectProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateProjectProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRootDomainUnitOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRootDomainUnitOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRootDomainUnitOwner")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "f259b906-5102-40d0-a2ef-267c509dcb19",
+    "type": "feature",
+    "description": "Partner Managed Rulegroup feature support",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

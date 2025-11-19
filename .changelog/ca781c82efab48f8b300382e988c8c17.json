@@ -1,0 +1,8 @@
+{
+    "id": "ca781c82-efab-48f8-b300-382e988c8c17",
+    "type": "feature",
+    "description": "Added support for enhanced metrics for SageMaker AI Endpoints. This features provides Utilization Metrics at instance and container granularity and also provides easy configuration of metric publish frequency from 10 sec -\u003e 5 mins",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

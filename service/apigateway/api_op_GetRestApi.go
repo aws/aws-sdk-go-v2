@@ -48,6 +48,13 @@ type GetRestApiOutput struct {
 	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
+	// The ApiStatus of the RestApi.
+	ApiStatus types.ApiStatus
+
+	//  The status message of the RestApi. When the status message is UPDATING you can
+	// still invoke it.
+	ApiStatusMessage *string
+
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string
@@ -64,6 +71,9 @@ type GetRestApiOutput struct {
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
 	DisableExecuteApiEndpoint bool
+
+	//  The endpoint access mode of the RestApi.
+	EndpointAccessMode types.EndpointAccessMode
 
 	// The endpoint configuration of this RestApi showing the endpoint types and IP
 	// address types of the API.
@@ -89,6 +99,9 @@ type GetRestApiOutput struct {
 
 	// The API's root resource ID.
 	RootResourceId *string
+
+	//  The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string

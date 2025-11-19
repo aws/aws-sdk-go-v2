@@ -152,6 +152,12 @@ type Filters struct {
 	// receiver or the linked accounts in the rules.
 	Accounts []string
 
+	//  A list of Amazon Web Services account account IDs used to filter invoice
+	// units. These are payer accounts from other Organizations that have delegated
+	// their billing responsibility to the receiver account through the billing
+	// transfer feature.
+	BillSourceAccounts []string
+
 	//  You can specify a list of Amazon Web Services account IDs inside filters to
 	// return invoice units that match only the specified accounts. If multiple
 	// accounts are provided, the result is an OR condition (match any) of the
@@ -341,6 +347,12 @@ type InvoiceUnit struct {
 //
 // account IDs. Currently, the only supported rule is LINKED_ACCOUNT .
 type InvoiceUnitRule struct {
+
+	//  A list of Amazon Web Services account account IDs that have delegated their
+	// billing responsibility to the receiver account through transfer billing. Unlike
+	// linked accounts, these bill source accounts can be payer accounts from other
+	// organizations that have authorized billing transfer to this account.
+	BillSourceAccounts []string
 
 	// The list of LINKED_ACCOUNT IDs where charges are included within the invoice
 	// unit.

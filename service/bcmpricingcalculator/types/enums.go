@@ -225,6 +225,27 @@ func (CurrencyCode) Values() []CurrencyCode {
 	}
 }
 
+type GroupSharingPreferenceEnum string
+
+// Enum values for GroupSharingPreferenceEnum
+const (
+	GroupSharingPreferenceEnumOpen        GroupSharingPreferenceEnum = "OPEN"
+	GroupSharingPreferenceEnumPrioritized GroupSharingPreferenceEnum = "PRIORITIZED"
+	GroupSharingPreferenceEnumRestricted  GroupSharingPreferenceEnum = "RESTRICTED"
+)
+
+// Values returns all known values for GroupSharingPreferenceEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupSharingPreferenceEnum) Values() []GroupSharingPreferenceEnum {
+	return []GroupSharingPreferenceEnum{
+		"OPEN",
+		"PRIORITIZED",
+		"RESTRICTED",
+	}
+}
+
 type ListBillEstimateLineItemsFilterName string
 
 // Enum values for ListBillEstimateLineItemsFilterName
@@ -276,8 +297,10 @@ type ListBillScenariosFilterName string
 
 // Enum values for ListBillScenariosFilterName
 const (
-	ListBillScenariosFilterNameStatus ListBillScenariosFilterName = "STATUS"
-	ListBillScenariosFilterNameName   ListBillScenariosFilterName = "NAME"
+	ListBillScenariosFilterNameStatus                 ListBillScenariosFilterName = "STATUS"
+	ListBillScenariosFilterNameName                   ListBillScenariosFilterName = "NAME"
+	ListBillScenariosFilterNameGroupSharingPreference ListBillScenariosFilterName = "GROUP_SHARING_PREFERENCE"
+	ListBillScenariosFilterNameCostCategoryArn        ListBillScenariosFilterName = "COST_CATEGORY_ARN"
 )
 
 // Values returns all known values for ListBillScenariosFilterName. Note that this
@@ -288,6 +311,8 @@ func (ListBillScenariosFilterName) Values() []ListBillScenariosFilterName {
 	return []ListBillScenariosFilterName{
 		"STATUS",
 		"NAME",
+		"GROUP_SHARING_PREFERENCE",
+		"COST_CATEGORY_ARN",
 	}
 }
 

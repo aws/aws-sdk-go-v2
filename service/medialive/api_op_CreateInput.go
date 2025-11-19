@@ -63,6 +63,10 @@ type CreateInputInput struct {
 	// creation.
 	RoleArn *string
 
+	// This is the collection of settings that are used during the creation of a
+	// MediaConnect router input.
+	RouterSettings *types.RouterSettings
+
 	// SDI Sources for this Input.
 	SdiSources []string
 

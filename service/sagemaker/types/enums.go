@@ -4421,6 +4421,26 @@ func (ManagedInstanceScalingStatus) Values() []ManagedInstanceScalingStatus {
 	}
 }
 
+type MetricPublishFrequencyInSeconds = int32
+
+// Enum values for MetricPublishFrequencyInSeconds
+const (
+	// Metrics publishing at 10 seconds frequency
+	MetricPublishFrequencyInSecondsFreq10S MetricPublishFrequencyInSeconds = 10
+	// Metrics publishing at 30 seconds frequency
+	MetricPublishFrequencyInSecondsFreq30S MetricPublishFrequencyInSeconds = 30
+	// Metrics publishing at 60 seconds frequency
+	MetricPublishFrequencyInSecondsFreq60S MetricPublishFrequencyInSeconds = 60
+	// Metrics publishing at 120 seconds frequency
+	MetricPublishFrequencyInSecondsFreq120S MetricPublishFrequencyInSeconds = 120
+	// Metrics publishing at 180 seconds frequency
+	MetricPublishFrequencyInSecondsFreq180S MetricPublishFrequencyInSeconds = 180
+	// Metrics publishing at 240 seconds frequency
+	MetricPublishFrequencyInSecondsFreq240S MetricPublishFrequencyInSeconds = 240
+	// Metrics publishing at 300 seconds frequency
+	MetricPublishFrequencyInSecondsFreq300S MetricPublishFrequencyInSeconds = 300
+)
+
 type MetricSetSource string
 
 // Enum values for MetricSetSource

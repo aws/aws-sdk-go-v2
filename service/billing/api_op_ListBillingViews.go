@@ -50,6 +50,10 @@ type ListBillingViewsInput struct {
 	// The maximum number of billing views to retrieve. Default is 100.
 	MaxResults *int32
 
+	//  Filters the list of billing views by name. You can specify search criteria to
+	// match billing view names based on the search option provided.
+	Names []types.StringSearch
+
 	// The pagination token that is used on subsequent calls to list billing views.
 	NextToken *string
 

@@ -402,6 +402,9 @@ type DomainName struct {
 	// DomainName migration.
 	DomainNameStatusMessage *string
 
+	//  The endpoint access mode of the DomainName.
+	EndpointAccessMode EndpointAccessMode
+
 	// The endpoint configuration of this DomainName showing the endpoint types and IP
 	// address types of the domain name.
 	EndpointConfiguration *EndpointConfiguration
@@ -452,7 +455,6 @@ type DomainName struct {
 	RoutingMode RoutingMode
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
@@ -617,6 +619,9 @@ type Integration struct {
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
 	RequestTemplates map[string]string
+
+	//  The response transfer mode of the integration.
+	ResponseTransferMode ResponseTransferMode
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds. You can increase the default value to longer than 29
@@ -1047,6 +1052,13 @@ type RestApi struct {
 	// custom authorizer.
 	ApiKeySource ApiKeySourceType
 
+	// The ApiStatus of the RestApi.
+	ApiStatus ApiStatus
+
+	//  The status message of the RestApi. When the status message is UPDATING you can
+	// still invoke it.
+	ApiStatusMessage *string
+
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string
@@ -1063,6 +1075,9 @@ type RestApi struct {
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
 	DisableExecuteApiEndpoint bool
+
+	//  The endpoint access mode of the RestApi.
+	EndpointAccessMode EndpointAccessMode
 
 	// The endpoint configuration of this RestApi showing the endpoint types and IP
 	// address types of the API.
@@ -1088,6 +1103,9 @@ type RestApi struct {
 
 	// The API's root resource ID.
 	RootResourceId *string
+
+	//  The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+	SecurityPolicy SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string

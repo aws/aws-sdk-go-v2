@@ -5,6 +5,7 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -24,6 +25,26 @@ func (m *validateOpGetRecommendation) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEfficiencyMetrics struct {
+}
+
+func (*validateOpListEfficiencyMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEfficiencyMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEfficiencyMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEfficiencyMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -73,12 +94,34 @@ func addOpGetRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRecommendation{}, middleware.After)
 }
 
+func addOpListEfficiencyMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEfficiencyMetrics{}, middleware.After)
+}
+
 func addOpListRecommendationSummariesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRecommendationSummaries{}, middleware.After)
 }
 
 func addOpUpdateEnrollmentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnrollmentStatus{}, middleware.After)
+}
+
+func validateTimePeriod(v *types.TimePeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimePeriod"}
+	if v.Start == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Start"))
+	}
+	if v.End == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("End"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpGetRecommendationInput(v *GetRecommendationInput) error {
@@ -88,6 +131,28 @@ func validateOpGetRecommendationInput(v *GetRecommendationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetRecommendationInput"}
 	if v.RecommendationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEfficiencyMetricsInput(v *ListEfficiencyMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEfficiencyMetricsInput"}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
+	if v.TimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
+	} else if v.TimePeriod != nil {
+		if err := validateTimePeriod(v.TimePeriod); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

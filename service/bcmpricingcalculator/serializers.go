@@ -3373,6 +3373,16 @@ func awsAwsjson10_serializeOpDocumentCreateBillScenarioInput(v *CreateBillScenar
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CostCategoryGroupSharingPreferenceArn != nil {
+		ok := object.Key("costCategoryGroupSharingPreferenceArn")
+		ok.String(*v.CostCategoryGroupSharingPreferenceArn)
+	}
+
+	if len(v.GroupSharingPreference) > 0 {
+		ok := object.Key("groupSharingPreference")
+		ok.String(string(v.GroupSharingPreference))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3868,9 +3878,19 @@ func awsAwsjson10_serializeOpDocumentUpdateBillScenarioInput(v *UpdateBillScenar
 	object := value.Object()
 	defer object.Close()
 
+	if v.CostCategoryGroupSharingPreferenceArn != nil {
+		ok := object.Key("costCategoryGroupSharingPreferenceArn")
+		ok.String(*v.CostCategoryGroupSharingPreferenceArn)
+	}
+
 	if v.ExpiresAt != nil {
 		ok := object.Key("expiresAt")
 		ok.Double(smithytime.FormatEpochSeconds(*v.ExpiresAt))
+	}
+
+	if len(v.GroupSharingPreference) > 0 {
+		ok := object.Key("groupSharingPreference")
+		ok.String(string(v.GroupSharingPreference))
 	}
 
 	if v.Identifier != nil {

@@ -57,6 +57,9 @@ func ExampleCitationLocation_outputUsage() {
 	case *types.CitationLocationMemberDocumentPage:
 		_ = v.Value // Value is types.DocumentPageLocation
 
+	case *types.CitationLocationMemberSearchResultLocation:
+		_ = v.Value // Value is types.SearchResultLocation
+
 	case *types.CitationLocationMemberWeb:
 		_ = v.Value // Value is types.WebLocation
 
@@ -73,6 +76,7 @@ var _ *types.DocumentPageLocation
 var _ *types.DocumentCharLocation
 var _ *types.WebLocation
 var _ *types.DocumentChunkLocation
+var _ *types.SearchResultLocation
 
 func ExampleCitationSourceContent_outputUsage() {
 	var union types.CitationSourceContent
@@ -114,6 +118,9 @@ func ExampleContentBlock_outputUsage() {
 	case *types.ContentBlockMemberReasoningContent:
 		_ = v.Value // Value is types.ReasoningContentBlock
 
+	case *types.ContentBlockMemberSearchResult:
+		_ = v.Value // Value is types.SearchResultBlock
+
 	case *types.ContentBlockMemberText:
 		_ = v.Value // Value is string
 
@@ -136,6 +143,7 @@ func ExampleContentBlock_outputUsage() {
 }
 
 var _ *types.CitationsContentBlock
+var _ *types.SearchResultBlock
 var _ *types.DocumentBlock
 var _ *string
 var _ types.ReasoningContentBlock
@@ -682,6 +690,9 @@ func ExampleToolResultContentBlock_outputUsage() {
 	case *types.ToolResultContentBlockMemberJson:
 		_ = v.Value // Value is document.Interface
 
+	case *types.ToolResultContentBlockMemberSearchResult:
+		_ = v.Value // Value is types.SearchResultBlock
+
 	case *types.ToolResultContentBlockMemberText:
 		_ = v.Value // Value is string
 
@@ -697,6 +708,7 @@ func ExampleToolResultContentBlock_outputUsage() {
 	}
 }
 
+var _ *types.SearchResultBlock
 var _ *types.DocumentBlock
 var _ *string
 var _ document.Interface

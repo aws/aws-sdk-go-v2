@@ -163,6 +163,26 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
+//	A structure that defines how to search for string values. You can specify a
+//
+// search option and the value to search for.
+type StringSearch struct {
+
+	//  The type of search operation to perform on the string value. Determines how
+	// the search value is matched against the target field.
+	//
+	// This member is required.
+	SearchOption SearchOption
+
+	//  The string value to use in the search operation. This value is compared
+	// against the target field using the specified search option.
+	//
+	// This member is required.
+	SearchValue *string
+
+	noSmithyDocumentSerde
+}
+
 // The values that are available for a tag.
 type TagValues struct {
 

@@ -90,6 +90,29 @@ func (EnrollmentStatus) Values() []EnrollmentStatus {
 	}
 }
 
+type GranularityType string
+
+// Enum values for GranularityType
+const (
+	// Metrics are aggregated daily, with each data point representing a single day's
+	// worth of efficiency data. Timestamps are formatted as YYYY-MM-DD.
+	GranularityTypeDaily GranularityType = "Daily"
+	// Metrics are aggregated monthly, with each data point representing a full
+	// month's worth of efficiency data. Timestamps are formatted as YYYY-MM.
+	GranularityTypeMonthly GranularityType = "Monthly"
+)
+
+// Values returns all known values for GranularityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GranularityType) Values() []GranularityType {
+	return []GranularityType{
+		"Daily",
+		"Monthly",
+	}
+}
+
 type ImplementationEffort string
 
 // Enum values for ImplementationEffort

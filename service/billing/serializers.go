@@ -886,6 +886,36 @@ func awsAwsjson10_serializeDocumentResourceTagList(v []types.ResourceTag, value 
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentStringSearch(v *types.StringSearch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SearchOption) > 0 {
+		ok := object.Key("searchOption")
+		ok.String(string(v.SearchOption))
+	}
+
+	if v.SearchValue != nil {
+		ok := object.Key("searchValue")
+		ok.String(*v.SearchValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStringSearches(v []types.StringSearch, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentStringSearch(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTagValues(v *types.TagValues, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1083,6 +1113,13 @@ func awsAwsjson10_serializeOpDocumentListBillingViewsInput(v *ListBillingViewsIn
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Names != nil {
+		ok := object.Key("names")
+		if err := awsAwsjson10_serializeDocumentStringSearches(v.Names, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NextToken != nil {

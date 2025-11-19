@@ -11838,6 +11838,21 @@ type MetricDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for Utilization metrics.
+type MetricsConfig struct {
+
+	// Specifies whether to enable enhanced metrics for the endpoint. Enhanced metrics
+	// provide utilization data at instance and container granularity. Container
+	// granularity is supported for Inference Components. The default is False .
+	EnableEnhancedMetrics *bool
+
+	// The frequency, in seconds, at which utilization metrics are published to Amazon
+	// CloudWatch. The default is 60 seconds.
+	MetricPublishFrequencyInSeconds MetricPublishFrequencyInSeconds
+
+	noSmithyDocumentSerde
+}
+
 // An object containing information about a metric.
 //
 // The following types satisfy this interface:
@@ -17545,37 +17560,6 @@ type ResourceCatalog struct {
 // ML storage volumes, to use for model training.
 type ResourceConfig struct {
 
-	// The size of the ML storage volume that you want to provision.
-	//
-	// ML storage volumes store model artifacts and incremental states. Training
-	// algorithms might also use the ML storage volume for scratch space. If you want
-	// to store the training data in the ML storage volume, choose File as the
-	// TrainingInputMode in the algorithm specification.
-	//
-	// When using an ML instance with [NVMe SSD volumes], SageMaker doesn't provision Amazon EBS General
-	// Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type
-	// instance's storage capacity. SageMaker configures storage paths for training
-	// datasets, checkpoints, model artifacts, and outputs to use the entire capacity
-	// of the instance storage. For example, ML instance families with the NVMe-type
-	// instance storage include ml.p4d , ml.g4dn , and ml.g5 .
-	//
-	// When using an ML instance with the EBS-only storage option and without instance
-	// storage, you must define the size of EBS volume through VolumeSizeInGB in the
-	// ResourceConfig API. For example, ML instance families that use EBS volumes
-	// include ml.c5 and ml.p2 .
-	//
-	// To look up instance types and their instance storage types and volumes, see [Amazon EC2 Instance Types].
-	//
-	// To find the default local paths defined by the SageMaker training platform, see [Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs]
-	// .
-	//
-	// [NVMe SSD volumes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes
-	// [Amazon EC2 Instance Types]: http://aws.amazon.com/ec2/instance-types/
-	// [Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html
-	//
-	// This member is required.
-	VolumeSizeInGB *int32
-
 	// The number of ML compute instances to use. For distributed training, provide a
 	// value greater than 1.
 	InstanceCount *int32
@@ -17623,6 +17607,35 @@ type ResourceConfig struct {
 	// [SSD Instance Store Volumes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
 	// [Instance Store Volumes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
 	VolumeKmsKeyId *string
+
+	// The size of the ML storage volume that you want to provision.
+	//
+	// ML storage volumes store model artifacts and incremental states. Training
+	// algorithms might also use the ML storage volume for scratch space. If you want
+	// to store the training data in the ML storage volume, choose File as the
+	// TrainingInputMode in the algorithm specification.
+	//
+	// When using an ML instance with [NVMe SSD volumes], SageMaker doesn't provision Amazon EBS General
+	// Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type
+	// instance's storage capacity. SageMaker configures storage paths for training
+	// datasets, checkpoints, model artifacts, and outputs to use the entire capacity
+	// of the instance storage. For example, ML instance families with the NVMe-type
+	// instance storage include ml.p4d , ml.g4dn , and ml.g5 .
+	//
+	// When using an ML instance with the EBS-only storage option and without instance
+	// storage, you must define the size of EBS volume through VolumeSizeInGB in the
+	// ResourceConfig API. For example, ML instance families that use EBS volumes
+	// include ml.c5 and ml.p2 .
+	//
+	// To look up instance types and their instance storage types and volumes, see [Amazon EC2 Instance Types].
+	//
+	// To find the default local paths defined by the SageMaker training platform, see [Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs]
+	// .
+	//
+	// [NVMe SSD volumes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes
+	// [Amazon EC2 Instance Types]: http://aws.amazon.com/ec2/instance-types/
+	// [Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -17749,13 +17762,14 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the mapping between an in-app role and the AWS IAM Identity Center
-// group patterns that should be assigned to that role within the SageMaker Partner
-// AI App.
+// Defines the mapping between an in-app role and the Amazon Web Services IAM
+// Identity Center group patterns that should be assigned to that role within the
+// SageMaker Partner AI App.
 type RoleGroupAssignment struct {
 
-	// A list of AWS IAM Identity Center group patterns that should be assigned to the
-	// specified role. Group patterns support wildcard matching using * .
+	// A list of Amazon Web Services IAM Identity Center group patterns that should be
+	// assigned to the specified role. Group patterns support wildcard matching using *
+	// .
 	//
 	// This member is required.
 	GroupPatterns []string

@@ -934,6 +934,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		}
 	}
 
+	if v.TenancyConfig != nil {
+		ok := object.Key("TenancyConfig")
+		if err := awsRestjson1_serializeDocumentTenancyConfig(v.TenancyConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Timeout != nil {
 		ok := object.Key("Timeout")
 		ok.Integer(*v.Timeout)
@@ -3153,6 +3160,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeInput(v *InvokeInput, encoder *ht
 		encoder.SetQuery("Qualifier").String(*v.Qualifier)
 	}
 
+	if v.TenantId != nil {
+		locationName := "X-Amz-Tenant-Id"
+		encoder.SetHeader(locationName).String(*v.TenantId)
+	}
+
 	return nil
 }
 
@@ -3336,6 +3348,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeWithResponseStreamInput(v *Invoke
 
 	if v.Qualifier != nil {
 		encoder.SetQuery("Qualifier").String(*v.Qualifier)
+	}
+
+	if v.TenantId != nil {
+		locationName := "X-Amz-Tenant-Id"
+		encoder.SetHeader(locationName).String(*v.TenantId)
 	}
 
 	return nil
@@ -7272,6 +7289,18 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTenancyConfig(v *types.TenancyConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TenantIsolationMode) > 0 {
+		ok := object.Key("TenantIsolationMode")
+		ok.String(string(v.TenantIsolationMode))
+	}
+
 	return nil
 }
 

@@ -1343,6 +1343,21 @@ func validateCloudWatchAlarmDefinition(v *types.CloudWatchAlarmDefinition) error
 	}
 }
 
+func validateCloudWatchLogConfiguration(v *types.CloudWatchLogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogConfiguration"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComputeLimits(v *types.ComputeLimits) error {
 	if v == nil {
 		return nil
@@ -1696,6 +1711,23 @@ func validateManagedScalingPolicy(v *types.ManagedScalingPolicy) error {
 	if v.ComputeLimits != nil {
 		if err := validateComputeLimits(v.ComputeLimits); err != nil {
 			invalidParams.AddNested("ComputeLimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoringConfiguration"}
+	if v.CloudWatchLogConfiguration != nil {
+		if err := validateCloudWatchLogConfiguration(v.CloudWatchLogConfiguration); err != nil {
+			invalidParams.AddNested("CloudWatchLogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2746,6 +2778,11 @@ func validateOpRunJobFlowInput(v *RunJobFlowInput) error {
 	if v.PlacementGroupConfigs != nil {
 		if err := validatePlacementGroupConfigList(v.PlacementGroupConfigs); err != nil {
 			invalidParams.AddNested("PlacementGroupConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

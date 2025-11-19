@@ -100,7 +100,11 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
 	//
+	//   - For Network Load Balancer, the valid value is NLB_ACCESS_LOGS .
+	//
 	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS and PCS_JOBCOMP_LOGS .
+	//
+	//   - For Amazon Web Services RTB Fabric, the valid values is APPLICATION_LOGS .
 	//
 	//   - For Amazon Q, the valid values are EVENT_LOGS and SYNC_JOB_LOGS .
 	//

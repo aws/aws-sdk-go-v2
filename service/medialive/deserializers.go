@@ -9203,6 +9203,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInputOutput(v **DescribeInputOutp
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "routerSettings":
+			if err := awsRestjson1_deserializeDocumentRouterInputSettings(&sv.RouterSettings, value); err != nil {
+				return err
+			}
+
 		case "sdiSources":
 			if err := awsRestjson1_deserializeDocumentInputSdiSources(&sv.SdiSources, value); err != nil {
 				return err
@@ -27443,6 +27448,40 @@ func awsRestjson1_deserializeDocument__listOfRoute(v *[]types.Route, value inter
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfRouterDestination(v *[]types.RouterDestination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouterDestination
+	if *v == nil {
+		cv = []types.RouterDestination{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouterDestination
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouterDestination(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfRtmpAdMarkers(v *[]types.RtmpAdMarkers, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38307,6 +38346,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "routerSettings":
+			if err := awsRestjson1_deserializeDocumentRouterInputSettings(&sv.RouterSettings, value); err != nil {
+				return err
+			}
+
 		case "sdiSources":
 			if err := awsRestjson1_deserializeDocumentInputSdiSources(&sv.SdiSources, value); err != nil {
 				return err
@@ -46044,6 +46088,109 @@ func awsRestjson1_deserializeDocumentRoute(v **types.Route, value interface{}) e
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Gateway = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouterDestination(v **types.RouterDestination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouterDestination
+	if *v == nil {
+		sv = &types.RouterDestination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "availabilityZoneName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZoneName = ptr.String(jtv)
+			}
+
+		case "routerOutputArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RouterOutputArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouterInputSettings(v **types.RouterInputSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouterInputSettings
+	if *v == nil {
+		sv = &types.RouterInputSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "destinations":
+			if err := awsRestjson1_deserializeDocument__listOfRouterDestination(&sv.Destinations, value); err != nil {
+				return err
+			}
+
+		case "encryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouterEncryptionType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = types.RouterEncryptionType(jtv)
+			}
+
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
 			}
 
 		default:

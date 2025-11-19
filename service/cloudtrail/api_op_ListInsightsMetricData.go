@@ -30,9 +30,19 @@ import (
 //   - Data points with a period of 3600 seconds (1 hour) are available for 90
 //     days.
 //
-// Access to the ListInsightsMetricData API operation is linked to the
-// cloudtrail:LookupEvents action. To use this operation, you must have permissions
-// to perform the cloudtrail:LookupEvents action.
+// To use ListInsightsMetricData operation, you must have the following
+// permissions:
+//
+//   - If ListInsightsMetricData is invoked with TrailName parameter, access to the
+//     ListInsightsMetricData API operation is linked to the cloudtrail:LookupEvents
+//     action and cloudtrail:ListInsightsData . To use this operation, you must have
+//     permissions to perform the cloudtrail:LookupEvents and
+//     cloudtrail:ListInsightsData action on the specific trail.
+//
+//   - If ListInsightsMetricData is invoked without TrailName parameter, access to
+//     the ListInsightsMetricData API operation is linked to the
+//     cloudtrail:LookupEvents action only. To use this operation, you must have
+//     permissions to perform the cloudtrail:LookupEvents action.
 func (c *Client) ListInsightsMetricData(ctx context.Context, params *ListInsightsMetricDataInput, optFns ...func(*Options)) (*ListInsightsMetricDataOutput, error) {
 	if params == nil {
 		params = &ListInsightsMetricDataInput{}
@@ -110,6 +120,13 @@ type ListInsightsMetricDataInput struct {
 	// The default is 90 days before the time of request.
 	StartTime *time.Time
 
+	// The Amazon Resource Name(ARN) or name of the trail for which you want to
+	// retrieve Insights metrics data. This parameter should only be provided to fetch
+	// Insights metrics data generated on trails logging data events. This parameter is
+	// not required for Insights metric data generated on trails logging management
+	// events.
+	TrailName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -143,6 +160,10 @@ type ListInsightsMetricDataOutput struct {
 
 	// List of timestamps at intervals corresponding to the specified time period.
 	Timestamps []time.Time
+
+	// Specifies the ARN of the trail. This is only returned when Insights is enabled
+	// on a trail logging data events.
+	TrailARN *string
 
 	// List of values representing the API call rate or error rate at each timestamp.
 	// The number of values is equal to the number of timestamps.

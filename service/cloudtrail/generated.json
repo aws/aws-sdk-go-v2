@@ -41,6 +41,7 @@
         "api_op_ListEventDataStores.go",
         "api_op_ListImportFailures.go",
         "api_op_ListImports.go",
+        "api_op_ListInsightsData.go",
         "api_op_ListInsightsMetricData.go",
         "api_op_ListPublicKeys.go",
         "api_op_ListQueries.go",

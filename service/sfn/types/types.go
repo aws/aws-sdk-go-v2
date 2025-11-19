@@ -416,7 +416,9 @@ type HistoryEvent struct {
 	// This member is required.
 	Id int64
 
-	// The date and time the event occurred.
+	// The date and time the event occurred, expressed in seconds and fractional
+	// milliseconds since the Unix epoch, which is defined as January 1, 1970, at
+	// 00:00:00 Coordinated Universal Time (UTC).
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -579,6 +581,20 @@ type InspectionData struct {
 	// [InputPath]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath
 	AfterInputPath *string
 
+	// The effective input after the ItemBatcher filter is applied in a Map state.
+	AfterItemBatcher *string
+
+	// An array containing the inputs for each Map iteration, transformed by the
+	// ItemSelector specified in a Map state.
+	AfterItemSelector *string
+
+	// The effective input after the ItemsPath filter is applied. Not populated when
+	// the QueryLanguage is JSONata.
+	AfterItemsPath *string
+
+	// The effective input after the ItemsPointer filter is applied in a Map state.
+	AfterItemsPointer *string
+
 	// The effective input after Step Functions applies the [Parameters] filter. Not populated
 	// when QueryLanguage is JSONata.
 	//
@@ -597,8 +613,14 @@ type InspectionData struct {
 	// [ResultSelector]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector
 	AfterResultSelector *string
 
+	// An object containing data about a handled exception in the tested state.
+	ErrorDetails *InspectionErrorDetails
+
 	// The raw state input.
 	Input *string
+
+	// The max concurrency of the Map state.
+	MaxConcurrency *int32
 
 	// The raw HTTP request that is sent when you test an HTTP Task.
 	Request *InspectionDataRequest
@@ -608,6 +630,14 @@ type InspectionData struct {
 
 	// The state's raw result.
 	Result *string
+
+	// The tolerated failure threshold for a Map state as defined in number of Map
+	// state iterations.
+	ToleratedFailureCount *int32
+
+	// The tolerated failure threshold for a Map state as defined in percentage of Map
+	// state iterations.
+	ToleratedFailurePercentage *float32
 
 	// JSON string that contains the set of workflow variables after execution of the
 	// state. The set will include variables assigned in the state and variables set up
@@ -658,6 +688,21 @@ type InspectionDataResponse struct {
 
 	// The message associated with the HTTP status code.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// An object containing data about a handled exception in the tested state.
+type InspectionErrorDetails struct {
+
+	// The array index of the Catch which handled the exception.
+	CatchIndex *int32
+
+	// The duration in seconds of the backoff for a retry on a failed state invocation.
+	RetryBackoffIntervalSeconds *int32
+
+	// The array index of the Retry which handled the exception.
+	RetryIndex *int32
 
 	noSmithyDocumentSerde
 }
@@ -998,6 +1043,46 @@ type MapStateStartedEventDetails struct {
 
 	// The size of the array for Map state iterations.
 	Length int32
+
+	noSmithyDocumentSerde
+}
+
+// A JSON object that contains a mocked error.
+type MockErrorOutput struct {
+
+	// A string containing the cause of the exception thrown when executing the
+	// state's logic.
+	Cause *string
+
+	// A string denoting the error code of the exception thrown when invoking the
+	// tested state. This field is required if mock.errorOutput is specified.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// A JSON object that contains a mocked result or errorOutput .
+type MockInput struct {
+
+	// The mocked error output when calling TestState. When specified, the mocked
+	// response is returned as a JSON object that contains an error and cause field.
+	ErrorOutput *MockErrorOutput
+
+	// Determines the level of strictness when validating mocked results against their
+	// respective API models. Values include:
+	//
+	//   - STRICT : All required fields must be present, and all present fields must
+	//   conform to the API's schema.
+	//
+	//   - PRESENT : All present fields must conform to the API's schema.
+	//
+	//   - NONE : No validation is performed.
+	//
+	// If no value is specified, the default value is STRICT .
+	FieldValidationMode MockResponseValidationMode
+
+	// A JSON string containing the mocked result of the state invocation.
+	Result *string
 
 	noSmithyDocumentSerde
 }
@@ -1384,6 +1469,27 @@ type TaskTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the tested state.
+type TestStateConfiguration struct {
+
+	// The name of the state from which an error originates when an error is mocked
+	// for a Map or Parallel state.
+	ErrorCausedByState *string
+
+	// The data read by ItemReader in Distributed Map states as found in its original
+	// source.
+	MapItemReaderData *string
+
+	// The number of Map state iterations that failed during the Map state invocation.
+	MapIterationFailureCount *int32
+
+	// The number of retry attempts that have occurred for the state's Retry that
+	// applies to the mocked error.
+	RetrierRetryCount *int32
 
 	noSmithyDocumentSerde
 }

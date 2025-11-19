@@ -21,6 +21,25 @@ func (AcceptRuleBehavior) Values() []AcceptRuleBehavior {
 	}
 }
 
+type AttributeEntityType string
+
+// Enum values for AttributeEntityType
+const (
+	AttributeEntityTypeAsset   AttributeEntityType = "ASSET"
+	AttributeEntityTypeListing AttributeEntityType = "LISTING"
+)
+
+// Values returns all known values for AttributeEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeEntityType) Values() []AttributeEntityType {
+	return []AttributeEntityType{
+		"ASSET",
+		"LISTING",
+	}
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType
@@ -1477,6 +1496,7 @@ type RuleType string
 // Enum values for RuleType
 const (
 	RuleTypeMetadataFormEnforcement RuleType = "METADATA_FORM_ENFORCEMENT"
+	RuleTypeGlossaryTermEnforcement RuleType = "GLOSSARY_TERM_ENFORCEMENT"
 )
 
 // Values returns all known values for RuleType. Note that this can be expanded in
@@ -1486,6 +1506,7 @@ const (
 func (RuleType) Values() []RuleType {
 	return []RuleType{
 		"METADATA_FORM_ENFORCEMENT",
+		"GLOSSARY_TERM_ENFORCEMENT",
 	}
 }
 

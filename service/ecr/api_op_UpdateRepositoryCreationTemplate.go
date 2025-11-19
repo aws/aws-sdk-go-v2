@@ -65,8 +65,8 @@ type UpdateRepositoryCreationTemplateInput struct {
 	// repository will be immutable which will prevent them from being overwritten.
 	ImageTagMutability types.ImageTagMutability
 
-	// Updates a repository with filters that define which image tags can override the
-	// default image tag mutability setting.
+	// A list of filters that specify which image tags should be excluded from the
+	// repository creation template's image tag mutability setting.
 	ImageTagMutabilityExclusionFilters []types.ImageTagMutabilityExclusionFilter
 
 	// Updates the lifecycle policy associated with the specified repository creation

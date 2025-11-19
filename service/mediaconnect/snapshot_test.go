@@ -134,6 +134,42 @@ func TestCheckSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBridge(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBridge(context.Background(), nil, func(o *Options) {
@@ -170,6 +206,42 @@ func TestCheckSnapshot_CreateGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteBridge(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBridge(context.Background(), nil, func(o *Options) {
@@ -199,6 +271,42 @@ func TestCheckSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRouterOutput")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +422,66 @@ func TestCheckSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterInputSourceMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouterInputSourceMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouterInputThumbnail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterInputThumbnail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouterInputThumbnail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GrantFlowEntitlements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GrantFlowEntitlements(context.Background(), nil, func(o *Options) {
@@ -403,6 +571,54 @@ func TestCheckSnapshot_ListReservations(t *testing.T) {
 	_, err := svc.ListReservations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListReservations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRouterInputs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRouterInputs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRouterInputs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRouterNetworkInterfaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRouterNetworkInterfaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRouterNetworkInterfaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRouterOutputs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRouterOutputs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRouterOutputs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTagsForGlobalResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForGlobalResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTagsForGlobalResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -506,6 +722,30 @@ func TestCheckSnapshot_RemoveFlowVpcInterface(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RestartRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestartRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestartRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RestartRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestartRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestartRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RevokeFlowEntitlement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RevokeFlowEntitlement(context.Background(), nil, func(o *Options) {
@@ -530,6 +770,30 @@ func TestCheckSnapshot_StartFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopFlow(context.Background(), nil, func(o *Options) {
@@ -542,11 +806,71 @@ func TestCheckSnapshot_StopFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TagGlobalResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagGlobalResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TagGlobalResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TakeRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TakeRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TakeRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UntagGlobalResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagGlobalResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UntagGlobalResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -685,6 +1009,42 @@ func TestCheckSnapshot_UpdateGatewayInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AddBridgeOutputs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddBridgeOutputs(context.Background(), nil, func(o *Options) {
@@ -757,6 +1117,42 @@ func TestUpdateSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBridge(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBridge(context.Background(), nil, func(o *Options) {
@@ -793,6 +1189,42 @@ func TestUpdateSnapshot_CreateGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteBridge(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBridge(context.Background(), nil, func(o *Options) {
@@ -822,6 +1254,42 @@ func TestUpdateSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRouterOutput")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -937,6 +1405,66 @@ func TestUpdateSnapshot_DescribeReservation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterInputSourceMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouterInputSourceMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouterInputThumbnail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterInputThumbnail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouterInputThumbnail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GrantFlowEntitlements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GrantFlowEntitlements(context.Background(), nil, func(o *Options) {
@@ -1026,6 +1554,54 @@ func TestUpdateSnapshot_ListReservations(t *testing.T) {
 	_, err := svc.ListReservations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListReservations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRouterInputs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRouterInputs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRouterInputs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRouterNetworkInterfaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRouterNetworkInterfaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRouterNetworkInterfaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRouterOutputs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRouterOutputs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRouterOutputs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTagsForGlobalResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForGlobalResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTagsForGlobalResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1129,6 +1705,30 @@ func TestUpdateSnapshot_RemoveFlowVpcInterface(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RestartRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestartRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestartRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RestartRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestartRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestartRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RevokeFlowEntitlement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RevokeFlowEntitlement(context.Background(), nil, func(o *Options) {
@@ -1153,6 +1753,30 @@ func TestUpdateSnapshot_StartFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopFlow(context.Background(), nil, func(o *Options) {
@@ -1165,11 +1789,71 @@ func TestUpdateSnapshot_StopFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StopRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopRouterOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TagGlobalResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagGlobalResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TagGlobalResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TakeRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TakeRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TakeRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UntagGlobalResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagGlobalResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UntagGlobalResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1302,6 +1986,42 @@ func TestUpdateSnapshot_UpdateGatewayInstance(t *testing.T) {
 	_, err := svc.UpdateGatewayInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGatewayInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRouterInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRouterInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRouterInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRouterNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRouterNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRouterNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRouterOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRouterOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRouterOutput")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1824,6 +1824,11 @@ type CreateManagedInstancesProviderConfiguration struct {
 	// This member is required.
 	InstanceLaunchTemplate *InstanceLaunchTemplate
 
+	// Defines how Amazon ECS Managed Instances optimizes the infrastastructure in
+	// your capacity provider. Provides control over the delay between when EC2
+	// instances become idle or underutilized and when Amazon ECS optimizes them.
+	InfrastructureOptimization *InfrastructureOptimization
+
 	// Specifies whether to propagate tags from the capacity provider to the Amazon
 	// ECS Managed Instances. When enabled, tags applied to the capacity provider are
 	// automatically applied to all instances launched by this provider.
@@ -3047,6 +3052,29 @@ type InferenceAcceleratorOverride struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that controls how Amazon ECS optimizes your infrastructure.
+type InfrastructureOptimization struct {
+
+	// This parameter defines the number of seconds Amazon ECS Managed Instances waits
+	// before optimizing EC2 instances that have become idle or underutilized. A longer
+	// delay increases the likelihood of placing new tasks on idle or underutilized
+	// instances instances, reducing startup time. A shorter delay helps reduce
+	// infrastructure costs by optimizing idle or underutilized instances,instances
+	// more quickly.
+	//
+	// Valid values are:
+	//
+	//   - null - Uses the default optimization behavior.
+	//
+	//   - -1 - Disables automatic infrastructure optimization.
+	//
+	//   - A value between 0 and 3600 (inclusive) - Specifies the number of seconds to
+	//   wait before optimizing instances.
+	ScaleInAfter *int32
+
+	noSmithyDocumentSerde
+}
+
 // An object representing the result of a container instance health status check.
 type InstanceHealthCheckResult struct {
 
@@ -3841,6 +3869,12 @@ type ManagedInstancesNetworkConfiguration struct {
 // Amazon EC2 instance types and features while offloading infrastructure
 // management to Amazon Web Services.
 type ManagedInstancesProvider struct {
+
+	// Defines how Amazon ECS Managed Instances optimizes the infrastastructure in
+	// your capacity provider. Configure it to turn on or off the infrastructure
+	// optimization in your capacity provider, and to control the idle or underutilized
+	// EC2 instances optimization delay.
+	InfrastructureOptimization *InfrastructureOptimization
 
 	// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS
 	// assumes to manage instances. This role must include permissions for Amazon EC2
@@ -6980,6 +7014,10 @@ type UpdateManagedInstancesProviderConfiguration struct {
 	//
 	// This member is required.
 	InstanceLaunchTemplate *InstanceLaunchTemplateUpdate
+
+	// The updated infrastructure optimization configuration. Changes to this setting
+	// affect how Amazon ECS optimizes instances going forward.
+	InfrastructureOptimization *InfrastructureOptimization
 
 	// The updated tag propagation setting. When changed, this affects only new
 	// instances launched after the update.

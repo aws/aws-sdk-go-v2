@@ -914,6 +914,46 @@ type AvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
+// For regional NAT gateways only: The configuration specifying which Elastic IP
+// address (EIP) to use for handling outbound NAT traffic from a specific
+// Availability Zone.
+//
+// A regional NAT gateway is a single NAT Gateway that works across multiple
+// availability zones (AZs) in your VPC, providing redundancy, scalability and
+// availability across all the AZs in a Region.
+//
+// For more information, see [Regional NAT gateways for automatic multi-AZ expansion] in the Amazon VPC User Guide.
+//
+// [Regional NAT gateways for automatic multi-AZ expansion]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+type AvailabilityZoneAddress struct {
+
+	// The allocation IDs of the Elastic IP addresses (EIPs) to be used for handling
+	// outbound NAT traffic in this specific Availability Zone.
+	AllocationIds []string
+
+	// For regional NAT gateways only: The Availability Zone where this specific NAT
+	// gateway configuration will be active. Each AZ in a regional NAT gateway has its
+	// own configuration to handle outbound NAT traffic from that AZ.
+	//
+	// A regional NAT gateway is a single NAT Gateway that works across multiple
+	// availability zones (AZs) in your VPC, providing redundancy, scalability and
+	// availability across all the AZs in a Region.
+	AvailabilityZone *string
+
+	// For regional NAT gateways only: The ID of the Availability Zone where this
+	// specific NAT gateway configuration will be active. Each AZ in a regional NAT
+	// gateway has its own configuration to handle outbound NAT traffic from that AZ.
+	// Use this instead of AvailabilityZone for consistent identification of AZs across
+	// Amazon Web Services Regions.
+	//
+	// A regional NAT gateway is a single NAT Gateway that works across multiple
+	// availability zones (AZs) in your VPC, providing redundancy, scalability and
+	// availability across all the AZs in a Region.
+	AvailabilityZoneId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a message about an Availability Zone, Local Zone, or Wavelength Zone.
 type AvailabilityZoneMessage struct {
 
@@ -5560,7 +5600,7 @@ type ExportToS3TaskSpecification struct {
 // system. It specifies the type of external system and the external resource
 // identifier that identifies your account or instance in that system.
 //
-// For more information, see [Integrate VPC IPAM with Infoblox infrastructure] in the Amazon VPC IPAM User Guide..
+// For more information, see [Integrate VPC IPAM with Infoblox infrastructure] in the Amazon VPC IPAM User Guide.
 //
 // [Integrate VPC IPAM with Infoblox infrastructure]: https://docs.aws.amazon.com/vpc/latest/ipam/integrate-infoblox-ipam.html
 type ExternalAuthorityConfiguration struct {
@@ -10860,6 +10900,113 @@ type IpamOrganizationalUnitExclusion struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an IPAM policy.
+//
+// An IPAM policy is a set of rules that define how public IPv4 addresses from
+// IPAM pools are allocated to Amazon Web Services resources. Each rule maps an
+// Amazon Web Services service to IPAM pools that the service will use to get IP
+// addresses. A single policy can have multiple rules and be applied to multiple
+// Amazon Web Services Regions. If the IPAM pool run out of addresses then the
+// services fallback to Amazon-provided IP addresses. A policy can be applied to an
+// individual Amazon Web Services account or an entity within Amazon Web Services
+// Organizations.
+type IpamPolicy struct {
+
+	// The ID of the IPAM this policy belongs to.
+	IpamId *string
+
+	// The Amazon Resource Name (ARN) of the IPAM policy.
+	IpamPolicyArn *string
+
+	// The ID of the IPAM policy.
+	IpamPolicyId *string
+
+	// The Region of the IPAM policy.
+	IpamPolicyRegion *string
+
+	// The account ID that owns the IPAM policy.
+	OwnerId *string
+
+	// The state of the IPAM policy.
+	State IpamPolicyState
+
+	// A message about the state of the IPAM policy.
+	StateMessage *string
+
+	// The tags assigned to the IPAM policy.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Information about an IPAM policy allocation rule.
+//
+// Allocation rules are optional configurations within an IPAM policy that map
+// Amazon Web Services resource types to specific IPAM pools. If no rules are
+// defined, the resource types default to using Amazon-provided IP addresses.
+type IpamPolicyAllocationRule struct {
+
+	// The ID of the source IPAM pool for the allocation rule.
+	//
+	// An IPAM pool is a collection of IP addresses in IPAM that can be allocated to
+	// Amazon Web Services resources.
+	SourceIpamPoolId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a requested IPAM policy allocation rule.
+//
+// Allocation rules are optional configurations within an IPAM policy that map
+// Amazon Web Services resource types to specific IPAM pools. If no rules are
+// defined, the resource types default to using Amazon-provided IP addresses.
+type IpamPolicyAllocationRuleRequest struct {
+
+	// The ID of the source IPAM pool for the requested allocation rule.
+	//
+	// An IPAM pool is a collection of IP addresses in IPAM that can be allocated to
+	// Amazon Web Services resources.
+	SourceIpamPoolId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an IPAM policy.
+type IpamPolicyDocument struct {
+
+	// The allocation rules in the IPAM policy document.
+	//
+	// Allocation rules are optional configurations within an IPAM policy that map
+	// Amazon Web Services resource types to specific IPAM pools. If no rules are
+	// defined, the resource types default to using Amazon-provided IP addresses.
+	AllocationRules []IpamPolicyAllocationRule
+
+	// The ID of the IPAM policy.
+	IpamPolicyId *string
+
+	// The locale of the IPAM policy document.
+	Locale *string
+
+	// The resource type of the IPAM policy document.
+	//
+	// The Amazon Web Services service or resource type that can use IP addresses
+	// through IPAM policies. Supported services and resource types include:
+	//
+	//   - Elastic IP addresses
+	ResourceType IpamPolicyResourceType
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Web Services Organizations target for an IPAM policy.
+type IpamPolicyOrganizationTarget struct {
+
+	// The ID of a Amazon Web Services Organizations target for an IPAM policy.
+	OrganizationTargetId *string
+
+	noSmithyDocumentSerde
+}
+
 // In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable
 // you to organize your IP addresses according to your routing and security needs.
 // For example, if you have separate routing and security needs for development and
@@ -14663,6 +14810,46 @@ type MovingAddressStatus struct {
 // Describes a NAT gateway.
 type NatGateway struct {
 
+	// For regional NAT gateways only: Indicates whether Amazon Web Services
+	// automatically manages AZ coverage. When enabled, the NAT gateway associates EIPs
+	// in all AZs where your VPC has subnets to handle outbound NAT traffic, expands to
+	// new AZs when you create subnets there, and retracts from AZs where you've
+	// removed all subnets. When disabled, you must manually manage which AZs the NAT
+	// gateway supports and their corresponding EIPs.
+	//
+	// A regional NAT gateway is a single NAT Gateway that works across multiple
+	// availability zones (AZs) in your VPC, providing redundancy, scalability and
+	// availability across all the AZs in a Region.
+	//
+	// For more information, see [Regional NAT gateways for automatic multi-AZ expansion] in the Amazon VPC User Guide.
+	//
+	// [Regional NAT gateways for automatic multi-AZ expansion]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+	AutoProvisionZones AutoProvisionZonesState
+
+	// For regional NAT gateways only: Indicates whether Amazon Web Services
+	// automatically allocates additional Elastic IP addresses (EIPs) in an AZ when the
+	// NAT gateway needs more ports due to increased concurrent connections to a single
+	// destination from that AZ.
+	//
+	// For more information, see [Regional NAT gateways for automatic multi-AZ expansion] in the Amazon VPC User Guide.
+	//
+	// [Regional NAT gateways for automatic multi-AZ expansion]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+	AutoScalingIps AutoScalingIpsState
+
+	// Indicates whether this is a zonal (single-AZ) or regional (multi-AZ) NAT
+	// gateway.
+	//
+	// A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability
+	// within a single availability zone. A regional NAT gateway is a single NAT
+	// Gateway that works across multiple availability zones (AZs) in your VPC,
+	// providing redundancy, scalability and availability across all the AZs in a
+	// Region.
+	//
+	// For more information, see [Regional NAT gateways for automatic multi-AZ expansion] in the Amazon VPC User Guide.
+	//
+	// [Regional NAT gateways for automatic multi-AZ expansion]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+	AvailabilityMode AvailabilityMode
+
 	// Indicates whether the NAT gateway supports public or private connectivity.
 	ConnectivityType ConnectivityType
 
@@ -14713,6 +14900,9 @@ type NatGateway struct {
 	// [documented limits]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways
 	ProvisionedBandwidth *ProvisionedBandwidth
 
+	// For regional NAT gateways only, this is the ID of the NAT gateway.
+	RouteTableId *string
+
 	// The state of the NAT gateway.
 	//
 	//   - pending : The NAT gateway is being created and is not ready to process
@@ -14754,6 +14944,15 @@ type NatGatewayAddress struct {
 	// [Public NAT gateway only] The association ID of the Elastic IP address that's
 	// associated with the NAT gateway.
 	AssociationId *string
+
+	// The Availability Zone where this Elastic IP address (EIP) is being used to
+	// handle outbound NAT traffic.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone where this Elastic IP address (EIP) is being
+	// used to handle outbound NAT traffic. Use this instead of AvailabilityZone for
+	// consistent identification of AZs across Amazon Web Services Regions.
+	AvailabilityZoneId *string
 
 	// The address failure message.
 	FailureMessage *string

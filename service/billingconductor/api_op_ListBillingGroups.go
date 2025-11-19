@@ -128,6 +128,9 @@ func (c *Client) addOperationListBillingGroupsMiddlewares(stack *middleware.Stac
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addOpListBillingGroupsValidationMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBillingGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}

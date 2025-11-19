@@ -1,0 +1,8 @@
+{
+    "id": "bdae081e-b736-4141-a704-f5fb628b6917",
+    "type": "feature",
+    "description": "Adds support for blocking SSE-C writes to general purpose buckets.",
+    "modules": [
+        "service/s3"
+    ]
+}

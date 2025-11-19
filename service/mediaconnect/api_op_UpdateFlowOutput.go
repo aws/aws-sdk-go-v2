@@ -96,6 +96,13 @@ type UpdateFlowOutputInput struct {
 	//  The remote ID for the Zixi-pull stream.
 	RemoteId *string
 
+	// Indicates whether to enable or disable router integration for this flow output.
+	RouterIntegrationState types.State
+
+	// The configuration that defines how content is encrypted during transit between
+	// the MediaConnect router and a MediaConnect flow.
+	RouterIntegrationTransitEncryption *types.FlowTransitEncryption
+
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32

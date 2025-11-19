@@ -181,6 +181,18 @@ func TestCheckSnapshot_GetSessionToken(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_GetWebIdentityToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWebIdentityToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetWebIdentityToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssumeRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssumeRole(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_GetSessionToken(t *testing.T) {
 	_, err := svc.GetSessionToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSessionToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetWebIdentityToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWebIdentityToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetWebIdentityToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -231,6 +231,27 @@ func (PassthroughBehavior) Values() []PassthroughBehavior {
 	}
 }
 
+type PreviewStatus string
+
+// Enum values for PreviewStatus
+const (
+	PreviewStatusPreviewInProgress PreviewStatus = "PREVIEW_IN_PROGRESS"
+	PreviewStatusPreviewFailed     PreviewStatus = "PREVIEW_FAILED"
+	PreviewStatusPreviewReady      PreviewStatus = "PREVIEW_READY"
+)
+
+// Values returns all known values for PreviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreviewStatus) Values() []PreviewStatus {
+	return []PreviewStatus{
+		"PREVIEW_IN_PROGRESS",
+		"PREVIEW_FAILED",
+		"PREVIEW_READY",
+	}
+}
+
 type ProtocolType string
 
 // Enum values for ProtocolType
@@ -247,6 +268,29 @@ func (ProtocolType) Values() []ProtocolType {
 	return []ProtocolType{
 		"WEBSOCKET",
 		"HTTP",
+	}
+}
+
+type PublishStatus string
+
+// Enum values for PublishStatus
+const (
+	PublishStatusPublished         PublishStatus = "PUBLISHED"
+	PublishStatusPublishInProgress PublishStatus = "PUBLISH_IN_PROGRESS"
+	PublishStatusPublishFailed     PublishStatus = "PUBLISH_FAILED"
+	PublishStatusDisabled          PublishStatus = "DISABLED"
+)
+
+// Values returns all known values for PublishStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PublishStatus) Values() []PublishStatus {
+	return []PublishStatus{
+		"PUBLISHED",
+		"PUBLISH_IN_PROGRESS",
+		"PUBLISH_FAILED",
+		"DISABLED",
 	}
 }
 
@@ -287,6 +331,46 @@ func (SecurityPolicy) Values() []SecurityPolicy {
 	return []SecurityPolicy{
 		"TLS_1_0",
 		"TLS_1_2",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusAvailable  Status = "AVAILABLE"
+	StatusInProgress Status = "IN_PROGRESS"
+	StatusFailed     Status = "FAILED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"AVAILABLE",
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
+type TryItState string
+
+// Enum values for TryItState
+const (
+	TryItStateEnabled  TryItState = "ENABLED"
+	TryItStateDisabled TryItState = "DISABLED"
+)
+
+// Values returns all known values for TryItState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TryItState) Values() []TryItState {
+	return []TryItState{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

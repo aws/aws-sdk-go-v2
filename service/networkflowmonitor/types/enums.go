@@ -104,10 +104,11 @@ type MonitorLocalResourceType string
 
 // Enum values for MonitorLocalResourceType
 const (
-	MonitorLocalResourceTypeAwsVpc    MonitorLocalResourceType = "AWS::EC2::VPC"
-	MonitorLocalResourceTypeAwsAz     MonitorLocalResourceType = "AWS::AvailabilityZone"
-	MonitorLocalResourceTypeAwsSubnet MonitorLocalResourceType = "AWS::EC2::Subnet"
-	MonitorLocalResourceTypeAwsRegion MonitorLocalResourceType = "AWS::Region"
+	MonitorLocalResourceTypeAwsVpc     MonitorLocalResourceType = "AWS::EC2::VPC"
+	MonitorLocalResourceTypeAwsAz      MonitorLocalResourceType = "AWS::AvailabilityZone"
+	MonitorLocalResourceTypeAwsSubnet  MonitorLocalResourceType = "AWS::EC2::Subnet"
+	MonitorLocalResourceTypeAwsRegion  MonitorLocalResourceType = "AWS::Region"
+	MonitorLocalResourceTypeEksCluster MonitorLocalResourceType = "AWS::EKS::Cluster"
 )
 
 // Values returns all known values for MonitorLocalResourceType. Note that this
@@ -120,6 +121,7 @@ func (MonitorLocalResourceType) Values() []MonitorLocalResourceType {
 		"AWS::AvailabilityZone",
 		"AWS::EC2::Subnet",
 		"AWS::Region",
+		"AWS::EKS::Cluster",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "ded66e5e-a38f-408c-ab83-fc85ff56e470",
+    "type": "feature",
+    "description": "Support for API Gateway portals and portal products.",
+    "modules": [
+        "service/apigatewayv2"
+    ]
+}

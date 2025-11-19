@@ -690,6 +690,26 @@ func (m *validateOpDescribeRestoreJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeScanJob struct {
+}
+
+func (*validateOpDescribeScanJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeScanJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeScanJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeScanJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateBackupVaultMpaApprovalTeam struct {
 }
 
@@ -1430,6 +1450,26 @@ func (m *validateOpStartRestoreJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartScanJob struct {
+}
+
+func (*validateOpStartScanJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartScanJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartScanJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartScanJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopBackupJob struct {
 }
 
@@ -1786,6 +1826,10 @@ func addOpDescribeRestoreJobValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeRestoreJob{}, middleware.After)
 }
 
+func addOpDescribeScanJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeScanJob{}, middleware.After)
+}
+
 func addOpDisassociateBackupVaultMpaApprovalTeamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateBackupVaultMpaApprovalTeam{}, middleware.After)
 }
@@ -1932,6 +1976,10 @@ func addOpStartReportJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartRestoreJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartRestoreJob{}, middleware.After)
+}
+
+func addOpStartScanJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartScanJob{}, middleware.After)
 }
 
 func addOpStopBackupJobValidationMiddleware(stack *middleware.Stack) error {
@@ -3025,6 +3073,21 @@ func validateOpDescribeRestoreJobInput(v *DescribeRestoreJobInput) error {
 	}
 }
 
+func validateOpDescribeScanJobInput(v *DescribeScanJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeScanJobInput"}
+	if v.ScanJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateBackupVaultMpaApprovalTeamInput(v *DisassociateBackupVaultMpaApprovalTeamInput) error {
 	if v == nil {
 		return nil
@@ -3623,6 +3686,36 @@ func validateOpStartRestoreJobInput(v *StartRestoreJobInput) error {
 	}
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartScanJobInput(v *StartScanJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartScanJobInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if len(v.MalwareScanner) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MalwareScanner"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if len(v.ScanMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanMode"))
+	}
+	if v.ScannerRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScannerRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -138,6 +138,67 @@ func (m *awsAwsjson10_serializeOpGetRecommendation) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListEfficiencyMetrics struct {
+}
+
+func (*awsAwsjson10_serializeOpListEfficiencyMetrics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListEfficiencyMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListEfficiencyMetricsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CostOptimizationHubService.ListEfficiencyMetrics")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListEfficiencyMetricsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListEnrollmentStatuses struct {
 }
 
@@ -685,6 +746,23 @@ func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTimePeriod(v *types.TimePeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.End != nil {
+		ok := object.Key("end")
+		ok.String(*v.End)
+	}
+
+	if v.Start != nil {
+		ok := object.Key("start")
+		ok.String(*v.Start)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentGetPreferencesInput(v *GetPreferencesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -699,6 +777,47 @@ func awsAwsjson10_serializeOpDocumentGetRecommendationInput(v *GetRecommendation
 	if v.RecommendationId != nil {
 		ok := object.Key("recommendationId")
 		ok.String(*v.RecommendationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListEfficiencyMetricsInput(v *ListEfficiencyMetricsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Granularity) > 0 {
+		ok := object.Key("granularity")
+		ok.String(string(v.Granularity))
+	}
+
+	if v.GroupBy != nil {
+		ok := object.Key("groupBy")
+		ok.String(*v.GroupBy)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.OrderBy != nil {
+		ok := object.Key("orderBy")
+		if err := awsAwsjson10_serializeDocumentOrderBy(v.OrderBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimePeriod != nil {
+		ok := object.Key("timePeriod")
+		if err := awsAwsjson10_serializeDocumentTimePeriod(v.TimePeriod, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

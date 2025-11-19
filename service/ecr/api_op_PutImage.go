@@ -55,9 +55,7 @@ type PutImageInput struct {
 	// the request.
 	ImageManifestMediaType *string
 
-	// The tag to associate with the image. This parameter is required for images that
-	// use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI)
-	// formats.
+	// The tag to associate with the image. This parameter is optional.
 	ImageTag *string
 
 	// The Amazon Web Services account ID associated with the registry that contains

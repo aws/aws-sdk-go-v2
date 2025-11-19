@@ -48,6 +48,9 @@ type GetBillScenarioOutput struct {
 	//  The time period covered by the bill scenario.
 	BillInterval *types.BillInterval
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
 	//  The timestamp when the bill scenario was created.
 	CreatedAt *time.Time
 
@@ -56,6 +59,10 @@ type GetBillScenarioOutput struct {
 
 	//  An error message if the bill scenario retrieval failed.
 	FailureMessage *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
 
 	//  The name of the retrieved bill scenario.
 	Name *string

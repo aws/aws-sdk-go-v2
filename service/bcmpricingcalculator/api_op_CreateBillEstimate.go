@@ -92,6 +92,13 @@ type CreateBillEstimateOutput struct {
 	// timestamp.
 	BillInterval *types.BillInterval
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
+	// Timestamp of the effective date of the cost category used in the group sharing
+	// settings.
+	CostCategoryGroupSharingPreferenceEffectiveDate *time.Time
+
 	//  Returns summary-level cost information once a Bill estimate is successfully
 	// generated. This summary includes: 1) the total cost difference, showing the
 	// pre-tax cost change for the consolidated billing family between the completed
@@ -110,6 +117,10 @@ type CreateBillEstimateOutput struct {
 
 	//  This attribute provides the reason if a Bill estimate result generation fails.
 	FailureMessage *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
 
 	//  The name of your newly created Bill estimate.
 	Name *string

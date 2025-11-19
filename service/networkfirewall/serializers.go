@@ -5844,6 +5844,11 @@ func awsAwsjson10_serializeOpDocumentListRuleGroupsInput(v *ListRuleGroupsInput,
 		ok.String(string(v.Scope))
 	}
 
+	if len(v.SubscriptionStatus) > 0 {
+		ok := object.Key("SubscriptionStatus")
+		ok.String(string(v.SubscriptionStatus))
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))

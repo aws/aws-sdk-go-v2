@@ -1,0 +1,8 @@
+{
+    "id": "2180e985-e9e7-4008-9ab4-cb6d10f9b706",
+    "type": "feature",
+    "description": "Add dual-stack endpoint support for Route53",
+    "modules": [
+        "service/route53"
+    ]
+}

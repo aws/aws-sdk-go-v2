@@ -268,6 +268,45 @@ func (InsightType) Values() []InsightType {
 	}
 }
 
+type ListInsightsDataDimensionKey string
+
+// Enum values for ListInsightsDataDimensionKey
+const (
+	ListInsightsDataDimensionKeyEventId     ListInsightsDataDimensionKey = "EventId"
+	ListInsightsDataDimensionKeyEventName   ListInsightsDataDimensionKey = "EventName"
+	ListInsightsDataDimensionKeyEventSource ListInsightsDataDimensionKey = "EventSource"
+)
+
+// Values returns all known values for ListInsightsDataDimensionKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListInsightsDataDimensionKey) Values() []ListInsightsDataDimensionKey {
+	return []ListInsightsDataDimensionKey{
+		"EventId",
+		"EventName",
+		"EventSource",
+	}
+}
+
+type ListInsightsDataType string
+
+// Enum values for ListInsightsDataType
+const (
+	ListInsightsDataTypeInsightsEvents ListInsightsDataType = "InsightsEvents"
+)
+
+// Values returns all known values for ListInsightsDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListInsightsDataType) Values() []ListInsightsDataType {
+	return []ListInsightsDataType{
+		"InsightsEvents",
+	}
+}
+
 type LookupAttributeKey string
 
 // Enum values for LookupAttributeKey
@@ -402,6 +441,25 @@ func (RefreshScheduleStatus) Values() []RefreshScheduleStatus {
 	return []RefreshScheduleStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type SourceEventCategory string
+
+// Enum values for SourceEventCategory
+const (
+	SourceEventCategoryManagement SourceEventCategory = "Management"
+	SourceEventCategoryData       SourceEventCategory = "Data"
+)
+
+// Values returns all known values for SourceEventCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEventCategory) Values() []SourceEventCategory {
+	return []SourceEventCategory{
+		"Management",
+		"Data",
 	}
 }
 

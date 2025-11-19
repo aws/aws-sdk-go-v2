@@ -1,0 +1,8 @@
+{
+    "id": "30e85e4d-9e4e-4b0b-9eb5-e197a4ab3fe3",
+    "type": "feature",
+    "description": "Add support for adding Billing transfers in Invoice configuration",
+    "modules": [
+        "service/invoicing"
+    ]
+}

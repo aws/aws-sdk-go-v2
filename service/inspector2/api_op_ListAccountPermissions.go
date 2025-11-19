@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the permissions an account has to configure Amazon Inspector.
+//	Lists the permissions an account has to configure Amazon Inspector. If the
+//
+// account is a member account or standalone account with resources managed by an
+// Organizations policy, the operation returns fewer permissions.
 func (c *Client) ListAccountPermissions(ctx context.Context, params *ListAccountPermissionsInput, optFns ...func(*Options)) (*ListAccountPermissionsOutput, error) {
 	if params == nil {
 		params = &ListAccountPermissionsInput{}

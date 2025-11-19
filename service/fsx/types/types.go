@@ -1227,6 +1227,10 @@ type CreateFileSystemWindowsConfiguration struct {
 	// capacity.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
+	// The File Server Resource Manager (FSRM) configuration that Amazon FSx for
+	// Windows File Server uses for the file system. FSRM is disabled by default.
+	FsrmConfiguration *WindowsFsrmConfiguration
+
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located. For in-Amazon Web
 	// Services applications, we recommend that you launch your clients in the same
@@ -4821,6 +4825,10 @@ type UpdateFileSystemWindowsConfiguration struct {
 	// capacity.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
+	// The File Server Resource Manager (FSRM) configuration that Amazon FSx for
+	// Windows File Server uses for the file system. FSRM is disabled by default.
+	FsrmConfiguration *WindowsFsrmConfiguration
+
 	// The configuration Amazon FSx uses to join the Windows File Server instance to
 	// the self-managed Microsoft AD directory. You cannot make a self-managed
 	// Microsoft AD update request if there is an existing self-managed Microsoft AD
@@ -5274,6 +5282,10 @@ type WindowsFileSystemConfiguration struct {
 	// capacity.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
+	// The File Server Resource Manager (FSRM) configuration that Amazon FSx for
+	// Windows File Server uses for the file system. FSRM is disabled by default.
+	FsrmConfiguration *WindowsFsrmConfiguration
+
 	// The list of maintenance operations in progress for this file system.
 	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation
 
@@ -5333,6 +5345,35 @@ type WindowsFileSystemConfiguration struct {
 	// the UTC time zone. d is the weekday number, from 1 through 7, beginning with
 	// Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// The File Server Resource Manager (FSRM) configuration that Amazon FSx for
+// Windows File Server uses for the file system. When FSRM is enabled, you can
+// manage and monitor storage quotas, file screening, storage reports, and file
+// classification.
+type WindowsFsrmConfiguration struct {
+
+	// Specifies whether FSRM is enabled or disabled on the file system. When TRUE ,
+	// the FSRM service is enabled and monitor file operations according to configured
+	// policies. When FALSE or omitted, FSRM is disabled. The default value is FALSE .
+	//
+	// This member is required.
+	FsrmServiceEnabled *bool
+
+	// The Amazon Resource Name (ARN) for the destination of the FSRM event logs. The
+	// destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis
+	// Data Firehose delivery stream ARN.
+	//
+	// The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx
+	// prefix. The name of the Amazon Kinesis Data Firehose delivery stream must begin
+	// with the aws-fsx prefix.
+	//
+	// The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose
+	// delivery stream) must be in the same Amazon Web Services partition, Amazon Web
+	// Services Region, and Amazon Web Services account as your Amazon FSx file system.
+	EventLogDestination *string
 
 	noSmithyDocumentSerde
 }

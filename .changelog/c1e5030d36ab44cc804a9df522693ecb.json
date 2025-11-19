@@ -1,0 +1,8 @@
+{
+    "id": "c1e5030d-36ab-44cc-804a-9df522693ecb",
+    "type": "feature",
+    "description": "Add GroupSharingPreference, CostCategoryGroupSharingPreferenceArn, and CostCategoryGroupSharingPreferenceEffectiveDate to Bill Estimate. Add GroupSharingPreference and CostCategoryGroupSharingPreferenceArn to Bill Scenario.",
+    "modules": [
+        "service/bcmpricingcalculator"
+    ]
+}

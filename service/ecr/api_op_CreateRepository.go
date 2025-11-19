@@ -46,6 +46,10 @@ type CreateRepositoryInput struct {
 	// contents of your repository are encrypted at rest.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
+	// The imageScanningConfiguration parameter is being deprecated, in favor of
+	// specifying the image scanning configuration at the registry level. For more
+	// information, see PutRegistryScanningConfiguration .
+	//
 	// The image scanning configuration for the repository. This determines whether
 	// images are scanned for known vulnerabilities after being pushed to the
 	// repository.
@@ -57,8 +61,8 @@ type CreateRepositoryInput struct {
 	// will be immutable which will prevent them from being overwritten.
 	ImageTagMutability types.ImageTagMutability
 
-	// Creates a repository with a list of filters that define which image tags can
-	// override the default image tag mutability setting.
+	// A list of filters that specify which image tags should be excluded from the
+	// repository's image tag mutability setting.
 	ImageTagMutabilityExclusionFilters []types.ImageTagMutabilityExclusionFilter
 
 	// The Amazon Web Services account ID associated with the registry to create the

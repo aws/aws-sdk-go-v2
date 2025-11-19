@@ -18252,6 +18252,15 @@ func awsAwsjson11_deserializeDocumentParseToOCSF(v **types.ParseToOCSF, value in
 				sv.EventSource = types.EventSource(jtv)
 			}
 
+		case "mappingVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MappingVersion to be of type string, got %T instead", value)
+				}
+				sv.MappingVersion = ptr.String(jtv)
+			}
+
 		case "ocsfVersion":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -698,6 +698,18 @@ func TestCheckSnapshot_DisableOrganizationsRootSessions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableOutboundWebIdentityFederation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableOutboundWebIdentityFederation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableOutboundWebIdentityFederation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableMFADevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableMFADevice(context.Background(), nil, func(o *Options) {
@@ -727,6 +739,18 @@ func TestCheckSnapshot_EnableOrganizationsRootSessions(t *testing.T) {
 	_, err := svc.EnableOrganizationsRootSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableOrganizationsRootSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableOutboundWebIdentityFederation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableOutboundWebIdentityFederation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableOutboundWebIdentityFederation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -955,6 +979,18 @@ func TestCheckSnapshot_GetOrganizationsAccessReport(t *testing.T) {
 	_, err := svc.GetOrganizationsAccessReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOrganizationsAccessReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetOutboundWebIdentityFederationInfo(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOutboundWebIdentityFederationInfo(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOutboundWebIdentityFederationInfo")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2773,6 +2809,18 @@ func TestUpdateSnapshot_DisableOrganizationsRootSessions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableOutboundWebIdentityFederation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableOutboundWebIdentityFederation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableOutboundWebIdentityFederation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableMFADevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableMFADevice(context.Background(), nil, func(o *Options) {
@@ -2802,6 +2850,18 @@ func TestUpdateSnapshot_EnableOrganizationsRootSessions(t *testing.T) {
 	_, err := svc.EnableOrganizationsRootSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableOrganizationsRootSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableOutboundWebIdentityFederation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableOutboundWebIdentityFederation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableOutboundWebIdentityFederation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3030,6 +3090,18 @@ func TestUpdateSnapshot_GetOrganizationsAccessReport(t *testing.T) {
 	_, err := svc.GetOrganizationsAccessReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOrganizationsAccessReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetOutboundWebIdentityFederationInfo(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOutboundWebIdentityFederationInfo(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOutboundWebIdentityFederationInfo")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

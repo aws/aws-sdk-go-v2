@@ -1154,6 +1154,11 @@ func awsRestjson1_serializeDocumentCitation(v *types.Citation, value smithyjson.
 		}
 	}
 
+	if v.Source != nil {
+		ok := object.Key("source")
+		ok.String(*v.Source)
+	}
+
 	if v.SourceContent != nil {
 		ok := object.Key("sourceContent")
 		if err := awsRestjson1_serializeDocumentCitationSourceContentList(v.SourceContent, ok); err != nil {
@@ -1221,6 +1226,12 @@ func awsRestjson1_serializeDocumentCitationLocation(v types.CitationLocation, va
 	case *types.CitationLocationMemberDocumentPage:
 		av := object.Key("documentPage")
 		if err := awsRestjson1_serializeDocumentDocumentPageLocation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CitationLocationMemberSearchResultLocation:
+		av := object.Key("searchResultLocation")
+		if err := awsRestjson1_serializeDocumentSearchResultLocation(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -1353,6 +1364,12 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 	case *types.ContentBlockMemberReasoningContent:
 		av := object.Key("reasoningContent")
 		if err := awsRestjson1_serializeDocumentReasoningContentBlock(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ContentBlockMemberSearchResult:
+		av := object.Key("searchResult")
+		if err := awsRestjson1_serializeDocumentSearchResultBlock(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -2146,6 +2163,84 @@ func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSearchResultBlock(v *types.SearchResultBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Citations != nil {
+		ok := object.Key("citations")
+		if err := awsRestjson1_serializeDocumentCitationsConfig(v.Citations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentSearchResultContentBlocks(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		ok.String(*v.Source)
+	}
+
+	if v.Title != nil {
+		ok := object.Key("title")
+		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResultContentBlock(v *types.SearchResultContentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResultContentBlocks(v []types.SearchResultContentBlock, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSearchResultContentBlock(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResultLocation(v *types.SearchResultLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.End != nil {
+		ok := object.Key("end")
+		ok.Integer(*v.End)
+	}
+
+	if v.SearchResultIndex != nil {
+		ok := object.Key("searchResultIndex")
+		ok.Integer(*v.SearchResultIndex)
+	}
+
+	if v.Start != nil {
+		ok := object.Key("start")
+		ok.Integer(*v.Start)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentServiceTier(v *types.ServiceTier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2404,6 +2499,12 @@ func awsRestjson1_serializeDocumentToolResultContentBlock(v types.ToolResultCont
 	case *types.ToolResultContentBlockMemberJson:
 		av := object.Key("json")
 		if err := awsRestjson1_serializeDocumentDocument(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ToolResultContentBlockMemberSearchResult:
+		av := object.Key("searchResult")
+		if err := awsRestjson1_serializeDocumentSearchResultBlock(&uv.Value, av); err != nil {
 			return err
 		}
 

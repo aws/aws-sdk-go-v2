@@ -330,6 +330,23 @@ func (LifecycleDeleteAfterEvent) Values() []LifecycleDeleteAfterEvent {
 	}
 }
 
+type MalwareScanner string
+
+// Enum values for MalwareScanner
+const (
+	MalwareScannerGuardduty MalwareScanner = "GUARDDUTY"
+)
+
+// Values returns all known values for MalwareScanner. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MalwareScanner) Values() []MalwareScanner {
+	return []MalwareScanner{
+		"GUARDDUTY",
+	}
+}
+
 type MpaRevokeSessionStatus string
 
 // Enum values for MpaRevokeSessionStatus
@@ -557,6 +574,163 @@ func (RuleExecutionType) Values() []RuleExecutionType {
 		"CONTINUOUS",
 		"SNAPSHOTS",
 		"CONTINUOUS_AND_SNAPSHOTS",
+	}
+}
+
+type ScanFinding string
+
+// Enum values for ScanFinding
+const (
+	ScanFindingMalware ScanFinding = "MALWARE"
+)
+
+// Values returns all known values for ScanFinding. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanFinding) Values() []ScanFinding {
+	return []ScanFinding{
+		"MALWARE",
+	}
+}
+
+type ScanJobState string
+
+// Enum values for ScanJobState
+const (
+	ScanJobStateCompleted           ScanJobState = "COMPLETED"
+	ScanJobStateCompletedWithIssues ScanJobState = "COMPLETED_WITH_ISSUES"
+	ScanJobStateFailed              ScanJobState = "FAILED"
+	ScanJobStateCanceled            ScanJobState = "CANCELED"
+)
+
+// Values returns all known values for ScanJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanJobState) Values() []ScanJobState {
+	return []ScanJobState{
+		"COMPLETED",
+		"COMPLETED_WITH_ISSUES",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
+type ScanJobStatus string
+
+// Enum values for ScanJobStatus
+const (
+	ScanJobStatusCreated             ScanJobStatus = "CREATED"
+	ScanJobStatusCompleted           ScanJobStatus = "COMPLETED"
+	ScanJobStatusCompletedWithIssues ScanJobStatus = "COMPLETED_WITH_ISSUES"
+	ScanJobStatusRunning             ScanJobStatus = "RUNNING"
+	ScanJobStatusFailed              ScanJobStatus = "FAILED"
+	ScanJobStatusCanceled            ScanJobStatus = "CANCELED"
+	ScanJobStatusAggregateAll        ScanJobStatus = "AGGREGATE_ALL"
+	ScanJobStatusAny                 ScanJobStatus = "ANY"
+)
+
+// Values returns all known values for ScanJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanJobStatus) Values() []ScanJobStatus {
+	return []ScanJobStatus{
+		"CREATED",
+		"COMPLETED",
+		"COMPLETED_WITH_ISSUES",
+		"RUNNING",
+		"FAILED",
+		"CANCELED",
+		"AGGREGATE_ALL",
+		"ANY",
+	}
+}
+
+type ScanMode string
+
+// Enum values for ScanMode
+const (
+	ScanModeFullScan        ScanMode = "FULL_SCAN"
+	ScanModeIncrementalScan ScanMode = "INCREMENTAL_SCAN"
+)
+
+// Values returns all known values for ScanMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanMode) Values() []ScanMode {
+	return []ScanMode{
+		"FULL_SCAN",
+		"INCREMENTAL_SCAN",
+	}
+}
+
+type ScanResourceType string
+
+// Enum values for ScanResourceType
+const (
+	ScanResourceTypeEbs ScanResourceType = "EBS"
+	ScanResourceTypeEc2 ScanResourceType = "EC2"
+	ScanResourceTypeS3  ScanResourceType = "S3"
+)
+
+// Values returns all known values for ScanResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanResourceType) Values() []ScanResourceType {
+	return []ScanResourceType{
+		"EBS",
+		"EC2",
+		"S3",
+	}
+}
+
+type ScanResultStatus string
+
+// Enum values for ScanResultStatus
+const (
+	ScanResultStatusNoThreatsFound ScanResultStatus = "NO_THREATS_FOUND"
+	ScanResultStatusThreatsFound   ScanResultStatus = "THREATS_FOUND"
+)
+
+// Values returns all known values for ScanResultStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanResultStatus) Values() []ScanResultStatus {
+	return []ScanResultStatus{
+		"NO_THREATS_FOUND",
+		"THREATS_FOUND",
+	}
+}
+
+type ScanState string
+
+// Enum values for ScanState
+const (
+	ScanStateCanceled            ScanState = "CANCELED"
+	ScanStateCompleted           ScanState = "COMPLETED"
+	ScanStateCompletedWithIssues ScanState = "COMPLETED_WITH_ISSUES"
+	ScanStateCreated             ScanState = "CREATED"
+	ScanStateFailed              ScanState = "FAILED"
+	ScanStateRunning             ScanState = "RUNNING"
+)
+
+// Values returns all known values for ScanState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanState) Values() []ScanState {
+	return []ScanState{
+		"CANCELED",
+		"COMPLETED",
+		"COMPLETED_WITH_ISSUES",
+		"CREATED",
+		"FAILED",
+		"RUNNING",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "83397fd1-413e-436d-a295-b5dd688e75e7",
+    "type": "feature",
+    "description": "Release ListEfficiencyMetrics API",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

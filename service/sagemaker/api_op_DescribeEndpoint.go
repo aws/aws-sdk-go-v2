@@ -128,6 +128,9 @@ type DescribeEndpointOutput struct {
 	// The most recent deployment configuration for the endpoint.
 	LastDeploymentConfig *types.DeploymentConfig
 
+	// The configuration parameters for utilization metrics.
+	MetricsConfig *types.MetricsConfig
+
 	// Returns the summary of an in-progress deployment. This field is only returned
 	// when the endpoint is creating or updating with a new endpoint configuration.
 	PendingDeploymentSummary *types.PendingDeploymentSummary

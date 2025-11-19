@@ -280,6 +280,8 @@ const (
 	PerObjectSyncStatusPending             PerObjectSyncStatus = "PENDING"
 	PerObjectSyncStatusInSync              PerObjectSyncStatus = "IN_SYNC"
 	PerObjectSyncStatusCapacityConstrained PerObjectSyncStatus = "CAPACITY_CONSTRAINED"
+	PerObjectSyncStatusNotSubscribed       PerObjectSyncStatus = "NOT_SUBSCRIBED"
+	PerObjectSyncStatusDeprecated          PerObjectSyncStatus = "DEPRECATED"
 )
 
 // Values returns all known values for PerObjectSyncStatus. Note that this can be
@@ -291,6 +293,8 @@ func (PerObjectSyncStatus) Values() []PerObjectSyncStatus {
 		"PENDING",
 		"IN_SYNC",
 		"CAPACITY_CONSTRAINED",
+		"NOT_SUBSCRIBED",
+		"DEPRECATED",
 	}
 }
 
@@ -320,6 +324,7 @@ const (
 	ResourceManagedTypeAwsManagedThreatSignatures ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"
 	ResourceManagedTypeAwsManagedDomainLists      ResourceManagedType = "AWS_MANAGED_DOMAIN_LISTS"
 	ResourceManagedTypeActiveThreatDefense        ResourceManagedType = "ACTIVE_THREAT_DEFENSE"
+	ResourceManagedTypePartnerManaged             ResourceManagedType = "PARTNER_MANAGED"
 )
 
 // Values returns all known values for ResourceManagedType. Note that this can be
@@ -331,6 +336,7 @@ func (ResourceManagedType) Values() []ResourceManagedType {
 		"AWS_MANAGED_THREAT_SIGNATURES",
 		"AWS_MANAGED_DOMAIN_LISTS",
 		"ACTIVE_THREAT_DEFENSE",
+		"PARTNER_MANAGED",
 	}
 }
 
@@ -531,6 +537,25 @@ func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
 		"DROP",
 		"CONTINUE",
 		"REJECT",
+	}
+}
+
+type SubscriptionStatus string
+
+// Enum values for SubscriptionStatus
+const (
+	SubscriptionStatusNotSubscribed SubscriptionStatus = "NOT_SUBSCRIBED"
+	SubscriptionStatusSubscribed    SubscriptionStatus = "SUBSCRIBED"
+)
+
+// Values returns all known values for SubscriptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionStatus) Values() []SubscriptionStatus {
+	return []SubscriptionStatus{
+		"NOT_SUBSCRIBED",
+		"SUBSCRIBED",
 	}
 }
 

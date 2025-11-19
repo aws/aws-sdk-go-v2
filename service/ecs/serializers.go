@@ -4613,6 +4613,13 @@ func awsAwsjson11_serializeDocumentCreateManagedInstancesProviderConfiguration(v
 	object := value.Object()
 	defer object.Close()
 
+	if v.InfrastructureOptimization != nil {
+		ok := object.Key("infrastructureOptimization")
+		if err := awsAwsjson11_serializeDocumentInfrastructureOptimization(v.InfrastructureOptimization, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InfrastructureRoleArn != nil {
 		ok := object.Key("infrastructureRoleArn")
 		ok.String(*v.InfrastructureRoleArn)
@@ -5327,6 +5334,18 @@ func awsAwsjson11_serializeDocumentInferenceAccelerators(v []types.InferenceAcce
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInfrastructureOptimization(v *types.InfrastructureOptimization, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScaleInAfter != nil {
+		ok := object.Key("scaleInAfter")
+		ok.Integer(*v.ScaleInAfter)
+	}
+
 	return nil
 }
 
@@ -7343,6 +7362,13 @@ func awsAwsjson11_serializeDocumentUlimitList(v []types.Ulimit, value smithyjson
 func awsAwsjson11_serializeDocumentUpdateManagedInstancesProviderConfiguration(v *types.UpdateManagedInstancesProviderConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InfrastructureOptimization != nil {
+		ok := object.Key("infrastructureOptimization")
+		if err := awsAwsjson11_serializeDocumentInfrastructureOptimization(v.InfrastructureOptimization, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InfrastructureRoleArn != nil {
 		ok := object.Key("infrastructureRoleArn")

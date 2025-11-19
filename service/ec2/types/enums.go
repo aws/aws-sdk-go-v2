@@ -655,6 +655,63 @@ func (AutoPlacement) Values() []AutoPlacement {
 	}
 }
 
+type AutoProvisionZonesState string
+
+// Enum values for AutoProvisionZonesState
+const (
+	AutoProvisionZonesStateEnabled  AutoProvisionZonesState = "enabled"
+	AutoProvisionZonesStateDisabled AutoProvisionZonesState = "disabled"
+)
+
+// Values returns all known values for AutoProvisionZonesState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoProvisionZonesState) Values() []AutoProvisionZonesState {
+	return []AutoProvisionZonesState{
+		"enabled",
+		"disabled",
+	}
+}
+
+type AutoScalingIpsState string
+
+// Enum values for AutoScalingIpsState
+const (
+	AutoScalingIpsStateEnabled  AutoScalingIpsState = "enabled"
+	AutoScalingIpsStateDisabled AutoScalingIpsState = "disabled"
+)
+
+// Values returns all known values for AutoScalingIpsState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoScalingIpsState) Values() []AutoScalingIpsState {
+	return []AutoScalingIpsState{
+		"enabled",
+		"disabled",
+	}
+}
+
+type AvailabilityMode string
+
+// Enum values for AvailabilityMode
+const (
+	AvailabilityModeZonal    AvailabilityMode = "zonal"
+	AvailabilityModeRegional AvailabilityMode = "regional"
+)
+
+// Values returns all known values for AvailabilityMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AvailabilityMode) Values() []AvailabilityMode {
+	return []AvailabilityMode{
+		"zonal",
+		"regional",
+	}
+}
+
 type AvailabilityZoneOptInStatus string
 
 // Enum values for AvailabilityZoneOptInStatus
@@ -2826,6 +2883,7 @@ const (
 	FlowLogsResourceTypeNetworkInterface         FlowLogsResourceType = "NetworkInterface"
 	FlowLogsResourceTypeTransitGateway           FlowLogsResourceType = "TransitGateway"
 	FlowLogsResourceTypeTransitGatewayAttachment FlowLogsResourceType = "TransitGatewayAttachment"
+	FlowLogsResourceTypeRegionalNatGateway       FlowLogsResourceType = "RegionalNatGateway"
 )
 
 // Values returns all known values for FlowLogsResourceType. Note that this can be
@@ -2839,6 +2897,7 @@ func (FlowLogsResourceType) Values() []FlowLogsResourceType {
 		"NetworkInterface",
 		"TransitGateway",
 		"TransitGatewayAttachment",
+		"RegionalNatGateway",
 	}
 }
 
@@ -6288,6 +6347,87 @@ func (IpamOverlapStatus) Values() []IpamOverlapStatus {
 	}
 }
 
+type IpamPolicyManagedBy string
+
+// Enum values for IpamPolicyManagedBy
+const (
+	IpamPolicyManagedByAccount                       IpamPolicyManagedBy = "account"
+	IpamPolicyManagedByDelegatedAdministratorForIpam IpamPolicyManagedBy = "delegated-administrator-for-ipam"
+)
+
+// Values returns all known values for IpamPolicyManagedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPolicyManagedBy) Values() []IpamPolicyManagedBy {
+	return []IpamPolicyManagedBy{
+		"account",
+		"delegated-administrator-for-ipam",
+	}
+}
+
+type IpamPolicyResourceType string
+
+// Enum values for IpamPolicyResourceType
+const (
+	IpamPolicyResourceTypeAlb  IpamPolicyResourceType = "alb"
+	IpamPolicyResourceTypeEip  IpamPolicyResourceType = "eip"
+	IpamPolicyResourceTypeRds  IpamPolicyResourceType = "rds"
+	IpamPolicyResourceTypeRnat IpamPolicyResourceType = "rnat"
+)
+
+// Values returns all known values for IpamPolicyResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPolicyResourceType) Values() []IpamPolicyResourceType {
+	return []IpamPolicyResourceType{
+		"alb",
+		"eip",
+		"rds",
+		"rnat",
+	}
+}
+
+type IpamPolicyState string
+
+// Enum values for IpamPolicyState
+const (
+	IpamPolicyStateCreateInProgress  IpamPolicyState = "create-in-progress"
+	IpamPolicyStateCreateComplete    IpamPolicyState = "create-complete"
+	IpamPolicyStateCreateFailed      IpamPolicyState = "create-failed"
+	IpamPolicyStateModifyInProgress  IpamPolicyState = "modify-in-progress"
+	IpamPolicyStateModifyComplete    IpamPolicyState = "modify-complete"
+	IpamPolicyStateModifyFailed      IpamPolicyState = "modify-failed"
+	IpamPolicyStateDeleteInProgress  IpamPolicyState = "delete-in-progress"
+	IpamPolicyStateDeleteComplete    IpamPolicyState = "delete-complete"
+	IpamPolicyStateDeleteFailed      IpamPolicyState = "delete-failed"
+	IpamPolicyStateIsolateInProgress IpamPolicyState = "isolate-in-progress"
+	IpamPolicyStateIsolateComplete   IpamPolicyState = "isolate-complete"
+	IpamPolicyStateRestoreInProgress IpamPolicyState = "restore-in-progress"
+)
+
+// Values returns all known values for IpamPolicyState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPolicyState) Values() []IpamPolicyState {
+	return []IpamPolicyState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"modify-in-progress",
+		"modify-complete",
+		"modify-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
+		"isolate-in-progress",
+		"isolate-complete",
+		"restore-in-progress",
+	}
+}
+
 type IpamPoolAllocationResourceType string
 
 // Enum values for IpamPoolAllocationResourceType
@@ -8898,6 +9038,7 @@ const (
 	ResourceTypeCapacityBlock                                          ResourceType = "capacity-block"
 	ResourceTypeMacModificationTask                                    ResourceType = "mac-modification-task"
 	ResourceTypeIpamPrefixListResolver                                 ResourceType = "ipam-prefix-list-resolver"
+	ResourceTypeIpamPolicy                                             ResourceType = "ipam-policy"
 	ResourceTypeIpamPrefixListResolverTarget                           ResourceType = "ipam-prefix-list-resolver-target"
 	ResourceTypeCapacityManagerDataExport                              ResourceType = "capacity-manager-data-export"
 	ResourceTypeVpnConcentrator                                        ResourceType = "vpn-concentrator"
@@ -9007,6 +9148,7 @@ func (ResourceType) Values() []ResourceType {
 		"capacity-block",
 		"mac-modification-task",
 		"ipam-prefix-list-resolver",
+		"ipam-policy",
 		"ipam-prefix-list-resolver-target",
 		"capacity-manager-data-export",
 		"vpn-concentrator",
@@ -9566,6 +9708,7 @@ const (
 	ServiceManagedAlb  ServiceManaged = "alb"
 	ServiceManagedNlb  ServiceManaged = "nlb"
 	ServiceManagedRnat ServiceManaged = "rnat"
+	ServiceManagedRds  ServiceManaged = "rds"
 )
 
 // Values returns all known values for ServiceManaged. Note that this can be
@@ -9577,6 +9720,7 @@ func (ServiceManaged) Values() []ServiceManaged {
 		"alb",
 		"nlb",
 		"rnat",
+		"rds",
 	}
 }
 

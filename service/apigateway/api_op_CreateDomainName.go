@@ -63,6 +63,10 @@ type CreateDomainNameInput struct {
 	// key.
 	CertificatePrivateKey *string
 
+	//  The endpoint access mode of the DomainName. Only available for DomainNames
+	// that use security policies that start with SecurityPolicy_ .
+	EndpointAccessMode types.EndpointAccessMode
+
 	// The endpoint configuration of this DomainName showing the endpoint types and IP
 	// address types of the domain name.
 	EndpointConfiguration *types.EndpointConfiguration
@@ -96,7 +100,6 @@ type CreateDomainNameInput struct {
 	RoutingMode types.RoutingMode
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
@@ -157,6 +160,9 @@ type CreateDomainNameOutput struct {
 	// DomainName migration.
 	DomainNameStatusMessage *string
 
+	//  The endpoint access mode of the DomainName.
+	EndpointAccessMode types.EndpointAccessMode
+
 	// The endpoint configuration of this DomainName showing the endpoint types and IP
 	// address types of the domain name.
 	EndpointConfiguration *types.EndpointConfiguration
@@ -207,7 +213,6 @@ type CreateDomainNameOutput struct {
 	RoutingMode types.RoutingMode
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
-	// The valid values are TLS_1_0 and TLS_1_2 .
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.

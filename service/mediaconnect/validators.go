@@ -130,6 +130,66 @@ func (m *validateOpAddFlowVpcInterfaces) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetRouterInput struct {
+}
+
+func (*validateOpBatchGetRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetRouterNetworkInterface struct {
+}
+
+func (*validateOpBatchGetRouterNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetRouterNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetRouterNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetRouterNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetRouterOutput struct {
+}
+
+func (*validateOpBatchGetRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBridge struct {
 }
 
@@ -190,6 +250,66 @@ func (m *validateOpCreateGateway) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRouterInput struct {
+}
+
+func (*validateOpCreateRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRouterNetworkInterface struct {
+}
+
+func (*validateOpCreateRouterNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRouterNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRouterNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRouterNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRouterOutput struct {
+}
+
+func (*validateOpCreateRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBridge struct {
 }
 
@@ -245,6 +365,66 @@ func (m *validateOpDeleteGateway) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRouterInput struct {
+}
+
+func (*validateOpDeleteRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRouterNetworkInterface struct {
+}
+
+func (*validateOpDeleteRouterNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRouterNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRouterNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRouterNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRouterOutput struct {
+}
+
+func (*validateOpDeleteRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRouterOutputInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +610,106 @@ func (m *validateOpDescribeReservation) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRouterInput struct {
+}
+
+func (*validateOpGetRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRouterInputSourceMetadata struct {
+}
+
+func (*validateOpGetRouterInputSourceMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRouterInputSourceMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRouterInputSourceMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRouterInputSourceMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRouterInputThumbnail struct {
+}
+
+func (*validateOpGetRouterInputThumbnail) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRouterInputThumbnail) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRouterInputThumbnailInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRouterInputThumbnailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRouterNetworkInterface struct {
+}
+
+func (*validateOpGetRouterNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRouterNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRouterNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRouterNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRouterOutput struct {
+}
+
+func (*validateOpGetRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGrantFlowEntitlements struct {
 }
 
@@ -445,6 +725,26 @@ func (m *validateOpGrantFlowEntitlements) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGrantFlowEntitlementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForGlobalResource struct {
+}
+
+func (*validateOpListTagsForGlobalResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForGlobalResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForGlobalResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForGlobalResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +910,46 @@ func (m *validateOpRemoveFlowVpcInterface) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRestartRouterInput struct {
+}
+
+func (*validateOpRestartRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestartRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestartRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestartRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestartRouterOutput struct {
+}
+
+func (*validateOpRestartRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestartRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestartRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestartRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRevokeFlowEntitlement struct {
 }
 
@@ -650,6 +990,46 @@ func (m *validateOpStartFlow) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartRouterInput struct {
+}
+
+func (*validateOpStartRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartRouterOutput struct {
+}
+
+func (*validateOpStartRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopFlow struct {
 }
 
@@ -670,6 +1050,66 @@ func (m *validateOpStopFlow) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopRouterInput struct {
+}
+
+func (*validateOpStopRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopRouterOutput struct {
+}
+
+func (*validateOpStopRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagGlobalResource struct {
+}
+
+func (*validateOpTagGlobalResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagGlobalResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagGlobalResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagGlobalResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -685,6 +1125,46 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTakeRouterInput struct {
+}
+
+func (*validateOpTakeRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTakeRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TakeRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTakeRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagGlobalResource struct {
+}
+
+func (*validateOpUntagGlobalResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagGlobalResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagGlobalResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagGlobalResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -910,6 +1390,66 @@ func (m *validateOpUpdateGatewayInstance) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRouterInput struct {
+}
+
+func (*validateOpUpdateRouterInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRouterInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRouterInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRouterInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRouterNetworkInterface struct {
+}
+
+func (*validateOpUpdateRouterNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRouterNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRouterNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRouterNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRouterOutput struct {
+}
+
+func (*validateOpUpdateRouterOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRouterOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRouterOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRouterOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddBridgeOutputsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddBridgeOutputs{}, middleware.After)
 }
@@ -934,6 +1474,18 @@ func addOpAddFlowVpcInterfacesValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAddFlowVpcInterfaces{}, middleware.After)
 }
 
+func addOpBatchGetRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetRouterInput{}, middleware.After)
+}
+
+func addOpBatchGetRouterNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetRouterNetworkInterface{}, middleware.After)
+}
+
+func addOpBatchGetRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetRouterOutput{}, middleware.After)
+}
+
 func addOpCreateBridgeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBridge{}, middleware.After)
 }
@@ -946,6 +1498,18 @@ func addOpCreateGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGateway{}, middleware.After)
 }
 
+func addOpCreateRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRouterInput{}, middleware.After)
+}
+
+func addOpCreateRouterNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRouterNetworkInterface{}, middleware.After)
+}
+
+func addOpCreateRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRouterOutput{}, middleware.After)
+}
+
 func addOpDeleteBridgeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBridge{}, middleware.After)
 }
@@ -956,6 +1520,18 @@ func addOpDeleteFlowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGateway{}, middleware.After)
+}
+
+func addOpDeleteRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRouterInput{}, middleware.After)
+}
+
+func addOpDeleteRouterNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRouterNetworkInterface{}, middleware.After)
+}
+
+func addOpDeleteRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRouterOutput{}, middleware.After)
 }
 
 func addOpDeregisterGatewayInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -994,8 +1570,32 @@ func addOpDescribeReservationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeReservation{}, middleware.After)
 }
 
+func addOpGetRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRouterInput{}, middleware.After)
+}
+
+func addOpGetRouterInputSourceMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRouterInputSourceMetadata{}, middleware.After)
+}
+
+func addOpGetRouterInputThumbnailValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRouterInputThumbnail{}, middleware.After)
+}
+
+func addOpGetRouterNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRouterNetworkInterface{}, middleware.After)
+}
+
+func addOpGetRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRouterOutput{}, middleware.After)
+}
+
 func addOpGrantFlowEntitlementsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGrantFlowEntitlements{}, middleware.After)
+}
+
+func addOpListTagsForGlobalResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForGlobalResource{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1030,6 +1630,14 @@ func addOpRemoveFlowVpcInterfaceValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpRemoveFlowVpcInterface{}, middleware.After)
 }
 
+func addOpRestartRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestartRouterInput{}, middleware.After)
+}
+
+func addOpRestartRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestartRouterOutput{}, middleware.After)
+}
+
 func addOpRevokeFlowEntitlementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeFlowEntitlement{}, middleware.After)
 }
@@ -1038,12 +1646,40 @@ func addOpStartFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFlow{}, middleware.After)
 }
 
+func addOpStartRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRouterInput{}, middleware.After)
+}
+
+func addOpStartRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRouterOutput{}, middleware.After)
+}
+
 func addOpStopFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopFlow{}, middleware.After)
 }
 
+func addOpStopRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopRouterInput{}, middleware.After)
+}
+
+func addOpStopRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopRouterOutput{}, middleware.After)
+}
+
+func addOpTagGlobalResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagGlobalResource{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTakeRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTakeRouterInput{}, middleware.After)
+}
+
+func addOpUntagGlobalResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagGlobalResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1088,6 +1724,18 @@ func addOpUpdateFlowSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateGatewayInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGatewayInstance{}, middleware.After)
+}
+
+func addOpUpdateRouterInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRouterInput{}, middleware.After)
+}
+
+func addOpUpdateRouterNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRouterNetworkInterface{}, middleware.After)
+}
+
+func addOpUpdateRouterOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRouterOutput{}, middleware.After)
 }
 
 func validate__listOfAddBridgeOutputRequest(v []types.AddBridgeOutputRequest) error {
@@ -1512,6 +2160,11 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 			invalidParams.AddNested("MediaStreamOutputConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RouterIntegrationTransitEncryption != nil {
+		if err := validateFlowTransitEncryption(v.RouterIntegrationTransitEncryption); err != nil {
+			invalidParams.AddNested("RouterIntegrationTransitEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1569,6 +2222,120 @@ func validateEncryption(v *types.Encryption) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Encryption"}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFailoverRouterInputConfiguration(v *types.FailoverRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverRouterInputConfiguration"}
+	if v.NetworkInterfaceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceArn"))
+	}
+	if v.ProtocolConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolConfigurations"))
+	} else if v.ProtocolConfigurations != nil {
+		if err := validateFailoverRouterInputProtocolConfigurationList(v.ProtocolConfigurations); err != nil {
+			invalidParams.AddNested("ProtocolConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.SourcePriorityMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourcePriorityMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFailoverRouterInputProtocolConfiguration(v types.FailoverRouterInputProtocolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverRouterInputProtocolConfiguration"}
+	switch uv := v.(type) {
+	case *types.FailoverRouterInputProtocolConfigurationMemberRist:
+		if err := validateRistRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FailoverRouterInputProtocolConfigurationMemberRtp:
+		if err := validateRtpRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FailoverRouterInputProtocolConfigurationMemberSrtCaller:
+		if err := validateSrtCallerRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtCaller]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FailoverRouterInputProtocolConfigurationMemberSrtListener:
+		if err := validateSrtListenerRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtListener]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFailoverRouterInputProtocolConfigurationList(v []types.FailoverRouterInputProtocolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverRouterInputProtocolConfigurationList"}
+	for i := range v {
+		if err := validateFailoverRouterInputProtocolConfiguration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowTransitEncryption(v *types.FlowTransitEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowTransitEncryption"}
+	if v.EncryptionKeyConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionKeyConfiguration"))
+	} else if v.EncryptionKeyConfiguration != nil {
+		if err := validateFlowTransitEncryptionKeyConfiguration(v.EncryptionKeyConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionKeyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowTransitEncryptionKeyConfiguration(v types.FlowTransitEncryptionKeyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowTransitEncryptionKeyConfiguration"}
+	switch uv := v.(type) {
+	case *types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager:
+		if err := validateSecretsManagerEncryptionKeyConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SecretsManager]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1652,6 +2419,120 @@ func validateInterfaceRequest(v *types.InterfaceRequest) error {
 	}
 }
 
+func validateMaintenanceConfiguration(v types.MaintenanceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MaintenanceConfiguration"}
+	switch uv := v.(type) {
+	case *types.MaintenanceConfigurationMemberPreferredDayTime:
+		if err := validatePreferredDayTimeMaintenanceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[PreferredDayTime]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaConnectFlowRouterInputConfiguration(v *types.MediaConnectFlowRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaConnectFlowRouterInputConfiguration"}
+	if v.SourceTransitDecryption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceTransitDecryption"))
+	} else if v.SourceTransitDecryption != nil {
+		if err := validateFlowTransitEncryption(v.SourceTransitDecryption); err != nil {
+			invalidParams.AddNested("SourceTransitDecryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaConnectFlowRouterOutputConfiguration(v *types.MediaConnectFlowRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaConnectFlowRouterOutputConfiguration"}
+	if v.DestinationTransitEncryption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTransitEncryption"))
+	} else if v.DestinationTransitEncryption != nil {
+		if err := validateFlowTransitEncryption(v.DestinationTransitEncryption); err != nil {
+			invalidParams.AddNested("DestinationTransitEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaLiveInputRouterOutputConfiguration(v *types.MediaLiveInputRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaLiveInputRouterOutputConfiguration"}
+	if v.DestinationTransitEncryption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTransitEncryption"))
+	} else if v.DestinationTransitEncryption != nil {
+		if err := validateMediaLiveTransitEncryption(v.DestinationTransitEncryption); err != nil {
+			invalidParams.AddNested("DestinationTransitEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaLiveTransitEncryption(v *types.MediaLiveTransitEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaLiveTransitEncryption"}
+	if v.EncryptionKeyConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionKeyConfiguration"))
+	} else if v.EncryptionKeyConfiguration != nil {
+		if err := validateMediaLiveTransitEncryptionKeyConfiguration(v.EncryptionKeyConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionKeyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaLiveTransitEncryptionKeyConfiguration(v types.MediaLiveTransitEncryptionKeyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaLiveTransitEncryptionKeyConfiguration"}
+	switch uv := v.(type) {
+	case *types.MediaLiveTransitEncryptionKeyConfigurationMemberSecretsManager:
+		if err := validateSecretsManagerEncryptionKeyConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SecretsManager]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaStreamOutputConfigurationRequest(v *types.MediaStreamOutputConfigurationRequest) error {
 	if v == nil {
 		return nil
@@ -1703,6 +2584,72 @@ func validateMediaStreamSourceConfigurationRequest(v *types.MediaStreamSourceCon
 	}
 }
 
+func validateMergeRouterInputConfiguration(v *types.MergeRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MergeRouterInputConfiguration"}
+	if v.NetworkInterfaceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceArn"))
+	}
+	if v.ProtocolConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolConfigurations"))
+	} else if v.ProtocolConfigurations != nil {
+		if err := validateMergeRouterInputProtocolConfigurationList(v.ProtocolConfigurations); err != nil {
+			invalidParams.AddNested("ProtocolConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MergeRecoveryWindowMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergeRecoveryWindowMilliseconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMergeRouterInputProtocolConfiguration(v types.MergeRouterInputProtocolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MergeRouterInputProtocolConfiguration"}
+	switch uv := v.(type) {
+	case *types.MergeRouterInputProtocolConfigurationMemberRist:
+		if err := validateRistRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MergeRouterInputProtocolConfigurationMemberRtp:
+		if err := validateRtpRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMergeRouterInputProtocolConfigurationList(v []types.MergeRouterInputProtocolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MergeRouterInputProtocolConfigurationList"}
+	for i := range v {
+		if err := validateMergeRouterInputProtocolConfiguration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNdiConfig(v *types.NdiConfig) error {
 	if v == nil {
 		return nil
@@ -1730,6 +2677,355 @@ func validateNdiDiscoveryServerConfig(v *types.NdiDiscoveryServerConfig) error {
 	}
 	if v.VpcInterfaceAdapter == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcInterfaceAdapter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkInterfaceRuleList(v []types.PublicRouterNetworkInterfaceRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkInterfaceRuleList"}
+	for i := range v {
+		if err := validatePublicRouterNetworkInterfaceRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreferredDayTimeMaintenanceConfiguration(v *types.PreferredDayTimeMaintenanceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreferredDayTimeMaintenanceConfiguration"}
+	if len(v.Day) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Day"))
+	}
+	if v.Time == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Time"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicRouterNetworkInterfaceConfiguration(v *types.PublicRouterNetworkInterfaceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicRouterNetworkInterfaceConfiguration"}
+	if v.AllowRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowRules"))
+	} else if v.AllowRules != nil {
+		if err := validateNetworkInterfaceRuleList(v.AllowRules); err != nil {
+			invalidParams.AddNested("AllowRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicRouterNetworkInterfaceRule(v *types.PublicRouterNetworkInterfaceRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicRouterNetworkInterfaceRule"}
+	if v.Cidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRistRouterInputConfiguration(v *types.RistRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RistRouterInputConfiguration"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.RecoveryLatencyMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryLatencyMilliseconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRistRouterOutputConfiguration(v *types.RistRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RistRouterOutputConfiguration"}
+	if v.DestinationAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAddress"))
+	}
+	if v.DestinationPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPort"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterInputConfiguration(v types.RouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterInputConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterInputConfigurationMemberFailover:
+		if err := validateFailoverRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Failover]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputConfigurationMemberMediaConnectFlow:
+		if err := validateMediaConnectFlowRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[MediaConnectFlow]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputConfigurationMemberMerge:
+		if err := validateMergeRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Merge]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputConfigurationMemberStandard:
+		if err := validateStandardRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Standard]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterInputProtocolConfiguration(v types.RouterInputProtocolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterInputProtocolConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterInputProtocolConfigurationMemberRist:
+		if err := validateRistRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputProtocolConfigurationMemberRtp:
+		if err := validateRtpRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputProtocolConfigurationMemberSrtCaller:
+		if err := validateSrtCallerRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtCaller]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputProtocolConfigurationMemberSrtListener:
+		if err := validateSrtListenerRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtListener]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterInputTransitEncryption(v *types.RouterInputTransitEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterInputTransitEncryption"}
+	if v.EncryptionKeyConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionKeyConfiguration"))
+	} else if v.EncryptionKeyConfiguration != nil {
+		if err := validateRouterInputTransitEncryptionKeyConfiguration(v.EncryptionKeyConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionKeyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterInputTransitEncryptionKeyConfiguration(v types.RouterInputTransitEncryptionKeyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterInputTransitEncryptionKeyConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterInputTransitEncryptionKeyConfigurationMemberSecretsManager:
+		if err := validateSecretsManagerEncryptionKeyConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SecretsManager]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterNetworkInterfaceConfiguration(v types.RouterNetworkInterfaceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterNetworkInterfaceConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterNetworkInterfaceConfigurationMemberPublic:
+		if err := validatePublicRouterNetworkInterfaceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Public]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterNetworkInterfaceConfigurationMemberVpc:
+		if err := validateVpcRouterNetworkInterfaceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Vpc]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterOutputConfiguration(v types.RouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterOutputConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterOutputConfigurationMemberMediaConnectFlow:
+		if err := validateMediaConnectFlowRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[MediaConnectFlow]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterOutputConfigurationMemberMediaLiveInput:
+		if err := validateMediaLiveInputRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[MediaLiveInput]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterOutputConfigurationMemberStandard:
+		if err := validateStandardRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Standard]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouterOutputProtocolConfiguration(v types.RouterOutputProtocolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouterOutputProtocolConfiguration"}
+	switch uv := v.(type) {
+	case *types.RouterOutputProtocolConfigurationMemberRist:
+		if err := validateRistRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterOutputProtocolConfigurationMemberRtp:
+		if err := validateRtpRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterOutputProtocolConfigurationMemberSrtCaller:
+		if err := validateSrtCallerRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtCaller]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterOutputProtocolConfigurationMemberSrtListener:
+		if err := validateSrtListenerRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[SrtListener]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRtpRouterInputConfiguration(v *types.RtpRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RtpRouterInputConfiguration"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRtpRouterOutputConfiguration(v *types.RtpRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RtpRouterOutputConfiguration"}
+	if v.DestinationAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAddress"))
+	}
+	if v.DestinationPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPort"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecretsManagerEncryptionKeyConfiguration(v *types.SecretsManagerEncryptionKeyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecretsManagerEncryptionKeyConfiguration"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1773,6 +3069,191 @@ func validateSetSourceRequest(v *types.SetSourceRequest) error {
 			invalidParams.AddNested("GatewayBridgeSource", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RouterIntegrationTransitDecryption != nil {
+		if err := validateFlowTransitEncryption(v.RouterIntegrationTransitDecryption); err != nil {
+			invalidParams.AddNested("RouterIntegrationTransitDecryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtCallerRouterInputConfiguration(v *types.SrtCallerRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtCallerRouterInputConfiguration"}
+	if v.SourceAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceAddress"))
+	}
+	if v.SourcePort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourcePort"))
+	}
+	if v.MinimumLatencyMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumLatencyMilliseconds"))
+	}
+	if v.DecryptionConfiguration != nil {
+		if err := validateSrtDecryptionConfiguration(v.DecryptionConfiguration); err != nil {
+			invalidParams.AddNested("DecryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtCallerRouterOutputConfiguration(v *types.SrtCallerRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtCallerRouterOutputConfiguration"}
+	if v.DestinationAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAddress"))
+	}
+	if v.DestinationPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPort"))
+	}
+	if v.MinimumLatencyMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumLatencyMilliseconds"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateSrtEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtDecryptionConfiguration(v *types.SrtDecryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtDecryptionConfiguration"}
+	if v.EncryptionKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionKey"))
+	} else if v.EncryptionKey != nil {
+		if err := validateSecretsManagerEncryptionKeyConfiguration(v.EncryptionKey); err != nil {
+			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtEncryptionConfiguration(v *types.SrtEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtEncryptionConfiguration"}
+	if v.EncryptionKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionKey"))
+	} else if v.EncryptionKey != nil {
+		if err := validateSecretsManagerEncryptionKeyConfiguration(v.EncryptionKey); err != nil {
+			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtListenerRouterInputConfiguration(v *types.SrtListenerRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtListenerRouterInputConfiguration"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.MinimumLatencyMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumLatencyMilliseconds"))
+	}
+	if v.DecryptionConfiguration != nil {
+		if err := validateSrtDecryptionConfiguration(v.DecryptionConfiguration); err != nil {
+			invalidParams.AddNested("DecryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSrtListenerRouterOutputConfiguration(v *types.SrtListenerRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SrtListenerRouterOutputConfiguration"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.MinimumLatencyMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumLatencyMilliseconds"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateSrtEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStandardRouterInputConfiguration(v *types.StandardRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandardRouterInputConfiguration"}
+	if v.NetworkInterfaceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceArn"))
+	}
+	if v.ProtocolConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolConfiguration"))
+	} else if v.ProtocolConfiguration != nil {
+		if err := validateRouterInputProtocolConfiguration(v.ProtocolConfiguration); err != nil {
+			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStandardRouterOutputConfiguration(v *types.StandardRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandardRouterOutputConfiguration"}
+	if v.NetworkInterfaceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceArn"))
+	}
+	if v.ProtocolConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolConfiguration"))
+	} else if v.ProtocolConfiguration != nil {
+		if err := validateRouterOutputProtocolConfiguration(v.ProtocolConfiguration); err != nil {
+			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1791,6 +3272,24 @@ func validateVpcInterfaceRequest(v *types.VpcInterfaceRequest) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.SubnetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcRouterNetworkInterfaceConfiguration(v *types.VpcRouterNetworkInterfaceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcRouterNetworkInterfaceConfiguration"}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
 	}
@@ -1936,6 +3435,51 @@ func validateOpAddFlowVpcInterfacesInput(v *AddFlowVpcInterfacesInput) error {
 	}
 }
 
+func validateOpBatchGetRouterInputInput(v *BatchGetRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRouterInputInput"}
+	if v.Arns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetRouterNetworkInterfaceInput(v *BatchGetRouterNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRouterNetworkInterfaceInput"}
+	if v.Arns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetRouterOutputInput(v *BatchGetRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRouterOutputInput"}
+	if v.Arns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBridgeInput(v *CreateBridgeInput) error {
 	if v == nil {
 		return nil
@@ -2056,6 +3600,105 @@ func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 	}
 }
 
+func validateOpCreateRouterInputInput(v *CreateRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRouterInputInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateRouterInputConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaximumBitrate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumBitrate"))
+	}
+	if len(v.RoutingScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingScope"))
+	}
+	if len(v.Tier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
+	}
+	if v.TransitEncryption != nil {
+		if err := validateRouterInputTransitEncryption(v.TransitEncryption); err != nil {
+			invalidParams.AddNested("TransitEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceConfiguration != nil {
+		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
+			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRouterNetworkInterfaceInput(v *CreateRouterNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRouterNetworkInterfaceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateRouterNetworkInterfaceConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRouterOutputInput(v *CreateRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRouterOutputInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateRouterOutputConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaximumBitrate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumBitrate"))
+	}
+	if len(v.RoutingScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingScope"))
+	}
+	if len(v.Tier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
+	}
+	if v.MaintenanceConfiguration != nil {
+		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
+			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBridgeInput(v *DeleteBridgeInput) error {
 	if v == nil {
 		return nil
@@ -2093,6 +3736,51 @@ func validateOpDeleteGatewayInput(v *DeleteGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGatewayInput"}
 	if v.GatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRouterInputInput(v *DeleteRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRouterInputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRouterNetworkInterfaceInput(v *DeleteRouterNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRouterNetworkInterfaceInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRouterOutputInput(v *DeleteRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRouterOutputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2236,6 +3924,81 @@ func validateOpDescribeReservationInput(v *DescribeReservationInput) error {
 	}
 }
 
+func validateOpGetRouterInputInput(v *GetRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRouterInputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRouterInputSourceMetadataInput(v *GetRouterInputSourceMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRouterInputSourceMetadataInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRouterInputThumbnailInput(v *GetRouterInputThumbnailInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRouterInputThumbnailInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRouterNetworkInterfaceInput(v *GetRouterNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRouterNetworkInterfaceInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRouterOutputInput(v *GetRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRouterOutputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGrantFlowEntitlementsInput(v *GrantFlowEntitlementsInput) error {
 	if v == nil {
 		return nil
@@ -2250,6 +4013,21 @@ func validateOpGrantFlowEntitlementsInput(v *GrantFlowEntitlementsInput) error {
 	}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForGlobalResourceInput(v *ListTagsForGlobalResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForGlobalResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2402,6 +4180,36 @@ func validateOpRemoveFlowVpcInterfaceInput(v *RemoveFlowVpcInterfaceInput) error
 	}
 }
 
+func validateOpRestartRouterInputInput(v *RestartRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestartRouterInputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestartRouterOutputInput(v *RestartRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestartRouterOutputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRevokeFlowEntitlementInput(v *RevokeFlowEntitlementInput) error {
 	if v == nil {
 		return nil
@@ -2435,6 +4243,36 @@ func validateOpStartFlowInput(v *StartFlowInput) error {
 	}
 }
 
+func validateOpStartRouterInputInput(v *StartRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRouterInputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRouterOutputInput(v *StartRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRouterOutputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopFlowInput(v *StopFlowInput) error {
 	if v == nil {
 		return nil
@@ -2442,6 +4280,54 @@ func validateOpStopFlowInput(v *StopFlowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopFlowInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopRouterInputInput(v *StopRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopRouterInputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopRouterOutputInput(v *StopRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopRouterOutputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagGlobalResourceInput(v *TagGlobalResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagGlobalResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2460,6 +4346,39 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTakeRouterInputInput(v *TakeRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TakeRouterInputInput"}
+	if v.RouterOutputArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouterOutputArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagGlobalResourceInput(v *UntagGlobalResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagGlobalResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2627,6 +4546,11 @@ func validateOpUpdateFlowOutputInput(v *UpdateFlowOutputInput) error {
 	if v.OutputArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputArn"))
 	}
+	if v.RouterIntegrationTransitEncryption != nil {
+		if err := validateFlowTransitEncryption(v.RouterIntegrationTransitEncryption); err != nil {
+			invalidParams.AddNested("RouterIntegrationTransitEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2650,6 +4574,11 @@ func validateOpUpdateFlowSourceInput(v *UpdateFlowSourceInput) error {
 	if v.SourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
 	}
+	if v.RouterIntegrationTransitDecryption != nil {
+		if err := validateFlowTransitEncryption(v.RouterIntegrationTransitDecryption); err != nil {
+			invalidParams.AddNested("RouterIntegrationTransitDecryption", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2664,6 +4593,81 @@ func validateOpUpdateGatewayInstanceInput(v *UpdateGatewayInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayInstanceInput"}
 	if v.GatewayInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRouterInputInput(v *UpdateRouterInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRouterInputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Configuration != nil {
+		if err := validateRouterInputConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TransitEncryption != nil {
+		if err := validateRouterInputTransitEncryption(v.TransitEncryption); err != nil {
+			invalidParams.AddNested("TransitEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceConfiguration != nil {
+		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
+			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRouterNetworkInterfaceInput(v *UpdateRouterNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRouterNetworkInterfaceInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Configuration != nil {
+		if err := validateRouterNetworkInterfaceConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRouterOutputInput(v *UpdateRouterOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRouterOutputInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Configuration != nil {
+		if err := validateRouterOutputConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceConfiguration != nil {
+		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
+			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

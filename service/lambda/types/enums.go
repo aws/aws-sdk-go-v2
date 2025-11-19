@@ -516,9 +516,9 @@ const (
 	RuntimeJava21         Runtime = "java21"
 	RuntimePython313      Runtime = "python3.13"
 	RuntimeNodejs22x      Runtime = "nodejs22.x"
-	RuntimeJava25         Runtime = "java25"
 	RuntimeNodejs24x      Runtime = "nodejs24.x"
 	RuntimePython314      Runtime = "python3.14"
+	RuntimeJava25         Runtime = "java25"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -568,9 +568,9 @@ func (Runtime) Values() []Runtime {
 		"java21",
 		"python3.13",
 		"nodejs22.x",
-		"java25",
 		"nodejs24.x",
 		"python3.14",
+		"java25",
 	}
 }
 
@@ -767,6 +767,23 @@ func (SystemLogLevel) Values() []SystemLogLevel {
 		"DEBUG",
 		"INFO",
 		"WARN",
+	}
+}
+
+type TenantIsolationMode string
+
+// Enum values for TenantIsolationMode
+const (
+	TenantIsolationModePerTenant TenantIsolationMode = "PER_TENANT"
+)
+
+// Values returns all known values for TenantIsolationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TenantIsolationMode) Values() []TenantIsolationMode {
+	return []TenantIsolationMode{
+		"PER_TENANT",
 	}
 }
 

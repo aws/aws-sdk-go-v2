@@ -121,6 +121,9 @@ type Citation struct {
 	// found, including character positions, page numbers, or chunk identifiers.
 	Location CitationLocation
 
+	// The source from the original search result that provided the cited content.
+	Source *string
+
 	// The specific content from the source document that was referenced or cited in
 	// the generated response.
 	SourceContent []CitationSourceContent
@@ -160,6 +163,7 @@ func (*CitationGeneratedContentMemberText) isCitationGeneratedContent() {}
 //	CitationLocationMemberDocumentChar
 //	CitationLocationMemberDocumentChunk
 //	CitationLocationMemberDocumentPage
+//	CitationLocationMemberSearchResultLocation
 //	CitationLocationMemberWeb
 type CitationLocation interface {
 	isCitationLocation()
@@ -193,6 +197,16 @@ type CitationLocationMemberDocumentPage struct {
 }
 
 func (*CitationLocationMemberDocumentPage) isCitationLocation() {}
+
+// The search result location where the cited content is found, including the
+// search result index and block positions within the content array.
+type CitationLocationMemberSearchResultLocation struct {
+	Value SearchResultLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*CitationLocationMemberSearchResultLocation) isCitationLocation() {}
 
 // The web URL that was cited for this reference.
 type CitationLocationMemberWeb struct {
@@ -243,6 +257,9 @@ type CitationsDelta struct {
 	// be found. This can include character-level positions, page numbers, or document
 	// chunks depending on the document type and indexing method.
 	Location CitationLocation
+
+	// The source from the original search result that provided the cited content.
+	Source *string
 
 	// The specific content from the source document that was referenced or cited in
 	// the generated response.
@@ -295,6 +312,7 @@ type CitationSourceContentDelta struct {
 //	ContentBlockMemberGuardContent
 //	ContentBlockMemberImage
 //	ContentBlockMemberReasoningContent
+//	ContentBlockMemberSearchResult
 //	ContentBlockMemberText
 //	ContentBlockMemberToolResult
 //	ContentBlockMemberToolUse
@@ -369,6 +387,15 @@ type ContentBlockMemberReasoningContent struct {
 }
 
 func (*ContentBlockMemberReasoningContent) isContentBlock() {}
+
+// Search result to include in the message.
+type ContentBlockMemberSearchResult struct {
+	Value SearchResultBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberSearchResult) isContentBlock() {}
 
 // Text to include in the message.
 type ContentBlockMemberText struct {
@@ -2185,6 +2212,62 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+// A search result block that enables natural citations with proper source
+// attribution for retrieved content.
+//
+// This field is only supported by Anthropic Claude Opus 4.1, Opus 4, Sonnet 4.5,
+// Sonnet 4, Sonnet 3.7, and 3.5 Haiku models.
+type SearchResultBlock struct {
+
+	// An array of search result content block.
+	//
+	// This member is required.
+	Content []SearchResultContentBlock
+
+	// The source URL or identifier for the content.
+	//
+	// This member is required.
+	Source *string
+
+	// A descriptive title for the search result.
+	//
+	// This member is required.
+	Title *string
+
+	// Configuration setting for citations
+	Citations *CitationsConfig
+
+	noSmithyDocumentSerde
+}
+
+// A block within a search result that contains the content.
+type SearchResultContentBlock struct {
+
+	// The actual text content
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a search result location within the content array, providing
+// positioning information for cited content using search result index and block
+// positions.
+type SearchResultLocation struct {
+
+	// The ending position in the content array where the cited content ends.
+	End *int32
+
+	// The index of the search result content block where the cited content is found.
+	SearchResultIndex *int32
+
+	// The starting position in the content array where the cited content begins.
+	Start *int32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the processing tier configuration used for serving the request.
 type ServiceTier struct {
 
@@ -2513,6 +2596,7 @@ type ToolResultBlockStart struct {
 //	ToolResultContentBlockMemberDocument
 //	ToolResultContentBlockMemberImage
 //	ToolResultContentBlockMemberJson
+//	ToolResultContentBlockMemberSearchResult
 //	ToolResultContentBlockMemberText
 //	ToolResultContentBlockMemberVideo
 //
@@ -2549,6 +2633,15 @@ type ToolResultContentBlockMemberJson struct {
 }
 
 func (*ToolResultContentBlockMemberJson) isToolResultContentBlock() {}
+
+// A tool result that is a search result.
+type ToolResultContentBlockMemberSearchResult struct {
+	Value SearchResultBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultContentBlockMemberSearchResult) isToolResultContentBlock() {}
 
 // A tool result that is text.
 type ToolResultContentBlockMemberText struct {

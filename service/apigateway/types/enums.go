@@ -55,6 +55,29 @@ func (ApiKeySourceType) Values() []ApiKeySourceType {
 	}
 }
 
+type ApiStatus string
+
+// Enum values for ApiStatus
+const (
+	ApiStatusUpdating  ApiStatus = "UPDATING"
+	ApiStatusAvailable ApiStatus = "AVAILABLE"
+	ApiStatusPending   ApiStatus = "PENDING"
+	ApiStatusFailed    ApiStatus = "FAILED"
+)
+
+// Values returns all known values for ApiStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApiStatus) Values() []ApiStatus {
+	return []ApiStatus{
+		"UPDATING",
+		"AVAILABLE",
+		"PENDING",
+		"FAILED",
+	}
+}
+
 type AuthorizerType string
 
 // Enum values for AuthorizerType
@@ -218,6 +241,7 @@ const (
 	DomainNameStatusPending                      DomainNameStatus = "PENDING"
 	DomainNameStatusPendingCertificateReimport   DomainNameStatus = "PENDING_CERTIFICATE_REIMPORT"
 	DomainNameStatusPendingOwnershipVerification DomainNameStatus = "PENDING_OWNERSHIP_VERIFICATION"
+	DomainNameStatusFailed                       DomainNameStatus = "FAILED"
 )
 
 // Values returns all known values for DomainNameStatus. Note that this can be
@@ -231,6 +255,26 @@ func (DomainNameStatus) Values() []DomainNameStatus {
 		"PENDING",
 		"PENDING_CERTIFICATE_REIMPORT",
 		"PENDING_OWNERSHIP_VERIFICATION",
+		"FAILED",
+	}
+}
+
+type EndpointAccessMode string
+
+// Enum values for EndpointAccessMode
+const (
+	EndpointAccessModeBasic  EndpointAccessMode = "BASIC"
+	EndpointAccessModeStrict EndpointAccessMode = "STRICT"
+)
+
+// Values returns all known values for EndpointAccessMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointAccessMode) Values() []EndpointAccessMode {
+	return []EndpointAccessMode{
+		"BASIC",
+		"STRICT",
 	}
 }
 
@@ -461,6 +505,25 @@ func (ResourceOwner) Values() []ResourceOwner {
 	}
 }
 
+type ResponseTransferMode string
+
+// Enum values for ResponseTransferMode
+const (
+	ResponseTransferModeBuffered ResponseTransferMode = "BUFFERED"
+	ResponseTransferModeStream   ResponseTransferMode = "STREAM"
+)
+
+// Values returns all known values for ResponseTransferMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseTransferMode) Values() []ResponseTransferMode {
+	return []ResponseTransferMode{
+		"BUFFERED",
+		"STREAM",
+	}
+}
+
 type RoutingMode string
 
 // Enum values for RoutingMode
@@ -486,8 +549,17 @@ type SecurityPolicy string
 
 // Enum values for SecurityPolicy
 const (
-	SecurityPolicyTls10 SecurityPolicy = "TLS_1_0"
-	SecurityPolicyTls12 SecurityPolicy = "TLS_1_2"
+	SecurityPolicyTls10                             SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12                             SecurityPolicy = "TLS_1_2"
+	SecurityPolicySecurityPolicyTls1313202509       SecurityPolicy = "SecurityPolicy_TLS13_1_3_2025_09"
+	SecurityPolicySecurityPolicyTls1313Fips202509   SecurityPolicy = "SecurityPolicy_TLS13_1_3_FIPS_2025_09"
+	SecurityPolicySecurityPolicyTls1312PfsPq202509  SecurityPolicy = "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312FipsPq202509 SecurityPolicy = "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312Pq202509     SecurityPolicy = "SecurityPolicy_TLS13_1_2_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312202106       SecurityPolicy = "SecurityPolicy_TLS13_1_2_2021_06"
+	SecurityPolicySecurityPolicyTls132025Edge       SecurityPolicy = "SecurityPolicy_TLS13_2025_EDGE"
+	SecurityPolicySecurityPolicyTls12Pfs2025Edge    SecurityPolicy = "SecurityPolicy_TLS12_PFS_2025_EDGE"
+	SecurityPolicySecurityPolicyTls122018Edge       SecurityPolicy = "SecurityPolicy_TLS12_2018_EDGE"
 )
 
 // Values returns all known values for SecurityPolicy. Note that this can be
@@ -498,6 +570,15 @@ func (SecurityPolicy) Values() []SecurityPolicy {
 	return []SecurityPolicy{
 		"TLS_1_0",
 		"TLS_1_2",
+		"SecurityPolicy_TLS13_1_3_2025_09",
+		"SecurityPolicy_TLS13_1_3_FIPS_2025_09",
+		"SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09",
+		"SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09",
+		"SecurityPolicy_TLS13_1_2_PQ_2025_09",
+		"SecurityPolicy_TLS13_1_2_2021_06",
+		"SecurityPolicy_TLS13_2025_EDGE",
+		"SecurityPolicy_TLS12_PFS_2025_EDGE",
+		"SecurityPolicy_TLS12_2018_EDGE",
 	}
 }
 

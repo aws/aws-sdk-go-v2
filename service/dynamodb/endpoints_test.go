@@ -14207,11 +14207,11 @@ func TestEndpointCase362(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}
+// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}
 func TestEndpointCase363(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.eu-west-1.api.aws"),
-		Region:   ptr.String("eu-west-1"),
+		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws"),
+		Region:   ptr.String("us-east-1"),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -14226,11 +14226,11 @@ func TestEndpointCase363(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}
+// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}
 func TestEndpointCase364(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-west-2.api.aws"),
-		Region:   ptr.String("us-west-2"),
+		Endpoint: ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
+		Region:   ptr.String("us-gov-east-1"),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -14265,11 +14265,11 @@ func TestEndpointCase365(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}
+// {Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}
 func TestEndpointCase366(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
-		Region:   ptr.String("us-gov-east-1"),
+		Endpoint: ptr.String("https://dynamodb.us-west-2.api.aws"),
+		Region:   ptr.String("us-west-2"),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -14284,11 +14284,11 @@ func TestEndpointCase366(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}
+// {Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}
 func TestEndpointCase367(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws"),
-		Region:   ptr.String("us-east-1"),
+		Endpoint: ptr.String("https://dynamodb.eu-west-1.api.aws"),
+		Region:   ptr.String("eu-west-1"),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -14303,10 +14303,11 @@ func TestEndpointCase367(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1}
+// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
+// Region=us-east-1}
 func TestEndpointCase368(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://111111111111.ddb.us-east-1.api.aws"),
+		Endpoint: ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
 		Region:   ptr.String("us-east-1"),
 	}
 
@@ -14318,7 +14319,7 @@ func TestEndpointCase368(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://111111111111.ddb.us-east-1.api.aws")
+	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -14339,11 +14340,10 @@ func TestEndpointCase368(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
-// Region=us-east-1}
+// {Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1}
 func TestEndpointCase369(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
+		Endpoint: ptr.String("https://111111111111.ddb.us-east-1.api.aws"),
 		Region:   ptr.String("us-east-1"),
 	}
 
@@ -14355,7 +14355,7 @@ func TestEndpointCase369(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
+	uri, _ := url.Parse("https://111111111111.ddb.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

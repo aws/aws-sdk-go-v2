@@ -4706,6 +4706,7 @@ const (
 	InputTypeMulticast              InputType = "MULTICAST"
 	InputTypeSmpte2110ReceiverGroup InputType = "SMPTE_2110_RECEIVER_GROUP"
 	InputTypeSdi                    InputType = "SDI"
+	InputTypeMediaconnectRouter     InputType = "MEDIACONNECT_ROUTER"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -4728,6 +4729,7 @@ func (InputType) Values() []InputType {
 		"MULTICAST",
 		"SMPTE_2110_RECEIVER_GROUP",
 		"SDI",
+		"MEDIACONNECT_ROUTER",
 	}
 }
 
@@ -6071,6 +6073,25 @@ func (ReservationVideoQuality) Values() []ReservationVideoQuality {
 		"STANDARD",
 		"ENHANCED",
 		"PREMIUM",
+	}
+}
+
+type RouterEncryptionType string
+
+// Enum values for RouterEncryptionType
+const (
+	RouterEncryptionTypeAutomatic      RouterEncryptionType = "AUTOMATIC"
+	RouterEncryptionTypeSecretsManager RouterEncryptionType = "SECRETS_MANAGER"
+)
+
+// Values returns all known values for RouterEncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterEncryptionType) Values() []RouterEncryptionType {
+	return []RouterEncryptionType{
+		"AUTOMATIC",
+		"SECRETS_MANAGER",
 	}
 }
 

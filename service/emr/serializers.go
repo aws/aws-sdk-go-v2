@@ -3891,6 +3891,40 @@ func awsAwsjson11_serializeDocumentCloudWatchAlarmDefinition(v *types.CloudWatch
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCloudWatchLogConfiguration(v *types.CloudWatchLogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	if v.LogGroupName != nil {
+		ok := object.Key("LogGroupName")
+		ok.String(*v.LogGroupName)
+	}
+
+	if v.LogStreamNamePrefix != nil {
+		ok := object.Key("LogStreamNamePrefix")
+		ok.String(*v.LogStreamNamePrefix)
+	}
+
+	if v.LogTypes != nil {
+		ok := object.Key("LogTypes")
+		if err := awsAwsjson11_serializeDocumentLogTypesMap(v.LogTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterStateList(v []types.ClusterState, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4728,6 +4762,22 @@ func awsAwsjson11_serializeDocumentKeyValueList(v []types.KeyValue, value smithy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLogTypesMap(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentXmlStringList(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentManagedScalingPolicy(v *types.ManagedScalingPolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4779,6 +4829,20 @@ func awsAwsjson11_serializeDocumentMetricDimensionList(v []types.MetricDimension
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMonitoringConfiguration(v *types.MonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchLogConfiguration != nil {
+		ok := object.Key("CloudWatchLogConfiguration")
+		if err := awsAwsjson11_serializeDocumentCloudWatchLogConfiguration(v.CloudWatchLogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6587,6 +6651,13 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 	if v.ManagedScalingPolicy != nil {
 		ok := object.Key("ManagedScalingPolicy")
 		if err := awsAwsjson11_serializeDocumentManagedScalingPolicy(v.ManagedScalingPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MonitoringConfiguration != nil {
+		ok := object.Key("MonitoringConfiguration")
+		if err := awsAwsjson11_serializeDocumentMonitoringConfiguration(v.MonitoringConfiguration, ok); err != nil {
 			return err
 		}
 	}

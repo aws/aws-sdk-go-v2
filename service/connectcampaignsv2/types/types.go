@@ -990,6 +990,9 @@ type TelephonyChannelSubtypeParameters struct {
 	// If you do not specify a source phone number, you must specify a queue.
 	ConnectSourcePhoneNumber *string
 
+	// Ring timeout for outbound calls
+	RingTimeout *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -1007,6 +1010,9 @@ type TelephonyOutboundConfig struct {
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.
 	ConnectSourcePhoneNumber *string
+
+	// Ring timeout for outbound calls
+	RingTimeout *int32
 
 	noSmithyDocumentSerde
 }

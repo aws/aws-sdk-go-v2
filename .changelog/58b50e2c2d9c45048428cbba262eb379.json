@@ -1,0 +1,8 @@
+{
+    "id": "58b50e2c-2d9c-4504-8428-cbba262eb379",
+    "type": "feature",
+    "description": "Adds support to TestState for mocked results and exceptions, along with additional inspection data.",
+    "modules": [
+        "service/sfn"
+    ]
+}

@@ -3480,6 +3480,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemWindowsConfiguration(v *types
 		}
 	}
 
+	if v.FsrmConfiguration != nil {
+		ok := object.Key("FsrmConfiguration")
+		if err := awsAwsjson11_serializeDocumentWindowsFsrmConfiguration(v.FsrmConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PreferredSubnetId != nil {
 		ok := object.Key("PreferredSubnetId")
 		ok.String(*v.PreferredSubnetId)
@@ -5118,6 +5125,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v *types
 		}
 	}
 
+	if v.FsrmConfiguration != nil {
+		ok := object.Key("FsrmConfiguration")
+		if err := awsAwsjson11_serializeDocumentWindowsFsrmConfiguration(v.FsrmConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SelfManagedActiveDirectoryConfiguration != nil {
 		ok := object.Key("SelfManagedActiveDirectoryConfiguration")
 		if err := awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfigurationUpdates(v.SelfManagedActiveDirectoryConfiguration, ok); err != nil {
@@ -5377,6 +5391,23 @@ func awsAwsjson11_serializeDocumentWindowsAuditLogCreateConfiguration(v *types.W
 	if len(v.FileShareAccessAuditLogLevel) > 0 {
 		ok := object.Key("FileShareAccessAuditLogLevel")
 		ok.String(string(v.FileShareAccessAuditLogLevel))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWindowsFsrmConfiguration(v *types.WindowsFsrmConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventLogDestination != nil {
+		ok := object.Key("EventLogDestination")
+		ok.String(*v.EventLogDestination)
+	}
+
+	if v.FsrmServiceEnabled != nil {
+		ok := object.Key("FsrmServiceEnabled")
+		ok.Boolean(*v.FsrmServiceEnabled)
 	}
 
 	return nil

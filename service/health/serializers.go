@@ -1031,6 +1031,17 @@ func awsAwsjson11_serializeDocumentEventAccountFilter(v *types.EventAccountFilte
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEventActionabilityList(v []types.EventActionability, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEventArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1056,6 +1067,13 @@ func awsAwsjson11_serializeDocumentEventArnsList(v []string, value smithyjson.Va
 func awsAwsjson11_serializeDocumentEventFilter(v *types.EventFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Actionabilities != nil {
+		ok := object.Key("actionabilities")
+		if err := awsAwsjson11_serializeDocumentEventActionabilityList(v.Actionabilities, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AvailabilityZones != nil {
 		ok := object.Key("availabilityZones")
@@ -1120,6 +1138,13 @@ func awsAwsjson11_serializeDocumentEventFilter(v *types.EventFilter, value smith
 		}
 	}
 
+	if v.Personas != nil {
+		ok := object.Key("personas")
+		if err := awsAwsjson11_serializeDocumentEventPersonaList(v.Personas, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Regions != nil {
 		ok := object.Key("regions")
 		if err := awsAwsjson11_serializeDocumentRegionList(v.Regions, ok); err != nil {
@@ -1151,7 +1176,29 @@ func awsAwsjson11_serializeDocumentEventFilter(v *types.EventFilter, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEventPersonaList(v []types.EventPersona, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEventStatusCodeList(v []types.EventStatusCode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEventTypeActionabilityList(v []types.EventTypeActionability, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -1199,6 +1246,13 @@ func awsAwsjson11_serializeDocumentEventTypeFilter(v *types.EventTypeFilter, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Actionabilities != nil {
+		ok := object.Key("actionabilities")
+		if err := awsAwsjson11_serializeDocumentEventTypeActionabilityList(v.Actionabilities, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EventTypeCategories != nil {
 		ok := object.Key("eventTypeCategories")
 		if err := awsAwsjson11_serializeDocumentEventTypeCategoryList(v.EventTypeCategories, ok); err != nil {
@@ -1209,6 +1263,13 @@ func awsAwsjson11_serializeDocumentEventTypeFilter(v *types.EventTypeFilter, val
 	if v.EventTypeCodes != nil {
 		ok := object.Key("eventTypeCodes")
 		if err := awsAwsjson11_serializeDocumentEventTypeCodeList(v.EventTypeCodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Personas != nil {
+		ok := object.Key("personas")
+		if err := awsAwsjson11_serializeDocumentEventTypePersonaList(v.Personas, ok); err != nil {
 			return err
 		}
 	}
@@ -1230,6 +1291,17 @@ func awsAwsjson11_serializeDocumentEventTypeList2(v []string, value smithyjson.V
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEventTypePersonaList(v []types.EventTypePersona, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -1299,6 +1371,13 @@ func awsAwsjson11_serializeDocumentOrganizationEventFilter(v *types.Organization
 	object := value.Object()
 	defer object.Close()
 
+	if v.Actionabilities != nil {
+		ok := object.Key("actionabilities")
+		if err := awsAwsjson11_serializeDocumentEventActionabilityList(v.Actionabilities, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsAccountIds != nil {
 		ok := object.Key("awsAccountIds")
 		if err := awsAwsjson11_serializeDocumentAwsAccountIdsList(v.AwsAccountIds, ok); err != nil {
@@ -1351,6 +1430,13 @@ func awsAwsjson11_serializeDocumentOrganizationEventFilter(v *types.Organization
 	if v.LastUpdatedTime != nil {
 		ok := object.Key("lastUpdatedTime")
 		if err := awsAwsjson11_serializeDocumentDateTimeRange(v.LastUpdatedTime, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Personas != nil {
+		ok := object.Key("personas")
+		if err := awsAwsjson11_serializeDocumentEventPersonaList(v.Personas, ok); err != nil {
 			return err
 		}
 	}

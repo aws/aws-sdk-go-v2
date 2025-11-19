@@ -2358,6 +2358,47 @@ func awsAwsjson10_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentMockErrorOutput(v *types.MockErrorOutput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cause != nil {
+		ok := object.Key("cause")
+		ok.String(*v.Cause)
+	}
+
+	if v.Error != nil {
+		ok := object.Key("error")
+		ok.String(*v.Error)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentMockInput(v *types.MockInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorOutput != nil {
+		ok := object.Key("errorOutput")
+		if err := awsAwsjson10_serializeDocumentMockErrorOutput(v.ErrorOutput, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.FieldValidationMode) > 0 {
+		ok := object.Key("fieldValidationMode")
+		ok.String(string(v.FieldValidationMode))
+	}
+
+	if v.Result != nil {
+		ok := object.Key("result")
+		ok.String(*v.Result)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRoutingConfigurationList(v []types.RoutingConfigurationListItem, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2426,6 +2467,33 @@ func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentTestStateConfiguration(v *types.TestStateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorCausedByState != nil {
+		ok := object.Key("errorCausedByState")
+		ok.String(*v.ErrorCausedByState)
+	}
+
+	if v.MapItemReaderData != nil {
+		ok := object.Key("mapItemReaderData")
+		ok.String(*v.MapItemReaderData)
+	}
+
+	if v.MapIterationFailureCount != nil {
+		ok := object.Key("mapIterationFailureCount")
+		ok.Integer(*v.MapIterationFailureCount)
+	}
+
+	if v.RetrierRetryCount != nil {
+		ok := object.Key("retrierRetryCount")
+		ok.Integer(*v.RetrierRetryCount)
+	}
+
 	return nil
 }
 
@@ -3083,6 +3151,11 @@ func awsAwsjson10_serializeOpDocumentTestStateInput(v *TestStateInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Context != nil {
+		ok := object.Key("context")
+		ok.String(*v.Context)
+	}
+
 	if v.Definition != nil {
 		ok := object.Key("definition")
 		ok.String(*v.Definition)
@@ -3098,6 +3171,13 @@ func awsAwsjson10_serializeOpDocumentTestStateInput(v *TestStateInput, value smi
 		ok.String(string(v.InspectionLevel))
 	}
 
+	if v.Mock != nil {
+		ok := object.Key("mock")
+		if err := awsAwsjson10_serializeDocumentMockInput(v.Mock, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RevealSecrets {
 		ok := object.Key("revealSecrets")
 		ok.Boolean(v.RevealSecrets)
@@ -3106,6 +3186,18 @@ func awsAwsjson10_serializeOpDocumentTestStateInput(v *TestStateInput, value smi
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if v.StateConfiguration != nil {
+		ok := object.Key("stateConfiguration")
+		if err := awsAwsjson10_serializeDocumentTestStateConfiguration(v.StateConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StateName != nil {
+		ok := object.Key("stateName")
+		ok.String(*v.StateName)
 	}
 
 	if v.Variables != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "a45b6bac-0897-4ea3-b432-e32475385e12",
+    "type": "feature",
+    "description": "IAM now supports outbound identity federation via the STS GetWebIdentityToken API, enabling AWS workloads to securely authenticate with external services using short-lived JSON Web Tokens.",
+    "modules": [
+        "service/sts"
+    ]
+}

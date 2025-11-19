@@ -110,7 +110,22 @@ type AnomalyMonitor struct {
 	// This member is required.
 	MonitorName *string
 
-	// The possible type values.
+	// The type of the monitor.
+	//
+	// Set this to DIMENSIONAL for an Amazon Web Services managed monitor. Amazon Web
+	// Services managed monitors automatically track up to the top 5,000 values by cost
+	// within a dimension of your choosing. Each dimension value is evaluated
+	// independently. If you start incurring cost in a new value of your chosen
+	// dimension, it will automatically be analyzed by an Amazon Web Services managed
+	// monitor.
+	//
+	// Set this to CUSTOM for a customer managed monitor. Customer managed monitors
+	// let you select specific dimension values that get monitored in aggregate.
+	//
+	// For more information about monitor types, see [Monitor types] in the Billing and Cost
+	// Management User Guide.
+	//
+	// [Monitor types]: https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html#monitor-type-def
 	//
 	// This member is required.
 	MonitorType MonitorType
@@ -130,84 +145,38 @@ type AnomalyMonitor struct {
 	// The Amazon Resource Name (ARN) value.
 	MonitorArn *string
 
-	// The dimensions to evaluate.
+	// For customer managed monitors, do not specify this field.
+	//
+	// For Amazon Web Services managed monitors, this field controls which cost
+	// dimension is automatically analyzed by the monitor. For TAG and COST_CATEGORY
+	// dimensions, you must also specify MonitorSpecification to configure the specific
+	// tag or cost category key to analyze.
 	MonitorDimension MonitorDimension
 
-	// Use Expression to filter in various Cost Explorer APIs.
+	// An [Expression] object used to control what costs the monitor analyzes for anomalies.
 	//
-	// Not all Expression types are supported in each API. Refer to the documentation
-	// for each specific API to see what is supported.
+	// For Amazon Web Services managed monitors:
 	//
-	// There are two patterns:
+	//   - If MonitorDimension is SERVICE or LINKED_ACCOUNT , do not specify this field
 	//
-	//   - Simple dimension values.
+	//   - If MonitorDimension is TAG , set this field to { "Tags": { "Key": "your tag
+	//   key" } }
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - If MonitorDimension is COST_CATEGORY , set this field to {
+	//   "CostCategories": { "Key": "your cost category key" } }
 	//
-	//   - Specify the CostCategories field to define a filter that acts on Cost
-	//   Categories.
+	// For customer managed monitors:
 	//
-	//   - Specify the Tags field to define a filter that acts on Cost Allocation Tags.
+	//   - To track linked accounts, set this field to { "Dimensions": { "Key":
+	//   "LINKED_ACCOUNT", "Values": [ "your list of up to 10 account IDs" ] } }
 	//
-	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
-	//   DimensionValues .
+	//   - To track cost allocation tags, set this field to { "Tags": { "Key": "your
+	//   tag key", "Values": [ "your list of up to 10 tag values" ] } }
 	//
-	//   - For each filter type, you can set the dimension name and values for the
-	//   filters that you plan to use.
+	//   - To track cost categories, set this field to { "CostCategories": { "Key":
+	//   "your cost category key", "Values": [ "your cost category value" ] } }
 	//
-	//   - For example, you can filter for REGION==us-east-1 OR REGION==us-west-1 . For
-	//   GetRightsizingRecommendation , the Region is a full name (for example,
-	//   REGION==US East (N. Virginia) .
-	//
-	//   - The corresponding Expression for this example is as follows: {
-	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] } }
-	//
-	//   - As shown in the previous example, lists of dimension values are combined
-	//   with OR when applying the filter.
-	//
-	//   - You can also set different match options to further control how the filter
-	//   behaves. Not all APIs support match options. Refer to the documentation for each
-	//   specific API to see what is supported.
-	//
-	//   - For example, you can filter for linked account names that start with "a".
-	//
-	//   - The corresponding Expression for this example is as follows: {
-	//   "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
-	//   "Values": [ "a" ] } }
-	//
-	//   - Compound Expression types with logical operations.
-	//
-	//   - You can use multiple Expression types and the logical operators AND/OR/NOT
-	//   to create a list of one or more Expression objects. By doing this, you can
-	//   filter by more advanced options.
-	//
-	//   - For example, you can filter by ((REGION == us-east-1 OR REGION ==
-	//   us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer) .
-	//
-	//   - The corresponding Expression for this example is as follows: { "And": [
-	//   {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
-	//   ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
-	//   {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
-	//
-	// Because each Expression can have only one operator, the service returns an error
-	//   if more than one is specified. The following example shows an Expression
-	//   object that creates an error: { "And": [ ... ], "Dimensions": { "Key":
-	//   "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
-	//
-	// The following is an example of the corresponding error message: "Expression has
-	//   more than one roots. Only one root operator is allowed for each expression: And,
-	//   Or, Not, Dimensions, Tags, CostCategories"
-	//
-	// For the GetRightsizingRecommendation action, a combination of OR and NOT isn't
-	// supported. OR isn't supported between different dimensions, or dimensions and
-	// tags. NOT operators aren't supported. Dimensions are also limited to
-	// LINKED_ACCOUNT , REGION , or RIGHTSIZING_TYPE .
-	//
-	// For the GetReservationPurchaseRecommendation action, only NOT is supported. AND
-	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
-	//
-	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	MonitorSpecification *Expression
 
 	noSmithyDocumentSerde

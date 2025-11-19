@@ -510,6 +510,26 @@ func (m *validateOpListImportFailures) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInsightsData struct {
+}
+
+func (*validateOpListInsightsData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInsightsData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInsightsDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInsightsDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInsightsMetricData struct {
 }
 
@@ -1068,6 +1088,10 @@ func addOpGetTrailStatusValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListImportFailuresValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImportFailures{}, middleware.After)
+}
+
+func addOpListInsightsDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInsightsData{}, middleware.After)
 }
 
 func addOpListInsightsMetricDataValidationMiddleware(stack *middleware.Stack) error {
@@ -1865,6 +1889,24 @@ func validateOpListImportFailuresInput(v *ListImportFailuresInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImportFailuresInput"}
 	if v.ImportId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInsightsDataInput(v *ListInsightsDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsDataInput"}
+	if v.InsightSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightSource"))
+	}
+	if len(v.DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

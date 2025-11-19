@@ -95,6 +95,9 @@ type DescribeInputOutput struct {
 	// creation.
 	RoleArn *string
 
+	// Information about any MediaConnect router association with this input.
+	RouterSettings *types.RouterInputSettings
+
 	// SDI Sources for this Input.
 	SdiSources []string
 

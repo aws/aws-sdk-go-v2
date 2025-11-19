@@ -272,6 +272,33 @@ type CloudWatchAlarmDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Holds CloudWatch log configuration settings and metadata that specify settings
+// like log files to monitor and where to send them.
+type CloudWatchLogConfiguration struct {
+
+	// Specifies if CloudWatch logging is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The ARN of the encryption key used to encrypt the logs.
+	EncryptionKeyArn *string
+
+	// The name of the CloudWatch log group where logs are published.
+	LogGroupName *string
+
+	// The prefix of the log stream name.
+	LogStreamNamePrefix *string
+
+	// A map of log types to file names for publishing logs to the standard output or
+	// standard error streams for CloudWatch. Valid log types include STEP_LOGS,
+	// SPARK_DRIVER, and SPARK_EXECUTOR. Valid file names for each type include STDOUT
+	// and STDERR.
+	LogTypes map[string][]string
+
+	noSmithyDocumentSerde
+}
+
 // The detailed description of the cluster.
 type Cluster struct {
 
@@ -347,6 +374,9 @@ type Cluster struct {
 	// The DNS name of the master node. If the cluster is on a private subnet, this is
 	// the private DNS name. On a public subnet, this is the public DNS name.
 	MasterPublicDnsName *string
+
+	// Contains Cloudwatch log configuration metadata and settings.
+	MonitoringConfiguration *MonitoringConfiguration
 
 	// The name of the cluster. This parameter can't contain the characters <, >, $,
 	// |, or ` (backtick).
@@ -1224,10 +1254,9 @@ type InstanceGroup struct {
 	// value of a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicyDescription
 
-	// If specified, indicates that the instance group uses Spot Instances. This is
-	// the maximum price you are willing to pay for Spot Instances. Specify
-	// OnDemandPrice to set the amount equal to the On-Demand price, or specify an
-	// amount in USD.
+	// The bid price for each Amazon EC2 Spot Instance type as defined by InstanceType
+	// . Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
 
 	// Amazon EMR releases 4.x or later.
@@ -1315,10 +1344,9 @@ type InstanceGroupConfig struct {
 	// value of a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicy
 
-	// If specified, indicates that the instance group uses Spot Instances. This is
-	// the maximum price you are willing to pay for Spot Instances. Specify
-	// OnDemandPrice to set the amount equal to the On-Demand price, or specify an
-	// amount in USD.
+	// The bid price for each Amazon EC2 Spot Instance type as defined by InstanceType
+	// . Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
 
 	// Amazon EMR releases 4.x or later.
@@ -1383,10 +1411,9 @@ type InstanceGroupDetail struct {
 	// This member is required.
 	State InstanceGroupState
 
-	// If specified, indicates that the instance group uses Spot Instances. This is
-	// the maximum price you are willing to pay for Spot Instances. Specify
-	// OnDemandPrice to set the amount equal to the On-Demand price, or specify an
-	// amount in USD.
+	// The bid price for each Amazon EC2 Spot Instance type as defined by InstanceType
+	// . Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
 
 	// The custom AMI ID to use for the provisioned instance group.
@@ -1604,7 +1631,8 @@ type InstanceTypeConfig struct {
 type InstanceTypeSpecification struct {
 
 	// The bid price for each Amazon EC2 Spot Instance type as defined by InstanceType
-	// . Expressed in USD.
+	// . Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice
+	// is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
 
 	// The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot
@@ -2013,6 +2041,16 @@ type MetricDimension struct {
 
 	// The dimension value.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains CloudWatch log configuration metadata and settings.
+type MonitoringConfiguration struct {
+
+	// CloudWatch log configuration settings and metadata that specify settings like
+	// log files to monitor and where to send them.
+	CloudWatchLogConfiguration *CloudWatchLogConfiguration
 
 	noSmithyDocumentSerde
 }

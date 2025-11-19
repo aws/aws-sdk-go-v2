@@ -177,6 +177,10 @@ type DescribeRecoveryPointOutput struct {
 	// Relational Database Service (Amazon RDS) database.
 	ResourceType *string
 
+	// Contains the latest scanning results against the recovery point and currently
+	// include MalwareScanner , ScanJobState , Findings , and LastScanTimestamp
+	ScanResults []types.ScanResult
+
 	// An Amazon Resource Name (ARN) that uniquely identifies the source vault where
 	// the resource was originally backed up in; for example,
 	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault . If the

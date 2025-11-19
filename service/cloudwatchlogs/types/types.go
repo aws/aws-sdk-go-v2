@@ -1872,10 +1872,10 @@ type ParseRoute53 struct {
 
 // This processor converts logs into [Open Cybersecurity Schema Framework (OCSF)] events.
 //
-// For more information about this processor including examples, see [parseToOSCF] in the
+// For more information about this processor including examples, see [parseToOCSF] in the
 // CloudWatch Logs User Guide.
 //
-// [parseToOSCF]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF
+// [parseToOCSF]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF
 // [Open Cybersecurity Schema Framework (OCSF)]: https://ocsf.io
 type ParseToOCSF struct {
 
@@ -1889,6 +1889,11 @@ type ParseToOCSF struct {
 	//
 	// This member is required.
 	OcsfVersion OCSFVersion
+
+	// Identifies the specific release of the Open Cybersecurity Schema Framework
+	// (OCSF) transformer being used to parse OCSF data. Defaults to the latest version
+	// if not specified. Does not automatically update.
+	MappingVersion *string
 
 	// The path to the field in the log event that you want to parse. If you omit this
 	// value, the whole log message is parsed.
@@ -2436,16 +2441,16 @@ type S3DeliveryConfiguration struct {
 // delivered.
 type ScheduledQueryDestination struct {
 
-	// The destination identifier (S3 URI or EventBridge ARN).
+	// The destination identifier (S3 URI).
 	DestinationIdentifier *string
 
-	// The type of destination (S3 or EVENTBRIDGE).
+	// The type of destination (S3).
 	DestinationType ScheduledQueryDestinationType
 
 	// Error message if the destination processing failed.
 	ErrorMessage *string
 
-	// The processed identifier returned for the destination (S3 key or event ID).
+	// The processed identifier returned for the destination (S3 key).
 	ProcessedIdentifier *string
 
 	// The processing status for this destination (IN_PROGRESS, ERROR, FAILED, or
@@ -2703,16 +2708,15 @@ type TransformedLogRecord struct {
 type TriggerHistoryRecord struct {
 
 	// The list of destinations where the scheduled query results were delivered for
-	// this execution. This includes S3 buckets and EventBridge targets configured for
-	// the scheduled query.
+	// this execution. This includes S3 buckets configured for the scheduled query.
 	Destinations []ScheduledQueryDestination
 
 	// The error message if the scheduled query execution failed. This field is only
 	// populated when the execution status indicates a failure.
 	ErrorMessage *string
 
-	// The status of the query execution (SUCCEEDED, FAILED, TIMEOUT, or
-	// INVALID_QUERY).
+	// The status of the query execution (Running, Complete, Failed, Timeout, or
+	// InvalidQuery).
 	ExecutionStatus ExecutionStatus
 
 	// The unique identifier for the query execution.

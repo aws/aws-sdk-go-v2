@@ -1,0 +1,8 @@
+{
+    "id": "2b7f30cd-a32d-4f57-8350-1938c8e4eae6",
+    "type": "feature",
+    "description": "API Gateway now supports response streaming and new security policies for REST APIs and custom domain names.",
+    "modules": [
+        "service/apigateway"
+    ]
+}

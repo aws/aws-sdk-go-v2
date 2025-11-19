@@ -369,6 +369,7 @@ type OCSFVersion string
 // Enum values for OCSFVersion
 const (
 	OCSFVersionV11 OCSFVersion = "V1.1"
+	OCSFVersionV15 OCSFVersion = "V1.5"
 )
 
 // Values returns all known values for OCSFVersion. Note that this can be expanded
@@ -378,6 +379,7 @@ const (
 func (OCSFVersion) Values() []OCSFVersion {
 	return []OCSFVersion{
 		"V1.1",
+		"V1.5",
 	}
 }
 

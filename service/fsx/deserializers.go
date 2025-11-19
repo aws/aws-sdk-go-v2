@@ -15468,6 +15468,11 @@ func awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(v **types.Wi
 				return err
 			}
 
+		case "FsrmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentWindowsFsrmConfiguration(&sv.FsrmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "MaintenanceOperationsInProgress":
 			if err := awsAwsjson11_deserializeDocumentFileSystemMaintenanceOperations(&sv.MaintenanceOperationsInProgress, value); err != nil {
 				return err
@@ -15534,6 +15539,55 @@ func awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(v **types.Wi
 					return fmt.Errorf("expected WeeklyTime to be of type string, got %T instead", value)
 				}
 				sv.WeeklyMaintenanceStartTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWindowsFsrmConfiguration(v **types.WindowsFsrmConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WindowsFsrmConfiguration
+	if *v == nil {
+		sv = &types.WindowsFsrmConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EventLogDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeneralARN to be of type string, got %T instead", value)
+				}
+				sv.EventLogDestination = ptr.String(jtv)
+			}
+
+		case "FsrmServiceEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.FsrmServiceEnabled = ptr.Bool(jtv)
 			}
 
 		default:

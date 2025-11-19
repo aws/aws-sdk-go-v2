@@ -52,6 +52,10 @@ type ListRuleGroupsInput struct {
 	// all available managed rule groups.
 	Scope types.ResourceManagedStatus
 
+	// Filters the results to show only rule groups with the specified subscription
+	// status. Use this to find subscribed or unsubscribed rule groups.
+	SubscriptionStatus types.SubscriptionStatus
+
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
 	// rules.

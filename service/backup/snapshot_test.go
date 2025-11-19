@@ -494,6 +494,18 @@ func TestCheckSnapshot_DescribeRestoreJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeScanJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeScanJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeScanJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateBackupVaultMpaApprovalTeam(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateBackupVaultMpaApprovalTeam(context.Background(), nil, func(o *Options) {
@@ -1022,6 +1034,30 @@ func TestCheckSnapshot_ListRestoreTestingSelections(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListScanJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScanJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListScanJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListScanJobSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScanJobSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListScanJobSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTags(context.Background(), nil, func(o *Options) {
@@ -1147,6 +1183,18 @@ func TestCheckSnapshot_StartRestoreJob(t *testing.T) {
 	_, err := svc.StartRestoreJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartRestoreJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartScanJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartScanJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartScanJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1741,6 +1789,18 @@ func TestUpdateSnapshot_DescribeRestoreJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeScanJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeScanJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeScanJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateBackupVaultMpaApprovalTeam(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateBackupVaultMpaApprovalTeam(context.Background(), nil, func(o *Options) {
@@ -2269,6 +2329,30 @@ func TestUpdateSnapshot_ListRestoreTestingSelections(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListScanJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScanJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListScanJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListScanJobSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScanJobSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListScanJobSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTags(context.Background(), nil, func(o *Options) {
@@ -2394,6 +2478,18 @@ func TestUpdateSnapshot_StartRestoreJob(t *testing.T) {
 	_, err := svc.StartRestoreJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartRestoreJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartScanJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartScanJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartScanJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_GetPreferences.go",
         "api_op_GetRecommendation.go",
+        "api_op_ListEfficiencyMetrics.go",
         "api_op_ListEnrollmentStatuses.go",
         "api_op_ListRecommendationSummaries.go",
         "api_op_ListRecommendations.go",

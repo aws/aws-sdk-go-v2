@@ -27,6 +27,27 @@ func (EntityStatusCode) Values() []EntityStatusCode {
 	}
 }
 
+type EventActionability string
+
+// Enum values for EventActionability
+const (
+	EventActionabilityActionRequired      EventActionability = "ACTION_REQUIRED"
+	EventActionabilityActionMayBeRequired EventActionability = "ACTION_MAY_BE_REQUIRED"
+	EventActionabilityInformational       EventActionability = "INFORMATIONAL"
+)
+
+// Values returns all known values for EventActionability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventActionability) Values() []EventActionability {
+	return []EventActionability{
+		"ACTION_REQUIRED",
+		"ACTION_MAY_BE_REQUIRED",
+		"INFORMATIONAL",
+	}
+}
+
 type EventAggregateField string
 
 // Enum values for EventAggregateField
@@ -41,6 +62,27 @@ const (
 func (EventAggregateField) Values() []EventAggregateField {
 	return []EventAggregateField{
 		"eventTypeCategory",
+	}
+}
+
+type EventPersona string
+
+// Enum values for EventPersona
+const (
+	EventPersonaOperations EventPersona = "OPERATIONS"
+	EventPersonaSecurity   EventPersona = "SECURITY"
+	EventPersonaBilling    EventPersona = "BILLING"
+)
+
+// Values returns all known values for EventPersona. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventPersona) Values() []EventPersona {
+	return []EventPersona{
+		"OPERATIONS",
+		"SECURITY",
+		"BILLING",
 	}
 }
 
@@ -86,6 +128,27 @@ func (EventStatusCode) Values() []EventStatusCode {
 	}
 }
 
+type EventTypeActionability string
+
+// Enum values for EventTypeActionability
+const (
+	EventTypeActionabilityActionRequired      EventTypeActionability = "ACTION_REQUIRED"
+	EventTypeActionabilityActionMayBeRequired EventTypeActionability = "ACTION_MAY_BE_REQUIRED"
+	EventTypeActionabilityInformational       EventTypeActionability = "INFORMATIONAL"
+)
+
+// Values returns all known values for EventTypeActionability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventTypeActionability) Values() []EventTypeActionability {
+	return []EventTypeActionability{
+		"ACTION_REQUIRED",
+		"ACTION_MAY_BE_REQUIRED",
+		"INFORMATIONAL",
+	}
+}
+
 type EventTypeCategory string
 
 // Enum values for EventTypeCategory
@@ -106,5 +169,26 @@ func (EventTypeCategory) Values() []EventTypeCategory {
 		"accountNotification",
 		"scheduledChange",
 		"investigation",
+	}
+}
+
+type EventTypePersona string
+
+// Enum values for EventTypePersona
+const (
+	EventTypePersonaOperations EventTypePersona = "OPERATIONS"
+	EventTypePersonaSecurity   EventTypePersona = "SECURITY"
+	EventTypePersonaBilling    EventTypePersona = "BILLING"
+)
+
+// Values returns all known values for EventTypePersona. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventTypePersona) Values() []EventTypePersona {
+	return []EventTypePersona{
+		"OPERATIONS",
+		"SECURITY",
+		"BILLING",
 	}
 }

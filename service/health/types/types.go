@@ -58,7 +58,7 @@ type AffectedEntity struct {
 	LastUpdatedTime *time.Time
 
 	// The most recent status of the entity affected by the event. The possible values
-	// are IMPAIRED , UNIMPAIRED , and UNKNOWN .
+	// are IMPAIRED , UNIMPAIRED , UNKNOWN , PENDING , and RESOLVED .
 	StatusCode EntityStatusCode
 
 	// A map of entity tags attached to the affected entity.
@@ -190,6 +190,15 @@ type EntityFilter struct {
 // [eventScopeCode]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode
 type Event struct {
 
+	// The actionability classification of the event. Possible values are
+	// ACTION_REQUIRED , ACTION_MAY_BE_REQUIRED and INFORMATIONAL . Events with
+	// ACTION_REQUIRED actionability require customer action to resolve or mitigate the
+	// event. Events with ACTION_MAY_BE_REQUIRED actionability indicates that the
+	// current status is unknown or conditional and inspection is needed to determine
+	// if action is required. Events with INFORMATIONAL actionability are provided for
+	// awareness and do not require immediate action.
+	Actionability EventActionability
+
 	// The unique identifier for the event. The event ARN has the
 	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
 	// format.
@@ -232,6 +241,12 @@ type Event struct {
 
 	// The most recent date and time that the event was updated.
 	LastUpdatedTime *time.Time
+
+	// A list of persona classifications that indicate the target audience for the
+	// event. Possible values are OPERATIONS , SECURITY , and BILLING . Events can be
+	// associated with multiple personas to indicate relevance to different teams or
+	// roles within an organization.
+	Personas []EventPersona
 
 	// The Amazon Web Services Region name of the event.
 	Region *string
@@ -349,6 +364,11 @@ type EventDetailsErrorItem struct {
 // [DescribeEventAggregates]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html
 type EventFilter struct {
 
+	// A list of actionability values to filter events. Use this to filter events
+	// based on whether they require action ( ACTION_REQUIRED ), may require action (
+	// ACTION_MAY_BE_REQUIRED ) or are informational ( INFORMATIONAL ).
+	Actionabilities []EventActionability
+
 	// A list of Amazon Web Services Availability Zones.
 	AvailabilityZones []string
 
@@ -381,6 +401,10 @@ type EventFilter struct {
 
 	// A list of dates and times that the event was last updated.
 	LastUpdatedTimes []DateTimeRange
+
+	// A list of persona values to filter events. Use this to filter events based on
+	// their target audience: OPERATIONS , SECURITY , or BILLING .
+	Personas []EventPersona
 
 	// A list of Amazon Web Services Regions.
 	Regions []string
@@ -416,6 +440,15 @@ type EventFilter struct {
 // [DescribeEventTypes]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html
 type EventType struct {
 
+	// The actionability classification of the event. Possible values are
+	// ACTION_REQUIRED , ACTION_MAY_BE_REQUIRED and INFORMATIONAL . Events with
+	// ACTION_REQUIRED actionability require customer action to resolve or mitigate the
+	// event. Events with ACTION_MAY_BE_REQUIRED actionability indicates that the
+	// current status is unknown or conditional and inspection is needed to determine
+	// if action is required. Events with INFORMATIONAL actionability are provided for
+	// awareness and do not require immediate action.
+	Actionability EventTypeActionability
+
 	// A list of event type category codes. Possible values are issue ,
 	// accountNotification , or scheduledChange . Currently, the investigation value
 	// isn't supported at this time.
@@ -424,6 +457,12 @@ type EventType struct {
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION
 	// ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT .
 	Code *string
+
+	// A list of persona classifications that indicate the target audience for the
+	// event. Possible values are OPERATIONS , SECURITY , and BILLING . Events can be
+	// associated with multiple personas to indicate relevance to different teams or
+	// roles within an organization.
+	Personas []EventTypePersona
 
 	// The Amazon Web Services service that is affected by the event. For example, EC2
 	// , RDS .
@@ -437,6 +476,10 @@ type EventType struct {
 // [DescribeEventTypes]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html
 type EventTypeFilter struct {
 
+	// A list of actionability values to filter event types. Possible values are
+	// ACTION_REQUIRED , ACTION_MAY_BE_REQUIRED and INFORMATIONAL .
+	Actionabilities []EventTypeActionability
+
 	// A list of event type category codes. Possible values are issue ,
 	// accountNotification , or scheduledChange . Currently, the investigation value
 	// isn't supported at this time.
@@ -444,6 +487,10 @@ type EventTypeFilter struct {
 
 	// A list of event type codes.
 	EventTypeCodes []string
+
+	// A list of persona classifications to filter event types. Possible values are
+	// OPERATIONS , SECURITY , and BILLING .
+	Personas []EventTypePersona
 
 	// The Amazon Web Services services associated with the event. For example, EC2 ,
 	// RDS .
@@ -516,6 +563,15 @@ type OrganizationEntityAggregate struct {
 // [DescribeEventsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
 type OrganizationEvent struct {
 
+	// The actionability classification of the event. Possible values are
+	// ACTION_REQUIRED , ACTION_MAY_BE_REQUIRED and INFORMATIONAL . Events with
+	// ACTION_REQUIRED actionability require customer action to resolve or mitigate the
+	// event. Events with ACTION_MAY_BE_REQUIRED actionability indicates that the
+	// current status is unknown or conditional and inspection is needed to determine
+	// if action is required. Events with INFORMATIONAL actionability are provided for
+	// awareness and do not require immediate action.
+	Actionability EventActionability
+
 	// The unique identifier for the event. The event ARN has the
 	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
 	// format.
@@ -555,6 +611,12 @@ type OrganizationEvent struct {
 
 	// The most recent date and time that the event was updated.
 	LastUpdatedTime *time.Time
+
+	// A list of persona classifications that indicate the target audience for the
+	// event. Possible values are OPERATIONS , SECURITY , and BILLING . Events can be
+	// associated with multiple personas to indicate relevance to different teams or
+	// roles within an organization.
+	Personas []EventPersona
 
 	// The Amazon Web Services Region name of the event.
 	Region *string
@@ -665,6 +727,11 @@ type OrganizationEventDetailsErrorItem struct {
 // [DescribeEventsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
 type OrganizationEventFilter struct {
 
+	// A list of actionability values to filter events. Use this to filter events
+	// based on whether they require action ( ACTION_REQUIRED ), may require action (
+	// ACTION_MAY_BE_REQUIRED ) or are informational ( INFORMATIONAL ).
+	Actionabilities []EventActionability
+
 	// A list of 12-digit Amazon Web Services account numbers that contains the
 	// affected entities.
 	AwsAccountIds []string
@@ -709,6 +776,10 @@ type OrganizationEventFilter struct {
 	// [EntityFilter]: https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html
 	// [EventFilter]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
 	LastUpdatedTime *DateTimeRange
+
+	// A list of persona values to filter events. Use this to filter events based on
+	// their target audience: OPERATIONS , SECURITY , or BILLING .
+	Personas []EventPersona
 
 	// A list of Amazon Web Services Regions.
 	Regions []string

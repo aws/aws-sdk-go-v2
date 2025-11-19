@@ -280,6 +280,93 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request to create a new router input would exceed the service quotas for
+// the account.
+type RouterInputServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RouterInputServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RouterInputServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RouterInputServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RouterInputServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RouterInputServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The request to create a new router network interface would exceed the service
+// quotas (limits) set for the account.
+type RouterNetworkInterfaceServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RouterNetworkInterfaceServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RouterNetworkInterfaceServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RouterNetworkInterfaceServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RouterNetworkInterfaceServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RouterNetworkInterfaceServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The request to create a new router output would exceed the service quotas
+// (limits) set for the account.
+type RouterOutputServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RouterOutputServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RouterOutputServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RouterOutputServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RouterOutputServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RouterOutputServiceQuotaExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The service is currently unavailable or busy.
 type ServiceUnavailableException struct {
 	Message *string

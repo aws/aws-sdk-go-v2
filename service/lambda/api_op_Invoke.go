@@ -128,6 +128,9 @@ type InvokeInput struct {
 	// Specify a version or alias to invoke a published version of the function.
 	Qualifier *string
 
+	// The identifier of the tenant in a multi-tenant Lambda function.
+	TenantId *string
+
 	noSmithyDocumentSerde
 }
 

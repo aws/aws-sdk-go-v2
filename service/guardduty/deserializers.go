@@ -5735,6 +5735,326 @@ func awsRestjson1_deserializeOpDocumentGetMalwareProtectionPlanOutput(v **GetMal
 	return nil
 }
 
+type awsRestjson1_deserializeOpGetMalwareScan struct {
+}
+
+func (*awsRestjson1_deserializeOpGetMalwareScan) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetMalwareScan) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetMalwareScan(response, &metadata)
+	}
+	output := &GetMalwareScanOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetMalwareScanOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetMalwareScan(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetMalwareScanOutput(v **GetMalwareScanOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetMalwareScanOutput
+	if *v == nil {
+		sv = &GetMalwareScanOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adminDetectorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DetectorId to be of type string, got %T instead", value)
+				}
+				sv.AdminDetectorId = ptr.String(jtv)
+			}
+
+		case "detectorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DetectorId to be of type string, got %T instead", value)
+				}
+				sv.DetectorId = ptr.String(jtv)
+			}
+
+		case "failedResourcesCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FailedResourcesCount = ptr.Int32(int32(i64))
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.MalwareProtectionResourceType(jtv)
+			}
+
+		case "scanCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanCategory to be of type string, got %T instead", value)
+				}
+				sv.ScanCategory = types.ScanCategory(jtv)
+			}
+
+		case "scanCompletedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ScanCompletedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "scanConfiguration":
+			if err := awsRestjson1_deserializeDocumentScanConfiguration(&sv.ScanConfiguration, value); err != nil {
+				return err
+			}
+
+		case "scanId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ScanId = ptr.String(jtv)
+			}
+
+		case "scannedResources":
+			if err := awsRestjson1_deserializeDocumentScannedResources(&sv.ScannedResources, value); err != nil {
+				return err
+			}
+
+		case "scannedResourcesCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScannedResourcesCount = ptr.Int32(int32(i64))
+			}
+
+		case "scanResultDetails":
+			if err := awsRestjson1_deserializeDocumentGetMalwareScanResultDetails(&sv.ScanResultDetails, value); err != nil {
+				return err
+			}
+
+		case "scanStartedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ScanStartedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "scanStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionScanStatus to be of type string, got %T instead", value)
+				}
+				sv.ScanStatus = types.MalwareProtectionScanStatus(jtv)
+			}
+
+		case "scanStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanStatusReason to be of type string, got %T instead", value)
+				}
+				sv.ScanStatusReason = types.ScanStatusReason(jtv)
+			}
+
+		case "scanType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionScanType to be of type string, got %T instead", value)
+				}
+				sv.ScanType = types.MalwareProtectionScanType(jtv)
+			}
+
+		case "skippedResourcesCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SkippedResourcesCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpGetMalwareScanSettings struct {
 }
 
@@ -8830,6 +9150,170 @@ func awsRestjson1_deserializeOpDocumentListMalwareProtectionPlansOutput(v **List
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListMalwareScans struct {
+}
+
+func (*awsRestjson1_deserializeOpListMalwareScans) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListMalwareScans) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListMalwareScans(response, &metadata)
+	}
+	output := &ListMalwareScansOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListMalwareScansOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListMalwareScans(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListMalwareScansOutput(v **ListMalwareScansOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListMalwareScansOutput
+	if *v == nil {
+		sv = &ListMalwareScansOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "scans":
+			if err := awsRestjson1_deserializeDocumentMalwareScans(&sv.Scans, value); err != nil {
+				return err
 			}
 
 		default:
@@ -12979,6 +13463,55 @@ func awsRestjson1_deserializeDocumentActors(v *[]types.Actor, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdditionalInfo(v **types.AdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdditionalInfo
+	if *v == nil {
+		sv = &types.AdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeviceName = ptr.String(jtv)
+			}
+
+		case "versionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VersionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAdditionalSequenceTypes(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16114,6 +16647,86 @@ func awsRestjson1_deserializeDocumentDomainDetails(v **types.DomainDetails, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEbsSnapshot(v **types.EbsSnapshot, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EbsSnapshot
+	if *v == nil {
+		sv = &types.EbsSnapshot{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeviceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEbsSnapshotDetails(v **types.EbsSnapshotDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EbsSnapshotDetails
+	if *v == nil {
+		sv = &types.EbsSnapshotDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "snapshotArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SnapshotArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEbsVolumeDetails(v **types.EbsVolumeDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16293,6 +16906,46 @@ func awsRestjson1_deserializeDocumentEbsVolumesResult(v **types.EbsVolumesResult
 					return fmt.Errorf("expected DataSourceStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.DataSourceStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEc2ImageDetails(v **types.Ec2ImageDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2ImageDetails
+	if *v == nil {
+		sv = &types.Ec2ImageDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "imageArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ImageArn = ptr.String(jtv)
 			}
 
 		default:
@@ -17929,6 +18582,129 @@ func awsRestjson1_deserializeDocumentGeoLocation(v **types.GeoLocation, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGetMalwareScanResultDetails(v **types.GetMalwareScanResultDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GetMalwareScanResultDetails
+	if *v == nil {
+		sv = &types.GetMalwareScanResultDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failedFileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FailedFileCount = ptr.Int64(i64)
+			}
+
+		case "scanResultStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanResultStatus to be of type string, got %T instead", value)
+				}
+				sv.ScanResultStatus = types.ScanResultStatus(jtv)
+			}
+
+		case "skippedFileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SkippedFileCount = ptr.Int64(i64)
+			}
+
+		case "threatFoundFileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThreatFoundFileCount = ptr.Int64(i64)
+			}
+
+		case "threats":
+			if err := awsRestjson1_deserializeDocumentScanResultThreats(&sv.Threats, value); err != nil {
+				return err
+			}
+
+		case "totalBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalBytes = ptr.Int64(i64)
+			}
+
+		case "totalFileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalFileCount = ptr.Int64(i64)
+			}
+
+		case "uniqueThreatCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UniqueThreatCount = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGroupedByAccount(v *[]types.AccountStatistics, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18320,6 +19096,46 @@ func awsRestjson1_deserializeDocumentImpersonatedUser(v **types.ImpersonatedUser
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Username = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIncrementalScanDetails(v **types.IncrementalScanDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IncrementalScanDetails
+	if *v == nil {
+		sv = &types.IncrementalScanDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "baselineResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BaselineResourceArn = ptr.String(jtv)
 			}
 
 		default:
@@ -18838,6 +19654,103 @@ func awsRestjson1_deserializeDocumentIssues(v *[]string, value interface{}) erro
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentItemDetails(v **types.ItemDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ItemDetails
+	if *v == nil {
+		sv = &types.ItemDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "additionalInfo":
+			if err := awsRestjson1_deserializeDocumentAdditionalInfo(&sv.AdditionalInfo, value); err != nil {
+				return err
+			}
+
+		case "hash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Hash = ptr.String(jtv)
+			}
+
+		case "itemPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ItemPath = ptr.String(jtv)
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentItemDetailsList(v *[]types.ItemDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ItemDetails
+	if *v == nil {
+		cv = []types.ItemDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ItemDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentItemDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20211,6 +21124,51 @@ func awsRestjson1_deserializeDocumentMalwareProtectionDataSourceFreeTrial(v **ty
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMalwareProtectionFindingsScanConfiguration(v **types.MalwareProtectionFindingsScanConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MalwareProtectionFindingsScanConfiguration
+	if *v == nil {
+		sv = &types.MalwareProtectionFindingsScanConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "incrementalScanDetails":
+			if err := awsRestjson1_deserializeDocumentIncrementalScanDetails(&sv.IncrementalScanDetails, value); err != nil {
+				return err
+			}
+
+		case "triggerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TriggerType to be of type string, got %T instead", value)
+				}
+				sv.TriggerType = types.TriggerType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMalwareProtectionPlanActions(v **types.MalwareProtectionPlanActions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20480,6 +21438,123 @@ func awsRestjson1_deserializeDocumentMalwareProtectionPlanTaggingAction(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMalwareScan(v **types.MalwareScan, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MalwareScan
+	if *v == nil {
+		sv = &types.MalwareScan{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "resourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.MalwareProtectionResourceType(jtv)
+			}
+
+		case "scanCompletedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ScanCompletedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "scanId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ScanId = ptr.String(jtv)
+			}
+
+		case "scanResultStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanResultStatus to be of type string, got %T instead", value)
+				}
+				sv.ScanResultStatus = types.ScanResultStatus(jtv)
+			}
+
+		case "scanStartedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ScanStartedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "scanStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionScanStatus to be of type string, got %T instead", value)
+				}
+				sv.ScanStatus = types.MalwareProtectionScanStatus(jtv)
+			}
+
+		case "scanType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionScanType to be of type string, got %T instead", value)
+				}
+				sv.ScanType = types.MalwareProtectionScanType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMalwareScanDetails(v **types.MalwareScanDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20502,9 +21577,54 @@ func awsRestjson1_deserializeDocumentMalwareScanDetails(v **types.MalwareScanDet
 
 	for key, value := range shape {
 		switch key {
+		case "scanCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanCategory to be of type string, got %T instead", value)
+				}
+				sv.ScanCategory = types.ScanCategory(jtv)
+			}
+
+		case "scanConfiguration":
+			if err := awsRestjson1_deserializeDocumentMalwareProtectionFindingsScanConfiguration(&sv.ScanConfiguration, value); err != nil {
+				return err
+			}
+
+		case "scanId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ScanId = ptr.String(jtv)
+			}
+
+		case "scanType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionScanType to be of type string, got %T instead", value)
+				}
+				sv.ScanType = types.MalwareProtectionScanType(jtv)
+			}
+
 		case "threats":
 			if err := awsRestjson1_deserializeDocumentThreats(&sv.Threats, value); err != nil {
 				return err
+			}
+
+		case "uniqueThreatCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UniqueThreatCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -20513,6 +21633,40 @@ func awsRestjson1_deserializeDocumentMalwareScanDetails(v **types.MalwareScanDet
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMalwareScans(v *[]types.MalwareScan, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MalwareScan
+	if *v == nil {
+		cv = []types.MalwareScan{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MalwareScan
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMalwareScan(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -23498,6 +24652,55 @@ func awsRestjson1_deserializeDocumentRdsLoginAttemptAction(v **types.RdsLoginAtt
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRecoveryPointDetails(v **types.RecoveryPointDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecoveryPointDetails
+	if *v == nil {
+		sv = &types.RecoveryPointDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "backupVaultName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultName = ptr.String(jtv)
+			}
+
+		case "recoveryPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RecoveryPointArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRemoteAccountDetails(v **types.RemoteAccountDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23701,8 +24904,18 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				return err
 			}
 
+		case "ebsSnapshotDetails":
+			if err := awsRestjson1_deserializeDocumentEbsSnapshotDetails(&sv.EbsSnapshotDetails, value); err != nil {
+				return err
+			}
+
 		case "ebsVolumeDetails":
 			if err := awsRestjson1_deserializeDocumentEbsVolumeDetails(&sv.EbsVolumeDetails, value); err != nil {
+				return err
+			}
+
+		case "ec2ImageDetails":
+			if err := awsRestjson1_deserializeDocumentEc2ImageDetails(&sv.Ec2ImageDetails, value); err != nil {
 				return err
 			}
 
@@ -23743,6 +24956,11 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 
 		case "rdsLimitlessDbDetails":
 			if err := awsRestjson1_deserializeDocumentRdsLimitlessDbDetails(&sv.RdsLimitlessDbDetails, value); err != nil {
+				return err
+			}
+
+		case "recoveryPointDetails":
+			if err := awsRestjson1_deserializeDocumentRecoveryPointDetails(&sv.RecoveryPointDetails, value); err != nil {
 				return err
 			}
 
@@ -25232,6 +26450,101 @@ func awsRestjson1_deserializeDocumentScanConditionPair(v **types.ScanConditionPa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScanConfiguration(v **types.ScanConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScanConfiguration
+	if *v == nil {
+		sv = &types.ScanConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "incrementalScanDetails":
+			if err := awsRestjson1_deserializeDocumentIncrementalScanDetails(&sv.IncrementalScanDetails, value); err != nil {
+				return err
+			}
+
+		case "recoveryPoint":
+			if err := awsRestjson1_deserializeDocumentScanConfigurationRecoveryPoint(&sv.RecoveryPoint, value); err != nil {
+				return err
+			}
+
+		case "role":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Role = ptr.String(jtv)
+			}
+
+		case "triggerDetails":
+			if err := awsRestjson1_deserializeDocumentTriggerDetails(&sv.TriggerDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScanConfigurationRecoveryPoint(v **types.ScanConfigurationRecoveryPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScanConfigurationRecoveryPoint
+	if *v == nil {
+		sv = &types.ScanConfigurationRecoveryPoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "backupVaultName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentScanCriterion(v *map[string]types.ScanCondition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25491,6 +26804,153 @@ func awsRestjson1_deserializeDocumentScannedItemCount(v **types.ScannedItemCount
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScannedResource(v **types.ScannedResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScannedResource
+	if *v == nil {
+		sv = &types.ScannedResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceDetails":
+			if err := awsRestjson1_deserializeDocumentScannedResourceDetails(&sv.ResourceDetails, value); err != nil {
+				return err
+			}
+
+		case "scannedResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ScannedResourceArn = ptr.String(jtv)
+			}
+
+		case "scannedResourceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionScanStatus to be of type string, got %T instead", value)
+				}
+				sv.ScannedResourceStatus = types.MalwareProtectionScanStatus(jtv)
+			}
+
+		case "scannedResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MalwareProtectionResourceType to be of type string, got %T instead", value)
+				}
+				sv.ScannedResourceType = types.MalwareProtectionResourceType(jtv)
+			}
+
+		case "scanStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanStatusReason to be of type string, got %T instead", value)
+				}
+				sv.ScanStatusReason = types.ScanStatusReason(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScannedResourceDetails(v **types.ScannedResourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScannedResourceDetails
+	if *v == nil {
+		sv = &types.ScannedResourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ebsSnapshot":
+			if err := awsRestjson1_deserializeDocumentEbsSnapshot(&sv.EbsSnapshot, value); err != nil {
+				return err
+			}
+
+		case "ebsVolume":
+			if err := awsRestjson1_deserializeDocumentVolumeDetail(&sv.EbsVolume, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScannedResources(v *[]types.ScannedResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ScannedResource
+	if *v == nil {
+		cv = []types.ScannedResource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ScannedResource
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScannedResource(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentScanResourceCriteria(v **types.ScanResourceCriteria, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25569,6 +27029,116 @@ func awsRestjson1_deserializeDocumentScanResultDetails(v **types.ScanResultDetai
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScanResultThreat(v **types.ScanResultThreat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScanResultThreat
+	if *v == nil {
+		sv = &types.ScanResultThreat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int64(i64)
+			}
+
+		case "hash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Hash = ptr.String(jtv)
+			}
+
+		case "itemDetails":
+			if err := awsRestjson1_deserializeDocumentItemDetailsList(&sv.ItemDetails, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DetectionSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.DetectionSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScanResultThreats(v *[]types.ScanResultThreat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ScanResultThreat
+	if *v == nil {
+		cv = []types.ScanResultThreat{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ScanResultThreat
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScanResultThreat(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -26803,6 +28373,33 @@ func awsRestjson1_deserializeDocumentThreat(v **types.Threat, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int64(i64)
+			}
+
+		case "hash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Hash = ptr.String(jtv)
+			}
+
+		case "itemDetails":
+			if err := awsRestjson1_deserializeDocumentItemDetailsList(&sv.ItemDetails, value); err != nil {
+				return err
+			}
+
 		case "itemPaths":
 			if err := awsRestjson1_deserializeDocumentItemPaths(&sv.ItemPaths, value); err != nil {
 				return err
@@ -27267,6 +28864,15 @@ func awsRestjson1_deserializeDocumentTriggerDetails(v **types.TriggerDetails, va
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.GuardDutyFindingId = ptr.String(jtv)
+			}
+
+		case "triggerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TriggerType to be of type string, got %T instead", value)
+				}
+				sv.TriggerType = types.TriggerType(jtv)
 			}
 
 		default:

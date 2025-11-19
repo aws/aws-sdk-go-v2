@@ -45,7 +45,11 @@ type ListReportJobsInput struct {
 
 	// Returns only report jobs that are in the specified status. The statuses are:
 	//
-	//     CREATED | RUNNING | COMPLETED | FAILED
+	//     CREATED | RUNNING | COMPLETED | FAILED | COMPLETED_WITH_ISSUES
+	//
+	// Please note that only scanning jobs finish with state completed with issues.
+	// For backup jobs this is a console interpretation of a job that finishes in
+	// completed state and has a status message.
 	ByStatus *string
 
 	// The number of desired results from 1 to 1000. Optional. If unspecified, the

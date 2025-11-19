@@ -231,6 +231,11 @@ type CreateFunctionInput struct {
 	// [tags]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
 	Tags map[string]string
 
+	// Configuration for multi-tenant applications that use Lambda functions. Defines
+	// tenant isolation settings and resource allocations. Required for functions
+	// supporting multiple tenants.
+	TenancyConfig *types.TenancyConfig
+
 	// The amount of time (in seconds) that Lambda allows a function to run before
 	// stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
 	// For more information, see [Lambda execution environment].
@@ -408,6 +413,10 @@ type CreateFunctionOutput struct {
 	// The reason code for the function's current state. When the code is Creating ,
 	// you can't invoke or modify the function.
 	StateReasonCode types.StateReasonCode
+
+	// The function's tenant isolation configuration settings. Determines whether the
+	// Lambda function runs on a shared or dedicated infrastructure per unique tenant.
+	TenancyConfig *types.TenancyConfig
 
 	// The amount of time in seconds that Lambda allows a function to run before
 	// stopping it.

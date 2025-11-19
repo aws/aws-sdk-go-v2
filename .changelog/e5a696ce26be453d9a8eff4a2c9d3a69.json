@@ -1,0 +1,8 @@
+{
+    "id": "e5a696ce-26be-453d-9a8e-ff4a2c9d3a69",
+    "type": "feature",
+    "description": "Adds support to create, update, retrieve, rotate, and delete managed external secrets.",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

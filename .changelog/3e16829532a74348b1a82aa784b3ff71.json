@@ -1,0 +1,8 @@
+{
+    "id": "3e168295-32a7-4348-b1a8-2aa784b3ff71",
+    "type": "feature",
+    "description": "This release includes support for Search Results.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

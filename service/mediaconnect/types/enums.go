@@ -148,6 +148,35 @@ func (ContentQualityAnalysisState) Values() []ContentQualityAnalysisState {
 	}
 }
 
+type Day string
+
+// Enum values for Day
+const (
+	DayMonday    Day = "MONDAY"
+	DayTuesday   Day = "TUESDAY"
+	DayWednesday Day = "WEDNESDAY"
+	DayThursday  Day = "THURSDAY"
+	DayFriday    Day = "FRIDAY"
+	DaySaturday  Day = "SATURDAY"
+	DaySunday    Day = "SUNDAY"
+)
+
+// Values returns all known values for Day. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Day) Values() []Day {
+	return []Day{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}
+
 type DesiredState string
 
 // Enum values for DesiredState
@@ -247,6 +276,26 @@ func (EntitlementStatus) Values() []EntitlementStatus {
 	}
 }
 
+type FailoverInputSourcePriorityMode string
+
+// Enum values for FailoverInputSourcePriorityMode
+const (
+	FailoverInputSourcePriorityModeNoPriority       FailoverInputSourcePriorityMode = "NO_PRIORITY"
+	FailoverInputSourcePriorityModePrimarySecondary FailoverInputSourcePriorityMode = "PRIMARY_SECONDARY"
+)
+
+// Values returns all known values for FailoverInputSourcePriorityMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FailoverInputSourcePriorityMode) Values() []FailoverInputSourcePriorityMode {
+	return []FailoverInputSourcePriorityMode{
+		"NO_PRIORITY",
+		"PRIMARY_SECONDARY",
+	}
+}
+
 type FailoverMode string
 
 // Enum values for FailoverMode
@@ -282,6 +331,45 @@ func (FlowSize) Values() []FlowSize {
 	return []FlowSize{
 		"MEDIUM",
 		"LARGE",
+	}
+}
+
+type FlowTransitEncryptionKeyType string
+
+// Enum values for FlowTransitEncryptionKeyType
+const (
+	FlowTransitEncryptionKeyTypeSecretsManager FlowTransitEncryptionKeyType = "SECRETS_MANAGER"
+	FlowTransitEncryptionKeyTypeAutomatic      FlowTransitEncryptionKeyType = "AUTOMATIC"
+)
+
+// Values returns all known values for FlowTransitEncryptionKeyType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowTransitEncryptionKeyType) Values() []FlowTransitEncryptionKeyType {
+	return []FlowTransitEncryptionKeyType{
+		"SECRETS_MANAGER",
+		"AUTOMATIC",
+	}
+}
+
+type ForwardErrorCorrectionState string
+
+// Enum values for ForwardErrorCorrectionState
+const (
+	ForwardErrorCorrectionStateEnabled  ForwardErrorCorrectionState = "ENABLED"
+	ForwardErrorCorrectionStateDisabled ForwardErrorCorrectionState = "DISABLED"
+)
+
+// Values returns all known values for ForwardErrorCorrectionState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ForwardErrorCorrectionState) Values() []ForwardErrorCorrectionState {
+	return []ForwardErrorCorrectionState{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -386,6 +474,81 @@ func (MaintenanceDay) Values() []MaintenanceDay {
 		"Friday",
 		"Saturday",
 		"Sunday",
+	}
+}
+
+type MaintenanceScheduleType string
+
+// Enum values for MaintenanceScheduleType
+const (
+	MaintenanceScheduleTypeWindow MaintenanceScheduleType = "WINDOW"
+)
+
+// Values returns all known values for MaintenanceScheduleType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceScheduleType) Values() []MaintenanceScheduleType {
+	return []MaintenanceScheduleType{
+		"WINDOW",
+	}
+}
+
+type MaintenanceType string
+
+// Enum values for MaintenanceType
+const (
+	MaintenanceTypePreferredDayTime MaintenanceType = "PREFERRED_DAY_TIME"
+	MaintenanceTypeDefault          MaintenanceType = "DEFAULT"
+)
+
+// Values returns all known values for MaintenanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceType) Values() []MaintenanceType {
+	return []MaintenanceType{
+		"PREFERRED_DAY_TIME",
+		"DEFAULT",
+	}
+}
+
+type MediaLiveInputPipelineId string
+
+// Enum values for MediaLiveInputPipelineId
+const (
+	MediaLiveInputPipelineIdPipeline0 MediaLiveInputPipelineId = "PIPELINE_0"
+	MediaLiveInputPipelineIdPipeline1 MediaLiveInputPipelineId = "PIPELINE_1"
+)
+
+// Values returns all known values for MediaLiveInputPipelineId. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaLiveInputPipelineId) Values() []MediaLiveInputPipelineId {
+	return []MediaLiveInputPipelineId{
+		"PIPELINE_0",
+		"PIPELINE_1",
+	}
+}
+
+type MediaLiveTransitEncryptionKeyType string
+
+// Enum values for MediaLiveTransitEncryptionKeyType
+const (
+	MediaLiveTransitEncryptionKeyTypeSecretsManager MediaLiveTransitEncryptionKeyType = "SECRETS_MANAGER"
+	MediaLiveTransitEncryptionKeyTypeAutomatic      MediaLiveTransitEncryptionKeyType = "AUTOMATIC"
+)
+
+// Values returns all known values for MediaLiveTransitEncryptionKeyType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaLiveTransitEncryptionKeyType) Values() []MediaLiveTransitEncryptionKeyType {
+	return []MediaLiveTransitEncryptionKeyType{
+		"SECRETS_MANAGER",
+		"AUTOMATIC",
 	}
 }
 
@@ -581,6 +744,314 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Mbps_Outbound_Bandwidth",
+	}
+}
+
+type RouterInputProtocol string
+
+// Enum values for RouterInputProtocol
+const (
+	RouterInputProtocolRtp         RouterInputProtocol = "RTP"
+	RouterInputProtocolRist        RouterInputProtocol = "RIST"
+	RouterInputProtocolSrtCaller   RouterInputProtocol = "SRT_CALLER"
+	RouterInputProtocolSrtListener RouterInputProtocol = "SRT_LISTENER"
+)
+
+// Values returns all known values for RouterInputProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterInputProtocol) Values() []RouterInputProtocol {
+	return []RouterInputProtocol{
+		"RTP",
+		"RIST",
+		"SRT_CALLER",
+		"SRT_LISTENER",
+	}
+}
+
+type RouterInputState string
+
+// Enum values for RouterInputState
+const (
+	RouterInputStateCreating   RouterInputState = "CREATING"
+	RouterInputStateStandby    RouterInputState = "STANDBY"
+	RouterInputStateStarting   RouterInputState = "STARTING"
+	RouterInputStateActive     RouterInputState = "ACTIVE"
+	RouterInputStateStopping   RouterInputState = "STOPPING"
+	RouterInputStateDeleting   RouterInputState = "DELETING"
+	RouterInputStateUpdating   RouterInputState = "UPDATING"
+	RouterInputStateError      RouterInputState = "ERROR"
+	RouterInputStateRecovering RouterInputState = "RECOVERING"
+	RouterInputStateMigrating  RouterInputState = "MIGRATING"
+)
+
+// Values returns all known values for RouterInputState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterInputState) Values() []RouterInputState {
+	return []RouterInputState{
+		"CREATING",
+		"STANDBY",
+		"STARTING",
+		"ACTIVE",
+		"STOPPING",
+		"DELETING",
+		"UPDATING",
+		"ERROR",
+		"RECOVERING",
+		"MIGRATING",
+	}
+}
+
+type RouterInputTier string
+
+// Enum values for RouterInputTier
+const (
+	RouterInputTierInput100 RouterInputTier = "INPUT_100"
+	RouterInputTierInput50  RouterInputTier = "INPUT_50"
+	RouterInputTierInput20  RouterInputTier = "INPUT_20"
+)
+
+// Values returns all known values for RouterInputTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterInputTier) Values() []RouterInputTier {
+	return []RouterInputTier{
+		"INPUT_100",
+		"INPUT_50",
+		"INPUT_20",
+	}
+}
+
+type RouterInputTransitEncryptionKeyType string
+
+// Enum values for RouterInputTransitEncryptionKeyType
+const (
+	RouterInputTransitEncryptionKeyTypeSecretsManager RouterInputTransitEncryptionKeyType = "SECRETS_MANAGER"
+	RouterInputTransitEncryptionKeyTypeAutomatic      RouterInputTransitEncryptionKeyType = "AUTOMATIC"
+)
+
+// Values returns all known values for RouterInputTransitEncryptionKeyType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterInputTransitEncryptionKeyType) Values() []RouterInputTransitEncryptionKeyType {
+	return []RouterInputTransitEncryptionKeyType{
+		"SECRETS_MANAGER",
+		"AUTOMATIC",
+	}
+}
+
+type RouterInputType string
+
+// Enum values for RouterInputType
+const (
+	RouterInputTypeStandard         RouterInputType = "STANDARD"
+	RouterInputTypeFailover         RouterInputType = "FAILOVER"
+	RouterInputTypeMerge            RouterInputType = "MERGE"
+	RouterInputTypeMediaconnectFlow RouterInputType = "MEDIACONNECT_FLOW"
+)
+
+// Values returns all known values for RouterInputType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterInputType) Values() []RouterInputType {
+	return []RouterInputType{
+		"STANDARD",
+		"FAILOVER",
+		"MERGE",
+		"MEDIACONNECT_FLOW",
+	}
+}
+
+type RouterNetworkInterfaceState string
+
+// Enum values for RouterNetworkInterfaceState
+const (
+	RouterNetworkInterfaceStateCreating   RouterNetworkInterfaceState = "CREATING"
+	RouterNetworkInterfaceStateActive     RouterNetworkInterfaceState = "ACTIVE"
+	RouterNetworkInterfaceStateUpdating   RouterNetworkInterfaceState = "UPDATING"
+	RouterNetworkInterfaceStateDeleting   RouterNetworkInterfaceState = "DELETING"
+	RouterNetworkInterfaceStateError      RouterNetworkInterfaceState = "ERROR"
+	RouterNetworkInterfaceStateRecovering RouterNetworkInterfaceState = "RECOVERING"
+)
+
+// Values returns all known values for RouterNetworkInterfaceState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterNetworkInterfaceState) Values() []RouterNetworkInterfaceState {
+	return []RouterNetworkInterfaceState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"ERROR",
+		"RECOVERING",
+	}
+}
+
+type RouterNetworkInterfaceType string
+
+// Enum values for RouterNetworkInterfaceType
+const (
+	RouterNetworkInterfaceTypePublic RouterNetworkInterfaceType = "PUBLIC"
+	RouterNetworkInterfaceTypeVpc    RouterNetworkInterfaceType = "VPC"
+)
+
+// Values returns all known values for RouterNetworkInterfaceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterNetworkInterfaceType) Values() []RouterNetworkInterfaceType {
+	return []RouterNetworkInterfaceType{
+		"PUBLIC",
+		"VPC",
+	}
+}
+
+type RouterOutputProtocol string
+
+// Enum values for RouterOutputProtocol
+const (
+	RouterOutputProtocolRtp         RouterOutputProtocol = "RTP"
+	RouterOutputProtocolRist        RouterOutputProtocol = "RIST"
+	RouterOutputProtocolSrtCaller   RouterOutputProtocol = "SRT_CALLER"
+	RouterOutputProtocolSrtListener RouterOutputProtocol = "SRT_LISTENER"
+)
+
+// Values returns all known values for RouterOutputProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterOutputProtocol) Values() []RouterOutputProtocol {
+	return []RouterOutputProtocol{
+		"RTP",
+		"RIST",
+		"SRT_CALLER",
+		"SRT_LISTENER",
+	}
+}
+
+type RouterOutputRoutedState string
+
+// Enum values for RouterOutputRoutedState
+const (
+	RouterOutputRoutedStateRouted   RouterOutputRoutedState = "ROUTED"
+	RouterOutputRoutedStateRouting  RouterOutputRoutedState = "ROUTING"
+	RouterOutputRoutedStateUnrouted RouterOutputRoutedState = "UNROUTED"
+)
+
+// Values returns all known values for RouterOutputRoutedState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterOutputRoutedState) Values() []RouterOutputRoutedState {
+	return []RouterOutputRoutedState{
+		"ROUTED",
+		"ROUTING",
+		"UNROUTED",
+	}
+}
+
+type RouterOutputState string
+
+// Enum values for RouterOutputState
+const (
+	RouterOutputStateCreating   RouterOutputState = "CREATING"
+	RouterOutputStateStandby    RouterOutputState = "STANDBY"
+	RouterOutputStateStarting   RouterOutputState = "STARTING"
+	RouterOutputStateActive     RouterOutputState = "ACTIVE"
+	RouterOutputStateStopping   RouterOutputState = "STOPPING"
+	RouterOutputStateDeleting   RouterOutputState = "DELETING"
+	RouterOutputStateUpdating   RouterOutputState = "UPDATING"
+	RouterOutputStateError      RouterOutputState = "ERROR"
+	RouterOutputStateRecovering RouterOutputState = "RECOVERING"
+	RouterOutputStateMigrating  RouterOutputState = "MIGRATING"
+)
+
+// Values returns all known values for RouterOutputState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterOutputState) Values() []RouterOutputState {
+	return []RouterOutputState{
+		"CREATING",
+		"STANDBY",
+		"STARTING",
+		"ACTIVE",
+		"STOPPING",
+		"DELETING",
+		"UPDATING",
+		"ERROR",
+		"RECOVERING",
+		"MIGRATING",
+	}
+}
+
+type RouterOutputTier string
+
+// Enum values for RouterOutputTier
+const (
+	RouterOutputTierOutput100 RouterOutputTier = "OUTPUT_100"
+	RouterOutputTierOutput50  RouterOutputTier = "OUTPUT_50"
+	RouterOutputTierOutput20  RouterOutputTier = "OUTPUT_20"
+)
+
+// Values returns all known values for RouterOutputTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterOutputTier) Values() []RouterOutputTier {
+	return []RouterOutputTier{
+		"OUTPUT_100",
+		"OUTPUT_50",
+		"OUTPUT_20",
+	}
+}
+
+type RouterOutputType string
+
+// Enum values for RouterOutputType
+const (
+	RouterOutputTypeStandard         RouterOutputType = "STANDARD"
+	RouterOutputTypeMediaconnectFlow RouterOutputType = "MEDIACONNECT_FLOW"
+	RouterOutputTypeMedialiveInput   RouterOutputType = "MEDIALIVE_INPUT"
+)
+
+// Values returns all known values for RouterOutputType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterOutputType) Values() []RouterOutputType {
+	return []RouterOutputType{
+		"STANDARD",
+		"MEDIACONNECT_FLOW",
+		"MEDIALIVE_INPUT",
+	}
+}
+
+type RoutingScope string
+
+// Enum values for RoutingScope
+const (
+	RoutingScopeRegional RoutingScope = "REGIONAL"
+	RoutingScopeGlobal   RoutingScope = "GLOBAL"
+)
+
+// Values returns all known values for RoutingScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingScope) Values() []RoutingScope {
+	return []RoutingScope{
+		"REGIONAL",
+		"GLOBAL",
 	}
 }
 

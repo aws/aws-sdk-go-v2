@@ -45,6 +45,23 @@ type AdvancedBackupSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Contains aggregated scan results across multiple scan operations, providing a
+// summary of scan status and findings.
+type AggregatedScanResult struct {
+
+	// A Boolean value indicating whether any of the aggregated scans failed.
+	FailedScan *bool
+
+	// An array of findings discovered across all aggregated scans.
+	Findings []ScanFinding
+
+	// The timestamp when the aggregated scan result was last computed, in Unix format
+	// and Coordinated Universal Time (UTC).
+	LastComputed *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains detailed information about a backup job.
 type BackupJob struct {
 
@@ -319,6 +336,10 @@ type BackupPlan struct {
 	// Contains a list of BackupOptions for each resource type.
 	AdvancedBackupSettings []AdvancedBackupSetting
 
+	// Contains your scanning configuration for the backup plan and includes the
+	// Malware scanner, your selected resources, and scanner role.
+	ScanSettings []ScanSetting
+
 	noSmithyDocumentSerde
 }
 
@@ -342,6 +363,10 @@ type BackupPlanInput struct {
 	// Specifies a list of BackupOptions for each resource type. These settings are
 	// only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
 	AdvancedBackupSettings []AdvancedBackupSetting
+
+	// Contains your scanning configuration for the backup rule and includes the
+	// malware scanner, and scan mode of either full or incremental.
+	ScanSettings []ScanSetting
 
 	noSmithyDocumentSerde
 }
@@ -467,6 +492,10 @@ type BackupRule struct {
 	// of resources.
 	RuleId *string
 
+	// Contains your scanning configuration for the backup rule and includes the
+	// malware scanner, and scan mode of either full or incremental.
+	ScanActions []ScanAction
+
 	// A cron expression in UTC specifying when Backup initiates a backup job. When no
 	// CRON expression is provided, Backup will use the default expression cron(0 5 ?
 	// * * *) .
@@ -570,6 +599,10 @@ type BackupRuleInput struct {
 
 	// The tags to assign to the resources.
 	RecoveryPointTags map[string]string
+
+	// Contains your scanning configuration for the backup rule and includes the
+	// malware scanner, and scan mode of either full or incremental.
+	ScanActions []ScanAction
 
 	// A CRON expression in UTC specifying when Backup initiates a backup job. When no
 	// CRON expression is provided, Backup will use the default expression cron(0 5 ?
@@ -1532,6 +1565,10 @@ type ProtectedResourceConditions struct {
 // vault.
 type RecoveryPointByBackupVault struct {
 
+	// Contains the latest scanning results against the recovery point and currently
+	// include FailedScan , Findings , LastComputed .
+	AggregatedScanResult *AggregatedScanResult
+
 	// The size, in bytes, of a backup.
 	BackupSizeInBytes *int64
 
@@ -1671,6 +1708,10 @@ type RecoveryPointByBackupVault struct {
 
 // Contains detailed information about a saved recovery point.
 type RecoveryPointByResource struct {
+
+	// Contains the latest scanning results against the recovery point and currently
+	// include FailedScan , Findings , LastComputed .
+	AggregatedScanResult *AggregatedScanResult
 
 	// The size, in bytes, of a backup.
 	BackupSizeBytes *int64
@@ -1969,7 +2010,7 @@ type ReportSetting struct {
 	// template. The report templates are:
 	//
 	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
-	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT
+	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT | SCAN_JOB_REPORT
 	//
 	// This member is required.
 	ReportTemplate *string
@@ -2706,6 +2747,277 @@ type RestoreTestingSelectionForUpdate struct {
 	// Accepted value is an integer between 0 and 168 (the hourly equivalent of seven
 	// days).
 	ValidationWindowHours int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines a scanning action that specifies the malware scanner and scan mode to
+// use.
+type ScanAction struct {
+
+	// The malware scanner to use for the scan action. Currently only GUARDDUTY is
+	// supported.
+	MalwareScanner MalwareScanner
+
+	// The scanning mode to use for the scan action.
+	//
+	// Valid values: FULL_SCAN | INCREMENTAL_SCAN .
+	ScanMode ScanMode
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a scan job, including information about the scanning
+// process, results, and associated resources.
+type ScanJob struct {
+
+	// The account ID that owns the scan job.
+	//
+	// This member is required.
+	AccountId *string
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
+	// example, arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
+	//
+	// This member is required.
+	BackupVaultArn *string
+
+	// The name of a logical container where backups are stored. Backup vaults are
+	// identified by names that are unique to the account used to create them and the
+	// Amazon Web Services Region where they are created.
+	//
+	// This member is required.
+	BackupVaultName *string
+
+	// Contains identifying information about the creation of a scan job.
+	//
+	// This member is required.
+	CreatedBy *ScanJobCreator
+
+	// The date and time that a scan job is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// Specifies the IAM role ARN used to create the scan job; for example,
+	// arn:aws:iam::123456789012:role/S3Access .
+	//
+	// This member is required.
+	IamRoleArn *string
+
+	// The scanning engine used for the scan job. Currently only GUARDDUTY is
+	// supported.
+	//
+	// This member is required.
+	MalwareScanner MalwareScanner
+
+	// An ARN that uniquely identifies the recovery point being scanned; for example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
+	// .
+	//
+	// This member is required.
+	RecoveryPointArn *string
+
+	// An ARN that uniquely identifies the source resource of the recovery point being
+	// scanned.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The non-unique name of the resource that belongs to the specified backup.
+	//
+	// This member is required.
+	ResourceName *string
+
+	// The type of Amazon Web Services resource being scanned; for example, an Amazon
+	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
+	// (Amazon RDS) database.
+	//
+	// This member is required.
+	ResourceType ScanResourceType
+
+	// The unique identifier that identifies the scan job request to Backup.
+	//
+	// This member is required.
+	ScanJobId *string
+
+	// Specifies the scan type use for the scan job.
+	//
+	// Includes:
+	//
+	// FULL_SCAN will scan the entire data lineage within the backup.
+	//
+	// INCREMENTAL_SCAN will scan the data difference between the target recovery
+	// point and base recovery point ARN.
+	//
+	// This member is required.
+	ScanMode ScanMode
+
+	// Specifies the scanner IAM role ARN used for the scan job.
+	//
+	// This member is required.
+	ScannerRoleArn *string
+
+	// The date and time that a scan job is completed, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CompletionDate is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CompletionDate *time.Time
+
+	// An ARN that uniquely identifies the base recovery point for scanning. This
+	// field is populated when an incremental scan job has taken place.
+	ScanBaseRecoveryPointArn *string
+
+	// The scan ID generated by the malware scanner for the corresponding scan job.
+	ScanId *string
+
+	// Contains the scan results information, including the status of threats found
+	// during scanning.
+	ScanResult *ScanResultInfo
+
+	// The current state of the scan job.
+	//
+	// Valid values: CREATED | RUNNING | COMPLETED | COMPLETED_WITH_ISSUES | FAILED |
+	// CANCELED .
+	State ScanState
+
+	// A detailed message explaining the status of the scan job.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains identifying information about the creation of a scan job, including
+// the backup plan and rule that initiated the scan.
+type ScanJobCreator struct {
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
+	// example,
+	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50 .
+	//
+	// This member is required.
+	BackupPlanArn *string
+
+	// The ID of the backup plan.
+	//
+	// This member is required.
+	BackupPlanId *string
+
+	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
+	// 1,024 bytes long. Version IDs cannot be edited.
+	//
+	// This member is required.
+	BackupPlanVersion *string
+
+	// Uniquely identifies the backup rule that initiated the scan job.
+	//
+	// This member is required.
+	BackupRuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about scan jobs, including counts and metadata for
+// a specific time period and criteria.
+type ScanJobSummary struct {
+
+	// The account ID that owns the scan jobs included in this summary.
+	AccountId *string
+
+	// The number of scan jobs that match the specified criteria.
+	Count int32
+
+	// The value of time in number format of a job end time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
+	EndTime *time.Time
+
+	// Specifies the malware scanner used during the scan job. Currently only supports
+	// GUARDDUTY .
+	MalwareScanner MalwareScanner
+
+	// The Amazon Web Services Region where the scan jobs were executed.
+	Region *string
+
+	// The type of Amazon Web Services resource for the scan jobs included in this
+	// summary.
+	ResourceType *string
+
+	// The scan result status for the scan jobs included in this summary.
+	//
+	// Valid values: THREATS_FOUND | NO_THREATS_FOUND .
+	ScanResultStatus ScanResultStatus
+
+	// The value of time in number format of a job start time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
+	StartTime *time.Time
+
+	// The state of the scan jobs included in this summary.
+	//
+	// Valid values: CREATED | RUNNING | COMPLETED | COMPLETED_WITH_ISSUES | FAILED |
+	// CANCELED .
+	State ScanJobStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results of a security scan, including scanner information, scan
+// state, and any findings discovered.
+type ScanResult struct {
+
+	// An array of findings discovered during the scan.
+	Findings []ScanFinding
+
+	// The timestamp of when the last scan was performed, in Unix format and
+	// Coordinated Universal Time (UTC).
+	LastScanTimestamp *time.Time
+
+	// The malware scanner used to perform the scan. Currently only GUARDDUTY is
+	// supported.
+	MalwareScanner MalwareScanner
+
+	// The final state of the scan job.
+	//
+	// Valid values: COMPLETED | FAILED | CANCELED .
+	ScanJobState ScanJobState
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the results of a scan job.
+type ScanResultInfo struct {
+
+	// The status of the scan results.
+	//
+	// Valid values: THREATS_FOUND | NO_THREATS_FOUND .
+	//
+	// This member is required.
+	ScanResultStatus ScanResultStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration settings for malware scanning, including the scanner
+// type, target resource types, and scanner role.
+type ScanSetting struct {
+
+	// The malware scanner to use for scanning. Currently only GUARDDUTY is supported.
+	MalwareScanner MalwareScanner
+
+	// An array of resource types to be scanned for malware.
+	ResourceTypes []string
+
+	// The Amazon Resource Name (ARN) of the IAM role that the scanner uses to access
+	// resources; for example, arn:aws:iam::123456789012:role/ScannerRole .
+	ScannerRoleArn *string
 
 	noSmithyDocumentSerde
 }

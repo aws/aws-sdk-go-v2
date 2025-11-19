@@ -40,6 +40,13 @@ type CreateBillScenarioInput struct {
 	//  A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
+
 	//  The tags to apply to the bill scenario.
 	Tags map[string]string
 
@@ -56,6 +63,9 @@ type CreateBillScenarioOutput struct {
 	//  The time period covered by the bill scenario.
 	BillInterval *types.BillInterval
 
+	// The arn of the cost category used in the reserved and prioritized group sharing.
+	CostCategoryGroupSharingPreferenceArn *string
+
 	//  The timestamp when the bill scenario was created.
 	CreatedAt *time.Time
 
@@ -64,6 +74,10 @@ type CreateBillScenarioOutput struct {
 
 	//  An error message if the bill scenario creation failed.
 	FailureMessage *string
+
+	// The setting for the reserved instance and savings plan group sharing used in
+	// this estimate.
+	GroupSharingPreference types.GroupSharingPreferenceEnum
 
 	//  The name of the created bill scenario.
 	Name *string

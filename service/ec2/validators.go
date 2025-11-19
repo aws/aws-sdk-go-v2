@@ -1530,6 +1530,26 @@ func (m *validateOpCreateIpamExternalResourceVerificationToken) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIpamPolicy struct {
+}
+
+func (*validateOpCreateIpamPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIpamPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIpamPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIpamPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIpamPool struct {
 }
 
@@ -1825,26 +1845,6 @@ func (m *validateOpCreateManagedPrefixList) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateManagedPrefixListInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpCreateNatGateway struct {
-}
-
-func (*validateOpCreateNatGateway) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateNatGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateNatGatewayInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateNatGatewayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3105,6 +3105,26 @@ func (m *validateOpDeleteIpam) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteIpamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIpamPolicy struct {
+}
+
+func (*validateOpDeleteIpamPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIpamPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIpamPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIpamPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5290,6 +5310,26 @@ func (m *validateOpDisableIpamOrganizationAdminAccount) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableIpamPolicy struct {
+}
+
+func (*validateOpDisableIpamPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableIpamPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableIpamPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableIpamPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableRouteServerPropagation struct {
 }
 
@@ -5905,6 +5945,26 @@ func (m *validateOpEnableIpamOrganizationAdminAccount) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableIpamOrganizationAdminAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableIpamPolicy struct {
+}
+
+func (*validateOpEnableIpamPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableIpamPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableIpamPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableIpamPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6565,6 +6625,46 @@ func (m *validateOpGetIpamDiscoveredResourceCidrs) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIpamDiscoveredResourceCidrsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIpamPolicyAllocationRules struct {
+}
+
+func (*validateOpGetIpamPolicyAllocationRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIpamPolicyAllocationRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIpamPolicyAllocationRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIpamPolicyAllocationRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIpamPolicyOrganizationTargets struct {
+}
+
+func (*validateOpGetIpamPolicyOrganizationTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIpamPolicyOrganizationTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIpamPolicyOrganizationTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIpamPolicyOrganizationTargetsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7785,6 +7885,26 @@ func (m *validateOpModifyIpam) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyIpamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyIpamPolicyAllocationRules struct {
+}
+
+func (*validateOpModifyIpamPolicyAllocationRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyIpamPolicyAllocationRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyIpamPolicyAllocationRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyIpamPolicyAllocationRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -10414,6 +10534,10 @@ func addOpCreateIpamExternalResourceVerificationTokenValidationMiddleware(stack 
 	return stack.Initialize.Add(&validateOpCreateIpamExternalResourceVerificationToken{}, middleware.After)
 }
 
+func addOpCreateIpamPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIpamPolicy{}, middleware.After)
+}
+
 func addOpCreateIpamPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIpamPool{}, middleware.After)
 }
@@ -10472,10 +10596,6 @@ func addOpCreateMacSystemIntegrityProtectionModificationTaskValidationMiddleware
 
 func addOpCreateManagedPrefixListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateManagedPrefixList{}, middleware.After)
-}
-
-func addOpCreateNatGatewayValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateNatGateway{}, middleware.After)
 }
 
 func addOpCreateNetworkAclEntryValidationMiddleware(stack *middleware.Stack) error {
@@ -10728,6 +10848,10 @@ func addOpDeleteIpamExternalResourceVerificationTokenValidationMiddleware(stack 
 
 func addOpDeleteIpamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIpam{}, middleware.After)
+}
+
+func addOpDeleteIpamPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIpamPolicy{}, middleware.After)
 }
 
 func addOpDeleteIpamPoolValidationMiddleware(stack *middleware.Stack) error {
@@ -11166,6 +11290,10 @@ func addOpDisableIpamOrganizationAdminAccountValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDisableIpamOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpDisableIpamPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableIpamPolicy{}, middleware.After)
+}
+
 func addOpDisableRouteServerPropagationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableRouteServerPropagation{}, middleware.After)
 }
@@ -11288,6 +11416,10 @@ func addOpEnableInstanceSqlHaStandbyDetectionsValidationMiddleware(stack *middle
 
 func addOpEnableIpamOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableIpamOrganizationAdminAccount{}, middleware.After)
+}
+
+func addOpEnableIpamPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableIpamPolicy{}, middleware.After)
 }
 
 func addOpEnableRouteServerPropagationValidationMiddleware(stack *middleware.Stack) error {
@@ -11420,6 +11552,14 @@ func addOpGetIpamDiscoveredPublicAddressesValidationMiddleware(stack *middleware
 
 func addOpGetIpamDiscoveredResourceCidrsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIpamDiscoveredResourceCidrs{}, middleware.After)
+}
+
+func addOpGetIpamPolicyAllocationRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIpamPolicyAllocationRules{}, middleware.After)
+}
+
+func addOpGetIpamPolicyOrganizationTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIpamPolicyOrganizationTargets{}, middleware.After)
 }
 
 func addOpGetIpamPoolAllocationsValidationMiddleware(stack *middleware.Stack) error {
@@ -11664,6 +11804,10 @@ func addOpModifyInstancePlacementValidationMiddleware(stack *middleware.Stack) e
 
 func addOpModifyIpamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyIpam{}, middleware.After)
+}
+
+func addOpModifyIpamPolicyAllocationRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyIpamPolicyAllocationRules{}, middleware.After)
 }
 
 func addOpModifyIpamPoolValidationMiddleware(stack *middleware.Stack) error {
@@ -14418,6 +14562,21 @@ func validateOpCreateIpamExternalResourceVerificationTokenInput(v *CreateIpamExt
 	}
 }
 
+func validateOpCreateIpamPolicyInput(v *CreateIpamPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIpamPolicyInput"}
+	if v.IpamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateIpamPoolInput(v *CreateIpamPoolInput) error {
 	if v == nil {
 		return nil
@@ -14698,21 +14857,6 @@ func validateOpCreateManagedPrefixListInput(v *CreateManagedPrefixListInput) err
 	}
 	if v.AddressFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddressFamily"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCreateNatGatewayInput(v *CreateNatGatewayInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateNatGatewayInput"}
-	if v.SubnetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15811,6 +15955,21 @@ func validateOpDeleteIpamInput(v *DeleteIpamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIpamInput"}
 	if v.IpamId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIpamPolicyInput(v *DeleteIpamPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIpamPolicyInput"}
+	if v.IpamPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17521,6 +17680,21 @@ func validateOpDisableIpamOrganizationAdminAccountInput(v *DisableIpamOrganizati
 	}
 }
 
+func validateOpDisableIpamPolicyInput(v *DisableIpamPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableIpamPolicyInput"}
+	if v.IpamPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableRouteServerPropagationInput(v *DisableRouteServerPropagationInput) error {
 	if v == nil {
 		return nil
@@ -18031,6 +18205,21 @@ func validateOpEnableIpamOrganizationAdminAccountInput(v *EnableIpamOrganization
 	invalidParams := smithy.InvalidParamsError{Context: "EnableIpamOrganizationAdminAccountInput"}
 	if v.DelegatedAdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DelegatedAdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableIpamPolicyInput(v *EnableIpamPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableIpamPolicyInput"}
+	if v.IpamPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18607,6 +18796,36 @@ func validateOpGetIpamDiscoveredResourceCidrsInput(v *GetIpamDiscoveredResourceC
 	}
 	if v.ResourceRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIpamPolicyAllocationRulesInput(v *GetIpamPolicyAllocationRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIpamPolicyAllocationRulesInput"}
+	if v.IpamPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIpamPolicyOrganizationTargetsInput(v *GetIpamPolicyOrganizationTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIpamPolicyOrganizationTargetsInput"}
+	if v.IpamPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19613,6 +19832,27 @@ func validateOpModifyIpamInput(v *ModifyIpamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyIpamInput"}
 	if v.IpamId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyIpamPolicyAllocationRulesInput(v *ModifyIpamPolicyAllocationRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyIpamPolicyAllocationRulesInput"}
+	if v.IpamPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPolicyId"))
+	}
+	if v.Locale == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Locale"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

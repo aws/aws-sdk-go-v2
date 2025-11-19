@@ -338,6 +338,27 @@ func (MapRunStatus) Values() []MapRunStatus {
 	}
 }
 
+type MockResponseValidationMode string
+
+// Enum values for MockResponseValidationMode
+const (
+	MockResponseValidationModeStrict  MockResponseValidationMode = "STRICT"
+	MockResponseValidationModePresent MockResponseValidationMode = "PRESENT"
+	MockResponseValidationModeNone    MockResponseValidationMode = "NONE"
+)
+
+// Values returns all known values for MockResponseValidationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MockResponseValidationMode) Values() []MockResponseValidationMode {
+	return []MockResponseValidationMode{
+		"STRICT",
+		"PRESENT",
+		"NONE",
+	}
+}
+
 type StateMachineStatus string
 
 // Enum values for StateMachineStatus

@@ -64,6 +64,10 @@ type UpdateBackupPlanOutput struct {
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
+	// Contains your scanning configuration for the backup plan and includes the
+	// Malware scanner, your selected resources, and scanner role.
+	ScanSettings []types.ScanSetting
+
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version Ids cannot be edited.
 	VersionId *string

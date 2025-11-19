@@ -434,8 +434,8 @@ type EventSourceMappingConfiguration struct {
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32
 
-	// (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
-	// configuration for the event source. For more information, see [provisioned mode].
+	// (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned
+	// mode configuration for the event source. For more information, see [provisioned mode].
 	//
 	// [provisioned mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
 	ProvisionedPollerConfig *ProvisionedPollerConfig
@@ -774,6 +774,10 @@ type FunctionConfiguration struct {
 	// The reason code for the function's current state. When the code is Creating ,
 	// you can't invoke or modify the function.
 	StateReasonCode StateReasonCode
+
+	// The function's tenant isolation configuration settings. Determines whether the
+	// Lambda function runs on a shared or dedicated infrastructure per unique tenant.
+	TenancyConfig *TenancyConfig
 
 	// The amount of time in seconds that Lambda allows a function to run before
 	// stopping it.
@@ -1283,16 +1287,20 @@ type ProvisionedConcurrencyConfigListItem struct {
 }
 
 // The [provisioned mode] configuration for the event source. Use Provisioned Mode to customize the
-// minimum and maximum number of event pollers for your event source. An event
-// poller is a compute unit that provides approximately 5 MBps of throughput.
+// minimum and maximum number of event pollers for your event source.
 //
 // [provisioned mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
 type ProvisionedPollerConfig struct {
 
-	// The maximum number of event pollers this event source can scale up to.
+	// The maximum number of event pollers this event source can scale up to. For
+	// Amazon SQS events source mappings, default is 200, and minimum value allowed is
+	// 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default
+	// is 200, and minimum value allowed is 1.
 	MaximumPollers *int32
 
-	// The minimum number of event pollers this event source can scale down to.
+	// The minimum number of event pollers this event source can scale down to. For
+	// Amazon SQS events source mappings, default is 2, and minimum 2 required. For
+	// Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.
 	MinimumPollers *int32
 
 	noSmithyDocumentSerde
@@ -1454,6 +1462,21 @@ type TagsError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the tenant isolation mode configuration for a Lambda function. This
+// allows you to configure specific tenant isolation strategies for your function
+// invocations. Tenant isolation configuration cannot be modified after function
+// creation.
+type TenancyConfig struct {
+
+	// Tenant isolation mode allows for invocation to be sent to a corresponding
+	// execution environment dedicated to a specific tenant ID.
+	//
+	// This member is required.
+	TenantIsolationMode TenantIsolationMode
 
 	noSmithyDocumentSerde
 }

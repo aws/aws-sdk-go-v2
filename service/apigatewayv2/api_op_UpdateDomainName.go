@@ -55,7 +55,7 @@ type UpdateDomainNameOutput struct {
 	// The name of the DomainName resource.
 	DomainName *string
 
-	// Represents an Amazon Resource Name (ARN).
+	// The ARN of the DomainName resource.
 	DomainNameArn *string
 
 	// The domain name configurations.

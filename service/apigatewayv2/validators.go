@@ -170,6 +170,86 @@ func (m *validateOpCreateModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePortal struct {
+}
+
+func (*validateOpCreatePortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePortalProduct struct {
+}
+
+func (*validateOpCreatePortalProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePortalProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePortalProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePortalProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProductPage struct {
+}
+
+func (*validateOpCreateProductPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProductPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProductPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProductPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProductRestEndpointPage struct {
+}
+
+func (*validateOpCreateProductRestEndpointPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProductRestEndpointPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProductRestEndpointPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProductRestEndpointPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRoute struct {
 }
 
@@ -470,6 +550,106 @@ func (m *validateOpDeleteModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePortal struct {
+}
+
+func (*validateOpDeletePortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePortalProduct struct {
+}
+
+func (*validateOpDeletePortalProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePortalProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePortalProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePortalProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePortalProductSharingPolicy struct {
+}
+
+func (*validateOpDeletePortalProductSharingPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePortalProductSharingPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePortalProductSharingPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePortalProductSharingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProductPage struct {
+}
+
+func (*validateOpDeleteProductPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProductPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProductPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProductPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProductRestEndpointPage struct {
+}
+
+func (*validateOpDeleteProductRestEndpointPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProductRestEndpointPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProductRestEndpointPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProductRestEndpointPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRoute struct {
 }
 
@@ -605,6 +785,26 @@ func (m *validateOpDeleteVpcLink) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteVpcLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisablePortal struct {
+}
+
+func (*validateOpDisablePortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisablePortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisablePortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisablePortalInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,6 +1130,106 @@ func (m *validateOpGetModelTemplate) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPortal struct {
+}
+
+func (*validateOpGetPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPortalProduct struct {
+}
+
+func (*validateOpGetPortalProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPortalProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPortalProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPortalProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPortalProductSharingPolicy struct {
+}
+
+func (*validateOpGetPortalProductSharingPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPortalProductSharingPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPortalProductSharingPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPortalProductSharingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetProductPage struct {
+}
+
+func (*validateOpGetProductPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProductPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProductPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProductPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetProductRestEndpointPage struct {
+}
+
+func (*validateOpGetProductRestEndpointPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProductRestEndpointPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProductRestEndpointPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProductRestEndpointPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRoute struct {
 }
 
@@ -1130,6 +1430,46 @@ func (m *validateOpImportApi) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProductPages struct {
+}
+
+func (*validateOpListProductPages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProductPages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProductPagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProductPagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListProductRestEndpointPages struct {
+}
+
+func (*validateOpListProductRestEndpointPages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProductRestEndpointPages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProductRestEndpointPagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProductRestEndpointPagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRoutingRules struct {
 }
 
@@ -1145,6 +1485,66 @@ func (m *validateOpListRoutingRules) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRoutingRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPreviewPortal struct {
+}
+
+func (*validateOpPreviewPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPreviewPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PreviewPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPreviewPortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPublishPortal struct {
+}
+
+func (*validateOpPublishPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishPortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutPortalProductSharingPolicy struct {
+}
+
+func (*validateOpPutPortalProductSharingPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPortalProductSharingPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPortalProductSharingPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPortalProductSharingPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1410,6 +1810,86 @@ func (m *validateOpUpdateModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePortal struct {
+}
+
+func (*validateOpUpdatePortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePortalProduct struct {
+}
+
+func (*validateOpUpdatePortalProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePortalProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePortalProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePortalProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProductPage struct {
+}
+
+func (*validateOpUpdateProductPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProductPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProductPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProductPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProductRestEndpointPage struct {
+}
+
+func (*validateOpUpdateProductRestEndpointPage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProductRestEndpointPage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProductRestEndpointPageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProductRestEndpointPageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRoute struct {
 }
 
@@ -1522,6 +2002,22 @@ func addOpCreateModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModel{}, middleware.After)
 }
 
+func addOpCreatePortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePortal{}, middleware.After)
+}
+
+func addOpCreatePortalProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePortalProduct{}, middleware.After)
+}
+
+func addOpCreateProductPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProductPage{}, middleware.After)
+}
+
+func addOpCreateProductRestEndpointPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProductRestEndpointPage{}, middleware.After)
+}
+
 func addOpCreateRouteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRoute{}, middleware.After)
 }
@@ -1582,6 +2078,26 @@ func addOpDeleteModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteModel{}, middleware.After)
 }
 
+func addOpDeletePortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePortal{}, middleware.After)
+}
+
+func addOpDeletePortalProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePortalProduct{}, middleware.After)
+}
+
+func addOpDeletePortalProductSharingPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePortalProductSharingPolicy{}, middleware.After)
+}
+
+func addOpDeleteProductPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProductPage{}, middleware.After)
+}
+
+func addOpDeleteProductRestEndpointPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProductRestEndpointPage{}, middleware.After)
+}
+
 func addOpDeleteRouteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRoute{}, middleware.After)
 }
@@ -1608,6 +2124,10 @@ func addOpDeleteStageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteVpcLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVpcLink{}, middleware.After)
+}
+
+func addOpDisablePortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisablePortal{}, middleware.After)
 }
 
 func addOpExportApiValidationMiddleware(stack *middleware.Stack) error {
@@ -1674,6 +2194,26 @@ func addOpGetModelTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelTemplate{}, middleware.After)
 }
 
+func addOpGetPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPortal{}, middleware.After)
+}
+
+func addOpGetPortalProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPortalProduct{}, middleware.After)
+}
+
+func addOpGetPortalProductSharingPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPortalProductSharingPolicy{}, middleware.After)
+}
+
+func addOpGetProductPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProductPage{}, middleware.After)
+}
+
+func addOpGetProductRestEndpointPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProductRestEndpointPage{}, middleware.After)
+}
+
 func addOpGetRouteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRoute{}, middleware.After)
 }
@@ -1714,8 +2254,28 @@ func addOpImportApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportApi{}, middleware.After)
 }
 
+func addOpListProductPagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProductPages{}, middleware.After)
+}
+
+func addOpListProductRestEndpointPagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProductRestEndpointPages{}, middleware.After)
+}
+
 func addOpListRoutingRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRoutingRules{}, middleware.After)
+}
+
+func addOpPreviewPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPreviewPortal{}, middleware.After)
+}
+
+func addOpPublishPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishPortal{}, middleware.After)
+}
+
+func addOpPutPortalProductSharingPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPortalProductSharingPolicy{}, middleware.After)
 }
 
 func addOpPutRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -1768,6 +2328,22 @@ func addOpUpdateIntegrationResponseValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateModel{}, middleware.After)
+}
+
+func addOpUpdatePortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePortal{}, middleware.After)
+}
+
+func addOpUpdatePortalProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePortalProduct{}, middleware.After)
+}
+
+func addOpUpdateProductPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProductPage{}, middleware.After)
+}
+
+func addOpUpdateProductRestEndpointPageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProductRestEndpointPage{}, middleware.After)
 }
 
 func addOpUpdateRouteValidationMiddleware(stack *middleware.Stack) error {
@@ -1828,6 +2404,243 @@ func validate__listOfRoutingRuleMatchHeaderValue(v []types.RoutingRuleMatchHeade
 	for i := range v {
 		if err := validateRoutingRuleMatchHeaderValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfSection(v []types.Section) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfSection"}
+	for i := range v {
+		if err := validateSection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateACMManaged(v *types.ACMManaged) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ACMManaged"}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthorization(v *types.Authorization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Authorization"}
+	if v.CognitoConfig != nil {
+		if err := validateCognitoConfig(v.CognitoConfig); err != nil {
+			invalidParams.AddNested("CognitoConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCognitoConfig(v *types.CognitoConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CognitoConfig"}
+	if v.AppClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppClientId"))
+	}
+	if v.UserPoolArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolArn"))
+	}
+	if v.UserPoolDomain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolDomain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomColors(v *types.CustomColors) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomColors"}
+	if v.AccentColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccentColor"))
+	}
+	if v.BackgroundColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackgroundColor"))
+	}
+	if v.ErrorValidationColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ErrorValidationColor"))
+	}
+	if v.HeaderColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeaderColor"))
+	}
+	if v.NavigationColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NavigationColor"))
+	}
+	if v.TextColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextColor"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDisplayContent(v *types.DisplayContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisplayContent"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDisplayOrder(v *types.DisplayOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisplayOrder"}
+	if v.Contents != nil {
+		if err := validate__listOfSection(v.Contents); err != nil {
+			invalidParams.AddNested("Contents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEndpointConfigurationRequest(v *types.EndpointConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointConfigurationRequest"}
+	if v.AcmManaged != nil {
+		if err := validateACMManaged(v.AcmManaged); err != nil {
+			invalidParams.AddNested("AcmManaged", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdentifierParts(v *types.IdentifierParts) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentifierParts"}
+	if v.Method == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Method"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.RestApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.Stage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePortalContent(v *types.PortalContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PortalContent"}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.Theme == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Theme"))
+	} else if v.Theme != nil {
+		if err := validatePortalTheme(v.Theme); err != nil {
+			invalidParams.AddNested("Theme", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePortalTheme(v *types.PortalTheme) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PortalTheme"}
+	if v.CustomColors == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomColors"))
+	} else if v.CustomColors != nil {
+		if err := validateCustomColors(v.CustomColors); err != nil {
+			invalidParams.AddNested("CustomColors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRestEndpointIdentifier(v *types.RestEndpointIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestEndpointIdentifier"}
+	if v.IdentifierParts != nil {
+		if err := validateIdentifierParts(v.IdentifierParts); err != nil {
+			invalidParams.AddNested("IdentifierParts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1940,6 +2753,24 @@ func validateRoutingRuleMatchHeaderValue(v *types.RoutingRuleMatchHeaderValue) e
 	}
 	if v.ValueGlob == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ValueGlob"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSection(v *types.Section) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Section"}
+	if v.ProductRestEndpointPageArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductRestEndpointPageArns"))
+	}
+	if v.SectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SectionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2093,6 +2924,98 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 	}
 	if v.Schema == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePortalInput(v *CreatePortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePortalInput"}
+	if v.Authorization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Authorization"))
+	} else if v.Authorization != nil {
+		if err := validateAuthorization(v.Authorization); err != nil {
+			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndpointConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfiguration"))
+	} else if v.EndpointConfiguration != nil {
+		if err := validateEndpointConfigurationRequest(v.EndpointConfiguration); err != nil {
+			invalidParams.AddNested("EndpointConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PortalContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalContent"))
+	} else if v.PortalContent != nil {
+		if err := validatePortalContent(v.PortalContent); err != nil {
+			invalidParams.AddNested("PortalContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePortalProductInput(v *CreatePortalProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePortalProductInput"}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProductPageInput(v *CreateProductPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProductPageInput"}
+	if v.DisplayContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayContent"))
+	} else if v.DisplayContent != nil {
+		if err := validateDisplayContent(v.DisplayContent); err != nil {
+			invalidParams.AddNested("DisplayContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProductRestEndpointPageInput(v *CreateProductRestEndpointPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProductRestEndpointPageInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.RestEndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestEndpointIdentifier"))
+	} else if v.RestEndpointIdentifier != nil {
+		if err := validateRestEndpointIdentifier(v.RestEndpointIdentifier); err != nil {
+			invalidParams.AddNested("RestEndpointIdentifier", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2382,6 +3305,87 @@ func validateOpDeleteModelInput(v *DeleteModelInput) error {
 	}
 }
 
+func validateOpDeletePortalInput(v *DeletePortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePortalInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePortalProductInput(v *DeletePortalProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePortalProductInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePortalProductSharingPolicyInput(v *DeletePortalProductSharingPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePortalProductSharingPolicyInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProductPageInput(v *DeleteProductPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProductPageInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.ProductPageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductPageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProductRestEndpointPageInput(v *DeleteProductRestEndpointPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProductRestEndpointPageInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.ProductRestEndpointPageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductRestEndpointPageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRouteInput(v *DeleteRouteInput) error {
 	if v == nil {
 		return nil
@@ -2506,6 +3510,21 @@ func validateOpDeleteVpcLinkInput(v *DeleteVpcLinkInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcLinkInput"}
 	if v.VpcLinkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcLinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisablePortalInput(v *DisablePortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisablePortalInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2787,6 +3806,87 @@ func validateOpGetModelTemplateInput(v *GetModelTemplateInput) error {
 	}
 }
 
+func validateOpGetPortalInput(v *GetPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPortalInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPortalProductInput(v *GetPortalProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPortalProductInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPortalProductSharingPolicyInput(v *GetPortalProductSharingPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPortalProductSharingPolicyInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetProductPageInput(v *GetProductPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProductPageInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.ProductPageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductPageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetProductRestEndpointPageInput(v *GetProductRestEndpointPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProductRestEndpointPageInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.ProductRestEndpointPageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductRestEndpointPageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetRouteInput(v *GetRouteInput) error {
 	if v == nil {
 		return nil
@@ -2955,6 +4055,36 @@ func validateOpImportApiInput(v *ImportApiInput) error {
 	}
 }
 
+func validateOpListProductPagesInput(v *ListProductPagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProductPagesInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProductRestEndpointPagesInput(v *ListProductRestEndpointPagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProductRestEndpointPagesInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRoutingRulesInput(v *ListRoutingRulesInput) error {
 	if v == nil {
 		return nil
@@ -2962,6 +4092,54 @@ func validateOpListRoutingRulesInput(v *ListRoutingRulesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingRulesInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPreviewPortalInput(v *PreviewPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreviewPortalInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishPortalInput(v *PublishPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishPortalInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutPortalProductSharingPolicyInput(v *PutPortalProductSharingPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPortalProductSharingPolicyInput"}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3210,6 +4388,97 @@ func validateOpUpdateModelInput(v *UpdateModelInput) error {
 	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePortalInput(v *UpdatePortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePortalInput"}
+	if v.Authorization != nil {
+		if err := validateAuthorization(v.Authorization); err != nil {
+			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndpointConfiguration != nil {
+		if err := validateEndpointConfigurationRequest(v.EndpointConfiguration); err != nil {
+			invalidParams.AddNested("EndpointConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PortalContent != nil {
+		if err := validatePortalContent(v.PortalContent); err != nil {
+			invalidParams.AddNested("PortalContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePortalProductInput(v *UpdatePortalProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePortalProductInput"}
+	if v.DisplayOrder != nil {
+		if err := validateDisplayOrder(v.DisplayOrder); err != nil {
+			invalidParams.AddNested("DisplayOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProductPageInput(v *UpdateProductPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProductPageInput"}
+	if v.DisplayContent != nil {
+		if err := validateDisplayContent(v.DisplayContent); err != nil {
+			invalidParams.AddNested("DisplayContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.ProductPageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductPageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProductRestEndpointPageInput(v *UpdateProductRestEndpointPageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProductRestEndpointPageInput"}
+	if v.PortalProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalProductId"))
+	}
+	if v.ProductRestEndpointPageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductRestEndpointPageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

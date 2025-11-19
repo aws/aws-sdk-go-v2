@@ -107,9 +107,10 @@ type UpdateTrailInput struct {
 	// organization trail.
 	IsOrganizationTrail *bool
 
-	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail.
-	// The value can be an alias name prefixed by "alias/", a fully specified ARN to an
-	// alias, a fully specified ARN to a key, or a globally unique identifier.
+	// Specifies the KMS key ID to use to encrypt the logs and digest files delivered
+	// by CloudTrail. The value can be an alias name prefixed by "alias/", a fully
+	// specified ARN to an alias, a fully specified ARN to a key, or a globally unique
+	// identifier.
 	//
 	// CloudTrail also supports KMS multi-Region keys. For more information about
 	// multi-Region keys, see [Using multi-Region keys]in the Key Management Service Developer Guide.
@@ -169,8 +170,9 @@ type UpdateTrailOutput struct {
 	// Specifies whether the trail is an organization trail.
 	IsOrganizationTrail *bool
 
-	// Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The
-	// value is a fully specified ARN to a KMS key in the following format.
+	// Specifies the KMS key ID that encrypts the logs and digest files delivered by
+	// CloudTrail. The value is a fully specified ARN to a KMS key in the following
+	// format.
 	//
 	//     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string

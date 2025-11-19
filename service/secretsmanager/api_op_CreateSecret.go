@@ -213,6 +213,12 @@ type CreateSecretInput struct {
 	// [Control access to secrets using tags]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#tag-secrets-abac
 	Tags []types.Tag
 
+	// The exact string that identifies the partner that holds the external secret.
+	// For more information, see [Using Secrets Manager managed external secrets].
+	//
+	// [Using Secrets Manager managed external secrets]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
+	Type *string
+
 	noSmithyDocumentSerde
 }
 

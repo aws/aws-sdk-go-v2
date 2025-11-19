@@ -728,6 +728,43 @@ type AthenaPropertiesPatch struct {
 	noSmithyDocumentSerde
 }
 
+// The attribute error.
+type AttributeError struct {
+
+	// The attribute ID as part of the attribute error.
+	//
+	// This member is required.
+	AttributeIdentifier *string
+
+	// The code generated as part of the attribute error.
+	//
+	// This member is required.
+	Code *string
+
+	// The message generated as part of the attribute error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The attribute input.
+type AttributeInput struct {
+
+	// The ID of the attribute.
+	//
+	// This member is required.
+	AttributeIdentifier *string
+
+	// The metadata forms as part of the attribute input.
+	//
+	// This member is required.
+	Forms []FormInput
+
+	noSmithyDocumentSerde
+}
+
 // The authentication configuration of a connection.
 type AuthenticationConfiguration struct {
 
@@ -854,6 +891,31 @@ type BasicAuthenticationCredentials struct {
 
 	// The user name for the connecion.
 	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// The results of the BatchGetAttribute action.
+type BatchGetAttributeOutput struct {
+
+	// The attribute ID.
+	//
+	// This member is required.
+	AttributeIdentifier *string
+
+	// The metadata forms that are part of the results of the BatchGetAttribute action.
+	Forms []FormOutput
+
+	noSmithyDocumentSerde
+}
+
+// The results of the BatchPutAttribute action.
+type BatchPutAttributeOutput struct {
+
+	// The attribute ID.
+	//
+	// This member is required.
+	AttributeIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -2767,6 +2829,15 @@ type GlossaryItemAdditionalAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The enforcement details of a glossary term.
+type GlossaryTermEnforcementDetail struct {
+
+	// The ID of the required glossary term.
+	RequiredGlossaryTermIds []string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a business glossary term.
 type GlossaryTermItem struct {
 
@@ -3245,6 +3316,7 @@ type IamPropertiesPatch struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the IAM user profile.
 type IamUserProfileDetails struct {
 
 	// The ARN of the IAM user.
@@ -5391,10 +5463,20 @@ func (*RowFilterExpressionMemberNotLike) isRowFilterExpression() {}
 //
 // The following types satisfy this interface:
 //
+//	RuleDetailMemberGlossaryTermEnforcementDetail
 //	RuleDetailMemberMetadataFormEnforcementDetail
 type RuleDetail interface {
 	isRuleDetail()
 }
+
+// The enforcement details of a glossary term that's part of the metadata rule.
+type RuleDetailMemberGlossaryTermEnforcementDetail struct {
+	Value GlossaryTermEnforcementDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleDetailMemberGlossaryTermEnforcementDetail) isRuleDetail() {}
 
 // The enforcement detail of the metadata form.
 type RuleDetailMemberMetadataFormEnforcementDetail struct {

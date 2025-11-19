@@ -1106,6 +1106,18 @@ func TestCheckSnapshot_CreateIpamExternalResourceVerificationToken(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_CreateIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIpamPool(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamPool(context.Background(), nil, func(o *Options) {
@@ -2167,6 +2179,18 @@ func TestCheckSnapshot_DeleteIpamExternalResourceVerificationToken(t *testing.T)
 	_, err := svc.DeleteIpamExternalResourceVerificationToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIpamExternalResourceVerificationToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIpamPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3950,6 +3974,18 @@ func TestCheckSnapshot_DescribeIpamExternalResourceVerificationTokens(t *testing
 	}
 }
 
+func TestCheckSnapshot_DescribeIpamPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeIpamPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIpamPools(context.Background(), nil, func(o *Options) {
@@ -5462,6 +5498,18 @@ func TestCheckSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableRouteServerPropagation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableRouteServerPropagation(context.Background(), nil, func(o *Options) {
@@ -5918,6 +5966,18 @@ func TestCheckSnapshot_EnableIpamOrganizationAdminAccount(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_EnableIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableReachabilityAnalyzerOrganizationSharing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableReachabilityAnalyzerOrganizationSharing(context.Background(), nil, func(o *Options) {
@@ -6278,6 +6338,18 @@ func TestCheckSnapshot_GetEbsEncryptionByDefault(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEnabledIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnabledIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEnabledIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFlowLogsIntegrationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFlowLogsIntegrationTemplate(context.Background(), nil, func(o *Options) {
@@ -6427,6 +6499,30 @@ func TestCheckSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	_, err := svc.GetIpamDiscoveredResourceCidrs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetIpamDiscoveredResourceCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPolicyAllocationRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamPolicyAllocationRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamPolicyOrganizationTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPolicyOrganizationTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamPolicyOrganizationTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7255,6 +7351,18 @@ func TestCheckSnapshot_ModifyIpam(t *testing.T) {
 	_, err := svc.ModifyIpam(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyIpam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyIpamPolicyAllocationRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPolicyAllocationRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamPolicyAllocationRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9793,6 +9901,18 @@ func TestUpdateSnapshot_CreateIpamExternalResourceVerificationToken(t *testing.T
 	}
 }
 
+func TestUpdateSnapshot_CreateIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIpamPool(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamPool(context.Background(), nil, func(o *Options) {
@@ -10854,6 +10974,18 @@ func TestUpdateSnapshot_DeleteIpamExternalResourceVerificationToken(t *testing.T
 	_, err := svc.DeleteIpamExternalResourceVerificationToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIpamExternalResourceVerificationToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIpamPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12637,6 +12769,18 @@ func TestUpdateSnapshot_DescribeIpamExternalResourceVerificationTokens(t *testin
 	}
 }
 
+func TestUpdateSnapshot_DescribeIpamPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeIpamPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIpamPools(context.Background(), nil, func(o *Options) {
@@ -14149,6 +14293,18 @@ func TestUpdateSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableRouteServerPropagation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableRouteServerPropagation(context.Background(), nil, func(o *Options) {
@@ -14605,6 +14761,18 @@ func TestUpdateSnapshot_EnableIpamOrganizationAdminAccount(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_EnableIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableReachabilityAnalyzerOrganizationSharing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableReachabilityAnalyzerOrganizationSharing(context.Background(), nil, func(o *Options) {
@@ -14965,6 +15133,18 @@ func TestUpdateSnapshot_GetEbsEncryptionByDefault(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEnabledIpamPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnabledIpamPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEnabledIpamPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFlowLogsIntegrationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFlowLogsIntegrationTemplate(context.Background(), nil, func(o *Options) {
@@ -15114,6 +15294,30 @@ func TestUpdateSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	_, err := svc.GetIpamDiscoveredResourceCidrs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetIpamDiscoveredResourceCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPolicyAllocationRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamPolicyAllocationRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamPolicyOrganizationTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamPolicyOrganizationTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamPolicyOrganizationTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15942,6 +16146,18 @@ func TestUpdateSnapshot_ModifyIpam(t *testing.T) {
 	_, err := svc.ModifyIpam(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyIpam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyIpamPolicyAllocationRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPolicyAllocationRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamPolicyAllocationRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

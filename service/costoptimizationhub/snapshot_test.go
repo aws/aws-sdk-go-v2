@@ -86,6 +86,18 @@ func TestCheckSnapshot_GetRecommendation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEfficiencyMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEfficiencyMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEfficiencyMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnrollmentStatuses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnrollmentStatuses(context.Background(), nil, func(o *Options) {
@@ -162,6 +174,18 @@ func TestUpdateSnapshot_GetRecommendation(t *testing.T) {
 	_, err := svc.GetRecommendation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEfficiencyMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEfficiencyMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEfficiencyMetrics")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

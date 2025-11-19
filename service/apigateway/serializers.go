@@ -821,6 +821,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		ok.String(*v.DomainName)
 	}
 
+	if len(v.EndpointAccessMode) > 0 {
+		ok := object.Key("endpointAccessMode")
+		ok.String(string(v.EndpointAccessMode))
+	}
+
 	if v.EndpointConfiguration != nil {
 		ok := object.Key("endpointConfiguration")
 		if err := awsRestjson1_serializeDocumentEndpointConfiguration(v.EndpointConfiguration, ok); err != nil {
@@ -1389,6 +1394,11 @@ func awsRestjson1_serializeOpDocumentCreateRestApiInput(v *CreateRestApiInput, v
 		ok.Boolean(v.DisableExecuteApiEndpoint)
 	}
 
+	if len(v.EndpointAccessMode) > 0 {
+		ok := object.Key("endpointAccessMode")
+		ok.String(string(v.EndpointAccessMode))
+	}
+
 	if v.EndpointConfiguration != nil {
 		ok := object.Key("endpointConfiguration")
 		if err := awsRestjson1_serializeDocumentEndpointConfiguration(v.EndpointConfiguration, ok); err != nil {
@@ -1409,6 +1419,11 @@ func awsRestjson1_serializeOpDocumentCreateRestApiInput(v *CreateRestApiInput, v
 	if v.Policy != nil {
 		ok := object.Key("policy")
 		ok.String(*v.Policy)
+	}
+
+	if len(v.SecurityPolicy) > 0 {
+		ok := object.Key("securityPolicy")
+		ok.String(string(v.SecurityPolicy))
 	}
 
 	if v.Tags != nil {
@@ -8193,6 +8208,11 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.RequestTemplates, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ResponseTransferMode) > 0 {
+		ok := object.Key("responseTransferMode")
+		ok.String(string(v.ResponseTransferMode))
 	}
 
 	if v.TimeoutInMillis != nil {

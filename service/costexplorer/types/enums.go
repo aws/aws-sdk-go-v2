@@ -641,7 +641,10 @@ type MonitorDimension string
 
 // Enum values for MonitorDimension
 const (
-	MonitorDimensionService MonitorDimension = "SERVICE"
+	MonitorDimensionService       MonitorDimension = "SERVICE"
+	MonitorDimensionLinkedAccount MonitorDimension = "LINKED_ACCOUNT"
+	MonitorDimensionTag           MonitorDimension = "TAG"
+	MonitorDimensionCostCategory  MonitorDimension = "COST_CATEGORY"
 )
 
 // Values returns all known values for MonitorDimension. Note that this can be
@@ -651,6 +654,9 @@ const (
 func (MonitorDimension) Values() []MonitorDimension {
 	return []MonitorDimension{
 		"SERVICE",
+		"LINKED_ACCOUNT",
+		"TAG",
+		"COST_CATEGORY",
 	}
 }
 

@@ -2679,6 +2679,16 @@ loop:
 			uv = &types.CitationLocationMemberDocumentPage{Value: mv}
 			break loop
 
+		case "searchResultLocation":
+			var mv types.SearchResultLocation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSearchResultLocation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CitationLocationMemberSearchResultLocation{Value: mv}
+			break loop
+
 		case "web":
 			var mv types.WebLocation
 			destAddr := &mv
@@ -2724,6 +2734,15 @@ func awsRestjson1_deserializeDocumentCitationsDelta(v **types.CitationsDelta, va
 		case "location":
 			if err := awsRestjson1_deserializeDocumentCitationLocation(&sv.Location, value); err != nil {
 				return err
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
 			}
 
 		case "sourceContent":
@@ -6275,6 +6294,76 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSearchResultLocation(v **types.SearchResultLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SearchResultLocation
+	if *v == nil {
+		sv = &types.SearchResultLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "end":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.End = ptr.Int32(int32(i64))
+			}
+
+		case "searchResultIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SearchResultIndex = ptr.Int32(int32(i64))
+			}
+
+		case "start":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Start = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceTier(v **types.ServiceTier, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7489,6 +7578,15 @@ func awsRestjson1_deserializeDocumentCitation(v **types.Citation, value interfac
 				return err
 			}
 
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
 		case "sourceContent":
 			if err := awsRestjson1_deserializeDocumentCitationSourceContentList(&sv.SourceContent, value); err != nil {
 				return err
@@ -7889,6 +7987,16 @@ loop:
 				return err
 			}
 			uv = &types.ContentBlockMemberReasoningContent{Value: mv}
+			break loop
+
+		case "searchResult":
+			var mv types.SearchResultBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSearchResultBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockMemberSearchResult{Value: mv}
 			break loop
 
 		case "text":
@@ -9056,6 +9164,139 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSearchResultBlock(v **types.SearchResultBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SearchResultBlock
+	if *v == nil {
+		sv = &types.SearchResultBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "citations":
+			if err := awsRestjson1_deserializeDocumentCitationsConfig(&sv.Citations, value); err != nil {
+				return err
+			}
+
+		case "content":
+			if err := awsRestjson1_deserializeDocumentSearchResultContentBlocks(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
+		case "title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSearchResultContentBlock(v **types.SearchResultContentBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SearchResultContentBlock
+	if *v == nil {
+		sv = &types.SearchResultContentBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "text":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Text = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSearchResultContentBlocks(v *[]types.SearchResultContentBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SearchResultContentBlock
+	if *v == nil {
+		cv = []types.SearchResultContentBlock{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SearchResultContentBlock
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSearchResultContentBlock(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9205,6 +9446,16 @@ loop:
 				return err
 			}
 			uv = &types.ToolResultContentBlockMemberJson{Value: mv}
+			break loop
+
+		case "searchResult":
+			var mv types.SearchResultBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSearchResultBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ToolResultContentBlockMemberSearchResult{Value: mv}
 			break loop
 
 		case "text":

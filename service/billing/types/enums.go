@@ -60,9 +60,11 @@ type BillingViewType string
 
 // Enum values for BillingViewType
 const (
-	BillingViewTypePrimary      BillingViewType = "PRIMARY"
-	BillingViewTypeBillingGroup BillingViewType = "BILLING_GROUP"
-	BillingViewTypeCustom       BillingViewType = "CUSTOM"
+	BillingViewTypePrimary                 BillingViewType = "PRIMARY"
+	BillingViewTypeBillingGroup            BillingViewType = "BILLING_GROUP"
+	BillingViewTypeCustom                  BillingViewType = "CUSTOM"
+	BillingViewTypeBillingTransfer         BillingViewType = "BILLING_TRANSFER"
+	BillingViewTypeBillingTransferShowback BillingViewType = "BILLING_TRANSFER_SHOWBACK"
 )
 
 // Values returns all known values for BillingViewType. Note that this can be
@@ -74,6 +76,8 @@ func (BillingViewType) Values() []BillingViewType {
 		"PRIMARY",
 		"BILLING_GROUP",
 		"CUSTOM",
+		"BILLING_TRANSFER",
+		"BILLING_TRANSFER_SHOWBACK",
 	}
 }
 
@@ -91,6 +95,23 @@ const (
 func (Dimension) Values() []Dimension {
 	return []Dimension{
 		"LINKED_ACCOUNT",
+	}
+}
+
+type SearchOption string
+
+// Enum values for SearchOption
+const (
+	SearchOptionStartsWith SearchOption = "STARTS_WITH"
+)
+
+// Values returns all known values for SearchOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchOption) Values() []SearchOption {
+	return []SearchOption{
+		"STARTS_WITH",
 	}
 }
 

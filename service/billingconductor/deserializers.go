@@ -6697,6 +6697,15 @@ func awsRestjson1_deserializeDocumentBillingGroupListElement(v **types.BillingGr
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "BillingGroupType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingGroupType to be of type string, got %T instead", value)
+				}
+				sv.BillingGroupType = types.BillingGroupType(jtv)
+			}
+
 		case "ComputationPreference":
 			if err := awsRestjson1_deserializeDocumentComputationPreference(&sv.ComputationPreference, value); err != nil {
 				return err
@@ -7630,6 +7639,15 @@ func awsRestjson1_deserializeDocumentListBillingGroupAccountGrouping(v **types.L
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.AutoAssociate = ptr.Bool(jtv)
+			}
+
+		case "ResponsibilityTransferArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResponsibilityTransferArn to be of type string, got %T instead", value)
+				}
+				sv.ResponsibilityTransferArn = ptr.String(jtv)
 			}
 
 		default:
@@ -8673,6 +8691,15 @@ func awsRestjson1_deserializeDocumentUpdateBillingGroupAccountGrouping(v **types
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.AutoAssociate = ptr.Bool(jtv)
+			}
+
+		case "ResponsibilityTransferArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResponsibilityTransferArn to be of type string, got %T instead", value)
+				}
+				sv.ResponsibilityTransferArn = ptr.String(jtv)
 			}
 
 		default:

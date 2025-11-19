@@ -388,6 +388,41 @@ func validateResourceTagList(v []types.ResourceTag) error {
 	}
 }
 
+func validateStringSearch(v *types.StringSearch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StringSearch"}
+	if len(v.SearchOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchOption"))
+	}
+	if v.SearchValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStringSearches(v []types.StringSearch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StringSearches"}
+	for i := range v {
+		if err := validateStringSearch(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTagValues(v *types.TagValues) error {
 	if v == nil {
 		return nil
@@ -523,6 +558,11 @@ func validateOpListBillingViewsInput(v *ListBillingViewsInput) error {
 	if v.ActiveTimeRange != nil {
 		if err := validateActiveTimeRange(v.ActiveTimeRange); err != nil {
 			invalidParams.AddNested("ActiveTimeRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Names != nil {
+		if err := validateStringSearches(v.Names); err != nil {
+			invalidParams.AddNested("Names", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

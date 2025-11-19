@@ -7710,6 +7710,42 @@ func awsAwsjson10_deserializeDocumentInspectionData(v **types.InspectionData, va
 				sv.AfterInputPath = ptr.String(jtv)
 			}
 
+		case "afterItemBatcher":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
+				}
+				sv.AfterItemBatcher = ptr.String(jtv)
+			}
+
+		case "afterItemSelector":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
+				}
+				sv.AfterItemSelector = ptr.String(jtv)
+			}
+
+		case "afterItemsPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
+				}
+				sv.AfterItemsPath = ptr.String(jtv)
+			}
+
+		case "afterItemsPointer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
+				}
+				sv.AfterItemsPointer = ptr.String(jtv)
+			}
+
 		case "afterParameters":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7737,6 +7773,11 @@ func awsAwsjson10_deserializeDocumentInspectionData(v **types.InspectionData, va
 				sv.AfterResultSelector = ptr.String(jtv)
 			}
 
+		case "errorDetails":
+			if err := awsAwsjson10_deserializeDocumentInspectionErrorDetails(&sv.ErrorDetails, value); err != nil {
+				return err
+			}
+
 		case "input":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7744,6 +7785,19 @@ func awsAwsjson10_deserializeDocumentInspectionData(v **types.InspectionData, va
 					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
 				}
 				sv.Input = ptr.String(jtv)
+			}
+
+		case "maxConcurrency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InspectionMaxConcurrency to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConcurrency = ptr.Int32(int32(i64))
 			}
 
 		case "request":
@@ -7763,6 +7817,53 @@ func awsAwsjson10_deserializeDocumentInspectionData(v **types.InspectionData, va
 					return fmt.Errorf("expected SensitiveData to be of type string, got %T instead", value)
 				}
 				sv.Result = ptr.String(jtv)
+			}
+
+		case "toleratedFailureCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InspectionToleratedFailureCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ToleratedFailureCount = ptr.Int32(int32(i64))
+			}
+
+		case "toleratedFailurePercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ToleratedFailurePercentage = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ToleratedFailurePercentage = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected InspectionToleratedFailurePercentage to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "variables":
@@ -7924,6 +8025,76 @@ func awsAwsjson10_deserializeDocumentInspectionDataResponse(v **types.Inspection
 					return fmt.Errorf("expected HTTPStatusMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInspectionErrorDetails(v **types.InspectionErrorDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InspectionErrorDetails
+	if *v == nil {
+		sv = &types.InspectionErrorDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "catchIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ExceptionHandlerIndex to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CatchIndex = ptr.Int32(int32(i64))
+			}
+
+		case "retryBackoffIntervalSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetryBackoffIntervalSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetryBackoffIntervalSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "retryIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ExceptionHandlerIndex to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetryIndex = ptr.Int32(int32(i64))
 			}
 
 		default:
