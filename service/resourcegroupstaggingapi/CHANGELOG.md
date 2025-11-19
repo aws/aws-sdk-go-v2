@@ -1,3 +1,7 @@
+# v1.31.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2025-11-18)
 
 * **Feature**: Add support for new ListRequiredTags API used to retrieve the required tags specified in a customer's effective tag policy.

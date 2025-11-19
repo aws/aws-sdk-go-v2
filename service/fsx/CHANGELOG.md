@@ -1,3 +1,7 @@
+# v1.64.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2025-11-19)
 
 * **Feature**: Adding File Server Resource Manager configuration to FSx Windows

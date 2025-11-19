@@ -1,3 +1,7 @@
+# v1.15.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2025-11-17)
 
 * **Feature**: Added support for the managed Slurm REST API endpoint

@@ -1,3 +1,7 @@
+# v1.82.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.82.0 (2025-11-19)
 
 * **Feature**: Added support for creating and invoking Tenant Isolated functions in AWS Lambda APIs.

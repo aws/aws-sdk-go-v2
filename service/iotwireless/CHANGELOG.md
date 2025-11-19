@@ -1,3 +1,7 @@
+# v1.54.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2025-11-13)
 
 * **Feature**: Integration of Device Location with Amazon Sidewalk network for Amazon Sidewalk enabled devices

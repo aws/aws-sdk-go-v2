@@ -1,3 +1,7 @@
+# v1.61.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2025-11-18)
 
 * **Feature**: This release adds the new LaunchInstances API, which can launch instances synchronously in an AutoScaling group. The API also returns instances info and launch error back immediately.

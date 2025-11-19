@@ -1,3 +1,7 @@
+# v1.30.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2025-11-19)
 
 * **Feature**: CloudWatch RUM now supports mobile application monitoring for Android and iOS platforms

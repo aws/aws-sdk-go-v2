@@ -1,3 +1,7 @@
+# v1.54.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2025-11-19)
 
 * **Feature**: AWS CloudTrail now supports Insights for data events, expanding beyond management events to automatically detect unusual activity on data plane operations.

@@ -1,3 +1,7 @@
+# v1.37.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2025-11-19)
 
 * **Feature**: API Gateway now supports response streaming and new security policies for REST APIs and custom domain names.

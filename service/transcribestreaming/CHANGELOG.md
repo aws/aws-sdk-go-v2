@@ -1,3 +1,7 @@
+# v1.33.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2025-11-19)
 
 * **Feature**: This release adds support for additional locales in AWS transcribe streaming.

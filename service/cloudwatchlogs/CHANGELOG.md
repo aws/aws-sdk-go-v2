@@ -1,3 +1,7 @@
+# v1.60.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2025-11-19)
 
 * **Feature**: Adding support for ocsf version 1.5, add optional parameter MappingVersion

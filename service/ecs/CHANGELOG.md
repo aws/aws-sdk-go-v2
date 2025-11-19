@@ -1,3 +1,7 @@
+# v1.68.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2025-11-19)
 
 * **Feature**: Added support for Amazon ECS Managed Instances infrastructure optimization configuration.

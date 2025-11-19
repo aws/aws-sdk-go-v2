@@ -1,3 +1,7 @@
+# v1.8.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2025-11-19)
 
 * **Feature**: Add support for adding Billing transfers in Invoice configuration

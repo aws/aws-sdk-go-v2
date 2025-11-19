@@ -1,3 +1,7 @@
+# v1.11.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2025-11-19)
 
 * **Feature**: Added new enum value (AWS::EKS::Cluster) for type field under MonitorLocalResource

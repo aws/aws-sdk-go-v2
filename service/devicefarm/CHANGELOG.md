@@ -1,3 +1,7 @@
+# v1.37.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2025-11-17)
 
 * **Feature**: This release adds support for interacting with devices during a remote access session using the remoteDriverEndpoint interface

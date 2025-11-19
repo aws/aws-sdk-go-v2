@@ -1,3 +1,16 @@
+# Release (2025-11-19.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.40.0
+  * **Feature**: Add support for AWS Login credentials (package credentials/logincreds) to the default credential chain.
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.32.0](config/CHANGELOG.md#v1320-2025-11-192)
+  * **Feature**: Add support for AWS Login credentials (package credentials/logincreds) to the default credential chain.
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.19.0](credentials/CHANGELOG.md#v1190-2025-11-192)
+  * **Feature**: Add support for AWS Login credentials (package credentials/logincreds) to the default credential chain.
+
 # Release (2025-11-19)
 
 ## General Highlights

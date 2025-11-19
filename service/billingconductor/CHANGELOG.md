@@ -1,3 +1,7 @@
+# v1.27.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2025-11-19)
 
 * **Feature**: This release adds support for Billing Transfers, enabling management of billing transfers with billing groups on AWS Billing Conductor.

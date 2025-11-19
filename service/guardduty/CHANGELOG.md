@@ -1,3 +1,7 @@
+# v1.68.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2025-11-19)
 
 * **Feature**: Add support for scanning and viewing scan results for backup resource types

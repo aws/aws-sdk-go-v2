@@ -1,3 +1,7 @@
+# v1.33.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2025-11-17)
 
 * **Feature**: Add support for SCTE messages in Segment file output

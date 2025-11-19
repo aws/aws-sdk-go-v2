@@ -3,4 +3,4 @@
 package ec2instanceconnect
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.32.11"
+const goModuleVersion = "1.32.12"

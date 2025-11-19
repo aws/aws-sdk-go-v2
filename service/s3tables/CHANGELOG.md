@@ -1,3 +1,7 @@
+# v1.12.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2025-11-12)
 
 * **Feature**: Adds support for request metrics metrics APIs for S3 Tables

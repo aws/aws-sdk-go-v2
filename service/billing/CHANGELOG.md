@@ -1,3 +1,7 @@
+# v1.9.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2025-11-19)
 
 * **Feature**: Added name filtering support to ListBillingViews API through the new names parameter to efficiently filter billing views by name.

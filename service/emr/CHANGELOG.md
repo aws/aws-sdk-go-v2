@@ -1,3 +1,7 @@
+# v1.56.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2025-11-19)
 
 * **Feature**: Add CloudWatch Logs integration for Spark driver, executor and step logs

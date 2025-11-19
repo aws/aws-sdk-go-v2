@@ -1,3 +1,7 @@
+# v1.9.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2025-11-19)
 
 * **Feature**: This release added support for ring timer configuration for campaign calls.

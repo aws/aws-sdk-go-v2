@@ -3,4 +3,4 @@
 package outposts
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.57.6"
+const goModuleVersion = "1.57.7"

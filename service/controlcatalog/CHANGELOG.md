@@ -1,3 +1,7 @@
+# v1.14.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2025-11-13)
 
 * **Feature**: Added support for related control mappings with new RELATED_CONTROL mapping type in ListControlMappings API.

@@ -1,3 +1,7 @@
+# v1.34.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2025-11-13)
 
 * **Feature**: Support for managing web content filtering for defining, tracking and regulating type of content accessed with WorkSpaces Secure Browser as part of browser settings.

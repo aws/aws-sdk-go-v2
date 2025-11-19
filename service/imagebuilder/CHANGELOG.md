@@ -1,3 +1,7 @@
+# v1.49.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2025-11-14)
 
 * **Feature**: EC2 Image Builder now supports invoking Lambda functions and executing Step Functions state machine through image workflows.

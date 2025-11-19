@@ -1,3 +1,7 @@
+# v1.42.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2025-11-12)
 
 * **Feature**: Add VPC source configuration support enabling Amazon Managed Service for Prometheus Collector to collect metrics from MSK clusters.

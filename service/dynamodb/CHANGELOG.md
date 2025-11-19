@@ -1,3 +1,7 @@
+# v1.53.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2025-11-19)
 
 * **Feature**: Extended Global Secondary Index (GSI) composite keys to support up to 8 attributes.

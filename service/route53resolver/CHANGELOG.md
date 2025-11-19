@@ -1,3 +1,7 @@
+# v1.41.1 (2025-11-19.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2025-11-17)
 
 * **Feature**: Adding DICTIONARY_DGA to dns-threat-protection as a new enum type. Customers can now set rules for dictionary dga protection

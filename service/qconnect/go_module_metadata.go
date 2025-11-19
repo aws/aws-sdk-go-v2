@@ -3,4 +3,4 @@
 package qconnect
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.23.6"
+const goModuleVersion = "1.23.7"
