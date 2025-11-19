@@ -1,3 +1,7 @@
+# v1.40.0 (2025-11-19)
+
+* **Feature**: Adds support to TestState for mocked results and exceptions, along with additional inspection data.
+
 # v1.39.13 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

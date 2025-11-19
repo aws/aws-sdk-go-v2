@@ -1,3 +1,7 @@
+# v1.56.0 (2025-11-19)
+
+* **Feature**: Add CloudWatch Logs integration for Spark driver, executor and step logs
+
 # v1.55.6 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

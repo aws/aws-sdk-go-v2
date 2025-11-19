@@ -1,3 +1,7 @@
+# v1.53.0 (2025-11-19)
+
+* **Feature**: Extended Global Secondary Index (GSI) composite keys to support up to 8 attributes.
+
 # v1.52.6 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

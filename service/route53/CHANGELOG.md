@@ -1,3 +1,7 @@
+# v1.60.0 (2025-11-19)
+
+* **Feature**: Add dual-stack endpoint support for Route53
+
 # v1.59.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

@@ -1,8 +1,0 @@
-{
-    "id": "59ea7d53-5f5c-4fdf-9663-a607ef797597",
-    "type": "feature",
-    "description": "Initial GA launch of Partner Central Channel",
-    "modules": [
-        "service/partnercentralchannel"
-    ]
-}

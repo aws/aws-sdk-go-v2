@@ -1,3 +1,7 @@
+# v1.33.0 (2025-11-19)
+
+* **Feature**: This release adds support for additional locales in AWS transcribe streaming.
+
 # v1.32.10 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

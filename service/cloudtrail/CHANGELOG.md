@@ -1,3 +1,7 @@
+# v1.54.0 (2025-11-19)
+
+* **Feature**: AWS CloudTrail now supports Insights for data events, expanding beyond management events to automatically detect unusual activity on data plane operations.
+
 # v1.53.13 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

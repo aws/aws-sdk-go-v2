@@ -1,8 +1,0 @@
-{
-    "id": "63ec84f3-ed20-4dae-b518-a61b680b4c74",
-    "type": "feature",
-    "description": "This release adds support for additional locales in AWS transcribe streaming.",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

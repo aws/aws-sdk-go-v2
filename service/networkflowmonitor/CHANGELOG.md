@@ -1,3 +1,7 @@
+# v1.11.0 (2025-11-19)
+
+* **Feature**: Added new enum value (AWS::EKS::Cluster) for type field under MonitorLocalResource
+
 # v1.10.5 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

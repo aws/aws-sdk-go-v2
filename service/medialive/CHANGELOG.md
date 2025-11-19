@@ -1,3 +1,7 @@
+# v1.87.0 (2025-11-19)
+
+* **Feature**: MediaLive is adding support for MediaConnect Router by supporting a new input type called MEDIACONNECT_ROUTER. This new input type will provide seamless encrypted transport between MediaConnect Router and your MediaLive channel.
+
 # v1.86.0 (2025-11-17)
 
 * **Feature**: Adds configurations for spatial/temporal adaptive quantization in AV1 codec, and conversion to HLG output color space in H265 codec.

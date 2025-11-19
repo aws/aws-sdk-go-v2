@@ -1,3 +1,7 @@
+# v1.68.0 (2025-11-19)
+
+* **Feature**: Add support for scanning and viewing scan results for backup resource types
+
 # v1.67.0 (2025-11-17)
 
 * **Feature**: Add S3 On-Demand Object Scanning

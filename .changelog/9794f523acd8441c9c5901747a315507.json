@@ -1,8 +1,0 @@
-{
-    "id": "9794f523-acd8-441c-9c59-01747a315507",
-    "type": "feature",
-    "description": "Added name filtering support to ListBillingViews API through the new names parameter to efficiently filter billing views by name.",
-    "modules": [
-        "service/billing"
-    ]
-}

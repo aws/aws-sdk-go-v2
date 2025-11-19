@@ -1,3 +1,7 @@
+# v1.68.0 (2025-11-19)
+
+* **Feature**: Added support for Amazon ECS Managed Instances infrastructure optimization configuration.
+
 # v1.67.4 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

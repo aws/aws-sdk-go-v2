@@ -1,3 +1,90 @@
+# Release (2025-11-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.37.0](service/apigateway/CHANGELOG.md#v1370-2025-11-19)
+  * **Feature**: API Gateway now supports response streaming and new security policies for REST APIs and custom domain names.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.33.0](service/apigatewayv2/CHANGELOG.md#v1330-2025-11-19)
+  * **Feature**: Support for API Gateway portals and portal products.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.54.0](service/backup/CHANGELOG.md#v1540-2025-11-19)
+  * **Feature**: Amazon GuardDuty Malware Protection now supports AWS Backup, extending malware detection capabilities to EC2, EBS, and S3 backups.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.10.0](service/bcmpricingcalculator/CHANGELOG.md#v1100-2025-11-19)
+  * **Feature**: Add GroupSharingPreference, CostCategoryGroupSharingPreferenceArn, and CostCategoryGroupSharingPreferenceEffectiveDate to Bill Estimate. Add GroupSharingPreference and CostCategoryGroupSharingPreferenceArn to Bill Scenario.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.44.0](service/bedrockruntime/CHANGELOG.md#v1440-2025-11-19)
+  * **Feature**: This release includes support for Search Results.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.9.0](service/billing/CHANGELOG.md#v190-2025-11-19)
+  * **Feature**: Added name filtering support to ListBillingViews API through the new names parameter to efficiently filter billing views by name.
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.27.0](service/billingconductor/CHANGELOG.md#v1270-2025-11-19)
+  * **Feature**: This release adds support for Billing Transfers, enabling management of billing transfers with billing groups on AWS Billing Conductor.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.54.0](service/cloudtrail/CHANGELOG.md#v1540-2025-11-19)
+  * **Feature**: AWS CloudTrail now supports Insights for data events, expanding beyond management events to automatically detect unusual activity on data plane operations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.60.0](service/cloudwatchlogs/CHANGELOG.md#v1600-2025-11-19)
+  * **Feature**: Adding support for ocsf version 1.5, add optional parameter MappingVersion
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.9.0](service/connectcampaignsv2/CHANGELOG.md#v190-2025-11-19)
+  * **Feature**: This release added support for ring timer configuration for campaign calls.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.60.0](service/costexplorer/CHANGELOG.md#v1600-2025-11-19)
+  * **Feature**: Add support for COST_CATEGORY, TAG, and LINKED_ACCOUNT AWS managed cost anomaly detection monitors
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.21.0](service/costoptimizationhub/CHANGELOG.md#v1210-2025-11-19)
+  * **Feature**: Release ListEfficiencyMetrics API
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.48.0](service/datazone/CHANGELOG.md#v1480-2025-11-19)
+  * **Feature**: Amazon DataZone now supports business metadata (readme and metadata forms) at the individual attribute (column) level, a new rule type for glossary terms, and the ability to update the owner of the root domain unit.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.53.0](service/dynamodb/CHANGELOG.md#v1530-2025-11-19)
+  * **Feature**: Extended Global Secondary Index (GSI) composite keys to support up to 8 attributes.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.272.0](service/ec2/CHANGELOG.md#v12720-2025-11-19)
+  * **Feature**: This launch adds support for two new features: Regional NAT Gateway and IPAM Policies. IPAM policies offers customers central control for public IPv4 assignments across AWS services. Regional NAT is a single NAT Gateway that automatically expands across AZs in a VPC to maintain high availability.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.53.0](service/ecr/CHANGELOG.md#v1530-2025-11-19)
+  * **Feature**: Add support for ECR archival storage class and Inspector org policy for scanning
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.68.0](service/ecs/CHANGELOG.md#v1680-2025-11-19)
+  * **Feature**: Added support for Amazon ECS Managed Instances infrastructure optimization configuration.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.56.0](service/emr/CHANGELOG.md#v1560-2025-11-19)
+  * **Feature**: Add CloudWatch Logs integration for Spark driver, executor and step logs
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.64.0](service/fsx/CHANGELOG.md#v1640-2025-11-19)
+  * **Feature**: Adding File Server Resource Manager configuration to FSx Windows
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.68.0](service/guardduty/CHANGELOG.md#v1680-2025-11-19)
+  * **Feature**: Add support for scanning and viewing scan results for backup resource types
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.35.0](service/health/CHANGELOG.md#v1350-2025-11-19)
+  * **Feature**: Adds actionability and personas properties to Health events exposed through DescribeEvents, DescribeEventsForOrganization, DescribeEventDetails, and DescribeEventTypes APIs. Adds filtering by actionabilities and personas in EventFilter, OrganizationEventFilter, EventTypeFilter.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.52.0](service/iam/CHANGELOG.md#v1520-2025-11-19)
+  * **Feature**: Added the EnableOutboundWebIdentityFederation, DisableOutboundWebIdentityFederation and GetOutboundWebIdentityFederationInfo APIs for the IAM outbound federation feature.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.45.0](service/inspector2/CHANGELOG.md#v1450-2025-11-19)
+  * **Feature**: This release introduces BLOCKED_BY_ORGANIZATION_POLICY error code and IMAGE_ARCHIVED scanStatusReason. BLOCKED_BY_ORGANIZATION_POLICY error code is returned when an operation is blocked by an AWS Organizations policy. IMAGE_ARCHIVED scanStatusReason is returned when an Image is archived in ECR.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.8.0](service/invoicing/CHANGELOG.md#v180-2025-11-19)
+  * **Feature**: Add support for adding Billing transfers in Invoice configuration
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.82.0](service/lambda/CHANGELOG.md#v1820-2025-11-19)
+  * **Feature**: Added support for creating and invoking Tenant Isolated functions in AWS Lambda APIs.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.46.0](service/mediaconnect/CHANGELOG.md#v1460-2025-11-19)
+  * **Feature**: This release adds support for global routing in AWS Elemental MediaConnect. You can now use router inputs and router outputs to manage global video and audio routing workflows both within the AWS-Cloud and over the public internet.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.87.0](service/medialive/CHANGELOG.md#v1870-2025-11-19)
+  * **Feature**: MediaLive is adding support for MediaConnect Router by supporting a new input type called MEDIACONNECT_ROUTER. This new input type will provide seamless encrypted transport between MediaConnect Router and your MediaLive channel.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.58.0](service/networkfirewall/CHANGELOG.md#v1580-2025-11-19)
+  * **Feature**: Partner Managed Rulegroup feature support
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.11.0](service/networkflowmonitor/CHANGELOG.md#v1110-2025-11-19)
+  * **Feature**: Added new enum value (AWS::EKS::Cluster) for type field under MonitorLocalResource
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralchannel`: [v1.0.0](service/partnercentralchannel/CHANGELOG.md#v100-2025-11-19)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial GA launch of Partner Central Channel
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.60.0](service/route53/CHANGELOG.md#v1600-2025-11-19)
+  * **Feature**: Add dual-stack endpoint support for Route53
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.30.0](service/rum/CHANGELOG.md#v1300-2025-11-19)
+  * **Feature**: CloudWatch RUM now supports mobile application monitoring for Android and iOS platforms
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.91.0](service/s3/CHANGELOG.md#v1910-2025-11-19)
+  * **Feature**: Adds support for blocking SSE-C writes to general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.224.0](service/sagemaker/CHANGELOG.md#v12240-2025-11-19)
+  * **Feature**: Added support for enhanced metrics for SageMaker AI Endpoints. This features provides Utilization Metrics at instance and container granularity and also provides easy configuration of metric publish frequency from 10 sec -> 5 mins
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.40.0](service/secretsmanager/CHANGELOG.md#v1400-2025-11-19)
+  * **Feature**: Adds support to create, update, retrieve, rotate, and delete managed external secrets.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.40.0](service/sfn/CHANGELOG.md#v1400-2025-11-19)
+  * **Feature**: Adds support to TestState for mocked results and exceptions, along with additional inspection data.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.0.0](service/signin/CHANGELOG.md#v100-2025-11-19)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Sign-In manages authentication for AWS services. This service provides secure authentication flows for accessing AWS resources from the console and developer tools. This release adds the CreateOAuth2Token API, which can be used to fetch OAuth2 access tokens and refresh tokens from Sign-In.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.41.0](service/sts/CHANGELOG.md#v1410-2025-11-19)
+  * **Feature**: IAM now supports outbound identity federation via the STS GetWebIdentityToken API, enabling AWS workloads to securely authenticate with external services using short-lived JSON Web Tokens.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.33.0](service/transcribestreaming/CHANGELOG.md#v1330-2025-11-19)
+  * **Feature**: This release adds support for additional locales in AWS transcribe streaming.
+
 # Release (2025-11-18)
 
 ## Module Highlights

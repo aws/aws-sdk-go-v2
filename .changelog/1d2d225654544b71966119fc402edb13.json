@@ -1,8 +1,0 @@
-{
-    "id": "1d2d2256-5454-4b71-9661-19fc402edb13",
-    "type": "feature",
-    "description": "Adding support for ocsf version 1.5, add optional parameter MappingVersion",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

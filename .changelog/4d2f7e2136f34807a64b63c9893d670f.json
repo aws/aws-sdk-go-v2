@@ -1,8 +1,0 @@
-{
-    "id": "4d2f7e21-36f3-4807-a64b-63c9893d670f",
-    "type": "feature",
-    "description": "Adding File Server Resource Manager configuration to FSx Windows",
-    "modules": [
-        "service/fsx"
-    ]
-}

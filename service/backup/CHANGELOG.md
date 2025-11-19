@@ -1,3 +1,7 @@
+# v1.54.0 (2025-11-19)
+
+* **Feature**: Amazon GuardDuty Malware Protection now supports AWS Backup, extending malware detection capabilities to EC2, EBS, and S3 backups.
+
 # v1.53.0 (2025-11-18)
 
 * **Feature**: AWS Backup now supports a low-cost warm storage tier for Amazon S3 backup data.

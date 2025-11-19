@@ -1,3 +1,7 @@
+# v1.64.0 (2025-11-19)
+
+* **Feature**: Adding File Server Resource Manager configuration to FSx Windows
+
 # v1.63.2 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

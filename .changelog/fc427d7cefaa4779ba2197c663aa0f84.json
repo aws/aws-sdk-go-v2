@@ -1,8 +1,0 @@
-{
-    "id": "fc427d7c-efaa-4779-ba21-97c663aa0f84",
-    "type": "feature",
-    "description": "This release added support for ring timer configuration for campaign calls.",
-    "modules": [
-        "service/connectcampaignsv2"
-    ]
-}

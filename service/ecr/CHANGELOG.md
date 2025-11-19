@@ -1,3 +1,7 @@
+# v1.53.0 (2025-11-19)
+
+* **Feature**: Add support for ECR archival storage class and Inspector org policy for scanning
+
 # v1.52.0 (2025-11-13)
 
 * **Feature**: Add Amazon ECR FIPS PrivateLink endpoint support

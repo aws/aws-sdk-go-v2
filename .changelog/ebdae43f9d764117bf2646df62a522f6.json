@@ -1,8 +1,0 @@
-{
-    "id": "ebdae43f-9d76-4117-bf26-46df62a522f6",
-    "type": "feature",
-    "description": "Amazon GuardDuty Malware Protection now supports AWS Backup, extending malware detection capabilities to EC2, EBS, and S3 backups.",
-    "modules": [
-        "service/backup"
-    ]
-}

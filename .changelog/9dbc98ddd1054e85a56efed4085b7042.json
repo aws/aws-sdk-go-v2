@@ -1,8 +1,0 @@
-{
-    "id": "9dbc98dd-d105-4e85-a56e-fed4085b7042",
-    "type": "feature",
-    "description": "This release introduces BLOCKED_BY_ORGANIZATION_POLICY error code and IMAGE_ARCHIVED scanStatusReason. BLOCKED_BY_ORGANIZATION_POLICY error code is returned when an operation is blocked by an AWS Organizations policy. IMAGE_ARCHIVED scanStatusReason is returned when an Image is archived in ECR.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

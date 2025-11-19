@@ -1,3 +1,7 @@
+# v1.58.0 (2025-11-19)
+
+* **Feature**: Partner Managed Rulegroup feature support
+
 # v1.57.8 (2025-11-14)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.44.0 (2025-11-19)
+
+* **Feature**: This release includes support for Search Results.
+
 # v1.43.0 (2025-11-18)
 
 * **Feature**: Amazon Bedrock Runtime Service Tier Support Launch

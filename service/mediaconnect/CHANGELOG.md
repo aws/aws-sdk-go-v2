@@ -1,3 +1,7 @@
+# v1.46.0 (2025-11-19)
+
+* **Feature**: This release adds support for global routing in AWS Elemental MediaConnect. You can now use router inputs and router outputs to manage global video and audio routing workflows both within the AWS-Cloud and over the public internet.
+
 # v1.45.6 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

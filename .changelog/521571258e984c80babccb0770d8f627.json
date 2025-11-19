@@ -1,8 +1,0 @@
-{
-    "id": "52157125-8e98-4c80-babc-cb0770d8f627",
-    "type": "feature",
-    "description": "CloudWatch RUM now supports mobile application monitoring for Android and iOS platforms",
-    "modules": [
-        "service/rum"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "96cdaa5b-002c-49a7-bcde-73a5ff028d83",
-    "type": "feature",
-    "description": "Add CloudWatch Logs integration for Spark driver, executor and step logs",
-    "modules": [
-        "service/emr"
-    ]
-}

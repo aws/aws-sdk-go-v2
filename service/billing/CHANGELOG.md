@@ -1,3 +1,7 @@
+# v1.9.0 (2025-11-19)
+
+* **Feature**: Added name filtering support to ListBillingViews API through the new names parameter to efficiently filter billing views by name.
+
 # v1.8.6 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

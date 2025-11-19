@@ -1,3 +1,7 @@
+# v1.30.0 (2025-11-19)
+
+* **Feature**: CloudWatch RUM now supports mobile application monitoring for Android and iOS platforms
+
 # v1.29.4 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

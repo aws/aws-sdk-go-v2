@@ -1,8 +1,0 @@
-{
-    "id": "ad09db32-8d1e-4423-a666-dc8f4c6d701e",
-    "type": "feature",
-    "description": "Added support for creating and invoking Tenant Isolated functions in AWS Lambda APIs.",
-    "modules": [
-        "service/lambda"
-    ]
-}

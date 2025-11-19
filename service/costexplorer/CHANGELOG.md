@@ -1,3 +1,7 @@
+# v1.60.0 (2025-11-19)
+
+* **Feature**: Add support for COST_CATEGORY, TAG, and LINKED_ACCOUNT AWS managed cost anomaly detection monitors
+
 # v1.59.4 (2025-11-12)
 
 * **Bug Fix**: Further reduce allocation overhead when the metrics system isn't in-use.

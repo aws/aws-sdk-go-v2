@@ -1,3 +1,7 @@
+# v1.60.0 (2025-11-19)
+
+* **Feature**: Adding support for ocsf version 1.5, add optional parameter MappingVersion
+
 # v1.59.0 (2025-11-18)
 
 * **Feature**: CloudWatch Logs updates: Added capability to setup a recurring schedule for log insights queries. Logs introduced Scheduled Queries (managed through Create/Update/Get/Delete/List/History Scheduled Query APIs). For more information, see CloudWatch Logs API documentation.
