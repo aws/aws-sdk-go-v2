@@ -7,6 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.18.25
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.13
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.4
+	github.com/aws/aws-sdk-go-v2/service/signin v1.0.0
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.0
@@ -35,6 +36,8 @@ replace github.com/aws/aws-sdk-go-v2/internal/ini => ../internal/ini/
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../service/internal/accept-encoding/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../service/internal/presigned-url/
+
+replace github.com/aws/aws-sdk-go-v2/service/signin => ../service/signin/
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../service/sso/
 
