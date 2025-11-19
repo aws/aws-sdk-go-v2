@@ -753,13 +753,46 @@ func (*awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream) 
 	return "OperationEventStreamDeserializer"
 }
 
-func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	defer func() {
-		if err == nil {
+type deserializeResult struct {
+	reader io.ReadCloser
+	err    error
+}
+
+type asyncEventStreamReader struct {
+	pipeReader *io.PipeReader
+	pipeWriter *io.PipeWriter
+}
+
+func newAsyncEventStreamReader(resultChan <-chan deserializeResult) *asyncEventStreamReader {
+	pipeReader, pipeWriter := io.Pipe()
+
+	reader := &asyncEventStreamReader{
+		pipeReader: pipeReader,
+		pipeWriter: pipeWriter,
+	}
+
+	// Start background copying
+	go func() {
+		result := <-resultChan
+		if result.err != nil {
+			pipeWriter.CloseWithError(result.err)
 			return
 		}
+
+		// Copy from real response body to pipe
+		_, err := io.Copy(pipeWriter, result.reader)
+		pipeWriter.CloseWithError(err)
+	}()
+
+	return reader
+}
+
+func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	defer func() {
+		if err == nil {return}
 		m.closeResponseBody(out)
 	}()
 
@@ -804,7 +837,6 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 	if !ok {
 		return out, metadata, fmt.Errorf("no sigv4 signing region")
 	}
-
 	signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
 
 	eventWriter := newInvokeModelWithBidirectionalStreamInputWriter(
@@ -822,32 +854,14 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 		}
 		_ = eventWriter.Close()
 	}()
-
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
-	}
-	_ = deserializeOutput
-
-	output, ok := out.Result.(*InvokeModelWithBidirectionalStreamOutput)
-	if out.Result != nil && !ok {
-		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
-	} else if out.Result == nil {
-		output = &InvokeModelWithBidirectionalStreamOutput{}
-		out.Result = output
-	}
-
+	// Create async result channel
+	asyncResult := make(chan deserializeResult, 1)
+	asyncReader := newAsyncEventStreamReader(asyncResult)
 	eventReader := newInvokeModelWithBidirectionalStreamOutputReader(
-		deserializeOutput.Body,
+		asyncReader.pipeReader,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
 			options.LogMessages = m.LogEventStreamReads
-
 		}),
 	)
 	defer func() {
@@ -857,6 +871,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 		_ = eventReader.Close()
 	}()
 
+	output := &InvokeModelWithBidirectionalStreamOutput{}
 	output.eventStream = NewInvokeModelWithBidirectionalStreamEventStream(func(stream *InvokeModelWithBidirectionalStreamEventStream) {
 		stream.Writer = eventWriter
 		stream.Reader = eventReader
@@ -864,7 +879,21 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 
 	go output.eventStream.waitStreamClose()
 
-	return out, metadata, nil
+	// Start background processing
+	go func() {
+		out, metadata, err = next.HandleDeserialize(ctx, in)
+
+		if err == nil {
+			// Extract actual response and create real reader
+			resp := out.RawResponse.(*smithyhttp.Response)
+			// TODO lmadrig this should have more than just the body
+			asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+		} else {
+			asyncResult <- deserializeResult{reader: nil, err: err}
+		}
+	}()
+
+	return middleware.DeserializeOutput{Result: output}, middleware.Metadata{}, nil
 }
 
 func (*awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream) closeResponseBody(out middleware.DeserializeOutput) {
