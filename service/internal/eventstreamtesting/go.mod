@@ -26,6 +26,8 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../.
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../service/internal/presigned-url/
 
+replace github.com/aws/aws-sdk-go-v2/service/signin => ../../../service/signin/
+
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../service/sso/
 
 replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../service/ssooidc/

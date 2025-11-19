@@ -20,6 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.4 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.13 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.13 // indirect
+	github.com/aws/aws-sdk-go-v2/service/signin v1.0.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.30.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.0 // indirect
@@ -53,6 +54,8 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../
 replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../../service/internal/s3shared/
 
 replace github.com/aws/aws-sdk-go-v2/service/s3 => ../../../../service/s3/
+
+replace github.com/aws/aws-sdk-go-v2/service/signin => ../../../../service/signin/
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../../service/sso/
 
