@@ -1,0 +1,8 @@
+{
+    "id": "64b1c9dc-8f26-4e4e-9861-ea8bbb132c97",
+    "type": "feature",
+    "description": "The partition value \"aws-eusc\" is now permitted for ARN (Amazon Resource Name) fields.",
+    "modules": [
+        "service/datasync"
+    ]
+}

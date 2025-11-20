@@ -1445,6 +1445,27 @@ func (FilterValueType) Values() []FilterValueType {
 	}
 }
 
+type FunctionType string
+
+// Enum values for FunctionType
+const (
+	FunctionTypeRegularFunction   FunctionType = "REGULAR_FUNCTION"
+	FunctionTypeAggregateFunction FunctionType = "AGGREGATE_FUNCTION"
+	FunctionTypeStoredProcedure   FunctionType = "STORED_PROCEDURE"
+)
+
+// Values returns all known values for FunctionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionType) Values() []FunctionType {
+	return []FunctionType{
+		"REGULAR_FUNCTION",
+		"AGGREGATE_FUNCTION",
+		"STORED_PROCEDURE",
+	}
+}
+
 type GlueRecordType string
 
 // Enum values for GlueRecordType

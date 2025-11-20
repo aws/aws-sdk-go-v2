@@ -50,6 +50,26 @@ func (m *validateOpInvokeDataAutomationAsync) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeDataAutomation struct {
+}
+
+func (*validateOpInvokeDataAutomation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeDataAutomation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeDataAutomationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeDataAutomationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -116,6 +136,10 @@ func addOpGetDataAutomationStatusValidationMiddleware(stack *middleware.Stack) e
 
 func addOpInvokeDataAutomationAsyncValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeDataAutomationAsync{}, middleware.After)
+}
+
+func addOpInvokeDataAutomationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeDataAutomation{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -427,6 +451,39 @@ func validateOpInvokeDataAutomationAsyncInput(v *InvokeDataAutomationAsyncInput)
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeDataAutomationInput(v *InvokeDataAutomationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeDataAutomationInput"}
+	if v.InputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputConfiguration"))
+	}
+	if v.DataAutomationConfiguration != nil {
+		if err := validateDataAutomationConfiguration(v.DataAutomationConfiguration); err != nil {
+			invalidParams.AddNested("DataAutomationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Blueprints != nil {
+		if err := validateBlueprintList(v.Blueprints); err != nil {
+			invalidParams.AddNested("Blueprints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataAutomationProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAutomationProfileArn"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

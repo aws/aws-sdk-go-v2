@@ -1481,6 +1481,57 @@ func validateQueryPlanningContext(v *types.QueryPlanningContext) error {
 	}
 }
 
+func validateRedshiftConnect(v *types.RedshiftConnect) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftConnect"}
+	if len(v.Authorization) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Authorization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftScopeUnion(v types.RedshiftScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftScopeUnion"}
+	switch uv := v.(type) {
+	case *types.RedshiftScopeUnionMemberRedshiftConnect:
+		if err := validateRedshiftConnect(&uv.Value); err != nil {
+			invalidParams.AddNested("[RedshiftConnect]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftServiceIntegrations(v []types.RedshiftScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftServiceIntegrations"}
+	for i := range v {
+		if err := validateRedshiftScopeUnion(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResource(v *types.Resource) error {
 	if v == nil {
 		return nil
@@ -1520,6 +1571,42 @@ func validateResource(v *types.Resource) error {
 		if err := validateLFTagExpressionResource(v.LFTagExpression); err != nil {
 			invalidParams.AddNested("LFTagExpression", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceIntegrationList(v []types.ServiceIntegrationUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceIntegrationList"}
+	for i := range v {
+		if err := validateServiceIntegrationUnion(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceIntegrationUnion(v types.ServiceIntegrationUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceIntegrationUnion"}
+	switch uv := v.(type) {
+	case *types.ServiceIntegrationUnionMemberRedshift:
+		if err := validateRedshiftServiceIntegrations(uv.Value); err != nil {
+			invalidParams.AddNested("[Redshift]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1774,6 +1861,11 @@ func validateOpCreateLakeFormationIdentityCenterConfigurationInput(v *CreateLake
 	if v.ExternalFiltering != nil {
 		if err := validateExternalFilteringConfiguration(v.ExternalFiltering); err != nil {
 			invalidParams.AddNested("ExternalFiltering", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceIntegrations != nil {
+		if err := validateServiceIntegrationList(v.ServiceIntegrations); err != nil {
+			invalidParams.AddNested("ServiceIntegrations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2435,6 +2527,11 @@ func validateOpUpdateLakeFormationIdentityCenterConfigurationInput(v *UpdateLake
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLakeFormationIdentityCenterConfigurationInput"}
+	if v.ServiceIntegrations != nil {
+		if err := validateServiceIntegrationList(v.ServiceIntegrations); err != nil {
+			invalidParams.AddNested("ServiceIntegrations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ExternalFiltering != nil {
 		if err := validateExternalFilteringConfiguration(v.ExternalFiltering); err != nil {
 			invalidParams.AddNested("ExternalFiltering", err.(smithy.InvalidParamsError))

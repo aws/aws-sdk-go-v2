@@ -93,6 +93,7 @@ const (
 	ActionTypeEnableAllFeatures                 ActionType = "ENABLE_ALL_FEATURES"
 	ActionTypeApproveAllFeatures                ActionType = "APPROVE_ALL_FEATURES"
 	ActionTypeAddOrganizationsServiceLinkedRole ActionType = "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+	ActionTypeTransferResponsibility            ActionType = "TRANSFER_RESPONSIBILITY"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -105,6 +106,7 @@ func (ActionType) Values() []ActionType {
 		"ENABLE_ALL_FEATURES",
 		"APPROVE_ALL_FEATURES",
 		"ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE",
+		"TRANSFER_RESPONSIBILITY",
 	}
 }
 
@@ -168,6 +170,14 @@ const (
 	ConstraintViolationExceptionReasonAccountCreationNotComplete                             ConstraintViolationExceptionReason = "ACCOUNT_CREATION_NOT_COMPLETE"
 	ConstraintViolationExceptionReasonCannotRegisterSuspendedAccountAsDelegatedAdministrator ConstraintViolationExceptionReason = "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR"
 	ConstraintViolationExceptionReasonAllFeaturesMigrationOrganizationSizeLimitExceeded      ConstraintViolationExceptionReason = "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonResponsibilityTransferMaxLevelViolation                ConstraintViolationExceptionReason = "RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION"
+	ConstraintViolationExceptionReasonResponsibilityTransferMaxInboundQuotaViolation         ConstraintViolationExceptionReason = "RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION"
+	ConstraintViolationExceptionReasonResponsibilityTransferMaxOutboundQuotaViolation        ConstraintViolationExceptionReason = "RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION"
+	ConstraintViolationExceptionReasonResponsibilityTransferMaxTransfersQuotaViolation       ConstraintViolationExceptionReason = "RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION"
+	ConstraintViolationExceptionReasonActiveResponsibilityTransferProcess                    ConstraintViolationExceptionReason = "ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS"
+	ConstraintViolationExceptionReasonTransferResponsibilityTargetDeletionInProgress         ConstraintViolationExceptionReason = "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS"
+	ConstraintViolationExceptionReasonTransferResponsibilitySourceDeletionInProgress         ConstraintViolationExceptionReason = "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS"
+	ConstraintViolationExceptionReasonUnsupportedPricing                                     ConstraintViolationExceptionReason = "UNSUPPORTED_PRICING"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -214,6 +224,14 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"ACCOUNT_CREATION_NOT_COMPLETE",
 		"CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR",
 		"ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED",
+		"RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION",
+		"RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION",
+		"RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION",
+		"RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION",
+		"ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS",
+		"TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS",
+		"TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS",
+		"UNSUPPORTED_PRICING",
 	}
 }
 
@@ -293,6 +311,7 @@ const (
 	EffectivePolicyTypeChatbotPolicy          EffectivePolicyType = "CHATBOT_POLICY"
 	EffectivePolicyTypeDeclarativePolicyEc2   EffectivePolicyType = "DECLARATIVE_POLICY_EC2"
 	EffectivePolicyTypeSecurityhubPolicy      EffectivePolicyType = "SECURITYHUB_POLICY"
+	EffectivePolicyTypeInspectorPolicy        EffectivePolicyType = "INSPECTOR_POLICY"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -307,6 +326,7 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"CHATBOT_POLICY",
 		"DECLARATIVE_POLICY_EC2",
 		"SECURITYHUB_POLICY",
+		"INSPECTOR_POLICY",
 	}
 }
 
@@ -324,6 +344,10 @@ const (
 	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord          HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
 	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded    HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
 	HandshakeConstraintViolationExceptionReasonManagementAccountEmailNotVerified                HandshakeConstraintViolationExceptionReason = "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED"
+	HandshakeConstraintViolationExceptionReasonResponsibilityTransferAlreadyExists              HandshakeConstraintViolationExceptionReason = "RESPONSIBILITY_TRANSFER_ALREADY_EXISTS"
+	HandshakeConstraintViolationExceptionReasonSourceAndTargetCannotMatch                       HandshakeConstraintViolationExceptionReason = "SOURCE_AND_TARGET_CANNOT_MATCH"
+	HandshakeConstraintViolationExceptionReasonUnusedPrepaymentBalance                          HandshakeConstraintViolationExceptionReason = "UNUSED_PREPAYMENT_BALANCE"
+	HandshakeConstraintViolationExceptionReasonLegacyPermissionsStillInUse                      HandshakeConstraintViolationExceptionReason = "LEGACY_PERMISSIONS_STILL_IN_USE"
 )
 
 // Values returns all known values for
@@ -343,6 +367,10 @@ func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstrain
 		"ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD",
 		"ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED",
 		"MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED",
+		"RESPONSIBILITY_TRANSFER_ALREADY_EXISTS",
+		"SOURCE_AND_TARGET_CANNOT_MATCH",
+		"UNUSED_PREPAYMENT_BALANCE",
+		"LEGACY_PERMISSIONS_STILL_IN_USE",
 	}
 }
 
@@ -379,6 +407,12 @@ const (
 	HandshakeResourceTypeMasterName             HandshakeResourceType = "MASTER_NAME"
 	HandshakeResourceTypeNotes                  HandshakeResourceType = "NOTES"
 	HandshakeResourceTypeParentHandshake        HandshakeResourceType = "PARENT_HANDSHAKE"
+	HandshakeResourceTypeResponsibilityTransfer HandshakeResourceType = "RESPONSIBILITY_TRANSFER"
+	HandshakeResourceTypeTransferStartTimestamp HandshakeResourceType = "TRANSFER_START_TIMESTAMP"
+	HandshakeResourceTypeTransferType           HandshakeResourceType = "TRANSFER_TYPE"
+	HandshakeResourceTypeManagementAccount      HandshakeResourceType = "MANAGEMENT_ACCOUNT"
+	HandshakeResourceTypeManagementEmail        HandshakeResourceType = "MANAGEMENT_EMAIL"
+	HandshakeResourceTypeManagementName         HandshakeResourceType = "MANAGEMENT_NAME"
 )
 
 // Values returns all known values for HandshakeResourceType. Note that this can
@@ -395,6 +429,12 @@ func (HandshakeResourceType) Values() []HandshakeResourceType {
 		"MASTER_NAME",
 		"NOTES",
 		"PARENT_HANDSHAKE",
+		"RESPONSIBILITY_TRANSFER",
+		"TRANSFER_START_TIMESTAMP",
+		"TRANSFER_TYPE",
+		"MANAGEMENT_ACCOUNT",
+		"MANAGEMENT_EMAIL",
+		"MANAGEMENT_NAME",
 	}
 }
 
@@ -448,36 +488,46 @@ type InvalidInputExceptionReason string
 
 // Enum values for InvalidInputExceptionReason
 const (
-	InvalidInputExceptionReasonInvalidPartyTypeTarget                InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
-	InvalidInputExceptionReasonInvalidSyntaxOrganization             InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
-	InvalidInputExceptionReasonInvalidSyntaxPolicy                   InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
-	InvalidInputExceptionReasonInvalidEnum                           InvalidInputExceptionReason = "INVALID_ENUM"
-	InvalidInputExceptionReasonInvalidEnumPolicyType                 InvalidInputExceptionReason = "INVALID_ENUM_POLICY_TYPE"
-	InvalidInputExceptionReasonInvalidListMember                     InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
-	InvalidInputExceptionReasonMaxLengthExceeded                     InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
-	InvalidInputExceptionReasonMaxValueExceeded                      InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
-	InvalidInputExceptionReasonMinLengthExceeded                     InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
-	InvalidInputExceptionReasonMinValueExceeded                      InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
-	InvalidInputExceptionReasonImmutablePolicy                       InvalidInputExceptionReason = "IMMUTABLE_POLICY"
-	InvalidInputExceptionReasonInvalidPattern                        InvalidInputExceptionReason = "INVALID_PATTERN"
-	InvalidInputExceptionReasonInvalidPatternTargetId                InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
-	InvalidInputExceptionReasonInputRequired                         InvalidInputExceptionReason = "INPUT_REQUIRED"
-	InvalidInputExceptionReasonInvalidPaginationToken                InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
-	InvalidInputExceptionReasonMaxFilterLimitExceeded                InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
-	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots    InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
-	InvalidInputExceptionReasonInvalidFullNameTarget                 InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
-	InvalidInputExceptionReasonUnrecognizedServicePrincipal          InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
-	InvalidInputExceptionReasonInvalidRoleName                       InvalidInputExceptionReason = "INVALID_ROLE_NAME"
-	InvalidInputExceptionReasonInvalidSystemTagsParameter            InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
-	InvalidInputExceptionReasonDuplicateTagKey                       InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
-	InvalidInputExceptionReasonTargetNotSupported                    InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
-	InvalidInputExceptionReasonInvalidEmailAddressTarget             InvalidInputExceptionReason = "INVALID_EMAIL_ADDRESS_TARGET"
-	InvalidInputExceptionReasonInvalidResourcePolicyJson             InvalidInputExceptionReason = "INVALID_RESOURCE_POLICY_JSON"
-	InvalidInputExceptionReasonInvalidPrincipal                      InvalidInputExceptionReason = "INVALID_PRINCIPAL"
-	InvalidInputExceptionReasonUnsupportedActionInResourcePolicy     InvalidInputExceptionReason = "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY"
-	InvalidInputExceptionReasonUnsupportedPolicyTypeInResourcePolicy InvalidInputExceptionReason = "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY"
-	InvalidInputExceptionReasonUnsupportedResourceInResourcePolicy   InvalidInputExceptionReason = "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY"
-	InvalidInputExceptionReasonNonDetachablePolicy                   InvalidInputExceptionReason = "NON_DETACHABLE_POLICY"
+	InvalidInputExceptionReasonInvalidPartyTypeTarget                    InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
+	InvalidInputExceptionReasonInvalidSyntaxOrganization                 InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
+	InvalidInputExceptionReasonInvalidSyntaxPolicy                       InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
+	InvalidInputExceptionReasonInvalidEnum                               InvalidInputExceptionReason = "INVALID_ENUM"
+	InvalidInputExceptionReasonInvalidEnumPolicyType                     InvalidInputExceptionReason = "INVALID_ENUM_POLICY_TYPE"
+	InvalidInputExceptionReasonInvalidListMember                         InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
+	InvalidInputExceptionReasonMaxLengthExceeded                         InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMaxValueExceeded                          InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonMinLengthExceeded                         InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMinValueExceeded                          InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonImmutablePolicy                           InvalidInputExceptionReason = "IMMUTABLE_POLICY"
+	InvalidInputExceptionReasonInvalidPattern                            InvalidInputExceptionReason = "INVALID_PATTERN"
+	InvalidInputExceptionReasonInvalidPatternTargetId                    InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
+	InvalidInputExceptionReasonInputRequired                             InvalidInputExceptionReason = "INPUT_REQUIRED"
+	InvalidInputExceptionReasonInvalidPaginationToken                    InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
+	InvalidInputExceptionReasonMaxFilterLimitExceeded                    InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
+	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots        InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
+	InvalidInputExceptionReasonInvalidFullNameTarget                     InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
+	InvalidInputExceptionReasonUnrecognizedServicePrincipal              InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
+	InvalidInputExceptionReasonInvalidRoleName                           InvalidInputExceptionReason = "INVALID_ROLE_NAME"
+	InvalidInputExceptionReasonInvalidSystemTagsParameter                InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
+	InvalidInputExceptionReasonDuplicateTagKey                           InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
+	InvalidInputExceptionReasonTargetNotSupported                        InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
+	InvalidInputExceptionReasonInvalidEmailAddressTarget                 InvalidInputExceptionReason = "INVALID_EMAIL_ADDRESS_TARGET"
+	InvalidInputExceptionReasonInvalidResourcePolicyJson                 InvalidInputExceptionReason = "INVALID_RESOURCE_POLICY_JSON"
+	InvalidInputExceptionReasonInvalidPrincipal                          InvalidInputExceptionReason = "INVALID_PRINCIPAL"
+	InvalidInputExceptionReasonUnsupportedActionInResourcePolicy         InvalidInputExceptionReason = "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY"
+	InvalidInputExceptionReasonUnsupportedPolicyTypeInResourcePolicy     InvalidInputExceptionReason = "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY"
+	InvalidInputExceptionReasonUnsupportedResourceInResourcePolicy       InvalidInputExceptionReason = "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY"
+	InvalidInputExceptionReasonNonDetachablePolicy                       InvalidInputExceptionReason = "NON_DETACHABLE_POLICY"
+	InvalidInputExceptionReasonCallerRequiredFieldMissing                InvalidInputExceptionReason = "CALLER_REQUIRED_FIELD_MISSING"
+	InvalidInputExceptionReasonUnsupportedActionInResponsibilityTransfer InvalidInputExceptionReason = "UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER"
+	InvalidInputExceptionReasonStartDateNotBeginningOfMonth              InvalidInputExceptionReason = "START_DATE_NOT_BEGINNING_OF_MONTH"
+	InvalidInputExceptionReasonStartDateNotBeginningOfDay                InvalidInputExceptionReason = "START_DATE_NOT_BEGINNING_OF_DAY"
+	InvalidInputExceptionReasonStartDateTooEarly                         InvalidInputExceptionReason = "START_DATE_TOO_EARLY"
+	InvalidInputExceptionReasonStartDateTooLate                          InvalidInputExceptionReason = "START_DATE_TOO_LATE"
+	InvalidInputExceptionReasonInvalidStartDate                          InvalidInputExceptionReason = "INVALID_START_DATE"
+	InvalidInputExceptionReasonEndDateNotEndOfMonth                      InvalidInputExceptionReason = "END_DATE_NOT_END_OF_MONTH"
+	InvalidInputExceptionReasonEndDateTooEarly                           InvalidInputExceptionReason = "END_DATE_TOO_EARLY"
+	InvalidInputExceptionReasonInvalidEndDate                            InvalidInputExceptionReason = "INVALID_END_DATE"
 )
 
 // Values returns all known values for InvalidInputExceptionReason. Note that this
@@ -516,6 +566,16 @@ func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
 		"UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY",
 		"UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY",
 		"NON_DETACHABLE_POLICY",
+		"CALLER_REQUIRED_FIELD_MISSING",
+		"UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER",
+		"START_DATE_NOT_BEGINNING_OF_MONTH",
+		"START_DATE_NOT_BEGINNING_OF_DAY",
+		"START_DATE_TOO_EARLY",
+		"START_DATE_TOO_LATE",
+		"INVALID_START_DATE",
+		"END_DATE_NOT_END_OF_MONTH",
+		"END_DATE_TOO_EARLY",
+		"INVALID_END_DATE",
 	}
 }
 
@@ -569,6 +629,7 @@ const (
 	PolicyTypeChatbotPolicy          PolicyType = "CHATBOT_POLICY"
 	PolicyTypeDeclarativePolicyEc2   PolicyType = "DECLARATIVE_POLICY_EC2"
 	PolicyTypeSecurityhubPolicy      PolicyType = "SECURITYHUB_POLICY"
+	PolicyTypeInspectorPolicy        PolicyType = "INSPECTOR_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -585,6 +646,7 @@ func (PolicyType) Values() []PolicyType {
 		"CHATBOT_POLICY",
 		"DECLARATIVE_POLICY_EC2",
 		"SECURITYHUB_POLICY",
+		"INSPECTOR_POLICY",
 	}
 }
 
@@ -606,6 +668,51 @@ func (PolicyTypeStatus) Values() []PolicyTypeStatus {
 		"ENABLED",
 		"PENDING_ENABLE",
 		"PENDING_DISABLE",
+	}
+}
+
+type ResponsibilityTransferStatus string
+
+// Enum values for ResponsibilityTransferStatus
+const (
+	ResponsibilityTransferStatusRequested ResponsibilityTransferStatus = "REQUESTED"
+	ResponsibilityTransferStatusDeclined  ResponsibilityTransferStatus = "DECLINED"
+	ResponsibilityTransferStatusCanceled  ResponsibilityTransferStatus = "CANCELED"
+	ResponsibilityTransferStatusExpired   ResponsibilityTransferStatus = "EXPIRED"
+	ResponsibilityTransferStatusAccepted  ResponsibilityTransferStatus = "ACCEPTED"
+	ResponsibilityTransferStatusWithdrawn ResponsibilityTransferStatus = "WITHDRAWN"
+)
+
+// Values returns all known values for ResponsibilityTransferStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponsibilityTransferStatus) Values() []ResponsibilityTransferStatus {
+	return []ResponsibilityTransferStatus{
+		"REQUESTED",
+		"DECLINED",
+		"CANCELED",
+		"EXPIRED",
+		"ACCEPTED",
+		"WITHDRAWN",
+	}
+}
+
+type ResponsibilityTransferType string
+
+// Enum values for ResponsibilityTransferType
+const (
+	ResponsibilityTransferTypeBilling ResponsibilityTransferType = "BILLING"
+)
+
+// Values returns all known values for ResponsibilityTransferType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponsibilityTransferType) Values() []ResponsibilityTransferType {
+	return []ResponsibilityTransferType{
+		"BILLING",
 	}
 }
 

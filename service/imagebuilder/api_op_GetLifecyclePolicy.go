@@ -40,7 +40,8 @@ type GetLifecyclePolicyInput struct {
 
 type GetLifecyclePolicyOutput struct {
 
-	// The ARN of the image lifecycle policy resource that was returned.
+	// The Amazon Resource Name (ARN) of the image lifecycle policy resource that was
+	// returned.
 	LifecyclePolicy *types.LifecyclePolicy
 
 	// Metadata pertaining to the operation's result.

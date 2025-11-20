@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the event configuration settings for the specified event data store.
-// You can update the maximum event size and context key selectors.
+// Updates the event configuration settings for the specified event data store or
+// trail. This operation supports updating the maximum event size, adding or
+// modifying context key selectors for event data store, and configuring
+// aggregation settings for the trail.
 func (c *Client) PutEventConfiguration(ctx context.Context, params *PutEventConfigurationInput, optFns ...func(*Options)) (*PutEventConfigurationOutput, error) {
 	if params == nil {
 		params = &PutEventConfigurationInput{}
@@ -30,27 +32,32 @@ func (c *Client) PutEventConfiguration(ctx context.Context, params *PutEventConf
 
 type PutEventConfigurationInput struct {
 
+	// The list of aggregation configurations that you want to configure for the trail.
+	AggregationConfigurations []types.AggregationConfiguration
+
 	// A list of context key selectors that will be included to provide enriched event
 	// data.
-	//
-	// This member is required.
 	ContextKeySelectors []types.ContextKeySelector
+
+	// The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store
+	// for which event configuration settings are updated.
+	EventDataStore *string
 
 	// The maximum allowed size for events to be stored in the specified event data
 	// store. If you are using context key selectors, MaxEventSize must be set to
 	// Large.
-	//
-	// This member is required.
 	MaxEventSize types.MaxEventSize
 
-	// The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store
-	// for which you want to update event configuration settings.
-	EventDataStore *string
+	// The name of the trail for which you want to update event configuration settings.
+	TrailName *string
 
 	noSmithyDocumentSerde
 }
 
 type PutEventConfigurationOutput struct {
+
+	// A list of aggregation configurations that are configured for the trail.
+	AggregationConfigurations []types.AggregationConfiguration
 
 	// The list of context key selectors that are configured for the event data store.
 	ContextKeySelectors []types.ContextKeySelector
@@ -61,6 +68,9 @@ type PutEventConfigurationOutput struct {
 
 	// The maximum allowed size for events stored in the specified event data store.
 	MaxEventSize types.MaxEventSize
+
+	// The Amazon Resource Name (ARN) of the trail that has aggregation enabled.
+	TrailARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

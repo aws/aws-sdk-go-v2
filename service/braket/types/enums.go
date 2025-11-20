@@ -434,6 +434,24 @@ func (SearchQuantumTasksFilterOperator) Values() []SearchQuantumTasksFilterOpera
 	}
 }
 
+type SearchSpendingLimitsFilterOperator string
+
+// Enum values for SearchSpendingLimitsFilterOperator
+const (
+	SearchSpendingLimitsFilterOperatorEqual SearchSpendingLimitsFilterOperator = "EQUAL"
+)
+
+// Values returns all known values for SearchSpendingLimitsFilterOperator. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchSpendingLimitsFilterOperator) Values() []SearchSpendingLimitsFilterOperator {
+	return []SearchSpendingLimitsFilterOperator{
+		"EQUAL",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

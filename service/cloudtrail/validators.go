@@ -1254,6 +1254,41 @@ func validateAdvancedFieldSelectors(v []types.AdvancedFieldSelector) error {
 	}
 }
 
+func validateAggregationConfiguration(v *types.AggregationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationConfiguration"}
+	if v.Templates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Templates"))
+	}
+	if len(v.EventCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationConfigurations(v []types.AggregationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationConfigurations"}
+	for i := range v {
+		if err := validateAggregationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContextKeySelector(v *types.ContextKeySelector) error {
 	if v == nil {
 		return nil
@@ -1988,14 +2023,14 @@ func validateOpPutEventConfigurationInput(v *PutEventConfigurationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutEventConfigurationInput"}
-	if len(v.MaxEventSize) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxEventSize"))
-	}
-	if v.ContextKeySelectors == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContextKeySelectors"))
-	} else if v.ContextKeySelectors != nil {
+	if v.ContextKeySelectors != nil {
 		if err := validateContextKeySelectors(v.ContextKeySelectors); err != nil {
 			invalidParams.AddNested("ContextKeySelectors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregationConfigurations != nil {
+		if err := validateAggregationConfigurations(v.AggregationConfigurations); err != nil {
+			invalidParams.AddNested("AggregationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

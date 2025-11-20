@@ -1947,6 +1947,9 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2488,6 +2491,9 @@ func awsAwsquery_deserializeOpErrorCreateDBInstance(response *smithyhttp.Respons
 	case strings.EqualFold("TenantDatabaseQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2668,6 +2674,9 @@ func awsAwsquery_deserializeOpErrorCreateDBInstanceReadReplica(response *smithyh
 
 	case strings.EqualFold("TenantDatabaseQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -13064,6 +13073,9 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -13592,6 +13604,9 @@ func awsAwsquery_deserializeOpErrorModifyDBInstance(response *smithyhttp.Respons
 
 	case strings.EqualFold("TenantDatabaseQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -17178,6 +17193,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -17352,6 +17370,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 
 	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
+
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -17534,6 +17555,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBInstanceFromDBSnapshot(response *smi
 	case strings.EqualFold("TenantDatabaseQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -17699,6 +17723,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBInstanceFromS3(response *smithyhttp.
 
 	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
+
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -17883,6 +17910,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBInstanceToPointInTime(response *smit
 
 	case strings.EqualFold("TenantDatabaseQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -18253,6 +18283,9 @@ func awsAwsquery_deserializeOpErrorStartDBCluster(response *smithyhttp.Response,
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -18394,6 +18427,9 @@ func awsAwsquery_deserializeOpErrorStartDBInstance(response *smithyhttp.Response
 
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
+	case strings.EqualFold("VpcEncryptionControlViolationException", errorCode):
+		return awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -25874,6 +25910,50 @@ func awsAwsquery_deserializeErrorUnsupportedDBEngineVersionFault(response *smith
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentUnsupportedDBEngineVersionFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorVpcEncryptionControlViolationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.VpcEncryptionControlViolationException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentVpcEncryptionControlViolationException(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -56206,6 +56286,55 @@ func awsAwsquery_deserializeDocumentValidUpgradeTargetListUnwrapped(v *[]types.U
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentVpcEncryptionControlViolationException(v **types.VpcEncryptionControlViolationException, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.VpcEncryptionControlViolationException
+	if *v == nil {
+		sv = &types.VpcEncryptionControlViolationException{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentVpcSecurityGroupMembership(v **types.VpcSecurityGroupMembership, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

@@ -15,7 +15,9 @@ import (
 // permissions of the caller. For example, if you are granted an ALTER permission,
 // you are able to see only the principal permissions for ALTER.
 //
-// This operation returns only those permissions that have been explicitly granted.
+// This operation returns only those permissions that have been explicitly
+// granted. If both Principal and Resource parameters are provided, the response
+// returns effective permissions rather than the explicitly granted permissions.
 //
 // For information about permissions, see [Security and Access Control to Metadata and Data].
 //
@@ -43,7 +45,12 @@ type ListPermissionsInput struct {
 	// environment.
 	CatalogId *string
 
-	// Indicates that related permissions should be included in the results.
+	// Indicates that related permissions should be included in the results when
+	// listing permissions on a table resource.
+	//
+	// Set the field to TRUE to show the cell filters on a table resource. Default is
+	// FALSE . The Principal parameter must not be specified when requesting cell
+	// filter information.
 	IncludeRelated *string
 
 	// The maximum number of results to return.

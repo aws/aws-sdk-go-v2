@@ -1,0 +1,8 @@
+{
+    "id": "7bedb3f0-62f2-44ff-a239-cd4d90c31fd5",
+    "type": "feature",
+    "description": "Release Findings and Resources Trends APIs- GetFindingsTrendsV2 and GetResourcesTrendsV2. This supports time-series aggregated counts with composite filtering for 1-year of historical data analysis of Findings and Resources.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

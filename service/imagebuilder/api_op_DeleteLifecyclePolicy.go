@@ -38,7 +38,7 @@ type DeleteLifecyclePolicyInput struct {
 
 type DeleteLifecyclePolicyOutput struct {
 
-	// The ARN of the lifecycle policy that was deleted.
+	// The Amazon Resource Name (ARN) of the lifecycle policy that was deleted.
 	LifecyclePolicyArn *string
 
 	// Metadata pertaining to the operation's result.

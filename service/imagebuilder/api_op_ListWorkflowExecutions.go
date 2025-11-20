@@ -48,8 +48,8 @@ type ListWorkflowExecutionsInput struct {
 
 type ListWorkflowExecutionsOutput struct {
 
-	// The resource ARN of the image build version for which you requested a list of
-	// workflow runtime details.
+	// The resource Amazon Resource Name (ARN) of the image build version for which
+	// you requested a list of workflow runtime details.
 	ImageBuildVersionArn *string
 
 	// The output message from the list action, if applicable.

@@ -49,6 +49,9 @@ type UpdateLicenseConfigurationInput struct {
 	// New hard limit of the number of available licenses.
 	LicenseCountHardLimit *bool
 
+	// License configuration expiry time.
+	LicenseExpiry *int64
+
 	// New license rule. The only rule that you can add after you create a license
 	// configuration is licenseAffinityToHost.
 	LicenseRules []string

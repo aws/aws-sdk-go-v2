@@ -51,7 +51,8 @@ type CancelImageCreationOutput struct {
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The ARN of the image whose creation this request canceled.
+	// The Amazon Resource Name (ARN) of the image whose creation this request
+	// canceled.
 	ImageBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

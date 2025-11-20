@@ -14,7 +14,7 @@ import (
 // operation is performed by the account that wants to leave. To remove a member
 // account as a user in the management account, use RemoveAccountFromOrganizationinstead.
 //
-// This operation can be called only from a member account in the organization.
+// You can only call from operation from a member account.
 //
 //   - The management account in an organization with all features enabled can set
 //     service control policies (SCPs) that can restrict what administrators of member

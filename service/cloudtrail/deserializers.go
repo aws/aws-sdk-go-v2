@@ -2806,11 +2806,17 @@ func awsAwsjson11_deserializeOpErrorGetEventConfiguration(response *smithyhttp.R
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("InvalidTrailNameException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
+
 	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("TrailNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorTrailNotFoundException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -5452,11 +5458,17 @@ func awsAwsjson11_deserializeOpErrorPutEventConfiguration(response *smithyhttp.R
 	case strings.EqualFold("InvalidEventDataStoreStatusException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidEventDataStoreStatusException(response, errorBody)
 
+	case strings.EqualFold("InvalidHomeRegionException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidHomeRegionException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("InvalidTrailNameException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
 	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
@@ -5469,6 +5481,9 @@ func awsAwsjson11_deserializeOpErrorPutEventConfiguration(response *smithyhttp.R
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("TrailNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorTrailNotFoundException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -11624,6 +11639,85 @@ func awsAwsjson11_deserializeDocumentAdvancedFieldSelectors(v *[]types.AdvancedF
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAggregationConfiguration(v **types.AggregationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AggregationConfiguration
+	if *v == nil {
+		sv = &types.AggregationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EventCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventCategoryAggregation to be of type string, got %T instead", value)
+				}
+				sv.EventCategory = types.EventCategoryAggregation(jtv)
+			}
+
+		case "Templates":
+			if err := awsAwsjson11_deserializeDocumentTemplates(&sv.Templates, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAggregationConfigurations(v *[]types.AggregationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AggregationConfiguration
+	if *v == nil {
+		cv = []types.AggregationConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AggregationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAggregationConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCannotDelegateManagementAccountException(v **types.CannotDelegateManagementAccountException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17484,6 +17578,42 @@ func awsAwsjson11_deserializeDocumentTagsList(v *[]types.Tag, value interface{})
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTemplates(v *[]types.Template, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Template
+	if *v == nil {
+		cv = []types.Template{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Template
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Template to be of type string, got %T instead", value)
+			}
+			col = types.Template(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19419,6 +19549,11 @@ func awsAwsjson11_deserializeOpDocumentGetEventConfigurationOutput(v **GetEventC
 
 	for key, value := range shape {
 		switch key {
+		case "AggregationConfigurations":
+			if err := awsAwsjson11_deserializeDocumentAggregationConfigurations(&sv.AggregationConfigurations, value); err != nil {
+				return err
+			}
+
 		case "ContextKeySelectors":
 			if err := awsAwsjson11_deserializeDocumentContextKeySelectors(&sv.ContextKeySelectors, value); err != nil {
 				return err
@@ -19440,6 +19575,15 @@ func awsAwsjson11_deserializeOpDocumentGetEventConfigurationOutput(v **GetEventC
 					return fmt.Errorf("expected MaxEventSize to be of type string, got %T instead", value)
 				}
 				sv.MaxEventSize = types.MaxEventSize(jtv)
+			}
+
+		case "TrailARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TrailARN = ptr.String(jtv)
 			}
 
 		default:
@@ -20868,6 +21012,11 @@ func awsAwsjson11_deserializeOpDocumentPutEventConfigurationOutput(v **PutEventC
 
 	for key, value := range shape {
 		switch key {
+		case "AggregationConfigurations":
+			if err := awsAwsjson11_deserializeDocumentAggregationConfigurations(&sv.AggregationConfigurations, value); err != nil {
+				return err
+			}
+
 		case "ContextKeySelectors":
 			if err := awsAwsjson11_deserializeDocumentContextKeySelectors(&sv.ContextKeySelectors, value); err != nil {
 				return err
@@ -20889,6 +21038,15 @@ func awsAwsjson11_deserializeOpDocumentPutEventConfigurationOutput(v **PutEventC
 					return fmt.Errorf("expected MaxEventSize to be of type string, got %T instead", value)
 				}
 				sv.MaxEventSize = types.MaxEventSize(jtv)
+			}
+
+		case "TrailARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TrailARN = ptr.String(jtv)
 			}
 
 		default:

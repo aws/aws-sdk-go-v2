@@ -1,0 +1,8 @@
+{
+    "id": "7141751c-f665-4bf6-9689-f9c5e0e0e795",
+    "type": "feature",
+    "description": "Added clusterVpcEndpoint field to GetVpcEndpointServiceName API response, returning the VPC connection endpoint for the cluster",
+    "modules": [
+        "service/dsql"
+    ]
+}

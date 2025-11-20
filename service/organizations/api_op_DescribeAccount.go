@@ -13,8 +13,8 @@ import (
 
 // Retrieves Organizations-related information about the specified account.
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInput, optFns ...func(*Options)) (*DescribeAccountOutput, error) {
 	if params == nil {
 		params = &DescribeAccountInput{}

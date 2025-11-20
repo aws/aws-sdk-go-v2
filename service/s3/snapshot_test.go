@@ -386,6 +386,18 @@ func TestCheckSnapshot_DeletePublicAccessBlock(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetBucketAbac(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBucketAbac(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBucketAbac")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetBucketAccelerateConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBucketAccelerateConfiguration(context.Background(), nil, func(o *Options) {
@@ -907,6 +919,18 @@ func TestCheckSnapshot_ListParts(t *testing.T) {
 	_, err := svc.ListParts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListParts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutBucketAbac(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutBucketAbac(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutBucketAbac")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1633,6 +1657,18 @@ func TestUpdateSnapshot_DeletePublicAccessBlock(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetBucketAbac(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBucketAbac(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBucketAbac")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetBucketAccelerateConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBucketAccelerateConfiguration(context.Background(), nil, func(o *Options) {
@@ -2154,6 +2190,18 @@ func TestUpdateSnapshot_ListParts(t *testing.T) {
 	_, err := svc.ListParts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListParts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutBucketAbac(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutBucketAbac(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutBucketAbac")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

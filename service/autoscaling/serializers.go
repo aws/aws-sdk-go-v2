@@ -5142,6 +5142,20 @@ func awsAwsquery_serializeDocumentInstanceIds(v []string, value query.Value) err
 	return nil
 }
 
+func awsAwsquery_serializeDocumentInstanceLifecyclePolicy(v *types.InstanceLifecyclePolicy, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.RetentionTriggers != nil {
+		objectKey := object.Key("RetentionTriggers")
+		if err := awsAwsquery_serializeDocumentRetentionTriggers(v.RetentionTriggers, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentInstanceMaintenancePolicy(v *types.InstanceMaintenancePolicy, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5454,6 +5468,11 @@ func awsAwsquery_serializeDocumentLaunchTemplate(v *types.LaunchTemplate, value 
 func awsAwsquery_serializeDocumentLaunchTemplateOverrides(v *types.LaunchTemplateOverrides, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
 
 	if v.InstanceRequirements != nil {
 		objectKey := object.Key("InstanceRequirements")
@@ -6217,6 +6236,18 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 	return nil
 }
 
+func awsAwsquery_serializeDocumentRetentionTriggers(v *types.RetentionTriggers, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.TerminateHookAbandon) > 0 {
+		objectKey := object.Key("TerminateHookAbandon")
+		objectKey.String(string(v.TerminateHookAbandon))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentScheduledActionNames(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -6901,6 +6932,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)
+	}
+
+	if v.InstanceLifecyclePolicy != nil {
+		objectKey := object.Key("InstanceLifecyclePolicy")
+		if err := awsAwsquery_serializeDocumentInstanceLifecyclePolicy(v.InstanceLifecyclePolicy, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.InstanceMaintenancePolicy != nil {
@@ -8463,6 +8501,13 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.HealthCheckType != nil {
 		objectKey := object.Key("HealthCheckType")
 		objectKey.String(*v.HealthCheckType)
+	}
+
+	if v.InstanceLifecyclePolicy != nil {
+		objectKey := object.Key("InstanceLifecyclePolicy")
+		if err := awsAwsquery_serializeDocumentInstanceLifecyclePolicy(v.InstanceLifecyclePolicy, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.InstanceMaintenancePolicy != nil {

@@ -74,6 +74,18 @@ func TestCheckSnapshot_GetDataAutomationStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeDataAutomation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeDataAutomation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeDataAutomation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeDataAutomationAsync(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeDataAutomationAsync(context.Background(), nil, func(o *Options) {
@@ -126,6 +138,18 @@ func TestUpdateSnapshot_GetDataAutomationStatus(t *testing.T) {
 	_, err := svc.GetDataAutomationStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDataAutomationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeDataAutomation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeDataAutomation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeDataAutomation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

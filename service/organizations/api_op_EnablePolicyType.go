@@ -19,8 +19,8 @@ import (
 // background. Amazon Web Services recommends that you first use ListRootsto see the status
 // of policy types for a specified root, and then use this operation.
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 //
 // You can enable a policy type in a root only if that policy type is available in
 // the organization. To view the status of available policy types in the
@@ -61,6 +61,8 @@ type EnablePolicyTypeInput struct {
 	//
 	// [SECURITYHUB_POLICY]
 	//
+	// [INSPECTOR_POLICY]
+	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
 	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
@@ -68,13 +70,14 @@ type EnablePolicyTypeInput struct {
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	// [DECLARATIVE_POLICY_EC2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+	// [INSPECTOR_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
 	// [RESOURCE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
 	//
 	// This member is required.
 	PolicyType types.PolicyType
 
-	// The unique identifier (ID) of the root in which you want to enable a policy
-	// type. You can get the ID from the ListRootsoperation.
+	// ID for the root in which you want to enable a policy type. You can get the ID
+	// from the ListRootsoperation.
 	//
 	// The [regex pattern] for a root ID string requires "r-" followed by from 4 to 32 lowercase
 	// letters or digits.

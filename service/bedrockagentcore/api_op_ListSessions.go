@@ -34,8 +34,7 @@ func (c *Client) ListSessions(ctx context.Context, params *ListSessionsInput, op
 
 type ListSessionsInput struct {
 
-	// The identifier of the actor for which to list sessions. If specified, only
-	// sessions involving this actor are returned.
+	// The identifier of the actor for which to list sessions.
 	//
 	// This member is required.
 	ActorId *string
@@ -45,8 +44,8 @@ type ListSessionsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -175,8 +174,8 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 
 // ListSessionsPaginatorOptions is the paginator options for ListSessions
 type ListSessionsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

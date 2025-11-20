@@ -31803,6 +31803,12 @@ func awsRestxml_deserializeDocumentAnycastIpList(v **types.AnycastIpList, decode
 				sv.IpAddressType = types.IpAddressType(xtv)
 			}
 
+		case strings.EqualFold("IpamConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIpamConfig(&sv.IpamConfig, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("IpCount", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -32135,6 +32141,12 @@ func awsRestxml_deserializeDocumentAnycastIpListSummary(v **types.AnycastIpListS
 			{
 				xtv := string(val)
 				sv.IpAddressType = types.IpAddressType(xtv)
+			}
+
+		case strings.EqualFold("IpamConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIpamConfig(&sv.IpamConfig, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("IpCount", t.Name.Local):
@@ -43943,6 +43955,221 @@ func awsRestxml_deserializeDocumentInvalidWebACLId(v **types.InvalidWebACLId, de
 			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentIpamCidrConfig(v **types.IpamCidrConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.IpamCidrConfig
+	if *v == nil {
+		sv = &types.IpamCidrConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AnycastIp", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AnycastIp = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Cidr", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Cidr = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IpamPoolArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpamPoolArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.IpamCidrStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentIpamCidrConfigList(v *[]types.IpamCidrConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.IpamCidrConfig
+	if *v == nil {
+		sv = make([]types.IpamCidrConfig, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("IpamCidrConfig", t.Name.Local):
+			var col types.IpamCidrConfig
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsRestxml_deserializeDocumentIpamCidrConfig(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentIpamCidrConfigListUnwrapped(v *[]types.IpamCidrConfig, decoder smithyxml.NodeDecoder) error {
+	var sv []types.IpamCidrConfig
+	if *v == nil {
+		sv = make([]types.IpamCidrConfig, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.IpamCidrConfig
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentIpamCidrConfig(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentIpamConfig(v **types.IpamConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.IpamConfig
+	if *v == nil {
+		sv = &types.IpamConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IpamCidrConfigs", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIpamCidrConfigList(&sv.IpamCidrConfigs, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Quantity", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Quantity = ptr.Int32(int32(i64))
 			}
 
 		default:

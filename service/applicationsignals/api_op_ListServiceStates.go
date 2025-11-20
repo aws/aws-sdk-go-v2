@@ -12,13 +12,10 @@ import (
 	"time"
 )
 
-// Retrieves the current state information for services monitored by Application
-// Signals. Service states include health status, recent change events, and other
-// operational metadata.
-//
-// You can filter results by time range, AWS account, and service attributes to
-// focus on specific services or time periods. This operation supports pagination
-// and can include data from linked accounts.
+// Returns information about the last deployment and other change states of
+// services. This API provides visibility into recent changes that may have
+// affected service performance, helping with troubleshooting and change
+// correlation.
 func (c *Client) ListServiceStates(ctx context.Context, params *ListServiceStatesInput, optFns ...func(*Options)) (*ListServiceStatesOutput, error) {
 	if params == nil {
 		params = &ListServiceStatesInput{}
@@ -36,40 +33,38 @@ func (c *Client) ListServiceStates(ctx context.Context, params *ListServiceState
 
 type ListServiceStatesInput struct {
 
-	// The end time for the service states query. Only service states before this time
-	// will be included. Specify the time as the number of milliseconds since January
-	// 1, 1970, 00:00:00 UTC.
+	// The end of the time period to retrieve service state information for. When used
+	// in a raw HTTP Query API, it is formatted as epoch time in seconds. For example,
+	// 1698778057 .
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The start time for the service states query. Only service states from this time
-	// onward will be included. Specify the time as the number of milliseconds since
-	// January 1, 1970, 00:00:00 UTC.
+	// The start of the time period to retrieve service state information for. When
+	// used in a raw HTTP Query API, it is formatted as epoch time in seconds. For
+	// example, 1698778057 .
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// An array of attribute filters to narrow down the service states returned. Each
-	// filter specifies an attribute name and the values to match against.
+	// A list of attribute filters to narrow down the services. You can filter by
+	// platform, environment, or other service attributes.
 	AttributeFilters []types.AttributeFilter
 
-	// The AWS account ID to filter service states. If specified, only service states
-	// from this account will be returned. If not specified, service states from the
-	// current account (and linked accounts if enabled) are returned.
+	// The Amazon Web Services account ID to filter service states by. Use this to
+	// limit results to services from a specific account.
 	AwsAccountId *string
 
-	// Specifies whether to include service states from linked AWS accounts in the
-	// results. Set to true to include linked accounts, or false to only include the
-	// current account. Defaults to false .
+	// If you are using this operation in a monitoring account, specify true to
+	// include service states from source accounts in the returned data.
 	IncludeLinkedAccounts bool
 
-	// The maximum number of service states to return in a single request. Valid range
-	// is 1 to 100. If not specified, defaults to 50.
+	// The maximum number of service states to return in one operation. If you omit
+	// this parameter, the default of 20 is used.
 	MaxResults *int32
 
-	// The token for the next set of results. Use this token to retrieve additional
-	// pages of service states when the result set is large.
+	// Include this value, if it was returned by the previous operation, to get the
+	// next set of service states.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -77,28 +72,28 @@ type ListServiceStatesInput struct {
 
 type ListServiceStatesOutput struct {
 
-	// The end time of the query range, expressed as the number of milliseconds since
-	// January 1, 1970, 00:00:00 UTC.
+	// The end of the time period that the returned information applies to. When used
+	// in a raw HTTP Query API, it is formatted as epoch time in seconds. For example,
+	// 1698778057 .
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// An array of service state objects that match the specified criteria. Each
-	// service state includes current status, recent change events, and service
-	// metadata.
+	// An array of structures, where each structure contains information about the
+	// state of one service, including its latest change events such as deployments.
 	//
 	// This member is required.
 	ServiceStates []types.ServiceState
 
-	// The start time of the query range, expressed as the number of milliseconds
-	// since January 1, 1970, 00:00:00 UTC.
+	// The start of the time period that the returned information applies to. When
+	// used in a raw HTTP Query API, it is formatted as epoch time in seconds. For
+	// example, 1698778057 .
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// The token to use for retrieving the next page of results. This value is present
-	// only if there are more results available than were returned in the current
-	// response.
+	// Include this value in your next use of this API to get the next set of service
+	// states.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -209,8 +204,8 @@ func (c *Client) addOperationListServiceStatesMiddlewares(stack *middleware.Stac
 
 // ListServiceStatesPaginatorOptions is the paginator options for ListServiceStates
 type ListServiceStatesPaginatorOptions struct {
-	// The maximum number of service states to return in a single request. Valid range
-	// is 1 to 100. If not specified, defaults to 50.
+	// The maximum number of service states to return in one operation. If you omit
+	// this parameter, the default of 20 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

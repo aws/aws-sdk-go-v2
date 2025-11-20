@@ -15,7 +15,7 @@ import (
 // The child OUs and accounts remain in place, and any attached policies of the OU
 // remain attached.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 func (c *Client) UpdateOrganizationalUnit(ctx context.Context, params *UpdateOrganizationalUnitInput, optFns ...func(*Options)) (*UpdateOrganizationalUnitOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationalUnitInput{}
@@ -33,8 +33,7 @@ func (c *Client) UpdateOrganizationalUnit(ctx context.Context, params *UpdateOrg
 
 type UpdateOrganizationalUnitInput struct {
 
-	// The unique identifier (ID) of the OU that you want to rename. You can get the
-	// ID from the ListOrganizationalUnitsForParentoperation.
+	// ID for the OU that you want to rename. You can get the ID from the ListOrganizationalUnitsForParent operation.
 	//
 	// The [regex pattern] for an organizational unit ID string requires "ou-" followed by from 4 to
 	// 32 lowercase letters or digits (the ID of the root that contains the OU). This

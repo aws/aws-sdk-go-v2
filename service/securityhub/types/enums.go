@@ -415,6 +415,62 @@ func (FindingHistoryUpdateSourceType) Values() []FindingHistoryUpdateSourceType 
 	}
 }
 
+type FindingsTrendsStringField string
+
+// Enum values for FindingsTrendsStringField
+const (
+	FindingsTrendsStringFieldAccountId           FindingsTrendsStringField = "account_id"
+	FindingsTrendsStringFieldRegion              FindingsTrendsStringField = "region"
+	FindingsTrendsStringFieldFindingType         FindingsTrendsStringField = "finding_types"
+	FindingsTrendsStringFieldFindingStatus       FindingsTrendsStringField = "finding_status"
+	FindingsTrendsStringFieldCveId               FindingsTrendsStringField = "finding_cve_ids"
+	FindingsTrendsStringFieldComplianceStatus    FindingsTrendsStringField = "finding_compliance_status"
+	FindingsTrendsStringFieldComplianceControl   FindingsTrendsStringField = "finding_control_id"
+	FindingsTrendsStringFieldFindingClass        FindingsTrendsStringField = "finding_class_name"
+	FindingsTrendsStringFieldProviderName        FindingsTrendsStringField = "finding_provider"
+	FindingsTrendsStringFieldFindingActivityName FindingsTrendsStringField = "finding_activity_name"
+)
+
+// Values returns all known values for FindingsTrendsStringField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingsTrendsStringField) Values() []FindingsTrendsStringField {
+	return []FindingsTrendsStringField{
+		"account_id",
+		"region",
+		"finding_types",
+		"finding_status",
+		"finding_cve_ids",
+		"finding_compliance_status",
+		"finding_control_id",
+		"finding_class_name",
+		"finding_provider",
+		"finding_activity_name",
+	}
+}
+
+type GranularityField string
+
+// Enum values for GranularityField
+const (
+	GranularityFieldDaily   GranularityField = "Daily"
+	GranularityFieldWeekly  GranularityField = "Weekly"
+	GranularityFieldMonthly GranularityField = "Monthly"
+)
+
+// Values returns all known values for GranularityField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GranularityField) Values() []GranularityField {
+	return []GranularityField{
+		"Daily",
+		"Weekly",
+		"Monthly",
+	}
+}
+
 type GroupByField string
 
 // Enum values for GroupByField
@@ -1183,6 +1239,29 @@ func (ResourcesStringField) Values() []ResourcesStringField {
 		"ResourceName",
 		"FindingsSummary.FindingType",
 		"FindingsSummary.ProductName",
+	}
+}
+
+type ResourcesTrendsStringField string
+
+// Enum values for ResourcesTrendsStringField
+const (
+	ResourcesTrendsStringFieldAccountId        ResourcesTrendsStringField = "account_id"
+	ResourcesTrendsStringFieldRegion           ResourcesTrendsStringField = "region"
+	ResourcesTrendsStringFieldResourceType     ResourcesTrendsStringField = "resource_type"
+	ResourcesTrendsStringFieldResourceCategory ResourcesTrendsStringField = "resource_category"
+)
+
+// Values returns all known values for ResourcesTrendsStringField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcesTrendsStringField) Values() []ResourcesTrendsStringField {
+	return []ResourcesTrendsStringField{
+		"account_id",
+		"region",
+		"resource_type",
+		"resource_category",
 	}
 }
 

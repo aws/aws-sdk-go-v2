@@ -718,6 +718,13 @@ func awsRestjson1_serializeOpDocumentCreateLakeFormationIdentityCenterConfigurat
 		ok.String(*v.InstanceArn)
 	}
 
+	if v.ServiceIntegrations != nil {
+		ok := object.Key("ServiceIntegrations")
+		if err := awsRestjson1_serializeDocumentServiceIntegrationList(v.ServiceIntegrations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ShareRecipients != nil {
 		ok := object.Key("ShareRecipients")
 		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.ShareRecipients, ok); err != nil {
@@ -5108,6 +5115,13 @@ func awsRestjson1_serializeOpDocumentUpdateLakeFormationIdentityCenterConfigurat
 		}
 	}
 
+	if v.ServiceIntegrations != nil {
+		ok := object.Key("ServiceIntegrations")
+		if err := awsRestjson1_serializeDocumentServiceIntegrationList(v.ServiceIntegrations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ShareRecipients != nil {
 		ok := object.Key("ShareRecipients")
 		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.ShareRecipients, ok); err != nil {
@@ -6394,6 +6408,52 @@ func awsRestjson1_serializeDocumentQuerySessionContext(v *types.QuerySessionCont
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRedshiftConnect(v *types.RedshiftConnect, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Authorization) > 0 {
+		ok := object.Key("Authorization")
+		ok.String(string(v.Authorization))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftScopeUnion(v types.RedshiftScopeUnion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RedshiftScopeUnionMemberRedshiftConnect:
+		av := object.Key("RedshiftConnect")
+		if err := awsRestjson1_serializeDocumentRedshiftConnect(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftServiceIntegrations(v []types.RedshiftScopeUnion, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentRedshiftScopeUnion(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResource(v *types.Resource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6490,6 +6550,40 @@ func awsRestjson1_serializeDocumentScopeTargets(v []string, value smithyjson.Val
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceIntegrationList(v []types.ServiceIntegrationUnion, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentServiceIntegrationUnion(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceIntegrationUnion(v types.ServiceIntegrationUnion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ServiceIntegrationUnionMemberRedshift:
+		av := object.Key("Redshift")
+		if err := awsRestjson1_serializeDocumentRedshiftServiceIntegrations(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

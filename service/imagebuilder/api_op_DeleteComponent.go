@@ -38,7 +38,8 @@ type DeleteComponentInput struct {
 
 type DeleteComponentOutput struct {
 
-	// The ARN of the component build version that this request deleted.
+	// The Amazon Resource Name (ARN) of the component build version that this request
+	// deleted.
 	ComponentBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

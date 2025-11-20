@@ -470,6 +470,26 @@ func (m *validateOpListEvents) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMemoryExtractionJobs struct {
+}
+
+func (*validateOpListMemoryExtractionJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMemoryExtractionJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMemoryExtractionJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMemoryExtractionJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMemoryRecords struct {
 }
 
@@ -565,6 +585,26 @@ func (m *validateOpStartCodeInterpreterSession) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartCodeInterpreterSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartMemoryExtractionJob struct {
+}
+
+func (*validateOpStartMemoryExtractionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMemoryExtractionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMemoryExtractionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMemoryExtractionJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -742,6 +782,10 @@ func addOpListEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEvents{}, middleware.After)
 }
 
+func addOpListMemoryExtractionJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMemoryExtractionJobs{}, middleware.After)
+}
+
 func addOpListMemoryRecordsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMemoryRecords{}, middleware.After)
 }
@@ -760,6 +804,10 @@ func addOpStartBrowserSessionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartCodeInterpreterSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCodeInterpreterSession{}, middleware.After)
+}
+
+func addOpStartMemoryExtractionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMemoryExtractionJob{}, middleware.After)
 }
 
 func addOpStopBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -853,6 +901,21 @@ func validateEventMetadataFilterList(v []types.EventMetadataFilterExpression) er
 		if err := validateEventMetadataFilterExpression(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtractionJob(v *types.ExtractionJob) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtractionJob"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1566,6 +1629,21 @@ func validateOpListEventsInput(v *ListEventsInput) error {
 	}
 }
 
+func validateOpListMemoryExtractionJobsInput(v *ListMemoryExtractionJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMemoryExtractionJobsInput"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMemoryRecordsInput(v *ListMemoryRecordsInput) error {
 	if v == nil {
 		return nil
@@ -1654,6 +1732,28 @@ func validateOpStartCodeInterpreterSessionInput(v *StartCodeInterpreterSessionIn
 	invalidParams := smithy.InvalidParamsError{Context: "StartCodeInterpreterSessionInput"}
 	if v.CodeInterpreterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeInterpreterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMemoryExtractionJobInput(v *StartMemoryExtractionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMemoryExtractionJobInput"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if v.ExtractionJob == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionJob"))
+	} else if v.ExtractionJob != nil {
+		if err := validateExtractionJob(v.ExtractionJob); err != nil {
+			invalidParams.AddNested("ExtractionJob", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

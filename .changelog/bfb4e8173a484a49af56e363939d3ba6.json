@@ -1,0 +1,8 @@
+{
+    "id": "bfb4e817-3a48-4a49-af56-e363939d3ba6",
+    "type": "feature",
+    "description": "This release adds support for three new features: 1) Image ID overrides in mixed instances policy, 2) Replace Root Volume - a new strategy for Instance Refresh, and 3) Instance Lifecycle Policy for enhanced instance lifecycle management.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

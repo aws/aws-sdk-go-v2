@@ -11,16 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Declines a handshake request. This sets the handshake state to DECLINED and
-// effectively deactivates the request.
+// Declines a Handshake.
 //
-// This operation can be called only from the account that received the handshake.
-// The originator of the handshake can use CancelHandshakeinstead. The originator can't
-// reactivate a declined request, but can reinitiate the process with a new
-// handshake request.
+// Only the account that receives a handshake can call this operation. The sender
+// of the handshake can use CancelHandshaketo cancel if the handshake hasn't yet been responded
+// to.
 //
-// After you decline a handshake, it continues to appear in the results of
-// relevant APIs for only 30 days. After that, it's deleted.
+// You can view canceled handshakes in API responses for 30 days before they are
+// deleted.
 func (c *Client) DeclineHandshake(ctx context.Context, params *DeclineHandshakeInput, optFns ...func(*Options)) (*DeclineHandshakeOutput, error) {
 	if params == nil {
 		params = &DeclineHandshakeInput{}
@@ -38,8 +36,8 @@ func (c *Client) DeclineHandshake(ctx context.Context, params *DeclineHandshakeI
 
 type DeclineHandshakeInput struct {
 
-	// The unique identifier (ID) of the handshake that you want to decline. You can
-	// get the ID from the ListHandshakesForAccountoperation.
+	// ID for the handshake that you want to decline. You can get the ID from the ListHandshakesForAccount
+	// operation.
 	//
 	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
 	// letters or digits.
@@ -54,8 +52,7 @@ type DeclineHandshakeInput struct {
 
 type DeclineHandshakeOutput struct {
 
-	// A structure that contains details about the declined handshake. The state is
-	// updated to show the value DECLINED .
+	// A Handshake object. Contains details for the declined handshake.
 	Handshake *types.Handshake
 
 	// Metadata pertaining to the operation's result.

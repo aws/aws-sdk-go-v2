@@ -40,8 +40,7 @@ type RetrieveMemoryRecordsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The namespace to filter memory records by. If specified, only memory records in
-	// this namespace are searched.
+	// The namespace to filter memory records by.
 	//
 	// This member is required.
 	Namespace *string
@@ -52,8 +51,8 @@ type RetrieveMemoryRecordsInput struct {
 	// This member is required.
 	SearchCriteria *types.SearchCriteria
 
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -184,8 +183,8 @@ func (c *Client) addOperationRetrieveMemoryRecordsMiddlewares(stack *middleware.
 // RetrieveMemoryRecordsPaginatorOptions is the paginator options for
 // RetrieveMemoryRecords
 type RetrieveMemoryRecordsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

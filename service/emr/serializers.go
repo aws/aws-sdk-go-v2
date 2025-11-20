@@ -5054,6 +5054,23 @@ func awsAwsjson11_serializeDocumentReleaseLabelFilter(v *types.ReleaseLabelFilte
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3MonitoringConfiguration(v *types.S3MonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	if v.LogUri != nil {
+		ok := object.Key("LogUri")
+		ok.String(*v.LogUri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentScalingAction(v *types.ScalingAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5284,6 +5301,13 @@ func awsAwsjson11_serializeDocumentStepConfig(v *types.StepConfig, value smithyj
 		ok.String(*v.Name)
 	}
 
+	if v.StepMonitoringConfiguration != nil {
+		ok := object.Key("StepMonitoringConfiguration")
+		if err := awsAwsjson11_serializeDocumentStepMonitoringConfiguration(v.StepMonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5308,6 +5332,20 @@ func awsAwsjson11_serializeDocumentStepIdsList(v []string, value smithyjson.Valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStepMonitoringConfiguration(v *types.StepMonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3MonitoringConfiguration != nil {
+		ok := object.Key("S3MonitoringConfiguration")
+		if err := awsAwsjson11_serializeDocumentS3MonitoringConfiguration(v.S3MonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

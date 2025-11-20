@@ -13,8 +13,8 @@ import (
 
 // Retrieves information about an organizational unit (OU).
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *DescribeOrganizationalUnitInput, optFns ...func(*Options)) (*DescribeOrganizationalUnitOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationalUnitInput{}
@@ -32,8 +32,8 @@ func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *Describ
 
 type DescribeOrganizationalUnitInput struct {
 
-	// The unique identifier (ID) of the organizational unit that you want details
-	// about. You can get the ID from the ListOrganizationalUnitsForParentoperation.
+	// ID for the organizational unit that you want details about. You can get the ID
+	// from the ListOrganizationalUnitsForParentoperation.
 	//
 	// The [regex pattern] for an organizational unit ID string requires "ou-" followed by from 4 to
 	// 32 lowercase letters or digits (the ID of the root that contains the OU). This

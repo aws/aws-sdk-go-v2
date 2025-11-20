@@ -3921,3 +3921,33 @@ func (e *UnsupportedDBEngineVersionFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedDBEngineVersionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The operation violates VPC encryption control settings. Make sure that your DB
+// instance type supports the Nitro encryption-in-transit capability, or modify
+// your VPC's encryption controls to not enforce encryption-in-transit.
+type VpcEncryptionControlViolationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *VpcEncryptionControlViolationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *VpcEncryptionControlViolationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *VpcEncryptionControlViolationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "VpcEncryptionControlViolationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *VpcEncryptionControlViolationException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}

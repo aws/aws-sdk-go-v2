@@ -23,8 +23,8 @@ import (
 //
 //   - Policy (any type)
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

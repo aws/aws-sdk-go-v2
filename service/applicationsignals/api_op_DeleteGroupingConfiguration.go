@@ -10,12 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a grouping configuration that defines how services are grouped and
-// organized in Application Signals. Once deleted, services will no longer be
-// grouped according to the specified configuration rules.
-//
-// This operation is irreversible. After deletion, you must recreate the grouping
-// configuration if you want to restore the same grouping behavior.
+// Deletes the grouping configuration for this account. This removes all custom
+// grouping attribute definitions that were previously configured.
 func (c *Client) DeleteGroupingConfiguration(ctx context.Context, params *DeleteGroupingConfigurationInput, optFns ...func(*Options)) (*DeleteGroupingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteGroupingConfigurationInput{}

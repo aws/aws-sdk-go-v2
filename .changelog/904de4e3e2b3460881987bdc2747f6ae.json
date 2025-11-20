@@ -1,0 +1,8 @@
+{
+    "id": "904de4e3-e2b3-4608-8198-7bdc2747f6ae",
+    "type": "feature",
+    "description": "Add BillingViewHealthStatusException to DescribeBudgetPerformanceHistory and ServiceQuotaExceededException to UpdateBudget for improved error handling with Billing Views.",
+    "modules": [
+        "service/budgets"
+    ]
+}

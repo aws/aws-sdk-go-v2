@@ -338,6 +338,11 @@ func awsRestjson1_serializeOpDocumentCreateDataAutomationProjectInput(v *CreateD
 		ok.String(string(v.ProjectStage))
 	}
 
+	if len(v.ProjectType) > 0 {
+		ok := object.Key("projectType")
+		ok.String(string(v.ProjectType))
+	}
+
 	if v.StandardOutputConfiguration != nil {
 		ok := object.Key("standardOutputConfiguration")
 		if err := awsRestjson1_serializeDocumentStandardOutputConfiguration(v.StandardOutputConfiguration, ok); err != nil {
@@ -1499,6 +1504,13 @@ func awsRestjson1_serializeDocumentAudioOverrideConfiguration(v *types.AudioOver
 		}
 	}
 
+	if v.SensitiveDataConfiguration != nil {
+		ok := object.Key("sensitiveDataConfiguration")
+		if err := awsRestjson1_serializeDocumentSensitiveDataConfiguration(v.SensitiveDataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1773,6 +1785,13 @@ func awsRestjson1_serializeDocumentDocumentOverrideConfiguration(v *types.Docume
 		}
 	}
 
+	if v.SensitiveDataConfiguration != nil {
+		ok := object.Key("sensitiveDataConfiguration")
+		if err := awsRestjson1_serializeDocumentSensitiveDataConfiguration(v.SensitiveDataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Splitter != nil {
 		ok := object.Key("splitter")
 		if err := awsRestjson1_serializeDocumentSplitterConfiguration(v.Splitter, ok); err != nil {
@@ -1912,6 +1931,13 @@ func awsRestjson1_serializeDocumentImageOverrideConfiguration(v *types.ImageOver
 	if v.ModalityProcessing != nil {
 		ok := object.Key("modalityProcessing")
 		if err := awsRestjson1_serializeDocumentModalityProcessingConfiguration(v.ModalityProcessing, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SensitiveDataConfiguration != nil {
+		ok := object.Key("sensitiveDataConfiguration")
+		if err := awsRestjson1_serializeDocumentSensitiveDataConfiguration(v.SensitiveDataConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -2080,6 +2106,73 @@ func awsRestjson1_serializeDocumentOverrideConfiguration(v *types.OverrideConfig
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPIIEntitiesConfiguration(v *types.PIIEntitiesConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PiiEntityTypes != nil {
+		ok := object.Key("piiEntityTypes")
+		if err := awsRestjson1_serializeDocumentPIIEntityTypes(v.PiiEntityTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RedactionMaskMode) > 0 {
+		ok := object.Key("redactionMaskMode")
+		ok.String(string(v.RedactionMaskMode))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPIIEntityTypes(v []types.PIIEntityType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSensitiveDataConfiguration(v *types.SensitiveDataConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DetectionMode) > 0 {
+		ok := object.Key("detectionMode")
+		ok.String(string(v.DetectionMode))
+	}
+
+	if v.DetectionScope != nil {
+		ok := object.Key("detectionScope")
+		if err := awsRestjson1_serializeDocumentSensitiveDataDetectionScope(v.DetectionScope, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PiiEntitiesConfiguration != nil {
+		ok := object.Key("piiEntitiesConfiguration")
+		if err := awsRestjson1_serializeDocumentPIIEntitiesConfiguration(v.PiiEntitiesConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSensitiveDataDetectionScope(v []types.SensitiveDataDetectionScopeType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -2253,6 +2346,13 @@ func awsRestjson1_serializeDocumentVideoOverrideConfiguration(v *types.VideoOver
 	if v.ModalityProcessing != nil {
 		ok := object.Key("modalityProcessing")
 		if err := awsRestjson1_serializeDocumentModalityProcessingConfiguration(v.ModalityProcessing, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SensitiveDataConfiguration != nil {
+		ok := object.Key("sensitiveDataConfiguration")
+		if err := awsRestjson1_serializeDocumentSensitiveDataConfiguration(v.SensitiveDataConfiguration, ok); err != nil {
 			return err
 		}
 	}

@@ -1,0 +1,50 @@
+GetBucketAbac
+	Initialize stack step
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		S3Shared:ARNLookup
+		SetLogger
+		OperationInputValidation
+	Serialize stack step
+		putBucketContext
+		setOperationInput
+		ResolveEndpoint
+		S3:ProcessARNResource
+		S3:ObjectLambdaEndpoint
+		serializeImmutableHostnameBucket
+		OperationSerializer
+		S3:UpdateEndpoint
+		S3:RemoveBucketFromPathMiddleware
+		isExpressUserAgent
+	Build stack step
+		ClientRequestID
+		ComputeContentLength
+		SetCredentialSourceMiddleware
+		UserAgent
+		AddTimeOffsetMiddleware
+		RecursionDetection
+	Finalize stack step
+		DisableAcceptEncodingGzip
+		spanRetryLoop
+		InterceptBeforeRetryLoop
+		Retry
+		InterceptAttempt
+		RetryMetricsHeader
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		ComputePayloadHash
+		SigV4ContentSHA256Header
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ErrorCloseResponseBody
+		CloseResponseBody
+		ResponseErrorWrapper
+		S3MetadataRetriever
+		OperationDeserializer
+		AddTimeOffsetMiddleware
+		RecordResponseTiming
+		RequestResponseLogger

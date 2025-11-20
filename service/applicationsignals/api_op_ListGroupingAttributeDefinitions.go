@@ -12,12 +12,10 @@ import (
 	"time"
 )
 
-// Retrieves the available grouping attribute definitions that can be used to
-// create grouping configurations. These definitions specify the attributes and
-// rules available for organizing services.
-//
-// Use this operation to discover what grouping options are available before
-// creating or updating grouping configurations.
+// Returns the current grouping configuration for this account, including all
+// custom grouping attribute definitions that have been configured. These
+// definitions determine how services are logically grouped based on telemetry
+// attributes, Amazon Web Services tags, or predefined mappings.
 func (c *Client) ListGroupingAttributeDefinitions(ctx context.Context, params *ListGroupingAttributeDefinitionsInput, optFns ...func(*Options)) (*ListGroupingAttributeDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListGroupingAttributeDefinitionsInput{}
@@ -35,8 +33,17 @@ func (c *Client) ListGroupingAttributeDefinitions(ctx context.Context, params *L
 
 type ListGroupingAttributeDefinitionsInput struct {
 
-	// The token for the next set of results. Use this token to retrieve additional
-	// pages of grouping attribute definitions when the result set is large.
+	// The Amazon Web Services account ID to retrieve grouping attribute definitions
+	// for. Use this when accessing grouping configurations from a different account in
+	// cross-account monitoring scenarios.
+	AwsAccountId *string
+
+	// If you are using this operation in a monitoring account, specify true to
+	// include grouping attributes from source accounts in the returned data.
+	IncludeLinkedAccounts bool
+
+	// Include this value, if it was returned by the previous operation, to get the
+	// next set of grouping attribute definitions.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,19 +51,19 @@ type ListGroupingAttributeDefinitionsInput struct {
 
 type ListGroupingAttributeDefinitionsOutput struct {
 
-	// An array of available grouping attribute definitions that can be used to create
-	// grouping configurations.
+	// An array of structures, where each structure contains information about one
+	// grouping attribute definition, including the grouping name, source keys, and
+	// default values.
 	//
 	// This member is required.
 	GroupingAttributeDefinitions []types.GroupingAttributeDefinition
 
-	// The token to use for retrieving the next page of results. This value is present
-	// only if there are more results available than were returned in the current
-	// response.
+	// Include this value in your next use of this API to get the next set of grouping
+	// attribute definitions.
 	NextToken *string
 
-	// The timestamp when the grouping attribute definitions were last updated.
-	// Expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.
+	// The timestamp when the grouping configuration was last updated. When used in a
+	// raw HTTP Query API, it is formatted as epoch time in seconds.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

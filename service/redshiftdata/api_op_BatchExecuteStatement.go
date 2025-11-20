@@ -64,12 +64,11 @@ func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecute
 
 type BatchExecuteStatementInput struct {
 
-	// One or more SQL statements to run.
-	//
-	// The SQL statements are run as a single transaction. They run serially in the
-	// order of the array. Subsequent SQL statements don't start until the previous
-	// statement in the array completes. If any SQL statement fails, then because they
-	// are run as one transaction, all work is rolled back.
+	// One or more SQL statements to run. The SQL statements are run as a single
+	// transaction. They run serially in the order of the array. Subsequent SQL
+	// statements don't start until the previous statement in the array completes. If
+	// any SQL statement fails, then because they are run as one transaction, all work
+	// is rolled back.
 	//
 	// This member is required.
 	Sqls []string

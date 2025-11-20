@@ -2468,6 +2468,11 @@ func awsRestjson1_deserializeOpDocumentDescribeLakeFormationIdentityCenterConfig
 				sv.ResourceShare = ptr.String(jtv)
 			}
 
+		case "ServiceIntegrations":
+			if err := awsRestjson1_deserializeDocumentServiceIntegrationList(&sv.ServiceIntegrations, value); err != nil {
+				return err
+			}
+
 		case "ShareRecipients":
 			if err := awsRestjson1_deserializeDocumentDataLakePrincipalList(&sv.ShareRecipients, value); err != nil {
 				return err
@@ -12014,6 +12019,118 @@ func awsRestjson1_deserializeDocumentPrincipalResourcePermissionsList(v *[]types
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRedshiftConnect(v **types.RedshiftConnect, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedshiftConnect
+	if *v == nil {
+		sv = &types.RedshiftConnect{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Authorization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceAuthorization to be of type string, got %T instead", value)
+				}
+				sv.Authorization = types.ServiceAuthorization(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRedshiftScopeUnion(v *types.RedshiftScopeUnion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.RedshiftScopeUnion
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "RedshiftConnect":
+			var mv types.RedshiftConnect
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRedshiftConnect(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RedshiftScopeUnionMemberRedshiftConnect{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRedshiftServiceIntegrations(v *[]types.RedshiftScopeUnion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RedshiftScopeUnion
+	if *v == nil {
+		cv = []types.RedshiftScopeUnion{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RedshiftScopeUnion
+		if err := awsRestjson1_deserializeDocumentRedshiftScopeUnion(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12410,6 +12527,76 @@ func awsRestjson1_deserializeDocumentScopeTargets(v *[]string, value interface{}
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceIntegrationList(v *[]types.ServiceIntegrationUnion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceIntegrationUnion
+	if *v == nil {
+		cv = []types.ServiceIntegrationUnion{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceIntegrationUnion
+		if err := awsRestjson1_deserializeDocumentServiceIntegrationUnion(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceIntegrationUnion(v *types.ServiceIntegrationUnion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ServiceIntegrationUnion
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "Redshift":
+			var mv []types.RedshiftScopeUnion
+			if err := awsRestjson1_deserializeDocumentRedshiftServiceIntegrations(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ServiceIntegrationUnionMemberRedshift{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

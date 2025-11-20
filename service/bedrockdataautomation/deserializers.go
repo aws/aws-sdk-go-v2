@@ -2756,6 +2756,11 @@ func awsRestjson1_deserializeDocumentAudioOverrideConfiguration(v **types.AudioO
 				return err
 			}
 
+		case "sensitiveDataConfiguration":
+			if err := awsRestjson1_deserializeDocumentSensitiveDataConfiguration(&sv.SensitiveDataConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3491,6 +3496,15 @@ func awsRestjson1_deserializeDocumentDataAutomationProject(v **types.DataAutomat
 				sv.ProjectStage = types.DataAutomationProjectStage(jtv)
 			}
 
+		case "projectType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataAutomationProjectType to be of type string, got %T instead", value)
+				}
+				sv.ProjectType = types.DataAutomationProjectType(jtv)
+			}
+
 		case "standardOutputConfiguration":
 			if err := awsRestjson1_deserializeDocumentStandardOutputConfiguration(&sv.StandardOutputConfiguration, value); err != nil {
 				return err
@@ -3608,6 +3622,15 @@ func awsRestjson1_deserializeDocumentDataAutomationProjectSummary(v **types.Data
 					return fmt.Errorf("expected DataAutomationProjectStage to be of type string, got %T instead", value)
 				}
 				sv.ProjectStage = types.DataAutomationProjectStage(jtv)
+			}
+
+		case "projectType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataAutomationProjectType to be of type string, got %T instead", value)
+				}
+				sv.ProjectType = types.DataAutomationProjectType(jtv)
 			}
 
 		default:
@@ -3911,6 +3934,11 @@ func awsRestjson1_deserializeDocumentDocumentOverrideConfiguration(v **types.Doc
 				return err
 			}
 
+		case "sensitiveDataConfiguration":
+			if err := awsRestjson1_deserializeDocumentSensitiveDataConfiguration(&sv.SensitiveDataConfiguration, value); err != nil {
+				return err
+			}
+
 		case "splitter":
 			if err := awsRestjson1_deserializeDocumentSplitterConfiguration(&sv.Splitter, value); err != nil {
 				return err
@@ -4197,6 +4225,11 @@ func awsRestjson1_deserializeDocumentImageOverrideConfiguration(v **types.ImageO
 		switch key {
 		case "modalityProcessing":
 			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
+				return err
+			}
+
+		case "sensitiveDataConfiguration":
+			if err := awsRestjson1_deserializeDocumentSensitiveDataConfiguration(&sv.SensitiveDataConfiguration, value); err != nil {
 				return err
 			}
 
@@ -4611,6 +4644,87 @@ func awsRestjson1_deserializeDocumentOverrideConfiguration(v **types.OverrideCon
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPIIEntitiesConfiguration(v **types.PIIEntitiesConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PIIEntitiesConfiguration
+	if *v == nil {
+		sv = &types.PIIEntitiesConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "piiEntityTypes":
+			if err := awsRestjson1_deserializeDocumentPIIEntityTypes(&sv.PiiEntityTypes, value); err != nil {
+				return err
+			}
+
+		case "redactionMaskMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PIIRedactionMaskMode to be of type string, got %T instead", value)
+				}
+				sv.RedactionMaskMode = types.PIIRedactionMaskMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPIIEntityTypes(v *[]types.PIIEntityType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PIIEntityType
+	if *v == nil {
+		cv = []types.PIIEntityType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PIIEntityType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PIIEntityType to be of type string, got %T instead", value)
+			}
+			col = types.PIIEntityType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4648,6 +4762,92 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSensitiveDataConfiguration(v **types.SensitiveDataConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SensitiveDataConfiguration
+	if *v == nil {
+		sv = &types.SensitiveDataConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "detectionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveDataDetectionMode to be of type string, got %T instead", value)
+				}
+				sv.DetectionMode = types.SensitiveDataDetectionMode(jtv)
+			}
+
+		case "detectionScope":
+			if err := awsRestjson1_deserializeDocumentSensitiveDataDetectionScope(&sv.DetectionScope, value); err != nil {
+				return err
+			}
+
+		case "piiEntitiesConfiguration":
+			if err := awsRestjson1_deserializeDocumentPIIEntitiesConfiguration(&sv.PiiEntitiesConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSensitiveDataDetectionScope(v *[]types.SensitiveDataDetectionScopeType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SensitiveDataDetectionScopeType
+	if *v == nil {
+		cv = []types.SensitiveDataDetectionScopeType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SensitiveDataDetectionScopeType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SensitiveDataDetectionScopeType to be of type string, got %T instead", value)
+			}
+			col = types.SensitiveDataDetectionScopeType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5259,6 +5459,11 @@ func awsRestjson1_deserializeDocumentVideoOverrideConfiguration(v **types.VideoO
 		switch key {
 		case "modalityProcessing":
 			if err := awsRestjson1_deserializeDocumentModalityProcessingConfiguration(&sv.ModalityProcessing, value); err != nil {
+				return err
+			}
+
+		case "sensitiveDataConfiguration":
+			if err := awsRestjson1_deserializeDocumentSensitiveDataConfiguration(&sv.SensitiveDataConfiguration, value); err != nil {
 				return err
 			}
 

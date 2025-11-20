@@ -24,8 +24,10 @@ import (
 // have the kinesis:TagResource permission for the consumer that will be
 // registered. Tags will take effect from the CREATING status of the consumer.
 //
-// You can register up to 20 consumers per stream. A given consumer can only be
-// registered with one stream at a time.
+// With On-demand Advantage streams, you can register up to 50 consumers per
+// stream to use Enhanced Fan-out. With On-demand Standard and Provisioned streams,
+// you can register up to 20 consumers per stream to use Enhanced Fan-out. A given
+// consumer can only be registered with one stream at a time.
 //
 // For an example of how to use this operation, see [Enhanced Fan-Out Using the Kinesis Data Streams API].
 //

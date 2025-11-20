@@ -1,0 +1,8 @@
+{
+    "id": "06555d25-a281-4eb6-bcac-3d82a8343daa",
+    "type": "feature",
+    "description": "Added training plan support for inference endpoints. Added HyperPod task governance with accelerator partition-based quota allocation. Added BatchRebootClusterNodes and BatchReplaceClusterNodes APIs. Updated ListClusterNodes to include privateDnsHostName.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

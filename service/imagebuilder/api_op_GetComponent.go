@@ -43,6 +43,9 @@ type GetComponentOutput struct {
 	// The component object specified in the request.
 	Component *types.Component
 
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

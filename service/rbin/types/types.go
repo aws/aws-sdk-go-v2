@@ -42,8 +42,12 @@ type RetentionPeriod struct {
 	// This member is required.
 	RetentionPeriodUnit RetentionPeriodUnit
 
-	// The period value for which the retention rule is to retain resources. The
-	// period is measured using the unit specified for RetentionPeriodUnit.
+	// The period value for which the retention rule is to retain resources, measured
+	// in days. The supported retention periods are:
+	//
+	//   - EBS volumes: 1 - 7 days
+	//
+	//   - EBS snapshots and EBS-backed AMIs: 1 - 365 days
 	//
 	// This member is required.
 	RetentionPeriodValue *int32
@@ -109,7 +113,7 @@ type Tag struct {
 type UnlockDelay struct {
 
 	// The unit of time in which to measure the unlock delay. Currently, the unlock
-	// delay can be measure only in days.
+	// delay can be measured only in days.
 	//
 	// This member is required.
 	UnlockDelayUnit UnlockDelayUnit

@@ -967,8 +967,10 @@ const (
 	ByoipCidrStateDeprovisioned                      ByoipCidrState = "deprovisioned"
 	ByoipCidrStateFailedDeprovision                  ByoipCidrState = "failed-deprovision"
 	ByoipCidrStateFailedProvision                    ByoipCidrState = "failed-provision"
+	ByoipCidrStatePendingAdvertising                 ByoipCidrState = "pending-advertising"
 	ByoipCidrStatePendingDeprovision                 ByoipCidrState = "pending-deprovision"
 	ByoipCidrStatePendingProvision                   ByoipCidrState = "pending-provision"
+	ByoipCidrStatePendingWithdrawal                  ByoipCidrState = "pending-withdrawal"
 	ByoipCidrStateProvisioned                        ByoipCidrState = "provisioned"
 	ByoipCidrStateProvisionedNotPubliclyAdvertisable ByoipCidrState = "provisioned-not-publicly-advertisable"
 )
@@ -983,8 +985,10 @@ func (ByoipCidrState) Values() []ByoipCidrState {
 		"deprovisioned",
 		"failed-deprovision",
 		"failed-provision",
+		"pending-advertising",
 		"pending-deprovision",
 		"pending-provision",
+		"pending-withdrawal",
 		"provisioned",
 		"provisioned-not-publicly-advertisable",
 	}
@@ -2333,6 +2337,49 @@ func (EnaSupport) Values() []EnaSupport {
 		"unsupported",
 		"supported",
 		"required",
+	}
+}
+
+type EncryptionStateValue string
+
+// Enum values for EncryptionStateValue
+const (
+	EncryptionStateValueEnabling  EncryptionStateValue = "enabling"
+	EncryptionStateValueEnabled   EncryptionStateValue = "enabled"
+	EncryptionStateValueDisabling EncryptionStateValue = "disabling"
+	EncryptionStateValueDisabled  EncryptionStateValue = "disabled"
+)
+
+// Values returns all known values for EncryptionStateValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionStateValue) Values() []EncryptionStateValue {
+	return []EncryptionStateValue{
+		"enabling",
+		"enabled",
+		"disabling",
+		"disabled",
+	}
+}
+
+type EncryptionSupportOptionValue string
+
+// Enum values for EncryptionSupportOptionValue
+const (
+	EncryptionSupportOptionValueEnable  EncryptionSupportOptionValue = "enable"
+	EncryptionSupportOptionValueDisable EncryptionSupportOptionValue = "disable"
+)
+
+// Values returns all known values for EncryptionSupportOptionValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionSupportOptionValue) Values() []EncryptionSupportOptionValue {
+	return []EncryptionSupportOptionValue{
+		"enable",
+		"disable",
 	}
 }
 
@@ -6438,6 +6485,7 @@ const (
 	IpamPoolAllocationResourceTypeCustom            IpamPoolAllocationResourceType = "custom"
 	IpamPoolAllocationResourceTypeSubnet            IpamPoolAllocationResourceType = "subnet"
 	IpamPoolAllocationResourceTypeEip               IpamPoolAllocationResourceType = "eip"
+	IpamPoolAllocationResourceTypeAnycastIpList     IpamPoolAllocationResourceType = "anycast-ip-list"
 )
 
 // Values returns all known values for IpamPoolAllocationResourceType. Note that
@@ -6453,6 +6501,7 @@ func (IpamPoolAllocationResourceType) Values() []IpamPoolAllocationResourceType 
 		"custom",
 		"subnet",
 		"eip",
+		"anycast-ip-list",
 	}
 }
 
@@ -6460,7 +6509,8 @@ type IpamPoolAwsService string
 
 // Enum values for IpamPoolAwsService
 const (
-	IpamPoolAwsServiceEc2 IpamPoolAwsService = "ec2"
+	IpamPoolAwsServiceEc2            IpamPoolAwsService = "ec2"
+	IpamPoolAwsServiceGlobalServices IpamPoolAwsService = "global-services"
 )
 
 // Values returns all known values for IpamPoolAwsService. Note that this can be
@@ -6470,6 +6520,7 @@ const (
 func (IpamPoolAwsService) Values() []IpamPoolAwsService {
 	return []IpamPoolAwsService{
 		"ec2",
+		"global-services",
 	}
 }
 
@@ -6781,6 +6832,7 @@ const (
 	IpamPublicAddressAwsServiceS2sVpn     IpamPublicAddressAwsService = "site-to-site-vpn"
 	IpamPublicAddressAwsServiceEc2Lb      IpamPublicAddressAwsService = "load-balancer"
 	IpamPublicAddressAwsServiceAga        IpamPublicAddressAwsService = "global-accelerator"
+	IpamPublicAddressAwsServiceCloudfront IpamPublicAddressAwsService = "cloudfront"
 	IpamPublicAddressAwsServiceOther      IpamPublicAddressAwsService = "other"
 )
 
@@ -6798,6 +6850,7 @@ func (IpamPublicAddressAwsService) Values() []IpamPublicAddressAwsService {
 		"site-to-site-vpn",
 		"load-balancer",
 		"global-accelerator",
+		"cloudfront",
 		"other",
 	}
 }
@@ -6812,6 +6865,7 @@ const (
 	IpamPublicAddressTypeAmazonOwnedContig   IpamPublicAddressType = "amazon-owned-contig"
 	IpamPublicAddressTypeByoip               IpamPublicAddressType = "byoip"
 	IpamPublicAddressTypeEc2PublicIp         IpamPublicAddressType = "ec2-public-ip"
+	IpamPublicAddressTypeAnycastIpListIp     IpamPublicAddressType = "anycast-ip-list-ip"
 )
 
 // Values returns all known values for IpamPublicAddressType. Note that this can
@@ -6826,6 +6880,7 @@ func (IpamPublicAddressType) Values() []IpamPublicAddressType {
 		"amazon-owned-contig",
 		"byoip",
 		"ec2-public-ip",
+		"anycast-ip-list-ip",
 	}
 }
 
@@ -6933,6 +6988,7 @@ const (
 	IpamResourceTypePublicIpv4Pool IpamResourceType = "public-ipv4-pool"
 	IpamResourceTypeIpv6Pool       IpamResourceType = "ipv6-pool"
 	IpamResourceTypeEni            IpamResourceType = "eni"
+	IpamResourceTypeAnycastIpList  IpamResourceType = "anycast-ip-list"
 )
 
 // Values returns all known values for IpamResourceType. Note that this can be
@@ -6947,6 +7003,7 @@ func (IpamResourceType) Values() []IpamResourceType {
 		"public-ipv4-pool",
 		"ipv6-pool",
 		"eni",
+		"anycast-ip-list",
 	}
 }
 
@@ -9005,6 +9062,7 @@ const (
 	ResourceTypeTransitGatewayConnectPeer                              ResourceType = "transit-gateway-connect-peer"
 	ResourceTypeTransitGatewayMulticastDomain                          ResourceType = "transit-gateway-multicast-domain"
 	ResourceTypeTransitGatewayPolicyTable                              ResourceType = "transit-gateway-policy-table"
+	ResourceTypeTransitGatewayMeteringPolicy                           ResourceType = "transit-gateway-metering-policy"
 	ResourceTypeTransitGatewayRouteTable                               ResourceType = "transit-gateway-route-table"
 	ResourceTypeTransitGatewayRouteTableAnnouncement                   ResourceType = "transit-gateway-route-table-announcement"
 	ResourceTypeVolume                                                 ResourceType = "volume"
@@ -9027,6 +9085,7 @@ const (
 	ResourceTypeVerifiedAccessTrustProvider                            ResourceType = "verified-access-trust-provider"
 	ResourceTypeVpnConnectionDeviceType                                ResourceType = "vpn-connection-device-type"
 	ResourceTypeVpcBlockPublicAccessExclusion                          ResourceType = "vpc-block-public-access-exclusion"
+	ResourceTypeVpcEncryptionControl                                   ResourceType = "vpc-encryption-control"
 	ResourceTypeRouteServer                                            ResourceType = "route-server"
 	ResourceTypeRouteServerEndpoint                                    ResourceType = "route-server-endpoint"
 	ResourceTypeRouteServerPeer                                        ResourceType = "route-server-peer"
@@ -9115,6 +9174,7 @@ func (ResourceType) Values() []ResourceType {
 		"transit-gateway-connect-peer",
 		"transit-gateway-multicast-domain",
 		"transit-gateway-policy-table",
+		"transit-gateway-metering-policy",
 		"transit-gateway-route-table",
 		"transit-gateway-route-table-announcement",
 		"volume",
@@ -9137,6 +9197,7 @@ func (ResourceType) Values() []ResourceType {
 		"verified-access-trust-provider",
 		"vpn-connection-device-type",
 		"vpc-block-public-access-exclusion",
+		"vpc-encryption-control",
 		"route-server",
 		"route-server-endpoint",
 		"route-server-peer",
@@ -10765,6 +10826,74 @@ func (TransitGatewayConnectPeerState) Values() []TransitGatewayConnectPeerState 
 	}
 }
 
+type TransitGatewayMeteringPayerType string
+
+// Enum values for TransitGatewayMeteringPayerType
+const (
+	TransitGatewayMeteringPayerTypeSourceAttachmentOwner      TransitGatewayMeteringPayerType = "source-attachment-owner"
+	TransitGatewayMeteringPayerTypeDestinationAttachmentOwner TransitGatewayMeteringPayerType = "destination-attachment-owner"
+	TransitGatewayMeteringPayerTypeTransitGatewayOwner        TransitGatewayMeteringPayerType = "transit-gateway-owner"
+)
+
+// Values returns all known values for TransitGatewayMeteringPayerType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayMeteringPayerType) Values() []TransitGatewayMeteringPayerType {
+	return []TransitGatewayMeteringPayerType{
+		"source-attachment-owner",
+		"destination-attachment-owner",
+		"transit-gateway-owner",
+	}
+}
+
+type TransitGatewayMeteringPolicyEntryState string
+
+// Enum values for TransitGatewayMeteringPolicyEntryState
+const (
+	TransitGatewayMeteringPolicyEntryStateAvailable TransitGatewayMeteringPolicyEntryState = "available"
+	TransitGatewayMeteringPolicyEntryStateDeleted   TransitGatewayMeteringPolicyEntryState = "deleted"
+)
+
+// Values returns all known values for TransitGatewayMeteringPolicyEntryState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayMeteringPolicyEntryState) Values() []TransitGatewayMeteringPolicyEntryState {
+	return []TransitGatewayMeteringPolicyEntryState{
+		"available",
+		"deleted",
+	}
+}
+
+type TransitGatewayMeteringPolicyState string
+
+// Enum values for TransitGatewayMeteringPolicyState
+const (
+	TransitGatewayMeteringPolicyStateAvailable TransitGatewayMeteringPolicyState = "available"
+	TransitGatewayMeteringPolicyStateDeleted   TransitGatewayMeteringPolicyState = "deleted"
+	TransitGatewayMeteringPolicyStatePending   TransitGatewayMeteringPolicyState = "pending"
+	TransitGatewayMeteringPolicyStateModifying TransitGatewayMeteringPolicyState = "modifying"
+	TransitGatewayMeteringPolicyStateDeleting  TransitGatewayMeteringPolicyState = "deleting"
+)
+
+// Values returns all known values for TransitGatewayMeteringPolicyState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayMeteringPolicyState) Values() []TransitGatewayMeteringPolicyState {
+	return []TransitGatewayMeteringPolicyState{
+		"available",
+		"deleted",
+		"pending",
+		"modifying",
+		"deleting",
+	}
+}
+
 type TransitGatewayMulitcastDomainAssociationState string
 
 // Enum values for TransitGatewayMulitcastDomainAssociationState
@@ -11637,6 +11766,26 @@ func (VpcEncryptionControlExclusionState) Values() []VpcEncryptionControlExclusi
 		"enabled",
 		"disabling",
 		"disabled",
+	}
+}
+
+type VpcEncryptionControlExclusionStateInput string
+
+// Enum values for VpcEncryptionControlExclusionStateInput
+const (
+	VpcEncryptionControlExclusionStateInputEnable  VpcEncryptionControlExclusionStateInput = "enable"
+	VpcEncryptionControlExclusionStateInputDisable VpcEncryptionControlExclusionStateInput = "disable"
+)
+
+// Values returns all known values for VpcEncryptionControlExclusionStateInput.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEncryptionControlExclusionStateInput) Values() []VpcEncryptionControlExclusionStateInput {
+	return []VpcEncryptionControlExclusionStateInput{
+		"enable",
+		"disable",
 	}
 }
 

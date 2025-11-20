@@ -150,6 +150,46 @@ func (m *validateOpBatchDescribeModelPackage) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchRebootClusterNodes struct {
+}
+
+func (*validateOpBatchRebootClusterNodes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchRebootClusterNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchRebootClusterNodesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchRebootClusterNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchReplaceClusterNodes struct {
+}
+
+func (*validateOpBatchReplaceClusterNodes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchReplaceClusterNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchReplaceClusterNodesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchReplaceClusterNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAction struct {
 }
 
@@ -6118,6 +6158,14 @@ func addOpBatchDescribeModelPackageValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpBatchDescribeModelPackage{}, middleware.After)
 }
 
+func addOpBatchRebootClusterNodesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchRebootClusterNodes{}, middleware.After)
+}
+
+func addOpBatchReplaceClusterNodesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchReplaceClusterNodes{}, middleware.After)
+}
+
 func addOpCreateActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAction{}, middleware.After)
 }
@@ -7304,6 +7352,24 @@ func addOpUpdateWorkforceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkteam{}, middleware.After)
+}
+
+func validateAcceleratorPartitionConfig(v *types.AcceleratorPartitionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceleratorPartitionConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Count == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Count"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateActionSource(v *types.ActionSource) error {
@@ -8862,6 +8928,11 @@ func validateComputeQuotaResourceConfig(v *types.ComputeQuotaResourceConfig) err
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeQuotaResourceConfig"}
 	if len(v.InstanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.AcceleratorPartition != nil {
+		if err := validateAcceleratorPartitionConfig(v.AcceleratorPartition); err != nil {
+			invalidParams.AddNested("AcceleratorPartition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14715,6 +14786,36 @@ func validateOpBatchDescribeModelPackageInput(v *BatchDescribeModelPackageInput)
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDescribeModelPackageInput"}
 	if v.ModelPackageArnList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageArnList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchRebootClusterNodesInput(v *BatchRebootClusterNodesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchRebootClusterNodesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchReplaceClusterNodesInput(v *BatchReplaceClusterNodesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchReplaceClusterNodesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

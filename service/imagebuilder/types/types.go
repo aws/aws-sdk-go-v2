@@ -1702,6 +1702,27 @@ type InstanceMetadataOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The resource ARNs with different wildcard variations of semantic versioning.
+type LatestVersionReferences struct {
+
+	// The latest version Amazon Resource Name (ARN) with the same major version of
+	// the Image Builder resource.
+	LatestMajorVersionArn *string
+
+	// The latest version Amazon Resource Name (ARN) with the same minor version of
+	// the Image Builder resource.
+	LatestMinorVersionArn *string
+
+	// The latest version Amazon Resource Name (ARN) with the same patch version of
+	// the Image Builder resource.
+	LatestPatchVersionArn *string
+
+	// The latest version Amazon Resource Name (ARN) of the Image Builder resource.
+	LatestVersionArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration for a launch permission. The launch permission
 // modification request is sent to the [Amazon EC2 ModifyImageAttribute]API on behalf of the user for each Region
 // they have selected to distribute the AMI. To make an AMI public, set the launch
@@ -2636,6 +2657,9 @@ type WorkflowExecutionMetadata struct {
 	// The name of the test group that included the test workflow resource at runtime.
 	ParallelGroup *string
 
+	// Indicates retry status for this runtime instance of the workflow.
+	Retried *bool
+
 	// The timestamp when the runtime instance of this workflow started.
 	StartTime *string
 
@@ -2741,7 +2765,7 @@ type WorkflowStepExecution struct {
 	// version.
 	StepExecutionId *string
 
-	// The ARN of the workflow resource that ran.
+	// The Amazon Resource Name (ARN) of the workflow resource that ran.
 	WorkflowBuildVersionArn *string
 
 	// Uniquely identifies the runtime instance of the workflow that contains the

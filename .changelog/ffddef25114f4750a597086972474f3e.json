@@ -1,0 +1,8 @@
+{
+    "id": "ffddef25-114f-4750-a597-086972474f3e",
+    "type": "feature",
+    "description": "Added new APIs for Billing Transfer, new policy type INSPECTOR_POLICY, and allow an account to transfer between organizations",
+    "modules": [
+        "service/organizations"
+    ]
+}

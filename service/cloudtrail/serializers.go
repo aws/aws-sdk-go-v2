@@ -3775,6 +3775,38 @@ func awsAwsjson11_serializeDocumentAdvancedFieldSelectors(v []types.AdvancedFiel
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAggregationConfiguration(v *types.AggregationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EventCategory) > 0 {
+		ok := object.Key("EventCategory")
+		ok.String(string(v.EventCategory))
+	}
+
+	if v.Templates != nil {
+		ok := object.Key("Templates")
+		if err := awsAwsjson11_serializeDocumentTemplates(v.Templates, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAggregationConfigurations(v []types.AggregationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAggregationConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentContextKeySelector(v *types.ContextKeySelector, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4238,6 +4270,17 @@ func awsAwsjson11_serializeDocumentTagsList(v []types.Tag, value smithyjson.Valu
 		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTemplates(v []types.Template, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -4706,6 +4749,11 @@ func awsAwsjson11_serializeOpDocumentGetEventConfigurationInput(v *GetEventConfi
 	if v.EventDataStore != nil {
 		ok := object.Key("EventDataStore")
 		ok.String(*v.EventDataStore)
+	}
+
+	if v.TrailName != nil {
+		ok := object.Key("TrailName")
+		ok.String(*v.TrailName)
 	}
 
 	return nil
@@ -5181,6 +5229,13 @@ func awsAwsjson11_serializeOpDocumentPutEventConfigurationInput(v *PutEventConfi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AggregationConfigurations != nil {
+		ok := object.Key("AggregationConfigurations")
+		if err := awsAwsjson11_serializeDocumentAggregationConfigurations(v.AggregationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ContextKeySelectors != nil {
 		ok := object.Key("ContextKeySelectors")
 		if err := awsAwsjson11_serializeDocumentContextKeySelectors(v.ContextKeySelectors, ok); err != nil {
@@ -5196,6 +5251,11 @@ func awsAwsjson11_serializeOpDocumentPutEventConfigurationInput(v *PutEventConfi
 	if len(v.MaxEventSize) > 0 {
 		ok := object.Key("MaxEventSize")
 		ok.String(string(v.MaxEventSize))
+	}
+
+	if v.TrailName != nil {
+		ok := object.Key("TrailName")
+		ok.String(*v.TrailName)
 	}
 
 	return nil

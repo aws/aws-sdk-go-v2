@@ -1,0 +1,8 @@
+{
+    "id": "b40a2985-907a-4245-9daf-9ae7d7c8fa23",
+    "type": "feature",
+    "description": "Added support for customer-managed KMS key (CMK) for encryption for import private key certificate. Additionally added Amazon SageMaker Lakehouse endpoint used for zero-ETL integrations with data warehouses.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

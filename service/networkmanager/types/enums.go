@@ -17,6 +17,8 @@ const (
 	AttachmentErrorCodeDirectConnectGatewayNotFound            AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NOT_FOUND"
 	AttachmentErrorCodeDirectConnectGatewayExistingAttachments AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS"
 	AttachmentErrorCodeDirectConnectGatewayNoPrivateVif        AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"
+	AttachmentErrorCodeVpnExistingAssociations                 AttachmentErrorCode = "VPN_EXISTING_ASSOCIATIONS"
+	AttachmentErrorCodeVpcUnsupportedFeatures                  AttachmentErrorCode = "VPC_UNSUPPORTED_FEATURES"
 )
 
 // Values returns all known values for AttachmentErrorCode. Note that this can be
@@ -36,6 +38,8 @@ func (AttachmentErrorCode) Values() []AttachmentErrorCode {
 		"DIRECT_CONNECT_GATEWAY_NOT_FOUND",
 		"DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS",
 		"DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF",
+		"VPN_EXISTING_ASSOCIATIONS",
+		"VPC_UNSUPPORTED_FEATURES",
 	}
 }
 
@@ -172,16 +176,20 @@ type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeCoreNetworkSegment              ChangeType = "CORE_NETWORK_SEGMENT"
-	ChangeTypeNetworkFunctionGroup            ChangeType = "NETWORK_FUNCTION_GROUP"
-	ChangeTypeCoreNetworkEdge                 ChangeType = "CORE_NETWORK_EDGE"
-	ChangeTypeAttachmentMapping               ChangeType = "ATTACHMENT_MAPPING"
-	ChangeTypeAttachmentRoutePropagation      ChangeType = "ATTACHMENT_ROUTE_PROPAGATION"
-	ChangeTypeAttachmentRouteStatic           ChangeType = "ATTACHMENT_ROUTE_STATIC"
-	ChangeTypeCoreNetworkConfiguration        ChangeType = "CORE_NETWORK_CONFIGURATION"
-	ChangeTypeSegmentsConfiguration           ChangeType = "SEGMENTS_CONFIGURATION"
-	ChangeTypeSegmentActionsConfiguration     ChangeType = "SEGMENT_ACTIONS_CONFIGURATION"
-	ChangeTypeAttachmentPoliciesConfiguration ChangeType = "ATTACHMENT_POLICIES_CONFIGURATION"
+	ChangeTypeCoreNetworkSegment                 ChangeType = "CORE_NETWORK_SEGMENT"
+	ChangeTypeNetworkFunctionGroup               ChangeType = "NETWORK_FUNCTION_GROUP"
+	ChangeTypeCoreNetworkEdge                    ChangeType = "CORE_NETWORK_EDGE"
+	ChangeTypeAttachmentMapping                  ChangeType = "ATTACHMENT_MAPPING"
+	ChangeTypeAttachmentRoutePropagation         ChangeType = "ATTACHMENT_ROUTE_PROPAGATION"
+	ChangeTypeAttachmentRouteStatic              ChangeType = "ATTACHMENT_ROUTE_STATIC"
+	ChangeTypeRoutingPolicy                      ChangeType = "ROUTING_POLICY"
+	ChangeTypeRoutingPolicySegmentAssociation    ChangeType = "ROUTING_POLICY_SEGMENT_ASSOCIATION"
+	ChangeTypeRoutingPolicyEdgeAssociation       ChangeType = "ROUTING_POLICY_EDGE_ASSOCIATION"
+	ChangeTypeRoutingPolicyAttachmentAssociation ChangeType = "ROUTING_POLICY_ATTACHMENT_ASSOCIATION"
+	ChangeTypeCoreNetworkConfiguration           ChangeType = "CORE_NETWORK_CONFIGURATION"
+	ChangeTypeSegmentsConfiguration              ChangeType = "SEGMENTS_CONFIGURATION"
+	ChangeTypeSegmentActionsConfiguration        ChangeType = "SEGMENT_ACTIONS_CONFIGURATION"
+	ChangeTypeAttachmentPoliciesConfiguration    ChangeType = "ATTACHMENT_POLICIES_CONFIGURATION"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -196,6 +204,10 @@ func (ChangeType) Values() []ChangeType {
 		"ATTACHMENT_MAPPING",
 		"ATTACHMENT_ROUTE_PROPAGATION",
 		"ATTACHMENT_ROUTE_STATIC",
+		"ROUTING_POLICY",
+		"ROUTING_POLICY_SEGMENT_ASSOCIATION",
+		"ROUTING_POLICY_EDGE_ASSOCIATION",
+		"ROUTING_POLICY_ATTACHMENT_ASSOCIATION",
 		"CORE_NETWORK_CONFIGURATION",
 		"SEGMENTS_CONFIGURATION",
 		"SEGMENT_ACTIONS_CONFIGURATION",
@@ -697,6 +709,25 @@ func (RouteType) Values() []RouteType {
 	return []RouteType{
 		"PROPAGATED",
 		"STATIC",
+	}
+}
+
+type RoutingPolicyDirection string
+
+// Enum values for RoutingPolicyDirection
+const (
+	RoutingPolicyDirectionInbound  RoutingPolicyDirection = "inbound"
+	RoutingPolicyDirectionOutbound RoutingPolicyDirection = "outbound"
+)
+
+// Values returns all known values for RoutingPolicyDirection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingPolicyDirection) Values() []RoutingPolicyDirection {
+	return []RoutingPolicyDirection{
+		"inbound",
+		"outbound",
 	}
 }
 

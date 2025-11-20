@@ -172,6 +172,12 @@ type UpdateAutoScalingGroupInput struct {
 	// [Health checks for instances in an Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
 	HealthCheckType *string
 
+	//  The instance lifecycle policy for the Auto Scaling group. Use this to add,
+	// modify, or remove lifecycle policies that control instance behavior when an
+	// instance transitions through its lifecycle states. Configure retention triggers
+	// to specify when to preserve instances for manual intervention.
+	InstanceLifecyclePolicy *types.InstanceLifecyclePolicy
+
 	// An instance maintenance policy. For more information, see [Set instance maintenance policy] in the Amazon EC2
 	// Auto Scaling User Guide.
 	//

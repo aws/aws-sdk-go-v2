@@ -82,6 +82,16 @@ type Certificate struct {
 	// The key length of the cryptographic algorithm being used.
 	KeyLength *int32
 
+	// An KMS key identifier that is used to encrypt the certificate.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then DMS uses your
+	// default encryption key.
+	//
+	// KMS creates the default encryption key for your Amazon Web Services account.
+	// Your Amazon Web Services account has a different default encryption key for each
+	// Amazon Web Services Region.
+	KmsKeyId *string
+
 	// The signing algorithm for the certificate.
 	SigningAlgorithm *string
 
@@ -916,6 +926,12 @@ type Endpoint struct {
 	// IBMDb2Settings structure.
 	IBMDb2Settings *IBMDb2Settings
 
+	// Indicates whether the endpoint is read-only. When set to true , this endpoint is
+	// managed by DMS as part of a zero-ETL integration and cannot be modified or
+	// deleted directly. You can only modify or delete read-only endpoints through
+	// their associated zero-ETL integration.
+	IsReadOnly *bool
+
 	// The settings for the Apache Kafka target endpoint. For more information, see
 	// the KafkaSettings structure.
 	KafkaSettings *KafkaSettings
@@ -934,6 +950,11 @@ type Endpoint struct {
 	// Your Amazon Web Services account has a different default encryption key for each
 	// Amazon Web Services Region.
 	KmsKeyId *string
+
+	// Settings in JSON format for the target Lakehouse endpoint. This parameter
+	// applies to endpoints that are automatically created by DMS for a Lakehouse data
+	// warehouse as part of a zero-ETL integration.
+	LakehouseSettings *LakehouseSettings
 
 	// The settings for the Microsoft SQL Server source and target endpoint. For more
 	// information, see the MicrosoftSQLServerSettings structure.
@@ -1742,6 +1763,19 @@ type KinesisSettings struct {
 
 	// Specifies using the large integer value with Kinesis.
 	UseLargeIntegerValue *bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a Lakehouse endpoint. This endpoint type is
+// used for zero-ETL integrations with Lakehouse data warehouses.
+type LakehouseSettings struct {
+
+	// The Amazon Resource Name (ARN) of the Lakehouse resource that serves as the
+	// target for this endpoint.
+	//
+	// This member is required.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -3652,6 +3686,12 @@ type Replication struct {
 	// Error and other information about why a serverless replication failed.
 	FailureMessages []string
 
+	// Indicates whether the serverless replication is read-only. When set to true ,
+	// this replication is managed by DMS as part of a zero-ETL integration and cannot
+	// be modified or deleted directly. You can only modify or delete read-only
+	// replications through their associated zero-ETL integration.
+	IsReadOnly *bool
+
 	// The status output of premigration assessment in describe-replications.
 	PremigrationAssessmentStatuses []PremigrationAssessmentStatus
 
@@ -3747,6 +3787,13 @@ type ReplicationConfig struct {
 
 	// Configuration parameters for provisioning an DMS serverless replication.
 	ComputeConfig *ComputeConfig
+
+	// Indicates whether the replication configuration is read-only. When set to true ,
+	// this replication configuration is managed by DMS as part of a zero-ETL
+	// integration and cannot be modified or deleted directly. You can only modify or
+	// delete read-only replication configurations through their associated zero-ETL
+	// integration.
+	IsReadOnly *bool
 
 	// The Amazon Resource Name (ARN) of this DMS Serverless replication configuration.
 	ReplicationConfigArn *string
@@ -4034,6 +4081,12 @@ type ReplicationStats struct {
 // Describes a subnet group in response to a request by the
 // DescribeReplicationSubnetGroups operation.
 type ReplicationSubnetGroup struct {
+
+	// Indicates whether the replication subnet group is read-only. When set to true ,
+	// this subnet group is managed by DMS as part of a zero-ETL integration and cannot
+	// be modified or deleted directly. You can only modify or delete read-only subnet
+	// groups through their associated zero-ETL integration.
+	IsReadOnly *bool
 
 	// A description for the replication subnet group.
 	ReplicationSubnetGroupDescription *string

@@ -1,0 +1,8 @@
+{
+    "id": "5bea5311-9bda-4db7-a87b-028c6c31fe94",
+    "type": "feature",
+    "description": "Bedrock AgentCore Memory release for redriving memory extraction jobs (StartMemoryExtractionJob and ListMemoryExtractionJob)",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

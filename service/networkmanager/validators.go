@@ -189,6 +189,26 @@ func (m *validateOpCreateCoreNetwork) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCoreNetworkPrefixListAssociation struct {
+}
+
+func (*validateOpCreateCoreNetworkPrefixListAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCoreNetworkPrefixListAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCoreNetworkPrefixListAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCoreNetworkPrefixListAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDevice struct {
 }
 
@@ -444,6 +464,26 @@ func (m *validateOpDeleteCoreNetworkPolicyVersion) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCoreNetworkPolicyVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCoreNetworkPrefixListAssociation struct {
+}
+
+func (*validateOpDeleteCoreNetworkPrefixListAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCoreNetworkPrefixListAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCoreNetworkPrefixListAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCoreNetworkPrefixListAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1229,6 +1269,26 @@ func (m *validateOpGetVpcAttachment) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAttachmentRoutingPolicyAssociations struct {
+}
+
+func (*validateOpListAttachmentRoutingPolicyAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAttachmentRoutingPolicyAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAttachmentRoutingPolicyAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAttachmentRoutingPolicyAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCoreNetworkPolicyVersions struct {
 }
 
@@ -1249,6 +1309,46 @@ func (m *validateOpListCoreNetworkPolicyVersions) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCoreNetworkPrefixListAssociations struct {
+}
+
+func (*validateOpListCoreNetworkPrefixListAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCoreNetworkPrefixListAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCoreNetworkPrefixListAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCoreNetworkPrefixListAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCoreNetworkRoutingInformation struct {
+}
+
+func (*validateOpListCoreNetworkRoutingInformation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCoreNetworkRoutingInformation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCoreNetworkRoutingInformationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCoreNetworkRoutingInformationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1264,6 +1364,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAttachmentRoutingPolicyLabel struct {
+}
+
+func (*validateOpPutAttachmentRoutingPolicyLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAttachmentRoutingPolicyLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAttachmentRoutingPolicyLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAttachmentRoutingPolicyLabelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1344,6 +1464,26 @@ func (m *validateOpRejectAttachment) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRejectAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveAttachmentRoutingPolicyLabel struct {
+}
+
+func (*validateOpRemoveAttachmentRoutingPolicyLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveAttachmentRoutingPolicyLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveAttachmentRoutingPolicyLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveAttachmentRoutingPolicyLabelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1665,6 +1805,10 @@ func addOpCreateCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCoreNetwork{}, middleware.After)
 }
 
+func addOpCreateCoreNetworkPrefixListAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCoreNetworkPrefixListAssociation{}, middleware.After)
+}
+
 func addOpCreateDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDevice{}, middleware.After)
 }
@@ -1715,6 +1859,10 @@ func addOpDeleteCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteCoreNetworkPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCoreNetworkPolicyVersion{}, middleware.After)
+}
+
+func addOpDeleteCoreNetworkPrefixListAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCoreNetworkPrefixListAssociation{}, middleware.After)
 }
 
 func addOpDeleteDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -1873,12 +2021,28 @@ func addOpGetVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVpcAttachment{}, middleware.After)
 }
 
+func addOpListAttachmentRoutingPolicyAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAttachmentRoutingPolicyAssociations{}, middleware.After)
+}
+
 func addOpListCoreNetworkPolicyVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCoreNetworkPolicyVersions{}, middleware.After)
 }
 
+func addOpListCoreNetworkPrefixListAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCoreNetworkPrefixListAssociations{}, middleware.After)
+}
+
+func addOpListCoreNetworkRoutingInformationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCoreNetworkRoutingInformation{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutAttachmentRoutingPolicyLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAttachmentRoutingPolicyLabel{}, middleware.After)
 }
 
 func addOpPutCoreNetworkPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1895,6 +2059,10 @@ func addOpRegisterTransitGatewayValidationMiddleware(stack *middleware.Stack) er
 
 func addOpRejectAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectAttachment{}, middleware.After)
+}
+
+func addOpRemoveAttachmentRoutingPolicyLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveAttachmentRoutingPolicyLabel{}, middleware.After)
 }
 
 func addOpRestoreCoreNetworkPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -2130,6 +2298,27 @@ func validateOpCreateCoreNetworkInput(v *CreateCoreNetworkInput) error {
 	}
 }
 
+func validateOpCreateCoreNetworkPrefixListAssociationInput(v *CreateCoreNetworkPrefixListAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCoreNetworkPrefixListAssociationInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PrefixListArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrefixListArn"))
+	}
+	if v.PrefixListAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrefixListAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDeviceInput(v *CreateDeviceInput) error {
 	if v == nil {
 		return nil
@@ -2350,6 +2539,24 @@ func validateOpDeleteCoreNetworkPolicyVersionInput(v *DeleteCoreNetworkPolicyVer
 	}
 	if v.PolicyVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCoreNetworkPrefixListAssociationInput(v *DeleteCoreNetworkPrefixListAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCoreNetworkPrefixListAssociationInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PrefixListArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrefixListArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2985,6 +3192,21 @@ func validateOpGetVpcAttachmentInput(v *GetVpcAttachmentInput) error {
 	}
 }
 
+func validateOpListAttachmentRoutingPolicyAssociationsInput(v *ListAttachmentRoutingPolicyAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAttachmentRoutingPolicyAssociationsInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListCoreNetworkPolicyVersionsInput(v *ListCoreNetworkPolicyVersionsInput) error {
 	if v == nil {
 		return nil
@@ -3000,6 +3222,42 @@ func validateOpListCoreNetworkPolicyVersionsInput(v *ListCoreNetworkPolicyVersio
 	}
 }
 
+func validateOpListCoreNetworkPrefixListAssociationsInput(v *ListCoreNetworkPrefixListAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCoreNetworkPrefixListAssociationsInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCoreNetworkRoutingInformationInput(v *ListCoreNetworkRoutingInformationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCoreNetworkRoutingInformationInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.SegmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentName"))
+	}
+	if v.EdgeLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -3007,6 +3265,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAttachmentRoutingPolicyLabelInput(v *PutAttachmentRoutingPolicyLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAttachmentRoutingPolicyLabelInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if v.RoutingPolicyLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingPolicyLabel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3074,6 +3353,24 @@ func validateOpRejectAttachmentInput(v *RejectAttachmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RejectAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveAttachmentRoutingPolicyLabelInput(v *RemoveAttachmentRoutingPolicyLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveAttachmentRoutingPolicyLabelInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
 	if v.AttachmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
 	}

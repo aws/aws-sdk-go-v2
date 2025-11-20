@@ -1,0 +1,8 @@
+{
+    "id": "d1056f37-0958-4720-bef6-520a21bee309",
+    "type": "feature",
+    "description": "Add optional ability to exclude users from send notification actions for Contact Lens Rules.",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -11,8 +11,8 @@ import (
 )
 
 // Grants permission to create a ticket in the chosen ITSM based on finding
-// information for the provided finding metadata UID. This API is in preview
-// release and subject to change.
+// information for the provided finding metadata UID. This API is in public preview
+// and subject to change.
 func (c *Client) CreateTicketV2(ctx context.Context, params *CreateTicketV2Input, optFns ...func(*Options)) (*CreateTicketV2Output, error) {
 	if params == nil {
 		params = &CreateTicketV2Input{}

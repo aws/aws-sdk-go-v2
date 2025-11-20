@@ -11,7 +11,7 @@ import (
 )
 
 // Grants permission to complete the authorization based on input parameters. This
-// API is in preview release and subject to change.
+// API is in public preview and subject to change.
 func (c *Client) ConnectorRegistrationsV2(ctx context.Context, params *ConnectorRegistrationsV2Input, optFns ...func(*Options)) (*ConnectorRegistrationsV2Output, error) {
 	if params == nil {
 		params = &ConnectorRegistrationsV2Input{}

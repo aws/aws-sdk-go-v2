@@ -204,6 +204,9 @@ func awsAwsquery_deserializeOpErrorAttachLoadBalancers(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InstanceRefreshInProgress", errorCode):
+		return awsAwsquery_deserializeErrorInstanceRefreshInProgressFault(response, errorBody)
+
 	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
@@ -319,6 +322,9 @@ func awsAwsquery_deserializeOpErrorAttachLoadBalancerTargetGroups(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InstanceRefreshInProgress", errorCode):
+		return awsAwsquery_deserializeErrorInstanceRefreshInProgressFault(response, errorBody)
+
 	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
@@ -434,6 +440,9 @@ func awsAwsquery_deserializeOpErrorAttachTrafficSources(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InstanceRefreshInProgress", errorCode):
+		return awsAwsquery_deserializeErrorInstanceRefreshInProgressFault(response, errorBody)
+
 	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
@@ -5903,6 +5912,9 @@ func awsAwsquery_deserializeOpErrorPutWarmPool(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InstanceRefreshInProgress", errorCode):
+		return awsAwsquery_deserializeErrorInstanceRefreshInProgressFault(response, errorBody)
+
 	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
@@ -8801,6 +8813,12 @@ func awsAwsquery_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup,
 				sv.HealthCheckType = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("InstanceLifecyclePolicy", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentInstanceLifecyclePolicy(&sv.InstanceLifecyclePolicy, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("InstanceMaintenancePolicy", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentInstanceMaintenancePolicy(&sv.InstanceMaintenancePolicy, nodeDecoder); err != nil {
@@ -9174,6 +9192,19 @@ func awsAwsquery_deserializeDocumentAutoScalingInstanceDetails(v **types.AutoSca
 			{
 				xtv := string(val)
 				sv.HealthStatus = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ImageId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImageId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("InstanceId", t.Name.Local):
@@ -11244,6 +11275,19 @@ func awsAwsquery_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 				sv.HealthStatus = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ImageId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImageId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("InstanceId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -11680,6 +11724,48 @@ func awsAwsquery_deserializeDocumentInstanceIdsUnwrapped(v *[]string, decoder sm
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentInstanceLifecyclePolicy(v **types.InstanceLifecyclePolicy, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InstanceLifecyclePolicy
+	if *v == nil {
+		sv = &types.InstanceLifecyclePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("RetentionTriggers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRetentionTriggers(&sv.RetentionTriggers, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentInstanceMaintenancePolicy(v **types.InstanceMaintenancePolicy, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12045,6 +12131,19 @@ func awsAwsquery_deserializeDocumentInstanceRefresh(v **types.InstanceRefresh, d
 			{
 				xtv := string(val)
 				sv.StatusReason = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Strategy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Strategy = types.RefreshStrategy(xtv)
 			}
 
 		default:
@@ -13564,6 +13663,19 @@ func awsAwsquery_deserializeDocumentLaunchTemplateOverrides(v **types.LaunchTemp
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ImageId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImageId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("InstanceRequirements", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentInstanceRequirements(&sv.InstanceRequirements, nodeDecoder); err != nil {
@@ -17031,6 +17143,55 @@ func awsAwsquery_deserializeDocumentResourceInUseFault(v **types.ResourceInUseFa
 			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentRetentionTriggers(v **types.RetentionTriggers, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.RetentionTriggers
+	if *v == nil {
+		sv = &types.RetentionTriggers{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("TerminateHookAbandon", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TerminateHookAbandon = types.RetentionAction(xtv)
 			}
 
 		default:

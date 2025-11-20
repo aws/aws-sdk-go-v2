@@ -68466,6 +68466,15 @@ func awsAwsjson11_deserializeDocumentUserDefinedFunction(v **types.UserDefinedFu
 				sv.FunctionName = ptr.String(jtv)
 			}
 
+		case "FunctionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FunctionType to be of type string, got %T instead", value)
+				}
+				sv.FunctionType = types.FunctionType(jtv)
+			}
+
 		case "OwnerName":
 			if value != nil {
 				jtv, ok := value.(string)

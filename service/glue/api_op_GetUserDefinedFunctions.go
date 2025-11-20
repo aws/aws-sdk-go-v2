@@ -43,6 +43,14 @@ type GetUserDefinedFunctionsInput struct {
 	// provided, functions from all the databases across the catalog will be returned.
 	DatabaseName *string
 
+	// An optional function-type pattern string that filters the function definitions
+	// returned from Amazon Redshift Federated Permissions Catalog.
+	//
+	// Specify a value of REGULAR_FUNCTION or STORED_PROCEDURE . The STORED_PROCEDURE
+	// function type is only compatible with Amazon Redshift Federated Permissions
+	// Catalog.
+	FunctionType types.FunctionType
+
 	// The maximum number of functions to return in one response.
 	MaxResults *int32
 

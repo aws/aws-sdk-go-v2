@@ -59,6 +59,9 @@ type CreateLicenseConfigurationInput struct {
 	// limit blocks the launch of new instances.
 	LicenseCountHardLimit *bool
 
+	// License configuration expiry.
+	LicenseExpiry *int64
+
 	// License rules. The syntax is #name=value (for example,
 	// #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as
 	// follows.

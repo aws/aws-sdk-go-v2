@@ -134,6 +134,23 @@ func (EventCategory) Values() []EventCategory {
 	}
 }
 
+type EventCategoryAggregation string
+
+// Enum values for EventCategoryAggregation
+const (
+	EventCategoryAggregationData EventCategoryAggregation = "Data"
+)
+
+// Values returns all known values for EventCategoryAggregation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventCategoryAggregation) Values() []EventCategoryAggregation {
+	return []EventCategoryAggregation{
+		"Data",
+	}
+}
+
 type EventDataStoreStatus string
 
 // Enum values for EventDataStoreStatus
@@ -460,6 +477,27 @@ func (SourceEventCategory) Values() []SourceEventCategory {
 	return []SourceEventCategory{
 		"Management",
 		"Data",
+	}
+}
+
+type Template string
+
+// Enum values for Template
+const (
+	TemplateApiActivity    Template = "API_ACTIVITY"
+	TemplateResourceAccess Template = "RESOURCE_ACCESS"
+	TemplateUserActions    Template = "USER_ACTIONS"
+)
+
+// Values returns all known values for Template. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Template) Values() []Template {
+	return []Template{
+		"API_ACTIVITY",
+		"RESOURCE_ACCESS",
+		"USER_ACTIONS",
 	}
 }
 

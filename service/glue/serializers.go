@@ -26856,6 +26856,11 @@ func awsAwsjson11_serializeDocumentUserDefinedFunctionInput(v *types.UserDefined
 		ok.String(*v.FunctionName)
 	}
 
+	if len(v.FunctionType) > 0 {
+		ok := object.Key("FunctionType")
+		ok.String(string(v.FunctionType))
+	}
+
 	if v.OwnerName != nil {
 		ok := object.Key("OwnerName")
 		ok.String(*v.OwnerName)
@@ -31229,6 +31234,11 @@ func awsAwsjson11_serializeOpDocumentGetUserDefinedFunctionsInput(v *GetUserDefi
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if len(v.FunctionType) > 0 {
+		ok := object.Key("FunctionType")
+		ok.String(string(v.FunctionType))
 	}
 
 	if v.MaxResults != nil {

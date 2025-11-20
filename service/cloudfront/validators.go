@@ -4224,6 +4224,41 @@ func validateInvalidationBatch(v *types.InvalidationBatch) error {
 	}
 }
 
+func validateIpamCidrConfig(v *types.IpamCidrConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpamCidrConfig"}
+	if v.Cidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
+	}
+	if v.IpamPoolArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPoolArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIpamCidrConfigList(v []types.IpamCidrConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpamCidrConfigList"}
+	for i := range v {
+		if err := validateIpamCidrConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKeyGroupConfig(v *types.KeyGroupConfig) error {
 	if v == nil {
 		return nil
@@ -6001,6 +6036,11 @@ func validateOpCreateAnycastIpListInput(v *CreateAnycastIpListInput) error {
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IpamCidrConfigs != nil {
+		if err := validateIpamCidrConfigList(v.IpamCidrConfigs); err != nil {
+			invalidParams.AddNested("IpamCidrConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

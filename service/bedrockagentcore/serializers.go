@@ -2272,6 +2272,112 @@ func awsRestjson1_serializeOpDocumentListEventsInput(v *ListEventsInput, value s
 	return nil
 }
 
+type awsRestjson1_serializeOpListMemoryExtractionJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListMemoryExtractionJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListMemoryExtractionJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMemoryExtractionJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memories/{memoryId}/extractionJobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListMemoryExtractionJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListMemoryExtractionJobsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListMemoryExtractionJobsInput(v *ListMemoryExtractionJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MemoryId == nil || len(*v.MemoryId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member memoryId must not be empty")}
+	}
+	if v.MemoryId != nil {
+		if err := encoder.SetURI("memoryId").String(*v.MemoryId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListMemoryExtractionJobsInput(v *ListMemoryExtractionJobsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentExtractionJobFilterInput(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListMemoryRecords struct {
 }
 
@@ -2830,6 +2936,107 @@ func awsRestjson1_serializeOpDocumentStartCodeInterpreterSessionInput(v *StartCo
 	if v.SessionTimeoutSeconds != nil {
 		ok := object.Key("sessionTimeoutSeconds")
 		ok.Integer(*v.SessionTimeoutSeconds)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartMemoryExtractionJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartMemoryExtractionJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartMemoryExtractionJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartMemoryExtractionJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memories/{memoryId}/extractionJobs/start")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartMemoryExtractionJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartMemoryExtractionJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartMemoryExtractionJobInput(v *StartMemoryExtractionJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MemoryId == nil || len(*v.MemoryId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member memoryId must not be empty")}
+	}
+	if v.MemoryId != nil {
+		if err := encoder.SetURI("memoryId").String(*v.MemoryId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartMemoryExtractionJobInput(v *StartMemoryExtractionJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ExtractionJob != nil {
+		ok := object.Key("extractionJob")
+		if err := awsRestjson1_serializeDocumentExtractionJob(v.ExtractionJob, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3402,6 +3609,45 @@ func awsRestjson1_serializeDocumentEventMetadataFilterList(v []types.EventMetada
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExtractionJob(v *types.ExtractionJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("jobId")
+		ok.String(*v.JobId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExtractionJobFilterInput(v *types.ExtractionJobFilterInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActorId != nil {
+		ok := object.Key("actorId")
+		ok.String(*v.ActorId)
+	}
+
+	if v.SessionId != nil {
+		ok := object.Key("sessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	if v.StrategyId != nil {
+		ok := object.Key("strategyId")
+		ok.String(*v.StrategyId)
+	}
+
 	return nil
 }
 

@@ -1694,6 +1694,30 @@ func TestCheckSnapshot_CreateTransitGatewayConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTransitGatewayMeteringPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateTransitGatewayMeteringPolicyEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayMeteringPolicyEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTransitGatewayMeteringPolicyEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
@@ -1867,6 +1891,18 @@ func TestCheckSnapshot_CreateVpcBlockPublicAccessExclusion(t *testing.T) {
 	_, err := svc.CreateVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVpcEncryptionControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2738,6 +2774,30 @@ func TestCheckSnapshot_DeleteTransitGatewayConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTransitGatewayMeteringPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTransitGatewayMeteringPolicyEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayMeteringPolicyEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayMeteringPolicyEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
@@ -2911,6 +2971,18 @@ func TestCheckSnapshot_DeleteVpcBlockPublicAccessExclusion(t *testing.T) {
 	_, err := svc.DeleteVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVpcEncryptionControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4862,6 +4934,18 @@ func TestCheckSnapshot_DescribeTransitGatewayConnects(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTransitGatewayMeteringPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTransitGatewayMeteringPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTransitGatewayMeteringPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTransitGatewayMulticastDomains(context.Background(), nil, func(o *Options) {
@@ -5119,6 +5203,18 @@ func TestCheckSnapshot_DescribeVpcClassicLinkDnsSupport(t *testing.T) {
 	_, err := svc.DescribeVpcClassicLinkDnsSupport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeVpcClassicLinkDnsSupport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeVpcEncryptionControls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcEncryptionControls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcEncryptionControls")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6794,6 +6890,18 @@ func TestCheckSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTransitGatewayMeteringPolicyEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTransitGatewayMeteringPolicyEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTransitGatewayMeteringPolicyEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -6895,6 +7003,18 @@ func TestCheckSnapshot_GetVerifiedAccessGroupPolicy(t *testing.T) {
 	_, err := svc.GetVerifiedAccessGroupPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetVerifiedAccessGroupPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetVpcResourcesBlockingEncryptionEnforcement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVpcResourcesBlockingEncryptionEnforcement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVpcResourcesBlockingEncryptionEnforcement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7027,6 +7147,18 @@ func TestCheckSnapshot_ListSnapshotsInRecycleBin(t *testing.T) {
 	_, err := svc.ListSnapshotsInRecycleBin(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListSnapshotsInRecycleBin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListVolumesInRecycleBin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVolumesInRecycleBin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListVolumesInRecycleBin")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7646,6 +7778,18 @@ func TestCheckSnapshot_ModifyTransitGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -7807,6 +7951,18 @@ func TestCheckSnapshot_ModifyVpcBlockPublicAccessOptions(t *testing.T) {
 	_, err := svc.ModifyVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyVpcBlockPublicAccessOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcEncryptionControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8539,6 +8695,18 @@ func TestCheckSnapshot_RestoreSnapshotTier(t *testing.T) {
 	_, err := svc.RestoreSnapshotTier(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RestoreSnapshotTier")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RestoreVolumeFromRecycleBin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreVolumeFromRecycleBin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestoreVolumeFromRecycleBin")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10489,6 +10657,30 @@ func TestUpdateSnapshot_CreateTransitGatewayConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTransitGatewayMeteringPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateTransitGatewayMeteringPolicyEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayMeteringPolicyEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTransitGatewayMeteringPolicyEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
@@ -10662,6 +10854,18 @@ func TestUpdateSnapshot_CreateVpcBlockPublicAccessExclusion(t *testing.T) {
 	_, err := svc.CreateVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVpcEncryptionControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11533,6 +11737,30 @@ func TestUpdateSnapshot_DeleteTransitGatewayConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTransitGatewayMeteringPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTransitGatewayMeteringPolicyEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayMeteringPolicyEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayMeteringPolicyEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
@@ -11706,6 +11934,18 @@ func TestUpdateSnapshot_DeleteVpcBlockPublicAccessExclusion(t *testing.T) {
 	_, err := svc.DeleteVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVpcEncryptionControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13657,6 +13897,18 @@ func TestUpdateSnapshot_DescribeTransitGatewayConnects(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTransitGatewayMeteringPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTransitGatewayMeteringPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTransitGatewayMeteringPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTransitGatewayMulticastDomains(context.Background(), nil, func(o *Options) {
@@ -13914,6 +14166,18 @@ func TestUpdateSnapshot_DescribeVpcClassicLinkDnsSupport(t *testing.T) {
 	_, err := svc.DescribeVpcClassicLinkDnsSupport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeVpcClassicLinkDnsSupport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeVpcEncryptionControls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcEncryptionControls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcEncryptionControls")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15589,6 +15853,18 @@ func TestUpdateSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTransitGatewayMeteringPolicyEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTransitGatewayMeteringPolicyEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTransitGatewayMeteringPolicyEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -15690,6 +15966,18 @@ func TestUpdateSnapshot_GetVerifiedAccessGroupPolicy(t *testing.T) {
 	_, err := svc.GetVerifiedAccessGroupPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetVerifiedAccessGroupPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVpcResourcesBlockingEncryptionEnforcement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVpcResourcesBlockingEncryptionEnforcement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVpcResourcesBlockingEncryptionEnforcement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15822,6 +16110,18 @@ func TestUpdateSnapshot_ListSnapshotsInRecycleBin(t *testing.T) {
 	_, err := svc.ListSnapshotsInRecycleBin(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSnapshotsInRecycleBin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListVolumesInRecycleBin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVolumesInRecycleBin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListVolumesInRecycleBin")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16441,6 +16741,18 @@ func TestUpdateSnapshot_ModifyTransitGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -16602,6 +16914,18 @@ func TestUpdateSnapshot_ModifyVpcBlockPublicAccessOptions(t *testing.T) {
 	_, err := svc.ModifyVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyVpcBlockPublicAccessOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcEncryptionControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17334,6 +17658,18 @@ func TestUpdateSnapshot_RestoreSnapshotTier(t *testing.T) {
 	_, err := svc.RestoreSnapshotTier(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RestoreSnapshotTier")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RestoreVolumeFromRecycleBin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreVolumeFromRecycleBin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestoreVolumeFromRecycleBin")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

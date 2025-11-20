@@ -721,6 +721,36 @@ type QuerySessionContext struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for enabling trusted identity propagation with Redshift Connect.
+type RedshiftConnect struct {
+
+	// The authorization status for Redshift Connect. Valid values are ENABLED or
+	// DISABLED.
+	//
+	// This member is required.
+	Authorization ServiceAuthorization
+
+	noSmithyDocumentSerde
+}
+
+// A union structure representing different Redshift integration scopes.
+//
+// The following types satisfy this interface:
+//
+//	RedshiftScopeUnionMemberRedshiftConnect
+type RedshiftScopeUnion interface {
+	isRedshiftScopeUnion()
+}
+
+// Configuration for Redshift Connect integration.
+type RedshiftScopeUnionMemberRedshiftConnect struct {
+	Value RedshiftConnect
+
+	noSmithyDocumentSerde
+}
+
+func (*RedshiftScopeUnionMemberRedshiftConnect) isRedshiftScopeUnion() {}
+
 // A structure for the resource.
 type Resource struct {
 
@@ -741,7 +771,7 @@ type Resource struct {
 	// and Revoke database permissions to a principal.
 	Database *DatabaseResource
 
-	// The LF-tag key and values attached to a resource.
+	// The LF-Tag key and values attached to a resource.
 	LFTag *LFTagKeyResource
 
 	// LF-Tag expression resource. A logical expression composed of one or more LF-Tag
@@ -801,6 +831,24 @@ type RowFilter struct {
 
 	noSmithyDocumentSerde
 }
+
+// A union structure representing different service integration types.
+//
+// The following types satisfy this interface:
+//
+//	ServiceIntegrationUnionMemberRedshift
+type ServiceIntegrationUnion interface {
+	isServiceIntegrationUnion()
+}
+
+// Redshift service integration configuration.
+type ServiceIntegrationUnionMemberRedshift struct {
+	Value []RedshiftScopeUnion
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceIntegrationUnionMemberRedshift) isServiceIntegrationUnion() {}
 
 // A structure describing the configuration and details of a storage optimizer.
 type StorageOptimizer struct {
@@ -1010,3 +1058,15 @@ type WriteOperation struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRedshiftScopeUnion()      {}
+func (*UnknownUnionMember) isServiceIntegrationUnion() {}

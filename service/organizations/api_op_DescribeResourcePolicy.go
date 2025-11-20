@@ -13,8 +13,8 @@ import (
 
 // Retrieves information about a resource policy.
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 func (c *Client) DescribeResourcePolicy(ctx context.Context, params *DescribeResourcePolicyInput, optFns ...func(*Options)) (*DescribeResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DescribeResourcePolicyInput{}

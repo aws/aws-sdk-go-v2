@@ -38,7 +38,8 @@ type DeleteWorkflowInput struct {
 
 type DeleteWorkflowOutput struct {
 
-	// The ARN of the workflow resource that this request deleted.
+	// The Amazon Resource Name (ARN) of the workflow resource that this request
+	// deleted.
 	WorkflowBuildVersionArn *string
 
 	// Metadata pertaining to the operation's result.

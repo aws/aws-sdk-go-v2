@@ -43,12 +43,16 @@ type CreateAnycastIpListInput struct {
 	// The IP address type for the Anycast static IP list. You can specify one of the
 	// following options:
 	//
-	//   - ipv4 - Allocate a list of only IPv4 addresses
+	//   - ipv4 only
 	//
-	//   - ipv6 - Allocate a list of only IPv4 addresses
+	//   - ipv6 only
 	//
 	//   - dualstack - Allocate a list of both IPv4 and IPv6 addresses
 	IpAddressType types.IpAddressType
+
+	//  A list of IPAM CIDR configurations that specify the IP address ranges and IPAM
+	// pool settings for creating the Anycast static IP list.
+	IpamCidrConfigs []types.IpamCidrConfig
 
 	// A complex type that contains zero or more Tag elements.
 	Tags *types.Tags

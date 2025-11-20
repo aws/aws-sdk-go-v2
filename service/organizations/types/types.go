@@ -163,8 +163,8 @@ type CreateAccountStatus struct {
 	// [Managing your Amazon Web Services payments]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html
 	FailureReason CreateAccountFailureReason
 
-	// If the account was created successfully, the unique identifier (ID) of the new
-	// account in the Amazon Web Services GovCloud (US) Region.
+	// If the account was created successfully, the ID for the new account in the
+	// Amazon Web Services GovCloud (US) Region.
 	GovCloudAccountId *string
 
 	// The unique identifier (ID) that references this request. You get this value
@@ -304,36 +304,30 @@ type EnabledServicePrincipal struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information that must be exchanged to securely establish a
-// relationship between two accounts (an originator and a recipient). For example,
-// when a management account (the originator) invites another account (the
-// recipient) to join its organization, the two accounts exchange information as a
-// series of handshake requests and responses.
+// Contains details for a handshake. A handshake is the secure exchange of
+// information between two Amazon Web Services accounts: a sender and a recipient.
 //
 // Note: Handshakes that are CANCELED , ACCEPTED , DECLINED , or EXPIRED show up
 // in lists for only 30 days after entering that state After that they are deleted.
 type Handshake struct {
 
-	// The type of handshake, indicating what action occurs when the recipient accepts
-	// the handshake. The following handshake types are supported:
+	// The type of handshake:
 	//
-	//   - INVITE: This type of handshake represents a request to join an
-	//   organization. It is always sent from the management account to only non-member
-	//   accounts.
+	//   - INVITE: Handshake sent to a standalone account requesting that it to join
+	//   the sender's organization.
 	//
-	//   - ENABLE_ALL_FEATURES: This type of handshake represents a request to enable
-	//   all features in an organization. It is always sent from the management account
-	//   to only invited member accounts. Created accounts do not receive this because
-	//   those accounts were created by the organization's management account and
-	//   approval is inferred.
+	//   - ENABLE_ALL_FEATURES: Handshake sent to invited member accounts to enable
+	//   all features for the organization.
 	//
-	//   - APPROVE_ALL_FEATURES: This type of handshake is sent from the Organizations
-	//   service when all member accounts have approved the ENABLE_ALL_FEATURES
-	//   invitation. It is sent only to the management account and signals the master
-	//   that it can finalize the process to enable all features.
+	//   - APPROVE_ALL_FEATURES: Handshake sent to the management account when all
+	//   invited member accounts have approved to enable all features.
+	//
+	//   - TRANSFER_RESPONSIBILITY: Handshake sent to another organization's
+	//   management account requesting that it designate the sender with the specified
+	//   responsibilities for recipient's organization.
 	Action ActionType
 
-	// The Amazon Resource Name (ARN) of a handshake.
+	// Amazon Resource Name (ARN) for the handshake.
 	//
 	// For more information about ARNs in Organizations, see [ARN Formats Supported by Organizations] in the Amazon Web
 	// Services Service Authorization Reference.
@@ -341,13 +335,10 @@ type Handshake struct {
 	// [ARN Formats Supported by Organizations]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
 	Arn *string
 
-	// The date and time that the handshake expires. If the recipient of the handshake
-	// request fails to respond before the specified date and time, the handshake
-	// becomes inactive and is no longer valid.
+	// Timestamp when the handshake expires.
 	ExpirationTimestamp *time.Time
 
-	// The unique identifier (ID) of a handshake. The originating account creates the
-	// ID when it initiates the handshake.
+	// ID for the handshake.
 	//
 	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
 	// letters or digits.
@@ -355,54 +346,46 @@ type Handshake struct {
 	// [regex pattern]: http://wikipedia.org/wiki/regex
 	Id *string
 
-	// Information about the two accounts that are participating in the handshake.
+	// An array of HandshakeParty objects. Contains details for participant in a
+	// handshake.
 	Parties []HandshakeParty
 
-	// The date and time that the handshake request was made.
+	// Timestamp when the handshake request was made.
 	RequestedTimestamp *time.Time
 
-	// Additional information that is needed to process the handshake.
+	// An array of HandshakeResource objects. When needed, contains additional details
+	// for a handshake. For example, the email address for the sender.
 	Resources []HandshakeResource
 
-	// The current state of the handshake. Use the state to trace the flow of the
-	// handshake through the process from its creation to its acceptance. The meaning
-	// of each of the valid values is as follows:
+	// Current state for the handshake.
 	//
-	//   - REQUESTED: This handshake was sent to multiple recipients (applicable to
-	//   only some handshake types) and not all recipients have responded yet. The
-	//   request stays in this state until all recipients respond.
+	//   - REQUESTED: Handshake awaiting a response from the recipient.
 	//
-	//   - OPEN: This handshake was sent to multiple recipients (applicable to only
-	//   some policy types) and all recipients have responded, allowing the originator to
-	//   complete the handshake action.
+	//   - OPEN: Handshake sent to multiple recipients and all recipients have
+	//   responded. The sender can now complete the handshake action.
 	//
-	//   - CANCELED: This handshake is no longer active because it was canceled by the
-	//   originating account.
+	//   - CANCELED: Handshake canceled by the sender.
 	//
-	//   - ACCEPTED: This handshake is complete because it has been accepted by the
-	//   recipient.
+	//   - ACCEPTED: Handshake accepted by the recipient.
 	//
-	//   - DECLINED: This handshake is no longer active because it was declined by the
-	//   recipient account.
+	//   - DECLINED: Handshake declined by the recipient.
 	//
-	//   - EXPIRED: This handshake is no longer active because the originator did not
-	//   receive a response of any kind from the recipient before the expiration time (15
-	//   days).
+	//   - EXPIRED: Handshake has expired.
 	State HandshakeState
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the criteria that are used to select the handshakes for the operation.
+// Contains the filter used to select the handshakes for an operation.
 type HandshakeFilter struct {
 
-	// Specifies the type of handshake action.
+	// The type of handshake.
 	//
 	// If you specify ActionType , you cannot also specify ParentHandshakeId .
 	ActionType ActionType
 
-	// Specifies the parent handshake. Only used for handshake types that are a child
-	// of another type.
+	// The parent handshake. Only used for handshake types that are a child of another
+	// type.
 	//
 	// If you specify ParentHandshakeId , you cannot also specify ActionType .
 	//
@@ -415,10 +398,10 @@ type HandshakeFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies a participant in a handshake.
+// Contains details for a participant in a handshake.
 type HandshakeParty struct {
 
-	// The unique identifier (ID) for the party.
+	// ID for the participant: Acccount ID, organization ID, or email address.
 	//
 	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
 	// letters or digits.
@@ -428,7 +411,7 @@ type HandshakeParty struct {
 	// This member is required.
 	Id *string
 
-	// The type of party.
+	// The type of ID for the participant.
 	//
 	// This member is required.
 	Type HandshakePartyType
@@ -436,34 +419,31 @@ type HandshakeParty struct {
 	noSmithyDocumentSerde
 }
 
-// Contains additional data that is needed to process a handshake.
+// Contains additional details for a handshake.
 type HandshakeResource struct {
 
-	// When needed, contains an additional array of HandshakeResource objects.
+	// An array of HandshakeResource objects. When needed, contains additional details
+	// for a handshake. For example, the email address for the sender.
 	Resources []HandshakeResource
 
 	// The type of information being passed, specifying how the value is to be
 	// interpreted by the other party:
 	//
-	//   - ACCOUNT - Specifies an Amazon Web Services account ID number.
+	//   - ACCOUNT: ID for an Amazon Web Services account.
 	//
-	//   - ORGANIZATION - Specifies an organization ID number.
+	//   - ORGANIZATION: ID for an organization.
 	//
-	//   - EMAIL - Specifies the email address that is associated with the account that
-	//   receives the handshake.
+	//   - EMAIL: Email address for the recipient.
 	//
-	//   - OWNER_EMAIL - Specifies the email address associated with the management
-	//   account. Included as information about an organization.
+	//   - OWNER_EMAIL: Email address for the sender.
 	//
-	//   - OWNER_NAME - Specifies the name associated with the management account.
-	//   Included as information about an organization.
+	//   - OWNER_NAME: Name of the sender.
 	//
-	//   - NOTES - Additional text provided by the handshake initiator and intended for
-	//   the recipient to read.
+	//   - NOTES: Additional text included by the sender for the recipient.
 	Type HandshakeResourceType
 
-	// The information that is passed to the other party in the handshake. The format
-	// of the value string must match the requirements of the specified type.
+	// Additional information for the handshake. The format of the value string must
+	// match the requirements of the specified type.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -727,6 +707,45 @@ type ResourcePolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details for a transfer. A transfer is the arrangement between two
+// management accounts where one account designates the other with specified
+// responsibilities for their organization.
+type ResponsibilityTransfer struct {
+
+	// ID for the handshake of the transfer.
+	ActiveHandshakeId *string
+
+	// Amazon Resource Name (ARN) for the transfer.
+	Arn *string
+
+	// Timestamp when the transfer ends.
+	EndTimestamp *time.Time
+
+	// ID for the transfer.
+	Id *string
+
+	// Name assigned to the transfer.
+	Name *string
+
+	// Account that allows another account external to its organization to manage the
+	// specified responsibilities for the organization.
+	Source *TransferParticipant
+
+	// Timestamp when the transfer starts.
+	StartTimestamp *time.Time
+
+	// Status for the transfer.
+	Status ResponsibilityTransferStatus
+
+	// Account that manages the specified responsibilities for another organization.
+	Target *TransferParticipant
+
+	// The type of transfer. Currently, only BILLING is supported.
+	Type ResponsibilityTransferType
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a root. A root is a top-level parent node in the
 // hierarchy of an organization that can contain organizational units (OUs) and
 // accounts. The root contains every Amazon Web Services account in the
@@ -792,6 +811,20 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for a participant in a transfer. A transfer is the arrangement
+// between two management accounts where one account designates the other with
+// specified responsibilities for their organization.
+type TransferParticipant struct {
+
+	// Email address for the management account.
+	ManagementAccountEmail *string
+
+	// ID for the management account.
+	ManagementAccountId *string
 
 	noSmithyDocumentSerde
 }

@@ -842,6 +842,18 @@ func TestCheckSnapshot_GetFindingStatisticsV2(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFindingsTrendsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingsTrendsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFindingsTrendsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFindingsV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFindingsV2(context.Background(), nil, func(o *Options) {
@@ -919,6 +931,18 @@ func TestCheckSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	_, err := svc.GetResourcesStatisticsV2(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResourcesStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcesTrendsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcesTrendsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcesTrendsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2101,6 +2125,18 @@ func TestUpdateSnapshot_GetFindingStatisticsV2(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFindingsTrendsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingsTrendsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFindingsTrendsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFindingsV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFindingsV2(context.Background(), nil, func(o *Options) {
@@ -2178,6 +2214,18 @@ func TestUpdateSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	_, err := svc.GetResourcesStatisticsV2(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourcesStatisticsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcesTrendsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcesTrendsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcesTrendsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

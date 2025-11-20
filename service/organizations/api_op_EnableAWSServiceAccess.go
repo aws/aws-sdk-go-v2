@@ -28,7 +28,7 @@ import (
 // For more information about enabling services to integrate with Organizations,
 // see [Using Organizations with other Amazon Web Services services]in the Organizations User Guide.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 //
 // [Using Organizations with other Amazon Web Services services]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
 // [service-linked role]: https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html

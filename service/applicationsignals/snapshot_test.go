@@ -158,6 +158,18 @@ func TestCheckSnapshot_ListAuditFindings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEntityEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEntityEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEntityEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListGroupingAttributeDefinitions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGroupingAttributeDefinitions(context.Background(), nil, func(o *Options) {
@@ -414,6 +426,18 @@ func TestUpdateSnapshot_ListAuditFindings(t *testing.T) {
 	_, err := svc.ListAuditFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAuditFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEntityEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEntityEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEntityEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

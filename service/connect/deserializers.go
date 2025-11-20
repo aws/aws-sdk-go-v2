@@ -66667,6 +66667,11 @@ func awsRestjson1_deserializeDocumentSendNotificationActionDefinition(v **types.
 				sv.DeliveryMethod = types.NotificationDeliveryType(jtv)
 			}
 
+		case "Exclusion":
+			if err := awsRestjson1_deserializeDocumentNotificationRecipientType(&sv.Exclusion, value); err != nil {
+				return err
+			}
+
 		case "Recipient":
 			if err := awsRestjson1_deserializeDocumentNotificationRecipientType(&sv.Recipient, value); err != nil {
 				return err

@@ -6,7 +6,8 @@ type ChangeEventType string
 
 // Enum values for ChangeEventType
 const (
-	ChangeEventTypeDeployment ChangeEventType = "DEPLOYMENT"
+	ChangeEventTypeDeployment    ChangeEventType = "DEPLOYMENT"
+	ChangeEventTypeConfiguration ChangeEventType = "CONFIGURATION"
 )
 
 // Values returns all known values for ChangeEventType. Note that this can be
@@ -16,6 +17,7 @@ const (
 func (ChangeEventType) Values() []ChangeEventType {
 	return []ChangeEventType{
 		"DEPLOYMENT",
+		"CONFIGURATION",
 	}
 }
 
@@ -35,6 +37,25 @@ func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"INDIRECT",
 		"DIRECT",
+	}
+}
+
+type DetailLevel string
+
+// Enum values for DetailLevel
+const (
+	DetailLevelBrief    DetailLevel = "BRIEF"
+	DetailLevelDetailed DetailLevel = "DETAILED"
+)
+
+// Values returns all known values for DetailLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetailLevel) Values() []DetailLevel {
+	return []DetailLevel{
+		"BRIEF",
+		"DETAILED",
 	}
 }
 

@@ -366,6 +366,89 @@ type EventMetadataFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the metadata of a memory extraction job such as the message
+// identifiers that compose this job.
+type ExtractionJob struct {
+
+	// The unique identifier of the extraction job.
+	//
+	// This member is required.
+	JobId *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for querying memory extraction jobs based on various criteria.
+type ExtractionJobFilterInput struct {
+
+	// The identifier of the actor. If specified, only extraction jobs with this actor
+	// ID are returned.
+	ActorId *string
+
+	// The unique identifier of the session. If specified, only extraction jobs with
+	// this session ID are returned.
+	SessionId *string
+
+	// The status of the extraction job. If specified, only extraction jobs with this
+	// status are returned.
+	Status ExtractionJobStatus
+
+	// The memory strategy identifier to filter extraction jobs by. If specified, only
+	// extraction jobs with this strategy ID are returned.
+	StrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The list of messages that compose this extraction job.
+//
+// The following types satisfy this interface:
+//
+//	ExtractionJobMessagesMemberMessagesList
+type ExtractionJobMessages interface {
+	isExtractionJobMessages()
+}
+
+// The list of messages that compose this extraction job.
+type ExtractionJobMessagesMemberMessagesList struct {
+	Value []MessageMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*ExtractionJobMessagesMemberMessagesList) isExtractionJobMessages() {}
+
+// Metadata information associated with this extraction job.
+type ExtractionJobMetadata struct {
+
+	// The unique identifier for the extraction job.
+	//
+	// This member is required.
+	JobID *string
+
+	// The messages associated with the extraction job.
+	//
+	// This member is required.
+	Messages ExtractionJobMessages
+
+	// The identifier of the actor for this extraction job.
+	ActorId *string
+
+	// The cause of failure, if the job did not complete successfully.
+	FailureReason *string
+
+	// The identifier of the session for this extraction job.
+	SessionId *string
+
+	// The current status of the extraction job.
+	Status ExtractionJobStatus
+
+	// The identifier of the memory strategy for this extraction job.
+	StrategyId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains filter criteria for listing events.
 type FilterInput struct {
 
@@ -599,6 +682,22 @@ type MemoryRecordUpdateInput struct {
 
 	// The updated list of namespace identifiers for categorizing the memory record.
 	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information associated with this message.
+type MessageMetadata struct {
+
+	// The identifier of the event associated with this message.
+	//
+	// This member is required.
+	EventId *string
+
+	// The position of this message within that event’s ordered list of messages.
+	//
+	// This member is required.
+	MessageIndex *int32
 
 	noSmithyDocumentSerde
 }
@@ -892,6 +991,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput() {}
 func (*UnknownUnionMember) isContent()                     {}
+func (*UnknownUnionMember) isExtractionJobMessages()       {}
 func (*UnknownUnionMember) isLeftExpression()              {}
 func (*UnknownUnionMember) isMemoryContent()               {}
 func (*UnknownUnionMember) isMetadataValue()               {}

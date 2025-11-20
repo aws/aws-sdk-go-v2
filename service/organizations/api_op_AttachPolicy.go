@@ -30,8 +30,10 @@ import (
 //
 // [SECURITYHUB_POLICY]
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// [INSPECTOR_POLICY]
+//
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 //
 // [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
 // [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
@@ -40,6 +42,7 @@ import (
 // [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 // [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 // [DECLARATIVE_POLICY_EC2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+// [INSPECTOR_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
 // [RESOURCE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {
@@ -58,8 +61,8 @@ func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, op
 
 type AttachPolicyInput struct {
 
-	// The unique identifier (ID) of the policy that you want to attach to the target.
-	// You can get the ID for the policy by calling the ListPoliciesoperation.
+	// ID for the policy that you want to attach to the target. You can get the ID for
+	// the policy by calling the ListPoliciesoperation.
 	//
 	// The [regex pattern] for a policy ID string requires "p-" followed by from 8 to 128 lowercase
 	// or uppercase letters, digits, or the underscore character (_).
@@ -69,8 +72,8 @@ type AttachPolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// The unique identifier (ID) of the root, OU, or account that you want to attach
-	// the policy to. You can get the ID by calling the ListRoots, ListOrganizationalUnitsForParent, or ListAccounts operations.
+	// ID for the root, OU, or account that you want to attach the policy to. You can
+	// get the ID by calling the ListRoots, ListOrganizationalUnitsForParent, or ListAccounts operations.
 	//
 	// The [regex pattern] for a target ID string requires one of the following:
 	//

@@ -5193,6 +5193,11 @@ func awsAwsquery_serializeOpDocumentCreateTargetGroupInput(v *CreateTargetGroupI
 		}
 	}
 
+	if v.TargetControlPort != nil {
+		objectKey := object.Key("TargetControlPort")
+		objectKey.Integer(*v.TargetControlPort)
+	}
+
 	if len(v.TargetType) > 0 {
 		objectKey := object.Key("TargetType")
 		objectKey.String(string(v.TargetType))

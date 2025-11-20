@@ -5401,6 +5401,23 @@ func (TextQualifier) Values() []TextQualifier {
 	}
 }
 
+type TextTransform string
+
+// Enum values for TextTransform
+const (
+	TextTransformCapitalize TextTransform = "CAPITALIZE"
+)
+
+// Values returns all known values for TextTransform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TextTransform) Values() []TextTransform {
+	return []TextTransform{
+		"CAPITALIZE",
+	}
+}
+
 type TextWrap string
 
 // Enum values for TextWrap

@@ -383,6 +383,23 @@ func validateAudioExtractionCategoryTypeConfiguration(v *types.AudioExtractionCa
 	}
 }
 
+func validateAudioOverrideConfiguration(v *types.AudioOverrideConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioOverrideConfiguration"}
+	if v.SensitiveDataConfiguration != nil {
+		if err := validateSensitiveDataConfiguration(v.SensitiveDataConfiguration); err != nil {
+			invalidParams.AddNested("SensitiveDataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAudioStandardExtraction(v *types.AudioStandardExtraction) error {
 	if v == nil {
 		return nil
@@ -585,6 +602,23 @@ func validateDocumentOutputFormat(v *types.DocumentOutputFormat) error {
 	}
 }
 
+func validateDocumentOverrideConfiguration(v *types.DocumentOverrideConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentOverrideConfiguration"}
+	if v.SensitiveDataConfiguration != nil {
+		if err := validateSensitiveDataConfiguration(v.SensitiveDataConfiguration); err != nil {
+			invalidParams.AddNested("SensitiveDataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDocumentStandardExtraction(v *types.DocumentStandardExtraction) error {
 	if v == nil {
 		return nil
@@ -694,6 +728,23 @@ func validateImageExtractionCategory(v *types.ImageExtractionCategory) error {
 	}
 }
 
+func validateImageOverrideConfiguration(v *types.ImageOverrideConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageOverrideConfiguration"}
+	if v.SensitiveDataConfiguration != nil {
+		if err := validateSensitiveDataConfiguration(v.SensitiveDataConfiguration); err != nil {
+			invalidParams.AddNested("SensitiveDataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageStandardExtraction(v *types.ImageStandardExtraction) error {
 	if v == nil {
 		return nil
@@ -749,6 +800,53 @@ func validateImageStandardOutputConfiguration(v *types.ImageStandardOutputConfig
 		if err := validateImageStandardGenerativeField(v.GenerativeField); err != nil {
 			invalidParams.AddNested("GenerativeField", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOverrideConfiguration(v *types.OverrideConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OverrideConfiguration"}
+	if v.Document != nil {
+		if err := validateDocumentOverrideConfiguration(v.Document); err != nil {
+			invalidParams.AddNested("Document", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Image != nil {
+		if err := validateImageOverrideConfiguration(v.Image); err != nil {
+			invalidParams.AddNested("Image", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Video != nil {
+		if err := validateVideoOverrideConfiguration(v.Video); err != nil {
+			invalidParams.AddNested("Video", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Audio != nil {
+		if err := validateAudioOverrideConfiguration(v.Audio); err != nil {
+			invalidParams.AddNested("Audio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSensitiveDataConfiguration(v *types.SensitiveDataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SensitiveDataConfiguration"}
+	if len(v.DetectionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectionMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -891,6 +989,23 @@ func validateVideoExtractionCategory(v *types.VideoExtractionCategory) error {
 	}
 }
 
+func validateVideoOverrideConfiguration(v *types.VideoOverrideConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoOverrideConfiguration"}
+	if v.SensitiveDataConfiguration != nil {
+		if err := validateSensitiveDataConfiguration(v.SensitiveDataConfiguration); err != nil {
+			invalidParams.AddNested("SensitiveDataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVideoStandardExtraction(v *types.VideoStandardExtraction) error {
 	if v == nil {
 		return nil
@@ -1018,6 +1133,11 @@ func validateOpCreateDataAutomationProjectInput(v *CreateDataAutomationProjectIn
 	if v.CustomOutputConfiguration != nil {
 		if err := validateCustomOutputConfiguration(v.CustomOutputConfiguration); err != nil {
 			invalidParams.AddNested("CustomOutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OverrideConfiguration != nil {
+		if err := validateOverrideConfiguration(v.OverrideConfiguration); err != nil {
+			invalidParams.AddNested("OverrideConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EncryptionConfiguration != nil {
@@ -1227,6 +1347,11 @@ func validateOpUpdateDataAutomationProjectInput(v *UpdateDataAutomationProjectIn
 	if v.CustomOutputConfiguration != nil {
 		if err := validateCustomOutputConfiguration(v.CustomOutputConfiguration); err != nil {
 			invalidParams.AddNested("CustomOutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OverrideConfiguration != nil {
+		if err := validateOverrideConfiguration(v.OverrideConfiguration); err != nil {
+			invalidParams.AddNested("OverrideConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EncryptionConfiguration != nil {

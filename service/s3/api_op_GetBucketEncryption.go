@@ -17,7 +17,7 @@ import (
 // Returns the default encryption configuration for an Amazon S3 bucket. By
 // default, all buckets have a default encryption configuration that uses
 // server-side encryption with Amazon S3 managed keys (SSE-S3). This operation also
-// returns the BucketKeyEnabled and BlockedEncryptionTypes statuses.
+// returns the [BucketKeyEnabled]and [BlockedEncryptionTypes] statuses.
 //
 //   - General purpose buckets - For information about the bucket default
 //     encryption feature, see [Amazon S3 Bucket Default Encryption]in the Amazon S3 User Guide.
@@ -53,6 +53,8 @@ import (
 // if your header value is my file.txt , containing two spaces after my , you must
 // URL encode this value to my%20%20file.txt .
 //
+// [BucketKeyEnabled]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BucketKeyEnabled.html
+// [BlockedEncryptionTypes]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BlockedEncryptionTypes.html
 // [DeleteBucketEncryption]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
 // [PutBucketEncryption]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
 // [Setting default server-side encryption behavior for directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-bucket-encryption.html

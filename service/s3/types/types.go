@@ -7,6 +7,21 @@ import (
 	"time"
 )
 
+// The ABAC status of the general purpose bucket. When ABAC is enabled for the
+// general purpose bucket, you can use tags to manage access to the general purpose
+// buckets as well as for cost tracking purposes. When ABAC is disabled for the
+// general purpose buckets, you can only use tags for cost tracking purposes. For
+// more information, see [Using tags with S3 general purpose buckets].
+//
+// [Using tags with S3 general purpose buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+type AbacStatus struct {
+
+	// The ABAC status of the general purpose bucket.
+	Status BucketAbacStatus
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the days since the initiation of an incomplete multipart upload that
 // Amazon S3 will wait before permanently removing all parts of the upload. For
 // more information, see [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration]in the Amazon S3 User Guide.

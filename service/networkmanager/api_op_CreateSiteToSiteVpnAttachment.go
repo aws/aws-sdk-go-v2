@@ -43,6 +43,10 @@ type CreateSiteToSiteVpnAttachmentInput struct {
 	// The client token associated with the request.
 	ClientToken *string
 
+	// The routing policy label to apply to the Site-to-Site VPN attachment for
+	// traffic routing decisions.
+	RoutingPolicyLabel *string
+
 	// The tags associated with the request.
 	Tags []types.Tag
 

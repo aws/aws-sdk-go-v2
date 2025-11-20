@@ -302,6 +302,18 @@ func TestCheckSnapshot_DeleteWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DistributeImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DistributeImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DistributeImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetComponent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetComponent(context.Background(), nil, func(o *Options) {
@@ -854,6 +866,18 @@ func TestCheckSnapshot_PutImageRecipePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RetryImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RetryImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RetryImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendWorkflowStepAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendWorkflowStepAction(context.Background(), nil, func(o *Options) {
@@ -1194,6 +1218,18 @@ func TestUpdateSnapshot_DeleteWorkflow(t *testing.T) {
 	_, err := svc.DeleteWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DistributeImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DistributeImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DistributeImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1746,6 +1782,18 @@ func TestUpdateSnapshot_PutImageRecipePolicy(t *testing.T) {
 	_, err := svc.PutImageRecipePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutImageRecipePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RetryImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RetryImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RetryImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

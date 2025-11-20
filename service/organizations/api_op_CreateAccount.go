@@ -41,7 +41,7 @@ import (
 // and address information for the new account from the organization's management
 // account.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 //
 // For more information about creating accounts, see [Creating a member account in your organization] in the Organizations User
 // Guide.

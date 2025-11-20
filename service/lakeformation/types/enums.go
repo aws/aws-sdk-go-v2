@@ -285,6 +285,25 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type ServiceAuthorization string
+
+// Enum values for ServiceAuthorization
+const (
+	ServiceAuthorizationEnabled  ServiceAuthorization = "ENABLED"
+	ServiceAuthorizationDisabled ServiceAuthorization = "DISABLED"
+)
+
+// Values returns all known values for ServiceAuthorization. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceAuthorization) Values() []ServiceAuthorization {
+	return []ServiceAuthorization{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type TransactionStatus string
 
 // Enum values for TransactionStatus

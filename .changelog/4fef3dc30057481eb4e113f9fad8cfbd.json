@@ -1,0 +1,8 @@
+{
+    "id": "4fef3dc3-0057-481e-b4e1-13f9fad8cfbd",
+    "type": "feature",
+    "description": "Amazon CloudWatch Application Signals now supports un-instrumented services discovery, cross-account views, and change history, helping SRE and DevOps teams monitor and troubleshoot their large-scale distributed applications.",
+    "modules": [
+        "service/applicationsignals"
+    ]
+}

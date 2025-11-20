@@ -34,8 +34,7 @@ func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns
 
 type ListEventsInput struct {
 
-	// The identifier of the actor for which to list events. If specified, only events
-	// from this actor are returned.
+	// The identifier of the actor for which to list events.
 	//
 	// This member is required.
 	ActorId *string
@@ -45,8 +44,7 @@ type ListEventsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The identifier of the session for which to list events. If specified, only
-	// events from this session are returned.
+	// The identifier of the session for which to list events.
 	//
 	// This member is required.
 	SessionId *string
@@ -58,8 +56,8 @@ type ListEventsInput struct {
 	// include payloads, or false to exclude them.
 	IncludePayloads *bool
 
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -188,8 +186,8 @@ func (c *Client) addOperationListEventsMiddlewares(stack *middleware.Stack, opti
 
 // ListEventsPaginatorOptions is the paginator options for ListEvents
 type ListEventsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

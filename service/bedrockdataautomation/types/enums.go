@@ -167,6 +167,25 @@ func (DataAutomationProjectStatus) Values() []DataAutomationProjectStatus {
 	}
 }
 
+type DataAutomationProjectType string
+
+// Enum values for DataAutomationProjectType
+const (
+	DataAutomationProjectTypeAsync DataAutomationProjectType = "ASYNC"
+	DataAutomationProjectTypeSync  DataAutomationProjectType = "SYNC"
+)
+
+// Values returns all known values for DataAutomationProjectType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataAutomationProjectType) Values() []DataAutomationProjectType {
+	return []DataAutomationProjectType{
+		"ASYNC",
+		"SYNC",
+	}
+}
+
 type DesiredModality string
 
 // Enum values for DesiredModality
@@ -318,6 +337,147 @@ func (Language) Values() []Language {
 	}
 }
 
+type PIIEntityType string
+
+// Enum values for PIIEntityType
+const (
+	// All supported PII entity types
+	PIIEntityTypeAll PIIEntityType = "ALL"
+	// A physical address, such as '100 Main Street, Anytown, USA' or 'Suite #12,
+	// Building 123'
+	PIIEntityTypeAddress PIIEntityType = "ADDRESS"
+	// An individual's age, including the quantity and unit of time
+	PIIEntityTypeAge PIIEntityType = "AGE"
+	// An individual's name. Does not include titles such as Dr., Mr., Mrs., or Miss
+	PIIEntityTypeName PIIEntityType = "NAME"
+	// An email address, such as marymajor@email.com
+	PIIEntityTypeEmail PIIEntityType = "EMAIL"
+	// A phone number. Also includes fax and pager numbers
+	PIIEntityTypePhone PIIEntityType = "PHONE"
+	// A user name that identifies an account, such as a login name, screen name, nick
+	// name, or handle
+	PIIEntityTypeUsername PIIEntityType = "USERNAME"
+	// An alphanumeric string that is used as a password
+	PIIEntityTypePassword PIIEntityType = "PASSWORD"
+	// The number assigned to a driver's license
+	PIIEntityTypeDriverId PIIEntityType = "DRIVER_ID"
+	// A license plate for a vehicle issued by the state or country where the vehicle
+	// is registered
+	PIIEntityTypeLicensePlate PIIEntityType = "LICENSE_PLATE"
+	// A Vehicle Identification Number (VIN) that uniquely identifies a vehicle
+	PIIEntityTypeVehicleIdentificationNumber PIIEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+	// A three-digit card verification code (CVV) for VISA, MasterCard, and Discover
+	// cards, or four-digit for American Express
+	PIIEntityTypeCreditDebitCardCvv PIIEntityType = "CREDIT_DEBIT_CARD_CVV"
+	// The expiration date for a credit or debit card
+	PIIEntityTypeCreditDebitCardExpiry PIIEntityType = "CREDIT_DEBIT_CARD_EXPIRY"
+	// The number for a credit or debit card
+	PIIEntityTypeCreditDebitCardNumber PIIEntityType = "CREDIT_DEBIT_CARD_NUMBER"
+	// A four-digit personal identification number (PIN)
+	PIIEntityTypePin PIIEntityType = "PIN"
+	// An International Bank Account Number with specific formats for each country
+	PIIEntityTypeInternationalBankAccountNumber PIIEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	// A SWIFT code - standard format of Bank Identifier Code (BIC)
+	PIIEntityTypeSwiftCode PIIEntityType = "SWIFT_CODE"
+	// An IPv4 address, such as 198.51.100.0
+	PIIEntityTypeIpAddress PIIEntityType = "IP_ADDRESS"
+	// A media access control (MAC) address - unique identifier for network interface
+	// controller
+	PIIEntityTypeMacAddress PIIEntityType = "MAC_ADDRESS"
+	// A web address, such as www.example.com
+	PIIEntityTypeUrl PIIEntityType = "URL"
+	// A unique identifier associated with AWS secret access key
+	PIIEntityTypeAwsAccessKey PIIEntityType = "AWS_ACCESS_KEY"
+	// A unique identifier associated with AWS access key for signing programmatic
+	// requests
+	PIIEntityTypeAwsSecretKey PIIEntityType = "AWS_SECRET_KEY"
+	// A US bank account number, typically 10 to 12 digits long
+	PIIEntityTypeUsBankAccountNumber PIIEntityType = "US_BANK_ACCOUNT_NUMBER"
+	// A US bank account routing number, typically nine digits long
+	PIIEntityTypeUsBankRoutingNumber PIIEntityType = "US_BANK_ROUTING_NUMBER"
+	// A US Individual Taxpayer Identification Number (ITIN)
+	PIIEntityTypeUsIndividualTaxIdentificationNumber PIIEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	// A US passport number, ranging from six to nine alphanumeric characters
+	PIIEntityTypeUsPassportNumber PIIEntityType = "US_PASSPORT_NUMBER"
+	// A US Social Security Number (SSN) - nine-digit number for US citizens and
+	// residents
+	PIIEntityTypeUsSocialSecurityNumber PIIEntityType = "US_SOCIAL_SECURITY_NUMBER"
+	// A Canadian Health Service Number - 10-digit unique identifier for healthcare
+	// benefits
+	PIIEntityTypeCaHealthNumber PIIEntityType = "CA_HEALTH_NUMBER"
+	// A Canadian Social Insurance Number (SIN) - nine-digit unique identifier
+	PIIEntityTypeCaSocialInsuranceNumber PIIEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	// A UK National Health Service Number - 10-17 digit number
+	PIIEntityTypeUkNationalHealthServiceNumber PIIEntityType = "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+	// A UK National Insurance Number (NINO) for accessing National Insurance benefits
+	PIIEntityTypeUkNationalInsuranceNumber PIIEntityType = "UK_NATIONAL_INSURANCE_NUMBER"
+	// A UK Unique Taxpayer Reference (UTR) - 10-digit number identifying taxpayer or
+	// business
+	PIIEntityTypeUkUniqueTaxpayerReferenceNumber PIIEntityType = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+)
+
+// Values returns all known values for PIIEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PIIEntityType) Values() []PIIEntityType {
+	return []PIIEntityType{
+		"ALL",
+		"ADDRESS",
+		"AGE",
+		"NAME",
+		"EMAIL",
+		"PHONE",
+		"USERNAME",
+		"PASSWORD",
+		"DRIVER_ID",
+		"LICENSE_PLATE",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+		"CREDIT_DEBIT_CARD_CVV",
+		"CREDIT_DEBIT_CARD_EXPIRY",
+		"CREDIT_DEBIT_CARD_NUMBER",
+		"PIN",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"SWIFT_CODE",
+		"IP_ADDRESS",
+		"MAC_ADDRESS",
+		"URL",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"US_BANK_ACCOUNT_NUMBER",
+		"US_BANK_ROUTING_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"US_PASSPORT_NUMBER",
+		"US_SOCIAL_SECURITY_NUMBER",
+		"CA_HEALTH_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		"UK_NATIONAL_INSURANCE_NUMBER",
+		"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+	}
+}
+
+type PIIRedactionMaskMode string
+
+// Enum values for PIIRedactionMaskMode
+const (
+	// Replace with generic PII marker [PII]
+	PIIRedactionMaskModePii PIIRedactionMaskMode = "PII"
+	// Replace with specific entity type marker, e.g. [NAME]/[SSN] etc.
+	PIIRedactionMaskModeEntityType PIIRedactionMaskMode = "ENTITY_TYPE"
+)
+
+// Values returns all known values for PIIRedactionMaskMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PIIRedactionMaskMode) Values() []PIIRedactionMaskMode {
+	return []PIIRedactionMaskMode{
+		"PII",
+		"ENTITY_TYPE",
+	}
+}
+
 type ResourceOwner string
 
 // Enum values for ResourceOwner
@@ -334,6 +494,49 @@ func (ResourceOwner) Values() []ResourceOwner {
 	return []ResourceOwner{
 		"SERVICE",
 		"ACCOUNT",
+	}
+}
+
+type SensitiveDataDetectionMode string
+
+// Enum values for SensitiveDataDetectionMode
+const (
+	// Only detect sensitive data without redaction
+	SensitiveDataDetectionModeDetection SensitiveDataDetectionMode = "DETECTION"
+	// Detect and redact sensitive data
+	SensitiveDataDetectionModeDetectionAndRedaction SensitiveDataDetectionMode = "DETECTION_AND_REDACTION"
+)
+
+// Values returns all known values for SensitiveDataDetectionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SensitiveDataDetectionMode) Values() []SensitiveDataDetectionMode {
+	return []SensitiveDataDetectionMode{
+		"DETECTION",
+		"DETECTION_AND_REDACTION",
+	}
+}
+
+type SensitiveDataDetectionScopeType string
+
+// Enum values for SensitiveDataDetectionScopeType
+const (
+	// Standard PII detection
+	SensitiveDataDetectionScopeTypeStandard SensitiveDataDetectionScopeType = "STANDARD"
+	// Custom PII detection
+	SensitiveDataDetectionScopeTypeCustom SensitiveDataDetectionScopeType = "CUSTOM"
+)
+
+// Values returns all known values for SensitiveDataDetectionScopeType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SensitiveDataDetectionScopeType) Values() []SensitiveDataDetectionScopeType {
+	return []SensitiveDataDetectionScopeType{
+		"STANDARD",
+		"CUSTOM",
 	}
 }
 

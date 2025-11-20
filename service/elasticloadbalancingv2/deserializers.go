@@ -16027,6 +16027,23 @@ func awsAwsquery_deserializeDocumentTargetGroup(v **types.TargetGroup, decoder s
 				sv.ProtocolVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("TargetControlPort", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TargetControlPort = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("TargetGroupArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -338,6 +338,18 @@ func TestCheckSnapshot_ListEvents(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMemoryExtractionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMemoryExtractionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMemoryExtractionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMemoryRecords(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMemoryRecords(context.Background(), nil, func(o *Options) {
@@ -391,6 +403,18 @@ func TestCheckSnapshot_StartCodeInterpreterSession(t *testing.T) {
 	_, err := svc.StartCodeInterpreterSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartCodeInterpreterSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartMemoryExtractionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMemoryExtractionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMemoryExtractionJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -721,6 +745,18 @@ func TestUpdateSnapshot_ListEvents(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMemoryExtractionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMemoryExtractionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMemoryExtractionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMemoryRecords(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMemoryRecords(context.Background(), nil, func(o *Options) {
@@ -774,6 +810,18 @@ func TestUpdateSnapshot_StartCodeInterpreterSession(t *testing.T) {
 	_, err := svc.StartCodeInterpreterSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartCodeInterpreterSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMemoryExtractionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMemoryExtractionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMemoryExtractionJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

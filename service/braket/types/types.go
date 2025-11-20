@@ -513,6 +513,98 @@ type SearchQuantumTasksFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies filter criteria for searching spending limits. Use filters to narrow
+// down results based on specific attributes.
+type SearchSpendingLimitsFilter struct {
+
+	// The name of the field to filter on. Currently only supports deviceArn .
+	//
+	// This member is required.
+	Name *string
+
+	// The comparison operator to use when filtering.
+	//
+	// This member is required.
+	Operator SearchSpendingLimitsFilterOperator
+
+	// An array of values to match against the specified field.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a spending limit, including current spending
+// status and configuration details.
+type SpendingLimitSummary struct {
+
+	// The date and time when the spending limit was created, in epoch seconds.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the quantum device associated with this
+	// spending limit.
+	//
+	// This member is required.
+	DeviceArn *string
+
+	// The amount currently queued for spending on the device, in USD.
+	//
+	// This member is required.
+	QueuedSpend *string
+
+	// The maximum spending amount allowed for the device during the specified time
+	// period, in USD.
+	//
+	// This member is required.
+	SpendingLimit *string
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the spending limit.
+	//
+	// This member is required.
+	SpendingLimitArn *string
+
+	// The time period during which the spending limit is active.
+	//
+	// This member is required.
+	TimePeriod *TimePeriod
+
+	// The total amount spent on the device so far during the current time period, in
+	// USD.
+	//
+	// This member is required.
+	TotalSpend *string
+
+	// The date and time when the spending limit was last modified, in epoch seconds.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The tags associated with the spending limit. Each tag consists of a key and an
+	// optional value.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a time range for spending limits, specifying when the limit is active.
+type TimePeriod struct {
+
+	// The end date and time for the spending limit period, in epoch seconds.
+	//
+	// This member is required.
+	EndAt *time.Time
+
+	// The start date and time for the spending limit period, in epoch seconds.
+	//
+	// This member is required.
+	StartAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,

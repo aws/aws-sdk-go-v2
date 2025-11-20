@@ -203,6 +203,10 @@ type AnycastIpList struct {
 	// The IP address type for the Anycast static IP list.
 	IpAddressType IpAddressType
 
+	// The IPAM configuration for the Anycast static IP list, that contains the
+	// quantity and list of IPAM CIDR configurations.
+	IpamConfig *IpamConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -285,6 +289,10 @@ type AnycastIpListSummary struct {
 
 	// The IP address type for the Anycast static IP list.
 	IpAddressType IpAddressType
+
+	// The IPAM configuration for the Anycast static IP list, that contains the
+	// quantity and list of IPAM CIDR configurations.
+	IpamConfig *IpamConfig
 
 	noSmithyDocumentSerde
 }
@@ -3546,6 +3554,49 @@ type InvalidationSummary struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an IPAM CIDR that defines a specific IP address range, IPAM
+// pool, and associated Anycast IP address.
+type IpamCidrConfig struct {
+
+	// The CIDR that specifies the IP address range for this IPAM configuration.
+	//
+	// This member is required.
+	Cidr *string
+
+	// The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned
+	// to.
+	//
+	// This member is required.
+	IpamPoolArn *string
+
+	// The specified Anycast IP address allocated from the IPAM pool for this CIDR
+	// configuration.
+	AnycastIp *string
+
+	// The current status of the IPAM CIDR configuration.
+	Status IpamCidrStatus
+
+	noSmithyDocumentSerde
+}
+
+// The configuration IPAM settings that includes the quantity of CIDR
+// configurations and the list of IPAM CIDR configurations.
+type IpamConfig struct {
+
+	// A list of IPAM CIDR configurations that define the IP address ranges, IPAM
+	// pools, and associated Anycast IP addresses.
+	//
+	// This member is required.
+	IpamCidrConfigs []IpamCidrConfig
+
+	// The number of IPAM CIDR configurations in the IpamCidrConfigs list.
+	//
+	// This member is required.
+	Quantity *int32
 
 	noSmithyDocumentSerde
 }

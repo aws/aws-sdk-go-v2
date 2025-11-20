@@ -11,15 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a handshake. Canceling a handshake sets the handshake state to CANCELED .
+// Cancels a Handshake.
 //
-// This operation can be called only from the account that originated the
-// handshake. The recipient of the handshake can't cancel it, but can use DeclineHandshakeinstead.
-// After a handshake is canceled, the recipient can no longer respond to that
-// handshake.
+// Only the account that sent a handshake can call this operation. The recipient
+// of the handshake can't cancel it, but can use DeclineHandshaketo decline. After a handshake is
+// canceled, the recipient can no longer respond to the handshake.
 //
-// After you cancel a handshake, it continues to appear in the results of relevant
-// APIs for only 30 days. After that, it's deleted.
+// You can view canceled handshakes in API responses for 30 days before they are
+// deleted.
 func (c *Client) CancelHandshake(ctx context.Context, params *CancelHandshakeInput, optFns ...func(*Options)) (*CancelHandshakeOutput, error) {
 	if params == nil {
 		params = &CancelHandshakeInput{}
@@ -37,8 +36,8 @@ func (c *Client) CancelHandshake(ctx context.Context, params *CancelHandshakeInp
 
 type CancelHandshakeInput struct {
 
-	// The unique identifier (ID) of the handshake that you want to cancel. You can
-	// get the ID from the ListHandshakesForOrganizationoperation.
+	// ID for the handshake that you want to cancel. You can get the ID from the ListHandshakesForOrganization
+	// operation.
 	//
 	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
 	// letters or digits.
@@ -53,7 +52,7 @@ type CancelHandshakeInput struct {
 
 type CancelHandshakeOutput struct {
 
-	// A structure that contains details about the handshake that you canceled.
+	// A Handshake object. Contains for the handshake that you canceled.
 	Handshake *types.Handshake
 
 	// Metadata pertaining to the operation's result.

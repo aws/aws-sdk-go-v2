@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"path"
@@ -426,6 +427,128 @@ func (m *awsAwsjson11_serializeOpCreateLicense) HandleSerialize(ctx context.Cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentCreateLicenseInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateLicenseAssetGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLicenseAssetGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLicenseAssetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLicenseAssetGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.CreateLicenseAssetGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLicenseAssetGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateLicenseAssetRuleset struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLicenseAssetRuleset) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLicenseAssetRuleset) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLicenseAssetRulesetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.CreateLicenseAssetRuleset")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLicenseAssetRulesetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -870,6 +993,128 @@ func (m *awsAwsjson11_serializeOpDeleteLicense) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteLicenseAssetGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteLicenseAssetGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteLicenseAssetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLicenseAssetGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.DeleteLicenseAssetGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteLicenseAssetGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteLicenseAssetRuleset struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteLicenseAssetRuleset) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteLicenseAssetRuleset) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLicenseAssetRulesetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.DeleteLicenseAssetRuleset")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteLicenseAssetRulesetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteLicenseConfiguration struct {
 }
 
@@ -1297,6 +1542,128 @@ func (m *awsAwsjson11_serializeOpGetLicense) HandleSerialize(ctx context.Context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetLicenseAssetGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpGetLicenseAssetGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetLicenseAssetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLicenseAssetGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.GetLicenseAssetGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetLicenseAssetGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetLicenseAssetRuleset struct {
+}
+
+func (*awsAwsjson11_serializeOpGetLicenseAssetRuleset) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetLicenseAssetRuleset) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLicenseAssetRulesetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.GetLicenseAssetRuleset")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetLicenseAssetRulesetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetLicenseConfiguration struct {
 }
 
@@ -1602,6 +1969,67 @@ func (m *awsAwsjson11_serializeOpGetServiceSettings) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListAssetsForLicenseAssetGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpListAssetsForLicenseAssetGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListAssetsForLicenseAssetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssetsForLicenseAssetGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListAssetsForLicenseAssetGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListAssetsForLicenseAssetGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListAssociationsForLicenseConfiguration struct {
 }
 
@@ -1785,6 +2213,128 @@ func (m *awsAwsjson11_serializeOpListFailuresForLicenseConfigurationOperations) 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListLicenseAssetGroups struct {
+}
+
+func (*awsAwsjson11_serializeOpListLicenseAssetGroups) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLicenseAssetGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLicenseAssetGroupsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListLicenseAssetGroups")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLicenseAssetGroupsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListLicenseAssetRulesets struct {
+}
+
+func (*awsAwsjson11_serializeOpListLicenseAssetRulesets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLicenseAssetRulesets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLicenseAssetRulesetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListLicenseAssetRulesets")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLicenseAssetRulesetsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListLicenseConfigurations struct {
 }
 
@@ -1829,6 +2379,67 @@ func (m *awsAwsjson11_serializeOpListLicenseConfigurations) HandleSerialize(ctx 
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListLicenseConfigurationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListLicenseConfigurationsForOrganization struct {
+}
+
+func (*awsAwsjson11_serializeOpListLicenseConfigurationsForOrganization) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLicenseConfigurationsForOrganization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLicenseConfigurationsForOrganizationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListLicenseConfigurationsForOrganization")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLicenseConfigurationsForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2822,6 +3433,128 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateLicenseAssetGroup struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLicenseAssetGroup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLicenseAssetGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLicenseAssetGroupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UpdateLicenseAssetGroup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLicenseAssetGroupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateLicenseAssetRuleset struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLicenseAssetRuleset) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLicenseAssetRuleset) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLicenseAssetRulesetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UpdateLicenseAssetRuleset")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLicenseAssetRulesetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateLicenseConfiguration struct {
 }
 
@@ -3076,6 +3809,27 @@ func awsAwsjson11_serializeDocumentAllowedOperationList(v []types.AllowedOperati
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAndRuleStatement(v *types.AndRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MatchingRuleStatements != nil {
+		ok := object.Key("MatchingRuleStatements")
+		if err := awsAwsjson11_serializeDocumentMatchingRuleStatementList(v.MatchingRuleStatements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScriptRuleStatements != nil {
+		ok := object.Key("ScriptRuleStatements")
+		if err := awsAwsjson11_serializeDocumentScriptRuleStatementList(v.ScriptRuleStatements, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3288,6 +4042,41 @@ func awsAwsjson11_serializeDocumentFilterValues(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInstanceRuleStatement(v *types.InstanceRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndRuleStatement != nil {
+		ok := object.Key("AndRuleStatement")
+		if err := awsAwsjson11_serializeDocumentAndRuleStatement(v.AndRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MatchingRuleStatement != nil {
+		ok := object.Key("MatchingRuleStatement")
+		if err := awsAwsjson11_serializeDocumentMatchingRuleStatement(v.MatchingRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrRuleStatement != nil {
+		ok := object.Key("OrRuleStatement")
+		if err := awsAwsjson11_serializeDocumentOrRuleStatement(v.OrRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScriptRuleStatement != nil {
+		ok := object.Key("ScriptRuleStatement")
+		if err := awsAwsjson11_serializeDocumentScriptRuleStatement(v.ScriptRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInventoryFilter(v *types.InventoryFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3340,6 +4129,127 @@ func awsAwsjson11_serializeDocumentIssuer(v *types.Issuer, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLicenseAssetGroupConfiguration(v *types.LicenseAssetGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UsageDimension != nil {
+		ok := object.Key("UsageDimension")
+		ok.String(*v.UsageDimension)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseAssetGroupConfigurationList(v []types.LicenseAssetGroupConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLicenseAssetGroupConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseAssetGroupProperty(v *types.LicenseAssetGroupProperty, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseAssetGroupPropertyList(v []types.LicenseAssetGroupProperty, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLicenseAssetGroupProperty(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseAssetRule(v *types.LicenseAssetRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuleStatement != nil {
+		ok := object.Key("RuleStatement")
+		if err := awsAwsjson11_serializeDocumentRuleStatement(v.RuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseAssetRuleList(v []types.LicenseAssetRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLicenseAssetRule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseAssetRulesetArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseConfigurationRuleStatement(v *types.LicenseConfigurationRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndRuleStatement != nil {
+		ok := object.Key("AndRuleStatement")
+		if err := awsAwsjson11_serializeDocumentAndRuleStatement(v.AndRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MatchingRuleStatement != nil {
+		ok := object.Key("MatchingRuleStatement")
+		if err := awsAwsjson11_serializeDocumentMatchingRuleStatement(v.MatchingRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrRuleStatement != nil {
+		ok := object.Key("OrRuleStatement")
+		if err := awsAwsjson11_serializeDocumentOrRuleStatement(v.OrRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLicenseConversionContext(v *types.LicenseConversionContext, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3354,6 +4264,34 @@ func awsAwsjson11_serializeDocumentLicenseConversionContext(v *types.LicenseConv
 	if v.UsageOperation != nil {
 		ok := object.Key("UsageOperation")
 		ok.String(*v.UsageOperation)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLicenseRuleStatement(v *types.LicenseRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndRuleStatement != nil {
+		ok := object.Key("AndRuleStatement")
+		if err := awsAwsjson11_serializeDocumentAndRuleStatement(v.AndRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MatchingRuleStatement != nil {
+		ok := object.Key("MatchingRuleStatement")
+		if err := awsAwsjson11_serializeDocumentMatchingRuleStatement(v.MatchingRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrRuleStatement != nil {
+		ok := object.Key("OrRuleStatement")
+		if err := awsAwsjson11_serializeDocumentOrRuleStatement(v.OrRuleStatement, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3383,6 +4321,43 @@ func awsAwsjson11_serializeDocumentLicenseSpecifications(v []types.LicenseSpecif
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentLicenseSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMatchingRuleStatement(v *types.MatchingRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Constraint != nil {
+		ok := object.Key("Constraint")
+		ok.String(*v.Constraint)
+	}
+
+	if v.KeyToMatch != nil {
+		ok := object.Key("KeyToMatch")
+		ok.String(*v.KeyToMatch)
+	}
+
+	if v.ValueToMatch != nil {
+		ok := object.Key("ValueToMatch")
+		if err := awsAwsjson11_serializeDocumentStringList(v.ValueToMatch, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMatchingRuleStatementList(v []types.MatchingRuleStatement, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMatchingRuleStatement(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3449,6 +4424,27 @@ func awsAwsjson11_serializeDocumentOrganizationConfiguration(v *types.Organizati
 	{
 		ok := object.Key("EnableIntegration")
 		ok.Boolean(v.EnableIntegration)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOrRuleStatement(v *types.OrRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MatchingRuleStatements != nil {
+		ok := object.Key("MatchingRuleStatements")
+		if err := awsAwsjson11_serializeDocumentMatchingRuleStatementList(v.MatchingRuleStatements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScriptRuleStatements != nil {
+		ok := object.Key("ScriptRuleStatements")
+		if err := awsAwsjson11_serializeDocumentScriptRuleStatementList(v.ScriptRuleStatements, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3580,11 +4576,28 @@ func awsAwsjson11_serializeDocumentReportContext(v *types.ReportContext, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.LicenseAssetGroupArns != nil {
+		ok := object.Key("licenseAssetGroupArns")
+		if err := awsAwsjson11_serializeDocumentArnList(v.LicenseAssetGroupArns, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LicenseConfigurationArns != nil {
 		ok := object.Key("licenseConfigurationArns")
 		if err := awsAwsjson11_serializeDocumentArnList(v.LicenseConfigurationArns, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ReportEndDate != nil {
+		ok := object.Key("reportEndDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ReportEndDate))
+	}
+
+	if v.ReportStartDate != nil {
+		ok := object.Key("reportStartDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ReportStartDate))
 	}
 
 	return nil
@@ -3614,6 +4627,64 @@ func awsAwsjson11_serializeDocumentReportTypeList(v []types.ReportType, value sm
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRuleStatement(v *types.RuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceRuleStatement != nil {
+		ok := object.Key("InstanceRuleStatement")
+		if err := awsAwsjson11_serializeDocumentInstanceRuleStatement(v.InstanceRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LicenseConfigurationRuleStatement != nil {
+		ok := object.Key("LicenseConfigurationRuleStatement")
+		if err := awsAwsjson11_serializeDocumentLicenseConfigurationRuleStatement(v.LicenseConfigurationRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LicenseRuleStatement != nil {
+		ok := object.Key("LicenseRuleStatement")
+		if err := awsAwsjson11_serializeDocumentLicenseRuleStatement(v.LicenseRuleStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentScriptRuleStatement(v *types.ScriptRuleStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyToMatch != nil {
+		ok := object.Key("KeyToMatch")
+		ok.String(*v.KeyToMatch)
+	}
+
+	if v.Script != nil {
+		ok := object.Key("Script")
+		ok.String(*v.Script)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentScriptRuleStatementList(v []types.ScriptRuleStatement, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentScriptRuleStatement(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -3883,6 +4954,92 @@ func awsAwsjson11_serializeOpDocumentCreateGrantVersionInput(v *CreateGrantVersi
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateLicenseAssetGroupInput(v *CreateLicenseAssetGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociatedLicenseAssetRulesetARNs != nil {
+		ok := object.Key("AssociatedLicenseAssetRulesetARNs")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetRulesetArnList(v.AssociatedLicenseAssetRulesetARNs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.LicenseAssetGroupConfigurations != nil {
+		ok := object.Key("LicenseAssetGroupConfigurations")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetGroupConfigurationList(v.LicenseAssetGroupConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetGroupPropertyList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateLicenseAssetRulesetInput(v *CreateLicenseAssetRulesetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("Rules")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetRuleList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3910,6 +5067,11 @@ func awsAwsjson11_serializeOpDocumentCreateLicenseConfigurationInput(v *CreateLi
 	if len(v.LicenseCountingType) > 0 {
 		ok := object.Key("LicenseCountingType")
 		ok.String(string(v.LicenseCountingType))
+	}
+
+	if v.LicenseExpiry != nil {
+		ok := object.Key("LicenseExpiry")
+		ok.Long(*v.LicenseExpiry)
 	}
 
 	if v.LicenseRules != nil {
@@ -4231,6 +5393,30 @@ func awsAwsjson11_serializeOpDocumentDeleteGrantInput(v *DeleteGrantInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteLicenseAssetGroupInput(v *DeleteLicenseAssetGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseAssetGroupArn != nil {
+		ok := object.Key("LicenseAssetGroupArn")
+		ok.String(*v.LicenseAssetGroupArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteLicenseAssetRulesetInput(v *DeleteLicenseAssetRulesetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseAssetRulesetArn != nil {
+		ok := object.Key("LicenseAssetRulesetArn")
+		ok.String(*v.LicenseAssetRulesetArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteLicenseConfigurationInput(v *DeleteLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4337,6 +5523,30 @@ func awsAwsjson11_serializeOpDocumentGetGrantInput(v *GetGrantInput, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetLicenseAssetGroupInput(v *GetLicenseAssetGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseAssetGroupArn != nil {
+		ok := object.Key("LicenseAssetGroupArn")
+		ok.String(*v.LicenseAssetGroupArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetLicenseAssetRulesetInput(v *GetLicenseAssetRulesetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseAssetRulesetArn != nil {
+		ok := object.Key("LicenseAssetRulesetArn")
+		ok.String(*v.LicenseAssetRulesetArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetLicenseConfigurationInput(v *GetLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4409,6 +5619,33 @@ func awsAwsjson11_serializeOpDocumentGetServiceSettingsInput(v *GetServiceSettin
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListAssetsForLicenseAssetGroupInput(v *ListAssetsForLicenseAssetGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetType != nil {
+		ok := object.Key("AssetType")
+		ok.String(*v.AssetType)
+	}
+
+	if v.LicenseAssetGroupArn != nil {
+		ok := object.Key("LicenseAssetGroupArn")
+		ok.String(*v.LicenseAssetGroupArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListAssociationsForLicenseConfigurationInput(v *ListAssociationsForLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4469,6 +5706,90 @@ func awsAwsjson11_serializeOpDocumentListFailuresForLicenseConfigurationOperatio
 	if v.LicenseConfigurationArn != nil {
 		ok := object.Key("LicenseConfigurationArn")
 		ok.String(*v.LicenseConfigurationArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLicenseAssetGroupsInput(v *ListLicenseAssetGroupsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLicenseAssetRulesetsInput(v *ListLicenseAssetRulesetsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ShowAWSManagedLicenseAssetRulesets {
+		ok := object.Key("ShowAWSManagedLicenseAssetRulesets")
+		ok.Boolean(v.ShowAWSManagedLicenseAssetRulesets)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLicenseConfigurationsForOrganizationInput(v *ListLicenseConfigurationsForOrganizationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LicenseConfigurationArns != nil {
+		ok := object.Key("LicenseConfigurationArns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.LicenseConfigurationArns, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -4899,6 +6220,93 @@ func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentUpdateLicenseAssetGroupInput(v *UpdateLicenseAssetGroupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociatedLicenseAssetRulesetARNs != nil {
+		ok := object.Key("AssociatedLicenseAssetRulesetARNs")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetRulesetArnList(v.AssociatedLicenseAssetRulesetARNs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.LicenseAssetGroupArn != nil {
+		ok := object.Key("LicenseAssetGroupArn")
+		ok.String(*v.LicenseAssetGroupArn)
+	}
+
+	if v.LicenseAssetGroupConfigurations != nil {
+		ok := object.Key("LicenseAssetGroupConfigurations")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetGroupConfigurationList(v.LicenseAssetGroupConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetGroupPropertyList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateLicenseAssetRulesetInput(v *UpdateLicenseAssetRulesetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.LicenseAssetRulesetArn != nil {
+		ok := object.Key("LicenseAssetRulesetArn")
+		ok.String(*v.LicenseAssetRulesetArn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("Rules")
+		if err := awsAwsjson11_serializeDocumentLicenseAssetRuleList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentUpdateLicenseConfigurationInput(v *UpdateLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4931,6 +6339,11 @@ func awsAwsjson11_serializeOpDocumentUpdateLicenseConfigurationInput(v *UpdateLi
 	if v.LicenseCountHardLimit != nil {
 		ok := object.Key("LicenseCountHardLimit")
 		ok.Boolean(*v.LicenseCountHardLimit)
+	}
+
+	if v.LicenseExpiry != nil {
+		ok := object.Key("LicenseExpiry")
+		ok.Long(*v.LicenseExpiry)
 	}
 
 	if v.LicenseRules != nil {
@@ -5036,6 +6449,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceSettingsInput(v *UpdateService
 	if v.EnableCrossAccountsDiscovery != nil {
 		ok := object.Key("EnableCrossAccountsDiscovery")
 		ok.Boolean(*v.EnableCrossAccountsDiscovery)
+	}
+
+	if v.EnabledDiscoverySourceRegions != nil {
+		ok := object.Key("EnabledDiscoverySourceRegions")
+		if err := awsAwsjson11_serializeDocumentStringList(v.EnabledDiscoverySourceRegions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OrganizationConfiguration != nil {

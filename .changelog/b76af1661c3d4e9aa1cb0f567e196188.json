@@ -1,0 +1,8 @@
+{
+    "id": "b76af166-1c3d-4e9a-a1cb-0f567e196188",
+    "type": "feature",
+    "description": "Added FunctionType parameter to Glue GetuserDefinedFunctions.",
+    "modules": [
+        "service/glue"
+    ]
+}

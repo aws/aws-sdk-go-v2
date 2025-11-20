@@ -56,6 +56,9 @@ type ListServicesInput struct {
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
+	// The resourceManagementType type to use when filtering the ListServices results.
+	ResourceManagementType types.ResourceManagementType
+
 	// The scheduling strategy to use when filtering the ListServices results.
 	SchedulingStrategy types.SchedulingStrategy
 

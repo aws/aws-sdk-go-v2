@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You do not have permissions to perform the requested operation.
+type AccessDeniedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You have exceeded the permitted request rate for the specific operation.
 type CallRateLimitExceededException struct {
 	Message *string
@@ -60,6 +86,33 @@ func (e *ClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The dry run operation of the resource was successful, and no resources or
+// mutations were actually performed due to the dry run flag in the request.
+type DryRunOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DryRunOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DryRunOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DryRunOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DryRunOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are not authorized to perform the requested operation.
 type ForbiddenException struct {
@@ -462,3 +515,29 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// You have attempted too many requests for the specific operation.
+type TooManyRequestsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyRequestsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyRequestsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

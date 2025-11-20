@@ -46,8 +46,8 @@ type ListMemoryRecordsInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	MaxResults *int32
 
 	// The memory strategy identifier to filter memory records by. If specified, only
@@ -180,8 +180,8 @@ func (c *Client) addOperationListMemoryRecordsMiddlewares(stack *middleware.Stac
 
 // ListMemoryRecordsPaginatorOptions is the paginator options for ListMemoryRecords
 type ListMemoryRecordsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

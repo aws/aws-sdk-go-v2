@@ -410,6 +410,26 @@ func (m *validateOpDeleteWorkflow) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDistributeImage struct {
+}
+
+func (*validateOpDistributeImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDistributeImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DistributeImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDistributeImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetComponent struct {
 }
 
@@ -1030,6 +1050,26 @@ func (m *validateOpPutImageRecipePolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRetryImage struct {
+}
+
+func (*validateOpRetryImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRetryImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RetryImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRetryImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendWorkflowStepAction struct {
 }
 
@@ -1290,6 +1330,10 @@ func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkflow{}, middleware.After)
 }
 
+func addOpDistributeImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDistributeImage{}, middleware.After)
+}
+
 func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponent{}, middleware.After)
 }
@@ -1412,6 +1456,10 @@ func addOpPutImagePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutImageRecipePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutImageRecipePolicy{}, middleware.After)
+}
+
+func addOpRetryImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRetryImage{}, middleware.After)
 }
 
 func addOpSendWorkflowStepActionValidationMiddleware(stack *middleware.Stack) error {
@@ -2461,6 +2509,30 @@ func validateOpDeleteWorkflowInput(v *DeleteWorkflowInput) error {
 	}
 }
 
+func validateOpDistributeImageInput(v *DistributeImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DistributeImageInput"}
+	if v.SourceImage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceImage"))
+	}
+	if v.DistributionConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DistributionConfigurationArn"))
+	}
+	if v.ExecutionRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetComponentInput(v *GetComponentInput) error {
 	if v == nil {
 		return nil
@@ -2978,6 +3050,24 @@ func validateOpPutImageRecipePolicyInput(v *PutImageRecipePolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRetryImageInput(v *RetryImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryImageInput"}
+	if v.ImageBuildVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuildVersionArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

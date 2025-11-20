@@ -370,6 +370,11 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     account isn't fully active. You must complete the account setup before you
 //     create an organization.
 //
+//   - ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS: You cannot delete organization due
+//     to an ongoing responsibility transfer process. For example, a pending invitation
+//     or an in-progress transfer. To delete the organization, you must resolve the
+//     current transfer process.
+//
 //   - ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the
 //     number of accounts in an organization. If you need more accounts, contact [Amazon Web Services Support]to
 //     request an increase in your limit.
@@ -427,7 +432,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //
 //	- EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid
 //	for a limited period of time. You must resubmit the request and generate a new
-//	verfication code.
+//	verification code.
 //
 //	- HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
 //	handshakes that you can send in one day.
@@ -500,6 +505,18 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //	access before you disabled the policy type (for example, SECURITYHUB_POLICY). To
 //	complete this operation, you must first disable the policy type.
 //
+//	- RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION: You have exceeded your
+//	inbound transfers limit.
+//
+//	- RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION: You have exceeded the maximum
+//	length of your transfer chain.
+//
+//	- RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION: You have exceeded
+//	your outbound transfers limit.
+//
+//	- RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION: You have exceeded
+//	the maximum number of inbound transfers allowed in a transfer chain.
+//
 //	- SERVICE_ACCESS_NOT_ENABLED:
 //
 //	- You attempted to register a delegated administrator before you enabled
@@ -510,6 +527,17 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //
 //	- TAG_POLICY_VIOLATION: You attempted to create or update a resource with
 //	tags that are not compliant with the tag policy requirements for this account.
+//
+//	- TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS: The source
+//	organization cannot accept this transfer invitation because it is marked for
+//	deletion.
+//
+//	- TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS: The source
+//	organization cannot accept this transfer invitation because target organization
+//	is marked for deletion.
+//
+//	- UNSUPPORTED_PRICING: Your organization has a pricing contract that is
+//	unsupported.
 //
 //	- WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you
 //	must wait until at least four days after the account was created. Invited
@@ -856,16 +884,19 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 //	can resume inviting accounts after you finalize the process when all accounts
 //	have agreed to the change.
 //
+//	- LEGACY_PERMISSIONS_STILL_IN_USE: Your organization must migrate to use the
+//	new IAM fine-grained actions for billing, cost management, and accounts.
+//
 //	- ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid
 //	because the organization has already enabled all features.
-//
-//	- ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake
-//	request is invalid because the organization has already started the process to
-//	enable all features.
 //
 //	- ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because
 //	the account is from a different marketplace than the accounts in the
 //	organization.
+//
+//	- ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake
+//	request is invalid because the organization has already started the process to
+//	enable all features.
 //
 //	- ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change
 //	the membership of an account too quickly after its previous change.
@@ -873,6 +904,15 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 //	- PAYMENT_INSTRUMENT_REQUIRED: You can't complete the operation with an
 //	account that doesn't have a payment instrument, such as a credit card,
 //	associated with it.
+//
+//	- RESPONSIBILITY_TRANSFER_ALREADY_EXISTS: You cannot perform this operation
+//	with the current transfer.
+//
+//	- SOURCE_AND_TARGET_CANNOT_MATCH: An account can't accept a transfer
+//	invitation if it is both the sender and recipient of the invitation.
+//
+//	- UNUSED_PREPAYMENT_BALANCE: Your organization has an outstanding pre-payment
+//	balance.
 //
 // [Amazon Web Services Support]: https://console.aws.amazon.com/support/home#/
 type HandshakeConstraintViolationException struct {
@@ -967,8 +1007,17 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 // Some of the reasons in the following list might not be applicable to this
 // specific API or operation.
 //
+//   - CALLER_REQUIRED_FIELD_MISSING: At least one of the required field is
+//     missing: Caller Account Id, Management Account Id or Organization Id.
+//
 //   - DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the
 //     same entity.
+//
+//   - END_DATE_NOT_END_OF_MONTH: You provided an invalid end date. The end date
+//     must be the end of the last day of the month (23.59.59.999).
+//
+//   - END_DATE_TOO_EARLY: You provided an invalid end date. It is too early for
+//     the transfer to end.
 //
 //   - IMMUTABLE_POLICY: You specified a policy that is managed by Amazon Web
 //     Services and can't be modified.
@@ -977,6 +1026,10 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //
 //   - INVALID_EMAIL_ADDRESS_TARGET: You specified an invalid email address for
 //     the invited account owner.
+//
+//   - INVALID_END_DATE: The selected withdrawal date doesn't meet the terms of
+//     your partner agreement. Visit Amazon Web Services Partner Central to view your
+//     partner agreements or contact your Amazon Web Services Partner for help.
 //
 //   - INVALID_ENUM: You specified an invalid value.
 //
@@ -1004,6 +1057,8 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //
 //   - INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name
 //     can't begin with the reserved prefix AWSServiceRoleFor .
+//
+//   - INVALID_START_DATE: The start date doesn't meet the minimum requirements.
 //
 //   - INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid Amazon Resource
 //     Name (ARN) for the organization.
@@ -1036,11 +1091,26 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //   - NON_DETACHABLE_POLICY: You can't detach this Amazon Web Services Managed
 //     Policy.
 //
+//   - START_DATE_NOT_BEGINNING_OF_DAY: You provided an invalid start date. The
+//     start date must be the beginning of the day (00:00:00.000).
+//
+//   - START_DATE_NOT_BEGINNING_OF_MONTH: You provided an invalid start date. The
+//     start date must be the first day of the month.
+//
+//   - START_DATE_TOO_EARLY: You provided an invalid start date. The start date is
+//     too early.
+//
+//   - START_DATE_TOO_LATE: You provided an invalid start date. The start date is
+//     too late.
+//
 //   - TARGET_NOT_SUPPORTED: You can't perform the specified operation on that
 //     target entity.
 //
 //   - UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that
 //     isn't recognized.
+//
+//   - UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER: You provided a value that is
+//     not supported by this operation.
 type InvalidInputException struct {
 	Message *string
 
@@ -1067,6 +1137,35 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The responsibility transfer can't transition to the requested state because
+// it's not in a valid state for this operation.
+type InvalidResponsibilityTransferTransitionException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidResponsibilityTransferTransitionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidResponsibilityTransferTransitionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidResponsibilityTransferTransitionException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidResponsibilityTransferTransitionException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidResponsibilityTransferTransitionException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The provided policy document doesn't meet the requirements of the specified
 // policy type. For example, the syntax might be incorrect. For details about
@@ -1459,6 +1558,62 @@ func (e *ResourcePolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The responsibility transfer is already in the status that you specified.
+type ResponsibilityTransferAlreadyInStatusException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResponsibilityTransferAlreadyInStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResponsibilityTransferAlreadyInStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResponsibilityTransferAlreadyInStatusException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResponsibilityTransferAlreadyInStatusException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResponsibilityTransferAlreadyInStatusException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// We can't find a transfer that you specified.
+type ResponsibilityTransferNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResponsibilityTransferNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResponsibilityTransferNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResponsibilityTransferNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResponsibilityTransferNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResponsibilityTransferNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // We can't find a root with the RootId that you specified.
 type RootNotFoundException struct {

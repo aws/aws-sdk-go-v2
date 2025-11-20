@@ -1422,6 +1422,10 @@ type TargetGroup struct {
 	// , and HTTP2 .
 	ProtocolVersion *string
 
+	// The port on which the target control agent and application load balancer
+	// exchange management traffic for the target optimizer feature.
+	TargetControlPort *int32
+
 	// The Amazon Resource Name (ARN) of the target group.
 	TargetGroupArn *string
 

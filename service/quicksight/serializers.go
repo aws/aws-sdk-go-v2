@@ -25530,9 +25530,19 @@ func awsRestjson1_serializeDocumentBorderStyle(v *types.BorderStyle, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
 	if v.Show != nil {
 		ok := object.Key("Show")
 		ok.Boolean(*v.Show)
+	}
+
+	if v.Width != nil {
+		ok := object.Key("Width")
+		ok.String(*v.Width)
 	}
 
 	return nil
@@ -33272,6 +33282,11 @@ func awsRestjson1_serializeDocumentFreeFormLayoutElement(v *types.FreeFormLayout
 		}
 	}
 
+	if v.BorderRadius != nil {
+		ok := object.Key("BorderRadius")
+		ok.String(*v.BorderRadius)
+	}
+
 	if v.BorderStyle != nil {
 		ok := object.Key("BorderStyle")
 		if err := awsRestjson1_serializeDocumentFreeFormLayoutElementBorderStyle(v.BorderStyle, ok); err != nil {
@@ -33299,6 +33314,11 @@ func awsRestjson1_serializeDocumentFreeFormLayoutElement(v *types.FreeFormLayout
 		if err := awsRestjson1_serializeDocumentLoadingAnimation(v.LoadingAnimation, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Padding != nil {
+		ok := object.Key("Padding")
+		ok.String(*v.Padding)
 	}
 
 	if v.RenderingRules != nil {
@@ -33367,6 +33387,11 @@ func awsRestjson1_serializeDocumentFreeFormLayoutElementBorderStyle(v *types.Fre
 	if len(v.Visibility) > 0 {
 		ok := object.Key("Visibility")
 		ok.String(string(v.Visibility))
+	}
+
+	if v.Width != nil {
+		ok := object.Key("Width")
+		ok.String(*v.Width)
 	}
 
 	return nil
@@ -35196,6 +35221,25 @@ func awsRestjson1_serializeDocumentGridLayoutElement(v *types.GridLayoutElement,
 	object := value.Object()
 	defer object.Close()
 
+	if v.BackgroundStyle != nil {
+		ok := object.Key("BackgroundStyle")
+		if err := awsRestjson1_serializeDocumentGridLayoutElementBackgroundStyle(v.BackgroundStyle, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BorderRadius != nil {
+		ok := object.Key("BorderRadius")
+		ok.String(*v.BorderRadius)
+	}
+
+	if v.BorderStyle != nil {
+		ok := object.Key("BorderStyle")
+		if err := awsRestjson1_serializeDocumentGridLayoutElementBorderStyle(v.BorderStyle, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ColumnIndex != nil {
 		ok := object.Key("ColumnIndex")
 		ok.Integer(*v.ColumnIndex)
@@ -35216,6 +35260,18 @@ func awsRestjson1_serializeDocumentGridLayoutElement(v *types.GridLayoutElement,
 		ok.String(string(v.ElementType))
 	}
 
+	if v.LoadingAnimation != nil {
+		ok := object.Key("LoadingAnimation")
+		if err := awsRestjson1_serializeDocumentLoadingAnimation(v.LoadingAnimation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Padding != nil {
+		ok := object.Key("Padding")
+		ok.String(*v.Padding)
+	}
+
 	if v.RowIndex != nil {
 		ok := object.Key("RowIndex")
 		ok.Integer(*v.RowIndex)
@@ -35224,6 +35280,52 @@ func awsRestjson1_serializeDocumentGridLayoutElement(v *types.GridLayoutElement,
 	if v.RowSpan != nil {
 		ok := object.Key("RowSpan")
 		ok.Integer(*v.RowSpan)
+	}
+
+	if v.SelectedBorderStyle != nil {
+		ok := object.Key("SelectedBorderStyle")
+		if err := awsRestjson1_serializeDocumentGridLayoutElementBorderStyle(v.SelectedBorderStyle, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGridLayoutElementBackgroundStyle(v *types.GridLayoutElementBackgroundStyle, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
+	if len(v.Visibility) > 0 {
+		ok := object.Key("Visibility")
+		ok.String(string(v.Visibility))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGridLayoutElementBorderStyle(v *types.GridLayoutElementBorderStyle, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
+	if len(v.Visibility) > 0 {
+		ok := object.Key("Visibility")
+		ok.String(string(v.Visibility))
+	}
+
+	if v.Width != nil {
+		ok := object.Key("Width")
+		ok.String(*v.Width)
 	}
 
 	return nil
@@ -43851,6 +43953,23 @@ func awsRestjson1_serializeDocumentSharedViewConfigurations(v *types.SharedViewC
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSheetBackgroundStyle(v *types.SheetBackgroundStyle, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
+	if v.Gradient != nil {
+		ok := object.Key("Gradient")
+		ok.String(*v.Gradient)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v *types.SheetControlInfoIconLabelOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -44215,6 +44334,13 @@ func awsRestjson1_serializeDocumentSheetLayoutElementMaximizationOption(v *types
 func awsRestjson1_serializeDocumentSheetStyle(v *types.SheetStyle, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Background != nil {
+		ok := object.Key("Background")
+		if err := awsRestjson1_serializeDocumentSheetBackgroundStyle(v.Background, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Tile != nil {
 		ok := object.Key("Tile")
@@ -46483,11 +46609,26 @@ func awsRestjson1_serializeDocumentTileStyle(v *types.TileStyle, value smithyjso
 	object := value.Object()
 	defer object.Close()
 
+	if v.BackgroundColor != nil {
+		ok := object.Key("BackgroundColor")
+		ok.String(*v.BackgroundColor)
+	}
+
 	if v.Border != nil {
 		ok := object.Key("Border")
 		if err := awsRestjson1_serializeDocumentBorderStyle(v.Border, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.BorderRadius != nil {
+		ok := object.Key("BorderRadius")
+		ok.String(*v.BorderRadius)
+	}
+
+	if v.Padding != nil {
+		ok := object.Key("Padding")
+		ok.String(*v.Padding)
 	}
 
 	return nil
@@ -48746,9 +48887,58 @@ func awsRestjson1_serializeDocumentTypography(v *types.Typography, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.AxisLabelFontConfiguration != nil {
+		ok := object.Key("AxisLabelFontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.AxisLabelFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AxisTitleFontConfiguration != nil {
+		ok := object.Key("AxisTitleFontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.AxisTitleFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataLabelFontConfiguration != nil {
+		ok := object.Key("DataLabelFontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.DataLabelFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FontFamilies != nil {
 		ok := object.Key("FontFamilies")
 		if err := awsRestjson1_serializeDocumentFontList(v.FontFamilies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LegendTitleFontConfiguration != nil {
+		ok := object.Key("LegendTitleFontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.LegendTitleFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LegendValueFontConfiguration != nil {
+		ok := object.Key("LegendValueFontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.LegendValueFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisualSubtitleFontConfiguration != nil {
+		ok := object.Key("VisualSubtitleFontConfiguration")
+		if err := awsRestjson1_serializeDocumentVisualSubtitleFontConfiguration(v.VisualSubtitleFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisualTitleFontConfiguration != nil {
+		ok := object.Key("VisualTitleFontConfiguration")
+		if err := awsRestjson1_serializeDocumentVisualTitleFontConfiguration(v.VisualTitleFontConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -49530,6 +49720,30 @@ func awsRestjson1_serializeDocumentVisualPalette(v *types.VisualPalette, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVisualSubtitleFontConfiguration(v *types.VisualSubtitleFontConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FontConfiguration != nil {
+		ok := object.Key("FontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.FontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TextAlignment) > 0 {
+		ok := object.Key("TextAlignment")
+		ok.String(string(v.TextAlignment))
+	}
+
+	if len(v.TextTransform) > 0 {
+		ok := object.Key("TextTransform")
+		ok.String(string(v.TextTransform))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVisualSubtitleLabelOptions(v *types.VisualSubtitleLabelOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -49544,6 +49758,30 @@ func awsRestjson1_serializeDocumentVisualSubtitleLabelOptions(v *types.VisualSub
 	if len(v.Visibility) > 0 {
 		ok := object.Key("Visibility")
 		ok.String(string(v.Visibility))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVisualTitleFontConfiguration(v *types.VisualTitleFontConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FontConfiguration != nil {
+		ok := object.Key("FontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.FontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TextAlignment) > 0 {
+		ok := object.Key("TextAlignment")
+		ok.String(string(v.TextAlignment))
+	}
+
+	if len(v.TextTransform) > 0 {
+		ok := object.Key("TextTransform")
+		ok.String(string(v.TextTransform))
 	}
 
 	return nil

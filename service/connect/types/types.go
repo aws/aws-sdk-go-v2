@@ -7761,6 +7761,9 @@ type SendNotificationActionDefinition struct {
 	// This member is required.
 	Recipient *NotificationRecipientType
 
+	// Recipients to exclude from notification.
+	Exclusion *NotificationRecipientType
+
 	// The subject of the email if the delivery method is EMAIL . Supports variable
 	// injection. For more information, see [JSONPath reference]in the Amazon Connect Administrators Guide.
 	//

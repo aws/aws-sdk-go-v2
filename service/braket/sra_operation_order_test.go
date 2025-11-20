@@ -159,6 +159,76 @@ func TestOpCreateQuantumTaskSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpCreateSpendingLimitSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.CreateSpendingLimit(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpDeleteSpendingLimitSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.DeleteSpendingLimit(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpGetDeviceSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -404,6 +474,41 @@ func TestOpSearchQuantumTasksSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpSearchSpendingLimitsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.SearchSpendingLimits(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpTagResourceSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -457,6 +562,41 @@ func TestOpUntagResourceSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.UntagResource(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpUpdateSpendingLimitSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateSpendingLimit(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}

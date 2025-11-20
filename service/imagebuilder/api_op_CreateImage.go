@@ -93,6 +93,9 @@ type CreateImageOutput struct {
 	// The Amazon Resource Name (ARN) of the image that the request created.
 	ImageBuildVersionArn *string
 
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

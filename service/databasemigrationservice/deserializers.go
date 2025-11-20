@@ -9450,6 +9450,9 @@ func awsAwsjson11_deserializeOpErrorImportCertificate(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidCertificateFault", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidCertificateFault(response, errorBody)
 
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsjson11_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
 	case strings.EqualFold("ResourceAlreadyExistsFault", errorCode):
 		return awsAwsjson11_deserializeErrorResourceAlreadyExistsFault(response, errorBody)
 
@@ -15322,6 +15325,15 @@ func awsAwsjson11_deserializeDocumentCertificate(v **types.Certificate, value in
 				sv.KeyLength = ptr.Int32(int32(i64))
 			}
 
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "SigningAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17702,6 +17714,15 @@ func awsAwsjson11_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				return err
 			}
 
+		case "IsReadOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.IsReadOnly = ptr.Bool(jtv)
+			}
+
 		case "KafkaSettings":
 			if err := awsAwsjson11_deserializeDocumentKafkaSettings(&sv.KafkaSettings, value); err != nil {
 				return err
@@ -17719,6 +17740,11 @@ func awsAwsjson11_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "LakehouseSettings":
+			if err := awsAwsjson11_deserializeDocumentLakehouseSettings(&sv.LakehouseSettings, value); err != nil {
+				return err
 			}
 
 		case "MicrosoftSQLServerSettings":
@@ -20722,6 +20748,46 @@ func awsAwsjson11_deserializeDocumentKMSThrottlingFault(v **types.KMSThrottlingF
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLakehouseSettings(v **types.LakehouseSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LakehouseSettings
+	if *v == nil {
+		sv = &types.LakehouseSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:
@@ -25153,6 +25219,15 @@ func awsAwsjson11_deserializeDocumentReplication(v **types.Replication, value in
 				return err
 			}
 
+		case "IsReadOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.IsReadOnly = ptr.Bool(jtv)
+			}
+
 		case "PremigrationAssessmentStatuses":
 			if err := awsAwsjson11_deserializeDocumentPremigrationAssessmentStatusList(&sv.PremigrationAssessmentStatuses, value); err != nil {
 				return err
@@ -25347,6 +25422,15 @@ func awsAwsjson11_deserializeDocumentReplicationConfig(v **types.ReplicationConf
 		case "ComputeConfig":
 			if err := awsAwsjson11_deserializeDocumentComputeConfig(&sv.ComputeConfig, value); err != nil {
 				return err
+			}
+
+		case "IsReadOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.IsReadOnly = ptr.Bool(jtv)
 			}
 
 		case "ReplicationConfigArn":
@@ -26314,6 +26398,15 @@ func awsAwsjson11_deserializeDocumentReplicationSubnetGroup(v **types.Replicatio
 
 	for key, value := range shape {
 		switch key {
+		case "IsReadOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.IsReadOnly = ptr.Bool(jtv)
+			}
+
 		case "ReplicationSubnetGroupDescription":
 			if value != nil {
 				jtv, ok := value.(string)

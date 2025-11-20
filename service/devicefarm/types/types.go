@@ -619,6 +619,22 @@ type DeviceSelectionResult struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an environment variable for a project or a run.
+type EnvironmentVariable struct {
+
+	// The name of the environment variable.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the environment variable.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents configuration information about a test run, such as the execution
 // timeout (in minutes).
 type ExecutionConfiguration struct {
@@ -1040,6 +1056,12 @@ type Project struct {
 	// it times out. The default value is 150 minutes.
 	DefaultJobTimeoutMinutes *int32
 
+	// Environment variables associated with the project.
+	EnvironmentVariables []EnvironmentVariable
+
+	// The IAM execution role associated with the project.
+	ExecutionRoleArn *string
+
 	// The project's name.
 	Name *string
 
@@ -1350,9 +1372,15 @@ type Run struct {
 	// The results of a device filter used to select the devices for a test run.
 	DeviceSelectionResult *DeviceSelectionResult
 
+	// Environment variables associated with the run.
+	EnvironmentVariables []EnvironmentVariable
+
 	// For fuzz tests, this is the number of events, between 1 and 10000, that the UI
 	// fuzz test should perform.
 	EventCount *int32
+
+	// The IAM role associated with the run.
+	ExecutionRoleArn *string
 
 	// The number of minutes the job executes before it times out.
 	JobTimeoutMinutes *int32
@@ -1579,6 +1607,12 @@ type ScheduleRunConfiguration struct {
 
 	// The device proxy to be configured on the device for the run.
 	DeviceProxy *DeviceProxy
+
+	// Environment variables associated with the run.
+	EnvironmentVariables []EnvironmentVariable
+
+	// An IAM role to be assumed by the test host for the run.
+	ExecutionRoleArn *string
 
 	// The ARN of the extra data for the run. The extra data is a .zip file that AWS
 	// Device Farm extracts to external data for Android or the app's sandbox for iOS.

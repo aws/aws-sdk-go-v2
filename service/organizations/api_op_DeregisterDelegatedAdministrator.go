@@ -22,7 +22,7 @@ import (
 // feature. For a current list of services that support it, see the column Supports
 // Delegated Administrator in the table at [Amazon Web Services Services that you can use with Organizations]in the Organizations User Guide.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 //
 // [Amazon Web Services Services that you can use with Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
 func (c *Client) DeregisterDelegatedAdministrator(ctx context.Context, params *DeregisterDelegatedAdministratorInput, optFns ...func(*Options)) (*DeregisterDelegatedAdministratorOutput, error) {

@@ -77,6 +77,67 @@ func (m *awsAwsjson11_serializeOpGetDataAutomationStatus) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpInvokeDataAutomation struct {
+}
+
+func (*awsAwsjson11_serializeOpInvokeDataAutomation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpInvokeDataAutomation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InvokeDataAutomationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonBedrockKeystoneRuntimeService.InvokeDataAutomation")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentInvokeDataAutomationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpInvokeDataAutomationAsync struct {
 }
 
@@ -473,6 +534,23 @@ func awsAwsjson11_serializeDocumentOutputConfiguration(v *types.OutputConfigurat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSyncInputConfiguration(v *types.SyncInputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bytes != nil {
+		ok := object.Key("bytes")
+		ok.Base64EncodeBytes(v.Bytes)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("s3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -634,6 +712,46 @@ func awsAwsjson11_serializeOpDocumentInvokeDataAutomationAsyncInput(v *InvokeDat
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentInvokeDataAutomationInput(v *InvokeDataAutomationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Blueprints != nil {
+		ok := object.Key("blueprints")
+		if err := awsAwsjson11_serializeDocumentBlueprintList(v.Blueprints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataAutomationConfiguration != nil {
+		ok := object.Key("dataAutomationConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataAutomationConfiguration(v.DataAutomationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataAutomationProfileArn != nil {
+		ok := object.Key("dataAutomationProfileArn")
+		ok.String(*v.DataAutomationProfileArn)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsAwsjson11_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InputConfiguration != nil {
+		ok := object.Key("inputConfiguration")
+		if err := awsAwsjson11_serializeDocumentSyncInputConfiguration(v.InputConfiguration, ok); err != nil {
 			return err
 		}
 	}

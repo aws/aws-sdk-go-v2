@@ -42,6 +42,9 @@ type GetContainerRecipeOutput struct {
 	// The container recipe object that is returned.
 	ContainerRecipe *types.ContainerRecipe
 
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

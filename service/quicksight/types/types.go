@@ -2679,8 +2679,14 @@ type BookmarksConfigurations struct {
 // The display options for tile borders for visuals.
 type BorderStyle struct {
 
+	// The option to add color for tile borders for visuals.
+	Color *string
+
 	// The option to enable display of borders for visuals.
 	Show *bool
+
+	// The option to set the width of tile borders for visuals.
+	Width *string
 
 	noSmithyDocumentSerde
 }
@@ -8546,11 +8552,17 @@ type FreeFormLayoutElement struct {
 	// The background style configuration of a free-form layout element.
 	BackgroundStyle *FreeFormLayoutElementBackgroundStyle
 
+	// The border radius of a free-form layout element.
+	BorderRadius *string
+
 	// The border style configuration of a free-form layout element.
 	BorderStyle *FreeFormLayoutElementBorderStyle
 
 	// The loading animation configuration of a free-form layout element.
 	LoadingAnimation *LoadingAnimation
+
+	// The padding of a free-form layout element.
+	Padding *string
 
 	// The rendering rules that determine when an element should be displayed within a
 	// free-form layout.
@@ -8586,6 +8598,9 @@ type FreeFormLayoutElementBorderStyle struct {
 
 	// The border visibility of a free-form layout element.
 	Visibility Visibility
+
+	// The border width of a free-form layout element.
+	Width *string
 
 	noSmithyDocumentSerde
 }
@@ -9621,11 +9636,57 @@ type GridLayoutElement struct {
 	// This member is required.
 	RowSpan *int32
 
+	// The background style configuration of a grid layout element.
+	BackgroundStyle *GridLayoutElementBackgroundStyle
+
+	// The border radius of a grid layout element.
+	BorderRadius *string
+
+	// The border style configuration of a grid layout element.
+	BorderStyle *GridLayoutElementBorderStyle
+
 	// The column index for the upper left corner of an element.
 	ColumnIndex *int32
 
+	// The configuration of loading animation in free-form layout.
+	LoadingAnimation *LoadingAnimation
+
+	// The padding of a grid layout element.
+	Padding *string
+
 	// The row index for the upper left corner of an element.
 	RowIndex *int32
+
+	// The border style configuration of a grid layout element. This border style is
+	// used when the element is selected.
+	SelectedBorderStyle *GridLayoutElementBorderStyle
+
+	noSmithyDocumentSerde
+}
+
+// The background style configuration of a grid layout element.
+type GridLayoutElementBackgroundStyle struct {
+
+	// The background color of a grid layout element.
+	Color *string
+
+	// The background visibility of a grid layout element.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The border style configuration of a grid layout element.
+type GridLayoutElementBorderStyle struct {
+
+	// The border color of a grid layout element.
+	Color *string
+
+	// The border visibility of a grid layout element.
+	Visibility Visibility
+
+	// The border width of a grid layout element.
+	Width *string
 
 	noSmithyDocumentSerde
 }
@@ -15942,6 +16003,18 @@ type Sheet struct {
 	noSmithyDocumentSerde
 }
 
+// The background configuration for sheets.
+type SheetBackgroundStyle struct {
+
+	// The solid color background option for sheets.
+	Color *string
+
+	// The gradient background option for sheets.
+	Gradient *string
+
+	noSmithyDocumentSerde
+}
+
 // A control to display info icons for filters and parameters.
 type SheetControlInfoIconLabelOptions struct {
 
@@ -16189,6 +16262,9 @@ type SheetLayoutElementMaximizationOption struct {
 
 // The theme display options for sheets.
 type SheetStyle struct {
+
+	// The background for sheets.
+	Background *SheetBackgroundStyle
 
 	// The display options for tiles.
 	Tile *TileStyle
@@ -18011,8 +18087,17 @@ type TileLayoutStyle struct {
 // Display options related to tiles on a sheet.
 type TileStyle struct {
 
+	// The background color of a tile.
+	BackgroundColor *string
+
 	// The border around a tile.
 	Border *BorderStyle
+
+	// The border radius of a tile.
+	BorderRadius *string
+
+	// The padding of a tile.
+	Padding *string
 
 	noSmithyDocumentSerde
 }
@@ -19498,8 +19583,29 @@ type TwitterParameters struct {
 // Determines the typography options.
 type Typography struct {
 
+	// Configures the display properties of the given text.
+	AxisLabelFontConfiguration *FontConfiguration
+
+	// Configures the display properties of the given text.
+	AxisTitleFontConfiguration *FontConfiguration
+
+	// Configures the display properties of the given text.
+	DataLabelFontConfiguration *FontConfiguration
+
 	// Determines the list of font families.
 	FontFamilies []Font
+
+	// Configures the display properties of the given text.
+	LegendTitleFontConfiguration *FontConfiguration
+
+	// Configures the display properties of the given text.
+	LegendValueFontConfiguration *FontConfiguration
+
+	// Configures the display properties of the visual sub-title.
+	VisualSubtitleFontConfiguration *VisualSubtitleFontConfiguration
+
+	// Configures the display properties of the visual title.
+	VisualTitleFontConfiguration *VisualTitleFontConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -20121,6 +20227,21 @@ type VisualPalette struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the display properties of the visual sub-title.
+type VisualSubtitleFontConfiguration struct {
+
+	// Configures the display properties of the given text.
+	FontConfiguration *FontConfiguration
+
+	// Determines the alignment of visual sub-title.
+	TextAlignment HorizontalTextAlignment
+
+	// Determines the text transformation of visual sub-title.
+	TextTransform TextTransform
+
+	noSmithyDocumentSerde
+}
+
 // The subtitle label options for a visual.
 type VisualSubtitleLabelOptions struct {
 
@@ -20129,6 +20250,21 @@ type VisualSubtitleLabelOptions struct {
 
 	// The visibility of the subtitle label.
 	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// Configures the display properties of the visual title.
+type VisualTitleFontConfiguration struct {
+
+	// Configures the display properties of the given text.
+	FontConfiguration *FontConfiguration
+
+	// Determines the alignment of visual title.
+	TextAlignment HorizontalTextAlignment
+
+	// Determines the text transformation of visual title.
+	TextTransform TextTransform
 
 	noSmithyDocumentSerde
 }

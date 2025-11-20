@@ -110,6 +110,30 @@ func TestCheckSnapshot_CreateQuantumTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSpendingLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSpendingLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSpendingLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSpendingLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSpendingLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSpendingLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDevice(context.Background(), nil, func(o *Options) {
@@ -194,6 +218,18 @@ func TestCheckSnapshot_SearchQuantumTasks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchSpendingLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchSpendingLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchSpendingLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -211,6 +247,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateSpendingLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSpendingLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSpendingLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -258,6 +306,30 @@ func TestUpdateSnapshot_CreateQuantumTask(t *testing.T) {
 	_, err := svc.CreateQuantumTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateQuantumTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateSpendingLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSpendingLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSpendingLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSpendingLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSpendingLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSpendingLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -349,6 +421,18 @@ func TestUpdateSnapshot_SearchQuantumTasks(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchSpendingLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchSpendingLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchSpendingLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -366,6 +450,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSpendingLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSpendingLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSpendingLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

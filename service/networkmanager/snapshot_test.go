@@ -170,6 +170,18 @@ func TestCheckSnapshot_CreateCoreNetwork(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCoreNetworkPrefixListAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCoreNetworkPrefixListAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCoreNetworkPrefixListAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDevice(context.Background(), nil, func(o *Options) {
@@ -331,6 +343,18 @@ func TestCheckSnapshot_DeleteCoreNetworkPolicyVersion(t *testing.T) {
 	_, err := svc.DeleteCoreNetworkPolicyVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCoreNetworkPolicyVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCoreNetworkPrefixListAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCoreNetworkPrefixListAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCoreNetworkPrefixListAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,6 +842,18 @@ func TestCheckSnapshot_GetVpcAttachment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAttachmentRoutingPolicyAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAttachmentRoutingPolicyAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAttachmentRoutingPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAttachments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAttachments(context.Background(), nil, func(o *Options) {
@@ -847,6 +883,30 @@ func TestCheckSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 	_, err := svc.ListCoreNetworkPolicyVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCoreNetworkPolicyVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCoreNetworkPrefixListAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCoreNetworkPrefixListAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCoreNetworkPrefixListAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCoreNetworkRoutingInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCoreNetworkRoutingInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCoreNetworkRoutingInformation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -902,6 +962,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAttachmentRoutingPolicyLabel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAttachmentRoutingPolicyLabel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAttachmentRoutingPolicyLabel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutCoreNetworkPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutCoreNetworkPolicy(context.Background(), nil, func(o *Options) {
@@ -943,6 +1015,18 @@ func TestCheckSnapshot_RejectAttachment(t *testing.T) {
 	_, err := svc.RejectAttachment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RejectAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RemoveAttachmentRoutingPolicyLabel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveAttachmentRoutingPolicyLabel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemoveAttachmentRoutingPolicyLabel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1225,6 +1309,18 @@ func TestUpdateSnapshot_CreateCoreNetwork(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCoreNetworkPrefixListAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCoreNetworkPrefixListAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCoreNetworkPrefixListAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDevice(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1482,18 @@ func TestUpdateSnapshot_DeleteCoreNetworkPolicyVersion(t *testing.T) {
 	_, err := svc.DeleteCoreNetworkPolicyVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCoreNetworkPolicyVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCoreNetworkPrefixListAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCoreNetworkPrefixListAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCoreNetworkPrefixListAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1873,6 +1981,18 @@ func TestUpdateSnapshot_GetVpcAttachment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAttachmentRoutingPolicyAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAttachmentRoutingPolicyAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAttachmentRoutingPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAttachments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAttachments(context.Background(), nil, func(o *Options) {
@@ -1902,6 +2022,30 @@ func TestUpdateSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 	_, err := svc.ListCoreNetworkPolicyVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCoreNetworkPolicyVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCoreNetworkPrefixListAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCoreNetworkPrefixListAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCoreNetworkPrefixListAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCoreNetworkRoutingInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCoreNetworkRoutingInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCoreNetworkRoutingInformation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1957,6 +2101,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutAttachmentRoutingPolicyLabel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAttachmentRoutingPolicyLabel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAttachmentRoutingPolicyLabel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutCoreNetworkPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutCoreNetworkPolicy(context.Background(), nil, func(o *Options) {
@@ -1998,6 +2154,18 @@ func TestUpdateSnapshot_RejectAttachment(t *testing.T) {
 	_, err := svc.RejectAttachment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RejectAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RemoveAttachmentRoutingPolicyLabel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveAttachmentRoutingPolicyLabel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemoveAttachmentRoutingPolicyLabel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -22,7 +22,7 @@ import (
 // If the request includes tags, then the requester must have the
 // organizations:TagResource permission.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 //
 // [Managing organizational units (OUs)]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
 func (c *Client) CreateOrganizationalUnit(ctx context.Context, params *CreateOrganizationalUnitInput, optFns ...func(*Options)) (*CreateOrganizationalUnitOutput, error) {
@@ -47,8 +47,7 @@ type CreateOrganizationalUnitInput struct {
 	// This member is required.
 	Name *string
 
-	// The unique identifier (ID) of the parent root or OU that you want to create the
-	// new OU in.
+	// ID for the parent root or OU that you want to create the new OU in.
 	//
 	// The [regex pattern] for a parent ID string requires one of the following:
 	//

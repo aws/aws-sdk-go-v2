@@ -1,0 +1,8 @@
+{
+    "id": "916238c0-5b3e-4215-ad47-c3ebeedd5344",
+    "type": "feature",
+    "description": "Added support for Synchronous project type and PII Detection and Redaction",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

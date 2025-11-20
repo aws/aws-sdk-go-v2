@@ -33881,6 +33881,13 @@ func awsRestjson1_serializeDocumentSendNotificationActionDefinition(v *types.Sen
 		ok.String(string(v.DeliveryMethod))
 	}
 
+	if v.Exclusion != nil {
+		ok := object.Key("Exclusion")
+		if err := awsRestjson1_serializeDocumentNotificationRecipientType(v.Exclusion, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Recipient != nil {
 		ok := object.Key("Recipient")
 		if err := awsRestjson1_serializeDocumentNotificationRecipientType(v.Recipient, ok); err != nil {

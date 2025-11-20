@@ -50,6 +50,10 @@ type CreateVpcAttachmentInput struct {
 	// Options for the VPC attachment.
 	Options *types.VpcOptions
 
+	// The routing policy label to apply to the VPC attachment for traffic routing
+	// decisions.
+	RoutingPolicyLabel *string
+
 	// The key-value tags associated with the request.
 	Tags []types.Tag
 

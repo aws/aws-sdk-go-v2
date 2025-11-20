@@ -12733,6 +12733,55 @@ func awsAwsjson11_deserializeDocumentPortRanges(v *[]types.PortRange, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3MonitoringConfiguration(v **types.S3MonitoringConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3MonitoringConfiguration
+	if *v == nil {
+		sv = &types.S3MonitoringConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "LogUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.LogUri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentScalingAction(v **types.ScalingAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13695,6 +13744,15 @@ func awsAwsjson11_deserializeDocumentStep(v **types.Step, value interface{}) err
 				return err
 			}
 
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13711,6 +13769,15 @@ func awsAwsjson11_deserializeDocumentStep(v **types.Step, value interface{}) err
 					return fmt.Errorf("expected StepId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "LogUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LogUri = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -13779,6 +13846,11 @@ func awsAwsjson11_deserializeDocumentStepConfig(v **types.StepConfig, value inte
 					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "StepMonitoringConfiguration":
+			if err := awsAwsjson11_deserializeDocumentStepMonitoringConfiguration(&sv.StepMonitoringConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13998,6 +14070,42 @@ func awsAwsjson11_deserializeDocumentStepIdsList(v *[]string, value interface{})
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStepMonitoringConfiguration(v **types.StepMonitoringConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StepMonitoringConfiguration
+	if *v == nil {
+		sv = &types.StepMonitoringConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3MonitoringConfiguration":
+			if err := awsAwsjson11_deserializeDocumentS3MonitoringConfiguration(&sv.S3MonitoringConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStepStateChangeReason(v **types.StepStateChangeReason, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14138,6 +14246,15 @@ func awsAwsjson11_deserializeDocumentStepSummary(v **types.StepSummary, value in
 				return err
 			}
 
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14145,6 +14262,15 @@ func awsAwsjson11_deserializeDocumentStepSummary(v **types.StepSummary, value in
 					return fmt.Errorf("expected StepId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "LogUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LogUri = ptr.String(jtv)
 			}
 
 		case "Name":

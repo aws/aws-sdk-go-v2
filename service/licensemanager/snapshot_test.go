@@ -146,6 +146,30 @@ func TestCheckSnapshot_CreateLicense(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLicenseAssetRuleset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -223,6 +247,30 @@ func TestCheckSnapshot_DeleteLicense(t *testing.T) {
 	_, err := svc.DeleteLicense(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLicense")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLicenseAssetRuleset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +362,30 @@ func TestCheckSnapshot_GetLicense(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLicenseAssetRuleset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -374,6 +446,18 @@ func TestCheckSnapshot_GetServiceSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAssetsForLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetsForLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetsForLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAssociationsForLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssociationsForLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -410,11 +494,47 @@ func TestCheckSnapshot_ListFailuresForLicenseConfigurationOperations(t *testing.
 	}
 }
 
+func TestCheckSnapshot_ListLicenseAssetGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLicenseAssetGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLicenseAssetGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListLicenseAssetRulesets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLicenseAssetRulesets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLicenseAssetRulesets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListLicenseConfigurations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLicenseConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListLicenseConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListLicenseConfigurationsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLicenseConfigurationsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLicenseConfigurationsForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -614,6 +734,30 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLicenseAssetRuleset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -745,6 +889,30 @@ func TestUpdateSnapshot_CreateLicense(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLicenseAssetRuleset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -822,6 +990,30 @@ func TestUpdateSnapshot_DeleteLicense(t *testing.T) {
 	_, err := svc.DeleteLicense(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLicense")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLicenseAssetRuleset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -913,6 +1105,30 @@ func TestUpdateSnapshot_GetLicense(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLicenseAssetRuleset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -973,6 +1189,18 @@ func TestUpdateSnapshot_GetServiceSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAssetsForLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetsForLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetsForLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAssociationsForLicenseConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssociationsForLicenseConfiguration(context.Background(), nil, func(o *Options) {
@@ -1009,11 +1237,47 @@ func TestUpdateSnapshot_ListFailuresForLicenseConfigurationOperations(t *testing
 	}
 }
 
+func TestUpdateSnapshot_ListLicenseAssetGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLicenseAssetGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLicenseAssetGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLicenseAssetRulesets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLicenseAssetRulesets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLicenseAssetRulesets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListLicenseConfigurations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLicenseConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListLicenseConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLicenseConfigurationsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLicenseConfigurationsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLicenseConfigurationsForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1206,6 +1470,30 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLicenseAssetGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLicenseAssetGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLicenseAssetGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLicenseAssetRuleset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLicenseAssetRuleset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLicenseAssetRuleset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

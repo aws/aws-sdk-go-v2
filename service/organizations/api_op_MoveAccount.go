@@ -13,7 +13,7 @@ import (
 // Moves an account from its current source parent root or organizational unit
 // (OU) to the specified destination parent root or OU.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 func (c *Client) MoveAccount(ctx context.Context, params *MoveAccountInput, optFns ...func(*Options)) (*MoveAccountOutput, error) {
 	if params == nil {
 		params = &MoveAccountInput{}
@@ -31,7 +31,7 @@ func (c *Client) MoveAccount(ctx context.Context, params *MoveAccountInput, optF
 
 type MoveAccountInput struct {
 
-	// The unique identifier (ID) of the account that you want to move.
+	// ID for the account that you want to move.
 	//
 	// The [regex pattern] for an account ID string requires exactly 12 digits.
 	//
@@ -40,8 +40,7 @@ type MoveAccountInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The unique identifier (ID) of the root or organizational unit that you want to
-	// move the account to.
+	// ID for the root or organizational unit that you want to move the account to.
 	//
 	// The [regex pattern] for a parent ID string requires one of the following:
 	//
@@ -58,8 +57,7 @@ type MoveAccountInput struct {
 	// This member is required.
 	DestinationParentId *string
 
-	// The unique identifier (ID) of the root or organizational unit that you want to
-	// move the account from.
+	// ID for the root or organizational unit that you want to move the account from.
 	//
 	// The [regex pattern] for a parent ID string requires one of the following:
 	//

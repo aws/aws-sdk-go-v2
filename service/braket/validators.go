@@ -90,6 +90,46 @@ func (m *validateOpCreateQuantumTask) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSpendingLimit struct {
+}
+
+func (*validateOpCreateSpendingLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSpendingLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSpendingLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSpendingLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSpendingLimit struct {
+}
+
+func (*validateOpDeleteSpendingLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSpendingLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSpendingLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSpendingLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDevice struct {
 }
 
@@ -230,6 +270,26 @@ func (m *validateOpSearchQuantumTasks) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchSpendingLimits struct {
+}
+
+func (*validateOpSearchSpendingLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchSpendingLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchSpendingLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchSpendingLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -270,6 +330,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSpendingLimit struct {
+}
+
+func (*validateOpUpdateSpendingLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSpendingLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSpendingLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSpendingLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
 }
@@ -284,6 +364,14 @@ func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateQuantumTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQuantumTask{}, middleware.After)
+}
+
+func addOpCreateSpendingLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSpendingLimit{}, middleware.After)
+}
+
+func addOpDeleteSpendingLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSpendingLimit{}, middleware.After)
 }
 
 func addOpGetDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -314,12 +402,20 @@ func addOpSearchQuantumTasksValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpSearchQuantumTasks{}, middleware.After)
 }
 
+func addOpSearchSpendingLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchSpendingLimits{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateSpendingLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSpendingLimit{}, middleware.After)
 }
 
 func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
@@ -659,6 +755,62 @@ func validateSearchQuantumTasksFilterList(v []types.SearchQuantumTasksFilter) er
 	}
 }
 
+func validateSearchSpendingLimitsFilter(v *types.SearchSpendingLimitsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSpendingLimitsFilter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchSpendingLimitsFilterList(v []types.SearchSpendingLimitsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSpendingLimitsFilterList"}
+	for i := range v {
+		if err := validateSearchSpendingLimitsFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimePeriod(v *types.TimePeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimePeriod"}
+	if v.StartAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartAt"))
+	}
+	if v.EndAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndAt"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelJobInput(v *CancelJobInput) error {
 	if v == nil {
 		return nil
@@ -791,6 +943,47 @@ func validateOpCreateQuantumTaskInput(v *CreateQuantumTaskInput) error {
 	}
 }
 
+func validateOpCreateSpendingLimitInput(v *CreateSpendingLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSpendingLimitInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.DeviceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceArn"))
+	}
+	if v.SpendingLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpendingLimit"))
+	}
+	if v.TimePeriod != nil {
+		if err := validateTimePeriod(v.TimePeriod); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSpendingLimitInput(v *DeleteSpendingLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSpendingLimitInput"}
+	if v.SpendingLimitArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpendingLimitArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDeviceInput(v *GetDeviceInput) error {
 	if v == nil {
 		return nil
@@ -908,6 +1101,23 @@ func validateOpSearchQuantumTasksInput(v *SearchQuantumTasksInput) error {
 	}
 }
 
+func validateOpSearchSpendingLimitsInput(v *SearchSpendingLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSpendingLimitsInput"}
+	if v.Filters != nil {
+		if err := validateSearchSpendingLimitsFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -936,6 +1146,29 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSpendingLimitInput(v *UpdateSpendingLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSpendingLimitInput"}
+	if v.SpendingLimitArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpendingLimitArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.TimePeriod != nil {
+		if err := validateTimePeriod(v.TimePeriod); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

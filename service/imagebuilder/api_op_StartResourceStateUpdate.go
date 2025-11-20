@@ -39,8 +39,8 @@ type StartResourceStateUpdateInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The ARN of the Image Builder resource that is updated. The state update might
-	// also impact associated resources.
+	// The Amazon Resource Name (ARN) of the Image Builder resource that is updated.
+	// The state update might also impact associated resources.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -73,7 +73,8 @@ type StartResourceStateUpdateOutput struct {
 	// update.
 	LifecycleExecutionId *string
 
-	// The requested ARN of the Image Builder resource for the asynchronous update.
+	// The requested Amazon Resource Name (ARN) of the Image Builder resource for the
+	// asynchronous update.
 	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.

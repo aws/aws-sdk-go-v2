@@ -445,6 +445,128 @@ func (m *awsAwsjson11_serializeOpBatchDescribeModelPackage) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchRebootClusterNodes struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchRebootClusterNodes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchRebootClusterNodes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchRebootClusterNodesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.BatchRebootClusterNodes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchRebootClusterNodesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpBatchReplaceClusterNodes struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchReplaceClusterNodes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchReplaceClusterNodes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchReplaceClusterNodesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.BatchReplaceClusterNodes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchReplaceClusterNodesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateAction struct {
 }
 
@@ -22648,6 +22770,23 @@ func (m *awsAwsjson11_serializeOpUpdateWorkteam) HandleSerialize(ctx context.Con
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAcceleratorPartitionConfig(v *types.AcceleratorPartitionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Count != nil {
+		ok := object.Key("Count")
+		ok.Integer(*v.Count)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentActionSource(v *types.ActionSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25186,6 +25325,13 @@ func awsAwsjson11_serializeDocumentComputeQuotaConfig(v *types.ComputeQuotaConfi
 func awsAwsjson11_serializeDocumentComputeQuotaResourceConfig(v *types.ComputeQuotaResourceConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AcceleratorPartition != nil {
+		ok := object.Key("AcceleratorPartition")
+		if err := awsAwsjson11_serializeDocumentAcceleratorPartitionConfig(v.AcceleratorPartition, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Accelerators != nil {
 		ok := object.Key("Accelerators")
@@ -35687,6 +35833,58 @@ func awsAwsjson11_serializeOpDocumentBatchDescribeModelPackageInput(v *BatchDesc
 	if v.ModelPackageArnList != nil {
 		ok := object.Key("ModelPackageArnList")
 		if err := awsAwsjson11_serializeDocumentModelPackageArnList(v.ModelPackageArnList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchRebootClusterNodesInput(v *BatchRebootClusterNodesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterName != nil {
+		ok := object.Key("ClusterName")
+		ok.String(*v.ClusterName)
+	}
+
+	if v.NodeIds != nil {
+		ok := object.Key("NodeIds")
+		if err := awsAwsjson11_serializeDocumentClusterNodeIds(v.NodeIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NodeLogicalIds != nil {
+		ok := object.Key("NodeLogicalIds")
+		if err := awsAwsjson11_serializeDocumentClusterNodeLogicalIdList(v.NodeLogicalIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchReplaceClusterNodesInput(v *BatchReplaceClusterNodesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterName != nil {
+		ok := object.Key("ClusterName")
+		ok.String(*v.ClusterName)
+	}
+
+	if v.NodeIds != nil {
+		ok := object.Key("NodeIds")
+		if err := awsAwsjson11_serializeDocumentClusterNodeIds(v.NodeIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NodeLogicalIds != nil {
+		ok := object.Key("NodeLogicalIds")
+		if err := awsAwsjson11_serializeDocumentClusterNodeLogicalIdList(v.NodeLogicalIds, ok); err != nil {
 			return err
 		}
 	}

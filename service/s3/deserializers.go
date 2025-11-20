@@ -3002,6 +3002,150 @@ func awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response *smithyhttp.R
 	}
 }
 
+type awsRestxml_deserializeOpGetBucketAbac struct {
+}
+
+func (*awsRestxml_deserializeOpGetBucketAbac) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpGetBucketAbac) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAbac(response, &metadata)
+	}
+	output := &GetBucketAbacOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentAbacStatus(&output.AbacStatus, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorGetBucketAbac(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
+	if err != nil {
+		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentGetBucketAbacOutput(v **GetBucketAbacOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *GetBucketAbacOutput
+	if *v == nil {
+		sv = &GetBucketAbacOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AbacStatus", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentAbacStatus(&sv.AbacStatus, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestxml_deserializeOpGetBucketAccelerateConfiguration struct {
 }
 
@@ -10878,6 +11022,86 @@ func awsRestxml_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, decode
 	return nil
 }
 
+type awsRestxml_deserializeOpPutBucketAbac struct {
+}
+
+func (*awsRestxml_deserializeOpPutBucketAbac) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpPutBucketAbac) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAbac(response, &metadata)
+	}
+	output := &PutBucketAbacOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorPutBucketAbac(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
+	if err != nil {
+		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestxml_deserializeOpPutBucketAccelerateConfiguration struct {
 }
 
@@ -14506,6 +14730,55 @@ func awsRestxml_deserializeErrorObjectNotInActiveTierError(response *smithyhttp.
 func awsRestxml_deserializeErrorTooManyParts(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyParts{}
 	return output
+}
+
+func awsRestxml_deserializeDocumentAbacStatus(v **types.AbacStatus, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AbacStatus
+	if *v == nil {
+		sv = &types.AbacStatus{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.BucketAbacStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
 }
 
 func awsRestxml_deserializeDocumentAbortIncompleteMultipartUpload(v **types.AbortIncompleteMultipartUpload, decoder smithyxml.NodeDecoder) error {

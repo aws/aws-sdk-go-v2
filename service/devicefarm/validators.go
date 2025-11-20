@@ -1689,6 +1689,41 @@ func validateDeviceSelectionConfiguration(v *types.DeviceSelectionConfiguration)
 	}
 }
 
+func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariable"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnvironmentVariables(v []types.EnvironmentVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariables"}
+	for i := range v {
+		if err := validateEnvironmentVariable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLocation(v *types.Location) error {
 	if v == nil {
 		return nil
@@ -1720,6 +1755,11 @@ func validateScheduleRunConfiguration(v *types.ScheduleRunConfiguration) error {
 	if v.DeviceProxy != nil {
 		if err := validateDeviceProxy(v.DeviceProxy); err != nil {
 			invalidParams.AddNested("DeviceProxy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentVariables != nil {
+		if err := validateEnvironmentVariables(v.EnvironmentVariables); err != nil {
+			invalidParams.AddNested("EnvironmentVariables", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1886,6 +1926,11 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentVariables != nil {
+		if err := validateEnvironmentVariables(v.EnvironmentVariables); err != nil {
+			invalidParams.AddNested("EnvironmentVariables", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2855,6 +2900,11 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentVariables != nil {
+		if err := validateEnvironmentVariables(v.EnvironmentVariables); err != nil {
+			invalidParams.AddNested("EnvironmentVariables", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

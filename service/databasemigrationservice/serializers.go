@@ -12260,6 +12260,11 @@ func awsAwsjson11_serializeOpDocumentImportCertificateInput(v *ImportCertificate
 		ok.Base64EncodeBytes(v.CertificateWallet)
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {

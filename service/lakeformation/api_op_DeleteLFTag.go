@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified LF-tag given a key name. If the input parameter tag key
-// was not found, then the operation will throw an exception. When you delete an
-// LF-tag, the LFTagPolicy attached to the LF-tag becomes invalid. If the deleted
-// LF-tag was still assigned to any resource, the tag policy attach to the deleted
-// LF-tag will no longer be applied to the resource.
+//	Deletes an LF-tag by its key name. The operation fails if the specified tag
+//
+// key doesn't exist. When you delete an LF-Tag:
+//
+//   - The associated LF-Tag policy becomes invalid.
+//
+//   - Resources that had this tag assigned will no longer have the tag policy
+//     applied to them.
 func (c *Client) DeleteLFTag(ctx context.Context, params *DeleteLFTagInput, optFns ...func(*Options)) (*DeleteLFTagOutput, error) {
 	if params == nil {
 		params = &DeleteLFTagInput{}

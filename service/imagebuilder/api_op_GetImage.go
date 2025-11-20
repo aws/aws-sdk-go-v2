@@ -42,6 +42,9 @@ type GetImageOutput struct {
 	// The image object.
 	Image *types.Image
 
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

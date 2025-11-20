@@ -526,6 +526,19 @@ func awsRestxml_serializeOpDocumentCreateAnycastIpListInput(v *CreateAnycastIpLi
 		el := value.MemberElement(root)
 		el.String(string(v.IpAddressType))
 	}
+	if v.IpamCidrConfigs != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IpamCidrConfigs",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentIpamCidrConfigList(v.IpamCidrConfigs, el); err != nil {
+			return err
+		}
+	}
 	if v.IpCount != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -15694,6 +15707,77 @@ func awsRestxml_serializeDocumentInvalidationBatch(v *types.InvalidationBatch, v
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentPaths(v.Paths, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentIpamCidrConfig(v *types.IpamCidrConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.AnycastIp != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AnycastIp",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.AnycastIp)
+	}
+	if v.Cidr != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Cidr",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Cidr)
+	}
+	if v.IpamPoolArn != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IpamPoolArn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.IpamPoolArn)
+	}
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentIpamCidrConfigList(v []types.IpamCidrConfig, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "IpamCidrConfig",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentIpamCidrConfig(&v[i], am); err != nil {
 			return err
 		}
 	}

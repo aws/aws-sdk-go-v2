@@ -12,7 +12,7 @@ import (
 
 // Deletes the resource policy from your organization.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

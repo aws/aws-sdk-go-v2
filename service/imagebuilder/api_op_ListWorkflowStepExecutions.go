@@ -48,8 +48,8 @@ type ListWorkflowStepExecutionsInput struct {
 
 type ListWorkflowStepExecutionsOutput struct {
 
-	// The image build version resource ARN that's associated with the specified
-	// runtime instance of the workflow.
+	// The image build version resource Amazon Resource Name (ARN) that's associated
+	// with the specified runtime instance of the workflow.
 	ImageBuildVersionArn *string
 
 	// The output message from the list action, if applicable.
@@ -67,8 +67,8 @@ type ListWorkflowStepExecutionsOutput struct {
 	// instance of the workflow.
 	Steps []types.WorkflowStepMetadata
 
-	// The build version ARN for the Image Builder workflow resource that defines the
-	// steps for this runtime instance of the workflow.
+	// The build version Amazon Resource Name (ARN) for the Image Builder workflow
+	// resource that defines the steps for this runtime instance of the workflow.
 	WorkflowBuildVersionArn *string
 
 	// The unique identifier that Image Builder assigned to keep track of runtime

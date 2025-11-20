@@ -24,7 +24,17 @@ import (
 // GetDataAccess . Therefore, all SAML roles that can be assumed via
 // AssumeDecoratedRoleWithSAML must at a minimum include
 // lakeformation:GetDataAccess in their role policies. A typical IAM policy
-// attached to such a role would look as follows:
+// attached to such a role would include the following actions:
+//
+//   - glue:*Database*
+//
+//   - glue:*Table*
+//
+//   - glue:*Partition*
+//
+//   - glue:*UserDefinedFunction*
+//
+//   - lakeformation:GetDataAccess
 func (c *Client) AssumeDecoratedRoleWithSAML(ctx context.Context, params *AssumeDecoratedRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeDecoratedRoleWithSAMLOutput, error) {
 	if params == nil {
 		params = &AssumeDecoratedRoleWithSAMLInput{}

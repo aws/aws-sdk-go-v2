@@ -40,6 +40,19 @@ type CreateProjectInput struct {
 	// scheduling a run.
 	DefaultJobTimeoutMinutes *int32
 
+	//  A set of environment variables which are used by default for all runs in the
+	// project. These environment variables are applied to the test run during the
+	// execution of a test spec file.
+	//
+	// For more information about using test spec files, please see [Custom test environments] in AWS Device
+	// Farm.
+	//
+	// [Custom test environments]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+	EnvironmentVariables []types.EnvironmentVariable
+
+	// An IAM role to be assumed by the test host for all runs in the project.
+	ExecutionRoleArn *string
+
 	// The VPC security groups and subnets that are attached to a project.
 	VpcConfig *types.VpcConfig
 

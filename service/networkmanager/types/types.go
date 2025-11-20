@@ -102,6 +102,24 @@ type AttachmentError struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about routing policy associations for an attachment.
+type AttachmentRoutingPolicyAssociationSummary struct {
+
+	// The list of routing policies currently associated with the attachment.
+	AssociatedRoutingPolicies []string
+
+	// The ID of the attachment associated with the routing policy.
+	AttachmentId *string
+
+	// The list of routing policies that are pending association with the attachment.
+	PendingRoutingPolicies []string
+
+	// The routing policy label associated with the attachment.
+	RoutingPolicyLabel *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a location in Amazon Web Services.
 type AWSLocation struct {
 
@@ -463,6 +481,16 @@ type CoreNetworkChangeEventValues struct {
 	// The changed network function group name.
 	NetworkFunctionGroupName *string
 
+	// The edge location of the peer in a core network change event.
+	PeerEdgeLocation *string
+
+	// The names of the routing policies and other association details in the core
+	// network change values.
+	RoutingPolicyAssociationDetails []RoutingPolicyAssociationDetail
+
+	// The routing policy direction (inbound/outbound) in a core network change event.
+	RoutingPolicyDirection RoutingPolicyDirection
+
 	// The segment name if the change event is associated with a segment.
 	SegmentName *string
 
@@ -474,6 +502,9 @@ type CoreNetworkChangeValues struct {
 
 	// The ASN of a core network.
 	Asn *int64
+
+	// The attachment identifier in the core network change values.
+	AttachmentId *string
 
 	// The IP addresses used for a core network.
 	Cidr *string
@@ -493,6 +524,19 @@ type CoreNetworkChangeValues struct {
 	// The network function group name if the change event is associated with a
 	// network function group.
 	NetworkFunctionGroupName *string
+
+	// The edge locations of peers in the core network change values.
+	PeerEdgeLocations []string
+
+	// The routing policy configuration in the core network change values.
+	RoutingPolicy *string
+
+	// The names of the routing policies and other association details in the core
+	// network change values.
+	RoutingPolicyAssociationDetails []RoutingPolicyAssociationDetail
+
+	// The routing policy direction (inbound/outbound) in a core network change event.
+	RoutingPolicyDirection RoutingPolicyDirection
 
 	// Indicates whether security group referencing is enabled for the core network.
 	SecurityGroupReferencingSupport bool
@@ -630,6 +674,31 @@ type CoreNetworkPolicyVersion struct {
 
 	// The ID of the policy version.
 	PolicyVersionId *int32
+
+	noSmithyDocumentSerde
+}
+
+// Routing information for a core network, including route details and BGP
+// attributes.
+type CoreNetworkRoutingInformation struct {
+
+	// The BGP AS path for the route.
+	AsPath []string
+
+	// The BGP community values for the route.
+	Communities []string
+
+	// The BGP local preference value for the route.
+	LocalPreference *string
+
+	// The BGP Multi-Exit Discriminator (MED) value for the route.
+	Med *string
+
+	// The next hop information for the route.
+	NextHop *RoutingInformationNextHop
+
+	// The IP prefix for the route.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -1196,6 +1265,21 @@ type PermissionsErrorContext struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a prefix list association with a core network.
+type PrefixListAssociation struct {
+
+	// The core network id in the association.
+	CoreNetworkId *string
+
+	// The alias of the prefix list in the association.
+	PrefixListAlias *string
+
+	// The ARN of the prefix list in the association.
+	PrefixListArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes proposed changes to a network function group.
 type ProposedNetworkFunctionGroupChange struct {
 
@@ -1376,6 +1460,42 @@ type RouteTableIdentifier struct {
 	// "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"
 	// .
 	TransitGatewayRouteTableArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the next hop for a route in the core network.
+type RoutingInformationNextHop struct {
+
+	// The ID of the core network attachment for the next hop.
+	CoreNetworkAttachmentId *string
+
+	// The edge location for the next hop.
+	EdgeLocation *string
+
+	// The IP address of the next hop.
+	IpAddress *string
+
+	// The ID of the resource for the next hop.
+	ResourceId *string
+
+	// The type of resource for the next hop.
+	ResourceType *string
+
+	// The name of the segment for the next hop.
+	SegmentName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a routing policy association.
+type RoutingPolicyAssociationDetail struct {
+
+	// The names of the routing policies in the association.
+	RoutingPolicyNames []string
+
+	// The names of the segments that are shared with each other in the association.
+	SharedSegments []string
 
 	noSmithyDocumentSerde
 }

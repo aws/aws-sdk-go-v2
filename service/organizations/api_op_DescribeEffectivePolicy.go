@@ -23,7 +23,7 @@ import (
 // For more information about policy inheritance, see [Understanding management policy inheritance] in the Organizations User
 // Guide.
 //
-// This operation can be called from any account in the organization.
+// You can call this operation from any account in a organization.
 //
 // [Understanding management policy inheritance]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html
 func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEffectivePolicyInput, optFns ...func(*Options)) (*DescribeEffectivePolicyOutput, error) {
@@ -58,12 +58,15 @@ type DescribeEffectivePolicyInput struct {
 	//
 	// [SECURITYHUB_POLICY]
 	//
+	// [INSPECTOR_POLICY]
+	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
 	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	// [DECLARATIVE_POLICY_EC2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+	// [INSPECTOR_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
 	//
 	// This member is required.
 	PolicyType types.EffectivePolicyType

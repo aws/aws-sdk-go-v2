@@ -32,6 +32,9 @@ type UpdateServiceSettingsInput struct {
 	// Activates cross-account discovery.
 	EnableCrossAccountsDiscovery *bool
 
+	// Cross region discovery enabled source regions.
+	EnabledDiscoverySourceRegions []string
+
 	// Enables integration with Organizations for cross-account discovery.
 	OrganizationConfiguration *types.OrganizationConfiguration
 

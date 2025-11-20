@@ -12,7 +12,7 @@ import (
 )
 
 // Grants permission to create a connectorV2 based on input parameters. This API
-// is in preview release and subject to change.
+// is in public preview and subject to change.
 func (c *Client) CreateConnectorV2(ctx context.Context, params *CreateConnectorV2Input, optFns ...func(*Options)) (*CreateConnectorV2Output, error) {
 	if params == nil {
 		params = &CreateConnectorV2Input{}

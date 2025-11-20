@@ -39,6 +39,9 @@ type GetWorkflowInput struct {
 
 type GetWorkflowOutput struct {
 
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
+
 	// The workflow resource specified in the request.
 	Workflow *types.Workflow
 

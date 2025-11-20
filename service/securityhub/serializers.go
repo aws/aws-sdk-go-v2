@@ -5377,6 +5377,109 @@ func awsRestjson1_serializeOpDocumentGetFindingStatisticsV2Input(v *GetFindingSt
 	return nil
 }
 
+type awsRestjson1_serializeOpGetFindingsTrendsV2 struct {
+}
+
+func (*awsRestjson1_serializeOpGetFindingsTrendsV2) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetFindingsTrendsV2) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetFindingsTrendsV2Input)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/findingsTrendsv2")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetFindingsTrendsV2Input(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetFindingsTrendsV2Input(v *GetFindingsTrendsV2Input, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetFindingsTrendsV2Input(v *GetFindingsTrendsV2Input, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentFindingsTrendsFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetFindingsV2 struct {
 }
 
@@ -5928,6 +6031,109 @@ func awsRestjson1_serializeOpDocumentGetResourcesStatisticsV2Input(v *GetResourc
 	if len(v.SortOrder) > 0 {
 		ok := object.Key("SortOrder")
 		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetResourcesTrendsV2 struct {
+}
+
+func (*awsRestjson1_serializeOpGetResourcesTrendsV2) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetResourcesTrendsV2) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetResourcesTrendsV2Input)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/resourcesTrendsv2")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetResourcesTrendsV2Input(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetResourcesTrendsV2Input(v *GetResourcesTrendsV2Input, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetResourcesTrendsV2Input(v *GetResourcesTrendsV2Input, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentResourcesTrendsFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.String(smithytime.FormatDateTime(*v.StartTime))
 	}
 
 	return nil
@@ -29573,6 +29779,96 @@ func awsRestjson1_serializeDocumentFindingProviderSeverity(v *types.FindingProvi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFindingsTrendsCompositeFilter(v *types.FindingsTrendsCompositeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NestedCompositeFilters != nil {
+		ok := object.Key("NestedCompositeFilters")
+		if err := awsRestjson1_serializeDocumentFindingsTrendsCompositeFilterList(v.NestedCompositeFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.StringFilters != nil {
+		ok := object.Key("StringFilters")
+		if err := awsRestjson1_serializeDocumentFindingsTrendsStringFilterList(v.StringFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFindingsTrendsCompositeFilterList(v []types.FindingsTrendsCompositeFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFindingsTrendsCompositeFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFindingsTrendsFilters(v *types.FindingsTrendsFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompositeFilters != nil {
+		ok := object.Key("CompositeFilters")
+		if err := awsRestjson1_serializeDocumentFindingsTrendsCompositeFilterList(v.CompositeFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CompositeOperator) > 0 {
+		ok := object.Key("CompositeOperator")
+		ok.String(string(v.CompositeOperator))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFindingsTrendsStringFilter(v *types.FindingsTrendsStringFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FieldName) > 0 {
+		ok := object.Key("FieldName")
+		ok.String(string(v.FieldName))
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsRestjson1_serializeDocumentStringFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFindingsTrendsStringFilterList(v []types.FindingsTrendsStringFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFindingsTrendsStringFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFirewallPolicyDetails(v *types.FirewallPolicyDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32505,6 +32801,96 @@ func awsRestjson1_serializeDocumentResourcesStringFilterList(v []types.Resources
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentResourcesStringFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourcesTrendsCompositeFilter(v *types.ResourcesTrendsCompositeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NestedCompositeFilters != nil {
+		ok := object.Key("NestedCompositeFilters")
+		if err := awsRestjson1_serializeDocumentResourcesTrendsCompositeFilterList(v.NestedCompositeFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.StringFilters != nil {
+		ok := object.Key("StringFilters")
+		if err := awsRestjson1_serializeDocumentResourcesTrendsStringFilterList(v.StringFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourcesTrendsCompositeFilterList(v []types.ResourcesTrendsCompositeFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentResourcesTrendsCompositeFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourcesTrendsFilters(v *types.ResourcesTrendsFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompositeFilters != nil {
+		ok := object.Key("CompositeFilters")
+		if err := awsRestjson1_serializeDocumentResourcesTrendsCompositeFilterList(v.CompositeFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CompositeOperator) > 0 {
+		ok := object.Key("CompositeOperator")
+		ok.String(string(v.CompositeOperator))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourcesTrendsStringFilter(v *types.ResourcesTrendsStringFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FieldName) > 0 {
+		ok := object.Key("FieldName")
+		ok.String(string(v.FieldName))
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsRestjson1_serializeDocumentStringFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourcesTrendsStringFilterList(v []types.ResourcesTrendsStringFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentResourcesTrendsStringFilter(&v[i], av); err != nil {
 			return err
 		}
 	}

@@ -802,6 +802,228 @@ func awsAwsjson11_deserializeOpErrorBatchDescribeModelPackage(response *smithyht
 	}
 }
 
+type awsAwsjson11_deserializeOpBatchRebootClusterNodes struct {
+}
+
+func (*awsAwsjson11_deserializeOpBatchRebootClusterNodes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpBatchRebootClusterNodes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorBatchRebootClusterNodes(response, &metadata)
+	}
+	output := &BatchRebootClusterNodesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentBatchRebootClusterNodesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorBatchRebootClusterNodes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpBatchReplaceClusterNodes struct {
+}
+
+func (*awsAwsjson11_deserializeOpBatchReplaceClusterNodes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpBatchReplaceClusterNodes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorBatchReplaceClusterNodes(response, &metadata)
+	}
+	output := &BatchReplaceClusterNodesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentBatchReplaceClusterNodesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorBatchReplaceClusterNodes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpCreateAction struct {
 }
 
@@ -40027,6 +40249,59 @@ func awsAwsjson11_deserializeErrorResourceNotFound(response *smithyhttp.Response
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAcceleratorPartitionConfig(v **types.AcceleratorPartitionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AcceleratorPartitionConfig
+	if *v == nil {
+		sv = &types.AcceleratorPartitionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int32(int32(i64))
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MIGProfileType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.MIGProfileType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentActionSource(v **types.ActionSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45128,6 +45403,374 @@ func awsAwsjson11_deserializeDocumentBatchDescribeModelPackageSummary(v **types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBatchRebootClusterNodeLogicalIdsError(v **types.BatchRebootClusterNodeLogicalIdsError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchRebootClusterNodeLogicalIdsError
+	if *v == nil {
+		sv = &types.BatchRebootClusterNodeLogicalIdsError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchRebootClusterNodesErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchRebootClusterNodesErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "NodeLogicalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterNodeLogicalId to be of type string, got %T instead", value)
+				}
+				sv.NodeLogicalId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchRebootClusterNodeLogicalIdsErrors(v *[]types.BatchRebootClusterNodeLogicalIdsError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchRebootClusterNodeLogicalIdsError
+	if *v == nil {
+		cv = []types.BatchRebootClusterNodeLogicalIdsError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchRebootClusterNodeLogicalIdsError
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBatchRebootClusterNodeLogicalIdsError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchRebootClusterNodesError(v **types.BatchRebootClusterNodesError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchRebootClusterNodesError
+	if *v == nil {
+		sv = &types.BatchRebootClusterNodesError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchRebootClusterNodesErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchRebootClusterNodesErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "NodeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterNodeId to be of type string, got %T instead", value)
+				}
+				sv.NodeId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchRebootClusterNodesErrors(v *[]types.BatchRebootClusterNodesError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchRebootClusterNodesError
+	if *v == nil {
+		cv = []types.BatchRebootClusterNodesError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchRebootClusterNodesError
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBatchRebootClusterNodesError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchReplaceClusterNodeLogicalIdsError(v **types.BatchReplaceClusterNodeLogicalIdsError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchReplaceClusterNodeLogicalIdsError
+	if *v == nil {
+		sv = &types.BatchReplaceClusterNodeLogicalIdsError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchReplaceClusterNodesErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchReplaceClusterNodesErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "NodeLogicalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterNodeLogicalId to be of type string, got %T instead", value)
+				}
+				sv.NodeLogicalId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchReplaceClusterNodeLogicalIdsErrors(v *[]types.BatchReplaceClusterNodeLogicalIdsError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchReplaceClusterNodeLogicalIdsError
+	if *v == nil {
+		cv = []types.BatchReplaceClusterNodeLogicalIdsError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchReplaceClusterNodeLogicalIdsError
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBatchReplaceClusterNodeLogicalIdsError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchReplaceClusterNodesError(v **types.BatchReplaceClusterNodesError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchReplaceClusterNodesError
+	if *v == nil {
+		sv = &types.BatchReplaceClusterNodesError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchReplaceClusterNodesErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchReplaceClusterNodesErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "NodeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterNodeId to be of type string, got %T instead", value)
+				}
+				sv.NodeId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchReplaceClusterNodesErrors(v *[]types.BatchReplaceClusterNodesError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchReplaceClusterNodesError
+	if *v == nil {
+		cv = []types.BatchReplaceClusterNodesError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchReplaceClusterNodesError
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBatchReplaceClusterNodesError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchTransformInput(v **types.BatchTransformInput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48616,6 +49259,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeSummary(v **types.ClusterNodeSum
 				sv.NodeLogicalId = ptr.String(jtv)
 			}
 
+		case "PrivateDnsHostname":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterPrivateDnsHostname to be of type string, got %T instead", value)
+				}
+				sv.PrivateDnsHostname = ptr.String(jtv)
+			}
+
 		case "UltraServerInfo":
 			if err := awsAwsjson11_deserializeDocumentUltraServerInfo(&sv.UltraServerInfo, value); err != nil {
 				return err
@@ -50067,6 +50719,11 @@ func awsAwsjson11_deserializeDocumentComputeQuotaResourceConfig(v **types.Comput
 
 	for key, value := range shape {
 		switch key {
+		case "AcceleratorPartition":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorPartitionConfig(&sv.AcceleratorPartition, value); err != nil {
+				return err
+			}
+
 		case "Accelerators":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -94478,6 +95135,108 @@ func awsAwsjson11_deserializeOpDocumentBatchDescribeModelPackageOutput(v **Batch
 
 		case "ModelPackageSummaries":
 			if err := awsAwsjson11_deserializeDocumentModelPackageSummaries(&sv.ModelPackageSummaries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentBatchRebootClusterNodesOutput(v **BatchRebootClusterNodesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchRebootClusterNodesOutput
+	if *v == nil {
+		sv = &BatchRebootClusterNodesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Failed":
+			if err := awsAwsjson11_deserializeDocumentBatchRebootClusterNodesErrors(&sv.Failed, value); err != nil {
+				return err
+			}
+
+		case "FailedNodeLogicalIds":
+			if err := awsAwsjson11_deserializeDocumentBatchRebootClusterNodeLogicalIdsErrors(&sv.FailedNodeLogicalIds, value); err != nil {
+				return err
+			}
+
+		case "Successful":
+			if err := awsAwsjson11_deserializeDocumentClusterNodeIds(&sv.Successful, value); err != nil {
+				return err
+			}
+
+		case "SuccessfulNodeLogicalIds":
+			if err := awsAwsjson11_deserializeDocumentClusterNodeLogicalIdList(&sv.SuccessfulNodeLogicalIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentBatchReplaceClusterNodesOutput(v **BatchReplaceClusterNodesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchReplaceClusterNodesOutput
+	if *v == nil {
+		sv = &BatchReplaceClusterNodesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Failed":
+			if err := awsAwsjson11_deserializeDocumentBatchReplaceClusterNodesErrors(&sv.Failed, value); err != nil {
+				return err
+			}
+
+		case "FailedNodeLogicalIds":
+			if err := awsAwsjson11_deserializeDocumentBatchReplaceClusterNodeLogicalIdsErrors(&sv.FailedNodeLogicalIds, value); err != nil {
+				return err
+			}
+
+		case "Successful":
+			if err := awsAwsjson11_deserializeDocumentClusterNodeIds(&sv.Successful, value); err != nil {
+				return err
+			}
+
+		case "SuccessfulNodeLogicalIds":
+			if err := awsAwsjson11_deserializeDocumentClusterNodeLogicalIdList(&sv.SuccessfulNodeLogicalIds, value); err != nil {
 				return err
 			}
 

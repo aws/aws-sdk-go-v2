@@ -271,8 +271,7 @@ func (e *ResourceLockedException) ErrorCode() string {
 }
 func (e *ResourceLockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of tags you can associate with a
-// resource.
+// You've reached a Service Quota limit on this resource.
 type ServiceQuotaExceededException struct {
 	Message *string
 

@@ -46,6 +46,25 @@ func (BlueprintStage) Values() []BlueprintStage {
 	}
 }
 
+type CustomOutputStatus string
+
+// Enum values for CustomOutputStatus
+const (
+	CustomOutputStatusMatch   CustomOutputStatus = "MATCH"
+	CustomOutputStatusNoMatch CustomOutputStatus = "NO_MATCH"
+)
+
+// Values returns all known values for CustomOutputStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomOutputStatus) Values() []CustomOutputStatus {
+	return []CustomOutputStatus{
+		"MATCH",
+		"NO_MATCH",
+	}
+}
+
 type DataAutomationStage string
 
 // Enum values for DataAutomationStage
@@ -62,5 +81,28 @@ func (DataAutomationStage) Values() []DataAutomationStage {
 	return []DataAutomationStage{
 		"LIVE",
 		"DEVELOPMENT",
+	}
+}
+
+type SemanticModality string
+
+// Enum values for SemanticModality
+const (
+	SemanticModalityDocument SemanticModality = "DOCUMENT"
+	SemanticModalityImage    SemanticModality = "IMAGE"
+	SemanticModalityAudio    SemanticModality = "AUDIO"
+	SemanticModalityVideo    SemanticModality = "VIDEO"
+)
+
+// Values returns all known values for SemanticModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SemanticModality) Values() []SemanticModality {
+	return []SemanticModality{
+		"DOCUMENT",
+		"IMAGE",
+		"AUDIO",
+		"VIDEO",
 	}
 }

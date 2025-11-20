@@ -2454,6 +2454,23 @@ type ReleaseLabelFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 configuration for monitoring log publishing. You can configure
+// your step to send log information to Amazon S3. When it's specified, it takes
+// precedence over the cluster's logging configuration. If you don't specify this
+// configuration entirely, or omit individual fields, EMR falls back to
+// cluster-level logging behavior.
+type S3MonitoringConfiguration struct {
+
+	// The KMS key ARN to encrypt the logs published to the given Amazon S3
+	// destination.
+	EncryptionKeyArn *string
+
+	// The Amazon S3 destination URI for log publishing.
+	LogUri *string
+
+	noSmithyDocumentSerde
+}
+
 // The type of adjustment the automatic scaling activity makes when triggered, and
 // the periodicity of the adjustment.
 type ScalingAction struct {
@@ -2795,6 +2812,10 @@ type Step struct {
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
 
+	// The KMS key ARN to encrypt the logs published to the given Amazon S3
+	// destination.
+	EncryptionKeyArn *string
+
 	// The Amazon Resource Name (ARN) of the runtime role for a step on the cluster.
 	// The runtime role can be a cross-account IAM role. The runtime role ARN is a
 	// combination of account ID, role name, and role type using the following format:
@@ -2806,6 +2827,9 @@ type Step struct {
 
 	// The identifier of the cluster step.
 	Id *string
+
+	// The Amazon S3 destination URI for log publishing.
+	LogUri *string
 
 	// The name of the cluster step.
 	Name *string
@@ -2853,6 +2877,9 @@ type StepConfig struct {
 	// this parameter set to TERMINATE_CLUSTER , the cluster does not terminate.
 	ActionOnFailure ActionOnFailure
 
+	// Object that holds configuration properties for logging.
+	StepMonitoringConfiguration *StepMonitoringConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2893,6 +2920,19 @@ type StepExecutionStatusDetail struct {
 
 	// The start date and time of the step.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Object that holds configuration properties for logging.
+type StepMonitoringConfiguration struct {
+
+	// The Amazon S3 configuration for monitoring log publishing. You can configure
+	// your step to send log information to Amazon S3. When it's specified, it takes
+	// precedence over the cluster's logging configuration. If you don't specify this
+	// configuration entirely, or omit individual fields, EMR falls back to
+	// cluster-level logging behavior.
+	S3MonitoringConfiguration *S3MonitoringConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2940,8 +2980,15 @@ type StepSummary struct {
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
 
+	// The KMS key ARN to encrypt the logs published to the given Amazon S3
+	// destination.
+	EncryptionKeyArn *string
+
 	// The identifier of the cluster step.
 	Id *string
+
+	// The Amazon S3 destination URI for log publishing.
+	LogUri *string
 
 	// The name of the cluster step.
 	Name *string

@@ -990,6 +990,26 @@ func (m *validateOpGetFindingStatisticsV2) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFindingsTrendsV2 struct {
+}
+
+func (*validateOpGetFindingsTrendsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFindingsTrendsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFindingsTrendsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFindingsTrendsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInsightResults struct {
 }
 
@@ -1045,6 +1065,26 @@ func (m *validateOpGetResourcesStatisticsV2) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourcesStatisticsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourcesTrendsV2 struct {
+}
+
+func (*validateOpGetResourcesTrendsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcesTrendsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcesTrendsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcesTrendsV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1626,6 +1666,10 @@ func addOpGetFindingStatisticsV2ValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetFindingStatisticsV2{}, middleware.After)
 }
 
+func addOpGetFindingsTrendsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFindingsTrendsV2{}, middleware.After)
+}
+
 func addOpGetInsightResultsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInsightResults{}, middleware.After)
 }
@@ -1636,6 +1680,10 @@ func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetResourcesStatisticsV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcesStatisticsV2{}, middleware.After)
+}
+
+func addOpGetResourcesTrendsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcesTrendsV2{}, middleware.After)
 }
 
 func addOpGetSecurityControlDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -3532,6 +3580,24 @@ func validateOpGetFindingStatisticsV2Input(v *GetFindingStatisticsV2Input) error
 	}
 }
 
+func validateOpGetFindingsTrendsV2Input(v *GetFindingsTrendsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFindingsTrendsV2Input"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInsightResultsInput(v *GetInsightResultsInput) error {
 	if v == nil {
 		return nil
@@ -3573,6 +3639,24 @@ func validateOpGetResourcesStatisticsV2Input(v *GetResourcesStatisticsV2Input) e
 		if err := validateResourceGroupByRules(v.GroupByRules); err != nil {
 			invalidParams.AddNested("GroupByRules", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourcesTrendsV2Input(v *GetResourcesTrendsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcesTrendsV2Input"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

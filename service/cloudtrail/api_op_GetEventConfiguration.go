@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves the current event configuration settings for the specified event data
-// store, including details about maximum event size and context key selectors
-// configured for the event data store.
+// store or trail. The response includes maximum event size configuration, the
+// context key selectors configured for the event data store, and any aggregation
+// settings configured for the trail.
 func (c *Client) GetEventConfiguration(ctx context.Context, params *GetEventConfigurationInput, optFns ...func(*Options)) (*GetEventConfigurationOutput, error) {
 	if params == nil {
 		params = &GetEventConfigurationInput{}
@@ -35,10 +36,17 @@ type GetEventConfigurationInput struct {
 	// for which you want to retrieve event configuration settings.
 	EventDataStore *string
 
+	// The name of the trail for which you want to retrieve event configuration
+	// settings.
+	TrailName *string
+
 	noSmithyDocumentSerde
 }
 
 type GetEventConfigurationOutput struct {
+
+	// The list of aggregation configurations that are configured for the trail.
+	AggregationConfigurations []types.AggregationConfiguration
 
 	// The list of context key selectors that are configured for the event data store.
 	ContextKeySelectors []types.ContextKeySelector
@@ -49,6 +57,10 @@ type GetEventConfigurationOutput struct {
 
 	// The maximum allowed size for events stored in the specified event data store.
 	MaxEventSize types.MaxEventSize
+
+	// The Amazon Resource Name (ARN) of the trail for which the event configuration
+	// settings are returned.
+	TrailARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

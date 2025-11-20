@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to delete a connectorV2. This API is in preview release and
+// Grants permission to delete a connectorV2. This API is in public preview and
 // subject to change.
 func (c *Client) DeleteConnectorV2(ctx context.Context, params *DeleteConnectorV2Input, optFns ...func(*Options)) (*DeleteConnectorV2Output, error) {
 	if params == nil {

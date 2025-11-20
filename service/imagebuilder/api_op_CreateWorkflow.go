@@ -77,6 +77,11 @@ type CreateWorkflowInput struct {
 	// Describes the workflow.
 	Description *string
 
+	// Validates the required permissions for the operation and the request
+	// parameters, without actually making the request, and provides an error response.
+	// Upon a successful request, the error response is DryRunOperationException .
+	DryRun bool
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
 	// encrypt this workflow resource. This can be either the Key ARN or the Alias ARN.
 	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
@@ -103,6 +108,9 @@ type CreateWorkflowOutput struct {
 
 	// The client token that uniquely identifies the request.
 	ClientToken *string
+
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
 
 	// The Amazon Resource Name (ARN) of the workflow resource that the request
 	// created.

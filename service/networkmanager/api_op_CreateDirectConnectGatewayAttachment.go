@@ -49,6 +49,10 @@ type CreateDirectConnectGatewayAttachmentInput struct {
 	// client token
 	ClientToken *string
 
+	// The routing policy label to apply to the Direct Connect Gateway attachment for
+	// traffic routing decisions.
+	RoutingPolicyLabel *string
+
 	// The key value tags to apply to the Direct Connect gateway attachment during
 	// creation.
 	Tags []types.Tag

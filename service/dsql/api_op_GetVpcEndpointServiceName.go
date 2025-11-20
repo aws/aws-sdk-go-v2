@@ -43,6 +43,9 @@ type GetVpcEndpointServiceNameOutput struct {
 	// This member is required.
 	ServiceName *string
 
+	// The VPC connection endpoint for the cluster.
+	ClusterVpcEndpoint *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

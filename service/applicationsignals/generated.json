@@ -16,6 +16,7 @@
         "api_op_GetService.go",
         "api_op_GetServiceLevelObjective.go",
         "api_op_ListAuditFindings.go",
+        "api_op_ListEntityEvents.go",
         "api_op_ListGroupingAttributeDefinitions.go",
         "api_op_ListServiceDependencies.go",
         "api_op_ListServiceDependents.go",

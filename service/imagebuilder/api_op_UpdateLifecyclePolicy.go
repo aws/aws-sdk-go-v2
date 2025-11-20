@@ -74,7 +74,8 @@ type UpdateLifecyclePolicyInput struct {
 
 type UpdateLifecyclePolicyOutput struct {
 
-	// The ARN of the image lifecycle policy resource that was updated.
+	// The Amazon Resource Name (ARN) of the image lifecycle policy resource that was
+	// updated.
 	LifecyclePolicyArn *string
 
 	// Metadata pertaining to the operation's result.

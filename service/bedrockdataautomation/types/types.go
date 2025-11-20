@@ -57,6 +57,9 @@ type AudioOverrideConfiguration struct {
 	// Configuration to enable/disable processing of modality
 	ModalityProcessing *ModalityProcessingConfiguration
 
+	// Configuration for sensitive data detection and redaction
+	SensitiveDataConfiguration *SensitiveDataConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -273,6 +276,9 @@ type DataAutomationProject struct {
 	// Stage of the Project
 	ProjectStage DataAutomationProjectStage
 
+	// Type of the DataAutomationProject
+	ProjectType DataAutomationProjectType
+
 	// Standard output configuration
 	StandardOutputConfiguration *StandardOutputConfiguration
 
@@ -311,6 +317,9 @@ type DataAutomationProjectSummary struct {
 
 	// Stage of the Project
 	ProjectStage DataAutomationProjectStage
+
+	// Type of the DataAutomationProject
+	ProjectType DataAutomationProjectType
 
 	noSmithyDocumentSerde
 }
@@ -376,6 +385,9 @@ type DocumentOverrideConfiguration struct {
 
 	// Configuration to enable/disable processing of modality
 	ModalityProcessing *ModalityProcessingConfiguration
+
+	// Configuration for sensitive data detection and redaction
+	SensitiveDataConfiguration *SensitiveDataConfiguration
 
 	// Configuration of Splitter
 	Splitter *SplitterConfiguration
@@ -470,6 +482,9 @@ type ImageOverrideConfiguration struct {
 	// Configuration to enable/disable processing of modality
 	ModalityProcessing *ModalityProcessingConfiguration
 
+	// Configuration for sensitive data detection and redaction
+	SensitiveDataConfiguration *SensitiveDataConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -559,6 +574,35 @@ type OverrideConfiguration struct {
 
 	// Override Configuration of Video
 	Video *VideoOverrideConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for PII entities detection and redaction
+type PIIEntitiesConfiguration struct {
+
+	// Types of PII entities to detect
+	PiiEntityTypes []PIIEntityType
+
+	// Mode for redacting detected PII
+	RedactionMaskMode PIIRedactionMaskMode
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for sensitive data detection and redaction
+type SensitiveDataConfiguration struct {
+
+	// Mode for sensitive data detection
+	//
+	// This member is required.
+	DetectionMode SensitiveDataDetectionMode
+
+	// Scope of detection - what types of sensitive data to detect
+	DetectionScope []SensitiveDataDetectionScopeType
+
+	// Configuration for PII entities detection and redaction
+	PiiEntitiesConfiguration *PIIEntitiesConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -676,6 +720,9 @@ type VideoOverrideConfiguration struct {
 
 	// Configuration to enable/disable processing of modality
 	ModalityProcessing *ModalityProcessingConfiguration
+
+	// Configuration for sensitive data detection and redaction
+	SensitiveDataConfiguration *SensitiveDataConfiguration
 
 	noSmithyDocumentSerde
 }

@@ -130,6 +130,46 @@ func (m *validateOpCreateGrantVersion) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLicenseAssetGroup struct {
+}
+
+func (*validateOpCreateLicenseAssetGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicenseAssetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseAssetGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseAssetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLicenseAssetRuleset struct {
+}
+
+func (*validateOpCreateLicenseAssetRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicenseAssetRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseAssetRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseAssetRulesetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLicenseConfiguration struct {
 }
 
@@ -265,6 +305,46 @@ func (m *validateOpDeleteGrant) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLicenseAssetGroup struct {
+}
+
+func (*validateOpDeleteLicenseAssetGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLicenseAssetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLicenseAssetGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLicenseAssetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLicenseAssetRuleset struct {
+}
+
+func (*validateOpDeleteLicenseAssetRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLicenseAssetRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLicenseAssetRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLicenseAssetRulesetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +490,46 @@ func (m *validateOpGetGrant) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLicenseAssetGroup struct {
+}
+
+func (*validateOpGetLicenseAssetGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLicenseAssetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLicenseAssetGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLicenseAssetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLicenseAssetRuleset struct {
+}
+
+func (*validateOpGetLicenseAssetRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLicenseAssetRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLicenseAssetRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLicenseAssetRulesetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLicenseConfiguration struct {
 }
 
@@ -505,6 +625,26 @@ func (m *validateOpGetLicenseUsage) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLicenseUsageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetsForLicenseAssetGroup struct {
+}
+
+func (*validateOpListAssetsForLicenseAssetGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetsForLicenseAssetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetsForLicenseAssetGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetsForLicenseAssetGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +870,46 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLicenseAssetGroup struct {
+}
+
+func (*validateOpUpdateLicenseAssetGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLicenseAssetGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLicenseAssetGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLicenseAssetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLicenseAssetRuleset struct {
+}
+
+func (*validateOpUpdateLicenseAssetRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLicenseAssetRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLicenseAssetRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLicenseAssetRulesetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLicenseConfiguration struct {
 }
 
@@ -834,6 +1014,14 @@ func addOpCreateGrantVersionValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateGrantVersion{}, middleware.After)
 }
 
+func addOpCreateLicenseAssetGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicenseAssetGroup{}, middleware.After)
+}
+
+func addOpCreateLicenseAssetRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicenseAssetRuleset{}, middleware.After)
+}
+
 func addOpCreateLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLicenseConfiguration{}, middleware.After)
 }
@@ -860,6 +1048,14 @@ func addOpCreateTokenValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGrantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGrant{}, middleware.After)
+}
+
+func addOpDeleteLicenseAssetGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLicenseAssetGroup{}, middleware.After)
+}
+
+func addOpDeleteLicenseAssetRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLicenseAssetRuleset{}, middleware.After)
 }
 
 func addOpDeleteLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -890,6 +1086,14 @@ func addOpGetGrantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGrant{}, middleware.After)
 }
 
+func addOpGetLicenseAssetGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLicenseAssetGroup{}, middleware.After)
+}
+
+func addOpGetLicenseAssetRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLicenseAssetRuleset{}, middleware.After)
+}
+
 func addOpGetLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLicenseConfiguration{}, middleware.After)
 }
@@ -908,6 +1112,10 @@ func addOpGetLicenseManagerReportGeneratorValidationMiddleware(stack *middleware
 
 func addOpGetLicenseUsageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLicenseUsage{}, middleware.After)
+}
+
+func addOpListAssetsForLicenseAssetGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetsForLicenseAssetGroup{}, middleware.After)
 }
 
 func addOpListAssociationsForLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -954,6 +1162,14 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateLicenseAssetGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLicenseAssetGroup{}, middleware.After)
+}
+
+func addOpUpdateLicenseAssetRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLicenseAssetRuleset{}, middleware.After)
+}
+
 func addOpUpdateLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLicenseConfiguration{}, middleware.After)
 }
@@ -968,6 +1184,28 @@ func addOpUpdateLicenseSpecificationsForResourceValidationMiddleware(stack *midd
 
 func addOpUpdateServiceSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateServiceSettings{}, middleware.After)
+}
+
+func validateAndRuleStatement(v *types.AndRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AndRuleStatement"}
+	if v.MatchingRuleStatements != nil {
+		if err := validateMatchingRuleStatementList(v.MatchingRuleStatements); err != nil {
+			invalidParams.AddNested("MatchingRuleStatements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScriptRuleStatements != nil {
+		if err := validateScriptRuleStatementList(v.ScriptRuleStatements); err != nil {
+			invalidParams.AddNested("ScriptRuleStatements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBorrowConfiguration(v *types.BorrowConfiguration) error {
@@ -1095,6 +1333,38 @@ func validateEntitlementList(v []types.Entitlement) error {
 	}
 }
 
+func validateInstanceRuleStatement(v *types.InstanceRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceRuleStatement"}
+	if v.AndRuleStatement != nil {
+		if err := validateAndRuleStatement(v.AndRuleStatement); err != nil {
+			invalidParams.AddNested("AndRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrRuleStatement != nil {
+		if err := validateOrRuleStatement(v.OrRuleStatement); err != nil {
+			invalidParams.AddNested("OrRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MatchingRuleStatement != nil {
+		if err := validateMatchingRuleStatement(v.MatchingRuleStatement); err != nil {
+			invalidParams.AddNested("MatchingRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScriptRuleStatement != nil {
+		if err := validateScriptRuleStatement(v.ScriptRuleStatement); err != nil {
+			invalidParams.AddNested("ScriptRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInventoryFilter(v *types.InventoryFilter) error {
 	if v == nil {
 		return nil
@@ -1145,6 +1415,104 @@ func validateIssuer(v *types.Issuer) error {
 	}
 }
 
+func validateLicenseAssetGroupProperty(v *types.LicenseAssetGroupProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseAssetGroupProperty"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLicenseAssetGroupPropertyList(v []types.LicenseAssetGroupProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseAssetGroupPropertyList"}
+	for i := range v {
+		if err := validateLicenseAssetGroupProperty(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLicenseAssetRule(v *types.LicenseAssetRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseAssetRule"}
+	if v.RuleStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleStatement"))
+	} else if v.RuleStatement != nil {
+		if err := validateRuleStatement(v.RuleStatement); err != nil {
+			invalidParams.AddNested("RuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLicenseAssetRuleList(v []types.LicenseAssetRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseAssetRuleList"}
+	for i := range v {
+		if err := validateLicenseAssetRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLicenseConfigurationRuleStatement(v *types.LicenseConfigurationRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseConfigurationRuleStatement"}
+	if v.AndRuleStatement != nil {
+		if err := validateAndRuleStatement(v.AndRuleStatement); err != nil {
+			invalidParams.AddNested("AndRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrRuleStatement != nil {
+		if err := validateOrRuleStatement(v.OrRuleStatement); err != nil {
+			invalidParams.AddNested("OrRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MatchingRuleStatement != nil {
+		if err := validateMatchingRuleStatement(v.MatchingRuleStatement); err != nil {
+			invalidParams.AddNested("MatchingRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLicenseConversionContext(v *types.LicenseConversionContext) error {
 	if v == nil {
 		return nil
@@ -1153,6 +1521,33 @@ func validateLicenseConversionContext(v *types.LicenseConversionContext) error {
 	if v.ProductCodes != nil {
 		if err := validateProductCodeList(v.ProductCodes); err != nil {
 			invalidParams.AddNested("ProductCodes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLicenseRuleStatement(v *types.LicenseRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseRuleStatement"}
+	if v.AndRuleStatement != nil {
+		if err := validateAndRuleStatement(v.AndRuleStatement); err != nil {
+			invalidParams.AddNested("AndRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrRuleStatement != nil {
+		if err := validateOrRuleStatement(v.OrRuleStatement); err != nil {
+			invalidParams.AddNested("OrRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MatchingRuleStatement != nil {
+		if err := validateMatchingRuleStatement(v.MatchingRuleStatement); err != nil {
+			invalidParams.AddNested("MatchingRuleStatement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1194,11 +1589,71 @@ func validateLicenseSpecifications(v []types.LicenseSpecification) error {
 	}
 }
 
+func validateMatchingRuleStatement(v *types.MatchingRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchingRuleStatement"}
+	if v.KeyToMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyToMatch"))
+	}
+	if v.Constraint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Constraint"))
+	}
+	if v.ValueToMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueToMatch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchingRuleStatementList(v []types.MatchingRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchingRuleStatementList"}
+	for i := range v {
+		if err := validateMatchingRuleStatement(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrganizationConfiguration(v *types.OrganizationConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrRuleStatement(v *types.OrRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrRuleStatement"}
+	if v.MatchingRuleStatements != nil {
+		if err := validateMatchingRuleStatementList(v.MatchingRuleStatements); err != nil {
+			invalidParams.AddNested("MatchingRuleStatements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScriptRuleStatements != nil {
+		if err := validateScriptRuleStatementList(v.ScriptRuleStatements); err != nil {
+			invalidParams.AddNested("ScriptRuleStatements", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1330,13 +1785,60 @@ func validateProvisionalConfiguration(v *types.ProvisionalConfiguration) error {
 	}
 }
 
-func validateReportContext(v *types.ReportContext) error {
+func validateRuleStatement(v *types.RuleStatement) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ReportContext"}
-	if v.LicenseConfigurationArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LicenseConfigurationArns"))
+	invalidParams := smithy.InvalidParamsError{Context: "RuleStatement"}
+	if v.LicenseConfigurationRuleStatement != nil {
+		if err := validateLicenseConfigurationRuleStatement(v.LicenseConfigurationRuleStatement); err != nil {
+			invalidParams.AddNested("LicenseConfigurationRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LicenseRuleStatement != nil {
+		if err := validateLicenseRuleStatement(v.LicenseRuleStatement); err != nil {
+			invalidParams.AddNested("LicenseRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstanceRuleStatement != nil {
+		if err := validateInstanceRuleStatement(v.InstanceRuleStatement); err != nil {
+			invalidParams.AddNested("InstanceRuleStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScriptRuleStatement(v *types.ScriptRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScriptRuleStatement"}
+	if v.KeyToMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyToMatch"))
+	}
+	if v.Script == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Script"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScriptRuleStatementList(v []types.ScriptRuleStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScriptRuleStatementList"}
+	for i := range v {
+		if err := validateScriptRuleStatement(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1482,6 +1984,60 @@ func validateOpCreateGrantVersionInput(v *CreateGrantVersionInput) error {
 	}
 }
 
+func validateOpCreateLicenseAssetGroupInput(v *CreateLicenseAssetGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseAssetGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.LicenseAssetGroupConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetGroupConfigurations"))
+	}
+	if v.AssociatedLicenseAssetRulesetARNs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedLicenseAssetRulesetARNs"))
+	}
+	if v.Properties != nil {
+		if err := validateLicenseAssetGroupPropertyList(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLicenseAssetRulesetInput(v *CreateLicenseAssetRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseAssetRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateLicenseAssetRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1605,10 +2161,6 @@ func validateOpCreateLicenseManagerReportGeneratorInput(v *CreateLicenseManagerR
 	}
 	if v.ReportContext == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportContext"))
-	} else if v.ReportContext != nil {
-		if err := validateReportContext(v.ReportContext); err != nil {
-			invalidParams.AddNested("ReportContext", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ReportFrequency == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportFrequency"))
@@ -1709,6 +2261,36 @@ func validateOpDeleteGrantInput(v *DeleteGrantInput) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLicenseAssetGroupInput(v *DeleteLicenseAssetGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLicenseAssetGroupInput"}
+	if v.LicenseAssetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLicenseAssetRulesetInput(v *DeleteLicenseAssetRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLicenseAssetRulesetInput"}
+	if v.LicenseAssetRulesetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetRulesetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1825,6 +2407,36 @@ func validateOpGetGrantInput(v *GetGrantInput) error {
 	}
 }
 
+func validateOpGetLicenseAssetGroupInput(v *GetLicenseAssetGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseAssetGroupInput"}
+	if v.LicenseAssetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLicenseAssetRulesetInput(v *GetLicenseAssetRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseAssetRulesetInput"}
+	if v.LicenseAssetRulesetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetRulesetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLicenseConfigurationInput(v *GetLicenseConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1892,6 +2504,24 @@ func validateOpGetLicenseUsageInput(v *GetLicenseUsageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseUsageInput"}
 	if v.LicenseArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetsForLicenseAssetGroupInput(v *ListAssetsForLicenseAssetGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetsForLicenseAssetGroupInput"}
+	if v.LicenseAssetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetGroupArn"))
+	}
+	if v.AssetType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2073,6 +2703,57 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateLicenseAssetGroupInput(v *UpdateLicenseAssetGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLicenseAssetGroupInput"}
+	if v.AssociatedLicenseAssetRulesetARNs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedLicenseAssetRulesetARNs"))
+	}
+	if v.Properties != nil {
+		if err := validateLicenseAssetGroupPropertyList(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LicenseAssetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetGroupArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLicenseAssetRulesetInput(v *UpdateLicenseAssetRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLicenseAssetRulesetInput"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateLicenseAssetRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LicenseAssetRulesetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseAssetRulesetArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLicenseConfigurationInput(v *UpdateLicenseConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2109,10 +2790,6 @@ func validateOpUpdateLicenseManagerReportGeneratorInput(v *UpdateLicenseManagerR
 	}
 	if v.ReportContext == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportContext"))
-	} else if v.ReportContext != nil {
-		if err := validateReportContext(v.ReportContext); err != nil {
-			invalidParams.AddNested("ReportContext", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ReportFrequency == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportFrequency"))

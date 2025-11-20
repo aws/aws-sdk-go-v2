@@ -11648,6 +11648,9 @@ type UserDefinedFunction struct {
 	// The name of the function.
 	FunctionName *string
 
+	// The type of the function.
+	FunctionType FunctionType
+
 	// The owner of the function.
 	OwnerName *string
 
@@ -11668,6 +11671,9 @@ type UserDefinedFunctionInput struct {
 
 	// The name of the function.
 	FunctionName *string
+
+	// The type of the function.
+	FunctionType FunctionType
 
 	// The owner of the function.
 	OwnerName *string

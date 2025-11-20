@@ -111,6 +111,32 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception will be thrown when service is temporarily unavailable.
+type ServiceUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // This exception will be thrown when customer reached API TPS limit.
 type ThrottlingException struct {
 	Message *string

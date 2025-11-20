@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateService(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateService(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,18 @@ func TestCheckSnapshot_DeleteCluster(t *testing.T) {
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteExpressGatewayService")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -247,6 +271,18 @@ func TestCheckSnapshot_DescribeContainerInstances(t *testing.T) {
 	_, err := svc.DescribeContainerInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeContainerInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeExpressGatewayService")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -734,6 +770,18 @@ func TestCheckSnapshot_UpdateContainerInstancesState(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateExpressGatewayService")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateService(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateService(context.Background(), nil, func(o *Options) {
@@ -798,6 +846,18 @@ func TestUpdateSnapshot_CreateCluster(t *testing.T) {
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateExpressGatewayService")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -870,6 +930,18 @@ func TestUpdateSnapshot_DeleteCluster(t *testing.T) {
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteExpressGatewayService")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -966,6 +1038,18 @@ func TestUpdateSnapshot_DescribeContainerInstances(t *testing.T) {
 	_, err := svc.DescribeContainerInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeContainerInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeExpressGatewayService")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1446,6 +1530,18 @@ func TestUpdateSnapshot_UpdateContainerInstancesState(t *testing.T) {
 	_, err := svc.UpdateContainerInstancesState(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateContainerInstancesState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateExpressGatewayService(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExpressGatewayService(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateExpressGatewayService")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "726803c6-f89a-4f72-a710-b6343d09e64f",
+    "type": "feature",
+    "description": "Add support for Braket spending limits.",
+    "modules": [
+        "service/braket"
+    ]
+}

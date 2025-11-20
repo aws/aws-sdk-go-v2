@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_GetDataAutomationStatus.go",
+        "api_op_InvokeDataAutomation.go",
         "api_op_InvokeDataAutomationAsync.go",
         "api_op_ListTagsForResource.go",
         "api_op_TagResource.go",

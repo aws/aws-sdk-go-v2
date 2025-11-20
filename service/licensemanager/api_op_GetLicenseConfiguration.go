@@ -69,6 +69,9 @@ type GetLicenseConfigurationOutput struct {
 	// Dimension for which the licenses are counted.
 	LicenseCountingType types.LicenseCountingType
 
+	// License Expiry.
+	LicenseExpiry *int64
+
 	// License rules.
 	LicenseRules []string
 

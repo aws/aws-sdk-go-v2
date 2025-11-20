@@ -83,6 +83,22 @@ type AdvancedFieldSelector struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains configuration settings for aggregating events.
+type AggregationConfiguration struct {
+
+	// Specifies the event category for which aggregation should be performed.
+	//
+	// This member is required.
+	EventCategory EventCategoryAggregation
+
+	// A list of aggregation templates that can be used to configure event aggregation.
+	//
+	// This member is required.
+	Templates []Template
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a returned CloudTrail channel.
 type Channel struct {
 

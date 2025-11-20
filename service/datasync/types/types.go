@@ -1021,7 +1021,7 @@ type TaskExecutionListEntry struct {
 
 	// The status of a task execution. For more information, see [Task execution statuses].
 	//
-	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-execution-statuses
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
 	Status TaskExecutionStatus
 
 	// The Amazon Resource Name (ARN) of a task execution.

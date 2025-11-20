@@ -150,6 +150,26 @@ func (m *validateOpListAuditFindings) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEntityEvents struct {
+}
+
+func (*validateOpListEntityEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEntityEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEntityEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEntityEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListServiceDependencies struct {
 }
 
@@ -416,6 +436,10 @@ func addOpGetServiceLevelObjectiveValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListAuditFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAuditFindings{}, middleware.After)
+}
+
+func addOpListEntityEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEntityEvents{}, middleware.After)
 }
 
 func addOpListServiceDependenciesValidationMiddleware(stack *middleware.Stack) error {
@@ -1227,6 +1251,27 @@ func validateOpListAuditFindingsInput(v *ListAuditFindingsInput) error {
 		if err := validateAuditTargets(v.AuditTargets); err != nil {
 			invalidParams.AddNested("AuditTargets", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEntityEventsInput(v *ListEntityEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEntityEventsInput"}
+	if v.Entity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1267,6 +1267,54 @@ func (BatchDeleteClusterNodesErrorCode) Values() []BatchDeleteClusterNodesErrorC
 	}
 }
 
+type BatchRebootClusterNodesErrorCode string
+
+// Enum values for BatchRebootClusterNodesErrorCode
+const (
+	BatchRebootClusterNodesErrorCodeInstanceIdNotFound    BatchRebootClusterNodesErrorCode = "InstanceIdNotFound"
+	BatchRebootClusterNodesErrorCodeInvalidInstanceStatus BatchRebootClusterNodesErrorCode = "InvalidInstanceStatus"
+	BatchRebootClusterNodesErrorCodeInstanceIdInUse       BatchRebootClusterNodesErrorCode = "InstanceIdInUse"
+	BatchRebootClusterNodesErrorCodeInternalServerError   BatchRebootClusterNodesErrorCode = "InternalServerError"
+)
+
+// Values returns all known values for BatchRebootClusterNodesErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchRebootClusterNodesErrorCode) Values() []BatchRebootClusterNodesErrorCode {
+	return []BatchRebootClusterNodesErrorCode{
+		"InstanceIdNotFound",
+		"InvalidInstanceStatus",
+		"InstanceIdInUse",
+		"InternalServerError",
+	}
+}
+
+type BatchReplaceClusterNodesErrorCode string
+
+// Enum values for BatchReplaceClusterNodesErrorCode
+const (
+	BatchReplaceClusterNodesErrorCodeInstanceIdNotFound    BatchReplaceClusterNodesErrorCode = "InstanceIdNotFound"
+	BatchReplaceClusterNodesErrorCodeInvalidInstanceStatus BatchReplaceClusterNodesErrorCode = "InvalidInstanceStatus"
+	BatchReplaceClusterNodesErrorCodeInstanceIdInUse       BatchReplaceClusterNodesErrorCode = "InstanceIdInUse"
+	BatchReplaceClusterNodesErrorCodeInternalServerError   BatchReplaceClusterNodesErrorCode = "InternalServerError"
+)
+
+// Values returns all known values for BatchReplaceClusterNodesErrorCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchReplaceClusterNodesErrorCode) Values() []BatchReplaceClusterNodesErrorCode {
+	return []BatchReplaceClusterNodesErrorCode{
+		"InstanceIdNotFound",
+		"InvalidInstanceStatus",
+		"InstanceIdInUse",
+		"InternalServerError",
+	}
+}
+
 type BatchStrategy string
 
 // Enum values for BatchStrategy
@@ -4462,6 +4510,77 @@ func (MetricSetSource) Values() []MetricSetSource {
 	}
 }
 
+type MIGProfileType string
+
+// Enum values for MIGProfileType
+const (
+	MIGProfileTypeMig1g5gb   MIGProfileType = "mig-1g.5gb"
+	MIGProfileTypeMig1g10gb  MIGProfileType = "mig-1g.10gb"
+	MIGProfileTypeMig1g18gb  MIGProfileType = "mig-1g.18gb"
+	MIGProfileTypeMig1g20gb  MIGProfileType = "mig-1g.20gb"
+	MIGProfileTypeMig1g23gb  MIGProfileType = "mig-1g.23gb"
+	MIGProfileTypeMig1g35gb  MIGProfileType = "mig-1g.35gb"
+	MIGProfileTypeMig1g45gb  MIGProfileType = "mig-1g.45gb"
+	MIGProfileTypeMig1g47gb  MIGProfileType = "mig-1g.47gb"
+	MIGProfileTypeMig2g10gb  MIGProfileType = "mig-2g.10gb"
+	MIGProfileTypeMig2g20gb  MIGProfileType = "mig-2g.20gb"
+	MIGProfileTypeMig2g35gb  MIGProfileType = "mig-2g.35gb"
+	MIGProfileTypeMig2g45gb  MIGProfileType = "mig-2g.45gb"
+	MIGProfileTypeMig2g47gb  MIGProfileType = "mig-2g.47gb"
+	MIGProfileTypeMig3g20gb  MIGProfileType = "mig-3g.20gb"
+	MIGProfileTypeMig3g40gb  MIGProfileType = "mig-3g.40gb"
+	MIGProfileTypeMig3g71gb  MIGProfileType = "mig-3g.71gb"
+	MIGProfileTypeMig3g90gb  MIGProfileType = "mig-3g.90gb"
+	MIGProfileTypeMig3g93gb  MIGProfileType = "mig-3g.93gb"
+	MIGProfileTypeMig4g20gb  MIGProfileType = "mig-4g.20gb"
+	MIGProfileTypeMig4g40gb  MIGProfileType = "mig-4g.40gb"
+	MIGProfileTypeMig4g71gb  MIGProfileType = "mig-4g.71gb"
+	MIGProfileTypeMig4g90gb  MIGProfileType = "mig-4g.90gb"
+	MIGProfileTypeMig4g93gb  MIGProfileType = "mig-4g.93gb"
+	MIGProfileTypeMig7g40gb  MIGProfileType = "mig-7g.40gb"
+	MIGProfileTypeMig7g80gb  MIGProfileType = "mig-7g.80gb"
+	MIGProfileTypeMig7g141gb MIGProfileType = "mig-7g.141gb"
+	MIGProfileTypeMig7g180gb MIGProfileType = "mig-7g.180gb"
+	MIGProfileTypeMig7g186gb MIGProfileType = "mig-7g.186gb"
+)
+
+// Values returns all known values for MIGProfileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MIGProfileType) Values() []MIGProfileType {
+	return []MIGProfileType{
+		"mig-1g.5gb",
+		"mig-1g.10gb",
+		"mig-1g.18gb",
+		"mig-1g.20gb",
+		"mig-1g.23gb",
+		"mig-1g.35gb",
+		"mig-1g.45gb",
+		"mig-1g.47gb",
+		"mig-2g.10gb",
+		"mig-2g.20gb",
+		"mig-2g.35gb",
+		"mig-2g.45gb",
+		"mig-2g.47gb",
+		"mig-3g.20gb",
+		"mig-3g.40gb",
+		"mig-3g.71gb",
+		"mig-3g.90gb",
+		"mig-3g.93gb",
+		"mig-4g.20gb",
+		"mig-4g.40gb",
+		"mig-4g.71gb",
+		"mig-4g.90gb",
+		"mig-4g.93gb",
+		"mig-7g.40gb",
+		"mig-7g.80gb",
+		"mig-7g.141gb",
+		"mig-7g.180gb",
+		"mig-7g.186gb",
+	}
+}
+
 type MlTools string
 
 // Enum values for MlTools
@@ -7374,6 +7493,7 @@ type SageMakerResourceName string
 const (
 	SageMakerResourceNameTrainingJob     SageMakerResourceName = "training-job"
 	SageMakerResourceNameHyperpodCluster SageMakerResourceName = "hyperpod-cluster"
+	SageMakerResourceNameEndpoint        SageMakerResourceName = "endpoint"
 )
 
 // Values returns all known values for SageMakerResourceName. Note that this can
@@ -7384,6 +7504,7 @@ func (SageMakerResourceName) Values() []SageMakerResourceName {
 	return []SageMakerResourceName{
 		"training-job",
 		"hyperpod-cluster",
+		"endpoint",
 	}
 }
 

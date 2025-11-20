@@ -38,8 +38,8 @@ type ListActorsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -168,8 +168,8 @@ func (c *Client) addOperationListActorsMiddlewares(stack *middleware.Stack, opti
 
 // ListActorsPaginatorOptions is the paginator options for ListActors
 type ListActorsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Minimum value of 1,
-	// maximum value of 100. Default is 20.
+	// The maximum number of results to return in a single call. The default value is
+	// 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

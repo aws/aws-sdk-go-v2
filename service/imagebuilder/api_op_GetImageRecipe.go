@@ -42,6 +42,9 @@ type GetImageRecipeOutput struct {
 	// The image recipe object.
 	ImageRecipe *types.ImageRecipe
 
+	// The resource ARNs with different wildcard variations of semantic versioning.
+	LatestVersionReferences *types.LatestVersionReferences
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

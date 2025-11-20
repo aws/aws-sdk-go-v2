@@ -39,7 +39,7 @@ import (
 // management account can apply policies that prevent accounts from leaving the
 // organization. Ensure that your account administrators are aware of this.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 //
 // [Enabling all features in your organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
 func (c *Client) EnableAllFeatures(ctx context.Context, params *EnableAllFeaturesInput, optFns ...func(*Options)) (*EnableAllFeaturesOutput, error) {

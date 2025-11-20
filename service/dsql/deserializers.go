@@ -1193,6 +1193,15 @@ func awsRestjson1_deserializeOpDocumentGetVpcEndpointServiceNameOutput(v **GetVp
 
 	for key, value := range shape {
 		switch key {
+		case "clusterVpcEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterVpcEndpoint to be of type string, got %T instead", value)
+				}
+				sv.ClusterVpcEndpoint = ptr.String(jtv)
+			}
+
 		case "serviceName":
 			if value != nil {
 				jtv, ok := value.(string)

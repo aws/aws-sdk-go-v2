@@ -281,6 +281,11 @@ func awsRestjson1_serializeOpDocumentCreateComponentInput(v *CreateComponentInpu
 		ok.String(*v.Description)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("kmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -1432,6 +1437,11 @@ func awsRestjson1_serializeOpDocumentCreateWorkflowInput(v *CreateWorkflowInput,
 		ok.String(*v.Description)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("kmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -2056,6 +2066,116 @@ func awsRestjson1_serializeOpHttpBindingsDeleteWorkflowInput(v *DeleteWorkflowIn
 
 	if v.WorkflowBuildVersionArn != nil {
 		encoder.SetQuery("workflowBuildVersionArn").String(*v.WorkflowBuildVersionArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDistributeImage struct {
+}
+
+func (*awsRestjson1_serializeOpDistributeImage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDistributeImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DistributeImageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DistributeImage")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDistributeImageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDistributeImageInput(v *DistributeImageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDistributeImageInput(v *DistributeImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DistributionConfigurationArn != nil {
+		ok := object.Key("distributionConfigurationArn")
+		ok.String(*v.DistributionConfigurationArn)
+	}
+
+	if v.ExecutionRole != nil {
+		ok := object.Key("executionRole")
+		ok.String(*v.ExecutionRole)
+	}
+
+	if v.LoggingConfiguration != nil {
+		ok := object.Key("loggingConfiguration")
+		if err := awsRestjson1_serializeDocumentImageLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceImage != nil {
+		ok := object.Key("sourceImage")
+		ok.String(*v.SourceImage)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6003,6 +6123,92 @@ func awsRestjson1_serializeOpDocumentPutImageRecipePolicyInput(v *PutImageRecipe
 	if v.Policy != nil {
 		ok := object.Key("policy")
 		ok.String(*v.Policy)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRetryImage struct {
+}
+
+func (*awsRestjson1_serializeOpRetryImage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRetryImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RetryImageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/RetryImage")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRetryImageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRetryImageInput(v *RetryImageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRetryImageInput(v *RetryImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ImageBuildVersionArn != nil {
+		ok := object.Key("imageBuildVersionArn")
+		ok.String(*v.ImageBuildVersionArn)
 	}
 
 	return nil

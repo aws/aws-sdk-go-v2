@@ -58,6 +58,10 @@ type CreateConnectAttachmentInput struct {
 	// The client token associated with the request.
 	ClientToken *string
 
+	// The routing policy label to apply to the Connect attachment for traffic routing
+	// decisions.
+	RoutingPolicyLabel *string
+
 	// The list of key-value tags associated with the request.
 	Tags []types.Tag
 

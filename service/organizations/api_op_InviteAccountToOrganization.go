@@ -24,7 +24,7 @@ import (
 // If the request includes tags, then the requester must have the
 // organizations:TagResource permission.
 //
-// This operation can be called only from the organization's management account.
+// You can only call this operation from the management account.
 //
 // [Amazon Web Services Support]: https://console.aws.amazon.com/support/home#/
 func (c *Client) InviteAccountToOrganization(ctx context.Context, params *InviteAccountToOrganizationInput, optFns ...func(*Options)) (*InviteAccountToOrganizationOutput, error) {

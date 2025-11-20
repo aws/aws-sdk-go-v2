@@ -44,6 +44,24 @@ func ExampleContent_outputUsage() {
 
 var _ *string
 
+func ExampleExtractionJobMessages_outputUsage() {
+	var union types.ExtractionJobMessages
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExtractionJobMessagesMemberMessagesList:
+		_ = v.Value // Value is []types.MessageMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.MessageMetadata
+
 func ExampleLeftExpression_outputUsage() {
 	var union types.LeftExpression
 	// type switches can be used to check the union value

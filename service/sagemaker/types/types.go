@@ -7,6 +7,28 @@ import (
 	"time"
 )
 
+// Configuration for allocating accelerator partitions.
+type AcceleratorPartitionConfig struct {
+
+	// The number of accelerator partitions to allocate with the specified partition
+	// type. If you don't specify a value for vCPU and MemoryInGiB, SageMaker AI
+	// automatically allocates ratio-based values for those parameters based on the
+	// accelerator partition count you provide.
+	//
+	// This member is required.
+	Count *int32
+
+	// The Multi-Instance GPU (MIG) profile type that defines the partition
+	// configuration. The profile specifies the compute and memory allocation for each
+	// partition instance. The available profile types depend on the instance type
+	// specified in the compute quota configuration.
+	//
+	// This member is required.
+	Type MIGProfileType
+
+	noSmithyDocumentSerde
+}
+
 // A structure describing the source of an action.
 type ActionSource struct {
 
@@ -2641,6 +2663,151 @@ type BatchDescribeModelPackageSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an error encountered when rebooting a node (identified by its
+// logical node ID) from a SageMaker HyperPod cluster.
+type BatchRebootClusterNodeLogicalIdsError struct {
+
+	// The error code associated with the error encountered when rebooting a node by
+	// logical node ID.
+	//
+	// Possible values:
+	//
+	//   - InstanceIdNotFound : The node does not exist in the specified cluster.
+	//
+	//   - InvalidInstanceStatus : The node is in a state that does not allow
+	//   rebooting. Wait for the node to finish any ongoing changes before retrying.
+	//
+	//   - InstanceIdInUse : Another operation is already in progress for this node.
+	//   Wait for the operation to complete before retrying.
+	//
+	//   - InternalServerError : An internal error occurred while processing this node.
+	//
+	// This member is required.
+	ErrorCode BatchRebootClusterNodesErrorCode
+
+	// A human-readable message describing the error encountered when rebooting a node
+	// by logical node ID.
+	//
+	// This member is required.
+	Message *string
+
+	// The logical node ID of the node that encountered an error during the reboot
+	// operation.
+	//
+	// This member is required.
+	NodeLogicalId *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an error encountered when rebooting a node from a SageMaker HyperPod
+// cluster.
+type BatchRebootClusterNodesError struct {
+
+	// The error code associated with the error encountered when rebooting a node.
+	//
+	// Possible values:
+	//
+	//   - InstanceIdNotFound : The instance does not exist in the specified cluster.
+	//
+	//   - InvalidInstanceStatus : The instance is in a state that does not allow
+	//   rebooting. Wait for the instance to finish any ongoing changes before retrying.
+	//
+	//   - InstanceIdInUse : Another operation is already in progress for this node.
+	//   Wait for the operation to complete before retrying.
+	//
+	//   - InternalServerError : An internal error occurred while processing this node.
+	//
+	// This member is required.
+	ErrorCode BatchRebootClusterNodesErrorCode
+
+	// A human-readable message describing the error encountered when rebooting a node.
+	//
+	// This member is required.
+	Message *string
+
+	// The EC2 instance ID of the node that encountered an error during the reboot
+	// operation.
+	//
+	// This member is required.
+	NodeId *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an error encountered when replacing a node (identified by its
+// logical node ID) in a SageMaker HyperPod cluster.
+type BatchReplaceClusterNodeLogicalIdsError struct {
+
+	// The error code associated with the error encountered when replacing a node by
+	// logical node ID.
+	//
+	// Possible values:
+	//
+	//   - InstanceIdNotFound : The node does not exist in the specified cluster.
+	//
+	//   - InvalidInstanceStatus : The node is in a state that does not allow
+	//   replacement. Wait for the node to finish any ongoing changes before retrying.
+	//
+	//   - InstanceIdInUse : Another operation is already in progress for this node.
+	//   Wait for the operation to complete before retrying.
+	//
+	//   - InternalServerError : An internal error occurred while processing this node.
+	//
+	// This member is required.
+	ErrorCode BatchReplaceClusterNodesErrorCode
+
+	// A human-readable message describing the error encountered when replacing a node
+	// by logical node ID.
+	//
+	// This member is required.
+	Message *string
+
+	// The logical node ID of the node that encountered an error during the
+	// replacement operation.
+	//
+	// This member is required.
+	NodeLogicalId *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an error encountered when replacing a node in a SageMaker HyperPod
+// cluster.
+type BatchReplaceClusterNodesError struct {
+
+	// The error code associated with the error encountered when replacing a node.
+	//
+	// Possible values:
+	//
+	//   - InstanceIdNotFound : The instance does not exist in the specified cluster.
+	//
+	//   - InvalidInstanceStatus : The instance is in a state that does not allow
+	//   replacement. Wait for the instance to finish any ongoing changes before
+	//   retrying.
+	//
+	//   - InstanceIdInUse : Another operation is already in progress for this node.
+	//   Wait for the operation to complete before retrying.
+	//
+	//   - InternalServerError : An internal error occurred while processing this node.
+	//
+	// This member is required.
+	ErrorCode BatchReplaceClusterNodesErrorCode
+
+	// A human-readable message describing the error encountered when replacing a node.
+	//
+	// This member is required.
+	Message *string
+
+	// The EC2 instance ID of the node that encountered an error during the
+	// replacement operation.
+	//
+	// This member is required.
+	NodeId *string
+
+	noSmithyDocumentSerde
+}
+
 // Input object for the batch transform job.
 type BatchTransformInput struct {
 
@@ -4143,6 +4310,9 @@ type ClusterNodeSummary struct {
 	// when IncludeNodeLogicalIds is set to True in the ListClusterNodes request.
 	NodeLogicalId *string
 
+	// The private DNS hostname of the SageMaker HyperPod cluster node.
+	PrivateDnsHostname *string
+
 	// Contains information about the UltraServer.
 	UltraServerInfo *UltraServerInfo
 
@@ -4678,6 +4848,9 @@ type ComputeQuotaResourceConfig struct {
 	//
 	// This member is required.
 	InstanceType ClusterInstanceType
+
+	// The accelerator partition configuration for fractional GPU allocation.
+	AcceleratorPartition *AcceleratorPartitionConfig
 
 	// The number of accelerators to allocate. If you don't specify a value for vCPU
 	// and MemoryInGiB, SageMaker AI automatically allocates ratio-based values for
@@ -20400,8 +20573,8 @@ type TrainingPlanFilter struct {
 // [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
 type TrainingPlanOffering struct {
 
-	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) for
-	// this training plan offering.
+	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
+	// SageMaker Endpoints) for this training plan offering.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -20410,6 +20583,9 @@ type TrainingPlanOffering struct {
 	//
 	//   - A training plan for HyperPod clusters can be used exclusively to provide
 	//   compute resources to a cluster's instance group.
+	//
+	//   - A training plan for SageMaker endpoints can be used exclusively to provide
+	//   compute resources to SageMaker endpoints for model deployment.
 	//
 	// This member is required.
 	TargetResources []SageMakerResourceName
@@ -20504,8 +20680,8 @@ type TrainingPlanSummary struct {
 	// training plan.
 	StatusMessage *string
 
-	// The target resources (e.g., training jobs, HyperPod clusters) that can use this
-	// training plan.
+	// The target resources (e.g., training jobs, HyperPod clusters, Endpoints) that
+	// can use this training plan.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -20514,6 +20690,9 @@ type TrainingPlanSummary struct {
 	//
 	//   - A training plan for HyperPod clusters can be used exclusively to provide
 	//   compute resources to a cluster's instance group.
+	//
+	//   - A training plan for SageMaker endpoints can be used exclusively to provide
+	//   compute resources to SageMaker endpoints for model deployment.
 	TargetResources []SageMakerResourceName
 
 	// The total number of instances reserved in this training plan.

@@ -126,7 +126,7 @@ type DescribeTaskOutput struct {
 
 	// The status of your task. For information about what each status means, see [Task statuses].
 	//
-	// [Task statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses
+	// [Task statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task-how-to.html#understand-task-creation-statuses
 	Status types.TaskStatus
 
 	// The ARN of your task.

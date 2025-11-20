@@ -47,8 +47,8 @@ type SearchTrainingPlanOfferingsInput struct {
 	// This member is required.
 	DurationHours *int64
 
-	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) to
-	// search for in the offerings.
+	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
+	// SageMaker Endpoints) to search for in the offerings.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -57,6 +57,9 @@ type SearchTrainingPlanOfferingsInput struct {
 	//
 	//   - A training plan for HyperPod clusters can be used exclusively to provide
 	//   compute resources to a cluster's instance group.
+	//
+	//   - A training plan for SageMaker endpoints can be used exclusively to provide
+	//   compute resources to SageMaker endpoints for model deployment.
 	//
 	// This member is required.
 	TargetResources []types.SageMakerResourceName

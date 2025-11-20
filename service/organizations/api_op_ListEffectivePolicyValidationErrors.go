@@ -14,8 +14,8 @@ import (
 
 // Lists all the validation errors on an [effective policy] for a specified account and policy type.
 //
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator.
+// You can only call this operation from the management account or a member
+// account that is a delegated administrator.
 //
 // [effective policy]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html
 func (c *Client) ListEffectivePolicyValidationErrors(ctx context.Context, params *ListEffectivePolicyValidationErrorsInput, optFns ...func(*Options)) (*ListEffectivePolicyValidationErrorsOutput, error) {
@@ -56,25 +56,22 @@ type ListEffectivePolicyValidationErrorsInput struct {
 	//
 	// [SECURITYHUB_POLICY]
 	//
+	// [INSPECTOR_POLICY]
+	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
 	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	// [DECLARATIVE_POLICY_EC2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+	// [INSPECTOR_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
 	//
 	// This member is required.
 	PolicyType types.EffectivePolicyType
 
-	// The total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the maximum you
-	// specify, the NextToken response element is present and has a value (is not
-	// null). Include that value as the NextToken request parameter in the next call
-	// to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// The maximum number of items to return in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that you can retrieve the remaining results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
@@ -123,12 +120,15 @@ type ListEffectivePolicyValidationErrorsOutput struct {
 	//
 	// [SECURITYHUB_POLICY]
 	//
+	// [INSPECTOR_POLICY]
+	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
 	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	// [DECLARATIVE_POLICY_EC2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
+	// [INSPECTOR_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
 	PolicyType types.EffectivePolicyType
 
 	// Metadata pertaining to the operation's result.
@@ -240,15 +240,9 @@ func (c *Client) addOperationListEffectivePolicyValidationErrorsMiddlewares(stac
 // ListEffectivePolicyValidationErrorsPaginatorOptions is the paginator options
 // for ListEffectivePolicyValidationErrors
 type ListEffectivePolicyValidationErrorsPaginatorOptions struct {
-	// The total number of results that you want included on each page of the
-	// response. If you do not include this parameter, it defaults to a value that is
-	// specific to the operation. If additional items exist beyond the maximum you
-	// specify, the NextToken response element is present and has a value (is not
-	// null). Include that value as the NextToken request parameter in the next call
-	// to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// The maximum number of items to return in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so
+	// that you can retrieve the remaining results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

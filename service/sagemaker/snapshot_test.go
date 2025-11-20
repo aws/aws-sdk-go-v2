@@ -146,6 +146,30 @@ func TestCheckSnapshot_BatchDescribeModelPackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchRebootClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRebootClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchRebootClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchReplaceClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchReplaceClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchReplaceClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAction(context.Background(), nil, func(o *Options) {
@@ -4590,6 +4614,30 @@ func TestUpdateSnapshot_BatchDescribeModelPackage(t *testing.T) {
 	_, err := svc.BatchDescribeModelPackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchDescribeModelPackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchRebootClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRebootClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchRebootClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchReplaceClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchReplaceClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchReplaceClusterNodes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -92,8 +92,8 @@ type DescribeTrainingPlanOutput struct {
 	// training plan.
 	StatusMessage *string
 
-	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) that
-	// can use this training plan.
+	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
+	// SageMaker Endpoints) that can use this training plan.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -102,6 +102,9 @@ type DescribeTrainingPlanOutput struct {
 	//
 	//   - A training plan for HyperPod clusters can be used exclusively to provide
 	//   compute resources to a cluster's instance group.
+	//
+	//   - A training plan for SageMaker endpoints can be used exclusively to provide
+	//   compute resources to SageMaker endpoints for model deployment.
 	TargetResources []types.SageMakerResourceName
 
 	// The total number of instances reserved in this training plan.

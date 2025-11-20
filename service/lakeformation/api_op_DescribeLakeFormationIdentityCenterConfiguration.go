@@ -59,6 +59,10 @@ type DescribeLakeFormationIdentityCenterConfigurationOutput struct {
 	// The Amazon Resource Name (ARN) of the RAM share.
 	ResourceShare *string
 
+	// A list of service integrations for enabling trusted identity propagation with
+	// external services such as Redshift.
+	ServiceIntegrations []types.ServiceIntegrationUnion
+
 	// A list of Amazon Web Services account IDs or Amazon Web Services
 	// organization/organizational unit ARNs that are allowed to access data managed by
 	// Lake Formation.

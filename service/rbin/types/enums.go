@@ -64,6 +64,7 @@ type ResourceType string
 const (
 	ResourceTypeEbsSnapshot ResourceType = "EBS_SNAPSHOT"
 	ResourceTypeEc2Image    ResourceType = "EC2_IMAGE"
+	ResourceTypeEbsVolume   ResourceType = "EBS_VOLUME"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -74,6 +75,7 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EBS_SNAPSHOT",
 		"EC2_IMAGE",
+		"EBS_VOLUME",
 	}
 }
 

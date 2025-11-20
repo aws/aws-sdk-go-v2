@@ -15159,6 +15159,48 @@ type FindingProviderSeverity struct {
 	noSmithyDocumentSerde
 }
 
+// A filter structure that contains a logical combination of string filters and
+// nested composite filters for findings trend data.
+type FindingsTrendsCompositeFilter struct {
+
+	// A list of nested composite filters that you can use to create complex filter
+	// conditions for findings trend data.
+	NestedCompositeFilters []FindingsTrendsCompositeFilter
+
+	// The logical operator (AND, OR) to apply between the string filters and nested
+	// composite filters.
+	Operator AllowedOperators
+
+	// A list of string filters that apply to findings trend data fields.
+	StringFilters []FindingsTrendsStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// The structure that defines filters to apply to findings trend data queries.
+type FindingsTrendsFilters struct {
+
+	// A list of composite filters to apply to the findings trend data.
+	CompositeFilters []FindingsTrendsCompositeFilter
+
+	// The logical operator (AND, OR) to apply between multiple composite filters.
+	CompositeOperator AllowedOperators
+
+	noSmithyDocumentSerde
+}
+
+// A filter for string-based fields in findings trend data.
+type FindingsTrendsStringFilter struct {
+
+	// The name of the findings field to filter on.
+	FieldName FindingsTrendsStringField
+
+	// A string filter for filtering Security Hub findings.
+	Filter *StringFilter
+
+	noSmithyDocumentSerde
+}
+
 // Defines the behavior of the firewall.
 type FirewallPolicyDetails struct {
 
@@ -17394,6 +17436,17 @@ type ResourcesCompositeFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Contains counts of resources for trend analysis.
+type ResourcesCount struct {
+
+	// The total count of all resources for the given time interval.
+	//
+	// This member is required.
+	AllResources *int64
+
+	noSmithyDocumentSerde
+}
+
 // Enables the filtering of Amazon Web Services resources based on date and
 // timestamp attributes.
 type ResourcesDateFilter struct {
@@ -17486,6 +17539,80 @@ type ResourcesStringFilter struct {
 
 	// A string filter for filtering Security Hub findings.
 	Filter *StringFilter
+
+	noSmithyDocumentSerde
+}
+
+// A filter structure that contains a logical combination of string filters and
+// nested composite filters for resources trend data.
+type ResourcesTrendsCompositeFilter struct {
+
+	// A list of nested composite filters that you can use to create complex filter
+	// conditions for resources trend data.
+	NestedCompositeFilters []ResourcesTrendsCompositeFilter
+
+	// The logical operator (AND, OR) to apply between the string filters and nested
+	// composite filters.
+	Operator AllowedOperators
+
+	// A list of string filters that apply to resources trend data fields.
+	StringFilters []ResourcesTrendsStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// The structure that defines filters to apply to resources trend data queries.
+type ResourcesTrendsFilters struct {
+
+	// A list of composite filters to apply to the resources trend data.
+	CompositeFilters []ResourcesTrendsCompositeFilter
+
+	// The logical operator (AND, OR) to apply between multiple composite filters.
+	CompositeOperator AllowedOperators
+
+	noSmithyDocumentSerde
+}
+
+// Contains the resource trend metrics data for a specific time point in the
+// requested time period.
+type ResourcesTrendsMetricsResult struct {
+
+	// The timestamp for this data point in the resources trend metrics.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The resource trend metric values associated with this timestamp, including
+	// resource counts.
+	//
+	// This member is required.
+	TrendsValues *ResourcesTrendsValues
+
+	noSmithyDocumentSerde
+}
+
+// A filter for string-based fields in resources trend data, such as resource type
+// or account ID.
+type ResourcesTrendsStringFilter struct {
+
+	// The name of the resources field to filter on, such as resourceType, accountId,
+	// or region.
+	FieldName ResourcesTrendsStringField
+
+	// A string filter for filtering Security Hub findings.
+	Filter *StringFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains the aggregated resource count values for a specific point in the
+// resources trend timeline.
+type ResourcesTrendsValues struct {
+
+	// The resource count statistics for this data point in the trend timeline.
+	//
+	// This member is required.
+	ResourcesCount *ResourcesCount
 
 	noSmithyDocumentSerde
 }
@@ -18238,6 +18365,60 @@ type Severity struct {
 	// The native severity as defined by the Amazon Web Services service or integrated
 	// partner product that generated the finding.
 	Product *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains counts of findings grouped by severity level for trend analysis.
+type SeverityTrendsCount struct {
+
+	// The count of findings with Critical severity level at this point in the trend
+	// timeline.
+	//
+	// This member is required.
+	Critical *int64
+
+	// The count of findings with Fatal severity level at this point in the trend
+	// timeline.
+	//
+	// This member is required.
+	Fatal *int64
+
+	// The count of findings with High severity level at this point in the trend
+	// timeline.
+	//
+	// This member is required.
+	High *int64
+
+	// The count of findings with Informational severity level at this point in the
+	// trend timeline.
+	//
+	// This member is required.
+	Informational *int64
+
+	// The count of findings with Low severity level at this point in the trend
+	// timeline.
+	//
+	// This member is required.
+	Low *int64
+
+	// The count of findings with Medium severity level at this point in the trend
+	// timeline.
+	//
+	// This member is required.
+	Medium *int64
+
+	// The count of findings with severity levels not fitting into the standard
+	// categories at this point in the trend timeline.
+	//
+	// This member is required.
+	Other *int64
+
+	// The count of findings with Unknown severity level at this point in the trend
+	// timeline.
+	//
+	// This member is required.
+	Unknown *int64
 
 	noSmithyDocumentSerde
 }
@@ -19016,6 +19197,37 @@ type ThreatIntelIndicator struct {
 	//
 	// Length Constraints: Minimum of 1 length. Maximum of 512 length.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the findings trend metrics data for a specific time point in the
+// requested time period.
+type TrendsMetricsResult struct {
+
+	// The timestamp for this data point in the findings trend metrics.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The finding trend metric values associated with this timestamp, including
+	// severity counts.
+	//
+	// This member is required.
+	TrendsValues *TrendsValues
+
+	noSmithyDocumentSerde
+}
+
+// Contains the aggregated finding values for a specific point in the findings
+// trend timeline.
+type TrendsValues struct {
+
+	// The count of findings organized by severity level for this data point in the
+	// trend timeline.
+	//
+	// This member is required.
+	SeverityTrends *SeverityTrendsCount
 
 	noSmithyDocumentSerde
 }

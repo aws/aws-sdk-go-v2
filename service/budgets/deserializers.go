@@ -1892,6 +1892,9 @@ func awsAwsjson11_deserializeOpErrorDescribeBudgetPerformanceHistory(response *s
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("BillingViewHealthStatusException", errorCode):
+		return awsAwsjson11_deserializeErrorBillingViewHealthStatusException(response, errorBody)
+
 	case strings.EqualFold("ExpiredNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredNextTokenException(response, errorBody)
 
@@ -2917,6 +2920,9 @@ func awsAwsjson11_deserializeOpErrorUpdateBudget(response *smithyhttp.Response, 
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)

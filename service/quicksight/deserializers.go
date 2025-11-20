@@ -55091,6 +55091,15 @@ func awsRestjson1_deserializeDocumentBorderStyle(v **types.BorderStyle, value in
 
 	for key, value := range shape {
 		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Color to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
 		case "Show":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -55098,6 +55107,15 @@ func awsRestjson1_deserializeDocumentBorderStyle(v **types.BorderStyle, value in
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Show = ptr.Bool(jtv)
+			}
+
+		case "Width":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Width to be of type string, got %T instead", value)
+				}
+				sv.Width = ptr.String(jtv)
 			}
 
 		default:
@@ -73224,6 +73242,15 @@ func awsRestjson1_deserializeDocumentFreeFormLayoutElement(v **types.FreeFormLay
 				return err
 			}
 
+		case "BorderRadius":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BorderRadius to be of type string, got %T instead", value)
+				}
+				sv.BorderRadius = ptr.String(jtv)
+			}
+
 		case "BorderStyle":
 			if err := awsRestjson1_deserializeDocumentFreeFormLayoutElementBorderStyle(&sv.BorderStyle, value); err != nil {
 				return err
@@ -73259,6 +73286,15 @@ func awsRestjson1_deserializeDocumentFreeFormLayoutElement(v **types.FreeFormLay
 		case "LoadingAnimation":
 			if err := awsRestjson1_deserializeDocumentLoadingAnimation(&sv.LoadingAnimation, value); err != nil {
 				return err
+			}
+
+		case "Padding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Padding to be of type string, got %T instead", value)
+				}
+				sv.Padding = ptr.String(jtv)
 			}
 
 		case "RenderingRules":
@@ -73403,6 +73439,15 @@ func awsRestjson1_deserializeDocumentFreeFormLayoutElementBorderStyle(v **types.
 					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
 				}
 				sv.Visibility = types.Visibility(jtv)
+			}
+
+		case "Width":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Width to be of type string, got %T instead", value)
+				}
+				sv.Width = ptr.String(jtv)
 			}
 
 		default:
@@ -77196,6 +77241,25 @@ func awsRestjson1_deserializeDocumentGridLayoutElement(v **types.GridLayoutEleme
 
 	for key, value := range shape {
 		switch key {
+		case "BackgroundStyle":
+			if err := awsRestjson1_deserializeDocumentGridLayoutElementBackgroundStyle(&sv.BackgroundStyle, value); err != nil {
+				return err
+			}
+
+		case "BorderRadius":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BorderRadius to be of type string, got %T instead", value)
+				}
+				sv.BorderRadius = ptr.String(jtv)
+			}
+
+		case "BorderStyle":
+			if err := awsRestjson1_deserializeDocumentGridLayoutElementBorderStyle(&sv.BorderStyle, value); err != nil {
+				return err
+			}
+
 		case "ColumnIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -77240,6 +77304,20 @@ func awsRestjson1_deserializeDocumentGridLayoutElement(v **types.GridLayoutEleme
 				sv.ElementType = types.LayoutElementType(jtv)
 			}
 
+		case "LoadingAnimation":
+			if err := awsRestjson1_deserializeDocumentLoadingAnimation(&sv.LoadingAnimation, value); err != nil {
+				return err
+			}
+
+		case "Padding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Padding to be of type string, got %T instead", value)
+				}
+				sv.Padding = ptr.String(jtv)
+			}
+
 		case "RowIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -77264,6 +77342,118 @@ func awsRestjson1_deserializeDocumentGridLayoutElement(v **types.GridLayoutEleme
 					return err
 				}
 				sv.RowSpan = ptr.Int32(int32(i64))
+			}
+
+		case "SelectedBorderStyle":
+			if err := awsRestjson1_deserializeDocumentGridLayoutElementBorderStyle(&sv.SelectedBorderStyle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGridLayoutElementBackgroundStyle(v **types.GridLayoutElementBackgroundStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GridLayoutElementBackgroundStyle
+	if *v == nil {
+		sv = &types.GridLayoutElementBackgroundStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGridLayoutElementBorderStyle(v **types.GridLayoutElementBorderStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GridLayoutElementBorderStyle
+	if *v == nil {
+		sv = &types.GridLayoutElementBorderStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
+			}
+
+		case "Width":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Width to be of type string, got %T instead", value)
+				}
+				sv.Width = ptr.String(jtv)
 			}
 
 		default:
@@ -97249,6 +97439,55 @@ func awsRestjson1_deserializeDocumentSheet(v **types.Sheet, value interface{}) e
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSheetBackgroundStyle(v **types.SheetBackgroundStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetBackgroundStyle
+	if *v == nil {
+		sv = &types.SheetBackgroundStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Color to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "Gradient":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Gradient = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSheetControlInfoIconLabelOptions(v **types.SheetControlInfoIconLabelOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -98118,6 +98357,11 @@ func awsRestjson1_deserializeDocumentSheetStyle(v **types.SheetStyle, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "Background":
+			if err := awsRestjson1_deserializeDocumentSheetBackgroundStyle(&sv.Background, value); err != nil {
+				return err
+			}
+
 		case "Tile":
 			if err := awsRestjson1_deserializeDocumentTileStyle(&sv.Tile, value); err != nil {
 				return err
@@ -104857,9 +105101,36 @@ func awsRestjson1_deserializeDocumentTileStyle(v **types.TileStyle, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "BackgroundColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Color to be of type string, got %T instead", value)
+				}
+				sv.BackgroundColor = ptr.String(jtv)
+			}
+
 		case "Border":
 			if err := awsRestjson1_deserializeDocumentBorderStyle(&sv.Border, value); err != nil {
 				return err
+			}
+
+		case "BorderRadius":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BorderRadius to be of type string, got %T instead", value)
+				}
+				sv.BorderRadius = ptr.String(jtv)
+			}
+
+		case "Padding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Padding to be of type string, got %T instead", value)
+				}
+				sv.Padding = ptr.String(jtv)
 			}
 
 		default:
@@ -109493,8 +109764,43 @@ func awsRestjson1_deserializeDocumentTypography(v **types.Typography, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "AxisLabelFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.AxisLabelFontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "AxisTitleFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.AxisTitleFontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DataLabelFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.DataLabelFontConfiguration, value); err != nil {
+				return err
+			}
+
 		case "FontFamilies":
 			if err := awsRestjson1_deserializeDocumentFontList(&sv.FontFamilies, value); err != nil {
+				return err
+			}
+
+		case "LegendTitleFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.LegendTitleFontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "LegendValueFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.LegendValueFontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "VisualSubtitleFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentVisualSubtitleFontConfiguration(&sv.VisualSubtitleFontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "VisualTitleFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentVisualTitleFontConfiguration(&sv.VisualTitleFontConfiguration, value); err != nil {
 				return err
 			}
 
@@ -111177,6 +111483,60 @@ func awsRestjson1_deserializeDocumentVisualPalette(v **types.VisualPalette, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVisualSubtitleFontConfiguration(v **types.VisualSubtitleFontConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualSubtitleFontConfiguration
+	if *v == nil {
+		sv = &types.VisualSubtitleFontConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.FontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "TextAlignment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HorizontalTextAlignment to be of type string, got %T instead", value)
+				}
+				sv.TextAlignment = types.HorizontalTextAlignment(jtv)
+			}
+
+		case "TextTransform":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TextTransform to be of type string, got %T instead", value)
+				}
+				sv.TextTransform = types.TextTransform(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVisualSubtitleLabelOptions(v **types.VisualSubtitleLabelOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -111211,6 +111571,60 @@ func awsRestjson1_deserializeDocumentVisualSubtitleLabelOptions(v **types.Visual
 					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
 				}
 				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVisualTitleFontConfiguration(v **types.VisualTitleFontConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualTitleFontConfiguration
+	if *v == nil {
+		sv = &types.VisualTitleFontConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.FontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "TextAlignment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HorizontalTextAlignment to be of type string, got %T instead", value)
+				}
+				sv.TextAlignment = types.HorizontalTextAlignment(jtv)
+			}
+
+		case "TextTransform":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TextTransform to be of type string, got %T instead", value)
+				}
+				sv.TextTransform = types.TextTransform(jtv)
 			}
 
 		default:

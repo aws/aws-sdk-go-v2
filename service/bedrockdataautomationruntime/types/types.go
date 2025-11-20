@@ -107,6 +107,33 @@ type OutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Results for an output segment
+type OutputSegment struct {
+
+	// Custom output response
+	CustomOutput *string
+
+	// Status of blueprint match
+	CustomOutputStatus CustomOutputStatus
+
+	// Standard output response
+	StandardOutput *string
+
+	noSmithyDocumentSerde
+}
+
+// Input configuration for synchronous API
+type SyncInputConfiguration struct {
+
+	// Input data as bytes
+	Bytes []byte
+
+	// S3 URI of the input data
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Key value pair of a tag
 type Tag struct {
 

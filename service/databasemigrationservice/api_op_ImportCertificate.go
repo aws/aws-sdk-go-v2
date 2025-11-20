@@ -46,6 +46,16 @@ type ImportCertificateInput struct {
 	// Example: filebase64("${path.root}/rds-ca-2019-root.sso")
 	CertificateWallet []byte
 
+	// An KMS key identifier that is used to encrypt the certificate.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then DMS uses your
+	// default encryption key.
+	//
+	// KMS creates the default encryption key for your Amazon Web Services account.
+	// Your Amazon Web Services account has a different default encryption key for each
+	// Amazon Web Services Region.
+	KmsKeyId *string
+
 	// The tags associated with the certificate.
 	Tags []types.Tag
 

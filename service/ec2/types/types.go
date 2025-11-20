@@ -1195,6 +1195,19 @@ type Byoasn struct {
 // Web Services resources through bring your own IP addresses (BYOIP).
 type ByoipCidr struct {
 
+	// Specifies the advertisement method for the BYOIP CIDR. Valid values are:
+	//
+	//   - unicast : IP is advertised from a single location (regional services like
+	//   EC2)
+	//
+	//   - anycast : IP is advertised from multiple global locations simultaneously
+	//   (global services like CloudFront)
+	//
+	// For more information, see [Bring your own IP to CloudFront using IPAM] in the Amazon VPC IPAM User Guide.
+	//
+	// [Bring your own IP to CloudFront using IPAM]: https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-cloudfront.html
+	AdvertisementType *string
+
 	// The BYOIP CIDR associations with ASNs.
 	AsnAssociations []AsnAssociation
 
@@ -2865,6 +2878,20 @@ type ClientVpnRouteStatus struct {
 // Options for sending VPN tunnel logs to CloudWatch.
 type CloudWatchLogOptions struct {
 
+	// Indicates whether Border Gateway Protocol (BGP) logging is enabled for the VPN
+	// connection. Default value is False .
+	//
+	// Valid values: True | False
+	BgpLogEnabled *bool
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group for BGP logs.
+	BgpLogGroupArn *string
+
+	// The output format for BGP logs sent to CloudWatch. Default format is json .
+	//
+	// Valid values: json | text
+	BgpLogOutputFormat *string
+
 	// Status of VPN tunnel logging feature. Default value is False .
 	//
 	// Valid values: True | False
@@ -2883,6 +2910,22 @@ type CloudWatchLogOptions struct {
 
 // Options for sending VPN tunnel logs to CloudWatch.
 type CloudWatchLogOptionsSpecification struct {
+
+	// Specifies whether to enable BGP logging for the VPN connection. Default value
+	// is False .
+	//
+	// Valid values: True | False
+	BgpLogEnabled *bool
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will
+	// be sent.
+	BgpLogGroupArn *string
+
+	// The desired output format for BGP logs to be sent to CloudWatch. Default format
+	// is json .
+	//
+	// Valid values: json | text
+	BgpLogOutputFormat *string
 
 	// Enable or disable VPN tunnel logging feature. Default value is False .
 	//
@@ -5186,6 +5229,18 @@ type EnclaveOptionsRequest struct {
 	// To enable the instance for Amazon Web Services Nitro Enclaves, set this
 	// parameter to true .
 	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the encryption support status for a transit gateway.
+type EncryptionSupport struct {
+
+	// The current encryption state of the resource.
+	EncryptionState EncryptionStateValue
+
+	// A message describing the encryption state.
+	StateMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -14435,6 +14490,9 @@ type ModifyTransitGatewayOptions struct {
 	// Enable or disable DNS support.
 	DnsSupport DnsSupportValue
 
+	// Enable or disable encryption support for VPC Encryption Control.
+	EncryptionSupport EncryptionSupportOptionValue
+
 	// The ID of the default propagation route table.
 	PropagationDefaultRouteTableId *string
 
@@ -22138,6 +22196,92 @@ type TransitGatewayConnectRequestBgpOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a transit gateway metering policy.
+type TransitGatewayMeteringPolicy struct {
+
+	// The IDs of the middlebox attachments associated with the metering policy.
+	MiddleboxAttachmentIds []string
+
+	// The state of the transit gateway metering policy.
+	State TransitGatewayMeteringPolicyState
+
+	// The tags assigned to the transit gateway metering policy.
+	Tags []Tag
+
+	// The ID of the transit gateway associated with the metering policy.
+	TransitGatewayId *string
+
+	// The ID of the transit gateway metering policy.
+	TransitGatewayMeteringPolicyId *string
+
+	// The date and time when the metering policy update becomes effective.
+	UpdateEffectiveAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes an entry in a transit gateway metering policy.
+type TransitGatewayMeteringPolicyEntry struct {
+
+	// The Amazon Web Services account ID to which the metered traffic is attributed.
+	MeteredAccount TransitGatewayMeteringPayerType
+
+	// The metering policy rule that defines traffic matching criteria.
+	MeteringPolicyRule *TransitGatewayMeteringPolicyRule
+
+	// The rule number of the metering policy entry.
+	PolicyRuleNumber *string
+
+	// The state of the metering policy entry.
+	State TransitGatewayMeteringPolicyEntryState
+
+	// The date and time when the metering policy entry update becomes effective.
+	UpdateEffectiveAt *time.Time
+
+	// The date and time when the metering policy entry was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the traffic matching criteria for a transit gateway metering policy
+// rule.
+type TransitGatewayMeteringPolicyRule struct {
+
+	// The destination CIDR block for the rule.
+	DestinationCidrBlock *string
+
+	// The destination port range for the rule.
+	DestinationPortRange *string
+
+	// The ID of the destination transit gateway attachment.
+	DestinationTransitGatewayAttachmentId *string
+
+	// The type of the destination transit gateway attachment. Note that the
+	// tgw-peering resource type has been deprecated. To configure metering policies
+	// for Connect, use the transport attachment type.
+	DestinationTransitGatewayAttachmentType TransitGatewayAttachmentResourceType
+
+	// The protocol for the rule (1, 6, 17, etc.).
+	Protocol *string
+
+	// The source CIDR block for the rule.
+	SourceCidrBlock *string
+
+	// The source port range for the rule.
+	SourcePortRange *string
+
+	// The ID of the source transit gateway attachment.
+	SourceTransitGatewayAttachmentId *string
+
+	// The type of the source transit gateway attachment. Note that the tgw-peering
+	// resource type has been deprecated. To configure metering policies for Connect,
+	// use the transport attachment type.
+	SourceTransitGatewayAttachmentType TransitGatewayAttachmentResourceType
+
+	noSmithyDocumentSerde
+}
+
 // Describes the deregistered transit gateway multicast group members.
 type TransitGatewayMulticastDeregisteredGroupMembers struct {
 
@@ -22363,6 +22507,9 @@ type TransitGatewayOptions struct {
 
 	// Indicates whether DNS support is enabled.
 	DnsSupport DnsSupportValue
+
+	// Defines if the Transit Gateway supports VPC Encryption Control.
+	EncryptionSupport *EncryptionSupport
 
 	// Indicates whether multicast is enabled on the transit gateway
 	MulticastSupport MulticastSupportValue
@@ -24003,6 +24150,61 @@ type VolumeModification struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a volume that is currently in the Recycle Bin.
+type VolumeRecycleBinInfo struct {
+
+	// The Availability Zone for the volume.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone for the volume.
+	AvailabilityZoneId *string
+
+	// The time stamp when volume creation was initiated.
+	CreateTime *time.Time
+
+	// The number of I/O operations per second (IOPS) for the volume.
+	Iops *int32
+
+	// The service provider that manages the volume.
+	Operator *OperatorResponse
+
+	// The ARN of the Outpost on which the volume is stored. For more information, see [Amazon EBS volumes on Outposts]
+	// in the Amazon EBS User Guide.
+	//
+	// [Amazon EBS volumes on Outposts]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-outposts.html
+	OutpostArn *string
+
+	// The date and time when the volume entered the Recycle Bin.
+	RecycleBinEnterTime *time.Time
+
+	// The date and time when the volume is to be permanently deleted from the Recycle
+	// Bin.
+	RecycleBinExitTime *time.Time
+
+	// The size of the volume, in GiB.
+	Size *int32
+
+	// The snapshot from which the volume was created, if applicable.
+	SnapshotId *string
+
+	// The ID of the source volume.
+	SourceVolumeId *string
+
+	// The state of the volume.
+	State VolumeState
+
+	// The throughput that the volume supports, in MiB/s.
+	Throughput *int32
+
+	// The ID of the volume.
+	VolumeId *string
+
+	// The volume type.
+	VolumeType VolumeType
+
+	noSmithyDocumentSerde
+}
+
 // Describes a volume status operation code.
 type VolumeStatusAction struct {
 
@@ -24148,6 +24350,11 @@ type Vpc struct {
 	// The ID of the set of DHCP options you've associated with the VPC.
 	DhcpOptionsId *string
 
+	// Describes the configuration and state of VPC encryption controls.
+	//
+	// For more information, see [Enforce VPC encryption in transit] in the Amazon VPC User Guide.
+	//
+	// [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
 	EncryptionControl *VpcEncryptionControl
 
 	// The allowed tenancy of instances launched into the VPC.
@@ -24335,48 +24542,152 @@ type VpcClassicLink struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration and state of VPC encryption controls.
+//
+// For more information, see [Enforce VPC encryption in transit] in the Amazon VPC User Guide.
+//
+// [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
 type VpcEncryptionControl struct {
+
+	// The encryption mode for the VPC Encryption Control configuration.
 	Mode VpcEncryptionControlMode
 
+	// Information about resource exclusions for the VPC Encryption Control
+	// configuration.
 	ResourceExclusions *VpcEncryptionControlExclusions
 
+	// The current state of the VPC Encryption Control configuration.
 	State VpcEncryptionControlState
 
+	// A message providing additional information about the encryption control state.
 	StateMessage *string
 
+	// The tags assigned to the VPC Encryption Control configuration.
 	Tags []Tag
 
+	// The ID of the VPC Encryption Control configuration.
 	VpcEncryptionControlId *string
 
+	// The ID of the VPC associated with the encryption control configuration.
 	VpcId *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration settings for VPC Encryption Control.
+//
+// For more information, see [Enforce VPC encryption in transit] in the Amazon VPC User Guide.
+//
+// [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
+type VpcEncryptionControlConfiguration struct {
+
+	// The encryption mode for the VPC Encryption Control configuration.
+	//
+	// This member is required.
+	Mode VpcEncryptionControlMode
+
+	// Specifies whether to exclude egress-only internet gateway traffic from
+	// encryption enforcement.
+	EgressOnlyInternetGatewayExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude Elastic File System traffic from encryption
+	// enforcement.
+	ElasticFileSystemExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude internet gateway traffic from encryption
+	// enforcement.
+	InternetGatewayExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude Lambda function traffic from encryption
+	// enforcement.
+	LambdaExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude NAT gateway traffic from encryption enforcement.
+	NatGatewayExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude virtual private gateway traffic from encryption
+	// enforcement.
+	VirtualPrivateGatewayExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude VPC Lattice traffic from encryption enforcement.
+	VpcLatticeExclusion VpcEncryptionControlExclusionStateInput
+
+	// Specifies whether to exclude VPC peering connection traffic from encryption
+	// enforcement.
+	VpcPeeringExclusion VpcEncryptionControlExclusionStateInput
+
+	noSmithyDocumentSerde
+}
+
+// Describes an exclusion configuration for VPC Encryption Control.
+//
+// For more information, see [Enforce VPC encryption in transit] in the Amazon VPC User Guide.
+//
+// [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
 type VpcEncryptionControlExclusion struct {
+
+	// The current state of the exclusion configuration.
 	State VpcEncryptionControlExclusionState
 
+	// A message providing additional information about the exclusion state.
 	StateMessage *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes the exclusion configurations for various resource types in VPC
+// Encryption Control.
+//
+// For more information, see [Enforce VPC encryption in transit] in the Amazon VPC User Guide.
+//
+// [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
 type VpcEncryptionControlExclusions struct {
+
+	// The exclusion configuration for egress-only internet gateway traffic.
 	EgressOnlyInternetGateway *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for Elastic File System traffic.
 	ElasticFileSystem *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for internet gateway traffic.
 	InternetGateway *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for Lambda function traffic.
 	Lambda *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for NAT gateway traffic.
 	NatGateway *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for virtual private gateway traffic.
 	VirtualPrivateGateway *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for VPC Lattice traffic.
 	VpcLattice *VpcEncryptionControlExclusion
 
+	// The exclusion configuration for VPC peering connection traffic.
 	VpcPeering *VpcEncryptionControlExclusion
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource that is not compliant with VPC encryption requirements.
+//
+// For more information, see [Enforce VPC encryption in transit] in the Amazon VPC User Guide.
+//
+// [Enforce VPC encryption in transit]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html
+type VpcEncryptionNonCompliantResource struct {
+
+	// A description of the non-compliant resource.
+	Description *string
+
+	// The ID of the non-compliant resource.
+	Id *string
+
+	// Indicates whether the resource can be excluded from encryption enforcement.
+	IsExcludable *bool
+
+	// The type of the non-compliant resource.
+	Type *string
 
 	noSmithyDocumentSerde
 }
