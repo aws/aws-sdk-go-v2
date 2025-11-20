@@ -1,8 +1,0 @@
-{
-    "id": "8da20771-1331-4f7d-bb23-2e9425576a6f",
-    "type": "feature",
-    "description": "Increasing the length limit of Statement Name from 500 to 2048.",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}

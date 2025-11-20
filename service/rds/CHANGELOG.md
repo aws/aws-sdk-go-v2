@@ -1,3 +1,7 @@
+# v1.110.0 (2025-11-20)
+
+* **Feature**: Add support for VPC Encryption Controls.
+
 # v1.109.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

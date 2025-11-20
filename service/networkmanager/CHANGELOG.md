@@ -1,3 +1,7 @@
+# v1.41.0 (2025-11-20)
+
+* **Feature**: This release adds support for Cloud WAN Routing Policy providing customers sophisticated routing controls to better manage their global networks
+
 # v1.40.6 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

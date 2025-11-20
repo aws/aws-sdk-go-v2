@@ -1,8 +1,0 @@
-{
-    "id": "0995a85a-3f5a-47ae-aead-9631f1ea4283",
-    "type": "feature",
-    "description": "This release adds support for Cloud WAN Routing Policy providing customers sophisticated routing controls to better manage their global networks",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

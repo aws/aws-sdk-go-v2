@@ -1,3 +1,7 @@
+# v1.12.0 (2025-11-20)
+
+* **Feature**: Added clusterVpcEndpoint field to GetVpcEndpointServiceName API response, returning the VPC connection endpoint for the cluster
+
 # v1.11.3 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

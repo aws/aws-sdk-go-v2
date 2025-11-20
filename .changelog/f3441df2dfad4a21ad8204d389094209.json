@@ -1,8 +1,0 @@
-{
-    "id": "f3441df2-dfad-4a21-ad82-04d389094209",
-    "type": "feature",
-    "description": "EC2 Image Builder now enables the distribution of existing AMIs, retry distribution, and define distribution workflows. It also supports automatic versioning for recipes and components, allowing automatic version increments and dynamic referencing in pipelines.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

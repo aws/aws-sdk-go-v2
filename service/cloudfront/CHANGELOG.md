@@ -1,3 +1,7 @@
+# v1.57.0 (2025-11-20)
+
+* **Feature**: This release adds support for bring your own IP (BYOIP) to CloudFront's CreateAnycastIpList API through an optional IpamCidrConfigs field.
+
 # v1.56.3 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

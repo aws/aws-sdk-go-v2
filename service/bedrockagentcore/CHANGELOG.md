@@ -1,3 +1,7 @@
+# v1.9.0 (2025-11-20)
+
+* **Feature**: Bedrock AgentCore Memory release for redriving memory extraction jobs (StartMemoryExtractionJob and ListMemoryExtractionJob)
+
 # v1.8.5 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

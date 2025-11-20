@@ -1,3 +1,7 @@
+# v1.57.0 (2025-11-20)
+
+* **Feature**: Add support for configuring S3 destination for step logs on a per-step basis.
+
 # v1.56.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "8c67b86c-7302-4e87-8ad5-a02d86ac5e4e",
-    "type": "feature",
-    "description": "Add support for environment variables and an IAM execution role.",
-    "modules": [
-        "service/devicefarm"
-    ]
-}

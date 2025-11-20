@@ -1,3 +1,7 @@
+# v1.54.0 (2025-11-20)
+
+* **Feature**: This release adds the target optimizer feature in ALB, enabling strict concurrency enforcement on targets.
+
 # v1.53.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

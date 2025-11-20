@@ -1,3 +1,7 @@
+# v1.39.0 (2025-11-20)
+
+* **Feature**: Add support for Braket spending limits.
+
 # v1.38.3 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

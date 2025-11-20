@@ -1,3 +1,7 @@
+# v1.46.0 (2025-11-20)
+
+* **Feature**: Added ServiceIntegrations as a request parameter for CreateLakeFormationIdentityCenterConfigurationRequest and UpdateLakeFormationIdentityCenterConfigurationRequest and response parameter for DescribeLakeFormationIdentityCenterConfigurationResponse
+
 # v1.45.12 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

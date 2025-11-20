@@ -1,3 +1,7 @@
+# v1.27.0 (2025-11-20)
+
+* **Feature**: Add support for EBS volume in Recycle Bin
+
 # v1.26.14 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

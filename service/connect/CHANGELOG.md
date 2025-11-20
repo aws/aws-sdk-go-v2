@@ -1,3 +1,7 @@
+# v1.147.0 (2025-11-20)
+
+* **Feature**: Add optional ability to exclude users from send notification actions for Contact Lens Rules.
+
 # v1.146.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

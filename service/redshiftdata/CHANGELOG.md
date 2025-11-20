@@ -1,3 +1,7 @@
+# v1.38.0 (2025-11-20)
+
+* **Feature**: Increasing the length limit of Statement Name from 500 to 2048.
+
 # v1.37.13 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

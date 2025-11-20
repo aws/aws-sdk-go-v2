@@ -1,8 +1,0 @@
-{
-    "id": "f9076566-a7d0-4733-b808-5ce2e4a6d4a8",
-    "type": "feature",
-    "description": "Add support for EBS volume in Recycle Bin",
-    "modules": [
-        "service/rbin"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "810b44d0-bdd1-48c9-9814-274656abb45d",
-    "type": "feature",
-    "description": "Enable / Disable ABAC on a general purpose bucket.",
-    "modules": [
-        "service/s3"
-    ]
-}

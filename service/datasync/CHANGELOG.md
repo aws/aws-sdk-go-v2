@@ -1,3 +1,7 @@
+# v1.56.0 (2025-11-20)
+
+* **Feature**: The partition value "aws-eusc" is now permitted for ARN (Amazon Resource Name) fields.
+
 # v1.55.7 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

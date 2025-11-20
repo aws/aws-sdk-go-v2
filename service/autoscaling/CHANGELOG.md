@@ -1,3 +1,7 @@
+# v1.62.0 (2025-11-20)
+
+* **Feature**: This release adds support for three new features: 1) Image ID overrides in mixed instances policy, 2) Replace Root Volume - a new strategy for Instance Refresh, and 3) Instance Lifecycle Policy for enhanced instance lifecycle management.
+
 # v1.61.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

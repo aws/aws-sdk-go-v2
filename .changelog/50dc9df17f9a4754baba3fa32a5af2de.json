@@ -1,8 +1,0 @@
-{
-    "id": "50dc9df1-7f9a-4754-baba-3fa32a5af2de",
-    "type": "feature",
-    "description": "Added ServiceIntegrations as a request parameter for CreateLakeFormationIdentityCenterConfigurationRequest and UpdateLakeFormationIdentityCenterConfigurationRequest and response parameter for DescribeLakeFormationIdentityCenterConfigurationResponse",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

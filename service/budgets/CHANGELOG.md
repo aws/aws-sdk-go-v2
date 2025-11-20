@@ -1,3 +1,7 @@
+# v1.42.0 (2025-11-20)
+
+* **Feature**: Add BillingViewHealthStatusException to DescribeBudgetPerformanceHistory and ServiceQuotaExceededException to UpdateBudget for improved error handling with Billing Views.
+
 # v1.41.4 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

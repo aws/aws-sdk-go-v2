@@ -1,3 +1,7 @@
+# v1.225.0 (2025-11-20)
+
+* **Feature**: Added training plan support for inference endpoints. Added HyperPod task governance with accelerator partition-based quota allocation. Added BatchRebootClusterNodes and BatchReplaceClusterNodes APIs. Updated ListClusterNodes to include privateDnsHostName.
+
 # v1.224.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

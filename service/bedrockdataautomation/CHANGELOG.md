@@ -1,3 +1,7 @@
+# v1.12.0 (2025-11-20)
+
+* **Feature**: Added support for Synchronous project type and PII Detection and Redaction
+
 # v1.11.2 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "f7ffe147-70c4-4fd9-9fdb-7e1471a2cbf3",
-    "type": "feature",
-    "description": "This release adds the target optimizer feature in ALB, enabling strict concurrency enforcement on targets.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

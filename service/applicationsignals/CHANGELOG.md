@@ -1,3 +1,7 @@
+# v1.18.0 (2025-11-20)
+
+* **Feature**: Amazon CloudWatch Application Signals now supports un-instrumented services discovery, cross-account views, and change history, helping SRE and DevOps teams monitor and troubleshoot their large-scale distributed applications.
+
 # v1.17.5 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

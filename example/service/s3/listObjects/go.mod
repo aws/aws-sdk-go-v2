@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.91.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.92.0
 )
 
 require (

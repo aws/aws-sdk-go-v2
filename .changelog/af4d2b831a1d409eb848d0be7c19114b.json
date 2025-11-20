@@ -1,8 +1,0 @@
-{
-    "id": "af4d2b83-1a1d-409e-b848-d0be7c19114b",
-    "type": "feature",
-    "description": "Bedrock Data Automation Runtime Sync API",
-    "modules": [
-        "service/bedrockdataautomationruntime"
-    ]
-}

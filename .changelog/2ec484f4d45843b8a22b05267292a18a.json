@@ -1,8 +1,0 @@
-{
-    "id": "2ec484f4-d458-43b8-a22b-05267292a18a",
-    "type": "feature",
-    "description": "Add support for VPC Encryption Controls.",
-    "modules": [
-        "service/rds"
-    ]
-}

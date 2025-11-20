@@ -1,3 +1,7 @@
+# v1.47.0 (2025-11-20)
+
+* **Feature**: Added new APIs for Billing Transfer, new policy type INSPECTOR_POLICY, and allow an account to transfer between organizations
+
 # v1.46.5 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

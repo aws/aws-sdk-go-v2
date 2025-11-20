@@ -1,3 +1,7 @@
+# v1.55.0 (2025-11-20)
+
+* **Feature**: AWS launches CloudTrail aggregated events to simplify monitoring of data events at scale. This feature delivers both granular and summarized data events for resources like S3/Lambda, helping security teams identify patterns without custom aggregation logic.
+
 # v1.54.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

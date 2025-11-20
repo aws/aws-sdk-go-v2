@@ -1,3 +1,7 @@
+# v1.8.0 (2025-11-20)
+
+* **Feature**: Bedrock Data Automation Runtime Sync API
+
 # v1.7.13 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

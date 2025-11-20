@@ -1,3 +1,7 @@
+# v1.66.0 (2025-11-20)
+
+* **Feature**: Release Findings and Resources Trends APIs- GetFindingsTrendsV2 and GetResourcesTrendsV2. This supports time-series aggregated counts with composite filtering for 1-year of historical data analysis of Findings and Resources.
+
 # v1.65.5 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

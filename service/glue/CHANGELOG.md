@@ -1,3 +1,7 @@
+# v1.134.0 (2025-11-20)
+
+* **Feature**: Added FunctionType parameter to Glue GetuserDefinedFunctions.
+
 # v1.133.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

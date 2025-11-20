@@ -1,3 +1,7 @@
+# v1.38.0 (2025-11-20)
+
+* **Feature**: Add support for environment variables and an IAM execution role.
+
 # v1.37.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
