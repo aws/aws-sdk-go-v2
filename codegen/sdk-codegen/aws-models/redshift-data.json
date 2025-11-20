@@ -49,11 +49,14 @@
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n      <i>Amazon Redshift Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret stored in Secrets Manager which has <code>username</code> and <code>password</code>. The specified secret contains credentials to connect to the <code>database</code> you specify. When you are connecting to a cluster, you also supply the database name, If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret. When you are connecting to a serverless workgroup, you also supply the database name.</p> </li> <li> <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p> <ul> <li> <p>When connecting to a serverless workgroup, specify the workgroup name and database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p> </li> </ul> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#BatchExecuteStatementException": {
@@ -85,7 +88,7 @@
                 "Sqls": {
                     "target": "com.amazonaws.redshiftdata#SqlList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more SQL statements to run. \n      \n      The SQL statements are run as a single transaction. They run serially in the order of the array. \n      Subsequent SQL statements don't start until the previous statement in the array completes. \n      If any SQL statement fails, then because they are run as one transaction, all work is rolled back.</p>",
+                        "smithy.api#documentation": "<p>One or more SQL statements to run. The SQL statements are run as a single transaction. They run serially in the order of the array. Subsequent SQL statements don't start until the previous statement in the array completes. If any SQL statement fails, then because they are run as one transaction, all work is rolled back.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -138,6 +141,12 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>"
+                    }
+                },
                 "SessionKeepAliveSeconds": {
                     "target": "com.amazonaws.redshiftdata#SessionAliveSeconds",
                     "traits": {
@@ -148,12 +157,6 @@
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
-                    }
-                },
-                "ResultFormat": {
-                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>"
                     }
                 }
             },
@@ -167,7 +170,7 @@
                 "Id": {
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n      This identifier is returned by <code>BatchExecuteStatment</code>. </p>"
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>BatchExecuteStatment</code>. </p>"
                     }
                 },
                 "CreatedAt": {
@@ -251,6 +254,9 @@
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#QueryTimeoutException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
                 },
                 {
@@ -258,7 +264,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a running query. To be canceled, a query must be running. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Cancels a running query. To be canceled, a query must be running. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#CancelStatementRequest": {
@@ -267,7 +273,7 @@
                 "Id": {
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the SQL statement to cancel. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n        This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement to cancel. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -305,7 +311,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 63
-                }
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
             }
         },
         "com.amazonaws.redshiftdata#ColumnList": {
@@ -461,7 +468,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information\n      includes when the query started, when it finished, the query status, the number of rows returned, and the SQL\n      statement. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information includes when the query started, when it finished, the query status, the number of rows returned, and the SQL statement. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -471,7 +478,7 @@
                 "Id": {
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the SQL statement to describe. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n       A suffix indicates the number of the SQL statement.\n       For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.\n       This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatement</code>, and <code>ListStatements</code>. </p>",
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement to describe. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates the number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatement</code>, and <code>ListStatements</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -530,7 +537,7 @@
                 "Status": {
                     "target": "com.amazonaws.redshiftdata#StatusString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the SQL statement being described. Status values are defined as follows: </p>\n         <ul>\n            <li>\n               <p>ABORTED - The query run was stopped by the user. </p>\n            </li>\n            <li>\n               <p>ALL -  A status value that includes all query statuses. This value can be used to filter results. </p>\n            </li>\n            <li>\n               <p>FAILED - The query run failed. </p>\n            </li>\n            <li>\n               <p>FINISHED - The query has finished running. </p>\n            </li>\n            <li>\n               <p>PICKED - The query has been chosen to be run. </p>\n            </li>\n            <li>\n               <p>STARTED - The query run has started. </p>\n            </li>\n            <li>\n               <p>SUBMITTED - The query was submitted, but not yet processed. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the SQL statement being described. Status values are defined as follows: </p> <ul> <li> <p>ABORTED - The query run was stopped by the user. </p> </li> <li> <p>ALL - A status value that includes all query statuses. This value can be used to filter results. </p> </li> <li> <p>FAILED - The query run failed. </p> </li> <li> <p>FINISHED - The query has finished running. </p> </li> <li> <p>PICKED - The query has been chosen to be run. </p> </li> <li> <p>STARTED - The query run has started. </p> </li> <li> <p>SUBMITTED - The query was submitted, but not yet processed. </p> </li> </ul>"
                     }
                 },
                 "CreatedAt": {
@@ -542,7 +549,7 @@
                 "UpdatedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time (UTC) that the metadata for the SQL statement was last updated. An\n      example is the time the status last changed. </p>"
+                        "smithy.api#documentation": "<p>The date and time (UTC) that the metadata for the SQL statement was last updated. An example is the time the status last changed. </p>"
                     }
                 },
                 "RedshiftPid": {
@@ -555,7 +562,7 @@
                 "HasResultSet": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.\n      The value is true if any substatement returns a result set.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set. The value is true if any substatement returns a result set.</p>"
                     }
                 },
                 "QueryString": {
@@ -568,7 +575,7 @@
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected.\n        If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. \n        A <code>-1</code> indicates the value is null.</p>"
+                        "smithy.api#documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. A <code>-1</code> indicates the value is null.</p>"
                     }
                 },
                 "ResultSize": {
@@ -582,7 +589,7 @@
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The identifier of the query generated by Amazon Redshift. \n      These identifiers are also available in the <code>query</code> column of the <code>STL_QUERY</code> system view. </p>"
+                        "smithy.api#documentation": "<p>The identifier of the query generated by Amazon Redshift. These identifiers are also available in the <code>query</code> column of the <code>STL_QUERY</code> system view. </p>"
                     }
                 },
                 "QueryParameters": {
@@ -603,16 +610,16 @@
                         "smithy.api#documentation": "<p>The serverless workgroup name or Amazon Resource Name (ARN).</p>"
                     }
                 },
-                "SessionId": {
-                    "target": "com.amazonaws.redshiftdata#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The session identifier of the query.</p>"
-                    }
-                },
                 "ResultFormat": {
                     "target": "com.amazonaws.redshiftdata#ResultFormatString",
                     "traits": {
                         "smithy.api#documentation": "<p>The data format of the result of the SQL statement.</p>"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
                 }
             },
@@ -639,11 +646,14 @@
                     "target": "com.amazonaws.redshiftdata#QueryTimeoutException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret stored in Secrets Manager which has <code>username</code> and <code>password</code>. The specified secret contains credentials to connect to the <code>database</code> you specify. When you are connecting to a cluster, you also supply the database name, If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret. When you are connecting to a serverless workgroup, you also supply the database name.</p> </li> <li> <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p> <ul> <li> <p>When connecting to a serverless workgroup, specify the workgroup name and database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p> </li> </ul> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -677,7 +687,7 @@
                 "Database": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database that contains the tables to be described.  \n      If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>",
+                        "smithy.api#documentation": "<p>The name of the database that contains the tables to be described. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -696,7 +706,7 @@
                 "Table": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The table name. If no table is specified, then all tables for all matching schemas are returned. \n       If no table and no schema is specified, then all tables for all schemas in the database are returned</p>"
+                        "smithy.api#documentation": "<p>The table name. If no table is specified, then all tables for all matching schemas are returned. If no table and no schema is specified, then all tables for all schemas in the database are returned</p>"
                     }
                 },
                 "NextToken": {
@@ -709,7 +719,7 @@
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of tables to return in the response. \n      If more tables exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of tables to return in the response. If more tables exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
                 "WorkgroupName": {
@@ -771,11 +781,14 @@
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret stored in Secrets Manager which has <code>username</code> and <code>password</code>. The specified secret contains credentials to connect to the <code>database</code> you specify. When you are connecting to a cluster, you also supply the database name, If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret. When you are connecting to a serverless workgroup, you also supply the database name.</p> </li> <li> <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p> <ul> <li> <p>When connecting to a serverless workgroup, specify the workgroup name and database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p> </li> </ul> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#ExecuteStatementException": {
@@ -867,6 +880,12 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>"
+                    }
+                },
                 "SessionKeepAliveSeconds": {
                     "target": "com.amazonaws.redshiftdata#SessionAliveSeconds",
                     "traits": {
@@ -877,12 +896,6 @@
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
-                    }
-                },
-                "ResultFormat": {
-                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>"
                     }
                 }
             },
@@ -1028,7 +1041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement in JSON format. \n       The <code>ExecuteStatement</code> or <code>BatchExecuteStatement</code> operation that ran the SQL statement must have specified <code>ResultFormat</code> as <code>JSON</code>\n       , or let the format default to JSON.\n       A token is returned to page through the statement results.</p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement in JSON format. The <code>ExecuteStatement</code> or <code>BatchExecuteStatement</code> operation that ran the SQL statement must have specified <code>ResultFormat</code> as <code>JSON</code> , or let the format default to JSON. A token is returned to page through the statement results.</p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1043,7 +1056,7 @@
                 "Id": {
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n       A suffix indicates then number of the SQL statement.\n       For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.\n       This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates then number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1078,7 +1091,7 @@
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. \n       You can use this number to estimate the number of calls to the <code>GetStatementResult</code> operation needed to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. You can use this number to estimate the number of calls to the <code>GetStatementResult</code> operation needed to page through the results. </p>"
                     }
                 },
                 "NextToken": {
@@ -1112,7 +1125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement in CSV format. \n      The <code>ExecuteStatement</code> or <code>BatchExecuteStatement</code> operation that ran the SQL statement must have specified <code>ResultFormat</code> as <code>CSV</code>.\n      A token is returned to page through the statement results.</p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n      <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement in CSV format. The <code>ExecuteStatement</code> or <code>BatchExecuteStatement</code> operation that ran the SQL statement must have specified <code>ResultFormat</code> as <code>CSV</code>. A token is returned to page through the statement results.</p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1127,7 +1140,7 @@
                 "Id": {
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n      A suffix indicates then number of the SQL statement.\n      For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.\n      This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates then number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1162,7 +1175,7 @@
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. \n      You can use this number to estimate the number of calls to the <code>GetStatementResultV2</code> operation needed to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. You can use this number to estimate the number of calls to the <code>GetStatementResultV2</code> operation needed to page through the results. </p>"
                     }
                 },
                 "ResultFormat": {
@@ -1224,11 +1237,14 @@
                     "target": "com.amazonaws.redshiftdata#QueryTimeoutException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret stored in Secrets Manager which has <code>username</code> and <code>password</code>. The specified secret contains credentials to connect to the <code>database</code> you specify. When you are connecting to a cluster, you also supply the database name, If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret. When you are connecting to a serverless workgroup, you also supply the database name.</p> </li> <li> <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p> <ul> <li> <p>When connecting to a serverless workgroup, specify the workgroup name and database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p> </li> </ul> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1276,7 +1292,7 @@
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of databases to return in the response. \n       If more databases exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of databases to return in the response. If more databases exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
                 "WorkgroupName": {
@@ -1329,11 +1345,14 @@
                     "target": "com.amazonaws.redshiftdata#QueryTimeoutException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret stored in Secrets Manager which has <code>username</code> and <code>password</code>. The specified secret contains credentials to connect to the <code>database</code> you specify. When you are connecting to a cluster, you also supply the database name, If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret. When you are connecting to a serverless workgroup, you also supply the database name.</p> </li> <li> <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p> <ul> <li> <p>When connecting to a serverless workgroup, specify the workgroup name and database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p> </li> </ul> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1367,7 +1386,7 @@
                 "Database": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database that contains the schemas to list. \n     If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>",
+                        "smithy.api#documentation": "<p>The name of the database that contains the schemas to list. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1380,7 +1399,7 @@
                 "SchemaPattern": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pattern to filter results by schema name. Within a schema pattern, \"%\" means match any\n      substring of 0 or more characters and \"_\" means match any one character. Only schema name\n      entries matching the search pattern are returned. </p>"
+                        "smithy.api#documentation": "<p>A pattern to filter results by schema name. Within a schema pattern, \"%\" means match any substring of 0 or more characters and \"_\" means match any one character. Only schema name entries matching the search pattern are returned. </p>"
                     }
                 },
                 "NextToken": {
@@ -1393,7 +1412,7 @@
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of schemas to return in the response. \n       If more schemas exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of schemas to return in the response. If more schemas exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
                 "WorkgroupName": {
@@ -1440,11 +1459,14 @@
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List of SQL statements. By default, only finished statements are shown. \n        A token is returned to page through the statement list. </p>\n         <p>When you use identity-enhanced role sessions to list statements, you must provide either the \n     <code>cluster-identifier</code> or <code>workgroup-name</code> parameter. This ensures that the IdC user\n     can only access the Amazon Redshift IdC applications they are assigned. For more information, see \n       <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html\">\n         Trusted identity propagation overview</a>.</p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>List of SQL statements. By default, only finished statements are shown. A token is returned to page through the statement list. </p> <p>When you use identity-enhanced role sessions to list statements, you must provide either the <code>cluster-identifier</code> or <code>workgroup-name</code> parameter. This ensures that the IdC user can only access the Amazon Redshift IdC applications they are assigned. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html\"> Trusted identity propagation overview</a>.</p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1477,43 +1499,43 @@
                     "target": "com.amazonaws.redshiftdata#ListStatementsLimit",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of SQL statements to return in the response. \n       If more SQL statements exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of SQL statements to return in the response. If more SQL statements exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
                 "StatementName": {
                     "target": "com.amazonaws.redshiftdata#StatementNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SQL statement specified as input to <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> to identify the query. \n      You can list multiple statements by providing a prefix that matches the beginning of the statement name. \n      For example, to list myStatement1, myStatement2, myStatement3, and so on, then provide the a value of <code>myStatement</code>.  \n      Data API does a case-sensitive match of SQL statement names to the prefix value you provide. </p>"
+                        "smithy.api#documentation": "<p>The name of the SQL statement specified as input to <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> to identify the query. You can list multiple statements by providing a prefix that matches the beginning of the statement name. For example, to list myStatement1, myStatement2, myStatement3, and so on, then provide the a value of <code>myStatement</code>. Data API does a case-sensitive match of SQL statement names to the prefix value you provide. </p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.redshiftdata#StatusString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the SQL statement to list. Status values are defined as follows: </p>\n         <ul>\n            <li>\n               <p>ABORTED - The query run was stopped by the user. </p>\n            </li>\n            <li>\n               <p>ALL -  A status value that includes all query statuses. This value can be used to filter results. </p>\n            </li>\n            <li>\n               <p>FAILED - The query run failed. </p>\n            </li>\n            <li>\n               <p>FINISHED - The query has finished running. </p>\n            </li>\n            <li>\n               <p>PICKED - The query has been chosen to be run. </p>\n            </li>\n            <li>\n               <p>STARTED - The query run has started. </p>\n            </li>\n            <li>\n               <p>SUBMITTED - The query was submitted, but not yet processed. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the SQL statement to list. Status values are defined as follows: </p> <ul> <li> <p>ABORTED - The query run was stopped by the user. </p> </li> <li> <p>ALL - A status value that includes all query statuses. This value can be used to filter results. </p> </li> <li> <p>FAILED - The query run failed. </p> </li> <li> <p>FINISHED - The query has finished running. </p> </li> <li> <p>PICKED - The query has been chosen to be run. </p> </li> <li> <p>STARTED - The query run has started. </p> </li> <li> <p>SUBMITTED - The query was submitted, but not yet processed. </p> </li> </ul>"
                     }
                 },
                 "RoleLevel": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that filters which statements to return in the response. If true, all statements run by the caller's IAM role are returned. \n      If false, only statements run by the caller's IAM role in the current IAM session are returned.  The default is true. </p>"
+                        "smithy.api#documentation": "<p>A value that filters which statements to return in the response. If true, all statements run by the caller's IAM role are returned. If false, only statements run by the caller's IAM role in the current IAM session are returned. The default is true. </p>"
                     }
                 },
                 "Database": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database when listing statements run against a <code>ClusterIdentifier</code> or <code>WorkgroupName</code>. \n       </p>"
+                        "smithy.api#documentation": "<p>The name of the database when listing statements run against a <code>ClusterIdentifier</code> or <code>WorkgroupName</code>. </p>"
                     }
                 },
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#ClusterIdentifierString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. Only statements that ran on this cluster are returned. \n      When providing <code>ClusterIdentifier</code>, then <code>WorkgroupName</code> can't be specified.</p>"
+                        "smithy.api#documentation": "<p>The cluster identifier. Only statements that ran on this cluster are returned. When providing <code>ClusterIdentifier</code>, then <code>WorkgroupName</code> can't be specified.</p>"
                     }
                 },
                 "WorkgroupName": {
                     "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The serverless workgroup name or Amazon Resource Name (ARN). Only statements that ran on this workgroup are returned. \n      When providing <code>WorkgroupName</code>, then <code>ClusterIdentifier</code> can't be specified.</p>"
+                        "smithy.api#documentation": "<p>The serverless workgroup name or Amazon Resource Name (ARN). Only statements that ran on this workgroup are returned. When providing <code>WorkgroupName</code>, then <code>ClusterIdentifier</code> can't be specified.</p>"
                     }
                 }
             },
@@ -1561,11 +1583,14 @@
                     "target": "com.amazonaws.redshiftdata#QueryTimeoutException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret \n                                    stored in Secrets Manager which has <code>username</code> and <code>password</code>. \n                                    The specified secret contains credentials\n                                    to connect to the <code>database</code> you specify. \n                                    When you are connecting to a cluster, you also supply the database name, \n                                    If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret.       \n                                    When you are connecting to a serverless workgroup, you also supply the database name.</p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p>\n               <ul>\n                  <li>\n                     <p>When connecting to a serverless workgroup, specify the workgroup name and database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name.\n                                        The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>.\n                                        Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p>\n                  </li>\n                  <li>\n                     <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. \n                                        Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, provide the <code>secret-arn</code> of a secret stored in Secrets Manager which has <code>username</code> and <code>password</code>. The specified secret contains credentials to connect to the <code>database</code> you specify. When you are connecting to a cluster, you also supply the database name, If you provide a cluster identifier (<code>dbClusterIdentifier</code>), it must match the cluster identifier stored in the secret. When you are connecting to a serverless workgroup, you also supply the database name.</p> </li> <li> <p>Temporary credentials - when connecting to your data warehouse, choose one of the following options:</p> <ul> <li> <p>When connecting to a serverless workgroup, specify the workgroup name and database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as an IAM identity, specify the cluster identifier and the database name. The database user name is derived from the IAM identity. For example, <code>arn:iam::123456789012:user:foo</code> has the database user name <code>IAM:foo</code>. Also, permission to call the <code>redshift:GetClusterCredentialsWithIAM</code> operation is required.</p> </li> <li> <p>When connecting to a cluster as a database user, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.</p> </li> </ul> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1599,7 +1624,7 @@
                 "Database": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database that contains the tables to list. \n      If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>",
+                        "smithy.api#documentation": "<p>The name of the database that contains the tables to list. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1612,13 +1637,13 @@
                 "SchemaPattern": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pattern to filter results by schema name. Within a schema pattern, \"%\" means match any\n      substring of 0 or more characters and \"_\" means match any one character. Only schema name\n      entries matching the search pattern are returned. If <code>SchemaPattern</code> is not specified, then all tables that match \n       <code>TablePattern</code> are returned. \n       If neither <code>SchemaPattern</code> or <code>TablePattern</code> are specified, then all tables are returned. </p>"
+                        "smithy.api#documentation": "<p>A pattern to filter results by schema name. Within a schema pattern, \"%\" means match any substring of 0 or more characters and \"_\" means match any one character. Only schema name entries matching the search pattern are returned. If <code>SchemaPattern</code> is not specified, then all tables that match <code>TablePattern</code> are returned. If neither <code>SchemaPattern</code> or <code>TablePattern</code> are specified, then all tables are returned. </p>"
                     }
                 },
                 "TablePattern": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pattern to filter results by table name. Within a table pattern, \"%\" means match any\n      substring of 0 or more characters and \"_\" means match any one character. Only table name\n      entries matching the search pattern are returned. If <code>TablePattern</code> is not specified, then all tables that match \n       <code>SchemaPattern</code>are returned.  \n       If neither <code>SchemaPattern</code> or <code>TablePattern</code> are specified, then all tables are returned. </p>"
+                        "smithy.api#documentation": "<p>A pattern to filter results by table name. Within a table pattern, \"%\" means match any substring of 0 or more characters and \"_\" means match any one character. Only table name entries matching the search pattern are returned. If <code>TablePattern</code> is not specified, then all tables that match <code>SchemaPattern</code>are returned. If neither <code>SchemaPattern</code> or <code>TablePattern</code> are specified, then all tables are returned. </p>"
                     }
                 },
                 "NextToken": {
@@ -1631,7 +1656,7 @@
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of tables to return in the response. \n       If more tables exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of tables to return in the response. If more tables exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
                 "WorkgroupName": {
@@ -1770,7 +1795,7 @@
                 },
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You\n      can run SQL statements, which are committed if the statement succeeds. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#title": "Redshift Data API Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2440,7 +2465,7 @@
                 "value": {
                     "target": "com.amazonaws.redshiftdata#ParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the parameter. \n    Amazon Redshift implicitly converts to the proper data type. For more information, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html\">Data types</a> in the \n      <i>Amazon Redshift Database Developer Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The value of the parameter. Amazon Redshift implicitly converts to the proper data type. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html\">Data types</a> in the <i>Amazon Redshift Database Developer Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2497,7 +2522,7 @@
                 "Status": {
                     "target": "com.amazonaws.redshiftdata#StatusString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the SQL statement. An\n       example is the that the SQL statement finished.\n      </p>"
+                        "smithy.api#documentation": "<p>The status of the SQL statement. An example is the that the SQL statement finished. </p>"
                     }
                 },
                 "StatementName": {
@@ -2557,7 +2582,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "max": 500
+                    "max": 2048
                 }
             }
         },
@@ -2645,7 +2670,7 @@
                 "Id": {
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the SQL statement. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n      A suffix indicates the number of the SQL statement.\n      For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates the number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2665,7 +2690,7 @@
                 "Status": {
                     "target": "com.amazonaws.redshiftdata#StatementStatusString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the SQL statement. An\n      example is the that the SQL statement finished.\n      </p>"
+                        "smithy.api#documentation": "<p>The status of the SQL statement. An example is the that the SQL statement finished. </p>"
                     }
                 },
                 "CreatedAt": {
@@ -2690,7 +2715,7 @@
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. \n      If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others.\n      A <code>-1</code> indicates the value is null.</p>"
+                        "smithy.api#documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. A <code>-1</code> indicates the value is null.</p>"
                     }
                 },
                 "ResultSize": {
@@ -2742,7 +2767,7 @@
                 "type": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the table. Possible values include TABLE, VIEW, SYSTEM TABLE, GLOBAL\n      TEMPORARY, LOCAL TEMPORARY, ALIAS, and SYNONYM. </p>"
+                        "smithy.api#documentation": "<p>The type of the table. Possible values include TABLE, VIEW, SYSTEM TABLE, GLOBAL TEMPORARY, LOCAL TEMPORARY, ALIAS, and SYNONYM. </p>"
                     }
                 },
                 "schema": {
@@ -2759,7 +2784,7 @@
         "com.amazonaws.redshiftdata#UUID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-z0-9]{8}(-[a-z0-9]{4}){3}-[a-z0-9]{12}(:\\d+)?$"
+                "smithy.api#pattern": "^[a-z0-9]{8}(-[a-z0-9]{4}){3}-[a-z0-9]{12}(:\\d{0,2})?$"
             }
         },
         "com.amazonaws.redshiftdata#ValidationException": {
@@ -2785,7 +2810,7 @@
                     "min": 3,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(([a-z0-9-]+)|(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov|(-iso[a-z]?))?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$"
+                "smithy.api#pattern": "((^[a-z0-9-]{3,63}$)|^(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov|(-iso[a-z]?))?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$"
             }
         },
         "com.amazonaws.redshiftdata#bool": {

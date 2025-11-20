@@ -322,6 +322,40 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#AggregationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Templates": {
+                    "target": "com.amazonaws.cloudtrail#Templates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of aggregation templates that can be used to configure event aggregation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventCategory": {
+                    "target": "com.amazonaws.cloudtrail#EventCategoryAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event category for which aggregation should be performed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains configuration settings for aggregating events.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#AggregationConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#AggregationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.cloudtrail#BillingMode": {
             "type": "enum",
             "members": {
@@ -3855,6 +3889,20 @@
                         "smithy.api#enumValue": "insight"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the event category for which aggregation configuration is enabled. Valid value is Data.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#EventCategoryAggregation": {
+            "type": "enum",
+            "members": {
+                "Data": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Data"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#EventDataStore": {
@@ -4615,23 +4663,35 @@
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current event configuration settings for the specified event data store, including details \n         about maximum event size and context key selectors configured for the event data store.</p>",
+                "smithy.api#documentation": "<p>Retrieves the current event configuration settings for the specified event data store or trail. The response includes maximum event size configuration, the context key selectors configured for the event data store, and any aggregation settings configured for the trail.</p>",
                 "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.cloudtrail#GetEventConfigurationRequest": {
             "type": "structure",
             "members": {
+                "TrailName": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the trail for which you want to retrieve event configuration settings.</p>"
+                    }
+                },
                 "EventDataStore": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
@@ -4646,6 +4706,12 @@
         "com.amazonaws.cloudtrail#GetEventConfigurationResponse": {
             "type": "structure",
             "members": {
+                "TrailARN": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trail for which the event configuration settings are returned.</p>"
+                    }
+                },
                 "EventDataStoreArn": {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
                     "traits": {
@@ -4662,6 +4728,12 @@
                     "target": "com.amazonaws.cloudtrail#ContextKeySelectors",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of context key selectors that are configured for the event data store.</p>"
+                    }
+                },
+                "AggregationConfigurations": {
+                    "target": "com.amazonaws.cloudtrail#AggregationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of aggregation configurations that are configured for the trail.</p>"
                     }
                 }
             },
@@ -8340,10 +8412,16 @@
                     "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreStatusException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InvalidHomeRegionException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterCombinationException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
@@ -8358,35 +8436,48 @@
                     "target": "com.amazonaws.cloudtrail#ThrottlingException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the event configuration settings for the specified event data store. You can update the maximum event size and context key selectors.</p>",
+                "smithy.api#documentation": "<p>Updates the event configuration settings for the specified event data store or trail. This operation supports updating the maximum event size, adding or modifying context key selectors for event data store, and configuring aggregation settings for the trail.</p>",
                 "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.cloudtrail#PutEventConfigurationRequest": {
             "type": "structure",
             "members": {
+                "TrailName": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the trail for which you want to update event configuration settings.</p>"
+                    }
+                },
                 "EventDataStore": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to update event configuration settings.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which event configuration settings are updated.</p>"
                     }
                 },
                 "MaxEventSize": {
                     "target": "com.amazonaws.cloudtrail#MaxEventSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum allowed size for events to be stored in the specified event data store. If you are using context key selectors, MaxEventSize must be set to Large.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The maximum allowed size for events to be stored in the specified event data store. If you are using context key selectors, MaxEventSize must be set to Large.</p>"
                     }
                 },
                 "ContextKeySelectors": {
                     "target": "com.amazonaws.cloudtrail#ContextKeySelectors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of context key selectors that will be included to provide enriched event data.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A list of context key selectors that will be included to provide enriched event data.</p>"
+                    }
+                },
+                "AggregationConfigurations": {
+                    "target": "com.amazonaws.cloudtrail#AggregationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of aggregation configurations that you want to configure for the trail.</p>"
                     }
                 }
             },
@@ -8397,6 +8488,12 @@
         "com.amazonaws.cloudtrail#PutEventConfigurationResponse": {
             "type": "structure",
             "members": {
+                "TrailARN": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trail that has aggregation enabled.</p>"
+                    }
+                },
                 "EventDataStoreArn": {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
                     "traits": {
@@ -8413,6 +8510,12 @@
                     "target": "com.amazonaws.cloudtrail#ContextKeySelectors",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of context key selectors that are configured for the event data store.</p>"
+                    }
+                },
+                "AggregationConfigurations": {
+                    "target": "com.amazonaws.cloudtrail#AggregationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of aggregation configurations that are configured for the trail.</p>"
                     }
                 }
             },
@@ -10717,6 +10820,44 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#Template": {
+            "type": "enum",
+            "members": {
+                "API_ACTIVITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_ACTIVITY"
+                    }
+                },
+                "RESOURCE_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ACCESS"
+                    }
+                },
+                "USER_ACTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_ACTIONS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the type of the aggregation templates in the aggregation configuration. Valid values include API_ACTIVITY, RESOURCE_ACCESS and USER_ACTIONS.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#Templates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#Template"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },

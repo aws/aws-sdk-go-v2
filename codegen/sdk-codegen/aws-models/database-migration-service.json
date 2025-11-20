@@ -2101,6 +2101,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The key length of the cryptographic algorithm being used.</p>"
                     }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the certificate.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses\n         your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has\n         a different default encryption key for each Amazon Web Services Region.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10653,6 +10659,12 @@
                         "smithy.api#documentation": "<p> Value returned by a call to CreateEndpoint that can be used for cross-account\n         validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a\n         cross-account. </p>"
                     }
                 },
+                "IsReadOnly": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the endpoint is read-only. When set to <code>true</code>, this endpoint\n         is managed by DMS as part of a zero-ETL integration and cannot be modified or deleted directly.\n         You can only modify or delete read-only endpoints through their associated zero-ETL integration.</p>"
+                    }
+                },
                 "DynamoDbSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DynamoDbSettings",
                     "traits": {
@@ -10762,6 +10774,12 @@
                     "target": "com.amazonaws.databasemigrationservice#TimestreamSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for the Amazon Timestream target endpoint. For more information, see the\n            <code>TimestreamSettings</code> structure.</p>"
+                    }
+                },
+                "LakehouseSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#LakehouseSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the target Lakehouse endpoint. This parameter applies to endpoints\n          that are automatically created by DMS for a Lakehouse data warehouse as part of a zero-ETL integration.</p>"
                     }
                 }
             },
@@ -11745,6 +11763,9 @@
                     "target": "com.amazonaws.databasemigrationservice#InvalidCertificateFault"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#KMSKeyNotAccessibleFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ResourceAlreadyExistsFault"
                 },
                 {
@@ -11794,6 +11815,12 @@
                     "target": "com.amazonaws.databasemigrationservice#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the certificate.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the certificate.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses\n         your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has\n         a different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -12402,6 +12429,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information that describes an Amazon Kinesis Data Stream endpoint. This\n         information includes the output format of records applied to the endpoint and details of\n         transaction and control table data information.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#LakehouseSettings": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lakehouse resource that serves as the target for\n         this endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines a Lakehouse endpoint. This endpoint type is used for\n         zero-ETL integrations with Lakehouse data warehouses.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#Limitation": {
@@ -16962,6 +17004,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when DMS will deprovision the replication.</p>"
                     }
+                },
+                "IsReadOnly": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the serverless replication is read-only. When set to <code>true</code>,\n         this replication is managed by DMS as part of a zero-ETL integration and cannot be modified\n         or deleted directly. You can only modify or delete read-only replications through their\n         associated zero-ETL integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17035,6 +17083,12 @@
                     "target": "com.amazonaws.databasemigrationservice#TStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the serverless replication config was updated.</p>"
+                    }
+                },
+                "IsReadOnly": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the replication configuration is read-only. When set to <code>true</code>,\n         this replication configuration is managed by DMS as part of a zero-ETL integration and cannot\n         be modified or deleted directly. You can only modify or delete read-only replication configurations\n         through their associated zero-ETL integration.</p>"
                     }
                 }
             },
@@ -17471,6 +17525,12 @@
                     "target": "com.amazonaws.databasemigrationservice#StringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP addressing protocol supported by the subnet group. This is used by a replication\n         instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6\n         addressing. IPv6 only is not yet supported.</p>"
+                    }
+                },
+                "IsReadOnly": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the replication subnet group is read-only. When set to <code>true</code>,\n         this subnet group is managed by DMS as part of a zero-ETL integration and cannot be modified\n         or deleted directly. You can only modify or delete read-only subnet groups through their\n         associated zero-ETL integration.</p>"
                     }
                 }
             },

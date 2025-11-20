@@ -3315,6 +3315,9 @@
                     "target": "com.amazonaws.budgets#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.budgets#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.budgets#ExpiredNextTokenException"
                 },
                 {
@@ -4991,7 +4994,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You've reached the limit on the number of tags you can associate with a resource.</p>",
+                "smithy.api#documentation": "<p>You've reached a Service Quota limit on this resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -5416,6 +5419,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.budgets#ThrottlingException"

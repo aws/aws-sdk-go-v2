@@ -56,6 +56,9 @@
                     "target": "com.amazonaws.applicationsignals#ListAuditFindings"
                 },
                 {
+                    "target": "com.amazonaws.applicationsignals#ListEntityEvents"
+                },
+                {
                     "target": "com.amazonaws.applicationsignals#ListGroupingAttributeDefinitions"
                 },
                 {
@@ -367,20 +370,20 @@
                 "AttributeFilterName": {
                     "target": "com.amazonaws.applicationsignals#AttributeFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute to filter on. This corresponds to service metadata attributes such as environment, team, or custom tags.</p>",
+                        "smithy.api#documentation": "<p>The name of the attribute to filter by, such as <code>Platform</code>, <code>Environment</code>, or <code>BusinessUnit</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AttributeFilterValues": {
                     "target": "com.amazonaws.applicationsignals#AttributeFilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of values to match against the specified attribute. Services with attribute values matching any of these values will be included in the results.</p>",
+                        "smithy.api#documentation": "<p>An array of values to match for the specified attribute. Services that have any of these values for the attribute will be included in the results.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a filter for service attributes. Used to narrow down results based on specific attribute names and values.</p>"
+                "smithy.api#documentation": "<p>A structure that defines a filter for narrowing down results based on specific attribute values. This can be used to filter services by platform, environment, or other service characteristics.</p>"
             }
         },
         "com.amazonaws.applicationsignals#AttributeFilterName": {
@@ -453,43 +456,43 @@
                 "KeyAttributes": {
                     "target": "com.amazonaws.applicationsignals#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key attributes that identify the resource associated with this audit finding. These attributes help locate and understand the context of the finding.</p>",
+                        "smithy.api#documentation": "<p>The key attributes that identify the service or entity this audit finding relates to. This is a string-to-string map that includes fields like Type, Name, and Environment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AuditorResults": {
                     "target": "com.amazonaws.applicationsignals#AuditorResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of results from different auditors that examined the resource. Each result includes the auditor name, description, and severity level.</p>"
+                        "smithy.api#documentation": "<p>An array of auditor results that contain the specific findings, descriptions, and severity levels identified by different auditing algorithms.</p>"
                     }
                 },
                 "Operation": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operation or action that was being audited when this finding was discovered. This provides context about what was being examined.</p>"
+                        "smithy.api#documentation": "<p>The name of the operation associated with this audit finding, if the finding is specific to a particular service operation.</p>"
                     }
                 },
                 "MetricGraph": {
                     "target": "com.amazonaws.applicationsignals#MetricGraph",
                     "traits": {
-                        "smithy.api#documentation": "<p>A metric graph associated with the audit finding, showing relevant performance data that may be related to the identified issue.</p>"
+                        "smithy.api#documentation": "<p>A structure containing metric data queries and time range information that provides context for the audit finding through relevant performance metrics.</p>"
                     }
                 },
                 "DependencyGraph": {
                     "target": "com.amazonaws.applicationsignals#DependencyGraph",
                     "traits": {
-                        "smithy.api#documentation": "<p>A dependency graph showing the relationships between services that may be affected by or related to the audit finding.</p>"
+                        "smithy.api#documentation": "<p>A structure containing nodes and edges that represent the dependency relationships relevant to this audit finding, helping to understand the context and potential impact.</p>"
                     }
                 },
                 "Type": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type or category of the audit finding, such as \"Performance\", \"Security\", or \"Configuration\".</p>"
+                        "smithy.api#documentation": "<p>The type of audit finding.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an audit finding that identifies a potential issue, misconfiguration, or compliance violation in Application Signals resources.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about an audit finding, which represents an automated analysis result about service behavior, performance issues, or potential problems identified through heuristic algorithms.</p>"
             }
         },
         "com.amazonaws.applicationsignals#AuditFindings": {
@@ -509,20 +512,20 @@
                 "Type": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource being targeted for audit, such as \"Service\", \"SLO\", \"ServiceOperation\", or \"Canary\".</p>",
+                        "smithy.api#documentation": "<p>The type of entity being audited, such as <code>service</code>, <code>SLO</code>, <code>service_operation</code>, or <code>canary</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Data": {
                     "target": "com.amazonaws.applicationsignals#AuditTargetEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific data or entity information for the audit target, containing details needed to identify and examine the resource.</p>",
+                        "smithy.api#documentation": "<p>The specific data identifying the audit target entity.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a target resource for auditing, such as a service, SLO, or operation.</p>"
+                "smithy.api#documentation": "<p>A structure that specifies the target entity for audit analysis, such as a <code>service</code>, <code>SLO</code>, <code>service_operation</code>, or <code>canary</code>.</p>"
             }
         },
         "com.amazonaws.applicationsignals#AuditTargetEntity": {
@@ -537,13 +540,13 @@
                 "Slo": {
                     "target": "com.amazonaws.applicationsignals#ServiceLevelObjectiveEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Service Level Objective entity information when the audit target is an SLO.</p>"
+                        "smithy.api#documentation": "<p>SLO entity information when the audit target is a service level objective.</p>"
                     }
                 },
                 "ServiceOperation": {
                     "target": "com.amazonaws.applicationsignals#ServiceOperationEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Service operation entity information when the audit target is a specific operation within a service.</p>"
+                        "smithy.api#documentation": "<p>Service operation entity information when the audit target is a specific service operation.</p>"
                     }
                 },
                 "Canary": {
@@ -554,7 +557,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A union type that represents different types of entities that can be audited, such as services, SLOs, service operations, or canaries.</p>"
+                "smithy.api#documentation": "<p>A union structure that contains the specific entity information for different types of audit targets.</p>"
             }
         },
         "com.amazonaws.applicationsignals#AuditTargets": {
@@ -575,27 +578,33 @@
                 "Auditor": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or identifier of the auditor that performed the examination and generated this result.</p>"
+                        "smithy.api#documentation": "<p>The name of the auditor algorithm that generated this result.</p>"
                     }
                 },
                 "Description": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed description of what the auditor found, including any recommendations for remediation or further investigation.</p>",
+                        "smithy.api#documentation": "<p>A detailed description of the audit finding, explaining what was observed and potential implications.</p>",
                         "smithy.api#length": {
                             "max": 10240
                         }
                     }
                 },
+                "Data": {
+                    "target": "com.amazonaws.applicationsignals#DataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a string-to-string map. It contains additional data about the result of an automated audit analysis.</p>"
+                    }
+                },
                 "Severity": {
                     "target": "com.amazonaws.applicationsignals#Severity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The severity level of the finding, such as \"Critical\", \"High\", \"Medium\", or \"Low\". This helps prioritize remediation efforts.</p>"
+                        "smithy.api#documentation": "<p>The severity level of this audit finding, indicating the importance and potential impact of the issue.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of an audit performed by a specific auditor on a resource.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the result of an automated audit analysis, including the auditor name, description of findings, additional data, and severity level.</p>"
             }
         },
         "com.amazonaws.applicationsignals#AuditorResults": {
@@ -904,7 +913,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a CloudWatch Synthetics canary that can be audited for performance and configuration issues.</p>"
+                "smithy.api#documentation": "<p>A structure that contains identifying information for a CloudWatch Synthetics canary entity used in audit targeting.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ChangeEvent": {
@@ -913,60 +922,60 @@
                 "Timestamp": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the change event occurred, expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The timestamp when this change event occurred. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AccountId": {
                     "target": "com.amazonaws.applicationsignals#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID where the change event occurred.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID where this change event occurred.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Region": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region where the change event occurred.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services region where this change event occurred.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Entity": {
                     "target": "com.amazonaws.applicationsignals#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity or resource that was changed, such as a service, deployment, or configuration.</p>",
+                        "smithy.api#documentation": "<p>The entity (service or resource) that was affected by this change event, including its key attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> <li> <p> <code>AwsAccountId</code> specifies the account where this object is in.</p> </li> </ul> <p>Below is an example of a service.</p> <p> <code>{ \"Type\": \"Service\", \"Name\": \"visits-service\", \"Environment\": \"petclinic-test\" }</code> </p> <p>Below is an example of a resource.</p> <p> <code>{ \"Type\": \"AWS::Resource\", \"ResourceType\": \"AWS::DynamoDB::Table\", \"Identifier\": \"Customers\" }</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ChangeEventType": {
                     "target": "com.amazonaws.applicationsignals#ChangeEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of change that occurred, such as \"Deployment\", \"Configuration\", or \"Infrastructure\".</p>",
+                        "smithy.api#documentation": "<p>The type of change event that occurred, such as <code>DEPLOYMENT</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EventId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the change event.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for this change event. For CloudTrail-based events, this is the CloudTrail event id. For other events, this will be <code>Unknown</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or system that initiated the change event.</p>"
+                        "smithy.api#documentation": "<p>The name of the user who initiated this change event, if available.</p>"
                     }
                 },
                 "EventName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A descriptive name for the change event that provides context about what changed.</p>"
+                        "smithy.api#documentation": "<p>The name or description of this change event.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a change event that occurred in the system, such as deployments, configuration changes, or other operational events that may impact service performance.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about a change event that occurred for a service, such as a deployment or configuration change.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ChangeEventType": {
@@ -977,6 +986,23 @@
                     "traits": {
                         "smithy.api#enumValue": "DEPLOYMENT"
                     }
+                },
+                "CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIGURATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ChangeEvents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#ChangeEvent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 250
                 }
             }
         },
@@ -1113,6 +1139,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.applicationsignals#DataMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.applicationsignals#DeleteGroupingConfiguration": {
             "type": "operation",
             "input": {
@@ -1133,7 +1168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a grouping configuration that defines how services are grouped and organized in Application Signals. Once deleted, services will no longer be grouped according to the specified configuration rules.</p> <p>This operation is irreversible. After deletion, you must recreate the grouping configuration if you want to restore the same grouping behavior.</p>",
+                "smithy.api#documentation": "<p>Deletes the grouping configuration for this account. This removes all custom grouping attribute definitions that were previously configured.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/grouping-configuration",
@@ -1229,18 +1264,35 @@
                 "Nodes": {
                     "target": "com.amazonaws.applicationsignals#Nodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of nodes in the dependency graph, where each node represents a service or component.</p>"
+                        "smithy.api#documentation": "<p>An array of nodes representing the services, resources, or other entities in the dependency graph.</p>"
                     }
                 },
                 "Edges": {
                     "target": "com.amazonaws.applicationsignals#Edges",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of edges in the dependency graph, where each edge represents a connection or dependency between two nodes.</p>"
+                        "smithy.api#documentation": "<p>An array of edges representing the connections and relationships between the nodes in the dependency graph.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a graph showing the dependencies between services and components in your application architecture.</p>"
+                "smithy.api#documentation": "<p>A structure that represents the dependency relationships relevant to an audit finding, containing nodes and edges that show how services and resources are connected.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#DetailLevel": {
+            "type": "enum",
+            "members": {
+                "BRIEF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BRIEF"
+                    }
+                },
+                "DETAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationsignals#Dimension": {
@@ -1329,30 +1381,30 @@
                 "SourceNodeId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the source node in the dependency relationship.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the source node in this edge connection.</p>"
                     }
                 },
                 "DestinationNodeId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the destination node in the dependency relationship.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the destination node in this edge connection.</p>"
                     }
                 },
                 "Duration": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The typical duration or latency of interactions along this edge, measured in milliseconds.</p>"
+                        "smithy.api#documentation": "<p>The duration or latency associated with this connection, if applicable.</p>"
                     }
                 },
                 "ConnectionType": {
                     "target": "com.amazonaws.applicationsignals#ConnectionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of connection between the nodes, such as \"HTTP\", \"Database\", \"Queue\", or \"Internal\".</p>"
+                        "smithy.api#documentation": "<p>The type of connection between the nodes, indicating the nature of the relationship.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a connection between two nodes in a dependency graph, showing how services or components interact with each other.</p>"
+                "smithy.api#documentation": "<p>A structure that represents a connection between two nodes in a dependency graph, showing the relationship and characteristics of the connection.</p>"
             }
         },
         "com.amazonaws.applicationsignals#Edges": {
@@ -1677,25 +1729,25 @@
                 "GroupingName": {
                     "target": "com.amazonaws.applicationsignals#GroupingString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the grouping attribute, such as \"Environment\", \"Team\", or \"Application\".</p>",
+                        "smithy.api#documentation": "<p>The friendly name for this grouping attribute, such as <code>BusinessUnit</code> or <code>Environment</code>. This name is used to identify the grouping in the console and APIs.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GroupingSourceKeys": {
                     "target": "com.amazonaws.applicationsignals#GroupingSourceKeyStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of source attribute keys that will be used to determine the grouping value for each service. These keys correspond to service metadata or tags.</p>"
+                        "smithy.api#documentation": "<p>An array of source keys used to derive the grouping attribute value from telemetry data, Amazon Web Services tags, or other sources. For example, [\"business_unit\", \"team\"] would look for values in those fields.</p>"
                     }
                 },
                 "DefaultGroupingValue": {
                     "target": "com.amazonaws.applicationsignals#GroupingString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value to use for grouping when a service doesn't have any of the specified source keys, such as \"Unknown\" or \"Unassigned\".</p>"
+                        "smithy.api#documentation": "<p>The default value to use for this grouping attribute when no value can be derived from the source keys. This ensures all services have a grouping value even if the source data is missing.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines how services should be grouped based on specific attributes. This allows logical organization of services in dashboards and service maps.</p>"
+                "smithy.api#documentation": "<p>A structure that defines how services should be grouped based on specific attributes. This includes the friendly name for the grouping, the source keys to derive values from, and an optional default value.</p>"
             }
         },
         "com.amazonaws.applicationsignals#GroupingAttributeDefinitions": {
@@ -1710,20 +1762,20 @@
                 "GroupingAttributeDefinitions": {
                     "target": "com.amazonaws.applicationsignals#GroupingAttributeDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of grouping attribute definitions that specify the rules for organizing services into groups.</p>",
+                        "smithy.api#documentation": "<p>An array of grouping attribute definitions that specify how services should be grouped based on various attributes and source keys.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UpdatedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the grouping configuration was last updated, expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The timestamp when this grouping configuration was last updated. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the complete configuration for how services are grouped and organized in Application Signals.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the complete grouping configuration for an account, including all defined grouping attributes and metadata about when it was last updated.</p>"
             }
         },
         "com.amazonaws.applicationsignals#GroupingSourceKeyStringList": {
@@ -1816,7 +1868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of audit findings for Application Signals resources. Audit findings identify potential issues, misconfigurations, or compliance violations in your observability setup.</p> <p>You can filter findings by time range, auditor type, and target resources to focus on specific areas of concern. This operation supports pagination for large result sets.</p>",
+                "smithy.api#documentation": "<p>Returns a list of audit findings that provide automated analysis of service behavior and root cause analysis. These findings help identify the most significant observations about your services, including performance issues, anomalies, and potential problems. The findings are generated using heuristic algorithms based on established troubleshooting patterns.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/auditFindings",
@@ -1831,7 +1883,7 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time for the audit findings query. Only findings created on or after this time will be included in the results. Specify the time as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>",
                         "smithy.api#httpQuery": "StartTime",
                         "smithy.api#required": {}
                     }
@@ -1839,7 +1891,7 @@
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time for the audit findings query. Only findings created before this time will be included in the results. Specify the time as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>",
                         "smithy.api#httpQuery": "EndTime",
                         "smithy.api#required": {}
                     }
@@ -1847,26 +1899,32 @@
                 "Auditors": {
                     "target": "com.amazonaws.applicationsignals#Auditors",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of auditor names to filter the findings. Only findings generated by the specified auditors will be returned. When not specified, findings from all auditors are included except canary.</p>"
+                        "smithy.api#documentation": "<p>A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.</p> <p>The following auditors are available for configuration:</p> <ul> <li> <p> <code>slo</code> - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.</p> </li> <li> <p> <code>operation_metric</code> - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase</p> <note> <p>Anomaly detection is not supported for sparse metrics (those missing more than 80% of datapoints within the given time period).</p> </note> </li> <li> <p> <code>service_quota</code> - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase</p> </li> <li> <p> <code>trace</code> - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase</p> </li> <li> <p> <code>dependency_metric</code> - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>top_contributor</code> - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>log</code> - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase</p> </li> </ul> <note> <p> <code>InitAuditor</code> and <code>Summarizer</code> auditors are not configurable as they are automatically triggered during the audit process.</p> </note>"
                     }
                 },
                 "AuditTargets": {
                     "target": "com.amazonaws.applicationsignals#AuditTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of audit target specifications to filter the findings. Only findings related to the specified targets (such as specific services, SLOs, operations or canary) will be returned.</p>",
+                        "smithy.api#documentation": "<p>A list of audit targets to filter the findings by. You can specify services, SLOs, or service operations to limit the audit findings to specific entities.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DetailLevel": {
+                    "target": "com.amazonaws.applicationsignals#DetailLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of details of the audit findings. Supported values: <code>BRIEF</code>, <code>DETAILED</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use this token to retrieve additional pages of audit findings when the result set is large.</p>"
+                        "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of audit findings.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.applicationsignals#ListAuditFindingMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of audit findings to return in a single request. Valid range is 1 to 100. If not specified, defaults to 50.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of audit findings to return in one operation. If you omit this parameter, the default of 10 is used.</p>"
                     }
                 }
             },
@@ -1877,17 +1935,149 @@
         "com.amazonaws.applicationsignals#ListAuditFindingsOutput": {
             "type": "structure",
             "members": {
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time period that the returned audit findings apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time period that the returned audit findings apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>"
+                    }
+                },
                 "AuditFindings": {
                     "target": "com.amazonaws.applicationsignals#AuditFindings",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of audit findings that match the specified criteria. Each finding includes details about the issue, affected resources, and auditor results.</p>",
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about one audit finding, including the auditor results, severity, and associated metric and dependency graphs.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use for retrieving the next page of results. This value is present only if there are more results available than were returned in the current response.</p>"
+                        "smithy.api#documentation": "<p>Include this value in your next use of this API to get the next set of audit findings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ListEntityEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationsignals#ListEntityEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationsignals#ListEntityEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationsignals#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationsignals#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of change events for a specific entity, such as deployments, configuration changes, or other state-changing activities. This operation helps track the history of changes that may have affected service performance.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/events",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "outputToken": "NextToken",
+                    "items": "ChangeEvents"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ListEntityEventsInput": {
+            "type": "structure",
+            "members": {
+                "Entity": {
+                    "target": "com.amazonaws.applicationsignals#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity for which to retrieve change events. This specifies the service, resource, or other entity whose event history you want to examine.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> <li> <p> <code>AwsAccountId</code> specifies the account where this object is in.</p> </li> </ul> <p>Below is an example of a service.</p> <p> <code>{ \"Type\": \"Service\", \"Name\": \"visits-service\", \"Environment\": \"petclinic-test\" }</code> </p> <p>Below is an example of a resource.</p> <p> <code>{ \"Type\": \"AWS::Resource\", \"ResourceType\": \"AWS::DynamoDB::Table\", \"Identifier\": \"Customers\" }</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.applicationsignals#ListEntityEventsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>The maximum number of change events to return in one operation. If you omit this parameter, the default of 50 is used.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of change events.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#ListEntityEventsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#ListEntityEventsOutput": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time period that the returned change events apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time period that the returned change events apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChangeEvents": {
+                    "target": "com.amazonaws.applicationsignals#ChangeEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about one change event that occurred for the specified entity during the requested time period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationsignals#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include this value in your next use of this API to get the next set of change events.</p>"
                     }
                 }
             },
@@ -1915,7 +2105,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the available grouping attribute definitions that can be used to create grouping configurations. These definitions specify the attributes and rules available for organizing services.</p> <p>Use this operation to discover what grouping options are available before creating or updating grouping configurations.</p>",
+                "smithy.api#documentation": "<p>Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured. These definitions determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/grouping-attribute-definitions",
@@ -1930,8 +2120,23 @@
                 "NextToken": {
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use this token to retrieve additional pages of grouping attribute definitions when the result set is large.</p>",
+                        "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.</p>",
                         "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.applicationsignals#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID to retrieve grouping attribute definitions for. Use this when accessing grouping configurations from a different account in cross-account monitoring scenarios.</p>",
+                        "smithy.api#httpQuery": "AwsAccountId"
+                    }
+                },
+                "IncludeLinkedAccounts": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, specify <code>true</code> to include grouping attributes from source accounts in the returned data.</p>",
+                        "smithy.api#httpQuery": "IncludeLinkedAccounts"
                     }
                 }
             },
@@ -1945,20 +2150,20 @@
                 "GroupingAttributeDefinitions": {
                     "target": "com.amazonaws.applicationsignals#GroupingAttributeDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of available grouping attribute definitions that can be used to create grouping configurations.</p>",
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about one grouping attribute definition, including the grouping name, source keys, and default values.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UpdatedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the grouping attribute definitions were last updated. Expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the grouping configuration was last updated. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use for retrieving the next page of results. This value is present only if there are more results available than were returned in the current response.</p>"
+                        "smithy.api#documentation": "<p>Include this value in your next use of this API to get the next set of grouping attribute definitions.</p>"
                     }
                 }
             },
@@ -2574,7 +2779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current state information for services monitored by Application Signals. Service states include health status, recent change events, and other operational metadata.</p> <p>You can filter results by time range, AWS account, and service attributes to focus on specific services or time periods. This operation supports pagination and can include data from linked accounts.</p>",
+                "smithy.api#documentation": "<p>Returns information about the last deployment and other change states of services. This API provides visibility into recent changes that may have affected service performance, helping with troubleshooting and change correlation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/service/states",
@@ -2594,14 +2799,14 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time for the service states query. Only service states from this time onward will be included. Specify the time as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve service state information for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time for the service states query. Only service states before this time will be included. Specify the time as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve service state information for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2609,32 +2814,32 @@
                     "target": "com.amazonaws.applicationsignals#ListServiceStatesMaxResults",
                     "traits": {
                         "smithy.api#default": 20,
-                        "smithy.api#documentation": "<p>The maximum number of service states to return in a single request. Valid range is 1 to 100. If not specified, defaults to 50.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of service states to return in one operation. If you omit this parameter, the default of 20 is used.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results. Use this token to retrieve additional pages of service states when the result set is large.</p>"
+                        "smithy.api#documentation": "<p>Include this value, if it was returned by the previous operation, to get the next set of service states.</p>"
                     }
                 },
                 "IncludeLinkedAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether to include service states from linked AWS accounts in the results. Set to <code>true</code> to include linked accounts, or <code>false</code> to only include the current account. Defaults to <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, specify <code>true</code> to include service states from source accounts in the returned data.</p>"
                     }
                 },
                 "AwsAccountId": {
                     "target": "com.amazonaws.applicationsignals#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID to filter service states. If specified, only service states from this account will be returned. If not specified, service states from the current account (and linked accounts if enabled) are returned.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID to filter service states by. Use this to limit results to services from a specific account.</p>"
                     }
                 },
                 "AttributeFilters": {
                     "target": "com.amazonaws.applicationsignals#AttributeFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of attribute filters to narrow down the service states returned. Each filter specifies an attribute name and the values to match against.</p>"
+                        "smithy.api#documentation": "<p>A list of attribute filters to narrow down the services. You can filter by platform, environment, or other service attributes.</p>"
                     }
                 }
             },
@@ -2656,28 +2861,28 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time of the query range, expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time of the query range, expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceStates": {
                     "target": "com.amazonaws.applicationsignals#ServiceStates",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of service state objects that match the specified criteria. Each service state includes current status, recent change events, and service metadata.</p>",
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about the state of one service, including its latest change events such as deployments.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.applicationsignals#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use for retrieving the next page of results. This value is present only if there are more results available than were returned in the current response.</p>"
+                        "smithy.api#documentation": "<p>Include this value in your next use of this API to get the next set of service states.</p>"
                     }
                 }
             },
@@ -2977,24 +3182,24 @@
                 "MetricDataQueries": {
                     "target": "com.amazonaws.applicationsignals#MetricDataQueries",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of metric data queries that define what metrics to display in the graph. Each query specifies the metric source, aggregation, and time range.</p>"
+                        "smithy.api#documentation": "<p>An array of metric data queries that define the metrics to be retrieved and analyzed as part of the audit finding context.</p>"
                     }
                 },
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time for the metric data displayed in the graph, expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>"
+                        "smithy.api#documentation": "<p>The start time for the metric data included in this graph. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>"
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time for the metric data displayed in the graph, expressed as the number of milliseconds since January 1, 1970, 00:00:00 UTC.</p>"
+                        "smithy.api#documentation": "<p>The end time for the metric data included in this graph. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a graph of metric data over time, showing performance trends and patterns for monitored resources.</p>"
+                "smithy.api#documentation": "<p>A structure that contains metric data queries and time range information that provides context for audit findings through relevant performance metrics.</p>"
             }
         },
         "com.amazonaws.applicationsignals#MetricId": {
@@ -3180,51 +3385,51 @@
                 "KeyAttributes": {
                     "target": "com.amazonaws.applicationsignals#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key attributes that identify and describe the node, such as service name, environment, and other metadata.</p>",
+                        "smithy.api#documentation": "<p>The key attributes that identify this node, including Type, Name, and Environment information.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the node, typically the service or component name.</p>",
+                        "smithy.api#documentation": "<p>The name of the entity represented by this node.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NodeId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the node within the dependency graph.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for this node within the dependency graph.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Operation": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific operation or endpoint within the service that this node represents, if applicable.</p>"
+                        "smithy.api#documentation": "<p>The operation associated with this node, if applicable.</p>"
                     }
                 },
                 "Type": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of node, such as \"Service\", \"Database\", \"Queue\", or \"External\".</p>"
+                        "smithy.api#documentation": "<p>The type of entity represented by this node, such as <code>Service</code> or <code>Resource</code>.</p>"
                     }
                 },
                 "Duration": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The typical response time or processing duration for this node, measured in milliseconds.</p>"
+                        "smithy.api#documentation": "<p>The duration or processing time associated with this node, if applicable.</p>"
                     }
                 },
                 "Status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current health status of the node, such as \"Healthy\", \"Warning\", or \"Critical\".</p>"
+                        "smithy.api#documentation": "<p>The status of the entity represented by this node.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a node in a dependency graph, typically corresponding to a service or component in your application architecture.</p>"
+                "smithy.api#documentation": "<p>A structure that represents a node in a dependency graph, containing information about a service, resource, or other entity and its characteristics.</p>"
             }
         },
         "com.amazonaws.applicationsignals#Nodes": {
@@ -3275,7 +3480,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a grouping configuration that defines how services are organized and grouped in Application Signals dashboards and service maps.</p> <p>Grouping configurations allow you to logically organize services based on attributes such as environment, team ownership, or business function, making it easier to monitor and manage related services together.</p>",
+                "smithy.api#documentation": "<p>Creates or updates the grouping configuration for this account. This operation allows you to define custom grouping attributes that determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings. These grouping attributes can then be used to organize and filter services in the Application Signals console and APIs.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/grouping-configuration",
@@ -3290,7 +3495,7 @@
                 "GroupingAttributeDefinitions": {
                     "target": "com.amazonaws.applicationsignals#GroupingAttributeDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of grouping attribute definitions that specify how services should be grouped. Each definition includes the grouping name, source keys, and default values.</p>",
+                        "smithy.api#documentation": "<p>An array of grouping attribute definitions that specify how services should be grouped. Each definition includes a friendly name, source keys to derive the grouping value from, and an optional default value.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3305,7 +3510,7 @@
                 "GroupingConfiguration": {
                     "target": "com.amazonaws.applicationsignals#GroupingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The created or updated grouping configuration, including all attribute definitions and metadata such as the update timestamp.</p>",
+                        "smithy.api#documentation": "<p>A structure containing the updated grouping configuration, including all grouping attribute definitions and the timestamp when it was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3570,7 +3775,7 @@
                 "ServiceGroups": {
                     "target": "com.amazonaws.applicationsignals#ServiceGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of service groups that this service belongs to, based on the configured grouping rules.</p>"
+                        "smithy.api#documentation": "<p>An array of service groups that this service belongs to, based on the configured grouping attributes.</p>"
                     }
                 },
                 "MetricReferences": {
@@ -3691,30 +3896,30 @@
                 "Type": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of service, such as \"WebService\", \"Database\", \"Queue\", or \"Function\".</p>"
+                        "smithy.api#documentation": "<p>The type of the service entity.</p>"
                     }
                 },
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service as identified by Application Signals.</p>"
+                        "smithy.api#documentation": "<p>The name of the service.</p>"
                     }
                 },
                 "Environment": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment where the service is deployed, such as \"Production\", \"Staging\", or \"Development\".</p>"
+                        "smithy.api#documentation": "<p>The environment where the service is deployed.</p>"
                     }
                 },
                 "AwsAccountId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID where the service is deployed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID where the service is located. Provide this value only for cross-account access.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a service entity that is monitored by Application Signals.</p>"
+                "smithy.api#documentation": "<p>A structure that contains identifying information for a service entity.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ServiceErrorMessage": {
@@ -3726,34 +3931,34 @@
                 "GroupName": {
                     "target": "com.amazonaws.applicationsignals#GroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the group, such as \"Environment\", \"Team\", or \"Application\".</p>",
+                        "smithy.api#documentation": "<p>The name of the grouping attribute, such as <code>BusinessUnit</code> or <code>Environment</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GroupValue": {
                     "target": "com.amazonaws.applicationsignals#GroupValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific value for this group, such as \"Production\", \"TeamA\", or \"WebApp\".</p>",
+                        "smithy.api#documentation": "<p>The value of the grouping attribute for this service, such as <code>Payments</code> or <code>Production</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GroupSource": {
                     "target": "com.amazonaws.applicationsignals#GroupSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the grouping information, such as \"Tag\", \"Attribute\", or \"Manual\".</p>",
+                        "smithy.api#documentation": "<p>The source of the grouping attribute, such as <code>TAG</code>, <code>OTEL</code>, or <code>DEFAULT</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GroupIdentifier": {
                     "target": "com.amazonaws.applicationsignals#GroupIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the group within the grouping configuration.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for this grouping attribute value, used for filtering and API operations.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a logical grouping of services based on shared attributes or characteristics.</p>"
+                "smithy.api#documentation": "<p>A structure that represents a logical grouping of services based on shared attributes such as business unit, environment, or entry point.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ServiceGroups": {
@@ -3912,7 +4117,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.applicationsignals#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudWatch metric used as a service level indicator (SLI) for measuring service performance.</p>"
+                        "smithy.api#documentation": "<p>The name of the CloudWatch metric to use for the SLO, when using a custom metric rather than Application Signals standard metrics.</p>"
                     }
                 },
                 "Statistic": {
@@ -4059,7 +4264,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws:application-signals:[^:]*:[^:]*:slo/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov):application-signals:[^:]*:[^:]*:slo/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"
             }
         },
         "com.amazonaws.applicationsignals#ServiceLevelObjectiveBudgetReport": {
@@ -4247,24 +4452,24 @@
                 "SloName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Service Level Objective.</p>"
+                        "smithy.api#documentation": "<p>The name of the service level objective.</p>"
                     }
                 },
                 "SloArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Service Level Objective.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the service level objective. The SLO must be provided with ARN for cross-account access.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a Service Level Objective (SLO) entity that can be audited for compliance and performance.</p>"
+                "smithy.api#documentation": "<p>A structure that contains identifying information for a service level objective entity.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ServiceLevelObjectiveId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$|^arn:aws:application-signals:[^:]*:[^:]*:slo/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"
+                "smithy.api#pattern": "^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$|^arn:(aws|aws-us-gov):application-signals:[^:]*:[^:]*:slo/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"
             }
         },
         "com.amazonaws.applicationsignals#ServiceLevelObjectiveIds": {
@@ -4412,18 +4617,18 @@
                 "Operation": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the specific operation within the service.</p>"
+                        "smithy.api#documentation": "<p>The name of the operation.</p>"
                     }
                 },
                 "MetricType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of metric associated with this service operation, such as \"Latency\", \"ErrorRate\", or \"Throughput\".</p>"
+                        "smithy.api#documentation": "<p>The type of metric associated with this service operation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a specific operation within a service that can be monitored and audited independently.</p>"
+                "smithy.api#documentation": "<p>A structure that contains identifying information for a service operation entity.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ServiceOperations": {
@@ -4460,26 +4665,26 @@
                 "AttributeFilters": {
                     "target": "com.amazonaws.applicationsignals#AttributeFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attribute filters that were applied when retrieving this service state.</p>"
+                        "smithy.api#documentation": "<p>The attribute filters that were applied when retrieving this service state information.</p>"
                     }
                 },
                 "Service": {
                     "target": "com.amazonaws.applicationsignals#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service entity information for this service state.</p>",
+                        "smithy.api#documentation": "<p>The key attributes that identify this service, including Type, Name, and Environment information.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LatestChangeEvents": {
                     "target": "com.amazonaws.applicationsignals#LatestChangeEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of the most recent change events that may have affected this service, such as deployments or configuration changes.</p>",
+                        "smithy.api#documentation": "<p>An array containing the most recent change events for this service, such as deployments, with information about when they occurred and who initiated them.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the current state and health information for a service monitored by Application Signals.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about the current state of a service, including its latest change events such as deployments and other state-changing activities.</p>"
             }
         },
         "com.amazonaws.applicationsignals#ServiceStates": {
@@ -4525,7 +4730,7 @@
                 "ServiceGroups": {
                     "target": "com.amazonaws.applicationsignals#ServiceGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of service groups that this service belongs to, providing a summary view of the service's organizational context.</p>"
+                        "smithy.api#documentation": "<p>An array of service groups that this service belongs to, based on the configured grouping attributes.</p>"
                     }
                 }
             },
@@ -4755,7 +4960,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul> <p>After completing this step, you still need to instrument your Java and Python applications to send data to Application Signals. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html\"> Enabling Application Signals</a>.</p>",
+                "smithy.api#documentation": "<p>Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul> <p>A service-linked CloudTrail event channel is created to process CloudTrail events and return change event information. This includes last deployment time, userName, eventName, and other event metadata.</p> <p>After completing this step, you still need to instrument your Java and Python applications to send data to Application Signals. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html\"> Enabling Application Signals</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/start-discovery",

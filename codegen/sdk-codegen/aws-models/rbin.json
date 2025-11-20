@@ -76,7 +76,7 @@
                     "name": "rbin"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>Recycle Bin API Reference</i>. This documentation provides \n      descriptions and syntax for each of the actions and data types in Recycle Bin.</p>\n         <p>Recycle Bin is a resource recovery feature that enables you to restore accidentally \n      deleted snapshots and EBS-backed AMIs. When using Recycle Bin, if your resources are \n      deleted, they are retained in the Recycle Bin for a time period that you specify.</p>\n         <p>You can restore a resource from the Recycle Bin at any time before its retention period \n      expires. After you restore a resource from the Recycle Bin, the resource is removed from the \n      Recycle Bin, and you can then use it in the same way you use any other resource of that type \n      in your account. If the retention period expires and the resource is not restored, the resource \n      is permanently deleted from the Recycle Bin and is no longer available for recovery. For more \n      information about Recycle Bin, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html\">\n        Recycle Bin</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This is the <i>Recycle Bin API Reference</i>. This documentation provides \n      descriptions and syntax for each of the actions and data types in Recycle Bin.</p>\n         <p>Recycle Bin is a resource recovery feature that enables you to restore accidentally deleted \n      EBS volumes, EBS snapshots, and EBS-backed AMIs. When using Recycle Bin, if your resources are \n      deleted, they are retained in the Recycle Bin for a time period that you specify.</p>\n         <p>You can restore a resource from the Recycle Bin at any time before its retention period \n      expires. After you restore a resource from the Recycle Bin, the resource is removed from the \n      Recycle Bin, and you can then use it in the same way you use any other resource of that type \n      in your account. If the retention period expires and the resource is not restored, the resource \n      is permanently deleted from the Recycle Bin and is no longer available for recovery. For more \n      information about Recycle Bin, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html\">\n        Recycle Bin</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Recycle Bin",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -988,7 +988,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>",
+                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to \n  retain resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1007,7 +1007,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots \n      and EBS-backed AMIs are supported. To retain snapshots, specify <code>EBS_SNAPSHOT</code>. To \n      retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>",
+                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs \n      are supported.</p>\n         <ul>\n            <li>\n               <p>To retain EBS volumes, specify <code>EBS_VOLUME</code>.</p>\n            </li>\n            <li>\n               <p>To retain EBS snapshots, specify <code>EBS_SNAPSHOT</code>\n               </p>\n            </li>\n            <li>\n               <p>To retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1248,7 +1248,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
+                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to \n  retain resources.</p>"
                     }
                 },
                 "ResourceTags": {
@@ -1360,7 +1360,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type retained by the retention rule. Only retention rules that retain \n      the specified resource type are listed. Currently, only Amazon EBS snapshots and EBS-backed \n      AMIs are supported. To list retention rules that retain snapshots, specify \n      <code>EBS_SNAPSHOT</code>. To list retention rules that retain EBS-backed AMIs, specify \n      <code>EC2_IMAGE</code>.</p>",
+                        "smithy.api#documentation": "<p>The resource type retained by the retention rule. Only retention rules that retain \n      the specified resource type are listed. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.</p>\n         <ul>\n            <li>\n               <p>To list retention rules that retain EBS volumes, specify <code>EBS_VOLUME</code>.</p>\n            </li>\n            <li>\n               <p>To list retention rules that retain EBS snapshots, specify <code>EBS_SNAPSHOT</code>.</p>\n            </li>\n            <li>\n               <p>To list retention rules that retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1726,6 +1726,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EC2_IMAGE"
                     }
+                },
+                "EBS_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_VOLUME"
+                    }
                 }
             }
         },
@@ -1735,7 +1741,7 @@
                 "RetentionPeriodValue": {
                     "target": "com.amazonaws.rbin#RetentionPeriodValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period value for which the retention rule is to retain resources. The period is measured using \n      the unit specified for <b>RetentionPeriodUnit</b>.</p>",
+                        "smithy.api#documentation": "<p>The period value for which the retention rule is to retain resources, measured in days. \n      The supported retention periods are:</p>\n         <ul>\n            <li>\n               <p>EBS volumes: 1 - 7 days</p>\n            </li>\n            <li>\n               <p>EBS snapshots and EBS-backed AMIs: 1 - 365 days</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1748,7 +1754,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
+                "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to \n  retain resources.</p>"
             }
         },
         "com.amazonaws.rbin#RetentionPeriodUnit": {
@@ -1778,7 +1784,7 @@
                     "min": 0,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]{1,3}){0,2}:rbin:[a-z\\-0-9]{0,63}:[0-9]{12}:rule/[0-9a-zA-Z]{11}{0,1011}$"
+                "smithy.api#pattern": "^arn:\\S+:rbin:[a-z\\-0-9]{0,63}:[0-9]{12}:rule/[0-9a-zA-Z]{11}{0,1011}$"
             }
         },
         "com.amazonaws.rbin#RuleIdentifier": {
@@ -1822,7 +1828,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
+                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to \n  retain resources.</p>"
                     }
                 },
                 "LockState": {
@@ -2021,7 +2027,7 @@
                 "UnlockDelayUnit": {
                     "target": "com.amazonaws.rbin#UnlockDelayUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of time in which to measure the unlock delay. Currently, the unlock delay can \n      be measure only in days.</p>",
+                        "smithy.api#documentation": "<p>The unit of time in which to measure the unlock delay. Currently, the unlock delay can \n      be measured only in days.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2275,7 +2281,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
+                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to \n  retain resources.</p>"
                     }
                 },
                 "Description": {

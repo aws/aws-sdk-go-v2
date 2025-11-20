@@ -1363,7 +1363,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows a caller to assume an IAM role decorated as the SAML user specified in the SAML assertion included in the request. This decoration allows Lake Formation to enforce access policies against the SAML users and groups.  This API operation requires SAML federation setup in the caller’s account as it can only be called with valid SAML assertions.\n      Lake Formation does not scope down the permission of the assumed role.  All permissions attached to the role via the SAML federation setup will be included in the role session.\n    </p>\n         <p>\n      This decorated role is expected to access data in Amazon S3 by getting temporary access from Lake Formation which is authorized via the virtual API <code>GetDataAccess</code>.  Therefore, all SAML roles that can be assumed via <code>AssumeDecoratedRoleWithSAML</code> must at a minimum include <code>lakeformation:GetDataAccess</code> in their role policies.  A typical IAM policy attached to such a role would look as follows:\n    </p>",
+                "smithy.api#documentation": "<p>Allows a caller to assume an IAM role decorated as the SAML user specified in the SAML assertion included in the request. This decoration allows Lake Formation to enforce access policies against the SAML users and groups.  This API operation requires SAML federation setup in the caller’s account as it can only be called with valid SAML assertions.\n      Lake Formation does not scope down the permission of the assumed role.  All permissions attached to the role via the SAML federation setup will be included in the role session.\n    </p>\n         <p>\n      This decorated role is expected to access data in Amazon S3 by getting temporary access from Lake Formation which is authorized via the virtual API <code>GetDataAccess</code>.\n      Therefore, all SAML roles that can be assumed via <code>AssumeDecoratedRoleWithSAML</code> must at a minimum include <code>lakeformation:GetDataAccess</code> in their role policies.\n      A typical IAM policy attached to such a role would include the following actions:\n    </p>\n         <ul>\n            <li>\n               <p>glue:*Database*</p>\n            </li>\n            <li>\n               <p>glue:*Table*</p>\n            </li>\n            <li>\n               <p>glue:*Partition*</p>\n            </li>\n            <li>\n               <p>glue:*UserDefinedFunction*</p>\n            </li>\n            <li>\n               <p>lakeformation:GetDataAccess</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/AssumeDecoratedRoleWithSAML",
@@ -2262,6 +2262,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs and/or Amazon Web Services organization/organizational unit ARNs\n         that are allowed to access data managed by Lake Formation. </p>\n         <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources.</p>\n         <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>"
                     }
+                },
+                "ServiceIntegrations": {
+                    "target": "com.amazonaws.lakeformation#ServiceIntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2774,7 +2780,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified LF-tag given a key name. If the input parameter tag key was not found, then the operation will throw an exception. When you delete an LF-tag, the <code>LFTagPolicy</code> attached to the LF-tag becomes invalid. If the deleted LF-tag was still assigned to any resource, the tag policy attach to the deleted LF-tag will no longer be applied to the resource.</p>",
+                "smithy.api#documentation": "<p> Deletes an LF-tag by its key name. The operation fails if the specified tag key doesn't\n      exist. When you delete an LF-Tag: </p>\n         <ul>\n            <li>\n               <p>The associated LF-Tag policy becomes invalid.</p>\n            </li>\n            <li>\n               <p>\n     Resources that had this tag assigned will no longer have the tag policy applied to\n     them.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteLFTag",
@@ -3248,6 +3254,12 @@
                     "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that\n         are allowed to access data managed by Lake Formation. </p>\n         <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources as the <code>ShareRecipients</code>.</p>\n         <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>"
+                    }
+                },
+                "ServiceIntegrations": {
+                    "target": "com.amazonaws.lakeformation#ServiceIntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>"
                     }
                 },
                 "ResourceShare": {
@@ -5764,7 +5776,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p>\n         <p>This operation returns only those permissions that have been explicitly granted.</p>\n         <p>For information about permissions, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p>\n         <p>This operation returns only those permissions that have been explicitly granted. If both\n        <code>Principal</code> and <code>Resource</code> parameters are provided, the response\n      returns effective permissions rather than the explicitly granted permissions.</p>\n         <p>For information about permissions, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListPermissions",
@@ -5819,7 +5831,7 @@
                 "IncludeRelated": {
                     "target": "com.amazonaws.lakeformation#TrueFalseString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that related permissions should be included in the results.</p>"
+                        "smithy.api#documentation": "<p>Indicates that related permissions should be included in the results when listing permissions on a table resource.</p>\n         <p>Set the field to <code>TRUE</code> to show the cell filters on a table resource. Default\n      is <code>FALSE</code>. The Principal parameter must not be specified when requesting cell\n      filter information.</p>"
                     }
                 }
             },
@@ -6778,6 +6790,44 @@
         "com.amazonaws.lakeformation#RAMResourceShareArn": {
             "type": "string"
         },
+        "com.amazonaws.lakeformation#RedshiftConnect": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.lakeformation#ServiceAuthorization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization status for Redshift Connect. Valid values are ENABLED or DISABLED.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for enabling trusted identity propagation with Redshift Connect.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RedshiftScopeUnion": {
+            "type": "union",
+            "members": {
+                "RedshiftConnect": {
+                    "target": "com.amazonaws.lakeformation#RedshiftConnect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for Redshift Connect integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union structure representing different Redshift integration scopes.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RedshiftServiceIntegrations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#RedshiftScopeUnion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Redshift service integration configurations.</p>"
+            }
+        },
         "com.amazonaws.lakeformation#RegisterResource": {
             "type": "operation",
             "input": {
@@ -6995,7 +7045,7 @@
                 "LFTag": {
                     "target": "com.amazonaws.lakeformation#LFTagKeyResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The LF-tag key and values attached to a resource.</p>"
+                        "smithy.api#documentation": "<p>The LF-Tag key and values attached to a resource.</p>"
                     }
                 },
                 "LFTagPolicy": {
@@ -7468,6 +7518,49 @@
         },
         "com.amazonaws.lakeformation#SecretAccessKeyString": {
             "type": "string"
+        },
+        "com.amazonaws.lakeformation#ServiceAuthorization": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Authorization status for service integrations. Specify a value of <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#ServiceIntegrationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#ServiceIntegrationUnion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of service integrations for trusted identity propagation.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#ServiceIntegrationUnion": {
+            "type": "union",
+            "members": {
+                "Redshift": {
+                    "target": "com.amazonaws.lakeformation#RedshiftServiceIntegrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Redshift service integration configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union structure representing different service integration types.</p>"
+            }
         },
         "com.amazonaws.lakeformation#SessionTokenString": {
             "type": "string"
@@ -8392,6 +8485,12 @@
                     "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that\n         are allowed to access to access data managed by Lake Formation. </p>\n         <p>If the <code>ShareRecipients</code> list includes valid values, then the resource share is updated with the principals you want to have access to the resources.</p>\n         <p>If the <code>ShareRecipients</code> value is null, both the list of share recipients and\n         the resource share remain unchanged.</p>\n         <p>If the <code>ShareRecipients</code> value is an empty list, then the existing share\n         recipients list will be cleared, and the resource share will be deleted.</p>"
+                    }
+                },
+                "ServiceIntegrations": {
+                    "target": "com.amazonaws.lakeformation#ServiceIntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>"
                     }
                 },
                 "ApplicationStatus": {

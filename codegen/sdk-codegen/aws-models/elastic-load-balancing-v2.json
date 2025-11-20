@@ -1199,7 +1199,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ProtocolEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol for connections from clients to the load balancer. For Application Load\n      Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the\n      supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP\n      protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load\n      Balancer.</p>"
+                        "smithy.api#documentation": "<p>The protocol for connections from clients to the load balancer. For Application Load\n      Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the\n      supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC\n      protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load\n      Balancer.</p>"
                     }
                 },
                 "Port": {
@@ -1739,7 +1739,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ProtocolEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol to use for routing traffic to the targets. For Application Load Balancers,\n      the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported\n      protocols are TCP, TLS, UDP, or TCP_UDP. For Gateway Load Balancers, the supported protocol is\n      GENEVE. A TCP_UDP listener must be associated with a TCP_UDP target group. If the target is a\n      Lambda function, this parameter does not apply.</p>"
+                        "smithy.api#documentation": "<p>The protocol to use for routing traffic to the targets. For Application Load Balancers,\n      the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported\n      protocols are TCP, TLS, UDP, TCP_UDP, QUIC, or TCP_QUIC. For Gateway Load Balancers, the supported protocol is\n      GENEVE. A TCP_UDP listener must be associated with a TCP_UDP target group. A TCP_QUIC listener must be associated with a TCP_QUIC target group. If the target is a\n      Lambda function, this parameter does not apply.</p>"
                     }
                 },
                 "ProtocolVersion": {
@@ -1763,13 +1763,13 @@
                 "HealthCheckProtocol": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ProtocolEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol the load balancer uses when performing health checks on targets. For\n      Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load\n      Balancers, the default is TCP. The TCP protocol is not supported for health checks if the\n      protocol of the target group is HTTP or HTTPS. The GENEVE, TLS, UDP, and TCP_UDP protocols are\n      not supported for health checks.</p>"
+                        "smithy.api#documentation": "<p>The protocol the load balancer uses when performing health checks on targets. For\n      Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load\n      Balancers, the default is TCP. The TCP protocol is not supported for health checks if the\n      protocol of the target group is HTTP or HTTPS. The GENEVE, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC protocols are\n      not supported for health checks.</p>"
                     }
                 },
                 "HealthCheckPort": {
                     "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port the load balancer uses when performing health checks on targets. If the protocol\n      is HTTP, HTTPS, TCP, TLS, UDP, or TCP_UDP, the default is <code>traffic-port</code>, which is\n      the port on which each target receives traffic from the load balancer. If the protocol is\n      GENEVE, the default is port 80.</p>"
+                        "smithy.api#documentation": "<p>The port the load balancer uses when performing health checks on targets. If the protocol\n      is HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, QUIC, or TCP_QUIC the default is <code>traffic-port</code>, which is\n      the port on which each target receives traffic from the load balancer. If the protocol is\n      GENEVE, the default is port 80.</p>"
                     }
                 },
                 "HealthCheckEnabled": {
@@ -1787,7 +1787,7 @@
                 "HealthCheckIntervalSeconds": {
                     "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckIntervalSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300.\n      If the target group protocol is TCP, TLS, UDP, TCP_UDP, HTTP or HTTPS, the default is 30 seconds. \n      If the target group protocol is GENEVE, the default is 10 seconds. \n      If the target type is <code>lambda</code>, the default is 35 seconds.</p>"
+                        "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300.\n      If the target group protocol is TCP, TLS, UDP, TCP_UDP, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 30 seconds. \n      If the target group protocol is GENEVE, the default is 10 seconds. \n      If the target type is <code>lambda</code>, the default is 35 seconds.</p>"
                     }
                 },
                 "HealthCheckTimeoutSeconds": {
@@ -1805,13 +1805,13 @@
                 "UnhealthyThresholdCount": {
                     "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckThresholdCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of consecutive health check failures required before considering a target unhealthy. The range is \n      2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 2. For target groups \n      with a protocol of GENEVE, the default is 2. If the target type \n      is <code>lambda</code>, the default is 5.</p>"
+                        "smithy.api#documentation": "<p>The number of consecutive health check failures required before considering a target unhealthy. The range is \n      2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 2. For target groups \n      with a protocol of GENEVE, the default is 2. If the target type \n      is <code>lambda</code>, the default is 5.</p>"
                     }
                 },
                 "Matcher": {
                     "target": "com.amazonaws.elasticloadbalancingv2#Matcher",
                     "traits": {
-                        "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful \n      response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range \n      is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target \n      groups with a protocol of GENEVE, the range is 200-399.</p>"
+                        "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful \n      response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP, QUIC, TCP_QUIC, or TLS the range \n      is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target \n      groups with a protocol of GENEVE, the range is 200-399.</p>"
                     }
                 },
                 "TargetType": {
@@ -1830,6 +1830,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupIpAddressTypeEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type. The default value is <code>ipv4</code>.</p>"
+                    }
+                },
+                "TargetControlPort": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TargetControlPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature.</p>"
                     }
                 }
             },
@@ -4263,7 +4269,7 @@
                     "name": "elasticloadbalancing"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Elastic Load Balancing</fullname>\n         <p>A load balancer distributes incoming traffic across targets, such as your EC2 instances.\n      This enables you to increase the availability of your application. The load balancer also\n      monitors the health of its registered targets and ensures that it routes traffic only to\n      healthy targets. You configure your load balancer to accept incoming traffic by specifying one\n      or more listeners, which are configured with a protocol and port number for connections from\n      clients to the load balancer. You configure a target group with a protocol and port number for\n      connections from the load balancer to the targets, and with health check settings to be used\n      when checking the health status of the targets.</p>\n         <p>Elastic Load Balancing supports the following types of load balancers: Application Load\n      Balancers, Network Load Balancers, Gateway Load Balancers, and Classic Load Balancers. This\n      reference covers the following load balancer types:</p>\n         <ul>\n            <li>\n               <p>Application Load Balancer - Operates at the application layer (layer 7) and supports\n          HTTP and HTTPS.</p>\n            </li>\n            <li>\n               <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP,\n          TLS, and UDP.</p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>\n            </li>\n         </ul>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/\">Elastic Load Balancing User\n      Guide</a>.</p>\n         <p>All Elastic Load Balancing operations are idempotent, which means that they complete at\n      most one time. If you repeat an operation, it succeeds.</p>",
+                "smithy.api#documentation": "<fullname>Elastic Load Balancing</fullname>\n         <p>A load balancer distributes incoming traffic across targets, such as your EC2 instances.\n      This enables you to increase the availability of your application. The load balancer also\n      monitors the health of its registered targets and ensures that it routes traffic only to\n      healthy targets. You configure your load balancer to accept incoming traffic by specifying one\n      or more listeners, which are configured with a protocol and port number for connections from\n      clients to the load balancer. You configure a target group with a protocol and port number for\n      connections from the load balancer to the targets, and with health check settings to be used\n      when checking the health status of the targets.</p>\n         <p>Elastic Load Balancing supports the following types of load balancers: Application Load\n      Balancers, Network Load Balancers, Gateway Load Balancers, and Classic Load Balancers. This\n      reference covers the following load balancer types:</p>\n         <ul>\n            <li>\n               <p>Application Load Balancer - Operates at the application layer (layer 7) and supports\n          HTTP and HTTPS.</p>\n            </li>\n            <li>\n               <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP,\n          TLS, UDP, and QUIC.</p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>\n            </li>\n         </ul>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/\">Elastic Load Balancing User\n      Guide</a>.</p>\n         <p>All Elastic Load Balancing operations are idempotent, which means that they complete at\n      most one time. If you repeat an operation, it succeeds.</p>",
                 "smithy.api#title": "Elastic Load Balancing",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"
@@ -6918,7 +6924,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ProtocolEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol for connections from clients to the load balancer. Application Load Balancers\n      support the HTTP and HTTPS protocols. Network Load Balancers support the TCP, TLS, UDP, and\n      TCP_UDP protocols. You can’t change the protocol to UDP or TCP_UDP if dual-stack mode is\n      enabled. You can't specify a protocol for a Gateway Load Balancer.</p>"
+                        "smithy.api#documentation": "<p>The protocol for connections from clients to the load balancer. Application Load Balancers\n      support the HTTP and HTTPS protocols. Network Load Balancers support the TCP, TLS, UDP,\n      TCP_UDP, QUIC, and TCP_QUIC protocols. You can’t change the protocol to UDP, TCP_UDP, QUIC, or TCP_QUIC if dual-stack mode is\n      enabled. You can't specify a protocol for a Gateway Load Balancer.</p>"
                     }
                 },
                 "SslPolicy": {
@@ -7451,7 +7457,7 @@
                 "HealthCheckProtocol": {
                     "target": "com.amazonaws.elasticloadbalancingv2#ProtocolEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol the load balancer uses when performing health checks on targets. For\n      Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load\n      Balancers, the default is TCP. The TCP protocol is not supported for health checks if the\n      protocol of the target group is HTTP or HTTPS. It is supported for health checks only if the\n      protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP\n      protocols are not supported for health checks.</p>"
+                        "smithy.api#documentation": "<p>The protocol the load balancer uses when performing health checks on targets. For\n      Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load\n      Balancers, the default is TCP. The TCP protocol is not supported for health checks if the\n      protocol of the target group is HTTP or HTTPS. It is supported for health checks only if the\n      protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC\n      protocols are not supported for health checks.</p>"
                     }
                 },
                 "HealthCheckPort": {
@@ -9340,6 +9346,15 @@
                 }
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#TargetControlPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#TargetDescription": {
             "type": "structure",
             "members": {
@@ -9489,6 +9504,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupIpAddressTypeEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type. The default value is <code>ipv4</code>.</p>"
+                    }
+                },
+                "TargetControlPort": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#TargetControlPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature.</p>"
                     }
                 }
             },

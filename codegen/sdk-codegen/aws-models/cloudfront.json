@@ -227,6 +227,12 @@
                         "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list.</p>"
                     }
                 },
+                "IpamConfig": {
+                    "target": "com.amazonaws.cloudfront#IpamConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPAM configuration for the Anycast static IP list, that contains the quantity and list of IPAM CIDR configurations.</p>"
+                    }
+                },
                 "AnycastIps": {
                     "target": "com.amazonaws.cloudfront#AnycastIps",
                     "traits": {
@@ -375,6 +381,12 @@
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The current version (ETag value) of the Anycast static IP list.</p>"
+                    }
+                },
+                "IpamConfig": {
+                    "target": "com.amazonaws.cloudfront#IpamConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPAM configuration for the Anycast static IP list, that contains the quantity and list of IPAM CIDR configurations.</p>"
                     }
                 }
             },
@@ -2704,85 +2716,43 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://cloudfront-fips.api.aws"
+                                    "url": "https://cloudfront-fips.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://cloudfront-fips.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://cloudfront.api.aws"
+                                    "url": "https://cloudfront.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://cloudfront.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -2956,43 +2926,85 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://cloudfront-fips.amazonaws.eu"
+                                    "url": "https://cloudfront-fips.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://cloudfront-fips.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://cloudfront.amazonaws.eu"
+                                    "url": "https://cloudfront.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://cloudfront.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -3948,7 +3960,13 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.cloudfront#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>ipv6</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> only</p> </li> <li> <p> <code>ipv6</code> only </p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>"
+                    }
+                },
+                "IpamCidrConfigs": {
+                    "target": "com.amazonaws.cloudfront#IpamCidrConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of IPAM CIDR configurations that specify the IP address ranges and IPAM pool settings for creating the Anycast static IP list. </p>"
                     }
                 }
             },
@@ -13658,6 +13676,148 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#IpamCidrConfig": {
+            "type": "structure",
+            "members": {
+                "Cidr": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR that specifies the IP address range for this IPAM configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IpamPoolArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnycastIp": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#IpamCidrStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the IPAM CIDR configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#IpamCidrConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#IpamCidrConfig",
+                "traits": {
+                    "smithy.api#xmlName": "IpamCidrConfig"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#IpamCidrStatus": {
+            "type": "enum",
+            "members": {
+                "Provisioned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provisioned"
+                    }
+                },
+                "FailedProvision": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed-provision"
+                    }
+                },
+                "Provisioning": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provisioning"
+                    }
+                },
+                "Deprovisioned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deprovisioned"
+                    }
+                },
+                "FailedDeprovision": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed-deprovision"
+                    }
+                },
+                "Deprovisioning": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deprovisioning"
+                    }
+                },
+                "Advertised": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advertised"
+                    }
+                },
+                "FailedAdvertise": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed-advertise"
+                    }
+                },
+                "Advertising": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advertising"
+                    }
+                },
+                "Withdrawn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "withdrawn"
+                    }
+                },
+                "FailedWithdraw": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed-withdraw"
+                    }
+                },
+                "Withdrawing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "withdrawing"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#IpamConfig": {
+            "type": "structure",
+            "members": {
+                "Quantity": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPAM CIDR configurations in the <code>IpamCidrConfigs</code> list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IpamCidrConfigs": {
+                    "target": "com.amazonaws.cloudfront#IpamCidrConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IPAM CIDR configurations that define the IP address ranges, IPAM pools, and associated Anycast IP addresses.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration IPAM settings that includes the quantity of CIDR configurations and the list of IPAM CIDR configurations.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#ItemSelection": {
             "type": "enum",
             "members": {
@@ -21648,7 +21808,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.cloudfront#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>ipv6</code> - Allocate a list of only IPv4 addresses</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> only</p> </li> <li> <p> <code>ipv6</code> only</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>"
                     }
                 },
                 "IfMatch": {

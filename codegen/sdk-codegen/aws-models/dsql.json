@@ -235,6 +235,12 @@
                 "smithy.api#documentation": "<p>A summary of the properties of a cluster.</p>"
             }
         },
+        "com.amazonaws.dsql#ClusterVpcEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9.-]+$"
+            }
+        },
         "com.amazonaws.dsql#ConflictException": {
             "type": "structure",
             "members": {
@@ -1297,6 +1303,13 @@
                         "smithy.api#documentation": "<p>The VPC endpoint service name.</p>",
                         "smithy.api#notProperty": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clusterVpcEndpoint": {
+                    "target": "com.amazonaws.dsql#ClusterVpcEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC connection endpoint for the cluster.</p>",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },

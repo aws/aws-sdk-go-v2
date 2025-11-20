@@ -9297,6 +9297,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#S3MonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "LogUri": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination URI for log publishing.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information \n         to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this \n         configuration entirely, or omit individual fields, EMR falls back to cluster-level \n         logging behavior.</p>"
+            }
+        },
         "com.amazonaws.emr#ScaleDownBehavior": {
             "type": "enum",
             "members": {
@@ -10130,6 +10150,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a\n         combination of account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:IAM::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
                     }
+                },
+                "LogUri": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination URI for log publishing.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3 \n         destination.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10176,6 +10208,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The JAR file used for the step.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "StepMonitoringConfiguration": {
+                    "target": "com.amazonaws.emr#StepMonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that holds configuration properties for logging.</p>"
                     }
                 }
             },
@@ -10315,6 +10353,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#XmlStringMaxLen256"
+            }
+        },
+        "com.amazonaws.emr#StepMonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3MonitoringConfiguration": {
+                    "target": "com.amazonaws.emr#S3MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information \n         to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this \n         configuration entirely, or omit individual fields, EMR falls back to cluster-level logging behavior.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that holds configuration properties for logging.</p>"
             }
         },
         "com.amazonaws.emr#StepState": {
@@ -10464,6 +10516,18 @@
                     "target": "com.amazonaws.emr#StepStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current execution status details of the cluster step.</p>"
+                    }
+                },
+                "LogUri": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination URI for log publishing.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3 \n         destination.</p>"
                     }
                 }
             },

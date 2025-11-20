@@ -794,6 +794,9 @@
                 },
                 "languageConfiguration": {
                     "target": "com.amazonaws.bedrockdataautomation#AudioLanguageConfiguration"
+                },
+                "sensitiveDataConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#SensitiveDataConfiguration"
                 }
             },
             "traits": {
@@ -1400,6 +1403,12 @@
                 "projectStage": {
                     "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
                 },
+                "projectType": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectType",
+                    "traits": {
+                        "smithy.api#default": "ASYNC"
+                    }
+                },
                 "standardOutputConfiguration": {
                     "target": "com.amazonaws.bedrockdataautomation#StandardOutputConfiguration",
                     "traits": {
@@ -1491,6 +1500,9 @@
                 },
                 "projectStage": {
                     "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
+                },
+                "projectType": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectType"
                 },
                 "projectDescription": {
                     "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectDescription"
@@ -1687,6 +1699,9 @@
                 "projectStage": {
                     "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectStage"
                 },
+                "projectType": {
+                    "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectType"
+                },
                 "projectName": {
                     "target": "com.amazonaws.bedrockdataautomation#DataAutomationProjectName"
                 },
@@ -1699,6 +1714,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Summary of a DataAutomationProject"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#DataAutomationProjectType": {
+            "type": "enum",
+            "members": {
+                "ASYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASYNC"
+                    }
+                },
+                "SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type of the DataAutomationProject"
             }
         },
         "com.amazonaws.bedrockdataautomation#DateTimestamp": {
@@ -2037,6 +2072,9 @@
                 },
                 "modalityProcessing": {
                     "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                },
+                "sensitiveDataConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#SensitiveDataConfiguration"
                 }
             },
             "traits": {
@@ -2355,6 +2393,9 @@
             "members": {
                 "modalityProcessing": {
                     "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                },
+                "sensitiveDataConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#SensitiveDataConfiguration"
                 }
             },
             "traits": {
@@ -2861,6 +2902,293 @@
                 "smithy.api#documentation": "Override configuration"
             }
         },
+        "com.amazonaws.bedrockdataautomation#PIIEntitiesConfiguration": {
+            "type": "structure",
+            "members": {
+                "piiEntityTypes": {
+                    "target": "com.amazonaws.bedrockdataautomation#PIIEntityTypes",
+                    "traits": {
+                        "smithy.api#documentation": "Types of PII entities to detect"
+                    }
+                },
+                "redactionMaskMode": {
+                    "target": "com.amazonaws.bedrockdataautomation#PIIRedactionMaskMode",
+                    "traits": {
+                        "smithy.api#documentation": "Mode for redacting detected PII"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for PII entities detection and redaction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#PIIEntityType": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "All supported PII entity types",
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A physical address, such as '100 Main Street, Anytown, USA' or 'Suite #12, Building 123'",
+                        "smithy.api#enumValue": "ADDRESS"
+                    }
+                },
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An individual's age, including the quantity and unit of time",
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An individual's name. Does not include titles such as Dr., Mr., Mrs., or Miss",
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An email address, such as marymajor@email.com",
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "PHONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A phone number. Also includes fax and pager numbers",
+                        "smithy.api#enumValue": "PHONE"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A user name that identifies an account, such as a login name, screen name, nick name, or handle",
+                        "smithy.api#enumValue": "USERNAME"
+                    }
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An alphanumeric string that is used as a password",
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "DRIVER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The number assigned to a driver's license",
+                        "smithy.api#enumValue": "DRIVER_ID"
+                    }
+                },
+                "LICENSE_PLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A license plate for a vehicle issued by the state or country where the vehicle is registered",
+                        "smithy.api#enumValue": "LICENSE_PLATE"
+                    }
+                },
+                "VEHICLE_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A Vehicle Identification Number (VIN) that uniquely identifies a vehicle",
+                        "smithy.api#enumValue": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_CVV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A three-digit card verification code (CVV) for VISA, MasterCard, and Discover cards, or four-digit for American Express",
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_CVV"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_EXPIRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The expiration date for a credit or debit card",
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_EXPIRY"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The number for a credit or debit card",
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_NUMBER"
+                    }
+                },
+                "PIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A four-digit personal identification number (PIN)",
+                        "smithy.api#enumValue": "PIN"
+                    }
+                },
+                "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An International Bank Account Number with specific formats for each country",
+                        "smithy.api#enumValue": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "SWIFT_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A SWIFT code - standard format of Bank Identifier Code (BIC)",
+                        "smithy.api#enumValue": "SWIFT_CODE"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An IPv4 address, such as 198.51.100.0",
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "MAC_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A media access control (MAC) address - unique identifier for network interface controller",
+                        "smithy.api#enumValue": "MAC_ADDRESS"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A web address, such as www.example.com",
+                        "smithy.api#enumValue": "URL"
+                    }
+                },
+                "AWS_ACCESS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A unique identifier associated with AWS secret access key",
+                        "smithy.api#enumValue": "AWS_ACCESS_KEY"
+                    }
+                },
+                "AWS_SECRET_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A unique identifier associated with AWS access key for signing programmatic requests",
+                        "smithy.api#enumValue": "AWS_SECRET_KEY"
+                    }
+                },
+                "US_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A US bank account number, typically 10 to 12 digits long",
+                        "smithy.api#enumValue": "US_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "US_BANK_ROUTING_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A US bank account routing number, typically nine digits long",
+                        "smithy.api#enumValue": "US_BANK_ROUTING_NUMBER"
+                    }
+                },
+                "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A US Individual Taxpayer Identification Number (ITIN)",
+                        "smithy.api#enumValue": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "US_PASSPORT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A US passport number, ranging from six to nine alphanumeric characters",
+                        "smithy.api#enumValue": "US_PASSPORT_NUMBER"
+                    }
+                },
+                "US_SOCIAL_SECURITY_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A US Social Security Number (SSN) - nine-digit number for US citizens and residents",
+                        "smithy.api#enumValue": "US_SOCIAL_SECURITY_NUMBER"
+                    }
+                },
+                "CA_HEALTH_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A Canadian Health Service Number - 10-digit unique identifier for healthcare benefits",
+                        "smithy.api#enumValue": "CA_HEALTH_NUMBER"
+                    }
+                },
+                "CA_SOCIAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A Canadian Social Insurance Number (SIN) - nine-digit unique identifier",
+                        "smithy.api#enumValue": "CA_SOCIAL_INSURANCE_NUMBER"
+                    }
+                },
+                "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A UK National Health Service Number - 10-17 digit number",
+                        "smithy.api#enumValue": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+                    }
+                },
+                "UK_NATIONAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A UK National Insurance Number (NINO) for accessing National Insurance benefits",
+                        "smithy.api#enumValue": "UK_NATIONAL_INSURANCE_NUMBER"
+                    }
+                },
+                "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A UK Unique Taxpayer Reference (UTR) - 10-digit number identifying taxpayer or business",
+                        "smithy.api#enumValue": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Types of PII entities that can be detected, we will support every types that Guardrails can support"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#PIIEntityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#PIIEntityType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of PII entity types",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#PIIRedactionMaskMode": {
+            "type": "enum",
+            "members": {
+                "PII": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Replace with generic PII marker [PII]",
+                        "smithy.api#enumValue": "PII"
+                    }
+                },
+                "ENTITY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Replace with specific entity type marker, e.g. [NAME]/[SSN] etc.",
+                        "smithy.api#enumValue": "ENTITY_TYPE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Mode for redacting detected PII"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -2892,6 +3220,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "Resource Owner"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#SensitiveDataConfiguration": {
+            "type": "structure",
+            "members": {
+                "detectionMode": {
+                    "target": "com.amazonaws.bedrockdataautomation#SensitiveDataDetectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Mode for sensitive data detection",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detectionScope": {
+                    "target": "com.amazonaws.bedrockdataautomation#SensitiveDataDetectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "Scope of detection - what types of sensitive data to detect"
+                    }
+                },
+                "piiEntitiesConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#PIIEntitiesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for PII entities detection and redaction"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for sensitive data detection and redaction"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#SensitiveDataDetectionMode": {
+            "type": "enum",
+            "members": {
+                "DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Only detect sensitive data without redaction",
+                        "smithy.api#enumValue": "DETECTION"
+                    }
+                },
+                "DETECTION_AND_REDACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Detect and redact sensitive data",
+                        "smithy.api#enumValue": "DETECTION_AND_REDACTION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Mode for sensitive data detection"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#SensitiveDataDetectionScope": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#SensitiveDataDetectionScopeType"
+            },
+            "traits": {
+                "smithy.api#documentation": "Scope of sensitive data detection",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#SensitiveDataDetectionScopeType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Standard PII detection",
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Custom PII detection",
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Types of sensitive data detection scope"
             }
         },
         "com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException": {
@@ -3534,6 +3946,9 @@
             "members": {
                 "modalityProcessing": {
                     "target": "com.amazonaws.bedrockdataautomation#ModalityProcessingConfiguration"
+                },
+                "sensitiveDataConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#SensitiveDataConfiguration"
                 }
             },
             "traits": {

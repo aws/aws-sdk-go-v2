@@ -6007,14 +6007,35 @@
         "com.amazonaws.quicksight#BooleanObject": {
             "type": "boolean"
         },
+        "com.amazonaws.quicksight#BorderRadius": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.quicksight#BorderStyle": {
             "type": "structure",
             "members": {
+                "Color": {
+                    "target": "com.amazonaws.quicksight#Color",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to add color for tile borders for visuals.</p>"
+                    }
+                },
                 "Show": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The option to enable display of borders for visuals.</p>"
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.quicksight#Width",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to set the width of tile borders for visuals.</p>"
                     }
                 }
             },
@@ -7723,6 +7744,12 @@
                     "min": 0,
                     "max": 2000
                 }
+            }
+        },
+        "com.amazonaws.quicksight#Color": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "String to encapsulate the most generic way Color can be formatted (words, hexStrings etc)"
             }
         },
         "com.amazonaws.quicksight#ColorFillType": {
@@ -30232,6 +30259,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The loading animation configuration of a free-form layout element.</p>"
                     }
+                },
+                "BorderRadius": {
+                    "target": "com.amazonaws.quicksight#BorderRadius",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border radius of a free-form layout element.</p>"
+                    }
+                },
+                "Padding": {
+                    "target": "com.amazonaws.quicksight#Padding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The padding of a free-form layout element.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30271,6 +30310,12 @@
                     "target": "com.amazonaws.quicksight#HexColorWithTransparency",
                     "traits": {
                         "smithy.api#documentation": "<p>The border color of a free-form layout element.</p>"
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.quicksight#Width",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border width of a free-form layout element.</p>"
                     }
                 }
             },
@@ -33125,10 +33170,89 @@
                         "smithy.api#documentation": "<p>The height of a grid element expressed as a number of grid rows.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "BorderStyle": {
+                    "target": "com.amazonaws.quicksight#GridLayoutElementBorderStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border style configuration of a grid layout element.</p>"
+                    }
+                },
+                "SelectedBorderStyle": {
+                    "target": "com.amazonaws.quicksight#GridLayoutElementBorderStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border style configuration of a grid layout element. This border style is used when the element is selected.</p>"
+                    }
+                },
+                "BackgroundStyle": {
+                    "target": "com.amazonaws.quicksight#GridLayoutElementBackgroundStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background style configuration of a grid layout element.</p>"
+                    }
+                },
+                "LoadingAnimation": {
+                    "target": "com.amazonaws.quicksight#LoadingAnimation"
+                },
+                "BorderRadius": {
+                    "target": "com.amazonaws.quicksight#BorderRadius",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border radius of a grid layout element.</p>"
+                    }
+                },
+                "Padding": {
+                    "target": "com.amazonaws.quicksight#Padding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The padding of a grid layout element.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An element within a grid layout.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GridLayoutElementBackgroundStyle": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background visibility of a grid layout element.</p>"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background color of a grid layout element.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The background style configuration of a grid layout element.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GridLayoutElementBorderStyle": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border visibility of a grid layout element.</p>"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border color of a grid layout element.</p>"
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.quicksight#Width",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border width of a grid layout element.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The border style configuration of a grid layout element.</p>"
             }
         },
         "com.amazonaws.quicksight#GridLayoutElementColumnIndex": {
@@ -43680,6 +43804,15 @@
                 "smithy.api#documentation": "<p>A transform operation that overrides the dataset parameter values that are defined in another dataset.</p>"
             }
         },
+        "com.amazonaws.quicksight#Padding": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.quicksight#PageNumber": {
             "type": "long",
             "traits": {
@@ -53622,6 +53755,26 @@
                 "smithy.api#documentation": "<p>A <i>sheet</i>, which is an object that contains a set of visuals that\n            are viewed together on one page in Quick Sight. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.</p>"
             }
         },
+        "com.amazonaws.quicksight#SheetBackgroundStyle": {
+            "type": "structure",
+            "members": {
+                "Color": {
+                    "target": "com.amazonaws.quicksight#Color",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The solid color background option for sheets.</p>"
+                    }
+                },
+                "Gradient": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gradient background option for sheets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The background configuration for sheets.</p>"
+            }
+        },
         "com.amazonaws.quicksight#SheetContentType": {
             "type": "enum",
             "members": {
@@ -54157,6 +54310,12 @@
                     "target": "com.amazonaws.quicksight#TileLayoutStyle",
                     "traits": {
                         "smithy.api#documentation": "<p>The layout options for tiles.</p>"
+                    }
+                },
+                "Background": {
+                    "target": "com.amazonaws.quicksight#SheetBackgroundStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background for sheets.</p>"
                     }
                 }
             },
@@ -58204,6 +58363,17 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#TextTransform": {
+            "type": "enum",
+            "members": {
+                "CAPITALIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAPITALIZE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#TextWrap": {
             "type": "enum",
             "members": {
@@ -58655,10 +58825,28 @@
         "com.amazonaws.quicksight#TileStyle": {
             "type": "structure",
             "members": {
+                "BackgroundColor": {
+                    "target": "com.amazonaws.quicksight#Color",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background color of a tile.</p>"
+                    }
+                },
                 "Border": {
                     "target": "com.amazonaws.quicksight#BorderStyle",
                     "traits": {
                         "smithy.api#documentation": "<p>The border around a tile.</p>"
+                    }
+                },
+                "BorderRadius": {
+                    "target": "com.amazonaws.quicksight#BorderRadius",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The border radius of a tile.</p>"
+                    }
+                },
+                "Padding": {
+                    "target": "com.amazonaws.quicksight#Padding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The padding of a tile.</p>"
                     }
                 }
             },
@@ -61720,6 +61908,33 @@
                     "target": "com.amazonaws.quicksight#FontList",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines the list of font families.</p>"
+                    }
+                },
+                "AxisTitleFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "AxisLabelFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "LegendTitleFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "LegendValueFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "DataLabelFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "VisualTitleFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#VisualTitleFontConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the display properties of the visual title.</p>"
+                    }
+                },
+                "VisualSubtitleFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#VisualSubtitleFontConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the display properties of the visual sub-title.</p>"
                     }
                 }
             },
@@ -68686,6 +68901,29 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#VisualSubtitleFontConfiguration": {
+            "type": "structure",
+            "members": {
+                "FontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "TextAlignment": {
+                    "target": "com.amazonaws.quicksight#HorizontalTextAlignment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the alignment of visual sub-title.</p>"
+                    }
+                },
+                "TextTransform": {
+                    "target": "com.amazonaws.quicksight#TextTransform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the text transformation of visual sub-title.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the display properties of the visual sub-title.</p>"
+            }
+        },
         "com.amazonaws.quicksight#VisualSubtitleLabelOptions": {
             "type": "structure",
             "members": {
@@ -68713,6 +68951,29 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.quicksight#VisualTitleFontConfiguration": {
+            "type": "structure",
+            "members": {
+                "FontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
+                },
+                "TextAlignment": {
+                    "target": "com.amazonaws.quicksight#HorizontalTextAlignment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the alignment of visual title.</p>"
+                    }
+                },
+                "TextTransform": {
+                    "target": "com.amazonaws.quicksight#TextTransform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the text transformation of visual title.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the display properties of the visual title.</p>"
             }
         },
         "com.amazonaws.quicksight#VisualTitleLabelOptions": {
@@ -69236,6 +69497,16 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#Width": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "String to encapsulate the most generic way Width can be formatted with whatever units (px, em etc)",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
                 }
             }
         },

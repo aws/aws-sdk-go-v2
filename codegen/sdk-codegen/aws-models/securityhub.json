@@ -23180,7 +23180,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to complete the authorization based on input parameters. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to complete the authorization based on input parameters. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/connectorsv2/registrations",
@@ -24149,7 +24149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to create a connectorV2 based on input parameters. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to create a connectorV2 based on input parameters. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/connectorsv2",
@@ -24568,7 +24568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to create a ticket in the chosen ITSM based on finding information for the provided finding metadata UID. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to create a ticket in the chosen ITSM based on finding information for the provided finding metadata UID. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ticketsv2",
@@ -25215,7 +25215,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to delete a connectorV2. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to delete a connectorV2. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/connectorsv2/{ConnectorId+}",
@@ -27396,6 +27396,146 @@
                 "smithy.api#documentation": "<p>The severity assigned to a finding by the finding provider. This object may include one or more of the following \nattributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Label</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Normalized</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Original</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Product</code>\n               </p>\n            </li>\n         </ul>\n         <p>If a <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html\">\n               <code>BatchImportFindings</code>\n            </a> request for a \n           new finding only provides <code>Label</code> or only provides <code>Normalized</code>, Security Hub \n           automatically populates the value of the other field.</p>\n         <p>The <code>Normalized</code> and <code>Product</code> attributes are included in the <code>FindingProviderSeverity</code> \n           structure to preserve the historical information associated with the finding, even if the top-level \n           <code>Severity</code> object is later modified using the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html\">\n               <code>BatchUpdateFindings</code>\n            </a> operation.</p>\n         <p>If the top-level <code>Finding.Severity</code> object is present, but <code>Finding.FindingProviderFields</code> isn't present, \n           Security Hub creates the <code>FindingProviderFields.Severity</code> object and copies the entire <code>Finding.Severity</code> object into it. \n           This ensures that the original, provider-supplied details are retained within the <code>FindingProviderFields.Severity</code> \n           object, even if the top-level <code>Severity</code> object is overwritten.\n       </p>"
             }
         },
+        "com.amazonaws.securityhub#FindingsTrendsCompositeFilter": {
+            "type": "structure",
+            "members": {
+                "StringFilters": {
+                    "target": "com.amazonaws.securityhub#FindingsTrendsStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of string filters that apply to findings trend data fields.</p>"
+                    }
+                },
+                "NestedCompositeFilters": {
+                    "target": "com.amazonaws.securityhub#FindingsTrendsCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of nested composite filters that you can use to create complex filter conditions for findings trend data.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.securityhub#AllowedOperators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator (AND, OR) to apply between the string filters and nested composite filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter structure that contains a logical combination of string filters and nested composite filters for findings trend data.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingsTrendsCompositeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FindingsTrendsCompositeFilter"
+            }
+        },
+        "com.amazonaws.securityhub#FindingsTrendsFilters": {
+            "type": "structure",
+            "members": {
+                "CompositeFilters": {
+                    "target": "com.amazonaws.securityhub#FindingsTrendsCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of composite filters to apply to the findings trend data.</p>"
+                    }
+                },
+                "CompositeOperator": {
+                    "target": "com.amazonaws.securityhub#AllowedOperators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator (AND, OR) to apply between multiple composite filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that defines filters to apply to findings trend data queries.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingsTrendsStringField": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "account_id"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "region"
+                    }
+                },
+                "FINDING_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_types"
+                    }
+                },
+                "FINDING_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_status"
+                    }
+                },
+                "CVE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_cve_ids"
+                    }
+                },
+                "COMPLIANCE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_compliance_status"
+                    }
+                },
+                "COMPLIANCE_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_control_id"
+                    }
+                },
+                "FINDING_CLASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_class_name"
+                    }
+                },
+                "PROVIDER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_provider"
+                    }
+                },
+                "FINDING_ACTIVITY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "finding_activity_name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#FindingsTrendsStringFilter": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.securityhub#FindingsTrendsStringField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the findings field to filter on.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.securityhub#StringFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for string-based fields in findings trend data.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingsTrendsStringFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FindingsTrendsStringFilter"
+            }
+        },
         "com.amazonaws.securityhub#FirewallPolicyDetails": {
             "type": "structure",
             "members": {
@@ -28109,7 +28249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to retrieve details for a connectorV2 based on connector id. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to retrieve details for a connectorV2 based on connector id. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/connectorsv2/{ConnectorId+}",
@@ -28784,6 +28924,115 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#GetFindingsTrendsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetFindingsTrendsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetFindingsTrendsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns findings trend data based on the specified criteria. This operation helps you analyze patterns and changes in findings over time. This API is in public preview and subject to change.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/findingsTrendsv2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TrendsMetrics",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingsTrendsV2Request": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#FindingsTrendsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the findings trend data.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The starting timestamp for the time period to analyze findings trends, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ending timestamp for the time period to analyze findings trends, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use for paginating results. This value is returned in the response if more results are available.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of trend data points to return in a single response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingsTrendsV2Response": {
+            "type": "structure",
+            "members": {
+                "Granularity": {
+                    "target": "com.amazonaws.securityhub#GranularityField",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time interval granularity for the returned trend data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrendsMetrics": {
+                    "target": "com.amazonaws.securityhub#TrendsMetrics",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The collection of time-series trend metrics, including counts of findings by severity across the specified time period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use for retrieving the next page of results, if more trend data is available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#GetFindingsV2": {
             "type": "operation",
             "input": {
@@ -29359,6 +29608,115 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#GetResourcesTrendsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetResourcesTrendsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetResourcesTrendsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns resource trend data based on the specified criteria. This operation helps you analyze patterns and changes in resource compliance over time. This API is in public preview and subject to change.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/resourcesTrendsv2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TrendsMetrics",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetResourcesTrendsV2Request": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the resources trend data.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The starting timestamp for the time period to analyze resources trends, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ending timestamp for the time period to analyze resources trends, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use for paginating results. This value is returned in the response if more results are available.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of trend data points to return in a single response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetResourcesTrendsV2Response": {
+            "type": "structure",
+            "members": {
+                "Granularity": {
+                    "target": "com.amazonaws.securityhub#GranularityField",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time interval granularity for the returned trend data (such as DAILY or WEEKLY).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrendsMetrics": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsMetrics",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The collection of time-series trend metrics, including counts of resources across the specified time period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use for retrieving the next page of results, if more trend data is available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#GetResourcesV2": {
             "type": "operation",
             "input": {
@@ -29551,6 +29909,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#GranularityField": {
+            "type": "enum",
+            "members": {
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Daily"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Weekly"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Monthly"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#GroupByField": {
@@ -31016,7 +31397,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to retrieve a list of connectorsV2 and their metadata for the calling account. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to retrieve a list of connectorsV2 and their metadata for the calling account. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/connectorsv2",
@@ -35511,6 +35892,22 @@
                 "target": "com.amazonaws.securityhub#ResourcesCompositeFilter"
             }
         },
+        "com.amazonaws.securityhub#ResourcesCount": {
+            "type": "structure",
+            "members": {
+                "AllResources": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The total count of all resources for the given time interval.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains counts of resources for trend analysis.</p>"
+            }
+        },
         "com.amazonaws.securityhub#ResourcesDateField": {
             "type": "enum",
             "members": {
@@ -35767,6 +36164,156 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#ResourcesStringFilter"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsCompositeFilter": {
+            "type": "structure",
+            "members": {
+                "StringFilters": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of string filters that apply to resources trend data fields.</p>"
+                    }
+                },
+                "NestedCompositeFilters": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of nested composite filters that you can use to create complex filter conditions for resources trend data.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.securityhub#AllowedOperators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator (AND, OR) to apply between the string filters and nested composite filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter structure that contains a logical combination of string filters and nested composite filters for resources trend data.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsCompositeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ResourcesTrendsCompositeFilter"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsFilters": {
+            "type": "structure",
+            "members": {
+                "CompositeFilters": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of composite filters to apply to the resources trend data.</p>"
+                    }
+                },
+                "CompositeOperator": {
+                    "target": "com.amazonaws.securityhub#AllowedOperators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator (AND, OR) to apply between multiple composite filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that defines filters to apply to resources trend data queries.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ResourcesTrendsMetricsResult"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsMetricsResult": {
+            "type": "structure",
+            "members": {
+                "Timestamp": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp for this data point in the resources trend metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrendsValues": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource trend metric values associated with this timestamp, including resource counts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the resource trend metrics data for a specific time point in the requested time period.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsStringField": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "account_id"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "region"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource_type"
+                    }
+                },
+                "RESOURCE_CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource_category"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsStringFilter": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.securityhub#ResourcesTrendsStringField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resources field to filter on, such as resourceType, accountId, or region.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.securityhub#StringFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for string-based fields in resources trend data, such as resource type or account ID.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsStringFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ResourcesTrendsStringFilter"
+            }
+        },
+        "com.amazonaws.securityhub#ResourcesTrendsValues": {
+            "type": "structure",
+            "members": {
+                "ResourcesCount": {
+                    "target": "com.amazonaws.securityhub#ResourcesCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource count statistics for this data point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the aggregated resource count values for a specific point in the resources trend timeline.</p>"
             }
         },
         "com.amazonaws.securityhub#Result": {
@@ -36908,6 +37455,9 @@
                     "target": "com.amazonaws.securityhub#GetFindingStatisticsV2"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GetFindingsTrendsV2"
+                },
+                {
                     "target": "com.amazonaws.securityhub#GetFindingsV2"
                 },
                 {
@@ -36927,6 +37477,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#GetResourcesStatisticsV2"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#GetResourcesTrendsV2"
                 },
                 {
                     "target": "com.amazonaws.securityhub#GetResourcesV2"
@@ -38285,6 +38838,78 @@
                         "smithy.api#enumValue": "CRITICAL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.securityhub#SeverityTrendsCount": {
+            "type": "structure",
+            "members": {
+                "Unknown": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with Unknown severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Informational": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with Informational severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Low": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with Low severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Medium": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with Medium severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "High": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with High severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Critical": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with Critical severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fatal": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with Fatal severity level at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Other": {
+                    "target": "com.amazonaws.securityhub#TrendsValueCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings with severity levels not fitting into the standard categories at this point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains counts of findings grouped by severity level for trend analysis.</p>"
             }
         },
         "com.amazonaws.securityhub#SeverityUpdate": {
@@ -39941,6 +40566,60 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.securityhub#TrendsMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#TrendsMetricsResult"
+            }
+        },
+        "com.amazonaws.securityhub#TrendsMetricsResult": {
+            "type": "structure",
+            "members": {
+                "Timestamp": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp for this data point in the findings trend metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrendsValues": {
+                    "target": "com.amazonaws.securityhub#TrendsValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The finding trend metric values associated with this timestamp, including severity counts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the findings trend metrics data for a specific time point in the requested time period.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#TrendsValueCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.securityhub#TrendsValues": {
+            "type": "structure",
+            "members": {
+                "SeverityTrends": {
+                    "target": "com.amazonaws.securityhub#SeverityTrendsCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The count of findings organized by severity level for this data point in the trend timeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the aggregated finding values for a specific point in the findings trend timeline.</p>"
+            }
+        },
         "com.amazonaws.securityhub#TypeList": {
             "type": "list",
             "member": {
@@ -40803,7 +41482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permission to update a connectorV2 based on its id and input parameters. This API is in preview release and subject to change.</p>",
+                "smithy.api#documentation": "<p>Grants permission to update a connectorV2 based on its id and input parameters. This API is in public preview and subject to change.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/connectorsv2/{ConnectorId+}",

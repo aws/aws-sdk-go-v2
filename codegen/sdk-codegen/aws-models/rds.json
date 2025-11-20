@@ -3993,6 +3993,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -4424,7 +4427,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB cluster is publicly accessible.</p>\n         <p>When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), \n              its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, \n              the endpoint resolves to the private IP address. Access to the DB cluster is ultimately controlled by the security group it uses. That public\n              access isn't permitted if the security group assigned to the DB cluster doesn't permit it.</p>\n         <p>When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters only</p>\n         <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p>\n         <p>If <code>DBSubnetGroupName</code> isn't specified, and <code>PubliclyAccessible</code> isn't specified, the following applies:</p>\n         <ul>\n            <li>\n               <p>If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB cluster is private.</p>\n            </li>\n            <li>\n               <p>If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.</p>\n            </li>\n         </ul>\n         <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn't specified, the following applies:</p>\n         <ul>\n            <li>\n               <p>If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB cluster is private.</p>\n            </li>\n            <li>\n               <p>If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB cluster is publicly accessible.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters only</p>\n         <p>When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its domain name system (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is controlled by its security group settings.</p>\n         <p>When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.</p>\n         <p>The default behavior when <code>PubliclyAccessible</code> is not specified depends on whether a <code>DBSubnetGroup</code> is specified.</p>\n         <p>If <code>DBSubnetGroup</code> isn't specified, <code>PubliclyAccessible</code> defaults to <code>true</code>.</p>\n         <p>If <code>DBSubnetGroup</code> is specified, <code>PubliclyAccessible</code> defaults to <code>false</code> unless the value of <code>DBSubnetGroup</code> is <code>default</code>, in which case <code>PubliclyAccessible</code> defaults to <code>true</code>.</p>\n         <p>If <code>PubliclyAccessible</code> is true and the VPC that the <code>DBSubnetGroup</code> is in doesn't have an internet gateway attached to it, Amazon RDS returns an error.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -4862,6 +4865,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -5134,7 +5140,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance is publicly accessible.</p>\n         <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private cloud (VPC), \n              its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB instance, \n              the endpoint resolves to the private IP address. Access to the DB instance is ultimately controlled by the security group it uses. \n              That public access is not permitted if the security group assigned to the DB instance doesn't permit it.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p>\n         <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p>\n         <p>If <code>DBSubnetGroupName</code> isn't specified, and <code>PubliclyAccessible</code> isn't specified, the following applies:</p>\n         <ul>\n            <li>\n               <p>If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB instance is private.</p>\n            </li>\n            <li>\n               <p>If the default VPC in the target Region has an internet gateway attached to it, the DB instance is public.</p>\n            </li>\n         </ul>\n         <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn't specified, the following applies:</p>\n         <ul>\n            <li>\n               <p>If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB instance is private.</p>\n            </li>\n            <li>\n               <p>If the subnets are part of a VPC that has an internet gateway attached to it, the DB instance is public.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is publicly accessible.</p>\n         <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private cloud (VPC), its domain name system (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is controlled by its security group settings.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p>\n         <p>The default behavior when <code>PubliclyAccessible</code> is not specified depends on whether a <code>DBSubnetGroup</code> is specified.</p>\n         <p>If <code>DBSubnetGroup</code> isn't specified, <code>PubliclyAccessible</code> defaults to <code>false</code> for Aurora instances and <code>true</code> for non-Aurora instances.</p>\n         <p>If <code>DBSubnetGroup</code> is specified, <code>PubliclyAccessible</code> defaults to <code>false</code> unless the value of <code>DBSubnetGroup</code> is <code>default</code>, in which case <code>PubliclyAccessible</code> defaults to <code>true</code>.</p>\n         <p>If <code>PubliclyAccessible</code> is true and the VPC that the <code>DBSubnetGroup</code> is in doesn't have an internet gateway attached to it, Amazon RDS returns an error.</p>"
                     }
                 },
                 "Tags": {
@@ -5457,6 +5463,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -21881,6 +21890,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -22586,6 +22598,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -22807,7 +22822,7 @@
                 "DomainOu": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Active Directory organizational unit for your DB instance to join.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be in the distinguished name format.</p>\n            </li>\n            <li>\n               <p>Can't be longer than 64 characters.</p>\n            </li>\n         </ul>\n         <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Active Directory organizational unit for your DB instance to join.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be in the distinguished name format.</p>\n            </li>\n         </ul>\n         <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code>\n         </p>"
                     }
                 },
                 "DomainAuthSecretArn": {
@@ -27734,6 +27749,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -28106,6 +28124,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -28477,6 +28498,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -28862,6 +28886,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StorageTypeNotSupportedFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -29296,6 +29323,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#TenantDatabaseQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -30437,6 +30467,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -30533,6 +30566,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#VpcEncryptionControlViolationException"
                 }
             ],
             "traits": {
@@ -32350,6 +32386,23 @@
                 "traits": {
                     "smithy.api#xmlName": "UpgradeTarget"
                 }
+            }
+        },
+        "com.amazonaws.rds#VpcEncryptionControlViolationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "VpcEncryptionControlViolationException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The operation violates VPC encryption control settings. Make sure that your DB instance \n            type supports the Nitro encryption-in-transit capability, \n            or modify your VPC's encryption controls to not enforce encryption-in-transit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rds#VpcSecurityGroupIdList": {

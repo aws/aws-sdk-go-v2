@@ -756,6 +756,18 @@
                     "traits": {
                         "smithy.api#enumValue": "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"
                     }
+                },
+                "VPN_EXISTING_ASSOCIATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPN_EXISTING_ASSOCIATIONS"
+                    }
+                },
+                "VPC_UNSUPPORTED_FEATURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_UNSUPPORTED_FEATURES"
+                    }
                 }
             }
         },
@@ -785,6 +797,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkmanager#Attachment"
+            }
+        },
+        "com.amazonaws.networkmanager#AttachmentRoutingPolicyAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment associated with the routing policy.</p>"
+                    }
+                },
+                "PendingRoutingPolicies": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of routing policies that are pending association with the attachment.</p>"
+                    }
+                },
+                "AssociatedRoutingPolicies": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of routing policies currently associated with the attachment.</p>"
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label associated with the attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about routing policy associations for an attachment.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#AttachmentRoutingPolicyAssociationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#AttachmentRoutingPolicyAssociationSummary"
             }
         },
         "com.amazonaws.networkmanager#AttachmentState": {
@@ -1051,6 +1101,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ATTACHMENT_ROUTE_STATIC"
+                    }
+                },
+                "ROUTING_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_POLICY"
+                    }
+                },
+                "ROUTING_POLICY_SEGMENT_ASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_POLICY_SEGMENT_ASSOCIATION"
+                    }
+                },
+                "ROUTING_POLICY_EDGE_ASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_POLICY_EDGE_ASSOCIATION"
+                    }
+                },
+                "ROUTING_POLICY_ATTACHMENT_ASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_POLICY_ATTACHMENT_ASSOCIATION"
                     }
                 },
                 "CORE_NETWORK_CONFIGURATION": {
@@ -1960,6 +2034,18 @@
                         "smithy.api#documentation": "<p>The edge location for the core network change event.</p>"
                     }
                 },
+                "PeerEdgeLocation": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edge location of the peer in a core network change event.</p>"
+                    }
+                },
+                "RoutingPolicyDirection": {
+                    "target": "com.amazonaws.networkmanager#RoutingPolicyDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy direction (inbound/outbound) in a core network change event.</p>"
+                    }
+                },
                 "SegmentName": {
                     "target": "com.amazonaws.networkmanager#ConstrainedString",
                     "traits": {
@@ -1982,6 +2068,12 @@
                     "target": "com.amazonaws.networkmanager#ConstrainedString",
                     "traits": {
                         "smithy.api#documentation": "<p>For a <code>STATIC_ROUTE</code> event, this is the IP address.</p>"
+                    }
+                },
+                "RoutingPolicyAssociationDetails": {
+                    "target": "com.amazonaws.networkmanager#RoutingPolicyAssociationDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the routing policies and other association details in the core network change values.</p>"
                     }
                 }
             },
@@ -2071,6 +2163,36 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether security group referencing is enabled for the core network.</p>"
+                    }
+                },
+                "RoutingPolicyDirection": {
+                    "target": "com.amazonaws.networkmanager#RoutingPolicyDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy direction (inbound/outbound) in a core network change event.</p>"
+                    }
+                },
+                "RoutingPolicy": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy configuration in the core network change values.</p>"
+                    }
+                },
+                "PeerEdgeLocations": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edge locations of peers in the core network change values.</p>"
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attachment identifier in the core network change values.</p>"
+                    }
+                },
+                "RoutingPolicyAssociationDetails": {
+                    "target": "com.amazonaws.networkmanager#RoutingPolicyAssociationDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the routing policies and other association details in the core network change values.</p>"
                     }
                 }
             },
@@ -2367,6 +2489,56 @@
                 "target": "com.amazonaws.networkmanager#CoreNetworkPolicyVersion"
             }
         },
+        "com.amazonaws.networkmanager#CoreNetworkRoutingInformation": {
+            "type": "structure",
+            "members": {
+                "Prefix": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP prefix for the route.</p>"
+                    }
+                },
+                "NextHop": {
+                    "target": "com.amazonaws.networkmanager#RoutingInformationNextHop",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next hop information for the route.</p>"
+                    }
+                },
+                "LocalPreference": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BGP local preference value for the route.</p>"
+                    }
+                },
+                "Med": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BGP Multi-Exit Discriminator (MED) value for the route.</p>"
+                    }
+                },
+                "AsPath": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BGP AS path for the route.</p>"
+                    }
+                },
+                "Communities": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BGP community values for the route.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Routing information for a core network, including route details and BGP attributes.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#CoreNetworkRoutingInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#CoreNetworkRoutingInformation"
+            }
+        },
         "com.amazonaws.networkmanager#CoreNetworkSegment": {
             "type": "structure",
             "members": {
@@ -2569,6 +2741,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the attachment between the two connections.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label to apply to the Connect attachment for traffic routing decisions.</p>"
                     }
                 },
                 "Options": {
@@ -2865,6 +3043,108 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an association between a core network and a prefix list for routing control.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prefix-list",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network to associate with the prefix list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrefixListArn": {
+                    "target": "com.amazonaws.networkmanager#PrefixListArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the prefix list to associate with the core network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrefixListAlias": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional alias for the prefix list association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.networkmanager#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network associated with the prefix list.</p>"
+                    }
+                },
+                "PrefixListArn": {
+                    "target": "com.amazonaws.networkmanager#PrefixListArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the prefix list that was associated with the core network.</p>"
+                    }
+                },
+                "PrefixListAlias": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the prefix list association, if provided.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkmanager#CreateCoreNetworkRequest": {
             "type": "structure",
             "members": {
@@ -3095,6 +3375,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Direct Connect gateway attachment.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label to apply to the Direct Connect Gateway attachment for traffic routing decisions.</p>"
                     }
                 },
                 "EdgeLocations": {
@@ -3457,6 +3743,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label to apply to the Site-to-Site VPN attachment for traffic routing decisions.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
@@ -3629,6 +3921,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label to apply to the Transit Gateway route table attachment for traffic routing decisions.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
@@ -3726,6 +4024,12 @@
                     "target": "com.amazonaws.networkmanager#VpcOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Options for the VPC attachment.</p>"
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label to apply to the VPC attachment for traffic routing decisions.</p>"
                     }
                 },
                 "Tags": {
@@ -4166,6 +4470,90 @@
                     "target": "com.amazonaws.networkmanager#CoreNetworkPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns information about the deleted policy version. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an association between a core network and a prefix list.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/prefix-list/{PrefixListArn}/core-network/{CoreNetworkId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network from which to delete the prefix list association.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrefixListArn": {
+                    "target": "com.amazonaws.networkmanager#PrefixListArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the prefix list to disassociate from the core network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network from which the prefix list association was deleted.</p>"
+                    }
+                },
+                "PrefixListArn": {
+                    "target": "com.amazonaws.networkmanager#PrefixListArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the prefix list that was disassociated from the core network.</p>"
                     }
                 }
             },
@@ -8256,6 +8644,103 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the routing policy associations for attachments in a core network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/routing-policy-label/core-network/{CoreNetworkId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AttachmentRoutingPolicyAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network to list attachment routing policy associations for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a specific attachment to filter the routing policy associations.</p>",
+                        "smithy.api#httpQuery": "attachmentId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "AttachmentRoutingPolicyAssociations": {
+                    "target": "com.amazonaws.networkmanager#AttachmentRoutingPolicyAssociationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of attachment routing policy associations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkmanager#ListAttachments": {
             "type": "operation",
             "input": {
@@ -8533,6 +9018,237 @@
                     "target": "com.amazonaws.networkmanager#CoreNetworkPolicyVersionList",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes core network policy versions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the prefix list associations for a core network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prefix-list/core-network/{CoreNetworkId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PrefixListAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network to list prefix list associations for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrefixListArn": {
+                    "target": "com.amazonaws.networkmanager#PrefixListArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a specific prefix list to filter the associations.</p>",
+                        "smithy.api#httpQuery": "prefixListArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "PrefixListAssociations": {
+                    "target": "com.amazonaws.networkmanager#PrefixListAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of prefix list associations for the core network.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists routing information for a core network, including routes and their attributes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/core-networks/{CoreNetworkId}/core-network-routing-information",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CoreNetworkRoutingInformation",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformationRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network to retrieve routing information for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentName": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment to filter routing information by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EdgeLocation": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edge location to filter routing information by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextHopFilters": {
+                    "target": "com.amazonaws.networkmanager#FilterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply based on next hop information.</p>"
+                    }
+                },
+                "LocalPreferenceMatches": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Local preference values to match when filtering routing information.</p>"
+                    }
+                },
+                "ExactAsPathMatches": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exact AS path values to match when filtering routing information.</p>"
+                    }
+                },
+                "MedMatches": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Multi-Exit Discriminator (MED) values to match when filtering routing information.</p>"
+                    }
+                },
+                "CommunityMatches": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>BGP community values to match when filtering routing information.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of routing information entries to return in a single page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformationResponse": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkRoutingInformation": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkRoutingInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of routing information for the core network.</p>"
                     }
                 },
                 "NextToken": {
@@ -8952,6 +9668,9 @@
                     "target": "com.amazonaws.networkmanager#CreateCoreNetwork"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociation"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#CreateDevice"
                 },
                 {
@@ -8992,6 +9711,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#DeleteCoreNetworkPolicyVersion"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociation"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#DeleteDevice"
@@ -9114,6 +9836,9 @@
                     "target": "com.amazonaws.networkmanager#GetVpcAttachment"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociations"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#ListAttachments"
                 },
                 {
@@ -9121,6 +9846,12 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#ListCoreNetworkPolicyVersions"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociations"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformation"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#ListCoreNetworks"
@@ -9135,6 +9866,9 @@
                     "target": "com.amazonaws.networkmanager#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabel"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#PutCoreNetworkPolicy"
                 },
                 {
@@ -9145,6 +9879,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#RejectAttachment"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabel"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#RestoreCoreNetworkPolicyVersion"
@@ -11040,6 +11777,48 @@
                 "smithy.api#documentation": "<p>Describes additional information about missing permissions. </p>"
             }
         },
+        "com.amazonaws.networkmanager#PrefixListArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.networkmanager#PrefixListAssociation": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The core network id in the association.</p>"
+                    }
+                },
+                "PrefixListArn": {
+                    "target": "com.amazonaws.networkmanager#PrefixListArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the prefix list in the association.</p>"
+                    }
+                },
+                "PrefixListAlias": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the prefix list in the association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a prefix list association with a core network.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#PrefixListAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#PrefixListAssociation"
+            }
+        },
         "com.amazonaws.networkmanager#ProposedNetworkFunctionGroupChange": {
             "type": "structure",
             "members": {
@@ -11090,6 +11869,108 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a proposed segment change. In some cases, the segment change must first be evaluated and accepted. </p>"
+            }
+        },
+        "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies a routing policy label to an attachment for traffic routing decisions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/routing-policy-label",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabelRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network containing the attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment to apply the routing policy label to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label to apply to the attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.networkmanager#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabelResponse": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network containing the attachment.</p>"
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment that received the routing policy label.</p>"
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label that was applied to the attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.networkmanager#PutCoreNetworkPolicy": {
@@ -11449,6 +12330,96 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkmanager#Relationship"
+            }
+        },
+        "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a routing policy label from an attachment.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/routing-policy-label/core-network/{CoreNetworkId}/attachment/{AttachmentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabelRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network containing the attachment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment to remove the routing policy label from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabelResponse": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network containing the attachment.</p>"
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment from which the routing policy label was removed.</p>"
+                    }
+                },
+                "RoutingPolicyLabel": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing policy label that was removed from the attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.networkmanager#ResourceArn": {
@@ -11947,6 +12918,93 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkmanager#RouteType"
+            }
+        },
+        "com.amazonaws.networkmanager#RoutingInformationNextHop": {
+            "type": "structure",
+            "members": {
+                "IpAddress": {
+                    "target": "com.amazonaws.networkmanager#IPAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the next hop.</p>"
+                    }
+                },
+                "CoreNetworkAttachmentId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network attachment for the next hop.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource for the next hop.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource for the next hop.</p>"
+                    }
+                },
+                "SegmentName": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment for the next hop.</p>"
+                    }
+                },
+                "EdgeLocation": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edge location for the next hop.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the next hop for a route in the core network.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RoutingPolicyAssociationDetail": {
+            "type": "structure",
+            "members": {
+                "RoutingPolicyNames": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the routing policies in the association.</p>"
+                    }
+                },
+                "SharedSegments": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the segments that are shared with each other in the association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a routing policy association.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RoutingPolicyAssociationDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#RoutingPolicyAssociationDetail"
+            }
+        },
+        "com.amazonaws.networkmanager#RoutingPolicyDirection": {
+            "type": "enum",
+            "members": {
+                "INBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inbound"
+                    }
+                },
+                "OUTBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "outbound"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#SLRDeploymentStatus": {

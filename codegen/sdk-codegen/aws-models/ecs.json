@@ -246,6 +246,23 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecs#AccessType": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#AdvancedConfiguration": {
             "type": "structure",
             "members": {
@@ -355,6 +372,9 @@
                     "target": "com.amazonaws.ecs#CreateCluster"
                 },
                 {
+                    "target": "com.amazonaws.ecs#CreateExpressGatewayService"
+                },
+                {
                     "target": "com.amazonaws.ecs#CreateService"
                 },
                 {
@@ -371,6 +391,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#DeleteCluster"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DeleteExpressGatewayService"
                 },
                 {
                     "target": "com.amazonaws.ecs#DeleteService"
@@ -395,6 +418,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#DescribeContainerInstances"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DescribeExpressGatewayService"
                 },
                 {
                     "target": "com.amazonaws.ecs#DescribeServiceDeployments"
@@ -515,6 +541,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#UpdateContainerInstancesState"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UpdateExpressGatewayService"
                 },
                 {
                     "target": "com.amazonaws.ecs#UpdateService"
@@ -3654,6 +3683,141 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#CreateExpressGatewayService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#CreateExpressGatewayServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#CreateExpressGatewayServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#PlatformTaskDefinitionIncompatibilityException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#PlatformUnknownException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Express service that simplifies deploying containerized web applications on\n\t\t\tAmazon ECS with managed Amazon Web Services infrastructure. This operation provisions and configures\n\t\t\tApplication Load Balancers, target groups, security groups, and auto-scaling policies\n\t\t\tautomatically.</p>\n         <p>Specify a primary container configuration with your application image and basic\n\t\t\tsettings. Amazon ECS creates the necessary Amazon Web Services resources for traffic distribution, health\n\t\t\tmonitoring, network access control, and capacity management.</p>\n         <p>Provide an execution role for task operations and an infrastructure role for managing\n\t\t\tAmazon Web Services resources on your behalf.</p>"
+            }
+        },
+        "com.amazonaws.ecs#CreateExpressGatewayServiceRequest": {
+            "type": "structure",
+            "members": {
+                "executionRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS\n\t\t\tcontainer agent permission to make Amazon Web Services API calls on your behalf. This role is required\n\t\t\tfor Amazon ECS to pull container images from Amazon ECR, send container logs to Amazon\n\t\t\tCloudWatch Logs, and retrieve sensitive data from Amazon Web Services Systems Manager Parameter Store or\n\t\t\tAmazon Web Services Secrets Manager.</p>\n         <p>The execution role must include the <code>AmazonECSTaskExecutionRolePolicy</code>\n\t\t\tmanaged policy or equivalent permissions. For Express services, this role is used during\n\t\t\ttask startup and runtime for container management operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the infrastructure role that grants Amazon ECS permission\n\t\t\tto create and manage Amazon Web Services resources on your behalf for the Express service. This role is\n\t\t\tused to provision and manage Application Load Balancers, target groups, security groups,\n\t\t\tauto-scaling policies, and other Amazon Web Services infrastructure components.</p>\n         <p>The infrastructure role must include permissions for Elastic Load Balancing, Application\n\t\t\tAuto Scaling, Amazon EC2 (for security groups), and other services required for managed\n\t\t\tinfrastructure. This role is only used during Express service creation, updates, and\n\t\t\tdeletion operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Express service. This name must be unique within the specified cluster\n\t\t\tand can contain up to 255 letters (uppercase and lowercase), numbers, underscores, and\n\t\t\thyphens. The name is used to identify the service in the Amazon ECS console and API\n\t\t\toperations.</p>\n         <p>If you don't specify a service name, Amazon ECS generates a unique name for the service. The\n\t\t\tservice name becomes part of the service ARN and cannot be changed after the service is\n\t\t\tcreated.</p>"
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster on which to create the\n\t\t\tExpress service. If you do not specify a cluster, the <code>default</code> cluster is\n\t\t\tassumed.</p>"
+                    }
+                },
+                "healthCheckPath": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path on the container that the Application Load Balancer uses for health checks.\n\t\t\tThis should be a valid HTTP endpoint that returns a successful response (HTTP 200) when the\n\t\t\tapplication is healthy.</p>\n         <p>If not specified, the default health check path is <code>/ping</code>. The health check path\n\t\t\tmust start with a forward slash and can include query parameters. Examples:\n\t\t\t<code>/health</code>, <code>/api/status</code>, <code>/ping?format=json</code>.</p>"
+                    }
+                },
+                "primaryContainer": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayContainer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary container configuration for the Express service. This defines the main\n\t\t\tapplication container that will receive traffic from the Application Load Balancer.</p>\n         <p>The primary container must specify at minimum a container image. You can also configure\n\t\t\tthe container port (defaults to 80), logging configuration, environment variables, secrets,\n\t\t\tand startup commands. The container image can be from Amazon ECR, Docker Hub, or any other\n\t\t\tcontainer registry accessible to your execution role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume.\n\t\t\tThis role allows your application code to access other Amazon Web Services services securely.</p>\n         <p>The task role is different from the execution role. While the execution role is used by\n\t\t\tthe Amazon ECS agent to set up the task, the task role is used by your application code running\n\t\t\tinside the container to make Amazon Web Services API calls. If your application doesn't need to access\n\t\t\tAmazon Web Services services, you can omit this parameter.</p>"
+                    }
+                },
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for the Express service tasks. This specifies the VPC subnets\n\t\t\tand security groups for the tasks.</p>\n         <p>For Express services, you can specify custom security groups and subnets. If not\n\t\t\tprovided, Amazon ECS will use the default VPC configuration and create appropriate security\n\t\t\tgroups automatically. The network configuration determines how your service integrates with\n\t\t\tyour VPC and what network access it has.</p>"
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU units used by the task. This parameter determines the CPU allocation\n\t\t\tfor each task in the Express service. The default value for an Express service is 256 (.25 vCPU).</p>"
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory (in MiB) used by the task. This parameter determines the memory\n\t\t\tallocation for each task in the Express service. The default value for an express service is 512 MiB.</p>"
+                    }
+                },
+                "scalingTarget": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayScalingTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto-scaling configuration for the Express service. This defines how the service\n\t\t\tautomatically adjusts the number of running tasks based on demand.</p>\n         <p>You can specify the minimum and maximum number of tasks, the scaling metric (CPU\n\t\t\tutilization, memory utilization, or request count per target), and the target value for the\n\t\t\tmetric. If not specified, the default target value for an Express service is 60.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the Express service to help categorize and organize it.\n\t\t\tEach tag consists of a key and an optional value. You can apply up to 50 tags to a\n\t\t\tservice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#CreateExpressGatewayServiceResponse": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.ecs#ECSExpressGatewayService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of your Express service following the create operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#CreateManagedInstancesProviderConfiguration": {
             "type": "structure",
             "members": {
@@ -4586,6 +4750,73 @@
                     "target": "com.amazonaws.ecs#Cluster",
                     "traits": {
                         "smithy.api#documentation": "<p>The full description of the deleted cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteExpressGatewayService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DeleteExpressGatewayServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DeleteExpressGatewayServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotActiveException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Express service and removes all associated Amazon Web Services resources. This operation\n\t\t\tstops service tasks, removes the Application Load Balancer, target groups, security groups,\n\t\t\tauto-scaling policies, and other managed infrastructure components.</p>\n         <p>The service enters a <code>DRAINING</code> state where existing tasks complete current\n\t\t\trequests without starting new tasks. After all tasks stop, the service and infrastructure\n\t\t\tare permanently removed.</p>\n         <p>This operation cannot be reversed. Back up important data and verify the service is no\n\t\t\tlonger needed before deletion.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DeleteExpressGatewayServiceRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Express service to delete. The ARN uniquely\n\t\t\tidentifies the service within your Amazon Web Services account and region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteExpressGatewayServiceResponse": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.ecs#ECSExpressGatewayService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the deleted express service.</p>"
                     }
                 }
             },
@@ -5941,6 +6172,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#DescribeExpressGatewayService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeExpressGatewayServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeExpressGatewayServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about an Express service, including current status,\n\t\t\tconfiguration, managed infrastructure, and service revisions.</p>\n         <p>Returns comprehensive service details, active service revisions, ingress paths with\n\t\t\tendpoints, and managed Amazon Web Services resource status including load balancers and auto-scaling\n\t\t\tpolicies.</p>\n         <p>Use the <code>include</code> parameter to retrieve additional information such as\n\t\t\tresource tags.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DescribeExpressGatewayServiceRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Express service to describe. The ARN uniquely\n\t\t\tidentifies the service within your Amazon Web Services account and region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "include": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceIncludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional information to include in the response. Valid values are\n\t\t\t<code>TAGS</code> to include resource tags associated with the Express service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeExpressGatewayServiceResponse": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.ecs#ECSExpressGatewayService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the described express service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#DescribeServiceDeployments": {
             "type": "operation",
             "input": {
@@ -6974,6 +7275,112 @@
         "com.amazonaws.ecs#EBSVolumeType": {
             "type": "string"
         },
+        "com.amazonaws.ecs#ECSExpressGatewayService": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name or full ARN of the cluster that hosts the Express service.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Express service.</p>"
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that identifies the Express service.</p>"
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the infrastructure role that manages Amazon Web Services resources for the Express\n\t\t\tservice.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Express service.</p>"
+                    }
+                },
+                "currentDeployment": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current deployment configuration for the Express service.</p>"
+                    }
+                },
+                "activeConfigurations": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of active service configurations for the Express service.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata applied to the Express service.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the Express service was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the Express service was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an Express service, which provides a simplified way to deploy containerized\n\t\t\tweb applications on Amazon ECS with managed Amazon Web Services infrastructure. An Express service\n\t\t\tautomatically provisions and manages Application Load Balancers, target groups, security\n\t\t\tgroups, and auto-scaling policies.</p>\n         <p>Express services use a service revision architecture where each service can have\n\t\t\tmultiple active configurations, enabling blue-green deployments and gradual rollouts. The\n\t\t\tservice maintains a list of active configurations and manages the lifecycle of the\n\t\t\tunderlying Amazon Web Services resources.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ECSManagedResources": {
+            "type": "structure",
+            "members": {
+                "ingressPaths": {
+                    "target": "com.amazonaws.ecs#ManagedIngressPaths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ingress paths and endpoints for the Express service.</p>"
+                    }
+                },
+                "autoScaling": {
+                    "target": "com.amazonaws.ecs#ManagedAutoScaling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto-scaling configuration and policies for the Express service.</p>"
+                    }
+                },
+                "metricAlarms": {
+                    "target": "com.amazonaws.ecs#ManagedMetricAlarms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch metric alarms associated with the Express service.</p>"
+                    }
+                },
+                "serviceSecurityGroups": {
+                    "target": "com.amazonaws.ecs#ManagedSecurityGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups managed by the Express service.</p>"
+                    }
+                },
+                "logGroups": {
+                    "target": "com.amazonaws.ecs#ManagedLogGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log groups managed by the Express service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the Amazon Web Services resources managed by Amazon ECS for an Express service, including ingress\n\t\t\tpaths, auto-scaling policies, metric alarms, and security groups.</p>"
+            }
+        },
         "com.amazonaws.ecs#ECSVolumeName": {
             "type": "string"
         },
@@ -7389,6 +7796,308 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#ExpressGatewayContainer": {
+            "type": "structure",
+            "members": {
+                "image": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image used to start a container. This string is passed directly to the Docker\n\t\t\tdaemon. Images in the Docker Hub registry are available by default. Other repositories are\n\t\t\tspecified with either <code>repository-url/image:tag</code> or\n\t\t\t<code>repository-url/image@digest</code>.</p>\n         <p>For Express services, the image typically contains a web application that listens on the\n\t\t\tspecified container port. The image can be stored in Amazon ECR, Docker Hub, or any other\n\t\t\tcontainer registry accessible to your execution role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "containerPort": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on the container that receives traffic from the load balancer. Default\n\t\t\tis 80.</p>"
+                    }
+                },
+                "awsLogsConfiguration": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceAwsLogsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log configuration for the container.</p>"
+                    }
+                },
+                "repositoryCredentials": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayRepositoryCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for repository credentials for private registry authentication.</p>"
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command that is passed to the container.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.ecs#EnvironmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment variables to pass to the container.</p>"
+                    }
+                },
+                "secrets": {
+                    "target": "com.amazonaws.ecs#SecretList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secrets to pass to the container.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration for the primary container in an Express service. This container\n\t\t\treceives traffic from the Application Load Balancer and runs your application code.</p>\n         <p>The container configuration includes the container image, port mapping, logging\n\t\t\tsettings, environment variables, and secrets. The container image is the only required\n\t\t\tparameter, with sensible defaults provided for other settings.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayRepositoryCredentials": {
+            "type": "structure",
+            "members": {
+                "credentialsParameter": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret containing the private repository credentials.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The repository credentials for private registry authentication to pass to the container.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayScalingTarget": {
+            "type": "structure",
+            "members": {
+                "minTaskCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of tasks to run in the Express service.</p>"
+                    }
+                },
+                "maxTaskCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tasks to run in the Express service.</p>"
+                    }
+                },
+                "autoScalingMetric": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceScalingMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric used for auto-scaling decisions. The default metric used for an Express service is <code>CPUUtilization</code>.</p>"
+                    }
+                },
+                "autoScalingTargetValue": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target value for the auto-scaling metric. The default value for an Express service is 60.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the auto-scaling configuration for an Express service. This determines how the\n\t\t\tservice automatically adjusts the number of running tasks based on demand metrics such as\n\t\t\tCPU utilization, memory utilization, or request count per target.</p>\n         <p>Auto-scaling helps ensure your application can handle varying levels of traffic while\n\t\t\toptimizing costs by scaling down during low-demand periods. You can specify the minimum and\n\t\t\tmaximum number of tasks, the scaling metric, and the target value for that metric.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceAwsLogsConfiguration": {
+            "type": "structure",
+            "members": {
+                "logGroup": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch Logs log group to send container logs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logStreamPrefix": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix for the CloudWatch Logs log stream names. The default for an Express service is <code>ecs</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Amazon CloudWatch Logs configuration for the Express service\n\t\t\tcontainer.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceConfiguration": {
+            "type": "structure",
+            "members": {
+                "serviceRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service revision.</p>"
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the task execution role for the service revision.</p>"
+                    }
+                },
+                "taskRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the task role for the service revision.</p>"
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU allocation for tasks in this service revision.</p>"
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory allocation for tasks in this service revision.</p>"
+                    }
+                },
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for tasks in this service revision.</p>"
+                    }
+                },
+                "healthCheckPath": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health check path for this service revision.</p>"
+                    }
+                },
+                "primaryContainer": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayContainer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary container configuration for this service revision.</p>"
+                    }
+                },
+                "scalingTarget": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayScalingTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto-scaling configuration for this service revision.</p>"
+                    }
+                },
+                "ingressPaths": {
+                    "target": "com.amazonaws.ecs#IngressPathSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entry point into this service revision.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when this service revision was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a specific configuration revision of an Express service, containing all the\n\t\t\tsettings and parameters for that revision.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ExpressGatewayServiceConfiguration"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceInclude": {
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceIncludeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ExpressGatewayServiceInclude"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "securityGroups": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security groups associated with the Express service.</p>"
+                    }
+                },
+                "subnets": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the subnets associated with the Express service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network configuration for an Express service. By default, an Express service utilizes subnets and security groups associated with the default VPC.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceScalingMetric": {
+            "type": "enum",
+            "members": {
+                "AverageCPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE_CPU"
+                    }
+                },
+                "AverageMemoryUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE_MEMORY"
+                    }
+                },
+                "RequestCountPerTarget": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_COUNT_PER_TARGET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Express service.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the Express service is in the current status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines the status of Express service creation and information about the\n\t\t\tstatus of the service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ExpressGatewayServiceStatusCode": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAINING"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#FSxWindowsFileServerAuthorizationConfig": {
             "type": "structure",
             "members": {
@@ -7799,6 +8508,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration that controls how Amazon ECS optimizes your infrastructure.</p>"
+            }
+        },
+        "com.amazonaws.ecs#IngressPathSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#IngressPathSummary"
+            }
+        },
+        "com.amazonaws.ecs#IngressPathSummary": {
+            "type": "structure",
+            "members": {
+                "accessType": {
+                    "target": "com.amazonaws.ecs#AccessType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of access to the endpoint for the Express service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpoint": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint for access to the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The entry point into an Express service.</p>"
             }
         },
         "com.amazonaws.ecs#InstanceGeneration": {
@@ -9087,6 +9824,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scheduling strategy to use when filtering the <code>ListServices</code>\n\t\t\tresults.</p>"
                     }
+                },
+                "resourceManagementType": {
+                    "target": "com.amazonaws.ecs#ResourceManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resourceManagementType type to use when filtering the <code>ListServices</code> results.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9834,6 +10577,129 @@
                 "target": "com.amazonaws.ecs#ManagedAgent"
             }
         },
+        "com.amazonaws.ecs#ManagedApplicationAutoScalingPolicies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ManagedApplicationAutoScalingPolicy"
+            }
+        },
+        "com.amazonaws.ecs#ManagedApplicationAutoScalingPolicy": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application Auto Scaling policy associated with\n\t\t\tthe Express service.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Application Auto Scaling policy creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the Application Auto Scaling policy is in the current\n\t\t\tstatus.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the Application Auto Scaling policy was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Application Auto Scaling policy associated with the Express service. Valid\n\t\t\tvalues are <code>TargetTrackingScaling</code>, <code>StepScaling</code>, and\n\t\t\t<code>PredictiveScaling</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetValue": {
+                    "target": "com.amazonaws.ecs#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The target value for the auto scaling metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metric": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric used for auto scaling decisions. The available metrics are\n\t\t\t<code>ECSServiceAverageCPUUtilization</code>,\n\t\t\t<code>ECSServiceAverageMemoryUtilization</code>, and\n\t\t\t<code>ALBRequestCOuntPerTarget</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Application Auto Scaling policy created by Amazon ECS when you create an Express\n\t\t\tservice.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedAutoScaling": {
+            "type": "structure",
+            "members": {
+                "scalableTarget": {
+                    "target": "com.amazonaws.ecs#ManagedScalableTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a scalable target.</p>"
+                    }
+                },
+                "applicationAutoScalingPolicies": {
+                    "target": "com.amazonaws.ecs#ManagedApplicationAutoScalingPolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy used for auto scaling.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The auto scaling configuration created by Amazon ECS for an Express service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedCertificate": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ACM; certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the ACM certificate is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the ACM certificate was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) that is secured with this ACM\n\t\t\tcertificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ACM certificate associated with the HTTPS domain created for the Express\n\t\t\tservice.</p>"
+            }
+        },
         "com.amazonaws.ecs#ManagedDraining": {
             "type": "enum",
             "members": {
@@ -9849,6 +10715,70 @@
                         "smithy.api#enumValue": "DISABLED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ecs#ManagedIngressPath": {
+            "type": "structure",
+            "members": {
+                "accessType": {
+                    "target": "com.amazonaws.ecs#AccessType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of access to the endpoint for the Express service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpoint": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint for access to the Express service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "loadBalancer": {
+                    "target": "com.amazonaws.ecs#ManagedLoadBalancer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Application Load Balancer associated with the Express service.</p>"
+                    }
+                },
+                "loadBalancerSecurityGroups": {
+                    "target": "com.amazonaws.ecs#ManagedSecurityGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups associated with the Application Load Balancer.</p>"
+                    }
+                },
+                "certificate": {
+                    "target": "com.amazonaws.ecs#ManagedCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ACM certificate for the Express service's domain.</p>"
+                    }
+                },
+                "listener": {
+                    "target": "com.amazonaws.ecs#ManagedListener",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listeners associated with the Application Load Balancer.</p>"
+                    }
+                },
+                "rule": {
+                    "target": "com.amazonaws.ecs#ManagedListenerRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listener rules for the Application Load Balancer.</p>"
+                    }
+                },
+                "targetGroups": {
+                    "target": "com.amazonaws.ecs#ManagedTargetGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target groups associated with the Application Load Balancer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The entry point into the Express service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedIngressPaths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ManagedIngressPath"
             }
         },
         "com.amazonaws.ecs#ManagedInstancesMonitoringOptions": {
@@ -9934,6 +10864,299 @@
                 "smithy.api#documentation": "<p>The storage configuration for Amazon ECS Managed Instances. This defines the root\n\t\t\tvolume configuration for the instances.</p>"
             }
         },
+        "com.amazonaws.ecs#ManagedListener": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer listener.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the load balancer listener.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Informaion about why the load balancer listener is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when this listener was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The listeners associated with the Express service's Application Load Balancer.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedListenerRule": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer listener rule.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the load balancer listener rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the load balancer listener rule is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when this listener rule was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The listener rule associated with the Express service's Application Load\n\t\t\tBalancer.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedLoadBalancer": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the load balancer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the load balancer is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when this load balancer was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scheme": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheme of the load balancer. By default, the scheme of the load balancer is\n\t\t\t<code>internet-facing</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the subnets associated with the load balancer.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security groups associated with the load balancer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Application Load Balancer associated with the Express service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedLogGroup": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Cloudwatch Log Group associated with\n\t\t\tthe Express service.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Cloudwatch LogGroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the Cloudwatch LogGroup is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the Cloudwatch LogGroup was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logGroupName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Cloudwatch Log Group associated with\n\t\t\tthe Express service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Cloudwatch Log Group created by Amazon ECS for an Express service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedLogGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ManagedLogGroup"
+            }
+        },
+        "com.amazonaws.ecs#ManagedMetricAlarm": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch metric alarm.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CloudWatch metric alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the CloudWatch metric alarm is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the CloudWatch metric alarm was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CloudWatch metric alarm associated with the Express service's scaling policy.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedMetricAlarms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ManagedMetricAlarm"
+            }
+        },
+        "com.amazonaws.ecs#ManagedResourceStatus": {
+            "type": "enum",
+            "members": {
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEPROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPROVISIONING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#ManagedScalableTarget": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the scalable target.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the scalable target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the scalable target is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the target was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "minCapacity": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The minimum value to scale to in response to a scale-in activity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxCapacity": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum value to scale to in response to a scale-out activity.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a scalable target.</p>"
+            }
+        },
         "com.amazonaws.ecs#ManagedScaling": {
             "type": "structure",
             "members": {
@@ -10016,6 +11239,46 @@
                 }
             }
         },
+        "com.amazonaws.ecs#ManagedSecurityGroup": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the security group.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the security group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the security group is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the security group was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A security group associated with the Express service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedSecurityGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ManagedSecurityGroup"
+            }
+        },
         "com.amazonaws.ecs#ManagedStorageConfiguration": {
             "type": "structure",
             "members": {
@@ -10034,6 +11297,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The managed storage configuration for the cluster.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedTargetGroup": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target group.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the target group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the target group is in the current status.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the target group was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "healthCheckPath": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for health checks on the targets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "healthCheckPort": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The port the load balancer uses when performing health checks on targets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The port on which the targets receive traffic.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target group associated with the Express service's Application Load Balancer. For\n\t\t\tmore information about load balancer target groups, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html\">CreateTargetGroup</a> in the <i>Elastic Load Balancing API\n\t\t\t\tReference</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.ecs#ManagedTargetGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ManagedTargetGroup"
             }
         },
         "com.amazonaws.ecs#ManagedTerminationProtection": {
@@ -11735,6 +13061,23 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecs#ResourceManagementType": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "ECS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -12314,6 +13657,18 @@
                         "smithy.api#documentation": "<p>The Unix timestamp for the time when the service was created.</p>"
                     }
                 },
+                "currentServiceDeployment": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the current service deployment.</p>"
+                    }
+                },
+                "currentServiceRevisions": {
+                    "target": "com.amazonaws.ecs#ServiceCurrentRevisionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of the service revisions.</p>"
+                    }
+                },
                 "placementConstraints": {
                     "target": "com.amazonaws.ecs#PlacementConstraints",
                     "traits": {
@@ -12386,6 +13741,12 @@
                     "target": "com.amazonaws.ecs#AvailabilityZoneRebalancing",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether to use Availability Zone rebalancing for the service.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html\">Balancing an Amazon\n\t\t\t\tECS service across Availability Zones</a> in the <i>\n               <i>Amazon\n\t\t\t\t\tElastic Container Service Developer Guide</i>\n            </i>.</p>\n         <p>The default behavior of <code>AvailabilityZoneRebalancing</code> differs between\n\t\t\tcreate and update requests:</p>\n         <ul>\n            <li>\n               <p>For create service requests, when no value is specified for\n\t\t\t\t\t\t<code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to\n\t\t\t\t\t\t<code>ENABLED</code>.</p>\n            </li>\n            <li>\n               <p>For update service requests, when no value is specified for\n\t\t\t\t\t\t<code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults to the\n\t\t\t\t\texisting service’s <code>AvailabilityZoneRebalancing</code> value. If the\n\t\t\t\t\tservice never had an <code>AvailabilityZoneRebalancing</code> value set, Amazon\n\t\t\t\t\tECS treats this as <code>DISABLED</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "resourceManagementType": {
+                    "target": "com.amazonaws.ecs#ResourceManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies whether an ECS Service is an Express Service managed by ECS, or managed by the customer. The\n\t\t\tvalid values are <code>ECS</code> and <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -12691,6 +14052,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The key that encrypts and decrypts your resources for Service Connect TLS.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceCurrentRevisionSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the current service revision.</p>"
+                    }
+                },
+                "requestedTaskCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of requested tasks in the  current service revision</p>"
+                    }
+                },
+                "runningTaskCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of running tasks of the current service revision</p>"
+                    }
+                },
+                "pendingTaskCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of pending tasks in the current service revision</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the current service revision configuration</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceCurrentRevisionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceCurrentRevisionSummary"
             }
         },
         "com.amazonaws.ecs#ServiceDeployment": {
@@ -13401,6 +14803,12 @@
                     "target": "com.amazonaws.ecs#ResolvedConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The resolved configuration for the service revision which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>"
+                    }
+                },
+                "ecsManagedResources": {
+                    "target": "com.amazonaws.ecs#ECSManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources created and managed by Amazon ECS when you create an Express service for Amazon ECS.</p>"
                     }
                 }
             },
@@ -16710,6 +18118,121 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#UpdateExpressGatewayService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#UpdateExpressGatewayServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#UpdateExpressGatewayServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotActiveException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing Express service configuration. Modifies container settings, resource\n\t\t\tallocation, auto-scaling configuration, and other service parameters without recreating the\n\t\t\tservice.</p>\n         <p>Amazon ECS creates a new service revision with updated configuration and performs a rolling\n\t\t\tdeployment to replace existing tasks. The service remains available during updates,\n\t\t\tensuring zero-downtime deployments.</p>\n         <p>Some parameters like the infrastructure role cannot be modified after service creation\n\t\t\tand require creating a new service.</p>"
+            }
+        },
+        "com.amazonaws.ecs#UpdateExpressGatewayServiceRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Express service to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role for the Express\n\t\t\tservice.</p>"
+                    }
+                },
+                "healthCheckPath": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path on the container for Application Load Balancer health checks.</p>"
+                    }
+                },
+                "primaryContainer": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayContainer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary container configuration for the Express service.</p>"
+                    }
+                },
+                "taskRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for containers in this task.</p>"
+                    }
+                },
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for the Express service tasks. By default, the network configuration for an Express service uses the default VPC.</p>"
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU units used by the task.</p>"
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory (in MiB) used by the task.</p>"
+                    }
+                },
+                "scalingTarget": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayScalingTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto-scaling configuration for the Express service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#UpdateExpressGatewayServiceResponse": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.ecs#UpdatedExpressGatewayService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of your express gateway service following the update call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#UpdateInProgressException": {
             "type": "structure",
             "members": {
@@ -17400,6 +18923,56 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#UpdatedExpressGatewayService": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Express service that is being updated.</p>"
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster associated with the Express service that is being updated.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Express service that is being updated.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Express service that is being updated.</p>"
+                    }
+                },
+                "targetConfiguration": {
+                    "target": "com.amazonaws.ecs#ExpressGatewayServiceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to which the current Express service is being updated to.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the Express service that is being updated was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for when the Express service that is being updated was most recently updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes an Express service to be updated.</p>"
             }
         },
         "com.amazonaws.ecs#VCpuCountRangeRequest": {

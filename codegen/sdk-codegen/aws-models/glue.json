@@ -19770,6 +19770,29 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
+        "com.amazonaws.glue#FunctionType": {
+            "type": "enum",
+            "members": {
+                "REGULAR_FUNCTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGULAR_FUNCTION"
+                    }
+                },
+                "AGGREGATE_FUNCTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGGREGATE_FUNCTION"
+                    }
+                },
+                "STORED_PROCEDURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORED_PROCEDURE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#Generic512CharString": {
             "type": "string",
             "traits": {
@@ -26099,6 +26122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional function-name pattern string that filters the function\n      definitions returned.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.glue#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional function-type pattern string that filters the function\n      definitions returned from Amazon Redshift Federated Permissions Catalog.</p>\n         <p>Specify a value of <code>REGULAR_FUNCTION</code> or <code>STORED_PROCEDURE</code>.\n      The <code>STORED_PROCEDURE</code> function type is only compatible with\n      Amazon Redshift Federated Permissions Catalog.\n    </p>"
                     }
                 },
                 "NextToken": {
@@ -47395,6 +47424,12 @@
                         "smithy.api#documentation": "<p>The owner of the function.</p>"
                     }
                 },
+                "FunctionType": {
+                    "target": "com.amazonaws.glue#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the function.</p>"
+                    }
+                },
                 "OwnerType": {
                     "target": "com.amazonaws.glue#PrincipalType",
                     "traits": {
@@ -47443,6 +47478,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The owner of the function.</p>"
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.glue#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the function.</p>"
                     }
                 },
                 "OwnerType": {

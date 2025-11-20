@@ -129,7 +129,7 @@
                         "http/1.1"
                     ]
                 },
-                "smithy.api#documentation": "<note> <p>Amazon Bedrock AgentCore is in preview release and is subject to change.</p> </note> <p>Welcome to the Amazon Bedrock AgentCore Data Plane API reference. Data Plane actions process and handle data or workloads within Amazon Web Services services. </p>",
+                "smithy.api#documentation": "<p>Welcome to the Amazon Bedrock AgentCore Data Plane API reference. Data Plane actions process and handle data or workloads within Amazon Web Services services. </p>",
                 "smithy.api#title": "Amazon Bedrock AgentCore",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2011,7 +2011,10 @@
             }
         },
         "com.amazonaws.bedrockagentcore#Document": {
-            "type": "document"
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.bedrockagentcore#Event": {
             "type": "structure",
@@ -2124,6 +2127,136 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionJob": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the extraction job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the metadata of a memory extraction job such as the message identifiers that compose this job.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionJobFilterInput": {
+            "type": "structure",
+            "members": {
+                "strategyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory strategy identifier to filter extraction jobs by. If specified, only extraction jobs with this strategy ID are returned.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session. If specified, only extraction jobs with this session ID are returned.</p>"
+                    }
+                },
+                "actorId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the actor. If specified, only extraction jobs with this actor ID are returned.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the extraction job. If specified, only extraction jobs with this status are returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for querying memory extraction jobs based on various criteria.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionJobMessages": {
+            "type": "union",
+            "members": {
+                "messagesList": {
+                    "target": "com.amazonaws.bedrockagentcore#MessagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of messages that compose this extraction job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of messages that compose this extraction job.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionJobMetadata": {
+            "type": "structure",
+            "members": {
+                "jobID": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the extraction job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionJobMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The messages associated with the extraction job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the extraction job.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cause of failure, if the job did not complete successfully.</p>"
+                    }
+                },
+                "strategyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the memory strategy for this extraction job.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session for this extraction job.</p>"
+                    }
+                },
+                "actorId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the actor for this extraction job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information associated with this extraction job.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionJobMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#ExtractionJobMetadata"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ExtractionJobStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
                 }
             }
         },
@@ -3588,7 +3721,7 @@
                     "target": "com.amazonaws.bedrockagentcore#MaxResults",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. The default value is 20.</p>"
                     }
                 },
                 "nextToken": {
@@ -3863,7 +3996,7 @@
                 "sessionId": {
                     "target": "com.amazonaws.bedrockagentcore#SessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the session for which to list events. If specified, only events from this session are returned.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the session for which to list events.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3871,7 +4004,7 @@
                 "actorId": {
                     "target": "com.amazonaws.bedrockagentcore#ActorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the actor for which to list events. If specified, only events from this actor are returned.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the actor for which to list events.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3893,7 +4026,7 @@
                     "target": "com.amazonaws.bedrockagentcore#MaxResults",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. The default value is 20.</p>"
                     }
                 },
                 "nextToken": {
@@ -3921,6 +4054,108 @@
                     "target": "com.amazonaws.bedrockagentcore#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use in a subsequent request to get the next set of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListMemoryExtractionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#ListMemoryExtractionJobsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#ListMemoryExtractionJobsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottledException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all long-term memory extraction jobs that are eligible to be started with optional filtering.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:ListMemoryExtractionJobs</code> permission.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/memories/{memoryId}/extractionJobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "jobs"
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListMemoryExtractionJobsInput": {
+            "type": "structure",
+            "members": {
+                "memoryId": {
+                    "target": "com.amazonaws.bedrockagentcore#MemoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the memory to list extraction jobs for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. The default value is 20.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionJobFilterInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria to apply when listing extraction jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcore#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListMemoryExtractionJobsOutput": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionJobMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of extraction job metadata matching the specified criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcore#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token to retrieve the next page of results, if available.</p>"
                     }
                 }
             },
@@ -4002,7 +4237,7 @@
                     "target": "com.amazonaws.bedrockagentcore#MaxResults",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. The default value is 20.</p>"
                     }
                 },
                 "nextToken": {
@@ -4097,7 +4332,7 @@
                 "actorId": {
                     "target": "com.amazonaws.bedrockagentcore#ActorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the actor for which to list sessions. If specified, only sessions involving this actor are returned.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the actor for which to list sessions. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4106,7 +4341,7 @@
                     "target": "com.amazonaws.bedrockagentcore#MaxResults",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. The default value is 20.</p>"
                     }
                 },
                 "nextToken": {
@@ -4534,6 +4769,9 @@
                     "target": "com.amazonaws.bedrockagentcore#ListEvents"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#ListMemoryExtractionJobs"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#ListMemoryRecords"
                 },
                 {
@@ -4541,6 +4779,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#RetrieveMemoryRecords"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#StartMemoryExtractionJob"
                 }
             ]
         },
@@ -4552,6 +4793,34 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#MessageMetadata": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the event associated with this message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of this message within that event’s ordered list of messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information associated with this message.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#MessagesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#MessageMetadata"
             }
         },
         "com.amazonaws.bedrockagentcore#MetadataKey": {
@@ -4915,7 +5184,7 @@
                 "namespace": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace to filter memory records by. If specified, only memory records in this namespace are searched.</p>",
+                        "smithy.api#documentation": "<p>The namespace to filter memory records by.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4936,7 +5205,7 @@
                     "target": "com.amazonaws.bedrockagentcore#MaxResults",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. The default value is 20.</p>"
                     }
                 }
             },
@@ -5438,6 +5707,88 @@
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the code interpreter session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#StartMemoryExtractionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#StartMemoryExtractionJobInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#StartMemoryExtractionJobOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottledException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Starts a memory extraction job that processes events that failed extraction previously in an AgentCore Memory resource and produces structured memory records. When earlier extraction attempts have left events unprocessed, this job will pick up and extract those as well. </p> <p>To use this operation, you must have the <code>bedrock-agentcore:StartMemoryExtractionJob</code> permission.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/memories/{memoryId}/extractionJobs/start"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#StartMemoryExtractionJobInput": {
+            "type": "structure",
+            "members": {
+                "memoryId": {
+                    "target": "com.amazonaws.bedrockagentcore#MemoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the memory for which to start extraction jobs.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "extractionJob": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Extraction job to start in this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotent processing of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#StartMemoryExtractionJobOutput": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Extraction Job ID that was attempted to start.</p>",
                         "smithy.api#required": {}
                     }
                 }
