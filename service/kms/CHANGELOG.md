@@ -1,3 +1,7 @@
+# v1.49.0 (2025-11-21)
+
+* **Feature**: Support for on-demand rotation of AWS KMS Multi-Region keys with imported key material
+
 # v1.48.3 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "9dabc6ab-6f3e-4ce3-8705-3c7d97c264dc",
-    "type": "feature",
-    "description": "Support for on-demand rotation of AWS KMS Multi-Region keys with imported key material",
-    "modules": [
-        "service/kms"
-    ]
-}

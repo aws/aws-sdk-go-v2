@@ -1,8 +1,0 @@
-{
-    "id": "b66514c2-2010-431a-afdd-fb22459d71df",
-    "type": "feature",
-    "description": "Add ListInvestigations and SendFeedback APIs to support SecurityIR AI agents",
-    "modules": [
-        "service/securityir"
-    ]
-}

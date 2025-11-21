@@ -1,3 +1,7 @@
+# v1.48.0 (2025-11-21)
+
+* **Feature**: Add support for policy operations on the UPGRADE_ROLLOUT_POLICY policy type.
+
 # v1.47.0 (2025-11-20)
 
 * **Feature**: Added new APIs for Billing Transfer, new policy type INSPECTOR_POLICY, and allow an account to transfer between organizations

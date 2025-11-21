@@ -1,3 +1,7 @@
+# v1.83.0 (2025-11-21)
+
+* **Feature**: Launching Enhanced Error Handling and ESM Grouping capabilities for Kafka ESMs
+
 # v1.82.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

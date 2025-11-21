@@ -1,8 +1,0 @@
-{
-    "id": "1de0422d-ca54-483f-8e9a-9fc097fd4ade",
-    "type": "feature",
-    "description": "This release adds a new capability to create and manage interruptible EC2 Capacity Reservations.",
-    "modules": [
-        "service/ec2"
-    ]
-}

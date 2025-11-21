@@ -1,8 +1,0 @@
-{
-    "id": "be492fb7-1253-4c04-bee1-1fccf8d17a33",
-    "type": "feature",
-    "description": "Endpoint update for new region",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

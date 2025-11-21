@@ -1,3 +1,7 @@
+# v1.111.0 (2025-11-21)
+
+* **Feature**: Add support for Upgrade Rollout Order
+
 # v1.110.0 (2025-11-20)
 
 * **Feature**: Add support for VPC Encryption Controls.

@@ -1,3 +1,80 @@
+# Release (2025-11-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.38.0](service/apigateway/CHANGELOG.md#v1380-2025-11-21)
+  * **Feature**: API Gateway supports VPC link V2 for REST APIs.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.56.0](service/athena/CHANGELOG.md#v1560-2025-11-21)
+  * **Feature**: Introduces Spark workgroup features including log persistence, S3/CloudWatch delivery, UI and History Server APIs, and SparkConnect 3.5.6 support. Adds DPU usage limits at workgroup and query levels as well as DPU usage tracking for Capacity Reservation queries to optimize performance and costs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.50.0](service/bedrock/CHANGELOG.md#v1500-2025-11-21)
+  * **Feature**: Add support to automatically enforce safeguards across accounts within an AWS Organization.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.14.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1140-2025-11-21)
+  * **Feature**: Support for agentcore gateway interceptor configurations and NONE authorizer type
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.9.0](service/bedrockdataautomationruntime/CHANGELOG.md#v190-2025-11-21)
+  * **Feature**: Adding new fields to GetDataAutomationStatus: jobSubmissionTime, jobCompletionTime, and jobDurationInSeconds
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.45.0](service/bedrockruntime/CHANGELOG.md#v1450-2025-11-21)
+  * **Feature**: Add support to automatically enforce safeguards across accounts within an AWS Organization.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.71.0](service/cloudformation/CHANGELOG.md#v1710-2025-11-21)
+  * **Feature**: Adds the DependsOn field to the AutoDeployment configuration parameter for CreateStackSet, UpdateStackSet, and DescribeStackSet APIs, allowing users to set and read auto-deployment dependencies between StackSets
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.0.0](service/computeoptimizerautomation/CHANGELOG.md#v100-2025-11-21)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Compute Optimizer Automation. Create automation rules to implement recommended actions on a recurring schedule based on your specified criteria. Supported actions include: snapshot and delete unattached EBS volumes and upgrade volume types to the latest generation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.148.0](service/connect/CHANGELOG.md#v11480-2025-11-21)
+  * **Feature**: New APIs to support aliases and versions for ContactFlowModule. Updated ContactFlowModule APIs to support custom blocks.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.28.0](service/controltower/CHANGELOG.md#v1280-2025-11-21)
+  * **Feature**: The manifest field is now optional for the AWS Control Tower CreateLandingZone and UpdateLandingZone APIs for Landing Zone version 4.0
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.274.0](service/ec2/CHANGELOG.md#v12740-2025-11-21)
+  * **Feature**: This release adds a new capability to create and manage interruptible EC2 Capacity Reservations.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.54.0](service/ecr/CHANGELOG.md#v1540-2025-11-21)
+  * **Feature**: Add support for ECR managed signing
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.75.0](service/eks/CHANGELOG.md#v1750-2025-11-21)
+  * **Feature**: Adds support for controlPlaneScalingConfig on EKS Clusters.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.54.1](service/elasticloadbalancingv2/CHANGELOG.md#v1541-2025-11-21)
+  * **Documentation**: This release adds the health check log feature in ALB, allowing customers to send detailed target health check log data directly to their designated Amazon S3 bucket.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.9.0](service/invoicing/CHANGELOG.md#v190-2025-11-21)
+  * **Feature**: Added the CreateProcurementPortalPreference, GetProcurementPortalPreference, PutProcurementPortalPreference, UpdateProcurementPortalPreferenceStatus, ListProcurementPortalPreferences and DeleteProcurementPortalPreference APIs for procurement portal preference management.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.33.0](service/kinesisvideo/CHANGELOG.md#v1330-2025-11-21)
+  * **Feature**: This release adds support for Tiered Storage
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.49.0](service/kms/CHANGELOG.md#v1490-2025-11-21)
+  * **Feature**: Support for on-demand rotation of AWS KMS Multi-Region keys with imported key material
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.83.0](service/lambda/CHANGELOG.md#v1830-2025-11-21)
+  * **Feature**: Launching Enhanced Error Handling and ESM Grouping capabilities for Kafka ESMs
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.58.0](service/lexmodelsv2/CHANGELOG.md#v1580-2025-11-21)
+  * **Feature**: Adds support for Intent Disambiguation, allowing resolution of ambiguous user inputs when multiple intents match by presenting clarifying questions to users. Also adds Speech Detection Sensitivity configuration for optimizing voice activity detection sensitivity levels in various noise environments.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.35.0](service/marketplaceentitlementservice/CHANGELOG.md#v1350-2025-11-21)
+  * **Feature**: Endpoint update for new region
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.35.0](service/marketplacemetering/CHANGELOG.md#v1350-2025-11-21)
+  * **Feature**: Endpoint update for new region
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.34.0](service/mediapackagev2/CHANGELOG.md#v1340-2025-11-21)
+  * **Feature**: Adds support for excluding session key tags from HLS multivariant playlists
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.6.0](service/odb/CHANGELOG.md#v160-2025-11-21)
+  * **Feature**: Adds AssociateIamRoleToResource and DisassociateIamRoleFromResource APIs for managing IAM roles. Enhances CreateOdbNetwork and UpdateOdbNetwork APIs with KMS, STS, and cross-region S3 parameters. Adds OCI identity domain support to InitializeService API.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.48.0](service/organizations/CHANGELOG.md#v1480-2025-11-21)
+  * **Feature**: Add support for policy operations on the UPGRADE_ROLLOUT_POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.24.0](service/qconnect/CHANGELOG.md#v1240-2025-11-21)
+  * **Feature**: This release introduces two new messaging channel subtypes: Push, WhatsApp, under MessageTemplate which is a resource in Amazon Q in Connect.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.98.0](service/quicksight/CHANGELOG.md#v1980-2025-11-21)
+  * **Feature**: Amazon Quick Suite now supports QuickChat as an embedding type when calling the GenerateEmbedUrlForRegisteredUser API, enabling developers to embed conversational AI agents directly into their applications.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.111.0](service/rds/CHANGELOG.md#v11110-2025-11-21)
+  * **Feature**: Add support for Upgrade Rollout Order
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.61.0](service/redshift/CHANGELOG.md#v1610-2025-11-21)
+  * **Feature**: Added support for Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.32.0](service/redshiftserverless/CHANGELOG.md#v1320-2025-11-21)
+  * **Feature**: Added UpdateLakehouseConfiguration API to manage Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation for namespaces.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.226.0](service/sagemaker/CHANGELOG.md#v12260-2025-11-21)
+  * **Feature**: Enhanced SageMaker HyperPod instance groups with support for MinInstanceCount, CapacityRequirements (Spot/On-Demand), and KubernetesConfig (labels and taints). Also Added speculative decoding and MaxInstanceCount for model optimization jobs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2`: [v1.0.0](service/sagemakerruntimehttp2/CHANGELOG.md#v100-2025-11-21)
+  * **Release**: New AWS service client module
+  * **Feature**: Add support for bidirectional streaming invocations on SageMaker AI real-time endpoints
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.10.0](service/securityir/CHANGELOG.md#v1100-2025-11-21)
+  * **Feature**: Add ListInvestigations and SendFeedback APIs to support SecurityIR AI agents
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.55.0](service/sesv2/CHANGELOG.md#v1550-2025-11-21)
+  * **Feature**: Added support for new SES regions - Asia Pacific (Malaysia) and Canada (Calgary)
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.68.0](service/transfer/CHANGELOG.md#v1680-2025-11-21)
+  * **Feature**: Adds support for creating Webapps accessible from a VPC.
+
 # Release (2025-11-20)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.32.0 (2025-11-21)
+
+* **Feature**: Added UpdateLakehouseConfiguration API to manage Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation for namespaces.
+
 # v1.31.16 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

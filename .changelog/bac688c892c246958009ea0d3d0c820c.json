@@ -1,8 +1,0 @@
-{
-    "id": "bac688c8-92c2-4695-8009-ea0d3d0c820c",
-    "type": "feature",
-    "description": "Launching Enhanced Error Handling and ESM Grouping capabilities for Kafka ESMs",
-    "modules": [
-        "service/lambda"
-    ]
-}

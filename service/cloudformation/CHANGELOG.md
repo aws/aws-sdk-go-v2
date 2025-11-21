@@ -1,3 +1,7 @@
+# v1.71.0 (2025-11-21)
+
+* **Feature**: Adds the DependsOn field to the AutoDeployment configuration parameter for CreateStackSet, UpdateStackSet, and DescribeStackSet APIs, allowing users to set and read auto-deployment dependencies between StackSets
+
 # v1.70.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.24.0 (2025-11-21)
+
+* **Feature**: This release introduces two new messaging channel subtypes: Push, WhatsApp, under MessageTemplate which is a resource in Amazon Q in Connect.
+
 # v1.23.7 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.45.0 (2025-11-21)
+
+* **Feature**: Add support to automatically enforce safeguards across accounts within an AWS Organization.
+
 # v1.44.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

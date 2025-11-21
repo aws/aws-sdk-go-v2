@@ -1,3 +1,7 @@
+# v1.58.0 (2025-11-21)
+
+* **Feature**: Adds support for Intent Disambiguation, allowing resolution of ambiguous user inputs when multiple intents match by presenting clarifying questions to users. Also adds Speech Detection Sensitivity configuration for optimizing voice activity detection sensitivity levels in various noise environments.
+
 # v1.57.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

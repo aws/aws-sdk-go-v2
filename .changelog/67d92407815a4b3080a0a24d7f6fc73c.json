@@ -1,8 +1,0 @@
-{
-    "id": "67d92407-815a-4b30-80a0-a24d7f6fc73c",
-    "type": "feature",
-    "description": "This release introduces two new messaging channel subtypes: Push, WhatsApp, under MessageTemplate which is a resource in Amazon Q in Connect.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

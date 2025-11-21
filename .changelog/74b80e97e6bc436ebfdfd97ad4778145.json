@@ -1,8 +1,0 @@
-{
-    "id": "74b80e97-e6bc-436e-bfdf-d97ad4778145",
-    "type": "feature",
-    "description": "Adding new fields to GetDataAutomationStatus: jobSubmissionTime, jobCompletionTime, and jobDurationInSeconds",
-    "modules": [
-        "service/bedrockdataautomationruntime"
-    ]
-}

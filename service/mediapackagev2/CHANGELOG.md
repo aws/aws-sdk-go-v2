@@ -1,3 +1,7 @@
+# v1.34.0 (2025-11-21)
+
+* **Feature**: Adds support for excluding session key tags from HLS multivariant playlists
+
 # v1.33.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

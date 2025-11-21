@@ -1,8 +1,0 @@
-{
-    "id": "4577156c-27e4-48de-8008-cdd5f17d94f3",
-    "type": "feature",
-    "description": "Adds support for controlPlaneScalingConfig on EKS Clusters.",
-    "modules": [
-        "service/eks"
-    ]
-}

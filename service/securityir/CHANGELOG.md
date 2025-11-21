@@ -1,3 +1,7 @@
+# v1.10.0 (2025-11-21)
+
+* **Feature**: Add ListInvestigations and SendFeedback APIs to support SecurityIR AI agents
+
 # v1.9.2 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

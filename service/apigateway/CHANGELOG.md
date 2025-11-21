@@ -1,3 +1,7 @@
+# v1.38.0 (2025-11-21)
+
+* **Feature**: API Gateway supports VPC link V2 for REST APIs.
+
 # v1.37.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

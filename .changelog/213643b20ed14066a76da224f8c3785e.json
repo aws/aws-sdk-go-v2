@@ -1,8 +1,0 @@
-{
-    "id": "213643b2-0ed1-4066-a76d-a224f8c3785e",
-    "type": "feature",
-    "description": "Add support for ECR managed signing",
-    "modules": [
-        "service/ecr"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "be7397fb-3938-431f-8770-0984aeb1243c",
-    "type": "feature",
-    "description": "Added the CreateProcurementPortalPreference, GetProcurementPortalPreference, PutProcurementPortalPreference, UpdateProcurementPortalPreferenceStatus, ListProcurementPortalPreferences and DeleteProcurementPortalPreference APIs for procurement portal preference management.",
-    "modules": [
-        "service/invoicing"
-    ]
-}

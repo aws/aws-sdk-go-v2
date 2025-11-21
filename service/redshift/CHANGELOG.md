@@ -1,3 +1,7 @@
+# v1.61.0 (2025-11-21)
+
+* **Feature**: Added support for Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation.
+
 # v1.60.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

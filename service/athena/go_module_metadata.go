@@ -3,4 +3,4 @@
 package athena
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.55.13"
+const goModuleVersion = "1.56.0"

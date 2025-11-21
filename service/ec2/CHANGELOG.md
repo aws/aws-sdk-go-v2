@@ -1,3 +1,7 @@
+# v1.274.0 (2025-11-21)
+
+* **Feature**: This release adds a new capability to create and manage interruptible EC2 Capacity Reservations.
+
 # v1.273.0 (2025-11-20)
 
 * **Feature**: This release adds support for multiple features including: VPC Encryption Control for the status of traffic flow; S2S VPN BGP Logging; TGW Flexible Costs; IPAM allocation of static IPs from IPAM pools to CF Anycast IP lists used on CloudFront distribution; and EBS Volume Integration with Recycle Bin

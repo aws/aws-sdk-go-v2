@@ -1,3 +1,7 @@
+# v1.75.0 (2025-11-21)
+
+* **Feature**: Adds support for controlPlaneScalingConfig on EKS Clusters.
+
 # v1.74.10 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

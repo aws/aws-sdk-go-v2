@@ -1,8 +1,0 @@
-{
-    "id": "87f422f5-a46d-4f3f-8600-c7ebf52981dc",
-    "type": "feature",
-    "description": "Amazon Quick Suite now supports QuickChat as an embedding type when calling the GenerateEmbedUrlForRegisteredUser API, enabling developers to embed conversational AI agents directly into their applications.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.98.0 (2025-11-21)
+
+* **Feature**: Amazon Quick Suite now supports QuickChat as an embedding type when calling the GenerateEmbedUrlForRegisteredUser API, enabling developers to embed conversational AI agents directly into their applications.
+
 # v1.97.0 (2025-11-20)
 
 * **Feature**: Introducing comprehensive theme styling controls. New features include border customization (radius, width, color), flexible padding controls, background styling for cards and sheets, centralized typography management, and visual-level override support across layouts.

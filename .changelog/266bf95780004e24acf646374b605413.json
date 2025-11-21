@@ -1,8 +1,0 @@
-{
-    "id": "266bf957-8000-4e24-acf6-46374b605413",
-    "type": "feature",
-    "description": "Adds support for excluding session key tags from HLS multivariant playlists",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

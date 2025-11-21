@@ -1,3 +1,7 @@
+# v1.68.0 (2025-11-21)
+
+* **Feature**: Adds support for creating Webapps accessible from a VPC.
+
 # v1.67.7 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.28.0 (2025-11-21)
+
+* **Feature**: The manifest field is now optional for the AWS Control Tower CreateLandingZone and UpdateLandingZone APIs for Landing Zone version 4.0
+
 # v1.27.3 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

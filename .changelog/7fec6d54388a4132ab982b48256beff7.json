@@ -1,8 +1,0 @@
-{
-    "id": "7fec6d54-388a-4132-ab98-2b48256beff7",
-    "type": "feature",
-    "description": "Added support for new SES regions - Asia Pacific (Malaysia) and Canada (Calgary)",
-    "modules": [
-        "service/sesv2"
-    ]
-}

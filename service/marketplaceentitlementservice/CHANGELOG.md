@@ -1,3 +1,7 @@
+# v1.35.0 (2025-11-21)
+
+* **Feature**: Endpoint update for new region
+
 # v1.34.6 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

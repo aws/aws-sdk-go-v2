@@ -1,3 +1,7 @@
+# v1.33.0 (2025-11-21)
+
+* **Feature**: This release adds support for Tiered Storage
+
 # v1.32.12 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

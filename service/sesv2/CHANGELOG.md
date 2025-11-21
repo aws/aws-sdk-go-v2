@@ -1,3 +1,7 @@
+# v1.55.0 (2025-11-21)
+
+* **Feature**: Added support for new SES regions - Asia Pacific (Malaysia) and Canada (Calgary)
+
 # v1.54.5 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

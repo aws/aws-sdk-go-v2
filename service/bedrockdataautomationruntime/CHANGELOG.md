@@ -1,3 +1,7 @@
+# v1.9.0 (2025-11-21)
+
+* **Feature**: Adding new fields to GetDataAutomationStatus: jobSubmissionTime, jobCompletionTime, and jobDurationInSeconds
+
 # v1.8.0 (2025-11-20)
 
 * **Feature**: Bedrock Data Automation Runtime Sync API

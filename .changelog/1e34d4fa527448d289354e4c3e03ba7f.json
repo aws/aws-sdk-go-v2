@@ -1,8 +1,0 @@
-{
-    "id": "1e34d4fa-5274-48d2-8935-4e4c3e03ba7f",
-    "type": "feature",
-    "description": "Adds the DependsOn field to the AutoDeployment configuration parameter for CreateStackSet, UpdateStackSet, and DescribeStackSet APIs, allowing users to set and read auto-deployment dependencies between StackSets",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

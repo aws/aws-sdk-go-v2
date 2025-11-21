@@ -1,8 +1,0 @@
-{
-    "id": "b8f5b484-44d6-4939-aa74-5076ce17c7c2",
-    "type": "feature",
-    "description": "Adds support for Intent Disambiguation, allowing resolution of ambiguous user inputs when multiple intents match by presenting clarifying questions to users. Also adds Speech Detection Sensitivity configuration for optimizing voice activity detection sensitivity levels in various noise environments.",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

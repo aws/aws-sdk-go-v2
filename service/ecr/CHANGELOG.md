@@ -1,3 +1,7 @@
+# v1.54.0 (2025-11-21)
+
+* **Feature**: Add support for ECR managed signing
+
 # v1.53.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

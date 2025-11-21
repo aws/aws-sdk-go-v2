@@ -1,3 +1,7 @@
+# v1.50.0 (2025-11-21)
+
+* **Feature**: Add support to automatically enforce safeguards across accounts within an AWS Organization.
+
 # v1.49.3 (2025-11-20)
 
 * No change notes available for this release.

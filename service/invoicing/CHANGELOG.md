@@ -1,3 +1,7 @@
+# v1.9.0 (2025-11-21)
+
+* **Feature**: Added the CreateProcurementPortalPreference, GetProcurementPortalPreference, PutProcurementPortalPreference, UpdateProcurementPortalPreferenceStatus, ListProcurementPortalPreferences and DeleteProcurementPortalPreference APIs for procurement portal preference management.
+
 # v1.8.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
