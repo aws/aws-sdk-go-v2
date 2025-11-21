@@ -40,6 +40,29 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.securityir#ActionType": {
+            "type": "enum",
+            "members": {
+                "EVIDENCE_COLLECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Evidence"
+                    }
+                },
+                "INVESTIGATION_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Investigation"
+                    }
+                },
+                "SUMMARIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Summarization"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityir#Arn": {
             "type": "string",
             "traits": {
@@ -514,6 +537,12 @@
                     "target": "com.amazonaws.securityir#ListComments"
                 },
                 {
+                    "target": "com.amazonaws.securityir#ListInvestigations"
+                },
+                {
+                    "target": "com.amazonaws.securityir#SendFeedback"
+                },
+                {
                     "target": "com.amazonaws.securityir#UpdateCaseComment"
                 },
                 {
@@ -732,6 +761,49 @@
                     "max": 32
                 },
                 "smithy.api#pattern": "^\\d{10,32}"
+            }
+        },
+        "com.amazonaws.securityir#CaseMetadata": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityir#CaseMetadataEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.securityir#CaseMetadataEntry": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the metadata field. This key uniquely identifies the type of metadata being stored, such as \"severity\", \"category\", or \"assignee\".</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 500
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with the metadata key. This contains the actual data for the metadata field identified by the key.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single metadata entry associated with a case. Each entry consists of a key-value pair that provides additional contextual information about the case, such as classification tags, custom attributes, or system-generated properties. </p>"
             }
         },
         "com.amazonaws.securityir#CaseStatus": {
@@ -1595,6 +1667,56 @@
                 }
             }
         },
+        "com.amazonaws.securityir#ExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "WAITING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Waiting"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cancelled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityir#FeedbackComment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.securityir#FileName": {
             "type": "string",
             "traits": {
@@ -2068,6 +2190,15 @@
                         "smithy.api#documentation": "<p>Response element for GetCase that provides the date a specified case was closed.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-closedDate"
+                        }
+                    }
+                },
+                "caseMetadata": {
+                    "target": "com.amazonaws.securityir#CaseMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Case response metadata</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-caseMetadata"
                         }
                     }
                 }
@@ -2561,6 +2692,118 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 423,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.securityir#InvestigationAction": {
+            "type": "structure",
+            "members": {
+                "investigationId": {
+                    "target": "com.amazonaws.securityir#InvestigationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this investigation action. This ID is used to track and reference the specific investigation throughout its lifecycle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionType": {
+                    "target": "com.amazonaws.securityir#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of investigation action being performed. This categorizes the investigation method or approach used in the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.securityir#InvestigationTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human-readable summary of the investigation focus. This provides a brief description of what the investigation is examining or analyzing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.securityir#InvestigationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed investigation results in rich markdown format. This field contains the comprehensive findings, analysis, and conclusions from the investigation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityir#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current execution status of the investigation. This indicates whether the investigation is pending, in progress, completed, or failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdated": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ISO 8601 timestamp of the most recent status update. This indicates when the investigation was last modified or when its status last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "feedback": {
+                    "target": "com.amazonaws.securityir#InvestigationFeedback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User feedback for this investigation result. This contains the user's assessment and comments about the quality and usefulness of the investigation findings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an investigation action performed within a case. This structure captures the details of an automated or manual investigation, including its status, results, and user feedback.</p>"
+            }
+        },
+        "com.amazonaws.securityir#InvestigationActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityir#InvestigationAction"
+            }
+        },
+        "com.amazonaws.securityir#InvestigationContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.securityir#InvestigationFeedback": {
+            "type": "structure",
+            "members": {
+                "usefulness": {
+                    "target": "com.amazonaws.securityir#UsefulnessRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User assessment of the investigation result's quality and helpfulness. This rating indicates how valuable the investigation findings were in addressing the case.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.securityir#FeedbackComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional user comments providing additional context about the investigation feedback. This allows users to explain their rating or provide suggestions for improvement.</p>"
+                    }
+                },
+                "submittedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ISO 8601 timestamp when the feedback was submitted. This records when the user provided their assessment of the investigation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents user feedback for an investigation result. This structure captures the user's evaluation of the investigation's quality, usefulness, and any additional comments.</p>"
+            }
+        },
+        "com.amazonaws.securityir#InvestigationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^inv-[a-z0-9]{10,32}$"
+            }
+        },
+        "com.amazonaws.securityir#InvestigationTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.securityir#JobTitle": {
@@ -3120,6 +3363,143 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityir#ListInvestigations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityir#ListInvestigationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityir#ListInvestigationsResponse"
+            },
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "ListInvestigations",
+                    "documentation": "Grants permission to list investigations for a case"
+                },
+                "smithy.api#documentation": "<p>Investigation performed by an agent for a security incident...</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke ListInvestigations with feedback examples",
+                        "input": {
+                            "caseId": "8403556009",
+                            "maxResults": 10
+                        },
+                        "output": {
+                            "investigationActions": [
+                                {
+                                    "investigationId": "inv-hgyuiuytrt",
+                                    "actionType": "Evidence",
+                                    "title": "Collected CloudTrail logs for suspicious activity",
+                                    "content": "## Evidence Collection Results\n\nAnalyzed CloudTrail logs from 2024-01-15 to 2024-01-16 and found:\n\n- 15 failed login attempts from IP 192.168.1.100\n- Unusual API calls to S3 buckets\n- Privilege escalation attempts detected\n\n### Recommendations\n\n1. Block the suspicious IP address\n2. Review S3 bucket permissions\n3. Audit user privileges",
+                                    "status": "Completed",
+                                    "lastUpdated": "2024-01-16T10:30:00Z",
+                                    "feedback": {
+                                        "usefulness": "USEFUL",
+                                        "comment": "The CloudTrail analysis was very helpful in identifying the root cause of the security incident. The recommendations were actionable and led to immediate remediation.",
+                                        "submittedAt": "2024-01-16T11:15:00Z"
+                                    }
+                                }
+                            ],
+                            "nextToken": "eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InBhcnRpdGlvbktleSI6eyJTIjoiQ0FTRV8xMjM0NTY3ODkwIn0sInNvcnRLZXkiOnsiUyI6IjIwMjQtMDEtMTZUMTA6MzA6MDBaIn19fQ=="
+                        }
+                    }
+                ],
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v1/cases/{caseId}/list-investigations"
+                },
+                "smithy.api#paginated": {
+                    "items": "investigationActions",
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.securityir#ListInvestigationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Investigation performed by an agent for a security incident request</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-request-nextToken"
+                        },
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "max": 2000
+                        }
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>Investigation performed by an agent for a security incident request, returning max results</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-request-maxResults"
+                        },
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 25
+                        }
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.securityir#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Investigation performed by an agent for a security incident per caseID</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-request-uri-caseId"
+                        },
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityir#ListInvestigationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Investigation performed by an agent for a security incident for next Token</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-response-nextToken"
+                        }
+                    }
+                },
+                "investigationActions": {
+                    "target": "com.amazonaws.securityir#InvestigationActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Investigation performed by an agent for a security incid…Unique identifier for the specific investigation&gt;</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-response-investigationActions"
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#API_ListInvestigations_ResponseSyntax"
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3720,6 +4100,12 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.securityir#ResultId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^inv-[a-z0-9]{10,32}$"
+            }
+        },
         "com.amazonaws.securityir#SecurityIncidentResponse": {
             "type": "service",
             "version": "2018-05-10",
@@ -4107,6 +4493,111 @@
                         "smithy.api#enumValue": "Post-incident Activities"
                     }
                 }
+            }
+        },
+        "com.amazonaws.securityir#SendFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityir#SendFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityir#SendFeedbackResponse"
+            },
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "SendFeedback",
+                    "documentation": "Grants permission to send feedback for investigation results"
+                },
+                "smithy.api#documentation": "<p>Send feedback based on response investigation action</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Send positive feedback for investigation result",
+                        "input": {
+                            "caseId": "8403556009",
+                            "resultId": "inv-polkjhyuty",
+                            "usefulness": "USEFUL",
+                            "comment": "The CloudTrail analysis was very helpful in identifying the root cause of the security incident."
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "Send negative feedback with detailed comment",
+                        "input": {
+                            "caseId": "8403556009",
+                            "resultId": "inv-irutjfhgjk",
+                            "usefulness": "NOT_USEFUL",
+                            "comment": "The investigation results were too generic and didn't provide actionable insights for our specific incident."
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/v1/cases/{caseId}/feedback/{resultId}/send-feedback"
+                }
+            }
+        },
+        "com.amazonaws.securityir#SendFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.securityir#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Send feedback based on request caseID</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-uri-caseId"
+                        },
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "resultId": {
+                    "target": "com.amazonaws.securityir#ResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Send feedback based on request result ID</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-uri-resultId"
+                        },
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "usefulness": {
+                    "target": "com.amazonaws.securityir#UsefulnessRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required enum value indicating user assessment of result q.....</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-usefulness"
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.securityir#FeedbackComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Send feedback based on request comments</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-comment"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityir#SendFeedbackResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#API_SendFeedback_ResponseSyntax"
+                },
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.securityir#ServiceQuotaExceededException": {
@@ -4817,6 +5308,15 @@
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-impactedAccountsToDelete"
                         }
                     }
+                },
+                "caseMetadata": {
+                    "target": "com.amazonaws.securityir#CaseMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update the case request with case metadata</p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-caseMetadata"
+                        }
+                    }
                 }
             },
             "traits": {
@@ -5148,6 +5648,23 @@
             "traits": {
                 "smithy.api#pattern": "^https?://(?:www.)?[a-zA-Z0-9@:._+~#=-]{2,256}\\.[a-z]{2,6}\\b(?:[-a-zA-Z0-9@:%_+.~#?&/=]{0,2048})$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.securityir#UsefulnessRating": {
+            "type": "enum",
+            "members": {
+                "USEFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USEFUL"
+                    }
+                },
+                "NOT_USEFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_USEFUL"
+                    }
+                }
             }
         },
         "com.amazonaws.securityir#UserAgent": {

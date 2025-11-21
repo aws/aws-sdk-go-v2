@@ -7371,6 +7371,12 @@
                         "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p>"
                     }
                 },
+                "UpgradeRolloutOrder": {
+                    "target": "com.amazonaws.rds#UpgradeRolloutOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This data type represents the order in which the clusters are upgraded.</p>\n         <ul>\n            <li>\n               <p>[first] - Typically used for development or testing environments.</p>\n            </li>\n            <li>\n               <p>[second] - Default order for resources not specifically configured.</p>\n            </li>\n            <li>\n               <p>[last] - Usually reserved for production environments.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "ReplicationSourceIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
@@ -9245,6 +9251,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p>"
+                    }
+                },
+                "UpgradeRolloutOrder": {
+                    "target": "com.amazonaws.rds#UpgradeRolloutOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This data type represents the order in which the instances are upgraded.</p>\n         <ul>\n            <li>\n               <p>[first] - Typically used for development or testing environments.</p>\n            </li>\n            <li>\n               <p>[second] - Default order for resources not specifically configured.</p>\n            </li>\n            <li>\n               <p>[last] - Usually reserved for production environments.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PendingModifiedValues": {
@@ -32108,6 +32120,29 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.rds#UpgradeRolloutOrder": {
+            "type": "enum",
+            "members": {
+                "FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "first"
+                    }
+                },
+                "SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "second"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "last"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rds#UpgradeTarget": {
             "type": "structure",
             "members": {
@@ -32400,7 +32435,7 @@
                     "code": "VpcEncryptionControlViolationException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The operation violates VPC encryption control settings. Make sure that your DB instance \n            type supports the Nitro encryption-in-transit capability, \n            or modify your VPC's encryption controls to not enforce encryption-in-transit.</p>",
+                "smithy.api#documentation": "<p>The operation violates VPC encryption control settings. Make sure that your DB \n            instance type supports the Nitro encryption-in-transit capability, \n            or modify your VPC's encryption controls to not enforce encryption-in-transit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

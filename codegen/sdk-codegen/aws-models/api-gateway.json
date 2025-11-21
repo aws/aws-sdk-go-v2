@@ -9052,6 +9052,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\nThe response transfer mode of the integration.\n</p>"
                     }
+                },
+                "integrationTarget": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ALB or NLB listener to send the request to. \n</p>"
+                    }
                 }
             },
             "traits": {
@@ -10093,6 +10099,12 @@
                     "target": "com.amazonaws.apigateway#ResponseTransferMode",
                     "traits": {
                         "smithy.api#documentation": "<p>\nThe response transfer mode of the integration.\n</p>"
+                    }
+                },
+                "integrationTarget": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ALB or NLB listener to send the request to.\n</p>"
                     }
                 }
             },

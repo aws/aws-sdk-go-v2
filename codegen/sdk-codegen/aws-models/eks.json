@@ -2321,12 +2321,12 @@
                 "name": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Auto Scaling group associated with an Amazon EKS managed node group.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon EC2 Auto Scaling group associated with an Amazon EKS managed node group.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Auto Scaling group that is associated with an Amazon EKS managed node group.</p>"
+                "smithy.api#documentation": "<p>An Amazon EC2 Auto Scaling group that is associated with an Amazon EKS managed node group.</p>"
             }
         },
         "com.amazonaws.eks#AutoScalingGroupList": {
@@ -2681,6 +2681,12 @@
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>The current deletion protection setting for the cluster. When <code>true</code>, \n            deletion protection is enabled and the cluster cannot be deleted until protection is \n            disabled. When <code>false</code>, the cluster can be deleted normally. This setting \n            only applies to clusters in an active state.</p>"
+                    }
+                },
+                "controlPlaneScalingConfig": {
+                    "target": "com.amazonaws.eks#ControlPlaneScalingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>"
                     }
                 }
             },
@@ -3234,6 +3240,20 @@
                 "smithy.api#documentation": "<p>The placement configuration for all the control plane instances of your local Amazon EKS\n            cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.eks#ControlPlaneScalingConfig": {
+            "type": "structure",
+            "members": {
+                "tier": {
+                    "target": "com.amazonaws.eks#ProvisionedControlPlaneTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control plane scaling tier configuration. Available options are <code>standard</code>, <code>tier-xl</code>, <code>tier-2xl</code>, or <code>tier-4xl</code>. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>"
+            }
+        },
         "com.amazonaws.eks#CreateAccessConfigRequest": {
             "type": "structure",
             "members": {
@@ -3508,7 +3528,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane.</p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes\n            software, such as <code>etcd</code> and the API server. The control plane runs in an\n            account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint.\n            Each Amazon EKS cluster control plane is single tenant and unique. It runs on its own set of\n            Amazon EC2 instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide\n            connectivity from the control plane instances to the nodes (for example, to support\n                <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data\n            flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane over\n            the Kubernetes API server endpoint and a certificate file that is created for your\n            cluster.</p>\n         <p>You can use the <code>endpointPublicAccess</code> and\n                <code>endpointPrivateAccess</code> parameters to enable or disable public and\n            private access to your cluster's Kubernetes API server endpoint. By default, public access is\n            enabled, and private access is disabled. The\n            endpoint domain name and IP address family depends on the value of the\n            <code>ipFamily</code> for the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <p>You can use the <code>logging</code> parameter to enable or disable exporting the\n            Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane\n            logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS\n                Cluster Control Plane Logs</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p>\n         </note>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an Amazon EKS\n            cluster, you must configure your Kubernetes tooling to communicate with the API server and\n            launch nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-auth.html\">Allowing users to\n                access your cluster</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS\n                nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane.</p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes\n            software, such as <code>etcd</code> and the API server. The control plane runs in an\n            account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint.\n            Each Amazon EKS cluster control plane is single tenant and unique. It runs on its own set of\n            Amazon EC2 instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an ELB\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide\n            connectivity from the control plane instances to the nodes (for example, to support\n                <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data\n            flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane over\n            the Kubernetes API server endpoint and a certificate file that is created for your\n            cluster.</p>\n         <p>You can use the <code>endpointPublicAccess</code> and\n                <code>endpointPrivateAccess</code> parameters to enable or disable public and\n            private access to your cluster's Kubernetes API server endpoint. By default, public access is\n            enabled, and private access is disabled. The\n            endpoint domain name and IP address family depends on the value of the\n            <code>ipFamily</code> for the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <p>You can use the <code>logging</code> parameter to enable or disable exporting the\n            Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane\n            logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS\n                Cluster Control Plane Logs</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p>\n         </note>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an Amazon EKS\n            cluster, you must configure your Kubernetes tooling to communicate with the API server and\n            launch nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-auth.html\">Allowing users to\n                access your cluster</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS\n                nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new cluster",
@@ -3651,6 +3671,12 @@
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster \n            cannot be deleted unless deletion protection is first disabled. This helps prevent \n            accidental cluster deletion. Default value is <code>false</code>.</p>"
+                    }
+                },
+                "controlPlaneScalingConfig": {
+                    "target": "com.amazonaws.eks#ControlPlaneScalingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>"
                     }
                 }
             },
@@ -3913,7 +3939,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster.</p>\n         <p>You can only create a node group for your cluster that is equal to the current Kubernetes\n            version for the cluster. All node groups are created with the latest AMI release version\n            for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI\n            using a launch template.</p>\n         <p>For later updates, you will only be able to update a node group using a launch\n            template only if it was originally deployed with a launch template. Additionally, the\n            launch template ID or name must match what was used when the node group was created. You\n            can update the launch template version with necessary changes. For more information\n            about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Customizing managed nodes with\n                launch templates</a>.</p>\n         <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that\n            are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                node groups</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>Windows AMI types are only supported for commercial Amazon Web Services Regions that support\n                Windows on Amazon EKS.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster.</p>\n         <p>You can only create a node group for your cluster that is equal to the current Kubernetes\n            version for the cluster. All node groups are created with the latest AMI release version\n            for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI\n            using a launch template.</p>\n         <p>For later updates, you will only be able to update a node group using a launch\n            template only if it was originally deployed with a launch template. Additionally, the\n            launch template ID or name must match what was used when the node group was created. You\n            can update the launch template version with necessary changes. For more information\n            about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Customizing managed nodes with\n                launch templates</a>.</p>\n         <p>An Amazon EKS managed node group is an Amazon EC2 Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that\n            are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                node groups</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>Windows AMI types are only supported for commercial Amazon Web Services Regions that support\n                Windows on Amazon EKS.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups",
@@ -7384,7 +7410,7 @@
                 "code": {
                     "target": "com.amazonaws.eks#NodegroupIssueCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or more of your\n                    managed nodes is failing to authenticate or authorize with your Kubernetes cluster\n                    API server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is\n                    experiencing failures while attempting to launch instances.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be able to\n                    recreate an Auto Scaling group with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one or more of\n                    your managed nodes is unable to to communicate with your Kubernetes cluster API\n                    server. This can happen if there are network disruptions or if API servers are\n                    timing out processing requests. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2InstanceTypeDoesNotExist</b>: One or more of\n                    the supplied Amazon EC2 instance types do not exist. Amazon EKS checked for the\n                    instance types that you provided in this Amazon Web Services Region, and one or more aren't\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be able to\n                    recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2\n                    launch template version for your managed node group does not match the version\n                    that Amazon EKS created. You may be able to revert to the version that Amazon EKS created\n                    to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                    Amazon EC2 subnets specified for a node group do not automatically assign public IP\n                    addresses to instances launched into it. If you want your instances to be\n                    assigned a public IP address, then you need to enable the <code>auto-assign\n                        public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public <code>IPv4</code> addressing attribute for your subnet</a> in\n                    the <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be able to\n                    recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                    IAM role for your managed node group. You may be able to recreate an IAM\n                    role with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is\n                    unable to launch any more instances of the specified instance type. You may be\n                    able to request an Amazon EC2 instance limit increase to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM role</a>\n                    permissions or lack of outbound internet access for the nodes. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or more of your\n                    managed nodes is failing to authenticate or authorize with your Kubernetes cluster\n                    API server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Amazon EC2 Auto Scaling group is\n                    experiencing failures while attempting to launch instances.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Amazon EC2 Auto Scaling group associated with the managed node group. You may be able to\n                    recreate an Amazon EC2 Auto Scaling group with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one or more of\n                    your managed nodes is unable to to communicate with your Kubernetes cluster API\n                    server. This can happen if there are network disruptions or if API servers are\n                    timing out processing requests. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2InstanceTypeDoesNotExist</b>: One or more of\n                    the supplied Amazon EC2 instance types do not exist. Amazon EKS checked for the\n                    instance types that you provided in this Amazon Web Services Region, and one or more aren't\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be able to\n                    recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2\n                    launch template version for your managed node group does not match the version\n                    that Amazon EKS created. You may be able to revert to the version that Amazon EKS created\n                    to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                    Amazon EC2 subnets specified for a node group do not automatically assign public IP\n                    addresses to instances launched into it. If you want your instances to be\n                    assigned a public IP address, then you need to enable the <code>auto-assign\n                        public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public <code>IPv4</code> addressing attribute for your subnet</a> in\n                    the <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be able to\n                    recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                    IAM role for your managed node group. You may be able to recreate an IAM\n                    role with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is\n                    unable to launch any more instances of the specified instance type. You may be\n                    able to request an Amazon EC2 instance limit increase to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM role</a>\n                    permissions or lack of outbound internet access for the nodes. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "message": {
@@ -9403,7 +9429,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing the scaling configuration details for the Auto Scaling group that is\n            associated with your node group. When creating a node group, you must specify all or\n            none of the properties. When updating a node group, you can specify any or none of the\n            properties.</p>"
+                "smithy.api#documentation": "<p>An object representing the scaling configuration details for the Amazon EC2 Auto Scaling group that is\n            associated with your node group. When creating a node group, you must specify all or\n            none of the properties. When updating a node group, you can specify any or none of the\n            properties.</p>"
             }
         },
         "com.amazonaws.eks#NodegroupStatus": {
@@ -9886,6 +9912,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Identifies the Key Management Service (KMS) key used to encrypt the secrets.</p>"
+            }
+        },
+        "com.amazonaws.eks#ProvisionedControlPlaneTier": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
+                },
+                "TIER_XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tier-xl"
+                    }
+                },
+                "TIER_2XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tier-2xl"
+                    }
+                },
+                "TIER_4XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tier-4xl"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#RegisterCluster": {
@@ -11078,6 +11133,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable or disable deletion protection for the cluster. When \n            enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is \n            explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted \n            normally.</p>"
                     }
+                },
+                "controlPlaneScalingConfig": {
+                    "target": "com.amazonaws.eks#ControlPlaneScalingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11456,7 +11517,7 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes version of\n            the node group does not change. You can specify the Kubernetes version of the cluster to\n            update the node group to the latest AMI version of the cluster's Kubernetes version.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the node group\n            will be updated to match the cluster's current Kubernetes version, and the latest available\n            AMI for that version will be used. You can also specify the Kubernetes version of the cluster\n            to update the node group to the latest AMI version of the cluster's Kubernetes version.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "releaseVersion": {
@@ -11751,6 +11812,18 @@
                     "traits": {
                         "smithy.api#enumValue": "NodeRepairConfig"
                     }
+                },
+                "UPDATED_TIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdatedTier"
+                    }
+                },
+                "PREVIOUS_TIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PreviousTier"
+                    }
                 }
             }
         },
@@ -11994,6 +12067,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DeletionProtectionUpdate"
+                    }
+                },
+                "CONTROL_PLANE_SCALING_CONFIG_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ControlPlaneScalingConfigUpdate"
                     }
                 }
             }

@@ -1055,6 +1055,26 @@
                     "traits": {
                         "smithy.api#documentation": "Output configuration."
                     }
+                },
+                "jobSubmissionTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Job Submission time.",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "jobCompletionTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Job completion time.",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "jobDurationInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Job duration in seconds."
+                    }
                 }
             },
             "traits": {

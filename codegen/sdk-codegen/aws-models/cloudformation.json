@@ -507,6 +507,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If set to <code>true</code>, stack resources are retained when an account is removed from a\n   target organization or OU. If set to <code>false</code>, stack resources are deleted. Specify\n   only if <code>Enabled</code> is set to <code>True</code>.</p>"
                     }
+                },
+                "DependsOn": {
+                    "target": "com.amazonaws.cloudformation#StackSetARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of StackSet ARNs that this StackSet depends on for auto-deployment operations.\n   When auto-deployment is triggered, operations will be sequenced to ensure all dependencies\n   complete successfully before this StackSet's operation begins.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1579,7 +1585,7 @@
                     "name": "cloudformation"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>CloudFormation</fullname>\n         <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments predictably and\n      repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store,\n      Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective\n      applications without creating or configuring the underlying Amazon Web Services infrastructure.</p>\n         <p>With CloudFormation, you declare all your resources and dependencies in a template file. The\n      template defines a collection of resources as a single unit called a stack. CloudFormation creates\n      and deletes all member resources of the stack together and manages all dependencies between\n      the resources for you.</p>\n         <p>For more information about CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation product page</a>.</p>\n         <p>CloudFormation makes use of other Amazon Web Services products. If you need additional technical information\n      about a specific Amazon Web Services product, you can find the product's technical documentation at <a href=\"https://docs.aws.amazon.com/\">docs.aws.amazon.com</a>.</p>",
+                "smithy.api#documentation": "<fullname>CloudFormation</fullname>\n         <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments predictably and\n      repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store,\n      Amazon Simple Notification Service, ELB, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective\n      applications without creating or configuring the underlying Amazon Web Services infrastructure.</p>\n         <p>With CloudFormation, you declare all your resources and dependencies in a template file. The\n      template defines a collection of resources as a single unit called a stack. CloudFormation creates\n      and deletes all member resources of the stack together and manages all dependencies between\n      the resources for you.</p>\n         <p>For more information about CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation product page</a>.</p>\n         <p>CloudFormation makes use of other Amazon Web Services products. If you need additional technical information\n      about a specific Amazon Web Services product, you can find the product's technical documentation at <a href=\"https://docs.aws.amazon.com/\">docs.aws.amazon.com</a>.</p>",
                 "smithy.api#title": "AWS CloudFormation",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
@@ -13138,7 +13144,7 @@
                     "target": "com.amazonaws.cloudformation#ResourceSignalUniqueId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling groups, specify the\n      instance ID that you are signaling as the unique ID. If you send multiple signals to a single\n      resource (such as signaling a wait condition), each signal requires a different unique\n      ID.</p>",
+                        "smithy.api#documentation": "<p>A unique ID of the signal. When you signal Amazon EC2 instances or Amazon EC2 Auto Scaling groups, specify the\n      instance ID that you are signaling as the unique ID. If you send multiple signals to a single\n      resource (such as signaling a wait condition), each signal requires a different unique\n      ID.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14969,6 +14975,12 @@
         },
         "com.amazonaws.cloudformation#StackSetARN": {
             "type": "string"
+        },
+        "com.amazonaws.cloudformation#StackSetARNList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#StackSetARN"
+            }
         },
         "com.amazonaws.cloudformation#StackSetAutoDeploymentTargetSummaries": {
             "type": "list",

@@ -205,6 +205,96 @@
                 "smithy.api#documentation": "<p> The billing period for which you want to retrieve invoice-related documents. </p>"
             }
         },
+        "com.amazonaws.invoicing#BuyerDomain": {
+            "type": "enum",
+            "members": {
+                "NetworkID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.invoicing#BasicString"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource that caused the conflict.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that caused the conflict.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvoicingConflict",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The request could not be completed due to a conflict with the current state of the resource. This exception occurs when a concurrent modification is detected during an update operation, or when attempting to create a resource that already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.invoicing#ConnectionTestingMethod": {
+            "type": "enum",
+            "members": {
+                "PROD_ENV_DOLLAR_TEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROD_ENV_DOLLAR_TEST"
+                    }
+                },
+                "TEST_ENV_REPLAY_TEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_ENV_REPLAY_TEST"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#Contact": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the contact person or role.</p>"
+                    }
+                },
+                "Email": {
+                    "target": "com.amazonaws.invoicing#EmailString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the contact person or role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents contact information for a person or role associated with the procurement portal preference.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.invoicing#Contacts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#Contact"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.invoicing#CreateInvoiceUnit": {
             "type": "operation",
             "input": {
@@ -311,6 +401,225 @@
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
                         "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#CreateProcurementPortalPreference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#CreateProcurementPortalPreferenceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#CreateProcurementPortalPreferenceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a procurement portal preference configuration for e-invoice delivery and purchase order retrieval. This preference defines how invoices are delivered to a procurement portal and how purchase orders are retrieved.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateProcurementPortalPreference for Coupa",
+                        "input": {
+                            "ProcurementPortalName": "COUPA",
+                            "BuyerDomain": "NetworkID",
+                            "BuyerIdentifier": "BuyerId_1",
+                            "SupplierDomain": "NetworkID",
+                            "SupplierIdentifier": "SupplierId_1",
+                            "Selector": {
+                                "InvoiceUnitArns": [
+                                    "arn:aws:invoicing::111111111111:invoice-unit/12345678",
+                                    "arn:aws:invoicing::111111111111:invoice-unit/12345679"
+                                ],
+                                "SellerOfRecords": [
+                                    "AWS_INC",
+                                    "AWS_EUROPE"
+                                ]
+                            },
+                            "ProcurementPortalSharedSecret": "Coupa_Secret",
+                            "ProcurementPortalInstanceEndpoint": "https://www.placeholder-domain.test",
+                            "TestEnvPreference": {
+                                "BuyerDomain": "NetworkID",
+                                "BuyerIdentifier": "BuyerId_1_Test",
+                                "SupplierDomain": "NetworkID",
+                                "SupplierIdentifier": "SupplierId_1_Test",
+                                "ProcurementPortalSharedSecret": "Coupa_Secret_test",
+                                "ProcurementPortalInstanceEndpoint": "https://www.placeholder-domain.test"
+                            },
+                            "EinvoiceDeliveryEnabled": true,
+                            "EinvoiceDeliveryPreference": {
+                                "EinvoiceDeliveryDocumentTypes": [
+                                    "AWS_CLOUD_INVOICE"
+                                ],
+                                "EinvoiceDeliveryAttachmentTypes": [
+                                    "INVOICE_PDF"
+                                ],
+                                "Protocol": "CXML",
+                                "PurchaseOrderDataSources": [
+                                    {
+                                        "EinvoiceDeliveryDocumentType": "AWS_CLOUD_INVOICE",
+                                        "PurchaseOrderDataSourceType": "ASSOCIATED_PURCHASE_ORDER_REQUIRED"
+                                    }
+                                ],
+                                "ConnectionTestingMethod": "PROD_ENV_DOLLAR_TEST",
+                                "EinvoiceDeliveryActivationDate": 1.750279280091E9
+                            },
+                            "PurchaseOrderRetrievalEnabled": true,
+                            "Contacts": [
+                                {
+                                    "Name": "John Doe",
+                                    "Email": "example-placeholder@amazon.com"
+                                }
+                            ],
+                            "ResourceTags": [
+                                {
+                                    "Key": "testKey",
+                                    "Value": "testValue"
+                                }
+                            ],
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b42"
+                        },
+                        "output": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.invoicing#CreateProcurementPortalPreferenceRequest": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalName": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerDomain": {
+                    "target": "com.amazonaws.invoicing#BuyerDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the buyer in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the buyer in the procurement portal. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierDomain": {
+                    "target": "com.amazonaws.invoicing#SupplierDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the supplier in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the supplier in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceSelector"
+                },
+                "ProcurementPortalSharedSecret": {
+                    "target": "com.amazonaws.invoicing#SensitiveBasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared secret or authentication credential used to establish secure communication with the procurement portal. This value must be encrypted at rest.</p>"
+                    }
+                },
+                "ProcurementPortalInstanceEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL where e-invoices will be delivered to the procurement portal. Must be a valid HTTPS URL.</p>"
+                    }
+                },
+                "TestEnvPreference": {
+                    "target": "com.amazonaws.invoicing#TestEnvPreferenceInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for the test environment of the procurement portal. Includes test credentials and endpoints that are used for validation before production deployment.</p>"
+                    }
+                },
+                "EinvoiceDeliveryEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether e-invoice delivery is enabled for this procurement portal preference. Set to true to enable e-invoice delivery, false to disable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryPreference": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the e-invoice delivery configuration including document types, attachment types, and customization settings for the portal.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether purchase order retrieval is enabled for this procurement portal preference. Set to true to enable PO retrieval, false to disable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Contacts": {
+                    "target": "com.amazonaws.invoicing#Contacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of contact information for portal administrators and technical contacts responsible for the e-invoice integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.invoicing#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to this procurement portal preference resource. Each tag consists of a key and an optional value.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#CreateProcurementPortalPreferenceResponse": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created procurement portal preference.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -444,6 +753,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.invoicing#DeleteProcurementPortalPreference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#DeleteProcurementPortalPreferenceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#DeleteProcurementPortalPreferenceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing procurement portal preference. This action cannot be undone. Active e-invoice delivery and PO retrieval configurations will be terminated.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteProcurementPortalPreference call",
+                        "input": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
+                        },
+                        "output": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#DeleteProcurementPortalPreferenceRequest": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#DeleteProcurementPortalPreferenceResponse": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.invoicing#DescriptionString": {
             "type": "string",
             "traits": {
@@ -504,6 +886,135 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.invoicing#DiscountsBreakdownAmount"
+            }
+        },
+        "com.amazonaws.invoicing#EinvoiceDeliveryAttachmentType": {
+            "type": "enum",
+            "members": {
+                "INVOICE_PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVOICE_PDF"
+                    }
+                },
+                "RFP_PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RFP_PDF"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#EinvoiceDeliveryAttachmentTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#EinvoiceDeliveryAttachmentType"
+            }
+        },
+        "com.amazonaws.invoicing#EinvoiceDeliveryDocumentType": {
+            "type": "enum",
+            "members": {
+                "AWS_CLOUD_INVOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_CLOUD_INVOICE"
+                    }
+                },
+                "AWS_CLOUD_CREDIT_MEMO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_CLOUD_CREDIT_MEMO"
+                    }
+                },
+                "AWS_MARKETPLACE_INVOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MARKETPLACE_INVOICE"
+                    }
+                },
+                "AWS_MARKETPLACE_CREDIT_MEMO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MARKETPLACE_CREDIT_MEMO"
+                    }
+                },
+                "AWS_REQUEST_FOR_PAYMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_REQUEST_FOR_PAYMENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#EinvoiceDeliveryDocumentTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#EinvoiceDeliveryDocumentType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.invoicing#EinvoiceDeliveryPreference": {
+            "type": "structure",
+            "members": {
+                "EinvoiceDeliveryDocumentTypes": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryDocumentTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of e-invoice documents to be delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryAttachmentTypes": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryAttachmentTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of attachments to include with the e-invoice delivery.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.invoicing#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The communication protocol to use for e-invoice delivery.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PurchaseOrderDataSources": {
+                    "target": "com.amazonaws.invoicing#PurchaseOrderDataSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sources of purchase order data to use for e-invoice generation and delivery.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionTestingMethod": {
+                    "target": "com.amazonaws.invoicing#ConnectionTestingMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method to use for testing the connection to the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryActivationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when e-invoice delivery should be activated for this preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the preferences for e-invoice delivery, including document types, attachment types, and customization settings.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#EmailString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
             }
         },
         "com.amazonaws.invoicing#Entity": {
@@ -831,6 +1342,142 @@
                     "target": "com.amazonaws.invoicing#LastModifiedTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p> The most recent date the invoice unit response was updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#GetProcurementPortalPreference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#GetProcurementPortalPreferenceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#GetProcurementPortalPreferenceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a specific procurement portal preference configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetProcurementPortalPreference for Coupa pref",
+                        "input": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd"
+                        },
+                        "output": {
+                            "ProcurementPortalPreference": {
+                                "AwsAccountId": "111111111111",
+                                "BuyerDomain": "NetworkID",
+                                "BuyerIdentifier": "BuyerId_1",
+                                "Selector": {
+                                    "InvoiceUnitArns": [
+                                        "arn:aws:invoicing::111111111111:invoice-unit/12345678",
+                                        "arn:aws:invoicing::111111111111:invoice-unit/12345679"
+                                    ],
+                                    "SellerOfRecords": [
+                                        "AWS_INC",
+                                        "AWS_EUROPE"
+                                    ]
+                                },
+                                "Contacts": [
+                                    {
+                                        "Email": "example-placeholder@amazon.com",
+                                        "Name": "John Doe"
+                                    }
+                                ],
+                                "CreateDate": 1.750375489242E9,
+                                "EinvoiceDeliveryEnabled": true,
+                                "EinvoiceDeliveryPreference": {
+                                    "ConnectionTestingMethod": "PROD_ENV_DOLLAR_TEST",
+                                    "EinvoiceDeliveryActivationDate": 1.750279280091E9,
+                                    "EinvoiceDeliveryAttachmentTypes": [
+                                        "INVOICE_PDF"
+                                    ],
+                                    "EinvoiceDeliveryDocumentTypes": [
+                                        "AWS_CLOUD_INVOICE"
+                                    ],
+                                    "Protocol": "CXML",
+                                    "PurchaseOrderDataSources": [
+                                        {
+                                            "EinvoiceDeliveryDocumentType": "AWS_CLOUD_INVOICE",
+                                            "PurchaseOrderDataSourceType": "ASSOCIATED_PURCHASE_ORDER_REQUIRED"
+                                        }
+                                    ]
+                                },
+                                "EinvoiceDeliveryPreferenceStatus": "PENDING_VERIFICATION",
+                                "LastUpdateDate": 1.750375489242E9,
+                                "ProcurementPortalInstanceEndpoint": "https://www.placeholder-domain.test",
+                                "ProcurementPortalName": "COUPA",
+                                "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd",
+                                "ProcurementPortalSharedSecret": "Coupa_Secret",
+                                "PurchaseOrderRetrievalEnabled": true,
+                                "PurchaseOrderRetrievalEndpoint": "https://www.placeholder-domain.test",
+                                "PurchaseOrderRetrievalPreferenceStatus": "PENDING_VERIFICATION",
+                                "SupplierDomain": "NetworkID",
+                                "SupplierIdentifier": "SupplierId_1",
+                                "TestEnvPreference": {
+                                    "BuyerDomain": "NetworkID",
+                                    "BuyerIdentifier": "BuyerId_1_Test",
+                                    "ProcurementPortalInstanceEndpoint": "https://www.placeholder-domain.test",
+                                    "ProcurementPortalSharedSecret": "Coupa_Secret_test",
+                                    "PurchaseOrderRetrievalEndpoint": "https://www.placeholder-domain.test",
+                                    "SupplierDomain": "NetworkID",
+                                    "SupplierIdentifier": "SupplierId_1_Test"
+                                },
+                                "Version": 1
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#GetProcurementPortalPreferenceRequest": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#GetProcurementPortalPreferenceResponse": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreference": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed configuration of the requested procurement portal preference.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1197,6 +1844,18 @@
                 "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
             }
         },
+        "com.amazonaws.invoicing#InvoiceUnitArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#InvoiceUnitArnString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.invoicing#InvoiceUnitName": {
             "type": "string",
             "traits": {
@@ -1250,7 +1909,13 @@
                     "target": "com.amazonaws.invoicing#CreateInvoiceUnit"
                 },
                 {
+                    "target": "com.amazonaws.invoicing#CreateProcurementPortalPreference"
+                },
+                {
                     "target": "com.amazonaws.invoicing#DeleteInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#DeleteProcurementPortalPreference"
                 },
                 {
                     "target": "com.amazonaws.invoicing#GetInvoicePDF"
@@ -1259,13 +1924,22 @@
                     "target": "com.amazonaws.invoicing#GetInvoiceUnit"
                 },
                 {
+                    "target": "com.amazonaws.invoicing#GetProcurementPortalPreference"
+                },
+                {
                     "target": "com.amazonaws.invoicing#ListInvoiceSummaries"
                 },
                 {
                     "target": "com.amazonaws.invoicing#ListInvoiceUnits"
                 },
                 {
+                    "target": "com.amazonaws.invoicing#ListProcurementPortalPreferences"
+                },
+                {
                     "target": "com.amazonaws.invoicing#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#PutProcurementPortalPreference"
                 },
                 {
                     "target": "com.amazonaws.invoicing#TagResource"
@@ -1275,6 +1949,9 @@
                 },
                 {
                     "target": "com.amazonaws.invoicing#UpdateInvoiceUnit"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatus"
                 }
             ],
             "traits": {
@@ -1293,7 +1970,7 @@
                     "endpointPatternType": "service_region_dnsSuffix"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p> <b>Amazon Web Services Invoice Configuration</b> </p> <p>You can use Amazon Web Services Invoice Configuration APIs to programmatically create, update, delete, get, and list invoice units. You can also programmatically fetch the information of the invoice receiver. For example, business legal name, address, and invoicing contacts. </p> <p>You can use Amazon Web Services Invoice Configuration to receive separate Amazon Web Services invoices based your organizational needs. By using Amazon Web Services Invoice Configuration, you can configure invoice units that are groups of Amazon Web Services accounts that represent your business entities, and receive separate invoices for each business entity. You can also assign a unique member or payer account as the invoice receiver for each invoice unit. As you create new accounts within your Organizations using Amazon Web Services Invoice Configuration APIs, you can automate the creation of new invoice units and subsequently automate the addition of new accounts to your invoice units.</p> <p>Service endpoint</p> <p>You can use the following endpoints for Amazon Web Services Invoice Configuration:</p> <ul> <li> <p> <code>https://invoicing.us-east-1.api.aws</code> </p> </li> </ul>",
+                "smithy.api#documentation": "<p> <b>Amazon Web Services Invoice Configuration</b> </p> <p>You can use Amazon Web Services Invoice Configuration APIs to programmatically create, update, delete, get, and list invoice units. You can also programmatically fetch the information of the invoice receiver. For example, business legal name, address, and invoicing contacts. </p> <p>You can use Amazon Web Services Invoice Configuration to receive separate Amazon Web Services invoices based your organizational needs. By using Amazon Web Services Invoice Configuration, you can configure invoice units that are groups of Amazon Web Services accounts that represent your business entities, and receive separate invoices for each business entity. You can also assign a unique member or payer account as the invoice receiver for each invoice unit. As you create new accounts within your Organizations using Amazon Web Services Invoice Configuration APIs, you can automate the creation of new invoice units and subsequently automate the addition of new accounts to your invoice units.</p> <p> <b>Amazon Web Services Procurement Portal Preferences</b> </p> <p>You can use Amazon Web Services Procurement Portal Preferences APIs to programmatically create, update, delete, get, and list procurement portal connections and e-invoice delivery settings. You can also programmatically fetch and modify the status of procurement portal configurations. For example, SAP Business Network or Coupa connections, configure e-invoice delivery and purchase order retrieval features.</p> <p>You can use Amazon Web Services Procurement Portal Preferences to connect e-invoice delivery to your procurement portals based on your organizational needs. By using Amazon Web Services Procurement Portal Preferences, you can configure connections to SAP Business Network and Coupa procurement portals that retrieve purchase orders and deliver Amazon Web Services invoices on the same day they are generated. You can also set up testing environments to validate invoice delivery without affecting live transactions, and manage contact information for portal setup and support. </p> <p>Administrative users should understand that billing read-only policies will show all procurement portal connection details. Review your IAM policies to ensure appropriate access controls are in place for procurement portal preferences.</p> <p> <b>Amazon Web Services Invoice Management</b> </p> <p>You can use Amazon Web Services Invoice Management APIs to programmatically list invoice summaries and get invoice documents. You can also programmatically fetch invoice documents with S3 pre-signed URLs.</p> <p>You can use Amazon Web Services Invoice Management to access invoice information based on your organizational needs. By using Amazon Web Services Invoice Management, you can retrieve paginated lists of invoice summaries that include invoice metadata such as invoice IDs, amounts, and currencies without downloading documents. You can also download invoice documents in PDF format using S3 pre-signed URLs with built-in expiration. As you manage invoices across your organization using Amazon Web Services Invoice Management APIs, you can create invoice retrieval processes and integrate invoice data into your financial systems.</p> <p>Service endpoint</p> <p>You can use the following endpoints for Amazon Web Services Invoice Configuration, Amazon Web Services Procurement Portal Preferences, and Amazon Web Services Invoice Management:</p> <ul> <li> <p> <code>https://invoicing.us-east-1.api.aws</code> </p> </li> </ul>",
                 "smithy.api#title": "AWS Invoicing",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2415,6 +3092,183 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.invoicing#ListProcurementPortalPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#ListProcurementPortalPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#ListProcurementPortalPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of procurement portal preferences associated with the Amazon Web Services account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListProcurementPortalPreferences for Coupa prefs. First Call with following pages",
+                        "input": {
+                            "MaxResults": 2
+                        },
+                        "output": {
+                            "NextToken": "AAQA-EFRSURBSGpkVFU5MVNUVWNXTzNoUEptWEFGcEt0QzBBeHZaZmRUU2w3L0hRQmdDeEx3R0NuSnF2NjM5NGNmM1I5KzNIQzNnT0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVhPSnhEQ04rWk1idnAyb1RBZ0VRZ0RzbFJBeFlXMk9RRGFtTU8vdFc0MUJlTFFNU2hPR1E5bDM3MHcyS05mSjIzbU93MG1aVXk1MzBiWWVsZ3FaZzhjMndhTjZtNzNYTWd3bnpsZz09E8JRNUKK1r2-b9X8Qd1RAOSKHZOCy-UCpOQjJdSfZHcUefTH0YmlIW8ykllegYUWB1D1NjDjC3u2z2e4cLBTmQhrQewSBW-I_i8okXup9RWN60eMOnB6dl5jUiinJ-FjY_jGjbOkiWuJhXteDKP16RfVRW7mxp2-v1-B8gPPxGLolXHBHrb8gt18P8eWs8RcvRRmmbGUy5qa6nFH5WiCq9Bx2fTUTy9Iz_xZooNuiqC6y119EGQqJ9WsWsIUa8MbWHFXtn9-Uriz7osYocbFm1Evv_NCn3YK-wFy9rUlUskcM2n9AqvPYhOyf0reV7E8cErZFR_Ev8l008QcxQfaqK19-gKR9clddwoDzMVfVuyiW3vbzUXz7fzQLr-UMLCGdE3yHf1oz2SEbcxhHZ2eh7-9wEYDv0v92wXg7m7xaYvaKuVBPKqBaq66GdpS1HTfakkjRGvsoBStXWVgPahISglPO__-Ym5NnXOw2wENBVXZ7RsVe6nJ1X15bB1RDkqLV8xJD0L83snuCEBtM9pyUUQOPvfGHzC4yRusMgBav_y1kq0wjqsbJV5EhHV_SIwf-WZa_A==",
+                            "ProcurementPortalPreferences": [
+                                {
+                                    "AwsAccountId": "111111111111",
+                                    "BuyerDomain": "NetworkID",
+                                    "BuyerIdentifier": "BuyerId_2",
+                                    "CreateDate": 1.750375489242E9,
+                                    "EinvoiceDeliveryEnabled": true,
+                                    "EinvoiceDeliveryPreferenceStatus": "PENDING_VERIFICATION",
+                                    "LastUpdateDate": 1.750375489242E9,
+                                    "ProcurementPortalName": "COUPA",
+                                    "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/1c7c6d71-fbc1-45bd-a18c-40cb61810679",
+                                    "PurchaseOrderRetrievalEnabled": true,
+                                    "PurchaseOrderRetrievalPreferenceStatus": "PENDING_VERIFICATION",
+                                    "SupplierDomain": "NetworkID",
+                                    "SupplierIdentifier": "SupplierId_1",
+                                    "Selector": {
+                                        "InvoiceUnitArns": [
+                                            "arn:aws:invoicing::111111111111:invoice-unit/12345679"
+                                        ],
+                                        "SellerOfRecords": [
+                                            "AWS_INC"
+                                        ]
+                                    },
+                                    "Version": 1
+                                },
+                                {
+                                    "AwsAccountId": "111111111111",
+                                    "BuyerDomain": "NetworkID",
+                                    "BuyerIdentifier": "BuyerId_4",
+                                    "CreateDate": 1.750375489242E9,
+                                    "EinvoiceDeliveryEnabled": true,
+                                    "EinvoiceDeliveryPreferenceStatus": "PENDING_VERIFICATION",
+                                    "LastUpdateDate": 1.750375489242E9,
+                                    "ProcurementPortalName": "COUPA",
+                                    "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/ae467ebd-ec8c-4089-b904-a7cd9e76f970",
+                                    "PurchaseOrderRetrievalEnabled": true,
+                                    "PurchaseOrderRetrievalPreferenceStatus": "PENDING_VERIFICATION",
+                                    "SupplierDomain": "NetworkID",
+                                    "SupplierIdentifier": "SupplierId_1",
+                                    "Selector": {
+                                        "InvoiceUnitArns": [
+                                            "arn:aws:invoicing::111111111111:invoice-unit/12345678"
+                                        ],
+                                        "SellerOfRecords": [
+                                            "AWS_INC"
+                                        ]
+                                    },
+                                    "Version": 1
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListProcurementPortalPreferences for Coupa prefs. Second Call with the last page",
+                        "input": {
+                            "NextToken": "AAQA-EFRSURBSGpkVFU5MVNUVWNXTzNoUEptWEFGcEt0QzBBeHZaZmRUU2w3L0hRQmdDeEx3R0NuSnF2NjM5NGNmM1I5KzNIQzNnT0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVhPSnhEQ04rWk1idnAyb1RBZ0VRZ0RzbFJBeFlXMk9RRGFtTU8vdFc0MUJlTFFNU2hPR1E5bDM3MHcyS05mSjIzbU93MG1aVXk1MzBiWWVsZ3FaZzhjMndhTjZtNzNYTWd3bnpsZz09E8JRNUKK1r2-b9X8Qd1RAOSKHZOCy-UCpOQjJdSfZHcUefTH0YmlIW8ykllegYUWB1D1NjDjC3u2z2e4cLBTmQhrQewSBW-I_i8okXup9RWN60eMOnB6dl5jUiinJ-FjY_jGjbOkiWuJhXteDKP16RfVRW7mxp2-v1-B8gPPxGLolXHBHrb8gt18P8eWs8RcvRRmmbGUy5qa6nFH5WiCq9Bx2fTUTy9Iz_xZooNuiqC6y119EGQqJ9WsWsIUa8MbWHFXtn9-Uriz7osYocbFm1Evv_NCn3YK-wFy9rUlUskcM2n9AqvPYhOyf0reV7E8cErZFR_Ev8l008QcxQfaqK19-gKR9clddwoDzMVfVuyiW3vbzUXz7fzQLr-UMLCGdE3yHf1oz2SEbcxhHZ2eh7-9wEYDv0v92wXg7m7xaYvaKuVBPKqBaq66GdpS1HTfakkjRGvsoBStXWVgPahISglPO__-Ym5NnXOw2wENBVXZ7RsVe6nJ1X15bB1RDkqLV8xJD0L83snuCEBtM9pyUUQOPvfGHzC4yRusMgBav_y1kq0wjqsbJV5EhHV_SIwf-WZa_A==",
+                            "MaxResults": 2
+                        },
+                        "output": {
+                            "ProcurementPortalPreferences": [
+                                {
+                                    "AwsAccountId": "111111111111",
+                                    "BuyerDomain": "NetworkID",
+                                    "BuyerIdentifier": "BuyerId_1",
+                                    "CreateDate": 1.750375489242E9,
+                                    "EinvoiceDeliveryEnabled": true,
+                                    "EinvoiceDeliveryPreferenceStatus": "TEST_INITIALIZED",
+                                    "EinvoiceDeliveryPreferenceStatusReason": "test initialized example reason",
+                                    "LastUpdateDate": 1.750375489242E9,
+                                    "ProcurementPortalName": "COUPA",
+                                    "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd",
+                                    "PurchaseOrderRetrievalEnabled": true,
+                                    "PurchaseOrderRetrievalPreferenceStatus": "TEST_INITIALIZED",
+                                    "PurchaseOrderRetrievalPreferenceStatusReason": "test initialized example reason",
+                                    "SupplierDomain": "NetworkID",
+                                    "SupplierIdentifier": "SupplierId_1",
+                                    "Selector": {
+                                        "InvoiceUnitArns": [
+                                            "arn:aws:invoicing::111111111111:invoice-unit/12345678"
+                                        ],
+                                        "SellerOfRecords": [
+                                            "AWS_INC"
+                                        ]
+                                    },
+                                    "Version": 3
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ProcurementPortalPreferences"
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ListProcurementPortalPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.invoicing#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#ListProcurementPortalPreferencesResponse": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferences": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of procurement portal preferences associated with the Amazon Web Services account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.invoicing#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -2490,6 +3344,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.invoicing#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 100,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.invoicing#MaxResultsInteger": {
             "type": "integer",
             "traits": {
@@ -2518,10 +3382,599 @@
                 "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
+        "com.amazonaws.invoicing#ProcurementPortalName": {
+            "type": "enum",
+            "members": {
+                "SAP_BUSINESS_NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_BUSINESS_NETWORK"
+                    }
+                },
+                "COUPA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUPA"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ProcurementPortalPreference": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcurementPortalName": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerDomain": {
+                    "target": "com.amazonaws.invoicing#BuyerDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the buyer in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the buyer in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierDomain": {
+                    "target": "com.amazonaws.invoicing#SupplierDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the supplier in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the supplier in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceSelector"
+                },
+                "ProcurementPortalSharedSecret": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared secret or authentication credential used for secure communication with the procurement portal.</p>"
+                    }
+                },
+                "ProcurementPortalInstanceEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL where e-invoices are delivered to the procurement portal.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL used for retrieving purchase orders from the procurement portal.</p>"
+                    }
+                },
+                "TestEnvPreference": {
+                    "target": "com.amazonaws.invoicing#TestEnvPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration on settings for the test environment of the procurement portal.</p>"
+                    }
+                },
+                "EinvoiceDeliveryEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether e-invoice delivery is enabled for this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryPreference": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that specify how e-invoices are delivered to the procurement portal.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether purchase order retrieval is enabled for this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Contacts": {
+                    "target": "com.amazonaws.invoicing#Contacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of contact information for portal administrators and technical contacts.</p>"
+                    }
+                },
+                "EinvoiceDeliveryPreferenceStatus": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the e-invoice delivery preference.</p>"
+                    }
+                },
+                "EinvoiceDeliveryPreferenceStatusReason": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current e-invoice delivery preference status.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalPreferenceStatus": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the purchase order retrieval preference.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalPreferenceStatusReason": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current purchase order retrieval preference status.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the procurement portal preference configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the procurement portal preference was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the procurement portal preference was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the full configuration of a procurement portal preference, including settings for e-invoice delivery and purchase order retrieval.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws:invoicing::[0-9]{12}:procurement-portal-preference/[-a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.invoicing#ProcurementPortalPreferenceSelector": {
+            "type": "structure",
+            "members": {
+                "InvoiceUnitArns": {
+                    "target": "com.amazonaws.invoicing#InvoiceUnitArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of invoice unit identifiers to which this preference applies. </p>"
+                    }
+                },
+                "SellerOfRecords": {
+                    "target": "com.amazonaws.invoicing#SellerOfRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The list of seller of record IDs to which this preference applies. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies criteria for selecting which invoices should be processed using a particular procurement portal preference.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_VERIFICATION"
+                    }
+                },
+                "TEST_INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_INITIALIZED"
+                    }
+                },
+                "TEST_INITIALIZATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_INITIALIZATION_FAILED"
+                    }
+                },
+                "TEST_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#ProcurementPortalPreferenceSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceSummary"
+            }
+        },
+        "com.amazonaws.invoicing#ProcurementPortalPreferenceSummary": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.invoicing#AccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with this procurement portal preference summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcurementPortalName": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerDomain": {
+                    "target": "com.amazonaws.invoicing#BuyerDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the buyer in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the buyer in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierDomain": {
+                    "target": "com.amazonaws.invoicing#SupplierDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the supplier in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the supplier in the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceSelector"
+                },
+                "EinvoiceDeliveryEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether e-invoice delivery is enabled for this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PurchaseOrderRetrievalEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether purchase order retrieval is enabled for this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryPreferenceStatus": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the e-invoice delivery preference in this summary.</p>"
+                    }
+                },
+                "EinvoiceDeliveryPreferenceStatusReason": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current e-invoice delivery preference status in this summary.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalPreferenceStatus": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the purchase order retrieval preference in this summary.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalPreferenceStatusReason": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current purchase order retrieval preference status in this summary.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the procurement portal preference configuration in this summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the procurement portal preference was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the procurement portal preference was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a procurement portal preference, including key identifiers and status information.</p>"
+            }
+        },
         "com.amazonaws.invoicing#ProfileList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.invoicing#InvoiceProfile"
+            }
+        },
+        "com.amazonaws.invoicing#Protocol": {
+            "type": "enum",
+            "members": {
+                "CXML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CXML"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#PurchaseOrderDataSource": {
+            "type": "structure",
+            "members": {
+                "EinvoiceDeliveryDocumentType": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of e-invoice document that requires purchase order data.</p>"
+                    }
+                },
+                "PurchaseOrderDataSourceType": {
+                    "target": "com.amazonaws.invoicing#PurchaseOrderDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source for purchase order data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the source configuration for retrieving purchase order data.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#PurchaseOrderDataSourceType": {
+            "type": "enum",
+            "members": {
+                "ASSOCIATED_PURCHASE_ORDER_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED_PURCHASE_ORDER_REQUIRED"
+                    }
+                },
+                "PURCHASE_ORDER_NOT_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PURCHASE_ORDER_NOT_REQUIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#PurchaseOrderDataSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#PurchaseOrderDataSource"
+            }
+        },
+        "com.amazonaws.invoicing#PutProcurementPortalPreference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#PutProcurementPortalPreferenceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#PutProcurementPortalPreferenceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing procurement portal preference configuration. This operation can modify settings for e-invoice delivery and purchase order retrieval.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "PutProcurementPortalPreference for Coupa pref",
+                        "input": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd",
+                            "ProcurementPortalSharedSecret": "Coupa_Secret_2",
+                            "ProcurementPortalInstanceEndpoint": "https://www.placeholder-domain.test",
+                            "Selector": {
+                                "InvoiceUnitArns": [
+                                    "arn:aws:invoicing::111111111111:invoice-unit/12345679"
+                                ],
+                                "SellerOfRecords": [
+                                    "AWS_INC"
+                                ]
+                            },
+                            "TestEnvPreference": {
+                                "BuyerDomain": "NetworkID",
+                                "BuyerIdentifier": "BuyerId_1_Test",
+                                "SupplierDomain": "NetworkID",
+                                "SupplierIdentifier": "SupplierId_1_Test",
+                                "ProcurementPortalSharedSecret": "Coupa_Secret_test_2",
+                                "ProcurementPortalInstanceEndpoint": "https://www.placeholder-domain.test"
+                            },
+                            "EinvoiceDeliveryEnabled": true,
+                            "EinvoiceDeliveryPreference": {
+                                "EinvoiceDeliveryDocumentTypes": [
+                                    "AWS_CLOUD_INVOICE"
+                                ],
+                                "EinvoiceDeliveryAttachmentTypes": [
+                                    "INVOICE_PDF"
+                                ],
+                                "Protocol": "CXML",
+                                "PurchaseOrderDataSources": [
+                                    {
+                                        "EinvoiceDeliveryDocumentType": "AWS_CLOUD_INVOICE",
+                                        "PurchaseOrderDataSourceType": "ASSOCIATED_PURCHASE_ORDER_REQUIRED"
+                                    }
+                                ],
+                                "ConnectionTestingMethod": "PROD_ENV_DOLLAR_TEST",
+                                "EinvoiceDeliveryActivationDate": 1.750279280091E9
+                            },
+                            "PurchaseOrderRetrievalEnabled": true,
+                            "Contacts": [
+                                {
+                                    "Name": "John Doe2",
+                                    "Email": "example-placeholder2@amazon.com"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#PutProcurementPortalPreferenceRequest": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceSelector"
+                },
+                "ProcurementPortalSharedSecret": {
+                    "target": "com.amazonaws.invoicing#SensitiveBasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated shared secret or authentication credential for the procurement portal. This value must be encrypted at rest.</p>"
+                    }
+                },
+                "ProcurementPortalInstanceEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated endpoint URL where e-invoices will be delivered to the procurement portal. Must be a valid HTTPS URL.</p>"
+                    }
+                },
+                "TestEnvPreference": {
+                    "target": "com.amazonaws.invoicing#TestEnvPreferenceInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated configuration settings for the test environment of the procurement portal.</p>"
+                    }
+                },
+                "EinvoiceDeliveryEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated flag indicating whether e-invoice delivery is enabled for this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryPreference": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated e-invoice delivery configuration including document types, attachment types, and customization settings for the portal.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated flag indicating whether purchase order retrieval is enabled for this procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Contacts": {
+                    "target": "com.amazonaws.invoicing#Contacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated list of contact information for portal administrators and technical contacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#PutProcurementPortalPreferenceResponse": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated procurement portal preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.invoicing#ReceiverAddress": {
@@ -2686,6 +4139,18 @@
                 }
             }
         },
+        "com.amazonaws.invoicing#SellerOfRecords": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#BasicStringWithoutSpace"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.invoicing#SensitiveBasicStringWithoutSpace": {
             "type": "string",
             "traits": {
@@ -2751,6 +4216,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.invoicing#SupplementalDocument"
+            }
+        },
+        "com.amazonaws.invoicing#SupplierDomain": {
+            "type": "enum",
+            "members": {
+                "NetworkID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkID"
+                    }
+                }
             }
         },
         "com.amazonaws.invoicing#TagResource": {
@@ -2895,6 +4371,108 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.invoicing#TaxesBreakdownAmount"
+            }
+        },
+        "com.amazonaws.invoicing#TestEnvPreference": {
+            "type": "structure",
+            "members": {
+                "BuyerDomain": {
+                    "target": "com.amazonaws.invoicing#BuyerDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the buyer in the test environment of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the buyer in the test environment of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierDomain": {
+                    "target": "com.amazonaws.invoicing#SupplierDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier for the supplier in the test environment of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the supplier in the test environment of the procurement portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcurementPortalSharedSecret": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared secret or authentication credential used for secure communication with the test environment.</p>"
+                    }
+                },
+                "ProcurementPortalInstanceEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL where e-invoices are delivered in the test environment.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL used for retrieving purchase orders in the test environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration settings for testing the procurement portal integration in a non-production environment.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#TestEnvPreferenceInput": {
+            "type": "structure",
+            "members": {
+                "BuyerDomain": {
+                    "target": "com.amazonaws.invoicing#BuyerDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier to use for the buyer in the test environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuyerIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier to use for the buyer in the test environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierDomain": {
+                    "target": "com.amazonaws.invoicing#SupplierDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain identifier to use for the supplier in the test environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupplierIdentifier": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier to use for the supplier in the test environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcurementPortalSharedSecret": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared secret or authentication credential to use for secure communication in the test environment.</p>"
+                    }
+                },
+                "ProcurementPortalInstanceEndpoint": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL where e-invoices will be delivered in the test environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input parameters for configuring test environment preferences for a procurement portal.</p>"
             }
         },
         "com.amazonaws.invoicing#ThrottlingException": {
@@ -3083,6 +4661,110 @@
                     "target": "com.amazonaws.invoicing#InvoiceUnitArnString",
                     "traits": {
                         "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the status of a procurement portal preference, including the activation state of e-invoice delivery and purchase order retrieval features.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateProcurementPortalPreference for EinvoiceDeliveryPreferenceStatus and PurchaseOrderRetrievalPreferenceStatus",
+                        "input": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd",
+                            "EinvoiceDeliveryPreferenceStatus": "SUSPENDED",
+                            "EinvoiceDeliveryPreferenceStatusReason": "suspended example reason",
+                            "PurchaseOrderRetrievalPreferenceStatus": "SUSPENDED",
+                            "PurchaseOrderRetrievalPreferenceStatusReason": "suspended example reason"
+                        },
+                        "output": {
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatusRequest": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EinvoiceDeliveryPreferenceStatus": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated status of the e-invoice delivery preference.</p>"
+                    }
+                },
+                "EinvoiceDeliveryPreferenceStatusReason": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the e-invoice delivery preference status update, providing context for the change.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalPreferenceStatus": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated status of the purchase order retrieval preference.</p>"
+                    }
+                },
+                "PurchaseOrderRetrievalPreferenceStatusReason": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the purchase order retrieval preference status update, providing context for the change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatusResponse": {
+            "type": "structure",
+            "members": {
+                "ProcurementPortalPreferenceArn": {
+                    "target": "com.amazonaws.invoicing#ProcurementPortalPreferenceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference with updated status.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },

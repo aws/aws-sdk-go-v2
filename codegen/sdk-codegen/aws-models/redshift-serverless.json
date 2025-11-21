@@ -77,6 +77,16 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.redshiftserverless#CatalogNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$"
+            }
+        },
         "com.amazonaws.redshiftserverless#Charge": {
             "type": "double",
             "traits": {
@@ -89,7 +99,7 @@
                 "parameterKey": {
                     "target": "com.amazonaws.redshiftserverless#ParameterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the parameter. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let \n         you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>The key of the parameter. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "parameterValue": {
@@ -154,7 +164,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Converts a recovery point to a snapshot. For more information about recovery points and snapshots, \n         see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html\">Working with snapshots and recovery points</a>.</p>"
+                "smithy.api#documentation": "<p>Converts a recovery point to a snapshot. For more information about recovery points and snapshots, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html\">Working with snapshots and recovery points</a>.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshotRequest": {
@@ -183,7 +193,7 @@
                 "tags": {
                     "target": "com.amazonaws.redshiftserverless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html\">Tag objects</a> \n         to associate with the created snapshot.</p>"
+                        "smithy.api#documentation": "<p>An array of <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html\">Tag objects</a> to associate with the created snapshot.</p>"
                     }
                 }
             },
@@ -338,14 +348,14 @@
                 "endpointName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. \n         Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. \n         The name can't contain two consecutive hyphens or end with a hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can't contain two consecutive hyphens or end with a hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.redshiftserverless#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifers of subnets from which \n         Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>",
+                        "smithy.api#documentation": "<p>The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -359,7 +369,7 @@
                 "vpcSecurityGroupIds": {
                     "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifiers of the security group that defines the ports, \n         protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>"
+                        "smithy.api#documentation": "<p>The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>"
                     }
                 },
                 "ownerAccount": {
@@ -433,7 +443,7 @@
                 "adminUserPassword": {
                     "target": "com.amazonaws.redshiftserverless#DbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace.</p>\n         <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace.</p> <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
                     }
                 },
                 "dbName": {
@@ -463,7 +473,7 @@
                 "logExports": {
                     "target": "com.amazonaws.redshiftserverless#LogExportList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of logs the namespace can export. \n         Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>"
+                        "smithy.api#documentation": "<p>The types of logs the namespace can export. Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>"
                     }
                 },
                 "tags": {
@@ -475,13 +485,13 @@
                 "manageAdminPassword": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. \n         You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. \n         If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses \n         <code>adminUserPassword</code> for the admin user account's password.\n      </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses <code>adminUserPassword</code> for the admin user account's password. </p>"
                     }
                 },
                 "adminPasswordSecretKmsKeyId": {
                     "target": "com.amazonaws.redshiftserverless#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. \n         You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
                     }
                 },
                 "redshiftIdcApplicationArn": {
@@ -541,7 +551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) \n         for a year at a discount from Serverless on-demand (OD) rates.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -570,7 +580,7 @@
                 "clientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services \n         SDK populates this field. This token must be a valid UUIDv4 value. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">\n            Making retries safe with idempotent APIs\n         </a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. This token must be a valid UUIDv4 value. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\"> Making retries safe with idempotent APIs </a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -616,7 +626,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. \n         For example, you can create a schedule of when to run the <code>CreateSnapshot</code> API operation.</p>",
+                "smithy.api#documentation": "<p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>CreateSnapshot</code> API operation.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -639,14 +649,14 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li>\n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.redshiftserverless#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Management Guide</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -660,7 +670,7 @@
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> \n         of the scheduled action, see <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html\">ScheduledAction</a>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html\">ScheduledAction</a>.</p>"
                     }
                 },
                 "scheduledActionDescription": {
@@ -729,7 +739,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a snapshot of all databases in a namespace.\n         For more information about snapshots, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html\">\n         Working with snapshots and recovery points</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a snapshot of all databases in a namespace. For more information about snapshots, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html\"> Working with snapshots and recovery points</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -876,7 +886,7 @@
                 "snapshotNamePrefix": {
                     "target": "com.amazonaws.redshiftserverless#SnapshotNamePrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string prefix that is attached to the name of the snapshot created by the scheduled action. The final \n      name of the snapshot is the string prefix appended by the date and time of when the snapshot was created.</p>",
+                        "smithy.api#documentation": "<p>A string prefix that is attached to the name of the snapshot created by the scheduled action. The final name of the snapshot is the string prefix appended by the date and time of when the snapshot was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -894,7 +904,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters that you can use to configure a <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html\">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see \n         <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html\">CreateScheduledAction</a>.</p>"
+                "smithy.api#documentation": "<p>The parameters that you can use to configure a <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html\">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see <a href=\"https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html\">CreateScheduledAction</a>.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#CreateUsageLimit": {
@@ -923,7 +933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier.\n      </p>",
+                "smithy.api#documentation": "<p>Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -947,7 +957,7 @@
                 "amount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data\n         transferred between Regions in cross-account sharing. The value must be a positive number.</p>",
+                        "smithy.api#documentation": "<p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1014,7 +1024,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an workgroup in Amazon Redshift Serverless.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n         you own in a Region from reaching or being reached from the internet through internet\n         gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA\n         turned on, the following capabilities are blocked: </p>\n         <ul>\n            <li>\n               <p>Creating a public access workgroup</p>\n            </li>\n            <li>\n               <p>Modifying a private workgroup to public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is\n               public</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an workgroup in Amazon Redshift Serverless.</p> <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA turned on, the following capabilities are blocked: </p> <ul> <li> <p>Creating a public access workgroup</p> </li> <li> <p>Modifying a private workgroup to public</p> </li> <li> <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is public</p> </li> </ul> <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1044,13 +1054,13 @@
                 "enhancedVpcRouting": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that specifies whether to turn on enhanced virtual \n         private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>"
+                        "smithy.api#documentation": "<p>The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>"
                     }
                 },
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">\n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -1104,7 +1114,7 @@
                 "trackName": {
                     "target": "com.amazonaws.redshiftserverless#TrackName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter for the name of the track for the workgroup. If you don't provide \n         a track name, the workgroup is assigned to the <code>current</code> track.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter for the name of the track for the workgroup. If you don't provide a track name, the workgroup is assigned to the <code>current</code> track.</p>"
                     }
                 }
             },
@@ -1324,7 +1334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a namespace from Amazon Redshift Serverless. \n         Before you delete the namespace, you can create a final snapshot that has all of the data within the namespace.</p>",
+                "smithy.api#documentation": "<p>Deletes a namespace from Amazon Redshift Serverless. Before you delete the namespace, you can create a final snapshot that has all of the data within the namespace.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1697,6 +1707,22 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#DryRunException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when the request was successful, but dry run was enabled so no action was taken.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshiftserverless#Duration": {
             "type": "integer",
             "traits": {
@@ -1772,7 +1798,7 @@
                 "subnetIds": {
                     "target": "com.amazonaws.redshiftserverless#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of subnets \n         where Amazon Redshift Serverless choose to deploy the VPC endpoint.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of subnets where Amazon Redshift Serverless choose to deploy the VPC endpoint.</p>"
                     }
                 },
                 "vpcSecurityGroups": {
@@ -1824,7 +1850,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a database user name and temporary password with\n         temporary authorization to log in to Amazon Redshift Serverless.</p>\n         <p>By default, the temporary credentials expire in 900 seconds. \n         You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p>\n         <p>The Identity and Access Management (IAM) user or role that runs \n      GetCredentials must have an IAM policy attached that allows access to all \n      necessary actions and resources.</p>\n         <p>If the <code>DbName</code> parameter is specified, the IAM policy must \n      allow access to the resource dbname for the specified database name.</p>"
+                "smithy.api#documentation": "<p>Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless.</p> <p>By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p> <p>The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#GetCredentialsRequest": {
@@ -1833,13 +1859,13 @@
                 "dbName": {
                     "target": "com.amazonaws.redshiftserverless#DbName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database to get temporary authorization to log on to.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 64 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon ( : ) or slash ( / ).</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found \n               in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words </a> \n               in the Amazon Redshift Database Developer Guide</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the database to get temporary authorization to log on to.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens.</p> </li> <li> <p>Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words </a> in the Amazon Redshift Database Developer Guide</p> </li> </ul>"
                     }
                 },
                 "durationSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds until the returned temporary password expires.\n         The minimum is 900 seconds, and the maximum is 3600 seconds.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds until the returned temporary password expires. The minimum is 900 seconds, and the maximum is 3600 seconds.</p>"
                     }
                 },
                 "workgroupName": {
@@ -1865,13 +1891,13 @@
                 "dbUser": {
                     "target": "com.amazonaws.redshiftserverless#DbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>A database user name that is authorized to log on to the database <code>DbName</code>\n         using the password <code>DbPassword</code>. If the specified <code>DbUser</code> exists in the database, \n         the new user name has the same database privileges as the the user named in \n         <code>DbUser</code>. By default, the user is added to PUBLIC.</p>"
+                        "smithy.api#documentation": "<p>A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the specified <code>DbUser</code> exists in the database, the new user name has the same database privileges as the the user named in <code>DbUser</code>. By default, the user is added to PUBLIC.</p>"
                     }
                 },
                 "dbPassword": {
                     "target": "com.amazonaws.redshiftserverless#DbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>A temporary password that authorizes the user name returned by \n         <code>DbUser</code> to log on to the database <code>DbName</code>.</p>"
+                        "smithy.api#documentation": "<p>A temporary password that authorizes the user name returned by <code>DbUser</code> to log on to the database <code>DbName</code>.</p>"
                     }
                 },
                 "expiration": {
@@ -1883,7 +1909,7 @@
                 "nextRefreshTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time of when the <code>DbUser</code> and <code>DbPassword</code> \n         authorization refreshes.</p>"
+                        "smithy.api#documentation": "<p>The date and time of when the <code>DbUser</code> and <code>DbPassword</code> authorization refreshes.</p>"
                     }
                 }
             },
@@ -2167,7 +2193,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets an Amazon Redshift Serverless reservation. A reservation gives you the option to commit to a specified number of Redshift Processing Units (RPUs) \n         for a year at a discount from Serverless on-demand (OD) rates.</p>",
+                "smithy.api#documentation": "<p>Gets an Amazon Redshift Serverless reservation. A reservation gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -2478,7 +2504,7 @@
                 "tableRestoreStatus": {
                     "target": "com.amazonaws.redshiftserverless#TableRestoreStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The returned <code>TableRestoreStatus</code> object that contains information about\n         the status of your <code>RestoreTableFromSnapshot</code> request.</p>"
+                        "smithy.api#documentation": "<p>The returned <code>TableRestoreStatus</code> object that contains information about the status of your <code>RestoreTableFromSnapshot</code> request.</p>"
                     }
                 }
             },
@@ -2742,6 +2768,36 @@
         "com.amazonaws.redshiftserverless#KmsKeyId": {
             "type": "string"
         },
+        "com.amazonaws.redshiftserverless#LakehouseIdcRegistration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ASSOCIATE",
+                        "value": "Associate"
+                    },
+                    {
+                        "name": "DISASSOCIATE",
+                        "value": "Disassociate"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#LakehouseRegistration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "REGISTER",
+                        "value": "Register"
+                    },
+                    {
+                        "name": "DEREGISTER",
+                        "value": "Deregister"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshiftserverless#ListCustomDomainAssociations": {
             "type": "operation",
             "input": {
@@ -2784,7 +2840,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2792,7 +2848,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -2823,7 +2879,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 },
                 "associations": {
@@ -2876,7 +2932,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in following <code>ListEndpointAccess</code> operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListEndpointAccess</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2884,7 +2940,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -2921,7 +2977,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 },
                 "endpoints": {
@@ -2968,20 +3024,20 @@
                 "sourceArn": {
                     "target": "com.amazonaws.redshiftserverless#SourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed \n         workgroup in the AWS Glue Data Catalog.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial ListManagedWorkgroups operation returns a nextToken, \n         you can include the returned nextToken in following ListManagedWorkgroups \n         operations, which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number \n         of results to return. You can use nextToken to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3000,7 +3056,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If nextToken is returned, there are more results available. \n         The value of nextToken is a unique pagination token for each page.\n         To retrieve the next page, make the call again using the returned token.</p>"
+                        "smithy.api#documentation": "<p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token.</p>"
                     }
                 },
                 "managedWorkgroups": {
@@ -3047,7 +3103,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in following <code>ListNamespaces</code> operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListNamespaces</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3055,7 +3111,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3074,7 +3130,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 },
                 "namespaces": {
@@ -3122,7 +3178,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in following <code>ListRecoveryPoints</code> operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListRecoveryPoints</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3130,7 +3186,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3179,7 +3235,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -3382,7 +3438,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3477,7 +3533,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using \n         the returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3504,7 +3560,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using \n         the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 },
                 "snapshotCopyConfigurations": {
@@ -3555,7 +3611,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3563,7 +3619,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3612,7 +3668,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 },
                 "snapshots": {
@@ -3662,7 +3718,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListTableRestoreStatus</code> operation returns a nextToken, \n         you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code>\n         operations. This will return results on the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListTableRestoreStatus</code> operation returns a nextToken, you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code> operations. This will return results on the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3670,7 +3726,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to \n         return. You can use nextToken to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3701,7 +3757,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListTableRestoreStatus</code> operation returns a <code>nextToken</code>, \n         you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code>\n         operations. This will returns results on the next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListTableRestoreStatus</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code> operations. This will returns results on the next page.</p>"
                     }
                 },
                 "tableRestoreStatuses": {
@@ -3813,7 +3869,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListTracksRequest</code> operation returns a \n         <code>nextToken</code>, you can include the returned <code>nextToken</code>\n         in following <code>ListTracksRequest</code> operations, which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListTracksRequest</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListTracksRequest</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3821,7 +3877,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. \n         If the number of remaining response records exceeds the specified \n         MaxRecords value, a value is returned in a marker field of the response. \n         You can retrieve the next set of records by retrying the command with the \n         returned marker value.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3846,7 +3902,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code>\n         is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -3908,7 +3964,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in following <code>ListUsageLimits</code> operations,\n         which returns results in the next page.\n      </p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListUsageLimits</code> operations, which returns results in the next page. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3916,7 +3972,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -3941,7 +3997,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.redshiftserverless#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -3982,7 +4038,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial ListWorkgroups operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in following ListNamespaces operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial ListWorkgroups operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following ListNamespaces operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -3990,7 +4046,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to display the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -4015,7 +4071,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         To retrieve the next page, make the call again using the returned token.</p>"
+                        "smithy.api#documentation": "<p> If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token.</p>"
                     }
                 },
                 "workgroups": {
@@ -4079,7 +4135,7 @@
                 "sourceArn": {
                     "target": "com.amazonaws.redshiftserverless#SourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed \n         workgroup in the AWS Glue Data Catalog.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.</p>"
                     }
                 },
                 "status": {
@@ -4097,7 +4153,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of Amazon Redshift compute resources managed by AWS Glue.</p>"
+                "smithy.api#documentation": "<p>A collection of Amazon Redshift compute resources managed by Glue.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#ManagedWorkgroupName": {
@@ -4177,7 +4233,7 @@
                 "namespaceName": {
                     "target": "com.amazonaws.redshiftserverless#NamespaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the namespace. \n      Must be between 3-64 alphanumeric characters in lowercase, \n      and it cannot be a reserved word. A list of reserved words can be found \n      in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>The name of the namespace. Must be between 3-64 alphanumeric characters in lowercase, and it cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p>"
                     }
                 },
                 "adminUsername": {
@@ -4240,6 +4296,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>"
                     }
+                },
+                "lakehouseRegistrationStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lakehouse registration for the namespace. Indicates whether the namespace is successfully registered with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "catalogArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the namespace enabled with Amazon Redshift federated permissions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4284,6 +4352,11 @@
             "list": {
                 "target": "com.amazonaws.redshiftserverless#ListNamespaces"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateLakehouseConfiguration"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "namespace/{namespaceName}"
@@ -4345,7 +4418,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a network interface \n         in an Amazon Redshift Serverless managed VPC endpoint.\n      </p>"
+                "smithy.api#documentation": "<p>Contains information about a network interface in an Amazon Redshift Serverless managed VPC endpoint. </p>"
             }
         },
         "com.amazonaws.redshiftserverless#NetworkInterfaceList": {
@@ -4421,7 +4494,7 @@
                 "level": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target price performance level for the workgroup. Valid values include 1, 25, 50, 75, and 100. These\n         correspond to the price performance levels LOW_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.</p>",
+                        "smithy.api#documentation": "<p>The target price performance level for the workgroup. Valid values include 1, 25, 50, 75, and 100. These correspond to the price performance levels LOW_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -4490,7 +4563,7 @@
                 "policy": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p>\n         <p>\n            <code>\"{\\\"Version\\\": \\\"2012-10-17\\\", \\\"Statement\\\" : \n            [{ \\\"Sid\\\": \\\"AllowUserRestoreFromSnapshot\\\", \\\"Principal\\\":{\\\"AWS\\\": \n            [\\\"739247239426\\\"]}, \\\"Action\\\": [\\\"redshift-serverless:RestoreFromSnapshot\\\"]\n            , \\\"Effect\\\": \\\"Allow\\\" }]}\"</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p> <p> <code>\"{\\\"Version\\\": \\\"2012-10-17\\\", \\\"Statement\\\" : [{ \\\"Sid\\\": \\\"AllowUserRestoreFromSnapshot\\\", \\\"Principal\\\":{\\\"AWS\\\": [\\\"739247239426\\\"]}, \\\"Action\\\": [\\\"redshift-serverless:RestoreFromSnapshot\\\"] , \\\"Effect\\\": \\\"Allow\\\" }]}\"</code> </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4555,7 +4628,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The automatically created recovery point of a namespace. \n         Recovery points are created every 30 minutes and kept for 24 hours.</p>"
+                "smithy.api#documentation": "<p>The automatically created recovery point of a namespace. Recovery points are created every 30 minutes and kept for 24 hours.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#RecoveryPointList": {
@@ -4685,7 +4758,7 @@
                 ],
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>This is an interface reference for Amazon Redshift Serverless. \n           It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless.\n        </p>\n         <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the \n           underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high \n           performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you\n           focus on using your data to acquire new insights for your business and customers.\n        </p>\n         <p> To learn more about Amazon Redshift Serverless, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html\">What is Amazon Redshift Serverless?</a>.</p>",
+                "smithy.api#documentation": "<p>This is an interface reference for Amazon Redshift Serverless. It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless. </p> <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you focus on using your data to acquire new insights for your business and customers. </p> <p> To learn more about Amazon Redshift Serverless, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html\">What is Amazon Redshift Serverless?</a>.</p>",
                 "smithy.api#title": "Redshift Serverless",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -5421,7 +5494,7 @@
                 "startDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start date for the serverless reservation. This is the date you specified for the reservation to start when\n         you created the reservation.</p>",
+                        "smithy.api#documentation": "<p>The start date for the serverless reservation. This is the date you created the reservation.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
@@ -5448,12 +5521,12 @@
                 "status": {
                     "target": "com.amazonaws.redshiftserverless#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the reservation. Possible values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>payment-pending</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>payment-failed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>retired</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the reservation. Possible values include the following:</p> <ul> <li> <p> <code>payment-pending</code> </p> </li> <li> <p> <code>active</code> </p> </li> <li> <p> <code>payment-failed</code> </p> </li> <li> <p> <code>retired</code> </p> </li> </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) \n         for a year at a discount from Serverless on-demand (OD) rates.</p>"
+                "smithy.api#documentation": "<p>Represents an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#ReservationArn": {
@@ -5518,7 +5591,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The class of offering for the reservation. The offering class determines the payment\n         schedule for the reservation.</p>"
+                "smithy.api#documentation": "<p>The class of offering for the reservation. The offering class determines the payment schedule for the reservation.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#ReservationOfferingsList": {
@@ -5726,7 +5799,7 @@
                 "snapshotArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring\n         from a provisioned cluster to Amazon Redshift Serverless. Must not be specified at the same time as\n            <code>snapshotName</code>.</p>\n         <p>The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring from a provisioned cluster to Amazon Redshift Serverless. Must not be specified at the same time as <code>snapshotName</code>.</p> <p>The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.</p>"
                     }
                 },
                 "ownerAccount": {
@@ -5738,7 +5811,7 @@
                 "manageAdminPassword": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored \n         snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, \n         Amazon Redshift uses the admin credentials that the namespace or cluster \n         had at the time the snapshot was taken.</p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, Amazon Redshift uses the admin credentials that the namespace or cluster had at the time the snapshot was taken.</p>"
                     }
                 },
                 "adminPasswordSecretKmsKeyId": {
@@ -5909,7 +5982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to\n         restore tables with <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved\">interleaved sort keys</a>.</p>"
+                "smithy.api#documentation": "<p>Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved\">interleaved sort keys</a>.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#RestoreTableFromSnapshotRequest": {
@@ -5978,7 +6051,7 @@
                 "activateCaseSensitiveIdentifier": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether name identifiers for database, schema, and table \n         are case sensitive. If true, the names are case sensitive. If \n         false, the names are not case sensitive. The default is false.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.</p>"
                     }
                 }
             },
@@ -6012,7 +6085,7 @@
                 "cron": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <p>Format of cron expressions is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <p>Format of cron expressions is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
                     }
                 }
             },
@@ -6082,7 +6155,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li>\n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>"
                     }
                 },
                 "scheduledActionDescription": {
@@ -6100,7 +6173,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.redshiftserverless#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Management Guide</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>"
                     }
                 },
                 "state": {
@@ -6179,7 +6252,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a track that determines which Amazon Redshift version \n         to apply after a new version is released. If the value for <code>ServerlessTrack</code> is \n         <code>current</code>, the workgroup is updated to the most recently certified release. \n         If the value is <code>trailing</code>, the workgroup is updated to the previously certified release.</p>"
+                "smithy.api#documentation": "<p>Defines a track that determines which Amazon Redshift version to apply after a new version is released. If the value for <code>ServerlessTrack</code> is <code>current</code>, the workgroup is updated to the most recently certified release. If the value is <code>trailing</code>, the workgroup is updated to the previously certified release.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#ServiceQuotaExceededException": {
@@ -6314,7 +6387,7 @@
                 "accountsWithRestoreAccess": {
                     "target": "com.amazonaws.redshiftserverless#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>All of the Amazon Web Services accounts that have access to \n         restore a snapshot to a namespace.</p>"
+                        "smithy.api#documentation": "<p>All of the Amazon Web Services accounts that have access to restore a snapshot to a namespace.</p>"
                     }
                 },
                 "accountsWithProvisionedRestoreAccess": {
@@ -6537,7 +6610,7 @@
                 "status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that describes the current state of the table restore request. \n         Possible values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>"
+                        "smithy.api#documentation": "<p>A value that describes the current state of the table restore request. Possible values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>"
                     }
                 },
                 "message": {
@@ -6549,7 +6622,7 @@
                 "requestTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the table restore request was made, \n         in Universal Coordinated Time (UTC).</p>"
+                        "smithy.api#documentation": "<p>The time that the table restore request was made, in Universal Coordinated Time (UTC).</p>"
                     }
                 },
                 "namespaceName": {
@@ -6765,7 +6838,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>\n         <p>\n            <code>\"{\"CreateSnapshot\": {\"NamespaceName\": \"sampleNamespace\",\"SnapshotName\": \"sampleSnapshot\", \"retentionPeriod\": \"1\"}}\"</code>\n         </p>"
+                "smithy.api#documentation": "<p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>\"{\"CreateSnapshot\": {\"NamespaceName\": \"sampleNamespace\",\"SnapshotName\": \"sampleSnapshot\", \"retentionPeriod\": \"1\"}}\"</code> </p>"
             }
         },
         "com.amazonaws.redshiftserverless#ThrottlingException": {
@@ -7033,6 +7106,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#UpdateLakehouseConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateLakehouseConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateLakehouseConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DryRunException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the lakehouse configuration for a namespace. This operation allows you to manage Amazon Redshift federated permissions and Amazon Web Services IAM Identity Center trusted identity propagation.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateLakehouseConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace whose lakehouse configuration you want to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lakehouseRegistration": {
+                    "target": "com.amazonaws.redshiftserverless#LakehouseRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to register or deregister the namespace with Amazon Redshift federated permissions. Valid values are <code>Register</code> or <code>Deregister</code>.</p>"
+                    }
+                },
+                "catalogName": {
+                    "target": "com.amazonaws.redshiftserverless#CatalogNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue Data Catalog that will be associated with the namespace enabled with Amazon Redshift federated permissions.</p> <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code> </p>"
+                    }
+                },
+                "lakehouseIdcRegistration": {
+                    "target": "com.amazonaws.redshiftserverless#LakehouseIdcRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions. Valid values are <code>Associate</code> or <code>Disassociate</code>.</p>"
+                    }
+                },
+                "lakehouseIdcApplicationArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "dryRun": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, validates the request without actually updating the lakehouse configuration. Use this to check for errors before making changes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateLakehouseConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace.</p>"
+                    }
+                },
+                "lakehouseIdcApplicationArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation.</p>"
+                    }
+                },
+                "lakehouseRegistrationStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the lakehouse registration. Indicates whether the namespace is successfully registered with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "catalogArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the lakehouse configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.redshiftserverless#UpdateNamespace": {
             "type": "operation",
             "input": {
@@ -7056,7 +7235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example,\n      you must specify both <code>adminUsername</code> and <code>adminUserPassword</code> to update either field, but you can't update both <code>kmsKeyId</code>\n      and <code>logExports</code> in a single request.</p>"
+                "smithy.api#documentation": "<p>Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example, you must specify both <code>adminUsername</code> and <code>adminUserPassword</code> to update either field, but you can't update both <code>kmsKeyId</code> and <code>logExports</code> in a single request.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#UpdateNamespaceRequest": {
@@ -7072,13 +7251,13 @@
                 "adminUserPassword": {
                     "target": "com.amazonaws.redshiftserverless#DbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace. This parameter must be updated together\n      with <code>adminUsername</code>.</p>\n         <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace. This parameter must be updated together with <code>adminUsername</code>.</p> <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>"
                     }
                 },
                 "adminUsername": {
                     "target": "com.amazonaws.redshiftserverless#DbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the administrator for the first database created in the namespace. This parameter must be updated\n      together with <code>adminUserPassword</code>.</p>"
+                        "smithy.api#documentation": "<p>The username of the administrator for the first database created in the namespace. This parameter must be updated together with <code>adminUserPassword</code>.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -7090,7 +7269,7 @@
                 "defaultIamRoleArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together\n      with <code>iamRoles</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together with <code>iamRoles</code>.</p>"
                     }
                 },
                 "iamRoles": {
@@ -7108,13 +7287,13 @@
                 "manageAdminPassword": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. \n         You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. \n         If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses \n         <code>adminUserPassword</code> for the admin user account's password.\n      </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses <code>adminUserPassword</code> for the admin user account's password. </p>"
                     }
                 },
                 "adminPasswordSecretKmsKeyId": {
                     "target": "com.amazonaws.redshiftserverless#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. \n         You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
                     }
                 }
             },
@@ -7180,13 +7359,13 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li>\n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.redshiftserverless#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Management Guide</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>"
                     }
                 },
                 "enabled": {
@@ -7423,7 +7602,7 @@
                 "amount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. \n         If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. \n         The value must be a positive number.</p>"
+                        "smithy.api#documentation": "<p>The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.</p>"
                     }
                 },
                 "breachAction": {
@@ -7480,7 +7659,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example,\n      you can update <code>baseCapacity</code> or <code>port</code> in a single request, but you can't update both in the same request.</p>\n         <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that\n         you own in a Region from reaching or being reached from the internet through internet\n         gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA\n         turned on, the following capabilities are blocked: </p>\n         <ul>\n            <li>\n               <p>Creating a public access workgroup</p>\n            </li>\n            <li>\n               <p>Modifying a private workgroup to public</p>\n            </li>\n            <li>\n               <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is\n               public</p>\n            </li>\n         </ul>\n         <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and\n            subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example, you can update <code>baseCapacity</code> or <code>port</code> in a single request, but you can't update both in the same request.</p> <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA turned on, the following capabilities are blocked: </p> <ul> <li> <p>Creating a public access workgroup</p> </li> <li> <p>Modifying a private workgroup to public</p> </li> <li> <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is public</p> </li> </ul> <p>For more information about VPC BPA, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html\">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#UpdateWorkgroupRequest": {
@@ -7502,13 +7681,13 @@
                 "enhancedVpcRouting": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that specifies whether to turn on enhanced virtual \n         private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>"
+                        "smithy.api#documentation": "<p>The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>"
                     }
                 },
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you \n         define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> \n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "publiclyAccessible": {
@@ -7556,7 +7735,7 @@
                 "trackName": {
                     "target": "com.amazonaws.redshiftserverless#TrackName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter for the name of the track for the workgroup. If you don't provide \n         a track name, the workgroup is assigned to the <code>current</code> track.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter for the name of the track for the workgroup. If you don't provide a track name, the workgroup is assigned to the <code>current</code> track.</p>"
                     }
                 }
             },
@@ -7725,7 +7904,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input failed to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7839,13 +8018,13 @@
                 "enhancedVpcRouting": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that specifies whether to enable enhanced virtual \n      private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>"
+                        "smithy.api#documentation": "<p>The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>"
                     }
                 },
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n        options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n        <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. \n        For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -7919,7 +8098,7 @@
                 "patchVersion": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The patch version of your Amazon Redshift Serverless workgroup. For more information about patch versions, see\n         <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html\">Cluster versions for Amazon Redshift</a>.</p>"
+                        "smithy.api#documentation": "<p>The patch version of your Amazon Redshift Serverless workgroup. For more information about patch versions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html\">Cluster versions for Amazon Redshift</a>.</p>"
                     }
                 },
                 "maxCapacity": {
@@ -7955,7 +8134,7 @@
                 "pendingTrackName": {
                     "target": "com.amazonaws.redshiftserverless#TrackName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the track that you want to assign to the workgroup. When the track changes, the \n         workgroup is switched to the latest workgroup release available for the track. At this point, the \n         track name is applied.</p>"
+                        "smithy.api#documentation": "<p>The name for the track that you want to assign to the workgroup. When the track changes, the workgroup is switched to the latest workgroup release available for the track. At this point, the track name is applied.</p>"
                     }
                 }
             },

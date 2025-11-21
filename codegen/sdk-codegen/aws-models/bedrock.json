@@ -20,6 +20,121 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.bedrock#AccountEnforcedGuardrailConfigurationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.bedrock#AccountEnforcedGuardrailInferenceInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "guardrailIdentifier": {
+                    "target": "com.amazonaws.bedrock#GuardrailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier for the guardrail, could be the ID or the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "com.amazonaws.bedrock#GuardrailNumericalVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Numerical guardrail version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputTags": {
+                    "target": "com.amazonaws.bedrock#InputTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to honor or ignore input tags at runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Account-level enforced guardrail input configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AccountEnforcedGuardrailOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "configId": {
+                    "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique ID for the account enforced configuration.</p>"
+                    }
+                },
+                "guardrailArn": {
+                    "target": "com.amazonaws.bedrock#GuardrailArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN representation for the guardrail.</p>"
+                    }
+                },
+                "guardrailId": {
+                    "target": "com.amazonaws.bedrock#GuardrailId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique ID for the guardrail.</p>"
+                    }
+                },
+                "inputTags": {
+                    "target": "com.amazonaws.bedrock#InputTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to honor or ignore input tags at runtime.</p>"
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "com.amazonaws.bedrock#GuardrailNumericalVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Numerical guardrail version.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role used to update the configuration.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role used to update the configuration.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.bedrock#ConfigurationOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration owner type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Account enforced guardrail output configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AccountEnforcedGuardrailsOutputConfiguration": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailOutputConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrock#AccountId": {
             "type": "string",
             "traits": {
@@ -135,6 +250,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrock#CustomModelResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#EnforcedGuardrailConfigurationResource"
                 },
                 {
                     "target": "com.amazonaws.bedrock#EvaluationJobResource"
@@ -4183,6 +4301,18 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#ConfigurationOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCOUNT",
+                        "name": "ACCOUNT",
+                        "documentation": "Configuration owned by the account"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.bedrock#ConflictException": {
             "type": "structure",
             "members": {
@@ -6986,6 +7116,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the account-level enforced guardrail configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/enforcedGuardrailsConfiguration/{configId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "configId": {
+                    "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique ID for the account enforced configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#DeleteFoundationModelAgreement": {
             "type": "operation",
             "input": {
@@ -7584,6 +7772,20 @@
                     "max": 30
                 }
             }
+        },
+        "com.amazonaws.bedrock#EnforcedGuardrailConfigurationResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ListEnforcedGuardrailsConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration"
+                }
+            ]
         },
         "com.amazonaws.bedrock#EntitlementAvailability": {
             "type": "enum",
@@ -14272,6 +14474,23 @@
                 "target": "com.amazonaws.bedrock#InferenceType"
             }
         },
+        "com.amazonaws.bedrock#InputTags": {
+            "type": "enum",
+            "members": {
+                "HONOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HONOR"
+                    }
+                },
+                "IGNORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrock#InstanceCount": {
             "type": "integer",
             "traits": {
@@ -15234,6 +15453,82 @@
                     "target": "com.amazonaws.bedrock#CustomModelSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>Model summaries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListEnforcedGuardrailsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListEnforcedGuardrailsConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListEnforcedGuardrailsConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the account-level enforced guardrail configurations.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/enforcedGuardrailsConfiguration"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "guardrailsConfig"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListEnforcedGuardrailsConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opaque continuation token of previous paginated response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListEnforcedGuardrailsConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "guardrailsConfig": {
+                    "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailsOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of AccountEnforcedGuardrailOutputConfiguration objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opaque continuation token of previous paginated response.</p>"
                     }
                 }
             },
@@ -18442,6 +18737,91 @@
                     "target": "com.amazonaws.bedrock#UpdateProvisionedModelThroughput"
                 }
             ]
+        },
+        "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutEnforcedGuardrailConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutEnforcedGuardrailConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the account-level enforced guardrail configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/enforcedGuardrailsConfiguration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutEnforcedGuardrailConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "configId": {
+                    "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique ID for the account enforced configuration.</p>"
+                    }
+                },
+                "guardrailInferenceConfig": {
+                    "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailInferenceInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level enforced guardrail input configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutEnforcedGuardrailConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "configId": {
+                    "target": "com.amazonaws.bedrock#AccountEnforcedGuardrailConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique ID for the account enforced configuration.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role used to update the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.bedrock#PutModelInvocationLoggingConfiguration": {
             "type": "operation",

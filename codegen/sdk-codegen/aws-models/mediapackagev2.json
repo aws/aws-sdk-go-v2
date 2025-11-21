@@ -3554,6 +3554,16 @@
                         }
                     }
                 },
+                "DrmSettings": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                },
                 "Start": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -9091,6 +9101,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INVALID_MANIFEST_FILTER"
+                    }
+                },
+                "INVALID_DRM_SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DRM_SETTINGS"
                     }
                 },
                 "INVALID_TIME_DELAY_SECONDS": {

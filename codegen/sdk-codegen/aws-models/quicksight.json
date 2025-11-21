@@ -50199,6 +50199,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration details for embedding the Generative Q&A experience.</p>\n         <p>For more information about embedding the Generative Q&A experience, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a> in\n            the <i>Amazon Quick Sight User Guide</i>.</p>"
                     }
+                },
+                "QuickChat": {
+                    "target": "com.amazonaws.quicksight#RegisteredUserQuickChatEmbeddingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for embedding the Quick chat agent.</p>"
+                    }
                 }
             },
             "traits": {
@@ -50231,6 +50237,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the Q search bar embedding experience.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RegisteredUserQuickChatEmbeddingConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An object that provides information about the configuration of a chat agent.</p>"
             }
         },
         "com.amazonaws.quicksight#RegisteredUserQuickSightConsoleEmbeddingConfiguration": {

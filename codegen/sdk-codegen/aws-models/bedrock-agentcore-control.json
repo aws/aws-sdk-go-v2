@@ -1369,6 +1369,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS_IAM"
                     }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
                 }
             }
         },
@@ -2658,7 +2664,7 @@
                 "authorizerType": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authorizer to use for the gateway.</p> <ul> <li> <p> <code>CUSTOM_JWT</code> - Authorize with a bearer token.</p> </li> <li> <p> <code>AWS_IAM</code> - Authorize with your Amazon Web Services IAM credentials.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The type of authorizer to use for the gateway.</p> <ul> <li> <p> <code>CUSTOM_JWT</code> - Authorize with a bearer token.</p> </li> <li> <p> <code>AWS_IAM</code> - Authorize with your Amazon Web Services IAM credentials.</p> </li> <li> <p> <code>NONE</code> - No authorization</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2672,6 +2678,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated with the gateway.</p>"
+                    }
+                },
+                "interceptorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of configuration settings for a gateway interceptor. Gateway interceptors allow custom code to be invoked during gateway invocations.</p>"
                     }
                 },
                 "exceptionLevel": {
@@ -2790,6 +2802,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated with the gateway.</p>"
+                    }
+                },
+                "interceptorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of interceptor configurations for the created gateway.</p>"
                     }
                 },
                 "workloadIdentityDetails": {
@@ -4837,6 +4855,75 @@
                 "smithy.api#pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptionPoint": {
+            "type": "enum",
+            "members": {
+                "REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST"
+                    }
+                },
+                "RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptionPoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptionPoint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfiguration": {
+            "type": "structure",
+            "members": {
+                "interceptor": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure settings of an interceptor configuration. This structure defines how the interceptor can be invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "interceptionPoints": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptionPoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported points of interception. This field specifies which points during the gateway invocation to invoke the interceptor</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the input of the interceptor. This field specifies how the input to the interceptor is constructed</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an interceptor on a gateway. This structure defines settings for an interceptor that will be invoked during the invocation of the gateway.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#GatewayMaxResults": {
             "type": "integer",
             "traits": {
@@ -5960,6 +6047,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the gateway.</p>"
                     }
                 },
+                "interceptorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interceptors configured on the gateway.</p>"
+                    }
+                },
                 "workloadIdentityDetails": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityDetails",
                     "traits": {
@@ -6677,6 +6770,35 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#InterceptorConfiguration": {
+            "type": "union",
+            "members": {
+                "lambda": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LambdaInterceptorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the lambda function used for the interceptor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The interceptor configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InterceptorInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "passRequestHeaders": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to pass request headers as input into the interceptor. When set to true, request headers will be passed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input configuration of the interceptor.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#InternalServerException": {
             "type": "structure",
             "members": {
@@ -6794,6 +6916,21 @@
                     "max": 170
                 },
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-]+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LambdaInterceptorConfiguration": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LambdaFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the lambda function to be invoked for the interceptor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lambda configuration for the interceptor</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration": {
@@ -11347,6 +11484,12 @@
                         "smithy.api#documentation": "<p>The updated ARN of the KMS key used to encrypt the gateway.</p>"
                     }
                 },
+                "interceptorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated interceptor configurations for the gateway.</p>"
+                    }
+                },
                 "exceptionLevel": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ExceptionLevel",
                     "traits": {
@@ -11454,6 +11597,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated ARN of the KMS key used to encrypt the gateway.</p>"
+                    }
+                },
+                "interceptorConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GatewayInterceptorConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated interceptor configurations for the gateway.</p>"
                     }
                 },
                 "workloadIdentityDetails": {

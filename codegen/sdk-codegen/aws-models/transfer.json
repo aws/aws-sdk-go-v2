@@ -1441,7 +1441,7 @@
                         "transfer:TagResource"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app.</p>",
+                "smithy.api#documentation": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app. You can configure the web app to be publicly accessible or hosted within a VPC.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createWebApp"
@@ -1480,6 +1480,12 @@
                     "target": "com.amazonaws.transfer#WebAppEndpointPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>"
+                    }
+                },
+                "EndpointDetails": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration for the web app. You can specify whether the web app endpoint is publicly accessible or hosted within a VPC.</p>"
                     }
                 }
             },
@@ -3106,7 +3112,7 @@
                         "transfer:DescribeWebApp"
                     ]
                 },
-                "smithy.api#documentation": "<p>Describes the web app that's identified by <code>WebAppId</code>.</p>",
+                "smithy.api#documentation": "<p>Describes the web app that's identified by <code>WebAppId</code>. The response includes endpoint configuration details such as whether the web app is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeWebApp"
@@ -4178,6 +4184,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If your web app was created in an Amazon Web Services GovCloud (US) Region, the value of this parameter can be <code>FIPS</code>, which indicates the web app endpoint is FIPS-compliant.</p>"
                     }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints that provide network isolation.</p>"
+                    }
+                },
+                "DescribedEndpointDetails": {
+                    "target": "com.amazonaws.transfer#DescribedWebAppEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration details for the web app, including VPC settings if the endpoint is hosted within a VPC.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4229,6 +4247,20 @@
                 ]
             }
         },
+        "com.amazonaws.transfer#DescribedWebAppEndpointDetails": {
+            "type": "union",
+            "members": {
+                "Vpc": {
+                    "target": "com.amazonaws.transfer#DescribedWebAppVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration details when the web app endpoint is hosted within a VPC. This includes the VPC ID, subnet IDs, and VPC endpoint ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the endpoint configuration details for a web app, including VPC configuration when the endpoint is hosted within a VPC.</p>"
+            }
+        },
         "com.amazonaws.transfer#DescribedWebAppIdentityProviderDetails": {
             "type": "union",
             "members": {
@@ -4241,6 +4273,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns a structure that contains the identity provider details for your web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedWebAppVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.transfer#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnet IDs within the VPC where the web app endpoint is deployed. These subnets must be in the same VPC and provide network connectivity for the endpoint.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.transfer#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC where the web app endpoint is hosted.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.transfer#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC endpoint created for the web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the VPC configuration details for a web app endpoint, including the VPC identifier, subnet IDs, and VPC endpoint ID used for hosting the endpoint.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedWorkflow": {
@@ -6376,7 +6434,7 @@
                         "transfer:ListWebApps"
                     ]
                 },
-                "smithy.api#documentation": "<p>Lists all web apps associated with your Amazon Web Services account for your current region.</p>",
+                "smithy.api#documentation": "<p>Lists all web apps associated with your Amazon Web Services account for your current region. The response includes the endpoint type for each web app, showing whether it is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listWebApps"
@@ -6961,6 +7019,12 @@
                     "target": "com.amazonaws.transfer#WebAppEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>"
+                    }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints.</p>"
                     }
                 }
             },
@@ -11265,7 +11329,7 @@
                         "transfer:UpdateWebApp"
                     ]
                 },
-                "smithy.api#documentation": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, and the web app units.</p>",
+                "smithy.api#documentation": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, endpoint configuration, and the web app units.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateWebApp"
@@ -11371,6 +11435,20 @@
                 ]
             }
         },
+        "com.amazonaws.transfer#UpdateWebAppEndpointDetails": {
+            "type": "union",
+            "members": {
+                "Vpc": {
+                    "target": "com.amazonaws.transfer#UpdateWebAppVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration details for updating a web app endpoint hosted within a VPC. This includes the subnet IDs for endpoint deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the endpoint configuration details for updating a web app, including VPC settings for endpoints hosted within a VPC.</p>"
+            }
+        },
         "com.amazonaws.transfer#UpdateWebAppIdentityCenterConfig": {
             "type": "structure",
             "members": {
@@ -11427,6 +11505,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>"
                     }
+                },
+                "EndpointDetails": {
+                    "target": "com.amazonaws.transfer#UpdateWebAppEndpointDetails",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The updated endpoint configuration for the web app. You can modify the endpoint type and VPC configuration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11446,6 +11531,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.transfer#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnet IDs within the VPC where the web app endpoint should be deployed during the update operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the VPC configuration settings for updating a web app endpoint, including the subnet IDs where the endpoint should be deployed.</p>"
             }
         },
         "com.amazonaws.transfer#Url": {
@@ -11616,6 +11715,20 @@
                 }
             }
         },
+        "com.amazonaws.transfer#WebAppEndpointDetails": {
+            "type": "union",
+            "members": {
+                "Vpc": {
+                    "target": "com.amazonaws.transfer#WebAppVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for hosting the web app endpoint within a VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the endpoint configuration for a web app, including VPC settings when the endpoint is hosted within a VPC.</p>"
+            }
+        },
         "com.amazonaws.transfer#WebAppEndpointPolicy": {
             "type": "enum",
             "members": {
@@ -11629,6 +11742,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppEndpointType": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                },
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC"
                     }
                 }
             }
@@ -11743,6 +11873,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains an integer value that represents the value for number of concurrent connections or the user sessions on your web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WebAppVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.transfer#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnet IDs within the VPC where the web app endpoint will be deployed. These subnets must be in the same VPC specified in the VpcId parameter.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.transfer#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC where the web app endpoint will be hosted.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.transfer#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of security group IDs that control access to the web app endpoint. These security groups determine which sources can access the endpoint based on IP addresses and port configurations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the VPC configuration settings for hosting a web app endpoint, including the VPC ID, subnet IDs, and security group IDs for access control.</p>"
             }
         },
         "com.amazonaws.transfer#WorkflowDescription": {

@@ -709,6 +709,44 @@
                 "smithy.api#documentation": "<p>The model must request at least one tool (no text is generated). For example, <code>{\"any\" : {}}</code>. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#AppliedGuardrailDetails": {
+            "type": "structure",
+            "members": {
+                "guardrailId": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the guardrail that was applied.</p>"
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the guardrail that was applied.</p>"
+                    }
+                },
+                "guardrailArn": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the guardrail that was applied.</p>"
+                    }
+                },
+                "guardrailOrigin": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailOriginList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of how the guardrail was applied. This can be either requested at the API level or enforced at the account or organization level as a default guardrail.</p>"
+                    }
+                },
+                "guardrailOwnership": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailOwnership",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ownership type of the guardrail, indicating whether it is owned by the requesting account or is a cross-account guardrail shared from another AWS account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the specific guardrail that was applied during this assessment, including its identifier, version, ARN, origin, and ownership information.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#ApplyGuardrail": {
             "type": "operation",
             "input": {
@@ -2623,6 +2661,15 @@
                 }
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+)$"
+            }
+        },
         "com.amazonaws.bedrockruntime#GuardrailAssessment": {
             "type": "structure",
             "members": {
@@ -2667,6 +2714,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The invocation metrics for the guardrail assessment.</p>"
                     }
+                },
+                "appliedGuardrailDetails": {
+                    "target": "com.amazonaws.bedrockruntime#AppliedGuardrailDetails"
                 }
             },
             "traits": {
@@ -3174,15 +3224,17 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the guardrail.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The identifier for the guardrail.</p>"
                     }
                 },
                 "guardrailVersion": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the guardrail.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The version of the guardrail.</p>"
                     }
                 },
                 "trace": {
@@ -3742,13 +3794,22 @@
                 "target": "com.amazonaws.bedrockruntime#GuardrailCustomWord"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^([a-z0-9]+)$"
+            }
+        },
         "com.amazonaws.bedrockruntime#GuardrailIdentifier": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"
+                "smithy.api#pattern": "^(|([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailImageBlock": {
@@ -3907,6 +3968,35 @@
                 }
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailOrigin": {
+            "type": "enum",
+            "members": {
+                "REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST"
+                    }
+                },
+                "ACCOUNT_ENFORCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_ENFORCED"
+                    }
+                },
+                "ORGANIZATION_ENFORCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATION_ENFORCED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailOriginList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#GuardrailOrigin"
+            }
+        },
         "com.amazonaws.bedrockruntime#GuardrailOutputContent": {
             "type": "structure",
             "members": {
@@ -3946,6 +4036,23 @@
         },
         "com.amazonaws.bedrockruntime#GuardrailOutputText": {
             "type": "string"
+        },
+        "com.amazonaws.bedrockruntime#GuardrailOwnership": {
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
+                    }
+                },
+                "CROSS_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CROSS_ACCOUNT"
+                    }
+                }
+            }
         },
         "com.amazonaws.bedrockruntime#GuardrailPiiEntityFilter": {
             "type": "structure",
@@ -4292,15 +4399,17 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the guardrail.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The identifier for the guardrail.</p>"
                     }
                 },
                 "guardrailVersion": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the guardrail.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The version of the guardrail.</p>"
                     }
                 },
                 "trace": {
@@ -4593,7 +4702,7 @@
         "com.amazonaws.bedrockruntime#GuardrailVersion": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(([1-9][0-9]{0,7})|(DRAFT))$"
+                "smithy.api#pattern": "^(|([1-9][0-9]{0,7})|(DRAFT))$"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailWordPolicyAction": {

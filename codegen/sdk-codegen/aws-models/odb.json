@@ -86,6 +86,92 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.odb#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.odb#AssociateIamRoleToResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#AssociateIamRoleToResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#AssociateIamRoleToResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an Amazon Web Services Identity and Access Management (IAM) service role with a specified resource to enable Amazon Web Services service integration.</p>"
+            }
+        },
+        "com.amazonaws.odb#AssociateIamRoleToResourceInput": {
+            "type": "structure",
+            "members": {
+                "iamRoleArn": {
+                    "target": "com.amazonaws.odb#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role to associate with the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsIntegration": {
+                    "target": "com.amazonaws.odb#SupportedAwsIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the IAM service role association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.odb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to associate with the IAM service role.</p>",
+                        "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:cloud-vm-cluster/[a-z0-9-_]+$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#CloudVmClusterResource",
+                        "ids": {
+                            "cloudVmClusterId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.odb#AssociateIamRoleToResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#AutonomousVirtualMachineList": {
             "type": "list",
             "member": {
@@ -1673,6 +1759,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>"
                     }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.odb#IamRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the VM cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1950,6 +2042,12 @@
                     "target": "com.amazonaws.odb#ComputeModel",
                     "traits": {
                         "smithy.api#documentation": "<p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.odb#IamRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the VM cluster in the summary information.</p>"
                     }
                 }
             },
@@ -2805,10 +2903,40 @@
                         "smithy.api#documentation": "<p>Specifies the configuration for Zero-ETL access from the ODB network.</p>"
                     }
                 },
+                "stsAccess": {
+                    "target": "com.amazonaws.odb#Access",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) access configuration for the ODB network.</p>"
+                    }
+                },
+                "kmsAccess": {
+                    "target": "com.amazonaws.odb#Access",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) access configuration for the ODB network.</p>"
+                    }
+                },
                 "s3PolicyDocument": {
                     "target": "com.amazonaws.odb#PolicyDocument",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the endpoint policy for Amazon S3 access from the ODB network.</p>"
+                    }
+                },
+                "stsPolicyDocument": {
+                    "target": "com.amazonaws.odb#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The STS policy document that defines permissions for token service usage within the ODB network.</p>"
+                    }
+                },
+                "kmsPolicyDocument": {
+                    "target": "com.amazonaws.odb#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS policy document that defines permissions for key usage within the ODB network.</p>"
+                    }
+                },
+                "crossRegionS3RestoreSourcesToEnable": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-Region Amazon S3 restore sources to enable for the ODB network.</p>"
                     }
                 },
                 "tags": {
@@ -2979,6 +3107,38 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#CrossRegionS3RestoreSourcesAccess": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for cross-Region S3 restore access.</p>"
+                    }
+                },
+                "ipv4Addresses": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for cross-Region S3 restore access.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the cross-Region S3 restore access configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration access for the cross-Region Amazon S3 database restore source for the ODB network.</p>"
+            }
+        },
+        "com.amazonaws.odb#CrossRegionS3RestoreSourcesAccessList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#CrossRegionS3RestoreSourcesAccess"
             }
         },
         "com.amazonaws.odb#CustomerContact": {
@@ -4336,6 +4496,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#DisassociateIamRoleFromResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#DisassociateIamRoleFromResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#DisassociateIamRoleFromResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates an Amazon Web Services Identity and Access Management (IAM) service role from a specified resource to disable Amazon Web Services service integration.</p>"
+            }
+        },
+        "com.amazonaws.odb#DisassociateIamRoleFromResourceInput": {
+            "type": "structure",
+            "members": {
+                "iamRoleArn": {
+                    "target": "com.amazonaws.odb#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role to disassociate from the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsIntegration": {
+                    "target": "com.amazonaws.odb#SupportedAwsIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the IAM service role disassociation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.odb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target resource to disassociate from the IAM service role.</p>",
+                        "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-[a-z]?|aws-iso):odb:[a-z0-9-]+:\\d{12}:cloud-vm-cluster/[a-z0-9-_]+$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#CloudVmClusterResource",
+                        "ids": {
+                            "cloudVmClusterId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.odb#DisassociateIamRoleFromResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#DiskRedundancy": {
             "type": "enum",
             "members": {
@@ -4848,6 +5085,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A new OCI tenancy activation link for your Amazon Web Services account.</p>"
                     }
+                },
+                "ociIdentityDomain": {
+                    "target": "com.amazonaws.odb#OciIdentityDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle Cloud Infrastructure (OCI) identity domain information in the onboarding status response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4997,6 +5240,91 @@
                 "target": "smithy.api#Integer"
             }
         },
+        "com.amazonaws.odb#IamRole": {
+            "type": "structure",
+            "members": {
+                "iamRoleArn": {
+                    "target": "com.amazonaws.odb#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#IamRoleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the IAM service role.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the IAM service role, if applicable.</p>"
+                    }
+                },
+                "awsIntegration": {
+                    "target": "com.amazonaws.odb#SupportedAwsIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the IAM service role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Amazon Web Services Identity and Access Management (IAM) service role associated with a resource.</p>"
+            }
+        },
+        "com.amazonaws.odb#IamRoleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#IamRole"
+            }
+        },
+        "com.amazonaws.odb#IamRoleStatus": {
+            "type": "enum",
+            "members": {
+                "ASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATING"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
+                    }
+                },
+                "DISCONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECTED"
+                    }
+                },
+                "PARTIALLY_CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIALLY_CONNECTED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.odb#InitializeService": {
             "type": "operation",
             "input": {
@@ -5026,7 +5354,15 @@
         },
         "com.amazonaws.odb#InitializeServiceInput": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "ociIdentityDomain": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>The Oracle Cloud Infrastructure (OCI) identity domain configuration for service initialization.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#input": {}
             }
@@ -5095,6 +5431,38 @@
                         "smithy.api#enumValue": "UPDATING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.odb#KmsAccess": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.odb#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the KMS access configuration.</p>"
+                    }
+                },
+                "ipv4Addresses": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for KMS access.</p>"
+                    }
+                },
+                "domainName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name for KMS access configuration.</p>"
+                    }
+                },
+                "kmsPolicyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS policy document that defines permissions for key usage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Web Services Key Management Service (KMS) access from the ODB network.</p>"
             }
         },
         "com.amazonaws.odb#LicenseModel": {
@@ -6440,6 +6808,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 access configuration.</p>"
                     }
+                },
+                "stsAccess": {
+                    "target": "com.amazonaws.odb#StsAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) access configuration for managed services.</p>"
+                    }
+                },
+                "kmsAccess": {
+                    "target": "com.amazonaws.odb#KmsAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) access configuration for managed services.</p>"
+                    }
+                },
+                "crossRegionS3RestoreSourcesAccess": {
+                    "target": "com.amazonaws.odb#CrossRegionS3RestoreSourcesAccessList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access configuration for the cross-Region Amazon S3 database restore source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6608,6 +6994,50 @@
                 "target": "com.amazonaws.odb#OciDnsForwardingConfig"
             }
         },
+        "com.amazonaws.odb#OciIdentityDomain": {
+            "type": "structure",
+            "members": {
+                "ociIdentityDomainId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the OCI identity domain.</p>"
+                    }
+                },
+                "ociIdentityDomainResourceUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource URL for accessing the OCI identity domain.</p>"
+                    }
+                },
+                "ociIdentityDomainUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the OCI identity domain.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the OCI identity domain.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the OCI identity domain, if applicable.</p>"
+                    }
+                },
+                "accountSetupCloudFormationUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services CloudFormation URL for setting up the account integration with the OCI identity domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Oracle Cloud Infrastructure (OCI) identity domain configuration.</p>"
+            }
+        },
         "com.amazonaws.odb#OciOnboardingStatus": {
             "type": "enum",
             "members": {
@@ -6694,6 +7124,12 @@
             "operations": [
                 {
                     "target": "com.amazonaws.odb#AcceptMarketplaceRegistration"
+                },
+                {
+                    "target": "com.amazonaws.odb#AssociateIamRoleToResource"
+                },
+                {
+                    "target": "com.amazonaws.odb#DisassociateIamRoleFromResource"
                 },
                 {
                     "target": "com.amazonaws.odb#GetOciOnboardingStatus"
@@ -8243,6 +8679,16 @@
                 }
             }
         },
+        "com.amazonaws.odb#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):iam::[0-9]{12}:role/.+$"
+            }
+        },
         "com.amazonaws.odb#S3Access": {
             "type": "structure",
             "members": {
@@ -8552,6 +8998,49 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.odb#StsAccess": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.odb#ManagedResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the STS access configuration.</p>"
+                    }
+                },
+                "ipv4Addresses": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 addresses allowed for STS access.</p>"
+                    }
+                },
+                "domainName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name for STS access configuration.</p>"
+                    }
+                },
+                "stsPolicyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The STS policy document that defines permissions for token service usage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Web Services Security Token Service (STS) access from the ODB network.</p>"
+            }
+        },
+        "com.amazonaws.odb#SupportedAwsIntegration": {
+            "type": "enum",
+            "members": {
+                "KmsTde": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KmsTde"
+                    }
                 }
             }
         },
@@ -8981,10 +9470,46 @@
                         "smithy.api#documentation": "<p>Specifies the updated configuration for Zero-ETL access from the ODB network.</p>"
                     }
                 },
+                "stsAccess": {
+                    "target": "com.amazonaws.odb#Access",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Security Token Service (STS) access configuration for the ODB network.</p>"
+                    }
+                },
+                "kmsAccess": {
+                    "target": "com.amazonaws.odb#Access",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) access configuration for the ODB network.</p>"
+                    }
+                },
                 "s3PolicyDocument": {
                     "target": "com.amazonaws.odb#PolicyDocument",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the updated endpoint policy for Amazon S3 access from the ODB network.</p>"
+                    }
+                },
+                "stsPolicyDocument": {
+                    "target": "com.amazonaws.odb#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The STS policy document that defines permissions for token service usage within the ODB network.</p>"
+                    }
+                },
+                "kmsPolicyDocument": {
+                    "target": "com.amazonaws.odb#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS policy document that defines permissions for key usage within the ODB network.</p>"
+                    }
+                },
+                "crossRegionS3RestoreSourcesToEnable": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-Region Amazon S3 restore sources to enable for the ODB network.</p>"
+                    }
+                },
+                "crossRegionS3RestoreSourcesToDisable": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-Region Amazon S3 restore sources to disable for the ODB network.</p>"
                     }
                 }
             },

@@ -4657,7 +4657,7 @@
         "com.amazonaws.mailmanager#KmsKeyArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$"
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov|-eusc):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$"
             }
         },
         "com.amazonaws.mailmanager#KmsKeyId": {
@@ -8504,7 +8504,7 @@
                 "aws.api#arnReference": {
                     "type": "AWS::SecretsManager::Secret"
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=,.@-]+$"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=,.@-]+$"
             }
         },
         "com.amazonaws.mailmanager#SendAction": {
@@ -8644,7 +8644,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):sns:[a-z0-9-]+:\\d{12}:[\\w\\-]{1,256}$"
             }
         },
         "com.amazonaws.mailmanager#StartAddressListImportJob": {
@@ -9194,7 +9194,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):ses:[a-z0-9-]{1,20}:[0-9]{12}:(mailmanager-|addon-).+$"
+                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov|-eusc):ses:[a-z0-9-]{1,20}:[0-9]{12}:(mailmanager-|addon-).+$"
             }
         },
         "com.amazonaws.mailmanager#ThrottlingException": {

@@ -88,6 +88,9 @@
                     "target": "com.amazonaws.ecr#DeleteRepositoryPolicy"
                 },
                 {
+                    "target": "com.amazonaws.ecr#DeleteSigningConfiguration"
+                },
+                {
                     "target": "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusion"
                 },
                 {
@@ -98,6 +101,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#DescribeImageScanFindings"
+                },
+                {
+                    "target": "com.amazonaws.ecr#DescribeImageSigningStatus"
                 },
                 {
                     "target": "com.amazonaws.ecr#DescribePullThroughCacheRules"
@@ -134,6 +140,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#GetRepositoryPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ecr#GetSigningConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ecr#InitiateLayerUpload"
@@ -173,6 +182,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#PutReplicationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.ecr#PutSigningConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ecr#RegisterPullTimeUpdateExclusion"
@@ -3991,6 +4003,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#DeleteSigningConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DeleteSigningConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DeleteSigningConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#SigningConfigurationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the registry's signing configuration. Images pushed after deletion of the signing\n            configuration will no longer be automatically signed.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html\">Managed signing</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>\n         <note>\n            <p>Deleting the signing configuration does not affect existing image signatures.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.ecr#DeleteSigningConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#DeleteSigningConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry.</p>"
+                    }
+                },
+                "signingConfiguration": {
+                    "target": "com.amazonaws.ecr#SigningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry's deleted signing configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusion": {
             "type": "operation",
             "input": {
@@ -4278,6 +4340,95 @@
                     "target": "com.amazonaws.ecr#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>DescribeImageScanFindings</code> request. When the results of a\n                <code>DescribeImageScanFindings</code> request exceed <code>maxResults</code>, this\n            value can be used to retrieve the next page of results. This value is null when there\n            are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecr#DescribeImageSigningStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DescribeImageSigningStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DescribeImageSigningStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#ImageNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the signing status for a specified image. If the image matched\n            signing rules that reference different signing profiles, a status is returned\n            for each profile.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html\">Managed signing</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecr#DescribeImageSigningStatusRequest": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that contains the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing identifying information for an image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#DescribeImageSigningStatusResponse": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository.</p>"
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object with identifying information for the image.</p>"
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry.</p>"
+                    }
+                },
+                "signingStatuses": {
+                    "target": "com.amazonaws.ecr#ImageSigningStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of signing statuses for the specified image. Each status corresponds to a\n            signing profile.</p>"
                     }
                 }
             },
@@ -5681,6 +5832,59 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#GetSigningConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#GetSigningConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#GetSigningConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#SigningConfigurationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the registry's signing configuration, which defines\n            rules for automatically signing images using Amazon Web Services Signer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html\">Managed signing</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecr#GetSigningConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#GetSigningConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry.</p>"
+                    }
+                },
+                "signingConfiguration": {
+                    "target": "com.amazonaws.ecr#SigningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry's signing configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#Image": {
             "type": "structure",
             "members": {
@@ -6287,6 +6491,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The image scanning configuration for a repository.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ImageSigningStatus": {
+            "type": "structure",
+            "members": {
+                "signingProfileArn": {
+                    "target": "com.amazonaws.ecr#SigningProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Signer signing profile used to sign the image.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.ecr#SigningStatusFailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code, which is only present if <code>status</code>\n            is <code>FAILED</code>.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.ecr#SigningStatusFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why signing the image failed. This field is only\n            present if <code>status</code> is <code>FAILED</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#SigningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image's signing status. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Signing is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - The signature was successfully generated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Signing failed. See\n                    <code>failureCode</code> and <code>failureReason</code> for details.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The signing status for an image. Each status corresponds to a signing profile.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ImageSigningStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ImageSigningStatus"
             }
         },
         "com.amazonaws.ecr#ImageSizeInBytes": {
@@ -8489,6 +8731,58 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#PutSigningConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#PutSigningConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#PutSigningConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the registry's signing configuration, which defines\n            rules for automatically signing images with Amazon Web Services Signer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html\">Managed signing</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>\n         <note>\n            <p>To successfully generate a signature, the IAM principal pushing images must have\n                permission to sign payloads with the Amazon Web Services Signer signing profile referenced in the signing\n                configuration.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.ecr#PutSigningConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "signingConfiguration": {
+                    "target": "com.amazonaws.ecr#SigningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing configuration to assign to the registry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#PutSigningConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "signingConfiguration": {
+                    "target": "com.amazonaws.ecr#SigningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry's updated signing configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#RCTAppliedFor": {
             "type": "enum",
             "members": {
@@ -9640,6 +9934,170 @@
                     "min": 0
                 }
             }
+        },
+        "com.amazonaws.ecr#SigningConfiguration": {
+            "type": "structure",
+            "members": {
+                "rules": {
+                    "target": "com.amazonaws.ecr#SigningRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of signing rules. Each rule defines a signing profile and optional repository\n            filters that determine which images are automatically signed. Maximum of 10 rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The signing configuration for a registry, which specifies rules\n            for automatically signing images when pushed.</p>"
+            }
+        },
+        "com.amazonaws.ecr#SigningConfigurationNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message associated with the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified signing configuration was not found. This occurs when\n            attempting to retrieve or delete a signing configuration that does not exist.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#SigningProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services Signer signing profile. The ARN contains the\n            <code>arn:aws:signer</code> namespace, followed by the region, Amazon Web Services account ID, and\n            signing profile resource path. For example,\n            <code>arn:aws:signer:region:012345678910:/signing-profiles/profile-name</code>.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:signer:[a-z0-9-]+:[0-9]{12}:\\/signing-profiles\\/[a-zA-Z0-9_]{2,}$"
+            }
+        },
+        "com.amazonaws.ecr#SigningRepositoryFilter": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.ecr#SigningRepositoryFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter value used to match repository names. When using\n            <code>WILDCARD_MATCH</code>, the <code>*</code> character matches any sequence of characters.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>myapp/*</code> - Matches all repositories starting with\n                    <code>myapp/</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>*/production</code> - Matches all repositories ending with\n                    <code>/production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>*prod*</code> - Matches all repositories containing\n                    <code>prod</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterType": {
+                    "target": "com.amazonaws.ecr#SigningRepositoryFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of filter to apply. Currently, only <code>WILDCARD_MATCH</code> is supported,\n            which uses wildcard patterns to match repository names.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A repository filter used to determine which repositories have their\n            images automatically signed on push. Each filter consists of a filter type and filter value.</p>"
+            }
+        },
+        "com.amazonaws.ecr#SigningRepositoryFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#SigningRepositoryFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ecr#SigningRepositoryFilterType": {
+            "type": "enum",
+            "members": {
+                "WILDCARD_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WILDCARD_MATCH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of filter to use when determining which repositories\n            should have their images automatically signed.</p>"
+            }
+        },
+        "com.amazonaws.ecr#SigningRepositoryFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?:[a-z0-9*]+(?:[._-][a-z0-9*]+)*/)*[a-z0-9*]+(?:[._-][a-z0-9*]+)*$"
+            }
+        },
+        "com.amazonaws.ecr#SigningRule": {
+            "type": "structure",
+            "members": {
+                "signingProfileArn": {
+                    "target": "com.amazonaws.ecr#SigningProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Signer signing profile to use for signing images that match this\n            rule. For more information about signing profiles, see <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/signing-profiles.html\">Signing profiles</a> in\n            the <i>Amazon Web Services Signer Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "repositoryFilters": {
+                    "target": "com.amazonaws.ecr#SigningRepositoryFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of repository filters that determine which repositories\n            have their images signed on push. If no filters are specified, all\n            images pushed to the registry are signed using the rule's signing\n            profile. Maximum of 100 filters per rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A signing rule that specifies a signing profile and optional\n            repository filters. When an image is pushed to a matching repository, a\n            signing job is created using the specified profile.</p>"
+            }
+        },
+        "com.amazonaws.ecr#SigningRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#SigningRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.ecr#SigningStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image signing status. Possible values include <code>IN_PROGRESS</code>,\n            <code>COMPLETE</code>, and <code>FAILED</code>.</p>"
+            }
+        },
+        "com.amazonaws.ecr#SigningStatusFailureCode": {
+            "type": "string"
+        },
+        "com.amazonaws.ecr#SigningStatusFailureReason": {
+            "type": "string"
         },
         "com.amazonaws.ecr#Source": {
             "type": "string"

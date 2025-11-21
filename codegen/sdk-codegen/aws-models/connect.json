@@ -1112,6 +1112,12 @@
                     "target": "com.amazonaws.connect#CreateContactFlowModule"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateContactFlowModuleAlias"
+                },
+                {
+                    "target": "com.amazonaws.connect#CreateContactFlowModuleVersion"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateContactFlowVersion"
                 },
                 {
@@ -1202,6 +1208,12 @@
                     "target": "com.amazonaws.connect#DeleteContactFlowModule"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteContactFlowModuleAlias"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteContactFlowModuleVersion"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteContactFlowVersion"
                 },
                 {
@@ -1287,6 +1299,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeContactFlowModule"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeContactFlowModuleAlias"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeEmailAddress"
@@ -1463,7 +1478,13 @@
                     "target": "com.amazonaws.connect#ListContactEvaluations"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListContactFlowModuleAliases"
+                },
+                {
                     "target": "com.amazonaws.connect#ListContactFlowModules"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListContactFlowModuleVersions"
                 },
                 {
                     "target": "com.amazonaws.connect#ListContactFlows"
@@ -1761,6 +1782,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateContactFlowMetadata"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateContactFlowModuleAlias"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateContactFlowModuleContent"
@@ -6857,10 +6881,156 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
+                },
+                "FlowModuleContentSha256": {
+                    "target": "com.amazonaws.connect#FlowModuleContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Hash of the module content for integrity verification.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>"
+                    }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the version.</p>"
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.connect#FlowModuleSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the flow module.</p>"
+                    }
+                },
+                "ExternalInvocationConfiguration": {
+                    "target": "com.amazonaws.connect#ExternalInvocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external invocation configuration for the flow module</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a flow module.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactFlowModuleAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^([$0-9a-zA-Z][_-]?)+$"
+            }
+        },
+        "com.amazonaws.connect#ContactFlowModuleAliasInfo": {
+            "type": "structure",
+            "members": {
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>"
+                    }
+                },
+                "ContactFlowModuleArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow module.</p>"
+                    }
+                },
+                "AliasId": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alias.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alias.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this resource was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an alias.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactFlowModuleAliasSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow module alias.</p>"
+                    }
+                },
+                "AliasId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>"
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alias.</p>"
+                    }
+                },
+                "AliasDescription": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alias.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this resource was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an alias.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactFlowModuleAliasSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ContactFlowModuleAliasSummary"
             }
         },
         "com.amazonaws.connect#ContactFlowModuleContent": {
@@ -7023,6 +7193,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains summary information about a flow.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactFlowModuleVersionSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow module version.</p>"
+                    }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the flow module version.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a version.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactFlowModuleVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ContactFlowModuleVersionSummary"
             }
         },
         "com.amazonaws.connect#ContactFlowModulesSummaryList": {
@@ -8174,6 +8376,113 @@
                 }
             }
         },
+        "com.amazonaws.connect#CreateContactFlowModuleAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateContactFlowModuleAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateContactFlowModuleAliasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a named alias that points to a specific version of a contact flow module.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/alias",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateContactFlowModuleAliasRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ContactFlowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alias.</p>"
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleVersion": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateContactFlowModuleAliasResponse": {
+            "type": "structure",
+            "members": {
+                "ContactFlowModuleArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow module.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateContactFlowModuleRequest": {
             "type": "structure",
             "members": {
@@ -8217,6 +8526,18 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.connect#FlowModuleSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the flow module.</p>"
+                    }
+                },
+                "ExternalInvocationConfiguration": {
+                    "target": "com.amazonaws.connect#ExternalInvocationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external invocation configuration for the flow module.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8236,6 +8557,102 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow module.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateContactFlowModuleVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateContactFlowModuleVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateContactFlowModuleVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an immutable snapshot of a contact flow module, preserving its content and settings at a specific point in time for version control and rollback capabilities.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/version",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateContactFlowModuleVersionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the flow module version.</p>"
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowModuleContentSha256": {
+                    "target": "com.amazonaws.connect#FlowModuleContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the checksum value of the flow module content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateContactFlowModuleVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ContactFlowModuleArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow module.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>"
                     }
                 }
             },
@@ -12152,6 +12569,82 @@
                 }
             }
         },
+        "com.amazonaws.connect#DeleteContactFlowModuleAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteContactFlowModuleAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteContactFlowModuleAliasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an alias reference, breaking the named connection to the underlying module version without affecting the version itself.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/alias/{AliasId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowModuleAliasRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowModuleAliasResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeleteContactFlowModuleRequest": {
             "type": "structure",
             "members": {
@@ -12177,6 +12670,82 @@
             }
         },
         "com.amazonaws.connect#DeleteContactFlowModuleResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowModuleVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteContactFlowModuleVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteContactFlowModuleVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a specific version of a contact flow module.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/version/{ContactFlowModuleVersion}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowModuleVersionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleVersion": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteContactFlowModuleVersionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -14026,6 +14595,89 @@
                     "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.connect#DescribeContactFlowModuleAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeContactFlowModuleAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeContactFlowModuleAliasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific alias, including which version it currently points to and its metadata.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/alias/{AliasId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeContactFlowModuleAliasRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeContactFlowModuleAliasResponse": {
+            "type": "structure",
+            "members": {
+                "ContactFlowModuleAlias": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleAliasInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the flow module alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#DescribeContactFlowModuleRequest": {
@@ -20268,6 +20920,21 @@
                 "target": "com.amazonaws.connect#Expression"
             }
         },
+        "com.amazonaws.connect#ExternalInvocationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Enable external invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The external invocation configuration for the flow module</p>"
+            }
+        },
         "com.amazonaws.connect#FailedRequest": {
             "type": "structure",
             "members": {
@@ -20693,6 +21360,19 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]{64}$"
             }
+        },
+        "com.amazonaws.connect#FlowModuleContentSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{64}$"
+            }
+        },
+        "com.amazonaws.connect#FlowModuleSettings": {
+            "type": "string"
         },
         "com.amazonaws.connect#FormId": {
             "type": "string"
@@ -25390,6 +26070,208 @@
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>\n         <important>\n            <p>This is always returned as null in the response.</p>\n         </important>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListContactFlowModuleAliases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListContactFlowModuleAliasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListContactFlowModuleAliasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all aliases associated with a contact flow module, showing their current version mappings and metadata.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/aliases",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContactFlowModuleAliasSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListContactFlowModuleAliasesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListContactFlowModuleAliasesResponse": {
+            "type": "structure",
+            "members": {
+                "ContactFlowModuleAliasSummaryList": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleAliasSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the flow module aliases.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListContactFlowModuleVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListContactFlowModuleVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListContactFlowModuleVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of all versions for a specific contact flow module.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContactFlowModuleVersionSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListContactFlowModuleVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListContactFlowModuleVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "ContactFlowModuleVersionSummaryList": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the flow module versions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             },
@@ -44924,6 +45806,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#UpdateContactFlowModuleAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateContactFlowModuleAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateContactFlowModuleAliasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ConditionalOperationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a specific Aliases metadata, including the version it’s tied to, it’s name, and description.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/alias/{AliasId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateContactFlowModuleAliasRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowModuleId": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasId": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alias.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alias.</p>"
+                    }
+                },
+                "ContactFlowModuleVersion": {
+                    "target": "com.amazonaws.connect#ResourceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the flow module.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateContactFlowModuleAliasResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#UpdateContactFlowModuleContent": {
             "type": "operation",
             "input": {
@@ -44983,8 +45965,13 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowModuleContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    flow in Amazon Connect Flow language</a>. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The JSON string that represents the content of the flow. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    flow in Amazon Connect Flow language</a>. </p>"
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.connect#FlowModuleSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Serialized JSON string of the flow module Settings schema.</p>"
                     }
                 }
             },

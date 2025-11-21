@@ -361,7 +361,7 @@
                 "SingleMasterConfiguration": {
                     "target": "com.amazonaws.kinesisvideo#SingleMasterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing the configuration for the <code>SINGLE_MASTER</code> channel\n            type. </p>"
+                        "smithy.api#documentation": "<p>A structure containing the configuration for the <code>SINGLE_MASTER</code> channel\n            type. The default configuration for the channel message's time to live is 60 seconds (1\n            minute).</p>"
                     }
                 },
                 "Tags": {
@@ -435,7 +435,7 @@
                 "DeviceName": {
                     "target": "com.amazonaws.kinesisvideo#DeviceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the device that is writing to the stream. </p>\n         <note>\n            <p>In the current implementation, Kinesis Video Streams does not use this\n                name.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the device that is writing to the stream. </p>\n         <note>\n            <p>In the current implementation, Kinesis Video Streams doesn't use this name.</p>\n         </note>"
                     }
                 },
                 "StreamName": {
@@ -454,19 +454,25 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.kinesisvideo#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n         <p>If no key ID is specified, the default, Kinesis Video-managed key\n            (<code>Amazon Web Services/kinesisvideo</code>) is used.</p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n         <p>If no key ID is specified, the default, Kinesis Video-managed key\n            (<code>aws/kinesisvideo</code>) is used.</p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
                     }
                 },
                 "DataRetentionInHours": {
                     "target": "com.amazonaws.kinesisvideo#DataRetentionInHours",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p>\n         <p>The default value is 0, indicating that the stream does not persist data.</p>\n         <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume\n            the fragments that remain in the service host buffer, which has a retention time limit\n            of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the\n            buffer when either limit is reached.</p>"
+                        "smithy.api#documentation": "<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p>\n         <p>The default value is 0, indicating that the stream does not persist data. The minimum\n            is 1 hour.</p>\n         <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume\n            the fragments that remain in the service host buffer, which has a retention time limit\n            of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the\n            buffer when either limit is reached.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.kinesisvideo#ResourceTags",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags to associate with the specified stream. Each tag is a key-value pair\n            (the value is optional).</p>"
+                    }
+                },
+                "StreamStorageConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#StreamStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the stream's storage, including the default storage tier for stream data. This configuration determines how stream data is stored and accessed, with different tiers offering varying levels of performance and cost optimization.</p>\n         <p>If not specified, the stream will use the default storage configuration with HOT tier for optimal performance.</p>"
                     }
                 }
             },
@@ -504,6 +510,23 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DefaultStorageTier": {
+            "type": "enum",
+            "members": {
+                "HOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOT"
+                    }
+                },
+                "WARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARM"
+                    }
                 }
             }
         },
@@ -1251,6 +1274,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kinesisvideo#DescribeStreamStorageConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#DescribeStreamStorageConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#DescribeStreamStorageConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current storage configuration for the specified Kinesis video stream.</p>\n         <p>In the request, you must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>\n         <p>You must have permissions for the <code>KinesisVideo:DescribeStreamStorageConfiguration</code> action.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeStreamStorageConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeStreamStorageConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream for which you want to retrieve the storage configuration.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream for which you want to retrieve the storage configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeStreamStorageConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
+                    }
+                },
+                "StreamStorageConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#StreamStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current storage configuration for the stream, including the default storage tier and other storage-related settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kinesisvideo#DestinationRegion": {
             "type": "string",
             "traits": {
@@ -1523,7 +1623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides an endpoint for the specified signaling channel to send and receive messages.\n            This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter,\n            which consists of the <code>Protocols</code> and <code>Role</code> properties.</p>\n         <p>\n            <code>Protocols</code> is used to determine the communication mechanism. For example,\n            if you specify <code>WSS</code> as the protocol, this API produces a secure websocket\n            endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS\n            endpoint. </p>\n         <p>\n            <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role\n            results in this API generating an endpoint that a client can use to communicate with any\n            of the viewers on the channel. A <code>VIEWER</code> role results in this API generating\n            an endpoint that a client can use to communicate only with a <code>MASTER</code>.\n        </p>",
+                "smithy.api#documentation": "<p>Provides an endpoint for the specified signaling channel to send and receive messages.\n            This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter,\n            which consists of the <code>Protocols</code> and <code>Role</code> properties.</p>\n         <p>\n            <code>Protocols</code> is used to determine the communication mechanism. For example,\n            if you specify <code>WSS</code> as the protocol, this API produces a secure websocket\n            endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS\n            endpoint. If you specify <code>WEBRTC</code> as the protocol, but the signaling channel isn't\n            configured for ingestion, you will receive the error\n                <code>InvalidArgumentException</code>.</p>\n         <p>\n            <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role\n            results in this API generating an endpoint that a client can use to communicate with any\n            of the viewers on the channel. A <code>VIEWER</code> role results in this API generating\n            an endpoint that a client can use to communicate only with a <code>MASTER</code>.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getSignalingChannelEndpoint",
@@ -1768,6 +1868,9 @@
                     "target": "com.amazonaws.kinesisvideo#DescribeStream"
                 },
                 {
+                    "target": "com.amazonaws.kinesisvideo#DescribeStreamStorageConfiguration"
+                },
+                {
                     "target": "com.amazonaws.kinesisvideo#GetDataEndpoint"
                 },
                 {
@@ -1820,6 +1923,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#UpdateStream"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#UpdateStreamStorageConfiguration"
                 }
             ],
             "traits": {
@@ -3400,7 +3506,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The structure that contains the notification information for the KVS images delivery. If this parameter is null, the configuration will be deleted from the stream.</p>"
+                "smithy.api#documentation": "<p>Use this API to configure Amazon Simple Notification Service (Amazon SNS)\n            notifications for when fragments become available in a stream. If this parameter is\n            null, the configuration will be deleted from the stream.</p>\n         <p>See <a href=\"https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/notifications.html\">Notifications in Kinesis\n                Video Streams</a> for more information.</p>"
             }
         },
         "com.amazonaws.kinesisvideo#NotificationDestinationConfig": {
@@ -3436,7 +3542,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as \n            credentials to accesss the local media files streamed on the camera. </p>"
+                "smithy.api#documentation": "<p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as \n            credentials to access the local media files streamed on the camera. </p>"
             }
         },
         "com.amazonaws.kinesisvideo#RecorderStatus": {
@@ -3551,7 +3657,7 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.kinesisvideo#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Quartz cron expression that takes care of scheduling jobs to record from the\n            camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided for the <code>RecorderConfig</code>,\n            then the Edge Agent will always be set to recording mode.</p>\n         <p>For more information about Quartz, refer to the \n            <a href=\"http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html\">\n               <i>Cron Trigger Tutorial</i>\n            </a> page to understand the valid expressions and its use.</p>",
+                        "smithy.api#documentation": "<p>The Quartz cron expression that takes care of scheduling jobs to record from the\n            camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided for the <code>RecorderConfig</code>,\n            then the Edge Agent will always be set to recording mode.</p>\n         <p>For more information about Quartz, refer to the \n            <a href=\"https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html\">\n               <i>Cron Trigger Tutorial</i>\n            </a> page to understand the valid expressions and its use.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3603,7 +3709,7 @@
                 "MessageTtlSeconds": {
                     "target": "com.amazonaws.kinesisvideo#MessageTtlSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time a signaling channel retains undelivered messages before they are\n            discarded.</p>"
+                        "smithy.api#documentation": "<p>The period of time (in seconds) a signaling channel retains undelivered messages\n            before they are discarded. Use  to update\n            this value.</p>"
                     }
                 }
             },
@@ -3880,6 +3986,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the condition that streams must satisfy to be returned when you list\n            streams (see the <code>ListStreams</code> API). A condition has a comparison operation\n            and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator,\n            which finds streams whose names start with a given prefix. </p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#StreamStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "DefaultStorageTier": {
+                    "target": "com.amazonaws.kinesisvideo#DefaultStorageTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default storage tier for the stream data. This setting determines the storage class used for stream data, affecting both performance characteristics and storage costs.</p>\n         <p>Available storage tiers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HOT</code> - Optimized for frequent access with the lowest latency and highest performance. Ideal for real-time applications and frequently accessed data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARM</code> - Balanced performance and cost for moderately accessed data. Suitable for data that is accessed regularly but not continuously.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for stream storage, including the default storage tier for stream data. This configuration determines how stream data is stored and accessed, with different tiers offering varying levels of performance and cost optimization.</p>"
             }
         },
         "com.amazonaws.kinesisvideo#SyncStatus": {
@@ -4653,7 +4774,7 @@
                 "SingleMasterConfiguration": {
                     "target": "com.amazonaws.kinesisvideo#SingleMasterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of\n            the signaling channel that you want to update. </p>"
+                        "smithy.api#documentation": "<p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of\n            the signaling channel that you want to update. This parameter and the channel message's\n            time-to-live are required for channels with the <code>SINGLE_MASTER</code> channel\n            type.</p>"
                     }
                 }
             },
@@ -4745,6 +4866,84 @@
             }
         },
         "com.amazonaws.kinesisvideo#UpdateStreamOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateStreamStorageConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#UpdateStreamStorageConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#UpdateStreamStorageConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#VersionMismatchException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the storage configuration for an existing Kinesis video stream.</p>\n         <p>This operation allows you to modify the storage tier settings for a stream, enabling you to optimize storage costs and performance based on your access patterns.</p>\n         <p>\n            <code>UpdateStreamStorageConfiguration</code> is an asynchronous operation.</p>\n         <p>You must have permissions for the <code>KinesisVideo:UpdateStreamStorageConfiguration</code> action.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateStreamStorageConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateStreamStorageConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream for which you want to update the storage configuration.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream for which you want to update the storage configuration.</p>"
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kinesisvideo#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the stream whose storage configuration you want to change. To get the\n            version, call either the <code>DescribeStream</code> or the <code>ListStreams</code>\n            API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreamStorageConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#StreamStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new storage configuration for the stream. This includes the default storage tier that determines how stream data is stored and accessed.</p>\n         <p>Different storage tiers offer varying levels of performance and cost optimization to match your specific use case requirements.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateStreamStorageConfigurationOutput": {
             "type": "structure",
             "members": {},
             "traits": {

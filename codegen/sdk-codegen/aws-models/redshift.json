@@ -245,6 +245,23 @@
                 "smithy.api#documentation": "<p>Adds a partner integration to a cluster.\n            This operation authorizes a partner to push status updates for the specified database. \n            To complete the integration, you also set up the integration on the partner website.</p>"
             }
         },
+        "com.amazonaws.redshift#ApplicationType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "LAKEHOUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lakehouse"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#AquaConfiguration": {
             "type": "structure",
             "members": {
@@ -889,7 +906,7 @@
                 "AuthorizedAudiencesList": {
                     "target": "com.amazonaws.redshift#AuthorizedAudienceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of audiences for the authorized token issuer for integrating Amazon Redshift \n            with IDC Identity Center.</p>"
+                        "smithy.api#documentation": "<p>The list of audiences for the authorized token issuer for integrating Amazon Redshift\n            with IDC Identity Center.</p>"
                     }
                 }
             },
@@ -1168,6 +1185,16 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#CatalogNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$"
             }
         },
         "com.amazonaws.redshift#CertificateAssociation": {
@@ -1560,6 +1587,18 @@
                     "target": "com.amazonaws.redshift#SecondaryClusterInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>The secondary compute unit of a cluster, if Multi-AZ deployment is turned on.</p>"
+                    }
+                },
+                "LakehouseRegistrationStatus": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lakehouse registration for the cluster. Indicates whether the cluster is successfully registered with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "CatalogArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Glue data catalog associated with the cluster enabled with Amazon Redshift federated permissions.</p>"
                     }
                 }
             },
@@ -2543,6 +2582,22 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.redshift#Connect": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.redshift#ServiceAuthorization",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Determines whether the Amazon Redshift connect integration is enabled or disabled for the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines the Amazon Redshift connect service integration scope.</p>"
+            }
+        },
         "com.amazonaws.redshift#ConsumerIdentifierList": {
             "type": "list",
             "member": {
@@ -2744,7 +2799,13 @@
                     "target": "com.amazonaws.redshift#ClusterSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#DependentServiceRequestThrottlingFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#HsmClientCertificateNotFoundFault"
@@ -3049,6 +3110,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "CatalogName": {
+                    "target": "com.amazonaws.redshift#CatalogNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue data catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>\n         </p>\n         <p>Example: <code>my-catalog_01</code>\n         </p>"
                     }
                 }
             },
@@ -4018,6 +4085,12 @@
                     "target": "com.amazonaws.redshift#ServiceIntegrationList",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of service integrations for the Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.redshift#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application being created. Valid values are <code>None</code> or <code>Lakehouse</code>. Use <code>Lakehouse</code> to enable Amazon Redshift federated permissions on cluster.</p>"
                     }
                 },
                 "Tags": {
@@ -11510,6 +11583,72 @@
                 "target": "com.amazonaws.redshift#LakeFormationScopeUnion"
             }
         },
+        "com.amazonaws.redshift#LakehouseConfiguration": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster associated with this lakehouse configuration.</p>"
+                    }
+                },
+                "LakehouseIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "LakehouseRegistrationStatus": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the lakehouse registration. Indicates whether the cluster is successfully registered with the lakehouse.</p>"
+                    }
+                },
+                "CatalogArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Glue data catalog associated with the lakehouse configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration information for lakehouse integration, including the cluster identifier, catalog ARN, and registration status.</p>"
+            }
+        },
+        "com.amazonaws.redshift#LakehouseIdcRegistration": {
+            "type": "enum",
+            "members": {
+                "ASSOCIATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Associate"
+                    }
+                },
+                "DISASSOCIATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disassociate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#LakehouseRegistration": {
+            "type": "enum",
+            "members": {
+                "REGISTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Register"
+                    }
+                },
+                "DEREGISTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deregister"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#LimitExceededFault": {
             "type": "structure",
             "members": {
@@ -12870,6 +13009,87 @@
                     "target": "com.amazonaws.redshift#IntegrationName",
                     "traits": {
                         "smithy.api#documentation": "<p>A new name for the integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#ModifyLakehouseConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#ModifyLakehouseConfigurationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#LakehouseConfiguration"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the lakehouse configuration for a cluster. This operation allows you to manage Amazon Redshift federated permissions and Amazon Web Services IAM Identity Center trusted identity propagation.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ModifyLakehouseConfigurationMessage": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster whose lakehouse configuration you want to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LakehouseRegistration": {
+                    "target": "com.amazonaws.redshift#LakehouseRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to register or deregister the cluster with Amazon Redshift federated permissions. Valid values are <code>Register</code> or <code>Deregister</code>.</p>"
+                    }
+                },
+                "CatalogName": {
+                    "target": "com.amazonaws.redshift#CatalogNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue data catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>\n         </p>\n         <p>Example: <code>my-catalog_01</code>\n         </p>"
+                    }
+                },
+                "LakehouseIdcRegistration": {
+                    "target": "com.amazonaws.redshift#LakehouseIdcRegistration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions. Valid values are <code>Associate</code> or <code>Disassociate</code>.</p>"
+                    }
+                },
+                "LakehouseIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that, if <code>true</code>, validates the request without actually modifying the lakehouse configuration. Use this to check for errors before making changes.</p>"
                     }
                 }
             },
@@ -14448,6 +14668,12 @@
                         "smithy.api#documentation": "<p>A list of service integrations for the Redshift IAM Identity Center application.</p>"
                     }
                 },
+                "ApplicationType": {
+                    "target": "com.amazonaws.redshift#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of application being created. Valid values are <code>None</code> or <code>Lakehouse</code>. Use <code>Lakehouse</code> to enable Amazon Redshift federated permissions on cluster.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.redshift#TagList",
                     "traits": {
@@ -14547,6 +14773,26 @@
                 "smithy.api#documentation": "<p>The request contains one or more invalid parameters. \n            This error occurs when required parameters are missing, \n            parameter values are outside acceptable ranges, \n            or parameter formats are incorrect.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#RedshiftScopeUnion": {
+            "type": "union",
+            "members": {
+                "Connect": {
+                    "target": "com.amazonaws.redshift#Connect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Redshift connect integration scope configuration. Defines authorization settings for Amazon Redshift connect service integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union structure that defines the scope of Amazon Redshift service integrations. Contains configuration for different integration types such as Amazon Redshift.</p>"
+            }
+        },
+        "com.amazonaws.redshift#RedshiftServiceIntegrations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#RedshiftScopeUnion"
             }
         },
         "com.amazonaws.redshift#RedshiftServiceVersion20121201": {
@@ -14909,6 +15155,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyIntegration"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ModifyLakehouseConfiguration"
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyRedshiftIdcApplication"
@@ -16976,6 +17225,9 @@
                     "target": "com.amazonaws.redshift#ClusterSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DependentServiceAccessDeniedFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#DependentServiceRequestThrottlingFault"
                 },
                 {
@@ -17028,6 +17280,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#NumberOfNodesQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#ReservedNodeAlreadyExistsFault"
@@ -17283,6 +17538,18 @@
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>If true, the snapshot will be restored to a cluster deployed in two Availability Zones.</p>"
+                    }
+                },
+                "CatalogName": {
+                    "target": "com.amazonaws.redshift#CatalogNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue Data Catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>\n         </p>\n         <p>Example: <code>my-catalog_01</code>\n         </p>"
+                    }
+                },
+                "RedshiftIdcApplicationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions.</p>"
                     }
                 }
             },
@@ -18324,6 +18591,12 @@
                     "target": "com.amazonaws.redshift#S3AccessGrantsServiceIntegrations",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of scopes set up for S3 Access Grants integration.</p>"
+                    }
+                },
+                "Redshift": {
+                    "target": "com.amazonaws.redshift#RedshiftServiceIntegrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of scopes set up for Amazon Redshift integration.</p>"
                     }
                 }
             },

@@ -2020,6 +2020,14 @@
                     {
                         "value": "SMS",
                         "name": "SMS"
+                    },
+                    {
+                        "value": "WHATSAPP",
+                        "name": "WHATSAPP"
+                    },
+                    {
+                        "value": "PUSH",
+                        "name": "PUSH"
                     }
                 ]
             }
@@ -4233,15 +4241,13 @@
                 "name": {
                     "target": "com.amazonaws.qconnect#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the message template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the message template.</p>"
                     }
                 },
                 "content": {
                     "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The content of the message template.</p>"
                     }
                 },
                 "description": {
@@ -4261,6 +4267,12 @@
                     "target": "com.amazonaws.qconnect#LanguageCode",
                     "traits": {
                         "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>"
+                    }
+                },
+                "sourceConfiguration": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration of the message template. Only set this argument for WHATSAPP channel subtype.</p>"
                     }
                 },
                 "defaultAttributes": {
@@ -6536,6 +6548,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "channel": {
+                    "target": "com.amazonaws.qconnect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel of the message template.</p>"
+                    }
+                },
                 "channelSubtype": {
                     "target": "com.amazonaws.qconnect#ChannelSubtype",
                     "traits": {
@@ -6569,8 +6587,7 @@
                 "content": {
                     "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The content of the message template.</p>"
                     }
                 },
                 "description": {
@@ -6583,6 +6600,12 @@
                     "target": "com.amazonaws.qconnect#LanguageCode",
                     "traits": {
                         "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>"
+                    }
+                },
+                "sourceConfigurationSummary": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration summary of the message template.</p>"
                     }
                 },
                 "groupingConfiguration": {
@@ -11218,6 +11241,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content of the message template that applies to the SMS channel subtype.</p>"
                     }
+                },
+                "whatsApp": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to the WHATSAPP channel subtype.</p>"
+                    }
+                },
+                "push": {
+                    "target": "com.amazonaws.qconnect#PushMessageTemplateContent"
                 }
             },
             "traits": {
@@ -11272,6 +11304,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "channel": {
+                    "target": "com.amazonaws.qconnect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel of the message template.</p>"
+                    }
+                },
                 "channelSubtype": {
                     "target": "com.amazonaws.qconnect#ChannelSubtype",
                     "traits": {
@@ -11305,8 +11343,7 @@
                 "content": {
                     "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The content of the message template.</p>"
                     }
                 },
                 "description": {
@@ -11319,6 +11356,12 @@
                     "target": "com.amazonaws.qconnect#LanguageCode",
                     "traits": {
                         "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>"
+                    }
+                },
+                "sourceConfigurationSummary": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration summary of the message template.</p>"
                     }
                 },
                 "groupingConfiguration": {
@@ -11620,6 +11663,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "channel": {
+                    "target": "com.amazonaws.qconnect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel of the message template.</p>"
+                    }
+                },
                 "channelSubtype": {
                     "target": "com.amazonaws.qconnect#ChannelSubtype",
                     "traits": {
@@ -11668,6 +11717,12 @@
                         "smithy.api#documentation": "<p>The description of the message template.</p>"
                     }
                 },
+                "sourceConfigurationSummary": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration summary of the message template.</p>"
+                    }
+                },
                 "groupingConfiguration": {
                     "target": "com.amazonaws.qconnect#GroupingConfiguration"
                 },
@@ -11700,6 +11755,34 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#MessageTemplateSearchResultData"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSourceConfiguration": {
+            "type": "union",
+            "members": {
+                "whatsApp": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sourceConfiguration of the message template that applies to the WHATSAPP channel subtype.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container of message template source configuration.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSourceConfigurationSummary": {
+            "type": "union",
+            "members": {
+                "whatsApp": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateSourceConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sourceConfiguration summary of the message template that applies to the WHATSAPP channel subtype.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container of message template source configuration summary.</p>"
             }
         },
         "com.amazonaws.qconnect#MessageTemplateSummary": {
@@ -11740,6 +11823,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "channel": {
+                    "target": "com.amazonaws.qconnect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel this message template applies to.</p>"
+                    }
+                },
                 "channelSubtype": {
                     "target": "com.amazonaws.qconnect#ChannelSubtype",
                     "traits": {
@@ -11769,6 +11858,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the message template data.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "sourceConfiguration": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfiguration"
                 },
                 "activeVersionNumber": {
                     "target": "com.amazonaws.qconnect#Version",
@@ -11843,6 +11935,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the message template.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.qconnect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel of the message template.</p>"
                     }
                 },
                 "channelSubtype": {
@@ -12210,6 +12308,293 @@
                         "name": "LOW"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#PushADMMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body to use in a push notification that is based on the message template.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#PushMessageAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>"
+                    }
+                },
+                "sound": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in <code>/res/raw/</code>.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>"
+                    }
+                },
+                "imageUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an image to display in a push notification that's based on the message template.</p>"
+                    }
+                },
+                "imageIconUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>"
+                    }
+                },
+                "smallImageIconUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+                    }
+                },
+                "rawContent": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the push message template that applies to ADM (Amazon Device Messaging) notification service.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#PushAPNSMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body to use in a push notification that is based on the message template.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#PushMessageAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the iOS platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>"
+                    }
+                },
+                "sound": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the sound to play when the recipient receives a push notification that's based on the message template. The value for this key is the name of a sound file in your app's main bundle or the <code>Library/Sounds</code> folder in your app's data container. If the sound file can't be found or you specify <code>default</code> for the value, the system plays the default alert sound.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>"
+                    }
+                },
+                "mediaUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an image or video to display in push notifications that are based on the message template.</p>"
+                    }
+                },
+                "rawContent": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw, JSON-formatted string to use as the payload for a push notification that's based on the message template. If specified, this value overrides all other content for the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the push message template that applies to APNS (Apple Push Notification service) notification service.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#PushBaiduMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body to use in a push notification that is based on the message template.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#PushMessageAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>"
+                    }
+                },
+                "sound": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in <code>/res/raw/</code>.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>"
+                    }
+                },
+                "imageUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an image to display in a push notification that's based on the message template.</p>"
+                    }
+                },
+                "imageIconUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>"
+                    }
+                },
+                "smallImageIconUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+                    }
+                },
+                "rawContent": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the push message template that applies to Baidu notification service.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#PushFCMMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body to use in a push notification that is based on the message template.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#PushMessageAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>"
+                    }
+                },
+                "sound": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in <code>/res/raw/</code>.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>"
+                    }
+                },
+                "imageUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an image to display in a push notification that's based on the message template.</p>"
+                    }
+                },
+                "imageIconUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>"
+                    }
+                },
+                "smallImageIconUrl": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+                    }
+                },
+                "rawContent": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the push message template that applies to FCM (Firebase Cloud Messaging) notification service.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#PushMessageAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OPEN_APP",
+                        "name": "OPEN_APP"
+                    },
+                    {
+                        "value": "DEEP_LINK",
+                        "name": "DEEP_LINK"
+                    },
+                    {
+                        "value": "URL",
+                        "name": "URL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#PushMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "adm": {
+                    "target": "com.amazonaws.qconnect#PushADMMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to ADM (Amazon Device Messaging) notification service.</p>"
+                    }
+                },
+                "apns": {
+                    "target": "com.amazonaws.qconnect#PushAPNSMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to APNS(Apple Push Notification service) notification service.</p>"
+                    }
+                },
+                "fcm": {
+                    "target": "com.amazonaws.qconnect#PushFCMMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to FCM (Firebase Cloud Messaging) notification service.</p>"
+                    }
+                },
+                "baidu": {
+                    "target": "com.amazonaws.qconnect#PushBaiduMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to Baidu notification service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the message template that applies to the push channel subtype.</p>"
             }
         },
         "com.amazonaws.qconnect#PutFeedback": {
@@ -13873,8 +14258,13 @@
                 "content": {
                     "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The content of the message template.</p>"
+                    }
+                },
+                "sourceConfigurationSummary": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration of the message template.</p>"
                     }
                 },
                 "attributesNotInterpolated": {
@@ -16322,6 +16712,12 @@
                         "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>"
                     }
                 },
+                "sourceConfiguration": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration of the message template. Only set this argument for WHATSAPP channel subtype.</p>"
+                    }
+                },
                 "defaultAttributes": {
                     "target": "com.amazonaws.qconnect#MessageTemplateAttributes",
                     "traits": {
@@ -16910,6 +17306,182 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^https?://[A-Za-z0-9][^\\s]*$"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppBusinessAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "(^waba-[0-9a-zA-Z]+$)|(^arn:.*:waba/[0-9a-zA-Z]+$)"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateComponent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The component mapping from WhatsApp template parameters to Message Template attributes.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateComponents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateComponent"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateContentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the message template that applies to the WHATSAPP channel subtype.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateContentData": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6000
+                }
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateLanguage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "businessAccountId": {
+                    "target": "com.amazonaws.qconnect#WhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the End User Messaging WhatsApp Business Account to associate with this template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WhatsApp template ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "components": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateComponents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of component mapping from WhatsApp template parameters to Message Template attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information about the external data source.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppMessageTemplateSourceConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "businessAccountId": {
+                    "target": "com.amazonaws.qconnect#WhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the End User Messaging WhatsApp Business Account to associate with this template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of WhatsApp template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the WhatsApp template.</p>"
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the WhatsApp template.</p>"
+                    }
+                },
+                "components": {
+                    "target": "com.amazonaws.qconnect#WhatsAppMessageTemplateComponents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of component mapping from WhatsApp template parameters to Message Template attributes.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#WhatsAppSourceConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the message template.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status reason of the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information about the external data source.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#WhatsAppSourceConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALID",
+                        "name": "VALID"
+                    },
+                    {
+                        "value": "INVALID",
+                        "name": "INVALID"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#WisdomService": {

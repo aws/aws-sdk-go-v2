@@ -3416,6 +3416,12 @@
                 },
                 "voiceSettings": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceSettings"
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5373,6 +5379,12 @@
                 },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5438,6 +5450,12 @@
                 },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) that was specified for the bot locale.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5972,6 +5990,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A display name for the intent. If configured, This name will be shown to\n          users during Intent Disambiguation instead of the intent name. Display names\n          should be user-friendly, descriptive and match the intent's purpose to improve user experience\n          during disambiguation.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.lexmodelsv2#Description",
                     "traits": {
@@ -6092,6 +6116,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name specified for the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name specified for the intent.</p>"
                     }
                 },
                 "description": {
@@ -6948,6 +6978,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CustomDisambiguationMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#CustomPayload": {
@@ -9070,6 +9109,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for Amazon Bedrock's generative AI features for your bot locale.</p>"
                     }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) configured for the bot locale.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10243,6 +10288,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name specified for the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name specified for the intent.</p>"
                     }
                 },
                 "description": {
@@ -11423,6 +11474,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The current state of the conversation with the user.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#DomainEndpoint": {
@@ -13015,6 +13075,34 @@
                 "smithy.api#documentation": "<p>Provides a prompt for making sure that the user is ready for the\n         intent to be fulfilled.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#IntentDisambiguationSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether the Intent Disambiguation feature is enabled. When set to <code>true</code>, Amazon Lex will present disambiguation options to users when multiple intents could match their input, with the default being <code>false</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxDisambiguationIntents": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxDisambiguationIntents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of intent options (2-5) to present to users when disambiguation is needed. This setting determines how many intent options will be shown to users when the system detects ambiguous input. The default value is 3.</p>"
+                    }
+                },
+                "customDisambiguationMessage": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomDisambiguationMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a custom message that will be displayed before presenting the disambiguation options to users. This message helps set the context for users and can be customized to match your bot's tone and brand. If not specified, a default message will be used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the Intent Disambiguation feature that helps resolve ambiguous user inputs when multiple intents could match. When enabled, the system presents clarifying questions to users, helping them specify their exact intent for improved conversation accuracy.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#IntentFilter": {
             "type": "structure",
             "members": {
@@ -13265,6 +13353,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the intent.</p>"
                     }
                 },
                 "description": {
@@ -17965,6 +18059,15 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#MaxDisambiguationIntents": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#MaxResults": {
             "type": "integer",
             "traits": {
@@ -18182,6 +18285,12 @@
                     "target": "com.amazonaws.lexmodelsv2#AssistedNluMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, or <code>Fallback</code> to use it only when standard NLU confidence is low.</p>"
+                    }
+                },
+                "intentDisambiguationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#IntentDisambiguationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing specifications for the Intent Disambiguation feature within the Assisted NLU settings. These settings determine how the bot handles ambiguous user inputs that could match multiple intents.</p>"
                     }
                 }
             },
@@ -20603,6 +20712,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Subslot specifications.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity": {
+            "type": "enum",
+            "members": {
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                },
+                "HighNoiseTolerance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HighNoiseTolerance"
+                    }
+                },
+                "MaximumNoiseTolerance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaximumNoiseTolerance"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines the sensitivity level for voice activity detection (VAD) in noisy environments. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Default</code> - Standard sensitivity level suitable for most environments</p>\n            </li>\n            <li>\n               <p>\n                  <code>HighNoiseTolerance</code> - Increased tolerance for moderate background noise</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumNoiseTolerance</code> - Maximum tolerance for high levels of background noise</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.lexmodelsv2#StartBotRecommendation": {
@@ -23124,6 +23259,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing \n      may differ if you turn a feature on. For more information, see LINK.</p>"
                     }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23209,6 +23350,12 @@
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale.</p>"
+                    }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated sensitivity level for voice activity detection (VAD) in the bot locale.</p>"
                     }
                 }
             },
@@ -23683,6 +23830,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new display name for the intent.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.lexmodelsv2#Description",
                     "traits": {
@@ -23809,6 +23962,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated name of the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated display name of the intent.</p>"
                     }
                 },
                 "description": {
