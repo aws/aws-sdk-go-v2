@@ -341,13 +341,14 @@ type EventSourceMappingConfiguration struct {
 	// set MaximumBatchingWindowInSeconds to at least 1.
 	BatchSize *int32
 
-	// (Kinesis and DynamoDB Streams only) If the function returns an error, split the
-	// batch in two and retry. The default value is false.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the
+	// function returns an error, split the batch in two and retry. The default value
+	// is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event
-	// sources only) A configuration object that specifies the destination of an event
-	// after Lambda processes it.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A
+	// configuration object that specifies the destination of an event after Lambda
+	// processes it.
 	DestinationConfig *DestinationConfig
 
 	// Specific configuration settings for a DocumentDB event source.
@@ -377,8 +378,8 @@ type EventSourceMappingConfiguration struct {
 	// The ARN of the Lambda function.
 	FunctionArn *string
 
-	// (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type
-	// enums applied to the event source mapping.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and Amazon
+	// SQS) A list of current response type enums applied to the event source mapping.
 	FunctionResponseTypes []FunctionResponseType
 
 	//  The ARN of the Key Management Service (KMS) customer managed key that Lambda
@@ -410,19 +411,21 @@ type EventSourceMappingConfiguration struct {
 	// MaximumBatchingWindowInSeconds to at least 1.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Kinesis and DynamoDB Streams only) Discard records older than the specified
-	// age. The default value is -1, which sets the maximum age to infinite. When the
-	// value is set to infinite, Lambda never discards old records.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard
+	// records older than the specified age. The default value is -1, which sets the
+	// maximum age to infinite. When the value is set to infinite, Lambda never
+	// discards old records.
 	//
 	// The minimum valid value for maximum record age is 60s. Although values less
 	// than 60 and greater than -1 fall within the parameter's absolute range, they are
 	// not allowed
 	MaximumRecordAgeInSeconds *int32
 
-	// (Kinesis and DynamoDB Streams only) Discard records after the specified number
-	// of retries. The default value is -1, which sets the maximum number of retries to
-	// infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records
-	// until the record expires in the event source.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard
+	// records after the specified number of retries. The default value is -1, which
+	// sets the maximum number of retries to infinite. When MaximumRetryAttempts is
+	// infinite, Lambda retries failed records until the record expires in the event
+	// source.
 	MaximumRetryAttempts *int32
 
 	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].
@@ -1206,9 +1209,9 @@ type OnFailure struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
 	//
-	// To retain records of unsuccessful [asynchronous invocations], you can configure an Amazon SNS topic,
-	// Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event
-	// bus as the destination.
+	// To retain records of failed invocations from [Kinesis], [DynamoDB], [self-managed Apache Kafka], or [Amazon MSK], you can configure an
+	// Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, or Kafka topic as the
+	// destination.
 	//
 	// Amazon SNS destinations have a message size limit of 256 KB. If the combined
 	// size of the function request and response payload exceeds the limit, Lambda will
@@ -1221,8 +1224,8 @@ type OnFailure struct {
 	// [Amazon MSK]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination
 	// [Retaining records of asynchronous invocations]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html
 	// [Kinesis]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
-	// [asynchronous invocations]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
 	// [DynamoDB]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
+	// [self-managed Apache Kafka]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-on-failure.html
 	// [self-managed Kafka]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination
 	Destination *string
 
@@ -1302,6 +1305,13 @@ type ProvisionedPollerConfig struct {
 	// Amazon SQS events source mappings, default is 2, and minimum 2 required. For
 	// Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.
 	MinimumPollers *int32
+
+	// (Amazon MSK and self-managed Apache Kafka) The name of the provisioned poller
+	// group. Use this option to group multiple ESMs within the VPC to share Event
+	// Poller Unit (EPU) capacity. This option is used to optimize Provisioned mode
+	// costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate
+	// maximum pollers across all ESMs in a group cannot exceed 2000.
+	PollerGroupName *string
 
 	noSmithyDocumentSerde
 }

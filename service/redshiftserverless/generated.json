@@ -65,6 +65,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateCustomDomainAssociation.go",
         "api_op_UpdateEndpointAccess.go",
+        "api_op_UpdateLakehouseConfiguration.go",
         "api_op_UpdateNamespace.go",
         "api_op_UpdateScheduledAction.go",
         "api_op_UpdateSnapshot.go",

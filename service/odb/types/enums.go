@@ -161,6 +161,35 @@ func (DiskRedundancy) Values() []DiskRedundancy {
 	}
 }
 
+type IamRoleStatus string
+
+// Enum values for IamRoleStatus
+const (
+	IamRoleStatusAssociating        IamRoleStatus = "ASSOCIATING"
+	IamRoleStatusDisassociating     IamRoleStatus = "DISASSOCIATING"
+	IamRoleStatusFailed             IamRoleStatus = "FAILED"
+	IamRoleStatusConnected          IamRoleStatus = "CONNECTED"
+	IamRoleStatusDisconnected       IamRoleStatus = "DISCONNECTED"
+	IamRoleStatusPartiallyConnected IamRoleStatus = "PARTIALLY_CONNECTED"
+	IamRoleStatusUnknown            IamRoleStatus = "UNKNOWN"
+)
+
+// Values returns all known values for IamRoleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IamRoleStatus) Values() []IamRoleStatus {
+	return []IamRoleStatus{
+		"ASSOCIATING",
+		"DISASSOCIATING",
+		"FAILED",
+		"CONNECTED",
+		"DISCONNECTED",
+		"PARTIALLY_CONNECTED",
+		"UNKNOWN",
+	}
+}
+
 type IormLifecycleState string
 
 // Enum values for IormLifecycleState
@@ -418,6 +447,23 @@ func (ShapeType) Values() []ShapeType {
 		"INTEL",
 		"INTEL_FLEX_X9",
 		"AMPERE_FLEX_A1",
+	}
+}
+
+type SupportedAwsIntegration string
+
+// Enum values for SupportedAwsIntegration
+const (
+	SupportedAwsIntegrationKmsTde SupportedAwsIntegration = "KmsTde"
+)
+
+// Values returns all known values for SupportedAwsIntegration. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedAwsIntegration) Values() []SupportedAwsIntegration {
+	return []SupportedAwsIntegration{
+		"KmsTde",
 	}
 }
 

@@ -116,6 +116,9 @@ type DescribeOptimizationJobOutput struct {
 	// If the optimization job status is FAILED , the reason for the failure.
 	FailureReason *string
 
+	// The maximum number of instances to use for the optimization job.
+	MaxInstanceCount *int32
+
 	// The time when the optimization job finished processing.
 	OptimizationEndTime *time.Time
 

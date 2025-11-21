@@ -74,6 +74,18 @@ func TestCheckSnapshot_AcceptMarketplaceRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateIamRoleToResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateIamRoleToResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateIamRoleToResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCloudAutonomousVmCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCloudAutonomousVmCluster(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_DeleteOdbPeeringConnection(t *testing.T) {
 	_, err := svc.DeleteOdbPeeringConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOdbPeeringConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateIamRoleFromResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateIamRoleFromResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -565,6 +589,18 @@ func TestUpdateSnapshot_AcceptMarketplaceRegistration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateIamRoleToResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateIamRoleToResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateIamRoleToResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCloudAutonomousVmCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCloudAutonomousVmCluster(context.Background(), nil, func(o *Options) {
@@ -678,6 +714,18 @@ func TestUpdateSnapshot_DeleteOdbPeeringConnection(t *testing.T) {
 	_, err := svc.DeleteOdbPeeringConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOdbPeeringConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateIamRoleFromResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateIamRoleFromResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

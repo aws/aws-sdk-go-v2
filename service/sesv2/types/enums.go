@@ -304,6 +304,8 @@ const (
 	DkimSigningAttributesOriginAwsSesMeCentral1   DkimSigningAttributesOrigin = "AWS_SES_ME_CENTRAL_1"
 	DkimSigningAttributesOriginAwsSesApSouth2     DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTH_2"
 	DkimSigningAttributesOriginAwsSesEuCentral2   DkimSigningAttributesOrigin = "AWS_SES_EU_CENTRAL_2"
+	DkimSigningAttributesOriginAwsSesApSoutheast5 DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTHEAST_5"
+	DkimSigningAttributesOriginAwsSesCaWest1      DkimSigningAttributesOrigin = "AWS_SES_CA_WEST_1"
 )
 
 // Values returns all known values for DkimSigningAttributesOrigin. Note that this
@@ -339,6 +341,8 @@ func (DkimSigningAttributesOrigin) Values() []DkimSigningAttributesOrigin {
 		"AWS_SES_ME_CENTRAL_1",
 		"AWS_SES_AP_SOUTH_2",
 		"AWS_SES_EU_CENTRAL_2",
+		"AWS_SES_AP_SOUTHEAST_5",
+		"AWS_SES_CA_WEST_1",
 	}
 }
 

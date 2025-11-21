@@ -1476,11 +1476,20 @@ type ContactFlowModule struct {
 	// The description of the flow module.
 	Description *string
 
+	// The external invocation configuration for the flow module
+	ExternalInvocationConfiguration *ExternalInvocationConfiguration
+
+	// Hash of the module content for integrity verification.
+	FlowModuleContentSha256 *string
+
 	// The identifier of the flow module.
 	Id *string
 
 	// The name of the flow module.
 	Name *string
+
+	// The configuration settings for the flow module.
+	Settings *string
 
 	// The type of flow module.
 	State ContactFlowModuleState
@@ -1491,6 +1500,66 @@ type ContactFlowModule struct {
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	// The version of the flow module.
+	Version *int64
+
+	// Description of the version.
+	VersionDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an alias.
+type ContactFlowModuleAliasInfo struct {
+
+	// The identifier of the alias.
+	AliasId *string
+
+	// The Amazon Resource Name (ARN) of the flow module.
+	ContactFlowModuleArn *string
+
+	// The identifier of the flow module.
+	ContactFlowModuleId *string
+
+	// The description of the alias.
+	Description *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the alias.
+	Name *string
+
+	// The version of the flow module.
+	Version *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an alias.
+type ContactFlowModuleAliasSummary struct {
+
+	// The description of the alias.
+	AliasDescription *string
+
+	// The identifier of the alias.
+	AliasId *string
+
+	// The name of the alias.
+	AliasName *string
+
+	// The Amazon Resource Name (ARN) of the flow module alias.
+	Arn *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
+	// The version of the flow module.
+	Version *int64
 
 	noSmithyDocumentSerde
 }
@@ -1544,6 +1613,21 @@ type ContactFlowModuleSummary struct {
 
 	// The type of flow module.
 	State ContactFlowModuleState
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a version.
+type ContactFlowModuleVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the flow module version.
+	Arn *string
+
+	// The version of the flow module.
+	Version *int64
+
+	// The description of the flow module version.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -3810,6 +3894,15 @@ type Expression struct {
 
 	// List of routing expressions which will be OR-ed together.
 	OrExpression []Expression
+
+	noSmithyDocumentSerde
+}
+
+// The external invocation configuration for the flow module
+type ExternalInvocationConfiguration struct {
+
+	// Enable external invocation.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }

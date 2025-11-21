@@ -565,6 +565,7 @@ const (
 	ValidationExceptionTypeMemberInvalidEnumValue                                 ValidationExceptionType = "MEMBER_INVALID_ENUM_VALUE"
 	ValidationExceptionTypeMemberDoesNotMatchPattern                              ValidationExceptionType = "MEMBER_DOES_NOT_MATCH_PATTERN"
 	ValidationExceptionTypeInvalidManifestFilter                                  ValidationExceptionType = "INVALID_MANIFEST_FILTER"
+	ValidationExceptionTypeInvalidDrmSettings                                     ValidationExceptionType = "INVALID_DRM_SETTINGS"
 	ValidationExceptionTypeInvalidTimeDelaySeconds                                ValidationExceptionType = "INVALID_TIME_DELAY_SECONDS"
 	ValidationExceptionTypeEndTimeEarlierThanStartTime                            ValidationExceptionType = "END_TIME_EARLIER_THAN_START_TIME"
 	ValidationExceptionTypeTsContainerTypeWithDashManifest                        ValidationExceptionType = "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST"
@@ -661,6 +662,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"MEMBER_INVALID_ENUM_VALUE",
 		"MEMBER_DOES_NOT_MATCH_PATTERN",
 		"INVALID_MANIFEST_FILTER",
+		"INVALID_DRM_SETTINGS",
 		"INVALID_TIME_DELAY_SECONDS",
 		"END_TIME_EARLIER_THAN_START_TIME",
 		"TS_CONTAINER_TYPE_WITH_DASH_MANIFEST",

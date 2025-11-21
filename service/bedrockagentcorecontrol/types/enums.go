@@ -104,6 +104,7 @@ type AuthorizerType string
 const (
 	AuthorizerTypeCustomJwt AuthorizerType = "CUSTOM_JWT"
 	AuthorizerTypeAwsIam    AuthorizerType = "AWS_IAM"
+	AuthorizerTypeNone      AuthorizerType = "NONE"
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
@@ -114,6 +115,7 @@ func (AuthorizerType) Values() []AuthorizerType {
 	return []AuthorizerType{
 		"CUSTOM_JWT",
 		"AWS_IAM",
+		"NONE",
 	}
 }
 
@@ -312,6 +314,25 @@ const (
 func (ExceptionLevel) Values() []ExceptionLevel {
 	return []ExceptionLevel{
 		"DEBUG",
+	}
+}
+
+type GatewayInterceptionPoint string
+
+// Enum values for GatewayInterceptionPoint
+const (
+	GatewayInterceptionPointRequest  GatewayInterceptionPoint = "REQUEST"
+	GatewayInterceptionPointResponse GatewayInterceptionPoint = "RESPONSE"
+)
+
+// Values returns all known values for GatewayInterceptionPoint. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayInterceptionPoint) Values() []GatewayInterceptionPoint {
+	return []GatewayInterceptionPoint{
+		"REQUEST",
+		"RESPONSE",
 	}
 }
 

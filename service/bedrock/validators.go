@@ -490,6 +490,26 @@ func (m *validateOpDeleteCustomModel) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEnforcedGuardrailConfiguration struct {
+}
+
+func (*validateOpDeleteEnforcedGuardrailConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEnforcedGuardrailConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEnforcedGuardrailConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEnforcedGuardrailConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFoundationModelAgreement struct {
 }
 
@@ -1210,6 +1230,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutEnforcedGuardrailConfiguration struct {
+}
+
+func (*validateOpPutEnforcedGuardrailConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutEnforcedGuardrailConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutEnforcedGuardrailConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutEnforcedGuardrailConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutModelInvocationLoggingConfiguration struct {
 }
 
@@ -1626,6 +1666,10 @@ func addOpDeleteCustomModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomModel{}, middleware.After)
 }
 
+func addOpDeleteEnforcedGuardrailConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEnforcedGuardrailConfiguration{}, middleware.After)
+}
+
 func addOpDeleteFoundationModelAgreementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFoundationModelAgreement{}, middleware.After)
 }
@@ -1770,6 +1814,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutEnforcedGuardrailConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutEnforcedGuardrailConfiguration{}, middleware.After)
+}
+
 func addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutModelInvocationLoggingConfiguration{}, middleware.After)
 }
@@ -1832,6 +1880,27 @@ func addOpUpdateMarketplaceModelEndpointValidationMiddleware(stack *middleware.S
 
 func addOpUpdateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProvisionedModelThroughput{}, middleware.After)
+}
+
+func validateAccountEnforcedGuardrailInferenceInputConfiguration(v *types.AccountEnforcedGuardrailInferenceInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountEnforcedGuardrailInferenceInputConfiguration"}
+	if v.GuardrailIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailIdentifier"))
+	}
+	if v.GuardrailVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
+	}
+	if len(v.InputTags) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InputTags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAutomatedEvaluationConfig(v *types.AutomatedEvaluationConfig) error {
@@ -5330,6 +5399,21 @@ func validateOpDeleteCustomModelInput(v *DeleteCustomModelInput) error {
 	}
 }
 
+func validateOpDeleteEnforcedGuardrailConfigurationInput(v *DeleteEnforcedGuardrailConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnforcedGuardrailConfigurationInput"}
+	if v.ConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFoundationModelAgreementInput(v *DeleteFoundationModelAgreementInput) error {
 	if v == nil {
 		return nil
@@ -5889,6 +5973,25 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutEnforcedGuardrailConfigurationInput(v *PutEnforcedGuardrailConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutEnforcedGuardrailConfigurationInput"}
+	if v.GuardrailInferenceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailInferenceConfig"))
+	} else if v.GuardrailInferenceConfig != nil {
+		if err := validateAccountEnforcedGuardrailInferenceInputConfiguration(v.GuardrailInferenceConfig); err != nil {
+			invalidParams.AddNested("GuardrailInferenceConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

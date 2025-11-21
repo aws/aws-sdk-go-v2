@@ -20,10 +20,50 @@
 // Invoice Configuration APIs, you can automate the creation of new invoice units
 // and subsequently automate the addition of new accounts to your invoice units.
 //
+// # Amazon Web Services Procurement Portal Preferences
+//
+// You can use Amazon Web Services Procurement Portal Preferences APIs to
+// programmatically create, update, delete, get, and list procurement portal
+// connections and e-invoice delivery settings. You can also programmatically fetch
+// and modify the status of procurement portal configurations. For example, SAP
+// Business Network or Coupa connections, configure e-invoice delivery and purchase
+// order retrieval features.
+//
+// You can use Amazon Web Services Procurement Portal Preferences to connect
+// e-invoice delivery to your procurement portals based on your organizational
+// needs. By using Amazon Web Services Procurement Portal Preferences, you can
+// configure connections to SAP Business Network and Coupa procurement portals that
+// retrieve purchase orders and deliver Amazon Web Services invoices on the same
+// day they are generated. You can also set up testing environments to validate
+// invoice delivery without affecting live transactions, and manage contact
+// information for portal setup and support.
+//
+// Administrative users should understand that billing read-only policies will
+// show all procurement portal connection details. Review your IAM policies to
+// ensure appropriate access controls are in place for procurement portal
+// preferences.
+//
+// # Amazon Web Services Invoice Management
+//
+// You can use Amazon Web Services Invoice Management APIs to programmatically
+// list invoice summaries and get invoice documents. You can also programmatically
+// fetch invoice documents with S3 pre-signed URLs.
+//
+// You can use Amazon Web Services Invoice Management to access invoice
+// information based on your organizational needs. By using Amazon Web Services
+// Invoice Management, you can retrieve paginated lists of invoice summaries that
+// include invoice metadata such as invoice IDs, amounts, and currencies without
+// downloading documents. You can also download invoice documents in PDF format
+// using S3 pre-signed URLs with built-in expiration. As you manage invoices across
+// your organization using Amazon Web Services Invoice Management APIs, you can
+// create invoice retrieval processes and integrate invoice data into your
+// financial systems.
+//
 // # Service endpoint
 //
 // You can use the following endpoints for Amazon Web Services Invoice
-// Configuration:
+// Configuration, Amazon Web Services Procurement Portal Preferences, and Amazon
+// Web Services Invoice Management:
 //
 //   - https://invoicing.us-east-1.api.aws
 package invoicing

@@ -8191,6 +8191,11 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 		ok.String(*v.IntegrationHttpMethod)
 	}
 
+	if v.IntegrationTarget != nil {
+		ok := object.Key("integrationTarget")
+		ok.String(*v.IntegrationTarget)
+	}
+
 	if v.PassthroughBehavior != nil {
 		ok := object.Key("passthroughBehavior")
 		ok.String(*v.PassthroughBehavior)

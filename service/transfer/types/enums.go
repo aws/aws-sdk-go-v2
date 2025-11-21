@@ -772,6 +772,25 @@ func (WebAppEndpointPolicy) Values() []WebAppEndpointPolicy {
 	}
 }
 
+type WebAppEndpointType string
+
+// Enum values for WebAppEndpointType
+const (
+	WebAppEndpointTypePublic WebAppEndpointType = "PUBLIC"
+	WebAppEndpointTypeVpc    WebAppEndpointType = "VPC"
+)
+
+// Values returns all known values for WebAppEndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebAppEndpointType) Values() []WebAppEndpointType {
+	return []WebAppEndpointType{
+		"PUBLIC",
+		"VPC",
+	}
+}
+
 type WorkflowStepType string
 
 // Enum values for WorkflowStepType

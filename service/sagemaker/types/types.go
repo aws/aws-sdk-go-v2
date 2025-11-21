@@ -3756,6 +3756,19 @@ type ClusterAutoScalingConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the instance capacity requirements for an instance group, including
+// configurations for both Spot and On-Demand capacity types.
+type ClusterCapacityRequirements struct {
+
+	// Configuration options specific to On-Demand instances.
+	OnDemand *ClusterOnDemandOptions
+
+	// Configuration options specific to Spot instances.
+	Spot *ClusterSpotOptions
+
+	noSmithyDocumentSerde
+}
+
 // Defines the configuration for attaching an additional Amazon Elastic Block
 // Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance
 // group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].
@@ -3891,8 +3904,16 @@ type ClusterEventSummary struct {
 // Details of an instance group in a SageMaker HyperPod cluster.
 type ClusterInstanceGroupDetails struct {
 
+	// A map indicating active operations currently in progress for the instance group
+	// of a SageMaker HyperPod cluster. When there is a scaling operation in progress,
+	// this map contains a key Scaling with value 1.
+	ActiveOperations map[string]int32
+
 	// The configuration to use when updating the AMI versions.
 	ActiveSoftwareUpdateConfig *DeploymentConfiguration
+
+	// The instance capacity requirements for the instance group.
+	CapacityRequirements *ClusterCapacityRequirements
 
 	// The number of instances that are currently in the instance group of a SageMaker
 	// HyperPod cluster.
@@ -3917,8 +3938,16 @@ type ClusterInstanceGroupDetails struct {
 	// The instance type of the instance group of a SageMaker HyperPod cluster.
 	InstanceType ClusterInstanceType
 
+	// The Kubernetes configuration for the instance group that contains labels and
+	// taints to be applied for the nodes in this instance group.
+	KubernetesConfig *ClusterKubernetesConfigDetails
+
 	// Details of LifeCycle configuration for the instance group.
 	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// The minimum number of instances that must be available in the instance group of
+	// a SageMaker HyperPod cluster before it transitions to InService status.
+	MinCount *int32
 
 	// A flag indicating whether deep health checks should be performed when the
 	// cluster instance group is created or updated.
@@ -4014,6 +4043,9 @@ type ClusterInstanceGroupSpecification struct {
 	// This member is required.
 	LifeCycleConfig *ClusterLifeCycleConfig
 
+	// Specifies the capacity requirements for the instance group.
+	CapacityRequirements *ClusterCapacityRequirements
+
 	// When configuring your HyperPod cluster, you can specify an image ID using one
 	// of the following options:
 	//
@@ -4044,6 +4076,20 @@ type ClusterInstanceGroupSpecification struct {
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster instance group.
 	InstanceStorageConfigs []ClusterInstanceStorageConfig
+
+	// Specifies the Kubernetes configuration for the instance group. You describe
+	// what you want the labels and taints to look like, and the cluster works to
+	// reconcile the actual state with the declared state for nodes in this instance
+	// group.
+	KubernetesConfig *ClusterKubernetesConfig
+
+	// Defines the minimum number of instances required for an instance group to
+	// become InService . If this threshold isn't met within 3 hours, the instance
+	// group rolls back to its previous state - zero instances for new instance groups,
+	// or previous settings for existing instance groups. MinInstanceCount only
+	// affects the initial transition to InService and does not guarantee maintaining
+	// this minimum afterward.
+	MinInstanceCount *int32
 
 	// A flag indicating whether deep health checks should be performed when the
 	// cluster instance group is created or updated.
@@ -4159,6 +4205,77 @@ type ClusterInstanceStorageConfigMemberEbsVolumeConfig struct {
 
 func (*ClusterInstanceStorageConfigMemberEbsVolumeConfig) isClusterInstanceStorageConfig() {}
 
+// Kubernetes configuration that specifies labels and taints to be applied to
+// cluster nodes in an instance group.
+type ClusterKubernetesConfig struct {
+
+	// Key-value pairs of labels to be applied to cluster nodes.
+	Labels map[string]string
+
+	// List of taints to be applied to cluster nodes.
+	Taints []ClusterKubernetesTaint
+
+	noSmithyDocumentSerde
+}
+
+// Detailed Kubernetes configuration showing both the current and desired state of
+// labels and taints for cluster nodes.
+type ClusterKubernetesConfigDetails struct {
+
+	// The current labels applied to cluster nodes of an instance group.
+	CurrentLabels map[string]string
+
+	// The current taints applied to cluster nodes of an instance group.
+	CurrentTaints []ClusterKubernetesTaint
+
+	// The desired labels to be applied to cluster nodes of an instance group.
+	DesiredLabels map[string]string
+
+	// The desired taints to be applied to cluster nodes of an instance group.
+	DesiredTaints []ClusterKubernetesTaint
+
+	noSmithyDocumentSerde
+}
+
+// Node-specific Kubernetes configuration showing both current and desired state
+// of labels and taints for an individual cluster node.
+type ClusterKubernetesConfigNodeDetails struct {
+
+	// The current labels applied to the cluster node.
+	CurrentLabels map[string]string
+
+	// The current taints applied to the cluster node.
+	CurrentTaints []ClusterKubernetesTaint
+
+	// The desired labels to be applied to the cluster node.
+	DesiredLabels map[string]string
+
+	// The desired taints to be applied to the cluster node.
+	DesiredTaints []ClusterKubernetesTaint
+
+	noSmithyDocumentSerde
+}
+
+// A Kubernetes taint that can be applied to cluster nodes.
+type ClusterKubernetesTaint struct {
+
+	// The effect of the taint. Valid values are NoSchedule , PreferNoSchedule , and
+	// NoExecute .
+	//
+	// This member is required.
+	Effect ClusterKubernetesTaintEffect
+
+	// The key of the taint.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the taint.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The lifecycle configuration for a SageMaker HyperPod cluster.
 type ClusterLifeCycleConfig struct {
 
@@ -4206,6 +4323,11 @@ type ClusterMetadata struct {
 // HyperPod cluster.
 type ClusterNodeDetails struct {
 
+	// The capacity type of the node. Valid values are OnDemand and Spot . When set to
+	// OnDemand , the node is launched as an On-Demand instance. When set to Spot , the
+	// node is launched as a Spot instance.
+	CapacityType ClusterCapacityType
+
 	// The ID of the Amazon Machine Image (AMI) currently in use by the node.
 	CurrentImageId *string
 
@@ -4227,6 +4349,11 @@ type ClusterNodeDetails struct {
 
 	// The type of the instance.
 	InstanceType ClusterInstanceType
+
+	// The Kubernetes configuration applied to this node, showing both the current and
+	// desired state of labels and taints. The cluster works to reconcile the actual
+	// state with the declared state.
+	KubernetesConfig *ClusterKubernetesConfigNodeDetails
 
 	// The time when the cluster was last updated.
 	LastSoftwareUpdateTime *time.Time
@@ -4316,6 +4443,11 @@ type ClusterNodeSummary struct {
 	// Contains information about the UltraServer.
 	UltraServerInfo *UltraServerInfo
 
+	noSmithyDocumentSerde
+}
+
+// Configuration options specific to On-Demand instances.
+type ClusterOnDemandOptions struct {
 	noSmithyDocumentSerde
 }
 
@@ -4531,6 +4663,11 @@ type ClusterSchedulerConfigSummary struct {
 	// Last modified time of the cluster policy.
 	LastModifiedTime *time.Time
 
+	noSmithyDocumentSerde
+}
+
+// Configuration options specific to Spot instances.
+type ClusterSpotOptions struct {
 	noSmithyDocumentSerde
 }
 
@@ -11219,6 +11356,9 @@ type InstanceGroupScalingMetadata struct {
 	// The current number of instances in the group.
 	InstanceCount *int32
 
+	// Minimum instance count of the instance group.
+	MinCount *int32
+
 	// The desired number of instances for the group after scaling.
 	TargetCount *int32
 
@@ -13462,6 +13602,41 @@ type ModelShardingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for the model speculative decoding technique that's applied by a model
+// optimization job.
+type ModelSpeculativeDecodingConfig struct {
+
+	// The speculative decoding technique to apply during model optimization.
+	//
+	// This member is required.
+	Technique ModelSpeculativeDecodingTechnique
+
+	// The location of the training data to use for speculative decoding. The data
+	// must be formatted as ShareGPT, OpenAI Completions or OpenAI Chat Completions.
+	// The input can also be unencrypted captured data from a SageMaker endpoint as
+	// long as the endpoint uses one of the above formats.
+	TrainingDataSource *ModelSpeculativeDecodingTrainingDataSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the training data source for speculative decoding.
+type ModelSpeculativeDecodingTrainingDataSource struct {
+
+	// The type of data stored in the Amazon S3 location. Valid values are S3Prefix or
+	// ManifestFile .
+	//
+	// This member is required.
+	S3DataType ModelSpeculativeDecodingS3DataType
+
+	// The Amazon S3 URI that points to the training data for speculative decoding.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata for Model steps.
 type ModelStepMetadata struct {
 
@@ -14626,6 +14801,7 @@ type OnlineStoreSecurityConfig struct {
 //	OptimizationConfigMemberModelCompilationConfig
 //	OptimizationConfigMemberModelQuantizationConfig
 //	OptimizationConfigMemberModelShardingConfig
+//	OptimizationConfigMemberModelSpeculativeDecodingConfig
 type OptimizationConfig interface {
 	isOptimizationConfig()
 }
@@ -14660,11 +14836,24 @@ type OptimizationConfigMemberModelShardingConfig struct {
 
 func (*OptimizationConfigMemberModelShardingConfig) isOptimizationConfig() {}
 
+// Settings for the model speculative decoding technique that's applied by a model
+// optimization job.
+type OptimizationConfigMemberModelSpeculativeDecodingConfig struct {
+	Value ModelSpeculativeDecodingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizationConfigMemberModelSpeculativeDecodingConfig) isOptimizationConfig() {}
+
 // The location of the source model to optimize with an optimization job.
 type OptimizationJobModelSource struct {
 
 	// The Amazon S3 location of a source model to optimize with an optimization job.
 	S3 *OptimizationJobModelSourceS3
+
+	// The name of an existing SageMaker model to optimize with an optimization job.
+	SageMakerModel *OptimizationSageMakerModel
 
 	noSmithyDocumentSerde
 }
@@ -14697,6 +14886,10 @@ type OptimizationJobOutputConfig struct {
 	// uses they key to encrypt the artifacts of the optimized model when SageMaker
 	// uploads the model to Amazon S3.
 	KmsKeyId *string
+
+	// The name of a SageMaker model to use as the output destination for an
+	// optimization job.
+	SageMakerModel *OptimizationSageMakerModel
 
 	noSmithyDocumentSerde
 }
@@ -14738,6 +14931,9 @@ type OptimizationJobSummary struct {
 	// The time when the optimization job was last updated.
 	LastModifiedTime *time.Time
 
+	// The maximum number of instances to use for the optimization job.
+	MaxInstanceCount *int32
+
 	// The time when the optimization job finished processing.
 	OptimizationEndTime *time.Time
 
@@ -14769,6 +14965,15 @@ type OptimizationOutput struct {
 	// The image that SageMaker recommends that you use to host the optimized model
 	// that you created with an optimization job.
 	RecommendedInferenceImage *string
+
+	noSmithyDocumentSerde
+}
+
+// A SageMaker model to use as the source or destination for an optimization job.
+type OptimizationSageMakerModel struct {
+
+	// The name of a SageMaker model.
+	ModelName *string
 
 	noSmithyDocumentSerde
 }

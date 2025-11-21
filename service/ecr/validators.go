@@ -330,6 +330,26 @@ func (m *validateOpDescribeImageScanFindings) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeImageSigningStatus struct {
+}
+
+func (*validateOpDescribeImageSigningStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeImageSigningStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeImageSigningStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeImageSigningStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeImages struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpPutReplicationConfiguration) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutSigningConfiguration struct {
+}
+
+func (*validateOpPutSigningConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutSigningConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutSigningConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutSigningConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterPullTimeUpdateExclusion struct {
 }
 
@@ -974,6 +1014,10 @@ func addOpDescribeImageScanFindingsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDescribeImageScanFindings{}, middleware.After)
 }
 
+func addOpDescribeImageSigningStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeImageSigningStatus{}, middleware.After)
+}
+
 func addOpDescribeImagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeImages{}, middleware.After)
 }
@@ -1044,6 +1088,10 @@ func addOpPutRegistryScanningConfigurationValidationMiddleware(stack *middleware
 
 func addOpPutReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutReplicationConfiguration{}, middleware.After)
+}
+
+func addOpPutSigningConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutSigningConfiguration{}, middleware.After)
 }
 
 func addOpRegisterPullTimeUpdateExclusionValidationMiddleware(stack *middleware.Stack) error {
@@ -1349,6 +1397,97 @@ func validateScanningRepositoryFilterList(v []types.ScanningRepositoryFilter) er
 	invalidParams := smithy.InvalidParamsError{Context: "ScanningRepositoryFilterList"}
 	for i := range v {
 		if err := validateScanningRepositoryFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSigningConfiguration(v *types.SigningConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SigningConfiguration"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateSigningRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSigningRepositoryFilter(v *types.SigningRepositoryFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SigningRepositoryFilter"}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if len(v.FilterType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSigningRepositoryFilterList(v []types.SigningRepositoryFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SigningRepositoryFilterList"}
+	for i := range v {
+		if err := validateSigningRepositoryFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSigningRule(v *types.SigningRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SigningRule"}
+	if v.SigningProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningProfileArn"))
+	}
+	if v.RepositoryFilters != nil {
+		if err := validateSigningRepositoryFilterList(v.RepositoryFilters); err != nil {
+			invalidParams.AddNested("RepositoryFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSigningRuleList(v []types.SigningRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SigningRuleList"}
+	for i := range v {
+		if err := validateSigningRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1706,6 +1845,24 @@ func validateOpDescribeImageScanFindingsInput(v *DescribeImageScanFindingsInput)
 	}
 }
 
+func validateOpDescribeImageSigningStatusInput(v *DescribeImageSigningStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeImageSigningStatusInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeImagesInput(v *DescribeImagesInput) error {
 	if v == nil {
 		return nil
@@ -2003,6 +2160,25 @@ func validateOpPutReplicationConfigurationInput(v *PutReplicationConfigurationIn
 	} else if v.ReplicationConfiguration != nil {
 		if err := validateReplicationConfiguration(v.ReplicationConfiguration); err != nil {
 			invalidParams.AddNested("ReplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutSigningConfigurationInput(v *PutSigningConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutSigningConfigurationInput"}
+	if v.SigningConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningConfiguration"))
+	} else if v.SigningConfiguration != nil {
+		if err := validateSigningConfiguration(v.SigningConfiguration); err != nil {
+			invalidParams.AddNested("SigningConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

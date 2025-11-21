@@ -78,6 +78,67 @@ func (m *awsAwsjson10_serializeOpAcceptMarketplaceRegistration) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpAssociateIamRoleToResource struct {
+}
+
+func (*awsAwsjson10_serializeOpAssociateIamRoleToResource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpAssociateIamRoleToResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateIamRoleToResourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Odb.AssociateIamRoleToResource")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentAssociateIamRoleToResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpCreateCloudAutonomousVmCluster struct {
 }
 
@@ -671,6 +732,67 @@ func (m *awsAwsjson10_serializeOpDeleteOdbPeeringConnection) HandleSerialize(ctx
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteOdbPeeringConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDisassociateIamRoleFromResource struct {
+}
+
+func (*awsAwsjson10_serializeOpDisassociateIamRoleFromResource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDisassociateIamRoleFromResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateIamRoleFromResourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Odb.DisassociateIamRoleFromResource")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDisassociateIamRoleFromResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2757,6 +2879,28 @@ func awsAwsjson10_serializeOpDocumentAcceptMarketplaceRegistrationInput(v *Accep
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentAssociateIamRoleToResourceInput(v *AssociateIamRoleToResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AwsIntegration) > 0 {
+		ok := object.Key("awsIntegration")
+		ok.String(string(v.AwsIntegration))
+	}
+
+	if v.IamRoleArn != nil {
+		ok := object.Key("iamRoleArn")
+		ok.String(*v.IamRoleArn)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateCloudAutonomousVmClusterInput(v *CreateCloudAutonomousVmClusterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3103,6 +3247,13 @@ func awsAwsjson10_serializeOpDocumentCreateOdbNetworkInput(v *CreateOdbNetworkIn
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CrossRegionS3RestoreSourcesToEnable != nil {
+		ok := object.Key("crossRegionS3RestoreSourcesToEnable")
+		if err := awsAwsjson10_serializeDocumentStringList(v.CrossRegionS3RestoreSourcesToEnable, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomDomainName != nil {
 		ok := object.Key("customDomainName")
 		ok.String(*v.CustomDomainName)
@@ -3118,6 +3269,16 @@ func awsAwsjson10_serializeOpDocumentCreateOdbNetworkInput(v *CreateOdbNetworkIn
 		ok.String(*v.DisplayName)
 	}
 
+	if len(v.KmsAccess) > 0 {
+		ok := object.Key("kmsAccess")
+		ok.String(string(v.KmsAccess))
+	}
+
+	if v.KmsPolicyDocument != nil {
+		ok := object.Key("kmsPolicyDocument")
+		ok.String(*v.KmsPolicyDocument)
+	}
+
 	if len(v.S3Access) > 0 {
 		ok := object.Key("s3Access")
 		ok.String(string(v.S3Access))
@@ -3126,6 +3287,16 @@ func awsAwsjson10_serializeOpDocumentCreateOdbNetworkInput(v *CreateOdbNetworkIn
 	if v.S3PolicyDocument != nil {
 		ok := object.Key("s3PolicyDocument")
 		ok.String(*v.S3PolicyDocument)
+	}
+
+	if len(v.StsAccess) > 0 {
+		ok := object.Key("stsAccess")
+		ok.String(string(v.StsAccess))
+	}
+
+	if v.StsPolicyDocument != nil {
+		ok := object.Key("stsPolicyDocument")
+		ok.String(*v.StsPolicyDocument)
 	}
 
 	if v.Tags != nil {
@@ -3244,6 +3415,28 @@ func awsAwsjson10_serializeOpDocumentDeleteOdbPeeringConnectionInput(v *DeleteOd
 	if v.OdbPeeringConnectionId != nil {
 		ok := object.Key("odbPeeringConnectionId")
 		ok.String(*v.OdbPeeringConnectionId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDisassociateIamRoleFromResourceInput(v *DisassociateIamRoleFromResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AwsIntegration) > 0 {
+		ok := object.Key("awsIntegration")
+		ok.String(string(v.AwsIntegration))
+	}
+
+	if v.IamRoleArn != nil {
+		ok := object.Key("iamRoleArn")
+		ok.String(*v.IamRoleArn)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	return nil
@@ -3372,6 +3565,11 @@ func awsAwsjson10_serializeOpDocumentGetOdbPeeringConnectionInput(v *GetOdbPeeri
 func awsAwsjson10_serializeOpDocumentInitializeServiceInput(v *InitializeServiceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.OciIdentityDomain != nil {
+		ok := object.Key("ociIdentityDomain")
+		ok.Boolean(*v.OciIdentityDomain)
+	}
 
 	return nil
 }
@@ -3742,9 +3940,33 @@ func awsAwsjson10_serializeOpDocumentUpdateOdbNetworkInput(v *UpdateOdbNetworkIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.CrossRegionS3RestoreSourcesToDisable != nil {
+		ok := object.Key("crossRegionS3RestoreSourcesToDisable")
+		if err := awsAwsjson10_serializeDocumentStringList(v.CrossRegionS3RestoreSourcesToDisable, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrossRegionS3RestoreSourcesToEnable != nil {
+		ok := object.Key("crossRegionS3RestoreSourcesToEnable")
+		if err := awsAwsjson10_serializeDocumentStringList(v.CrossRegionS3RestoreSourcesToEnable, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayName != nil {
 		ok := object.Key("displayName")
 		ok.String(*v.DisplayName)
+	}
+
+	if len(v.KmsAccess) > 0 {
+		ok := object.Key("kmsAccess")
+		ok.String(string(v.KmsAccess))
+	}
+
+	if v.KmsPolicyDocument != nil {
+		ok := object.Key("kmsPolicyDocument")
+		ok.String(*v.KmsPolicyDocument)
 	}
 
 	if v.OdbNetworkId != nil {
@@ -3774,6 +3996,16 @@ func awsAwsjson10_serializeOpDocumentUpdateOdbNetworkInput(v *UpdateOdbNetworkIn
 	if v.S3PolicyDocument != nil {
 		ok := object.Key("s3PolicyDocument")
 		ok.String(*v.S3PolicyDocument)
+	}
+
+	if len(v.StsAccess) > 0 {
+		ok := object.Key("stsAccess")
+		ok.String(string(v.StsAccess))
+	}
+
+	if v.StsPolicyDocument != nil {
+		ok := object.Key("stsPolicyDocument")
+		ok.String(*v.StsPolicyDocument)
 	}
 
 	if len(v.ZeroEtlAccess) > 0 {

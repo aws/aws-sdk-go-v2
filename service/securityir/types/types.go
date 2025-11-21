@@ -54,6 +54,27 @@ type CaseEditItem struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single metadata entry associated with a case. Each entry consists
+// of a key-value pair that provides additional contextual information about the
+// case, such as classification tags, custom attributes, or system-generated
+// properties.
+type CaseMetadataEntry struct {
+
+	// The identifier for the metadata field. This key uniquely identifies the type of
+	// metadata being stored, such as "severity", "category", or "assignee".
+	//
+	// This member is required.
+	Key *string
+
+	// The value associated with the metadata key. This contains the actual data for
+	// the metadata field identified by the key.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 type GetMembershipAccountDetailError struct {
 
 	//
@@ -117,6 +138,77 @@ type IncidentResponder struct {
 
 	//
 	CommunicationPreferences []CommunicationType
+
+	noSmithyDocumentSerde
+}
+
+// Represents an investigation action performed within a case. This structure
+// captures the details of an automated or manual investigation, including its
+// status, results, and user feedback.
+type InvestigationAction struct {
+
+	// The type of investigation action being performed. This categorizes the
+	// investigation method or approach used in the case.
+	//
+	// This member is required.
+	ActionType ActionType
+
+	// Detailed investigation results in rich markdown format. This field contains the
+	// comprehensive findings, analysis, and conclusions from the investigation.
+	//
+	// This member is required.
+	Content *string
+
+	// The unique identifier for this investigation action. This ID is used to track
+	// and reference the specific investigation throughout its lifecycle.
+	//
+	// This member is required.
+	InvestigationId *string
+
+	// ISO 8601 timestamp of the most recent status update. This indicates when the
+	// investigation was last modified or when its status last changed.
+	//
+	// This member is required.
+	LastUpdated *time.Time
+
+	// The current execution status of the investigation. This indicates whether the
+	// investigation is pending, in progress, completed, or failed.
+	//
+	// This member is required.
+	Status ExecutionStatus
+
+	// Human-readable summary of the investigation focus. This provides a brief
+	// description of what the investigation is examining or analyzing.
+	//
+	// This member is required.
+	Title *string
+
+	// User feedback for this investigation result. This contains the user's
+	// assessment and comments about the quality and usefulness of the investigation
+	// findings.
+	Feedback *InvestigationFeedback
+
+	noSmithyDocumentSerde
+}
+
+// Represents user feedback for an investigation result. This structure captures
+// the user's evaluation of the investigation's quality, usefulness, and any
+// additional comments.
+type InvestigationFeedback struct {
+
+	// Optional user comments providing additional context about the investigation
+	// feedback. This allows users to explain their rating or provide suggestions for
+	// improvement.
+	Comment *string
+
+	// ISO 8601 timestamp when the feedback was submitted. This records when the user
+	// provided their assessment of the investigation results.
+	SubmittedAt *time.Time
+
+	// User assessment of the investigation result's quality and helpfulness. This
+	// rating indicates how valuable the investigation findings were in addressing the
+	// case.
+	Usefulness UsefulnessRating
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "fb14c67f-ada9-44b9-8c70-ed199789042f",
+    "type": "feature",
+    "description": "Adds support for creating Webapps accessible from a VPC.",
+    "modules": [
+        "service/transfer"
+    ]
+}

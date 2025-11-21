@@ -27,6 +27,11 @@ func (c *Client) InitializeService(ctx context.Context, params *InitializeServic
 }
 
 type InitializeServiceInput struct {
+
+	// The Oracle Cloud Infrastructure (OCI) identity domain configuration for service
+	// initialization.
+	OciIdentityDomain *bool
+
 	noSmithyDocumentSerde
 }
 

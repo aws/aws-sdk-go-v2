@@ -102,6 +102,9 @@ type UpdateIntegrationOutput struct {
 	// Specifies the integration's responses.
 	IntegrationResponses map[string]types.IntegrationResponse
 
+	//  The ALB or NLB listener to send the request to.
+	IntegrationTarget *string
+
 	// Specifies how the method request body of an unmapped content type will be
 	// passed through the integration request to the back end without transformation. A
 	// content type is unmapped if no mapping template is defined in the integration or

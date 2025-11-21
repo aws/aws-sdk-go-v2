@@ -1,0 +1,8 @@
+{
+    "id": "b6330e5a-3c56-4b83-a7aa-f8d11c5d3bcc",
+    "type": "feature",
+    "description": "New APIs to support aliases and versions for ContactFlowModule. Updated ContactFlowModule APIs to support custom blocks.",
+    "modules": [
+        "service/connect"
+    ]
+}

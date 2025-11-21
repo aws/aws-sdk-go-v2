@@ -1267,9 +1267,18 @@ type DescribedWebApp struct {
 	// the default value.
 	AccessEndpoint *string
 
+	// The endpoint configuration details for the web app, including VPC settings if
+	// the endpoint is hosted within a VPC.
+	DescribedEndpointDetails DescribedWebAppEndpointDetails
+
 	// A structure that contains the details for the identity provider used by the web
 	// app.
 	DescribedIdentityProviderDetails DescribedWebAppIdentityProviderDetails
+
+	// The type of endpoint hosting the web app. Valid values are PUBLIC for publicly
+	// accessible endpoints and VPC for VPC-hosted endpoints that provide network
+	// isolation.
+	EndpointType WebAppEndpointType
 
 	// Key-value pairs that can be used to group and search for web apps. Tags are
 	// metadata attached to web apps for any purpose.
@@ -1320,6 +1329,26 @@ type DescribedWebAppCustomization struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the endpoint configuration details for a web app, including VPC
+// configuration when the endpoint is hosted within a VPC.
+//
+// The following types satisfy this interface:
+//
+//	DescribedWebAppEndpointDetailsMemberVpc
+type DescribedWebAppEndpointDetails interface {
+	isDescribedWebAppEndpointDetails()
+}
+
+// The VPC configuration details when the web app endpoint is hosted within a VPC.
+// This includes the VPC ID, subnet IDs, and VPC endpoint ID.
+type DescribedWebAppEndpointDetailsMemberVpc struct {
+	Value DescribedWebAppVpcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DescribedWebAppEndpointDetailsMemberVpc) isDescribedWebAppEndpointDetails() {}
+
 // Returns a structure that contains the identity provider details for your web
 // app.
 //
@@ -1339,6 +1368,24 @@ type DescribedWebAppIdentityProviderDetailsMemberIdentityCenterConfig struct {
 }
 
 func (*DescribedWebAppIdentityProviderDetailsMemberIdentityCenterConfig) isDescribedWebAppIdentityProviderDetails() {
+}
+
+// Contains the VPC configuration details for a web app endpoint, including the
+// VPC identifier, subnet IDs, and VPC endpoint ID used for hosting the endpoint.
+type DescribedWebAppVpcConfig struct {
+
+	// The list of subnet IDs within the VPC where the web app endpoint is deployed.
+	// These subnets must be in the same VPC and provide network connectivity for the
+	// endpoint.
+	SubnetIds []string
+
+	// The identifier of the VPC endpoint created for the web app.
+	VpcEndpointId *string
+
+	// The identifier of the VPC where the web app endpoint is hosted.
+	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of the specified workflow
@@ -2047,6 +2094,10 @@ type ListedWebApp struct {
 	// the default value.
 	AccessEndpoint *string
 
+	// The type of endpoint hosting the web app. Valid values are PUBLIC for publicly
+	// accessible endpoints and VPC for VPC-hosted endpoints.
+	EndpointType WebAppEndpointType
+
 	// The WebAppEndpoint is the unique URL for your Transfer Family web app. This is
 	// the value that you use when you configure Origins on CloudFront.
 	WebAppEndpoint *string
@@ -2496,6 +2547,26 @@ type UpdateConnectorVpcLatticeEgressConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the endpoint configuration details for updating a web app, including
+// VPC settings for endpoints hosted within a VPC.
+//
+// The following types satisfy this interface:
+//
+//	UpdateWebAppEndpointDetailsMemberVpc
+type UpdateWebAppEndpointDetails interface {
+	isUpdateWebAppEndpointDetails()
+}
+
+// The VPC configuration details for updating a web app endpoint hosted within a
+// VPC. This includes the subnet IDs for endpoint deployment.
+type UpdateWebAppEndpointDetailsMemberVpc struct {
+	Value UpdateWebAppVpcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateWebAppEndpointDetailsMemberVpc) isUpdateWebAppEndpointDetails() {}
+
 // A structure that describes the values to use for the IAM Identity Center
 // settings when you update a web app.
 type UpdateWebAppIdentityCenterConfig struct {
@@ -2526,6 +2597,17 @@ type UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig struct {
 func (*UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig) isUpdateWebAppIdentityProviderDetails() {
 }
 
+// Contains the VPC configuration settings for updating a web app endpoint,
+// including the subnet IDs where the endpoint should be deployed.
+type UpdateWebAppVpcConfig struct {
+
+	// The list of subnet IDs within the VPC where the web app endpoint should be
+	// deployed during the update operation.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the user name, server ID, and session ID for a workflow.
 type UserDetails struct {
 
@@ -2545,6 +2627,25 @@ type UserDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains the endpoint configuration for a web app, including VPC settings when
+// the endpoint is hosted within a VPC.
+//
+// The following types satisfy this interface:
+//
+//	WebAppEndpointDetailsMemberVpc
+type WebAppEndpointDetails interface {
+	isWebAppEndpointDetails()
+}
+
+// The VPC configuration for hosting the web app endpoint within a VPC.
+type WebAppEndpointDetailsMemberVpc struct {
+	Value WebAppVpcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*WebAppEndpointDetailsMemberVpc) isWebAppEndpointDetails() {}
 
 // A union that contains the IdentityCenterConfig object.
 //
@@ -2588,6 +2689,26 @@ type WebAppUnitsMemberProvisioned struct {
 }
 
 func (*WebAppUnitsMemberProvisioned) isWebAppUnits() {}
+
+// Contains the VPC configuration settings for hosting a web app endpoint,
+// including the VPC ID, subnet IDs, and security group IDs for access control.
+type WebAppVpcConfig struct {
+
+	// The list of security group IDs that control access to the web app endpoint.
+	// These security groups determine which sources can access the endpoint based on
+	// IP addresses and port configurations.
+	SecurityGroupIds []string
+
+	// The list of subnet IDs within the VPC where the web app endpoint will be
+	// deployed. These subnets must be in the same VPC specified in the VpcId
+	// parameter.
+	SubnetIds []string
+
+	// The identifier of the VPC where the web app endpoint will be hosted.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
 
 // Specifies the workflow ID for the workflow to assign and the execution role
 // that's used for executing the workflow.
@@ -2715,8 +2836,11 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isConnectorEgressConfig()                  {}
 func (*UnknownUnionMember) isDescribedConnectorEgressConfig()         {}
+func (*UnknownUnionMember) isDescribedWebAppEndpointDetails()         {}
 func (*UnknownUnionMember) isDescribedWebAppIdentityProviderDetails() {}
 func (*UnknownUnionMember) isUpdateConnectorEgressConfig()            {}
+func (*UnknownUnionMember) isUpdateWebAppEndpointDetails()            {}
 func (*UnknownUnionMember) isUpdateWebAppIdentityProviderDetails()    {}
+func (*UnknownUnionMember) isWebAppEndpointDetails()                  {}
 func (*UnknownUnionMember) isWebAppIdentityProviderDetails()          {}
 func (*UnknownUnionMember) isWebAppUnits()                            {}

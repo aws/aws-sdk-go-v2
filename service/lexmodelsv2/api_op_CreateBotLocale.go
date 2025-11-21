@@ -82,6 +82,11 @@ type CreateBotLocaleInput struct {
 	// Bedrock that you can turn on for your bot.
 	GenerativeAISettings *types.GenerativeAISettings
 
+	// The sensitivity level for voice activity detection (VAD) in the bot locale.
+	// This setting helps optimize speech recognition accuracy by adjusting how the
+	// system responds to background noise during voice interactions.
+	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
+
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
@@ -129,6 +134,10 @@ type CreateBotLocaleOutput struct {
 	// The specified confidence threshold for inserting the AMAZON.FallbackIntent and
 	// AMAZON.KendraSearchIntent intents.
 	NluIntentConfidenceThreshold *float64
+
+	// The sensitivity level for voice activity detection (VAD) that was specified for
+	// the bot locale.
+	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
 
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user.

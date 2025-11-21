@@ -830,6 +830,26 @@ func (m *validateOpUpdateEndpointAccess) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLakehouseConfiguration struct {
+}
+
+func (*validateOpUpdateLakehouseConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLakehouseConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLakehouseConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLakehouseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNamespace struct {
 }
 
@@ -1112,6 +1132,10 @@ func addOpUpdateCustomDomainAssociationValidationMiddleware(stack *middleware.St
 
 func addOpUpdateEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEndpointAccess{}, middleware.After)
+}
+
+func addOpUpdateLakehouseConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLakehouseConfiguration{}, middleware.After)
 }
 
 func addOpUpdateNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -1952,6 +1976,21 @@ func validateOpUpdateEndpointAccessInput(v *UpdateEndpointAccessInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEndpointAccessInput"}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLakehouseConfigurationInput(v *UpdateLakehouseConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLakehouseConfigurationInput"}
+	if v.NamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamespaceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

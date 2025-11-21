@@ -45,7 +45,9 @@ type UpdateSignalingChannelInput struct {
 	CurrentVersion *string
 
 	// The structure containing the configuration for the SINGLE_MASTER type of the
-	// signaling channel that you want to update.
+	// signaling channel that you want to update. This parameter and the channel
+	// message's time-to-live are required for channels with the SINGLE_MASTER channel
+	// type.
 	SingleMasterConfiguration *types.SingleMasterConfiguration
 
 	noSmithyDocumentSerde

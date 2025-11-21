@@ -6322,6 +6322,13 @@ func awsAwsquery_serializeDocumentAutoDeployment(v *types.AutoDeployment, value 
 	object := value.Object()
 	_ = object
 
+	if v.DependsOn != nil {
+		objectKey := object.Key("DependsOn")
+		if err := awsAwsquery_serializeDocumentStackSetARNList(v.DependsOn, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.Enabled != nil {
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(*v.Enabled)
@@ -6929,6 +6936,16 @@ func awsAwsquery_serializeDocumentStackResourceDriftStatusFilters(v []types.Stac
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentStackSetARNList(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

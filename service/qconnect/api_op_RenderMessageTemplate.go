@@ -58,16 +58,17 @@ type RenderMessageTemplateInput struct {
 
 type RenderMessageTemplateOutput struct {
 
-	// The content of the message template.
-	//
-	// This member is required.
-	Content types.MessageTemplateContentProvider
-
 	// The message template attachments.
 	Attachments []types.MessageTemplateAttachment
 
 	// The attribute keys that are not resolved.
 	AttributesNotInterpolated []string
+
+	// The content of the message template.
+	Content types.MessageTemplateContentProvider
+
+	// The source configuration of the message template.
+	SourceConfigurationSummary types.MessageTemplateSourceConfigurationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

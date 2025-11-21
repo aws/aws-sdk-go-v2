@@ -300,8 +300,14 @@ func ExampleMessageTemplateContentProvider_outputUsage() {
 	case *types.MessageTemplateContentProviderMemberEmail:
 		_ = v.Value // Value is types.EmailMessageTemplateContent
 
+	case *types.MessageTemplateContentProviderMemberPush:
+		_ = v.Value // Value is types.PushMessageTemplateContent
+
 	case *types.MessageTemplateContentProviderMemberSms:
 		_ = v.Value // Value is types.SMSMessageTemplateContent
+
+	case *types.MessageTemplateContentProviderMemberWhatsApp:
+		_ = v.Value // Value is types.WhatsAppMessageTemplateContent
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -312,8 +318,46 @@ func ExampleMessageTemplateContentProvider_outputUsage() {
 	}
 }
 
+var _ *types.WhatsAppMessageTemplateContent
 var _ *types.EmailMessageTemplateContent
 var _ *types.SMSMessageTemplateContent
+var _ *types.PushMessageTemplateContent
+
+func ExampleMessageTemplateSourceConfiguration_outputUsage() {
+	var union types.MessageTemplateSourceConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MessageTemplateSourceConfigurationMemberWhatsApp:
+		_ = v.Value // Value is types.WhatsAppMessageTemplateSourceConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WhatsAppMessageTemplateSourceConfiguration
+
+func ExampleMessageTemplateSourceConfigurationSummary_outputUsage() {
+	var union types.MessageTemplateSourceConfigurationSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MessageTemplateSourceConfigurationSummaryMemberWhatsApp:
+		_ = v.Value // Value is types.WhatsAppMessageTemplateSourceConfigurationSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WhatsAppMessageTemplateSourceConfigurationSummary
 
 func ExampleOrCondition_outputUsage() {
 	var union types.OrCondition

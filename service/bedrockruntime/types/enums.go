@@ -384,6 +384,27 @@ func (GuardrailManagedWordType) Values() []GuardrailManagedWordType {
 	}
 }
 
+type GuardrailOrigin string
+
+// Enum values for GuardrailOrigin
+const (
+	GuardrailOriginRequest              GuardrailOrigin = "REQUEST"
+	GuardrailOriginAccountEnforced      GuardrailOrigin = "ACCOUNT_ENFORCED"
+	GuardrailOriginOrganizationEnforced GuardrailOrigin = "ORGANIZATION_ENFORCED"
+)
+
+// Values returns all known values for GuardrailOrigin. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailOrigin) Values() []GuardrailOrigin {
+	return []GuardrailOrigin{
+		"REQUEST",
+		"ACCOUNT_ENFORCED",
+		"ORGANIZATION_ENFORCED",
+	}
+}
+
 type GuardrailOutputScope string
 
 // Enum values for GuardrailOutputScope
@@ -400,6 +421,25 @@ func (GuardrailOutputScope) Values() []GuardrailOutputScope {
 	return []GuardrailOutputScope{
 		"INTERVENTIONS",
 		"FULL",
+	}
+}
+
+type GuardrailOwnership string
+
+// Enum values for GuardrailOwnership
+const (
+	GuardrailOwnershipSelf         GuardrailOwnership = "SELF"
+	GuardrailOwnershipCrossAccount GuardrailOwnership = "CROSS_ACCOUNT"
+)
+
+// Values returns all known values for GuardrailOwnership. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailOwnership) Values() []GuardrailOwnership {
+	return []GuardrailOwnership{
+		"SELF",
+		"CROSS_ACCOUNT",
 	}
 }
 

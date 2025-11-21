@@ -592,9 +592,6 @@ func validateOpCreateLandingZoneInput(v *CreateLandingZoneInput) error {
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -934,9 +931,6 @@ func validateOpUpdateLandingZoneInput(v *UpdateLandingZoneInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLandingZoneInput"}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
 	}
 	if v.LandingZoneIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LandingZoneIdentifier"))

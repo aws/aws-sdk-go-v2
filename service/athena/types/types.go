@@ -257,6 +257,39 @@ type CapacityReservation struct {
 	noSmithyDocumentSerde
 }
 
+// A classification refers to a set of specific configurations.
+type Classification struct {
+
+	// The name of the configuration classification.
+	Name *string
+
+	// A set of properties specified within a configuration classification.
+	Properties map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for delivering logs to Amazon CloudWatch log groups.
+type CloudWatchLoggingConfiguration struct {
+
+	// Enables CloudWatch logging.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The name of the log group in Amazon CloudWatch Logs where you want to publish
+	// your logs.
+	LogGroup *string
+
+	// Prefix for the CloudWatch log stream name.
+	LogStreamNamePrefix *string
+
+	// The types of logs that you want to publish to CloudWatch.
+	LogTypes map[string][]string
+
+	noSmithyDocumentSerde
+}
+
 // Contains metadata for a column in a table.
 type Column struct {
 
@@ -555,16 +588,14 @@ type EncryptionConfiguration struct {
 // mappings for a notebook engine.
 type EngineConfiguration struct {
 
-	// The maximum number of DPUs that can run concurrently.
-	//
-	// This member is required.
-	MaxConcurrentDpus *int32
-
 	// Contains additional notebook engine MAP parameter mappings in the form of
 	// key-value pairs. To specify an Athena notebook that the Jupyter server will
 	// download and serve, specify a value for the StartSessionRequest$NotebookVersionfield, and then add a key named
 	// NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
 	AdditionalConfigs map[string]string
+
+	// The configuration classifications that can be specified for the engine.
+	Classifications []Classification
 
 	// The number of DPUs to use for the coordinator. A coordinator is a special
 	// executor that orchestrates processing work and manages other executors in a
@@ -575,6 +606,9 @@ type EngineConfiguration struct {
 	// unit of compute that a notebook session can request from Athena. The default is
 	// 1.
 	DefaultExecutorDpuSize *int32
+
+	// The maximum number of DPUs that can run concurrently.
+	MaxConcurrentDpus *int32
 
 	// Specifies custom jar files and Spark properties for use cases like cluster
 	// encryption, table formats, and general Spark tuning.
@@ -664,6 +698,20 @@ type IdentityCenterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for delivering logs to Amazon S3 buckets.
+type ManagedLoggingConfiguration struct {
+
+	// Enables mamanged log persistence.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The KMS key ARN to encrypt the logs stored in managed log persistence.
+	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration for storing results in Athena owned storage, which includes
 //
 // whether this feature is enabled; whether encryption configuration, if any, is
@@ -716,6 +764,22 @@ type ManagedQueryResultsEncryptionConfiguration struct {
 	//
 	// This member is required.
 	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration settings for managed log persistence, delivering
+// logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.
+type MonitoringConfiguration struct {
+
+	// Configuration settings for delivering logs to Amazon CloudWatch log groups.
+	CloudWatchLoggingConfiguration *CloudWatchLoggingConfiguration
+
+	// Configuration settings for managed log persistence.
+	ManagedLoggingConfiguration *ManagedLoggingConfiguration
+
+	// Configuration settings for delivering logs to Amazon S3 buckets.
+	S3LoggingConfiguration *S3LoggingConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -861,7 +925,7 @@ type QueryExecution struct {
 	// The type of query statement that was run. DDL indicates DDL query statements.
 	// DML indicates DML (Data Manipulation Language) query statements, such as CREATE
 	// TABLE AS SELECT . UTILITY indicates query statements other than DDL and DML,
-	// such as SHOW CREATE TABLE , or DESCRIBE TABLE .
+	// such as SHOW CREATE TABLE , EXPLAIN , DESCRIBE , or SHOW TABLES .
 	StatementType StatementType
 
 	// Query execution statistics, such as the amount of data scanned, the amount of
@@ -910,6 +974,9 @@ type QueryExecutionStatistics struct {
 
 	// The number of bytes in the data that was queried.
 	DataScannedInBytes *int64
+
+	// The number of Data Processing Units (DPUs) that Athena used to run the query.
+	DpuCount *float64
 
 	// The number of milliseconds that the query took to execute.
 	EngineExecutionTimeInMillis *int64
@@ -960,9 +1027,9 @@ type QueryExecutionStatus struct {
 	// query experienced an error and did not complete processing. CANCELLED indicates
 	// that a user input interrupted query execution.
 	//
-	// Athena automatically retries your queries in cases of certain transient errors.
-	// As a result, you may see the query state transition from RUNNING or FAILED to
-	// QUEUED .
+	// For queries that experience certain transient errors, the state transitions
+	// from RUNNING back to QUEUED . The FAILED state is always terminal with no
+	// automatic retry.
 	State QueryExecutionState
 
 	// Further detail about the status of the query.
@@ -1318,6 +1385,24 @@ type Row struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for delivering logs to Amazon S3 buckets.
+type S3LoggingConfiguration struct {
+
+	// Enables S3 log delivery.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The KMS key ARN to encrypt the logs published to the given Amazon S3
+	// destination.
+	KmsKey *string
+
+	// The Amazon S3 destination URI for log publishing.
+	LogLocation *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains session configuration information.
 type SessionConfiguration struct {
 
@@ -1332,6 +1417,9 @@ type SessionConfiguration struct {
 
 	// The idle timeout in seconds for the session.
 	IdleTimeoutSeconds *int64
+
+	// The idle timeout in seconds for the session.
+	SessionIdleTimeoutInMinutes *int32
 
 	// The Amazon S3 location that stores information for the notebook.
 	WorkingDirectory *string
@@ -1602,10 +1690,15 @@ type WorkGroupConfiguration struct {
 	EnableMinimumEncryptionConfiguration *bool
 
 	// If set to "true", the settings for the workgroup override client-side settings.
-	// If set to "false", client-side settings are used. For more information, see [Workgroup Settings Override Client-Side Settings].
+	// If set to "false", client-side settings are used. This property is not required
+	// for Apache Spark enabled workgroups. For more information, see [Workgroup Settings Override Client-Side Settings].
 	//
 	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EnforceWorkGroupConfiguration *bool
+
+	// Contains data processing unit (DPU) configuration settings and parameter
+	// mappings for a notebook engine.
+	EngineConfiguration *EngineConfiguration
 
 	// The engine version that all queries running on the workgroup use. Queries on
 	// the AmazonAthenaPreviewFunctionality workgroup run on the preview engine
@@ -1625,6 +1718,10 @@ type WorkGroupConfiguration struct {
 	// whether this feature is enabled; whether encryption configuration, if any, is
 	// used for encrypting query results.
 	ManagedQueryResultsConfiguration *ManagedQueryResultsConfiguration
+
+	// Contains the configuration settings for managed log persistence, delivering
+	// logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.
+	MonitoringConfiguration *MonitoringConfiguration
 
 	// Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 	PublishCloudWatchMetricsEnabled *bool
@@ -1691,6 +1788,10 @@ type WorkGroupConfigurationUpdates struct {
 	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EnforceWorkGroupConfiguration *bool
 
+	// Contains data processing unit (DPU) configuration settings and parameter
+	// mappings for a notebook engine.
+	EngineConfiguration *EngineConfiguration
+
 	// The engine version requested when a workgroup is updated. After the update, all
 	// queries on the workgroup run on the requested engine version. If no value was
 	// previously set, the default is Auto. Queries on the
@@ -1705,6 +1806,10 @@ type WorkGroupConfigurationUpdates struct {
 
 	// Updates configuration information for managed query results in the workgroup.
 	ManagedQueryResultsConfigurationUpdates *ManagedQueryResultsConfigurationUpdates
+
+	// Contains the configuration settings for managed log persistence, delivering
+	// logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.
+	MonitoringConfiguration *MonitoringConfiguration
 
 	// Indicates whether this workgroup enables publishing metrics to Amazon
 	// CloudWatch.

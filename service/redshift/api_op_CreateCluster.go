@@ -157,6 +157,21 @@ type CreateClusterInput struct {
 	// Availability Zones after the cluster is created.
 	AvailabilityZoneRelocation *bool
 
+	// The name of the Glue data catalog that will be associated with the cluster
+	// enabled with Amazon Redshift federated permissions.
+	//
+	// Constraints:
+	//
+	//   - Must contain at least one lowercase letter.
+	//
+	//   - Can only contain lowercase letters (a-z), numbers (0-9), underscores (_),
+	//   and hyphens (-).
+	//
+	// Pattern: ^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$
+	//
+	// Example: my-catalog_01
+	CatalogName *string
+
 	// The name of the parameter group to be associated with this cluster.
 	//
 	// Default: The default Amazon Redshift cluster parameter group. For information

@@ -438,7 +438,7 @@ func TestEndpointCase12(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://metering.marketplace.eusc-de-east-1.amazonaws.eu")
+	uri, _ := url.Parse("https://metering-marketplace.eusc-de-east-1.amazonaws.eu")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

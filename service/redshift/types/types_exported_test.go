@@ -47,6 +47,24 @@ func ExampleNamespaceIdentifierUnion_outputUsage() {
 var _ *types.ProvisionedIdentifier
 var _ *types.ServerlessIdentifier
 
+func ExampleRedshiftScopeUnion_outputUsage() {
+	var union types.RedshiftScopeUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RedshiftScopeUnionMemberConnect:
+		_ = v.Value // Value is types.Connect
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Connect
+
 func ExampleS3AccessGrantsScopeUnion_outputUsage() {
 	var union types.S3AccessGrantsScopeUnion
 	// type switches can be used to check the union value
@@ -72,6 +90,9 @@ func ExampleServiceIntegrationsUnion_outputUsage() {
 	case *types.ServiceIntegrationsUnionMemberLakeFormation:
 		_ = v.Value // Value is []types.LakeFormationScopeUnion
 
+	case *types.ServiceIntegrationsUnionMemberRedshift:
+		_ = v.Value // Value is []types.RedshiftScopeUnion
+
 	case *types.ServiceIntegrationsUnionMemberS3AccessGrants:
 		_ = v.Value // Value is []types.S3AccessGrantsScopeUnion
 
@@ -86,3 +107,4 @@ func ExampleServiceIntegrationsUnion_outputUsage() {
 
 var _ []types.LakeFormationScopeUnion
 var _ []types.S3AccessGrantsScopeUnion
+var _ []types.RedshiftScopeUnion

@@ -11805,6 +11805,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				return err
 			}
 
+		case "controlPlaneScalingConfig":
+			if err := awsRestjson1_deserializeDocumentControlPlaneScalingConfig(&sv.ControlPlaneScalingConfig, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12516,6 +12521,46 @@ func awsRestjson1_deserializeDocumentControlPlanePlacementResponse(v **types.Con
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.GroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlPlaneScalingConfig(v **types.ControlPlaneScalingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlPlaneScalingConfig
+	if *v == nil {
+		sv = &types.ControlPlaneScalingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisionedControlPlaneTier to be of type string, got %T instead", value)
+				}
+				sv.Tier = types.ProvisionedControlPlaneTier(jtv)
 			}
 
 		default:

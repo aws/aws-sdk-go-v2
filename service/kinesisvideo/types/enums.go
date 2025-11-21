@@ -128,6 +128,25 @@ func (ConfigurationStatus) Values() []ConfigurationStatus {
 	}
 }
 
+type DefaultStorageTier string
+
+// Enum values for DefaultStorageTier
+const (
+	DefaultStorageTierHot  DefaultStorageTier = "HOT"
+	DefaultStorageTierWarm DefaultStorageTier = "WARM"
+)
+
+// Values returns all known values for DefaultStorageTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultStorageTier) Values() []DefaultStorageTier {
+	return []DefaultStorageTier{
+		"HOT",
+		"WARM",
+	}
+}
+
 type Format string
 
 // Enum values for Format

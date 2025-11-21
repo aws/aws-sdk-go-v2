@@ -7136,6 +7136,11 @@ func awsRestjson1_serializeDocumentProvisionedPollerConfig(v *types.ProvisionedP
 		ok.Integer(*v.MinimumPollers)
 	}
 
+	if v.PollerGroupName != nil {
+		ok := object.Key("PollerGroupName")
+		ok.String(*v.PollerGroupName)
+	}
+
 	return nil
 }
 

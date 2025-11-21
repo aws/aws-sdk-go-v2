@@ -737,6 +737,27 @@ func (TargetType) Values() []TargetType {
 	}
 }
 
+type UpgradeRolloutOrder string
+
+// Enum values for UpgradeRolloutOrder
+const (
+	UpgradeRolloutOrderFirst  UpgradeRolloutOrder = "first"
+	UpgradeRolloutOrderSecond UpgradeRolloutOrder = "second"
+	UpgradeRolloutOrderLast   UpgradeRolloutOrder = "last"
+)
+
+// Values returns all known values for UpgradeRolloutOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpgradeRolloutOrder) Values() []UpgradeRolloutOrder {
+	return []UpgradeRolloutOrder{
+		"first",
+		"second",
+		"last",
+	}
+}
+
 type WriteForwardingStatus string
 
 // Enum values for WriteForwardingStatus

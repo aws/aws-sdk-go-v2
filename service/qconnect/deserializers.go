@@ -10869,6 +10869,11 @@ func awsRestjson1_deserializeOpDocumentRenderMessageTemplateOutput(v **RenderMes
 				return err
 			}
 
+		case "sourceConfigurationSummary":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateSourceConfigurationSummary(&sv.SourceConfigurationSummary, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19863,6 +19868,15 @@ func awsRestjson1_deserializeDocumentExtendedMessageTemplateData(v **types.Exten
 				return err
 			}
 
+		case "channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = ptr.String(jtv)
+			}
+
 		case "channelSubtype":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20001,6 +20015,11 @@ func awsRestjson1_deserializeDocumentExtendedMessageTemplateData(v **types.Exten
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "sourceConfigurationSummary":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateSourceConfigurationSummary(&sv.SourceConfigurationSummary, value); err != nil {
+				return err
 			}
 
 		case "tags":
@@ -22732,6 +22751,16 @@ loop:
 			uv = &types.MessageTemplateContentProviderMemberEmail{Value: mv}
 			break loop
 
+		case "push":
+			var mv types.PushMessageTemplateContent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPushMessageTemplateContent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MessageTemplateContentProviderMemberPush{Value: mv}
+			break loop
+
 		case "sms":
 			var mv types.SMSMessageTemplateContent
 			destAddr := &mv
@@ -22740,6 +22769,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.MessageTemplateContentProviderMemberSms{Value: mv}
+			break loop
+
+		case "whatsApp":
+			var mv types.WhatsAppMessageTemplateContent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWhatsAppMessageTemplateContent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MessageTemplateContentProviderMemberWhatsApp{Value: mv}
 			break loop
 
 		default:
@@ -22777,6 +22816,15 @@ func awsRestjson1_deserializeDocumentMessageTemplateData(v **types.MessageTempla
 		case "attributeTypes":
 			if err := awsRestjson1_deserializeDocumentMessageTemplateAttributeTypeList(&sv.AttributeTypes, value); err != nil {
 				return err
+			}
+
+		case "channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = ptr.String(jtv)
 			}
 
 		case "channelSubtype":
@@ -22910,6 +22958,11 @@ func awsRestjson1_deserializeDocumentMessageTemplateData(v **types.MessageTempla
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "sourceConfigurationSummary":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateSourceConfigurationSummary(&sv.SourceConfigurationSummary, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -22946,6 +22999,15 @@ func awsRestjson1_deserializeDocumentMessageTemplateSearchResultData(v **types.M
 
 	for key, value := range shape {
 		switch key {
+		case "channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = ptr.String(jtv)
+			}
+
 		case "channelSubtype":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23067,6 +23129,11 @@ func awsRestjson1_deserializeDocumentMessageTemplateSearchResultData(v **types.M
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "sourceConfigurationSummary":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateSourceConfigurationSummary(&sv.SourceConfigurationSummary, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -23128,6 +23195,86 @@ func awsRestjson1_deserializeDocumentMessageTemplateSearchResultsList(v *[]types
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMessageTemplateSourceConfiguration(v *types.MessageTemplateSourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.MessageTemplateSourceConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "whatsApp":
+			var mv types.WhatsAppMessageTemplateSourceConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWhatsAppMessageTemplateSourceConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MessageTemplateSourceConfigurationMemberWhatsApp{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageTemplateSourceConfigurationSummary(v *types.MessageTemplateSourceConfigurationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.MessageTemplateSourceConfigurationSummary
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "whatsApp":
+			var mv types.WhatsAppMessageTemplateSourceConfigurationSummary
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWhatsAppMessageTemplateSourceConfigurationSummary(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MessageTemplateSourceConfigurationSummaryMemberWhatsApp{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMessageTemplateSummary(v **types.MessageTemplateSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23161,6 +23308,15 @@ func awsRestjson1_deserializeDocumentMessageTemplateSummary(v **types.MessageTem
 					return err
 				}
 				sv.ActiveVersionNumber = ptr.Int64(i64)
+			}
+
+		case "channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = ptr.String(jtv)
 			}
 
 		case "channelSubtype":
@@ -23261,6 +23417,11 @@ func awsRestjson1_deserializeDocumentMessageTemplateSummary(v **types.MessageTem
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "sourceConfiguration":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateSourceConfiguration(&sv.SourceConfiguration, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -23331,6 +23492,15 @@ func awsRestjson1_deserializeDocumentMessageTemplateVersionSummary(v **types.Mes
 
 	for key, value := range shape {
 		switch key {
+		case "channel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Channel to be of type string, got %T instead", value)
+				}
+				sv.Channel = ptr.String(jtv)
+			}
+
 		case "channelSubtype":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23763,6 +23933,455 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPushADMMessageTemplateContent(v **types.PushADMMessageTemplateContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PushADMMessageTemplateContent
+	if *v == nil {
+		sv = &types.PushADMMessageTemplateContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PushMessageAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.PushMessageAction(jtv)
+			}
+
+		case "body":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.Body, value); err != nil {
+				return err
+			}
+
+		case "imageIconUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.ImageIconUrl = ptr.String(jtv)
+			}
+
+		case "imageUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.ImageUrl = ptr.String(jtv)
+			}
+
+		case "rawContent":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.RawContent, value); err != nil {
+				return err
+			}
+
+		case "smallImageIconUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.SmallImageIconUrl = ptr.String(jtv)
+			}
+
+		case "sound":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Sound = ptr.String(jtv)
+			}
+
+		case "title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		case "url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPushAPNSMessageTemplateContent(v **types.PushAPNSMessageTemplateContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PushAPNSMessageTemplateContent
+	if *v == nil {
+		sv = &types.PushAPNSMessageTemplateContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PushMessageAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.PushMessageAction(jtv)
+			}
+
+		case "body":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.Body, value); err != nil {
+				return err
+			}
+
+		case "mediaUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.MediaUrl = ptr.String(jtv)
+			}
+
+		case "rawContent":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.RawContent, value); err != nil {
+				return err
+			}
+
+		case "sound":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Sound = ptr.String(jtv)
+			}
+
+		case "title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		case "url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPushBaiduMessageTemplateContent(v **types.PushBaiduMessageTemplateContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PushBaiduMessageTemplateContent
+	if *v == nil {
+		sv = &types.PushBaiduMessageTemplateContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PushMessageAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.PushMessageAction(jtv)
+			}
+
+		case "body":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.Body, value); err != nil {
+				return err
+			}
+
+		case "imageIconUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.ImageIconUrl = ptr.String(jtv)
+			}
+
+		case "imageUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.ImageUrl = ptr.String(jtv)
+			}
+
+		case "rawContent":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.RawContent, value); err != nil {
+				return err
+			}
+
+		case "smallImageIconUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.SmallImageIconUrl = ptr.String(jtv)
+			}
+
+		case "sound":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Sound = ptr.String(jtv)
+			}
+
+		case "title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		case "url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPushFCMMessageTemplateContent(v **types.PushFCMMessageTemplateContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PushFCMMessageTemplateContent
+	if *v == nil {
+		sv = &types.PushFCMMessageTemplateContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PushMessageAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.PushMessageAction(jtv)
+			}
+
+		case "body":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.Body, value); err != nil {
+				return err
+			}
+
+		case "imageIconUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.ImageIconUrl = ptr.String(jtv)
+			}
+
+		case "imageUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.ImageUrl = ptr.String(jtv)
+			}
+
+		case "rawContent":
+			if err := awsRestjson1_deserializeDocumentMessageTemplateBodyContentProvider(&sv.RawContent, value); err != nil {
+				return err
+			}
+
+		case "smallImageIconUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.SmallImageIconUrl = ptr.String(jtv)
+			}
+
+		case "sound":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Sound = ptr.String(jtv)
+			}
+
+		case "title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		case "url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPushMessageTemplateContent(v **types.PushMessageTemplateContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PushMessageTemplateContent
+	if *v == nil {
+		sv = &types.PushMessageTemplateContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adm":
+			if err := awsRestjson1_deserializeDocumentPushADMMessageTemplateContent(&sv.Adm, value); err != nil {
+				return err
+			}
+
+		case "apns":
+			if err := awsRestjson1_deserializeDocumentPushAPNSMessageTemplateContent(&sv.Apns, value); err != nil {
+				return err
+			}
+
+		case "baidu":
+			if err := awsRestjson1_deserializeDocumentPushBaiduMessageTemplateContent(&sv.Baidu, value); err != nil {
+				return err
+			}
+
+		case "fcm":
+			if err := awsRestjson1_deserializeDocumentPushFCMMessageTemplateContent(&sv.Fcm, value); err != nil {
+				return err
 			}
 
 		default:
@@ -26720,6 +27339,226 @@ func awsRestjson1_deserializeDocumentWebCrawlerLimits(v **types.WebCrawlerLimits
 					return err
 				}
 				sv.RateLimit = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppMessageTemplateComponents(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected WhatsAppMessageTemplateComponent to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppMessageTemplateContent(v **types.WhatsAppMessageTemplateContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppMessageTemplateContent
+	if *v == nil {
+		sv = &types.WhatsAppMessageTemplateContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "data":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppMessageTemplateContentData to be of type string, got %T instead", value)
+				}
+				sv.Data = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppMessageTemplateSourceConfiguration(v **types.WhatsAppMessageTemplateSourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppMessageTemplateSourceConfiguration
+	if *v == nil {
+		sv = &types.WhatsAppMessageTemplateSourceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "businessAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppBusinessAccountId to be of type string, got %T instead", value)
+				}
+				sv.BusinessAccountId = ptr.String(jtv)
+			}
+
+		case "components":
+			if err := awsRestjson1_deserializeDocumentWhatsAppMessageTemplateComponents(&sv.Components, value); err != nil {
+				return err
+			}
+
+		case "templateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppMessageTemplateId to be of type string, got %T instead", value)
+				}
+				sv.TemplateId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppMessageTemplateSourceConfigurationSummary(v **types.WhatsAppMessageTemplateSourceConfigurationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppMessageTemplateSourceConfigurationSummary
+	if *v == nil {
+		sv = &types.WhatsAppMessageTemplateSourceConfigurationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "businessAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppBusinessAccountId to be of type string, got %T instead", value)
+				}
+				sv.BusinessAccountId = ptr.String(jtv)
+			}
+
+		case "components":
+			if err := awsRestjson1_deserializeDocumentWhatsAppMessageTemplateComponents(&sv.Components, value); err != nil {
+				return err
+			}
+
+		case "language":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppMessageTemplateLanguage to be of type string, got %T instead", value)
+				}
+				sv.Language = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppMessageTemplateName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppSourceConfigurationStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.WhatsAppSourceConfigurationStatus(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyUnlimitedString to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		case "templateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppMessageTemplateId to be of type string, got %T instead", value)
+				}
+				sv.TemplateId = ptr.String(jtv)
 			}
 
 		default:

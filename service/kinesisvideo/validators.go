@@ -390,6 +390,26 @@ func (m *validateOpUpdateStream) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStreamStorageConfiguration struct {
+}
+
+func (*validateOpUpdateStreamStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStreamStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStreamStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStreamStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateSignalingChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSignalingChannel{}, middleware.After)
 }
@@ -464,6 +484,10 @@ func addOpUpdateSignalingChannelValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStream{}, middleware.After)
+}
+
+func addOpUpdateStreamStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStreamStorageConfiguration{}, middleware.After)
 }
 
 func validateEdgeConfig(v *types.EdgeConfig) error {
@@ -654,6 +678,21 @@ func validateScheduleConfig(v *types.ScheduleConfig) error {
 	}
 }
 
+func validateStreamStorageConfiguration(v *types.StreamStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamStorageConfiguration"}
+	if len(v.DefaultStorageTier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultStorageTier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -752,6 +791,11 @@ func validateOpCreateStreamInput(v *CreateStreamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamInput"}
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
+	if v.StreamStorageConfiguration != nil {
+		if err := validateStreamStorageConfiguration(v.StreamStorageConfiguration); err != nil {
+			invalidParams.AddNested("StreamStorageConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1041,6 +1085,28 @@ func validateOpUpdateStreamInput(v *UpdateStreamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamInput"}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStreamStorageConfigurationInput(v *UpdateStreamStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamStorageConfigurationInput"}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.StreamStorageConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamStorageConfiguration"))
+	} else if v.StreamStorageConfiguration != nil {
+		if err := validateStreamStorageConfiguration(v.StreamStorageConfiguration); err != nil {
+			invalidParams.AddNested("StreamStorageConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

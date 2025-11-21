@@ -14815,6 +14815,9 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// [Embedding Overview]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
 	QSearchBar *RegisteredUserQSearchBarEmbeddingConfiguration
 
+	// The configuration details for embedding the Quick chat agent.
+	QuickChat *RegisteredUserQuickChatEmbeddingConfiguration
+
 	// The configuration details for providing each Amazon Quick Sight console
 	// embedding experience. This can be used along with custom permissions to restrict
 	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Amazon Quick Suite
@@ -14883,6 +14886,11 @@ type RegisteredUserQSearchBarEmbeddingConfiguration struct {
 	// [Quick Sight console]: https://quicksight.aws.amazon.com/
 	InitialTopicId *string
 
+	noSmithyDocumentSerde
+}
+
+// An object that provides information about the configuration of a chat agent.
+type RegisteredUserQuickChatEmbeddingConfiguration struct {
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "19fc9930-8a59-4e50-888a-aa466d0f7c38",
+    "type": "feature",
+    "description": "Enhanced SageMaker HyperPod instance groups with support for MinInstanceCount, CapacityRequirements (Spot/On-Demand), and KubernetesConfig (labels and taints). Also Added speculative decoding and MaxInstanceCount for model optimization jobs.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

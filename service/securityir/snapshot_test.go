@@ -218,6 +218,18 @@ func TestCheckSnapshot_ListComments(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInvestigations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInvestigations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMemberships(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMemberships(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SendFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendFeedback")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -481,6 +505,18 @@ func TestUpdateSnapshot_ListComments(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListInvestigations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInvestigations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMemberships(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMemberships(context.Background(), nil, func(o *Options) {
@@ -498,6 +534,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendFeedback")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

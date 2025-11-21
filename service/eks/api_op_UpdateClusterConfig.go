@@ -91,6 +91,10 @@ type UpdateClusterConfigInput struct {
 	// cluster. For example, enable the capability.
 	ComputeConfig *types.ComputeConfigRequest
 
+	// The control plane scaling tier configuration. For more information, see EKS
+	// Provisioned Control Plane in the Amazon EKS User Guide.
+	ControlPlaneScalingConfig *types.ControlPlaneScalingConfig
+
 	// Specifies whether to enable or disable deletion protection for the cluster.
 	// When enabled ( true ), the cluster cannot be deleted until deletion protection
 	// is explicitly disabled. When disabled ( false ), the cluster can be deleted

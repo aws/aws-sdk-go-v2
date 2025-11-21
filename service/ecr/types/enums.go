@@ -504,6 +504,44 @@ func (ScanType) Values() []ScanType {
 	}
 }
 
+type SigningRepositoryFilterType string
+
+// Enum values for SigningRepositoryFilterType
+const (
+	SigningRepositoryFilterTypeWildcardMatch SigningRepositoryFilterType = "WILDCARD_MATCH"
+)
+
+// Values returns all known values for SigningRepositoryFilterType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SigningRepositoryFilterType) Values() []SigningRepositoryFilterType {
+	return []SigningRepositoryFilterType{
+		"WILDCARD_MATCH",
+	}
+}
+
+type SigningStatus string
+
+// Enum values for SigningStatus
+const (
+	SigningStatusInProgress SigningStatus = "IN_PROGRESS"
+	SigningStatusComplete   SigningStatus = "COMPLETE"
+	SigningStatusFailed     SigningStatus = "FAILED"
+)
+
+// Values returns all known values for SigningStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SigningStatus) Values() []SigningStatus {
+	return []SigningStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
 type TagStatus string
 
 // Enum values for TagStatus

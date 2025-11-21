@@ -29,6 +29,26 @@ func (m *validateOpAcceptMarketplaceRegistration) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateIamRoleToResource struct {
+}
+
+func (*validateOpAssociateIamRoleToResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateIamRoleToResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateIamRoleToResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateIamRoleToResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCloudAutonomousVmCluster struct {
 }
 
@@ -224,6 +244,26 @@ func (m *validateOpDeleteOdbPeeringConnection) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteOdbPeeringConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateIamRoleFromResource struct {
+}
+
+func (*validateOpDisassociateIamRoleFromResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateIamRoleFromResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateIamRoleFromResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateIamRoleFromResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -653,6 +693,10 @@ func addOpAcceptMarketplaceRegistrationValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpAcceptMarketplaceRegistration{}, middleware.After)
 }
 
+func addOpAssociateIamRoleToResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateIamRoleToResource{}, middleware.After)
+}
+
 func addOpCreateCloudAutonomousVmClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCloudAutonomousVmCluster{}, middleware.After)
 }
@@ -691,6 +735,10 @@ func addOpDeleteOdbNetworkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteOdbPeeringConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOdbPeeringConnection{}, middleware.After)
+}
+
+func addOpDisassociateIamRoleFromResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateIamRoleFromResource{}, middleware.After)
 }
 
 func addOpGetCloudAutonomousVmClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -784,6 +832,27 @@ func validateOpAcceptMarketplaceRegistrationInput(v *AcceptMarketplaceRegistrati
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptMarketplaceRegistrationInput"}
 	if v.MarketplaceRegistrationToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRegistrationToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateIamRoleToResourceInput(v *AssociateIamRoleToResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateIamRoleToResourceInput"}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if len(v.AwsIntegration) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsIntegration"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -988,6 +1057,27 @@ func validateOpDeleteOdbPeeringConnectionInput(v *DeleteOdbPeeringConnectionInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteOdbPeeringConnectionInput"}
 	if v.OdbPeeringConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OdbPeeringConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateIamRoleFromResourceInput(v *DisassociateIamRoleFromResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIamRoleFromResourceInput"}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if len(v.AwsIntegration) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsIntegration"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

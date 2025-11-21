@@ -116,6 +116,21 @@ type RestoreFromClusterSnapshotInput struct {
 	// Availability Zones after the cluster is restored.
 	AvailabilityZoneRelocation *bool
 
+	// The name of the Glue Data Catalog that will be associated with the cluster
+	// enabled with Amazon Redshift federated permissions.
+	//
+	// Constraints:
+	//
+	//   - Must contain at least one lowercase letter.
+	//
+	//   - Can only contain lowercase letters (a-z), numbers (0-9), underscores (_),
+	//   and hyphens (-).
+	//
+	// Pattern: ^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$
+	//
+	// Example: my-catalog_01
+	CatalogName *string
+
 	// The name of the parameter group to be associated with this cluster.
 	//
 	// Default: The default Amazon Redshift cluster parameter group. For information
@@ -277,6 +292,11 @@ type RestoreFromClusterSnapshotInput struct {
 	//
 	// Default: false
 	PubliclyAccessible *bool
+
+	// The Amazon Resource Name (ARN) of the IAM Identity Center application used for
+	// enabling Amazon Web Services IAM Identity Center trusted identity propagation on
+	// a cluster enabled with Amazon Redshift federated permissions.
+	RedshiftIdcApplicationArn *string
 
 	// The identifier of the target reserved node offering.
 	ReservedNodeId *string

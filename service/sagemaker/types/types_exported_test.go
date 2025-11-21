@@ -216,6 +216,9 @@ func ExampleOptimizationConfig_outputUsage() {
 	case *types.OptimizationConfigMemberModelShardingConfig:
 		_ = v.Value // Value is types.ModelShardingConfig
 
+	case *types.OptimizationConfigMemberModelSpeculativeDecodingConfig:
+		_ = v.Value // Value is types.ModelSpeculativeDecodingConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -228,6 +231,7 @@ func ExampleOptimizationConfig_outputUsage() {
 var _ *types.ModelCompilationConfig
 var _ *types.ModelQuantizationConfig
 var _ *types.ModelShardingConfig
+var _ *types.ModelSpeculativeDecodingConfig
 
 func ExampleScalingPolicy_outputUsage() {
 	var union types.ScalingPolicy

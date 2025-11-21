@@ -341,6 +341,24 @@ func (CommitmentDuration) Values() []CommitmentDuration {
 	}
 }
 
+type ConfigurationOwner string
+
+// Enum values for ConfigurationOwner
+const (
+	// Configuration owned by the account
+	ConfigurationOwnerAccount ConfigurationOwner = "ACCOUNT"
+)
+
+// Values returns all known values for ConfigurationOwner. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationOwner) Values() []ConfigurationOwner {
+	return []ConfigurationOwner{
+		"ACCOUNT",
+	}
+}
+
 type CustomizationType string
 
 // Enum values for CustomizationType
@@ -957,6 +975,25 @@ func (InferenceType) Values() []InferenceType {
 	return []InferenceType{
 		"ON_DEMAND",
 		"PROVISIONED",
+	}
+}
+
+type InputTags string
+
+// Enum values for InputTags
+const (
+	InputTagsHonor  InputTags = "HONOR"
+	InputTagsIgnore InputTags = "IGNORE"
+)
+
+// Values returns all known values for InputTags. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InputTags) Values() []InputTags {
+	return []InputTags{
+		"HONOR",
+		"IGNORE",
 	}
 }
 

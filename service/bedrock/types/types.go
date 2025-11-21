@@ -8,6 +8,63 @@ import (
 	"time"
 )
 
+// Account-level enforced guardrail input configuration.
+type AccountEnforcedGuardrailInferenceInputConfiguration struct {
+
+	// Identifier for the guardrail, could be the ID or the ARN.
+	//
+	// This member is required.
+	GuardrailIdentifier *string
+
+	// Numerical guardrail version.
+	//
+	// This member is required.
+	GuardrailVersion *string
+
+	// Whether to honor or ignore input tags at runtime.
+	//
+	// This member is required.
+	InputTags InputTags
+
+	noSmithyDocumentSerde
+}
+
+// Account enforced guardrail output configuration.
+type AccountEnforcedGuardrailOutputConfiguration struct {
+
+	// Unique ID for the account enforced configuration.
+	ConfigId *string
+
+	// Timestamp.
+	CreatedAt *time.Time
+
+	// The ARN of the role used to update the configuration.
+	CreatedBy *string
+
+	// ARN representation for the guardrail.
+	GuardrailArn *string
+
+	// Unique ID for the guardrail.
+	GuardrailId *string
+
+	// Numerical guardrail version.
+	GuardrailVersion *string
+
+	// Whether to honor or ignore input tags at runtime.
+	InputTags InputTags
+
+	// Configuration owner type.
+	Owner ConfigurationOwner
+
+	// Timestamp.
+	UpdatedAt *time.Time
+
+	// The ARN of the role used to update the configuration.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the agreement availability
 type AgreementAvailability struct {
 

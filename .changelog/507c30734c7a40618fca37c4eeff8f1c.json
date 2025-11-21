@@ -1,0 +1,8 @@
+{
+    "id": "507c3073-4c7a-4061-8fca-37c4eeff8f1c",
+    "type": "feature",
+    "description": "Add support for bidirectional streaming invocations on SageMaker AI real-time endpoints",
+    "modules": [
+        "service/sagemakerruntimehttp2"
+    ]
+}

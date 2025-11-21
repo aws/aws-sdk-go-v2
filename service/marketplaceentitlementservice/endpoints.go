@@ -434,6 +434,29 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-eusc" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString("https://entitlement-marketplace.")
+							out.WriteString(_Region)
+							out.WriteString(".amazonaws.eu")
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+						}, nil
+					}
+				}
+			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {

@@ -12,7 +12,11 @@ import (
 )
 
 // Assigns new properties to a web app. You can modify the access point, identity
-// provider details, and the web app units.
+// provider details, endpoint configuration, and the web app units.
+//
+// For more information about using VPC endpoints with Transfer Family, see [Create a Transfer Family web app in a VPC].
+//
+// [Create a Transfer Family web app in a VPC]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
 func (c *Client) UpdateWebApp(ctx context.Context, params *UpdateWebAppInput, optFns ...func(*Options)) (*UpdateWebAppOutput, error) {
 	if params == nil {
 		params = &UpdateWebAppInput{}
@@ -39,6 +43,10 @@ type UpdateWebAppInput struct {
 	// interact with the Transfer Family web app. You can specify a custom URL or use
 	// the default value.
 	AccessEndpoint *string
+
+	// The updated endpoint configuration for the web app. You can modify the endpoint
+	// type and VPC configuration settings.
+	EndpointDetails types.UpdateWebAppEndpointDetails
 
 	// Provide updated identity provider values in a WebAppIdentityProviderDetails
 	// object.

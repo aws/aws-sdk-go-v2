@@ -1862,6 +1862,27 @@ func (SortOrder) Values() []SortOrder {
 	}
 }
 
+type SpeechDetectionSensitivity string
+
+// Enum values for SpeechDetectionSensitivity
+const (
+	SpeechDetectionSensitivityDefault               SpeechDetectionSensitivity = "Default"
+	SpeechDetectionSensitivityHighNoiseTolerance    SpeechDetectionSensitivity = "HighNoiseTolerance"
+	SpeechDetectionSensitivityMaximumNoiseTolerance SpeechDetectionSensitivity = "MaximumNoiseTolerance"
+)
+
+// Values returns all known values for SpeechDetectionSensitivity. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpeechDetectionSensitivity) Values() []SpeechDetectionSensitivity {
+	return []SpeechDetectionSensitivity{
+		"Default",
+		"HighNoiseTolerance",
+		"MaximumNoiseTolerance",
+	}
+}
+
 type TestExecutionApiMode string
 
 // Enum values for TestExecutionApiMode

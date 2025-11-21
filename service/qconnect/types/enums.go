@@ -204,8 +204,10 @@ type ChannelSubtype string
 
 // Enum values for ChannelSubtype
 const (
-	ChannelSubtypeEmail ChannelSubtype = "EMAIL"
-	ChannelSubtypeSms   ChannelSubtype = "SMS"
+	ChannelSubtypeEmail    ChannelSubtype = "EMAIL"
+	ChannelSubtypeSms      ChannelSubtype = "SMS"
+	ChannelSubtypeWhatsapp ChannelSubtype = "WHATSAPP"
+	ChannelSubtypePush     ChannelSubtype = "PUSH"
 )
 
 // Values returns all known values for ChannelSubtype. Note that this can be
@@ -216,6 +218,8 @@ func (ChannelSubtype) Values() []ChannelSubtype {
 	return []ChannelSubtype{
 		"EMAIL",
 		"SMS",
+		"WHATSAPP",
+		"PUSH",
 	}
 }
 
@@ -892,6 +896,27 @@ func (Priority) Values() []Priority {
 	}
 }
 
+type PushMessageAction string
+
+// Enum values for PushMessageAction
+const (
+	PushMessageActionOpenApp  PushMessageAction = "OPEN_APP"
+	PushMessageActionDeepLink PushMessageAction = "DEEP_LINK"
+	PushMessageActionUrl      PushMessageAction = "URL"
+)
+
+// Values returns all known values for PushMessageAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PushMessageAction) Values() []PushMessageAction {
+	return []PushMessageAction{
+		"OPEN_APP",
+		"DEEP_LINK",
+		"URL",
+	}
+}
+
 type QueryConditionComparisonOperator string
 
 // Enum values for QueryConditionComparisonOperator
@@ -1305,5 +1330,27 @@ func (WebScopeType) Values() []WebScopeType {
 	return []WebScopeType{
 		"HOST_ONLY",
 		"SUBDOMAINS",
+	}
+}
+
+type WhatsAppSourceConfigurationStatus string
+
+// Enum values for WhatsAppSourceConfigurationStatus
+const (
+	WhatsAppSourceConfigurationStatusValid    WhatsAppSourceConfigurationStatus = "VALID"
+	WhatsAppSourceConfigurationStatusInvalid  WhatsAppSourceConfigurationStatus = "INVALID"
+	WhatsAppSourceConfigurationStatusRejected WhatsAppSourceConfigurationStatus = "REJECTED"
+)
+
+// Values returns all known values for WhatsAppSourceConfigurationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WhatsAppSourceConfigurationStatus) Values() []WhatsAppSourceConfigurationStatus {
+	return []WhatsAppSourceConfigurationStatus{
+		"VALID",
+		"INVALID",
+		"REJECTED",
 	}
 }

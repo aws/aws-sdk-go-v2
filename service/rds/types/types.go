@@ -1017,6 +1017,15 @@ type DBCluster struct {
 	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
+	// This data type represents the order in which the clusters are upgraded.
+	//
+	//   - [first] - Typically used for development or testing environments.
+	//
+	//   - [second] - Default order for resources not specifically configured.
+	//
+	//   - [last] - Usually reserved for production environments.
+	UpgradeRolloutOrder UpgradeRolloutOrder
+
 	// The list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
 
@@ -2114,6 +2123,15 @@ type DBInstance struct {
 	// Timezone content appears only for RDS for Db2 and RDS for SQL Server DB
 	// instances that were created with a time zone specified.
 	Timezone *string
+
+	// This data type represents the order in which the instances are upgraded.
+	//
+	//   - [first] - Typically used for development or testing environments.
+	//
+	//   - [second] - Default order for resources not specifically configured.
+	//
+	//   - [last] - Usually reserved for production environments.
+	UpgradeRolloutOrder UpgradeRolloutOrder
 
 	// The list of Amazon EC2 VPC security groups that the DB instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership

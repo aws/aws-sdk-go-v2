@@ -23,6 +23,25 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type ApplicationType string
+
+// Enum values for ApplicationType
+const (
+	ApplicationTypeNone      ApplicationType = "None"
+	ApplicationTypeLakehouse ApplicationType = "Lakehouse"
+)
+
+// Values returns all known values for ApplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationType) Values() []ApplicationType {
+	return []ApplicationType{
+		"None",
+		"Lakehouse",
+	}
+}
+
 type AquaConfigurationStatus string
 
 // Enum values for AquaConfigurationStatus
@@ -214,6 +233,44 @@ func (ImpactRankingType) Values() []ImpactRankingType {
 		"HIGH",
 		"MEDIUM",
 		"LOW",
+	}
+}
+
+type LakehouseIdcRegistration string
+
+// Enum values for LakehouseIdcRegistration
+const (
+	LakehouseIdcRegistrationAssociate    LakehouseIdcRegistration = "Associate"
+	LakehouseIdcRegistrationDisassociate LakehouseIdcRegistration = "Disassociate"
+)
+
+// Values returns all known values for LakehouseIdcRegistration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LakehouseIdcRegistration) Values() []LakehouseIdcRegistration {
+	return []LakehouseIdcRegistration{
+		"Associate",
+		"Disassociate",
+	}
+}
+
+type LakehouseRegistration string
+
+// Enum values for LakehouseRegistration
+const (
+	LakehouseRegistrationRegister   LakehouseRegistration = "Register"
+	LakehouseRegistrationDeregister LakehouseRegistration = "Deregister"
+)
+
+// Values returns all known values for LakehouseRegistration. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LakehouseRegistration) Values() []LakehouseRegistration {
+	return []LakehouseRegistration{
+		"Register",
+		"Deregister",
 	}
 }
 

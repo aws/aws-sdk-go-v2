@@ -98,6 +98,9 @@ type GetGatewayOutput struct {
 	// An endpoint for invoking gateway.
 	GatewayUrl *string
 
+	// The interceptors configured on the gateway.
+	InterceptorConfigurations []types.GatewayInterceptorConfiguration
+
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 

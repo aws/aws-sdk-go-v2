@@ -16,6 +16,32 @@ type AnyToolChoice struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the specific guardrail that was applied during this assessment,
+// including its identifier, version, ARN, origin, and ownership information.
+type AppliedGuardrailDetails struct {
+
+	// The ARN of the guardrail that was applied.
+	GuardrailArn *string
+
+	// The unique ID of the guardrail that was applied.
+	GuardrailId *string
+
+	// The origin of how the guardrail was applied. This can be either requested at
+	// the API level or enforced at the account or organization level as a default
+	// guardrail.
+	GuardrailOrigin []GuardrailOrigin
+
+	// The ownership type of the guardrail, indicating whether it is owned by the
+	// requesting account or is a cross-account guardrail shared from another AWS
+	// account.
+	GuardrailOwnership GuardrailOwnership
+
+	// The version of the guardrail that was applied.
+	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Asynchronous invocation output data settings.
 //
 // The following types satisfy this interface:
@@ -957,6 +983,10 @@ func (*DocumentSourceMemberText) isDocumentSource() {}
 // API.
 type GuardrailAssessment struct {
 
+	// Details about the specific guardrail that was applied during this assessment,
+	// including its identifier, version, ARN, origin, and ownership information.
+	AppliedGuardrailDetails *AppliedGuardrailDetails
+
 	// The automated reasoning policy assessment results, including logical validation
 	// findings for the input content.
 	AutomatedReasoningPolicy *GuardrailAutomatedReasoningPolicyAssessment
@@ -1298,13 +1328,9 @@ type GuardrailAutomatedReasoningValidFinding struct {
 type GuardrailConfiguration struct {
 
 	// The identifier for the guardrail.
-	//
-	// This member is required.
 	GuardrailIdentifier *string
 
 	// The version of the guardrail.
-	//
-	// This member is required.
 	GuardrailVersion *string
 
 	// The trace behavior for the guardrail.
@@ -1704,13 +1730,9 @@ type GuardrailSensitiveInformationPolicyAssessment struct {
 type GuardrailStreamConfiguration struct {
 
 	// The identifier for the guardrail.
-	//
-	// This member is required.
 	GuardrailIdentifier *string
 
 	// The version of the guardrail.
-	//
-	// This member is required.
 	GuardrailVersion *string
 
 	// The processing mode.

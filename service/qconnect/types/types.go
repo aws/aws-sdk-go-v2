@@ -1995,11 +1995,6 @@ type ExtendedMessageTemplateData struct {
 	// This member is required.
 	ChannelSubtype ChannelSubtype
 
-	// The content of the message template.
-	//
-	// This member is required.
-	Content MessageTemplateContentProvider
-
 	// The timestamp when the message template was created.
 	//
 	// This member is required.
@@ -2055,6 +2050,12 @@ type ExtendedMessageTemplateData struct {
 	// The types of attributes contain the message template.
 	AttributeTypes []MessageTemplateAttributeType
 
+	// The channel of the message template.
+	Channel *string
+
+	// The content of the message template.
+	Content MessageTemplateContentProvider
+
 	// An object that specifies the default values to use for variables in the message
 	// template. This object contains different categories of key-value pairs. Each key
 	// defines a variable or placeholder in the message template. The corresponding
@@ -2074,6 +2075,9 @@ type ExtendedMessageTemplateData struct {
 	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
 	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
 	Language *string
+
+	// The source configuration summary of the message template.
+	SourceConfigurationSummary MessageTemplateSourceConfigurationSummary
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -3119,7 +3123,9 @@ func (*MessageTemplateBodyContentProviderMemberContent) isMessageTemplateBodyCon
 // The following types satisfy this interface:
 //
 //	MessageTemplateContentProviderMemberEmail
+//	MessageTemplateContentProviderMemberPush
 //	MessageTemplateContentProviderMemberSms
+//	MessageTemplateContentProviderMemberWhatsApp
 type MessageTemplateContentProvider interface {
 	isMessageTemplateContentProvider()
 }
@@ -3133,6 +3139,15 @@ type MessageTemplateContentProviderMemberEmail struct {
 
 func (*MessageTemplateContentProviderMemberEmail) isMessageTemplateContentProvider() {}
 
+// The content of the message template that applies to the push channel subtype.
+type MessageTemplateContentProviderMemberPush struct {
+	Value PushMessageTemplateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateContentProviderMemberPush) isMessageTemplateContentProvider() {}
+
 // The content of the message template that applies to the SMS channel subtype.
 type MessageTemplateContentProviderMemberSms struct {
 	Value SMSMessageTemplateContent
@@ -3142,6 +3157,16 @@ type MessageTemplateContentProviderMemberSms struct {
 
 func (*MessageTemplateContentProviderMemberSms) isMessageTemplateContentProvider() {}
 
+// The content of the message template that applies to the WHATSAPP channel
+// subtype.
+type MessageTemplateContentProviderMemberWhatsApp struct {
+	Value WhatsAppMessageTemplateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateContentProviderMemberWhatsApp) isMessageTemplateContentProvider() {}
+
 // The data of a message template.
 type MessageTemplateData struct {
 
@@ -3149,11 +3174,6 @@ type MessageTemplateData struct {
 	//
 	// This member is required.
 	ChannelSubtype ChannelSubtype
-
-	// The content of the message template.
-	//
-	// This member is required.
-	Content MessageTemplateContentProvider
 
 	// The timestamp when the message template was created.
 	//
@@ -3207,6 +3227,12 @@ type MessageTemplateData struct {
 	// The types of attributes that the message template contains.
 	AttributeTypes []MessageTemplateAttributeType
 
+	// The channel of the message template.
+	Channel *string
+
+	// The content of the message template.
+	Content MessageTemplateContentProvider
+
 	// An object that specifies the default values to use for variables in the message
 	// template. This object contains different categories of key-value pairs. Each key
 	// defines a variable or placeholder in the message template. The corresponding
@@ -3223,6 +3249,9 @@ type MessageTemplateData struct {
 	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
 	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
 	Language *string
+
+	// The source configuration summary of the message template.
+	SourceConfigurationSummary MessageTemplateSourceConfigurationSummary
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -3411,6 +3440,9 @@ type MessageTemplateSearchResultData struct {
 	// This member is required.
 	Name *string
 
+	// The channel of the message template.
+	Channel *string
+
 	// The description of the message template.
 	Description *string
 
@@ -3425,6 +3457,9 @@ type MessageTemplateSearchResultData struct {
 	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
 	Language *string
 
+	// The source configuration summary of the message template.
+	SourceConfigurationSummary MessageTemplateSourceConfigurationSummary
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -3432,6 +3467,45 @@ type MessageTemplateSearchResultData struct {
 	VersionNumber *int64
 
 	noSmithyDocumentSerde
+}
+
+// The container of message template source configuration.
+//
+// The following types satisfy this interface:
+//
+//	MessageTemplateSourceConfigurationMemberWhatsApp
+type MessageTemplateSourceConfiguration interface {
+	isMessageTemplateSourceConfiguration()
+}
+
+// The sourceConfiguration of the message template that applies to the WHATSAPP
+// channel subtype.
+type MessageTemplateSourceConfigurationMemberWhatsApp struct {
+	Value WhatsAppMessageTemplateSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateSourceConfigurationMemberWhatsApp) isMessageTemplateSourceConfiguration() {}
+
+// The container of message template source configuration summary.
+//
+// The following types satisfy this interface:
+//
+//	MessageTemplateSourceConfigurationSummaryMemberWhatsApp
+type MessageTemplateSourceConfigurationSummary interface {
+	isMessageTemplateSourceConfigurationSummary()
+}
+
+// The sourceConfiguration summary of the message template that applies to the
+// WHATSAPP channel subtype.
+type MessageTemplateSourceConfigurationSummaryMemberWhatsApp struct {
+	Value WhatsAppMessageTemplateSourceConfigurationSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateSourceConfigurationSummaryMemberWhatsApp) isMessageTemplateSourceConfigurationSummary() {
 }
 
 // The summary of the message template.
@@ -3486,8 +3560,14 @@ type MessageTemplateSummary struct {
 	// The version number of the message template version that is activated.
 	ActiveVersionNumber *int64
 
+	// The channel this message template applies to.
+	Channel *string
+
 	// The description of the message template.
 	Description *string
+
+	// The container of message template source configuration.
+	SourceConfiguration MessageTemplateSourceConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -3537,6 +3617,9 @@ type MessageTemplateVersionSummary struct {
 	//
 	// This member is required.
 	VersionNumber *int64
+
+	// The channel of the message template.
+	Channel *string
 
 	noSmithyDocumentSerde
 }
@@ -3606,6 +3689,241 @@ type ParsingPrompt struct {
 	//
 	// This member is required.
 	ParsingPromptText *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the push message template that applies to ADM (Amazon Device
+// Messaging) notification service.
+type PushADMMessageTemplateContent struct {
+
+	// The action to occur if a recipient taps a push notification that is based on
+	// the message template. Valid values are:
+	//
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent to
+	//   the background. This is the default action.
+	//
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
+	Action PushMessageAction
+
+	// The message body to use in a push notification that is based on the message
+	// template.
+	Body MessageTemplateBodyContentProvider
+
+	// The URL of the large icon image to display in the content view of a push
+	// notification that's based on the message template.
+	ImageIconUrl *string
+
+	// The URL of an image to display in a push notification that's based on the
+	// message template.
+	ImageUrl *string
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	RawContent MessageTemplateBodyContentProvider
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	SmallImageIconUrl *string
+
+	// The sound to play when a recipient receives a push notification that's based on
+	// the message template. You can use the default stream or specify the file name of
+	// a sound resource that's bundled in your app. On an Android platform, the sound
+	// file must reside in /res/raw/ .
+	Sound *string
+
+	// The title to use in a push notification that's based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string
+
+	// The URL to open in a recipient's default mobile browser, if a recipient taps a
+	// push notification that's based on the message template and the value of the
+	// action property is URL .
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the push message template that applies to APNS (Apple Push
+// Notification service) notification service.
+type PushAPNSMessageTemplateContent struct {
+
+	// The action to occur if a recipient taps a push notification that is based on
+	// the message template. Valid values are:
+	//
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent to
+	//   the background. This is the default action.
+	//
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the iOS platform.
+	//
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
+	Action PushMessageAction
+
+	// The message body to use in a push notification that is based on the message
+	// template.
+	Body MessageTemplateBodyContentProvider
+
+	// The URL of an image or video to display in push notifications that are based on
+	// the message template.
+	MediaUrl *string
+
+	// The raw, JSON-formatted string to use as the payload for a push notification
+	// that's based on the message template. If specified, this value overrides all
+	// other content for the message template.
+	RawContent MessageTemplateBodyContentProvider
+
+	// The key for the sound to play when the recipient receives a push notification
+	// that's based on the message template. The value for this key is the name of a
+	// sound file in your app's main bundle or the Library/Sounds folder in your app's
+	// data container. If the sound file can't be found or you specify default for the
+	// value, the system plays the default alert sound.
+	Sound *string
+
+	// The title to use in a push notification that's based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string
+
+	// The URL to open in a recipient's default mobile browser, if a recipient taps a
+	// push notification that's based on the message template and the value of the
+	// action property is URL .
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the push message template that applies to Baidu notification
+// service.
+type PushBaiduMessageTemplateContent struct {
+
+	// The action to occur if a recipient taps a push notification that is based on
+	// the message template. Valid values are:
+	//
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent to
+	//   the background. This is the default action.
+	//
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
+	Action PushMessageAction
+
+	// The message body to use in a push notification that is based on the message
+	// template.
+	Body MessageTemplateBodyContentProvider
+
+	// The URL of the large icon image to display in the content view of a push
+	// notification that's based on the message template.
+	ImageIconUrl *string
+
+	// The URL of an image to display in a push notification that's based on the
+	// message template.
+	ImageUrl *string
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	RawContent MessageTemplateBodyContentProvider
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	SmallImageIconUrl *string
+
+	// The sound to play when a recipient receives a push notification that's based on
+	// the message template. You can use the default stream or specify the file name of
+	// a sound resource that's bundled in your app. On an Android platform, the sound
+	// file must reside in /res/raw/ .
+	Sound *string
+
+	// The title to use in a push notification that's based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string
+
+	// The URL to open in a recipient's default mobile browser, if a recipient taps a
+	// push notification that's based on the message template and the value of the
+	// action property is URL .
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the push message template that applies to FCM (Firebase Cloud
+// Messaging) notification service.
+type PushFCMMessageTemplateContent struct {
+
+	// The action to occur if a recipient taps a push notification that is based on
+	// the message template. Valid values are:
+	//
+	//   - OPEN_APP - Your app opens or it becomes the foreground app if it was sent to
+	//   the background. This is the default action.
+	//
+	//   - DEEP_LINK - Your app opens and displays a designated user interface in the
+	//   app. This action uses the deep-linking features of the Android platform.
+	//
+	//   - URL - The default mobile browser on the recipient's device opens and loads
+	//   the web page at a URL that you specify.
+	Action PushMessageAction
+
+	// The message body to use in a push notification that is based on the message
+	// template.
+	Body MessageTemplateBodyContentProvider
+
+	// The URL of the large icon image to display in the content view of a push
+	// notification that's based on the message template.
+	ImageIconUrl *string
+
+	// The URL of an image to display in a push notification that's based on the
+	// message template.
+	ImageUrl *string
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	RawContent MessageTemplateBodyContentProvider
+
+	// The URL of the small icon image to display in the status bar and the content
+	// view of a push notification that's based on the message template.
+	SmallImageIconUrl *string
+
+	// The sound to play when a recipient receives a push notification that's based on
+	// the message template. You can use the default stream or specify the file name of
+	// a sound resource that's bundled in your app. On an Android platform, the sound
+	// file must reside in /res/raw/ .
+	Sound *string
+
+	// The title to use in a push notification that's based on the message template.
+	// This title appears above the notification message on a recipient's device.
+	Title *string
+
+	// The URL to open in a recipient's default mobile browser, if a recipient taps a
+	// push notification that's based on the message template and the value of the
+	// action property is URL .
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the message template that applies to the push channel subtype.
+type PushMessageTemplateContent struct {
+
+	// The content of the message template that applies to ADM (Amazon Device
+	// Messaging) notification service.
+	Adm *PushADMMessageTemplateContent
+
+	// The content of the message template that applies to APNS(Apple Push
+	// Notification service) notification service.
+	Apns *PushAPNSMessageTemplateContent
+
+	// The content of the message template that applies to Baidu notification service.
+	Baidu *PushBaiduMessageTemplateContent
+
+	// The content of the message template that applies to FCM (Firebase Cloud
+	// Messaging) notification service.
+	Fcm *PushFCMMessageTemplateContent
 
 	noSmithyDocumentSerde
 }
@@ -4760,6 +5078,70 @@ type WebCrawlerLimits struct {
 	noSmithyDocumentSerde
 }
 
+// The content of the message template that applies to the WHATSAPP channel
+// subtype.
+type WhatsAppMessageTemplateContent struct {
+
+	// The data.
+	Data *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information about the external data source.
+type WhatsAppMessageTemplateSourceConfiguration struct {
+
+	// The ID of the End User Messaging WhatsApp Business Account to associate with
+	// this template.
+	//
+	// This member is required.
+	BusinessAccountId *string
+
+	// The WhatsApp template ID.
+	//
+	// This member is required.
+	TemplateId *string
+
+	// The list of component mapping from WhatsApp template parameters to Message
+	// Template attributes.
+	Components []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information about the external data source.
+type WhatsAppMessageTemplateSourceConfigurationSummary struct {
+
+	// The ID of the End User Messaging WhatsApp Business Account to associate with
+	// this template.
+	//
+	// This member is required.
+	BusinessAccountId *string
+
+	// The ID of WhatsApp template.
+	//
+	// This member is required.
+	TemplateId *string
+
+	// The list of component mapping from WhatsApp template parameters to Message
+	// Template attributes.
+	Components []string
+
+	// The language of the WhatsApp template.
+	Language *string
+
+	// The name of the WhatsApp template.
+	Name *string
+
+	// The status of the message template.
+	Status WhatsAppSourceConfigurationStatus
+
+	// The status reason of the message template.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -4771,26 +5153,28 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAIAgentConfiguration()               {}
-func (*UnknownUnionMember) isAIPromptTemplateConfiguration()      {}
-func (*UnknownUnionMember) isAssistantAssociationInputData()      {}
-func (*UnknownUnionMember) isAssistantAssociationOutputData()     {}
-func (*UnknownUnionMember) isAssociationConfigurationData()       {}
-func (*UnknownUnionMember) isConfiguration()                      {}
-func (*UnknownUnionMember) isContentAssociationContents()         {}
-func (*UnknownUnionMember) isContentFeedbackData()                {}
-func (*UnknownUnionMember) isDataDetails()                        {}
-func (*UnknownUnionMember) isDataReference()                      {}
-func (*UnknownUnionMember) isManagedSourceConfiguration()         {}
-func (*UnknownUnionMember) isMessageData()                        {}
-func (*UnknownUnionMember) isMessageTemplateBodyContentProvider() {}
-func (*UnknownUnionMember) isMessageTemplateContentProvider()     {}
-func (*UnknownUnionMember) isOrCondition()                        {}
-func (*UnknownUnionMember) isQueryCondition()                     {}
-func (*UnknownUnionMember) isQueryInputData()                     {}
-func (*UnknownUnionMember) isQuickResponseContentProvider()       {}
-func (*UnknownUnionMember) isQuickResponseDataProvider()          {}
-func (*UnknownUnionMember) isRecommendationTriggerData()          {}
-func (*UnknownUnionMember) isRuntimeSessionDataValue()            {}
-func (*UnknownUnionMember) isSourceConfiguration()                {}
-func (*UnknownUnionMember) isTagFilter()                          {}
+func (*UnknownUnionMember) isAIAgentConfiguration()                      {}
+func (*UnknownUnionMember) isAIPromptTemplateConfiguration()             {}
+func (*UnknownUnionMember) isAssistantAssociationInputData()             {}
+func (*UnknownUnionMember) isAssistantAssociationOutputData()            {}
+func (*UnknownUnionMember) isAssociationConfigurationData()              {}
+func (*UnknownUnionMember) isConfiguration()                             {}
+func (*UnknownUnionMember) isContentAssociationContents()                {}
+func (*UnknownUnionMember) isContentFeedbackData()                       {}
+func (*UnknownUnionMember) isDataDetails()                               {}
+func (*UnknownUnionMember) isDataReference()                             {}
+func (*UnknownUnionMember) isManagedSourceConfiguration()                {}
+func (*UnknownUnionMember) isMessageData()                               {}
+func (*UnknownUnionMember) isMessageTemplateBodyContentProvider()        {}
+func (*UnknownUnionMember) isMessageTemplateContentProvider()            {}
+func (*UnknownUnionMember) isMessageTemplateSourceConfiguration()        {}
+func (*UnknownUnionMember) isMessageTemplateSourceConfigurationSummary() {}
+func (*UnknownUnionMember) isOrCondition()                               {}
+func (*UnknownUnionMember) isQueryCondition()                            {}
+func (*UnknownUnionMember) isQueryInputData()                            {}
+func (*UnknownUnionMember) isQuickResponseContentProvider()              {}
+func (*UnknownUnionMember) isQuickResponseDataProvider()                 {}
+func (*UnknownUnionMember) isRecommendationTriggerData()                 {}
+func (*UnknownUnionMember) isRuntimeSessionDataValue()                   {}
+func (*UnknownUnionMember) isSourceConfiguration()                       {}
+func (*UnknownUnionMember) isTagFilter()                                 {}

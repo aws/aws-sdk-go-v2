@@ -1,0 +1,39 @@
+GetSigningConfiguration
+	Initialize stack step
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		SetLogger
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		ComputeContentLength
+		SetCredentialSourceMiddleware
+		UserAgent
+		AddTimeOffsetMiddleware
+		RecursionDetection
+	Finalize stack step
+		spanRetryLoop
+		InterceptBeforeRetryLoop
+		Retry
+		InterceptAttempt
+		RetryMetricsHeader
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		ComputePayloadHash
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ErrorCloseResponseBody
+		CloseResponseBody
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		AddTimeOffsetMiddleware
+		RecordResponseTiming
+		RequestResponseLogger

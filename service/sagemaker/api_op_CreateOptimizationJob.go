@@ -108,6 +108,9 @@ type CreateOptimizationJobInput struct {
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
 
+	// The maximum number of instances to use for the optimization job.
+	MaxInstanceCount *int32
+
 	// The environment variables to set in the model container.
 	OptimizationEnvironment map[string]string
 

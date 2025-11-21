@@ -1082,6 +1082,18 @@ func TestCheckSnapshot_CreateInternetGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateInterruptibleCapacityReservationAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInterruptibleCapacityReservationAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInterruptibleCapacityReservationAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIpam(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpam(context.Background(), nil, func(o *Options) {
@@ -8990,6 +9002,18 @@ func TestCheckSnapshot_UpdateCapacityManagerOrganizationsAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateInterruptibleCapacityReservationAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInterruptibleCapacityReservationAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateInterruptibleCapacityReservationAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSecurityGroupRuleDescriptionsEgress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSecurityGroupRuleDescriptionsEgress(context.Background(), nil, func(o *Options) {
@@ -10038,6 +10062,18 @@ func TestUpdateSnapshot_CreateInternetGateway(t *testing.T) {
 	_, err := svc.CreateInternetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateInternetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateInterruptibleCapacityReservationAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInterruptibleCapacityReservationAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInterruptibleCapacityReservationAllocation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17946,6 +17982,18 @@ func TestUpdateSnapshot_UpdateCapacityManagerOrganizationsAccess(t *testing.T) {
 	_, err := svc.UpdateCapacityManagerOrganizationsAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCapacityManagerOrganizationsAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateInterruptibleCapacityReservationAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInterruptibleCapacityReservationAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateInterruptibleCapacityReservationAllocation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

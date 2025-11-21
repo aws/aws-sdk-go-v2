@@ -128,7 +128,7 @@ type EndpointAccess struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of Amazon Redshift compute resources managed by AWS Glue.
+// A collection of Amazon Redshift compute resources managed by Glue.
 type ManagedWorkgroupListItem struct {
 
 	// The creation date of the managed workgroup.
@@ -140,7 +140,7 @@ type ManagedWorkgroupListItem struct {
 	// The name of the managed workgroup.
 	ManagedWorkgroupName *string
 
-	// The Amazon Resource Name (ARN) for the managed workgroup in the AWS Glue Data
+	// The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data
 	// Catalog.
 	SourceArn *string
 
@@ -165,6 +165,10 @@ type Namespace struct {
 	// namespace.
 	AdminUsername *string
 
+	// The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the
+	// namespace enabled with Amazon Redshift federated permissions.
+	CatalogArn *string
+
 	// The date of when the namespace was created.
 	CreationDate *time.Time
 
@@ -181,6 +185,11 @@ type Namespace struct {
 	// The ID of the Amazon Web Services Key Management Service key used to encrypt
 	// your data.
 	KmsKeyId *string
+
+	// The status of the lakehouse registration for the namespace. Indicates whether
+	// the namespace is successfully registered with Amazon Redshift federated
+	// permissions.
+	LakehouseRegistrationStatus *string
 
 	// The types of logs the namespace can export. Available export types are User
 	// log, Connection log, and User activity log.
@@ -291,8 +300,8 @@ type Reservation struct {
 	// The identifier that uniquely identifies the serverless reservation.
 	ReservationId *string
 
-	// The start date for the serverless reservation. This is the date you specified
-	// for the reservation to start when you created the reservation.
+	// The start date for the serverless reservation. This is the date you created the
+	// reservation.
 	StartDate *time.Time
 
 	// The status of the reservation. Possible values include the following:

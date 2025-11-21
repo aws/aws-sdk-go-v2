@@ -7319,6 +7319,15 @@ func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfigu
 				}
 			}
 
+		case "DrmSettings":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DrmSettings = ptr.String(jtv)
+			}
+
 		case "End":
 			if value != nil {
 				switch jtv := value.(type) {

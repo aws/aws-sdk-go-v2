@@ -12,7 +12,12 @@ import (
 )
 
 // Creates a web app based on specified parameters, and returns the ID for the new
-// web app.
+// web app. You can configure the web app to be publicly accessible or hosted
+// within a VPC.
+//
+// For more information about using VPC endpoints with Transfer Family, see [Create a Transfer Family web app in a VPC].
+//
+// [Create a Transfer Family web app in a VPC]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
 func (c *Client) CreateWebApp(ctx context.Context, params *CreateWebAppInput, optFns ...func(*Options)) (*CreateWebAppOutput, error) {
 	if params == nil {
 		params = &CreateWebAppInput{}
@@ -49,6 +54,10 @@ type CreateWebAppInput struct {
 	//
 	// [Update your access endpoint with a custom URL]: https://docs.aws.amazon.com/transfer/latest/userguide/webapp-customize.html
 	AccessEndpoint *string
+
+	// The endpoint configuration for the web app. You can specify whether the web app
+	// endpoint is publicly accessible or hosted within a VPC.
+	EndpointDetails types.WebAppEndpointDetails
 
 	// Key-value pairs that can be used to group and search for web apps.
 	Tags []types.Tag

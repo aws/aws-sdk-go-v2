@@ -52,8 +52,20 @@ type StartSessionInput struct {
 	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
+	// Copies the tags from the Workgroup to the Session when.
+	CopyWorkGroupTags *bool
+
 	// The session description.
 	Description *string
+
+	// The ARN of the execution role used to access user resources for Spark sessions
+	// and Identity Center enabled workgroups. This property applies only to Spark
+	// enabled workgroups and Identity Center enabled workgroups.
+	ExecutionRole *string
+
+	// Contains the configuration settings for managed log persistence, delivering
+	// logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.
+	MonitoringConfiguration *types.MonitoringConfiguration
 
 	// The notebook version. This value is supplied automatically for notebook
 	// sessions in the Athena console and is not required for programmatic session
@@ -64,6 +76,9 @@ type StartSessionInput struct {
 
 	// The idle timeout in minutes for the session.
 	SessionIdleTimeoutInMinutes *int32
+
+	// A list of comma separated tags to add to the session that is created.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

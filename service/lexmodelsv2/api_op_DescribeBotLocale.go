@@ -109,6 +109,10 @@ type DescribeBotLocaleOutput struct {
 	// The number of slot types defined for the locale.
 	SlotTypesCount *int32
 
+	// The sensitivity level for voice activity detection (VAD) configured for the bot
+	// locale.
+	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
+
 	// The Amazon Polly voice Amazon Lex uses for voice interaction with the user.
 	VoiceSettings *types.VoiceSettings
 

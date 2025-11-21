@@ -48,6 +48,23 @@ func (ActivationState) Values() []ActivationState {
 	}
 }
 
+type ActiveClusterOperationName string
+
+// Enum values for ActiveClusterOperationName
+const (
+	ActiveClusterOperationNameScaling ActiveClusterOperationName = "Scaling"
+)
+
+// Values returns all known values for ActiveClusterOperationName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActiveClusterOperationName) Values() []ActiveClusterOperationName {
+	return []ActiveClusterOperationName{
+		"Scaling",
+	}
+}
+
 type AdditionalS3DataSourceDataType string
 
 // Enum values for AdditionalS3DataSourceDataType
@@ -1752,6 +1769,25 @@ func (ClusterAutoScalingStatus) Values() []ClusterAutoScalingStatus {
 	}
 }
 
+type ClusterCapacityType string
+
+// Enum values for ClusterCapacityType
+const (
+	ClusterCapacityTypeSpot     ClusterCapacityType = "Spot"
+	ClusterCapacityTypeOnDemand ClusterCapacityType = "OnDemand"
+)
+
+// Values returns all known values for ClusterCapacityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterCapacityType) Values() []ClusterCapacityType {
+	return []ClusterCapacityType{
+		"Spot",
+		"OnDemand",
+	}
+}
+
 type ClusterConfigMode string
 
 // Enum values for ClusterConfigMode
@@ -2061,6 +2097,28 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.r7i.16xlarge",
 		"ml.r7i.24xlarge",
 		"ml.r7i.48xlarge",
+	}
+}
+
+type ClusterKubernetesTaintEffect string
+
+// Enum values for ClusterKubernetesTaintEffect
+const (
+	ClusterKubernetesTaintEffectNoSchedule       ClusterKubernetesTaintEffect = "NoSchedule"
+	ClusterKubernetesTaintEffectPreferNoSchedule ClusterKubernetesTaintEffect = "PreferNoSchedule"
+	ClusterKubernetesTaintEffectNoExecute        ClusterKubernetesTaintEffect = "NoExecute"
+)
+
+// Values returns all known values for ClusterKubernetesTaintEffect. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterKubernetesTaintEffect) Values() []ClusterKubernetesTaintEffect {
+	return []ClusterKubernetesTaintEffect{
+		"NoSchedule",
+		"PreferNoSchedule",
+		"NoExecute",
 	}
 }
 
@@ -5031,6 +5089,44 @@ func (ModelSortKey) Values() []ModelSortKey {
 	}
 }
 
+type ModelSpeculativeDecodingS3DataType string
+
+// Enum values for ModelSpeculativeDecodingS3DataType
+const (
+	ModelSpeculativeDecodingS3DataTypeS3Prefix     ModelSpeculativeDecodingS3DataType = "S3Prefix"
+	ModelSpeculativeDecodingS3DataTypeManifestFile ModelSpeculativeDecodingS3DataType = "ManifestFile"
+)
+
+// Values returns all known values for ModelSpeculativeDecodingS3DataType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelSpeculativeDecodingS3DataType) Values() []ModelSpeculativeDecodingS3DataType {
+	return []ModelSpeculativeDecodingS3DataType{
+		"S3Prefix",
+		"ManifestFile",
+	}
+}
+
+type ModelSpeculativeDecodingTechnique string
+
+// Enum values for ModelSpeculativeDecodingTechnique
+const (
+	ModelSpeculativeDecodingTechniqueEagle ModelSpeculativeDecodingTechnique = "EAGLE"
+)
+
+// Values returns all known values for ModelSpeculativeDecodingTechnique. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelSpeculativeDecodingTechnique) Values() []ModelSpeculativeDecodingTechnique {
+	return []ModelSpeculativeDecodingTechnique{
+		"EAGLE",
+	}
+}
+
 type ModelVariantAction string
 
 // Enum values for ModelVariantAction
@@ -5483,6 +5579,8 @@ const (
 	OptimizationJobDeploymentInstanceTypeMlP4d24xlarge   OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"
 	OptimizationJobDeploymentInstanceTypeMlP4de24xlarge  OptimizationJobDeploymentInstanceType = "ml.p4de.24xlarge"
 	OptimizationJobDeploymentInstanceTypeMlP548xlarge    OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP5e48xlarge   OptimizationJobDeploymentInstanceType = "ml.p5e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP5en48xlarge  OptimizationJobDeploymentInstanceType = "ml.p5en.48xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG5Xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG52xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG54xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
@@ -5526,6 +5624,8 @@ func (OptimizationJobDeploymentInstanceType) Values() []OptimizationJobDeploymen
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",
 		"ml.p5.48xlarge",
+		"ml.p5e.48xlarge",
+		"ml.p5en.48xlarge",
 		"ml.g5.xlarge",
 		"ml.g5.2xlarge",
 		"ml.g5.4xlarge",

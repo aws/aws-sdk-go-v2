@@ -8643,6 +8643,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 			invalidParams.AddNested("ScheduledUpdateConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.KubernetesConfig != nil {
+		if err := validateClusterKubernetesConfig(v.KubernetesConfig); err != nil {
+			invalidParams.AddNested("KubernetesConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8657,6 +8662,58 @@ func validateClusterInstanceGroupSpecifications(v []types.ClusterInstanceGroupSp
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceGroupSpecifications"}
 	for i := range v {
 		if err := validateClusterInstanceGroupSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterKubernetesConfig(v *types.ClusterKubernetesConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterKubernetesConfig"}
+	if v.Taints != nil {
+		if err := validateClusterKubernetesTaints(v.Taints); err != nil {
+			invalidParams.AddNested("Taints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterKubernetesTaint(v *types.ClusterKubernetesTaint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterKubernetesTaint"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if len(v.Effect) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterKubernetesTaints(v []types.ClusterKubernetesTaint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterKubernetesTaints"}
+	for i := range v {
+		if err := validateClusterKubernetesTaint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -11894,6 +11951,44 @@ func validateModelQualityJobInput(v *types.ModelQualityJobInput) error {
 	}
 }
 
+func validateModelSpeculativeDecodingConfig(v *types.ModelSpeculativeDecodingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelSpeculativeDecodingConfig"}
+	if len(v.Technique) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Technique"))
+	}
+	if v.TrainingDataSource != nil {
+		if err := validateModelSpeculativeDecodingTrainingDataSource(v.TrainingDataSource); err != nil {
+			invalidParams.AddNested("TrainingDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelSpeculativeDecodingTrainingDataSource(v *types.ModelSpeculativeDecodingTrainingDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelSpeculativeDecodingTrainingDataSource"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if len(v.S3DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelVariantConfig(v *types.ModelVariantConfig) error {
 	if v == nil {
 		return nil
@@ -12336,6 +12431,42 @@ func validateOidcConfig(v *types.OidcConfig) error {
 	}
 	if v.JwksUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JwksUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationConfig(v types.OptimizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationConfig"}
+	switch uv := v.(type) {
+	case *types.OptimizationConfigMemberModelSpeculativeDecodingConfig:
+		if err := validateModelSpeculativeDecodingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[ModelSpeculativeDecodingConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationConfigs(v []types.OptimizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationConfigs"}
+	for i := range v {
+		if err := validateOptimizationConfig(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -16535,6 +16666,10 @@ func validateOpCreateOptimizationJobInput(v *CreateOptimizationJobInput) error {
 	}
 	if v.OptimizationConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OptimizationConfigs"))
+	} else if v.OptimizationConfigs != nil {
+		if err := validateOptimizationConfigs(v.OptimizationConfigs); err != nil {
+			invalidParams.AddNested("OptimizationConfigs", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OutputConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))

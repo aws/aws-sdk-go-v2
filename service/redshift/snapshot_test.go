@@ -1490,6 +1490,18 @@ func TestCheckSnapshot_ModifyIntegration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyLakehouseConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyLakehouseConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyLakehouseConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyRedshiftIdcApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyRedshiftIdcApplication(context.Background(), nil, func(o *Options) {
@@ -3162,6 +3174,18 @@ func TestUpdateSnapshot_ModifyIntegration(t *testing.T) {
 	_, err := svc.ModifyIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyLakehouseConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyLakehouseConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyLakehouseConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

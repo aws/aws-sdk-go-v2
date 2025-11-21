@@ -1670,6 +1670,11 @@ type BotLocaleImportSpecification struct {
 	//   - IntentC
 	NluIntentConfidenceThreshold *float64
 
+	// The sensitivity level for voice activity detection (VAD) in the bot locale.
+	// This setting helps optimize speech recognition accuracy by adjusting how the
+	// system responds to background noise during voice interactions.
+	SpeechDetectionSensitivity SpeechDetectionSensitivity
+
 	// Defines settings for using an Amazon Polly voice to communicate with a user.
 	//
 	// Valid values include:
@@ -3346,6 +3351,34 @@ type IntentConfirmationSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the Intent Disambiguation feature that helps resolve ambiguous user
+// inputs when multiple intents could match. When enabled, the system presents
+// clarifying questions to users, helping them specify their exact intent for
+// improved conversation accuracy.
+type IntentDisambiguationSettings struct {
+
+	// Determines whether the Intent Disambiguation feature is enabled. When set to
+	// true , Amazon Lex will present disambiguation options to users when multiple
+	// intents could match their input, with the default being false .
+	//
+	// This member is required.
+	Enabled bool
+
+	// Provides a custom message that will be displayed before presenting the
+	// disambiguation options to users. This message helps set the context for users
+	// and can be customized to match your bot's tone and brand. If not specified, a
+	// default message will be used.
+	CustomDisambiguationMessage *string
+
+	// Specifies the maximum number of intent options (2-5) to present to users when
+	// disambiguation is needed. This setting determines how many intent options will
+	// be shown to users when the system detects ambiguous input. The default value is
+	// 3.
+	MaxDisambiguationIntents *int32
+
+	noSmithyDocumentSerde
+}
+
 // Filters the response from the ListIntents operation.
 type IntentFilter struct {
 
@@ -3450,6 +3483,9 @@ type IntentSummary struct {
 	// The input contexts that must be active for this intent to be considered for
 	// recognition.
 	InputContexts []InputContext
+
+	// The display name of the intent.
+	IntentDisplayName *string
 
 	// The unique identifier assigned to the intent. Use this ID to get detailed
 	// information about the intent with the DescribeIntent operation.
@@ -3621,6 +3657,11 @@ type NluImprovementSpecification struct {
 	// the primary intent recognition method, or Fallback to use it only when standard
 	// NLU confidence is low.
 	AssistedNluMode AssistedNluMode
+
+	// An object containing specifications for the Intent Disambiguation feature
+	// within the Assisted NLU settings. These settings determine how the bot handles
+	// ambiguous user inputs that could match multiple intents.
+	IntentDisambiguationSettings *IntentDisambiguationSettings
 
 	noSmithyDocumentSerde
 }

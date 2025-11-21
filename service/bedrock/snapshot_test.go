@@ -350,6 +350,18 @@ func TestCheckSnapshot_DeleteCustomModelDeployment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteEnforcedGuardrailConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEnforcedGuardrailConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEnforcedGuardrailConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteFoundationModelAgreement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFoundationModelAgreement(context.Background(), nil, func(o *Options) {
@@ -830,6 +842,18 @@ func TestCheckSnapshot_ListCustomModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEnforcedGuardrailsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEnforcedGuardrailsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEnforcedGuardrailsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEvaluationJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluationJobs(context.Background(), nil, func(o *Options) {
@@ -991,6 +1015,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutEnforcedGuardrailConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutEnforcedGuardrailConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutEnforcedGuardrailConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1470,6 +1506,18 @@ func TestUpdateSnapshot_DeleteCustomModelDeployment(t *testing.T) {
 	_, err := svc.DeleteCustomModelDeployment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCustomModelDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteEnforcedGuardrailConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEnforcedGuardrailConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEnforcedGuardrailConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1957,6 +2005,18 @@ func TestUpdateSnapshot_ListCustomModels(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListEnforcedGuardrailsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEnforcedGuardrailsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEnforcedGuardrailsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEvaluationJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluationJobs(context.Background(), nil, func(o *Options) {
@@ -2118,6 +2178,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutEnforcedGuardrailConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutEnforcedGuardrailConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutEnforcedGuardrailConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

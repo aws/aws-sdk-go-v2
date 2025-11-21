@@ -710,6 +710,13 @@ func awsRestjson1_serializeOpDocumentCreateGatewayInput(v *CreateGatewayInput, v
 		ok.String(string(v.ExceptionLevel))
 	}
 
+	if v.InterceptorConfigurations != nil {
+		ok := object.Key("interceptorConfigurations")
+		if err := awsRestjson1_serializeDocumentGatewayInterceptorConfigurations(v.InterceptorConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
@@ -4558,6 +4565,13 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayInput(v *UpdateGatewayInput, v
 		ok.String(string(v.ExceptionLevel))
 	}
 
+	if v.InterceptorConfigurations != nil {
+		ok := object.Key("interceptorConfigurations")
+		if err := awsRestjson1_serializeDocumentGatewayInterceptorConfigurations(v.InterceptorConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
@@ -5517,6 +5531,58 @@ func awsRestjson1_serializeDocumentGatewayApiKeyCredentialProvider(v *types.Gate
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGatewayInterceptionPoints(v []types.GatewayInterceptionPoint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGatewayInterceptorConfiguration(v *types.GatewayInterceptorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InputConfiguration != nil {
+		ok := object.Key("inputConfiguration")
+		if err := awsRestjson1_serializeDocumentInterceptorInputConfiguration(v.InputConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InterceptionPoints != nil {
+		ok := object.Key("interceptionPoints")
+		if err := awsRestjson1_serializeDocumentGatewayInterceptionPoints(v.InterceptionPoints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interceptor != nil {
+		ok := object.Key("interceptor")
+		if err := awsRestjson1_serializeDocumentInterceptorConfiguration(v.Interceptor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGatewayInterceptorConfigurations(v []types.GatewayInterceptorConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGatewayInterceptorConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGatewayProtocolConfiguration(v types.GatewayProtocolConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5601,6 +5667,36 @@ func awsRestjson1_serializeDocumentIncludedOauth2ProviderConfigInput(v *types.In
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInterceptorConfiguration(v types.InterceptorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.InterceptorConfigurationMemberLambda:
+		av := object.Key("lambda")
+		if err := awsRestjson1_serializeDocumentLambdaInterceptorConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInterceptorInputConfiguration(v *types.InterceptorInputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PassRequestHeaders != nil {
+		ok := object.Key("passRequestHeaders")
+		ok.Boolean(*v.PassRequestHeaders)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInvocationConfigurationInput(v *types.InvocationConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5630,6 +5726,18 @@ func awsRestjson1_serializeDocumentKmsConfiguration(v *types.KmsConfiguration, v
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaInterceptorConfiguration(v *types.LambdaInterceptorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
 	}
 
 	return nil

@@ -5110,6 +5110,24 @@ func awsAwsjson11_serializeDocumentUpdateConnectorVpcLatticeEgressConfig(v *type
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUpdateWebAppEndpointDetails(v types.UpdateWebAppEndpointDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.UpdateWebAppEndpointDetailsMemberVpc:
+		av := object.Key("Vpc")
+		if err := awsAwsjson11_serializeDocumentUpdateWebAppVpcConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUpdateWebAppIdentityCenterConfig(v *types.UpdateWebAppIdentityCenterConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5130,6 +5148,38 @@ func awsAwsjson11_serializeDocumentUpdateWebAppIdentityProviderDetails(v types.U
 	case *types.UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig:
 		av := object.Key("IdentityCenterConfig")
 		if err := awsAwsjson11_serializeDocumentUpdateWebAppIdentityCenterConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateWebAppVpcConfig(v *types.UpdateWebAppVpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubnetIds != nil {
+		ok := object.Key("SubnetIds")
+		if err := awsAwsjson11_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWebAppEndpointDetails(v types.WebAppEndpointDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.WebAppEndpointDetailsMemberVpc:
+		av := object.Key("Vpc")
+		if err := awsAwsjson11_serializeDocumentWebAppVpcConfig(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -5171,6 +5221,32 @@ func awsAwsjson11_serializeDocumentWebAppUnits(v types.WebAppUnits, value smithy
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWebAppVpcConfig(v *types.WebAppVpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("SubnetIds")
+		if err := awsAwsjson11_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
 	return nil
 }
 
@@ -5658,6 +5734,13 @@ func awsAwsjson11_serializeOpDocumentCreateWebAppInput(v *CreateWebAppInput, val
 	if v.AccessEndpoint != nil {
 		ok := object.Key("AccessEndpoint")
 		ok.String(*v.AccessEndpoint)
+	}
+
+	if v.EndpointDetails != nil {
+		ok := object.Key("EndpointDetails")
+		if err := awsAwsjson11_serializeDocumentWebAppEndpointDetails(v.EndpointDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IdentityProviderDetails != nil {
@@ -7122,6 +7205,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWebAppInput(v *UpdateWebAppInput, val
 	if v.AccessEndpoint != nil {
 		ok := object.Key("AccessEndpoint")
 		ok.String(*v.AccessEndpoint)
+	}
+
+	if v.EndpointDetails != nil {
+		ok := object.Key("EndpointDetails")
+		if err := awsAwsjson11_serializeDocumentUpdateWebAppEndpointDetails(v.EndpointDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IdentityProviderDetails != nil {

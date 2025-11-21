@@ -58,9 +58,12 @@ type DescribeEffectivePolicyInput struct {
 	//
 	// [SECURITYHUB_POLICY]
 	//
+	// [UPGRADE_ROLLOUT_POLICY]
+	//
 	// [INSPECTOR_POLICY]
 	//
 	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+	// [UPGRADE_ROLLOUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
 	// [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html

@@ -1,0 +1,8 @@
+{
+    "id": "2df7f350-67c9-4ee1-a66b-722ec275372e",
+    "type": "documentation",
+    "description": "This release adds the health check log feature in ALB, allowing customers to send detailed target health check log data directly to their designated Amazon S3 bucket.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

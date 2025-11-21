@@ -530,6 +530,26 @@ func (m *validateOpCreateContactFlow) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContactFlowModuleAlias struct {
+}
+
+func (*validateOpCreateContactFlowModuleAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContactFlowModuleAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContactFlowModuleAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContactFlowModuleAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateContactFlowModule struct {
 }
 
@@ -545,6 +565,26 @@ func (m *validateOpCreateContactFlowModule) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateContactFlowModuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateContactFlowModuleVersion struct {
+}
+
+func (*validateOpCreateContactFlowModuleVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContactFlowModuleVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContactFlowModuleVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContactFlowModuleVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1150,6 +1190,26 @@ func (m *validateOpDeleteContactFlow) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteContactFlowModuleAlias struct {
+}
+
+func (*validateOpDeleteContactFlowModuleAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContactFlowModuleAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContactFlowModuleAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContactFlowModuleAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteContactFlowModule struct {
 }
 
@@ -1165,6 +1225,26 @@ func (m *validateOpDeleteContactFlowModule) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteContactFlowModuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteContactFlowModuleVersion struct {
+}
+
+func (*validateOpDeleteContactFlowModuleVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContactFlowModuleVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContactFlowModuleVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContactFlowModuleVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1705,6 +1785,26 @@ func (m *validateOpDescribeContactFlow) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeContactFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeContactFlowModuleAlias struct {
+}
+
+func (*validateOpDescribeContactFlowModuleAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContactFlowModuleAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContactFlowModuleAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContactFlowModuleAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2910,6 +3010,26 @@ func (m *validateOpListContactEvaluations) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListContactFlowModuleAliases struct {
+}
+
+func (*validateOpListContactFlowModuleAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContactFlowModuleAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContactFlowModuleAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContactFlowModuleAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListContactFlowModules struct {
 }
 
@@ -2925,6 +3045,26 @@ func (m *validateOpListContactFlowModules) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListContactFlowModulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContactFlowModuleVersions struct {
+}
+
+func (*validateOpListContactFlowModuleVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContactFlowModuleVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContactFlowModuleVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContactFlowModuleVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4830,6 +4970,26 @@ func (m *validateOpUpdateContactFlowMetadata) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContactFlowModuleAlias struct {
+}
+
+func (*validateOpUpdateContactFlowModuleAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContactFlowModuleAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactFlowModuleAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactFlowModuleAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateContactFlowModuleContent struct {
 }
 
@@ -5834,8 +5994,16 @@ func addOpCreateContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContactFlow{}, middleware.After)
 }
 
+func addOpCreateContactFlowModuleAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContactFlowModuleAlias{}, middleware.After)
+}
+
 func addOpCreateContactFlowModuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContactFlowModule{}, middleware.After)
+}
+
+func addOpCreateContactFlowModuleVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContactFlowModuleVersion{}, middleware.After)
 }
 
 func addOpCreateContactFlowVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -5958,8 +6126,16 @@ func addOpDeleteContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContactFlow{}, middleware.After)
 }
 
+func addOpDeleteContactFlowModuleAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContactFlowModuleAlias{}, middleware.After)
+}
+
 func addOpDeleteContactFlowModuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContactFlowModule{}, middleware.After)
+}
+
+func addOpDeleteContactFlowModuleVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContactFlowModuleVersion{}, middleware.After)
 }
 
 func addOpDeleteContactFlowVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -6068,6 +6244,10 @@ func addOpDescribeContactEvaluationValidationMiddleware(stack *middleware.Stack)
 
 func addOpDescribeContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContactFlow{}, middleware.After)
+}
+
+func addOpDescribeContactFlowModuleAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContactFlowModuleAlias{}, middleware.After)
 }
 
 func addOpDescribeContactFlowModuleValidationMiddleware(stack *middleware.Stack) error {
@@ -6310,8 +6490,16 @@ func addOpListContactEvaluationsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpListContactEvaluations{}, middleware.After)
 }
 
+func addOpListContactFlowModuleAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContactFlowModuleAliases{}, middleware.After)
+}
+
 func addOpListContactFlowModulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContactFlowModules{}, middleware.After)
+}
+
+func addOpListContactFlowModuleVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContactFlowModuleVersions{}, middleware.After)
 }
 
 func addOpListContactFlowsValidationMiddleware(stack *middleware.Stack) error {
@@ -6692,6 +6880,10 @@ func addOpUpdateContactFlowContentValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateContactFlowMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContactFlowMetadata{}, middleware.After)
+}
+
+func addOpUpdateContactFlowModuleAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContactFlowModuleAlias{}, middleware.After)
 }
 
 func addOpUpdateContactFlowModuleContentValidationMiddleware(stack *middleware.Stack) error {
@@ -10051,6 +10243,30 @@ func validateOpCreateContactFlowInput(v *CreateContactFlowInput) error {
 	}
 }
 
+func validateOpCreateContactFlowModuleAliasInput(v *CreateContactFlowModuleAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContactFlowModuleAliasInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if v.ContactFlowModuleVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleVersion"))
+	}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateContactFlowModuleInput(v *CreateContactFlowModuleInput) error {
 	if v == nil {
 		return nil
@@ -10064,6 +10280,24 @@ func validateOpCreateContactFlowModuleInput(v *CreateContactFlowModuleInput) err
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateContactFlowModuleVersionInput(v *CreateContactFlowModuleVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContactFlowModuleVersionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10785,6 +11019,27 @@ func validateOpDeleteContactFlowInput(v *DeleteContactFlowInput) error {
 	}
 }
 
+func validateOpDeleteContactFlowModuleAliasInput(v *DeleteContactFlowModuleAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContactFlowModuleAliasInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteContactFlowModuleInput(v *DeleteContactFlowModuleInput) error {
 	if v == nil {
 		return nil
@@ -10795,6 +11050,27 @@ func validateOpDeleteContactFlowModuleInput(v *DeleteContactFlowModuleInput) err
 	}
 	if v.ContactFlowModuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteContactFlowModuleVersionInput(v *DeleteContactFlowModuleVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContactFlowModuleVersionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if v.ContactFlowModuleVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11290,6 +11566,27 @@ func validateOpDescribeContactFlowInput(v *DescribeContactFlowInput) error {
 	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeContactFlowModuleAliasInput(v *DescribeContactFlowModuleAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContactFlowModuleAliasInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12435,6 +12732,24 @@ func validateOpListContactEvaluationsInput(v *ListContactEvaluationsInput) error
 	}
 }
 
+func validateOpListContactFlowModuleAliasesInput(v *ListContactFlowModuleAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContactFlowModuleAliasesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListContactFlowModulesInput(v *ListContactFlowModulesInput) error {
 	if v == nil {
 		return nil
@@ -12442,6 +12757,24 @@ func validateOpListContactFlowModulesInput(v *ListContactFlowModulesInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListContactFlowModulesInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContactFlowModuleVersionsInput(v *ListContactFlowModuleVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContactFlowModuleVersionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14275,6 +14608,27 @@ func validateOpUpdateContactFlowMetadataInput(v *UpdateContactFlowMetadataInput)
 	}
 }
 
+func validateOpUpdateContactFlowModuleAliasInput(v *UpdateContactFlowModuleAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactFlowModuleAliasInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
+	}
+	if v.AliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateContactFlowModuleContentInput(v *UpdateContactFlowModuleContentInput) error {
 	if v == nil {
 		return nil
@@ -14285,9 +14639,6 @@ func validateOpUpdateContactFlowModuleContentInput(v *UpdateContactFlowModuleCon
 	}
 	if v.ContactFlowModuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowModuleId"))
-	}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

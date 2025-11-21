@@ -1810,6 +1810,19 @@ type CapacityReservation struct {
 	// The type of instance for which the Capacity Reservation reserves capacity.
 	InstanceType *string
 
+	//  Indicates whether this Capacity Reservation is interruptible, meaning
+	// instances may be terminated when the owner reclaims capacity.
+	Interruptible *bool
+
+	//  Contains allocation details for interruptible reservations, including current
+	// allocated instances and target instance counts within the
+	// interruptibleCapacityAllocation object.
+	InterruptibleCapacityAllocation *InterruptibleCapacityAllocation
+
+	//  Information about the interruption configuration and association with the
+	// source reservation for interruptible Capacity Reservations.
+	InterruptionInfo *InterruptionInfo
+
 	// The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation
 	// was created.
 	OutpostArn *string
@@ -10517,6 +10530,48 @@ type InternetGatewayAttachment struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+//	Represents the allocation of capacity from a source reservation to an
+//
+// interruptible reservation, tracking current and target instance counts for
+// allocation management.
+type InterruptibleCapacityAllocation struct {
+
+	//  The current number of instances allocated to the interruptible reservation.
+	InstanceCount *int32
+
+	//  The ID of the interruptible Capacity Reservation created from the allocation.
+	InterruptibleCapacityReservationId *string
+
+	//  The type of interruption policy applied to the interruptible reservation.
+	InterruptionType InterruptionType
+
+	//  The current status of the allocation (updating during reclamation, active when
+	// complete).
+	Status InterruptibleCapacityReservationAllocationStatus
+
+	//  After your modify request, the requested number of instances allocated to
+	// interruptible reservation.
+	TargetInstanceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+//	Contains information about how and when instances in an interruptible
+//
+// reservation can be terminated when capacity is reclaimed.
+type InterruptionInfo struct {
+
+	//  The interruption type that determines how instances are terminated when
+	// capacity is reclaimed.
+	InterruptionType InterruptionType
+
+	//  The ID of the source Capacity Reservation from which the interruptible
+	// reservation was created.
+	SourceCapacityReservationId *string
 
 	noSmithyDocumentSerde
 }

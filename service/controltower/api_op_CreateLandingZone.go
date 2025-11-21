@@ -32,18 +32,16 @@ func (c *Client) CreateLandingZone(ctx context.Context, params *CreateLandingZon
 
 type CreateLandingZoneInput struct {
 
-	// The manifest JSON file is a text file that describes your Amazon Web Services
-	// resources. For examples, review [Launch your landing zone].
-	//
-	// [Launch your landing zone]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
-	//
-	// This member is required.
-	Manifest document.Interface
-
 	// The landing zone version, for example, 3.0.
 	//
 	// This member is required.
 	Version *string
+
+	// The manifest JSON file is a text file that describes your Amazon Web Services
+	// resources. For examples, review [Launch your landing zone].
+	//
+	// [Launch your landing zone]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
+	Manifest document.Interface
 
 	// Specifies the types of remediation actions to apply when creating the landing
 	// zone, such as automatic drift correction or compliance enforcement.

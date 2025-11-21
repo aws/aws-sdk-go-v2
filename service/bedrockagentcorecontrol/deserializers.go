@@ -1297,6 +1297,11 @@ func awsRestjson1_deserializeOpDocumentCreateGatewayOutput(v **CreateGatewayOutp
 				sv.GatewayUrl = ptr.String(jtv)
 			}
 
+		case "interceptorConfigurations":
+			if err := awsRestjson1_deserializeDocumentGatewayInterceptorConfigurations(&sv.InterceptorConfigurations, value); err != nil {
+				return err
+			}
+
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5342,6 +5347,11 @@ func awsRestjson1_deserializeOpDocumentGetGatewayOutput(v **GetGatewayOutput, va
 					return fmt.Errorf("expected GatewayUrl to be of type string, got %T instead", value)
 				}
 				sv.GatewayUrl = ptr.String(jtv)
+			}
+
+		case "interceptorConfigurations":
+			if err := awsRestjson1_deserializeDocumentGatewayInterceptorConfigurations(&sv.InterceptorConfigurations, value); err != nil {
+				return err
 			}
 
 		case "kmsKeyArn":
@@ -10051,6 +10061,11 @@ func awsRestjson1_deserializeOpDocumentUpdateGatewayOutput(v **UpdateGatewayOutp
 				sv.GatewayUrl = ptr.String(jtv)
 			}
 
+		case "interceptorConfigurations":
+			if err := awsRestjson1_deserializeDocumentGatewayInterceptorConfigurations(&sv.InterceptorConfigurations, value); err != nil {
+				return err
+			}
+
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13490,6 +13505,122 @@ func awsRestjson1_deserializeDocumentGatewayApiKeyCredentialProvider(v **types.G
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGatewayInterceptionPoints(v *[]types.GatewayInterceptionPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GatewayInterceptionPoint
+	if *v == nil {
+		cv = []types.GatewayInterceptionPoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GatewayInterceptionPoint
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GatewayInterceptionPoint to be of type string, got %T instead", value)
+			}
+			col = types.GatewayInterceptionPoint(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGatewayInterceptorConfiguration(v **types.GatewayInterceptorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GatewayInterceptorConfiguration
+	if *v == nil {
+		sv = &types.GatewayInterceptorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputConfiguration":
+			if err := awsRestjson1_deserializeDocumentInterceptorInputConfiguration(&sv.InputConfiguration, value); err != nil {
+				return err
+			}
+
+		case "interceptionPoints":
+			if err := awsRestjson1_deserializeDocumentGatewayInterceptionPoints(&sv.InterceptionPoints, value); err != nil {
+				return err
+			}
+
+		case "interceptor":
+			if err := awsRestjson1_deserializeDocumentInterceptorConfiguration(&sv.Interceptor, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGatewayInterceptorConfigurations(v *[]types.GatewayInterceptorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GatewayInterceptorConfiguration
+	if *v == nil {
+		cv = []types.GatewayInterceptorConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GatewayInterceptorConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGatewayInterceptorConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGatewayProtocolConfiguration(v *types.GatewayProtocolConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13974,6 +14105,86 @@ func awsRestjson1_deserializeDocumentIncludedOauth2ProviderConfigOutput(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInterceptorConfiguration(v *types.InterceptorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.InterceptorConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "lambda":
+			var mv types.LambdaInterceptorConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLambdaInterceptorConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.InterceptorConfigurationMemberLambda{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInterceptorInputConfiguration(v **types.InterceptorInputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InterceptorInputConfiguration
+	if *v == nil {
+		sv = &types.InterceptorInputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "passRequestHeaders":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PassRequestHeaders = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14101,6 +14312,46 @@ func awsRestjson1_deserializeDocumentKmsConfiguration(v **types.KmsConfiguration
 					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLambdaInterceptorConfiguration(v **types.LambdaInterceptorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaInterceptorConfiguration
+	if *v == nil {
+		sv = &types.LambdaInterceptorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaFunctionArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:

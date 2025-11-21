@@ -1,0 +1,8 @@
+{
+    "id": "71fa972f-2262-44ca-ab3f-811bb32fc08f",
+    "type": "feature",
+    "description": "Support for agentcore gateway interceptor configurations and NONE authorizer type",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

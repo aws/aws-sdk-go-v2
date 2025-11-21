@@ -1,0 +1,8 @@
+{
+    "id": "76d8b9b8-353e-463a-8690-9929313ffdbf",
+    "type": "feature",
+    "description": "Add support to automatically enforce safeguards across accounts within an AWS Organization.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

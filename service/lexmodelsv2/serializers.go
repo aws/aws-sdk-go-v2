@@ -846,6 +846,11 @@ func awsRestjson1_serializeOpDocumentCreateBotLocaleInput(v *CreateBotLocaleInpu
 		}
 	}
 
+	if len(v.SpeechDetectionSensitivity) > 0 {
+		ok := object.Key("speechDetectionSensitivity")
+		ok.String(string(v.SpeechDetectionSensitivity))
+	}
+
 	if v.VoiceSettings != nil {
 		ok := object.Key("voiceSettings")
 		if err := awsRestjson1_serializeDocumentVoiceSettings(v.VoiceSettings, ok); err != nil {
@@ -1293,6 +1298,11 @@ func awsRestjson1_serializeOpDocumentCreateIntentInput(v *CreateIntentInput, val
 		if err := awsRestjson1_serializeDocumentIntentConfirmationSetting(v.IntentConfirmationSetting, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IntentDisplayName != nil {
+		ok := object.Key("intentDisplayName")
+		ok.String(*v.IntentDisplayName)
 	}
 
 	if v.IntentName != nil {
@@ -9870,6 +9880,11 @@ func awsRestjson1_serializeOpDocumentUpdateBotLocaleInput(v *UpdateBotLocaleInpu
 		}
 	}
 
+	if len(v.SpeechDetectionSensitivity) > 0 {
+		ok := object.Key("speechDetectionSensitivity")
+		ok.String(string(v.SpeechDetectionSensitivity))
+	}
+
 	if v.VoiceSettings != nil {
 		ok := object.Key("voiceSettings")
 		if err := awsRestjson1_serializeDocumentVoiceSettings(v.VoiceSettings, ok); err != nil {
@@ -10255,6 +10270,11 @@ func awsRestjson1_serializeOpDocumentUpdateIntentInput(v *UpdateIntentInput, val
 		if err := awsRestjson1_serializeDocumentIntentConfirmationSetting(v.IntentConfirmationSetting, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IntentDisplayName != nil {
+		ok := object.Key("intentDisplayName")
+		ok.String(*v.IntentDisplayName)
 	}
 
 	if v.IntentName != nil {
@@ -11878,6 +11898,11 @@ func awsRestjson1_serializeDocumentBotLocaleImportSpecification(v *types.BotLoca
 		}
 	}
 
+	if len(v.SpeechDetectionSensitivity) > 0 {
+		ok := object.Key("speechDetectionSensitivity")
+		ok.String(string(v.SpeechDetectionSensitivity))
+	}
+
 	if v.VoiceSettings != nil {
 		ok := object.Key("voiceSettings")
 		if err := awsRestjson1_serializeDocumentVoiceSettings(v.VoiceSettings, ok); err != nil {
@@ -13361,6 +13386,28 @@ func awsRestjson1_serializeDocumentIntentConfirmationSetting(v *types.IntentConf
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIntentDisambiguationSettings(v *types.IntentDisambiguationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomDisambiguationMessage != nil {
+		ok := object.Key("customDisambiguationMessage")
+		ok.String(*v.CustomDisambiguationMessage)
+	}
+
+	{
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.MaxDisambiguationIntents != nil {
+		ok := object.Key("maxDisambiguationIntents")
+		ok.Integer(*v.MaxDisambiguationIntents)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIntentFilter(v *types.IntentFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13615,6 +13662,13 @@ func awsRestjson1_serializeDocumentNluImprovementSpecification(v *types.NluImpro
 	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	if v.IntentDisambiguationSettings != nil {
+		ok := object.Key("intentDisambiguationSettings")
+		if err := awsRestjson1_serializeDocumentIntentDisambiguationSettings(v.IntentDisambiguationSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

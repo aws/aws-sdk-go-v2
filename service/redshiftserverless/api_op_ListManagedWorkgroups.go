@@ -39,7 +39,7 @@ type ListManagedWorkgroupsInput struct {
 	// which returns results in the next page.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) for the managed workgroup in the AWS Glue Data
+	// The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data
 	// Catalog.
 	SourceArn *string
 

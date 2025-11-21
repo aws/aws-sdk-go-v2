@@ -630,6 +630,46 @@ func (m *validateOpGetQueryRuntimeStatistics) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourceDashboard struct {
+}
+
+func (*validateOpGetResourceDashboard) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceDashboard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceDashboardInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSessionEndpoint struct {
+}
+
+func (*validateOpGetSessionEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSessionEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSession struct {
 }
 
@@ -1354,6 +1394,14 @@ func addOpGetQueryRuntimeStatisticsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetQueryRuntimeStatistics{}, middleware.After)
 }
 
+func addOpGetResourceDashboardValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceDashboard{}, middleware.After)
+}
+
+func addOpGetSessionEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSessionEndpoint{}, middleware.After)
+}
+
 func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSession{}, middleware.After)
 }
@@ -1489,6 +1537,21 @@ func validateAclConfiguration(v *types.AclConfiguration) error {
 	}
 }
 
+func validateCloudWatchLoggingConfiguration(v *types.CloudWatchLoggingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLoggingConfiguration"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomerContentEncryptionConfiguration(v *types.CustomerContentEncryptionConfiguration) error {
 	if v == nil {
 		return nil
@@ -1519,13 +1582,13 @@ func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	}
 }
 
-func validateEngineConfiguration(v *types.EngineConfiguration) error {
+func validateManagedLoggingConfiguration(v *types.ManagedLoggingConfiguration) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "EngineConfiguration"}
-	if v.MaxConcurrentDpus == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxConcurrentDpus"))
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedLoggingConfiguration"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1575,6 +1638,33 @@ func validateManagedQueryResultsEncryptionConfiguration(v *types.ManagedQueryRes
 	invalidParams := smithy.InvalidParamsError{Context: "ManagedQueryResultsEncryptionConfiguration"}
 	if v.KmsKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoringConfiguration"}
+	if v.CloudWatchLoggingConfiguration != nil {
+		if err := validateCloudWatchLoggingConfiguration(v.CloudWatchLoggingConfiguration); err != nil {
+			invalidParams.AddNested("CloudWatchLoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedLoggingConfiguration != nil {
+		if err := validateManagedLoggingConfiguration(v.ManagedLoggingConfiguration); err != nil {
+			invalidParams.AddNested("ManagedLoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3LoggingConfiguration != nil {
+		if err := validateS3LoggingConfiguration(v.S3LoggingConfiguration); err != nil {
+			invalidParams.AddNested("S3LoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1674,6 +1764,21 @@ func validateResultReuseConfiguration(v *types.ResultReuseConfiguration) error {
 	}
 }
 
+func validateS3LoggingConfiguration(v *types.S3LoggingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3LoggingConfiguration"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 	if v == nil {
 		return nil
@@ -1687,6 +1792,11 @@ func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 	if v.ManagedQueryResultsConfiguration != nil {
 		if err := validateManagedQueryResultsConfiguration(v.ManagedQueryResultsConfiguration); err != nil {
 			invalidParams.AddNested("ManagedQueryResultsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CustomerContentEncryptionConfiguration != nil {
@@ -1729,6 +1839,11 @@ func validateWorkGroupConfigurationUpdates(v *types.WorkGroupConfigurationUpdate
 	if v.QueryResultsS3AccessGrantsConfiguration != nil {
 		if err := validateQueryResultsS3AccessGrantsConfiguration(v.QueryResultsS3AccessGrantsConfiguration); err != nil {
 			invalidParams.AddNested("QueryResultsS3AccessGrantsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2241,6 +2356,36 @@ func validateOpGetQueryRuntimeStatisticsInput(v *GetQueryRuntimeStatisticsInput)
 	}
 }
 
+func validateOpGetResourceDashboardInput(v *GetResourceDashboardInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceDashboardInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSessionEndpointInput(v *GetSessionEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionEndpointInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSessionInput(v *GetSessionInput) error {
 	if v == nil {
 		return nil
@@ -2534,9 +2679,10 @@ func validateOpStartSessionInput(v *StartSessionInput) error {
 	}
 	if v.EngineConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineConfiguration"))
-	} else if v.EngineConfiguration != nil {
-		if err := validateEngineConfiguration(v.EngineConfiguration); err != nil {
-			invalidParams.AddNested("EngineConfiguration", err.(smithy.InvalidParamsError))
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

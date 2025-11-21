@@ -422,9 +422,10 @@ type KeyMaterialState string
 
 // Enum values for KeyMaterialState
 const (
-	KeyMaterialStateNonCurrent      KeyMaterialState = "NON_CURRENT"
-	KeyMaterialStateCurrent         KeyMaterialState = "CURRENT"
-	KeyMaterialStatePendingRotation KeyMaterialState = "PENDING_ROTATION"
+	KeyMaterialStateNonCurrent                          KeyMaterialState = "NON_CURRENT"
+	KeyMaterialStateCurrent                             KeyMaterialState = "CURRENT"
+	KeyMaterialStatePendingRotation                     KeyMaterialState = "PENDING_ROTATION"
+	KeyMaterialStatePendingMultiRegionImportAndRotation KeyMaterialState = "PENDING_MULTI_REGION_IMPORT_AND_ROTATION"
 )
 
 // Values returns all known values for KeyMaterialState. Note that this can be
@@ -436,6 +437,7 @@ func (KeyMaterialState) Values() []KeyMaterialState {
 		"NON_CURRENT",
 		"CURRENT",
 		"PENDING_ROTATION",
+		"PENDING_MULTI_REGION_IMPORT_AND_ROTATION",
 	}
 }
 

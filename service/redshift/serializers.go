@@ -8344,6 +8344,76 @@ func (m *awsAwsquery_serializeOpModifyIntegration) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyLakehouseConfiguration struct {
+}
+
+func (*awsAwsquery_serializeOpModifyLakehouseConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyLakehouseConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyLakehouseConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyLakehouseConfiguration")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyLakehouseConfigurationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyRedshiftIdcApplication struct {
 }
 
@@ -9884,6 +9954,18 @@ func awsAwsquery_serializeDocumentClusterSecurityGroupNameList(v []string, value
 	return nil
 }
 
+func awsAwsquery_serializeDocumentConnect(v *types.Connect, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.Authorization) > 0 {
+		objectKey := object.Key("Authorization")
+		objectKey.String(string(v.Authorization))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentConsumerIdentifierList(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -10226,6 +10308,38 @@ func awsAwsquery_serializeDocumentReadWriteAccess(v *types.ReadWriteAccess, valu
 	return nil
 }
 
+func awsAwsquery_serializeDocumentRedshiftScopeUnion(v types.RedshiftScopeUnion, value query.Value) error {
+	object := value.Object()
+
+	switch uv := v.(type) {
+	case *types.RedshiftScopeUnionMemberConnect:
+		objectKey := object.Key("Connect")
+		if err := awsAwsquery_serializeDocumentConnect(&uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentRedshiftServiceIntegrations(v []types.RedshiftScopeUnion, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentRedshiftScopeUnion(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentResizeClusterMessage(v *types.ResizeClusterMessage, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10420,6 +10534,12 @@ func awsAwsquery_serializeDocumentServiceIntegrationsUnion(v types.ServiceIntegr
 	case *types.ServiceIntegrationsUnionMemberLakeFormation:
 		objectKey := object.Key("LakeFormation")
 		if err := awsAwsquery_serializeDocumentLakeFormationServiceIntegrations(uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	case *types.ServiceIntegrationsUnionMemberRedshift:
+		objectKey := object.Key("Redshift")
+		if err := awsAwsquery_serializeDocumentRedshiftServiceIntegrations(uv.Value, objectKey); err != nil {
 			return err
 		}
 
@@ -10876,6 +10996,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 	if v.AvailabilityZoneRelocation != nil {
 		objectKey := object.Key("AvailabilityZoneRelocation")
 		objectKey.Boolean(*v.AvailabilityZoneRelocation)
+	}
+
+	if v.CatalogName != nil {
+		objectKey := object.Key("CatalogName")
+		objectKey.String(*v.CatalogName)
 	}
 
 	if v.ClusterIdentifier != nil {
@@ -11388,6 +11513,11 @@ func awsAwsquery_serializeOpDocumentCreateIntegrationInput(v *CreateIntegrationI
 func awsAwsquery_serializeOpDocumentCreateRedshiftIdcApplicationInput(v *CreateRedshiftIdcApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.ApplicationType) > 0 {
+		objectKey := object.Key("ApplicationType")
+		objectKey.String(string(v.ApplicationType))
+	}
 
 	if v.AuthorizedTokenIssuerList != nil {
 		objectKey := object.Key("AuthorizedTokenIssuerList")
@@ -13943,6 +14073,43 @@ func awsAwsquery_serializeOpDocumentModifyIntegrationInput(v *ModifyIntegrationI
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentModifyLakehouseConfigurationInput(v *ModifyLakehouseConfigurationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CatalogName != nil {
+		objectKey := object.Key("CatalogName")
+		objectKey.String(*v.CatalogName)
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.LakehouseIdcApplicationArn != nil {
+		objectKey := object.Key("LakehouseIdcApplicationArn")
+		objectKey.String(*v.LakehouseIdcApplicationArn)
+	}
+
+	if len(v.LakehouseIdcRegistration) > 0 {
+		objectKey := object.Key("LakehouseIdcRegistration")
+		objectKey.String(string(v.LakehouseIdcRegistration))
+	}
+
+	if len(v.LakehouseRegistration) > 0 {
+		objectKey := object.Key("LakehouseRegistration")
+		objectKey.String(string(v.LakehouseRegistration))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentModifyRedshiftIdcApplicationInput(v *ModifyRedshiftIdcApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -14287,6 +14454,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		objectKey.Boolean(*v.AvailabilityZoneRelocation)
 	}
 
+	if v.CatalogName != nil {
+		objectKey := object.Key("CatalogName")
+		objectKey.String(*v.CatalogName)
+	}
+
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
@@ -14409,6 +14581,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
+	}
+
+	if v.RedshiftIdcApplicationArn != nil {
+		objectKey := object.Key("RedshiftIdcApplicationArn")
+		objectKey.String(*v.RedshiftIdcApplicationArn)
 	}
 
 	if v.ReservedNodeId != nil {

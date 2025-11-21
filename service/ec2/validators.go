@@ -1510,6 +1510,26 @@ func (m *validateOpCreateInstanceExportTask) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInterruptibleCapacityReservationAllocation struct {
+}
+
+func (*validateOpCreateInterruptibleCapacityReservationAllocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInterruptibleCapacityReservationAllocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInterruptibleCapacityReservationAllocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInterruptibleCapacityReservationAllocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIpamExternalResourceVerificationToken struct {
 }
 
@@ -10450,6 +10470,26 @@ func (m *validateOpUpdateCapacityManagerOrganizationsAccess) HandleInitialize(ct
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInterruptibleCapacityReservationAllocation struct {
+}
+
+func (*validateOpUpdateInterruptibleCapacityReservationAllocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInterruptibleCapacityReservationAllocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInterruptibleCapacityReservationAllocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInterruptibleCapacityReservationAllocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpWithdrawByoipCidr struct {
 }
 
@@ -10768,6 +10808,10 @@ func addOpCreateInstanceConnectEndpointValidationMiddleware(stack *middleware.St
 
 func addOpCreateInstanceExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInstanceExportTask{}, middleware.After)
+}
+
+func addOpCreateInterruptibleCapacityReservationAllocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInterruptibleCapacityReservationAllocation{}, middleware.After)
 }
 
 func addOpCreateIpamExternalResourceVerificationTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -12556,6 +12600,10 @@ func addOpUnmonitorInstancesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateCapacityManagerOrganizationsAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCapacityManagerOrganizationsAccess{}, middleware.After)
+}
+
+func addOpUpdateInterruptibleCapacityReservationAllocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInterruptibleCapacityReservationAllocation{}, middleware.After)
 }
 
 func addOpWithdrawByoipCidrValidationMiddleware(stack *middleware.Stack) error {
@@ -14842,6 +14890,24 @@ func validateOpCreateInstanceExportTaskInput(v *CreateInstanceExportTaskInput) e
 	}
 	if v.ExportToS3Task == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportToS3Task"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInterruptibleCapacityReservationAllocationInput(v *CreateInterruptibleCapacityReservationAllocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInterruptibleCapacityReservationAllocationInput"}
+	if v.CapacityReservationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
+	}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22309,6 +22375,24 @@ func validateOpUpdateCapacityManagerOrganizationsAccessInput(v *UpdateCapacityMa
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCapacityManagerOrganizationsAccessInput"}
 	if v.OrganizationsAccess == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationsAccess"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInterruptibleCapacityReservationAllocationInput(v *UpdateInterruptibleCapacityReservationAllocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInterruptibleCapacityReservationAllocationInput"}
+	if v.CapacityReservationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
+	}
+	if v.TargetInstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetInstanceCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

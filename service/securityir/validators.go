@@ -250,6 +250,26 @@ func (m *validateOpListComments) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInvestigations struct {
+}
+
+func (*validateOpListInvestigations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInvestigations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInvestigationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInvestigationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendFeedback struct {
+}
+
+func (*validateOpSendFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendFeedbackInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -458,8 +498,16 @@ func addOpListCommentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListComments{}, middleware.After)
 }
 
+func addOpListInvestigationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInvestigations{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpSendFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendFeedback{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -488,6 +536,41 @@ func addOpUpdateMembershipValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateResolverTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResolverType{}, middleware.After)
+}
+
+func validateCaseMetadata(v []types.CaseMetadataEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaseMetadata"}
+	for i := range v {
+		if err := validateCaseMetadataEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaseMetadataEntry(v *types.CaseMetadataEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaseMetadataEntry"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateImpactedAwsRegion(v *types.ImpactedAwsRegion) error {
@@ -898,6 +981,21 @@ func validateOpListCommentsInput(v *ListCommentsInput) error {
 	}
 }
 
+func validateOpListInvestigationsInput(v *ListInvestigationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInvestigationsInput"}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -905,6 +1003,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendFeedbackInput(v *SendFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendFeedbackInput"}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if v.ResultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultId"))
+	}
+	if len(v.Usefulness) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Usefulness"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1006,6 +1125,11 @@ func validateOpUpdateCaseInput(v *UpdateCaseInput) error {
 	if v.ImpactedAwsRegionsToDelete != nil {
 		if err := validateImpactedAwsRegionList(v.ImpactedAwsRegionsToDelete); err != nil {
 			invalidParams.AddNested("ImpactedAwsRegionsToDelete", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CaseMetadata != nil {
+		if err := validateCaseMetadata(v.CaseMetadata); err != nil {
+			invalidParams.AddNested("CaseMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

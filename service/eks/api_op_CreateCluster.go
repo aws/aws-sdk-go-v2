@@ -20,10 +20,10 @@ import (
 // single tenant and unique. It runs on its own set of Amazon EC2 instances.
 //
 // The cluster control plane is provisioned across multiple Availability Zones and
-// fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also
-// provisions elastic network interfaces in your VPC subnets to provide
-// connectivity from the control plane instances to the nodes (for example, to
-// support kubectl exec , logs , and proxy data flows).
+// fronted by an ELB Network Load Balancer. Amazon EKS also provisions elastic
+// network interfaces in your VPC subnets to provide connectivity from the control
+// plane instances to the nodes (for example, to support kubectl exec , logs , and
+// proxy data flows).
 //
 // Amazon EKS nodes run in your Amazon Web Services account and connect to your
 // cluster's control plane over the Kubernetes API server endpoint and a
@@ -121,6 +121,10 @@ type CreateClusterInput struct {
 	// EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will
 	// create and delete EC2 Managed Instances in your Amazon Web Services account
 	ComputeConfig *types.ComputeConfigRequest
+
+	// The control plane scaling tier configuration. For more information, see EKS
+	// Provisioned Control Plane in the Amazon EKS User Guide.
+	ControlPlaneScalingConfig *types.ControlPlaneScalingConfig
 
 	// Indicates whether to enable deletion protection for the cluster. When enabled,
 	// the cluster cannot be deleted unless deletion protection is first disabled. This

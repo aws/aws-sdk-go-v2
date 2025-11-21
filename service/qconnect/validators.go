@@ -3148,6 +3148,25 @@ func validateMessageTemplateSearchExpression(v *types.MessageTemplateSearchExpre
 	}
 }
 
+func validateMessageTemplateSourceConfiguration(v types.MessageTemplateSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateSourceConfiguration"}
+	switch uv := v.(type) {
+	case *types.MessageTemplateSourceConfigurationMemberWhatsApp:
+		if err := validateWhatsAppMessageTemplateSourceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[whatsApp]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrCondition(v types.OrCondition) error {
 	if v == nil {
 		return nil
@@ -3679,6 +3698,24 @@ func validateWebCrawlerConfiguration(v *types.WebCrawlerConfiguration) error {
 	}
 }
 
+func validateWhatsAppMessageTemplateSourceConfiguration(v *types.WhatsAppMessageTemplateSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppMessageTemplateSourceConfiguration"}
+	if v.BusinessAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BusinessAccountId"))
+	}
+	if v.TemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpActivateMessageTemplateInput(v *ActivateMessageTemplateInput) error {
 	if v == nil {
 		return nil
@@ -4024,14 +4061,13 @@ func validateOpCreateMessageTemplateInput(v *CreateMessageTemplateInput) error {
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
 	if len(v.ChannelSubtype) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelSubtype"))
+	}
+	if v.SourceConfiguration != nil {
+		if err := validateMessageTemplateSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5424,6 +5460,11 @@ func validateOpUpdateMessageTemplateInput(v *UpdateMessageTemplateInput) error {
 	}
 	if v.MessageTemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if v.SourceConfiguration != nil {
+		if err := validateMessageTemplateSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

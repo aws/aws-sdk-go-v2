@@ -740,6 +740,29 @@ func (NodegroupUpdateStrategies) Values() []NodegroupUpdateStrategies {
 	}
 }
 
+type ProvisionedControlPlaneTier string
+
+// Enum values for ProvisionedControlPlaneTier
+const (
+	ProvisionedControlPlaneTierStandard ProvisionedControlPlaneTier = "standard"
+	ProvisionedControlPlaneTierTierXl   ProvisionedControlPlaneTier = "tier-xl"
+	ProvisionedControlPlaneTierTier2xl  ProvisionedControlPlaneTier = "tier-2xl"
+	ProvisionedControlPlaneTierTier4xl  ProvisionedControlPlaneTier = "tier-4xl"
+)
+
+// Values returns all known values for ProvisionedControlPlaneTier. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisionedControlPlaneTier) Values() []ProvisionedControlPlaneTier {
+	return []ProvisionedControlPlaneTier{
+		"standard",
+		"tier-xl",
+		"tier-2xl",
+		"tier-4xl",
+	}
+}
+
 type RepairAction string
 
 // Enum values for RepairAction
@@ -864,6 +887,8 @@ const (
 	UpdateParamTypeRemoteNetworkConfig      UpdateParamType = "RemoteNetworkConfig"
 	UpdateParamTypeDeletionProtection       UpdateParamType = "DeletionProtection"
 	UpdateParamTypeNodeRepairConfig         UpdateParamType = "NodeRepairConfig"
+	UpdateParamTypeUpdatedTier              UpdateParamType = "UpdatedTier"
+	UpdateParamTypePreviousTier             UpdateParamType = "PreviousTier"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -910,6 +935,8 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"RemoteNetworkConfig",
 		"DeletionProtection",
 		"NodeRepairConfig",
+		"UpdatedTier",
+		"PreviousTier",
 	}
 }
 
@@ -955,6 +982,7 @@ const (
 	UpdateTypeAutoModeUpdate                     UpdateType = "AutoModeUpdate"
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
 	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
+	UpdateTypeControlPlaneScalingConfigUpdate    UpdateType = "ControlPlaneScalingConfigUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -978,6 +1006,7 @@ func (UpdateType) Values() []UpdateType {
 		"AutoModeUpdate",
 		"RemoteNetworkConfigUpdate",
 		"DeletionProtectionUpdate",
+		"ControlPlaneScalingConfigUpdate",
 	}
 }
 

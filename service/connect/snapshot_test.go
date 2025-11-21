@@ -398,6 +398,30 @@ func TestCheckSnapshot_CreateContactFlowModule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContactFlowModuleAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateContactFlowModuleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContactFlowModuleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContactFlowModuleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateContactFlowVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContactFlowVersion(context.Background(), nil, func(o *Options) {
@@ -758,6 +782,30 @@ func TestCheckSnapshot_DeleteContactFlowModule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContactFlowModuleAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteContactFlowModuleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactFlowModuleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContactFlowModuleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteContactFlowVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteContactFlowVersion(context.Background(), nil, func(o *Options) {
@@ -1099,6 +1147,18 @@ func TestCheckSnapshot_DescribeContactFlowModule(t *testing.T) {
 	_, err := svc.DescribeContactFlowModule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeContactFlowModule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeContactFlowModuleAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1802,11 +1862,35 @@ func TestCheckSnapshot_ListContactEvaluations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContactFlowModuleAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactFlowModuleAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContactFlowModuleAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListContactFlowModules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContactFlowModules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListContactFlowModules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContactFlowModuleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactFlowModuleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContactFlowModuleVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3002,6 +3086,18 @@ func TestCheckSnapshot_UpdateContactFlowMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateContactFlowModuleAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateContactFlowModuleContent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateContactFlowModuleContent(context.Background(), nil, func(o *Options) {
@@ -3865,6 +3961,30 @@ func TestUpdateSnapshot_CreateContactFlowModule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContactFlowModuleAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateContactFlowModuleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContactFlowModuleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContactFlowModuleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateContactFlowVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContactFlowVersion(context.Background(), nil, func(o *Options) {
@@ -4225,6 +4345,30 @@ func TestUpdateSnapshot_DeleteContactFlowModule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContactFlowModuleAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteContactFlowModuleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactFlowModuleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContactFlowModuleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteContactFlowVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteContactFlowVersion(context.Background(), nil, func(o *Options) {
@@ -4566,6 +4710,18 @@ func TestUpdateSnapshot_DescribeContactFlowModule(t *testing.T) {
 	_, err := svc.DescribeContactFlowModule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeContactFlowModule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeContactFlowModuleAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5269,11 +5425,35 @@ func TestUpdateSnapshot_ListContactEvaluations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListContactFlowModuleAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactFlowModuleAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContactFlowModuleAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListContactFlowModules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContactFlowModules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListContactFlowModules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContactFlowModuleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactFlowModuleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContactFlowModuleVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6462,6 +6642,18 @@ func TestUpdateSnapshot_UpdateContactFlowMetadata(t *testing.T) {
 	_, err := svc.UpdateContactFlowMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateContactFlowMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateContactFlowModuleAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContactFlowModuleAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateContactFlowModuleAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

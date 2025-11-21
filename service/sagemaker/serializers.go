@@ -24775,6 +24775,27 @@ func awsAwsjson11_serializeDocumentClusterAutoScalingConfig(v *types.ClusterAuto
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterCapacityRequirements(v *types.ClusterCapacityRequirements, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OnDemand != nil {
+		ok := object.Key("OnDemand")
+		if err := awsAwsjson11_serializeDocumentClusterOnDemandOptions(v.OnDemand, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Spot != nil {
+		ok := object.Key("Spot")
+		if err := awsAwsjson11_serializeDocumentClusterSpotOptions(v.Spot, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterEbsVolumeConfig(v *types.ClusterEbsVolumeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24800,6 +24821,13 @@ func awsAwsjson11_serializeDocumentClusterEbsVolumeConfig(v *types.ClusterEbsVol
 func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CapacityRequirements != nil {
+		ok := object.Key("CapacityRequirements")
+		if err := awsAwsjson11_serializeDocumentClusterCapacityRequirements(v.CapacityRequirements, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ExecutionRole != nil {
 		ok := object.Key("ExecutionRole")
@@ -24833,11 +24861,23 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 		ok.String(string(v.InstanceType))
 	}
 
+	if v.KubernetesConfig != nil {
+		ok := object.Key("KubernetesConfig")
+		if err := awsAwsjson11_serializeDocumentClusterKubernetesConfig(v.KubernetesConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LifeCycleConfig != nil {
 		ok := object.Key("LifeCycleConfig")
 		if err := awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v.LifeCycleConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.MinInstanceCount != nil {
+		ok := object.Key("MinInstanceCount")
+		ok.Integer(*v.MinInstanceCount)
 	}
 
 	if v.OnStartDeepHealthChecks != nil {
@@ -24932,6 +24972,73 @@ func awsAwsjson11_serializeDocumentClusterInstanceStorageConfigs(v []types.Clust
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterKubernetesConfig(v *types.ClusterKubernetesConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Labels != nil {
+		ok := object.Key("Labels")
+		if err := awsAwsjson11_serializeDocumentClusterKubernetesLabels(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Taints != nil {
+		ok := object.Key("Taints")
+		if err := awsAwsjson11_serializeDocumentClusterKubernetesTaints(v.Taints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterKubernetesLabels(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterKubernetesTaint(v *types.ClusterKubernetesTaint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Effect) > 0 {
+		ok := object.Key("Effect")
+		ok.String(string(v.Effect))
+	}
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterKubernetesTaints(v []types.ClusterKubernetesTaint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentClusterKubernetesTaint(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v *types.ClusterLifeCycleConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24968,6 +25075,13 @@ func awsAwsjson11_serializeDocumentClusterNodeLogicalIdList(v []string, value sm
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterOnDemandOptions(v *types.ClusterOnDemandOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 
@@ -25079,6 +25193,13 @@ func awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupSpecifications(
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterSpotOptions(v *types.ClusterSpotOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 
@@ -30377,6 +30498,42 @@ func awsAwsjson11_serializeDocumentModelShardingConfig(v *types.ModelShardingCon
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelSpeculativeDecodingConfig(v *types.ModelSpeculativeDecodingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Technique) > 0 {
+		ok := object.Key("Technique")
+		ok.String(string(v.Technique))
+	}
+
+	if v.TrainingDataSource != nil {
+		ok := object.Key("TrainingDataSource")
+		if err := awsAwsjson11_serializeDocumentModelSpeculativeDecodingTrainingDataSource(v.TrainingDataSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelSpeculativeDecodingTrainingDataSource(v *types.ModelSpeculativeDecodingTrainingDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.S3DataType) > 0 {
+		ok := object.Key("S3DataType")
+		ok.String(string(v.S3DataType))
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelVariantActionMap(v map[string]types.ModelVariantAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31236,6 +31393,12 @@ func awsAwsjson11_serializeDocumentOptimizationConfig(v types.OptimizationConfig
 			return err
 		}
 
+	case *types.OptimizationConfigMemberModelSpeculativeDecodingConfig:
+		av := object.Key("ModelSpeculativeDecodingConfig")
+		if err := awsAwsjson11_serializeDocumentModelSpeculativeDecodingConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -31281,6 +31444,13 @@ func awsAwsjson11_serializeDocumentOptimizationJobModelSource(v *types.Optimizat
 		}
 	}
 
+	if v.SageMakerModel != nil {
+		ok := object.Key("SageMakerModel")
+		if err := awsAwsjson11_serializeDocumentOptimizationSageMakerModel(v.SageMakerModel, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31317,6 +31487,13 @@ func awsAwsjson11_serializeDocumentOptimizationJobOutputConfig(v *types.Optimiza
 		ok.String(*v.S3OutputLocation)
 	}
 
+	if v.SageMakerModel != nil {
+		ok := object.Key("SageMakerModel")
+		if err := awsAwsjson11_serializeDocumentOptimizationSageMakerModel(v.SageMakerModel, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31327,6 +31504,18 @@ func awsAwsjson11_serializeDocumentOptimizationModelAccessConfig(v *types.Optimi
 	if v.AcceptEula != nil {
 		ok := object.Key("AcceptEula")
 		ok.Boolean(*v.AcceptEula)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOptimizationSageMakerModel(v *types.OptimizationSageMakerModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
 	}
 
 	return nil
@@ -38400,6 +38589,11 @@ func awsAwsjson11_serializeOpDocumentCreateOptimizationJobInput(v *CreateOptimiz
 	if len(v.DeploymentInstanceType) > 0 {
 		ok := object.Key("DeploymentInstanceType")
 		ok.String(string(v.DeploymentInstanceType))
+	}
+
+	if v.MaxInstanceCount != nil {
+		ok := object.Key("MaxInstanceCount")
+		ok.Integer(*v.MaxInstanceCount)
 	}
 
 	if v.ModelSource != nil {

@@ -2629,6 +2629,78 @@ func awsRestjson1_deserializeEventMessageConverseStreamMetadataEvent(v *types.Co
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAppliedGuardrailDetails(v **types.AppliedGuardrailDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AppliedGuardrailDetails
+	if *v == nil {
+		sv = &types.AppliedGuardrailDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guardrailArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailArn to be of type string, got %T instead", value)
+				}
+				sv.GuardrailArn = ptr.String(jtv)
+			}
+
+		case "guardrailId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailId to be of type string, got %T instead", value)
+				}
+				sv.GuardrailId = ptr.String(jtv)
+			}
+
+		case "guardrailOrigin":
+			if err := awsRestjson1_deserializeDocumentGuardrailOriginList(&sv.GuardrailOrigin, value); err != nil {
+				return err
+			}
+
+		case "guardrailOwnership":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailOwnership to be of type string, got %T instead", value)
+				}
+				sv.GuardrailOwnership = types.GuardrailOwnership(jtv)
+			}
+
+		case "guardrailVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailVersion to be of type string, got %T instead", value)
+				}
+				sv.GuardrailVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCitationLocation(v *types.CitationLocation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3485,6 +3557,11 @@ func awsRestjson1_deserializeDocumentGuardrailAssessment(v **types.GuardrailAsse
 
 	for key, value := range shape {
 		switch key {
+		case "appliedGuardrailDetails":
+			if err := awsRestjson1_deserializeDocumentAppliedGuardrailDetails(&sv.AppliedGuardrailDetails, value); err != nil {
+				return err
+			}
+
 		case "automatedReasoningPolicy":
 			if err := awsRestjson1_deserializeDocumentGuardrailAutomatedReasoningPolicyAssessment(&sv.AutomatedReasoningPolicy, value); err != nil {
 				return err
@@ -5326,6 +5403,42 @@ func awsRestjson1_deserializeDocumentGuardrailManagedWordList(v *[]types.Guardra
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailOriginList(v *[]types.GuardrailOrigin, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GuardrailOrigin
+	if *v == nil {
+		cv = []types.GuardrailOrigin{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GuardrailOrigin
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GuardrailOrigin to be of type string, got %T instead", value)
+			}
+			col = types.GuardrailOrigin(jtv)
+		}
 		cv = append(cv, col)
 
 	}

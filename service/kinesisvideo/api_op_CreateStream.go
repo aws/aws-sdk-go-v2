@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,7 +53,8 @@ type CreateStreamInput struct {
 	// Video Streams retains the data in a data store that is associated with the
 	// stream.
 	//
-	// The default value is 0, indicating that the stream does not persist data.
+	// The default value is 0, indicating that the stream does not persist data. The
+	// minimum is 1 hour.
 	//
 	// When the DataRetentionInHours value is 0, consumers can still consume the
 	// fragments that remain in the service host buffer, which has a retention time
@@ -62,14 +64,14 @@ type CreateStreamInput struct {
 
 	// The name of the device that is writing to the stream.
 	//
-	// In the current implementation, Kinesis Video Streams does not use this name.
+	// In the current implementation, Kinesis Video Streams doesn't use this name.
 	DeviceName *string
 
 	// The ID of the Key Management Service (KMS) key that you want Kinesis Video
 	// Streams to use to encrypt stream data.
 	//
-	// If no key ID is specified, the default, Kinesis Video-managed key ( Amazon Web
-	// Services/kinesisvideo ) is used.
+	// If no key ID is specified, the default, Kinesis Video-managed key (
+	// aws/kinesisvideo ) is used.
 	//
 	// For more information, see [DescribeKey].
 	//
@@ -87,6 +89,15 @@ type CreateStreamInput struct {
 	// [Naming Requirements]: https://tools.ietf.org/html/rfc6838#section-4.2
 	// [Media Types]: http://www.iana.org/assignments/media-types/media-types.xhtml
 	MediaType *string
+
+	// The configuration for the stream's storage, including the default storage tier
+	// for stream data. This configuration determines how stream data is stored and
+	// accessed, with different tiers offering varying levels of performance and cost
+	// optimization.
+	//
+	// If not specified, the stream will use the default storage configuration with
+	// HOT tier for optimal performance.
+	StreamStorageConfiguration *types.StreamStorageConfiguration
 
 	// A list of tags to associate with the specified stream. Each tag is a key-value
 	// pair (the value is optional).

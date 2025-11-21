@@ -38,21 +38,11 @@ type CreateMessageTemplateInput struct {
 	// This member is required.
 	ChannelSubtype types.ChannelSubtype
 
-	// The content of the message template.
-	//
-	// This member is required.
-	Content types.MessageTemplateContentProvider
-
 	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
 	// cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
-
-	// The name of the message template.
-	//
-	// This member is required.
-	Name *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
@@ -60,6 +50,9 @@ type CreateMessageTemplateInput struct {
 	//
 	// [Making retries safe with idempotent APIs]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
+
+	// The content of the message template.
+	Content types.MessageTemplateContentProvider
 
 	// An object that specifies the default values to use for variables in the message
 	// template. This object contains different categories of key-value pairs. Each key
@@ -77,6 +70,13 @@ type CreateMessageTemplateInput struct {
 	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
 	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
 	Language *string
+
+	// The name of the message template.
+	Name *string
+
+	// The source configuration of the message template. Only set this argument for
+	// WHATSAPP channel subtype.
+	SourceConfiguration types.MessageTemplateSourceConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

@@ -3600,6 +3600,11 @@ func awsRestjson1_serializeDocumentFilterConfiguration(v *types.FilterConfigurat
 		ok.Double(smithytime.FormatEpochSeconds(*v.ClipStartTime))
 	}
 
+	if v.DrmSettings != nil {
+		ok := object.Key("DrmSettings")
+		ok.String(*v.DrmSettings)
+	}
+
 	if v.End != nil {
 		ok := object.Key("End")
 		ok.Double(smithytime.FormatEpochSeconds(*v.End))

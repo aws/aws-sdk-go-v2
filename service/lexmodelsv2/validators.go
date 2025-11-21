@@ -4813,6 +4813,18 @@ func validateIntentConfirmationSetting(v *types.IntentConfirmationSetting) error
 	}
 }
 
+func validateIntentDisambiguationSettings(v *types.IntentDisambiguationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntentDisambiguationSettings"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIntentFilter(v *types.IntentFilter) error {
 	if v == nil {
 		return nil
@@ -5029,6 +5041,11 @@ func validateNluImprovementSpecification(v *types.NluImprovementSpecification) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NluImprovementSpecification"}
+	if v.IntentDisambiguationSettings != nil {
+		if err := validateIntentDisambiguationSettings(v.IntentDisambiguationSettings); err != nil {
+			invalidParams.AddNested("IntentDisambiguationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

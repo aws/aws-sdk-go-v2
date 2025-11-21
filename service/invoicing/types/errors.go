@@ -35,6 +35,38 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request could not be completed due to a conflict with the current state of
+// the resource. This exception occurs when a concurrent modification is detected
+// during an update operation, or when attempting to create a resource that already
+// exists.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The processing request failed because of an unknown error, exception, or
 // failure.
 type InternalServerException struct {

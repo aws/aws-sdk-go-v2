@@ -2,6 +2,27 @@
 
 package types
 
+type ActionType string
+
+// Enum values for ActionType
+const (
+	ActionTypeEvidenceCollection    ActionType = "Evidence"
+	ActionTypeInvestigationAnalysis ActionType = "Investigation"
+	ActionTypeSummarization         ActionType = "Summarization"
+)
+
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"Evidence",
+		"Investigation",
+		"Summarization",
+	}
+}
+
 type AwsRegion string
 
 // Enum values for AwsRegion
@@ -247,6 +268,33 @@ func (EngagementType) Values() []EngagementType {
 	}
 }
 
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusPending    ExecutionStatus = "Pending"
+	ExecutionStatusInProgress ExecutionStatus = "InProgress"
+	ExecutionStatusWaiting    ExecutionStatus = "Waiting"
+	ExecutionStatusCompleted  ExecutionStatus = "Completed"
+	ExecutionStatusFailed     ExecutionStatus = "Failed"
+	ExecutionStatusCancelled  ExecutionStatus = "Cancelled"
+)
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"Pending",
+		"InProgress",
+		"Waiting",
+		"Completed",
+		"Failed",
+		"Cancelled",
+	}
+}
+
 type MembershipAccountRelationshipStatus string
 
 // Enum values for MembershipAccountRelationshipStatus
@@ -385,6 +433,25 @@ func (SelfManagedCaseStatus) Values() []SelfManagedCaseStatus {
 		"Detection and Analysis",
 		"Containment, Eradication and Recovery",
 		"Post-incident Activities",
+	}
+}
+
+type UsefulnessRating string
+
+// Enum values for UsefulnessRating
+const (
+	UsefulnessRatingUseful    UsefulnessRating = "USEFUL"
+	UsefulnessRatingNotUseful UsefulnessRating = "NOT_USEFUL"
+)
+
+// Values returns all known values for UsefulnessRating. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UsefulnessRating) Values() []UsefulnessRating {
+	return []UsefulnessRating{
+		"USEFUL",
+		"NOT_USEFUL",
 	}
 }
 

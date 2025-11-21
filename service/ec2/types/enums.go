@@ -3709,9 +3709,10 @@ type InstanceLifecycleType string
 
 // Enum values for InstanceLifecycleType
 const (
-	InstanceLifecycleTypeSpot          InstanceLifecycleType = "spot"
-	InstanceLifecycleTypeScheduled     InstanceLifecycleType = "scheduled"
-	InstanceLifecycleTypeCapacityBlock InstanceLifecycleType = "capacity-block"
+	InstanceLifecycleTypeSpot                             InstanceLifecycleType = "spot"
+	InstanceLifecycleTypeScheduled                        InstanceLifecycleType = "scheduled"
+	InstanceLifecycleTypeCapacityBlock                    InstanceLifecycleType = "capacity-block"
+	InstanceLifecycleTypeInterruptibleCapacityReservation InstanceLifecycleType = "interruptible-capacity-reservation"
 )
 
 // Values returns all known values for InstanceLifecycleType. Note that this can
@@ -3723,6 +3724,7 @@ func (InstanceLifecycleType) Values() []InstanceLifecycleType {
 		"spot",
 		"scheduled",
 		"capacity-block",
+		"interruptible-capacity-reservation",
 	}
 }
 
@@ -6174,6 +6176,51 @@ func (InternetGatewayExclusionMode) Values() []InternetGatewayExclusionMode {
 	}
 }
 
+type InterruptibleCapacityReservationAllocationStatus string
+
+// Enum values for InterruptibleCapacityReservationAllocationStatus
+const (
+	InterruptibleCapacityReservationAllocationStatusPending   InterruptibleCapacityReservationAllocationStatus = "pending"
+	InterruptibleCapacityReservationAllocationStatusActive    InterruptibleCapacityReservationAllocationStatus = "active"
+	InterruptibleCapacityReservationAllocationStatusUpdating  InterruptibleCapacityReservationAllocationStatus = "updating"
+	InterruptibleCapacityReservationAllocationStatusCanceling InterruptibleCapacityReservationAllocationStatus = "canceling"
+	InterruptibleCapacityReservationAllocationStatusCanceled  InterruptibleCapacityReservationAllocationStatus = "canceled"
+	InterruptibleCapacityReservationAllocationStatusFailed    InterruptibleCapacityReservationAllocationStatus = "failed"
+)
+
+// Values returns all known values for
+// InterruptibleCapacityReservationAllocationStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InterruptibleCapacityReservationAllocationStatus) Values() []InterruptibleCapacityReservationAllocationStatus {
+	return []InterruptibleCapacityReservationAllocationStatus{
+		"pending",
+		"active",
+		"updating",
+		"canceling",
+		"canceled",
+		"failed",
+	}
+}
+
+type InterruptionType string
+
+// Enum values for InterruptionType
+const (
+	InterruptionTypeAdhoc InterruptionType = "adhoc"
+)
+
+// Values returns all known values for InterruptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InterruptionType) Values() []InterruptionType {
+	return []InterruptionType{
+		"adhoc",
+	}
+}
+
 type IpAddressType string
 
 // Enum values for IpAddressType
@@ -7755,8 +7802,9 @@ type MarketType string
 
 // Enum values for MarketType
 const (
-	MarketTypeSpot          MarketType = "spot"
-	MarketTypeCapacityBlock MarketType = "capacity-block"
+	MarketTypeSpot                             MarketType = "spot"
+	MarketTypeCapacityBlock                    MarketType = "capacity-block"
+	MarketTypeInterruptibleCapacityReservation MarketType = "interruptible-capacity-reservation"
 )
 
 // Values returns all known values for MarketType. Note that this can be expanded
@@ -7767,6 +7815,7 @@ func (MarketType) Values() []MarketType {
 	return []MarketType{
 		"spot",
 		"capacity-block",
+		"interruptible-capacity-reservation",
 	}
 }
 

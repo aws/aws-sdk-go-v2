@@ -41,6 +41,19 @@ type BillingPeriod struct {
 	noSmithyDocumentSerde
 }
 
+// Represents contact information for a person or role associated with the
+// procurement portal preference.
+type Contact struct {
+
+	// The email address of the contact person or role.
+	Email *string
+
+	// The name of the contact person or role.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of currency exchange.
 type CurrencyExchangeDetails struct {
 
@@ -100,6 +113,41 @@ type DiscountsBreakdownAmount struct {
 
 	//  The details for the discount rate..
 	Rate *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the preferences for e-invoice delivery, including document types,
+// attachment types, and customization settings.
+type EinvoiceDeliveryPreference struct {
+
+	// The method to use for testing the connection to the procurement portal.
+	//
+	// This member is required.
+	ConnectionTestingMethod ConnectionTestingMethod
+
+	// The date when e-invoice delivery should be activated for this preference.
+	//
+	// This member is required.
+	EinvoiceDeliveryActivationDate *time.Time
+
+	// The types of e-invoice documents to be delivered.
+	//
+	// This member is required.
+	EinvoiceDeliveryDocumentTypes []EinvoiceDeliveryDocumentType
+
+	// The communication protocol to use for e-invoice delivery.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	// The sources of purchase order data to use for e-invoice generation and delivery.
+	//
+	// This member is required.
+	PurchaseOrderDataSources []PurchaseOrderDataSource
+
+	// The types of attachments to include with the e-invoice delivery.
+	EinvoiceDeliveryAttachmentTypes []EinvoiceDeliveryAttachmentType
 
 	noSmithyDocumentSerde
 }
@@ -361,6 +409,227 @@ type InvoiceUnitRule struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the full configuration of a procurement portal preference, including
+// settings for e-invoice delivery and purchase order retrieval.
+type ProcurementPortalPreference struct {
+
+	// The Amazon Web Services account ID associated with this procurement portal
+	// preference.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The domain identifier for the buyer in the procurement portal.
+	//
+	// This member is required.
+	BuyerDomain BuyerDomain
+
+	// The unique identifier for the buyer in the procurement portal.
+	//
+	// This member is required.
+	BuyerIdentifier *string
+
+	// The date and time when the procurement portal preference was created.
+	//
+	// This member is required.
+	CreateDate *time.Time
+
+	// Indicates whether e-invoice delivery is enabled for this procurement portal
+	// preference.
+	//
+	// This member is required.
+	EinvoiceDeliveryEnabled *bool
+
+	// The date and time when the procurement portal preference was last updated.
+	//
+	// This member is required.
+	LastUpdateDate *time.Time
+
+	// The name of the procurement portal.
+	//
+	// This member is required.
+	ProcurementPortalName ProcurementPortalName
+
+	// The Amazon Resource Name (ARN) of the procurement portal preference.
+	//
+	// This member is required.
+	ProcurementPortalPreferenceArn *string
+
+	// Indicates whether purchase order retrieval is enabled for this procurement
+	// portal preference.
+	//
+	// This member is required.
+	PurchaseOrderRetrievalEnabled *bool
+
+	// The domain identifier for the supplier in the procurement portal.
+	//
+	// This member is required.
+	SupplierDomain SupplierDomain
+
+	// The unique identifier for the supplier in the procurement portal.
+	//
+	// This member is required.
+	SupplierIdentifier *string
+
+	// The version number of the procurement portal preference configuration.
+	//
+	// This member is required.
+	Version *int64
+
+	// List of contact information for portal administrators and technical contacts.
+	Contacts []Contact
+
+	// The configuration settings that specify how e-invoices are delivered to the
+	// procurement portal.
+	EinvoiceDeliveryPreference *EinvoiceDeliveryPreference
+
+	// The current status of the e-invoice delivery preference.
+	EinvoiceDeliveryPreferenceStatus ProcurementPortalPreferenceStatus
+
+	// The reason for the current e-invoice delivery preference status.
+	EinvoiceDeliveryPreferenceStatusReason *string
+
+	// The endpoint URL where e-invoices are delivered to the procurement portal.
+	ProcurementPortalInstanceEndpoint *string
+
+	// The shared secret or authentication credential used for secure communication
+	// with the procurement portal.
+	ProcurementPortalSharedSecret *string
+
+	// The endpoint URL used for retrieving purchase orders from the procurement
+	// portal.
+	PurchaseOrderRetrievalEndpoint *string
+
+	// The current status of the purchase order retrieval preference.
+	PurchaseOrderRetrievalPreferenceStatus ProcurementPortalPreferenceStatus
+
+	// The reason for the current purchase order retrieval preference status.
+	PurchaseOrderRetrievalPreferenceStatusReason *string
+
+	// Specifies criteria for selecting which invoices should be processed using a
+	// particular procurement portal preference.
+	Selector *ProcurementPortalPreferenceSelector
+
+	// Configuration on settings for the test environment of the procurement portal.
+	TestEnvPreference *TestEnvPreference
+
+	noSmithyDocumentSerde
+}
+
+// Specifies criteria for selecting which invoices should be processed using a
+// particular procurement portal preference.
+type ProcurementPortalPreferenceSelector struct {
+
+	//  The Amazon Resource Name (ARN) of invoice unit identifiers to which this
+	// preference applies.
+	InvoiceUnitArns []string
+
+	//  The list of seller of record IDs to which this preference applies.
+	SellerOfRecords []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a procurement portal preference, including key
+// identifiers and status information.
+type ProcurementPortalPreferenceSummary struct {
+
+	// The Amazon Web Services account ID associated with this procurement portal
+	// preference summary.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The domain identifier for the buyer in the procurement portal.
+	//
+	// This member is required.
+	BuyerDomain BuyerDomain
+
+	// The unique identifier for the buyer in the procurement portal.
+	//
+	// This member is required.
+	BuyerIdentifier *string
+
+	// The date and time when the procurement portal preference was created.
+	//
+	// This member is required.
+	CreateDate *time.Time
+
+	// Indicates whether e-invoice delivery is enabled for this procurement portal
+	// preference.
+	//
+	// This member is required.
+	EinvoiceDeliveryEnabled *bool
+
+	// The date and time when the procurement portal preference was last updated.
+	//
+	// This member is required.
+	LastUpdateDate *time.Time
+
+	// The name of the procurement portal.
+	//
+	// This member is required.
+	ProcurementPortalName ProcurementPortalName
+
+	// The Amazon Resource Name (ARN) of the procurement portal preference.
+	//
+	// This member is required.
+	ProcurementPortalPreferenceArn *string
+
+	// Indicates whether purchase order retrieval is enabled for this procurement
+	// portal preference.
+	//
+	// This member is required.
+	PurchaseOrderRetrievalEnabled *bool
+
+	// The domain identifier for the supplier in the procurement portal.
+	//
+	// This member is required.
+	SupplierDomain SupplierDomain
+
+	// The unique identifier for the supplier in the procurement portal.
+	//
+	// This member is required.
+	SupplierIdentifier *string
+
+	// The version number of the procurement portal preference configuration in this
+	// summary.
+	//
+	// This member is required.
+	Version *int64
+
+	// The current status of the e-invoice delivery preference in this summary.
+	EinvoiceDeliveryPreferenceStatus ProcurementPortalPreferenceStatus
+
+	// The reason for the current e-invoice delivery preference status in this summary.
+	EinvoiceDeliveryPreferenceStatusReason *string
+
+	// The current status of the purchase order retrieval preference in this summary.
+	PurchaseOrderRetrievalPreferenceStatus ProcurementPortalPreferenceStatus
+
+	// The reason for the current purchase order retrieval preference status in this
+	// summary.
+	PurchaseOrderRetrievalPreferenceStatusReason *string
+
+	// Specifies criteria for selecting which invoices should be processed using a
+	// particular procurement portal preference.
+	Selector *ProcurementPortalPreferenceSelector
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the source configuration for retrieving purchase order data.
+type PurchaseOrderDataSource struct {
+
+	// The type of e-invoice document that requires purchase order data.
+	EinvoiceDeliveryDocumentType EinvoiceDeliveryDocumentType
+
+	// The type of source for purchase order data.
+	PurchaseOrderDataSourceType PurchaseOrderDataSourceType
+
+	noSmithyDocumentSerde
+}
+
 // The details of the address associated with the receiver.
 type ReceiverAddress struct {
 
@@ -445,6 +714,81 @@ type TaxesBreakdownAmount struct {
 
 	//  The details of the tax rate.
 	Rate *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration settings for testing the procurement portal integration
+// in a non-production environment.
+type TestEnvPreference struct {
+
+	// The domain identifier for the buyer in the test environment of the procurement
+	// portal.
+	//
+	// This member is required.
+	BuyerDomain BuyerDomain
+
+	// The unique identifier for the buyer in the test environment of the procurement
+	// portal.
+	//
+	// This member is required.
+	BuyerIdentifier *string
+
+	// The domain identifier for the supplier in the test environment of the
+	// procurement portal.
+	//
+	// This member is required.
+	SupplierDomain SupplierDomain
+
+	// The unique identifier for the supplier in the test environment of the
+	// procurement portal.
+	//
+	// This member is required.
+	SupplierIdentifier *string
+
+	// The endpoint URL where e-invoices are delivered in the test environment.
+	ProcurementPortalInstanceEndpoint *string
+
+	// The shared secret or authentication credential used for secure communication
+	// with the test environment.
+	ProcurementPortalSharedSecret *string
+
+	// The endpoint URL used for retrieving purchase orders in the test environment.
+	PurchaseOrderRetrievalEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// Input parameters for configuring test environment preferences for a procurement
+// portal.
+type TestEnvPreferenceInput struct {
+
+	// The domain identifier to use for the buyer in the test environment.
+	//
+	// This member is required.
+	BuyerDomain BuyerDomain
+
+	// The unique identifier to use for the buyer in the test environment.
+	//
+	// This member is required.
+	BuyerIdentifier *string
+
+	// The domain identifier to use for the supplier in the test environment.
+	//
+	// This member is required.
+	SupplierDomain SupplierDomain
+
+	// The unique identifier to use for the supplier in the test environment.
+	//
+	// This member is required.
+	SupplierIdentifier *string
+
+	// The endpoint URL where e-invoices will be delivered in the test environment.
+	ProcurementPortalInstanceEndpoint *string
+
+	// The shared secret or authentication credential to use for secure communication
+	// in the test environment.
+	ProcurementPortalSharedSecret *string
 
 	noSmithyDocumentSerde
 }

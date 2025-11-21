@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the web app that's identified by WebAppId .
+// Describes the web app that's identified by WebAppId . The response includes
+// endpoint configuration details such as whether the web app is publicly
+// accessible or VPC hosted.
+//
+// For more information about using VPC endpoints with Transfer Family, see [Create a Transfer Family web app in a VPC].
+//
+// [Create a Transfer Family web app in a VPC]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
 func (c *Client) DescribeWebApp(ctx context.Context, params *DescribeWebAppInput, optFns ...func(*Options)) (*DescribeWebAppOutput, error) {
 	if params == nil {
 		params = &DescribeWebAppInput{}

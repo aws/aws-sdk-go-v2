@@ -42,6 +42,8 @@ type CreateSignalingChannelInput struct {
 	ChannelType types.ChannelType
 
 	// A structure containing the configuration for the SINGLE_MASTER channel type.
+	// The default configuration for the channel message's time to live is 60 seconds
+	// (1 minute).
 	SingleMasterConfiguration *types.SingleMasterConfiguration
 
 	// A set of tags (key-value pairs) that you want to associate with this channel.

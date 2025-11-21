@@ -1,0 +1,8 @@
+{
+    "id": "1152459f-e531-4300-abdb-c290232f0f50",
+    "type": "feature",
+    "description": "Added support for Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation.",
+    "modules": [
+        "service/redshift"
+    ]
+}

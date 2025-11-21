@@ -20572,6 +20572,15 @@ func awsRestjson1_deserializeDocumentProvisionedPollerConfig(v **types.Provision
 				sv.MinimumPollers = ptr.Int32(int32(i64))
 			}
 
+		case "PollerGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisionedPollerGroupName to be of type string, got %T instead", value)
+				}
+				sv.PollerGroupName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

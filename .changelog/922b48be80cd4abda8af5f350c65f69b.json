@@ -1,0 +1,8 @@
+{
+    "id": "922b48be-80cd-4abd-a8af-5f350c65f69b",
+    "type": "feature",
+    "description": "Add support for policy operations on the UPGRADE_ROLLOUT_POLICY policy type.",
+    "modules": [
+        "service/organizations"
+    ]
+}

@@ -934,6 +934,35 @@ func (e *ServerException) ErrorCode() string {
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The specified signing configuration was not found. This occurs when attempting
+// to retrieve or delete a signing configuration that does not exist.
+type SigningConfigurationNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SigningConfigurationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SigningConfigurationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SigningConfigurationNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SigningConfigurationNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SigningConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The repository creation template already exists. Specify a unique prefix and
 // try again.
 type TemplateAlreadyExistsException struct {

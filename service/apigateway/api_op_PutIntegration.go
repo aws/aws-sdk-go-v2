@@ -85,6 +85,9 @@ type PutIntegrationInput struct {
 	// The HTTP method for the integration.
 	IntegrationHttpMethod *string
 
+	//  The ALB or NLB listener to send the request to.
+	IntegrationTarget *string
+
 	// Specifies the pass-through behavior for incoming requests based on the
 	// Content-Type header in the request, and the available mapping templates
 	// specified as the requestTemplates property on the Integration resource. There
@@ -189,6 +192,9 @@ type PutIntegrationOutput struct {
 
 	// Specifies the integration's responses.
 	IntegrationResponses map[string]types.IntegrationResponse
+
+	//  The ALB or NLB listener to send the request to.
+	IntegrationTarget *string
 
 	// Specifies how the method request body of an unmapped content type will be
 	// passed through the integration request to the back end without transformation. A

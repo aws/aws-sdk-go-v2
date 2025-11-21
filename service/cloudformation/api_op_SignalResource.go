@@ -53,10 +53,10 @@ type SignalResourceInput struct {
 	// This member is required.
 	Status types.ResourceSignalStatus
 
-	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling
-	// groups, specify the instance ID that you are signaling as the unique ID. If you
-	// send multiple signals to a single resource (such as signaling a wait condition),
-	// each signal requires a different unique ID.
+	// A unique ID of the signal. When you signal Amazon EC2 instances or Amazon EC2
+	// Auto Scaling groups, specify the instance ID that you are signaling as the
+	// unique ID. If you send multiple signals to a single resource (such as signaling
+	// a wait condition), each signal requires a different unique ID.
 	//
 	// This member is required.
 	UniqueId *string

@@ -1,0 +1,8 @@
+{
+    "id": "64294108-b2d1-4836-99f1-70d672990ca0",
+    "type": "feature",
+    "description": "Initial release of AWS Compute Optimizer Automation. Create automation rules to implement recommended actions on a recurring schedule based on your specified criteria. Supported actions include: snapshot and delete unattached EBS volumes and upgrade volume types to the latest generation.",
+    "modules": [
+        "service/computeoptimizerautomation"
+    ]
+}

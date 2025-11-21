@@ -40498,6 +40498,46 @@ func awsAwsjson11_deserializeDocumentActionSummary(v **types.ActionSummary, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentActiveOperations(v *map[string]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]int32
+	if *v == nil {
+		mv = map[string]int32{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected ActiveClusterOperationCount to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			parsedVal = int32(i64)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAdditionalCodeRepositoryNamesOrUrls(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48049,6 +48089,47 @@ func awsAwsjson11_deserializeDocumentClusterAutoScalingConfigOutput(v **types.Cl
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterCapacityRequirements(v **types.ClusterCapacityRequirements, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterCapacityRequirements
+	if *v == nil {
+		sv = &types.ClusterCapacityRequirements{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OnDemand":
+			if err := awsAwsjson11_deserializeDocumentClusterOnDemandOptions(&sv.OnDemand, value); err != nil {
+				return err
+			}
+
+		case "Spot":
+			if err := awsAwsjson11_deserializeDocumentClusterSpotOptions(&sv.Spot, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterEbsVolumeConfig(v **types.ClusterEbsVolumeConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48392,8 +48473,18 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 
 	for key, value := range shape {
 		switch key {
+		case "ActiveOperations":
+			if err := awsAwsjson11_deserializeDocumentActiveOperations(&sv.ActiveOperations, value); err != nil {
+				return err
+			}
+
 		case "ActiveSoftwareUpdateConfig":
 			if err := awsAwsjson11_deserializeDocumentDeploymentConfiguration(&sv.ActiveSoftwareUpdateConfig, value); err != nil {
+				return err
+			}
+
+		case "CapacityRequirements":
+			if err := awsAwsjson11_deserializeDocumentClusterCapacityRequirements(&sv.CapacityRequirements, value); err != nil {
 				return err
 			}
 
@@ -48460,9 +48551,27 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				sv.InstanceType = types.ClusterInstanceType(jtv)
 			}
 
+		case "KubernetesConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesConfigDetails(&sv.KubernetesConfig, value); err != nil {
+				return err
+			}
+
 		case "LifeCycleConfig":
 			if err := awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(&sv.LifeCycleConfig, value); err != nil {
 				return err
+			}
+
+		case "MinCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClusterInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinCount = ptr.Int32(int32(i64))
 			}
 
 		case "OnStartDeepHealthChecks":
@@ -48768,6 +48877,236 @@ func awsAwsjson11_deserializeDocumentClusterInstanceStorageConfigs(v *[]types.Cl
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterKubernetesConfigDetails(v **types.ClusterKubernetesConfigDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterKubernetesConfigDetails
+	if *v == nil {
+		sv = &types.ClusterKubernetesConfigDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentLabels":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesLabels(&sv.CurrentLabels, value); err != nil {
+				return err
+			}
+
+		case "CurrentTaints":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesTaints(&sv.CurrentTaints, value); err != nil {
+				return err
+			}
+
+		case "DesiredLabels":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesLabels(&sv.DesiredLabels, value); err != nil {
+				return err
+			}
+
+		case "DesiredTaints":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesTaints(&sv.DesiredTaints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterKubernetesConfigNodeDetails(v **types.ClusterKubernetesConfigNodeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterKubernetesConfigNodeDetails
+	if *v == nil {
+		sv = &types.ClusterKubernetesConfigNodeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentLabels":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesLabels(&sv.CurrentLabels, value); err != nil {
+				return err
+			}
+
+		case "CurrentTaints":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesTaints(&sv.CurrentTaints, value); err != nil {
+				return err
+			}
+
+		case "DesiredLabels":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesLabels(&sv.DesiredLabels, value); err != nil {
+				return err
+			}
+
+		case "DesiredTaints":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesTaints(&sv.DesiredTaints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterKubernetesLabels(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClusterKubernetesLabelValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterKubernetesTaint(v **types.ClusterKubernetesTaint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterKubernetesTaint
+	if *v == nil {
+		sv = &types.ClusterKubernetesTaint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterKubernetesTaintEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.ClusterKubernetesTaintEffect(jtv)
+			}
+
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterKubernetesTaintKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterKubernetesTaintValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterKubernetesTaints(v *[]types.ClusterKubernetesTaint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ClusterKubernetesTaint
+	if *v == nil {
+		cv = []types.ClusterKubernetesTaint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ClusterKubernetesTaint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentClusterKubernetesTaint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(v **types.ClusterLifeCycleConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48893,6 +49232,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 
 	for key, value := range shape {
 		switch key {
+		case "CapacityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterCapacityType to be of type string, got %T instead", value)
+				}
+				sv.CapacityType = types.ClusterCapacityType(jtv)
+			}
+
 		case "CurrentImageId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48946,6 +49294,11 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 					return fmt.Errorf("expected ClusterInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.ClusterInstanceType(jtv)
+			}
+
+		case "KubernetesConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterKubernetesConfigNodeDetails(&sv.KubernetesConfig, value); err != nil {
+				return err
 			}
 
 		case "LastSoftwareUpdateTime":
@@ -49273,6 +49626,37 @@ func awsAwsjson11_deserializeDocumentClusterNodeSummary(v **types.ClusterNodeSum
 				return err
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterOnDemandOptions(v **types.ClusterOnDemandOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterOnDemandOptions
+	if *v == nil {
+		sv = &types.ClusterOnDemandOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -49693,6 +50077,37 @@ func awsAwsjson11_deserializeDocumentClusterSchedulerConfigSummaryList(v *[]type
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterSpotOptions(v **types.ClusterSpotOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterSpotOptions
+	if *v == nil {
+		sv = &types.ClusterSpotOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -65812,6 +66227,19 @@ func awsAwsjson11_deserializeDocumentInstanceGroupScalingMetadata(v **types.Inst
 				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
+		case "MinCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinCount = ptr.Int32(int32(i64))
+			}
+
 		case "TargetCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -72349,6 +72777,100 @@ func awsAwsjson11_deserializeDocumentModelShardingConfig(v **types.ModelSharding
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentModelSpeculativeDecodingConfig(v **types.ModelSpeculativeDecodingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelSpeculativeDecodingConfig
+	if *v == nil {
+		sv = &types.ModelSpeculativeDecodingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Technique":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelSpeculativeDecodingTechnique to be of type string, got %T instead", value)
+				}
+				sv.Technique = types.ModelSpeculativeDecodingTechnique(jtv)
+			}
+
+		case "TrainingDataSource":
+			if err := awsAwsjson11_deserializeDocumentModelSpeculativeDecodingTrainingDataSource(&sv.TrainingDataSource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentModelSpeculativeDecodingTrainingDataSource(v **types.ModelSpeculativeDecodingTrainingDataSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelSpeculativeDecodingTrainingDataSource
+	if *v == nil {
+		sv = &types.ModelSpeculativeDecodingTrainingDataSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3DataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelSpeculativeDecodingS3DataType to be of type string, got %T instead", value)
+				}
+				sv.S3DataType = types.ModelSpeculativeDecodingS3DataType(jtv)
+			}
+
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentModelStepMetadata(v **types.ModelStepMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -75775,6 +76297,16 @@ loop:
 			uv = &types.OptimizationConfigMemberModelShardingConfig{Value: mv}
 			break loop
 
+		case "ModelSpeculativeDecodingConfig":
+			var mv types.ModelSpeculativeDecodingConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentModelSpeculativeDecodingConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OptimizationConfigMemberModelSpeculativeDecodingConfig{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -75880,6 +76412,11 @@ func awsAwsjson11_deserializeDocumentOptimizationJobModelSource(v **types.Optimi
 				return err
 			}
 
+		case "SageMakerModel":
+			if err := awsAwsjson11_deserializeDocumentOptimizationSageMakerModel(&sv.SageMakerModel, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -75972,6 +76509,11 @@ func awsAwsjson11_deserializeDocumentOptimizationJobOutputConfig(v **types.Optim
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3OutputLocation = ptr.String(jtv)
+			}
+
+		case "SageMakerModel":
+			if err := awsAwsjson11_deserializeDocumentOptimizationSageMakerModel(&sv.SageMakerModel, value); err != nil {
+				return err
 			}
 
 		default:
@@ -76078,6 +76620,19 @@ func awsAwsjson11_deserializeDocumentOptimizationJobSummary(v **types.Optimizati
 					return fmt.Errorf("expected LastModifiedTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MaxInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected OptimizationJobMaxInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "OptimizationEndTime":
@@ -76222,6 +76777,46 @@ func awsAwsjson11_deserializeDocumentOptimizationOutput(v **types.OptimizationOu
 					return fmt.Errorf("expected OptimizationContainerImage to be of type string, got %T instead", value)
 				}
 				sv.RecommendedInferenceImage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOptimizationSageMakerModel(v **types.OptimizationSageMakerModel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OptimizationSageMakerModel
+	if *v == nil {
+		sv = &types.OptimizationSageMakerModel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
+				}
+				sv.ModelName = ptr.String(jtv)
 			}
 
 		default:
@@ -105718,6 +106313,19 @@ func awsAwsjson11_deserializeOpDocumentDescribeOptimizationJobOutput(v **Describ
 					return fmt.Errorf("expected LastModifiedTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MaxInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected OptimizationJobMaxInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "ModelSource":

@@ -289,6 +289,24 @@ func ExampleGatewayProtocolConfiguration_outputUsage() {
 
 var _ *types.MCPGatewayConfiguration
 
+func ExampleInterceptorConfiguration_outputUsage() {
+	var union types.InterceptorConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InterceptorConfigurationMemberLambda:
+		_ = v.Value // Value is types.LambdaInterceptorConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LambdaInterceptorConfiguration
+
 func ExampleMcpTargetConfiguration_outputUsage() {
 	var union types.McpTargetConfiguration
 	// type switches can be used to check the union value

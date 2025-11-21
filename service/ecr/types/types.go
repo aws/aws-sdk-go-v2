@@ -539,6 +539,32 @@ type ImageScanStatus struct {
 	noSmithyDocumentSerde
 }
 
+// The signing status for an image. Each status corresponds to a signing profile.
+type ImageSigningStatus struct {
+
+	// The failure code, which is only present if status is FAILED .
+	FailureCode *string
+
+	// A description of why signing the image failed. This field is only present if
+	// status is FAILED .
+	FailureReason *string
+
+	// The ARN of the Amazon Web Services Signer signing profile used to sign the
+	// image.
+	SigningProfileArn *string
+
+	// The image's signing status. Possible values are:
+	//
+	//   - IN_PROGRESS - Signing is currently in progress.
+	//
+	//   - COMPLETE - The signature was successfully generated.
+	//
+	//   - FAILED - Signing failed. See failureCode and failureReason for details.
+	Status SigningStatus
+
+	noSmithyDocumentSerde
+}
+
 // A filter that specifies which image tags should be excluded from the
 // repository's image tag mutability setting.
 type ImageTagMutabilityExclusionFilter struct {
@@ -1066,6 +1092,71 @@ type ScoreDetails struct {
 
 	// An object that contains details about the CVSS score given to a finding.
 	Cvss *CvssScoreDetails
+
+	noSmithyDocumentSerde
+}
+
+// The signing configuration for a registry, which specifies rules for
+// automatically signing images when pushed.
+type SigningConfiguration struct {
+
+	// A list of signing rules. Each rule defines a signing profile and optional
+	// repository filters that determine which images are automatically signed. Maximum
+	// of 10 rules.
+	//
+	// This member is required.
+	Rules []SigningRule
+
+	noSmithyDocumentSerde
+}
+
+// A repository filter used to determine which repositories have their images
+// automatically signed on push. Each filter consists of a filter type and filter
+// value.
+type SigningRepositoryFilter struct {
+
+	// The filter value used to match repository names. When using WILDCARD_MATCH , the
+	// * character matches any sequence of characters.
+	//
+	// Examples:
+	//
+	//   - myapp/* - Matches all repositories starting with myapp/
+	//
+	//   - */production - Matches all repositories ending with /production
+	//
+	//   - *prod* - Matches all repositories containing prod
+	//
+	// This member is required.
+	Filter *string
+
+	// The type of filter to apply. Currently, only WILDCARD_MATCH is supported, which
+	// uses wildcard patterns to match repository names.
+	//
+	// This member is required.
+	FilterType SigningRepositoryFilterType
+
+	noSmithyDocumentSerde
+}
+
+// A signing rule that specifies a signing profile and optional repository
+// filters. When an image is pushed to a matching repository, a signing job is
+// created using the specified profile.
+type SigningRule struct {
+
+	// The ARN of the Amazon Web Services Signer signing profile to use for signing
+	// images that match this rule. For more information about signing profiles, see [Signing profiles]
+	// in the Amazon Web Services Signer Developer Guide.
+	//
+	// [Signing profiles]: https://docs.aws.amazon.com/signer/latest/developerguide/signing-profiles.html
+	//
+	// This member is required.
+	SigningProfileArn *string
+
+	// A list of repository filters that determine which repositories have their
+	// images signed on push. If no filters are specified, all images pushed to the
+	// registry are signed using the rule's signing profile. Maximum of 100 filters per
+	// rule.
+	RepositoryFilters []SigningRepositoryFilter
 
 	noSmithyDocumentSerde
 }

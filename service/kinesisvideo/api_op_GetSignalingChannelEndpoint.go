@@ -17,7 +17,9 @@ import (
 //
 // Protocols is used to determine the communication mechanism. For example, if you
 // specify WSS as the protocol, this API produces a secure websocket endpoint. If
-// you specify HTTPS as the protocol, this API generates an HTTPS endpoint.
+// you specify HTTPS as the protocol, this API generates an HTTPS endpoint. If you
+// specify WEBRTC as the protocol, but the signaling channel isn't configured for
+// ingestion, you will receive the error InvalidArgumentException .
 //
 // Role determines the messaging permissions. A MASTER role results in this API
 // generating an endpoint that a client can use to communicate with any of the

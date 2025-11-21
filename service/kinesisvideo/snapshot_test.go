@@ -206,6 +206,18 @@ func TestCheckSnapshot_DescribeStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeStreamStorageConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeStreamStorageConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeStreamStorageConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataEndpoint(context.Background(), nil, func(o *Options) {
@@ -421,6 +433,18 @@ func TestCheckSnapshot_UpdateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateStreamStorageConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamStorageConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateStreamStorageConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateSignalingChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSignalingChannel(context.Background(), nil, func(o *Options) {
@@ -558,6 +582,18 @@ func TestUpdateSnapshot_DescribeStream(t *testing.T) {
 	_, err := svc.DescribeStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeStreamStorageConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeStreamStorageConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeStreamStorageConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -774,6 +810,18 @@ func TestUpdateSnapshot_UpdateStream(t *testing.T) {
 	_, err := svc.UpdateStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateStreamStorageConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamStorageConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateStreamStorageConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

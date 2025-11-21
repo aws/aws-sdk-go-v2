@@ -647,6 +647,11 @@ type FilterConfiguration struct {
 	// time query parameters for this manifest's endpoint URL.
 	ClipStartTime *time.Time
 
+	// Optionally specify one or more DRM settings for all of your manifest egress
+	// requests. When you include a DRM setting, note that you cannot use an identical
+	// DRM setting query parameter for this manifest's endpoint URL.
+	DrmSettings *string
+
 	// Optionally specify the end time for all of your manifest egress requests. When
 	// you include end time, note that you cannot use end time query parameters for
 	// this manifest's endpoint URL.

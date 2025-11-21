@@ -71,6 +71,9 @@ type UpdateGatewayInput struct {
 	//   user.
 	ExceptionLevel types.ExceptionLevel
 
+	// The updated interceptor configurations for the gateway.
+	InterceptorConfigurations []types.GatewayInterceptorConfiguration
+
 	// The updated ARN of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 
@@ -140,6 +143,9 @@ type UpdateGatewayOutput struct {
 
 	// An endpoint for invoking the updated gateway.
 	GatewayUrl *string
+
+	// The updated interceptor configurations for the gateway.
+	InterceptorConfigurations []types.GatewayInterceptorConfiguration
 
 	// The updated ARN of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string

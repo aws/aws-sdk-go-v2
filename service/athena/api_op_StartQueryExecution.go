@@ -53,6 +53,10 @@ type StartQueryExecutionInput struct {
 	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
+	// Contains data processing unit (DPU) configuration settings and parameter
+	// mappings for a notebook engine.
+	EngineConfiguration *types.EngineConfiguration
+
 	// A list of values for the parameters in a query. The values are applied
 	// sequentially to the parameters in the query in the order in which the parameters
 	// occur.

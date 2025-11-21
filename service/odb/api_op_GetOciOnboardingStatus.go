@@ -40,6 +40,10 @@ type GetOciOnboardingStatusOutput struct {
 	// A new OCI tenancy activation link for your Amazon Web Services account.
 	NewTenancyActivationLink *string
 
+	// The Oracle Cloud Infrastructure (OCI) identity domain information in the
+	// onboarding status response.
+	OciIdentityDomain *types.OciIdentityDomain
+
 	//
 	Status types.OciOnboardingStatus
 

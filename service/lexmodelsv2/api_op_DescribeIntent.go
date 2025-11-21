@@ -91,6 +91,9 @@ type DescribeIntentOutput struct {
 	// Prompts that Amazon Lex sends to the user to confirm completion of an intent.
 	IntentConfirmationSetting *types.IntentConfirmationSetting
 
+	// The display name specified for the intent.
+	IntentDisplayName *string
+
 	// The unique identifier assigned to the intent when it was created.
 	IntentId *string
 

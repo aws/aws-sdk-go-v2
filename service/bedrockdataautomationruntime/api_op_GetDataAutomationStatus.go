@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // API used to get data automation status.
@@ -46,6 +47,15 @@ type GetDataAutomationStatusOutput struct {
 
 	// Error Type.
 	ErrorType *string
+
+	// Job completion time.
+	JobCompletionTime *time.Time
+
+	// Job duration in seconds.
+	JobDurationInSeconds *int32
+
+	// Job Submission time.
+	JobSubmissionTime *time.Time
 
 	// Output configuration.
 	OutputConfiguration *types.OutputConfiguration

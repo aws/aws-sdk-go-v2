@@ -94,6 +94,9 @@ type CreateOdbNetworkInput struct {
 	// idempotency. The client token is valid for up to 24 hours after it's first used.
 	ClientToken *string
 
+	// The cross-Region Amazon S3 restore sources to enable for the ODB network.
+	CrossRegionS3RestoreSourcesToEnable []string
+
 	// The domain name to use for the resources in the ODB network.
 	CustomDomainName *string
 
@@ -101,11 +104,27 @@ type CreateOdbNetworkInput struct {
 	// oraclevcn.com.
 	DefaultDnsPrefix *string
 
+	// The Amazon Web Services Key Management Service (KMS) access configuration for
+	// the ODB network.
+	KmsAccess types.Access
+
+	// The KMS policy document that defines permissions for key usage within the ODB
+	// network.
+	KmsPolicyDocument *string
+
 	// Specifies the configuration for Amazon S3 access from the ODB network.
 	S3Access types.Access
 
 	// Specifies the endpoint policy for Amazon S3 access from the ODB network.
 	S3PolicyDocument *string
+
+	// The Amazon Web Services Security Token Service (STS) access configuration for
+	// the ODB network.
+	StsAccess types.Access
+
+	// The STS policy document that defines permissions for token service usage within
+	// the ODB network.
+	StsPolicyDocument *string
 
 	// The list of resource tags to apply to the ODB network.
 	Tags map[string]string

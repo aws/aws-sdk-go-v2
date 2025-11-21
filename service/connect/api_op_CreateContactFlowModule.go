@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +58,12 @@ type CreateContactFlowModuleInput struct {
 
 	// The description of the flow module.
 	Description *string
+
+	// The external invocation configuration for the flow module.
+	ExternalInvocationConfiguration *types.ExternalInvocationConfiguration
+
+	// The configuration settings for the flow module.
+	Settings *string
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.

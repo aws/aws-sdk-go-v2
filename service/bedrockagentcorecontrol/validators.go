@@ -1541,6 +1541,50 @@ func validateGatewayApiKeyCredentialProvider(v *types.GatewayApiKeyCredentialPro
 	}
 }
 
+func validateGatewayInterceptorConfiguration(v *types.GatewayInterceptorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayInterceptorConfiguration"}
+	if v.Interceptor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interceptor"))
+	} else if v.Interceptor != nil {
+		if err := validateInterceptorConfiguration(v.Interceptor); err != nil {
+			invalidParams.AddNested("Interceptor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InterceptionPoints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InterceptionPoints"))
+	}
+	if v.InputConfiguration != nil {
+		if err := validateInterceptorInputConfiguration(v.InputConfiguration); err != nil {
+			invalidParams.AddNested("InputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayInterceptorConfigurations(v []types.GatewayInterceptorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayInterceptorConfigurations"}
+	for i := range v {
+		if err := validateGatewayInterceptorConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGithubOauth2ProviderConfigInput(v *types.GithubOauth2ProviderConfigInput) error {
 	if v == nil {
 		return nil
@@ -1595,6 +1639,40 @@ func validateIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderCo
 	}
 }
 
+func validateInterceptorConfiguration(v types.InterceptorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InterceptorConfiguration"}
+	switch uv := v.(type) {
+	case *types.InterceptorConfigurationMemberLambda:
+		if err := validateLambdaInterceptorConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambda]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInterceptorInputConfiguration(v *types.InterceptorInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InterceptorInputConfiguration"}
+	if v.PassRequestHeaders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PassRequestHeaders"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvocationConfigurationInput(v *types.InvocationConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1620,6 +1698,21 @@ func validateKmsConfiguration(v *types.KmsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KmsConfiguration"}
 	if len(v.KeyType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaInterceptorConfiguration(v *types.LambdaInterceptorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaInterceptorConfiguration"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2638,6 +2731,11 @@ func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.InterceptorConfigurations != nil {
+		if err := validateGatewayInterceptorConfigurations(v.InterceptorConfigurations); err != nil {
+			invalidParams.AddNested("InterceptorConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3284,6 +3382,11 @@ func validateOpUpdateGatewayInput(v *UpdateGatewayInput) error {
 	if v.AuthorizerConfiguration != nil {
 		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InterceptorConfigurations != nil {
+		if err := validateGatewayInterceptorConfigurations(v.InterceptorConfigurations); err != nil {
+			invalidParams.AddNested("InterceptorConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

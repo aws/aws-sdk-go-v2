@@ -53,6 +53,10 @@ type CreateRedshiftIdcApplicationInput struct {
 	// This member is required.
 	RedshiftIdcApplicationName *string
 
+	// The type of application being created. Valid values are None or Lakehouse . Use
+	// Lakehouse to enable Amazon Redshift federated permissions on cluster.
+	ApplicationType types.ApplicationType
+
 	// The token issuer list for the Amazon Redshift IAM Identity Center application
 	// instance.
 	AuthorizedTokenIssuerList []types.AuthorizedTokenIssuer

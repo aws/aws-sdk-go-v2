@@ -1,0 +1,8 @@
+{
+    "id": "e8f78b33-485a-4789-b31e-90ea6f118544",
+    "type": "feature",
+    "description": "Added UpdateLakehouseConfiguration API to manage Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation for namespaces.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

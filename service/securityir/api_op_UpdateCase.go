@@ -39,6 +39,9 @@ type UpdateCaseInput struct {
 	// field.
 	ActualIncidentStartDate *time.Time
 
+	// Update the case request with case metadata
+	CaseMetadata []types.CaseMetadataEntry
+
 	// Optional element for UpdateCase to provide content for the description field.
 	Description *string
 

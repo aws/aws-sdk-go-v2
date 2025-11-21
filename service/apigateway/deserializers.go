@@ -10777,6 +10777,15 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				return err
 			}
 
+		case "integrationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IntegrationTarget = ptr.String(jtv)
+			}
+
 		case "passthroughBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16731,6 +16740,15 @@ func awsRestjson1_deserializeOpDocumentPutIntegrationOutput(v **PutIntegrationOu
 				return err
 			}
 
+		case "integrationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IntegrationTarget = ptr.String(jtv)
+			}
+
 		case "passthroughBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20975,6 +20993,15 @@ func awsRestjson1_deserializeOpDocumentUpdateIntegrationOutput(v **UpdateIntegra
 		case "integrationResponses":
 			if err := awsRestjson1_deserializeDocumentMapOfIntegrationResponse(&sv.IntegrationResponses, value); err != nil {
 				return err
+			}
+
+		case "integrationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IntegrationTarget = ptr.String(jtv)
 			}
 
 		case "passthroughBehavior":
@@ -25283,6 +25310,15 @@ func awsRestjson1_deserializeDocumentIntegration(v **types.Integration, value in
 		case "integrationResponses":
 			if err := awsRestjson1_deserializeDocumentMapOfIntegrationResponse(&sv.IntegrationResponses, value); err != nil {
 				return err
+			}
+
+		case "integrationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IntegrationTarget = ptr.String(jtv)
 			}
 
 		case "passthroughBehavior":

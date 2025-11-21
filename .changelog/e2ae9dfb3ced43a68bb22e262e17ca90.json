@@ -1,0 +1,8 @@
+{
+    "id": "e2ae9dfb-3ced-43a6-8bb2-2e262e17ca90",
+    "type": "feature",
+    "description": "Endpoint update for new region",
+    "modules": [
+        "service/marketplaceentitlementservice"
+    ]
+}

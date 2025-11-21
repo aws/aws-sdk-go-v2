@@ -1,0 +1,8 @@
+{
+    "id": "8a56d033-a971-44a3-b279-618aacf91945",
+    "type": "feature",
+    "description": "Add support for Upgrade Rollout Order",
+    "modules": [
+        "service/rds"
+    ]
+}

@@ -59,6 +59,10 @@ type UpdateMessageTemplateInput struct {
 	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
 	Language *string
 
+	// The source configuration of the message template. Only set this argument for
+	// WHATSAPP channel subtype.
+	SourceConfiguration types.MessageTemplateSourceConfiguration
+
 	noSmithyDocumentSerde
 }
 

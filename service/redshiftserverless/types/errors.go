@@ -61,6 +61,33 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when the request was successful, but dry run was
+// enabled so no action was taken.
+type DryRunException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DryRunException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DryRunException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DryRunException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DryRunException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DryRunException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There is an insufficient capacity to perform the action.
 type InsufficientCapacityException struct {
 	Message *string
@@ -277,7 +304,8 @@ func (e *TooManyTagsException) ErrorCode() string {
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input failed to satisfy the constraints specified by an AWS service.
+// The input failed to satisfy the constraints specified by an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 

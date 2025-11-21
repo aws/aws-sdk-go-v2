@@ -64,6 +64,11 @@ type UpdateBotLocaleInput struct {
 	// may differ if you turn a feature on. For more information, see LINK.
 	GenerativeAISettings *types.GenerativeAISettings
 
+	// The new sensitivity level for voice activity detection (VAD) in the bot locale.
+	// This setting helps optimize speech recognition accuracy by adjusting how the
+	// system responds to background noise during voice interactions.
+	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
+
 	// The new Amazon Polly voice Amazon Lex should use for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
@@ -113,6 +118,10 @@ type UpdateBotLocaleOutput struct {
 
 	// Recommended actions to take to resolve an error in the failureReasons field.
 	RecommendedActions []string
+
+	// The updated sensitivity level for voice activity detection (VAD) in the bot
+	// locale.
+	SpeechDetectionSensitivity types.SpeechDetectionSensitivity
 
 	// The updated Amazon Polly voice to use for voice interaction with the user.
 	VoiceSettings *types.VoiceSettings

@@ -13,6 +13,7 @@ import (
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -1538,6 +1539,45 @@ func awsAwsjson11_deserializeOpDocumentGetDataAutomationStatusOutput(v **GetData
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ErrorType = ptr.String(jtv)
+			}
+
+		case "jobCompletionTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.JobCompletionTime = ptr.Time(t)
+			}
+
+		case "jobDurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.JobDurationInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "jobSubmissionTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.JobSubmissionTime = ptr.Time(t)
 			}
 
 		case "outputConfiguration":

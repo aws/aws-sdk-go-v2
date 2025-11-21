@@ -1,0 +1,8 @@
+{
+    "id": "25e331ae-8ba3-42c5-b90a-6818582c23e2",
+    "type": "feature",
+    "description": "This release adds support for Tiered Storage",
+    "modules": [
+        "service/kinesisvideo"
+    ]
+}

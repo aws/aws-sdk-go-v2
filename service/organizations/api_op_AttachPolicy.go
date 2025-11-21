@@ -30,12 +30,15 @@ import (
 //
 // [SECURITYHUB_POLICY]
 //
+// [UPGRADE_ROLLOUT_POLICY]
+//
 // [INSPECTOR_POLICY]
 //
 // You can only call this operation from the management account or a member
 // account that is a delegated administrator.
 //
 // [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+// [UPGRADE_ROLLOUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
 // [SECURITYHUB_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
 // [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 // [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html

@@ -86,11 +86,35 @@ func TestCheckSnapshot_CreateInvoiceUnit(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProcurementPortalPreference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteInvoiceUnit(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteInvoiceUnit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteInvoiceUnit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProcurementPortalPreference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,6 +146,18 @@ func TestCheckSnapshot_GetInvoiceUnit(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProcurementPortalPreference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListInvoiceSummaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInvoiceSummaries(context.Background(), nil, func(o *Options) {
@@ -146,11 +182,35 @@ func TestCheckSnapshot_ListInvoiceUnits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListProcurementPortalPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProcurementPortalPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProcurementPortalPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutProcurementPortalPreference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -193,6 +253,18 @@ func TestCheckSnapshot_UpdateInvoiceUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateProcurementPortalPreferenceStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProcurementPortalPreferenceStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProcurementPortalPreferenceStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_BatchGetInvoiceProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetInvoiceProfile(context.Background(), nil, func(o *Options) {
@@ -217,11 +289,35 @@ func TestUpdateSnapshot_CreateInvoiceUnit(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProcurementPortalPreference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteInvoiceUnit(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteInvoiceUnit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteInvoiceUnit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProcurementPortalPreference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +349,18 @@ func TestUpdateSnapshot_GetInvoiceUnit(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProcurementPortalPreference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListInvoiceSummaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInvoiceSummaries(context.Background(), nil, func(o *Options) {
@@ -277,11 +385,35 @@ func TestUpdateSnapshot_ListInvoiceUnits(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListProcurementPortalPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProcurementPortalPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProcurementPortalPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutProcurementPortalPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutProcurementPortalPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutProcurementPortalPreference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -318,6 +450,18 @@ func TestUpdateSnapshot_UpdateInvoiceUnit(t *testing.T) {
 	_, err := svc.UpdateInvoiceUnit(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateInvoiceUnit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProcurementPortalPreferenceStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProcurementPortalPreferenceStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProcurementPortalPreferenceStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -144,6 +144,132 @@ func awsAwsjson10_deserializeOpErrorAcceptMarketplaceRegistration(response *smit
 	}
 }
 
+type awsAwsjson10_deserializeOpAssociateIamRoleToResource struct {
+}
+
+func (*awsAwsjson10_deserializeOpAssociateIamRoleToResource) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpAssociateIamRoleToResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorAssociateIamRoleToResource(response, &metadata)
+	}
+	output := &AssociateIamRoleToResourceOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentAssociateIamRoleToResourceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorAssociateIamRoleToResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpCreateCloudAutonomousVmCluster struct {
 }
 
@@ -1375,6 +1501,132 @@ func awsAwsjson10_deserializeOpErrorDeleteOdbPeeringConnection(response *smithyh
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpDisassociateIamRoleFromResource struct {
+}
+
+func (*awsAwsjson10_deserializeOpDisassociateIamRoleFromResource) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpDisassociateIamRoleFromResource) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorDisassociateIamRoleFromResource(response, &metadata)
+	}
+	output := &DisassociateIamRoleFromResourceOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentDisassociateIamRoleFromResourceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorDisassociateIamRoleFromResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
@@ -8671,6 +8923,11 @@ func awsAwsjson10_deserializeDocumentCloudVmCluster(v **types.CloudVmCluster, va
 				sv.Hostname = ptr.String(jtv)
 			}
 
+		case "iamRoles":
+			if err := awsAwsjson10_deserializeDocumentIamRoleList(&sv.IamRoles, value); err != nil {
+				return err
+			}
+
 		case "iormConfigCache":
 			if err := awsAwsjson10_deserializeDocumentExadataIormConfig(&sv.IormConfigCache, value); err != nil {
 				return err
@@ -9150,6 +9407,11 @@ func awsAwsjson10_deserializeDocumentCloudVmClusterSummary(v **types.CloudVmClus
 				sv.Hostname = ptr.String(jtv)
 			}
 
+		case "iamRoles":
+			if err := awsAwsjson10_deserializeDocumentIamRoleList(&sv.IamRoles, value); err != nil {
+				return err
+			}
+
 		case "iormConfigCache":
 			if err := awsAwsjson10_deserializeDocumentExadataIormConfig(&sv.IormConfigCache, value); err != nil {
 				return err
@@ -9455,6 +9717,94 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCrossRegionS3RestoreSourcesAccess(v **types.CrossRegionS3RestoreSourcesAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CrossRegionS3RestoreSourcesAccess
+	if *v == nil {
+		sv = &types.CrossRegionS3RestoreSourcesAccess{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ipv4Addresses":
+			if err := awsAwsjson10_deserializeDocumentStringList(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ManagedResourceStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCrossRegionS3RestoreSourcesAccessList(v *[]types.CrossRegionS3RestoreSourcesAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CrossRegionS3RestoreSourcesAccess
+	if *v == nil {
+		cv = []types.CrossRegionS3RestoreSourcesAccess{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CrossRegionS3RestoreSourcesAccess
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentCrossRegionS3RestoreSourcesAccess(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11475,6 +11825,107 @@ func awsAwsjson10_deserializeDocumentHoursOfDay(v *[]int32, value interface{}) e
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIamRole(v **types.IamRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamRole
+	if *v == nil {
+		sv = &types.IamRole{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "awsIntegration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SupportedAwsIntegration to be of type string, got %T instead", value)
+				}
+				sv.AwsIntegration = types.SupportedAwsIntegration(jtv)
+			}
+
+		case "iamRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.IamRoleArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.IamRoleStatus(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIamRoleList(v *[]types.IamRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IamRole
+	if *v == nil {
+		cv = []types.IamRole{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IamRole
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentIamRole(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11517,6 +11968,69 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 					return err
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentKmsAccess(v **types.KmsAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KmsAccess
+	if *v == nil {
+		sv = &types.KmsAccess{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DomainName = ptr.String(jtv)
+			}
+
+		case "ipv4Addresses":
+			if err := awsAwsjson10_deserializeDocumentStringList(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "kmsPolicyDocument":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsPolicyDocument = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ManagedResourceStatus(jtv)
 			}
 
 		default:
@@ -11708,6 +12222,16 @@ func awsAwsjson10_deserializeDocumentManagedServices(v **types.ManagedServices, 
 
 	for key, value := range shape {
 		switch key {
+		case "crossRegionS3RestoreSourcesAccess":
+			if err := awsAwsjson10_deserializeDocumentCrossRegionS3RestoreSourcesAccessList(&sv.CrossRegionS3RestoreSourcesAccess, value); err != nil {
+				return err
+			}
+
+		case "kmsAccess":
+			if err := awsAwsjson10_deserializeDocumentKmsAccess(&sv.KmsAccess, value); err != nil {
+				return err
+			}
+
 		case "managedS3BackupAccess":
 			if err := awsAwsjson10_deserializeDocumentManagedS3BackupAccess(&sv.ManagedS3BackupAccess, value); err != nil {
 				return err
@@ -11743,6 +12267,11 @@ func awsAwsjson10_deserializeDocumentManagedServices(v **types.ManagedServices, 
 
 		case "serviceNetworkEndpoint":
 			if err := awsAwsjson10_deserializeDocumentServiceNetworkEndpoint(&sv.ServiceNetworkEndpoint, value); err != nil {
+				return err
+			}
+
+		case "stsAccess":
+			if err := awsAwsjson10_deserializeDocumentStsAccess(&sv.StsAccess, value); err != nil {
 				return err
 			}
 
@@ -11914,6 +12443,91 @@ func awsAwsjson10_deserializeDocumentOciDnsForwardingConfigList(v *[]types.OciDn
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOciIdentityDomain(v **types.OciIdentityDomain, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OciIdentityDomain
+	if *v == nil {
+		sv = &types.OciIdentityDomain{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountSetupCloudFormationUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccountSetupCloudFormationUrl = ptr.String(jtv)
+			}
+
+		case "ociIdentityDomainId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OciIdentityDomainId = ptr.String(jtv)
+			}
+
+		case "ociIdentityDomainResourceUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OciIdentityDomainResourceUrl = ptr.String(jtv)
+			}
+
+		case "ociIdentityDomainUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OciIdentityDomainUrl = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ResourceStatus(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -13150,6 +13764,69 @@ func awsAwsjson10_deserializeDocumentStringList(v *[]string, value interface{}) 
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentStsAccess(v **types.StsAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StsAccess
+	if *v == nil {
+		sv = &types.StsAccess{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DomainName = ptr.String(jtv)
+			}
+
+		case "ipv4Addresses":
+			if err := awsAwsjson10_deserializeDocumentStringList(&sv.Ipv4Addresses, value); err != nil {
+				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ManagedResourceStatus(jtv)
+			}
+
+		case "stsPolicyDocument":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StsPolicyDocument = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentSystemVersionList(v *[]types.SystemVersionSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13533,6 +14210,37 @@ func awsAwsjson10_deserializeOpDocumentAcceptMarketplaceRegistrationOutput(v **A
 	var sv *AcceptMarketplaceRegistrationOutput
 	if *v == nil {
 		sv = &AcceptMarketplaceRegistrationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentAssociateIamRoleToResourceOutput(v **AssociateIamRoleToResourceOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *AssociateIamRoleToResourceOutput
+	if *v == nil {
+		sv = &AssociateIamRoleToResourceOutput{}
 	} else {
 		sv = *v
 	}
@@ -14038,6 +14746,37 @@ func awsAwsjson10_deserializeOpDocumentDeleteOdbPeeringConnectionOutput(v **Dele
 	return nil
 }
 
+func awsAwsjson10_deserializeOpDocumentDisassociateIamRoleFromResourceOutput(v **DisassociateIamRoleFromResourceOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DisassociateIamRoleFromResourceOutput
+	if *v == nil {
+		sv = &DisassociateIamRoleFromResourceOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentGetCloudAutonomousVmClusterOutput(v **GetCloudAutonomousVmClusterOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14292,6 +15031,11 @@ func awsAwsjson10_deserializeOpDocumentGetOciOnboardingStatusOutput(v **GetOciOn
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NewTenancyActivationLink = ptr.String(jtv)
+			}
+
+		case "ociIdentityDomain":
+			if err := awsAwsjson10_deserializeDocumentOciIdentityDomain(&sv.OciIdentityDomain, value); err != nil {
+				return err
 			}
 
 		case "status":

@@ -434,11 +434,35 @@ func TestCheckSnapshot_GetQueryRuntimeStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourceDashboard(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceDashboard(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourceDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSessionEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,11 +1273,35 @@ func TestUpdateSnapshot_GetQueryRuntimeStatistics(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourceDashboard(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceDashboard(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourceDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSessionEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

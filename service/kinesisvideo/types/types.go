@@ -341,9 +341,13 @@ type MediaStorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The structure that contains the notification information for the KVS images
-// delivery. If this parameter is null, the configuration will be deleted from the
-// stream.
+// Use this API to configure Amazon Simple Notification Service (Amazon SNS)
+// notifications for when fragments become available in a stream. If this parameter
+// is null, the configuration will be deleted from the stream.
+//
+// See [Notifications in Kinesis Video Streams] for more information.
+//
+// [Notifications in Kinesis Video Streams]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/notifications.html
 type NotificationConfiguration struct {
 
 	// The destination information required to deliver a notification to a customer.
@@ -373,7 +377,7 @@ type NotificationDestinationConfig struct {
 }
 
 // The recorder configuration consists of the local MediaSourceConfig details that
-// are used as credentials to accesss the local media files streamed on the camera.
+// are used as credentials to access the local media files streamed on the camera.
 type RecorderConfig struct {
 
 	// The configuration details that consist of the credentials required (
@@ -434,7 +438,7 @@ type ScheduleConfig struct {
 	// For more information about Quartz, refer to the [Cron Trigger Tutorial] page to understand the valid
 	// expressions and its use.
 	//
-	// [Cron Trigger Tutorial]: http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html
+	// [Cron Trigger Tutorial]: https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -465,8 +469,8 @@ type SingleMasterChannelEndpointConfiguration struct {
 // A structure that contains the configuration for the SINGLE_MASTER channel type.
 type SingleMasterConfiguration struct {
 
-	// The period of time a signaling channel retains undelivered messages before they
-	// are discarded.
+	// The period of time (in seconds) a signaling channel retains undelivered
+	// messages before they are discarded. Use to update this value.
 	MessageTtlSeconds *int32
 
 	noSmithyDocumentSerde
@@ -518,6 +522,30 @@ type StreamNameCondition struct {
 
 	// A value to compare.
 	ComparisonValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for stream storage, including the default storage tier for
+// stream data. This configuration determines how stream data is stored and
+// accessed, with different tiers offering varying levels of performance and cost
+// optimization.
+type StreamStorageConfiguration struct {
+
+	// The default storage tier for the stream data. This setting determines the
+	// storage class used for stream data, affecting both performance characteristics
+	// and storage costs.
+	//
+	// Available storage tiers:
+	//
+	//   - HOT - Optimized for frequent access with the lowest latency and highest
+	//   performance. Ideal for real-time applications and frequently accessed data.
+	//
+	//   - WARM - Balanced performance and cost for moderately accessed data. Suitable
+	//   for data that is accessed regularly but not continuously.
+	//
+	// This member is required.
+	DefaultStorageTier DefaultStorageTier
 
 	noSmithyDocumentSerde
 }

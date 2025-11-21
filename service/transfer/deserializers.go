@@ -10817,9 +10817,23 @@ func awsAwsjson11_deserializeDocumentDescribedWebApp(v **types.DescribedWebApp, 
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "DescribedEndpointDetails":
+			if err := awsAwsjson11_deserializeDocumentDescribedWebAppEndpointDetails(&sv.DescribedEndpointDetails, value); err != nil {
+				return err
+			}
+
 		case "DescribedIdentityProviderDetails":
 			if err := awsAwsjson11_deserializeDocumentDescribedWebAppIdentityProviderDetails(&sv.DescribedIdentityProviderDetails, value); err != nil {
 				return err
+			}
+
+		case "EndpointType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebAppEndpointType to be of type string, got %T instead", value)
+				}
+				sv.EndpointType = types.WebAppEndpointType(jtv)
 			}
 
 		case "Tags":
@@ -10952,6 +10966,46 @@ func awsAwsjson11_deserializeDocumentDescribedWebAppCustomization(v **types.Desc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDescribedWebAppEndpointDetails(v *types.DescribedWebAppEndpointDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DescribedWebAppEndpointDetails
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "Vpc":
+			var mv types.DescribedWebAppVpcConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentDescribedWebAppVpcConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DescribedWebAppEndpointDetailsMemberVpc{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDescribedWebAppIdentityProviderDetails(v *types.DescribedWebAppIdentityProviderDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10989,6 +11043,60 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDescribedWebAppVpcConfig(v **types.DescribedWebAppVpcConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DescribedWebAppVpcConfig
+	if *v == nil {
+		sv = &types.DescribedWebAppVpcConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SubnetIds":
+			if err := awsAwsjson11_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
+				return err
+			}
+
+		case "VpcEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcEndpointId to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointId = ptr.String(jtv)
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcId to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -12820,6 +12928,15 @@ func awsAwsjson11_deserializeDocumentListedWebApp(v **types.ListedWebApp, value 
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "EndpointType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebAppEndpointType to be of type string, got %T instead", value)
+				}
+				sv.EndpointType = types.WebAppEndpointType(jtv)
 			}
 
 		case "WebAppEndpoint":

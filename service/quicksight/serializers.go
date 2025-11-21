@@ -42354,6 +42354,13 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 		}
 	}
 
+	if v.QuickChat != nil {
+		ok := object.Key("QuickChat")
+		if err := awsRestjson1_serializeDocumentRegisteredUserQuickChatEmbeddingConfiguration(v.QuickChat, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QuickSightConsole != nil {
 		ok := object.Key("QuickSightConsole")
 		if err := awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v.QuickSightConsole, ok); err != nil {
@@ -42384,6 +42391,13 @@ func awsRestjson1_serializeDocumentRegisteredUserQSearchBarEmbeddingConfiguratio
 		ok := object.Key("InitialTopicId")
 		ok.String(*v.InitialTopicId)
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegisteredUserQuickChatEmbeddingConfiguration(v *types.RegisteredUserQuickChatEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }

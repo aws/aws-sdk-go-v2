@@ -63,13 +63,14 @@ type DeleteEventSourceMappingOutput struct {
 	// set MaximumBatchingWindowInSeconds to at least 1.
 	BatchSize *int32
 
-	// (Kinesis and DynamoDB Streams only) If the function returns an error, split the
-	// batch in two and retry. The default value is false.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the
+	// function returns an error, split the batch in two and retry. The default value
+	// is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event
-	// sources only) A configuration object that specifies the destination of an event
-	// after Lambda processes it.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A
+	// configuration object that specifies the destination of an event after Lambda
+	// processes it.
 	DestinationConfig *types.DestinationConfig
 
 	// Specific configuration settings for a DocumentDB event source.
@@ -99,8 +100,8 @@ type DeleteEventSourceMappingOutput struct {
 	// The ARN of the Lambda function.
 	FunctionArn *string
 
-	// (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type
-	// enums applied to the event source mapping.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and Amazon
+	// SQS) A list of current response type enums applied to the event source mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
 	//  The ARN of the Key Management Service (KMS) customer managed key that Lambda
@@ -132,19 +133,21 @@ type DeleteEventSourceMappingOutput struct {
 	// MaximumBatchingWindowInSeconds to at least 1.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Kinesis and DynamoDB Streams only) Discard records older than the specified
-	// age. The default value is -1, which sets the maximum age to infinite. When the
-	// value is set to infinite, Lambda never discards old records.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard
+	// records older than the specified age. The default value is -1, which sets the
+	// maximum age to infinite. When the value is set to infinite, Lambda never
+	// discards old records.
 	//
 	// The minimum valid value for maximum record age is 60s. Although values less
 	// than 60 and greater than -1 fall within the parameter's absolute range, they are
 	// not allowed
 	MaximumRecordAgeInSeconds *int32
 
-	// (Kinesis and DynamoDB Streams only) Discard records after the specified number
-	// of retries. The default value is -1, which sets the maximum number of retries to
-	// infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records
-	// until the record expires in the event source.
+	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard
+	// records after the specified number of retries. The default value is -1, which
+	// sets the maximum number of retries to infinite. When MaximumRetryAttempts is
+	// infinite, Lambda retries failed records until the record expires in the event
+	// source.
 	MaximumRetryAttempts *int32
 
 	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].

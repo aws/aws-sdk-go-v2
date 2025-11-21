@@ -816,6 +816,30 @@ type GatewayApiKeyCredentialProvider struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for an interceptor on a gateway. This structure defines
+// settings for an interceptor that will be invoked during the invocation of the
+// gateway.
+type GatewayInterceptorConfiguration struct {
+
+	// The supported points of interception. This field specifies which points during
+	// the gateway invocation to invoke the interceptor
+	//
+	// This member is required.
+	InterceptionPoints []GatewayInterceptionPoint
+
+	// The infrastructure settings of an interceptor configuration. This structure
+	// defines how the interceptor can be invoked.
+	//
+	// This member is required.
+	Interceptor InterceptorConfiguration
+
+	// The configuration for the input of the interceptor. This field specifies how
+	// the input to the interceptor is constructed
+	InputConfiguration *InterceptorInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a gateway protocol. This structure defines how the
 // gateway communicates with external services.
 //
@@ -1045,6 +1069,36 @@ type IncludedOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// The interceptor configuration.
+//
+// The following types satisfy this interface:
+//
+//	InterceptorConfigurationMemberLambda
+type InterceptorConfiguration interface {
+	isInterceptorConfiguration()
+}
+
+// The details of the lambda function used for the interceptor.
+type InterceptorConfigurationMemberLambda struct {
+	Value LambdaInterceptorConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*InterceptorConfigurationMemberLambda) isInterceptorConfiguration() {}
+
+// The input configuration of the interceptor.
+type InterceptorInputConfiguration struct {
+
+	// Indicates whether to pass request headers as input into the interceptor. When
+	// set to true, request headers will be passed.
+	//
+	// This member is required.
+	PassRequestHeaders *bool
+
+	noSmithyDocumentSerde
+}
+
 // The configuration to invoke a self-managed memory processing pipeline with.
 type InvocationConfiguration struct {
 
@@ -1087,6 +1141,17 @@ type KmsConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The lambda configuration for the interceptor
+type LambdaInterceptorConfiguration struct {
+
+	// The arn of the lambda function to be invoked for the interceptor.
+	//
+	// This member is required.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -2709,6 +2774,7 @@ func (*UnknownUnionMember) isCustomExtractionConfiguration()         {}
 func (*UnknownUnionMember) isCustomExtractionConfigurationInput()    {}
 func (*UnknownUnionMember) isExtractionConfiguration()               {}
 func (*UnknownUnionMember) isGatewayProtocolConfiguration()          {}
+func (*UnknownUnionMember) isInterceptorConfiguration()              {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                {}
 func (*UnknownUnionMember) isMemoryStrategyInput()                   {}
 func (*UnknownUnionMember) isModifyConsolidationConfiguration()      {}

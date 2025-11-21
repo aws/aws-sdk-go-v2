@@ -40,6 +40,8 @@ type CreateGatewayInput struct {
 	//
 	//   - AWS_IAM - Authorize with your Amazon Web Services IAM credentials.
 	//
+	//   - NONE - No authorization
+	//
 	// This member is required.
 	AuthorizerType types.AuthorizerType
 
@@ -82,6 +84,10 @@ type CreateGatewayInput struct {
 	//   - If the value is omitted, a generic error message is returned to the end
 	//   user.
 	ExceptionLevel types.ExceptionLevel
+
+	// A list of configuration settings for a gateway interceptor. Gateway
+	// interceptors allow custom code to be invoked during gateway invocations.
+	InterceptorConfigurations []types.GatewayInterceptorConfiguration
 
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated
 	// with the gateway.
@@ -156,6 +162,9 @@ type CreateGatewayOutput struct {
 
 	// The URL endpoint for the created gateway.
 	GatewayUrl *string
+
+	// The list of interceptor configurations for the created gateway.
+	InterceptorConfigurations []types.GatewayInterceptorConfiguration
 
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated
 	// with the gateway.

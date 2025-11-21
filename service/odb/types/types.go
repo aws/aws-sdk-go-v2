@@ -787,6 +787,10 @@ type CloudVmCluster struct {
 	// The host name for the VM cluster.
 	Hostname *string
 
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the VM cluster.
+	IamRoles []IamRole
+
 	// The ExadataIormConfig cache details for the VM cluster.
 	IormConfigCache *ExadataIormConfig
 
@@ -933,6 +937,10 @@ type CloudVmClusterSummary struct {
 	// The host name for the VM cluster.
 	Hostname *string
 
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the VM cluster in the summary information.
+	IamRoles []IamRole
+
 	// The IORM settings of the Exadata DB system.
 	IormConfigCache *ExadataIormConfig
 
@@ -1014,6 +1022,22 @@ type CloudVmClusterSummary struct {
 	// each node in the VM cluster to enable failover. If one node fails, the VIP is
 	// reassigned to another active node in the cluster.
 	VipIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration access for the cross-Region Amazon S3 database restore source
+// for the ODB network.
+type CrossRegionS3RestoreSourcesAccess struct {
+
+	// The IPv4 addresses allowed for cross-Region S3 restore access.
+	Ipv4Addresses []string
+
+	// The Amazon Web Services Region for cross-Region S3 restore access.
+	Region *string
+
+	// The current status of the cross-Region S3 restore access configuration.
+	Status ManagedResourceStatus
 
 	noSmithyDocumentSerde
 }
@@ -1540,6 +1564,46 @@ type GiVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an Amazon Web Services Identity and Access Management (IAM)
+// service role associated with a resource.
+type IamRole struct {
+
+	// The Amazon Web Services integration configuration settings for the IAM service
+	// role.
+	AwsIntegration SupportedAwsIntegration
+
+	// The Amazon Resource Name (ARN) of the IAM service role.
+	IamRoleArn *string
+
+	// The current status of the IAM service role.
+	Status IamRoleStatus
+
+	// Additional information about the current status of the IAM service role, if
+	// applicable.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Amazon Web Services Key Management Service (KMS) access from
+// the ODB network.
+type KmsAccess struct {
+
+	// The domain name for KMS access configuration.
+	DomainName *string
+
+	// The IPv4 addresses allowed for KMS access.
+	Ipv4Addresses []string
+
+	// The KMS policy document that defines permissions for key usage.
+	KmsPolicyDocument *string
+
+	// The current status of the KMS access configuration.
+	Status ManagedResourceStatus
+
+	noSmithyDocumentSerde
+}
+
 // The scheduling details for the maintenance window. Patching and system updates
 // take place during the maintenance window.
 type MaintenanceWindow struct {
@@ -1592,6 +1656,13 @@ type ManagedS3BackupAccess struct {
 // The managed services configuration for the ODB network.
 type ManagedServices struct {
 
+	// The access configuration for the cross-Region Amazon S3 database restore source.
+	CrossRegionS3RestoreSourcesAccess []CrossRegionS3RestoreSourcesAccess
+
+	// The Amazon Web Services Key Management Service (KMS) access configuration for
+	// managed services.
+	KmsAccess *KmsAccess
+
 	// The managed Amazon S3 backup access configuration.
 	ManagedS3BackupAccess *ManagedS3BackupAccess
 
@@ -1609,6 +1680,10 @@ type ManagedServices struct {
 
 	// The service network endpoint configuration.
 	ServiceNetworkEndpoint *ServiceNetworkEndpoint
+
+	// The Amazon Web Services Security Token Service (STS) access configuration for
+	// managed services.
+	StsAccess *StsAccess
 
 	// The Zero-ETL access configuration.
 	ZeroEtlAccess *ZeroEtlAccess
@@ -1633,6 +1708,33 @@ type OciDnsForwardingConfig struct {
 
 	// OCI DNS listener IP for custom DNS setup.
 	OciDnsListenerIp *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Oracle Cloud Infrastructure (OCI) identity domain
+// configuration.
+type OciIdentityDomain struct {
+
+	// The Amazon Web Services CloudFormation URL for setting up the account
+	// integration with the OCI identity domain.
+	AccountSetupCloudFormationUrl *string
+
+	// The unique identifier of the OCI identity domain.
+	OciIdentityDomainId *string
+
+	// The resource URL for accessing the OCI identity domain.
+	OciIdentityDomainResourceUrl *string
+
+	// The URL of the OCI identity domain.
+	OciIdentityDomainUrl *string
+
+	// The current status of the OCI identity domain.
+	Status ResourceStatus
+
+	// Additional information about the current status of the OCI identity domain, if
+	// applicable.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -1913,6 +2015,25 @@ type ServiceNetworkEndpoint struct {
 
 	// The type of the VPC endpoint.
 	VpcEndpointType VpcEndpointType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Amazon Web Services Security Token Service (STS) access from
+// the ODB network.
+type StsAccess struct {
+
+	// The domain name for STS access configuration.
+	DomainName *string
+
+	// The IPv4 addresses allowed for STS access.
+	Ipv4Addresses []string
+
+	// The current status of the STS access configuration.
+	Status ManagedResourceStatus
+
+	// The STS policy document that defines permissions for token service usage.
+	StsPolicyDocument *string
 
 	noSmithyDocumentSerde
 }

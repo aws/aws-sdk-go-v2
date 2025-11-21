@@ -2,6 +2,88 @@
 
 package types
 
+type BuyerDomain string
+
+// Enum values for BuyerDomain
+const (
+	BuyerDomainNetworkID BuyerDomain = "NetworkID"
+)
+
+// Values returns all known values for BuyerDomain. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BuyerDomain) Values() []BuyerDomain {
+	return []BuyerDomain{
+		"NetworkID",
+	}
+}
+
+type ConnectionTestingMethod string
+
+// Enum values for ConnectionTestingMethod
+const (
+	ConnectionTestingMethodProdEnvDollarTest ConnectionTestingMethod = "PROD_ENV_DOLLAR_TEST"
+	ConnectionTestingMethodTestEnvReplayTest ConnectionTestingMethod = "TEST_ENV_REPLAY_TEST"
+)
+
+// Values returns all known values for ConnectionTestingMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionTestingMethod) Values() []ConnectionTestingMethod {
+	return []ConnectionTestingMethod{
+		"PROD_ENV_DOLLAR_TEST",
+		"TEST_ENV_REPLAY_TEST",
+	}
+}
+
+type EinvoiceDeliveryAttachmentType string
+
+// Enum values for EinvoiceDeliveryAttachmentType
+const (
+	EinvoiceDeliveryAttachmentTypeInvoicePdf EinvoiceDeliveryAttachmentType = "INVOICE_PDF"
+	EinvoiceDeliveryAttachmentTypeRfpPdf     EinvoiceDeliveryAttachmentType = "RFP_PDF"
+)
+
+// Values returns all known values for EinvoiceDeliveryAttachmentType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EinvoiceDeliveryAttachmentType) Values() []EinvoiceDeliveryAttachmentType {
+	return []EinvoiceDeliveryAttachmentType{
+		"INVOICE_PDF",
+		"RFP_PDF",
+	}
+}
+
+type EinvoiceDeliveryDocumentType string
+
+// Enum values for EinvoiceDeliveryDocumentType
+const (
+	EinvoiceDeliveryDocumentTypeAwsCloudInvoice          EinvoiceDeliveryDocumentType = "AWS_CLOUD_INVOICE"
+	EinvoiceDeliveryDocumentTypeAwsCloudCreditMemo       EinvoiceDeliveryDocumentType = "AWS_CLOUD_CREDIT_MEMO"
+	EinvoiceDeliveryDocumentTypeAwsMarketplaceInvoice    EinvoiceDeliveryDocumentType = "AWS_MARKETPLACE_INVOICE"
+	EinvoiceDeliveryDocumentTypeAwsMarketplaceCreditMemo EinvoiceDeliveryDocumentType = "AWS_MARKETPLACE_CREDIT_MEMO"
+	EinvoiceDeliveryDocumentTypeAwsRequestForPayment     EinvoiceDeliveryDocumentType = "AWS_REQUEST_FOR_PAYMENT"
+)
+
+// Values returns all known values for EinvoiceDeliveryDocumentType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EinvoiceDeliveryDocumentType) Values() []EinvoiceDeliveryDocumentType {
+	return []EinvoiceDeliveryDocumentType{
+		"AWS_CLOUD_INVOICE",
+		"AWS_CLOUD_CREDIT_MEMO",
+		"AWS_MARKETPLACE_INVOICE",
+		"AWS_MARKETPLACE_CREDIT_MEMO",
+		"AWS_REQUEST_FOR_PAYMENT",
+	}
+}
+
 type InvoiceType string
 
 // Enum values for InvoiceType
@@ -38,6 +120,106 @@ func (ListInvoiceSummariesResourceType) Values() []ListInvoiceSummariesResourceT
 	return []ListInvoiceSummariesResourceType{
 		"ACCOUNT_ID",
 		"INVOICE_ID",
+	}
+}
+
+type ProcurementPortalName string
+
+// Enum values for ProcurementPortalName
+const (
+	ProcurementPortalNameSapBusinessNetwork ProcurementPortalName = "SAP_BUSINESS_NETWORK"
+	ProcurementPortalNameCoupa              ProcurementPortalName = "COUPA"
+)
+
+// Values returns all known values for ProcurementPortalName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcurementPortalName) Values() []ProcurementPortalName {
+	return []ProcurementPortalName{
+		"SAP_BUSINESS_NETWORK",
+		"COUPA",
+	}
+}
+
+type ProcurementPortalPreferenceStatus string
+
+// Enum values for ProcurementPortalPreferenceStatus
+const (
+	ProcurementPortalPreferenceStatusPendingVerification      ProcurementPortalPreferenceStatus = "PENDING_VERIFICATION"
+	ProcurementPortalPreferenceStatusTestInitialized          ProcurementPortalPreferenceStatus = "TEST_INITIALIZED"
+	ProcurementPortalPreferenceStatusTestInitializationFailed ProcurementPortalPreferenceStatus = "TEST_INITIALIZATION_FAILED"
+	ProcurementPortalPreferenceStatusTestFailed               ProcurementPortalPreferenceStatus = "TEST_FAILED"
+	ProcurementPortalPreferenceStatusActive                   ProcurementPortalPreferenceStatus = "ACTIVE"
+	ProcurementPortalPreferenceStatusSuspended                ProcurementPortalPreferenceStatus = "SUSPENDED"
+)
+
+// Values returns all known values for ProcurementPortalPreferenceStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcurementPortalPreferenceStatus) Values() []ProcurementPortalPreferenceStatus {
+	return []ProcurementPortalPreferenceStatus{
+		"PENDING_VERIFICATION",
+		"TEST_INITIALIZED",
+		"TEST_INITIALIZATION_FAILED",
+		"TEST_FAILED",
+		"ACTIVE",
+		"SUSPENDED",
+	}
+}
+
+type Protocol string
+
+// Enum values for Protocol
+const (
+	ProtocolCxml Protocol = "CXML"
+)
+
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Protocol) Values() []Protocol {
+	return []Protocol{
+		"CXML",
+	}
+}
+
+type PurchaseOrderDataSourceType string
+
+// Enum values for PurchaseOrderDataSourceType
+const (
+	PurchaseOrderDataSourceTypeAssociatedPurchaseOrderRequired PurchaseOrderDataSourceType = "ASSOCIATED_PURCHASE_ORDER_REQUIRED"
+	PurchaseOrderDataSourceTypePurchaseOrderNotRequired        PurchaseOrderDataSourceType = "PURCHASE_ORDER_NOT_REQUIRED"
+)
+
+// Values returns all known values for PurchaseOrderDataSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PurchaseOrderDataSourceType) Values() []PurchaseOrderDataSourceType {
+	return []PurchaseOrderDataSourceType{
+		"ASSOCIATED_PURCHASE_ORDER_REQUIRED",
+		"PURCHASE_ORDER_NOT_REQUIRED",
+	}
+}
+
+type SupplierDomain string
+
+// Enum values for SupplierDomain
+const (
+	SupplierDomainNetworkID SupplierDomain = "NetworkID"
+)
+
+// Values returns all known values for SupplierDomain. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupplierDomain) Values() []SupplierDomain {
+	return []SupplierDomain{
+		"NetworkID",
 	}
 }
 

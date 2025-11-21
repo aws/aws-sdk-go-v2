@@ -138,6 +138,12 @@ type CreateIntentInput struct {
 	// sent to the user to end the intent.
 	IntentConfirmationSetting *types.IntentConfirmationSetting
 
+	// A display name for the intent. If configured, This name will be shown to users
+	// during Intent Disambiguation instead of the intent name. Display names should be
+	// user-friendly, descriptive and match the intent's purpose to improve user
+	// experience during disambiguation.
+	IntentDisplayName *string
+
 	// Configuration information required to use the AMAZON.KendraSearchIntent intent
 	// to connect to an Amazon Kendra index. The AMAZON.KendraSearchIntent intent is
 	// called when Amazon Lex can't determine another intent to invoke.
@@ -208,6 +214,9 @@ type CreateIntentOutput struct {
 
 	// The confirmation setting specified for the intent.
 	IntentConfirmationSetting *types.IntentConfirmationSetting
+
+	// The display name specified for the intent.
+	IntentDisplayName *string
 
 	// A unique identifier for the intent.
 	IntentId *string

@@ -29550,6 +29550,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				return err
 			}
 
+		case strings.EqualFold("UpgradeRolloutOrder", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.UpgradeRolloutOrder = types.UpgradeRolloutOrder(xtv)
+			}
+
 		case strings.EqualFold("VpcSecurityGroups", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentVpcSecurityGroupMembershipList(&sv.VpcSecurityGroups, nodeDecoder); err != nil {
@@ -34228,6 +34241,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.Timezone = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("UpgradeRolloutOrder", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.UpgradeRolloutOrder = types.UpgradeRolloutOrder(xtv)
 			}
 
 		case strings.EqualFold("VpcSecurityGroups", t.Name.Local):

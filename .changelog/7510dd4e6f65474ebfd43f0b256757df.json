@@ -1,0 +1,8 @@
+{
+    "id": "7510dd4e-6f65-474e-bfd4-3f0b256757df",
+    "type": "feature",
+    "description": "Add support for resources in the aws-eusc partition.",
+    "modules": [
+        "service/mailmanager"
+    ]
+}

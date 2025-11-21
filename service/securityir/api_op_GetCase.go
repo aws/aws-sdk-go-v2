@@ -50,6 +50,9 @@ type GetCaseOutput struct {
 	// Response element for GetCase that provides a list of current case attachments.
 	CaseAttachments []types.CaseAttachmentAttributes
 
+	// Case response metadata
+	CaseMetadata []types.CaseMetadataEntry
+
 	// Response element for GetCase that provides the case status. Options for
 	// statuses include Submitted | Detection and Analysis | Eradication, Containment
 	// and Recovery | Post-Incident Activities | Closed

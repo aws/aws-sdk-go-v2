@@ -694,6 +694,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.ControlPlaneScalingConfig != nil {
+		ok := object.Key("controlPlaneScalingConfig")
+		if err := awsRestjson1_serializeDocumentControlPlaneScalingConfig(v.ControlPlaneScalingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeletionProtection != nil {
 		ok := object.Key("deletionProtection")
 		ok.Boolean(*v.DeletionProtection)
@@ -5052,6 +5059,13 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 		}
 	}
 
+	if v.ControlPlaneScalingConfig != nil {
+		ok := object.Key("controlPlaneScalingConfig")
+		if err := awsRestjson1_serializeDocumentControlPlaneScalingConfig(v.ControlPlaneScalingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeletionProtection != nil {
 		ok := object.Key("deletionProtection")
 		ok.Boolean(*v.DeletionProtection)
@@ -5825,6 +5839,18 @@ func awsRestjson1_serializeDocumentControlPlanePlacementRequest(v *types.Control
 	if v.GroupName != nil {
 		ok := object.Key("groupName")
 		ok.String(*v.GroupName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlPlaneScalingConfig(v *types.ControlPlaneScalingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Tier) > 0 {
+		ok := object.Key("tier")
+		ok.String(string(v.Tier))
 	}
 
 	return nil

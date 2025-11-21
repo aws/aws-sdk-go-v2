@@ -127,6 +127,7 @@
         "api_op_ModifyEndpointAccess.go",
         "api_op_ModifyEventSubscription.go",
         "api_op_ModifyIntegration.go",
+        "api_op_ModifyLakehouseConfiguration.go",
         "api_op_ModifyRedshiftIdcApplication.go",
         "api_op_ModifyScheduledAction.go",
         "api_op_ModifySnapshotCopyRetentionPeriod.go",

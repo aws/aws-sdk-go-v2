@@ -139,6 +139,67 @@ func (m *awsAwsjson10_serializeOpCreateInvoiceUnit) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpCreateProcurementPortalPreference struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateProcurementPortalPreference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateProcurementPortalPreference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateProcurementPortalPreferenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.CreateProcurementPortalPreference")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateProcurementPortalPreferenceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDeleteInvoiceUnit struct {
 }
 
@@ -183,6 +244,67 @@ func (m *awsAwsjson10_serializeOpDeleteInvoiceUnit) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteInvoiceUnitInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteProcurementPortalPreference struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteProcurementPortalPreference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteProcurementPortalPreference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteProcurementPortalPreferenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.DeleteProcurementPortalPreference")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteProcurementPortalPreferenceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -322,6 +444,67 @@ func (m *awsAwsjson10_serializeOpGetInvoiceUnit) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetProcurementPortalPreference struct {
+}
+
+func (*awsAwsjson10_serializeOpGetProcurementPortalPreference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetProcurementPortalPreference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetProcurementPortalPreferenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.GetProcurementPortalPreference")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetProcurementPortalPreferenceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListInvoiceSummaries struct {
 }
 
@@ -444,6 +627,67 @@ func (m *awsAwsjson10_serializeOpListInvoiceUnits) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListProcurementPortalPreferences struct {
+}
+
+func (*awsAwsjson10_serializeOpListProcurementPortalPreferences) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListProcurementPortalPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListProcurementPortalPreferencesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.ListProcurementPortalPreferences")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListProcurementPortalPreferencesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListTagsForResource struct {
 }
 
@@ -488,6 +732,67 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpPutProcurementPortalPreference struct {
+}
+
+func (*awsAwsjson10_serializeOpPutProcurementPortalPreference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPutProcurementPortalPreference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutProcurementPortalPreferenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.PutProcurementPortalPreference")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPutProcurementPortalPreferenceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -687,6 +992,67 @@ func (m *awsAwsjson10_serializeOpUpdateInvoiceUnit) HandleSerialize(ctx context.
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson10_serializeOpUpdateProcurementPortalPreferenceStatus struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateProcurementPortalPreferenceStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateProcurementPortalPreferenceStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateProcurementPortalPreferenceStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Invoicing.UpdateProcurementPortalPreferenceStatus")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateProcurementPortalPreferenceStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson10_serializeDocumentAccountIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -715,6 +1081,36 @@ func awsAwsjson10_serializeDocumentBillingPeriod(v *types.BillingPeriod, value s
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentContact(v *types.Contact, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Email != nil {
+		ok := object.Key("Email")
+		ok.String(*v.Email)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentContacts(v []types.Contact, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentContact(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDateInterval(v *types.DateInterval, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -727,6 +1123,71 @@ func awsAwsjson10_serializeDocumentDateInterval(v *types.DateInterval, value smi
 	if v.StartDate != nil {
 		ok := object.Key("StartDate")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartDate))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEinvoiceDeliveryAttachmentTypes(v []types.EinvoiceDeliveryAttachmentType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEinvoiceDeliveryDocumentTypes(v []types.EinvoiceDeliveryDocumentType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEinvoiceDeliveryPreference(v *types.EinvoiceDeliveryPreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ConnectionTestingMethod) > 0 {
+		ok := object.Key("ConnectionTestingMethod")
+		ok.String(string(v.ConnectionTestingMethod))
+	}
+
+	if v.EinvoiceDeliveryActivationDate != nil {
+		ok := object.Key("EinvoiceDeliveryActivationDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EinvoiceDeliveryActivationDate))
+	}
+
+	if v.EinvoiceDeliveryAttachmentTypes != nil {
+		ok := object.Key("EinvoiceDeliveryAttachmentTypes")
+		if err := awsAwsjson10_serializeDocumentEinvoiceDeliveryAttachmentTypes(v.EinvoiceDeliveryAttachmentTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EinvoiceDeliveryDocumentTypes != nil {
+		ok := object.Key("EinvoiceDeliveryDocumentTypes")
+		if err := awsAwsjson10_serializeDocumentEinvoiceDeliveryDocumentTypes(v.EinvoiceDeliveryDocumentTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("Protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	if v.PurchaseOrderDataSources != nil {
+		ok := object.Key("PurchaseOrderDataSources")
+		if err := awsAwsjson10_serializeDocumentPurchaseOrderDataSources(v.PurchaseOrderDataSources, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -810,6 +1271,17 @@ func awsAwsjson10_serializeDocumentInvoiceSummariesSelector(v *types.InvoiceSumm
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentInvoiceUnitArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentInvoiceUnitNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -839,6 +1311,57 @@ func awsAwsjson10_serializeDocumentInvoiceUnitRule(v *types.InvoiceUnitRule, val
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProcurementPortalPreferenceSelector(v *types.ProcurementPortalPreferenceSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InvoiceUnitArns != nil {
+		ok := object.Key("InvoiceUnitArns")
+		if err := awsAwsjson10_serializeDocumentInvoiceUnitArns(v.InvoiceUnitArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SellerOfRecords != nil {
+		ok := object.Key("SellerOfRecords")
+		if err := awsAwsjson10_serializeDocumentSellerOfRecords(v.SellerOfRecords, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPurchaseOrderDataSource(v *types.PurchaseOrderDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EinvoiceDeliveryDocumentType) > 0 {
+		ok := object.Key("EinvoiceDeliveryDocumentType")
+		ok.String(string(v.EinvoiceDeliveryDocumentType))
+	}
+
+	if len(v.PurchaseOrderDataSourceType) > 0 {
+		ok := object.Key("PurchaseOrderDataSourceType")
+		ok.String(string(v.PurchaseOrderDataSourceType))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPurchaseOrderDataSources(v []types.PurchaseOrderDataSource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentPurchaseOrderDataSource(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -891,6 +1414,54 @@ func awsAwsjson10_serializeDocumentRuleAccountIdList(v []string, value smithyjso
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentSellerOfRecords(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentTestEnvPreferenceInput(v *types.TestEnvPreferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BuyerDomain) > 0 {
+		ok := object.Key("BuyerDomain")
+		ok.String(string(v.BuyerDomain))
+	}
+
+	if v.BuyerIdentifier != nil {
+		ok := object.Key("BuyerIdentifier")
+		ok.String(*v.BuyerIdentifier)
+	}
+
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		ok := object.Key("ProcurementPortalInstanceEndpoint")
+		ok.String(*v.ProcurementPortalInstanceEndpoint)
+	}
+
+	if v.ProcurementPortalSharedSecret != nil {
+		ok := object.Key("ProcurementPortalSharedSecret")
+		ok.String(*v.ProcurementPortalSharedSecret)
+	}
+
+	if len(v.SupplierDomain) > 0 {
+		ok := object.Key("SupplierDomain")
+		ok.String(string(v.SupplierDomain))
+	}
+
+	if v.SupplierIdentifier != nil {
+		ok := object.Key("SupplierIdentifier")
+		ok.String(*v.SupplierIdentifier)
+	}
+
 	return nil
 }
 
@@ -949,6 +1520,98 @@ func awsAwsjson10_serializeOpDocumentCreateInvoiceUnitInput(v *CreateInvoiceUnit
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentCreateProcurementPortalPreferenceInput(v *CreateProcurementPortalPreferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BuyerDomain) > 0 {
+		ok := object.Key("BuyerDomain")
+		ok.String(string(v.BuyerDomain))
+	}
+
+	if v.BuyerIdentifier != nil {
+		ok := object.Key("BuyerIdentifier")
+		ok.String(*v.BuyerIdentifier)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Contacts != nil {
+		ok := object.Key("Contacts")
+		if err := awsAwsjson10_serializeDocumentContacts(v.Contacts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EinvoiceDeliveryEnabled != nil {
+		ok := object.Key("EinvoiceDeliveryEnabled")
+		ok.Boolean(*v.EinvoiceDeliveryEnabled)
+	}
+
+	if v.EinvoiceDeliveryPreference != nil {
+		ok := object.Key("EinvoiceDeliveryPreference")
+		if err := awsAwsjson10_serializeDocumentEinvoiceDeliveryPreference(v.EinvoiceDeliveryPreference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		ok := object.Key("ProcurementPortalInstanceEndpoint")
+		ok.String(*v.ProcurementPortalInstanceEndpoint)
+	}
+
+	if len(v.ProcurementPortalName) > 0 {
+		ok := object.Key("ProcurementPortalName")
+		ok.String(string(v.ProcurementPortalName))
+	}
+
+	if v.ProcurementPortalSharedSecret != nil {
+		ok := object.Key("ProcurementPortalSharedSecret")
+		ok.String(*v.ProcurementPortalSharedSecret)
+	}
+
+	if v.PurchaseOrderRetrievalEnabled != nil {
+		ok := object.Key("PurchaseOrderRetrievalEnabled")
+		ok.Boolean(*v.PurchaseOrderRetrievalEnabled)
+	}
+
+	if v.ResourceTags != nil {
+		ok := object.Key("ResourceTags")
+		if err := awsAwsjson10_serializeDocumentResourceTagList(v.ResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Selector != nil {
+		ok := object.Key("Selector")
+		if err := awsAwsjson10_serializeDocumentProcurementPortalPreferenceSelector(v.Selector, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SupplierDomain) > 0 {
+		ok := object.Key("SupplierDomain")
+		ok.String(string(v.SupplierDomain))
+	}
+
+	if v.SupplierIdentifier != nil {
+		ok := object.Key("SupplierIdentifier")
+		ok.String(*v.SupplierIdentifier)
+	}
+
+	if v.TestEnvPreference != nil {
+		ok := object.Key("TestEnvPreference")
+		if err := awsAwsjson10_serializeDocumentTestEnvPreferenceInput(v.TestEnvPreference, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteInvoiceUnitInput(v *DeleteInvoiceUnitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -956,6 +1619,18 @@ func awsAwsjson10_serializeOpDocumentDeleteInvoiceUnitInput(v *DeleteInvoiceUnit
 	if v.InvoiceUnitArn != nil {
 		ok := object.Key("InvoiceUnitArn")
 		ok.String(*v.InvoiceUnitArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteProcurementPortalPreferenceInput(v *DeleteProcurementPortalPreferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProcurementPortalPreferenceArn != nil {
+		ok := object.Key("ProcurementPortalPreferenceArn")
+		ok.String(*v.ProcurementPortalPreferenceArn)
 	}
 
 	return nil
@@ -985,6 +1660,18 @@ func awsAwsjson10_serializeOpDocumentGetInvoiceUnitInput(v *GetInvoiceUnitInput,
 	if v.InvoiceUnitArn != nil {
 		ok := object.Key("InvoiceUnitArn")
 		ok.String(*v.InvoiceUnitArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetProcurementPortalPreferenceInput(v *GetProcurementPortalPreferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProcurementPortalPreferenceArn != nil {
+		ok := object.Key("ProcurementPortalPreferenceArn")
+		ok.String(*v.ProcurementPortalPreferenceArn)
 	}
 
 	return nil
@@ -1050,6 +1737,23 @@ func awsAwsjson10_serializeOpDocumentListInvoiceUnitsInput(v *ListInvoiceUnitsIn
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentListProcurementPortalPreferencesInput(v *ListProcurementPortalPreferencesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1057,6 +1761,66 @@ func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentPutProcurementPortalPreferenceInput(v *PutProcurementPortalPreferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Contacts != nil {
+		ok := object.Key("Contacts")
+		if err := awsAwsjson10_serializeDocumentContacts(v.Contacts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EinvoiceDeliveryEnabled != nil {
+		ok := object.Key("EinvoiceDeliveryEnabled")
+		ok.Boolean(*v.EinvoiceDeliveryEnabled)
+	}
+
+	if v.EinvoiceDeliveryPreference != nil {
+		ok := object.Key("EinvoiceDeliveryPreference")
+		if err := awsAwsjson10_serializeDocumentEinvoiceDeliveryPreference(v.EinvoiceDeliveryPreference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		ok := object.Key("ProcurementPortalInstanceEndpoint")
+		ok.String(*v.ProcurementPortalInstanceEndpoint)
+	}
+
+	if v.ProcurementPortalPreferenceArn != nil {
+		ok := object.Key("ProcurementPortalPreferenceArn")
+		ok.String(*v.ProcurementPortalPreferenceArn)
+	}
+
+	if v.ProcurementPortalSharedSecret != nil {
+		ok := object.Key("ProcurementPortalSharedSecret")
+		ok.String(*v.ProcurementPortalSharedSecret)
+	}
+
+	if v.PurchaseOrderRetrievalEnabled != nil {
+		ok := object.Key("PurchaseOrderRetrievalEnabled")
+		ok.Boolean(*v.PurchaseOrderRetrievalEnabled)
+	}
+
+	if v.Selector != nil {
+		ok := object.Key("Selector")
+		if err := awsAwsjson10_serializeDocumentProcurementPortalPreferenceSelector(v.Selector, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TestEnvPreference != nil {
+		ok := object.Key("TestEnvPreference")
+		if err := awsAwsjson10_serializeDocumentTestEnvPreferenceInput(v.TestEnvPreference, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1124,6 +1888,38 @@ func awsAwsjson10_serializeOpDocumentUpdateInvoiceUnitInput(v *UpdateInvoiceUnit
 	if v.TaxInheritanceDisabled != nil {
 		ok := object.Key("TaxInheritanceDisabled")
 		ok.Boolean(*v.TaxInheritanceDisabled)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateProcurementPortalPreferenceStatusInput(v *UpdateProcurementPortalPreferenceStatusInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EinvoiceDeliveryPreferenceStatus) > 0 {
+		ok := object.Key("EinvoiceDeliveryPreferenceStatus")
+		ok.String(string(v.EinvoiceDeliveryPreferenceStatus))
+	}
+
+	if v.EinvoiceDeliveryPreferenceStatusReason != nil {
+		ok := object.Key("EinvoiceDeliveryPreferenceStatusReason")
+		ok.String(*v.EinvoiceDeliveryPreferenceStatusReason)
+	}
+
+	if v.ProcurementPortalPreferenceArn != nil {
+		ok := object.Key("ProcurementPortalPreferenceArn")
+		ok.String(*v.ProcurementPortalPreferenceArn)
+	}
+
+	if len(v.PurchaseOrderRetrievalPreferenceStatus) > 0 {
+		ok := object.Key("PurchaseOrderRetrievalPreferenceStatus")
+		ok.String(string(v.PurchaseOrderRetrievalPreferenceStatus))
+	}
+
+	if v.PurchaseOrderRetrievalPreferenceStatusReason != nil {
+		ok := object.Key("PurchaseOrderRetrievalPreferenceStatusReason")
+		ok.String(*v.PurchaseOrderRetrievalPreferenceStatusReason)
 	}
 
 	return nil
