@@ -787,6 +787,12 @@ func newAsyncEventStreamReader(resultChan <-chan deserializeResult) *asyncEventS
 	return reader
 }
 
+type PartialResult[T any] struct {
+	Output   T
+	Metadata middleware.Metadata
+	Error    error
+}
+
 func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream) HandleDeserialize(
 	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
 ) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
@@ -886,11 +892,11 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 		panic("missing asyncChan")
 	}
 	
-	c, ok := ch.(chan middleware.PartialResult[*InvokeModelWithBidirectionalStreamOutput])
+	c, ok := ch.(chan PartialResult[*InvokeModelWithBidirectionalStreamOutput])
 	if !ok {
 		panic("asyncChan was not a partialResult")
 	}
-	partial := middleware.PartialResult[*InvokeModelWithBidirectionalStreamOutput]{
+	partial := PartialResult[*InvokeModelWithBidirectionalStreamOutput]{
 		Output:   output,
 		Metadata: middleware.Metadata{},
 		Error:    nil,

@@ -312,7 +312,7 @@ func (c *Client) invokeOperation(
 	decorated := middleware.DecorateHandler(handler, stack)
 	// set this on an if
 	// set a channel for early return
-	results := make(chan middleware.PartialResult[*InvokeModelWithBidirectionalStreamOutput], 1)
+	results := make(chan PartialResult[*InvokeModelWithBidirectionalStreamOutput], 1)
 	ctx = context.WithValue(ctx, "asyncChan", results)
 
 	// do

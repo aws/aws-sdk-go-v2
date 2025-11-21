@@ -2925,5 +2925,6 @@ func (*UnknownUnionMember) isSystemContentBlock()                       {}
 func (*UnknownUnionMember) isTool()                                     {}
 func (*UnknownUnionMember) isToolChoice()                               {}
 func (*UnknownUnionMember) isToolInputSchema()                          {}
+func (*UnknownUnionMember) isToolResultBlockDelta()                     {}
 func (*UnknownUnionMember) isToolResultContentBlock()                   {}
 func (*UnknownUnionMember) isVideoSource()                              {}
