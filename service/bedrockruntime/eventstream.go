@@ -792,7 +792,9 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 ) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	defer func() {
-		if err == nil {return}
+		if err == nil {
+			return
+		}
 		m.closeResponseBody(out)
 	}()
 
@@ -879,21 +881,33 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream
 
 	go output.eventStream.waitStreamClose()
 
-	// Start background processing
-	go func() {
-		out, metadata, err = next.HandleDeserialize(ctx, in)
+	ch := ctx.Value("asyncChan")
+	if ch == nil {
+		panic("missing asyncChan")
+	}
+	
+	c, ok := ch.(chan middleware.PartialResult[*InvokeModelWithBidirectionalStreamOutput])
+	if !ok {
+		panic("asyncChan was not a partialResult")
+	}
+	partial := middleware.PartialResult[*InvokeModelWithBidirectionalStreamOutput]{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	c <- partial
 
-		if err == nil {
-			// Extract actual response and create real reader
-			resp := out.RawResponse.(*smithyhttp.Response)
-			// TODO lmadrig this should have more than just the body
-			asyncResult <- deserializeResult{reader: resp.Body, err: nil}
-		} else {
-			asyncResult <- deserializeResult{reader: nil, err: err}
-		}
-	}()
+	out, metadata, err = next.HandleDeserialize(ctx, in)
 
-	return middleware.DeserializeOutput{Result: output}, middleware.Metadata{}, nil
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		// TODO lmadrig this should have more than just the body
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	return out, metadata, err
 }
 
 func (*awsRestjson1_deserializeOpEventStreamInvokeModelWithBidirectionalStream) closeResponseBody(out middleware.DeserializeOutput) {
