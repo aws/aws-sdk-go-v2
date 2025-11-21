@@ -6,7 +6,9 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoStdlibTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
@@ -98,7 +100,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
                     if region == "" {
                         return nil, nil
                     }
-                    if !$validHost:T(region) {
+                    if !$validHost:T(region, true) {
                         return nil, $error:T("invalid input region %s", region)
                     }
                 
@@ -109,7 +111,8 @@ public class AwsEndpointBuiltins implements GoIntegration {
                         "awsString", SdkGoTypes.Aws.String,
                         "mapFipsRegion", SdkGoTypes.Internal.Endpoints.MapFIPSRegion,
                         "error", GoStdlibTypes.Fmt.Errorf,
-                        "validHost", SmithyGoTypes.Transport.Http.ValidHostLabel
+                        "validHost", SymbolUtils.createValueSymbolBuilder("IsValidHostLabel",
+                                SmithyGoDependency.SMITHY_ENDPOINT_RULESFN).build()
                 )
         );
     }

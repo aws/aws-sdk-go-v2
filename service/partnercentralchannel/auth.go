@@ -94,14 +94,14 @@ type AuthResolverParameters struct {
 	Region string
 }
 
-func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) *AuthResolverParameters {
-	params := &AuthResolverParameters{
+func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) (params *AuthResolverParameters, err error) {
+	params = &AuthResolverParameters{
 		Operation: operation,
 	}
 
 	bindAuthParamsRegion(ctx, params, input, options)
 
-	return params
+	return
 }
 
 // AuthSchemeResolver returns a set of possible authentication options for an
@@ -162,7 +162,10 @@ func (m *resolveAuthSchemeMiddleware) HandleFinalize(ctx context.Context, in mid
 	_, span := tracing.StartSpan(ctx, "ResolveAuthScheme")
 	defer span.End()
 
-	params := bindAuthResolverParams(ctx, m.operation, getOperationInput(ctx), m.options)
+	params, err := bindAuthResolverParams(ctx, m.operation, getOperationInput(ctx), m.options)
+	if err != nil {
+		return out, metadata, fmt.Errorf("bind auth scheme params: %w", err)
+	}
 	options, err := m.options.AuthSchemeResolver.ResolveAuthSchemes(ctx, params)
 	if err != nil {
 		return out, metadata, fmt.Errorf("resolve auth scheme: %w", err)

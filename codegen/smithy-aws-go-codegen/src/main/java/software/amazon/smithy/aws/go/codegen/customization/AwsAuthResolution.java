@@ -105,8 +105,9 @@ public class AwsAuthResolution implements GoIntegration {
 
     private GoWriter.Writable writeEndpointParamResolver() {
         return goTemplate("""
-                func bindAuthEndpointParams(ctx $P, params $P, input interface{}, options Options) {
-                    params.endpointParams, _ = bindEndpointParams(ctx, input, options)
+                func bindAuthEndpointParams(ctx $P, params $P, input interface{}, options Options) (err error) {
+                    params.endpointParams, err = bindEndpointParams(ctx, input, options)
+                    return
                 }
                 """, GoStdlibTypes.Context.Context, AuthParametersGenerator.STRUCT_SYMBOL);
     }
