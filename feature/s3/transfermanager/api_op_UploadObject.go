@@ -78,10 +78,10 @@ func (m *multipartUploadError) UploadID() string {
 // of s3 PutObject and CreateMultipartUpload input
 type UploadObjectInput struct {
 	// Bucket the object is uploaded into
-	Bucket string
+	Bucket *string
 
 	// Object key for which the PUT action was initiated
-	Key string
+	Key *string
 
 	// Object data
 	Body io.Reader
@@ -124,13 +124,13 @@ type UploadObjectInput struct {
 	// for S3 Bucket Key.
 	//
 	// This functionality is not supported for directory buckets.
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// Can be used to specify caching behavior along the request/reply chain. For more
 	// information, see [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9].
 	//
 	// [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	CacheControl string
+	CacheControl *string
 
 	// Indicates the algorithm used to create the checksum for the object when you use
 	// the SDK. This header will not provide any additional functionality if you don't
@@ -167,67 +167,67 @@ type UploadObjectInput struct {
 	// cannot be determined automatically. For more information, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length].
 	//
 	// [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length
-	ContentLength int64
+	ContentLength *int64
 
 	// Specifies presentational information for the object. For more information, see [https://www.rfc-editor.org/rfc/rfc6266#section-4].
 	//
 	// [https://www.rfc-editor.org/rfc/rfc6266#section-4]: https://www.rfc-editor.org/rfc/rfc6266#section-4
-	ContentDisposition string
+	ContentDisposition *string
 
 	// Specifies what content encodings have been applied to the object and thus what
 	// decoding mechanisms must be applied to obtain the media-type referenced by the
 	// Content-Type header field. For more information, see [https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding].
 	//
 	// [https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding
-	ContentEncoding string
+	ContentEncoding *string
 
 	// The language the content is in.
-	ContentLanguage string
+	ContentLanguage *string
 
 	// A standard MIME type describing the format of the contents. For more
 	// information, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type].
 	//
 	// [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
-	ContentType string
+	ContentType *string
 
 	// The account ID of the expected bucket owner. If the account ID that you provide
 	// does not match the actual owner of the bucket, the request fails with the HTTP
 	// status code 403 Forbidden (access denied).
-	ExpectedBucketOwner string
+	ExpectedBucketOwner *string
 
 	// The date and time at which the object is no longer cacheable. For more
 	// information, see [https://www.rfc-editor.org/rfc/rfc7234#section-5.3].
 	//
 	// [https://www.rfc-editor.org/rfc/rfc7234#section-5.3]: https://www.rfc-editor.org/rfc/rfc7234#section-5.3
-	Expires time.Time
+	Expires *time.Time
 
 	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
 	//
 	//   - This functionality is not supported for directory buckets.
 	//
 	//   - This functionality is not supported for Amazon S3 on Outposts.
-	GrantFullControl string
+	GrantFullControl *string
 
 	// Allows grantee to read the object data and its metadata.
 	//
 	//   - This functionality is not supported for directory buckets.
 	//
 	//   - This functionality is not supported for Amazon S3 on Outposts.
-	GrantRead string
+	GrantRead *string
 
 	// Allows grantee to read the object ACL.
 	//
 	//   - This functionality is not supported for directory buckets.
 	//
 	//   - This functionality is not supported for Amazon S3 on Outposts.
-	GrantReadACP string
+	GrantReadACP *string
 
 	// Allows grantee to write the ACL for the applicable object.
 	//
 	//   - This functionality is not supported for directory buckets.
 	//
 	//   - This functionality is not supported for Amazon S3 on Outposts.
-	GrantWriteACP string
+	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
 	Metadata map[string]string
@@ -249,7 +249,7 @@ type UploadObjectInput struct {
 	// formatted as a timestamp parameter.
 	//
 	// This functionality is not supported for directory buckets.
-	ObjectLockRetainUntilDate time.Time
+	ObjectLockRetainUntilDate *time.Time
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. If either the
@@ -266,7 +266,7 @@ type UploadObjectInput struct {
 	// Specifies the algorithm to use when encrypting the object (for example, AES256 ).
 	//
 	// This functionality is not supported for directory buckets.
-	SSECustomerAlgorithm string
+	SSECustomerAlgorithm *string
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use in
 	// encrypting data. This value is used to store the object and then it is
@@ -275,7 +275,7 @@ type UploadObjectInput struct {
 	// x-amz-server-side-encryption-customer-algorithm header.
 	//
 	// This functionality is not supported for directory buckets.
-	SSECustomerKey string
+	SSECustomerKey *string
 
 	// Specifies the Amazon Web Services KMS Encryption Context to use for object
 	// encryption. The value of this header is a base64-encoded UTF-8 string holding
@@ -285,7 +285,7 @@ type UploadObjectInput struct {
 	// explicitly added during CopyObject operations.
 	//
 	// This functionality is not supported for directory buckets.
-	SSEKMSEncryptionContext string
+	SSEKMSEncryptionContext *string
 
 	// If x-amz-server-side-encryption has a valid value of aws:kms or aws:kms:dsse ,
 	// this header specifies the ID (Key ID, Key ARN, or Key Alias) of the Key
@@ -298,7 +298,7 @@ type UploadObjectInput struct {
 	// and not just the ID.
 	//
 	// This functionality is not supported for directory buckets.
-	SSEKMSKeyID string
+	SSEKMSKeyID *string
 
 	// The server-side encryption algorithm that was used when you store this object
 	// in Amazon S3 (for example, AES256 , aws:kms , aws:kms:dsse ).
@@ -336,7 +336,7 @@ type UploadObjectInput struct {
 	// parameters. (For example, "Key1=Value1")
 	//
 	// This functionality is not supported for directory buckets.
-	Tagging string
+	Tagging *string
 
 	// If the bucket is configured as a website, redirects requests for this object to
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
@@ -361,7 +361,7 @@ type UploadObjectInput struct {
 	// [How to Configure Website Page Redirects]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html
 	// [Hosting Websites on Amazon S3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
 	// [Object Key and Metadata]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
-	WebsiteRedirectLocation string
+	WebsiteRedirectLocation *string
 }
 
 // map non-zero string to *string
@@ -382,7 +382,7 @@ func nztime(t time.Time) *time.Time {
 
 func (i UploadObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorithm types.ChecksumAlgorithm) *s3.PutObjectInput {
 	input := &s3.PutObjectInput{
-		Bucket: aws.String(i.Bucket),
+		Bucket: i.Bucket,
 		Key:    aws.String(i.Key),
 		Body:   body,
 	}
@@ -544,7 +544,7 @@ type UploadObjectOutput struct {
 	// can be cast to the MultiUploadFailure interface to extract the upload ID.
 	// Will be empty string if multipart upload was not used, and the object
 	// was uploaded as a single PutObject call.
-	UploadID string
+	UploadID *string
 
 	// The list of parts that were uploaded and their checksums. Will be empty
 	// if multipart upload was not used, and the object was uploaded as a
@@ -553,35 +553,35 @@ type UploadObjectOutput struct {
 
 	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side
 	// encryption with Amazon Web Services KMS (SSE-KMS).
-	BucketKeyEnabled bool
+	BucketKeyEnabled *bool
 
 	// The base64-encoded, 32-bit CRC32 checksum of the object.
-	ChecksumCRC32 string
+	ChecksumCRC32 *string
 
 	// The base64-encoded, 32-bit CRC32C checksum of the object.
-	ChecksumCRC32C string
+	ChecksumCRC32C *string
 
 	// The base64-encoded, 160-bit SHA-1 digest of the object.
-	ChecksumSHA1 string
+	ChecksumSHA1 *string
 
 	// The base64-encoded, 256-bit SHA-256 digest of the object.
-	ChecksumSHA256 string
+	ChecksumSHA256 *string
 
 	// Total length of the object
-	ContentLength int64
+	ContentLength *int64
 
 	// Entity tag for the uploaded object.
-	ETag string
+	ETag *string
 
 	// If the object expiration is configured, this will contain the expiration date
 	// (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
-	Expiration string
+	Expiration *string
 
 	// The bucket where the newly created object is put
-	Bucket string
+	Bucket *string
 
 	// The object key of the newly created object.
-	Key string
+	Key *string
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
@@ -590,7 +590,7 @@ type UploadObjectOutput struct {
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
 	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
 	// that was used for the object.
-	SSEKMSKeyID string
+	SSEKMSKeyID *string
 
 	// If you specified server-side encryption either with an Amazon S3-managed
 	// encryption key or an Amazon Web Services KMS customer master key (CMK) in your
@@ -601,7 +601,7 @@ type UploadObjectOutput struct {
 	// The version of the object that was uploaded. Will only be populated if
 	// the S3 Bucket is versioned. If the bucket is not versioned this field
 	// will not be set.
-	VersionID string
+	VersionID *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata smithymiddleware.Metadata
