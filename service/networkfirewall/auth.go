@@ -16,8 +16,9 @@ import (
 	"strings"
 )
 
-func bindAuthParamsRegion(_ interface{}, params *AuthResolverParameters, _ interface{}, options Options) {
+func bindAuthParamsRegion(_ interface{}, params *AuthResolverParameters, _ interface{}, options Options) error {
 	params.Region = options.Region
+	return nil
 }
 
 type setLegacyContextSigningOptionsMiddleware struct {
@@ -94,14 +95,16 @@ type AuthResolverParameters struct {
 	Region string
 }
 
-func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) (params *AuthResolverParameters, err error) {
-	params = &AuthResolverParameters{
+func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) (*AuthResolverParameters, error) {
+	params := &AuthResolverParameters{
 		Operation: operation,
 	}
 
-	bindAuthParamsRegion(ctx, params, input, options)
+	if err := bindAuthParamsRegion(ctx, params, input, options); err != nil {
+		return nil, err
+	}
 
-	return
+	return params, nil
 }
 
 // AuthSchemeResolver returns a set of possible authentication options for an

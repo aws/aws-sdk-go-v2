@@ -87,12 +87,12 @@ type AuthResolverParameters struct {
 	Operation string
 }
 
-func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) (params *AuthResolverParameters, err error) {
-	params = &AuthResolverParameters{
+func bindAuthResolverParams(ctx context.Context, operation string, input interface{}, options Options) (*AuthResolverParameters, error) {
+	params := &AuthResolverParameters{
 		Operation: operation,
 	}
 
-	return
+	return params, nil
 }
 
 // AuthSchemeResolver returns a set of possible authentication options for an

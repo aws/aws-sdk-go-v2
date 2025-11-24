@@ -97,8 +97,9 @@ public class AwsAuthResolution implements GoIntegration {
 
     private GoWriter.Writable writeRegionResolver() {
         return goTemplate("""
-                func bindAuthParamsRegion( _ interface{}, params $P, _ interface{}, options Options) {
+                func bindAuthParamsRegion( _ interface{}, params $P, _ interface{}, options Options) error {
                     params.Region = options.Region
+                    return nil
                 }
                 """, AuthParametersGenerator.STRUCT_SYMBOL);
     }
