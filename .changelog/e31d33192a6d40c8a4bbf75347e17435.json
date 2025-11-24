@@ -1,0 +1,8 @@
+{
+    "id": "e31d3319-2a6d-40c8-a4bb-f75347e17435",
+    "type": "bugfix",
+    "description": "Fix missing error message when service returns a specific type of error.",
+    "modules": [
+        "service/s3"
+    ]
+}
