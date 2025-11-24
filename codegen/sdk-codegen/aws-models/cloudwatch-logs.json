@@ -1235,6 +1235,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter to specify the log group class for this log group. There are three\n      classes:</p>\n         <ul>\n            <li>\n               <p>The <code>Standard</code> log class supports all CloudWatch Logs features.</p>\n            </li>\n            <li>\n               <p>The <code>Infrequent Access</code> log class supports a subset of CloudWatch Logs\n          features and incurs lower costs.</p>\n            </li>\n            <li>\n               <p>Use the <code>Delivery</code> log class only for delivering Lambda\n          logs to store in Amazon S3 or Amazon Data Firehose. Log events in log groups in\n          the Delivery class are kept in CloudWatch Logs for only one day. This log class doesn't\n          offer rich CloudWatch Logs capabilities such as CloudWatch Logs Insights\n          queries.</p>\n            </li>\n         </ul>\n         <p>If you omit this parameter, the default of <code>STANDARD</code> is used.</p>\n         <important>\n            <p>The value of <code>logGroupClass</code> can't be changed after a log group is\n        created.</p>\n         </important>\n         <p>For details about the features supported by each class, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html\">Log classes</a>\n         </p>"
                     }
+                },
+                "deletionProtectionEnabled": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to enable deletion protection for the new log group. When enabled on a log group, deletion protection blocks all\n      deletion operations until it is explicitly disabled. By default log groups are created without deletion protection enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2053,6 +2059,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
                 }
             ],
             "traits": {
@@ -2094,6 +2103,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
                 }
             ],
             "traits": {
@@ -2470,6 +2482,9 @@
                     "max": 5
                 }
             }
+        },
+        "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled": {
+            "type": "boolean"
         },
         "com.amazonaws.cloudwatchlogs#Delimiter": {
             "type": "string",
@@ -7594,6 +7609,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the log group. This version of the ARN doesn't\n      include a trailing <code>:*</code> after the log group name. </p>\n         <p>Use this version to refer to the ARN in the following situations:</p>\n         <ul>\n            <li>\n               <p>In the <code>logGroupIdentifier</code> input field in many CloudWatch Logs\n          APIs.</p>\n            </li>\n            <li>\n               <p>In the <code>resourceArn</code> field in tagging APIs</p>\n            </li>\n            <li>\n               <p>In IAM policies, when specifying permissions for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html\">TagResource</a>, <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html\">UntagResource</a>, and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "deletionProtectionEnabled": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled for this log group. When enabled, deletion protection blocks all\n      deletion operations until it is explicitly disabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8120,6 +8141,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutLogEvents"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtection"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutMetricFilter"
@@ -11274,6 +11298,60 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtectionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#OperationAbortedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables or disables deletion protection for the specified log group. When enabled on a log group, deletion protection blocks all\n      deletion operations until it is explicitly disabled.</p>\n         <p>For information about the parameters that are common to all actions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtectionRequest": {
+            "type": "structure",
+            "members": {
+                "logGroupIdentifier": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the log group.</p>\n         <p>Type: String</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 512.</p>\n         <p>Pattern: <code>[\\.\\-_/#A-Za-z0-9]+</code>\n         </p>\n         <p>Required: Yes</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtectionEnabled": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable deletion protection.</p>\n         <p>Type: Boolean</p>\n         <p>Required: Yes</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutMetricFilter": {

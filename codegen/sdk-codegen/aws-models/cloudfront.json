@@ -678,6 +678,60 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.cloudfront#CaCertificatesBundleS3Location": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location's key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location's Region.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 32
+                        },
+                        "smithy.api#pattern": "^[a-z]{2}-[a-z]+-\\d$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location's version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CA certificates bundle location in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#CaCertificatesBundleSource": {
+            "type": "union",
+            "members": {
+                "CaCertificatesBundleS3Location": {
+                    "target": "com.amazonaws.cloudfront#CaCertificatesBundleS3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificates bundle location in Amazon S3.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CA certificates bundle source.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#CacheBehavior": {
             "type": "structure",
             "members": {
@@ -1459,6 +1513,9 @@
                     "target": "com.amazonaws.cloudfront#CreateCloudFrontOriginAccessIdentity"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#CreateConnectionFunction"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#CreateConnectionGroup"
                 },
                 {
@@ -1519,6 +1576,9 @@
                     "target": "com.amazonaws.cloudfront#CreateStreamingDistributionWithTags"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#CreateTrustStore"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#CreateVpcOrigin"
                 },
                 {
@@ -1529,6 +1589,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteCloudFrontOriginAccessIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#DeleteConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteConnectionGroup"
@@ -1582,7 +1645,13 @@
                     "target": "com.amazonaws.cloudfront#DeleteStreamingDistribution"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#DeleteTrustStore"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#DeleteVpcOrigin"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#DescribeConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DescribeFunction"
@@ -1610,6 +1679,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetCloudFrontOriginAccessIdentityConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetConnectionGroup"
@@ -1705,6 +1777,9 @@
                     "target": "com.amazonaws.cloudfront#GetStreamingDistributionConfig"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#GetTrustStore"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#GetVpcOrigin"
                 },
                 {
@@ -1720,6 +1795,9 @@
                     "target": "com.amazonaws.cloudfront#ListConflictingAliases"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#ListConnectionFunctions"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#ListConnectionGroups"
                 },
                 {
@@ -1733,6 +1811,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByCachePolicyId"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionMode"
@@ -1751,6 +1832,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByResponseHeadersPolicyId"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#ListDistributionsByTrustStore"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ListDistributionsByVpcOriginId"
@@ -1810,7 +1894,13 @@
                     "target": "com.amazonaws.cloudfront#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#ListTrustStores"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#ListVpcOrigins"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PublishConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#PublishFunction"
@@ -1820,6 +1910,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TestConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TestFunction"
@@ -1835,6 +1928,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateCloudFrontOriginAccessIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UpdateConnectionFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateConnectionGroup"
@@ -1886,6 +1982,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateStreamingDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UpdateTrustStore"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateVpcOrigin"
@@ -3093,6 +3192,131 @@
                 "smithy.api#documentation": "<p>A list of aliases (also called CNAMEs) and the CloudFront standard distributions and Amazon Web Services accounts that they are associated with. In the list, the standard distribution and account IDs are partially hidden, which allows you to identify the standard distributions and accounts that you own, but helps to protect the information of ones that you don't own.</p>"
             }
         },
+        "com.amazonaws.cloudfront#ConnectionFunctionAssociation": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association's ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A connection function association.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionFunctionSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#FunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionFunctionConfig": {
+                    "target": "com.amazonaws.cloudfront#FunctionConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionFunctionArn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function stage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function created time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function last modified time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A connection function summary.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionFunctionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#ConnectionFunctionSummary",
+                "traits": {
+                    "smithy.api#xmlName": "ConnectionFunctionSummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ConnectionFunctionTestResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function summary.</p>"
+                    }
+                },
+                "ComputeUtilization": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function compute utilization.</p>"
+                    }
+                },
+                "ConnectionFunctionExecutionLogs": {
+                    "target": "com.amazonaws.cloudfront#FunctionExecutionLogList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function execution logs.</p>"
+                    }
+                },
+                "ConnectionFunctionErrorMessage": {
+                    "target": "com.amazonaws.cloudfront#sensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function error message.</p>"
+                    }
+                },
+                "ConnectionFunctionOutput": {
+                    "target": "com.amazonaws.cloudfront#sensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A connection function test result.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#ConnectionGroup": {
             "type": "structure",
             "members": {
@@ -4164,6 +4388,106 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The returned result of the corresponding request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntitySizeLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidTagging"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/connection-function",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#FunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the connection function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionFunctionConfig": {
+                    "target": "com.amazonaws.cloudfront#FunctionConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionFunctionCode": {
+                    "target": "com.amazonaws.cloudfront#FunctionBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the connection function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary for the connection function.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the connection function.</p>",
+                        "smithy.api#httpHeader": "Location"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the connection function.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -6390,6 +6714,90 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#CreateTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateTrustStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateTrustStoreResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidTagging"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a trust store.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/trust-store",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateTrustStoreRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleSource": {
+                    "target": "com.amazonaws.cloudfront#CaCertificatesBundleSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificates bundle source for the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#CreateTrustStoreResult": {
+            "type": "structure",
+            "members": {
+                "TrustStore": {
+                    "target": "com.amazonaws.cloudfront#TrustStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the trust store.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#CreateVpcOrigin": {
             "type": "operation",
             "input": {
@@ -7011,6 +7419,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a origin access identity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CannotDeleteEntityWhileInUse"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-05-31/connection-function/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the connection function you are deleting.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#input": {}
             }
         },
@@ -8001,6 +8473,67 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudfront#DeleteTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteTrustStoreRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#CannotDeleteEntityWhileInUse"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a trust store.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-05-31/trust-store/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteTrustStoreRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the trust store you are deleting.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.cloudfront#DeleteVpcOrigin": {
             "type": "operation",
             "input": {
@@ -8116,6 +8649,82 @@
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC origin ETag.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DescribeConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DescribeConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#DescribeConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/connection-function/{Identifier}/describe",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DescribeConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's stage.</p>",
+                        "smithy.api#httpQuery": "Stage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#DescribeConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's summary.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the connection function.</p>",
                         "smithy.api#httpHeader": "ETag"
                     }
                 }
@@ -8666,6 +9275,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).</p>"
                     }
+                },
+                "ViewerMtlsConfig": {
+                    "target": "com.amazonaws.cloudfront#ViewerMtlsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution's viewer mTLS configuration.</p>"
+                    }
+                },
+                "ConnectionFunctionAssociation": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution's connection function association.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9092,6 +9713,18 @@
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
                         "smithy.api#documentation": "<p>ID of the Anycast static IP list that is associated with the distribution.</p>"
+                    }
+                },
+                "ViewerMtlsConfig": {
+                    "target": "com.amazonaws.cloudfront#ViewerMtlsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution's viewer mTLS configuration.</p>"
+                    }
+                },
+                "ConnectionFunctionAssociation": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution's connection function association.</p>"
                     }
                 }
             },
@@ -10813,6 +11446,86 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The returned result of the corresponding request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/connection-function/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's stage.</p>",
+                        "smithy.api#httpQuery": "Stage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionCode": {
+                    "target": "com.amazonaws.cloudfront#FunctionBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's code.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the connection function.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's content type.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -12861,6 +13574,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#GetTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetTrustStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetTrustStoreResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a trust store.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/trust-store/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetTrustStoreRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#GetTrustStoreResult": {
+            "type": "structure",
+            "members": {
+                "TrustStore": {
+                    "target": "com.amazonaws.cloudfront#TrustStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the trust store.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#GetVpcOrigin": {
             "type": "operation",
             "input": {
@@ -14560,6 +15339,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#ListConnectionFunctions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListConnectionFunctionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListConnectionFunctionsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists connection functions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/connection-functions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "ConnectionFunctions",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListConnectionFunctionsRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of connection functions that you want returned in the response.</p>"
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function's stage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListConnectionFunctionsResult": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the next page of connection functions. To get the next page of the list, use this value in the <code>Marker</code> field of your request.</p>"
+                    }
+                },
+                "ConnectionFunctions": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of connection functions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#ListConnectionGroups": {
             "type": "operation",
             "input": {
@@ -15044,6 +15903,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#ListDistributionsByConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists distributions by connection function.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distributionsByConnectionFunction",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "DistributionList.NextMarker",
+                    "items": "DistributionList.Items",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of distributions that you want returned in the response.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                },
+                "ConnectionFunctionIdentifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distributions by connection function identifier.</p>",
+                        "smithy.api#httpQuery": "ConnectionFunctionIdentifier",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "DistributionList": {
+                    "target": "com.amazonaws.cloudfront#DistributionList",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#ListDistributionsByConnectionMode": {
             "type": "operation",
             "input": {
@@ -15468,6 +16405,84 @@
             "members": {
                 "DistributionIdList": {
                     "target": "com.amazonaws.cloudfront#DistributionIdList",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByTrustStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListDistributionsByTrustStoreResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists distributions by trust store.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/distributionsByTrustStore",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "DistributionList.NextMarker",
+                    "items": "DistributionList.Items",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByTrustStoreRequest": {
+            "type": "structure",
+            "members": {
+                "TrustStoreIdentifier": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distributions by trust store identifier.</p>",
+                        "smithy.api#httpQuery": "TrustStoreIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of distributions that you want returned in the response.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListDistributionsByTrustStoreResult": {
+            "type": "structure",
+            "members": {
+                "DistributionList": {
+                    "target": "com.amazonaws.cloudfront#DistributionList",
                     "traits": {
                         "smithy.api#httpPayload": {}
                     }
@@ -16746,6 +17761,80 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The returned result of the corresponding request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListTrustStores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListTrustStoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListTrustStoresResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists trust stores.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/trust-stores",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "TrustStoreList",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListTrustStoresRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of trust stores that you want returned in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#ListTrustStoresResult": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the next page of trust stores. To get the next page of the list, use this value in the <code>Marker</code> field of your request.</p>"
+                    }
+                },
+                "TrustStoreList": {
+                    "target": "com.amazonaws.cloudfront#TrustStoreList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store list.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -18726,6 +19815,82 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#PublishConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#PublishConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#PublishConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/connection-function/{Id}/publish",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#PublishConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the connection function.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#PublishConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function summary.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#PublishFunction": {
             "type": "operation",
             "input": {
@@ -19236,6 +20401,15 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws(-cn)?:cloudfront::[0-9]+:"
+            }
+        },
+        "com.amazonaws.cloudfront#ResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.cloudfront#ResourceInUse": {
@@ -20756,6 +21930,95 @@
                 "smithy.api#documentation": "<note> <p>This field only supports multi-tenant distributions. You can't specify this field for standard distributions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas\">Unsupported features for SaaS Manager for Amazon CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </note> <p>The configuration for a distribution tenant.</p>"
             }
         },
+        "com.amazonaws.cloudfront#TestConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#TestConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#TestConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TestFunctionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tests a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/connection-function/{Id}/test",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#TestConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the connection function.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function stage.</p>"
+                    }
+                },
+                "ConnectionObject": {
+                    "target": "com.amazonaws.cloudfront#FunctionEventObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#TestConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionTestResult": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionTestResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function test result.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#TestFunction": {
             "type": "operation",
             "input": {
@@ -21596,6 +22859,178 @@
                 "smithy.api#documentation": "<p>The traffic configuration of your continuous deployment.</p>"
             }
         },
+        "com.amazonaws.cloudfront#TrustStore": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's ID.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's name.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#TrustStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's status.</p>"
+                    }
+                },
+                "NumberOfCaCertificates": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's number of CA certificates.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's last modified time.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A trust store.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#TrustStoreConfig": {
+            "type": "structure",
+            "members": {
+                "TrustStoreId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdvertiseTrustStoreCaNames": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to use to advertise trust store CA names.</p>"
+                    }
+                },
+                "IgnoreCertificateExpiry": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to use to ignore certificate expiration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A trust store configuration.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#TrustStoreList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#TrustStoreSummary",
+                "traits": {
+                    "smithy.api#xmlName": "TrustStoreSummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#TrustStoreStatus": {
+            "type": "enum",
+            "members": {
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#TrustStoreSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#TrustStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberOfCaCertificates": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's number of CA certificates.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's last modified time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store's reason.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A trust store summary.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#TrustedKeyGroupDoesNotExist": {
             "type": "structure",
             "members": {
@@ -22047,6 +23482,105 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The returned result of the corresponding request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateConnectionFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateConnectionFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateConnectionFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntitySizeLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a connection function.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/connection-function/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateConnectionFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the connection function you are updating.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionFunctionConfig": {
+                    "target": "com.amazonaws.cloudfront#FunctionConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionFunctionCode": {
+                    "target": "com.amazonaws.cloudfront#FunctionBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function code.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateConnectionFunctionResult": {
+            "type": "structure",
+            "members": {
+                "ConnectionFunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#ConnectionFunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection function summary.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the connection function.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -24171,6 +25705,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudfront#UpdateTrustStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateTrustStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateTrustStoreResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#EntityNotFound"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a trust store.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/trust-store/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateTrustStoreRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaCertificatesBundleSource": {
+                    "target": "com.amazonaws.cloudfront#CaCertificatesBundleSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificates bundle source.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the trust store you are updating.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateTrustStoreResult": {
+            "type": "structure",
+            "members": {
+                "TrustStore": {
+                    "target": "com.amazonaws.cloudfront#TrustStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the trust store.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudfront#UpdateVpcOrigin": {
             "type": "operation",
             "input": {
@@ -24489,6 +26111,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that determines the distribution's SSL/TLS configuration for communicating with viewers.</p> <p>If the distribution doesn't use <code>Aliases</code> (also known as alternate domain names or CNAMEs)—that is, if the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code>—set <code>CloudFrontDefaultCertificate</code> to <code>true</code> and leave all other fields empty.</p> <p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), use the fields in this type to specify the following settings:</p> <ul> <li> <p>Which viewers the distribution accepts HTTPS connections from: only viewers that support <a href=\"https://en.wikipedia.org/wiki/Server_Name_Indication\">server name indication (SNI)</a> (recommended), or all viewers including those that don't support SNI.</p> <ul> <li> <p>To accept HTTPS connections from only viewers that support SNI, set <code>SSLSupportMethod</code> to <code>sni-only</code>. This is recommended. Most browsers and clients support SNI. </p> </li> <li> <p>To accept HTTPS connections from all viewers, including those that don't support SNI, set <code>SSLSupportMethod</code> to <code>vip</code>. This is not recommended, and results in additional monthly charges from CloudFront.</p> </li> </ul> </li> <li> <p>The minimum SSL/TLS protocol version that the distribution can use to communicate with viewers. To specify a minimum version, choose a value for <code>MinimumProtocolVersion</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValues-security-policy\">Security Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </li> <li> <p>The location of the SSL/TLS certificate, <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">Certificate Manager (ACM)</a> (recommended) or <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">Identity and Access Management (IAM)</a>. You specify the location by setting a value in one of the following fields (not both):</p> <ul> <li> <p> <code>ACMCertificateArn</code> </p> </li> <li> <p> <code>IAMCertificateId</code> </p> </li> </ul> </li> </ul> <p>All distributions support HTTPS connections from viewers. To require viewers to use HTTPS only, or to redirect them from HTTP to HTTPS, use <code>ViewerProtocolPolicy</code> in the <code>CacheBehavior</code> or <code>DefaultCacheBehavior</code>. To specify how CloudFront should use SSL/TLS to communicate with your custom origin, use <code>CustomOriginConfig</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https.html\">Using HTTPS with CloudFront</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-alternate-domain-names.html\"> Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ViewerMtlsConfig": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.cloudfront#ViewerMtlsMode",
+                    "traits": {
+                        "smithy.api#default": "required",
+                        "smithy.api#documentation": "<p>The viewer mTLS mode.</p>"
+                    }
+                },
+                "TrustStoreConfig": {
+                    "target": "com.amazonaws.cloudfront#TrustStoreConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store configuration associated with the viewer mTLS configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A viewer mTLS configuration.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#ViewerMtlsMode": {
+            "type": "enum",
+            "members": {
+                "Required": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "required"
+                    }
+                },
+                "Optional": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optional"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudfront#ViewerProtocolPolicy": {
