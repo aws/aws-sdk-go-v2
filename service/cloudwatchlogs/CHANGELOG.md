@@ -1,3 +1,7 @@
+# v1.61.0 (2025-11-24)
+
+* **Feature**: New CloudWatch Logs feature - LogGroup Deletion Protection, a capability that allows customers to safeguard their critical CloudWatch log groups from accidental or unintended deletion.
+
 # v1.60.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

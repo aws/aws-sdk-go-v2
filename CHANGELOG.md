@@ -1,3 +1,11 @@
+# Release (2025-11-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.58.0](service/cloudfront/CHANGELOG.md#v1580-2025-11-24)
+  * **Feature**: Add TrustStore, ConnectionFunction APIs to CloudFront SDK
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.61.0](service/cloudwatchlogs/CHANGELOG.md#v1610-2025-11-24)
+  * **Feature**: New CloudWatch Logs feature - LogGroup Deletion Protection, a capability that allows customers to safeguard their critical CloudWatch log groups from accidental or unintended deletion.
+
 # Release (2025-11-21)
 
 ## General Highlights

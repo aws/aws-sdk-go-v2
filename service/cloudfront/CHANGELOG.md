@@ -1,3 +1,7 @@
+# v1.58.0 (2025-11-24)
+
+* **Feature**: Add TrustStore, ConnectionFunction APIs to CloudFront SDK
+
 # v1.57.0 (2025-11-20)
 
 * **Feature**: This release adds support for bring your own IP (BYOIP) to CloudFront's CreateAnycastIpList API through an optional IpamCidrConfigs field.
