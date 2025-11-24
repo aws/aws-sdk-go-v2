@@ -1,0 +1,8 @@
+{
+    "id": "4fb4f541-1bfb-475b-8a16-834d3c11bd13",
+    "type": "feature",
+    "description": "Add TrustStore, ConnectionFunction APIs to CloudFront SDK",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

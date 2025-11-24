@@ -87,6 +87,7 @@
         "api_op_PutIndexPolicy.go",
         "api_op_PutIntegration.go",
         "api_op_PutLogEvents.go",
+        "api_op_PutLogGroupDeletionProtection.go",
         "api_op_PutMetricFilter.go",
         "api_op_PutQueryDefinition.go",
         "api_op_PutResourcePolicy.go",

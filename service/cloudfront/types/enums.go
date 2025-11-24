@@ -963,6 +963,27 @@ func (SSLSupportMethod) Values() []SSLSupportMethod {
 	}
 }
 
+type TrustStoreStatus string
+
+// Enum values for TrustStoreStatus
+const (
+	TrustStoreStatusPending TrustStoreStatus = "pending"
+	TrustStoreStatusActive  TrustStoreStatus = "active"
+	TrustStoreStatusFailed  TrustStoreStatus = "failed"
+)
+
+// Values returns all known values for TrustStoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustStoreStatus) Values() []TrustStoreStatus {
+	return []TrustStoreStatus{
+		"pending",
+		"active",
+		"failed",
+	}
+}
+
 type ValidationTokenHost string
 
 // Enum values for ValidationTokenHost
@@ -979,6 +1000,25 @@ func (ValidationTokenHost) Values() []ValidationTokenHost {
 	return []ValidationTokenHost{
 		"cloudfront",
 		"self-hosted",
+	}
+}
+
+type ViewerMtlsMode string
+
+// Enum values for ViewerMtlsMode
+const (
+	ViewerMtlsModeRequired ViewerMtlsMode = "required"
+	ViewerMtlsModeOptional ViewerMtlsMode = "optional"
+)
+
+// Values returns all known values for ViewerMtlsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ViewerMtlsMode) Values() []ViewerMtlsMode {
+	return []ViewerMtlsMode{
+		"required",
+		"optional",
 	}
 }
 

@@ -4775,6 +4775,67 @@ func (m *awsAwsjson11_serializeOpPutLogEvents) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPutLogGroupDeletionProtection struct {
+}
+
+func (*awsAwsjson11_serializeOpPutLogGroupDeletionProtection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutLogGroupDeletionProtection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutLogGroupDeletionProtectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Logs_20140328.PutLogGroupDeletionProtection")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutLogGroupDeletionProtectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpPutMetricFilter struct {
 }
 
@@ -7520,6 +7581,11 @@ func awsAwsjson11_serializeOpDocumentCreateLogGroupInput(v *CreateLogGroupInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("deletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("kmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -9141,6 +9207,23 @@ func awsAwsjson11_serializeOpDocumentPutLogEventsInput(v *PutLogEventsInput, val
 	if v.SequenceToken != nil {
 		ok := object.Key("sequenceToken")
 		ok.String(*v.SequenceToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentPutLogGroupDeletionProtectionInput(v *PutLogGroupDeletionProtectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("deletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.LogGroupIdentifier != nil {
+		ok := object.Key("logGroupIdentifier")
+		ok.String(*v.LogGroupIdentifier)
 	}
 
 	return nil

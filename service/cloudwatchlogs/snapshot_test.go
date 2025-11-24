@@ -998,6 +998,18 @@ func TestCheckSnapshot_PutLogEvents(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutLogGroupDeletionProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLogGroupDeletionProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutLogGroupDeletionProtection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutMetricFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutMetricFilter(context.Background(), nil, func(o *Options) {
@@ -2154,6 +2166,18 @@ func TestUpdateSnapshot_PutLogEvents(t *testing.T) {
 	_, err := svc.PutLogEvents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutLogEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutLogGroupDeletionProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLogGroupDeletionProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutLogGroupDeletionProtection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -67,6 +67,12 @@ type CreateLogGroupInput struct {
 	// This member is required.
 	LogGroupName *string
 
+	// Use this parameter to enable deletion protection for the new log group. When
+	// enabled on a log group, deletion protection blocks all deletion operations until
+	// it is explicitly disabled. By default log groups are created without deletion
+	// protection enabled.
+	DeletionProtectionEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
 	// For more information, see [Amazon Resource Names].
 	//

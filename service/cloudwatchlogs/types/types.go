@@ -1123,6 +1123,11 @@ type LogGroup struct {
 	// [PutDataProtectionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
 	DataProtectionStatus DataProtectionStatus
 
+	// Indicates whether deletion protection is enabled for this log group. When
+	// enabled, deletion protection blocks all deletion operations until it is
+	// explicitly disabled.
+	DeletionProtectionEnabled *bool
+
 	// Displays all the properties that this log group has inherited from
 	// account-level settings.
 	InheritedProperties []InheritedProperty

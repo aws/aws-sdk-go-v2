@@ -1150,6 +1150,26 @@ func (m *validateOpPutLogEvents) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutLogGroupDeletionProtection struct {
+}
+
+func (*validateOpPutLogGroupDeletionProtection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutLogGroupDeletionProtection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutLogGroupDeletionProtectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutLogGroupDeletionProtectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutMetricFilter struct {
 }
 
@@ -1736,6 +1756,10 @@ func addOpPutIntegrationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutLogEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutLogEvents{}, middleware.After)
+}
+
+func addOpPutLogGroupDeletionProtectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutLogGroupDeletionProtection{}, middleware.After)
 }
 
 func addOpPutMetricFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -3544,6 +3568,24 @@ func validateOpPutLogEventsInput(v *PutLogEventsInput) error {
 		if err := validateInputLogEvents(v.LogEvents); err != nil {
 			invalidParams.AddNested("LogEvents", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutLogGroupDeletionProtectionInput(v *PutLogGroupDeletionProtectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutLogGroupDeletionProtectionInput"}
+	if v.LogGroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifier"))
+	}
+	if v.DeletionProtectionEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeletionProtectionEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
