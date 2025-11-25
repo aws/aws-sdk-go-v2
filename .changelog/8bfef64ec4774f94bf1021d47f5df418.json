@@ -1,0 +1,8 @@
+{
+    "id": "8bfef64e-c477-4f94-bf10-21d47f5df418",
+    "type": "feature",
+    "description": "This release adds support to view Network firewall proxy appliances attached to an existing NAT Gateway via DescribeNatGateways API NatGatewayAttachedAppliance structure.",
+    "modules": [
+        "service/ec2"
+    ]
+}

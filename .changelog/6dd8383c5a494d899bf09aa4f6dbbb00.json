@@ -1,0 +1,8 @@
+{
+    "id": "6dd8383c-5a49-4d89-9bf0-9aa4f6dbbb00",
+    "type": "feature",
+    "description": "Network Firewall release of the Proxy feature.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

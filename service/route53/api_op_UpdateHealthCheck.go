@@ -104,8 +104,8 @@ type UpdateHealthCheckInput struct {
 	// healthy or vice versa. For more information, see [How Amazon Route 53 Determines Whether an Endpoint Is Healthy]in the Amazon Route 53
 	// Developer Guide.
 	//
-	// If you don't specify a value for FailureThreshold , the default value is three
-	// health checks.
+	// Otherwise, if you don't specify a value for FailureThreshold , the default value
+	// is three health checks.
 	//
 	// [How Amazon Route 53 Determines Whether an Endpoint Is Healthy]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
 	FailureThreshold *int32

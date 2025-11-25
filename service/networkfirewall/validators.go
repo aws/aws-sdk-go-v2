@@ -90,6 +90,26 @@ func (m *validateOpAssociateSubnets) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachRuleGroupsToProxyConfiguration struct {
+}
+
+func (*validateOpAttachRuleGroupsToProxyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachRuleGroupsToProxyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachRuleGroupsToProxyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachRuleGroupsToProxyConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFirewall struct {
 }
 
@@ -125,6 +145,86 @@ func (m *validateOpCreateFirewallPolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFirewallPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProxyConfiguration struct {
+}
+
+func (*validateOpCreateProxyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProxyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProxyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProxyConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProxy struct {
+}
+
+func (*validateOpCreateProxy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProxy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProxyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProxyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProxyRuleGroup struct {
+}
+
+func (*validateOpCreateProxyRuleGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProxyRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProxyRuleGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProxyRuleGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProxyRules struct {
+}
+
+func (*validateOpCreateProxyRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProxyRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProxyRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProxyRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +310,46 @@ func (m *validateOpDeleteNetworkFirewallTransitGatewayAttachment) HandleInitiali
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteProxy struct {
+}
+
+func (*validateOpDeleteProxy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProxy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProxyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProxyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProxyRules struct {
+}
+
+func (*validateOpDeleteProxyRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProxyRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProxyRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProxyRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -270,6 +410,26 @@ func (m *validateOpDescribeFlowOperation) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeProxyRule struct {
+}
+
+func (*validateOpDescribeProxyRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeProxyRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeProxyRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeProxyRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeResourcePolicy struct {
 }
 
@@ -305,6 +465,26 @@ func (m *validateOpDescribeVpcEndpointAssociation) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeVpcEndpointAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDetachRuleGroupsFromProxyConfiguration struct {
+}
+
+func (*validateOpDetachRuleGroupsFromProxyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachRuleGroupsFromProxyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachRuleGroupsFromProxyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachRuleGroupsFromProxyConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +870,106 @@ func (m *validateOpUpdateLoggingConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProxyConfiguration struct {
+}
+
+func (*validateOpUpdateProxyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxyConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProxy struct {
+}
+
+func (*validateOpUpdateProxy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProxyRuleGroupPriorities struct {
+}
+
+func (*validateOpUpdateProxyRuleGroupPriorities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxyRuleGroupPriorities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxyRuleGroupPrioritiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxyRuleGroupPrioritiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProxyRule struct {
+}
+
+func (*validateOpUpdateProxyRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxyRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxyRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxyRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProxyRulePriorities struct {
+}
+
+func (*validateOpUpdateProxyRulePriorities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxyRulePriorities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxyRulePrioritiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxyRulePrioritiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRuleGroup struct {
 }
 
@@ -766,12 +1046,32 @@ func addOpAssociateSubnetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateSubnets{}, middleware.After)
 }
 
+func addOpAttachRuleGroupsToProxyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachRuleGroupsToProxyConfiguration{}, middleware.After)
+}
+
 func addOpCreateFirewallValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFirewall{}, middleware.After)
 }
 
 func addOpCreateFirewallPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFirewallPolicy{}, middleware.After)
+}
+
+func addOpCreateProxyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProxyConfiguration{}, middleware.After)
+}
+
+func addOpCreateProxyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProxy{}, middleware.After)
+}
+
+func addOpCreateProxyRuleGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProxyRuleGroup{}, middleware.After)
+}
+
+func addOpCreateProxyRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProxyRules{}, middleware.After)
 }
 
 func addOpCreateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -790,6 +1090,14 @@ func addOpDeleteNetworkFirewallTransitGatewayAttachmentValidationMiddleware(stac
 	return stack.Initialize.Add(&validateOpDeleteNetworkFirewallTransitGatewayAttachment{}, middleware.After)
 }
 
+func addOpDeleteProxyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProxy{}, middleware.After)
+}
+
+func addOpDeleteProxyRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProxyRules{}, middleware.After)
+}
+
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
@@ -802,12 +1110,20 @@ func addOpDescribeFlowOperationValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDescribeFlowOperation{}, middleware.After)
 }
 
+func addOpDescribeProxyRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeProxyRule{}, middleware.After)
+}
+
 func addOpDescribeResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResourcePolicy{}, middleware.After)
 }
 
 func addOpDescribeVpcEndpointAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeVpcEndpointAssociation{}, middleware.After)
+}
+
+func addOpDetachRuleGroupsFromProxyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachRuleGroupsFromProxyConfiguration{}, middleware.After)
 }
 
 func addOpDisassociateAvailabilityZonesValidationMiddleware(stack *middleware.Stack) error {
@@ -884,6 +1200,26 @@ func addOpUpdateFirewallPolicyValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLoggingConfiguration{}, middleware.After)
+}
+
+func addOpUpdateProxyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxyConfiguration{}, middleware.After)
+}
+
+func addOpUpdateProxyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxy{}, middleware.After)
+}
+
+func addOpUpdateProxyRuleGroupPrioritiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxyRuleGroupPriorities{}, middleware.After)
+}
+
+func addOpUpdateProxyRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxyRule{}, middleware.After)
+}
+
+func addOpUpdateProxyRulePrioritiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxyRulePriorities{}, middleware.After)
 }
 
 func addOpUpdateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1197,6 +1533,41 @@ func validateIPSets(v map[string]types.IPSet) error {
 		if err := validateIPSet(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListenerPropertiesRequest(v []types.ListenerPropertyRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListenerPropertiesRequest"}
+	for i := range v {
+		if err := validateListenerPropertyRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListenerPropertyRequest(v *types.ListenerPropertyRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListenerPropertyRequest"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1950,6 +2321,24 @@ func validateOpAssociateSubnetsInput(v *AssociateSubnetsInput) error {
 	}
 }
 
+func validateOpAttachRuleGroupsToProxyConfigurationInput(v *AttachRuleGroupsToProxyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachRuleGroupsToProxyConfigurationInput"}
+	if v.RuleGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleGroups"))
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v == nil {
 		return nil
@@ -2012,6 +2401,95 @@ func validateOpCreateFirewallPolicyInput(v *CreateFirewallPolicyInput) error {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProxyConfigurationInput(v *CreateProxyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProxyConfigurationInput"}
+	if v.ProxyConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProxyConfigurationName"))
+	}
+	if v.DefaultRulePhaseActions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultRulePhaseActions"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProxyInput(v *CreateProxyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProxyInput"}
+	if v.ProxyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProxyName"))
+	}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if v.ListenerProperties != nil {
+		if err := validateListenerPropertiesRequest(v.ListenerProperties); err != nil {
+			invalidParams.AddNested("ListenerProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TlsInterceptProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TlsInterceptProperties"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProxyRuleGroupInput(v *CreateProxyRuleGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProxyRuleGroupInput"}
+	if v.ProxyRuleGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProxyRuleGroupName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProxyRulesInput(v *CreateProxyRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProxyRulesInput"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2133,6 +2611,36 @@ func validateOpDeleteNetworkFirewallTransitGatewayAttachmentInput(v *DeleteNetwo
 	}
 }
 
+func validateOpDeleteProxyInput(v *DeleteProxyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProxyInput"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProxyRulesInput(v *DeleteProxyRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProxyRulesInput"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -2181,6 +2689,21 @@ func validateOpDescribeFlowOperationInput(v *DescribeFlowOperationInput) error {
 	}
 }
 
+func validateOpDescribeProxyRuleInput(v *DescribeProxyRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeProxyRuleInput"}
+	if v.ProxyRuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProxyRuleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeResourcePolicyInput(v *DescribeResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -2203,6 +2726,21 @@ func validateOpDescribeVpcEndpointAssociationInput(v *DescribeVpcEndpointAssocia
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcEndpointAssociationInput"}
 	if v.VpcEndpointAssociationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointAssociationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetachRuleGroupsFromProxyConfigurationInput(v *DetachRuleGroupsFromProxyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachRuleGroupsFromProxyConfigurationInput"}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2529,6 +3067,109 @@ func validateOpUpdateLoggingConfigurationInput(v *UpdateLoggingConfigurationInpu
 		if err := validateLoggingConfiguration(v.LoggingConfiguration); err != nil {
 			invalidParams.AddNested("LoggingConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxyConfigurationInput(v *UpdateProxyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxyConfigurationInput"}
+	if v.DefaultRulePhaseActions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultRulePhaseActions"))
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxyInput(v *UpdateProxyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxyInput"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if v.ListenerPropertiesToAdd != nil {
+		if err := validateListenerPropertiesRequest(v.ListenerPropertiesToAdd); err != nil {
+			invalidParams.AddNested("ListenerPropertiesToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListenerPropertiesToRemove != nil {
+		if err := validateListenerPropertiesRequest(v.ListenerPropertiesToRemove); err != nil {
+			invalidParams.AddNested("ListenerPropertiesToRemove", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxyRuleGroupPrioritiesInput(v *UpdateProxyRuleGroupPrioritiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxyRuleGroupPrioritiesInput"}
+	if v.RuleGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleGroups"))
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxyRuleInput(v *UpdateProxyRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxyRuleInput"}
+	if v.ProxyRuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProxyRuleName"))
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxyRulePrioritiesInput(v *UpdateProxyRulePrioritiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxyRulePrioritiesInput"}
+	if len(v.RuleGroupRequestPhase) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleGroupRequestPhase"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

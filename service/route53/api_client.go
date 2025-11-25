@@ -1092,6 +1092,13 @@ func sanitizeURLInput(input interface{}) error {
 			i.Id = &v
 		}
 
+	case *UpdateHostedZoneFeaturesInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
 	default:
 		break
 	}

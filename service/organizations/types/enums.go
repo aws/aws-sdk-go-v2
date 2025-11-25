@@ -313,6 +313,8 @@ const (
 	EffectivePolicyTypeSecurityhubPolicy      EffectivePolicyType = "SECURITYHUB_POLICY"
 	EffectivePolicyTypeInspectorPolicy        EffectivePolicyType = "INSPECTOR_POLICY"
 	EffectivePolicyTypeUpgradeRolloutPolicy   EffectivePolicyType = "UPGRADE_ROLLOUT_POLICY"
+	EffectivePolicyTypeBedrockPolicy          EffectivePolicyType = "BEDROCK_POLICY"
+	EffectivePolicyTypeS3Policy               EffectivePolicyType = "S3_POLICY"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -329,6 +331,8 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"SECURITYHUB_POLICY",
 		"INSPECTOR_POLICY",
 		"UPGRADE_ROLLOUT_POLICY",
+		"BEDROCK_POLICY",
+		"S3_POLICY",
 	}
 }
 
@@ -633,6 +637,8 @@ const (
 	PolicyTypeSecurityhubPolicy      PolicyType = "SECURITYHUB_POLICY"
 	PolicyTypeInspectorPolicy        PolicyType = "INSPECTOR_POLICY"
 	PolicyTypeUpgradeRolloutPolicy   PolicyType = "UPGRADE_ROLLOUT_POLICY"
+	PolicyTypeBedrockPolicy          PolicyType = "BEDROCK_POLICY"
+	PolicyTypeS3Policy               PolicyType = "S3_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -651,6 +657,8 @@ func (PolicyType) Values() []PolicyType {
 		"SECURITYHUB_POLICY",
 		"INSPECTOR_POLICY",
 		"UPGRADE_ROLLOUT_POLICY",
+		"BEDROCK_POLICY",
+		"S3_POLICY",
 	}
 }
 

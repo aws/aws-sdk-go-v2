@@ -322,6 +322,55 @@ type CIDRSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Individual rules that define match conditions and actions for application-layer
+// traffic. Rules specify what to inspect (domains, headers, methods) and what
+// action to take (allow, deny, alert).
+type CreateProxyRule struct {
+
+	// Action to take.
+	Action ProxyRulePhaseAction
+
+	// Match criteria that specify what traffic attributes to examine. Conditions
+	// include operators (StringEquals, StringLike) and values to match against.
+	Conditions []ProxyRuleCondition
+
+	// A description of the proxy rule.
+	Description *string
+
+	// Where to insert a proxy rule in a proxy rule group.
+	InsertPosition *int32
+
+	// The descriptive name of the proxy rule. You can't change the name of a proxy
+	// rule after you create it.
+	ProxyRuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Evaluation points in the traffic flow where rules are applied. There are three
+// phases in a traffic where the rule match is applied.
+//
+// This data type is used specifically for the CreateProxyRules API.
+//
+// Pre-DNS - before domain resolution.
+//
+// Pre-Request - after DNS, before request.
+//
+// Post-Response - after receiving response.
+type CreateProxyRulesByRequestPhase struct {
+
+	// After receiving response.
+	PostRESPONSE []CreateProxyRule
+
+	// Before domain resolution.
+	PreDNS []CreateProxyRule
+
+	// After DNS, before request.
+	PreREQUEST []CreateProxyRule
+
+	noSmithyDocumentSerde
+}
+
 // An optional, non-standard action to use for stateless packet handling. You can
 // define this in addition to the standard action that you must specify.
 //
@@ -351,6 +400,65 @@ type CustomAction struct {
 	//
 	// This member is required.
 	ActionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Proxy attached to a NAT gateway.
+type DescribeProxyResource struct {
+
+	// Time the Proxy was created.
+	CreateTime *time.Time
+
+	// Time the Proxy was deleted.
+	DeleteTime *time.Time
+
+	// Failure code for cases when the Proxy fails to attach or update.
+	FailureCode *string
+
+	// Failure message for cases when the Proxy fails to attach or update.
+	FailureMessage *string
+
+	// Listener properties for HTTP and HTTPS traffic.
+	ListenerProperties []ListenerProperty
+
+	// The NAT Gateway for the proxy.
+	NatGatewayId *string
+
+	// The private DNS name of the Proxy.
+	PrivateDNSName *string
+
+	// The Amazon Resource Name (ARN) of a proxy.
+	ProxyArn *string
+
+	// The Amazon Resource Name (ARN) of a proxy configuration.
+	ProxyConfigurationArn *string
+
+	// The descriptive name of the proxy configuration. You can't change the name of a
+	// proxy configuration after you create it.
+	ProxyConfigurationName *string
+
+	// Current modification status of the Proxy.
+	ProxyModifyState ProxyModifyState
+
+	// The descriptive name of the proxy. You can't change the name of a proxy after
+	// you create it.
+	ProxyName *string
+
+	// Current attachment/detachment status of the Proxy.
+	ProxyState ProxyState
+
+	// The key:value pairs to associate with the resource.
+	Tags []Tag
+
+	// TLS decryption on traffic to filter on attributes in the HTTP header.
+	TlsInterceptProperties *TlsInterceptProperties
+
+	// Time the Proxy was updated.
+	UpdateTime *time.Time
+
+	// The service endpoint created in the VPC.
+	VpcEndpointServiceName *string
 
 	noSmithyDocumentSerde
 }
@@ -1048,6 +1156,36 @@ type IPSetReference struct {
 	noSmithyDocumentSerde
 }
 
+// Open port for taking HTTP or HTTPS traffic.
+type ListenerProperty struct {
+
+	// Port for processing traffic.
+	Port *int32
+
+	// Selection of HTTP or HTTPS traffic.
+	Type ListenerPropertyType
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used specifically for the CreateProxy and UpdateProxy APIs.
+//
+// Open port for taking HTTP or HTTPS traffic.
+type ListenerPropertyRequest struct {
+
+	// Port for processing traffic.
+	//
+	// This member is required.
+	Port *int32
+
+	// Selection of HTTP or HTTPS traffic.
+	//
+	// This member is required.
+	Type ListenerPropertyType
+
+	noSmithyDocumentSerde
+}
+
 // Defines where Network Firewall sends logs for the firewall for one log type.
 // This is used in LoggingConfiguration. You can send each type of log to an Amazon S3 bucket, a
 // CloudWatch log group, or a Firehose delivery stream.
@@ -1220,6 +1358,319 @@ type PortSet struct {
 
 	// The set of port ranges.
 	Definition []string
+
+	noSmithyDocumentSerde
+}
+
+// Proxy attached to a NAT gateway.
+type Proxy struct {
+
+	// Time the Proxy was created.
+	CreateTime *time.Time
+
+	// Time the Proxy was deleted.
+	DeleteTime *time.Time
+
+	// Failure code for cases when the Proxy fails to attach or update.
+	FailureCode *string
+
+	// Failure message for cases when the Proxy fails to attach or update.
+	FailureMessage *string
+
+	// Listener properties for HTTP and HTTPS traffic.
+	ListenerProperties []ListenerProperty
+
+	// The NAT Gateway for the proxy.
+	NatGatewayId *string
+
+	// The Amazon Resource Name (ARN) of a proxy.
+	ProxyArn *string
+
+	// The Amazon Resource Name (ARN) of a proxy configuration.
+	ProxyConfigurationArn *string
+
+	// The descriptive name of the proxy configuration. You can't change the name of a
+	// proxy configuration after you create it.
+	ProxyConfigurationName *string
+
+	// Current modification status of the Proxy.
+	ProxyModifyState ProxyModifyState
+
+	// The descriptive name of the proxy. You can't change the name of a proxy after
+	// you create it.
+	ProxyName *string
+
+	// Current attachment/detachment status of the Proxy.
+	ProxyState ProxyState
+
+	// The key:value pairs to associate with the resource.
+	Tags []Tag
+
+	// TLS decryption on traffic to filter on attributes in the HTTP header.
+	TlsInterceptProperties *TlsInterceptProperties
+
+	// Time the Proxy was updated.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Evaluation points in the traffic flow where rules are applied. There are three
+// phases in a traffic where the rule match is applied.
+//
+// This data type is used specifically for the CreateProxyConfiguration and UpdateProxyConfiguration APIs.
+type ProxyConfigDefaultRulePhaseActionsRequest struct {
+
+	// After receiving response.
+	PostRESPONSE ProxyRulePhaseAction
+
+	// Before domain resolution.
+	PreDNS ProxyRulePhaseAction
+
+	// After DNS, before request.
+	PreREQUEST ProxyRulePhaseAction
+
+	noSmithyDocumentSerde
+}
+
+// Proxy rule group contained within a proxy configuration.
+type ProxyConfigRuleGroup struct {
+
+	// Priority of the proxy rule group in the proxy configuration.
+	Priority *int32
+
+	// The Amazon Resource Name (ARN) of a proxy rule group.
+	ProxyRuleGroupArn *string
+
+	// The descriptive name of the proxy rule group. You can't change the name of a
+	// proxy rule group after you create it.
+	ProxyRuleGroupName *string
+
+	// Proxy rule group type.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A Proxy Configuration defines the monitoring and protection behavior for a
+// Proxy. The details of the behavior are defined in the rule groups that you add
+// to your configuration.
+type ProxyConfiguration struct {
+
+	// Time the Proxy Configuration was created.
+	CreateTime *time.Time
+
+	// Evaluation points in the traffic flow where rules are applied. There are three
+	// phases in a traffic where the rule match is applied.
+	//
+	// Pre-DNS - before domain resolution.
+	//
+	// Pre-Request - after DNS, before request.
+	//
+	// Post-Response - after receiving response.
+	DefaultRulePhaseActions *ProxyConfigDefaultRulePhaseActionsRequest
+
+	// Time the Proxy Configuration was deleted.
+	DeleteTime *time.Time
+
+	// A description of the proxy configuration.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of a proxy configuration.
+	ProxyConfigurationArn *string
+
+	// The descriptive name of the proxy configuration. You can't change the name of a
+	// proxy configuration after you create it.
+	ProxyConfigurationName *string
+
+	// Proxy rule groups within the proxy configuration.
+	RuleGroups []ProxyConfigRuleGroup
+
+	// The key:value pairs to associate with the resource.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about a proxy configuration, returned by operations like
+// create and describe. You can use the information provided in the metadata to
+// retrieve and manage a proxy configuration. You can retrieve all objects for a
+// proxy configuration by calling DescribeProxyConfiguration.
+type ProxyConfigurationMetadata struct {
+
+	// The Amazon Resource Name (ARN) of a proxy configuration.
+	Arn *string
+
+	// The descriptive name of the proxy configuration. You can't change the name of a
+	// proxy configuration after you create it.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about a proxy, returned by operations like create and
+// describe. You can use the information provided in the metadata to retrieve and
+// manage a proxy. You can retrieve all objects for a proxy by calling DescribeProxy.
+type ProxyMetadata struct {
+
+	// The Amazon Resource Name (ARN) of a proxy.
+	Arn *string
+
+	// The descriptive name of the proxy. You can't change the name of a proxy after
+	// you create it.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Individual rules that define match conditions and actions for application-layer
+// traffic. Rules specify what to inspect (domains, headers, methods) and what
+// action to take (allow, deny, alert).
+type ProxyRule struct {
+
+	// Action to take.
+	Action ProxyRulePhaseAction
+
+	// Match criteria that specify what traffic attributes to examine. Conditions
+	// include operators (StringEquals, StringLike) and values to match against.
+	Conditions []ProxyRuleCondition
+
+	// A description of the proxy rule.
+	Description *string
+
+	// The descriptive name of the proxy rule. You can't change the name of a proxy
+	// rule after you create it.
+	ProxyRuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Match criteria that specify what traffic attributes to examine.
+type ProxyRuleCondition struct {
+
+	// Defines what is to be matched.
+	ConditionKey *string
+
+	// Defines how to perform a match.
+	ConditionOperator *string
+
+	// Specifes the exact value that needs to be matched against.
+	ConditionValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Collections of related proxy filtering rules. Rule groups help you manage and
+// reuse sets of rules across multiple proxy configurations.
+type ProxyRuleGroup struct {
+
+	// Time the Proxy Rule Group was created.
+	CreateTime *time.Time
+
+	// Time the Proxy Rule Group was deleted.
+	DeleteTime *time.Time
+
+	// A description of the proxy rule group.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of a proxy rule group.
+	ProxyRuleGroupArn *string
+
+	// The descriptive name of the proxy rule group. You can't change the name of a
+	// proxy rule group after you create it.
+	ProxyRuleGroupName *string
+
+	// Individual rules that define match conditions and actions for application-layer
+	// traffic. Rules specify what to inspect (domains, headers, methods) and what
+	// action to take (allow, deny, alert).
+	Rules *ProxyRulesByRequestPhase
+
+	// The key:value pairs to associate with the resource.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The proxy rule group(s) to attach to the proxy configuration
+type ProxyRuleGroupAttachment struct {
+
+	// Where to insert a proxy rule group in a proxy configuration.
+	InsertPosition *int32
+
+	// The descriptive name of the proxy rule group. You can't change the name of a
+	// proxy rule group after you create it.
+	ProxyRuleGroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about a proxy rule group, returned by operations like
+// create and describe. You can use the information provided in the metadata to
+// retrieve and manage a proxy rule group. You can retrieve all objects for a proxy
+// rule group by calling DescribeProxyRuleGroup.
+type ProxyRuleGroupMetadata struct {
+
+	// The Amazon Resource Name (ARN) of a proxy rule group.
+	Arn *string
+
+	// The descriptive name of the proxy rule group. You can't change the name of a
+	// proxy rule group after you create it.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Proxy rule group name and new desired position.
+type ProxyRuleGroupPriority struct {
+
+	// Where to move a proxy rule group in a proxy configuration.
+	NewPosition *int32
+
+	// The descriptive name of the proxy rule group. You can't change the name of a
+	// proxy rule group after you create it.
+	ProxyRuleGroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// Proxy rule group along with its priority.
+type ProxyRuleGroupPriorityResult struct {
+
+	// Priority of the proxy rule group in the proxy configuration.
+	Priority *int32
+
+	// The descriptive name of the proxy rule group. You can't change the name of a
+	// proxy rule group after you create it.
+	ProxyRuleGroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// Proxy rule name and new desired position.
+type ProxyRulePriority struct {
+
+	// Where to move a proxy rule in a proxy rule group.
+	NewPosition *int32
+
+	// The descriptive name of the proxy rule. You can't change the name of a proxy
+	// rule after you create it.
+	ProxyRuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Evaluation points in the traffic flow where rules are applied. There are three
+// phases in a traffic where the rule match is applied.
+type ProxyRulesByRequestPhase struct {
+
+	// After receiving response.
+	PostRESPONSE []ProxyRule
+
+	// Before domain resolution.
+	PreDNS []ProxyRule
+
+	// After DNS, before request.
+	PreREQUEST []ProxyRule
 
 	noSmithyDocumentSerde
 }
@@ -2180,6 +2631,38 @@ type TLSInspectionConfigurationResponse struct {
 
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// TLS decryption on traffic to filter on attributes in the HTTP header.
+type TlsInterceptProperties struct {
+
+	// Private Certificate Authority (PCA) used to issue private TLS certificates so
+	// that the proxy can present PCA-signed certificates which applications trust
+	// through the same root, establishing a secure and consistent trust model for
+	// encrypted communication.
+	PcaArn *string
+
+	// Specifies whether to enable or disable TLS Intercept Mode.
+	TlsInterceptMode TlsInterceptMode
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used specifically for the CreateProxy and UpdateProxy APIs.
+//
+// TLS decryption on traffic to filter on attributes in the HTTP header.
+type TlsInterceptPropertiesRequest struct {
+
+	// Private Certificate Authority (PCA) used to issue private TLS certificates so
+	// that the proxy can present PCA-signed certificates which applications trust
+	// through the same root, establishing a secure and consistent trust model for
+	// encrypted communication.
+	PcaArn *string
+
+	// Specifies whether to enable or disable TLS Intercept Mode.
+	TlsInterceptMode TlsInterceptMode
 
 	noSmithyDocumentSerde
 }

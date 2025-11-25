@@ -214,6 +214,25 @@ func (IPAddressType) Values() []IPAddressType {
 	}
 }
 
+type ListenerPropertyType string
+
+// Enum values for ListenerPropertyType
+const (
+	ListenerPropertyTypeHttp  ListenerPropertyType = "HTTP"
+	ListenerPropertyTypeHttps ListenerPropertyType = "HTTPS"
+)
+
+// Values returns all known values for ListenerPropertyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListenerPropertyType) Values() []ListenerPropertyType {
+	return []ListenerPropertyType{
+		"HTTP",
+		"HTTPS",
+	}
+}
+
 type LogDestinationType string
 
 // Enum values for LogDestinationType
@@ -298,6 +317,75 @@ func (PerObjectSyncStatus) Values() []PerObjectSyncStatus {
 	}
 }
 
+type ProxyModifyState string
+
+// Enum values for ProxyModifyState
+const (
+	ProxyModifyStateModifying ProxyModifyState = "MODIFYING"
+	ProxyModifyStateCompleted ProxyModifyState = "COMPLETED"
+	ProxyModifyStateFailed    ProxyModifyState = "FAILED"
+)
+
+// Values returns all known values for ProxyModifyState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProxyModifyState) Values() []ProxyModifyState {
+	return []ProxyModifyState{
+		"MODIFYING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type ProxyRulePhaseAction string
+
+// Enum values for ProxyRulePhaseAction
+const (
+	ProxyRulePhaseActionAllow ProxyRulePhaseAction = "ALLOW"
+	ProxyRulePhaseActionDeny  ProxyRulePhaseAction = "DENY"
+	ProxyRulePhaseActionAlert ProxyRulePhaseAction = "ALERT"
+)
+
+// Values returns all known values for ProxyRulePhaseAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProxyRulePhaseAction) Values() []ProxyRulePhaseAction {
+	return []ProxyRulePhaseAction{
+		"ALLOW",
+		"DENY",
+		"ALERT",
+	}
+}
+
+type ProxyState string
+
+// Enum values for ProxyState
+const (
+	ProxyStateAttaching    ProxyState = "ATTACHING"
+	ProxyStateAttached     ProxyState = "ATTACHED"
+	ProxyStateDetaching    ProxyState = "DETACHING"
+	ProxyStateDetached     ProxyState = "DETACHED"
+	ProxyStateAttachFailed ProxyState = "ATTACH_FAILED"
+	ProxyStateDetachFailed ProxyState = "DETACH_FAILED"
+)
+
+// Values returns all known values for ProxyState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProxyState) Values() []ProxyState {
+	return []ProxyState{
+		"ATTACHING",
+		"ATTACHED",
+		"DETACHING",
+		"DETACHED",
+		"ATTACH_FAILED",
+		"DETACH_FAILED",
+	}
+}
+
 type ResourceManagedStatus string
 
 // Enum values for ResourceManagedStatus
@@ -379,6 +467,27 @@ func (RevocationCheckAction) Values() []RevocationCheckAction {
 		"PASS",
 		"DROP",
 		"REJECT",
+	}
+}
+
+type RuleGroupRequestPhase string
+
+// Enum values for RuleGroupRequestPhase
+const (
+	RuleGroupRequestPhasePreDns  RuleGroupRequestPhase = "PRE_DNS"
+	RuleGroupRequestPhasePreReq  RuleGroupRequestPhase = "PRE_REQ"
+	RuleGroupRequestPhasePostRes RuleGroupRequestPhase = "POST_RES"
+)
+
+// Values returns all known values for RuleGroupRequestPhase. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleGroupRequestPhase) Values() []RuleGroupRequestPhase {
+	return []RuleGroupRequestPhase{
+		"PRE_DNS",
+		"PRE_REQ",
+		"POST_RES",
 	}
 }
 
@@ -627,6 +736,25 @@ func (TCPFlag) Values() []TCPFlag {
 		"URG",
 		"ECE",
 		"CWR",
+	}
+}
+
+type TlsInterceptMode string
+
+// Enum values for TlsInterceptMode
+const (
+	TlsInterceptModeEnabled  TlsInterceptMode = "ENABLED"
+	TlsInterceptModeDisabled TlsInterceptMode = "DISABLED"
+)
+
+// Values returns all known values for TlsInterceptMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TlsInterceptMode) Values() []TlsInterceptMode {
+	return []TlsInterceptMode{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

@@ -878,6 +878,18 @@ func TestCheckSnapshot_UpdateHostedZoneComment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHostedZoneFeatures(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHostedZoneFeatures")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTrafficPolicyComment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTrafficPolicyComment(context.Background(), nil, func(o *Options) {
@@ -1710,6 +1722,18 @@ func TestUpdateSnapshot_UpdateHostedZoneComment(t *testing.T) {
 	_, err := svc.UpdateHostedZoneComment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateHostedZoneComment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHostedZoneFeatures(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHostedZoneFeatures")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
