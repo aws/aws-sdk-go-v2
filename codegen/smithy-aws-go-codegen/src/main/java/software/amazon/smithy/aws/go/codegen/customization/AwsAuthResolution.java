@@ -97,16 +97,18 @@ public class AwsAuthResolution implements GoIntegration {
 
     private GoWriter.Writable writeRegionResolver() {
         return goTemplate("""
-                func bindAuthParamsRegion( _ interface{}, params $P, _ interface{}, options Options) {
+                func bindAuthParamsRegion( _ interface{}, params $P, _ interface{}, options Options) error {
                     params.Region = options.Region
+                    return nil
                 }
                 """, AuthParametersGenerator.STRUCT_SYMBOL);
     }
 
     private GoWriter.Writable writeEndpointParamResolver() {
         return goTemplate("""
-                func bindAuthEndpointParams(ctx $P, params $P, input interface{}, options Options) {
-                    params.endpointParams, _ = bindEndpointParams(ctx, input, options)
+                func bindAuthEndpointParams(ctx $P, params $P, input interface{}, options Options) (err error) {
+                    params.endpointParams, err = bindEndpointParams(ctx, input, options)
+                    return
                 }
                 """, GoStdlibTypes.Context.Context, AuthParametersGenerator.STRUCT_SYMBOL);
     }
