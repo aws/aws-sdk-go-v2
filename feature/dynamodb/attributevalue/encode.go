@@ -88,7 +88,7 @@ type Marshaler interface {
 // type. This value can be used in API operations to simplify marshaling
 // your Go value types into AttributeValues.
 //
-// Marshal will recursively transverse the passed in value marshaling its
+// Marshal will recursively traverse the passed in value marshaling its
 // contents into a AttributeValue. Marshal supports basic scalars
 // (int,uint,float,bool,string), maps, slices, and structs. Anonymous
 // nested types are flattened based on Go anonymous type visibility.
@@ -191,7 +191,7 @@ func Marshal(in interface{}) (types.AttributeValue, error) {
 //
 // Use the `optsFns` functional options to override the default configuration.
 //
-// MarshalWithOptions will recursively transverse the passed in value marshaling its
+// MarshalWithOptions will recursively traverse the passed in value marshaling its
 // contents into a AttributeValue. Marshal supports basic scalars
 // (int,uint,float,bool,string), maps, slices, and structs. Anonymous
 // nested types are flattened based on Go anonymous type visibility.
