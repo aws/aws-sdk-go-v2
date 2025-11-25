@@ -1,3 +1,7 @@
+# v1.83.1 (2025-11-25)
+
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.83.0 (2025-11-21)
 
 * **Feature**: Launching Enhanced Error Handling and ESM Grouping capabilities for Kafka ESMs

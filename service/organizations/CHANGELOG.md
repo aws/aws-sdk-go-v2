@@ -1,3 +1,8 @@
+# v1.49.0 (2025-11-25)
+
+* **Feature**: Add support for policy operations on the S3_POLICY and BEDROCK_POLICY policy type.
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.48.0 (2025-11-21)
 
 * **Feature**: Add support for policy operations on the UPGRADE_ROLLOUT_POLICY policy type.

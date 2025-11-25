@@ -1,3 +1,7 @@
+# v1.38.1 (2025-11-25)
+
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.38.0 (2025-11-20)
 
 * **Feature**: Increasing the length limit of Statement Name from 500 to 2048.

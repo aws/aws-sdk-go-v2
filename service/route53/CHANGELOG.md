@@ -1,3 +1,8 @@
+# v1.61.0 (2025-11-25)
+
+* **Feature**: Adds support for new route53 feature: accelerated recovery.
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.60.1 (2025-11-19.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

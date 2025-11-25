@@ -1,8 +1,0 @@
-{
-    "id": "10227f97-cc5a-4747-bf83-42bb503480e8",
-    "type": "feature",
-    "description": "Add support for policy operations on the S3_POLICY and BEDROCK_POLICY policy type.",
-    "modules": [
-        "service/organizations"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "01301896-e199-44a5-90ec-0aa728f3cd6d",
-    "type": "feature",
-    "description": "Adds support for new route53 feature: accelerated recovery.",
-    "modules": [
-        "service/route53"
-    ]
-}

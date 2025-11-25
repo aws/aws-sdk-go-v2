@@ -1,3 +1,7 @@
+# v1.58.1 (2025-11-25)
+
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.58.0 (2025-11-24)
 
 * **Feature**: Add TrustStore, ConnectionFunction APIs to CloudFront SDK

@@ -3,4 +3,4 @@
 package route53resolver
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.41.1"
+const goModuleVersion = "1.41.2"

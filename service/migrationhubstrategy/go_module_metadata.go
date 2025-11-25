@@ -3,4 +3,4 @@
 package migrationhubstrategy
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.26.13"
+const goModuleVersion = "1.26.14"

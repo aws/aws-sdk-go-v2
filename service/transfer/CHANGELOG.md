@@ -1,3 +1,7 @@
+# v1.68.1 (2025-11-25)
+
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.68.0 (2025-11-21)
 
 * **Feature**: Adds support for creating Webapps accessible from a VPC.

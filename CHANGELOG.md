@@ -1,3 +1,21 @@
+# Release (2025-11-25)
+
+## General Highlights
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.275.0](service/ec2/CHANGELOG.md#v12750-2025-11-25)
+  * **Feature**: This release adds support to view Network firewall proxy appliances attached to an existing NAT Gateway via DescribeNatGateways API NatGatewayAttachedAppliance structure.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.59.0](service/networkfirewall/CHANGELOG.md#v1590-2025-11-25)
+  * **Feature**: Network Firewall release of the Proxy feature.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.49.0](service/organizations/CHANGELOG.md#v1490-2025-11-25)
+  * **Feature**: Add support for policy operations on the S3_POLICY and BEDROCK_POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.61.0](service/route53/CHANGELOG.md#v1610-2025-11-25)
+  * **Feature**: Adds support for new route53 feature: accelerated recovery.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.92.1](service/s3/CHANGELOG.md#v1921-2025-11-25)
+  * **Bug Fix**: Fix missing error message when service returns a specific type of error.
+
 # Release (2025-11-24)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.34.1 (2025-11-25)
+
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.34.0 (2025-11-21)
 
 * **Feature**: Adds support for excluding session key tags from HLS multivariant playlists

@@ -1,3 +1,7 @@
+# v1.29.7 (2025-11-25)
+
+* **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234
+
 # v1.29.6 (2025-11-21)
 
 * No change notes available for this release.
