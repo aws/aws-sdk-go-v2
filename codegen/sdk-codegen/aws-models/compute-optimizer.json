@@ -162,56 +162,56 @@
                     "target": "com.amazonaws.computeoptimizer#DesiredCapacity",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The desired capacity, or number of instances, for the EC2 Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The desired capacity, or number of instances, for the EC2 Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "minSize": {
                     "target": "com.amazonaws.computeoptimizer#MinSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The minimum size, or minimum number of instances, for the EC2 Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>The minimum size, or minimum number of instances, for the EC2 Amazon EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "maxSize": {
                     "target": "com.amazonaws.computeoptimizer#MaxSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum size, or maximum number of instances, for the EC2 Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>The maximum size, or maximum number of instances, for the EC2 Amazon EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "instanceType": {
                     "target": "com.amazonaws.computeoptimizer#NullableInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type for the EC2 Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The instance type for the EC2 Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "allocationStrategy": {
                     "target": "com.amazonaws.computeoptimizer#AllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the allocation strategy that the EC2 Auto Scaling group uses. This field is only available for EC2 Auto Scaling groups with mixed instance types.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the allocation strategy that the EC2 Amazon EC2 Auto Scaling group uses. This field is only available for EC2 Amazon EC2 Auto Scaling groups with mixed instance types.\n        </p>"
                     }
                 },
                 "estimatedInstanceHourReductionPercentage": {
                     "target": "com.amazonaws.computeoptimizer#NullableEstimatedInstanceHourReductionPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the projected percentage reduction in instance hours after adopting the recommended configuration. This field is only available for EC2 Auto Scaling groups with scaling policies.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the projected percentage reduction in instance hours after adopting the recommended configuration. This field is only available for EC2 Amazon EC2 Auto Scaling groups with scaling policies.\n        </p>"
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.computeoptimizer#AsgType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes whether the EC2 Auto Scaling group has a single instance type or a mixed instance type configuration.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes whether the EC2 Amazon EC2 Auto Scaling group has a single instance type or a mixed instance type configuration.\n        </p>"
                     }
                 },
                 "mixedInstanceTypes": {
                     "target": "com.amazonaws.computeoptimizer#MixedInstanceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            List the instance types within an EC2 Auto Scaling group that has mixed instance types.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            List the instance types within an EC2 Amazon EC2 Auto Scaling group that has mixed instance types.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of an EC2 Auto Scaling group.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration of an EC2 Amazon EC2 Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#AutoScalingGroupEstimatedMonthlySavings": {
@@ -232,7 +232,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            An object that describes the estimated monthly savings  possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the \n            Savings Plans and Reserved Instances discounts.\n        </p>"
+                "smithy.api#documentation": "<p>\n            An object that describes the estimated monthly savings  possible by adopting Compute Optimizer’s Amazon EC2 Auto Scaling group recommendations. This is based on the \n            Savings Plans and Reserved Instances discounts.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#AutoScalingGroupName": {
@@ -244,85 +244,85 @@
                 "accountId": {
                     "target": "com.amazonaws.computeoptimizer#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "autoScalingGroupArn": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "autoScalingGroupName": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#Finding",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding classification of the Auto Scaling group.</p>\n         <p>Findings for Auto Scaling groups include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—An Auto Scaling group is considered not optimized when Compute Optimizer identifies a\n                    recommendation that can provide better performance for your workload.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An Auto Scaling\n                    group is considered optimized when Compute Optimizer determines that the group\n                    is correctly provisioned to run your workload based on the chosen instance type.\n                    For optimized resources, Compute Optimizer might recommend a new generation\n                    instance type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The finding classification of the Amazon EC2 Auto Scaling group.</p>\n         <p>Findings for Amazon EC2 Auto Scaling groups include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—An Amazon EC2 Auto Scaling group is considered not optimized when Compute Optimizer identifies a\n                    recommendation that can provide better performance for your workload.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An Amazon EC2 Auto Scaling\n                    group is considered optimized when Compute Optimizer determines that the group\n                    is correctly provisioned to run your workload based on the chosen instance type.\n                    For optimized resources, Compute Optimizer might recommend a new generation\n                    instance type.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "utilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#UtilizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the Amazon EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "lookBackPeriodInDays": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "currentConfiguration": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe the current configuration of the Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe the current configuration of the Amazon EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "currentInstanceGpuInfo": {
                     "target": "com.amazonaws.computeoptimizer#GpuInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the current instance type of the Auto Scaling group.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the current instance type of the Amazon EC2 Auto Scaling group.\n        </p>"
                     }
                 },
                 "recommendationOptions": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe the recommendation options for the Auto Scaling\n            group.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe the recommendation options for the Amazon EC2 Auto Scaling\n            group.</p>"
                     }
                 },
                 "lastRefreshTimestamp": {
                     "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the Auto Scaling group recommendation was last\n            generated.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the Amazon EC2 Auto Scaling group recommendation was last\n            generated.</p>"
                     }
                 },
                 "currentPerformanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#CurrentPerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>The risk of the current Auto Scaling group not meeting the performance needs of\n            its workloads. The higher the risk, the more likely the current Auto Scaling group\n            configuration has insufficient capacity and cannot meet workload requirements.</p>"
+                        "smithy.api#documentation": "<p>The risk of the current Amazon EC2 Auto Scaling group not meeting the performance needs of\n            its workloads. The higher the risk, the more likely the current Amazon EC2 Auto Scaling group\n            configuration has insufficient capacity and cannot meet workload requirements.</p>"
                     }
                 },
                 "effectiveRecommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#EffectiveRecommendationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that describes the effective recommendation preferences for the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>An object that describes the effective recommendation preferences for the Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "inferredWorkloadTypes": {
                     "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The applications that might be running on the instances in the Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The applications that might be running on the instances in the Amazon EC2 Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an Auto Scaling group recommendation.</p>"
+                "smithy.api#documentation": "<p>Describes an Amazon EC2 Auto Scaling group recommendation.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOption": {
@@ -331,45 +331,45 @@
                 "configuration": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe an Auto Scaling group configuration.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe an Amazon EC2 Auto Scaling group configuration.</p>"
                     }
                 },
                 "instanceGpuInfo": {
                     "target": "com.amazonaws.computeoptimizer#GpuInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type of the Amazon EC2 Auto Scaling group.\n        </p>"
                     }
                 },
                 "projectedUtilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#ProjectedUtilizationMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe the projected utilization metrics of the Auto Scaling group recommendation option.</p>\n         <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned. Additionally, the <code>Memory</code> metric is\n                returned only for resources that have the unified CloudWatch agent installed\n                on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An array of objects that describe the projected utilization metrics of the Amazon EC2 Auto Scaling group recommendation option.</p>\n         <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned. Additionally, the <code>Memory</code> metric is\n                returned only for resources that have the unified CloudWatch agent installed\n                on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n         </note>"
                     }
                 },
                 "performanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The performance risk of the Auto Scaling group configuration\n            recommendation.</p>\n         <p>Performance risk indicates the likelihood of the recommended instance type not meeting\n            the resource needs of your workload. Compute Optimizer calculates an individual\n            performance risk score for each specification of the recommended instance, including\n            CPU, memory, EBS throughput, EBS IOPS, disk throughput, disk IOPS, network throughput,\n            and network PPS.\n            The performance\n            risk of the recommended instance is calculated as the maximum performance risk score\n            across the analyzed resource specifications.</p>\n         <p>The value ranges from <code>0</code> - <code>4</code>, with <code>0</code> meaning\n            that the recommended resource is predicted to always provide enough hardware capability.\n            The higher the performance risk is, the more likely you should validate whether the\n            recommendation will meet the performance requirements of your workload before migrating\n            your resource.</p>"
+                        "smithy.api#documentation": "<p>The performance risk of the Amazon EC2 Auto Scaling group configuration\n            recommendation.</p>\n         <p>Performance risk indicates the likelihood of the recommended instance type not meeting\n            the resource needs of your workload. Compute Optimizer calculates an individual\n            performance risk score for each specification of the recommended instance, including\n            CPU, memory, EBS throughput, EBS IOPS, disk throughput, disk IOPS, network throughput,\n            and network PPS.\n            The performance\n            risk of the recommended instance is calculated as the maximum performance risk score\n            across the analyzed resource specifications.</p>\n         <p>The value ranges from <code>0</code> - <code>4</code>, with <code>0</code> meaning\n            that the recommended resource is predicted to always provide enough hardware capability.\n            The higher the performance risk is, the more likely you should validate whether the\n            recommendation will meet the performance requirements of your workload before migrating\n            your resource.</p>"
                     }
                 },
                 "rank": {
                     "target": "com.amazonaws.computeoptimizer#Rank",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The rank of the Auto Scaling group recommendation option.</p>\n         <p>The top recommendation option is ranked as <code>1</code>.</p>"
+                        "smithy.api#documentation": "<p>The rank of the Amazon EC2 Auto Scaling group recommendation option.</p>\n         <p>The top recommendation option is ranked as <code>1</code>.</p>"
                     }
                 },
                 "savingsOpportunity": {
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunity",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that describes the savings opportunity for the Auto Scaling group\n            recommendation option. Savings opportunity includes the estimated monthly savings amount\n            and percentage.</p>"
+                        "smithy.api#documentation": "<p>An object that describes the savings opportunity for the Amazon EC2 Auto Scaling group\n            recommendation option. Savings opportunity includes the estimated monthly savings amount\n            and percentage.</p>"
                     }
                 },
                 "savingsOpportunityAfterDiscounts": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupSavingsOpportunityAfterDiscounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An object that describes the savings opportunity for the Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts. \n            Savings opportunity includes the estimated monthly savings and percentage.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An object that describes the savings opportunity for the Amazon EC2 Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts. \n            Savings opportunity includes the estimated monthly savings and percentage.\n        </p>"
                     }
                 },
                 "migrationEffort": {
@@ -380,7 +380,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a recommendation option for an Auto Scaling group.</p>"
+                "smithy.api#documentation": "<p>Describes a recommendation option for an Amazon EC2 Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOptions": {
@@ -402,18 +402,18 @@
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. This saving can be \n            achieved by adopting Compute Optimizer’s Auto Scaling group recommendations.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. This saving can be \n            achieved by adopting Compute Optimizer’s Amazon EC2 Auto Scaling group recommendations.\n        </p>"
                     }
                 },
                 "estimatedMonthlySavings": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupEstimatedMonthlySavings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the \n            Savings Plans and Reserved Instances pricing discounts.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EC2 Auto Scaling group recommendations. This is based on the \n            Savings Plans and Reserved Instances pricing discounts.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Auto Scaling group recommendations after applying the Savings Plans and Reserved Instances discounts.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings you can achieve by implementing Compute Optimizer recommendations.</p>"
+                "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon EC2 Auto Scaling group recommendations after applying the Savings Plans and Reserved Instances discounts.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings you can achieve by implementing Compute Optimizer recommendations.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#Code": {
@@ -1681,7 +1681,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to delete.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to delete.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Amazon EC2 Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Amazon EC2 Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2621,7 +2621,7 @@
                 "cpuVendorArchitectures": {
                     "target": "com.amazonaws.computeoptimizer#CpuVendorArchitectures",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the CPU vendor and architecture for an instance or Auto Scaling group\n            recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton instance types only.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Describes the CPU vendor and architecture for an instance or Amazon EC2 Auto Scaling group\n            recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton instance types only.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "enhancedInfrastructureMetrics": {
@@ -2790,7 +2790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Exports optimization recommendations for Auto Scaling groups.</p>\n         <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata\n            in a JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n            Guide</i>.</p>\n         <p>You can have only one Auto Scaling group export job in progress per Amazon Web Services Region.</p>"
+                "smithy.api#documentation": "<p>Exports optimization recommendations for Amazon EC2 Auto Scaling groups.</p>\n         <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata\n            in a JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n            Guide</i>.</p>\n         <p>You can have only one Amazon EC2 Auto Scaling group export job in progress per Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendationsRequest": {
@@ -2799,13 +2799,13 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts for which to export Auto Scaling group\n            recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to export recommendations.</p>\n         <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n         <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n         <p>You can specify multiple account IDs per request.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts for which to export Amazon EC2 Auto Scaling group\n            recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to export recommendations.</p>\n         <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n         <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n         <p>You can specify multiple account IDs per request.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.computeoptimizer#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects to specify a filter that exports a more specific set of Auto Scaling group recommendations.</p>"
+                        "smithy.api#documentation": "<p>An array of objects to specify a filter that exports a more specific set of Amazon EC2 Auto Scaling group recommendations.</p>"
                     }
                 },
                 "fieldsToExport": {
@@ -2837,7 +2837,7 @@
                 "recommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#RecommendationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object to specify the preferences for the Auto Scaling group recommendations\n            to export.</p>"
+                        "smithy.api#documentation": "<p>An object to specify the preferences for the Amazon EC2 Auto Scaling group recommendations\n            to export.</p>"
                     }
                 }
             },
@@ -4323,6 +4323,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsActiveConnectionCountMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsPacketsInFromSourceMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsPacketsInFromDestinationMaximum"
                     }
                 },
                 "FINDING": {
@@ -6003,7 +6021,7 @@
                 "values": {
                     "target": "com.amazonaws.computeoptimizer#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the filter.</p>\n         <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter and the resource type that you wish to filter results\n            for:</p>\n         <ul>\n            <li>\n               <p>Specify <code>Optimized</code> or <code>NotOptimized</code> if you specify the\n                        <code>name</code> parameter as <code>Finding</code> and you want to filter\n                    results for Auto Scaling groups.</p>\n            </li>\n            <li>\n               <p>Specify <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code> if you specify the <code>name</code> parameter as\n                        <code>Finding</code> and you want to filter results for EC2\n                    instances.</p>\n            </li>\n            <li>\n               <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specify the <code>name</code> parameter as\n                    <code>RecommendationSourceType</code>.</p>\n            </li>\n            <li>\n               <p>Specify one of the following options if you specify the <code>name</code>\n                    parameter as <code>FindingReasonCodes</code>:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>\n                           <code>CPUOverprovisioned</code>\n                        </b> — The\n                            instance’s CPU configuration can be sized down while still meeting the\n                            performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>CPUUnderprovisioned</code>\n                        </b> —\n                            The instance’s CPU configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better CPU performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>MemoryOverprovisioned</code>\n                        </b> —\n                            The instance’s memory configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>MemoryUnderprovisioned</code>\n                        </b> —\n                            The instance’s memory configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better memory performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSThroughputOverprovisioned</code>\n                        </b> — The\n                            instance’s EBS throughput configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSThroughputUnderprovisioned</code>\n                        </b> — The\n                            instance’s EBS throughput configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better EBS throughput performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSIOPSOverprovisioned</code>\n                        </b> —\n                            The instance’s EBS IOPS configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSIOPSUnderprovisioned</code>\n                        </b>\n                            — The instance’s EBS IOPS configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better EBS IOPS performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkBandwidthOverprovisioned</code>\n                        </b> — The\n                            instance’s network bandwidth configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkBandwidthUnderprovisioned</code>\n                        </b> — The\n                            instance’s network bandwidth configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better network bandwidth performance. This finding reason\n                            happens when the <code>NetworkIn</code> or <code>NetworkOut</code>\n                            performance of an instance is impacted.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkPPSOverprovisioned</code>\n                        </b> — The instance’s\n                            network PPS (packets per second) configuration can be sized down while\n                            still meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkPPSUnderprovisioned</code>\n                        </b> — The instance’s\n                            network PPS (packets per second) configuration doesn't meet the\n                            performance requirements of your workload and there is an alternative\n                            instance type that provides better network PPS performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskIOPSOverprovisioned</code>\n                        </b>\n                            — The instance’s disk IOPS configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskIOPSUnderprovisioned</code>\n                        </b>\n                            — The instance’s disk IOPS configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better disk IOPS performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskThroughputOverprovisioned</code>\n                        </b> — The\n                            instance’s disk throughput configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskThroughputUnderprovisioned</code>\n                        </b> — The\n                            instance’s disk throughput configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better disk throughput performance.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n         <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter and the resource type that you wish to filter results\n            for:</p>\n         <ul>\n            <li>\n               <p>Specify <code>Optimized</code> or <code>NotOptimized</code> if you specify the\n                        <code>name</code> parameter as <code>Finding</code> and you want to filter\n                    results for Amazon EC2 Auto Scaling groups.</p>\n            </li>\n            <li>\n               <p>Specify <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code> if you specify the <code>name</code> parameter as\n                        <code>Finding</code> and you want to filter results for EC2\n                    instances.</p>\n            </li>\n            <li>\n               <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specify the <code>name</code> parameter as\n                    <code>RecommendationSourceType</code>.</p>\n            </li>\n            <li>\n               <p>Specify one of the following options if you specify the <code>name</code>\n                    parameter as <code>FindingReasonCodes</code>:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>\n                           <code>CPUOverprovisioned</code>\n                        </b> — The\n                            instance’s CPU configuration can be sized down while still meeting the\n                            performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>CPUUnderprovisioned</code>\n                        </b> —\n                            The instance’s CPU configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better CPU performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>MemoryOverprovisioned</code>\n                        </b> —\n                            The instance’s memory configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>MemoryUnderprovisioned</code>\n                        </b> —\n                            The instance’s memory configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better memory performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSThroughputOverprovisioned</code>\n                        </b> — The\n                            instance’s EBS throughput configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSThroughputUnderprovisioned</code>\n                        </b> — The\n                            instance’s EBS throughput configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better EBS throughput performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSIOPSOverprovisioned</code>\n                        </b> —\n                            The instance’s EBS IOPS configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>EBSIOPSUnderprovisioned</code>\n                        </b>\n                            — The instance’s EBS IOPS configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better EBS IOPS performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkBandwidthOverprovisioned</code>\n                        </b> — The\n                            instance’s network bandwidth configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkBandwidthUnderprovisioned</code>\n                        </b> — The\n                            instance’s network bandwidth configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better network bandwidth performance. This finding reason\n                            happens when the <code>NetworkIn</code> or <code>NetworkOut</code>\n                            performance of an instance is impacted.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkPPSOverprovisioned</code>\n                        </b> — The instance’s\n                            network PPS (packets per second) configuration can be sized down while\n                            still meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>NetworkPPSUnderprovisioned</code>\n                        </b> — The instance’s\n                            network PPS (packets per second) configuration doesn't meet the\n                            performance requirements of your workload and there is an alternative\n                            instance type that provides better network PPS performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskIOPSOverprovisioned</code>\n                        </b>\n                            — The instance’s disk IOPS configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskIOPSUnderprovisioned</code>\n                        </b>\n                            — The instance’s disk IOPS configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better disk IOPS performance.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskThroughputOverprovisioned</code>\n                        </b> — The\n                            instance’s disk throughput configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>\n                           <code>DiskThroughputUnderprovisioned</code>\n                        </b> — The\n                            instance’s disk throughput configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better disk throughput performance.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6148,7 +6166,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns Auto Scaling group recommendations.</p>\n         <p>Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that\n            meet a specific set of requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported\n                resources and requirements</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Returns Amazon EC2 Auto Scaling group recommendations.</p>\n         <p>Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that\n            meet a specific set of requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported\n                resources and requirements</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendationsRequest": {
@@ -6157,37 +6175,37 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account for which to return Auto Scaling group\n            recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return Auto Scaling group\n            recommendations.</p>\n         <p>Only one account ID can be specified per request.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account for which to return Amazon EC2 Auto Scaling group\n            recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return Amazon EC2 Auto Scaling group\n            recommendations.</p>\n         <p>Only one account ID can be specified per request.</p>"
                     }
                 },
                 "autoScalingGroupArns": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return\n            recommendations.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling groups for which to return\n            recommendations.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.computeoptimizer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to advance to the next page of Auto Scaling group\n            recommendations.</p>"
+                        "smithy.api#documentation": "<p>The token to advance to the next page of Amazon EC2 Auto Scaling group\n            recommendations.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.computeoptimizer#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Auto Scaling group recommendations to return with a single\n            request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Amazon EC2 Auto Scaling group recommendations to return with a single\n            request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n                <code>nextToken</code> value.</p>"
                     }
                 },
                 "filters": {
                     "target": "com.amazonaws.computeoptimizer#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects to specify a filter that returns a more specific list of Auto Scaling group recommendations.</p>"
+                        "smithy.api#documentation": "<p>An array of objects to specify a filter that returns a more specific list of Amazon EC2 Auto Scaling group recommendations.</p>"
                     }
                 },
                 "recommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#RecommendationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object to specify the preferences for the Auto Scaling group recommendations\n            to return in the response.</p>"
+                        "smithy.api#documentation": "<p>An object to specify the preferences for the Amazon EC2 Auto Scaling group recommendations\n            to return in the response.</p>"
                     }
                 }
             },
@@ -6201,19 +6219,19 @@
                 "nextToken": {
                     "target": "com.amazonaws.computeoptimizer#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to advance to the next page of Auto Scaling group\n            recommendations.</p>\n         <p>This value is null when there are no more pages of Auto Scaling group\n            recommendations to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of Amazon EC2 Auto Scaling group\n            recommendations.</p>\n         <p>This value is null when there are no more pages of Amazon EC2 Auto Scaling group\n            recommendations to return.</p>"
                     }
                 },
                 "autoScalingGroupRecommendations": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendations",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe Auto Scaling group recommendations.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe Amazon EC2 Auto Scaling group recommendations.</p>"
                     }
                 },
                 "errors": {
                     "target": "com.amazonaws.computeoptimizer#GetRecommendationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n         <p>For example, an error is returned if you request recommendations for an unsupported\n                Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n         <p>For example, an error is returned if you request recommendations for an unsupported\n                Amazon EC2 Auto Scaling group.</p>"
                     }
                 }
             },
@@ -6775,7 +6793,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.computeoptimizer#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to confirm effective\n            recommendation preferences. Only EC2 instance and Auto Scaling group ARNs are\n            currently supported.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to confirm effective\n            recommendation preferences. Only EC2 instance and Amazon EC2 Auto Scaling group ARNs are\n            currently supported.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7523,7 +7541,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an error experienced when getting recommendations.</p>\n         <p>For example, an error is returned if you request recommendations for an unsupported\n                Auto Scaling group, or if you request recommendations for an instance of an\n            unsupported instance family.</p>"
+                "smithy.api#documentation": "<p>Describes an error experienced when getting recommendations.</p>\n         <p>For example, an error is returned if you request recommendations for an unsupported\n                Amazon EC2 Auto Scaling group, or if you request recommendations for an instance of an\n            unsupported instance family.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#GetRecommendationErrors": {
@@ -7567,7 +7585,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns existing recommendation preferences, such as enhanced infrastructure\n            metrics.</p>\n         <p>Use the <code>scope</code> parameter to specify which preferences to return. You can\n            specify to return preferences for an organization, a specific account ID, or a specific\n            EC2 instance or Auto Scaling group Amazon Resource Name (ARN).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns existing recommendation preferences, such as enhanced infrastructure\n            metrics.</p>\n         <p>Use the <code>scope</code> parameter to specify which preferences to return. You can\n            specify to return preferences for an organization, a specific account ID, or a specific\n            EC2 instance or Amazon EC2 Auto Scaling group Amazon Resource Name (ARN).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7582,7 +7600,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference for which to return\n            preferences.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference for which to return\n            preferences.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Amazon EC2 Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Amazon EC2 Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7661,7 +7679,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n         <p>It returns the number of:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2 instances in an account that are\n                        <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>EC2Auto Scaling groups in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Lambda functions in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>, \n                    <code>NotOptimized</code> or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, <code>Optimized</code>, or <code>NotOptimized</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n         <p>It returns the number of:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2 instances in an account that are\n                        <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>EC2Amazon EC2 Auto Scaling groups in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Lambda functions in an account that are <code>NotOptimized</code>,\n                    or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>, \n                    <code>NotOptimized</code> or <code>Optimized</code>.</p>\n            </li>\n            <li>\n               <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>, \n                    <code>Overprovisioned</code>, <code>Optimized</code>, or <code>NotOptimized</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7831,6 +7849,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Unattached"
                     }
+                },
+                "UNUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unused"
+                    }
                 }
             }
         },
@@ -7901,6 +7925,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VolumeWriteOpsPerSecond"
+                    }
+                },
+                "ACTIVE_CONNECTION_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ActiveConnectionCount"
+                    }
+                },
+                "PACKETS_IN_FROM_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PacketsInFromSource"
+                    }
+                },
+                "PACKETS_IN_FROM_DESTINATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PacketsInFromDestination"
                     }
                 }
             }
@@ -8098,6 +8140,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RDSDBInstance"
+                    }
+                },
+                "NAT_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NatGateway"
                     }
                 }
             }
@@ -10244,7 +10292,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html\">\n                Rightsizing recommendation preferences</a> in the <i>Compute Optimizer User\n                    Guide</i>.\n        </p>\n         <note>\n            <ul>\n               <li>\n                  <p>This preference is only available for the Amazon EC2 instance and Auto Scaling group resource types.</p>\n               </li>\n               <li>\n                  <p>Compute Optimizer only supports the customization of <code>Ec2InstanceTypes</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html\">\n                Rightsizing recommendation preferences</a> in the <i>Compute Optimizer User\n                    Guide</i>.\n        </p>\n         <note>\n            <ul>\n               <li>\n                  <p>This preference is only available for the Amazon EC2 instance and Amazon EC2 Auto Scaling group resource types.</p>\n               </li>\n               <li>\n                  <p>Compute Optimizer only supports the customization of <code>Ec2InstanceTypes</code>.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.computeoptimizer#PreferredResourceName": {
@@ -10358,14 +10406,14 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Amazon EC2 Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Amazon EC2 Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "scope": {
                     "target": "com.amazonaws.computeoptimizer#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that describes the scope of the recommendation preference to create.</p>\n         <p>You can create recommendation preferences at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n         <note>\n            <p>You cannot create recommendation preferences for Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified Auto Scaling group. You also cannot create recommendation\n                preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for\n                standalone instances.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An object that describes the scope of the recommendation preference to create.</p>\n         <p>You can create recommendation preferences at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n         <note>\n            <p>You cannot create recommendation preferences for Amazon EC2 Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Amazon EC2 Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Amazon EC2 Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified Amazon EC2 Auto Scaling group. You also cannot create recommendation\n                preferences at the resource level for instances that are part of an Amazon EC2 Auto Scaling group. You can create recommendation preferences at the resource level only for\n                standalone instances.</p>\n         </note>"
                     }
                 },
                 "enhancedInfrastructureMetrics": {
@@ -10389,7 +10437,7 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance and Amazon EC2 Auto Scaling group resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Amazon EC2 Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "utilizationPreferences": {
@@ -10401,7 +10449,7 @@
                 "preferredResources": {
                     "target": "com.amazonaws.computeoptimizer#PreferredResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance and Amazon EC2 Auto Scaling group resource types.</p>\n         </note>"
                     }
                 },
                 "savingsEstimationMode": {
@@ -11538,7 +11586,7 @@
                 "cpuVendorArchitectures": {
                     "target": "com.amazonaws.computeoptimizer#CpuVendorArchitectures",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton instance types only.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the CPU vendor and architecture for Amazon EC2 instance and Amazon EC2 Auto Scaling group recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton instance types only.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11558,7 +11606,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Amazon EC2 Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Amazon EC2 Auto Scaling group.</p>"
                     }
                 },
                 "enhancedInfrastructureMetrics": {
@@ -11631,7 +11679,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the source of a recommendation, such as an Amazon EC2 instance or\n                Auto Scaling group.</p>"
+                "smithy.api#documentation": "<p>Describes the source of a recommendation, such as an Amazon EC2 instance or\n                Amazon EC2 Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#RecommendationSourceArn": {
@@ -11692,6 +11740,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AuroraDBClusterStorage"
+                    }
+                },
+                "NAT_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NatGateway"
                     }
                 }
             }
@@ -11998,12 +12052,12 @@
                 "value": {
                     "target": "com.amazonaws.computeoptimizer#ScopeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the scope.</p>\n         <p>If you specified the <code>name</code> of the scope as:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Organization</code> - The <code>value</code> must be\n                        <code>ALL_ACCOUNTS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountId</code> - The <code>value</code> must be a 12-digit Amazon Web Services account ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceArn</code> - The <code>value</code> must be the Amazon Resource\n                    Name (ARN) of an EC2 instance or an Auto Scaling group.</p>\n            </li>\n         </ul>\n         <p>Only EC2 instance and Auto Scaling group ARNs are currently supported.</p>"
+                        "smithy.api#documentation": "<p>The value of the scope.</p>\n         <p>If you specified the <code>name</code> of the scope as:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Organization</code> - The <code>value</code> must be\n                        <code>ALL_ACCOUNTS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountId</code> - The <code>value</code> must be a 12-digit Amazon Web Services account ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceArn</code> - The <code>value</code> must be the Amazon Resource\n                    Name (ARN) of an EC2 instance or an Amazon EC2 Auto Scaling group.</p>\n            </li>\n         </ul>\n         <p>Only EC2 instance and Amazon EC2 Auto Scaling group ARNs are currently supported.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the scope of a recommendation preference.</p>\n         <p>Recommendation preferences can be created at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n         <note>\n            <p>You cannot create recommendation preferences for Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified Auto Scaling group. You also cannot create recommendation\n                preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for\n                standalone instances.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes the scope of a recommendation preference.</p>\n         <p>Recommendation preferences can be created at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n         <note>\n            <p>You cannot create recommendation preferences for Amazon EC2 Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Amazon EC2 Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Amazon EC2 Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified Amazon EC2 Auto Scaling group. You also cannot create recommendation\n                preferences at the resource level for instances that are part of an Amazon EC2 Auto Scaling group. You can create recommendation preferences at the resource level only for\n                standalone instances.</p>\n         </note>"
             }
         },
         "com.amazonaws.computeoptimizer#ScopeName": {

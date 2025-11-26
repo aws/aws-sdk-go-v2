@@ -6188,6 +6188,12 @@
                     "traits": {
                         "smithy.api#enumValue": "flex"
                     }
+                },
+                "RESERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reserved"
+                    }
                 }
             }
         },
