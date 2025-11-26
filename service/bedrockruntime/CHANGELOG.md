@@ -1,3 +1,7 @@
+# v1.46.0 (2025-11-26)
+
+* **Feature**: Bedrock Runtime Reserved Service Support
+
 # v1.45.1 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

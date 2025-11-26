@@ -1,3 +1,7 @@
+# v1.49.0 (2025-11-26)
+
+* **Feature**: Compute Optimizer now identifies idle NAT Gateway resources for cost optimization based on traffic patterns and backup configuration analysis. Access recommendations via the GetIdleRecommendations API.
+
 # v1.48.5 (2025-11-25)
 
 * **Bug Fix**: Add error check for endpoint param binding during auth scheme resolution to fix panic reported in #3234

@@ -1,3 +1,13 @@
+# Release (2025-11-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.46.0](service/bedrockruntime/CHANGELOG.md#v1460-2025-11-26)
+  * **Feature**: Bedrock Runtime Reserved Service Support
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.49.0](service/computeoptimizer/CHANGELOG.md#v1490-2025-11-26)
+  * **Feature**: Compute Optimizer now identifies idle NAT Gateway resources for cost optimization based on traffic patterns and backup configuration analysis. Access recommendations via the GetIdleRecommendations API.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.22.0](service/costoptimizationhub/CHANGELOG.md#v1220-2025-11-26)
+  * **Feature**: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for NAT Gateway.
+
 # Release (2025-11-25)
 
 ## General Highlights
