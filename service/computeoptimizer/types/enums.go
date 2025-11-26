@@ -719,6 +719,9 @@ const (
 	ExportableIdleFieldUtilizationMetricsEbsVolumeWriteIopsMaximum       ExportableIdleField = "UtilizationMetricsEBSVolumeWriteIOPSMaximum"
 	ExportableIdleFieldUtilizationMetricsVolumeReadOpsPerSecondMaximum   ExportableIdleField = "UtilizationMetricsVolumeReadOpsPerSecondMaximum"
 	ExportableIdleFieldUtilizationMetricsVolumeWriteOpsPerSecondMaximum  ExportableIdleField = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
+	ExportableIdleFieldUtilizationMetricsActiveConnectionCountMaximum    ExportableIdleField = "UtilizationMetricsActiveConnectionCountMaximum"
+	ExportableIdleFieldUtilizationMetricsPacketsInFromSourceMaximum      ExportableIdleField = "UtilizationMetricsPacketsInFromSourceMaximum"
+	ExportableIdleFieldUtilizationMetricsPacketsInFromDestinationMaximum ExportableIdleField = "UtilizationMetricsPacketsInFromDestinationMaximum"
 	ExportableIdleFieldFinding                                           ExportableIdleField = "Finding"
 	ExportableIdleFieldFindingDescription                                ExportableIdleField = "FindingDescription"
 	ExportableIdleFieldTags                                              ExportableIdleField = "Tags"
@@ -747,6 +750,9 @@ func (ExportableIdleField) Values() []ExportableIdleField {
 		"UtilizationMetricsEBSVolumeWriteIOPSMaximum",
 		"UtilizationMetricsVolumeReadOpsPerSecondMaximum",
 		"UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
+		"UtilizationMetricsActiveConnectionCountMaximum",
+		"UtilizationMetricsPacketsInFromSourceMaximum",
+		"UtilizationMetricsPacketsInFromDestinationMaximum",
 		"Finding",
 		"FindingDescription",
 		"Tags",
@@ -1474,6 +1480,7 @@ type IdleFinding string
 const (
 	IdleFindingIdle       IdleFinding = "Idle"
 	IdleFindingUnattached IdleFinding = "Unattached"
+	IdleFindingUnused     IdleFinding = "Unused"
 )
 
 // Values returns all known values for IdleFinding. Note that this can be expanded
@@ -1484,6 +1491,7 @@ func (IdleFinding) Values() []IdleFinding {
 	return []IdleFinding{
 		"Idle",
 		"Unattached",
+		"Unused",
 	}
 }
 
@@ -1500,6 +1508,9 @@ const (
 	IdleMetricNameEbsVolumeWriteIops       IdleMetricName = "EBSVolumeWriteIOPS"
 	IdleMetricNameVolumeReadOpsPerSecond   IdleMetricName = "VolumeReadOpsPerSecond"
 	IdleMetricNameVolumeWriteOpsPerSecond  IdleMetricName = "VolumeWriteOpsPerSecond"
+	IdleMetricNameActiveConnectionCount    IdleMetricName = "ActiveConnectionCount"
+	IdleMetricNamePacketsInFromSource      IdleMetricName = "PacketsInFromSource"
+	IdleMetricNamePacketsInFromDestination IdleMetricName = "PacketsInFromDestination"
 )
 
 // Values returns all known values for IdleMetricName. Note that this can be
@@ -1517,6 +1528,9 @@ func (IdleMetricName) Values() []IdleMetricName {
 		"EBSVolumeWriteIOPS",
 		"VolumeReadOpsPerSecond",
 		"VolumeWriteOpsPerSecond",
+		"ActiveConnectionCount",
+		"PacketsInFromSource",
+		"PacketsInFromDestination",
 	}
 }
 
@@ -1549,6 +1563,7 @@ const (
 	IdleRecommendationResourceTypeEbsVolume        IdleRecommendationResourceType = "EBSVolume"
 	IdleRecommendationResourceTypeEcsService       IdleRecommendationResourceType = "ECSService"
 	IdleRecommendationResourceTypeRdsDbInstance    IdleRecommendationResourceType = "RDSDBInstance"
+	IdleRecommendationResourceTypeNatGateway       IdleRecommendationResourceType = "NatGateway"
 )
 
 // Values returns all known values for IdleRecommendationResourceType. Note that
@@ -1563,6 +1578,7 @@ func (IdleRecommendationResourceType) Values() []IdleRecommendationResourceType 
 		"EBSVolume",
 		"ECSService",
 		"RDSDBInstance",
+		"NatGateway",
 	}
 }
 
@@ -2599,6 +2615,7 @@ const (
 	RecommendationSourceTypeRdsDbInstance          RecommendationSourceType = "RdsDBInstance"
 	RecommendationSourceTypeRdsDbInstanceStorage   RecommendationSourceType = "RdsDBInstanceStorage"
 	RecommendationSourceTypeAuroraDbClusterStorage RecommendationSourceType = "AuroraDBClusterStorage"
+	RecommendationSourceTypeNatGateway             RecommendationSourceType = "NatGateway"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this
@@ -2616,6 +2633,7 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"RdsDBInstance",
 		"RdsDBInstanceStorage",
 		"AuroraDBClusterStorage",
+		"NatGateway",
 	}
 }
 

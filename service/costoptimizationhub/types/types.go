@@ -647,6 +647,33 @@ type MixedInstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The NAT Gateway recommendation details.
+type NatGateway struct {
+
+	// The NAT Gateway configuration used for recommendations.
+	Configuration *NatGatewayConfiguration
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+// The NAT Gateway configuration used for recommendations.
+type NatGatewayConfiguration struct {
+
+	// The number of active connections through the NAT Gateway.
+	ActiveConnectionCount *int64
+
+	// The number of packets received from the destination through the NAT Gateway.
+	PacketsInFromDestination *int64
+
+	// The number of packets received from the source through the NAT Gateway.
+	PacketsInFromSource *int64
+
+	noSmithyDocumentSerde
+}
+
 // The OpenSearch reserved instances recommendation details.
 type OpenSearchReservedInstances struct {
 
@@ -1056,6 +1083,7 @@ type ResourceCostCalculation struct {
 //	ResourceDetailsMemberElastiCacheReservedInstances
 //	ResourceDetailsMemberLambdaFunction
 //	ResourceDetailsMemberMemoryDbReservedInstances
+//	ResourceDetailsMemberNatGateway
 //	ResourceDetailsMemberOpenSearchReservedInstances
 //	ResourceDetailsMemberRdsDbInstance
 //	ResourceDetailsMemberRdsDbInstanceStorage
@@ -1173,6 +1201,15 @@ type ResourceDetailsMemberMemoryDbReservedInstances struct {
 }
 
 func (*ResourceDetailsMemberMemoryDbReservedInstances) isResourceDetails() {}
+
+// The NAT Gateway recommendation details.
+type ResourceDetailsMemberNatGateway struct {
+	Value NatGateway
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberNatGateway) isResourceDetails() {}
 
 // The OpenSearch reserved instances recommendation details.
 type ResourceDetailsMemberOpenSearchReservedInstances struct {

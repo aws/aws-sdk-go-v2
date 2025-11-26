@@ -1,0 +1,8 @@
+{
+    "id": "3c9a2d06-c210-4000-91d8-8e2daef0bd49",
+    "type": "feature",
+    "description": "Bedrock Runtime Reserved Service Support",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

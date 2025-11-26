@@ -47,6 +47,9 @@ func ExampleResourceDetails_outputUsage() {
 	case *types.ResourceDetailsMemberMemoryDbReservedInstances:
 		_ = v.Value // Value is types.MemoryDbReservedInstances
 
+	case *types.ResourceDetailsMemberNatGateway:
+		_ = v.Value // Value is types.NatGateway
+
 	case *types.ResourceDetailsMemberOpenSearchReservedInstances:
 		_ = v.Value // Value is types.OpenSearchReservedInstances
 
@@ -86,6 +89,7 @@ var _ *types.Ec2Instance
 var _ *types.Ec2InstanceSavingsPlans
 var _ *types.RdsDbInstanceStorage
 var _ *types.EcsService
+var _ *types.NatGateway
 var _ *types.RedshiftReservedInstances
 var _ *types.RdsDbInstance
 var _ *types.ElastiCacheReservedInstances

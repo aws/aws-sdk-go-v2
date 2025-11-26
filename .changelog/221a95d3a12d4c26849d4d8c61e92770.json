@@ -1,0 +1,8 @@
+{
+    "id": "221a95d3-a12d-4c26-849d-4d8c61e92770",
+    "type": "feature",
+    "description": "This release enables AWS Cost Optimization Hub to show cost optimization recommendations for NAT Gateway.",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

@@ -687,6 +687,7 @@ const (
 	ServiceTierTypePriority ServiceTierType = "priority"
 	ServiceTierTypeDefault  ServiceTierType = "default"
 	ServiceTierTypeFlex     ServiceTierType = "flex"
+	ServiceTierTypeReserved ServiceTierType = "reserved"
 )
 
 // Values returns all known values for ServiceTierType. Note that this can be
@@ -698,6 +699,7 @@ func (ServiceTierType) Values() []ServiceTierType {
 		"priority",
 		"default",
 		"flex",
+		"reserved",
 	}
 }
 

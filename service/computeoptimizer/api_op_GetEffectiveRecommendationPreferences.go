@@ -36,8 +36,8 @@ func (c *Client) GetEffectiveRecommendationPreferences(ctx context.Context, para
 type GetEffectiveRecommendationPreferencesInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which to confirm effective
-	// recommendation preferences. Only EC2 instance and Auto Scaling group ARNs are
-	// currently supported.
+	// recommendation preferences. Only EC2 instance and Amazon EC2 Auto Scaling group
+	// ARNs are currently supported.
 	//
 	// This member is required.
 	ResourceArn *string

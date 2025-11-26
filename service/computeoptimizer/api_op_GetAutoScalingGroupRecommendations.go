@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Auto Scaling group recommendations.
+// Returns Amazon EC2 Auto Scaling group recommendations.
 //
 // Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups
 // that meet a specific set of requirements. For more information, see the [Supported resources and requirements]in the
@@ -35,36 +35,37 @@ func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params 
 
 type GetAutoScalingGroupRecommendationsInput struct {
 
-	// The ID of the Amazon Web Services account for which to return Auto Scaling
-	// group recommendations.
+	// The ID of the Amazon Web Services account for which to return Amazon EC2 Auto
+	// Scaling group recommendations.
 	//
 	// If your account is the management account of an organization, use this
-	// parameter to specify the member account for which you want to return Auto
-	// Scaling group recommendations.
+	// parameter to specify the member account for which you want to return Amazon EC2
+	// Auto Scaling group recommendations.
 	//
 	// Only one account ID can be specified per request.
 	AccountIds []string
 
-	// The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return
-	// recommendations.
+	// The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling groups for which
+	// to return recommendations.
 	AutoScalingGroupArns []string
 
 	// An array of objects to specify a filter that returns a more specific list of
-	// Auto Scaling group recommendations.
+	// Amazon EC2 Auto Scaling group recommendations.
 	Filters []types.Filter
 
-	// The maximum number of Auto Scaling group recommendations to return with a
-	// single request.
+	// The maximum number of Amazon EC2 Auto Scaling group recommendations to return
+	// with a single request.
 	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
 
-	// The token to advance to the next page of Auto Scaling group recommendations.
+	// The token to advance to the next page of Amazon EC2 Auto Scaling group
+	// recommendations.
 	NextToken *string
 
-	// An object to specify the preferences for the Auto Scaling group recommendations
-	// to return in the response.
+	// An object to specify the preferences for the Amazon EC2 Auto Scaling group
+	// recommendations to return in the response.
 	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde
@@ -72,20 +73,20 @@ type GetAutoScalingGroupRecommendationsInput struct {
 
 type GetAutoScalingGroupRecommendationsOutput struct {
 
-	// An array of objects that describe Auto Scaling group recommendations.
+	// An array of objects that describe Amazon EC2 Auto Scaling group recommendations.
 	AutoScalingGroupRecommendations []types.AutoScalingGroupRecommendation
 
 	// An array of objects that describe errors of the request.
 	//
 	// For example, an error is returned if you request recommendations for an
-	// unsupported Auto Scaling group.
+	// unsupported Amazon EC2 Auto Scaling group.
 	Errors []types.GetRecommendationError
 
-	// The token to use to advance to the next page of Auto Scaling group
+	// The token to use to advance to the next page of Amazon EC2 Auto Scaling group
 	// recommendations.
 	//
-	// This value is null when there are no more pages of Auto Scaling group
-	// recommendations to return.
+	// This value is null when there are no more pages of Amazon EC2 Auto Scaling
+	// group recommendations to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

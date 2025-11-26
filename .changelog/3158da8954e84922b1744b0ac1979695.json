@@ -1,0 +1,8 @@
+{
+    "id": "3158da89-54e8-4922-b174-4b0ac1979695",
+    "type": "feature",
+    "description": "Compute Optimizer now identifies idle NAT Gateway resources for cost optimization based on traffic patterns and backup configuration analysis. Access recommendations via the GetIdleRecommendations API.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

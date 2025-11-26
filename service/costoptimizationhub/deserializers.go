@@ -3584,6 +3584,117 @@ func awsAwsjson10_deserializeDocumentMixedInstanceConfigurationList(v *[]types.M
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentNatGateway(v **types.NatGateway, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NatGateway
+	if *v == nil {
+		sv = &types.NatGateway{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentNatGatewayConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentNatGatewayConfiguration(v **types.NatGatewayConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NatGatewayConfiguration
+	if *v == nil {
+		sv = &types.NatGatewayConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activeConnectionCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveConnectionCount = ptr.Int64(i64)
+			}
+
+		case "packetsInFromDestination":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PacketsInFromDestination = ptr.Int64(i64)
+			}
+
+		case "packetsInFromSource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PacketsInFromSource = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentOpenSearchReservedInstances(v **types.OpenSearchReservedInstances, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5326,6 +5437,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ResourceDetailsMemberMemoryDbReservedInstances{Value: mv}
+			break loop
+
+		case "natGateway":
+			var mv types.NatGateway
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentNatGateway(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberNatGateway{Value: mv}
 			break loop
 
 		case "openSearchReservedInstances":

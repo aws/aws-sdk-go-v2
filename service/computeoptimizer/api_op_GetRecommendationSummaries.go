@@ -18,7 +18,8 @@ import (
 //   - Amazon EC2 instances in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
 //
-//   - EC2Auto Scaling groups in an account that are NotOptimized , or Optimized .
+//   - EC2Amazon EC2 Auto Scaling groups in an account that are NotOptimized , or
+//     Optimized .
 //
 //   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
 //

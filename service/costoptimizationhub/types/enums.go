@@ -220,6 +220,7 @@ const (
 	ResourceTypeAuroraDbClusterStorage       ResourceType = "AuroraDbClusterStorage"
 	ResourceTypeDynamoDbReservedCapacity     ResourceType = "DynamoDbReservedCapacity"
 	ResourceTypeMemoryDbReservedInstances    ResourceType = "MemoryDbReservedInstances"
+	ResourceTypeNatGateway                   ResourceType = "NatGateway"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -246,6 +247,7 @@ func (ResourceType) Values() []ResourceType {
 		"AuroraDbClusterStorage",
 		"DynamoDbReservedCapacity",
 		"MemoryDbReservedInstances",
+		"NatGateway",
 	}
 }
 

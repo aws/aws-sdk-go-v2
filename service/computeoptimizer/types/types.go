@@ -30,38 +30,40 @@ type AccountEnrollmentStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of an EC2 Auto Scaling group.
+// Describes the configuration of an EC2 Amazon EC2 Auto Scaling group.
 type AutoScalingGroupConfiguration struct {
 
-	//  Describes the allocation strategy that the EC2 Auto Scaling group uses. This
-	// field is only available for EC2 Auto Scaling groups with mixed instance types.
+	//  Describes the allocation strategy that the EC2 Amazon EC2 Auto Scaling group
+	// uses. This field is only available for EC2 Amazon EC2 Auto Scaling groups with
+	// mixed instance types.
 	AllocationStrategy AllocationStrategy
 
-	// The desired capacity, or number of instances, for the EC2 Auto Scaling group.
+	// The desired capacity, or number of instances, for the EC2 Amazon EC2 Auto
+	// Scaling group.
 	DesiredCapacity int32
 
 	//  Describes the projected percentage reduction in instance hours after adopting
-	// the recommended configuration. This field is only available for EC2 Auto Scaling
-	// groups with scaling policies.
+	// the recommended configuration. This field is only available for EC2 Amazon EC2
+	// Auto Scaling groups with scaling policies.
 	EstimatedInstanceHourReductionPercentage *float64
 
-	// The instance type for the EC2 Auto Scaling group.
+	// The instance type for the EC2 Amazon EC2 Auto Scaling group.
 	InstanceType *string
 
-	// The maximum size, or maximum number of instances, for the EC2 Auto Scaling
-	// group.
+	// The maximum size, or maximum number of instances, for the EC2 Amazon EC2 Auto
+	// Scaling group.
 	MaxSize int32
 
-	// The minimum size, or minimum number of instances, for the EC2 Auto Scaling
-	// group.
+	// The minimum size, or minimum number of instances, for the EC2 Amazon EC2 Auto
+	// Scaling group.
 	MinSize int32
 
-	//  List the instance types within an EC2 Auto Scaling group that has mixed
-	// instance types.
+	//  List the instance types within an EC2 Amazon EC2 Auto Scaling group that has
+	// mixed instance types.
 	MixedInstanceTypes []string
 
-	//  Describes whether the EC2 Auto Scaling group has a single instance type or a
-	// mixed instance type configuration.
+	//  Describes whether the EC2 Amazon EC2 Auto Scaling group has a single instance
+	// type or a mixed instance type configuration.
 	Type AsgType
 
 	noSmithyDocumentSerde
@@ -69,8 +71,8 @@ type AutoScalingGroupConfiguration struct {
 
 //	An object that describes the estimated monthly savings possible by adopting
 //
-// Compute Optimizer’s Auto Scaling group recommendations. This is based on the
-// Savings Plans and Reserved Instances discounts.
+// Compute Optimizer’s Amazon EC2 Auto Scaling group recommendations. This is based
+// on the Savings Plans and Reserved Instances discounts.
 type AutoScalingGroupEstimatedMonthlySavings struct {
 
 	//  The currency of the estimated monthly savings.
@@ -82,52 +84,52 @@ type AutoScalingGroupEstimatedMonthlySavings struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Auto Scaling group recommendation.
+// Describes an Amazon EC2 Auto Scaling group recommendation.
 type AutoScalingGroupRecommendation struct {
 
-	// The Amazon Web Services account ID of the Auto Scaling group.
+	// The Amazon Web Services account ID of the Amazon EC2 Auto Scaling group.
 	AccountId *string
 
-	// The Amazon Resource Name (ARN) of the Auto Scaling group.
+	// The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling group.
 	AutoScalingGroupArn *string
 
-	// The name of the Auto Scaling group.
+	// The name of the Amazon EC2 Auto Scaling group.
 	AutoScalingGroupName *string
 
-	// An array of objects that describe the current configuration of the Auto Scaling
-	// group.
+	// An array of objects that describe the current configuration of the Amazon EC2
+	// Auto Scaling group.
 	CurrentConfiguration *AutoScalingGroupConfiguration
 
 	//  Describes the GPU accelerator settings for the current instance type of the
-	// Auto Scaling group.
+	// Amazon EC2 Auto Scaling group.
 	CurrentInstanceGpuInfo *GpuInfo
 
-	// The risk of the current Auto Scaling group not meeting the performance needs of
-	// its workloads. The higher the risk, the more likely the current Auto Scaling
-	// group configuration has insufficient capacity and cannot meet workload
-	// requirements.
+	// The risk of the current Amazon EC2 Auto Scaling group not meeting the
+	// performance needs of its workloads. The higher the risk, the more likely the
+	// current Amazon EC2 Auto Scaling group configuration has insufficient capacity
+	// and cannot meet workload requirements.
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
-	// An object that describes the effective recommendation preferences for the Auto
-	// Scaling group.
+	// An object that describes the effective recommendation preferences for the
+	// Amazon EC2 Auto Scaling group.
 	EffectiveRecommendationPreferences *EffectiveRecommendationPreferences
 
-	// The finding classification of the Auto Scaling group.
+	// The finding classification of the Amazon EC2 Auto Scaling group.
 	//
-	// Findings for Auto Scaling groups include:
+	// Findings for Amazon EC2 Auto Scaling groups include:
 	//
-	//   - NotOptimized —An Auto Scaling group is considered not optimized when Compute
-	//   Optimizer identifies a recommendation that can provide better performance for
-	//   your workload.
+	//   - NotOptimized —An Amazon EC2 Auto Scaling group is considered not optimized
+	//   when Compute Optimizer identifies a recommendation that can provide better
+	//   performance for your workload.
 	//
-	//   - Optimized —An Auto Scaling group is considered optimized when Compute
-	//   Optimizer determines that the group is correctly provisioned to run your
+	//   - Optimized —An Amazon EC2 Auto Scaling group is considered optimized when
+	//   Compute Optimizer determines that the group is correctly provisioned to run your
 	//   workload based on the chosen instance type. For optimized resources, Compute
 	//   Optimizer might recommend a new generation instance type.
 	Finding Finding
 
-	// The applications that might be running on the instances in the Auto Scaling
-	// group as inferred by Compute Optimizer.
+	// The applications that might be running on the instances in the Amazon EC2 Auto
+	// Scaling group as inferred by Compute Optimizer.
 	//
 	// Compute Optimizer can infer if one of the following applications might be
 	// running on the instances:
@@ -152,32 +154,34 @@ type AutoScalingGroupRecommendation struct {
 	//   - SQLServer - Infers that SQLServer might be running on the instance.
 	InferredWorkloadTypes []InferredWorkloadType
 
-	// The timestamp of when the Auto Scaling group recommendation was last generated.
+	// The timestamp of when the Amazon EC2 Auto Scaling group recommendation was last
+	// generated.
 	LastRefreshTimestamp *time.Time
 
-	// The number of days for which utilization metrics were analyzed for the Auto
-	// Scaling group.
+	// The number of days for which utilization metrics were analyzed for the Amazon
+	// EC2 Auto Scaling group.
 	LookBackPeriodInDays float64
 
-	// An array of objects that describe the recommendation options for the Auto
-	// Scaling group.
+	// An array of objects that describe the recommendation options for the Amazon EC2
+	// Auto Scaling group.
 	RecommendationOptions []AutoScalingGroupRecommendationOption
 
-	// An array of objects that describe the utilization metrics of the Auto Scaling
-	// group.
+	// An array of objects that describe the utilization metrics of the Amazon EC2
+	// Auto Scaling group.
 	UtilizationMetrics []UtilizationMetric
 
 	noSmithyDocumentSerde
 }
 
-// Describes a recommendation option for an Auto Scaling group.
+// Describes a recommendation option for an Amazon EC2 Auto Scaling group.
 type AutoScalingGroupRecommendationOption struct {
 
-	// An array of objects that describe an Auto Scaling group configuration.
+	// An array of objects that describe an Amazon EC2 Auto Scaling group
+	// configuration.
 	Configuration *AutoScalingGroupConfiguration
 
 	//  Describes the GPU accelerator settings for the recommended instance type of
-	// the Auto Scaling group.
+	// the Amazon EC2 Auto Scaling group.
 	InstanceGpuInfo *GpuInfo
 
 	// The level of effort required to migrate from the current instance type to the
@@ -191,7 +195,8 @@ type AutoScalingGroupRecommendationOption struct {
 	// CPU architecture.
 	MigrationEffort MigrationEffort
 
-	// The performance risk of the Auto Scaling group configuration recommendation.
+	// The performance risk of the Amazon EC2 Auto Scaling group configuration
+	// recommendation.
 	//
 	// Performance risk indicates the likelihood of the recommended instance type not
 	// meeting the resource needs of your workload. Compute Optimizer calculates an
@@ -208,8 +213,8 @@ type AutoScalingGroupRecommendationOption struct {
 	// migrating your resource.
 	PerformanceRisk float64
 
-	// An array of objects that describe the projected utilization metrics of the Auto
-	// Scaling group recommendation option.
+	// An array of objects that describe the projected utilization metrics of the
+	// Amazon EC2 Auto Scaling group recommendation option.
 	//
 	// The Cpu and Memory metrics are the only projected utilization metrics returned.
 	// Additionally, the Memory metric is returned only for resources that have the
@@ -218,41 +223,43 @@ type AutoScalingGroupRecommendationOption struct {
 	// [Enabling Memory Utilization with the CloudWatch Agent]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
 	ProjectedUtilizationMetrics []UtilizationMetric
 
-	// The rank of the Auto Scaling group recommendation option.
+	// The rank of the Amazon EC2 Auto Scaling group recommendation option.
 	//
 	// The top recommendation option is ranked as 1 .
 	Rank int32
 
-	// An object that describes the savings opportunity for the Auto Scaling group
-	// recommendation option. Savings opportunity includes the estimated monthly
-	// savings amount and percentage.
+	// An object that describes the savings opportunity for the Amazon EC2 Auto
+	// Scaling group recommendation option. Savings opportunity includes the estimated
+	// monthly savings amount and percentage.
 	SavingsOpportunity *SavingsOpportunity
 
-	//  An object that describes the savings opportunity for the Auto Scaling group
-	// recommendation option that includes Savings Plans and Reserved Instances
-	// discounts. Savings opportunity includes the estimated monthly savings and
-	// percentage.
+	//  An object that describes the savings opportunity for the Amazon EC2 Auto
+	// Scaling group recommendation option that includes Savings Plans and Reserved
+	// Instances discounts. Savings opportunity includes the estimated monthly savings
+	// and percentage.
 	SavingsOpportunityAfterDiscounts *AutoScalingGroupSavingsOpportunityAfterDiscounts
 
 	noSmithyDocumentSerde
 }
 
-//	Describes the savings opportunity for Auto Scaling group recommendations after
+//	Describes the savings opportunity for Amazon EC2 Auto Scaling group
 //
-// applying the Savings Plans and Reserved Instances discounts.
+// recommendations after applying the Savings Plans and Reserved Instances
+// discounts.
 //
 // Savings opportunity represents the estimated monthly savings you can achieve by
 // implementing Compute Optimizer recommendations.
 type AutoScalingGroupSavingsOpportunityAfterDiscounts struct {
 
 	//  An object that describes the estimated monthly savings possible by adopting
-	// Compute Optimizer’s Auto Scaling group recommendations. This is based on the
-	// Savings Plans and Reserved Instances pricing discounts.
+	// Compute Optimizer’s Amazon EC2 Auto Scaling group recommendations. This is based
+	// on the Savings Plans and Reserved Instances pricing discounts.
 	EstimatedMonthlySavings *AutoScalingGroupEstimatedMonthlySavings
 
 	//  The estimated monthly savings possible as a percentage of monthly cost after
 	// applying the Savings Plans and Reserved Instances discounts. This saving can be
-	// achieved by adopting Compute Optimizer’s Auto Scaling group recommendations.
+	// achieved by adopting Compute Optimizer’s Amazon EC2 Auto Scaling group
+	// recommendations.
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
@@ -907,8 +914,8 @@ type EffectivePreferredResource struct {
 // Describes the effective recommendation preferences for a resource.
 type EffectiveRecommendationPreferences struct {
 
-	// Describes the CPU vendor and architecture for an instance or Auto Scaling group
-	// recommendations.
+	// Describes the CPU vendor and architecture for an instance or Amazon EC2 Auto
+	// Scaling group recommendations.
 	//
 	// For example, when you specify AWS_ARM64 with:
 	//
@@ -1086,7 +1093,7 @@ type Filter struct {
 	// results for:
 	//
 	//   - Specify Optimized or NotOptimized if you specify the name parameter as
-	//   Finding and you want to filter results for Auto Scaling groups.
+	//   Finding and you want to filter results for Amazon EC2 Auto Scaling groups.
 	//
 	//   - Specify Underprovisioned , Overprovisioned , or Optimized if you specify the
 	//   name parameter as Finding and you want to filter results for EC2 instances.
@@ -1168,8 +1175,8 @@ type Filter struct {
 // Describes an error experienced when getting recommendations.
 //
 // For example, an error is returned if you request recommendations for an
-// unsupported Auto Scaling group, or if you request recommendations for an
-// instance of an unsupported instance family.
+// unsupported Amazon EC2 Auto Scaling group, or if you request recommendations for
+// an instance of an unsupported instance family.
 type GetRecommendationError struct {
 
 	// The error code.
@@ -2366,8 +2373,8 @@ type OrderBy struct {
 // or excludeList . If the preference is an empty set of resource type values, an
 // error occurs. For more information, see [Rightsizing recommendation preferences]in the Compute Optimizer User Guide.
 //
-//   - This preference is only available for the Amazon EC2 instance and Auto
-//     Scaling group resource types.
+//   - This preference is only available for the Amazon EC2 instance and Amazon
+//     EC2 Auto Scaling group resource types.
 //
 //   - Compute Optimizer only supports the customization of Ec2InstanceTypes .
 //
@@ -2902,8 +2909,8 @@ type RecommendationExportJob struct {
 // and GetRDSDatabaseRecommendationProjectedMetricsrequest.
 type RecommendationPreferences struct {
 
-	// Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto
-	// Scaling group recommendations.
+	// Specifies the CPU vendor and architecture for Amazon EC2 instance and Amazon
+	// EC2 Auto Scaling group recommendations.
 	//
 	// For example, when you specify AWS_ARM64 with:
 	//
@@ -2963,8 +2970,8 @@ type RecommendationPreferencesDetail struct {
 	// The target resource type of the recommendation preference to create.
 	//
 	// The Ec2Instance option encompasses standalone instances and instances that are
-	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
-	// instances that are part of an Auto Scaling group.
+	// part of Amazon EC2 Auto Scaling groups. The AutoScalingGroup option encompasses
+	// only instances that are part of an Amazon EC2 Auto Scaling group.
 	ResourceType ResourceType
 
 	//  Describes the savings estimation mode used for calculating savings
@@ -2994,7 +3001,7 @@ type RecommendationPreferencesDetail struct {
 }
 
 // Describes the source of a recommendation, such as an Amazon EC2 instance or
-// Auto Scaling group.
+// Amazon EC2 Auto Scaling group.
 type RecommendationSource struct {
 
 	// The Amazon Resource Name (ARN) of the recommendation source.
@@ -3185,15 +3192,15 @@ type SavingsOpportunity struct {
 // management accounts of an organization only), account level, and resource level.
 // For more information, see [Activating enhanced infrastructure metrics]in the Compute Optimizer User Guide.
 //
-// You cannot create recommendation preferences for Auto Scaling groups at the
-// organization and account levels. You can create recommendation preferences for
-// Auto Scaling groups only at the resource level by specifying a scope name of
-// ResourceArn and a scope value of the Auto Scaling group Amazon Resource Name
-// (ARN). This will configure the preference for all instances that are part of the
-// specified Auto Scaling group. You also cannot create recommendation preferences
-// at the resource level for instances that are part of an Auto Scaling group. You
-// can create recommendation preferences at the resource level only for standalone
-// instances.
+// You cannot create recommendation preferences for Amazon EC2 Auto Scaling groups
+// at the organization and account levels. You can create recommendation
+// preferences for Amazon EC2 Auto Scaling groups only at the resource level by
+// specifying a scope name of ResourceArn and a scope value of the Amazon EC2 Auto
+// Scaling group Amazon Resource Name (ARN). This will configure the preference for
+// all instances that are part of the specified Amazon EC2 Auto Scaling group. You
+// also cannot create recommendation preferences at the resource level for
+// instances that are part of an Amazon EC2 Auto Scaling group. You can create
+// recommendation preferences at the resource level only for standalone instances.
 //
 // [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 type Scope struct {
@@ -3221,9 +3228,10 @@ type Scope struct {
 	//   - AccountId - The value must be a 12-digit Amazon Web Services account ID.
 	//
 	//   - ResourceArn - The value must be the Amazon Resource Name (ARN) of an EC2
-	//   instance or an Auto Scaling group.
+	//   instance or an Amazon EC2 Auto Scaling group.
 	//
-	// Only EC2 instance and Auto Scaling group ARNs are currently supported.
+	// Only EC2 instance and Amazon EC2 Auto Scaling group ARNs are currently
+	// supported.
 	Value *string
 
 	noSmithyDocumentSerde
